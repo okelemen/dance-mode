@@ -1,0 +1,13 @@
+# bagimliliklar
+node_modules/
+
+# uretilen ses: HAM mp3'ten her seferinde yeniden uretilir
+01-muzik/*.wav
+
+# render ciktilari - repoda tutulmaz, Actions artifact olarak iner
+04-ciktilar/*.mp4
+04-ciktilar/*.png
+
+# gecici
+*.crdownload
+*.log
