@@ -25,6 +25,11 @@ const arg = (ad, vars) => {
 };
 const W = +arg('w', 1280), H = +arg('h', 720);
 const OLCU_SAYISI = +arg('olcu', 16);
+// Parca render: uzun bolumler bolunup paralel is olarak kosulur, sonra
+// birlestirilir. Tek is olarak 264 olcu 1080p'de ~6 saat surer ve
+// GitHub Actions zaman asimina ugrar.
+const BASLANGIC = +arg('baslangic', 0);          // olcu cinsinden ofset
+const SESSIZ = process.argv.includes('--sessiz'); // ses eklenmesin (parca)
 const CIKTI = path.resolve(arg('cikti', path.join(KOK, '04-ciktilar', 'ornek.mp4')));
 
 const MIME = { '.html':'text/html', '.js':'text/javascript', '.mjs':'text/javascript',
@@ -73,30 +78,34 @@ function sunucuBaslat() {
   console.log(`siluet:${bilgi.siluet ? 'VAR' : 'YOK'}  klip:${bilgi.klip}  nota:${bilgi.nota}`);
 
   const TOPLAM = Math.round(OLCU_SAYISI * 2.0 * 30);
+  const KARE0  = Math.round(BASLANGIC * 2.0 * 30);
   fs.mkdirSync(path.dirname(CIKTI), { recursive: true });
+  const sesEkle = !SESSIZ && fs.existsSync(MUZIK);
+  if (BASLANGIC) console.log(`parca: olcu ${BASLANGIC}-${BASLANGIC+OLCU_SAYISI}`);
 
   const ff = spawn('ffmpeg', [
     '-v','error','-y',
     '-f','image2pipe','-c:v','png','-r','30','-i','pipe:0',
-    ...(fs.existsSync(MUZIK) ? ['-i', MUZIK] : []),
+    ...(sesEkle ? ['-i', MUZIK] : []),
     '-c:v','libx264','-preset','veryfast','-crf','20','-pix_fmt','yuv420p',
-    ...(fs.existsSync(MUZIK) ? ['-c:a','aac','-b:a','192k','-shortest'] : []),
+    ...(sesEkle ? ['-c:a','aac','-b:a','192k','-shortest'] : []),
     CIKTI,
   ], { stdio: ['pipe', 'inherit', 'inherit'] });
 
   const t0 = Date.now();
-  for (let n = 0; n < TOPLAM; n++) {
+  for (let i = 0; i < TOPLAM; i++) {
+    const n = KARE0 + i;                 // mutlak kare no - determinizm korunur
     await sayfa.evaluate(k => window.kareKur(k), n);
     const veri = await sayfa.evaluate(() => window.kareAl());
     const buf = Buffer.from(veri.split(',')[1], 'base64');
     if (!ff.stdin.write(buf)) await new Promise(r => ff.stdin.once('drain', r));
 
-    if (n % 30 === 0 || n === TOPLAM - 1) {
+    if (i % 30 === 0 || i === TOPLAM - 1) {
       const gecen = (Date.now() - t0) / 1000;
-      const hiz = (n + 1) / gecen;
-      const kalan = (TOPLAM - n - 1) / hiz;
+      const hiz = (i + 1) / gecen;
+      const kalan = (TOPLAM - i - 1) / hiz;
       process.stdout.write(
-        `\r kare ${n+1}/${TOPLAM}  ${hiz.toFixed(1)} kare/sn  kalan ~${(kalan/60).toFixed(1)} dk   `);
+        `\r kare ${i+1}/${TOPLAM}  ${hiz.toFixed(1)} kare/sn  kalan ~${(kalan/60).toFixed(1)} dk   `);
     }
   }
   ff.stdin.end();
