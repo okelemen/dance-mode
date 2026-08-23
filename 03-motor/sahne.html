@@ -44,15 +44,28 @@ const PALET = {
 // [olcu_baslangic, olcu_bitis, kalip]  kalip = 4 vurusluk dizi
 const KALIP = {
   bos:      [null,null,null,null],
+  ogret:    ['step_L',null,'step_R',null],
+  mola:     ['arms_up',null,null,null],
   kademe2:  ['step_L',null,'step_R',null],
   kademe3:  ['step_L','jump','step_R','duck'],
+  kademe4:  ['step_L','dodge_R','jump','duck'],
+  kademe5:  ['step_L','punch','step_R','jump'],
+  final:    ['step_L','step_R','jump','duck'],
 };
+// Gercek bolum iskeletinin kisaltilmis hali - tirmanisin his verip
+// vermedigini test etmek icin. Tam bolumde ayni yapi 264 olcuye yayilacak.
 const BLOKLAR = [
-  [0, 2,  'bos'],
-  [2, 8,  'kademe2'],
-  [8, 16, 'kademe3'],
+  [0,  4,  'ogret'],      // ogretme
+  [4,  16, 'kademe2'],    // tur 1
+  [16, 18, 'mola'],
+  [18, 32, 'kademe3'],    // tur 2
+  [32, 34, 'mola'],
+  [34, 48, 'kademe4'],    // tur 3
+  [48, 50, 'mola'],
+  [50, 60, 'kademe5'],    // final
+  [60, 64, 'final'],      // son duz
 ];
-const TOPLAM_OLCU = 16;
+const TOPLAM_OLCU = 64;
 
 // ---------------------------------------------------------------- ORTAMLAR
 // Bolum icinde ortam degisir: palet + kemer renkleri + LEVEL etiketi.
@@ -62,18 +75,29 @@ const ORTAMLAR = [
     grid: ['#ff2fd0','#00e5ff','#8b5cff'],
     kemer:['#00e5ff','#ff2fd0','#8b5cff','#25d9c2','#ffb454'],
     ufuk: '#ff5ec4' },
-  { olcu: 8,  seviye: 2,
+  { olcu: 16, seviye: 2,
     grid: ['#25d9c2','#3d7bff','#ffb454'],
     kemer:['#ffb454','#25d9c2','#3d7bff','#ffe066','#00e5ff'],
     ufuk: '#ffb454' },
+  { olcu: 32, seviye: 3,
+    grid: ['#b18cff','#ff6ad5','#5ce1e6'],
+    kemer:['#ff6ad5','#b18cff','#5ce1e6','#ffffff','#8b5cff'],
+    ufuk: '#b18cff' },
+  { olcu: 48, seviye: 4,
+    grid: ['#ffe066','#ff5ec4','#00e5ff'],
+    kemer:['#ffe066','#ff2fd0','#00e5ff','#ffb454','#ffffff'],
+    ufuk: '#ff2fd0' },
 ];
 const GECIS_OLCU = 1.0;    // gecis kac olcude tamamlanir
 
 const CUE = {
-  step_L: { lane:0, sure:VURUS*2, klip:'step-left'  },
-  step_R: { lane:2, sure:VURUS*2, klip:'step-right' },
-  jump:   { lane:1, sure:OLCU,    klip:'jump'       },
-  duck:   { lane:1, sure:OLCU,    klip:'duck'       },
+  step_L:  { lane:0, sure:VURUS*2, klip:'step-left'   },
+  step_R:  { lane:2, sure:VURUS*2, klip:'step-right'  },
+  jump:    { lane:1, sure:OLCU,    klip:'jump'        },
+  duck:    { lane:1, sure:OLCU,    klip:'duck'        },
+  dodge_R: { lane:2, sure:OLCU,    klip:'dodge-right' },
+  punch:   { lane:1, sure:OLCU,    klip:'punch'       },
+  arms_up: { lane:1, sure:OLCU,    klip:'arms-up'     },
 };
 
 // cue listesini uret
@@ -325,7 +349,8 @@ const kameraSiluet = new THREE.PerspectiveCamera(
   26, (PANEL.g * 1280) / (PANEL.h * 720), 0.1, 60);
 // Figur olculdu: yukseklik ~4.7 birim, dikey merkez y~1.05.
 // 26 derece FOV'da tamaminin sigmasi icin ~12 birim mesafe gerekiyor.
-kameraSiluet.position.set(0, 1.05, 12.2);
+// dinamik pozlarda (kollar acik) tasmasin diye pay birakildi
+kameraSiluet.position.set(0, 1.05, 13.8);
 kameraSiluet.lookAt(0, 1.05, 0);
 const yukleyici = new FBXLoader();
 function yukle(ad){
@@ -340,7 +365,8 @@ function yukle(ad){
 // idle DAHIL tum animasyonlar ayri klip dosyalarindan gelir.
 // Govde dosyasinin kendi animasyonuna GUVENME - Mixamo bazen bos klip veriyor
 // (Remy'de tam bu oldu: duration 0, hic track yok -> siluet T-pozunda kaldi).
-const KLIP_ADLARI = ['idle','step-left','step-right','jump','duck'];
+const KLIP_ADLARI = ['idle','step-left','step-right','jump','duck',
+                     'dodge-right','punch','arms-up'];
 const klipler = {};
 let siluet = null, mixer = null;
 
@@ -376,7 +402,8 @@ if (govde) {
 // klipleri hedef sureye esnetip aksiyon olarak hazirla
 const aksiyon = {};
 const HEDEF_SURE = { 'idle':OLCU, 'step-left':VURUS*2, 'step-right':VURUS*2,
-                     'jump':OLCU, 'duck':OLCU };
+                     'jump':OLCU, 'duck':OLCU, 'dodge-right':OLCU,
+                     'punch':OLCU, 'arms-up':OLCU };
 if (mixer) {
   for (const [ad, klip] of Object.entries(klipler)) {
     const a = mixer.clipAction(klip);
