@@ -60,8 +60,9 @@ const KALIP = {
 // siluet bir EGITMEN: blok boyunca TEK bir egzersizi tekrarliyor. Vuruslara
 // gore ziplayan bir figur takip edilemez, cirpinma gibi gorunur.
 const BLOKLAR = [
-  [0,  4,  'ogret',   'adim'  ],   // ogretme  - yana adim
-  [4,  16, 'kademe2', 'adim'  ],   // tur 1    - yana adim
+  [0,  2,  'bos',     'nefes' ],   // GIRIS - READY/GO burada, nota YOK
+  [2,  6,  'ogret',   'adim'  ],   // ogretme  - yana adim
+  [6,  16, 'kademe2', 'adim'  ],   // tur 1    - yana adim
   [16, 18, 'mola',    'nefes' ],   // mola     - dinlenme
   [18, 32, 'kademe3', 'jacks' ],   // tur 2    - jumping jacks
   [32, 34, 'mola',    'nefes' ],
@@ -428,9 +429,12 @@ const hud = document.createElement('canvas');
 hud.width = W; hud.height = H;
 const hx = hud.getContext('2d');
 
-// giris sahnesi zamanlari - ilk nota t=4.0'da
-const T_READY = [0.35, 2.55];
-const T_GO    = [3.00, 4.20];
+// Giris zamanlari ILK NOTADAN turetilir - sabit saniye degil.
+// Boylece giris uzunlugu degisirse yazilar kendiliginden takip eder ve
+// GO! tam ilk notanin vurusunda soner.
+const ILK_NOTA = NOTALAR.length ? NOTALAR[0].t : 4.0;
+const T_READY = [ILK_NOTA - 3.65, ILK_NOTA - 1.45];
+const T_GO    = [ILK_NOTA - 1.00, ILK_NOTA + 0.20];
 
 // kilometre tasi ovgu sozleri (kendi setimiz)
 const OVGU = ['NICE!','KEEP GOING!','PERFECT!','ON FIRE!','AMAZING!','YOU GOT THIS!'];
@@ -686,7 +690,7 @@ function kareKur(n){
   if (gunes) gunes.material.opacity = 0.50 + 0.14 * nabizOlcu;  // bloom patlatmasin
 
   // giris nabzi: ilk nota gelene kadar vurus cizgisi her vurusta parlar
-  if (t < 4.0){
+  if (t < ILK_NOTA){
     const vurusIci = t % VURUS;
     const nabiz = Math.max(0, 1 - vurusIci / 0.16);
     vurusCizgi.material.opacity = 0.42 + 0.58 * nabiz;
