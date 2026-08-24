@@ -51,7 +51,7 @@ jobs:
           # yeniden uretiliyor - WAV repoda tutulmuyor.
           ffmpeg -v error -y \
             -i "01-muzik/bolum-01-neon-grid-HAM.mp3" \
-            -filter:a "atempo=0.98360656" -ac 2 -ar 48000 -c:a pcm_s16le \
+            -filter:a "atempo=0.98360656,apad" -t 244 -ac 2 -ar 48000 -c:a pcm_s16le \
             "01-muzik/bolum-01-neon-grid-120bpm.wav"
           ls -la 01-muzik/
 
