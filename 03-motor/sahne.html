@@ -1,4 +1,4 @@
-<meta charset="utf-8">
+﻿<meta charset="utf-8">
 <title>Dance Mode - sahne</title>
 <style>
   html,body { margin:0; background:#000; overflow:hidden; }
@@ -80,19 +80,19 @@ const ORTAMLAR = [
   { olcu: 0,  seviye: 1,
     grid: ['#ff2fd0','#00e5ff','#8b5cff'],
     kemer:['#00e5ff','#ff2fd0','#8b5cff','#25d9c2','#ffb454'],
-    ufuk: '#ff5ec4' },
+    ufuk: '#ff5ec4', ara: 5.0, olcek: 1.00 },
   { olcu: 16, seviye: 2,
     grid: ['#25d9c2','#3d7bff','#ffb454'],
     kemer:['#ffb454','#25d9c2','#3d7bff','#ffe066','#00e5ff'],
-    ufuk: '#ffb454' },
+    ufuk: '#ffb454', ara: 3.4, olcek: 0.86 },
   { olcu: 32, seviye: 3,
     grid: ['#b18cff','#ff6ad5','#5ce1e6'],
     kemer:['#ff6ad5','#b18cff','#5ce1e6','#ffffff','#8b5cff'],
-    ufuk: '#b18cff' },
+    ufuk: '#b18cff', ara: 6.6, olcek: 1.20 },
   { olcu: 48, seviye: 4,
     grid: ['#ffe066','#ff5ec4','#00e5ff'],
     kemer:['#ffe066','#ff2fd0','#00e5ff','#ffb454','#ffffff'],
-    ufuk: '#ff2fd0' },
+    ufuk: '#ff2fd0', ara: 2.9, olcek: 0.94 },
 ];
 // Renk gecisi KISA olmali. 1 olcuye yayilinca fark edilmiyordu; yarim
 // olcude bitince "bir sey degisti" hissi net veriyor.
@@ -171,9 +171,15 @@ const zeminMat = new THREE.ShaderMaterial({
       return 1.0 - smoothstep(0.0, kal, f);
     }
     void main(){
-      float boyuna = cizgi(vUv.x, 26.0, 1.2);
-      float enine  = cizgi(vUv.y + uKaydir, 40.0, 1.2);
-      float g = max(boyuna, enine);
+      // KOYU YOL + PARLAK SERITLER
+      // Referans kanallarda zemin koyu, nota parlak. Bizde tersiydi ve
+      // nota zeminle yarisiyordu. Artik izgara sadece derinlik ipucu,
+      // asil parlaklik lane ayraclarinda.
+      // Cizgi SAYISI kritik: sik cizgiler ufka dogru birbirine karisip
+      // tek parlak yuzeye donusuyordu. Seyrek cizgi = koyu yol.
+      float boyuna = cizgi(vUv.x, 9.0, 1.0);
+      float enine  = cizgi(vUv.y + uKaydir, 16.0, 1.0);
+      float g = max(boyuna * 0.40, enine * 0.16);
       // akan renk bantlari: tunel boyunca yumusak gecisli, 3 renkli
       // (tek renk izgara monoton duruyor; sert renk gecisi de bunaltir,
       //  bu yuzden sinus ile yumusak harmanlaniyor)
@@ -184,8 +190,11 @@ const zeminMat = new THREE.ShaderMaterial({
       float w2 = pow(0.5 + 0.5*sin(f + 2.0944), 3.0);
       float w3 = pow(0.5 + 0.5*sin(f + 4.1888), 3.0);
       vec3 gr = (uGrid*w1 + uGrid2*w2 + uGrid3*w3) / max(w1+w2+w3, 0.001);
-      vec3 renk = mix(uZemin, gr, g);
-      renk += gr * g * 0.42;                          // parlama gucu
+      // yol yuzeyi: merkeze dogru biraz daha koyu asfalt hissi
+      float merkez = 1.0 - smoothstep(0.26, 0.48, abs(vUv.x - 0.5));
+      vec3 yol = uZemin * mix(0.85, 0.12, merkez);    // asfalt: koyu
+      vec3 renk = mix(yol, gr, g);
+      renk += gr * g * 0.16;                          // parlama gucu
       float mesafe = length(vGoz);                    // FRAGMENT basina - dogru
       float sis = smoothstep(uSisYakin, uSisUzak, mesafe);
       // sise KAPANMIYOR, SAYDAMLASIYOR - yoksa arkadaki ufuk/gunes kapanir
@@ -277,7 +286,7 @@ if (!SADE) {
       g.beginPath(); g.roundRect(24, 24, 464, 252, 26); g.stroke();
     };
     ciz(26, 0.30, 34);     // dis hale
-    ciz(12, 0.75, 16);     // gövde
+    ciz(12, 0.75, 16);     // gÃ¶vde
     ciz(5,  1.00, 0);      // cekirdek
     return new THREE.CanvasTexture(c);
   }
@@ -293,6 +302,33 @@ if (!SADE) {
     m.position.set(0, 5.3, 0);     // alt kenar zemin hizasinda dursun
     m.userData = { i };
     scene.add(m); sutunlar.push(m);
+  }
+}
+
+// --- UCUSAN PARCACIKLAR
+// Referansta her sahnede enkaz/konfeti suzuluyor. Cok ucuz ama sahneyi
+// "canli" yapan seylerden biri. Konumlar indeksten turetiliyor -> deterministik.
+const parcaciklar = [];
+if (!SADE) {
+  const PARCA_SAY = 80, PARCA_KAPSAM = 44;
+  const pGeo = new THREE.PlaneGeometry(0.24, 0.24);
+  const kar = (n) => { const s = Math.sin(n * 127.1) * 43758.5453; return s - Math.floor(s); };
+  for (let i = 0; i < PARCA_SAY; i++) {
+    const m = new THREE.Mesh(pGeo, new THREE.MeshBasicMaterial({
+      color: '#ffffff', transparent: true, opacity: 0.5,
+      blending: THREE.AdditiveBlending, depthWrite: false, fog: true,
+      side: THREE.DoubleSide }));
+    m.userData = {
+      x: (kar(i) - 0.5) * 26,
+      y: 0.4 + kar(i + 11) * 8.5,
+      z0: kar(i + 23) * PARCA_KAPSAM,
+      hiz: 0.55 + kar(i + 37) * 0.8,          // farkli hizlar = derinlik hissi
+      don: kar(i + 51) * 6.28,
+      olcek: 0.5 + kar(i + 71) * 1.5,
+      kapsam: PARCA_KAPSAM,
+    };
+    m.scale.setScalar(m.userData.olcek);
+    scene.add(m); parcaciklar.push(m);
   }
 }
 
@@ -320,7 +356,7 @@ function notaDoku(){
 
   g.shadowBlur = 12;
   g.fillStyle = 'rgba(255,255,255,0.92)';
-  ciz(34, 34, 252, 60, 30);                 // gövde
+  ciz(34, 34, 252, 60, 30);                 // gÃ¶vde
 
   g.shadowBlur = 0;
   g.fillStyle = '#ffffff';
@@ -329,7 +365,9 @@ function notaDoku(){
 }
 const NOTA_DOKU = notaDoku();
 
-const notaGeo = new THREE.PlaneGeometry(2.35, 0.94);
+// Notalar BUYUK. Referansta kameraya yaklastiklarinda ekranin alt ucte
+// birini kapliyorlar; ince cubuk okunmuyor.
+const notaGeo = new THREE.PlaneGeometry(3.05, 1.45);
 const notaMesh = NOTALAR.map(n => {
   const m = new THREE.Mesh(notaGeo, new THREE.MeshBasicMaterial({
     map: NOTA_DOKU, color: PALET.lane[n.lane], transparent:true,
@@ -366,8 +404,8 @@ function yukle(ad){
     o => res(o), undefined, () => res(null)));
 }
 
-// ONEMLI: 'Without Skin' dosyalarda SADECE iskelet var, cizilecek gövde yok.
-// Bu yuzden tek bir 'With Skin' dosya (siluet-govde.fbx) gövdeyi saglar,
+// ONEMLI: 'Without Skin' dosyalarda SADECE iskelet var, cizilecek gÃ¶vde yok.
+// Bu yuzden tek bir 'With Skin' dosya (siluet-govde.fbx) gÃ¶vdeyi saglar,
 // digerlerinin animasyonlari ayni iskelet uzerinde calisir - butun Mixamo
 // klipleri ayni kemik adlarini kullaniyor.
 // idle DAHIL tum animasyonlar ayri klip dosyalarindan gelir.
@@ -438,7 +476,7 @@ const T_GO    = [ILK_NOTA - 1.00, ILK_NOTA + 0.20];
 
 // kilometre tasi ovgu sozleri (kendi setimiz)
 const OVGU = ['NICE!','KEEP GOING!','PERFECT!','ON FIRE!','AMAZING!','YOU GOT THIS!'];
-// yumusak, gozü yormayan renkler - saf kirmizi/yesil yok
+// yumusak, gozÃ¼ yormayan renkler - saf kirmizi/yesil yok
 const OVGU_RENK = ['#00e5ff','#ffb454','#ff6ad5','#25d9c2','#ffe066','#b18cff'];
 
 function hudCiz(t, combo, epic, kmCombo, kacis, seviye, duyuru){
@@ -454,6 +492,31 @@ function hudCiz(t, combo, epic, kmCombo, kacis, seviye, duyuru){
     hx.fillText(String(combo), W - 46*k, 122*k);
     hx.font = `700 ${Math.round(38*k)}px Arial Black, sans-serif`;
     hx.fillText('COMBO', W - 48*k, 164*k);
+
+    // --- KADEMELI DEGERLENDIRME ROZETI
+    // Referansta combo'nun altinda kalici, renk kodlu bir kutu var.
+    // Bizim ortadaki ovgu yazisi gosterisli ama anlik; bu surekli okunuyor.
+    const kademe = combo >= 120 ? { s:'UNSTOPPABLE', r:'#ffe066' }
+                 : combo >=  60 ? { s:'PERFECT',     r:'#ff2fd0' }
+                 : combo >=  25 ? { s:'GREAT',       r:'#25d9c2' }
+                 :                { s:'NICE',        r:'#00e5ff' };
+    hx.save();
+    hx.font = `700 ${Math.round(30*k)}px Arial Black, sans-serif`;
+    const gen = hx.measureText(kademe.s).width + 40*k, yuk = 52*k;
+    // siluet panelinin SOLUNA - ustune binmesin
+    const rx = PX - 22*k - gen, ry = 196*k;
+    hx.shadowColor = kademe.r; hx.shadowBlur = 26*k;
+    hx.fillStyle = 'rgba(6,2,16,0.78)';
+    hx.beginPath(); hx.roundRect(rx, ry, gen, yuk, 10*k); hx.fill();
+    hx.shadowBlur = 0;
+    hx.lineWidth = 3*k; hx.strokeStyle = kademe.r;
+    hx.beginPath(); hx.roundRect(rx, ry, gen, yuk, 10*k); hx.stroke();
+    hx.fillStyle = kademe.r;
+    hx.textAlign = 'center'; hx.textBaseline = 'middle';
+    hx.shadowColor = kademe.r; hx.shadowBlur = 16*k;
+    hx.fillText(kademe.s, rx + gen/2, ry + yuk/2 + 1*k);
+    hx.restore();
+    hx.textAlign = 'right'; hx.textBaseline = 'alphabetic';
   }
 
   hx.textAlign = 'left';
@@ -574,6 +637,43 @@ function hudCiz(t, combo, epic, kmCombo, kacis, seviye, duyuru){
     hx.strokeText(yazi, 0, 0);
     hx.restore();
   }
+  // --- FINAL KARTI: abone cagrisi
+  // Referansta var, bizde yoktu - kacirilmis bir yer.
+  const SON = TOPLAM_OLCU * OLCU;
+  if (t >= SON - 4.2){
+    const p = Math.min(1, (t - (SON - 4.2)) / 4.2);
+    const giris = Math.min(1, p / 0.10);
+    hx.save();
+    hx.globalAlpha = giris * 0.88;
+    hx.fillStyle = '#050110';
+    hx.fillRect(0, 0, W, H);                       // ekrani karart
+    hx.globalAlpha = giris;
+    hx.translate(W/2, H*0.46);
+    hx.save();
+    hx.globalAlpha = giris * 0.30;
+    hx.strokeStyle = '#ffffff'; hx.lineWidth = 3*k;
+    for (let i = 0; i < 30; i++){
+      const a = (i/30) * Math.PI * 2 + p * 0.3;
+      const i0 = 200*k, i1 = i0 + 320*k + (i % 5) * 90*k;
+      hx.beginPath();
+      hx.moveTo(Math.cos(a)*i0, Math.sin(a)*i0*0.55);
+      hx.lineTo(Math.cos(a)*i1, Math.sin(a)*i1*0.55);
+      hx.stroke();
+    }
+    hx.restore();
+    hx.textAlign = 'center'; hx.textBaseline = 'middle';
+    hx.fillStyle = '#ffffff'; hx.shadowColor = '#00e5ff'; hx.shadowBlur = 40*k;
+    hx.font = `700 ${Math.round(72*k)}px Arial Black, sans-serif`;
+    hx.fillText('THANKS FOR WATCHING', 0, -60*k);
+    hx.fillStyle = '#ffe066'; hx.shadowColor = '#ffe066'; hx.shadowBlur = 54*k;
+    hx.font = `700 ${Math.round(112*k)}px Impact, Arial Black, sans-serif`;
+    hx.fillText('SUBSCRIBE', 0, 46*k);
+    hx.font = `700 ${Math.round(34*k)}px Arial, sans-serif`;
+    hx.fillStyle = '#ffffff'; hx.shadowBlur = 20*k;
+    hx.fillText('for the next level', 0, 128*k);
+    hx.restore();
+  }
+
   hx.textBaseline = 'alphabetic';
   hx.shadowBlur = 0;
 }
@@ -674,18 +774,33 @@ function kareKur(n){
   const nabizOlcu = Math.max(0, 1 - olcuIci / 0.30);
 
   // sutunlar: mod ile dolasirlar, koordinat asla buyumez
-  const kapsam = SUTUN_ARA * SUTUN_SAY;
+  // Ortam degisiminde GEOMETRI de degisiyor - sadece renk degil.
+  // Referansta koridorun bicimi tamamen degisiyor; sadece palet
+  // degistirmek fark ettirmiyordu.
+  const ara   = O0.ara   + (O1.ara   - O0.ara)   * yumusak;
+  const kOlc  = O0.olcek + (O1.olcek - O0.olcek) * yumusak;
+  const kapsam = ara * SUTUN_SAY;
   for (const s of sutunlar) {
     const { i } = s.userData;
-    s.position.z = Z_VURUS - ((i * SUTUN_ARA + t * HIZ) % kapsam) + 4;
+    s.position.z = Z_VURUS - ((i * ara + t * HIZ) % kapsam) + 4;
     // kameraya cok yaklasan kemer kareyi basiyor - yakinda sondur
     const yakinSonme = THREE.MathUtils.smoothstep(camera.position.z - s.position.z, 1.5, 7);
     s.material.opacity = (0.34 + 0.36 * nabizOlcu) * yakinSonme;
     s.material.color.copy(karistir(
       O0.kemer[i % O0.kemer.length], O1.kemer[i % O1.kemer.length]));
-    const p = 1 + nabizOlcu * 0.035;
+    const p = kOlc * (1 + nabizOlcu * 0.035);
     s.scale.set(p, p, 1);
   }
+  // parcaciklar: tunel hiziyla akar, mod ile dolasir
+  for (const p of parcaciklar) {
+    const d = p.userData;
+    p.position.set(d.x, d.y,
+      Z_VURUS - ((d.z0 + t * HIZ * d.hiz) % d.kapsam) + 6);
+    p.rotation.z = d.don + t * (0.5 + d.hiz);
+    p.material.opacity = (0.18 + 0.30 * nabizOlcu) * d.olcek;
+    p.material.color.copy(karistir(O0.kemer[0], O1.kemer[0]));
+  }
+
   if (ufuk) ufuk.material.opacity = 0.62 + 0.38 * nabizOlcu;
   if (gunes) gunes.material.opacity = 0.50 + 0.14 * nabizOlcu;  // bloom patlatmasin
 
