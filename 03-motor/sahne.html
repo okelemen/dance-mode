@@ -54,16 +54,21 @@ const KALIP = {
 };
 // Gercek bolum iskeletinin kisaltilmis hali - tirmanisin his verip
 // vermedigini test etmek icin. Tam bolumde ayni yapi 264 olcuye yayilacak.
+// [baslangic, bitis, cue_kalibi, SILUET_HAREKETI]
+//
+// Siluet artik her cue'da klip degistirmiyor. Evde takip eden biri icin
+// siluet bir EGITMEN: blok boyunca TEK bir egzersizi tekrarliyor. Vuruslara
+// gore ziplayan bir figur takip edilemez, cirpinma gibi gorunur.
 const BLOKLAR = [
-  [0,  4,  'ogret'],      // ogretme
-  [4,  16, 'kademe2'],    // tur 1
-  [16, 18, 'mola'],
-  [18, 32, 'kademe3'],    // tur 2
-  [32, 34, 'mola'],
-  [34, 48, 'kademe4'],    // tur 3
-  [48, 50, 'mola'],
-  [50, 60, 'kademe5'],    // final
-  [60, 64, 'final'],      // son duz
+  [0,  4,  'ogret',   'adim'  ],   // ogretme  - yana adim
+  [4,  16, 'kademe2', 'adim'  ],   // tur 1    - yana adim
+  [16, 18, 'mola',    'nefes' ],   // mola     - dinlenme
+  [18, 32, 'kademe3', 'jacks' ],   // tur 2    - jumping jacks
+  [32, 34, 'mola',    'nefes' ],
+  [34, 48, 'kademe4', 'duck'  ],   // tur 3    - squat
+  [48, 50, 'mola',    'nefes' ],
+  [50, 60, 'kademe5', 'punch' ],   // final    - shadow boxing
+  [60, 64, 'final',   'jacks' ],   // son duz  - jumping jacks
 ];
 const TOPLAM_OLCU = 64;
 
@@ -88,7 +93,9 @@ const ORTAMLAR = [
     kemer:['#ffe066','#ff2fd0','#00e5ff','#ffb454','#ffffff'],
     ufuk: '#ff2fd0' },
 ];
-const GECIS_OLCU = 1.0;    // gecis kac olcude tamamlanir
+// Renk gecisi KISA olmali. 1 olcuye yayilinca fark edilmiyordu; yarim
+// olcude bitince "bir sey degisti" hissi net veriyor.
+const GECIS_OLCU = 0.4;
 
 const CUE = {
   step_L:  { lane:0, sure:VURUS*2, klip:'step-left'   },
@@ -365,8 +372,8 @@ function yukle(ad){
 // idle DAHIL tum animasyonlar ayri klip dosyalarindan gelir.
 // Govde dosyasinin kendi animasyonuna GUVENME - Mixamo bazen bos klip veriyor
 // (Remy'de tam bu oldu: duration 0, hic track yok -> siluet T-pozunda kaldi).
-const KLIP_ADLARI = ['idle','step-left','step-right','jump','duck',
-                     'dodge-right','punch','arms-up'];
+const KLIP_ADLARI = ['idle','idle-breathing','step-left','step-right','jump',
+                     'duck','dodge-right','punch','arms-up','jacks'];
 const klipler = {};
 let siluet = null, mixer = null;
 
@@ -401,9 +408,12 @@ if (govde) {
 
 // klipleri hedef sureye esnetip aksiyon olarak hazirla
 const aksiyon = {};
-const HEDEF_SURE = { 'idle':OLCU, 'step-left':VURUS*2, 'step-right':VURUS*2,
-                     'jump':OLCU, 'duck':OLCU, 'dodge-right':OLCU,
-                     'punch':OLCU, 'arms-up':OLCU };
+// Hedef sureler tam sayi vurusa oturur -> hareket her zaman ritimde biter.
+// Bu "keskinlik" hissini veren sey: yarim vurusta biten hareket sunepe durur.
+const HEDEF_SURE = { 'idle':OLCU, 'idle-breathing':OLCU*2,
+                     'step-left':VURUS*2, 'step-right':VURUS*2,
+                     'jacks':VURUS*2, 'jump':OLCU, 'duck':OLCU,
+                     'dodge-right':OLCU, 'punch':OLCU, 'arms-up':OLCU };
 if (mixer) {
   for (const [ad, klip] of Object.entries(klipler)) {
     const a = mixer.clipAction(klip);
@@ -427,7 +437,7 @@ const OVGU = ['NICE!','KEEP GOING!','PERFECT!','ON FIRE!','AMAZING!','YOU GOT TH
 // yumusak, gozü yormayan renkler - saf kirmizi/yesil yok
 const OVGU_RENK = ['#00e5ff','#ffb454','#ff6ad5','#25d9c2','#ffe066','#b18cff'];
 
-function hudCiz(t, combo, epic, kmCombo, kacis, seviye){
+function hudCiz(t, combo, epic, kmCombo, kacis, seviye, duyuru){
   hx.clearRect(0,0,W,H);
   const k = W/1280;
 
@@ -484,6 +494,41 @@ function hudCiz(t, combo, epic, kmCombo, kacis, seviye){
   };
   pop('READY', T_READY, '#00e5ff', 138);
   pop('GO!',   T_GO,    '#ffe600', 176);
+
+  // --- SEVIYE DUYURUSU: ortam degisimi fark edilsin diye tam ekran
+  if (duyuru >= 0){
+    const p = duyuru / 2.4;
+    const olcek = p < 0.12 ? 0.45 + 0.55*(p/0.12)
+                : p > 0.72 ? 1 + (p-0.72)/0.28*0.30 : 1;
+    const alfa = p > 0.72 ? 1 - (p-0.72)/0.28 : 1;
+    hx.save();
+    hx.globalAlpha = alfa;
+    hx.translate(W/2, H*0.40);
+    // isin cizgileri
+    hx.save();
+    hx.globalAlpha = alfa * 0.35 * (1 - p*0.6);
+    hx.strokeStyle = '#ffffff'; hx.lineWidth = 3*k;
+    for (let i = 0; i < 26; i++){
+      const a = (i/26) * Math.PI * 2 - p * 0.4;
+      const i0 = 240*k + (i%3)*70*k, i1 = i0 + 170*k + (i%4)*80*k;
+      hx.beginPath();
+      hx.moveTo(Math.cos(a)*i0, Math.sin(a)*i0*0.5);
+      hx.lineTo(Math.cos(a)*i1, Math.sin(a)*i1*0.5);
+      hx.stroke();
+    }
+    hx.restore();
+    hx.scale(olcek, olcek);
+    hx.textAlign = 'center'; hx.textBaseline = 'middle';
+    hx.font = `700 ${Math.round(64*k)}px Arial Black, sans-serif`;
+    hx.fillStyle = '#ffffff'; hx.shadowColor = '#ffffff'; hx.shadowBlur = 40*k;
+    hx.fillText('LEVEL UP', 0, -74*k);
+    hx.font = `700 ${Math.round(176*k)}px Impact, Arial Black, sans-serif`;
+    hx.fillStyle = '#ffe066'; hx.shadowColor = '#ffe066'; hx.shadowBlur = 64*k;
+    hx.fillText(String(seviye), 0, 40*k);
+    hx.lineWidth = 4*k; hx.strokeStyle = 'rgba(255,255,255,0.95)';
+    hx.strokeText(String(seviye), 0, 40*k);
+    hx.restore();
+  }
   hx.textBaseline = 'alphabetic';
 
   // --- ovgu yazisi: ufuk noktasindan buyuyerek gelir, notalarla ayni perspektif
@@ -614,8 +659,10 @@ function kareKur(n){
   zeminMat.uniforms.uGrid3.value.copy(karistir(O0.grid[2], O1.grid[2]));
   if (ufuk) ufuk.material.color.copy(karistir(O0.ufuk, O1.ufuk));
 
-  // gecis aninda beyaz cakma
-  const cakma = (ix > 0 && gecis < 0.35) ? Math.pow(1 - gecis / 0.35, 2) : 0;
+  // gecis aninda beyaz cakma + tam ekran seviye duyurusu
+  const gecisT = t - O1.olcu * OLCU;                 // gecis basindan gecen sure
+  const cakma = (ix > 0 && gecis < 0.5) ? Math.pow(1 - gecis / 0.5, 1.6) : 0;
+  const duyuru = (ix > 0 && gecisT >= 0 && gecisT < 2.4) ? gecisT : -1;
 
   // --- dolgu katmanlari
   // olcu nabzi: her olcu basinda sahne nefes alir
@@ -679,11 +726,23 @@ function kareKur(n){
 
   // siluet: aktif cue varsa onun klibi, yoksa idle
   if (mixer){
-    let ad = 'idle', yerel = t % OLCU;
-    for (const no of NOTALAR){
-      if (t >= no.t && t < no.t + no.sure && aksiyon[no.klip]){
-        ad = no.klip; yerel = t - no.t; break;
-      }
+    // Blogun egzersizi, olcu izgarasina kilitli olarak dongude oynar.
+    const suO = t / OLCU;
+    const blok = BLOKLAR.find(b => suO >= b[0] && suO < b[1]) || BLOKLAR[BLOKLAR.length-1];
+    const hareket = blok[3] || 'idle';
+    let ad, yerel;
+
+    if (hareket === 'adim') {
+      // yana adim: her yarim olcude yon degisir - gercek bir egzersiz gibi
+      const yariNo = Math.floor(t / (OLCU / 2));
+      ad = (yariNo % 2) ? 'step-right' : 'step-left';
+      yerel = t % (OLCU / 2);
+    } else if (hareket === 'nefes') {
+      ad = aksiyon['idle-breathing'] ? 'idle-breathing' : 'idle';
+      yerel = t % (HEDEF_SURE[ad] || OLCU);
+    } else {
+      ad = aksiyon[hareket] ? hareket : 'idle';
+      yerel = t % (HEDEF_SURE[ad] || OLCU);
     }
     for (const [k,v] of Object.entries(aksiyon)) v.a.enabled = (k === ad);
     const A = aksiyon[ad];
@@ -738,13 +797,13 @@ function kareKur(n){
   // ufuk (kacis) noktasinin ekran koordinati - ovgu yazisi oradan dogar
   const kv = new THREE.Vector3(0, 0.3, -400).project(camera);
   const kacis = [ (kv.x*0.5+0.5)*W, (-kv.y*0.5+0.5)*H ];
-  hudCiz(t, combo, sonKm > -90 ? t - sonKm : -1, kmCombo, kacis, O1.seviye);
+  hudCiz(t, combo, sonKm > -90 ? t - sonKm : -1, kmCombo, kacis, O1.seviye, duyuru);
 
   // ortam gecisinde beyaz cakma
   if (cakma > 0){
     bx.save();
     bx.globalCompositeOperation = 'lighter';
-    bx.globalAlpha = cakma * 0.55;
+    bx.globalAlpha = cakma * 0.80;
     bx.fillStyle = '#ffffff';
     bx.fillRect(0, 0, W, H);
     bx.restore();
