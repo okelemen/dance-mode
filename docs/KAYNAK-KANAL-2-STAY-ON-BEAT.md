@@ -159,23 +159,121 @@ koreografi ya da daha uzun bölüm demek.
 
 ---
 
-## EKSİK: görsel analiz
+## GÖRSEL ANALİZ
 
-Videonun kendisini inceleyemedim. Chrome otomasyon içinde videoyu hiç
-tamponlamadı (readyState 0, buffer 0); uygulama içi tarayıcıda çözüldü
-(readyState 4, 658 sn) ama o panel ekranda görünmediği için kare alınamadı.
+Video baştan sona tarandı (0:18, 0:42, 2:15, 4:50, 7:50, 10:45 kareleri).
 
-**Çözüm:** Claude Code'da Browser panelini görünür yap. Panel açık olunca
-video boyunca kare alıp şunları çıkarabilirim:
+### En büyük fark: kontrast tersine çevrilmiş
 
-- Tünel/sahne tasarımı ve ortam değişimleri
-- Cue görsel dili (fayans mı, halka mı, ok mu)
-- Siluetin konumu ve sunumu
-- HUD yerleşimi, combo/level tipografisi
-- Giriş ve final sekansları
-- Bölüm yapısı ve tırmanış ritmi
+**Onlarda zemin KOYU, notalar PARLAK.** Yol neredeyse siyah, ortasında kesikli
+şerit çizgisi olan bir asfalt gibi. Notalar bunun üstünde büyük, doygun renkli
+bloklar halinde geliyor.
 
-Bu yapılana kadar aşağıdaki "yapılacaklar" listesi eksik kalır.
+**Bizde tam tersi:** zemin parlak neon ızgara, notalar onun üstünde küçük.
+Sonuç olarak bizde nota zeminle yarışıyor, onlarda nota tek başına parlıyor.
+
+Bu tek karar okunabilirliği belirliyor. **Değiştirmemiz gereken en önemli şey bu.**
+
+### Notalar çok daha büyük
+
+Kameraya yaklaştıklarında ekranın alt üçte birini kaplayacak boyutta bloklar.
+Bizimkiler ince çubuklar. Büyük olmaları hem okunabilirliği hem "geliyor!"
+hissini artırıyor.
+
+Bazı notaların üstünde küçük bir simge var (hareket tipini gösteriyor).
+
+### Ortam gerçekten değişiyor — ve sert değişiyor
+
+Tek videoda en az üç tamamen farklı mekân gördüm:
+
+| Zaman | Ortam |
+|---|---|
+| 0:42 | Cyan/mor kemerli koridor, şehir ışıkları uzakta |
+| 2:15 | Mor kemerler + ekranın üstüne binen dev cyan altıgen çerçeve |
+| 4:50 - 7:50 | Sarı tel kafes koridor, mor küp enkazlar uçuşuyor |
+
+BEAT MOTION #15'te ise sıcak sarı/kırmızı palet, magenta oluklu yol.
+
+Bizim palet değişimimiz bunun yanında çekingen kalıyor — onlar **geometriyi de**
+değiştiriyor, sadece rengi değil.
+
+### Ön plan çerçevesi
+
+2:15'te ekranın tamamını saran dev bir altıgen/elmas çerçeve var — sahnenin
+önünde duran bir grafik katman. Kareyi "oyun arayüzü" gibi gösteriyor ve
+boşluğu kapatıyor. Bizde böyle bir katman yok.
+
+### Uçuşan parçacıklar
+
+Her sahnede konfeti/enkaz parçaları süzülüyor. Çok ucuz bir efekt ama sahneyi
+"canlı" yapan şeylerden biri. Bizde hiç yok.
+
+### HUD yerleşimi
+
+**Sağ üst:** büyük combo rakamı, altında küçük `COMBO` etiketi.
+
+**Onun altında değerlendirme rozeti** — yuvarlak köşeli kutu içinde, renk kodlu:
+
+| Kelime | Renk |
+|---|---|
+| `NICE` | cyan |
+| `GREAT` | yeşil |
+| `PERFECT` | magenta |
+| `UNSTOPPABLE` | magenta |
+
+Kademeli bir sistem: combo yükseldikçe kelime yükseliyor. Bizim övgü
+yazılarımız ekran ortasından geliyor ve daha gösterişli — ama onlarınki
+**kalıcı ve okunabilir**, her vuruşta güncelleniyor.
+
+### Siluet
+
+**Sol tarafta**, ince beyaz çerçeveli dikey kutu içinde. İçi boş, sadece
+beyaz kontur. Bizim yaptığımızla aynı teknik — ama biz sağa koyduk, bu
+bizi ayrıştırıyor, iyi.
+
+### Giriş ve final kartları
+
+**Giriş (0:18):** siyah zemin, ışın çizgileri, beyaz kalın yazı:
+`PUSH YOUR LIMITS` / `FEEL THE ENERGY!` — yanında el sallayan siluet.
+
+**Final (10:45):** aynı ışın çizgileri, `DON'T FORGET TO SUBSCRIBE` /
+`THANK YOU FOR WATCHING`.
+
+Bizde giriş var (`READY`/`GO!`) ama **final kartı yok**. Abone çağrısı için
+kaçırılmış bir yer.
+
+### Video ortasında SPOILER kartı
+
+BEAT MOTION #15'te ekranın ortasında dev `SPOILER` yazısı beliriyor.
+Muhtemelen gelecek bölümden bir görüntü ya da hedef combo gösteriliyor.
+Kapaklardaki `SPOILER 263` mantığının video içi versiyonu.
+
+### Combo SIFIRLANIYOR
+
+113 → 4 (2:15 ile 4:50 arası). Bölüm sınırlarında sıfırlanıyor.
+
+> **Not:** Sen "combo sıfırlama yok" dedin, o karar bizde duruyor.
+> Ama her iki referans kanal da sıfırlıyor — muhtemelen her bölümü
+> ayrı bir "seviye" gibi göstermek için. Bilinçli bir farkımız olsun.
+
+---
+
+## Alınacaklar — öncelik sırasıyla
+
+1. **Zemini koyulaştır, notaları büyüt.** En yüksek etkili değişiklik.
+2. **Parçacık katmanı ekle** — uçuşan enkaz/konfeti.
+3. **Değerlendirme rozeti** — combo altında kalıcı, renk kodlu kademe.
+4. **Ortam değişiminde geometriyi de değiştir**, sadece rengi değil.
+5. **Final kartı** — abone çağrısı.
+6. **Ön plan çerçevesi** — bazı bölümlerde ekranı saran grafik katman.
+7. **Nota üstünde hareket simgesi** — hangi hareket olduğunu göstersin.
+
+## Bilerek farklı kalacaklar
+
+- Siluet **sağda** (onlarda solda)
+- Synthwave güneşi ve akan renk bantları bizim imzamız
+- Övgü yazısının ufuktan büyüyerek gelmesi (onlarda sabit rozet)
+- Combo sıfırlanmıyor
 
 ---
 
