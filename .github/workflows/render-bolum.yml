@@ -19,10 +19,10 @@ on:
         default: "44"
       genislik:
         required: true
-        default: "1920"
+        default: "2560"
       yukseklik:
         required: true
-        default: "1080"
+        default: "1440"
 
 jobs:
   hazirla:
@@ -96,11 +96,15 @@ jobs:
           merge-multiple: true
           path: parcalar
 
-      - name: Sesi hazirla
+      - name: Sesi bolum uzunluguna getir
         run: |
-          ffmpeg -v error -y -i "01-muzik/bolum-01-neon-grid-HAM.mp3" \
-            -filter:a "atempo=0.98360656,apad" -t 244 -ac 2 -ar 48000 -c:a pcm_s16le \
-            "01-muzik/120bpm.wav"
+          # 122 olculuk parca, istenen olcu sayisina yeniden diziliyor:
+          # giris ve cikis birer kez, govde tekrarlaniyor. Tum kesimler
+          # tam olcu sinirinda -> ritim kaymaz, tik olusmaz.
+          python3 03-motor/muzik-bolum.py \
+            "01-muzik/bolum-01-neon-grid-HAM.mp3" \
+            "01-muzik/120bpm.wav" \
+            ${{ github.event.inputs.toplam_olcu }}
 
       - name: Parcalari birlestir ve sesi ekle
         run: |

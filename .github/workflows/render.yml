@@ -11,11 +11,11 @@ on:
       genislik:
         description: "Genislik"
         required: true
-        default: "1920"
+        default: "2560"
       yukseklik:
         description: "Yukseklik"
         required: true
-        default: "1080"
+        default: "1440"
 
 jobs:
   render:

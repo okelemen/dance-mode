@@ -360,7 +360,7 @@ scene.add(vurusCizgi);
 // --- nota havuzu
 // nota dokusu: yuvarlak kose + yumusak kenar parlamasi
 // (duz PlaneGeometry keskin dikdortgen verir; sekli dokudan aliyoruz)
-function notaDoku(){
+function notaDoku(tip){
   const c = document.createElement('canvas'); c.width = 320; c.height = 128;
   const g = c.getContext('2d');
   const ciz = (x,y,w,h,r) => { g.beginPath(); g.roundRect(x,y,w,h,r); g.fill(); };
@@ -376,18 +376,45 @@ function notaDoku(){
   g.shadowBlur = 0;
   g.fillStyle = '#ffffff';
   ciz(46, 46, 228, 36, 18);                 // parlak cekirdek
+
+  // --- HAREKET SIMGESI: izleyici hangi hareketi yapacagini notadan okusun.
+  //     Cekirdegin uzerine koyu oyularak ciziliyor -> her renkte okunur.
+  g.globalCompositeOperation = 'destination-out';
+  g.lineWidth = 20; g.lineCap = 'round'; g.lineJoin = 'round';
+  g.strokeStyle = '#000'; g.fillStyle = '#000';
+  const cx = 160, cy = 64;
+  const sev = (dx, dy) => {                  // sevron (ok ucu)
+    g.beginPath();
+    g.moveTo(cx - dy*26 - dx*14, cy - dx*26 - dy*14);
+    g.lineTo(cx + dx*17,         cy + dy*17);
+    g.lineTo(cx + dy*26 - dx*14, cy + dx*26 - dy*14);
+    g.stroke();
+  };
+  if      (tip === 'step_L')  { sev(-1, 0); }
+  else if (tip === 'step_R')  { sev( 1, 0); }
+  else if (tip === 'dodge_R') { g.translate(-14,0); sev(1,0); g.translate(28,0); sev(1,0); g.translate(-14,0); }
+  else if (tip === 'jump')    { g.translate(0, 8); sev(0,-1); g.translate(0,-18); sev(0,-1); g.translate(0,10); }
+  else if (tip === 'duck')    { g.translate(0,-8); sev(0, 1); g.translate(0, 18); sev(0, 1); g.translate(0,-10); }
+  else if (tip === 'arms_up') { g.translate(0,10); sev(0,-1); g.translate(0,-20); sev(0,-1); g.translate(0,10); }
+  else if (tip === 'punch')   { g.beginPath(); g.arc(cx, cy, 28, 0, 6.2832); g.stroke(); }
+  g.globalCompositeOperation = 'source-over';
   return new THREE.CanvasTexture(c);
 }
-const NOTA_DOKU = notaDoku();
+// Her cue tipinin kendi dokusu - simge farkli
+const NOTA_DOKULARI = {};
+for (const k of Object.keys(CUE)) NOTA_DOKULARI[k] = notaDoku(k);
+const NOTA_DOKU = NOTA_DOKULARI.step_L;
 
 // Notalar BUYUK. Referansta kameraya yaklastiklarinda ekranin alt ucte
 // birini kapliyorlar; ince cubuk okunmuyor.
 const notaGeo = new THREE.PlaneGeometry(3.05, 1.45);
 const notaMesh = NOTALAR.map(n => {
   const m = new THREE.Mesh(notaGeo, new THREE.MeshBasicMaterial({
-    map: NOTA_DOKU, color: PALET.lane[n.lane], transparent:true,
+    map: NOTA_DOKULARI[n.tip] || NOTA_DOKU, color: PALET.lane[n.lane], transparent:true,
     blending: THREE.AdditiveBlending, depthWrite:false, fog:true }));
-  m.rotation.x = -Math.PI/2;
+  // Tam yatik olunca perspektifte eziliyor ve simge okunmuyordu.
+  // Kameraya dogru egik: hem yolun uzerinde durur hem yuzu gorunur.
+  m.rotation.x = -Math.PI/2 + 0.62;
   m.visible = false;
   scene.add(m);
   return m;
@@ -922,6 +949,39 @@ function kareKur(n){
   bx.drawImage(canvas, 0, 0);
   bx.restore();
   bx.filter = 'none';
+
+  // --- ON PLAN CERCEVESI
+  // Sahnenin ONUNDE duran grafik katman. Kareyi "oyun arayuzu" gibi
+  // gosteriyor ve kenar boslugunu kapatiyor. Bicimi ortamla degisiyor.
+  {
+    const ins = 0.026 * W, r = 0.05 * W;
+    const x0 = ins, y0 = ins, x1 = W - ins, y1 = H - ins;
+    const bic = (yumusak > 0.5 ? O1.bicim : O0.bicim) || 'yuvarlak';
+    bx.save();
+    bx.globalCompositeOperation = 'lighter';
+    bx.globalAlpha = 0.30 + 0.22 * nabizOlcu;
+    bx.strokeStyle = '#' + karistir(O0.kemer[0], O1.kemer[0]).getHexString();
+    bx.shadowColor = bx.strokeStyle; bx.shadowBlur = 0.020 * W;
+    bx.lineWidth = 0.0055 * W;
+    bx.beginPath();
+    if (bic === 'altigen') {
+      const k = 0.10 * W;
+      bx.moveTo(x0+k, y0);  bx.lineTo(x1-k, y0); bx.lineTo(x1, (y0+y1)/2);
+      bx.lineTo(x1-k, y1);  bx.lineTo(x0+k, y1); bx.lineTo(x0, (y0+y1)/2);
+      bx.closePath();
+    } else if (bic === 'keskin') {
+      bx.rect(x0, y0, x1-x0, y1-y0);
+    } else if (bic === 'ikiz') {
+      bx.rect(x0, y0, x1-x0, y1-y0);
+      bx.rect(x0+r*0.5, y0+r*0.5, x1-x0-r, y1-y0-r);
+    } else {
+      bx.roundRect(x0, y0, x1-x0, y1-y0, r);
+    }
+    bx.stroke();
+    bx.restore();
+    bx.globalAlpha = 1;
+    bx.globalCompositeOperation = 'source-over';
+  }
 
   // --- SILUET GECISI: kendi sahnesi, saydam arka planla, kosede kucuk
   //     bir alana render edilir; sonra 2B tarafta panele cizilir.
