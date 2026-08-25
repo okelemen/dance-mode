@@ -809,6 +809,11 @@ function kareKur(n){
     }
     s.material.color.copy(karistir(
       O0.kemer[i % O0.kemer.length], O1.kemer[i % O1.kemer.length]));
+    // YAVAS DONUS: tam tur 32 olcude (64 sn). Olcu izgarasina bagli
+    // oldugu icin deterministik ve muzikle uyumlu. Her kemere indeksten
+    // gelen sabit bir faz farki verilir -> koridor boyunca spiral etkisi.
+    s.rotation.z = (t / (32 * OLCU)) * Math.PI * 2
+                 + i * (Math.PI * 2 / SUTUN_SAY) * 0.22;
     const p = kOlc * (1 + nabizOlcu * 0.035);
     s.scale.set(p, p, 1);
   }
