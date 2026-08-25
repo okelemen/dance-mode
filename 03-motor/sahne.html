@@ -1,4 +1,4 @@
-﻿<meta charset="utf-8">
+<meta charset="utf-8">
 <title>Dance Mode - sahne</title>
 <style>
   html,body { margin:0; background:#000; overflow:hidden; }
@@ -80,19 +80,19 @@ const ORTAMLAR = [
   { olcu: 0,  seviye: 1,
     grid: ['#ff2fd0','#00e5ff','#8b5cff'],
     kemer:['#00e5ff','#ff2fd0','#8b5cff','#25d9c2','#ffb454'],
-    ufuk: '#ff5ec4', ara: 5.0, olcek: 1.00 },
+    ufuk: '#ff5ec4', ara: 5.0, olcek: 1.00, bicim: 'yuvarlak' },
   { olcu: 16, seviye: 2,
     grid: ['#25d9c2','#3d7bff','#ffb454'],
     kemer:['#ffb454','#25d9c2','#3d7bff','#ffe066','#00e5ff'],
-    ufuk: '#ffb454', ara: 3.4, olcek: 0.86 },
+    ufuk: '#ffb454', ara: 3.4, olcek: 0.86, bicim: 'altigen'  },
   { olcu: 32, seviye: 3,
     grid: ['#b18cff','#ff6ad5','#5ce1e6'],
     kemer:['#ff6ad5','#b18cff','#5ce1e6','#ffffff','#8b5cff'],
-    ufuk: '#b18cff', ara: 6.6, olcek: 1.20 },
+    ufuk: '#b18cff', ara: 6.6, olcek: 1.20, bicim: 'ikiz'     },
   { olcu: 48, seviye: 4,
     grid: ['#ffe066','#ff5ec4','#00e5ff'],
     kemer:['#ffe066','#ff2fd0','#00e5ff','#ffb454','#ffffff'],
-    ufuk: '#ff2fd0', ara: 2.9, olcek: 0.94 },
+    ufuk: '#ff2fd0', ara: 2.9, olcek: 0.94, bicim: 'keskin'   },
 ];
 // Renk gecisi KISA olmali. 1 olcuye yayilinca fark edilmiyordu; yarim
 // olcude bitince "bir sey degisti" hissi net veriyor.
@@ -277,20 +277,35 @@ if (!SADE) {
   // --- kemer gecitleri: tunelin asil dolgusu
   // Duz zemin "ova" gibi durur; ic ice gecen cerceveler mekani kapatir ve
   // yanindan akip gectikleri icin hiz hissini paralaksla verirler.
-  function kemerDoku(){
+  function kemerDoku(tip){
     const c = document.createElement('canvas'); c.width = 512; c.height = 300;
     const g = c.getContext('2d');
     const ciz = (kal, alfa, blur) => {
       g.lineWidth = kal; g.strokeStyle = `rgba(255,255,255,${alfa})`;
       g.shadowColor = 'rgba(255,255,255,0.9)'; g.shadowBlur = blur;
-      g.beginPath(); g.roundRect(24, 24, 464, 252, 26); g.stroke();
+      g.beginPath();
+      if (tip === 'keskin') { g.rect(24,24,464,252); }
+      else if (tip === 'altigen') {
+        const x0=24,y0=24,w=464,h=252,kk=80;
+        g.moveTo(x0+kk,y0); g.lineTo(x0+w-kk,y0); g.lineTo(x0+w,y0+h/2);
+        g.lineTo(x0+w-kk,y0+h); g.lineTo(x0+kk,y0+h); g.lineTo(x0,y0+h/2);
+        g.closePath();
+      }
+      else if (tip === 'ikiz') { g.rect(24,24,464,252); g.rect(74,60,364,180); }
+      else { g.roundRect(24,24,464,252,30); }
+      g.stroke();
     };
     ciz(26, 0.30, 34);     // dis hale
     ciz(12, 0.75, 16);     // gÃ¶vde
     ciz(5,  1.00, 0);      // cekirdek
     return new THREE.CanvasTexture(c);
   }
-  const KEMER_DOKU = kemerDoku();
+  const KEMER_DOKULARI = {
+    yuvarlak: kemerDoku('yuvarlak'), altigen: kemerDoku('altigen'),
+    ikiz:     kemerDoku('ikiz'),     keskin:  kemerDoku('keskin'),
+  };
+  const KEMER_DOKU = KEMER_DOKULARI.yuvarlak;
+  window.__KEMER_DOKULARI = KEMER_DOKULARI;
   // yumusak, uyumlu 5 renk - sert siyah/beyaz zitliktan kacinildi
   const KEMER_RENK = ['#00e5ff','#ff2fd0','#8b5cff','#25d9c2','#ffb454'];
   const kemerGeo = new THREE.PlaneGeometry(17.5, 10.3);
@@ -785,7 +800,13 @@ function kareKur(n){
     s.position.z = Z_VURUS - ((i * ara + t * HIZ) % kapsam) + 4;
     // kameraya cok yaklasan kemer kareyi basiyor - yakinda sondur
     const yakinSonme = THREE.MathUtils.smoothstep(camera.position.z - s.position.z, 1.5, 7);
-    s.material.opacity = (0.34 + 0.36 * nabizOlcu) * yakinSonme;
+    s.material.opacity = (0.52 + 0.40 * nabizOlcu) * yakinSonme;
+    // BICIM degisimi: doku beyaz cakmanin ortasinda takas edilir, gozukmez
+    const dk = window.__KEMER_DOKULARI;
+    if (dk) {
+      const bic = (yumusak > 0.5 ? O1.bicim : O0.bicim) || 'yuvarlak';
+      if (s.material.map !== dk[bic]) { s.material.map = dk[bic]; s.material.needsUpdate = true; }
+    }
     s.material.color.copy(karistir(
       O0.kemer[i % O0.kemer.length], O1.kemer[i % O1.kemer.length]));
     const p = kOlc * (1 + nabizOlcu * 0.035);
