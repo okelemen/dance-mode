@@ -120,6 +120,22 @@ jobs:
             -c:v copy -c:a aac -b:a 192k -shortest bolum.mp4
           ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1 bolum.mp4
 
+      - name: Kucuk onizleme uret
+        run: |
+          # Tam cozunurluklu dosya 130-190 MB ve tarayici guvenlik taramasi
+          # bu boyutu sik sik bekletiyor. 720p / ~20 MB onizleme sorunsuz
+          # iniyor; orijinali sadece yayina hazirlarken indirmek yeterli.
+          ffmpeg -v error -y -i bolum.mp4 -vf "scale=1280:720" \
+            -c:v libx264 -preset slow -b:v 1350k -maxrate 1600k -bufsize 3000k \
+            -c:a aac -b:a 96k onizleme.mp4
+          ls -lh bolum.mp4 onizleme.mp4
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ONIZLEME-${{ github.event.inputs.toplam_olcu }}olcu-720p
+          path: onizleme.mp4
+          retention-days: 14
+
       - uses: actions/upload-artifact@v4
         with:
           name: BOLUM-${{ github.event.inputs.toplam_olcu }}olcu-${{ github.event.inputs.yukseklik }}p
