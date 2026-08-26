@@ -47,7 +47,7 @@ const YAZI_KONTUR = TB ? 'rgba(10,16,40,0.95)' : 'rgba(255,255,255,0.92)';
 const Z_VURUS = 4;      // vurus cizgisi
 const Z_DOGUM = -26;    // notanin dogdugu yer (30 birim / 2 sn)
 const LANE_X  = [-2.2, 0, 2.2];
-const SIS_YAKIN = TB ? 20 : 14, SIS_UZAK = TB ? 54 : 33;
+const SIS_YAKIN = TB ? 30 : 14, SIS_UZAK = TB ? 96 : 33;
 
 const PALET = TB ? {
   zemin:'#eaf6ff', grid:'#ff4d5e',
@@ -117,19 +117,19 @@ const ORTAMLAR_A = [
 // aramayi cekiyor ama IP kullanmadan da tema yapilabiliyor. Rakip analizinin
 // en onemli cikarimlarindan biri buydu.
 const ORTAMLAR_B = [
-  { olcu: 0,  seviye: 1, gok: '#7ecbff', ad: 'BLOCK ISLAND',
+  { olcu: 0,  seviye: 1, gok: '#12a8ff', ad: 'BLOCK ISLAND',
     grid: ['#ff4d5e','#ffd23f','#2fb8ff'],
     kemer:['#ff4d5e','#ffd23f','#2fb8ff','#1fc46a','#ff7ad4'],
     ufuk: '#ffffff', ara: 5.0, olcek: 1.00, bicim: 'yuvarlak' },
-  { olcu: 16, seviye: 2, gok: '#ffa8d8', ad: 'CANDY ROAD',
+  { olcu: 16, seviye: 2, gok: '#ff5eb8', ad: 'CANDY ROAD',
     grid: ['#ff2f86','#ffcc33','#00c8f0'],
     kemer:['#ff2f86','#ffcc33','#00c8f0','#a24bff','#ffffff'],
     ufuk: '#fff0f8', ara: 3.4, olcek: 0.86, bicim: 'altigen'  },
-  { olcu: 32, seviye: 3, gok: '#9adcff', ad: 'JUNGLE RUN',
+  { olcu: 32, seviye: 3, gok: '#00c2a8', ad: 'JUNGLE RUN',
     grid: ['#1fc46a','#b6e83a','#ffd23f'],
     kemer:['#1fc46a','#b6e83a','#ffd23f','#0f8f52','#ffffff'],
     ufuk: '#eaffd0', ara: 6.6, olcek: 1.20, bicim: 'ikiz'     },
-  { olcu: 48, seviye: 4, gok: '#cfeaff', ad: 'ICE PEAK',
+  { olcu: 48, seviye: 4, gok: '#00a3e0', ad: 'ICE PEAK',
     grid: ['#0091e6','#ffffff','#4c5cff'],
     kemer:['#0091e6','#ffffff','#4c5cff','#00d2ff','#ff3b5c'],
     ufuk: '#ffffff', ara: 2.9, olcek: 0.94, bicim: 'keskin'   },
@@ -240,10 +240,17 @@ const zeminMat = new THREE.ShaderMaterial({
         // B TEMASI - PARLAK BLOK YOLU
         // A'nin tam tersi: yolun KENDISI doygun renkli, cizgiler koyu derz.
         // Gunduz sahnesinde parlak cizgi goze carpmaz; carpan sey renk alani.
-        float genis = 1.0 - smoothstep(0.30, 0.50, abs(vUv.x - 0.5));
-        float derz = max(boyuna, enine);
-        vec3 yolB = mix(vec3(0.86,0.92,0.98), gr, genis * 0.98);
-        renk = mix(yolB, vec3(0.05,0.09,0.20), derz * (0.45 * genis + 0.08));
+        // sert kenarli platform segmentleri: her segment TEK duz renk
+        float seg = (vUv.y + uKaydir) * 54.0;
+        float idx = floor(fract(seg / 3.0) * 3.0);
+        vec3 c = idx < 0.5 ? uGrid : (idx < 1.5 ? uGrid2 : uGrid3);
+        float genis = 1.0 - smoothstep(0.32, 0.47, abs(vUv.x - 0.5));
+        // derz cizgileri segment izgarasiyla ayni sikliga oturtuldu
+        float derzE = cizgi(vUv.y + uKaydir, 54.0, 1.2);
+        float derz  = max(boyuna, derzE);
+        vec3 disi = c * 0.45;                      // yol disi: ayni renk, koyu
+        vec3 yolB = mix(disi, c, genis);
+        renk = mix(yolB, vec3(0.03,0.06,0.16), derz * (0.50 * genis + 0.16));
       } else {
         vec3 yol = uZemin * mix(0.85, 0.12, merkez);  // asfalt: koyu
         renk = mix(yol, gr, g);
@@ -497,7 +504,7 @@ function notaDoku(tip, renk){
     ciz(22, 19, 276, 90, 28);               // koyu kontur
     g.fillStyle = renk || '#ffffff';
     ciz(30, 26, 260, 76, 22);               // renkli govde
-    g.fillStyle = 'rgba(255,255,255,0.42)';
+    g.fillStyle = 'rgba(255,255,255,0.20)';
     ciz(30, 26, 260, 26, 12);               // ust yuz parlamasi - hacim hissi
   } else {
   g.shadowColor = 'rgba(255,255,255,0.85)'; g.shadowBlur = 26;
@@ -888,6 +895,12 @@ const birlesik = document.createElement('canvas');
 birlesik.width = W; birlesik.height = H;
 const bx = birlesik.getContext('2d');
 
+// B'nin son doygunluk pasi icin ara tuval (canvas kendi uzerine filtreli
+// cizilemiyor, ara kopya sart)
+const araCv = TB ? document.createElement('canvas') : null;
+if (araCv) { araCv.width = W; araCv.height = H; }
+const ax = araCv ? araCv.getContext('2d') : null;
+
 // --- siluet paneli
 const PW = Math.round(PANEL.g * W), PH = Math.round(PANEL.h * H);
 const PX = W - PW - Math.round(PANEL.kenar * W), PY = Math.round(PANEL.y * H);
@@ -993,7 +1006,7 @@ function kareKur(n){
   const kapsam = ara * SUTUN_SAY;
   for (const s of sutunlar) {
     const { i } = s.userData;
-    s.position.z = Z_VURUS - ((i * ara + t * HIZ) % kapsam) + 4;
+    s.position.z = Z_VURUS + 4 - kapsam + ((i * ara + t * HIZ) % kapsam);
     // kameraya cok yaklasan kemer kareyi basiyor - yakinda sondur
     const yakinSonme = THREE.MathUtils.smoothstep(camera.position.z - s.position.z,
                                                   TB ? 4.0 : 1.5, TB ? 15 : 7);
@@ -1019,7 +1032,7 @@ function kareKur(n){
   for (const p of parcaciklar) {
     const d = p.userData;
     p.position.set(d.x, d.y,
-      Z_VURUS - ((d.z0 + t * HIZ * d.hiz) % d.kapsam) + 6);
+      Z_VURUS + 6 - d.kapsam + ((d.z0 + t * HIZ * d.hiz) % d.kapsam));
     p.rotation.z = d.don + t * (0.5 + d.hiz);
     p.material.opacity = TB ? Math.min(0.75, (0.42 + 0.18 * nabizOlcu) * d.olcek)
                             : (0.18 + 0.30 * nabizOlcu) * d.olcek;
@@ -1117,11 +1130,8 @@ function kareKur(n){
   bx.save();
   bx.globalCompositeOperation = 'lighter';
   if (TB) {
-    // B'de bloom neredeyse kapali. Parlak gokyuzune toplama isik eklemek
-    // butun kareyi beyaza doyuruyor; tek ince gecis yeter.
-    bx.globalAlpha = 0.14;
-    bx.filter = 'blur(10px)';
-    bx.drawImage(canvas, 0, 0);
+    // B'de bloom YOK. 'lighter' harman beyaz ekler, beyaz eklemek ise
+    // dogrudan doygunluk dusurur - tam istemedigimiz sey.
   } else {
     bx.globalAlpha = 0.50;
     bx.filter = 'blur(14px)';
@@ -1202,6 +1212,18 @@ function kareKur(n){
     bx.restore();
   }
   bx.drawImage(hud, 0, 0);
+
+  // --- SON PAS: doygunluk + kontrast (sadece B)
+  // Rakiplerin (ozellikle Escapify) kareleri tam doygun. Bizimki olculdugunde
+  // soluk cikiyordu. Bu pas farki tek hamlede kapatiyor.
+  if (TB) {
+    ax.clearRect(0, 0, W, H);
+    ax.drawImage(birlesik, 0, 0);
+    bx.clearRect(0, 0, W, H);
+    bx.filter = 'saturate(1.45) contrast(1.08)';
+    bx.drawImage(araCv, 0, 0);
+    bx.filter = 'none';
+  }
 }
 
 // disariya ac
