@@ -5,7 +5,8 @@
  * bu yuzden ayni girdi her zaman ayni videoyu verir.
  *
  * Kullanim:
- *   node render.js [--w 1280] [--h 720] [--olcu 16] [--cikti ../04-ciktilar/ornek.mp4]
+ *   node render.js [--w 1280] [--h 720] [--olcu 16] [--tema a|b]
+ *                  [--cikti ../04-ciktilar/ornek.mp4]
  */
 const http = require('http');
 const fs = require('fs');
@@ -30,6 +31,9 @@ const OLCU_SAYISI = +arg('olcu', 16);
 // GitHub Actions zaman asimina ugrar.
 const BASLANGIC = +arg('baslangic', 0);          // olcu cinsinden ofset
 const SESSIZ = process.argv.includes('--sessiz'); // ses eklenmesin (parca)
+// Gorsel dil: 'a' soyut ritim seridi (neon), 'b' temali kosu (gunduz blok).
+// Ayni motor, ayni koreografi, ayni muzik - sadece gorsel katman degisiyor.
+const TEMA = arg('tema', 'a') === 'b' ? 'b' : 'a';
 const CIKTI = path.resolve(arg('cikti', path.join(KOK, '04-ciktilar', 'ornek.mp4')));
 
 const MIME = { '.html':'text/html', '.js':'text/javascript', '.mjs':'text/javascript',
@@ -67,7 +71,8 @@ function sunucuBaslat() {
   sayfa.on('pageerror', e => console.log('SAYFA HATASI:', e.message));
   sayfa.on('console', m => { if (m.type() === 'error') console.log('konsol:', m.text()); });
 
-  await sayfa.goto(`http://127.0.0.1:${port}/03-motor/sahne.html?w=${W}&h=${H}`,
+  console.log(`tema: ${TEMA}`);
+  await sayfa.goto(`http://127.0.0.1:${port}/03-motor/sahne.html?w=${W}&h=${H}&tema=${TEMA}`,
                    { waitUntil: 'load', timeout: 120000 });
   await sayfa.waitForFunction('window.HAZIR === true', { timeout: 180000 });
 
