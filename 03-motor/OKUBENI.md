@@ -23,6 +23,36 @@ bir tünel + bir hız + bir nota + bir siluet hareketi + bir combo tiki.
 > Bu 2 saniye doğru hissettiriyorsa geri kalan 9 dakika sadece tekrardır.
 > Yanlış hissettiriyorsa 9 dakika yapmak hiçbir şeyi kurtarmaz.
 
+## İki görsel dil — `--tema`
+
+Rakip analizi (`docs/RAKIP-ANALIZI-6-KANAL.md`) nişin tek değil **iki** olduğunu
+gösterdi. Motor ikisini de üretiyor; değişen tek şey görsel katman.
+Koreografi, müzik, zamanlama, ölçü ızgarası **aynı**.
+
+```bash
+node render.js --olcu 64 --tema a --cikti ../04-ciktilar/ornek-tema-a.mp4
+node render.js --olcu 64 --tema b --cikti ../04-ciktilar/ornek-tema-b.mp4
+```
+
+| | `a` — soyut ritim şeridi | `b` — temalı koşu |
+|---|---|---|
+| Referans | Dance Mode, Beat Motion, Stay on Beat | Escapify, FLEM, Prime & Prep |
+| Zemin | Koyu yol, parlak neon çizgi | Parlak renkli blok yolu, koyu derz |
+| Harman | Additive (toplama ışık) | **Normal** |
+| Ortamlar | Neon Grid / Uzay / CRT / Sıvı | Block Island / Candy Road / Jungle Run / Ice Peak |
+| Kontrast | Parlaklıkla | **Renk alanı + koyu kontur** |
+| Bloom | Güçlü | Neredeyse kapalı |
+| Yazı | Beyaz kontur | **Koyu kontur** |
+
+**Neden ayrı bir harman modu:** B'de additive kullanılamaz. Toplama ışık parlak
+gökyüzünde beyaza doyar ve bütün sahne yıkanır. Aynı sebeple B'de bloom kısılır,
+nota rengi materyal yerine **dokunun içine** gömülür (materyal rengi bütün dokuyu
+çarptığı için beyaz dış kenar da lane rengine boyanıyor ve nota, aynı renkteki
+yolun üzerinde kayboluyordu).
+
+`b` teması hiçbir lisanslı evrene ait değil. Rakiplerin en büyük vuruşları IP'den
+geliyor ama IP'siz de tema yapılabiliyor — arama hacmini çeken şey tema **ismi**.
+
 ## Değişmez tasarım kuralları
 
 - Deterministik: `t = kare_no / fps`. Duvar saati YOK, ekran kaydı YOK.
