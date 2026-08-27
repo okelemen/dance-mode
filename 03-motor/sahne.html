@@ -956,7 +956,7 @@ function kademeBaslangic(combo){
   return 0;
 }
 
-function hudCiz(t, combo, epic, kmCombo, kacis, seviye, duyuru, sonVurus){
+function hudCiz(t, combo, epic, kmCombo, seviye, duyuru, sonVurus){
   hx.clearRect(0,0,W,H);
   const k = W/1280;
   // B temasinda parlak zeminde beyaz yazi okunmuyor. Her yazi once koyu
@@ -1128,40 +1128,52 @@ function hudCiz(t, combo, epic, kmCombo, kacis, seviye, duyuru, sonVurus){
   }
   hx.textBaseline = 'alphabetic';
 
-  // --- ovgu yazisi: ufuk noktasindan buyuyerek gelir, notalarla ayni perspektif
-  const OV_GEL = 1.05, OV_TUT = 0.22, OV_SON = 0.42;
+  // --- OVGU YAZISI: ekranin UST BANDINDAN iner
+  // Eskiden ufuk noktasindan dogup ekranin ortasina (H*0.40) buyuyerek
+  // geliyordu. Perspektif hissi guzeldi ama tam notalarin aktigi koridorun
+  // onune oturuyor ve yaklasan cue'yu kapatiyordu - oyunun okunmasi
+  // gosterisin onunde gelir. Artik ustten inip ust bantta duruyor.
+  const OV_GEL = 0.34, OV_TUT = 0.74, OV_SON = 0.44;
   if (epic >= 0 && epic < OV_GEL + OV_TUT + OV_SON){
     const sira = Math.max(0, Math.floor(kmCombo/8) - 1);
     const yazi = OVGU[sira % OVGU.length];
     const renk = OVGU_RENK[sira % OVGU_RENK.length];
 
-    // perspektif: olcek 1/mesafe ile buyur - notanin yaklasmasiyla ayni his
-    const camZ = 10.8, zN = 4, zF = -26;
-    const s0 = (camZ - zN) / (camZ - zF);
-    let olcek, alfa;
-    if (epic < OV_GEL){
+    const UST_Y = H * 0.155;        // durdugu yer: LEVEL ve COMBO ile ayni bant
+    const BAS_Y = -H * 0.10;        // dogdugu yer: ust kenarin disi
+    let ilerle, alfa, ek;
+    if (epic < OV_GEL){                       // hizli in
       const q = epic / OV_GEL;
-      const z = zF + (zN - zF) * q;
-      olcek = (camZ - zN) / (camZ - z);
-      alfa = Math.min(1, q * 3.5);
-    } else if (epic < OV_GEL + OV_TUT){
-      olcek = 1; alfa = 1;
-    } else {
+      ilerle = 1 - Math.pow(1 - q, 3);        // sonda yumusayarak otur
+      alfa = Math.min(1, q * 4);
+      ek = 0;
+    } else if (epic < OV_GEL + OV_TUT){       // tut
+      ilerle = 1; alfa = 1; ek = 0;
+    } else {                                  // hafifce yukari suzul ve kaybol
       const q = (epic - OV_GEL - OV_TUT) / OV_SON;
-      olcek = 1 + q * 0.16; alfa = 1 - q;
+      ilerle = 1; alfa = 1 - q; ek = -q * H * 0.035;
     }
-    // ufuktan ekran ortasina dogru surukle
-    const yol = (olcek - s0) / (1 - s0);
-    const cx = kacis[0] + (W/2      - kacis[0]) * yol;
-    const cy = kacis[1] + (H*0.40   - kacis[1]) * yol;
+    const olcek = 0.62 + 0.38 * ilerle;       // inerken buyur
+    const cx = W / 2;
+    const cy = BAS_Y + (UST_Y - BAS_Y) * ilerle + ek;
 
     hx.save();
     hx.globalAlpha = alfa;
     hx.translate(cx, cy);
     hx.scale(olcek, olcek);
     hx.textAlign = 'center'; hx.textBaseline = 'middle';
-    hx.font = `700 ${Math.round(138*k)}px Impact, Arial Black, sans-serif`;
-    hx.fillStyle = renk; hx.shadowColor = renk; hx.shadowBlur = 58*k;
+    // Ust bantta solda LEVEL, sagda COMBO + rozet var. Yazi ikisinin arasina
+    // sigmali; sigmiyorsa punto kucululur. Sabit punto birakilirsa
+    // "YOU GOT THIS!" gibi uzun ovguler ikisinin de uzerine biniyor.
+    let punto = 104;
+    hx.font = `700 ${Math.round(punto*k)}px Impact, Arial Black, sans-serif`;
+    const enGenis = W * 0.50;
+    const olculen = hx.measureText(yazi).width * olcek;
+    if (olculen > enGenis) {
+      punto = Math.max(52, punto * enGenis / olculen);
+      hx.font = `700 ${Math.round(punto*k)}px Impact, Arial Black, sans-serif`;
+    }
+    hx.fillStyle = renk; hx.shadowColor = renk; hx.shadowBlur = 52*k;
     hx.fillText(yazi, 0, 0);
     hx.lineWidth = 3*k; hx.strokeStyle = YAZI_KONTUR;
     hx.strokeText(yazi, 0, 0);
@@ -1557,10 +1569,7 @@ function kareKur(n){
     mx.drawImage(canvas, 0, H - PH, PW, PH, 0, 0, PW, PH);
   }
   siluetPaneliCiz(O1.grid[0]);
-  // ufuk (kacis) noktasinin ekran koordinati - ovgu yazisi oradan dogar
-  const kv = new THREE.Vector3(0, 0.3, -400).project(camera);
-  const kacis = [ (kv.x*0.5+0.5)*W, (-kv.y*0.5+0.5)*H ];
-  hudCiz(t, combo, sonKm > -90 ? t - sonKm : -1, kmCombo, kacis, O1.seviye, duyuru, sonVurus);
+  hudCiz(t, combo, sonKm > -90 ? t - sonKm : -1, kmCombo, O1.seviye, duyuru, sonVurus);
 
   // ortam gecisinde beyaz cakma
   if (cakma > 0){
