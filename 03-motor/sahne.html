@@ -103,19 +103,19 @@ const ORTAMLAR_A = [
   { olcu: 0,  seviye: 1, gok: '#0a0118',
     grid: ['#ff2fd0','#00e5ff','#8b5cff'],
     kemer:['#00e5ff','#ff2fd0','#8b5cff','#25d9c2','#ffb454'],
-    ufuk: '#ff5ec4', ara: 5.0, olcek: 1.00, bicim: 'yuvarlak' },
+    ufuk: '#ff5ec4', ara: 5.0, olcek: 1.00, bicim: 'yuvarlak', en:1, boy:1, yer:5.3 },
   { olcu: 16, seviye: 2, gok: '#0a0118',
     grid: ['#25d9c2','#3d7bff','#ffb454'],
     kemer:['#ffb454','#25d9c2','#3d7bff','#ffe066','#00e5ff'],
-    ufuk: '#ffb454', ara: 3.4, olcek: 0.86, bicim: 'altigen'  },
+    ufuk: '#ffb454', ara: 3.4, olcek: 0.86, bicim: 'altigen',  en:1, boy:1, yer:5.3 },
   { olcu: 32, seviye: 3, gok: '#0a0118',
     grid: ['#b18cff','#ff6ad5','#5ce1e6'],
     kemer:['#ff6ad5','#b18cff','#5ce1e6','#ffffff','#8b5cff'],
-    ufuk: '#b18cff', ara: 6.6, olcek: 1.20, bicim: 'ikiz'     },
+    ufuk: '#b18cff', ara: 6.6, olcek: 1.20, bicim: 'ikiz',     en:1, boy:1, yer:5.3 },
   { olcu: 48, seviye: 4, gok: '#0a0118',
     grid: ['#ffe066','#ff5ec4','#00e5ff'],
     kemer:['#ffe066','#ff2fd0','#00e5ff','#ffb454','#ffffff'],
-    ufuk: '#ff2fd0', ara: 2.9, olcek: 0.94, bicim: 'keskin'   },
+    ufuk: '#ff2fd0', ara: 2.9, olcek: 0.94, bicim: 'keskin',   en:1, boy:1, yer:5.3 },
 ];
 // B temasi: dort "dunya". Hicbiri lisansli bir evrene ait degil - tema ismi
 // aramayi cekiyor ama IP kullanmadan da tema yapilabiliyor. Rakip analizinin
@@ -124,19 +124,23 @@ const ORTAMLAR_B = [
   { olcu: 0,  seviye: 1, gok: '#0d0524', ad: 'NEON CITY',
     grid: ['#22e0e8','#8b3cff','#ff2f8f'],
     kemer:['#22e0e8','#7a3cff','#ff2f8f','#5ce1ff','#b04dff'],
-    ufuk: '#ff2f8f', ara: 2.4, olcek: 1.00, bicim: 'yuvarlak' },
+    ufuk: '#ff2f8f', ara: 2.4, olcek: 1.00, bicim: 'kemer',
+    en: 1.00, boy: 1.15, yer: 4.6 },
   { olcu: 16, seviye: 2, gok: '#0a0426', ad: 'DEEP SPACE',
     grid: ['#3ad1ff','#b04dff','#ff5ec4'],
     kemer:['#3ad1ff','#b04dff','#ff5ec4','#6a3cff','#22e0e8'],
-    ufuk: '#b04dff', ara: 1.8, olcek: 0.86, bicim: 'altigen'  },
+    ufuk: '#b04dff', ara: 1.8, olcek: 0.86, bicim: 'tonoz',
+    en: 0.86, boy: 1.30, yer: 4.9 },
   { olcu: 32, seviye: 3, gok: '#08082a', ad: 'CIRCUIT',
     grid: ['#00ffc8','#6a3cff','#ff2f6d'],
     kemer:['#00ffc8','#6a3cff','#ff2f6d','#22e0e8','#a020ff'],
-    ufuk: '#00ffc8', ara: 3.0, olcek: 1.20, bicim: 'ikiz'     },
+    ufuk: '#00ffc8', ara: 3.0, olcek: 1.20, bicim: 'halka',
+    en: 0.78, boy: 1.34, yer: 2.9 },
   { olcu: 48, seviye: 4, gok: '#160530', ad: 'ULTRA',
     grid: ['#00e5ff','#a020ff','#ff008c'],
     kemer:['#00e5ff','#a020ff','#ff008c','#5ce1ff','#ff5ec4'],
-    ufuk: '#ff008c', ara: 1.6, olcek: 0.94, bicim: 'keskin'   },
+    ufuk: '#ff008c', ara: 1.6, olcek: 0.94, bicim: 'elmas',
+    en: 0.94, boy: 1.20, yer: 3.6 },
 ];
 const ORTAMLAR = TB ? ORTAMLAR_B : ORTAMLAR_A;
 // Renk gecisi KISA olmali. 1 olcuye yayilinca fark edilmiyordu; yarim
@@ -415,6 +419,27 @@ if (!SADE) {
         g.closePath();
       }
       else if (tip === 'ikiz') { g.rect(24,24,464,252); g.rect(74,60,364,180); }
+      // --- B temasinin dort mekani ---
+      else if (tip === 'kemer') {
+        // parabolik kemer: alti ACIK, tepesi egri. Yolun uzerinden geciyor.
+        g.moveTo(30, 292); g.lineTo(30, 190);
+        g.bezierCurveTo(30, 40, 482, 40, 482, 190);
+        g.lineTo(482, 292);
+      }
+      else if (tip === 'tonoz') {
+        // tonoz tunel: duz yan duvarlar + yarim daire tepe, alti acik
+        g.moveTo(56, 292); g.lineTo(56, 150);
+        g.arc(256, 150, 200, Math.PI, 0);
+        g.lineTo(456, 292);
+      }
+      else if (tip === 'halka') {
+        // ic ice halkalar: kapali elips. Tunel "boru" gibi okunur.
+        g.ellipse(256, 150, 210, 128, 0, 0, Math.PI * 2);
+      }
+      else if (tip === 'elmas') {
+        g.moveTo(256, 18); g.lineTo(488, 150);
+        g.lineTo(256, 282); g.lineTo(24, 150); g.closePath();
+      }
       else { g.roundRect(24,24,464,252,30); }
     };
     const ciz = (kal, alfa, blur) => {
@@ -437,11 +462,14 @@ if (!SADE) {
     }
     return new THREE.CanvasTexture(c);
   }
-  const KEMER_DOKULARI = {
+  const KEMER_DOKULARI = TB ? {
+    kemer: kemerDoku('kemer'), tonoz: kemerDoku('tonoz'),
+    halka: kemerDoku('halka'), elmas: kemerDoku('elmas'),
+  } : {
     yuvarlak: kemerDoku('yuvarlak'), altigen: kemerDoku('altigen'),
     ikiz:     kemerDoku('ikiz'),     keskin:  kemerDoku('keskin'),
   };
-  const KEMER_DOKU = KEMER_DOKULARI.yuvarlak;
+  const KEMER_DOKU = TB ? KEMER_DOKULARI.kemer : KEMER_DOKULARI.yuvarlak;
   window.__KEMER_DOKULARI = KEMER_DOKULARI;
   // yumusak, uyumlu 5 renk - sert siyah/beyaz zitliktan kacinildi
   const KEMER_RENK = ['#00e5ff','#ff2fd0','#8b5cff','#25d9c2','#ffb454'];
@@ -517,10 +545,16 @@ if (!SADE) {
       color: '#ffffff', transparent: true, opacity: 0.5,
       blending: HARMAN, depthWrite: false, fog: true,
       side: THREE.DoubleSide }));
+    // Referansta parcaciklar esit dagilmiyor, KUME halinde patliyor.
+    // Her 10 parcacik bir kume; kume merkezi indeksten turetiliyor.
+    const ku = Math.floor(i / 10);
+    const kx = (kar(ku * 17 + 3) - 0.5) * 22;
+    const ky = 1.2 + kar(ku * 17 + 8) * 6.5;
+    const kz = kar(ku * 17 + 13) * PARCA_KAPSAM;
     m.userData = {
-      x: (kar(i) - 0.5) * 26,
-      y: 0.4 + kar(i + 11) * 8.5,
-      z0: kar(i + 23) * PARCA_KAPSAM,
+      x: kx + (kar(i) - 0.5) * 3.4,
+      y: ky + (kar(i + 11) - 0.5) * 2.6,
+      z0: (kz + (kar(i + 23) - 0.5) * 4.0 + PARCA_KAPSAM) % PARCA_KAPSAM,
       hiz: 0.55 + kar(i + 37) * 0.8,          // farkli hizlar = derinlik hissi
       don: kar(i + 51) * 6.28,
       olcek: 0.5 + kar(i + 71) * 1.5,
@@ -652,6 +686,71 @@ const notaMesh = NOTALAR.map(n => {
   return m;
 });
 
+// --- AYAK KARTLARI: ufuktan gelen dik kartlar
+function ayakKartDoku(tip, renk){
+  const c = document.createElement('canvas'); c.width = c.height = 256;
+  const g = c.getContext('2d');
+  const kutu = (x,y,w,h,r) => { g.beginPath(); g.roundRect(x,y,w,h,r); g.fill(); };
+  g.shadowColor = renk; g.shadowBlur = 30;
+  g.fillStyle = 'rgba(255,255,255,0.95)';
+  kutu(12, 12, 232, 232, 34);          // beyaz cerceve
+  g.shadowBlur = 0;
+  g.fillStyle = renk;
+  kutu(22, 22, 212, 212, 27);          // doygun govde
+
+  // AYAK IZI: taban + bes parmak. Yumruk yerine ayak - hareket ayakla yapiliyor.
+  g.fillStyle = 'rgba(8,4,22,0.94)';
+  g.save(); g.translate(128, 132);
+  if (tip === 'step_L' || tip === 'dodge_R') g.scale(-1, 1);
+  g.beginPath(); g.ellipse(0, 22, 40, 54, 0, 0, 6.2832); g.fill();   // taban
+  const parmak = [[-34,-40,13],[-11,-52,12],[9,-54,11],[26,-48,9],[39,-38,8]];
+  for (const [px,py,pr] of parmak){
+    g.beginPath(); g.ellipse(px, py, pr, pr*1.15, 0, 0, 6.2832); g.fill();
+  }
+  g.restore();
+  return new THREE.CanvasTexture(c);
+}
+const KART_DOKU = {};
+if (TB) for (const k of Object.keys(CUE))
+  for (let l = 0; l < 3; l++) KART_DOKU[k + '_' + l] = ayakKartDoku(k, PALET.lane[l]);
+
+const kartGeo = new THREE.PlaneGeometry(1.55, 1.55);
+const kartMesh = TB ? NOTALAR.map(n => {
+  const m = new THREE.Mesh(kartGeo, new THREE.MeshBasicMaterial({
+    map: KART_DOKU[n.tip + '_' + n.lane], transparent:true,
+    blending: THREE.NormalBlending, depthWrite:false, fog:true }));
+  m.visible = false; scene.add(m); return m;
+}) : [];
+
+// --- LAZER ISINLARI: kareyi capraz kesen ince hatlar
+const lazerler = [];
+if (TB && !SADE) {
+  const LZ_SAY = 7, LZ_KAPSAM = 52;
+  const kar = (n) => { const v = Math.sin(n * 78.233) * 43758.5453; return v - Math.floor(v); };
+  for (let i = 0; i < LZ_SAY; i++) {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(0.05, 46),
+      new THREE.MeshBasicMaterial({ color:'#ff2f6d', transparent:true, opacity:0.30,
+        blending: THREE.AdditiveBlending, depthWrite:false, fog:true }));
+    m.rotation.z = (kar(i) - 0.5) * 2.2;          // capraz aci
+    m.userData = { i, kapsam: LZ_KAPSAM, ara: LZ_KAPSAM / LZ_SAY,
+                   y: 2.4 + kar(i + 5) * 5.5 };
+    m.position.y = m.userData.y;
+    scene.add(m); lazerler.push(m);
+  }
+}
+
+// --- YOL DALGALARI: vurus cizgisinden yayilan halkalar
+const dalgalar = [];
+if (TB) {
+  for (let i = 0; i < 3; i++) {
+    const m = new THREE.Mesh(new THREE.RingGeometry(1.0, 1.14, 64),
+      new THREE.MeshBasicMaterial({ color:'#ffffff', transparent:true, opacity:0,
+        blending: THREE.AdditiveBlending, depthWrite:false, side: THREE.DoubleSide }));
+    m.rotation.x = -Math.PI/2; m.position.set(0, 0.05, Z_VURUS);
+    scene.add(m); dalgalar.push(m);
+  }
+}
+
 // --- vurus patlamasi
 const halkaGeo = new THREE.RingGeometry(0.72, 0.80, 48);
 const halka = new THREE.Mesh(halkaGeo, new THREE.MeshBasicMaterial({
@@ -766,17 +865,34 @@ function hudCiz(t, combo, epic, kmCombo, kacis, seviye, duyuru){
     hx.fillStyle = PALET.hud;
     hx.font = `700 ${Math.round(124*k)}px Impact, Arial Black, sans-serif`;
     hx.shadowColor = PALET.grid; hx.shadowBlur = 32*k;
-    yaz(String(combo), W - 46*k, 122*k);
+    if (TB) {
+      // rakamlari ayri bir tuvale ciz, centigi oy, sonra HUD'a bas
+      const cw = Math.ceil(hx.measureText(String(combo)).width) + 40*k;
+      const ch = Math.ceil(150*k);
+      const cc = document.createElement('canvas'); cc.width = cw; cc.height = ch;
+      const cg = cc.getContext('2d');
+      cg.font = hx.font; cg.textAlign = 'right'; cg.fillStyle = PALET.hud;
+      cg.shadowColor = PALET.grid; cg.shadowBlur = 32*k;
+      cg.fillText(String(combo), cw - 4*k, 118*k);
+      cg.shadowBlur = 0;
+      cg.globalCompositeOperation = 'destination-out';
+      cg.fillStyle = '#000';
+      cg.fillRect(0, 74*k, cw, Math.max(2, 5*k));   // yatay centik
+      hx.drawImage(cc, W - 46*k - (cw - 4*k), 122*k - 118*k);
+    } else {
+      yaz(String(combo), W - 46*k, 122*k);
+    }
     hx.font = `700 ${Math.round(38*k)}px Arial Black, sans-serif`;
     yaz('COMBO', W - 48*k, 164*k);
 
     // --- KADEMELI DEGERLENDIRME ROZETI
     // Referansta combo'nun altinda kalici, renk kodlu bir kutu var.
     // Bizim ortadaki ovgu yazisi gosterisli ama anlik; bu surekli okunuyor.
-    const kademe = combo >= 120 ? { s:'UNSTOPPABLE', r:'#ffe066' }
-                 : combo >=  60 ? { s:'PERFECT',     r:'#ff2fd0' }
+    const kademe = combo >= 200 ? { s:'UNSTOPPABLE', r:'#ff2038' }
+                 : combo >= 120 ? { s:'PERFECT',     r:'#ff2f8f' }
+                 : combo >=  60 ? { s:'AWESOME',     r:'#ff9a1f' }
                  : combo >=  25 ? { s:'GREAT',       r:'#25d9c2' }
-                 :                { s:'NICE',        r:'#00e5ff' };
+                 :                { s:'NICE',        r:'#22e0e8' };
     hx.save();
     hx.font = `700 ${Math.round(30*k)}px Arial Black, sans-serif`;
     const gen = hx.measureText(kademe.s).width + 40*k, yuk = 52*k;
@@ -1092,19 +1208,43 @@ function kareKur(n){
     // BICIM degisimi: doku beyaz cakmanin ortasinda takas edilir, gozukmez
     const dk = window.__KEMER_DOKULARI;
     if (dk) {
-      const bic = (yumusak > 0.5 ? O1.bicim : O0.bicim) || 'yuvarlak';
-      if (s.material.map !== dk[bic]) { s.material.map = dk[bic]; s.material.needsUpdate = true; }
+      const bic = (yumusak > 0.5 ? O1.bicim : O0.bicim) || (TB ? 'kemer' : 'yuvarlak');
+      if (dk[bic] && s.material.map !== dk[bic]) { s.material.map = dk[bic]; s.material.needsUpdate = true; }
     }
     s.material.color.copy(karistir(
       O0.kemer[i % O0.kemer.length], O1.kemer[i % O1.kemer.length]));
     // YAVAS DONUS: tam tur 32 olcude (64 sn). Olcu izgarasina bagli
     // oldugu icin deterministik ve muzikle uyumlu. Her kemere indeksten
     // gelen sabit bir faz farki verilir -> koridor boyunca spiral etkisi.
-    s.rotation.z = (t / (32 * OLCU)) * Math.PI * 2
-                 + i * (Math.PI * 2 / SUTUN_SAY) * 0.22;
+    // A'da kemer KAPALI bir cokgen; yavas donmesi spiral etkisi veriyor.
+    // B'de sekiller ACIK (kemer, tonoz): donunce kemer olarak degil savrulan
+    // serit olarak okunuyor ve mekan hissi tamamen kayboluyor. B'de donus yok.
+    s.rotation.z = TB ? 0
+      : (t / (32 * OLCU)) * Math.PI * 2 + i * (Math.PI * 2 / SUTUN_SAY) * 0.22;
     const p = kOlc * (TB ? 0.82 : 1) * (1 + nabizOlcu * 0.035);
-    s.scale.set(p, p, 1);
+    // en/boy ayri: halka yuvarlak, tonoz yuksek, kemer genis olmali
+    const en  = (O0.en  ?? 1) + ((O1.en  ?? 1) - (O0.en  ?? 1)) * yumusak;
+    const boy = (O0.boy ?? 1) + ((O1.boy ?? 1) - (O0.boy ?? 1)) * yumusak;
+    const yer = (O0.yer ?? 5.3) + ((O1.yer ?? 5.3) - (O0.yer ?? 5.3)) * yumusak;
+    s.scale.set(p * en, p * boy, 1);
+    s.position.y = yer;
   }
+  // lazerler: tunelle ayni yonde akar, vurusta parlar
+  for (const l of lazerler) {
+    const d = l.userData;
+    l.position.z = Z_VURUS + 6 - d.kapsam + ((d.i * d.ara + t * HIZ * 0.75) % d.kapsam);
+    const vurusIci = t % VURUS;
+    l.material.opacity = 0.09 + 0.16 * Math.max(0, 1 - vurusIci / 0.22);
+  }
+
+  // yol dalgalari: her olcu basinda vurus cizgisinden disari yayilir
+  dalgalar.forEach((dg, i) => {
+    const faz = (t / OLCU + i / dalgalar.length) % 1;
+    dg.scale.setScalar(0.6 + faz * 6.5);
+    dg.material.opacity = 0.30 * (1 - faz) * (1 - faz);
+    dg.material.color.copy(karistir(O0.grid[i % 3], O1.grid[i % 3]));
+  });
+
   // sehir duvarlari: tunelle ayni yonde akar
   for (const b of binalar) {
     const d = b.userData, kap = d.ara * d.say;
@@ -1153,6 +1293,19 @@ function kareKur(n){
                     : 0.35 + 0.65 * Math.min(1, ilerleme*1.6) * sonme;
       if (m.userData.mats) m.userData.mats.forEach(x => x.opacity = op);
       else m.material.opacity = op;
+    }
+    if (TB) {
+      const km = kartMesh[i];
+      if (ilerleme < 0 || ilerleme > 0.62) km.visible = false;
+      else {
+        km.visible = true;
+        const z = Z_DOGUM + (Z_VURUS - Z_DOGUM) * ilerleme;
+        km.position.set(LANE_X[no.lane] * 0.55, 2.35, z);
+        // devir teslim: 0.42'den sonra sonuyor, blok devraliyor
+        km.material.opacity = ilerleme < 0.10 ? ilerleme / 0.10
+                            : ilerleme > 0.42 ? Math.max(0, 1 - (ilerleme - 0.42) / 0.20)
+                            : 1;
+      }
     }
     if (t >= no.t) { combo = no.combo; sonVurus = no.t; }
     if (t >= no.t && no.combo % 8 === 0) { sonKm = no.t; kmCombo = no.combo; }
@@ -1241,14 +1394,14 @@ function kareKur(n){
     bx.shadowColor = bx.strokeStyle; bx.shadowBlur = 0.020 * W;
     bx.lineWidth = 0.0055 * W;
     bx.beginPath();
-    if (bic === 'altigen') {
+    if (bic === 'altigen' || bic === 'elmas') {
       const k = 0.10 * W;
       bx.moveTo(x0+k, y0);  bx.lineTo(x1-k, y0); bx.lineTo(x1, (y0+y1)/2);
       bx.lineTo(x1-k, y1);  bx.lineTo(x0+k, y1); bx.lineTo(x0, (y0+y1)/2);
       bx.closePath();
-    } else if (bic === 'keskin') {
+    } else if (bic === 'keskin' || bic === 'tonoz') {
       bx.rect(x0, y0, x1-x0, y1-y0);
-    } else if (bic === 'ikiz') {
+    } else if (bic === 'ikiz' || bic === 'halka') {
       bx.rect(x0, y0, x1-x0, y1-y0);
       bx.rect(x0+r*0.5, y0+r*0.5, x1-x0-r, y1-y0-r);
     } else {
