@@ -584,6 +584,104 @@ scene.add(vurusCizgi);
 // lane rengine boyanirdi ve nota, ayni renkteki yolun uzerinde kayboluyordu.
 // B'de renk dokunun ICINE gomuluyor, materyal rengi beyaz kaliyor; boylece
 // beyaz kenar her zaman beyaz, koyu kontur her zaman koyu.
+// ============================================================ INSAN PIKTOGRAMI
+// Her cue tipinin KENDI simgesi olmali ve simge INSAN olmali. Onceki halde
+// iki ayri hata vardi:
+//   1) Dikey kartlarda 'tip' hic okunmuyordu (yalnizca aynalama icin) - yedi
+//      hareketin hepsi ayni ayak izini gosteriyordu.
+//   2) Nota fayanslarinda 'jump' ile 'arms_up' birebir ayni cift yukari
+//      sevrondu; iki farkli hareket, tek simge.
+// Ayak izi ayrica hayvan patisi gibi okunuyordu. Artik yedi hareketin yedi
+// ayri INSAN pozu var; yon oklari poza eslik ediyor, onun yerine gecmiyor.
+//
+// g merkeze otelenmis, stroke/fill rengi cagiran tarafindan ayarlanmis olmali.
+function insanSimge(g, tip, S, kal){
+  g.lineWidth = kal; g.lineCap = 'round'; g.lineJoin = 'round';
+  const P = (x, y) => [x, y];
+  const hat = (...n) => {
+    g.beginPath();
+    n.forEach(([x, y], i) => i ? g.lineTo(x * S, y * S) : g.moveTo(x * S, y * S));
+    g.stroke();
+  };
+  const bas = (x, y, r) => {
+    g.beginPath(); g.arc(x * S, y * S, r * S, 0, 6.2832); g.fill();
+  };
+  const ok = (x, y, dx, dy, b) => {
+    b = b || 15;
+    g.beginPath();
+    g.moveTo((x + dx*b) * S, (y + dy*b) * S);
+    g.lineTo((x - dy*b*0.85 - dx*b*0.5) * S, (y + dx*b*0.85 - dy*b*0.5) * S);
+    g.lineTo((x + dy*b*0.85 - dx*b*0.5) * S, (y - dx*b*0.85 - dy*b*0.5) * S);
+    g.closePath(); g.fill();
+  };
+
+  if (tip === 'step_L' || tip === 'step_R') {
+    g.save(); if (tip === 'step_L') g.scale(-1, 1);
+    bas(0, -48, 14);
+    hat(P(0,-32), P(0,6));
+    hat(P(0,-24), P(-26,-12));
+    hat(P(0,-24), P(30,-34));
+    hat(P(0,6), P(-8,28), P(-10,48));
+    hat(P(0,6), P(24,26), P(40,44));
+    ok(58, -6, 1, 0);
+    g.restore();
+  }
+  else if (tip === 'dodge_R') {
+    g.save(); g.rotate(0.26);
+    bas(0, -48, 14);
+    hat(P(0,-32), P(0,6));
+    hat(P(0,-26), P(-32,-18));
+    hat(P(0,-26), P(32,-32));
+    hat(P(0,6), P(-16,28), P(-22,48));
+    hat(P(0,6), P(20,26), P(30,44));
+    g.restore();
+    ok(50, -6, 1, 0, 13); ok(72, -6, 1, 0, 13);
+  }
+  else if (tip === 'jump') {
+    bas(0, -50, 14);
+    hat(P(0,-34), P(0,2));
+    hat(P(0,-28), P(-26,-58));
+    hat(P(0,-28), P(26,-58));
+    hat(P(0,2), P(-20,20), P(-12,40));
+    hat(P(0,2), P(20,20), P(12,40));
+    ok(0, -84, 0, -1);
+  }
+  else if (tip === 'duck') {
+    bas(0, -26, 14);
+    hat(P(0,-10), P(0,10));
+    hat(P(0,-6), P(26,-4), P(38,-12));
+    hat(P(0,-6), P(-22,2));
+    hat(P(0,10), P(-26,18), P(-24,46));
+    hat(P(0,10), P(24,18), P(26,46));
+    ok(0, -56, 0, 1);
+  }
+  else if (tip === 'punch') {
+    bas(-6, -48, 14);
+    hat(P(-6,-32), P(-6,6));
+    hat(P(-6,-26), P(-26,-14), P(-14,-2));
+    hat(P(-6,-26), P(30,-26));
+    g.beginPath(); g.arc(44*S, -26*S, 13*S, 0, 6.2832); g.fill();
+    hat(P(-6,6), P(-26,26), P(-32,48));
+    hat(P(-6,6), P(14,28), P(18,48));
+  }
+  else if (tip === 'arms_up') {
+    bas(0, -50, 14);
+    hat(P(0,-34), P(0,6));
+    hat(P(0,-30), P(-15,-74));
+    hat(P(0,-30), P(15,-74));
+    hat(P(0,6), P(-18,28), P(-22,48));
+    hat(P(0,6), P(18,28), P(22,48));
+  }
+  else {
+    bas(0, -48, 14);
+    hat(P(0,-32), P(0,6));
+    hat(P(0,-24), P(-22,-6));
+    hat(P(0,-24), P(22,-6));
+    hat(P(0,6), P(-14,28), P(-16,48));
+    hat(P(0,6), P(14,28), P(16,48));
+  }
+}
+
 function notaDoku(tip, renk){
   const c = document.createElement('canvas'); c.width = 320;
   // B'de ust yuz neredeyse kare (2.05 x 2.45) - doku da ona yakin olmali,
@@ -629,21 +727,13 @@ function notaDoku(tip, renk){
   g.strokeStyle = TB ? 'rgba(8,4,22,0.95)' : '#000';
   g.fillStyle   = TB ? 'rgba(8,4,22,0.95)' : '#000';
   const cx = 160, cy = yuk / 2;
-  const S = TB ? 1.7 : 1.0;                  // B'de blok buyuk, simge de buyur
-  const sev = (dx, dy) => {                  // sevron (ok ucu)
-    g.beginPath();
-    g.moveTo(cx - dy*26*S - dx*14*S, cy - dx*26*S - dy*14*S);
-    g.lineTo(cx + dx*17*S,           cy + dy*17*S);
-    g.lineTo(cx + dy*26*S - dx*14*S, cy + dx*26*S - dy*14*S);
-    g.stroke();
-  };
-  if      (tip === 'step_L')  { sev(-1, 0); }
-  else if (tip === 'step_R')  { sev( 1, 0); }
-  else if (tip === 'dodge_R') { g.translate(-14,0); sev(1,0); g.translate(28,0); sev(1,0); g.translate(-14,0); }
-  else if (tip === 'jump')    { g.translate(0, 8); sev(0,-1); g.translate(0,-18); sev(0,-1); g.translate(0,10); }
-  else if (tip === 'duck')    { g.translate(0,-8); sev(0, 1); g.translate(0, 18); sev(0, 1); g.translate(0,-10); }
-  else if (tip === 'arms_up') { g.translate(0,10); sev(0,-1); g.translate(0,-20); sev(0,-1); g.translate(0,10); }
-  else if (tip === 'punch')   { g.beginPath(); g.arc(cx, cy, 28*S, 0, 6.2832); g.stroke(); }
+  // Fayans yolun uzerinde yatik duruyor ve perspektifte dikeyde kisaliyor;
+  // figur o yuzden dikeyde gerilmis ciziliyor, ekranda normal oranli gorunsun.
+  g.save();
+  g.translate(cx, cy + (TB ? 8 : 0));
+  if (TB) g.scale(1.0, 1.24);
+  insanSimge(g, tip, TB ? 1.58 : 0.74, TB ? 20 : 11);
+  g.restore();
   g.globalCompositeOperation = 'source-over';
   return new THREE.CanvasTexture(c);
 }
@@ -686,8 +776,9 @@ const notaMesh = NOTALAR.map(n => {
   return m;
 });
 
-// --- AYAK KARTLARI: ufuktan gelen dik kartlar
-function ayakKartDoku(tip, renk){
+// --- HAREKET KARTLARI: ufuktan gelen dik kartlar
+// Kart kameraya bakiyor, perspektif kisalmasi yok -> figur gerdirilmiyor.
+function hareketKartDoku(tip, renk){
   const c = document.createElement('canvas'); c.width = c.height = 256;
   const g = c.getContext('2d');
   const kutu = (x,y,w,h,r) => { g.beginPath(); g.roundRect(x,y,w,h,r); g.fill(); };
@@ -698,21 +789,16 @@ function ayakKartDoku(tip, renk){
   g.fillStyle = renk;
   kutu(22, 22, 212, 212, 27);          // doygun govde
 
-  // AYAK IZI: taban + bes parmak. Yumruk yerine ayak - hareket ayakla yapiliyor.
   g.fillStyle = 'rgba(8,4,22,0.94)';
-  g.save(); g.translate(128, 132);
-  if (tip === 'step_L' || tip === 'dodge_R') g.scale(-1, 1);
-  g.beginPath(); g.ellipse(0, 22, 40, 54, 0, 0, 6.2832); g.fill();   // taban
-  const parmak = [[-34,-40,13],[-11,-52,12],[9,-54,11],[26,-48,9],[39,-38,8]];
-  for (const [px,py,pr] of parmak){
-    g.beginPath(); g.ellipse(px, py, pr, pr*1.15, 0, 0, 6.2832); g.fill();
-  }
+  g.strokeStyle = 'rgba(8,4,22,0.94)';
+  g.save(); g.translate(128, 140);
+  insanSimge(g, tip, 1.30, 17);
   g.restore();
   return new THREE.CanvasTexture(c);
 }
 const KART_DOKU = {};
 if (TB) for (const k of Object.keys(CUE))
-  for (let l = 0; l < 3; l++) KART_DOKU[k + '_' + l] = ayakKartDoku(k, PALET.lane[l]);
+  for (let l = 0; l < 3; l++) KART_DOKU[k + '_' + l] = hareketKartDoku(k, PALET.lane[l]);
 
 const kartGeo = new THREE.PlaneGeometry(1.55, 1.55);
 const kartMesh = TB ? NOTALAR.map(n => {
@@ -852,7 +938,25 @@ const OVGU = ['NICE!','KEEP GOING!','PERFECT!','ON FIRE!','AMAZING!','YOU GOT TH
 // yumusak, gozÃ¼ yormayan renkler - saf kirmizi/yesil yok
 const OVGU_RENK = ['#00e5ff','#ffb454','#ff6ad5','#25d9c2','#ffe066','#b18cff'];
 
-function hudCiz(t, combo, epic, kmCombo, kacis, seviye, duyuru){
+// Kademe esikleri tek yerde: hem rozet metni hem "ne zaman degisti" bundan.
+const KADEME = [
+  { esik: 200, s:'UNSTOPPABLE', r:'#ff2038' },
+  { esik: 120, s:'PERFECT',     r:'#ff2f8f' },
+  { esik:  60, s:'AWESOME',     r:'#ff9a1f' },
+  { esik:  25, s:'GREAT',       r:'#25d9c2' },
+  { esik:   1, s:'NICE',        r:'#22e0e8' },
+];
+// Kademenin BASLADIGI an. Duvar saati veya kare arasi durum yok - deger
+// dogrudan koreografiden turetiliyor, yani render deterministik kaliyor.
+function kademeBaslangic(combo){
+  for (const K of KADEME) if (combo >= K.esik) {
+    const n = NOTALAR.find(x => x.combo === K.esik);
+    return n ? n.t : 0;
+  }
+  return 0;
+}
+
+function hudCiz(t, combo, epic, kmCombo, kacis, seviye, duyuru, sonVurus){
   hx.clearRect(0,0,W,H);
   const k = W/1280;
   // B temasinda parlak zeminde beyaz yazi okunmuyor. Her yazi once koyu
@@ -878,38 +982,62 @@ function hudCiz(t, combo, epic, kmCombo, kacis, seviye, duyuru){
       cg.globalCompositeOperation = 'destination-out';
       cg.fillStyle = '#000';
       cg.fillRect(0, 74*k, cw, Math.max(2, 5*k));   // yatay centik
-      hx.drawImage(cc, W - 46*k - (cw - 4*k), 122*k - 118*k);
+      // Her vurusta rakam kisa bir "tik" atar. Sayinin artmasi tek basina
+      // fark edilmiyor; hareket fark ediliyor.
+      const vdt = sonVurus >= 0 ? t - sonVurus : 9;
+      const tik = vdt < 0.18 ? 1 + 0.13 * Math.pow(1 - vdt / 0.18, 2) : 1;
+      hx.save();
+      hx.translate(W - 46*k, 122*k);
+      hx.scale(tik, tik);
+      hx.drawImage(cc, -(cw - 4*k), -118*k);
+      hx.restore();
     } else {
       yaz(String(combo), W - 46*k, 122*k);
     }
     hx.font = `700 ${Math.round(38*k)}px Arial Black, sans-serif`;
-    yaz('COMBO', W - 48*k, 164*k);
+    yaz('COMBO', W - 46*k, 164*k);
 
     // --- KADEMELI DEGERLENDIRME ROZETI
     // Referansta combo'nun altinda kalici, renk kodlu bir kutu var.
     // Bizim ortadaki ovgu yazisi gosterisli ama anlik; bu surekli okunuyor.
-    const kademe = combo >= 200 ? { s:'UNSTOPPABLE', r:'#ff2038' }
-                 : combo >= 120 ? { s:'PERFECT',     r:'#ff2f8f' }
-                 : combo >=  60 ? { s:'AWESOME',     r:'#ff9a1f' }
-                 : combo >=  25 ? { s:'GREAT',       r:'#25d9c2' }
-                 :                { s:'NICE',        r:'#22e0e8' };
+    const kademe = KADEME.find(K => combo >= K.esik) || KADEME[KADEME.length - 1];
+
+    // BOYUT: LEVEL 52 px, COMBO etiketi 38 px. Rozet ikisinin arasinda
+    // durmali - eskiden 30 px'di ve HUD'un en onemsiz ogesi gibi okunuyordu.
+    // HIZA: sag kenari combo rakami ve COMBO etiketiyle ayni dikeyde (W-46k),
+    // solda LEVEL ile ayni kenar boslugu.
     hx.save();
-    hx.font = `700 ${Math.round(30*k)}px Arial Black, sans-serif`;
-    const gen = hx.measureText(kademe.s).width + 40*k, yuk = 52*k;
-    // Referans yerlesimi: combo sag ustte, rozet DOGRUDAN onun altinda.
-    // Onceki hali panelin solunda havada duruyordu ve iliskisi okunmuyordu.
+    hx.font = `700 ${Math.round(44*k)}px Arial Black, sans-serif`;
+    const gen = hx.measureText(kademe.s).width + 52*k, yuk = 72*k;
     const rx = TB ? W - 46*k - gen : PX - 22*k - gen;
-    const ry = TB ? 182*k : 196*k;
-    hx.shadowColor = kademe.r; hx.shadowBlur = 26*k;
-    hx.fillStyle = 'rgba(6,2,16,0.78)';
-    hx.beginPath(); hx.roundRect(rx, ry, gen, yuk, 10*k); hx.fill();
-    hx.shadowBlur = 0;
-    hx.lineWidth = 3*k; hx.strokeStyle = kademe.r;
-    hx.beginPath(); hx.roundRect(rx, ry, gen, yuk, 10*k); hx.stroke();
+    const ry = TB ? 186*k : 196*k;
+
+    // KADEME ATLAMA: yeni kademeye girildigi an rozet buyuyup yerine oturur
+    // ve bir kez beyaz cakar. Odul anini gorunur kilan sey bu; kalici kutu
+    // tek basina "bir sey kazandim" hissi vermiyor.
+    const kdt = t - kademeBaslangic(combo);
+    const patla = kdt >= 0 && kdt < 0.6 ? Math.pow(1 - kdt / 0.6, 2.0) : 0;
+    const olcek = 1 + 0.42 * patla;
+    hx.translate(rx + gen, ry + yuk / 2);      // sag kenardan olcekle
+    hx.scale(olcek, olcek);
+    hx.translate(-(rx + gen), -(ry + yuk / 2));
+
+    // Dolu renkli kutu + koyu yazi: ters kontrast, ayni alanda daha cok cikiyor
+    hx.shadowColor = kademe.r; hx.shadowBlur = (26 + 34 * patla) * k;
     hx.fillStyle = kademe.r;
+    hx.beginPath(); hx.roundRect(rx, ry, gen, yuk, 12*k); hx.fill();
+    hx.shadowBlur = 0;
+    hx.lineWidth = 3.5*k; hx.strokeStyle = 'rgba(255,255,255,0.92)';
+    hx.beginPath(); hx.roundRect(rx, ry, gen, yuk, 12*k); hx.stroke();
+    hx.fillStyle = 'rgba(8,4,20,0.95)';
     hx.textAlign = 'center'; hx.textBaseline = 'middle';
-    hx.shadowColor = kademe.r; hx.shadowBlur = 16*k;
-    hx.fillText(kademe.s, rx + gen/2, ry + yuk/2 + 1*k);
+    hx.fillText(kademe.s, rx + gen/2, ry + yuk/2 + 2*k);
+    if (patla > 0){                             // beyaz cakma
+      hx.globalAlpha = patla * 0.75;
+      hx.fillStyle = '#ffffff';
+      hx.beginPath(); hx.roundRect(rx, ry, gen, yuk, 12*k); hx.fill();
+      hx.globalAlpha = 1;
+    }
     hx.restore();
     hx.textAlign = 'right'; hx.textBaseline = 'alphabetic';
   }
@@ -1432,7 +1560,7 @@ function kareKur(n){
   // ufuk (kacis) noktasinin ekran koordinati - ovgu yazisi oradan dogar
   const kv = new THREE.Vector3(0, 0.3, -400).project(camera);
   const kacis = [ (kv.x*0.5+0.5)*W, (-kv.y*0.5+0.5)*H ];
-  hudCiz(t, combo, sonKm > -90 ? t - sonKm : -1, kmCombo, kacis, O1.seviye, duyuru);
+  hudCiz(t, combo, sonKm > -90 ? t - sonKm : -1, kmCombo, kacis, O1.seviye, duyuru, sonVurus);
 
   // ortam gecisinde beyaz cakma
   if (cakma > 0){
