@@ -17,12 +17,18 @@ on:
         description: "Parca basina olcu (paralel is sayisi = toplam/parca)"
         required: true
         default: "44"
+      tema:
+        description: "Gorsel dil: b (onaylanan koyu neon) veya a"
+        required: true
+        default: "b"
+        type: choice
+        options: ["b", "a"]
       genislik:
         required: true
-        default: "2560"
+        default: "1920"
       yukseklik:
         required: true
-        default: "1440"
+        default: "1080"
 
 jobs:
   hazirla:
