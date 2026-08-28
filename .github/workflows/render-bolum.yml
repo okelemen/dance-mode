@@ -69,9 +69,13 @@ jobs:
           CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
         run: |
           # --sessiz: parcalara ses eklenmez, birlestirmeden sonra bir kez eklenir
+          # --toplam: sahne final kartini ve ortam gecislerini TAM bolume
+          # gore hesaplamali; --olcu ise yalnizca bu parcanin uzunlugu.
           node render.js \
             --w ${{ github.event.inputs.genislik }} \
             --h ${{ github.event.inputs.yukseklik }} \
+            --tema ${{ github.event.inputs.tema }} \
+            --toplam ${{ github.event.inputs.toplam_olcu }} \
             --baslangic ${{ matrix.p.baslangic }} \
             --olcu ${{ matrix.p.olcu }} \
             --sessiz \

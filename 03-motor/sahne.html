@@ -74,6 +74,8 @@ const KALIP = {
   kademe4:  ['step_L','dodge_R','jump','duck'],
   kademe5:  ['step_L','punch','step_R','jump'],
   final:    ['step_L','step_R','jump','duck'],
+  ogret_zip:['jump',null,'duck',null],
+  ogret_kar:['step_L','jump','step_R',null],
 };
 // Gercek bolum iskeletinin kisaltilmis hali - tirmanisin his verip
 // vermedigini test etmek icin. Tam bolumde ayni yapi 264 olcuye yayilacak.
@@ -82,19 +84,61 @@ const KALIP = {
 // Siluet artik her cue'da klip degistirmiyor. Evde takip eden biri icin
 // siluet bir EGITMEN: blok boyunca TEK bir egzersizi tekrarliyor. Vuruslara
 // gore ziplayan bir figur takip edilemez, cirpinma gibi gorunur.
-const BLOKLAR = [
+// 64 olculuk DEMO iskeleti: tirmanisi ve dort ortami hizlica gormek icin.
+const ISKELET_DEMO = [
   [0,  2,  'bos',     'nefes' ],   // GIRIS - READY/GO burada, nota YOK
-  [2,  6,  'ogret',   'adim'  ],   // ogretme  - yana adim
-  [6,  16, 'kademe2', 'adim'  ],   // tur 1    - yana adim
-  [16, 18, 'mola',    'nefes' ],   // mola     - dinlenme
-  [18, 32, 'kademe3', 'jacks' ],   // tur 2    - jumping jacks
+  [2,  6,  'ogret',   'adim'  ],
+  [6,  16, 'kademe2', 'adim'  ],
+  [16, 18, 'mola',    'nefes' ],
+  [18, 32, 'kademe3', 'jacks' ],
   [32, 34, 'mola',    'nefes' ],
-  [34, 48, 'kademe4', 'duck'  ],   // tur 3    - squat
+  [34, 48, 'kademe4', 'duck'  ],
   [48, 50, 'mola',    'nefes' ],
-  [50, 60, 'kademe5', 'punch' ],   // final    - shadow boxing
-  [60, 64, 'final',   'jacks' ],   // son duz  - jumping jacks
+  [50, 60, 'kademe5', 'punch' ],
+  [60, 64, 'final',   'jacks' ],
 ];
-const TOPLAM_OLCU = 64;
+
+// 264 olculuk TAM BOLUM iskeleti - DANCE-MODE-PLANI.md'deki yapinin birebir
+// karsiligi: ogretme 32, uc tur 48'er, aralarinda 8'er olcu mola, final 64.
+//
+// Turlar 16'sarlik uc bloga bolundu. Zorluk kademesi tur boyunca AYNI kaliyor
+// (kademe2/3/4/5), degisen sey SILUETIN EGZERSIZI. Sebep: 48 olcu = 1:36 ve
+// evde takip eden biri ayni hareketi bir bucuk dakika yapamaz; ama cue
+// yogunlugunu blok icinde degistirmek de ogrenilen tempoyu bozar.
+// Yani ritim sabit, egzersiz degisiyor.
+const ISKELET_TAM = [
+  [0,   4,   'bos',      'nefes' ],  // giris: READY / GO, nota yok
+  [4,   12,  'ogret',    'adim'  ],  // OGRETME 0-32: once yana adim
+  [12,  20,  'ogret_zip','jump'  ],  //   sonra ziplama / comelme
+  [20,  32,  'ogret_kar','jacks' ],  //   sonra ucu birlikte
+
+  [32,  48,  'kademe2',  'adim'  ],  // TUR 1  32-80
+  [48,  64,  'kademe2',  'jacks' ],
+  [64,  80,  'kademe2',  'adim'  ],
+  [80,  88,  'mola',     'nefes' ],  // MOLA
+
+  [88,  104, 'kademe3',  'jacks' ],  // TUR 2  88-136
+  [104, 120, 'kademe3',  'duck'  ],
+  [120, 136, 'kademe3',  'jacks' ],
+  [136, 144, 'mola',     'nefes' ],  // MOLA
+
+  [144, 160, 'kademe4',  'duck'  ],  // TUR 3  144-192
+  [160, 176, 'kademe4',  'punch' ],
+  [176, 192, 'kademe4',  'jacks' ],
+  [192, 200, 'mola',     'nefes' ],  // MOLA
+
+  [200, 216, 'kademe5',  'punch' ],  // FINAL  200-264
+  [216, 232, 'kademe5',  'jacks' ],
+  [232, 248, 'kademe5',  'punch' ],
+  [248, 264, 'final',    'jacks' ],  // son 16: combo kapak rakamina kosar
+];
+
+// Kac olculuk bolum render edilecek. Parca render'da bu HER ZAMAN tam
+// bolumun uzunlugu olmali (parcanin degil) - final karti ve ortam
+// gecisleri mutlak zamandan hesaplaniyor.
+const TOPLAM_OLCU = Number(SP.get('toplam') || 64);
+const TAM_BOLUM   = TOPLAM_OLCU >= 200;
+const BLOKLAR     = TAM_BOLUM ? ISKELET_TAM : ISKELET_DEMO;
 
 // ---------------------------------------------------------------- ORTAMLAR
 // Bolum icinde ortam degisir: palet + kemer renkleri + LEVEL etiketi.
@@ -142,7 +186,12 @@ const ORTAMLAR_B = [
     ufuk: '#ff008c', ara: 1.6, olcek: 0.94, bicim: 'elmas',
     en: 0.94, boy: 1.20, yer: 3.6 },
 ];
-const ORTAMLAR = TB ? ORTAMLAR_B : ORTAMLAR_A;
+// Ortam degisimi YAPISAL sinirda olmali: her yeni tur yeni bir mekanda
+// basliyor, boylece "LEVEL UP" karti molanin hemen ardindan geliyor ve
+// izleyici dinlenmeden sonra yeni bir yere ciktigini hissediyor.
+const ORTAM_OLCU = TAM_BOLUM ? [0, 88, 144, 200] : [0, 16, 32, 48];
+const ORTAMLAR = (TB ? ORTAMLAR_B : ORTAMLAR_A)
+  .map((o, i) => ({ ...o, olcu: ORTAM_OLCU[i] }));
 // Renk gecisi KISA olmali. 1 olcuye yayilinca fark edilmiyordu; yarim
 // olcude bitince "bir sey degisti" hissi net veriyor.
 const GECIS_OLCU = 0.4;

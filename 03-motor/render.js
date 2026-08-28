@@ -34,6 +34,10 @@ const SESSIZ = process.argv.includes('--sessiz'); // ses eklenmesin (parca)
 // Gorsel dil: 'a' soyut ritim seridi (neon), 'b' temali kosu (gunduz blok).
 // Ayni motor, ayni koreografi, ayni muzik - sadece gorsel katman degisiyor.
 const TEMA = arg('tema', 'a') === 'b' ? 'b' : 'a';
+// Bolumun TAM uzunlugu (olcu). Parca render'da --olcu parcanin uzunlugu
+// olur; sahne ise final kartini ve ortam gecislerini tam bolume gore
+// hesaplamak zorunda. Verilmezse tek parcalik render varsayilir.
+const TOPLAM = +arg('toplam', BASLANGIC + OLCU_SAYISI);
 const CIKTI = path.resolve(arg('cikti', path.join(KOK, '04-ciktilar', 'ornek.mp4')));
 
 const MIME = { '.html':'text/html', '.js':'text/javascript', '.mjs':'text/javascript',
@@ -71,8 +75,9 @@ function sunucuBaslat() {
   sayfa.on('pageerror', e => console.log('SAYFA HATASI:', e.message));
   sayfa.on('console', m => { if (m.type() === 'error') console.log('konsol:', m.text()); });
 
-  console.log(`tema: ${TEMA}`);
-  await sayfa.goto(`http://127.0.0.1:${port}/03-motor/sahne.html?w=${W}&h=${H}&tema=${TEMA}`,
+  console.log(`tema: ${TEMA}  toplam: ${TOPLAM} olcu`);
+  await sayfa.goto(
+    `http://127.0.0.1:${port}/03-motor/sahne.html?w=${W}&h=${H}&tema=${TEMA}&toplam=${TOPLAM}`,
                    { waitUntil: 'load', timeout: 120000 });
   await sayfa.waitForFunction('window.HAZIR === true', { timeout: 180000 });
 
