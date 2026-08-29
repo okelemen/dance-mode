@@ -18,7 +18,9 @@ const KOK = path.resolve(__dirname, '..');
 // Bulutta CHROME_PATH ortam degiskeni ile gelir; yerelde Windows Chrome.
 const CHROME = process.env.CHROME_PATH
   || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
-const MUZIK = path.join(KOK, '01-muzik', 'bolum-01-neon-grid-120bpm.wav');
+// Muzik dosyasi parametreli: tam bolum 264 olculuk parcayi istiyor,
+// kisa testler 122 olculuk olani. Yanlis dosyayla -shortest videoyu kirpar.
+const MUZIK_VAR = path.join(KOK, '01-muzik', 'bolum-01-neon-grid-120bpm.wav');
 
 const arg = (ad, vars) => {
   const i = process.argv.indexOf('--' + ad);
@@ -39,6 +41,7 @@ const TEMA = arg('tema', 'a') === 'b' ? 'b' : 'a';
 // hesaplamak zorunda. Verilmezse tek parcalik render varsayilir.
 const BOLUM_OLCU = +arg('toplam', BASLANGIC + OLCU_SAYISI);
 const CIKTI = path.resolve(arg('cikti', path.join(KOK, '04-ciktilar', 'ornek.mp4')));
+const MUZIK = path.resolve(arg('muzik', MUZIK_VAR));
 
 const MIME = { '.html':'text/html', '.js':'text/javascript', '.mjs':'text/javascript',
                '.json':'application/json', '.fbx':'application/octet-stream' };

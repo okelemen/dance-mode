@@ -64,38 +64,24 @@ const PALET = TB ? {
 };
 
 // ------------------------------------------------------------- KOREOGRAFI
-// [olcu_baslangic, olcu_bitis, kalip]  kalip = 4 vurusluk dizi
-const KALIP = {
-  bos:      [null,null,null,null],
-  ogret:    ['step_L',null,'step_R',null],
-  mola:     ['arms_up',null,null,null],
-  kademe2:  ['step_L',null,'step_R',null],
-  kademe3:  ['step_L','jump','step_R','duck'],
-  kademe4:  ['step_L','dodge_R','jump','duck'],
-  kademe5:  ['step_L','punch','step_R','jump'],
-  final:    ['step_L','step_R','jump','duck'],
-  ogret_zip:['jump',null,'duck',null],
-  ogret_kar:['step_L','jump','step_R',null],
-};
-// Gercek bolum iskeletinin kisaltilmis hali - tirmanisin his verip
-// vermedigini test etmek icin. Tam bolumde ayni yapi 264 olcuye yayilacak.
-// [baslangic, bitis, cue_kalibi, SILUET_HAREKETI]
+// Kalip ve kademe tanimlari asagida (P / KADEME) - CUE tablosunun yaninda.
+// Burada sadece ISKELET var: hangi olcu araliginda hangi kademe.
 //
 // Siluet artik her cue'da klip degistirmiyor. Evde takip eden biri icin
 // siluet bir EGITMEN: blok boyunca TEK bir egzersizi tekrarliyor. Vuruslara
 // gore ziplayan bir figur takip edilemez, cirpinma gibi gorunur.
 // 64 olculuk DEMO iskeleti: tirmanisi ve dort ortami hizlica gormek icin.
 const ISKELET_DEMO = [
-  [0,  2,  'bos',     'nefes' ],   // GIRIS - READY/GO burada, nota YOK
-  [2,  6,  'ogret',   'adim'  ],
-  [6,  16, 'kademe2', 'adim'  ],
-  [16, 18, 'mola',    'nefes' ],
-  [18, 32, 'kademe3', 'jacks' ],
-  [32, 34, 'mola',    'nefes' ],
-  [34, 48, 'kademe4', 'duck'  ],
-  [48, 50, 'mola',    'nefes' ],
-  [50, 60, 'kademe5', 'punch' ],
-  [60, 64, 'final',   'jacks' ],
+  [0,  2,  'bos',  'nefes'        ],
+  [2,  6,  'd15',  'adim'         ],
+  [6,  16, 'd20',  'side-to-side' ],
+  [16, 18, 'mola', 'nefes'        ],
+  [18, 32, 'd25',  'jacks'        ],
+  [32, 34, 'mola', 'nefes'        ],
+  [34, 48, 'd30',  'duck'         ],
+  [48, 50, 'mola', 'nefes'        ],
+  [50, 60, 'd35',  'punch'        ],
+  [60, 64, 'd40',  'jacks'        ],
 ];
 
 // 264 olculuk TAM BOLUM iskeleti - DANCE-MODE-PLANI.md'deki yapinin birebir
@@ -106,31 +92,35 @@ const ISKELET_DEMO = [
 // evde takip eden biri ayni hareketi bir bucuk dakika yapamaz; ama cue
 // yogunlugunu blok icinde degistirmek de ogrenilen tempoyu bozar.
 // Yani ritim sabit, egzersiz degisiyor.
+// [baslangic, bitis, yogunluk_kademesi, siluet_egzersizi]
+// Zorluk GERCEKTEN tirmaniyor: 2,0 -> 2,5 -> 3,0 -> 3,5 -> 4,0.
+// Siluet egzersizi her 16 olcude degisiyor - 48 olcu (1:36) boyunca ayni
+// hareketi yapmak evde takip eden biri icin imkansiz.
 const ISKELET_TAM = [
-  [0,   4,   'bos',      'nefes' ],  // giris: READY / GO, nota yok
-  [4,   12,  'ogret',    'adim'  ],  // OGRETME 0-32: once yana adim
-  [12,  20,  'ogret_zip','jump'  ],  //   sonra ziplama / comelme
-  [20,  32,  'ogret_kar','jacks' ],  //   sonra ucu birlikte
+  [0,   4,   'bos',  'nefes'        ],  // giris: READY / GO
+  [4,   12,  'd15',  'adim'         ],  // OGRETME - yana adim
+  [12,  20,  'd20',  'jump'         ],  //   ziplama / comelme
+  [20,  32,  'd20',  'jacks'        ],  //   karma
 
-  [32,  48,  'kademe2',  'adim'  ],  // TUR 1  32-80
-  [48,  64,  'kademe2',  'jacks' ],
-  [64,  80,  'kademe2',  'adim'  ],
-  [80,  88,  'mola',     'nefes' ],  // MOLA
+  [32,  48,  'd20',  'adim'         ],  // TUR 1 - ortalama 2,0
+  [48,  64,  'd15',  'side-to-side' ],  //   dip
+  [64,  80,  'd25',  'adim'         ],  //   tepe
+  [80,  88,  'mola', 'arm-stretch'  ],  // AKTIF MOLA
 
-  [88,  104, 'kademe3',  'jacks' ],  // TUR 2  88-136
-  [104, 120, 'kademe3',  'duck'  ],
-  [120, 136, 'kademe3',  'jacks' ],
-  [136, 144, 'mola',     'nefes' ],  // MOLA
+  [88,  104, 'd25',  'jacks'        ],  // TUR 2 - ortalama 2,5
+  [104, 120, 'd20',  'charleston'   ],  //   dip
+  [120, 136, 'd30',  'jacks'        ],  //   tepe
+  [136, 144, 'mola', 'neck-roll'    ],  // AKTIF MOLA
 
-  [144, 160, 'kademe4',  'duck'  ],  // TUR 3  144-192
-  [160, 176, 'kademe4',  'punch' ],
-  [176, 192, 'kademe4',  'jacks' ],
-  [192, 200, 'mola',     'nefes' ],  // MOLA
+  [144, 160, 'd30',  'duck'         ],  // TUR 3 - ortalama 3,0
+  [160, 176, 'd25',  'kick-step'    ],  //   dip
+  [176, 192, 'd35',  'twist-dance'  ],  //   tepe
+  [192, 200, 'mola', 'arm-stretch'  ],  // AKTIF MOLA
 
-  [200, 216, 'kademe5',  'punch' ],  // FINAL  200-264
-  [216, 232, 'kademe5',  'jacks' ],
-  [232, 248, 'kademe5',  'punch' ],
-  [248, 264, 'final',    'jacks' ],  // son 16: combo kapak rakamina kosar
+  [200, 216, 'd35',  'punch'        ],  // FINAL - ortalama 3,5
+  [216, 232, 'd30',  'running-man'  ],  //   dip
+  [232, 248, 'd40',  'punch'        ],  //   tepe
+  [248, 264, 'd40',  'jacks'        ],  // son 16 - 4,0, combo kapak rakamina
 ];
 
 // Kac olculuk bolum render edilecek. Parca render'da bu HER ZAMAN tam
@@ -185,11 +175,24 @@ const ORTAMLAR_B = [
     kemer:['#00e5ff','#a020ff','#ff008c','#5ce1ff','#ff5ec4'],
     ufuk: '#ff008c', ara: 1.6, olcek: 0.94, bicim: 'elmas',
     en: 0.94, boy: 1.20, yer: 3.6 },
+  { olcu: 64, seviye: 5, gok: '#12042a', ad: 'PLASMA',
+    grid: ['#ff2f8f','#ff6a3d','#a020ff'],
+    kemer:['#ff2f8f','#ff6a3d','#a020ff','#ffb454','#ff5ec4'],
+    ufuk: '#ff6a3d', ara: 2.0, olcek: 1.08, bicim: 'kemer',
+    en: 1.06, boy: 1.10, yer: 4.2 },
+  { olcu: 80, seviye: 6, gok: '#061024', ad: 'FROST',
+    grid: ['#22e0e8','#7ee8ff','#4c5cff'],
+    kemer:['#22e0e8','#7ee8ff','#4c5cff','#ffffff','#8b3cff'],
+    ufuk: '#7ee8ff', ara: 2.8, olcek: 0.90, bicim: 'halka',
+    en: 0.82, boy: 1.28, yer: 3.2 },
 ];
 // Ortam degisimi YAPISAL sinirda olmali: her yeni tur yeni bir mekanda
 // basliyor, boylece "LEVEL UP" karti molanin hemen ardindan geliyor ve
 // izleyici dinlenmeden sonra yeni bir yere ciktigini hissediyor.
-const ORTAM_OLCU = TAM_BOLUM ? [0, 88, 144, 200] : [0, 16, 32, 48];
+// Rakip olcumu: gorsel durum medyan 19 saniyede bir degisiyor. Bizde dort
+// ortam 88 olcude bir degisiyordu (~162 sn). Alti ortam, 44 olculuk aralik:
+// ~81 saniye. Aradaki bosluk kemer renk akisiyla dolduruluyor.
+const ORTAM_OLCU = TAM_BOLUM ? [0, 44, 88, 132, 176, 220] : [0, 12, 22, 34, 44, 54];
 const ORTAMLAR = (TB ? ORTAMLAR_B : ORTAMLAR_A)
   .map((o, i) => ({ ...o, olcu: ORTAM_OLCU[i] }));
 // Renk gecisi KISA olmali. 1 olcuye yayilinca fark edilmiyordu; yarim
@@ -201,23 +204,80 @@ const CUE = {
   step_R:  { lane:2, sure:VURUS*2, klip:'step-right'  },
   jump:    { lane:1, sure:OLCU,    klip:'jump'        },
   duck:    { lane:1, sure:OLCU,    klip:'duck'        },
+  dodge_L: { lane:0, sure:OLCU,    klip:'dodge-right' },
   dodge_R: { lane:2, sure:OLCU,    klip:'dodge-right' },
   punch:   { lane:1, sure:OLCU,    klip:'punch'       },
   arms_up: { lane:1, sure:OLCU,    klip:'arms-up'     },
+  // aktif mola cue'lari: yogunluk duser ama ekran BOSALMAZ
+  reach_L: { lane:0, sure:OLCU,    klip:'arm-stretch' },
+  reach_R: { lane:2, sure:OLCU,    klip:'arm-stretch' },
+  // TUTMA NOTASI: iki vurus boyunca pozda kalinir. Uzun fayans olarak cizilir.
+  hold:    { lane:1, sure:VURUS*4, klip:'raise-roof', uzun: 2 },
 };
 
-// cue listesini uret
+// ------------------------------------------------- YOGUNLUK KADEMELERI
+// Rakip olcumu (docs/OLCUM-STAY-ON-BEAT-11.md): ortalama 2,64 cue/olcu ve
+// zorluk 11 dakikada 4,00'ten 4,25'e cikiyor - yani DUZ. Bizim farkimiz
+// gercek bir yay olacak: 2,0 -> 2,5 -> 3,0 -> 3,5.
+//
+// Kesirli yogunluk tek kalipla olmaz. Her kademe bir kalip SETI; olculer
+// set boyunca sirayla donuyor, ortalama kesirli cikiyor.
+const P = {
+  s2a: ['step_L', null,      'step_R', null   ],   // 2
+  s2b: ['jump',   null,      'duck',   null   ],   // 2
+  s3a: ['step_L', 'jump',    'step_R', null   ],   // 3
+  s3b: ['step_L', null,      'step_R', 'duck' ],   // 3
+  s4a: ['step_L', 'jump',    'step_R', 'duck' ],   // 4
+  s4b: ['step_L', 'dodge_R', 'jump',   'duck' ],   // 4
+  s4c: ['step_L', 'punch',   'step_R', 'jump' ],   // 4
+  s3c: ['step_L', 'dodge_R', 'step_R', null   ],   // 3 - kacis
+  s3d: ['punch',  null,      'step_R', 'duck' ],   // 3 - yumruk
+  m1:  ['reach_L', null, null,     null],          // aktif mola
+  m2:  [null,      null, 'reach_R', null],
+  m3:  ['hold',    null, null,     null],
+  m0:  [null,      null, null,     null],
+  bos: [null,      null, null,     null],
+};
+const YOGUNLUK = {
+  bos:  ['bos'],
+  d15:  ['s2a', 'm0'],                 // 1,5 - ogretme baslangici
+  d20:  ['s2a', 's2b'],                // 2,0 - tur 1
+  d25:  ['s2a', 's3c', 's3a', 's2b'],  // 2,5 - kacis girer
+  d30:  ['s3a', 's3d', 's3b', 's3a'],  // 3,0 - yumruk girer
+  d35:  ['s3a', 's4b', 's3b', 's4a'],  // 3,5
+  d40:  ['s4b', 's4c'],                // 4,0 - son duz
+  mola: ['m1', 'm2', 'm3', 'm0'],      // 0,75 - ekran bosalmiyor
+};
+
+// ---------------------------------------------------------- CUE URETECI
+// AYNALAMA: her 8 olculuk cumlede sol/sag takas. Vucut dengeli calissin.
+// Rakipler bunu sistematik yapmiyor; bir egzersiz videosunda yapilmali.
+const AYNA = { step_L:'step_R', step_R:'step_L',
+               dodge_L:'dodge_R', dodge_R:'dodge_L',
+               reach_L:'reach_R', reach_R:'reach_L' };
+
 const NOTALAR = [];
-for (const [b0, b1, ad] of BLOKLAR) {
-  const kalip = KALIP[ad];
+for (const [b0, b1, kademeAdi] of BLOKLAR) {
+  const set = YOGUNLUK[kademeAdi] || YOGUNLUK.bos;
   for (let olcu = b0; olcu < b1; olcu++) {
-    // her 8 olculuk cumlede sol/sag aynala - bedava cesitlilik
+    const kalip = P[set[(olcu - b0) % set.length]];
     const aynala = Math.floor(olcu / 8) % 2 === 1;
     for (let v = 0; v < 4; v++) {
       let tip = kalip[v];
       if (!tip) continue;
-      if (aynala) tip = tip === 'step_L' ? 'step_R' : tip === 'step_R' ? 'step_L' : tip;
+      if (aynala && AYNA[tip]) tip = AYNA[tip];
       NOTALAR.push({ tip, t: olcu * OLCU + v * VURUS, ...CUE[tip] });
+    }
+    // SEKIZLIK PATLAMA
+    // Rakipte 966 cue'nun tamami ceyreklikte - sekizlik altbolunme yok.
+    // 8 olculuk cumlenin SON olcusunde yarim vurusluk bir cift koyuyoruz:
+    // ortalama yogunlugu neredeyse hic degistirmiyor ama "burada bir sey
+    // oldu" hissi veriyor. Molada ve giriste yok.
+    const sonOlcu = (olcu + 1) % 8 === 0;
+    if (sonOlcu && kademeAdi !== 'mola' && kademeAdi !== 'bos') {
+      const t0 = olcu * OLCU + 3 * VURUS + VURUS / 2;
+      const tip = aynala ? 'step_L' : 'step_R';
+      NOTALAR.push({ tip, t: t0, ...CUE[tip], patlama: true });
     }
   }
 }
@@ -675,16 +735,18 @@ function insanSimge(g, tip, S, kal){
     ok(58, -6, 1, 0);
     g.restore();
   }
-  else if (tip === 'dodge_R') {
-    g.save(); g.rotate(0.26);
+  else if (tip === 'dodge_R' || tip === 'dodge_L') {
+    g.save(); if (tip === 'dodge_L') g.scale(-1, 1);
+    g.rotate(0.26);
     bas(0, -48, 14);
     hat(P(0,-32), P(0,6));
     hat(P(0,-26), P(-32,-18));
     hat(P(0,-26), P(32,-32));
     hat(P(0,6), P(-16,28), P(-22,48));
     hat(P(0,6), P(20,26), P(30,44));
-    g.restore();
+    g.rotate(-0.26);
     ok(50, -6, 1, 0, 13); ok(72, -6, 1, 0, 13);
+    g.restore();
   }
   else if (tip === 'jump') {
     bas(0, -50, 14);
@@ -713,6 +775,29 @@ function insanSimge(g, tip, S, kal){
     hat(P(-6,6), P(-26,26), P(-32,48));
     hat(P(-6,6), P(14,28), P(18,48));
   }
+  else if (tip === 'reach_L' || tip === 'reach_R') {
+    // esneme: bir kol basin uzerinden karsi yona uzaniyor
+    g.save(); if (tip === 'reach_L') g.scale(-1, 1);
+    bas(0, -48, 14);
+    hat(P(0,-32), P(2,6));
+    hat(P(0,-26), P(-18,-6), P(-10,10));
+    hat(P(0,-28), P(18,-56), P(40,-64));      // uzanan kol
+    hat(P(2,6), P(-14,28), P(-18,48));
+    hat(P(2,6), P(18,28), P(22,48));
+    g.restore();
+  }
+  else if (tip === 'hold') {
+    // tutma notasi: iki kol yukarida SABIT. Altina cizgi - "burada kal".
+    bas(0, -50, 14);
+    hat(P(0,-34), P(0,6));
+    hat(P(0,-30), P(-20,-70));
+    hat(P(0,-30), P(20,-70));
+    hat(P(0,6), P(-16,28), P(-18,48));
+    hat(P(0,6), P(16,28), P(18,48));
+    g.save(); g.lineWidth = kal * 0.8;
+    hat(P(-40,62), P(40,62));                 // tutma cizgisi
+    g.restore();
+  }
   else if (tip === 'arms_up') {
     bas(0, -50, 14);
     hat(P(0,-34), P(0,6));
@@ -731,11 +816,11 @@ function insanSimge(g, tip, S, kal){
   }
 }
 
-function notaDoku(tip, renk){
+function notaDoku(tip, renk, uzun){
   const c = document.createElement('canvas'); c.width = 320;
   // B'de ust yuz neredeyse kare (2.05 x 2.45) - doku da ona yakin olmali,
-  // yoksa simge yatay eziliyor.
-  c.height = TB ? 300 : 128;
+  // yoksa simge yatay eziliyor. Tutma notasi uzun oldugu icin tuvali de uzuyor.
+  c.height = TB ? Math.round(300 * (uzun || 1)) : 128;
   const g = c.getContext('2d');
   const ciz = (x,y,w,h,r) => { g.beginPath(); g.roundRect(x,y,w,h,r); g.fill(); };
   const yuk = c.height;
@@ -792,13 +877,18 @@ for (const k of Object.keys(CUE)) NOTA_DOKULARI[k] = notaDoku(k);
 // B'de her cue tipi x her lane icin ayri doku - renk dokuya gomulu
 const NOTA_DOKULARI_B = {};
 if (TB) for (const k of Object.keys(CUE))
-  for (let l = 0; l < 3; l++) NOTA_DOKULARI_B[k + '_' + l] = notaDoku(k, PALET.lane[l]);
+  for (let l = 0; l < 3; l++)
+    NOTA_DOKULARI_B[k + '_' + l] = notaDoku(k, PALET.lane[l], CUE[k].uzun);
 const NOTA_DOKU = NOTA_DOKULARI.step_L;
 
 // Notalar BUYUK. Referansta kameraya yaklastiklarinda ekranin alt ucte
 // birini kapliyorlar; ince cubuk okunmuyor.
 const notaGeo = TB ? new THREE.BoxGeometry(2.05, 0.34, 2.45)
                    : new THREE.PlaneGeometry(3.05, 1.45);
+// tutma notasi icin ayri, uzun geometri
+const notaGeoUzun = {};
+if (TB) for (const k of Object.keys(CUE)) if (CUE[k].uzun)
+  notaGeoUzun[k] = new THREE.BoxGeometry(2.05, 0.34, 2.45 * CUE[k].uzun);
 const notaMesh = NOTALAR.map(n => {
   const doku = TB ? (NOTA_DOKULARI_B[n.tip + '_' + n.lane] || NOTA_DOKU)
                   : (NOTA_DOKULARI[n.tip] || NOTA_DOKU);
@@ -811,7 +901,8 @@ const notaMesh = NOTALAR.map(n => {
       blending: THREE.NormalBlending, depthWrite:false, fog:true });
     const ustMat = new THREE.MeshBasicMaterial({ map: doku, color:'#ffffff',
       transparent:true, blending: THREE.NormalBlending, depthWrite:false, fog:true });
-    m = new THREE.Mesh(notaGeo, [yanMat, yanMat, ustMat, yanMat, yanMat, yanMat]);
+    m = new THREE.Mesh(notaGeoUzun[n.tip] || notaGeo,
+                       [yanMat, yanMat, ustMat, yanMat, yanMat, yanMat]);
     m.userData.mats = [yanMat, ustMat];
   } else {
     m = new THREE.Mesh(notaGeo, new THREE.MeshBasicMaterial({
@@ -1413,8 +1504,13 @@ function kareKur(n){
       const bic = (yumusak > 0.5 ? O1.bicim : O0.bicim) || (TB ? 'kemer' : 'yuvarlak');
       if (dk[bic] && s.material.map !== dk[bic]) { s.material.map = dk[bic]; s.material.needsUpdate = true; }
     }
+    // RENK AKISI: kemer tunelin sonuna varip basa dondugunde siradaki rengi
+    // alir; renkler koridor boyunca akar. Ani sicrama olmaz cunku renk,
+    // kemer sisin icindeyken degisiyor.
+    const donus = Math.floor((i * ara + t * HIZ) / kapsam);
+    const ci = (i + donus) % 5;
     s.material.color.copy(karistir(
-      O0.kemer[i % O0.kemer.length], O1.kemer[i % O1.kemer.length]));
+      O0.kemer[ci % O0.kemer.length], O1.kemer[ci % O1.kemer.length]));
     // YAVAS DONUS: tam tur 32 olcude (64 sn). Olcu izgarasina bagli
     // oldugu icin deterministik ve muzikle uyumlu. Her kemere indeksten
     // gelen sabit bir faz farki verilir -> koridor boyunca spiral etkisi.
