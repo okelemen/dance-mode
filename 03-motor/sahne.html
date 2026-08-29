@@ -920,9 +920,13 @@ function yukle(ad){
 // Govde dosyasinin kendi animasyonuna GUVENME - Mixamo bazen bos klip veriyor
 // (Remy'de tam bu oldu: duration 0, hic track yok -> siluet T-pozunda kaldi).
 const KLIP_ADLARI = ['idle','idle-breathing','step-left','step-right','jump',
-                     'duck','dodge-right','punch','arms-up','jacks'];
+                     'duck','dodge-right','punch','arms-up','jacks',
+                     // dans ve isinma repertuari - koreografide cesitlilik icin
+                     'jump-standing','side-to-side','twist-dance','charleston',
+                     'running-man','kick-step','shimmy','raise-roof',
+                     'arm-wave','arm-stretch','neck-roll'];
 const klipler = {};
-let siluet = null, mixer = null;
+let siluet = null, mixer = null, kokKemik = null, kokBaslangic = null;
 
 const govde = await yukle('siluet-govde');
 if (govde) {
@@ -945,6 +949,9 @@ if (govde) {
   sahneSiluet.add(govde);
   siluet = govde;
   mixer = new THREE.AnimationMixer(govde);
+  // kalca kemigi: klip oynatildiktan sonra yatay konumu buraya geri cekilir
+  govde.traverse(o => { if (o.isBone && /hips/i.test(o.name) && !kokKemik) kokKemik = o; });
+  if (kokKemik) kokBaslangic = kokKemik.position.clone();
 
   for (const ad of KLIP_ADLARI) {
     const o = await yukle(ad);
@@ -960,7 +967,13 @@ const aksiyon = {};
 const HEDEF_SURE = { 'idle':OLCU, 'idle-breathing':OLCU*2,
                      'step-left':VURUS*2, 'step-right':VURUS*2,
                      'jacks':VURUS*2, 'jump':OLCU, 'duck':OLCU,
-                     'dodge-right':OLCU, 'punch':OLCU, 'arms-up':OLCU };
+                     'dodge-right':OLCU, 'punch':OLCU, 'arms-up':OLCU,
+                     // Hepsi tam sayi vurusa oturuyor: yarim vurusta biten
+                     // hareket sunepe duruyor, ritimde bitmesi sart.
+                     'jump-standing':OLCU, 'side-to-side':OLCU, 'twist-dance':OLCU,
+                     'charleston':OLCU, 'running-man':VURUS*2, 'kick-step':OLCU,
+                     'shimmy':VURUS*2, 'raise-roof':OLCU, 'arm-wave':OLCU,
+                     'arm-stretch':OLCU*2, 'neck-roll':OLCU*2 };
 if (mixer) {
   for (const [ad, klip] of Object.entries(klipler)) {
     const a = mixer.clipAction(klip);
@@ -1299,7 +1312,7 @@ function siluetPaneliCiz(renk){
   // kutu
   bx.save();
   bx.shadowColor = renk; bx.shadowBlur = 0.022 * W;
-  bx.fillStyle = 'rgba(4,2,14,0.86)';
+  bx.fillStyle = 'rgba(4,2,14,1)';   // tam opak: arkadaki lazer/sehir sizmasin
   bx.beginPath(); bx.roundRect(PX, PY, PW, PH, r); bx.fill();
   bx.shadowBlur = 0;
   bx.lineWidth = Math.max(2, 0.0026 * W);
@@ -1539,6 +1552,11 @@ function kareKur(n){
       mixer.setTime(0);
       A.a.time = (yerel % A.hedef) * A.a.timeScale;
       mixer.update(0);
+      // root motion kilidi - poz korunur, yer degistirme silinir
+      if (kokKemik && kokBaslangic) {
+        kokKemik.position.x = kokBaslangic.x;
+        kokKemik.position.z = kokBaslangic.z;
+      }
     }
   }
 
@@ -1656,6 +1674,63 @@ window.__T = { THREE, scene, camera, siluet, notaMesh, NOTALAR, halka, mixer, ak
 window.HAZIR = true;
 window.SILUET_VAR = !!siluet;
 window.insanSimge = insanSimge;   // simge sayfasi uretmek icin
+
+// Kapak icin tek siluet karesi: saydam arka plan, konturlu, istenen olcude.
+// Videodaki panelden bagimsiz - kapakta siluet ekranin ortasinda ve buyuk
+// duruyor, panelin kucuk kutusuyla ayni goruntu ise yaramiyor.
+window.siluetKaresi = function(klipAdi, faz, gen, yuk){
+  if (!siluet || !mixer) return null;
+  const ad = aksiyon[klipAdi] ? klipAdi : 'idle';
+  for (const [k, v] of Object.entries(aksiyon)) v.a.enabled = (k === ad);
+  const A = aksiyon[ad];
+  A.a.play();
+  mixer.setTime(0);
+  A.a.time = (faz % 1) * A.hedef * A.a.timeScale;
+  mixer.update(0);
+  if (kokKemik && kokBaslangic) {
+    kokKemik.position.x = kokBaslangic.x;
+    kokKemik.position.z = kokBaslangic.z;
+  }
+
+  // siluet sahnesini istenen olcude, saydam zeminle render et
+  const kam = kameraSiluet.clone();
+  kam.aspect = gen / yuk; kam.updateProjectionMatrix();
+  renderer.setSize(gen, yuk, false);
+  renderer.setViewport(0, 0, gen, yuk);
+  renderer.setScissorTest(false);
+  renderer.setClearAlpha(0);
+  renderer.render(sahneSiluet, kam);
+
+  // maske: beyaz figur, saydam zemin
+  const mc = document.createElement('canvas'); mc.width = gen; mc.height = yuk;
+  const mg = mc.getContext('2d');
+  mg.drawImage(canvas, 0, 0, gen, yuk, 0, 0, gen, yuk);
+
+  // sonuc: dis parlama -> beyaz kontur -> koyu govde
+  const oc = document.createElement('canvas'); oc.width = gen; oc.height = yuk;
+  const og = oc.getContext('2d');
+  og.globalAlpha = 0.55;
+  og.filter = `blur(${Math.round(gen * 0.012)}px)`;
+  og.drawImage(mc, 0, 0);
+  og.filter = 'none'; og.globalAlpha = 1;
+  const k = Math.max(2, gen * 0.006);              // kontur kalinligi
+  for (let i = 0; i < 16; i++) {
+    const t = i * Math.PI / 8;
+    og.drawImage(mc, Math.cos(t) * k, Math.sin(t) * k);
+  }
+  const ic = document.createElement('canvas'); ic.width = gen; ic.height = yuk;
+  const ig = ic.getContext('2d');
+  ig.drawImage(mc, 0, 0);
+  ig.globalCompositeOperation = 'source-in';
+  ig.fillStyle = '#050110'; ig.fillRect(0, 0, gen, yuk);
+  og.drawImage(ic, 0, 0);
+
+  // renderer'i eski haline dondur
+  renderer.setSize(W, H, false);
+  renderer.setViewport(0, 0, W, H);
+  renderer.setClearAlpha(1);
+  return oc.toDataURL('image/png');
+};
 window.TEMA = TEMA;
 window.KLIP_SAYISI = Object.keys(klipler).length;
 window.NOTA_SAYISI = NOTALAR.length;
