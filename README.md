@@ -66,3 +66,20 @@ Faz 2 klipleri indirilmiş halde bekliyor, kaybolma riski yok.
 
 Bu klasör OneDrive dışında (bilinçli tercih — `node_modules` senkronu felaket olur).
 Şu an **tek nüsha**. GitHub reposu kurulana kadar aklında olsun.
+
+---
+
+## İki depo
+
+Bu depo **özel** ve strateji tarafını tutuyor: rakip analizi, ölçümler, Suno
+brief'i, kapak planı, bölüm içerikleri.
+
+Render motoru ayrı ve **public** bir depoda:
+**https://github.com/okelemen/dance-mode-motor**
+
+Sebep: public depolarda GitHub Actions ücretsiz ve sınırsız. Motor orada
+koştuğu için render maliyeti sıfır; strateji belgeleri ve rakip kapakları
+burada, özelde kalıyor.
+
+Motorda değişiklik yapılınca `dance-mode-motor` deposuna gönderilir, render
+oradan tetiklenir, çıktılar artifact olarak indirilir.
