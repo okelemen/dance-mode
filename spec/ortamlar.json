@@ -2,7 +2,7 @@
   "_": "Ortam kutuphanesi. Bolum dosyalari buradan ADA gore secim yapar. Yeni ortam eklemek icin kodu acmaya gerek yok - buraya bir kayit eklemek yeter.",
   "_alanlar": {
     "gok": "arka plan rengi",
-    "dekor": "yan duvar tipi: sehir | yildiz | devre | sutun | kristal | yok",
+    "dekor": "yan duvar tipi: sehir | yildiz | devre | sutun | kristal | ray | yok",
     "bicim": "koridor geometrisi: kemer | tonoz | halka | elmas | altigen | ikiz | keskin",
     "grid": "zemin cizgi renkleri (3)",
     "kemer": "koridor renk dizisi (5)",
@@ -426,6 +426,29 @@
       "en": 0.98,
       "boy": 1.14,
       "yer": 4.2
+    },
+    "RAIL YARD": {
+      "gok": "#07080e",
+      "dekor": "ray",
+      "grid": [
+        "#ffb454",
+        "#22e0e8",
+        "#ff2f8f"
+      ],
+      "kemer": [
+        "#ffb454",
+        "#ffffff",
+        "#22e0e8",
+        "#ff2f8f",
+        "#8b3cff"
+      ],
+      "ufuk": "#ffb454",
+      "ara": 1.7,
+      "olcek": 0.88,
+      "bicim": "tonoz",
+      "en": 0.84,
+      "boy": 1.24,
+      "yer": 4.4
     }
   }
 }

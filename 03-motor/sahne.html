@@ -218,7 +218,7 @@ const CUE = {
 //
 // Kesirli yogunluk tek kalipla olmaz. Her kademe bir kalip SETI; olculer
 // set boyunca sirayla donuyor, ortalama kesirli cikiyor.
-const P = {
+const P_VAR = {
   s2a: ['step_L', null,      'step_R', null   ],   // 2
   s2b: ['jump',   null,      'duck',   null   ],   // 2
   s3a: ['step_L', 'jump',    'step_R', null   ],   // 3
@@ -234,7 +234,7 @@ const P = {
   m0:  [null,      null, null,     null],
   bos: [null,      null, null,     null],
 };
-const YOGUNLUK = {
+const YOGUNLUK_VAR = {
   bos:  ['bos'],
   d15:  ['s2a', 'm0'],                 // 1,5 - ogretme baslangici
   d20:  ['s2a', 's2b'],                // 2,0 - tur 1
@@ -248,6 +248,12 @@ const YOGUNLUK = {
 // ---------------------------------------------------------- CUE URETECI
 // AYNALAMA: her 8 olculuk cumlede sol/sag takas. Vucut dengeli calissin.
 // Rakipler bunu sistematik yapmiyor; bir egzersiz videosunda yapilmali.
+// Kaliplar ve kademeler de bolum dosyasindan gelebilir. Boylece bir bolum
+// "sadece 4 hareket kullan" gibi bir kisit koyabiliyor - motor degismeden.
+const P = (BOLUM && BOLUM.kaliplar) ? { ...P_VAR, ...BOLUM.kaliplar } : P_VAR;
+const YOGUNLUK = (BOLUM && BOLUM.kademeler)
+  ? { ...YOGUNLUK_VAR, ...BOLUM.kademeler } : YOGUNLUK_VAR;
+
 const AYNA = { step_L:'step_R', step_R:'step_L',
                dodge_L:'dodge_R', dodge_R:'dodge_L',
                reach_L:'reach_R', reach_R:'reach_L' };
@@ -648,6 +654,45 @@ if (TB && !SADE) {
         g.fillStyle = gr; g.fillRect(x, 512-h, w, h);
       }
     }
+    else if (tip === 'ray') {
+      // METRO TUNELI: beton panel duvar, kablo demeti, aralikli servis
+      // lambalari ve seyrek graffiti lekesi. Referansta bu dekorun isi
+      // koridoru KAPATMAK - acik gokyuzu yok, dar ve bogucu olmali.
+      g.fillStyle = '#0a0a10'; g.fillRect(0, 0, 512, 512);
+      // beton panel derzleri
+      g.strokeStyle = 'rgba(120,130,160,0.16)'; g.lineWidth = 2;
+      for (let y = 0; y < 512; y += 64) {
+        g.beginPath(); g.moveTo(0, y); g.lineTo(512, y); g.stroke();
+      }
+      for (let x = 0; x < 512; x += 128) {
+        g.beginPath(); g.moveTo(x, 0); g.lineTo(x, 512); g.stroke();
+      }
+      // kablo demeti - duvar boyunca yatay
+      for (let i = 0; i < 4; i++) {
+        const y = 150 + i * 13 + kar(i) * 6;
+        g.strokeStyle = `rgba(${60 + i * 20},${70 + i * 15},110,0.5)`;
+        g.lineWidth = 3 + (i % 2);
+        g.beginPath(); g.moveTo(0, y); g.lineTo(512, y + (kar(i + 9) - 0.5) * 10); g.stroke();
+      }
+      // servis lambalari
+      for (let i = 0; i < 5; i++) {
+        const x = 40 + i * 104, y = 96;
+        const gr = g.createRadialGradient(x, y, 0, x, y, 54);
+        gr.addColorStop(0, 'rgba(255,214,140,0.85)');
+        gr.addColorStop(1, 'rgba(255,180,90,0)');
+        g.fillStyle = gr; g.fillRect(x - 54, y - 54, 108, 108);
+        g.fillStyle = 'rgba(255,236,190,0.95)';
+        g.fillRect(x - 9, y - 4, 18, 8);
+      }
+      // graffiti lekeleri - seyrek renk vurusu
+      for (let i = 0; i < 3; i++) {
+        const x = kar(i + 3) * 430, y = 250 + kar(i + 7) * 180;
+        g.fillStyle = `rgba(${[255,90,255][i % 3]},${[60,220,90][i % 3]},${[140,255,60][i % 3]},0.28)`;
+        g.beginPath();
+        g.ellipse(x, y, 34 + kar(i) * 40, 16 + kar(i + 1) * 18, kar(i) * 3, 0, 6.2832);
+        g.fill();
+      }
+    }
     else if (tip === 'kristal') {
       // buz: acili kirilmis parcalar
       for (let i = 0; i < 22; i++) {
@@ -700,7 +745,7 @@ if (TB && !SADE) {
   }
   // her dekor tipi icin 14 doku onceden uretiliyor - kare basina uretim yok
   window.__DEKOR = {};
-  for (const tip of ['sehir','yildiz','devre','sutun','kristal'])
+  for (const tip of ['sehir','yildiz','devre','sutun','kristal','ray'])
     window.__DEKOR[tip] = Array.from({length:14}, (_,i) => dekorDoku(tip, i));
   const DEKOR_DOKULARI = window.__DEKOR;
   const BINA_ARA = 26, BINA_SAY = 7;
