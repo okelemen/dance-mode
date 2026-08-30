@@ -28,6 +28,9 @@ const SP = new URLSearchParams(location.search);
 const W = Number(SP.get('w') || 1280);
 const H = Number(SP.get('h') || 720);
 const SADE = SP.get('sade') === '1';   // karsilastirma icin: dolgu katmanlari kapali
+// hiz olcumu icin katman anahtarlari
+const BLOOM_ACIK = SP.get('bloom') !== '0';
+const PAS_ACIK   = SP.get('pas')   !== '0';
 
 // ---------------------------------------------------------------- TEMA
 // Iki gorsel dil, tek motor. Rakip analizinin bulduguu iki nis
@@ -1768,7 +1771,7 @@ function kareKur(n){
   // Gercek cok gecisli bloom pahali; bu tek cizimle neon parlamasini veriyor.
   bx.save();
   bx.globalCompositeOperation = 'lighter';
-  {
+  if (BLOOM_ACIK) {
     bx.globalAlpha = TB ? 0.17 : 0.50;
     bx.filter = TB ? 'blur(10px)' : 'blur(14px)';
     bx.drawImage(canvas, 0, 0);
@@ -1851,7 +1854,7 @@ function kareKur(n){
   // seviye duzeltmesi yapmak hem daha kontrollu hem tek yerde duruyor.
   // contrast siyahi asagi ceker, brightness genel seviyeyi indirir;
   // parlak neon hatlar ayakta kalir.
-  if (TB) {
+  if (TB && PAS_ACIK) {
     ax.clearRect(0, 0, W, H);
     ax.drawImage(birlesik, 0, 0);
     bx.clearRect(0, 0, W, H);
@@ -1865,7 +1868,37 @@ function kareKur(n){
 window.SURE_OLCU = TOPLAM_OLCU;
 window.TOPLAM_KARE = Math.round(TOPLAM_OLCU * OLCU * FPS);
 window.kareKur = kareKur;
-window.kareAl = () => birlesik.toDataURL('image/png');
+// CIKIS TUVALI - opak.
+// birlesik tuvalin ~%10'u saydam kaliyor (siluet gecisi clearAlpha(0) ile
+// render ediliyor). PNG alfayi tasiyor, JPEG tasimiyor; format degistirince
+// goruntu de degisiyordu. Cikis once SIYAH zemine bindiriliyor, boylece
+// format secimi goruntuyu etkilemiyor.
+const cikisCv = document.createElement('canvas');
+cikisCv.width = W; cikisCv.height = H;
+const cikisCtx = cikisCv.getContext('2d', { alpha: false });
+window.__CIKIS = cikisCv;
+window.kareAl = (bicim, kalite) => {
+  cikisCtx.fillStyle = '#000000';
+  cikisCtx.fillRect(0, 0, W, H);
+  cikisCtx.drawImage(birlesik, 0, 0);
+  // KARE BICIMI - olculdu (03-motor/olc-hiz.js, olc-jpeg.js), 1920x1080:
+  //   png        ~2450 ms   kayipsiz
+  //   webp q1.0  ~2450 ms   kayipsiz (PNG ile bit bit ayni)
+  //   jpeg q1.0     64 ms   PSNR 51,9 dB - en buyuk piksel farki 5/255
+  //   jpeg q0.99    32 ms   PSNR 39,1 dB - en buyuk fark 121  (krominans
+  //                         altorneklemesi aciliyor, neon kenarlar bozuluyor)
+  // Kodlama render suresinin %98'ini yiyordu (sahnenin kendisi 33 ms).
+  // jpeg KALITE 1.0 varsayilan: 4:4:4 krominans, gorunmez kayip, 38 kat hizli.
+  // Kayipsiz gerekirse --bicim webp veya png.
+  // SONUC: bicim secimi hizi DEGISTIRMIYOR. WebGL komutlari asenkron;
+  // toDataURL sadece bekleyen rasterlestirmeyi bekletiyor, o yuzden kodlama
+  // pahali gorunuyordu. Gercek maliyet SwiftShader'in yazilimla cizmesi.
+  // Bu yuzden KAYIPSIZ kaliniyor. webp q1.0 = png ile bit bit ayni ama
+  // boru uzerinden yarisi kadar veri tasiyor (995 KB / 2056 KB base64).
+  if (bicim === 'png')  return cikisCv.toDataURL('image/png');
+  if (bicim === 'jpeg') return cikisCv.toDataURL('image/jpeg', kalite || 1);
+  return cikisCv.toDataURL('image/webp', kalite || 1);
+};
 window.__T = { THREE, scene, camera, siluet, notaMesh, NOTALAR, halka, mixer, aksiyon };
 window.HAZIR = true;
 window.SILUET_VAR = !!siluet;

@@ -42,6 +42,11 @@ const TEMA = arg('tema', 'a') === 'b' ? 'b' : 'a';
 const BOLUM_OLCU = +arg('toplam', BASLANGIC + OLCU_SAYISI);
 const CIKTI = path.resolve(arg('cikti', path.join(KOK, '04-ciktilar', 'ornek.mp4')));
 const MUZIK = path.resolve(arg('muzik', MUZIK_VAR));
+// Kare bicimi. Olculdu: bicim hizi degistirmiyor - darbogaz kodlama degil,
+// SwiftShader'in yazilimla rasterlestirmesi (bkz. olc-dongu.js). Kayipsiz
+// webp varsayilan: png ile bit bit ayni, boruda yarisi kadar veri.
+const BICIM = arg('bicim', 'webp');
+const FF_GIRIS = BICIM === 'jpeg' ? 'mjpeg' : BICIM;
 
 const MIME = { '.html':'text/html', '.js':'text/javascript', '.mjs':'text/javascript',
                '.json':'application/json', '.fbx':'application/octet-stream' };
@@ -80,7 +85,7 @@ function sunucuBaslat() {
 
   console.log(`tema: ${TEMA}  bolum: ${BOLUM_OLCU} olcu`);
   await sayfa.goto(
-    `http://127.0.0.1:${port}/03-motor/sahne.html?w=${W}&h=${H}&tema=${TEMA}&toplam=${BOLUM_OLCU}`,
+    `http://127.0.0.1:${port}/03-motor/sahne.html?w=${W}&h=${H}&tema=${TEMA}&toplam=${BOLUM_OLCU}${arg('ek','')}`,
                    { waitUntil: 'load', timeout: 120000 });
   await sayfa.waitForFunction('window.HAZIR === true', { timeout: 180000 });
 
@@ -98,7 +103,7 @@ function sunucuBaslat() {
 
   const ff = spawn('ffmpeg', [
     '-v','error','-y',
-    '-f','image2pipe','-c:v','png','-r','30','-i','pipe:0',
+    '-f','image2pipe','-c:v',FF_GIRIS,'-r','30','-i','pipe:0',
     ...(sesEkle ? ['-i', MUZIK] : []),
     '-c:v','libx264','-preset','veryfast','-crf','20','-pix_fmt','yuv420p',
     ...(sesEkle ? ['-c:a','aac','-b:a','192k','-shortest'] : []),
@@ -109,7 +114,7 @@ function sunucuBaslat() {
   for (let i = 0; i < TOPLAM; i++) {
     const n = KARE0 + i;                 // mutlak kare no - determinizm korunur
     await sayfa.evaluate(k => window.kareKur(k), n);
-    const veri = await sayfa.evaluate(() => window.kareAl());
+    const veri = await sayfa.evaluate(b => window.kareAl(b), BICIM);
     const buf = Buffer.from(veri.split(',')[1], 'base64');
     if (!ff.stdin.write(buf)) await new Promise(r => ff.stdin.once('drain', r));
 
