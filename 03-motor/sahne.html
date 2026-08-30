@@ -155,32 +155,32 @@ const ORTAMLAR_A = [
 // aramayi cekiyor ama IP kullanmadan da tema yapilabiliyor. Rakip analizinin
 // en onemli cikarimlarindan biri buydu.
 const ORTAMLAR_B = [
-  { olcu: 0,  seviye: 1, gok: '#0d0524', ad: 'NEON CITY',
+  { olcu: 0,  seviye: 1, gok: '#0d0524', ad: 'NEON CITY', dekor: 'sehir',
     grid: ['#22e0e8','#8b3cff','#ff2f8f'],
     kemer:['#22e0e8','#7a3cff','#ff2f8f','#5ce1ff','#b04dff'],
     ufuk: '#ff2f8f', ara: 2.4, olcek: 1.00, bicim: 'kemer',
     en: 1.00, boy: 1.15, yer: 4.6 },
-  { olcu: 16, seviye: 2, gok: '#0a0426', ad: 'DEEP SPACE',
+  { olcu: 16, seviye: 2, gok: '#0a0426', ad: 'DEEP SPACE', dekor: 'yildiz',
     grid: ['#3ad1ff','#b04dff','#ff5ec4'],
     kemer:['#3ad1ff','#b04dff','#ff5ec4','#6a3cff','#22e0e8'],
     ufuk: '#b04dff', ara: 1.8, olcek: 0.86, bicim: 'tonoz',
     en: 0.86, boy: 1.30, yer: 4.9 },
-  { olcu: 32, seviye: 3, gok: '#08082a', ad: 'CIRCUIT',
+  { olcu: 32, seviye: 3, gok: '#08082a', ad: 'CIRCUIT', dekor: 'devre',
     grid: ['#00ffc8','#6a3cff','#ff2f6d'],
     kemer:['#00ffc8','#6a3cff','#ff2f6d','#22e0e8','#a020ff'],
     ufuk: '#00ffc8', ara: 3.0, olcek: 1.20, bicim: 'halka',
     en: 0.78, boy: 1.34, yer: 2.9 },
-  { olcu: 48, seviye: 4, gok: '#160530', ad: 'ULTRA',
+  { olcu: 48, seviye: 4, gok: '#160530', ad: 'ULTRA', dekor: 'yok',
     grid: ['#00e5ff','#a020ff','#ff008c'],
     kemer:['#00e5ff','#a020ff','#ff008c','#5ce1ff','#ff5ec4'],
     ufuk: '#ff008c', ara: 1.6, olcek: 0.94, bicim: 'elmas',
     en: 0.94, boy: 1.20, yer: 3.6 },
-  { olcu: 64, seviye: 5, gok: '#12042a', ad: 'PLASMA',
+  { olcu: 64, seviye: 5, gok: '#12042a', ad: 'PLASMA', dekor: 'sutun',
     grid: ['#ff2f8f','#ff6a3d','#a020ff'],
     kemer:['#ff2f8f','#ff6a3d','#a020ff','#ffb454','#ff5ec4'],
     ufuk: '#ff6a3d', ara: 2.0, olcek: 1.08, bicim: 'kemer',
     en: 1.06, boy: 1.10, yer: 4.2 },
-  { olcu: 80, seviye: 6, gok: '#061024', ad: 'FROST',
+  { olcu: 80, seviye: 6, gok: '#061024', ad: 'FROST', dekor: 'kristal',
     grid: ['#22e0e8','#7ee8ff','#4c5cff'],
     kemer:['#22e0e8','#7ee8ff','#4c5cff','#ffffff','#8b3cff'],
     ufuk: '#7ee8ff', ara: 2.8, olcek: 0.90, bicim: 'halka',
@@ -598,6 +598,80 @@ if (!SADE) {
 // Yolun disini dolduruyor ve paralaksla hiz hissini artiriyor.
 const binalar = [];
 if (TB && !SADE) {
+  // DEKOR: yolun disini dolduran yan duvarlar. Onceki halde tek tip vardi
+  // (sehir) ve alti ortamin hepsinde ayni duvar akiyordu - palet degisse de
+  // her yer ayni mekan gibi okunuyordu. Artik her ortamin kendi dekoru var.
+  function dekorDoku(tip, tohum){
+    const c = document.createElement('canvas'); c.width = c.height = 512;
+    const g = c.getContext('2d');
+    const kar = (n) => { const v = Math.sin((n + tohum * 37.7) * 127.1) * 43758.5453;
+                         return v - Math.floor(v); };
+    g.fillStyle = '#020206'; g.fillRect(0, 0, 512, 512);
+
+    if (tip === 'yildiz') {
+      // derin uzay: seyrek yildizlar + yumusak nebula lekeleri
+      for (let i = 0; i < 3; i++) {
+        const gx = kar(i)*512, gy = kar(i+5)*512, r = 90 + kar(i+9)*150;
+        const gr = g.createRadialGradient(gx, gy, 0, gx, gy, r);
+        const renk = i % 2 ? '120,60,255' : '40,160,255';
+        gr.addColorStop(0, `rgba(${renk},0.22)`); gr.addColorStop(1, `rgba(${renk},0)`);
+        g.fillStyle = gr; g.fillRect(gx-r, gy-r, r*2, r*2);
+      }
+      for (let i = 0; i < 190; i++) {
+        const x = kar(i)*512, y = kar(i+31)*512, r = kar(i+77);
+        g.fillStyle = r > 0.9 ? 'rgba(180,240,255,0.95)' : `rgba(220,230,255,${0.2+r*0.5})`;
+        const b = r > 0.9 ? 2.6 : 1.5;
+        g.fillRect(x, y, b, b);
+      }
+    }
+    else if (tip === 'devre') {
+      // devre karti: dik acili izler + lehim noktalari
+      g.lineCap = 'square';
+      for (let i = 0; i < 26; i++) {
+        let x = kar(i)*512, y = kar(i+13)*512;
+        g.strokeStyle = i % 3 === 0 ? 'rgba(0,255,200,0.55)' : 'rgba(90,120,255,0.35)';
+        g.lineWidth = 2 + (i % 2);
+        g.beginPath(); g.moveTo(x, y);
+        for (let k = 0; k < 4; k++) {
+          if (k % 2) y += (kar(i*7+k) - 0.5) * 190; else x += (kar(i*5+k) - 0.5) * 190;
+          g.lineTo(x, y);
+        }
+        g.stroke();
+        g.fillStyle = 'rgba(0,255,200,0.8)';
+        g.beginPath(); g.arc(x, y, 4, 0, 6.2832); g.fill();
+      }
+    }
+    else if (tip === 'sutun') {
+      // plazma: dikey isik sutunlari, aralarinda karanlik
+      for (let i = 0; i < 14; i++) {
+        const x = kar(i)*512, w = 8 + kar(i+3)*22, h = 200 + kar(i+7)*312;
+        const gr = g.createLinearGradient(0, 512-h, 0, 512);
+        gr.addColorStop(0, 'rgba(255,110,60,0)');
+        gr.addColorStop(0.4, `rgba(255,${60+kar(i)*90|0},140,0.55)`);
+        gr.addColorStop(1, 'rgba(160,32,255,0.75)');
+        g.fillStyle = gr; g.fillRect(x, 512-h, w, h);
+      }
+    }
+    else if (tip === 'kristal') {
+      // buz: acili kirilmis parcalar
+      for (let i = 0; i < 22; i++) {
+        const x = kar(i)*512, y = kar(i+17)*512, r = 26 + kar(i+41)*82;
+        g.beginPath();
+        g.moveTo(x, y - r);
+        g.lineTo(x + r*0.45, y + r*0.25);
+        g.lineTo(x - r*0.30, y + r*0.75);
+        g.closePath();
+        g.fillStyle = `rgba(${140+kar(i)*80|0},240,255,${0.10 + kar(i+2)*0.22})`;
+        g.fill();
+        g.strokeStyle = 'rgba(190,250,255,0.55)'; g.lineWidth = 1.6; g.stroke();
+      }
+    }
+    else {
+      return binaDoku(tohum);          // 'sehir'
+    }
+    return new THREE.CanvasTexture(c);
+  }
+
   function binaDoku(tohum){
     const c = document.createElement('canvas'); c.width = 512; c.height = 512;
     const g = c.getContext('2d');
@@ -628,15 +702,20 @@ if (TB && !SADE) {
     }
     return new THREE.CanvasTexture(c);
   }
+  // her dekor tipi icin 14 doku onceden uretiliyor - kare basina uretim yok
+  window.__DEKOR = {};
+  for (const tip of ['sehir','yildiz','devre','sutun','kristal'])
+    window.__DEKOR[tip] = Array.from({length:14}, (_,i) => dekorDoku(tip, i));
+  const DEKOR_DOKULARI = window.__DEKOR;
   const BINA_ARA = 26, BINA_SAY = 7;
   for (let i = 0; i < BINA_SAY * 2; i++) {
     const sag = i % 2 === 1;
     const m = new THREE.Mesh(new THREE.PlaneGeometry(26, 17),
-      new THREE.MeshBasicMaterial({ map: binaDoku(i), transparent:true,
+      new THREE.MeshBasicMaterial({ map: DEKOR_DOKULARI.sehir[i], transparent:true,
         depthWrite:false, fog:true }));
     m.position.set(sag ? 15.5 : -15.5, 6.2, 0);
     m.rotation.y = sag ? -Math.PI/2 : Math.PI/2;
-    m.userData = { i: Math.floor(i / 2), sag, ara: BINA_ARA, say: BINA_SAY };
+    m.userData = { i: Math.floor(i / 2), di: i, sag, ara: BINA_ARA, say: BINA_SAY };
     scene.add(m); binalar.push(m);
   }
 }
@@ -1055,22 +1134,34 @@ if (govde) {
 const aksiyon = {};
 // Hedef sureler tam sayi vurusa oturur -> hareket her zaman ritimde biter.
 // Bu "keskinlik" hissini veren sey: yarim vurusta biten hareket sunepe durur.
-const HEDEF_SURE = { 'idle':OLCU, 'idle-breathing':OLCU*2,
-                     'step-left':VURUS*2, 'step-right':VURUS*2,
-                     'jacks':VURUS*2, 'jump':OLCU, 'duck':OLCU,
-                     'dodge-right':OLCU, 'punch':OLCU, 'arms-up':OLCU,
-                     // Hepsi tam sayi vurusa oturuyor: yarim vurusta biten
-                     // hareket sunepe duruyor, ritimde bitmesi sart.
-                     'jump-standing':OLCU, 'side-to-side':OLCU, 'twist-dance':OLCU,
-                     'charleston':OLCU, 'running-man':VURUS*2, 'kick-step':OLCU,
-                     'shimmy':VURUS*2, 'raise-roof':OLCU, 'arm-wave':OLCU,
-                     'arm-stretch':OLCU*2, 'neck-roll':OLCU*2 };
+// CUE'YA BAGLI klipler: hedef sure MUZIKAL olarak sabit. Bunlar bir vurusa
+// tepki veriyor, o yuzden bir/iki vurusta bitmek zorundalar. Hepsinin dogal
+// suresi zaten hedefe yakin (timeScale 0.63-1.25).
+const HEDEF_SABIT = { 'idle':OLCU, 'idle-breathing':OLCU*2,
+                      'step-left':VURUS*2, 'step-right':VURUS*2,
+                      'jacks':VURUS*2, 'jump':OLCU, 'duck':OLCU,
+                      'dodge-right':OLCU, 'punch':OLCU, 'arms-up':OLCU };
+// EGZERSIZ klipleri (charleston, running-man, shimmy...) blok boyunca dongude
+// oynuyor, bir vurusa tepki vermiyor. Onlarin hedefi klibin KENDI suresinden
+// turetiliyor: en yakin tam olcu.
+//
+// Onceki halde bu 11 klibin hedefi elle tahmin edilmisti ve dogal sureleri
+// olculmemisti. Sonuc felaketti: charleston 20,9 sn'lik bir klipti ve 2 sn'ye
+// sikistiriliyordu - 10,5 kat hiz. shimmy 12 kat. Hicbir hareket anlasilmiyordu.
+// Artik hesaplaniyor; timeScale 0,8-1,2 bandinda kaliyor.
+const HEDEF_SURE = {};
+function hedefSureHesapla(ad, sure){
+  if (HEDEF_SABIT[ad] !== undefined) return HEDEF_SABIT[ad];
+  return Math.max(1, Math.round(sure / OLCU)) * OLCU;
+}
 if (mixer) {
   for (const [ad, klip] of Object.entries(klipler)) {
+    const hedef = hedefSureHesapla(ad, klip.duration);
+    HEDEF_SURE[ad] = hedef;
     const a = mixer.clipAction(klip);
     a.setLoop(THREE.LoopRepeat, Infinity);
-    a.timeScale = klip.duration / HEDEF_SURE[ad];   // hedefe esnet
-    aksiyon[ad] = { a, klip, hedef: HEDEF_SURE[ad] };
+    a.timeScale = klip.duration / hedef;
+    aksiyon[ad] = { a, klip, hedef };
   }
 }
 
@@ -1543,10 +1634,19 @@ function kareKur(n){
     dg.material.color.copy(karistir(O0.grid[i % 3], O1.grid[i % 3]));
   });
 
-  // sehir duvarlari: tunelle ayni yonde akar
+  // yan dekor: tunelle ayni yonde akar. Doku takasi beyaz cakmanin
+  // ortasinda oluyor (kemer bicimiyle ayni numara), o yuzden gozukmuyor.
+  const dekorTip = (yumusak > 0.5 ? O1.dekor : O0.dekor) || 'sehir';
+  const dk = window.__DEKOR;
   for (const b of binalar) {
     const d = b.userData, kap = d.ara * d.say;
     b.position.z = Z_VURUS + 6 - kap + ((d.i * d.ara + t * HIZ) % kap);
+    if (dekorTip === 'yok') { b.visible = false; continue; }
+    b.visible = true;
+    if (dk && dk[dekorTip]) {
+      const yeni = dk[dekorTip][d.di];
+      if (b.material.map !== yeni) { b.material.map = yeni; b.material.needsUpdate = true; }
+    }
   }
 
   // parcaciklar: tunel hiziyla akar, mod ile dolasir
