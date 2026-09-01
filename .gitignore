@@ -15,3 +15,7 @@ node_modules/
 # gecici
 *.crdownload
 *.log
+
+# rakip kanal kareleri/kapaklari: analiz icin yerelde tutulur, depoda yayinlanmaz
+docs/kanal-kareleri/
+docs/rakip-kapaklar/

@@ -9,6 +9,10 @@ name: Tam bolum render (paralel)
 on:
   workflow_dispatch:
     inputs:
+      bolum:
+        description: "Bolum dosyasi (bos birakilirsa motordaki varsayilan)"
+        required: false
+        default: "bolumler/bolum-04.json"
       toplam_olcu:
         description: "Toplam olcu (tam bolum = 264)"
         required: true
@@ -84,6 +88,7 @@ jobs:
             --toplam ${{ github.event.inputs.toplam_olcu }} \
             --baslangic ${{ matrix.p.baslangic }} \
             --olcu ${{ matrix.p.olcu }} \
+            ${{ github.event.inputs.bolum && format('--bolum {0}', github.event.inputs.bolum) || '' }} \
             --sessiz \
             --cikti "../04-ciktilar/parca-$(printf '%03d' ${{ matrix.p.i }}).mp4"
 
