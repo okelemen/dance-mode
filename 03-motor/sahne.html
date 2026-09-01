@@ -396,7 +396,7 @@ LANE_X.forEach((x, i) => {
 // platform: yan yuzleri goruluyor, altinda ayri bir dunya zemini var ve
 // yuzeyinde kesikli serit cizgileri akiyor. Bizde tek duz duzlem vardi.
 const YOL_GEN = 7.0, YOL_KAL = 0.85;
-let yolUstMat = null;
+let yolUstMat = null, yolUst = null, yatak = null;
 if (TB) {
   // dunya zemini asagi iniyor - yol onun uzerinde YUKSELIYOR
   zemin.position.y = -YOL_KAL;
@@ -408,28 +408,148 @@ if (TB) {
   yolGovde.position.set(0, -YOL_KAL/2, -95);
   scene.add(yolGovde);
 
-  // ust yuzey: kesikli serit cizgileri dokuda, uzunluk boyunca akiyor
-  const yc = document.createElement('canvas'); yc.width = 256; yc.height = 256;
-  const yg = yc.getContext('2d');
-  yg.fillStyle = '#05040d'; yg.fillRect(0,0,256,256);
-  yg.strokeStyle = '#ffffff'; yg.lineWidth = 5; yg.setLineDash([46, 42]);
-  for (const x of [256/3, 512/3]) {          // uc lane -> iki ayrac
-    yg.beginPath(); yg.moveTo(x, -20); yg.lineTo(x, 276); yg.stroke();
+  // ust yuzey IKI KATMAN halinde.
+  // Neden iki: yolUst additive harmanli - koyu piksel eklemez, yani TRAVERS
+  // gibi zeminden KOYU bir oge additive katmanda cizilemez. Balast ve travers
+  // ayri, normal harmanli bir katmana alindi; additive katmanda sadece
+  // parlayan celik raylar kaldi.
+  const SERIT = 3;
+
+  // --- yatak: balast + enine traversler (normal harman)
+  // Referans (FLEM metro deposu) yolun boyali bir serit degil, uzerinde
+  // yuruunen bir YATAK oldugunu gosteriyor: sicak koyu balast, duzenli
+  // araliklarla enine kirisler. Bizdeki kesikli beyaz otoyol cizgileri hem
+  // yanlis mekani anlatiyordu hem de her ortamda ayniydi.
+  const bc = document.createElement('canvas'); bc.width = 256; bc.height = 256;
+  const bg = bc.getContext('2d');
+  const bkar = (n) => { const v = Math.sin(n * 127.1) * 43758.5453; return v - Math.floor(v); };
+  bg.fillStyle = '#241016'; bg.fillRect(0, 0, 256, 256);
+  for (let i = 0; i < 900; i++) {            // balast taneleri - deterministik
+    const r = bkar(i), r2 = bkar(i + 313);
+    bg.fillStyle = `rgba(${150 + r * 70 | 0},${115 + r * 45 | 0},${105 + r * 45 | 0},${0.04 + r2 * 0.10})`;
+    bg.fillRect(r * 256, r2 * 256, 2, 2);
   }
-  yg.setLineDash([]);
-  yg.lineWidth = 7;                          // kenar hatlari kesiksiz
-  for (const x of [4, 252]) {
-    yg.beginPath(); yg.moveTo(x, 0); yg.lineTo(x, 256); yg.stroke();
+  bg.fillStyle = 'rgba(6,5,9,0.70)';         // traversler
+  for (let y = 0; y < 256; y += 32) bg.fillRect(0, y, 256, 11);
+  // raylar: traverslerin USTUNDE, serit basina bir cift. Celik grisi ve
+  // NORMAL harman - additive denendi, yolu parlak bir merdivene cevirdi ve
+  // notayla parlaklik yarisina girdi. Neon serit cizgileri zaten shader'da.
+  const seritEn = 256 / 3, rayYari = seritEn * 0.55 / 2;
+  for (let i = 0; i < 3; i++) {
+    const mx = (i + 0.5) * seritEn;
+    for (const yon of [-1, 1]) {
+      const x = mx + yon * rayYari;
+      bg.fillStyle = 'rgba(14,11,18,0.90)';  // rayin oturdugu golge
+      bg.fillRect(x - 5, 0, 10, 256);
+      bg.fillStyle = 'rgba(122,130,148,0.62)';   // celik govde
+      bg.fillRect(x - 1, 0, 3, 256);
+      bg.fillStyle = 'rgba(198,208,226,0.30)';   // ust yuz, cok sonuk
+      bg.fillRect(x - 1, 0, 1, 256);
+    }
   }
-  const yolDoku = new THREE.CanvasTexture(yc);
-  yolDoku.wrapS = yolDoku.wrapT = THREE.RepeatWrapping;
-  yolDoku.repeat.set(1, 34);
-  yolUstMat = new THREE.MeshBasicMaterial({ map: yolDoku, transparent:true,
+  const yatakDoku = new THREE.CanvasTexture(bc);
+  yatakDoku.wrapS = yatakDoku.wrapT = THREE.RepeatWrapping;
+  yatakDoku.repeat.set(1, 34);
+  yatak = new THREE.Mesh(new THREE.PlaneGeometry(YOL_GEN, 220),
+    new THREE.MeshBasicMaterial({ map: yatakDoku, fog: true }));
+  yatak.rotation.x = -Math.PI/2; yatak.position.set(0, 0.006, -95);
+  yatak.renderOrder = 1;
+  scene.add(yatak);
+
+  // --- additive ust katman: kesikli serit cizgileri. Istasyon ortamlarinda
+  // bu katman tamamen kapatiliyor (yatakta zaten ray ve kenar var); diger
+  // ortamlar eski gorunumu aynen koruyor.
+  function ustDoku(ciz){
+    const c = document.createElement('canvas'); c.width = 256; c.height = 256;
+    const g = c.getContext('2d');
+    g.fillStyle = '#05040d'; g.fillRect(0, 0, 256, 256);
+    ciz(g);
+    const t = new THREE.CanvasTexture(c);
+    t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(1, 34);
+    return t;
+  }
+  const yolDokuSerit = ustDoku(g => {
+    g.strokeStyle = '#ffffff'; g.lineWidth = 5; g.setLineDash([46, 42]);
+    for (const x of [256/3, 512/3]) {         // uc lane -> iki ayrac
+      g.beginPath(); g.moveTo(x, -20); g.lineTo(x, 276); g.stroke();
+    }
+    g.setLineDash([]);
+    g.lineWidth = 7;                          // kenar hatlari kesiksiz
+    for (const x of [4, 252]) {
+      g.beginPath(); g.moveTo(x, 0); g.lineTo(x, 256); g.stroke();
+    }
+  });
+  yolUstMat = new THREE.MeshBasicMaterial({ map: yolDokuSerit, transparent:true,
     blending: THREE.AdditiveBlending, depthWrite:false, fog:true });
-  const yolUst = new THREE.Mesh(new THREE.PlaneGeometry(YOL_GEN, 220), yolUstMat);
+  yolUst = new THREE.Mesh(new THREE.PlaneGeometry(YOL_GEN, 220), yolUstMat);
   yolUst.rotation.x = -Math.PI/2; yolUst.position.set(0, 0.012, -95);
-  yolUst.renderOrder = 1;
+  yolUst.renderOrder = 2;
   scene.add(yolUst);
+}
+
+// ==================================================== ISTASYON KATMANI
+// Sadece dekor 'ray' olan ortamlarda gorunur (RAIL YARD, MAGENTA HALL).
+//
+// Neden gerekti: iki 'ray' ortamini yan yana olctugumuzde ikisinde de baskin
+// ton 240 derece ve %29-31 cikti; alti referans kanalda ise tek bir ton ailesi
+// kareyi %44-62 domine ediyor. Yani sorun paletin degeri degil, mekanin
+// KENDISININ ayirt edici olmamasiydi - iki ortam da ayni bos koridordu.
+// FLEM referans karesinde mekani kuran sey yan duvar degil, yolun iki yanindaki
+// DOLU hacim: park etmis vagonlar ve onlarin arkasindaki peron seddi.
+const istasyon = [];
+if (TB) {
+  // peron seddi: yol ile yan duvar arasindaki bosluğu kapatir. Kamera
+  // y=3.7'de; sed 0.75 yuksekliginde kaldigi icin seritleri ORTMUYOR,
+  // sadece kadrajin alt yanlarini dolduruyor.
+  const peronMat = new THREE.MeshBasicMaterial({ color:'#1d1c28', fog:true });
+  for (const yon of [-1, 1]) {
+    const pr = new THREE.Mesh(new THREE.BoxGeometry(5.3, 0.75, 220), peronMat);
+    pr.position.set(yon * 12.8, 0.375 - YOL_KAL, -95);
+    scene.add(pr); istasyon.push(pr);
+  }
+
+  // vagon govdesi: koyu kasa + aydinlik pencere serisi. Pencereler kareye
+  // sicak nokta koyuyor ama additive DEGIL - notayla parlaklik yarisina
+  // girmemeleri gerekiyor.
+  function vagonDoku(govde, cam){
+    const c = document.createElement('canvas'); c.width = 256; c.height = 64;
+    const g = c.getContext('2d');
+    g.fillStyle = govde; g.fillRect(0, 0, 256, 64);
+    g.fillStyle = 'rgba(0,0,0,0.55)'; g.fillRect(0, 0, 256, 9);     // cati bandi
+    g.fillStyle = 'rgba(0,0,0,0.55)'; g.fillRect(0, 50, 256, 14);   // sasi
+    g.fillStyle = 'rgba(255,255,255,0.14)'; g.fillRect(0, 40, 256, 2); // bel cizgisi
+    // pencereler: ilk denemede parlak cyan'di ve vagon karanlikta asili duran
+    // isikli bir kasa gibi okunuyordu. Sicak ve sonuk - kasa silueti one ciksin.
+    g.fillStyle = cam;
+    for (let x = 14; x < 246; x += 30) {
+      g.fillRect(x, 18, 19, 18);
+      g.fillStyle = 'rgba(0,0,0,0.30)'; g.fillRect(x, 30, 19, 6);   // alt yari koyu
+      g.fillStyle = cam;
+    }
+    return new THREE.CanvasTexture(c);
+  }
+  // yan hat yatagi: vagonlarin uzerinde durdugu serit. Olmadan vagonlar
+  // karanlikta asili duruyor ve mekan yerine dekor gibi okunuyor.
+  const yanHatMat = new THREE.MeshBasicMaterial({ color:'#1a1016', fog:true });
+  for (const yon of [-1, 1]) {
+    const yh = new THREE.Mesh(new THREE.BoxGeometry(4.6, 0.18, 220), yanHatMat);
+    yh.position.set(yon * 8.2, 0.09 - YOL_KAL, -95);
+    scene.add(yh); istasyon.push(yh);
+  }
+
+  const VAGON_ARA = 38, VAGON_SAY = 3;
+  const govdeler = ['#1e2438', '#33161d', '#14262a'];
+  const camlar   = ['#a8863f', '#5d7d91', '#8f5d78'];
+  for (let i = 0; i < VAGON_SAY * 2; i++) {
+    const sag = i % 2 === 1, k = Math.floor(i / 2);
+    const m = new THREE.Mesh(new THREE.BoxGeometry(2.9, 3.1, 15),
+      new THREE.MeshBasicMaterial({ map: vagonDoku(govdeler[k % 3], camlar[k % 3]),
+                                    fog:true }));
+    // x=8.2: yol kenari (3.5) ile peron basi (10.15) arasindaki yan hat
+    m.position.set(sag ? 8.2 : -8.2, 1.55 - YOL_KAL, 0);
+    m.userData = { i: k, sag, ara: VAGON_ARA, say: VAGON_SAY, akar: true };
+    scene.add(m); istasyon.push(m);
+  }
 }
 
 // ==================================================== DOLGU KATMANLARI
@@ -1785,6 +1905,19 @@ function kareKur(n){
       const yeni = dk[dekorTip][d.di];
       if (b.material.map !== yeni) { b.material.map = yeni; b.material.needsUpdate = true; }
     }
+  }
+
+  // istasyon: yatak/ray yuzeyi ve vagonlar sadece 'ray' dekorunda. Diger
+  // ortamlar eski serit cizgili yolu korur - takas doku duzeyinde.
+  const istasyonda = (dekorTip === 'ray');
+  if (yatak) yatak.visible = istasyonda;
+  if (yolUst) yolUst.visible = !istasyonda;
+  for (const o of istasyon) {
+    o.visible = istasyonda;
+    const d = o.userData;
+    if (!d || !d.akar) continue;              // peron sabit, sadece gorunurluk
+    const kap = d.ara * d.say;
+    o.position.z = Z_VURUS + 6 - kap + ((d.i * d.ara + t * HIZ) % kap);
   }
 
   // parcaciklar: tunel hiziyla akar, mod ile dolasir
