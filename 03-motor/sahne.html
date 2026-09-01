@@ -423,13 +423,14 @@ if (TB) {
   const bc = document.createElement('canvas'); bc.width = 256; bc.height = 256;
   const bg = bc.getContext('2d');
   const bkar = (n) => { const v = Math.sin(n * 127.1) * 43758.5453; return v - Math.floor(v); };
-  bg.fillStyle = '#241016'; bg.fillRect(0, 0, 256, 256);
+  bg.fillStyle = '#8c8c8c'; bg.fillRect(0, 0, 256, 256);
   for (let i = 0; i < 900; i++) {            // balast taneleri - deterministik
     const r = bkar(i), r2 = bkar(i + 313);
-    bg.fillStyle = `rgba(${150 + r * 70 | 0},${115 + r * 45 | 0},${105 + r * 45 | 0},${0.04 + r2 * 0.10})`;
+    bg.fillStyle = r2 > 0.5 ? `rgba(255,255,255,${0.05 + r * 0.16})`
+                            : `rgba(0,0,0,${0.05 + r * 0.18})`;
     bg.fillRect(r * 256, r2 * 256, 2, 2);
   }
-  bg.fillStyle = 'rgba(6,5,9,0.70)';         // traversler
+  bg.fillStyle = 'rgba(0,0,0,0.72)';         // traversler
   for (let y = 0; y < 256; y += 32) bg.fillRect(0, y, 256, 11);
   // raylar: traverslerin USTUNDE, serit basina bir cift. Celik grisi ve
   // NORMAL harman - additive denendi, yolu parlak bir merdivene cevirdi ve
@@ -439,11 +440,11 @@ if (TB) {
     const mx = (i + 0.5) * seritEn;
     for (const yon of [-1, 1]) {
       const x = mx + yon * rayYari;
-      bg.fillStyle = 'rgba(14,11,18,0.90)';  // rayin oturdugu golge
+      bg.fillStyle = 'rgba(0,0,0,0.82)';     // rayin oturdugu golge
       bg.fillRect(x - 5, 0, 10, 256);
-      bg.fillStyle = 'rgba(122,130,148,0.62)';   // celik govde
+      bg.fillStyle = 'rgba(255,255,255,0.42)';   // celik govde
       bg.fillRect(x - 1, 0, 3, 256);
-      bg.fillStyle = 'rgba(198,208,226,0.30)';   // ust yuz, cok sonuk
+      bg.fillStyle = 'rgba(255,255,255,0.30)';   // ust yuz
       bg.fillRect(x - 1, 0, 1, 256);
     }
   }
@@ -1910,7 +1911,13 @@ function kareKur(n){
   // istasyon: yatak/ray yuzeyi ve vagonlar sadece 'ray' dekorunda. Diger
   // ortamlar eski serit cizgili yolu korur - takas doku duzeyinde.
   const istasyonda = (dekorTip === 'ray');
-  if (yatak) yatak.visible = istasyonda;
+  if (yatak) {
+    yatak.visible = istasyonda;
+    // yatak dokusu notr; rengi ortamin ANA renginden geliyor. 0.42 carpani
+    // yatagi koyu tutuyor - notanin uzerinde durdugu yuzey parlarsa nota
+    // okunmuyor (ilk ray denemesinde olculdu).
+    yatak.material.color.copy(karistir(O0.grid[0], O1.grid[0])).multiplyScalar(0.42);
+  }
   if (yolUst) yolUst.visible = !istasyonda;
   for (const o of istasyon) {
     o.visible = istasyonda;
