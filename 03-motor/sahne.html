@@ -396,7 +396,7 @@ LANE_X.forEach((x, i) => {
 // platform: yan yuzleri goruluyor, altinda ayri bir dunya zemini var ve
 // yuzeyinde kesikli serit cizgileri akiyor. Bizde tek duz duzlem vardi.
 const YOL_GEN = 7.0, YOL_KAL = 0.85;
-let yolUstMat = null, yolUst = null, yatak = null;
+let yatak = null, yatakDoku = null;
 if (TB) {
   // dunya zemini asagi iniyor - yol onun uzerinde YUKSELIYOR
   zemin.position.y = -YOL_KAL;
@@ -408,12 +408,11 @@ if (TB) {
   yolGovde.position.set(0, -YOL_KAL/2, -95);
   scene.add(yolGovde);
 
-  // ust yuzey IKI KATMAN halinde.
-  // Neden iki: yolUst additive harmanli - koyu piksel eklemez, yani TRAVERS
-  // gibi zeminden KOYU bir oge additive katmanda cizilemez. Balast ve travers
-  // ayri, normal harmanli bir katmana alindi; additive katmanda sadece
-  // parlayan celik raylar kaldi.
-  const SERIT = 3;
+  // ust yuzey: TEK katman, normal harman.
+  // Once additive bir katman vardi (kesikli otoyol cizgileri). Additive koyu
+  // piksel eklemez - yani TRAVERS gibi zeminden koyu bir oge orada cizilemez.
+  // Yatak normal harmana alininca additive katmana gerek kalmadi; ray, travers
+  // ve kenar cizgisi hepsi ayni dokuda.
 
   // --- yatak: balast + enine traversler (normal harman)
   // Referans (FLEM metro deposu) yolun boyali bir serit degil, uzerinde
@@ -448,7 +447,7 @@ if (TB) {
       bg.fillRect(x - 1, 0, 1, 256);
     }
   }
-  const yatakDoku = new THREE.CanvasTexture(bc);
+  yatakDoku = new THREE.CanvasTexture(bc);
   yatakDoku.wrapS = yatakDoku.wrapT = THREE.RepeatWrapping;
   yatakDoku.repeat.set(1, 34);
   yatak = new THREE.Mesh(new THREE.PlaneGeometry(YOL_GEN, 220),
@@ -457,35 +456,6 @@ if (TB) {
   yatak.renderOrder = 1;
   scene.add(yatak);
 
-  // --- additive ust katman: kesikli serit cizgileri. Istasyon ortamlarinda
-  // bu katman tamamen kapatiliyor (yatakta zaten ray ve kenar var); diger
-  // ortamlar eski gorunumu aynen koruyor.
-  function ustDoku(ciz){
-    const c = document.createElement('canvas'); c.width = 256; c.height = 256;
-    const g = c.getContext('2d');
-    g.fillStyle = '#05040d'; g.fillRect(0, 0, 256, 256);
-    ciz(g);
-    const t = new THREE.CanvasTexture(c);
-    t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(1, 34);
-    return t;
-  }
-  const yolDokuSerit = ustDoku(g => {
-    g.strokeStyle = '#ffffff'; g.lineWidth = 5; g.setLineDash([46, 42]);
-    for (const x of [256/3, 512/3]) {         // uc lane -> iki ayrac
-      g.beginPath(); g.moveTo(x, -20); g.lineTo(x, 276); g.stroke();
-    }
-    g.setLineDash([]);
-    g.lineWidth = 7;                          // kenar hatlari kesiksiz
-    for (const x of [4, 252]) {
-      g.beginPath(); g.moveTo(x, 0); g.lineTo(x, 256); g.stroke();
-    }
-  });
-  yolUstMat = new THREE.MeshBasicMaterial({ map: yolDokuSerit, transparent:true,
-    blending: THREE.AdditiveBlending, depthWrite:false, fog:true });
-  yolUst = new THREE.Mesh(new THREE.PlaneGeometry(YOL_GEN, 220), yolUstMat);
-  yolUst.rotation.x = -Math.PI/2; yolUst.position.set(0, 0.012, -95);
-  yolUst.renderOrder = 2;
-  scene.add(yolUst);
 }
 
 // ==================================================== ISTASYON KATMANI
@@ -1800,8 +1770,11 @@ function kareKur(n){
   // zemin akisi - mod 1 icinde kalir, hicbir sayi buyumez
   const hiz = (Z_VURUS - Z_DOGUM) / YAKLASMA;   // birim/sn
   zeminMat.uniforms.uKaydir.value = (t * hiz / 220 * 40) % 1;
-  // yol ust yuzeyi de akar - notayla ayni hizda, ayni yonde
-  if (yolUstMat) yolUstMat.map.offset.y = (-t * hiz / (220 / 34)) % 1;
+  // yol ust yuzeyi de akar - notayla ayni hizda, ayni yonde.
+  // Bu satir eskiden additive serit katmanina bagliydi; yatak gelince
+  // baglanmadan kaldi ve traversler DURDU (iki kare caprazlanarak olculdu:
+  // en iyi dikey kayma 0 px). Artik yatak dokusu kayiyor.
+  if (yatakDoku) yatakDoku.offset.y = (-t * hiz / (220 / 34)) % 1;
 
   // --- ORTAM: hangi bolumdeyiz, gecis ne kadar ilerledi
   const suOlcu = t / OLCU;
@@ -1911,14 +1884,16 @@ function kareKur(n){
   // istasyon: yatak/ray yuzeyi ve vagonlar sadece 'ray' dekorunda. Diger
   // ortamlar eski serit cizgili yolu korur - takas doku duzeyinde.
   const istasyonda = (dekorTip === 'ray');
+  // Yatak alti ortamin HEPSINDE: bolum-04'un yalnizca ilk 88 olcusu 'ray',
+  // yatak ona kilitli kalsaydi 8:48'lik bolumun 2:56'si ray yatagi, kalan
+  // 5:52'si eski otoyol olurdu. Vagon ve peron ray ortamlarina ozel kaliyor.
   if (yatak) {
-    yatak.visible = istasyonda;
+    yatak.visible = true;
     // yatak dokusu notr; rengi ortamin ANA renginden geliyor. 0.42 carpani
     // yatagi koyu tutuyor - notanin uzerinde durdugu yuzey parlarsa nota
     // okunmuyor (ilk ray denemesinde olculdu).
     yatak.material.color.copy(karistir(O0.grid[0], O1.grid[0])).multiplyScalar(0.42);
   }
-  if (yolUst) yolUst.visible = !istasyonda;
   for (const o of istasyon) {
     o.visible = istasyonda;
     const d = o.userData;

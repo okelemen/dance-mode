@@ -96,7 +96,7 @@ jobs:
         with:
           name: parca-${{ matrix.p.i }}
           path: 04-ciktilar/parca-*.mp4
-          retention-days: 3
+          retention-days: 14
 
   birlestir:
     needs: parca
