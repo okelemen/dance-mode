@@ -1987,6 +1987,83 @@ const ENGEL_DOKU = [
   engelDoku('#1c1a17', '#3fc2c9'),   // sag  - turkuaz/siyah
 ];
 
+// ------------------------------------------------ ENGEL TASIYICILARI
+// Kullanici (4 Eyl 2026): engeller "havada duran duz renkli dikdortgen"
+// gibi okunuyor. Sebep: uc engelin de govdesi AYNI kutunun olceklenmis hali
+// ve hicbirini tasiyan yapi yok. En belirgini duck kirisi: bas hizasinda
+// asili duruyor ama onu tutan sey gorunmuyor, o yuzden suzuluyor.
+// Cozum: govdeden AYRI parcalar. Kardes olarak sahneye ekleniyorlar, yani
+// govdenin scale'inden etkilenmiyorlar - kutuyu daha da ezmek yerine
+// gercek tasiyici geometri ekleniyor.
+const DESTEK_MAT  = new THREE.MeshLambertMaterial({ color:'#454b53', fog:true });
+const DESTEK_KOYU = new THREE.MeshLambertMaterial({ color:'#24272c', fog:true });
+const DESTEK_GEO  = new THREE.BoxGeometry(1, 1, 1);
+
+function destekParca(mat){
+  const p = new THREE.Mesh(DESTEK_GEO, mat);
+  p.castShadow = true; p.visible = false;
+  return p;
+}
+function engelDestekYap(){
+  const g = new THREE.Group();
+  const d = {
+    askiL:   destekParca(DESTEK_MAT),    // duck: kirisi tavana baglayan aski
+    askiR:   destekParca(DESTEK_MAT),
+    tepe:    destekParca(DESTEK_KOYU),   // duck: askilarin asildigi ust kiris
+    taban:   destekParca(DESTEK_KOYU),   // jump: blogu yere civileyen kaide
+    ucL:     destekParca(DESTEK_MAT),    // jump + bariyer: uc direkleri
+    ucR:     destekParca(DESTEK_MAT),
+    ustRay:  destekParca(DESTEK_MAT),    // bariyer: ust ray (korkuluk okumasi)
+  };
+  for (const k in d) g.add(d[k]);
+  g.userData = d;
+  return g;
+}
+// gov: engel govdesinin OLCEKLENMIS olculeri {cx, y, w, h, d}
+function engelDestekGuncelle(g, tip, z, gov){
+  const d = g.userData;
+  for (const k in d) d[k].visible = false;
+  if (tip === 'duck'){
+    // Kiris artik tavandan sarkiyor: iki dikey aski + ust kiris.
+    const yTepe = 7.35;
+    const yUst  = gov.y + gov.h / 2;
+    const boy   = yTepe - yUst;
+    const xA    = gov.w / 2 - 0.34;
+    for (const [p, x] of [[d.askiL, -xA], [d.askiR, xA]]){
+      p.visible = true;
+      p.scale.set(0.26, boy, 0.26);
+      p.position.set(x, yUst + boy / 2, z);
+    }
+    d.tepe.visible = true;
+    d.tepe.scale.set(gov.w + 0.7, 0.40, 0.50);
+    d.tepe.position.set(gov.cx, yTepe + 0.20, z);
+  } else if (tip === 'jump'){
+    // Blok yere civilenmis okunmali: genis alcak kaide + iki uc direk.
+    d.taban.visible = true;
+    d.taban.scale.set(gov.w + 0.55, 0.22, gov.d + 0.40);
+    d.taban.position.set(gov.cx, 0.11, z);
+    const boy = gov.h + 0.55;
+    for (const [p, x] of [[d.ucL, gov.cx - gov.w/2], [d.ucR, gov.cx + gov.w/2]]){
+      p.visible = true;
+      p.scale.set(0.32, boy, gov.d + 0.34);
+      p.position.set(x, boy / 2, z);
+    }
+  } else if (tip !== 'arms_up'){
+    // Bosluklu bariyer korkuluk gibi okunmali: iki uc direk + ust ray.
+    // Bosluk kenarindaki direk boslugu ISARET ediyor - hangi tarafa
+    // gidilecegi levhanin kenarindan degil, direkten okunuyor.
+    const boy = gov.h + 0.45;
+    for (const [p, x] of [[d.ucL, gov.cx - gov.w/2], [d.ucR, gov.cx + gov.w/2]]){
+      p.visible = true;
+      p.scale.set(0.30, boy, gov.d + 0.30);
+      p.position.set(x, boy / 2, z);
+    }
+    d.ustRay.visible = true;
+    d.ustRay.scale.set(gov.w + 0.55, 0.24, gov.d + 0.36);
+    d.ustRay.position.set(gov.cx, gov.y + gov.h / 2 + 0.16, z);
+  }
+}
+
 const notaMesh = NOTALAR.map(n => {
   const doku = TB ? (NOTA_DOKULARI_B[n.tip + '_' + n.lane] || NOTA_DOKU)
                   : (NOTA_DOKULARI[n.tip] || NOTA_DOKU);
@@ -2007,6 +2084,8 @@ const notaMesh = NOTALAR.map(n => {
     const eMat = new THREE.MeshLambertMaterial({ map: eDoku, fog: true });
     m.userData.engel = [eMat, eMat, eMat, eMat, eMat, eMat];
     m.castShadow = true;      // engelin yere dusen golgesi onu YERE OTURTUR
+    m.userData.destek = engelDestekYap();
+    scene.add(m.userData.destek);
   } else {
     m = new THREE.Mesh(notaGeo, new THREE.MeshBasicMaterial({
       map: doku, color: PALET.lane[n.lane], transparent:true,
@@ -3001,7 +3080,10 @@ function kareKur(n){
   NOTALAR.forEach((no, i) => {
     const m = notaMesh[i];
     const ilerleme = (t - (no.t - YAKLASMA)) / YAKLASMA;
-    if (ilerleme < 0 || ilerleme > 1.04) { m.visible = false; }
+    if (ilerleme < 0 || ilerleme > 1.04) {
+      m.visible = false;
+      if (m.userData.destek) m.userData.destek.visible = false;
+    }
     else {
       m.visible = true;
       const engelde = TB && gd > 0.5 && m.userData.engel;
@@ -3017,15 +3099,25 @@ function kareKur(n){
         //   arms_up -> bas ustunde uzanilacak bar
         //   step_L/R-> TERK ETMEN gereken seridi kapatan engel
         // Kamera oyuncunun gozu (y=3,7); yukseklikler ona gore.
+        let gov = null;
         if (no.tip === 'duck') {
-          m.scale.set(3.6, 1.5, 0.30);            // genis, ince, enine kiris
-          m.position.set(0, 3.05, z);             // bas hizasi - altindan gec
+          // YUKSEKLIK HATASI (4 Eyl 2026, kontrol karelerinde olculdu):
+          // kiris y=3,05'teydi, kamera (oyuncunun gozu) ise y=3,7. Yani
+          // kirise YUKARIDAN bakiliyordu; ust yuzu gorundugu icin "yere
+          // serilmis levha" gibi okunuyordu ve o yukseklikte egilmek degil
+          // uzerinden adimlamak gerekirdi. Kiris artik gozun USTUNDE:
+          // alt yuzu 3,86 (~1,44 m) - altindan gecmek icin egilmek sart.
+          // Derinlik de artti: 0,74 birim bir levhaydi, 1,10 ile kiris oldu.
+          m.scale.set(3.6, 2.6, 0.45);            // genis, kalin, enine kiris
+          m.position.set(0, 4.30, z);             // goz hizasinin ustu
+          gov = { cx:0, y:4.30, w:2.05*3.6, h:0.34*2.6, d:2.45*0.45 };
         } else if (no.tip === 'jump') {
           // ZIPLAMA: ALCAK ama YOLU BASTAN BASA kapatan blok.
           // Yanindan gecilemeyecegi belli olmali - bu yuzden tam genislik.
           // Yuksekligi diz hizasi: uzerinden atlanacagi okunuyor.
           m.scale.set(3.25, 3.2, 0.36);
           m.position.set(0, 0.54, z);
+          gov = { cx:0, y:0.54, w:2.05*3.25, h:0.34*3.2, d:2.45*0.36 };
         } else if (no.tip === 'arms_up') {
           m.scale.set(2.2, 0.9, 0.26);            // uzanilacak bar
           m.position.set(0, 4.75, z);             // bas ustu
@@ -3054,11 +3146,25 @@ function kareKur(n){
           const genislik = Math.abs(dis - ic);
           // YUKSEK olmali: atlanamayacagi, yanindan gecilecegi belli olsun.
           // Alcak birakilinca ziplama blogundan ayirt edilemiyordu.
-          m.scale.set(genislik / 2.05, 8.8, 0.40);
-          m.position.set((ic + dis) / 2, 1.50, z);
+          // RAMPA OKUMASI (4 Eyl 2026, kontrol karelerinde olculdu):
+          // panel 0,98 birim DERINDI ve tepesi 3,0'daydi; kamera 3,7'den
+          // bakinca genis ust yuzu gorunuyor ve bariyer yere serilmis bir
+          // rampa gibi okunuyordu. Iki degisiklik: (1) derinlik 0,98 -> 0,44,
+          // ust yuz artik ince bir kenar; (2) tepe 3,0 -> 3,54, goz hizasina
+          // yakin - uzerinden adimlanamayacagi okunuyor. Alt kenar yerde.
+          m.scale.set(genislik / 2.05, 10.4, 0.18);
+          m.position.set((ic + dis) / 2, 1.77, z);
+          gov = { cx:(ic+dis)/2, y:1.77, w:genislik, h:0.34*10.4, d:2.45*0.18 };
+        }
+        if (m.userData.destek){
+          m.userData.destek.visible = true;
+          engelDestekGuncelle(m.userData.destek, no.tip, z, gov ||
+            { cx:m.position.x, y:m.position.y, w:2.05*m.scale.x,
+              h:0.34*m.scale.y, d:2.45*m.scale.z });
         }
       } else {
         if (m.userData.gece && m.material !== m.userData.gece) m.material = m.userData.gece;
+        if (m.userData.destek) m.userData.destek.visible = false;
         m.scale.set(1, 1, 1);
         m.position.set(LANE_X[no.lane], TB ? 0.18 : 0.06, z);
       }

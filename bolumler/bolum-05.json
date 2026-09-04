@@ -3,8 +3,8 @@
   "no": 5,
   "baslik": "DANCE MODE #5 | Open Air Warm Up | 3 Moves Only",
   "tema": "b",
-  "toplam_olcu": 168,
-  "muzik": "01-muzik/dark-groove-130bpm.wav",
+  "toplam_olcu": 286,
+  "muzik": "01-muzik/dark-groove-130bpm-286olcu.wav",
   "mekanik": "temel",
   "_mekanik": "Ileri cue tipi yok. Uc hareket, aynalama ile sol/sag dengeli.",
   "hareketler": [
@@ -19,17 +19,25 @@
     "ACIK-SERIN",
     "ACIK-SABAH",
     "ACIK-OGLE",
-    "ACIK-SERIN"
+    "ACIK-SERIN",
+    "ACIK-SABAH",
+    "ACIK-OGLE",
+    "ACIK-SERIN",
+    "ACIK-SABAH"
   ],
   "ortam_olcu": [
     0,
-    28,
-    56,
-    84,
-    112,
-    140
+    29,
+    57,
+    86,
+    114,
+    143,
+    172,
+    200,
+    229,
+    257
   ],
-  "_ortam": "Alti blok, her biri 28 olcu = 51,7 sn. Rakip olcumu mekan basina medyan 42 sn (07-mekan/OLCUM-17-VIDEO.md); 168 olcuyu altiya bolunce buna cok yaklasiyoruz. Uc gunduz paleti iki kez donuyor.",
+  "_ortam": "On blok, her biri 28-29 olcu = 52-53 sn. Rakip olcumu mekan basina medyan 42 sn (07-mekan/OLCUM-17-VIDEO.md). Uc gunduz paleti donuyor.",
   "_kaliplar": "Sadece uc hareketten kurulu. Mola kaliplari da ayni hareketleri kullaniyor, sadece cok seyrek.",
   "kaliplar": {
     "og1": [
@@ -178,83 +186,137 @@
     ],
     [
       4,
-      14,
+      13,
       "og1",
       "adim"
     ],
     [
-      14,
-      24,
+      13,
+      22,
       "og2",
       "adim"
     ],
     [
-      24,
-      32,
+      22,
+      30,
       "og3",
       "adim"
     ],
     [
-      32,
-      48,
+      30,
+      46,
       "d20",
       "adim"
     ],
     [
-      48,
-      64,
+      46,
+      62,
       "d30",
       "adim"
     ],
     [
-      64,
-      72,
+      62,
+      70,
       "mola",
       "nefes"
     ],
     [
-      72,
-      88,
+      70,
+      86,
       "d20",
       "adim"
     ],
     [
-      88,
-      104,
+      86,
+      102,
       "d30",
       "adim"
     ],
     [
-      104,
-      112,
+      102,
+      110,
       "mola",
       "nefes"
     ],
     [
-      112,
-      128,
-      "d35",
-      "adim"
-    ],
-    [
-      128,
-      144,
+      110,
+      126,
       "d25",
       "adim"
     ],
     [
-      144,
-      152,
+      126,
+      142,
+      "d35",
+      "adim"
+    ],
+    [
+      142,
+      150,
       "mola",
       "nefes"
     ],
     [
-      152,
-      168,
+      150,
+      166,
+      "d30",
+      "adim"
+    ],
+    [
+      166,
+      182,
+      "d35",
+      "adim"
+    ],
+    [
+      182,
+      190,
+      "mola",
+      "nefes"
+    ],
+    [
+      190,
+      206,
+      "d25",
+      "adim"
+    ],
+    [
+      206,
+      222,
+      "d35",
+      "adim"
+    ],
+    [
+      222,
+      230,
+      "mola",
+      "nefes"
+    ],
+    [
+      230,
+      246,
+      "d30",
+      "adim"
+    ],
+    [
+      246,
+      262,
+      "d35",
+      "adim"
+    ],
+    [
+      262,
+      270,
+      "mola",
+      "nefes"
+    ],
+    [
+      270,
+      286,
       "d35",
       "adim"
     ]
   ],
-  "_iskelet_kaynak": "Yogunluk profili STAY ON BEAT #11 olcumunden turetilmisti (264 olcu icin). Muzik 168 olcu oldugu icin ogretme bolumu (32 olcu) sabit tutulup gerisi olceklendi: uc tur + uc mola, yogunluk d20 -> d30 -> d20 -> d30 -> d35 -> d25 -> d35 (final).",
+  "_iskelet_kaynak": "Sure hedefi: yayinlanan ilk bolum (09-YAYIN/bolum-01) 8:48 = 528,000 sn. 130 BPM\"de 286 olcu tam 528,000 sn ediyor. Rakip olcumu (17 video, 07-mekan/OLCUM-17-VIDEO.md) medyan 9:24, tavsiye 8-12 dk; 8 dk orta-reklam esigi. Onceki 168 olculuk hali 5:10 ile esigin altinda kaliyordu. Ogretme bolumu 26 olcuye cekildi (4-30): kalan 256 olcu 16\"lik calisma ve 8\"lik mola bloklarina tam bolunuyor, 254 bolunmuyordu. Yogunluk profili: 13 calisma blogu (d20 d30 d20 d30 d25 d35 d30 d35 d25 d35 d30 d35 d35) + 6 mola. Blok UZUNLUGU degismedi (16 olcu = 29,5 sn); bolum uzarken blok SAYISI artti - antrenman boyle uzatilir, blogu uzatarak degil.",
   "_iskelet_hareket": "Blok etiketi artik yalnizca 'adim' veya 'nefes'. Onceki halde bolum-04'ten kopyalanmis jacks/charleston/running-man/kick-step/jump-standing etiketleri vardi ve siluet ekrandaki cue yerine bunlari oynuyordu - uc hareket sozu boylece ihlal ediliyordu. Motor tarafinda da 'hareketler' listesi disindaki klipler artik reddediliyor."
 }
