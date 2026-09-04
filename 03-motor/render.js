@@ -98,8 +98,19 @@ function sunucuBaslat() {
   }));
   console.log(`siluet:${bilgi.siluet ? 'VAR' : 'YOK'}  klip:${bilgi.klip}  nota:${bilgi.nota}`);
 
-  const TOPLAM = Math.round(OLCU_SAYISI * 2.0 * 30);
-  const KARE0  = Math.round(BASLANGIC * 2.0 * 30);
+  // HATA (4 Eyl 2026): olcu suresi 2,0 sn olarak SABIT yazilmisti - 120 BPM
+  // varsayimi. Muzik 130 BPM olunca her parca yanlis uzunlukta cikacakti
+  // (olcu 1,846 sn) ve ses ile goruntu birbirinden kayacakti.
+  // Artik spec/sabitler.json'dan okunuyor; BPM degisince otomatik takip eder.
+  const SPEC = JSON.parse(fs.readFileSync(path.join(KOK, 'spec', 'sabitler.json'), 'utf8'));
+  const OLCU_SN = SPEC.izgara.saniye_per_olcu;
+  const FPS_SPEC = SPEC.video.fps;
+  // Parca sinirlari MUTLAK kare uzerinden: yuvarlama parcalar arasinda
+  // birikmesin diye bitis - baslangic olarak hesaplaniyor.
+  const KARE0  = Math.round(BASLANGIC * OLCU_SN * FPS_SPEC);
+  const KARE1  = Math.round((BASLANGIC + OLCU_SAYISI) * OLCU_SN * FPS_SPEC);
+  const TOPLAM = KARE1 - KARE0;
+  console.log(`izgara: ${SPEC.izgara.bpm} BPM, olcu ${OLCU_SN.toFixed(4)} sn -> ${TOPLAM} kare`);
   fs.mkdirSync(path.dirname(CIKTI), { recursive: true });
   const sesEkle = !SESSIZ && fs.existsSync(MUZIK);
   if (BASLANGIC) console.log(`parca: olcu ${BASLANGIC}-${BASLANGIC+OLCU_SAYISI}`);
@@ -107,7 +118,9 @@ function sunucuBaslat() {
   const ff = spawn('ffmpeg', [
     '-v','error','-y',
     '-f','image2pipe','-c:v',FF_GIRIS,'-r','30','-i','pipe:0',
-    ...(sesEkle ? ['-i', MUZIK] : []),
+    // Parca render'inda muzigin O ARALIGI alinmali; bastan baslarsa
+    // birlestirmede ses goruntuyle kayar.
+    ...(sesEkle ? ['-ss', (KARE0 / FPS_SPEC).toFixed(6), '-i', MUZIK] : []),
     '-c:v','libx264','-preset','veryfast','-crf','20','-pix_fmt','yuv420p',
     ...(sesEkle ? ['-c:a','aac','-b:a','192k','-shortest'] : []),
     CIKTI,

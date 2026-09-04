@@ -2,27 +2,24 @@
   "_aciklama": "Izgara sabitleri. Motor bu dosyadan beslenir. Elle degistirme - degistirirsen tum tasarim varsayimlari cokebilir. Gerekce icin DANCE-MODE-PLANI.md bolum 3.",
   "_surum": 1,
   "_tarih": "2026-08-23",
-
   "video": {
     "fps": 30,
     "genislik": 1920,
     "yukseklik": 1080,
     "_not": "4K ve 60fps bilincli olarak reddedildi. Bkz docs/MAKINE-DURUMU.md"
   },
-
   "izgara": {
-    "bpm": 120,
+    "bpm": 130,
     "vurus_per_olcu": 4,
-    "kare_per_vurus": 15,
-    "kare_per_olcu": 60,
-    "saniye_per_vurus": 0.5,
-    "saniye_per_olcu": 2.0,
+    "kare_per_vurus": 13.8462,
+    "kare_per_olcu": 55.3846,
+    "saniye_per_vurus": 0.461538,
+    "saniye_per_olcu": 1.846154,
     "olcu_per_cumle": 8,
-    "kare_per_cumle": 480,
-    "saniye_per_cumle": 16.0,
-    "_neden_120": "30 fps'te tam sayi kare/vurus veren tek dans temposu. 124=14.516, 126=14.286, 128=14.063 -> hepsi kesirli. 120 -> tam 15. Hicbir yerde yuvarlama yok."
+    "kare_per_cumle": 443.077,
+    "saniye_per_cumle": 14.7692,
+    "_neden_120": "120 idi; 4 Eyl 2026'da muzik geldi ve OLCULDU: Dark Groove tam 130,000 BPM. 130, 30 fps'te tam sayi kare/vurus VERMIYOR (13,846) - 120'nin secilme sebebi buydu. Ama motor her kareyi t = kare_no/fps ile MUTLAK zamandan hesapliyor, delta biriktirmiyor; bu yuzden birikimli kayma olusmuyor, tek kare icindeki en buyuk sapma <=16,7 ms."
   },
-
   "oynanis": {
     "yaklasma_olcu": 1,
     "yaklasma_kare": 60,
@@ -31,25 +28,63 @@
     "lane_sayisi": 3,
     "tunel_hizi": "yaklasma_olcu'den turetilir - nota dogum noktasindan vurus cizgisine tam 1 olcude gider. ASLA degismez."
   },
-
   "bolum": {
-    "toplam_olcu": 264,
-    "toplam_kare": 15840,
-    "toplam_saniye": 528,
-    "sure": "8:48",
+    "toplam_olcu": 168,
+    "toplam_kare": 9305,
+    "toplam_saniye": 310.154,
+    "sure": "5:10",
     "bolumler": [
-      { "ad": "ogretme", "baslangic_olcu": 0,   "olcu": 32, "amac": "Yeni mekanigi tanit" },
-      { "ad": "tur1",    "baslangic_olcu": 32,  "olcu": 48, "amac": "Temel yogunluk" },
-      { "ad": "mola1",   "baslangic_olcu": 80,  "olcu": 8,  "amac": "Nefes" },
-      { "ad": "tur2",    "baslangic_olcu": 88,  "olcu": 48, "amac": "Yogunluk artar" },
-      { "ad": "mola2",   "baslangic_olcu": 136, "olcu": 8,  "amac": "Nefes" },
-      { "ad": "tur3",    "baslangic_olcu": 144, "olcu": 48, "amac": "Yogunluk daha da artar" },
-      { "ad": "mola3",   "baslangic_olcu": 192, "olcu": 8,  "amac": "Nefes" },
-      { "ad": "final",   "baslangic_olcu": 200, "olcu": 64, "amac": "Combo kapak rakamina kosar" }
+      {
+        "ad": "ogretme",
+        "baslangic_olcu": 0,
+        "olcu": 32,
+        "amac": "Uc hareketi tek tek tanit"
+      },
+      {
+        "ad": "tur1",
+        "baslangic_olcu": 32,
+        "olcu": 32,
+        "amac": "Temel yogunluk"
+      },
+      {
+        "ad": "mola1",
+        "baslangic_olcu": 64,
+        "olcu": 8,
+        "amac": "Nefes"
+      },
+      {
+        "ad": "tur2",
+        "baslangic_olcu": 72,
+        "olcu": 32,
+        "amac": "Yogunluk artar"
+      },
+      {
+        "ad": "mola2",
+        "baslangic_olcu": 104,
+        "olcu": 8,
+        "amac": "Nefes"
+      },
+      {
+        "ad": "tur3",
+        "baslangic_olcu": 112,
+        "olcu": 32,
+        "amac": "Yogunluk daha da artar"
+      },
+      {
+        "ad": "mola3",
+        "baslangic_olcu": 144,
+        "olcu": 8,
+        "amac": "Nefes"
+      },
+      {
+        "ad": "final",
+        "baslangic_olcu": 152,
+        "olcu": 16,
+        "amac": "Combo kapak rakamina kosar"
+      }
     ],
-    "_not": "Molalar sart. Surekli zirvede kalan sey zirvesizdir."
+    "_not": "264 olcu 120 BPM icin tasarlanmisti. Muzik 130 BPM ve 168 olcu; yapi ona gore olceklendi."
   },
-
   "render": {
     "deterministik": true,
     "zaman_formulu": "t = kare_no / fps",
@@ -57,6 +92,10 @@
     "kareler_diske_yazilir": false,
     "_not": "Kareler dogrudan ffmpeg'e boru ile gider. 1080p PNG x 15840 kare ~25 GB, ham RGBA ~131 GB. Boru zorunluluk, optimizasyon degil.",
     "hedef_ortam": "GitHub Actions",
-    "yerel_onizleme": { "genislik": 640, "yukseklik": 360, "gercek_zamanli": true }
+    "yerel_onizleme": {
+      "genislik": 640,
+      "yukseklik": 360,
+      "gercek_zamanli": true
+    }
   }
 }

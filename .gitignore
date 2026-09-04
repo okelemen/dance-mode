@@ -19,3 +19,12 @@ node_modules/
 # rakip kanal kareleri/kapaklari: analiz icin yerelde tutulur, depoda yayinlanmaz
 docs/kanal-kareleri/
 docs/rakip-kapaklar/
+
+# koreografi calismasi: rakip videolardan turetiliyor, depoda YAYINLANMAZ
+06-koreografi/
+
+# mekan tasarimi calismasi: rakip videolardan turetiliyor, depoda YAYINLANMAZ
+07-mekan/
+
+# yayin paketi: master video (574 MB) depoya girmesin - depo public
+09-YAYIN/

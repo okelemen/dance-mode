@@ -1,0 +1,260 @@
+{
+  "_": "Bolum 5. ACIK ALAN. Viyaduk arkadi, gunduz, uc renk ailesi. SADECE UC HAREKET: yana adim, comelme, kollari kaldirma. Ucu de gun icinde zaten yapilan seyler - yerden bir sey alma, ust rafa uzanma, yana adim. Ziplama, yumruk, kacis, tutma notasi YOK.",
+  "no": 5,
+  "baslik": "DANCE MODE #5 | Open Air Warm Up | 3 Moves Only",
+  "tema": "b",
+  "toplam_olcu": 168,
+  "muzik": "01-muzik/dark-groove-130bpm.wav",
+  "mekanik": "temel",
+  "_mekanik": "Ileri cue tipi yok. Uc hareket, aynalama ile sol/sag dengeli.",
+  "hareketler": [
+    "step_L / step_R",
+    "duck",
+    "jump"
+  ],
+  "_hareket_gerekce": "Kullanici karari (3 Eyl 2026): arms_up yerine jump. Iki sebep: (1) atlama hareketi istendi, (2) arms_up klibi Overhead Squat oldugu icin duck (Air Squat) ile ayni anda comeliyordu - uc hareketin ikisi gorsel olarak ayni okunuyordu. Klasik kosu ucluisu: yana adim, comelme, ziplama. Her birinin tartismasiz bir engeli var.",
+  "ortamlar": [
+    "ACIK-SABAH",
+    "ACIK-OGLE",
+    "ACIK-SERIN",
+    "ACIK-SABAH",
+    "ACIK-OGLE",
+    "ACIK-SERIN"
+  ],
+  "ortam_olcu": [
+    0,
+    28,
+    56,
+    84,
+    112,
+    140
+  ],
+  "_ortam": "Alti blok, her biri 28 olcu = 51,7 sn. Rakip olcumu mekan basina medyan 42 sn (07-mekan/OLCUM-17-VIDEO.md); 168 olcuyu altiya bolunce buna cok yaklasiyoruz. Uc gunduz paleti iki kez donuyor.",
+  "_kaliplar": "Sadece uc hareketten kurulu. Mola kaliplari da ayni hareketleri kullaniyor, sadece cok seyrek.",
+  "kaliplar": {
+    "og1": [
+      "step_L",
+      null,
+      "step_R",
+      null
+    ],
+    "og2": [
+      "duck",
+      null,
+      "duck",
+      null
+    ],
+    "og3": [
+      "jump",
+      null,
+      "jump",
+      null
+    ],
+    "s2a": [
+      "step_L",
+      null,
+      "step_R",
+      null
+    ],
+    "s2b": [
+      "duck",
+      null,
+      "jump",
+      null
+    ],
+    "s2c": [
+      "jump",
+      null,
+      "step_R",
+      null
+    ],
+    "s2d": [
+      "duck",
+      null,
+      "step_R",
+      null
+    ],
+    "s3a": [
+      "step_L",
+      "duck",
+      "step_R",
+      null
+    ],
+    "s3b": [
+      "step_L",
+      null,
+      "step_R",
+      "jump"
+    ],
+    "s3c": [
+      "jump",
+      null,
+      "step_R",
+      "duck"
+    ],
+    "s4a": [
+      "step_L",
+      "duck",
+      "step_R",
+      "jump"
+    ],
+    "s4b": [
+      "step_L",
+      "jump",
+      "step_R",
+      "duck"
+    ],
+    "m1": [
+      "step_L",
+      null,
+      null,
+      null
+    ],
+    "m2": [
+      null,
+      null,
+      "step_R",
+      null
+    ],
+    "m0": [
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "kademeler": {
+    "og1": [
+      "og1",
+      "m0"
+    ],
+    "og2": [
+      "og2",
+      "og1"
+    ],
+    "og3": [
+      "og3",
+      "og1"
+    ],
+    "d15": [
+      "s2a",
+      "m0"
+    ],
+    "d20": [
+      "s2a",
+      "s2b"
+    ],
+    "d25": [
+      "s2a",
+      "s3a",
+      "s2d",
+      "s3b"
+    ],
+    "d30": [
+      "s3a",
+      "s3b",
+      "s3c",
+      "s2b"
+    ],
+    "d35": [
+      "s3a",
+      "s4a",
+      "s3c",
+      "s4b"
+    ],
+    "mola": [
+      "m1",
+      "m0",
+      "m2",
+      "m0"
+    ]
+  },
+  "iskelet": [
+    [
+      0,
+      4,
+      "bos",
+      "nefes"
+    ],
+    [
+      4,
+      14,
+      "og1",
+      "adim"
+    ],
+    [
+      14,
+      24,
+      "og2",
+      "adim"
+    ],
+    [
+      24,
+      32,
+      "og3",
+      "adim"
+    ],
+    [
+      32,
+      48,
+      "d20",
+      "adim"
+    ],
+    [
+      48,
+      64,
+      "d30",
+      "adim"
+    ],
+    [
+      64,
+      72,
+      "mola",
+      "nefes"
+    ],
+    [
+      72,
+      88,
+      "d20",
+      "adim"
+    ],
+    [
+      88,
+      104,
+      "d30",
+      "adim"
+    ],
+    [
+      104,
+      112,
+      "mola",
+      "nefes"
+    ],
+    [
+      112,
+      128,
+      "d35",
+      "adim"
+    ],
+    [
+      128,
+      144,
+      "d25",
+      "adim"
+    ],
+    [
+      144,
+      152,
+      "mola",
+      "nefes"
+    ],
+    [
+      152,
+      168,
+      "d35",
+      "adim"
+    ]
+  ],
+  "_iskelet_kaynak": "Yogunluk profili STAY ON BEAT #11 olcumunden turetilmisti (264 olcu icin). Muzik 168 olcu oldugu icin ogretme bolumu (32 olcu) sabit tutulup gerisi olceklendi: uc tur + uc mola, yogunluk d20 -> d30 -> d20 -> d30 -> d35 -> d25 -> d35 (final).",
+  "_iskelet_hareket": "Blok etiketi artik yalnizca 'adim' veya 'nefes'. Onceki halde bolum-04'ten kopyalanmis jacks/charleston/running-man/kick-step/jump-standing etiketleri vardi ve siluet ekrandaki cue yerine bunlari oynuyordu - uc hareket sozu boylece ihlal ediliyordu. Motor tarafinda da 'hareketler' listesi disindaki klipler artik reddediliyor."
+}

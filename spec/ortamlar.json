@@ -10,7 +10,9 @@
     "olcek": "kemer olcegi",
     "en": "koridor genisligi",
     "boy": "koridor yuksekligi",
-    "yer": "koridor merkez yuksekligi"
+    "yer": "koridor merkez yuksekligi",
+    "gunduz": "true ise acik alan gunduz modu: gokyuzu acilir, yol aydinlanir, additive katmanlar kisilir",
+    "gok2": "gunduz gok kubbesinin ust rengi (gok ufuk hazesi)"
   },
   "ortamlar": {
     "NEON CITY": {
@@ -518,6 +520,84 @@
       "en": 0.8,
       "boy": 1.34,
       "yer": 3.0
+    },
+    "ACIK-SABAH": {
+      "_": "Viyaduk arkadi, sabah. Sicak terrakota duvar + kehribar direk + turkuaz kaide.",
+      "gunduz": true,
+      "gok": "#ffe2c2",
+      "gok2": "#f2c096",
+      "dekor": "acik1",
+      "grid": [
+        "#e08a4e",
+        "#f0ba3c",
+        "#c96a4a"
+      ],
+      "kemer": [
+        "#f0ba3c",
+        "#e08a4e",
+        "#2fb3ac",
+        "#ffd6a8",
+        "#c96a4a"
+      ],
+      "ufuk": "#f0ba3c",
+      "ara": 3.6,
+      "olcek": 1.0,
+      "bicim": "kemer",
+      "en": 1.15,
+      "boy": 1.0,
+      "yer": 5.0
+    },
+    "ACIK-OGLE": {
+      "_": "Viyaduk arkadi, ogle. Acik kum tasi duvar + derin turkuaz direk + mercan kaide.",
+      "gunduz": true,
+      "gok": "#dceefa",
+      "gok2": "#9fc9e4",
+      "dekor": "acik2",
+      "grid": [
+        "#3fb0a8",
+        "#e0cf9e",
+        "#ef6a5a"
+      ],
+      "kemer": [
+        "#3fb0a8",
+        "#ef6a5a",
+        "#e0cf9e",
+        "#1f9c9c",
+        "#ffffff"
+      ],
+      "ufuk": "#3fb0a8",
+      "ara": 3.2,
+      "olcek": 1.05,
+      "bicim": "kemer",
+      "en": 1.15,
+      "boy": 1.0,
+      "yer": 5.0
+    },
+    "ACIK-SERIN": {
+      "_": "Viyaduk arkadi, serin ikindi. Arduvaz mavi duvar + limon direk + erik kaide.",
+      "gunduz": true,
+      "gok": "#e4e8f5",
+      "gok2": "#adbcdd",
+      "dekor": "acik3",
+      "grid": [
+        "#7f9ac4",
+        "#c6dc4f",
+        "#8a63b5"
+      ],
+      "kemer": [
+        "#c6dc4f",
+        "#7f9ac4",
+        "#8a63b5",
+        "#ffffff",
+        "#6fae7d"
+      ],
+      "ufuk": "#c6dc4f",
+      "ara": 4.0,
+      "olcek": 0.98,
+      "bicim": "kemer",
+      "en": 1.15,
+      "boy": 1.0,
+      "yer": 5.0
     }
   },
   "_kaynak": "Bazi ortamlar rakip karelerinden OLCULEREK turetildi (docs/kanal-kareleri/). Olculen paletler ve parlaklik profilleri docs/OLCUM-KANAL-KARELERI.md icinde."

@@ -21,6 +21,12 @@ on:
         description: "Parca basina olcu (paralel is sayisi = toplam/parca)"
         required: true
         default: "44"
+      birlestir:
+        description: "Parcalari Actions'ta birlestir + ses ekle. HAYIR = sadece sessiz parcalar iner, montaj yerelde yapilir (bolum-05 gibi yeni muzikli bolumlerde HAYIR sec: workflow sesi 120 BPM HAM mp3'ten uretiyor, depoda 130 BPM parca yok)."
+        required: true
+        default: "hayir"
+        type: choice
+        options: ["hayir", "evet"]
       tema:
         description: "Gorsel dil: b (onaylanan koyu neon) veya a"
         required: true
@@ -100,6 +106,9 @@ jobs:
 
   birlestir:
     needs: parca
+    # Ses yolu 120 BPM HAM mp3'e bagli. 01-muzik/*.wav gitignore'da oldugu icin
+    # yeni muzikli bolumlerin sesi runner'da YOK -> montaj yerelde yapilir.
+    if: ${{ github.event.inputs.birlestir == 'evet' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
