@@ -1,0 +1,326 @@
+{
+  "_": "Bolum 6. IKI PALET yapisi - Escapify 'Roblox Obby Run' (imnH2PtT5-o) olcumunden alindi. Parlak gunduz ile mor gece iki AILE halinde donuyor: parlak (0-143) -> mor (143-229) -> parlak donus (229-286). Referansta oran %47/%34/%16 idi, burada %50/%30/%20. DORT HAREKET: yerinde sicrama, comelme, yana kacis, yana uzanma. Yana adim taban grooveu olarak devam ediyor (referansta RUN'in karsiligi).",
+  "no": 6,
+  "baslik": "DANCE MODE #6 | Two Worlds Warm Up | Interactive Full Body Cardio",
+  "tema": "b",
+  "toplam_olcu": 286,
+  "muzik": "01-muzik/dark-groove-130bpm-286olcu.wav",
+  "mekanik": "temel",
+  "_mekanik": "Ileri cue tipi (hold) YOK. Bu bolumun yeni ogrenilecek seyi tek: wave (yana uzanma). Plan kurali - her bolum YALNIZCA bir yeni sey tanitir.",
+  "hareketler": [
+    "hop",
+    "duck",
+    "dodge_L / dodge_R",
+    "wave_L / wave_R"
+  ],
+  "_hareket_gerekce": "Kullanici onayi (5 Eyl 2026), sadece bu bolum icin; biten bolumler degismiyor. Secim siluet maskesi CAKISMASI olculerek yapildi (IoU, 120x160 normalize). Dort hareket dort ayri sekil ailesi: comelme (duck) / havada toplanma (hop) / yana egilme (dodge) / yatay genisleme (wave). Elenen: arms_up duck ile 0,52 cakisiyor (ayni Overhead Squat sorunu, bkz bolum-05); running-man 0,54, jacks 0,57, kick-step 0,57, idle 0,68 - HUD boyutunda ayirt edilemiyor. 'jump' yerine 'hop': jump klibi yer degistiriyor, hop (jump-standing) ayni noktaya iniyor, notr-basla-notr-bit kuralina uyan tek sicrama.",
+  "ortamlar": [
+    "OBBY-MAVI",
+    "OBBY-KIRMIZI",
+    "OBBY-YESIL",
+    "OBBY-LIME",
+    "OBBY-MAVI",
+    "OBBY-MOR",
+    "OBBY-MOR",
+    "OBBY-MOR",
+    "OBBY-KIRMIZI",
+    "OBBY-YESIL"
+  ],
+  "ortam_olcu": [
+    0,
+    29,
+    57,
+    86,
+    114,
+    143,
+    172,
+    200,
+    229,
+    257
+  ],
+  "_ortam": "On blok, her biri 28-29 olcu = 52-53 sn. Referans olcumu mekan basina medyan 42 sn (07-mekan/OLCUM-17-VIDEO.md). IKI PALET: ACIK-GOK (parlak, gunduz, cyan) 0-143 ve 229-286, NEBULA (mor) 143-229. Palet degisimi 143. ve 229. olcude, blok sinirina denk geliyor. Referansta parlak bolum de mor bolum de TEK surekli mekandi (mor 306-510 sn, 204 sn, videonun en uzun blogu) - burada da oyle, ortam kimligi blok basina degil PALET basina degisiyor. ACIK-GOK bu is icin eklendi (spec/ortamlar.json, 5 Eyl 2026); ACIK-SABAH/OGLE/SERIN kullanilmadi cunku olcumde turuncu cikiyorlar.",
+  "_kaliplar": "Her kalip BIR olcu. Buyuk hareketler olcunun ilk vurusunda tek basina duruyor. Pencere bir sonraki cue'ya kadar oldugu icin kalip SIRASI da klibin hizini belirliyor: 'hp' ardindan 'stB' gelirse (ilk cue ikinci vuruста) hop bes vurus alir = 2,31 sn = klibin dogal suresi. 'dgR/dgL' kendi olcusunun dorduncu vurusuna adim koyar, dodge boylece uc vurus (1,38 sn) alir. 'bos' wave icin sart: klip 5,20 sn.",
+  "kaliplar": {
+    "st": [
+      "step_L",
+      null,
+      "step_R",
+      null
+    ],
+    "st1": [
+      "step_L",
+      null,
+      null,
+      null
+    ],
+    "hp": [
+      "hop",
+      null,
+      null,
+      null
+    ],
+    "dk": [
+      "duck",
+      null,
+      null,
+      null
+    ],
+    "dgR": [
+      "dodge_R",
+      null,
+      null,
+      "step_R"
+    ],
+    "dgL": [
+      "dodge_L",
+      null,
+      null,
+      "step_L"
+    ],
+    "wvR": [
+      "wave_R",
+      null,
+      null,
+      null
+    ],
+    "wvL": [
+      "wave_L",
+      null,
+      null,
+      null
+    ],
+    "bos": [
+      null,
+      null,
+      null,
+      null
+    ],
+    "stB": [
+      null,
+      "step_L",
+      null,
+      "step_R"
+    ]
+  },
+  "kademeler": {
+    "og1": [
+      "hp",
+      "stB"
+    ],
+    "og2": [
+      "dk",
+      "bos"
+    ],
+    "og3": [
+      "dgR",
+      "st",
+      "dgL",
+      "st"
+    ],
+    "og4": [
+      "wvR",
+      "bos",
+      "bos",
+      "st",
+      "wvL",
+      "bos",
+      "bos",
+      "st"
+    ],
+    "d20": [
+      "st",
+      "hp",
+      "stB",
+      "dk"
+    ],
+    "d25": [
+      "st",
+      "hp",
+      "stB",
+      "dgR",
+      "st",
+      "dk",
+      "st",
+      "dgL"
+    ],
+    "d30": [
+      "hp",
+      "stB",
+      "dk",
+      "dgR",
+      "dk",
+      "hp",
+      "stB",
+      "dgL"
+    ],
+    "d35": [
+      "hp",
+      "stB",
+      "dk",
+      "dgR",
+      "hp",
+      "stB",
+      "dk",
+      "dgL"
+    ],
+    "dwv": [
+      "wvR",
+      "bos",
+      "bos",
+      "st",
+      "wvL",
+      "bos",
+      "bos",
+      "st"
+    ],
+    "mola": [
+      "st1",
+      "bos",
+      "st1",
+      "bos"
+    ]
+  },
+  "iskelet": [
+    [
+      0,
+      6,
+      "bos",
+      "nefes"
+    ],
+    [
+      6,
+      14,
+      "og1",
+      "adim"
+    ],
+    [
+      14,
+      22,
+      "og2",
+      "adim"
+    ],
+    [
+      22,
+      30,
+      "og3",
+      "adim"
+    ],
+    [
+      30,
+      38,
+      "og4",
+      "adim"
+    ],
+    [
+      38,
+      54,
+      "d20",
+      "adim"
+    ],
+    [
+      54,
+      70,
+      "d30",
+      "adim"
+    ],
+    [
+      70,
+      78,
+      "mola",
+      "nefes"
+    ],
+    [
+      78,
+      94,
+      "d20",
+      "adim"
+    ],
+    [
+      94,
+      110,
+      "d30",
+      "adim"
+    ],
+    [
+      110,
+      118,
+      "mola",
+      "nefes"
+    ],
+    [
+      118,
+      134,
+      "dwv",
+      "adim"
+    ],
+    [
+      134,
+      150,
+      "d35",
+      "adim"
+    ],
+    [
+      150,
+      158,
+      "mola",
+      "nefes"
+    ],
+    [
+      158,
+      174,
+      "d30",
+      "adim"
+    ],
+    [
+      174,
+      190,
+      "d35",
+      "adim"
+    ],
+    [
+      190,
+      198,
+      "mola",
+      "nefes"
+    ],
+    [
+      198,
+      214,
+      "d25",
+      "adim"
+    ],
+    [
+      214,
+      230,
+      "dwv",
+      "adim"
+    ],
+    [
+      230,
+      238,
+      "mola",
+      "nefes"
+    ],
+    [
+      238,
+      254,
+      "d30",
+      "adim"
+    ],
+    [
+      254,
+      270,
+      "d35",
+      "adim"
+    ],
+    [
+      270,
+      286,
+      "d35",
+      "adim"
+    ]
+  ],
+  "_iskelet_kaynak": "286 olcu @ 130 BPM = 528,000 sn = 8:48, bolum-05 ile ayni muzik dosyasi. Bolunme: giris 6 + ogretme 32 (dort hareket x 8 olcu, bolum-05'te uc hareket 26 olcuydu) + 248 = 16'lik 13 calisma blogu (208) + 8'lik 5 mola (40). Ogretme 4 hareket oldugu icin 26'dan 32'ye cikti; kalan 248 hala 16 ve 8'e tam boluniyor. Blok UZUNLUGU degismedi, sayisi degisti.",
+  "_ortam_acik": "ACIK EKSIK: parlaklik hedefi tutmadi. Referans parlak 0,50 / mor 0,23; bizde ACIK-GOK 0,31 / NEBULA 0,30 - yani ton ayrimi var, PARLAKLIK ayrimi hala yok. Sahne gozle soguk/cyan okunuyor (turkuaz direk, acik duvar, beyaz-turkuaz tren, serin yatak) ama toplam deger orta bantta kaliyor. Kalan kaldirac: gunduz modunun genel pozlamasi. AYRICA OLCUM UYARISI: ton yuzdesi yalnizca DOYGUN pikselleri sayiyor; gunduz sahnesinde en buyuk doygun nesne ENGELIN kendisi (mercan/sari/turkuaz serit, ortamdan bagimsiz sabit). Bu yuzden 'turuncu %53' ortami degil engeli olcuyor. Ortam tonu icin engelsiz kare gerekir.",
+  "_iskelet_hareket": "Yogunluk kademeleri artik olcu basina EN FAZLA BIR buyuk hareket iceriyor. Onceki halde s4a gibi kaliplar tek olcuye dort cue koyuyordu (biri her 0,46 sn) ve klipler zorla sikistiriliyordu. wave iki calisma blogunda (118-134 ve 214-230) 'dwv' kademesiyle geliyor; baska yerde yok cunku uc olcu isgal ediyor."
+}

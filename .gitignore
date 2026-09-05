@@ -1,8 +1,23 @@
 # bagimliliklar
 node_modules/
 
-# uretilen ses: HAM mp3'ten her seferinde yeniden uretilir
+# ==================================================== MUZIK DEPOYA GIRMEZ
+# Kullanici karari (5 Eyl 2026): uretilen/denenen muzigin hicbiri depoya
+# gonderilmiyor. Onceki kural sadece 01-muzik/*.wav'i kapatiyordu; mp3, m4a
+# ve LMMS proje dosyalari aciktaydi ve 01-muzik/uretim/ klasoru hic
+# kapsanmiyordu.
+# TEK ISTISNA: bolum-01-neon-grid-HAM.mp3 - Actions sesi her render'da
+# ondan uretiyor, depodan cikarsa render'in sesi kalmaz.
+01-muzik/uretim/
 01-muzik/*.wav
+01-muzik/*.mp3
+01-muzik/*.m4a
+01-muzik/*.aac
+01-muzik/*.ogg
+01-muzik/*.flac
+01-muzik/*.mmp
+01-muzik/*.mmpz
+!01-muzik/bolum-01-neon-grid-HAM.mp3
 
 # render ciktilari - repoda tutulmaz, Actions artifact olarak iner
 # ** sart: artifact indirmeleri 04-ciktilar altinda ALT KLASOR aciyor
@@ -15,6 +30,11 @@ node_modules/
 # gecici
 *.crdownload
 *.log
+
+# render artiklari: Actions parcalari ve olcum ciktilari yerelde kalir
+04-ciktilar/parca-*/
+04-ciktilar/parcalar/
+04-ciktilar/tempo.json
 
 # rakip kanal kareleri/kapaklari: analiz icin yerelde tutulur, depoda yayinlanmaz
 docs/kanal-kareleri/
