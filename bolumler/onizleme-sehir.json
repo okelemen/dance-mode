@@ -1,10 +1,10 @@
 {
- "_": "Bolum 6. IKI PALET yapisi - Escapify 'Roblox Obby Run' (imnH2PtT5-o) olcumunden alindi. Parlak gunduz ile mor gece iki AILE halinde donuyor: parlak (0-143) -> mor (143-229) -> parlak donus (229-286). Referansta oran %47/%34/%16 idi, burada %50/%30/%20. DORT HAREKET: yerinde sicrama, comelme, yana kacis, yana uzanma. Yana adim taban grooveu olarak devam ediyor (referansta RUN'in karsiligi).",
+ "_": "ONIZLEME - yayinlanacak bir bolum degil. Sehir koprusu mekanini tam uzunlukta gormek icin bolum-06 koreografisi uzerine SEHIR-* ortamlari giydirildi (11 Eyl 2026). Mekan hangi bolumde kullanilacaksa oraya tasinacak.",
  "no": 6,
- "baslik": "DANCE MODE #6 | Two Worlds Warm Up | Interactive Full Body Cardio",
+ "baslik": "ONIZLEME | Sehir koprusu",
  "tema": "b",
- "toplam_olcu": 286,
- "muzik": "01-muzik/dark-groove-130bpm-286olcu.wav",
+ "toplam_olcu": 336,
+ "muzik": "01-muzik/subterranean-pulse-336olcu.wav",
  "mekanik": "temel",
  "_mekanik": "Ileri cue tipi (hold) YOK. Bu bolumun yeni ogrenilecek seyi tek: wave (yana uzanma). Plan kurali - her bolum YALNIZCA bir yeni sey tanitir.",
  "hareketler": [
@@ -15,28 +15,28 @@
  ],
  "_hareket_gerekce": "Kullanici onayi (5 Eyl 2026), sadece bu bolum icin; biten bolumler degismiyor. Secim siluet maskesi CAKISMASI olculerek yapildi (IoU, 120x160 normalize). Dort hareket dort ayri sekil ailesi: comelme (duck) / havada toplanma (hop) / yana egilme (dodge) / yatay genisleme (wave). Elenen: arms_up duck ile 0,52 cakisiyor (ayni Overhead Squat sorunu, bkz bolum-05); running-man 0,54, jacks 0,57, kick-step 0,57, idle 0,68 - HUD boyutunda ayirt edilemiyor. 'jump' yerine 'hop': jump klibi yer degistiriyor, hop (jump-standing) ayni noktaya iniyor, notr-basla-notr-bit kuralina uyan tek sicrama.",
  "ortamlar": [
-  "DENIZ-SAFAK",
-  "DENIZ-SABAH",
-  "DENIZ-OGLE",
-  "DENIZ-IKINDI",
-  "DENIZ-GUNBATIMI",
-  "DENIZ-GECE",
-  "DENIZ-GECE",
-  "DENIZ-GECE",
-  "DENIZ-SAFAK",
-  "DENIZ-SABAH"
+  "SEHIR-MOR",
+  "SEHIR-MAGENTA",
+  "SEHIR-MAVI",
+  "SEHIR-ALTIN",
+  "SEHIR-MOR",
+  "SEHIR-MAVI",
+  "SEHIR-MAVI",
+  "SEHIR-MAGENTA",
+  "SEHIR-ALTIN",
+  "SEHIR-MOR"
  ],
  "ortam_olcu": [
   0,
-  29,
-  57,
-  86,
-  114,
-  143,
-  172,
-  200,
-  229,
-  257
+  34,
+  66,
+  102,
+  134,
+  168,
+  202,
+  234,
+  270,
+  302
  ],
  "_ortam": "5 Eyl 2026: mekan DENIZ USTU ACIK GUVERTE olarak degisti (07-mekan/MEKAN-KARARI.md). Blok sinirlari AYNEN korundu - 10 blok, 28-29 olcu, 52-53 sn. Iki palet yapisi da korundu: parlak 0-143 (%50), karanlik 143-229 (%30), parlak donus 229-286 (%20). Fark: palet degisimi artik renk ailesi degil GUNUN SAATI. 286 olcu = 8:48'lik videoya safak -> sabah -> ogle -> ikindi -> gun batimi -> gece(3 blok) -> safak -> sabah yayildi. Gece uc blok surur (143-229, 159 sn) - referansta da en uzun blok karanlik olandi. Bordur rengi 10 blokta da ayni: tehlike/sinir tek renk. ONCEKI: OBBY-MAVI, OBBY-KIRMIZI, OBBY-YESIL, OBBY-LIME, OBBY-MAVI, OBBY-MOR, OBBY-MOR, OBBY-MOR, OBBY-KIRMIZI, OBBY-YESIL",
  "_kaliplar": "Her kalip BIR olcu. Buyuk hareketler olcunun ilk vurusunda tek basina duruyor. Pencere bir sonraki cue'ya kadar oldugu icin kalip SIRASI da klibin hizini belirliyor: 'hp' ardindan 'stB' gelirse (ilk cue ikinci vuruста) hop bes vurus alir = 2,31 sn = klibin dogal suresi. 'dgR/dgL' kendi olcusunun dorduncu vurusuna adim koyar, dodge boylece uc vurus (1,38 sn) alir. 'bos' wave icin sart: klip 5,20 sn. | 5 Eyl 2026: d30 ve d35'te buyuk engeller ardisik olculere dusuyordu (dk,dgR,dk arka arkaya = 1,85 sn ara). Kullanici: 'engeller birbirine cok yakin', 'engeller arasini biraz acalim'. Artik iki buyuk engel arasina her zaman bir adim olcusu giriyor: engel arasi en az 2 olcu = 3,7 sn. d20/d25/og* zaten bu kurala uyuyordu, dokunulmadi. | 6 Eyl 2026: aralik 2 olcuden UC olcuye cikti (3,7 -> 5,5 sn). Kalip uzunluklari 6/6/9/12 - hepsi 3'un kati, boylece dolanma noktasinda aralik bozulmuyor. Bosluklari kule metronomu (4 olcu) ve halka gecidi (6 olcu) dolduruyor.",
@@ -199,144 +199,147 @@
  "iskelet": [
   [
    0,
-   6,
+   8,
    "bos",
    "nefes"
   ],
   [
-   6,
-   14,
+   8,
+   16,
    "og1",
    "adim"
   ],
   [
-   14,
-   22,
+   16,
+   26,
    "og2",
    "adim"
   ],
   [
-   22,
-   30,
+   26,
+   36,
    "og3",
    "adim"
   ],
   [
-   30,
-   38,
+   36,
+   44,
    "og4",
    "adim"
   ],
   [
-   38,
-   54,
+   44,
+   64,
    "d20",
    "adim"
   ],
   [
-   54,
-   70,
+   64,
+   82,
    "d30",
    "adim"
   ],
   [
-   70,
-   78,
+   82,
+   92,
    "mola",
    "nefes"
   ],
   [
-   78,
-   94,
+   92,
+   110,
    "d20",
    "adim"
   ],
   [
-   94,
    110,
+   130,
    "d30",
    "adim"
   ],
   [
-   110,
-   118,
+   130,
+   138,
    "mola",
    "nefes"
   ],
   [
-   118,
-   134,
+   138,
+   158,
    "dwv",
    "adim"
   ],
   [
-   134,
-   150,
+   158,
+   176,
    "d35",
    "adim"
   ],
   [
-   150,
-   158,
+   176,
+   186,
    "mola",
    "nefes"
   ],
   [
-   158,
-   174,
+   186,
+   204,
    "d30",
    "adim"
   ],
   [
-   174,
-   190,
+   204,
+   224,
    "d35",
    "adim"
   ],
   [
-   190,
-   198,
+   224,
+   232,
    "mola",
    "nefes"
   ],
   [
-   198,
-   214,
+   232,
+   252,
    "d25",
    "adim"
   ],
   [
-   214,
-   230,
+   252,
+   270,
    "dwv",
    "adim"
   ],
   [
-   230,
-   238,
+   270,
+   280,
    "mola",
    "nefes"
   ],
   [
-   238,
-   254,
+   280,
+   298,
    "d30",
    "adim"
   ],
   [
-   254,
-   270,
+   298,
+   318,
    "d35",
    "adim"
   ],
   [
-   270,
-   286,
+   318,
+   336,
    "d35",
    "adim"
   ]
  ],
  "_iskelet_kaynak": "286 olcu @ 130 BPM = 528,000 sn = 8:48, bolum-05 ile ayni muzik dosyasi. Bolunme: giris 6 + ogretme 32 (dort hareket x 8 olcu, bolum-05'te uc hareket 26 olcuydu) + 248 = 16'lik 13 calisma blogu (208) + 8'lik 5 mola (40). Ogretme 4 hareket oldugu icin 26'dan 32'ye cikti; kalan 248 hala 16 ve 8'e tam boluniyor. Blok UZUNLUGU degismedi, sayisi degisti.",
  "_ortam_acik": "ACIK EKSIK: parlaklik hedefi tutmadi. Referans parlak 0,50 / mor 0,23; bizde ACIK-GOK 0,31 / NEBULA 0,30 - yani ton ayrimi var, PARLAKLIK ayrimi hala yok. Sahne gozle soguk/cyan okunuyor (turkuaz direk, acik duvar, beyaz-turkuaz tren, serin yatak) ama toplam deger orta bantta kaliyor. Kalan kaldirac: gunduz modunun genel pozlamasi. AYRICA OLCUM UYARISI: ton yuzdesi yalnizca DOYGUN pikselleri sayiyor; gunduz sahnesinde en buyuk doygun nesne ENGELIN kendisi (mercan/sari/turkuaz serit, ortamdan bagimsiz sabit). Bu yuzden 'turuncu %53' ortami degil engeli olcuyor. Ortam tonu icin engelsiz kare gerekir.",
- "_iskelet_hareket": "Yogunluk kademeleri artik olcu basina EN FAZLA BIR buyuk hareket iceriyor. Onceki halde s4a gibi kaliplar tek olcuye dort cue koyuyordu (biri her 0,46 sn) ve klipler zorla sikistiriliyordu. wave iki calisma blogunda (118-134 ve 214-230) 'dwv' kademesiyle geliyor; baska yerde yok cunku uc olcu isgal ediyor."
+ "_iskelet_hareket": "Yogunluk kademeleri artik olcu basina EN FAZLA BIR buyuk hareket iceriyor. Onceki halde s4a gibi kaliplar tek olcuye dort cue koyuyordu (biri her 0,46 sn) ve klipler zorla sikistiriliyordu. wave iki calisma blogunda (118-134 ve 214-230) 'dwv' kademesiyle geliyor; baska yerde yok cunku uc olcu isgal ediyor.",
+ "bpm": 132.5,
+ "_bpm": "Olculdu 12 Eyl 2026: subterranean-pulse.mp3 global tempo 132,50 BPM (otokorelasyon, tum dosya). Motorun 130'luk izgarasiyla 220 saniyede 4,15 sn kayma birikiyordu. Parca dilim dilim 131,8-132,7 arasi hafif hizlaniyor; 132,50 toplam kaymayi en aza indiren tek sabit deger. sabitler.json DEGISMEDI - bolum-06 (deniz) 130'da kaliyor. | 12 Eyl 2026 ek olcum: tempo SABIT DEGIL, parca boyunca artiyor - 29,5-60 sn 131,89 BPM, 60-90 132,20, 90-120 132,41, 140-175 132,52, 175-205 132,77 (kick atak tepelerine lineer fit, artik std 10 ms). 132,50 ortalamaya en yakin sabit deger; ACIK: blok ici kayma 48 olculuk blokta ~0,2 sn'ye ulasiyor, gerekirse blok basina yeniden orneklemeyle tam 132,500'e kilitlenebilir. | 12 Eyl aksami: warp uygulandi, artik parca GERCEKTEN 132,500 BPM. sabitler.json hala 130 - bolum dosyasindaki 'bpm' alani motorda ezme yapiyor (sahne.html sat. 49).",
+ "_muzik": "subterranean-pulse.mp3'ten uretildi (12 Eyl 2026, ayni gun DUZELTILDI). Parcanin ilk 29,6 saniyesi yavas giris: kick yok, bas bandi enerjisi 5-45; drop'un transient'i 29,640 sn'de basliyor ve kick bandi 500'un uzerine ciyor. Dosya 29,632 sn'den kesiliyor (8 ms on-yastik), yani ILK KARE = DROP. ONCEKI HATA: kesim 28,980 sn'deydi (sifir baslangicli 132,5 izgaranin 16. olcusu); o izgara yavas girise gore kuruldugu icin drop dosyanin 0,62 saniyesine dusuyordu - her downbeat motor izgarasina 0,62 sn gec geliyordu. Yapi degismedi: blok A = olcu 0-47, blok B = olcu 56-103, dizilim A B A B A B A = 336 olcu = 608,6038 sn. Birlesmelerde 5 ms inis-cikis. Pik 0,58, normalize edilmedi. Eski dosya 01-muzik/subterranean-pulse-336olcu.wav.yedek-eski olarak duruyor. | TEMPO KILIDI (ayni gun): kaynak Suno cikisi oldugu icin tempo 131,85 -> 132,72 kayiyordu. Vurus suresine dogrusal fit (period(t) = -1,917e-5*t + 0,455352, artik 0,37 ms) integre edilip zaman-warp uygulandi; her vurus artik tam 0,452830 sn. Kayma +-%0,33'ten +-%0,06'ya indi. 336 olculuk dosya bu warp edilmis parcadan kesildi. Perde farki en fazla %0,4."
 }

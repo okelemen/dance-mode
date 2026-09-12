@@ -103,14 +103,27 @@ function sunucuBaslat() {
   // (olcu 1,846 sn) ve ses ile goruntu birbirinden kayacakti.
   // Artik spec/sabitler.json'dan okunuyor; BPM degisince otomatik takip eder.
   const SPEC = JSON.parse(fs.readFileSync(path.join(KOK, 'spec', 'sabitler.json'), 'utf8'));
-  const OLCU_SN = SPEC.izgara.saniye_per_olcu;
+  // HATA (12 Eyl 2026): sahne.html bolum dosyasindaki 'bpm' alanini okuyup
+  // izgarayi ona gore kuruyor (bkz. sahne.html "BOLUM BAZLI BPM"), ama burasi
+  // hep sabitler.json'daki 130'u kullaniyordu. 132,5'lik bir bolumde kare
+  // sayisi ve ses ofseti 130 izgarasindan cikiyor, sahne ise 132,5'te
+  // kosuyordu: 12 olculuk kesit 665 kare (22,15 sn) olarak uretildi, oysa
+  // 12 olcu 21,74 sn. Artik ayni alan burada da okunuyor.
+  let BPM_IZGARA = SPEC.izgara.bpm;
+  if (BOLUM) {
+    try {
+      const bj = JSON.parse(fs.readFileSync(path.join(KOK, BOLUM), 'utf8'));
+      if (bj.bpm) BPM_IZGARA = bj.bpm;
+    } catch (e) { console.log('bolum dosyasi okunamadi, sabitler.json BPM:', e.message); }
+  }
+  const OLCU_SN = (60 / BPM_IZGARA) * SPEC.izgara.vurus_per_olcu;
   const FPS_SPEC = SPEC.video.fps;
   // Parca sinirlari MUTLAK kare uzerinden: yuvarlama parcalar arasinda
   // birikmesin diye bitis - baslangic olarak hesaplaniyor.
   const KARE0  = Math.round(BASLANGIC * OLCU_SN * FPS_SPEC);
   const KARE1  = Math.round((BASLANGIC + OLCU_SAYISI) * OLCU_SN * FPS_SPEC);
   const TOPLAM = KARE1 - KARE0;
-  console.log(`izgara: ${SPEC.izgara.bpm} BPM, olcu ${OLCU_SN.toFixed(4)} sn -> ${TOPLAM} kare`);
+  console.log(`izgara: ${BPM_IZGARA} BPM, olcu ${OLCU_SN.toFixed(4)} sn -> ${TOPLAM} kare`);
   fs.mkdirSync(path.dirname(CIKTI), { recursive: true });
   const sesEkle = !SESSIZ && fs.existsSync(MUZIK);
   if (BASLANGIC) console.log(`parca: olcu ${BASLANGIC}-${BASLANGIC+OLCU_SAYISI}`);
