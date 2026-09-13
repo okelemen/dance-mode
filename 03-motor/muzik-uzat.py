@@ -18,7 +18,11 @@ ama hata duyulabilir olmanin cok altinda ve BIRIKMIYOR: her kesim kaynaktaki
 mutlak konumdan hesaplaniyor, oncekinin uzerine eklenmiyor.
 
 Kullanim:
-  python muzik-uzat.py <kaynak.wav> <cikti.wav> <bpm> <kaynak_olcu> <hedef_olcu>
+  python muzik-uzat.py <kaynak.wav> <cikti.wav> <bpm> <kaynak_olcu> <hedef_olcu> [ofset_sn]
+
+ofset_sn: olcu izgarasinin dosya basina gore kaymasi (varsayilan 0). Ilk
+vurusun zamani ile olcu suresinin moduna esittir; 03-motor'daki vurus
+izleme olcumunden gelir. Verilmezse kesimler off-beat olur.
 """
 import subprocess
 import sys
@@ -51,6 +55,12 @@ def main():
     bpm = float(bpm)
     kaynak_olcu = int(kaynak_olcu)
     hedef_olcu = int(hedef_olcu)
+    # OFSET (13 Eyl 2026): olcu izgarasinin dosya basina gore kaymasi, saniye.
+    # Eski parcalarda izgara t=0 ile hizaliydi ve bu deger 0'di - varsayilan da
+    # 0, yani onceki cagrilar bit bit ayni sonucu veriyor. Neon Party Pulse'ta
+    # ilk vurus 3,6120 sn ve olcu 1,7652 sn; izgara 0,0816 sn kaymis. Ofset
+    # verilmezse her ekleme noktasi 82 ms off-beat oluyor ve tokezleme duyuluyor.
+    ofset = float(sys.argv[6]) if len(sys.argv) > 6 else 0.0
     olcu_sn = 4 * 60.0 / bpm
     parcalar = parcala(kaynak_olcu, hedef_olcu)
 
@@ -60,11 +70,13 @@ def main():
     for i, (bas, uz) in enumerate(parcalar):
         yol = os.path.join(gecici, 'p%02d.wav' % i)
         subprocess.run(['ffmpeg', '-v', 'error', '-y',
-                        '-ss', '%.6f' % (bas * olcu_sn),
+                        '-ss', '%.6f' % (ofset + bas * olcu_sn),
                         '-t', '%.6f' % (uz * olcu_sn),
                         '-i', kaynak, yol], check=True)
         satirlar.append("file '" + yol.replace(chr(92), '/') + "'")
-        print('  parca %d: olcu %d..%d (%.2f sn)' % (i, bas, bas + uz, uz * olcu_sn))
+        print('  parca %d: olcu %d..%d  kaynakta %.3f-%.3f sn (%.2f sn)'
+              % (i, bas, bas + uz, ofset + bas * olcu_sn,
+                 ofset + (bas + uz) * olcu_sn, uz * olcu_sn))
     with open(liste, 'w', encoding='utf-8') as f:
         f.write(chr(10).join(satirlar) + chr(10))
 

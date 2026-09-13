@@ -371,6 +371,7 @@ const camera = new THREE.PerspectiveCamera(52, W/H, 0.1, 300);
 camera.position.set(0, 3.7, 10.8);
 camera.lookAt(0, 0.55, -6);
 
+
 // ==================================================== GOKYUZU (GUNDUZ)
 // Sadece 'gunduz' ortamlarda gorunur. Referans olcumu: acik alan karelerinde
 // gokyuzu karenin %29-33'u ve DOYGUNSUZ - neredeyse beyaz. Buyuk, sakin,
@@ -2458,6 +2459,470 @@ let bordurKok = null, kuleKok = null, halkaKok = null;
 }
 
 
+// ======================================================= TABAN: ZEMIN MODU
+// 12 Eylul 2026, kullanici karari: mekan TEK SAHNE ve referans aldigimiz
+// yapilarla BENZERLIK OLMAYACAK. Onceki iki aday (deniz ustu guverte =
+// referans 15'in yapisi, sehir koprusu = sehir-kopru/referans.png) bu
+// kurala takildi: ikisinde de yapi alintiydi.
+//
+// Secilen tasiyici fikir: ZEMININ KENDISI MEKAN. Ufuk cizgisine kadar tek
+// yuzey. Yanlarda nesne YOK - bina, kemer, tunel, halka, kule, bordur,
+// cam ortu, su, izgara, tel kafes hicbiri yok. Mekan; zeminin uzerindeki
+// desen KATMANLARINDAN cikiyor.
+//
+// Referanslardan alinan sey yalnizca OLCULEBILIR disiplin (REF-001..006,
+// REFERANSLAR/referans-defteri.md): ufuk %42-50, yol tam ortada ve koyu,
+// doygunluk yalnizca cue/siluette, sabit kamera, siyah piksel %0.
+// Alinmayan: koridor tipi ve butun yan mimari.
+//
+// Uc katman, hepsi olcu izgarasindan turetiliyor - yani mekan muzigi
+// sayiyor, dekor saymiyor:
+//   1. TEMEL: kameraya yakin notr grafit -> ufka dogru gogun degerine
+//      karisan tek rampa. Doygunluk BILINCLI olarak dusuk (S<0,25):
+//      "doygunluk yalnizca tepki verilecek nesnelerde" kurali (UYGULAMA.md).
+//   2. OLCU CUBUGU: her olcude zemini enine gecen ince cizgi, her dorduncu
+//      olcude kalin ve parlak. Dikey metronom (kule) kalktigi icin sayma
+//      gorevi TABANA gecti - "olay basina bir isaret" kurali korunuyor.
+//   3. NABIZ HALKASI: vurus cizgisinden disa dogru buyuyen yayvan halka,
+//      her olcu basinda dogar. Zemin boylece nefes aliyor; buyuyen-kuculen
+//      desen katmani fikri burada.
+// Hepsi t'nin fonksiyonu - deterministik, kare basina rastgele yok.
+let tabanKok = null, tabanMat = null;
+{
+  tabanMat = new THREE.ShaderMaterial({
+    uniforms: {
+      uYakin:  { value: new THREE.Color('#1b1d28') },
+      uUzak:   { value: new THREE.Color('#12131c') },
+      uGok:    { value: new THREE.Color('#0e0f16') },
+      uVurus:  { value: new THREE.Color('#8a93ad') },
+      uHalka:  { value: new THREE.Color('#3f4668') },
+      // KARPUZ MODU (13 Eyl 2026, MEK-002 "ASKI"). Ayni duzlem, ayni rampa,
+      // FARKLI ritim katmani: olcu cubugu ve nabiz halkasi yerine bas ustunden
+      // gecen asma dalinin GOLGESI. Sayma gorevi zeminden TAVANA tasindi -
+      // MEK-001 ile ayni desen katmanini tekrarlamamak icin sart (mekan-defteri
+      // kurali: "ayni yapi, farkli palet yeni mekan sayilmaz").
+      uMod:    { value: 0 },                       // 0 = taban, 1 = karpuz
+      uYol:    { value: new THREE.Color('#99ac96') },   // karpuz: kabugun koyu dis yuzu
+      uSerit:  { value: new THREE.Color('#899e87') },   // karpuz: kabuk seridi
+      uAk:     { value: new THREE.Color('#f1f2ea') },   // karpuz: beyaz kabuk katmani
+      uEt:     { value: new THREE.Color('#e2a8b5') },   // karpuz: doygun ic
+      uCekirdek:{ value: new THREE.Color('#938989') },  // karpuz: cekirdek
+      uKFaz:   { value: 0 },                       // asma dizisinin faz kaymasi
+      uT:      { value: 0 },
+      uOLCU:   { value: 1.846 },
+      uHIZ:    { value: 15 },
+      uZV:     { value: Z_VURUS },
+    },
+    vertexShader: [
+      'varying vec3 vW;',
+      'void main(){',
+      '  vW = (modelMatrix * vec4(position,1.0)).xyz;',
+      '  gl_Position = projectionMatrix * viewMatrix * vec4(vW,1.0);',
+      '}'
+    ].join('\n'),
+    fragmentShader: [
+      'precision highp float;',
+      'varying vec3 vW;',
+      'uniform vec3 uYakin,uUzak,uGok,uVurus,uHalka,uYol,uSerit,uAk,uEt,uCekirdek;',
+      'uniform float uT,uOLCU,uHIZ,uZV,uMod,uKFaz;',
+      'void main(){',
+      // 1. TEMEL RAMPA. Sis KAPALI (deniz modunda oldugu gibi): ufuk
+      //    cizgisi keskin kalmali, sahne sisi grileştirince zemin ve gok
+      //    tek lekeye donuyor. Ufka karisma shader'in kendi icinde.
+      '  float d = clamp((-vW.z)/900.0, 0.0, 1.0);',
+      '  vec3 c = mix(uYakin, uUzak, pow(d, 0.60));',
+      '  c = mix(c, uGok, pow(d, 2.2) * 0.92);',
+      // yakinda kenarlara dogru hafif koyulma - kadrajin alt kenari
+      // yanlarda agirlasiyor, goz ortada kaliyor. Nesne DEGIL, degerleme.
+      '  float yan = clamp(abs(vW.x)/46.0, 0.0, 1.0);',
+      '  c *= 1.0 - 0.28 * yan * (1.0 - d);',
+      // 2. OLCU CUBUGU. Aralik = bir olcude gidilen mesafe, yani cubuklar
+      //    muzigin olcusuyle bire bir. Her dorduncu kalin: 4 olculuk
+      //    cumleyi zemin sayiyor.
+      '  float L = uHIZ * uOLCU;',
+      // --- KARPUZ: ASMA GOLGESI (ritmi tasiyan tek zemin ogesi)
+      // Asma dallari JS tarafinda z = ... + ((i*L + t*HIZ) % kapsam) ile
+      // akiyor; dunya istasyonu z - t*HIZ sabit kaliyor. Shader ayni ifadeyi
+      // kullandigi icin golge, dalin GERCEK yerine kilitli - ayri bir
+      // animasyon degil, ayni tek kaynaktan turuyor.
+      '  if (uMod > 0.5) {',
+      '    float sk = (vW.z - uT * uHIZ) / L - uKFaz;',
+      '    float dd = (sk - floor(sk + 0.5)) * L;',      // en yakin dala uzaklik
+      '    float g = exp(-(dd * dd) / (2.0 * 3.1 * 3.1));',
+      // Enine genis, boyuna dar: golge yolu ENINE gecen bir bant.
+      // NOT (13 Eyl 2026, olcum): burada once pow(x, 2.0) yaziliydi ve
+      // zemin TAMAMEN SIYAH cikti. GLSL'de pow(x,y) yalnizca x>=0 icin
+      // tanimli; vW.x negatif oldugu anda sonuc NaN oluyor ve NaN mix
+      // uzerinden butun piksele yayiliyor. Kare %36 siyah olcuyordu
+      // (kural %0). Kareler pow ile degil CARPMA ile aliniyor.
+      '    float ax = abs(vW.x);',
+      '    float u = ax / 15.0;',
+      '    float u2 = u * u;',
+      '    float gx = exp(-(u2 * u2));',
+      // Daldaki uc karpuz golgeyi uc yerde koyulastiriyor - kutlelerin
+      // sayisi zeminden de okunuyor.
+      '    float a1 = vW.x / 2.7;',
+      '    float a2 = (ax - 6.6) / 2.7;',
+      '    float lump = exp(-a1 * a1) + exp(-a2 * a2);',
+      '    float k = clamp(g * (0.40 * gx + 0.34 * lump), 0.0, 0.86);',
+      // ---- KOMPLE KARPUZ KESITI (13 Eyl 2026, kullanici: "mekanin komple
+      // konsepti olmasini istiyorum"). Zemin artik karpuzun UZERINDE degil,
+      // karpuzun KENDISI: ortada kabugun koyu dis yuzu (yol), iki yaninda
+      // beyaz kabuk katmani, onun disinda cekirdekli doygun ic.
+      // Kurallar kendiliginden saglaniyor: en koyu yuzey tam ortada (yol),
+      // doygunluk oyun duzleminin YANINDA - uzerinde degil.
+      '    float X = vW.z - uT * uHIZ;',                 // dunya istasyonu: akar
+      // YOL: kabuk dis yuzu + boyuna dalgali koyu serit. Dalga hem X hem x
+      //      ile besleniyor, yoksa desen serit cizgisi gibi okunuyor.
+      // KABUK DESENI: serit BOYUNA gider (yol boyunca), enine degil - enine
+      // giden desen olcu cubuguna benzer ve MEK-001'i tekrarlardi. Bantlarin
+      // kenari z boyunca salinıyor, yani desen kabuk gibi organik; duz cizgi
+      // olsa serit boyasi gibi okunurdu.
+      '    float sal = sin(X * 0.085) * 0.75 + 0.30 * sin(X * 0.191 + 1.3);',
+      '    float dg = sin(vW.x * 3.05 + sal);',
+      // Sivri kenar: karpuz seridinin kenari yumusak degil, dalgali ve keskin.
+      '    float ser = smoothstep(-0.10, 0.34, dg);',
+      '    vec3 yol = mix(uYol, uSerit, ser);',
+      // Bandin ortasinda ince acik damar - kabugun kendi ic dokusu.
+      '    float damar = smoothstep(0.86, 1.0, dg) * 0.35;',
+      '    yol = mix(yol, uAk, damar * 0.30);',
+      '    yol = mix(yol, uGok, pow(d, 2.2) * 0.80);',
+      // AK KABUK: etle kabuk arasindaki ince beyaz katman - karpuzun imzasi.
+      '    vec3 ak = mix(uAk, uGok, pow(d, 2.2) * 0.92);',
+      // ET: doygun ic. Ufka dogru gogun degerine karisiyor.
+      '    vec3 et = mix(uEt, uGok, pow(d, 2.2) * 0.92);',
+      // CEKIRDEK: dunya izgarasindan deterministik. X ile turetildigi icin
+      // zeminle birlikte akiyor - kamerada civilenmiyor.
+      '    vec2 g2 = vec2(vW.x / 3.6, X / 5.2);',
+      '    vec2 hu = floor(g2);',
+      '    float h1 = fract(sin(dot(hu, vec2(12.9898, 78.233))) * 43758.5453);',
+      '    float h2 = fract(h1 * 7919.0);',
+      '    vec2 mrk = hu + vec2(0.22 + 0.56 * h1, 0.22 + 0.56 * h2);',
+      '    vec2 dl = (g2 - mrk) * vec2(3.6, 5.2);',
+      '    float rc = length(dl / vec2(0.40, 0.66));',
+      '    float cek = (1.0 - smoothstep(0.80, 1.05, rc)) * (1.0 - d * 0.88);',
+      '    et = mix(et, uCekirdek, clamp(cek, 0.0, 1.0) * 0.92);',
+      // Uc bolgeyi birlestir. Kenarlar YUMUSAK: keskin cizgi "boyanmis serit"
+      // okunuyor, oysa burasi bir kesit yuzeyi.
+      '    float kYol = smoothstep(3.40, 3.20, ax);',
+      '    float kAk  = smoothstep(4.24, 4.06, ax) * (1.0 - kYol);',
+      '    c = mix(et, ak, kAk);',
+      '    c = mix(c, yol, kYol);',
+      // GOLGE: sabit renge BOYAMAZ, uzerine dustugu yuzeyi koyultur - boylece
+      // asma golgesi hem etin hem kabugun uzerinden gecerken ikisinin farki
+      // okunmaya devam ediyor.
+      '    c *= mix(1.0, 0.55, k * (1.0 - d * 0.75));',
+      '    gl_FragColor = vec4(c, 1.0);',
+      '    return;',
+      '  }',
+      '  float s = (vW.z - uT * uHIZ) / L;',
+      '  float f = abs(fract(s) - 0.5);',
+      '  float idx = floor(fract(floor(s) / 4.0) * 4.0 + 0.5);',
+      '  float kalin = (idx < 0.5) ? 1.0 : 0.0;',
+      '  float w = fwidth(s) * 1.6 + 0.004 + kalin * 0.010;',
+      '  float cub = smoothstep(0.5, 0.5 - w, f);',
+      '  cub *= (1.0 - d) * (0.34 + 0.62 * kalin);',
+      '  c += uVurus * cub;',
+      // 3. NABIZ HALKASI. Vurus cizgisinden disa buyuyor, bir olcude
+      //    kapsami tamamliyor ve sonerek yerini yenisine biraktiriyor.
+      '  float r = length(vec2(vW.x, vW.z - uZV));',
+      '  float faz = fract(uT / uOLCU);',
+      '  float R = faz * 88.0;',
+      '  float h = exp(-pow((r - R) / 7.0, 2.0)) * (1.0 - faz);',
+      '  float R2 = (faz + 1.0) * 88.0;',
+      '  h += exp(-pow((r - R2) / 9.0, 2.0)) * 0.45 * (1.0 - faz * 0.5);',
+      '  c += uHalka * h * 0.85 * (1.0 - d * 0.7);',
+      '  gl_FragColor = vec4(c, 1.0);',
+      '}'
+    ].join('\n'),
+    fog: false, depthWrite: true, side: THREE.DoubleSide,
+  });
+  // Yol govdesinin ust yuzu y=0; taban onun hemen altinda duruyor ki
+  // yol kendi koyu kutlesi olarak okunsun (cue zemini). Duzlem buyuk:
+  // ufuk cizgisi geometriden degil kamera egiminden geliyor, bu yuzden
+  // yuzeyin kenari kadrajda gorunmuyor.
+  // Duzlem 2600 idi ve KENARI kadrajda kaliyordu: ufuk cizgisinin hemen
+  // ustunde tum genisligi gecen ince SIYAH hatlar cikiyordu (12 Eyl 2026
+  // olcumu: HUD disi siyah %0,47, hepsi y 301-309 bandinda). Ufuk artik
+  // geometriden degil kamera egiminden geliyor - duzlem kenari kadrajin
+  // disina tasindi.
+  tabanKok = new THREE.Mesh(new THREE.PlaneGeometry(9000, 9000), tabanMat);
+  tabanKok.rotation.x = -Math.PI/2;
+  tabanKok.position.set(0, -0.05, -3600);
+  tabanKok.renderOrder = -3;
+  tabanKok.visible = false;
+  scene.add(tabanKok);
+}
+
+
+// ================================================== KARPUZ: ASKI (MEK-002)
+// 13 Eylul 2026, kullanici karari: "A ile devam et."
+//
+// Tasiyici fikir: MEKAN YUKARIDAN KURULUYOR. Goz hizasi bombos - yanlarda
+// bina, kemer, tunel, halka, kule, bordur, su, izgara hicbiri yok (MEK-001
+// ile paylasilan tek sey bu sadelik, cunku o disiplin mekan degil kural).
+// Farkli olan uc sey - mekan defterinin "ayni yapi farkli palet yeni mekan
+// sayilmaz" kurali bunlari zorunlu kiliyor:
+//   1) RITMI TASIYAN OGE: zemindeki olcu cubugu DEGIL, her olcude bas
+//      ustunden gecen asma dalinin YOLU ENINE TARAYAN GOLGESI.
+//   2) PALET AILESI: notr grafit degil; koyu kabuk yesili zemin +
+//      olgunlasmamis ic renginde (dusuk doygunluk) gokyuzu.
+//   3) DOLULUK DENGESI: MEK-001 bombos ve genisti; burasi ust seritte DOLU,
+//      goz hizasinda bos. Tam tersi.
+//
+// PALET KURALI - burasi olculen banttir. olc-mekan.py "mekan bandi" olarak
+// karenin UST %44'unu ve orta %30-70 kolonlarini aliyor; bas ustundeki
+// karpuzlar tam oraya dusuyor. Bu yuzden kabuk DOYGUN DEGIL (S<0,25):
+// kutleler renk degil SILUET olarak okunuyor. Doygun kirmizi yalnizca
+// engellerin kesik yuzunde - yani oyun duzleminde, tepki verilecek nesnede
+// (UYGULAMA.md: "doygunluk yalnizca tepki verilecek nesnelerde").
+//
+// YUKSEKLIK KURALI (5 Eyl 2026 dersi): bir seyin ne oldugu, kameranin
+// (y=3,7) ustunde mi altinda mi durduguyla okunuyor. Asili karpuzlarin ALT
+// ucu 7,1 - duck kirisinin tepesinden (4,6) belirgin yukarida. Boylece
+// "gecilecek engel" ile "mekani kuran kutle" karismiyor.
+let karpuzKok = null, karpuzMat = null, karpuzAsmaMat = null;
+const KARPUZ_SAY = 12;                    // ayni anda sahnedeki dal sayisi
+// Dizinin gecometrisi t'den BAGIMSIZ: bir olcude gidilen mesafe sabit.
+// Bu yuzden faz da sabit ve baslangicta hesaplaniyor - zemin shader'i ile
+// asma dallari ayni sayidan besleniyor. (Ilk surumde faz karpuzGuncelle
+// icinde hesaplaniyordu ve uniform bir KARE GERIDEN geliyordu; golge ile
+// dal arasinda bir karelik kayma oluyordu.)
+const KARPUZ_L = HIZ * OLCU;
+const KARPUZ_KAPSAM = KARPUZ_SAY * KARPUZ_L;
+const KARPUZ_TABANZ = Z_VURUS + 6 - KARPUZ_KAPSAM;
+const KARPUZ_FAZ = KARPUZ_TABANZ / KARPUZ_L;
+
+// Kabuk dokusu: koyu yesil govde uzerinde DAHA KOYU dalgali seritler.
+// Serit kontrasti bilincli olarak dusuk - kutle silueti bozulmasin.
+let KARPUZ_KABUK_DOKU = null;
+function karpuzKabukDoku(){
+  if (KARPUZ_KABUK_DOKU) return KARPUZ_KABUK_DOKU;
+  const c = document.createElement('canvas'); c.width = 256; c.height = 128;
+  const g = c.getContext('2d');
+  // Doku ACIK: Lambert'te map ile color CARPILIYOR. Koyu doku yazilirsa
+  // kutleler ekranda siyaha dusuyor (bir kez olculdu: (2,12,0)). Degeri ve
+  // rengi color tasir; doku yalnizca SERIT desenini verir.
+  // Serit kontrasti gercek karpuzunki kadar: acik govde uzerinde belirgin
+  // koyu dalgali bantlar. Onceki surumde kontrast dusuruldugu icin kabuk
+  // "gri bir kutle" gibi okunuyordu.
+  g.fillStyle = '#f4f4f0'; g.fillRect(0, 0, 256, 128);
+  g.strokeStyle = '#7f8d6c'; g.lineWidth = 15; g.lineCap = 'round';
+  for (let i = 0; i < 8; i++){
+    const x = i * 32 + 10;
+    g.beginPath();
+    for (let y = -6; y <= 134; y += 8){
+      const dx = Math.sin(y * 0.075 + i) * 6.5;
+      if (y < 0) g.moveTo(x + dx, y); else g.lineTo(x + dx, y);
+    }
+    g.stroke();
+  }
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace;
+  t.wrapS = t.wrapT = THREE.RepeatWrapping;
+  KARPUZ_KABUK_DOKU = t; return t;
+}
+
+// Kesik yuz dokusu: disdan ice kabuk -> beyaz katman -> doygun ic + cekirdek.
+// Doygunluk SADECE burada. Engel dokusu oldugu icin kurala uygun.
+let KARPUZ_ET_DOKU = null;
+function karpuzEtDoku(){
+  if (KARPUZ_ET_DOKU) return KARPUZ_ET_DOKU;
+  const c = document.createElement('canvas'); c.width = 256; c.height = 256;
+  const g = c.getContext('2d');
+  g.fillStyle = '#2b3a24'; g.fillRect(0, 0, 256, 256);      // dis kabuk
+  g.fillStyle = '#e8f0cf'; g.fillRect(9, 9, 238, 238);      // beyaz katman
+  g.fillStyle = '#d8233f'; g.fillRect(17, 17, 222, 222);    // ic
+  // cekirdekler: deterministik izgara, kare basina rastgele yok
+  g.fillStyle = '#171310';
+  for (let i = 0; i < 26; i++){
+    const x = 40 + ((i * 73) % 180), y = 42 + ((i * 137) % 176);
+    g.beginPath(); g.ellipse(x, y, 5.5, 8, 0.5, 0, Math.PI * 2); g.fill();
+  }
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace;
+  KARPUZ_ET_DOKU = t; return t;
+}
+
+// Yaprak dokusu: alfali tek yaprak silueti (wave engeli icin perde).
+let KARPUZ_YAPRAK_DOKU = null;
+function karpuzYaprakDoku(){
+  if (KARPUZ_YAPRAK_DOKU) return KARPUZ_YAPRAK_DOKU;
+  const c = document.createElement('canvas'); c.width = 128; c.height = 128;
+  const g = c.getContext('2d');
+  g.clearRect(0, 0, 128, 128);
+  g.fillStyle = '#4e8f3f';
+  g.beginPath();
+  g.moveTo(64, 4);
+  g.bezierCurveTo(122, 30, 118, 96, 64, 126);
+  g.bezierCurveTo(10, 96, 6, 30, 64, 4);
+  g.fill();
+  g.strokeStyle = '#2f5c27'; g.lineWidth = 3;
+  g.beginPath(); g.moveTo(64, 8); g.lineTo(64, 122); g.stroke();
+  for (let y = 22; y < 116; y += 16){
+    g.lineWidth = 2;
+    g.beginPath(); g.moveTo(64, y); g.lineTo(34, y + 13); g.stroke();
+    g.beginPath(); g.moveTo(64, y); g.lineTo(94, y + 13); g.stroke();
+  }
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace;
+  KARPUZ_YAPRAK_DOKU = t; return t;
+}
+
+const KARPUZ_TOP_GEO = new THREE.SphereGeometry(1, 20, 14);
+const KARPUZ_SILINDIR_GEO = new THREE.CylinderGeometry(1, 1, 1, 14);
+const KARPUZ_YAPRAK_GEO = new THREE.PlaneGeometry(1, 1);
+
+{
+  // Materyaller Lambert: sahnede ambient 0,58 + yonlu 1,62 var (TB && !SADE).
+  // Basic secilseydi kutle DUZ okunurdu - istasyon dersinde olculmustu:
+  // "duz renkli kutu ne kadar dogru yerlestirilirse yerlestirilsin kutu gibi
+  // gorunur; gerceklik yuzeydeki bilgiden ve GOLGEDEN geliyor."
+  // KABUK RENGI (13 Eyl 2026, kullanici karari): karpuz yesildir. Onceki
+  // deger (#6e7a63) mekan bandi doygunluk kuraline uymak icin gri-yesile
+  // cekilmisti ve kutleler siyah bir leke gibi okunuyordu. Kuralin kapsami
+  // daraltildi: dusuk doygunluk mekanin GENEL yuzeyleri icin (zemin, gok,
+  // yol); mekani kuran kimlikli cisim kendi rengini tasir.
+  karpuzMat = new THREE.MeshLambertMaterial({ map: karpuzKabukDoku(),
+    color: '#3f8a3a', fog: true });
+  karpuzAsmaMat = new THREE.MeshLambertMaterial({ color: '#40613a', fog: true });
+  karpuzKok = new THREE.Group();
+  karpuzKok.visible = false;
+  for (let i = 0; i < KARPUZ_SAY; i++){
+    const dal = new THREE.Group();
+    // ASMA DALI: yolu ENINE gecen kalin govde. Kadrajin disina tasacak kadar
+    // uzun - iki ucu gorunmuyor, yani "nereye baglandigi" sorusu sorulmuyor.
+    const gov = new THREE.Mesh(KARPUZ_SILINDIR_GEO, karpuzAsmaMat);
+    gov.rotation.z = Math.PI / 2;
+    gov.scale.set(0.30, 46, 0.30);
+    gov.position.set(0, 11.7, 0);
+    gov.castShadow = true;
+    dal.add(gov);
+    // UC KUTLE: biri tam ortada (bas ustunden gecen), ikisi yanlarda.
+    // Yanlardakiler kadrajin kenarina dogru cikiyor - ust serit boylece
+    // doluyor ama koridor duvarina donusmuyor (yanlarda nesne YOK kurali
+    // goz hizasi icin gecerli; bunlar 7,1'in ustunde).
+    const kume = [[0, 2.30, 0.9], [-6.6, 1.95, 1.4], [6.6, 2.10, 1.15]];
+    for (const [x, r, sap] of kume){
+      const sapM = new THREE.Mesh(KARPUZ_SILINDIR_GEO, karpuzAsmaMat);
+      sapM.scale.set(0.13, sap, 0.13);
+      sapM.position.set(x, 11.7 - sap / 2, 0);
+      dal.add(sapM);
+      const top = new THREE.Mesh(KARPUZ_TOP_GEO, karpuzMat);
+      top.scale.set(r, r * 0.88, r);
+      top.position.set(x, 11.7 - sap - r * 0.88, 0);
+      top.castShadow = true;
+      dal.add(top);
+    }
+    dal.userData = { i };
+    karpuzKok.add(dal);
+  }
+  scene.add(karpuzKok);
+}
+
+// ---- KARPUZ TARLASI (13 Eyl 2026, kullanici: "doldur karpuzla doldur")
+// Yol koridorunun DISINDA kalan etin uzeri bastan basa karpuz. Ilk surumde
+// 54 ayri Group vardi ve 260 birime yayilinca serpistirme gibi duruyordu.
+// Artik InstancedMesh: TARLA_SAY karpuz + TARLA_YAPRAK yaprak, sasirtmali ve
+// jitterli izgara uzerinde, aralari kapali.
+// Neden InstancedMesh: 1600 ayri Mesh cizim cagrisiyla kareyi bogar; instanced
+// hepsini tek cizimde veriyor (balast tasi cozumunun aynisi).
+// Koridor kurali: hicbir ornek |x| < 6,0'a girmez - oyun alani kapanmaz.
+// castShadow KAPALI: 1600 ornegi golge gecisinde tekrar cizmek kare suresini
+// ikiye katliyordu; tarla parlak etin uzerinde zaten koyu siluet okunuyor.
+let tarlaIM = null, tarlaYaprakIM = null, tarlaVeri = [], tarlaYaprakVeri = [];
+const TARLA_SAY = 1600, TARLA_YAPRAK = 420, TARLA_KAPSAM = 300;
+{
+  const rnd = (n) => { const x = Math.sin(n * 71.13) * 43758.5453; return x - Math.floor(x); };
+  // Sasirtmali izgara: satirlar z'de 2,35 birim aralikli, her satir yarim adim
+  // kaydirilmis. Duz izgara "dikili nizam" okunuyordu, sasirtmali olan tarla.
+  const SATIR = Math.ceil(TARLA_KAPSAM / 2.35);
+  const SUTUN = Math.ceil(TARLA_SAY / (SATIR * 2));
+  let n = 0;
+  for (let r = 0; r < SATIR && n < TARLA_SAY; r++) {
+    const kaydir = (r % 2) * 1.45;
+    for (let c = 0; c < SUTUN && n < TARLA_SAY; c++) {
+      for (const yon of [-1, 1]) {
+        if (n >= TARLA_SAY) break;
+        const h1 = rnd(n * 3 + 1), h2 = rnd(n * 3 + 2), h3 = rnd(n * 3 + 3);
+        const x = yon * (6.0 + kaydir + c * 2.90 + (h1 - 0.5) * 1.55);
+        const z0 = r * 2.35 + (h2 - 0.5) * 1.5;
+        // Boy da degisiyor: ayni capta karpuz dizisi desen gibi gorunuyordu.
+        const rr = 0.62 + h3 * 1.28;
+        tarlaVeri.push({ x, z0, r: rr, don: h1 * 6.28 });
+        n++;
+      }
+    }
+  }
+  const geo = KARPUZ_TOP_GEO;
+  tarlaIM = new THREE.InstancedMesh(geo, karpuzMat, tarlaVeri.length);
+  tarlaIM.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+  tarlaIM.castShadow = false; tarlaIM.receiveShadow = false;
+  tarlaIM.frustumCulled = false;
+  tarlaIM.visible = false;
+  scene.add(tarlaIM);
+
+  // Yapraklar: karpuzlarin arasini kapatan ikinci katman. Tek tip yesil bir
+  // kuredenizi olmasin diye - tarlada yaprak da var.
+  const yMat = new THREE.MeshLambertMaterial({ map: karpuzYaprakDoku(),
+    transparent: true, alphaTest: 0.5, side: THREE.DoubleSide, fog: true });
+  for (let i2 = 0; i2 < TARLA_YAPRAK; i2++) {
+    const h1 = rnd(i2 * 5 + 101), h2 = rnd(i2 * 5 + 102), h3 = rnd(i2 * 5 + 103);
+    const yon = h1 < 0.5 ? -1 : 1;
+    tarlaYaprakVeri.push({
+      x: yon * (6.3 + h2 * 21.0),
+      z0: h3 * TARLA_KAPSAM,
+      olc: 1.25 + h1 * 1.1,
+      don: h2 * 6.28,
+    });
+  }
+  tarlaYaprakIM = new THREE.InstancedMesh(KARPUZ_YAPRAK_GEO, yMat, TARLA_YAPRAK);
+  tarlaYaprakIM.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+  tarlaYaprakIM.castShadow = false;
+  tarlaYaprakIM.frustumCulled = false;
+  tarlaYaprakIM.visible = false;
+  scene.add(tarlaYaprakIM);
+}
+
+const _tM = new THREE.Matrix4(), _tV = new THREE.Vector3(),
+      _tQ = new THREE.Quaternion(), _tS = new THREE.Vector3(),
+      _tE = new THREE.Euler();
+function tarlaGuncelle(t){
+  const taban = Z_VURUS + 8 - TARLA_KAPSAM;
+  for (let i = 0; i < tarlaVeri.length; i++) {
+    const o = tarlaVeri[i];
+    const z = taban + ((o.z0 + t * HIZ) % TARLA_KAPSAM);
+    _tV.set(o.x, o.r * 0.88, z);
+    _tE.set(0, o.don, 0); _tQ.setFromEuler(_tE);
+    _tS.set(o.r, o.r * 0.88, o.r);
+    _tM.compose(_tV, _tQ, _tS);
+    tarlaIM.setMatrixAt(i, _tM);
+  }
+  tarlaIM.instanceMatrix.needsUpdate = true;
+  for (let i = 0; i < tarlaYaprakVeri.length; i++) {
+    const o = tarlaYaprakVeri[i];
+    const z = taban + ((o.z0 + t * HIZ) % TARLA_KAPSAM);
+    _tV.set(o.x, 0.62, z);
+    _tE.set(-1.18, o.don, 0); _tQ.setFromEuler(_tE);
+    _tS.set(o.olc, o.olc, 1);
+    _tM.compose(_tV, _tQ, _tS);
+    tarlaYaprakIM.setMatrixAt(i, _tM);
+  }
+  tarlaYaprakIM.instanceMatrix.needsUpdate = true;
+}
+
+// Her kare: dallar kameraya dogru akar. Golge ZEMIN SHADER'INDA ayni
+// formulden uretiliyor (uKFaz), yani iki katman tek kaynaktan turuyor -
+// birbirinden kayma ihtimali yok.
+function karpuzGuncelle(t, O0, O1, yumusak, karistir){
+  for (const dal of karpuzKok.children){
+    const i = dal.userData.i;
+    dal.position.z = KARPUZ_TABANZ + ((i * KARPUZ_L + t * HIZ) % KARPUZ_KAPSAM);
+  }
+  tarlaGuncelle(t);
+  karpuzMat.color.copy(karistir(O0.karpuzKabuk || O0.gok, O1.karpuzKabuk || O1.gok));
+  karpuzAsmaMat.color.copy(karistir(O0.karpuzKabuk || O0.gok, O1.karpuzKabuk || O1.gok))
+    .multiplyScalar(0.95);
+}
+
+
 // ==================================================== DENIZ: EK KATMANLAR
 // 5 Eyl 2026, kullanici "onerdiklerini ekle" dedi. Dort ek:
 //   1. Guverte bicim cesitlemesi (yan onluk) - en buyuk eksik
@@ -3388,6 +3853,10 @@ let DENIZ_MOD_AKTIF = false;
 // Sehir koprusu: kapali koridor, tavan var. Engel tasiyicisi gar dilinde
 // (tavandan sarkan kiris) - obby/deniz dalina girmemeli.
 let SEHIR_MOD_AKTIF = false;
+// KARPUZ (13 Eyl 2026): engel de mekanla ayni bitkinin parcasi. Kullanici
+// karari - "tek meyve, dort hali". Sahneye sonradan birakilmis gri celik
+// yerine govde / meyve / kesit / yaprak: dort ayri SEKIL AILESI, tek dil.
+let KARPUZ_MOD_AKTIF = false;
 
 const ENGEL_DOKU = [
   engelDoku('#1c1a17', '#f2c53d'),   // sol  - sari/siyah
@@ -3540,14 +4009,155 @@ function engelDestekYap(){
   // engeli). Hangi duvardan geldigi, gidilmeyecek tarafi soyluyor.
   d.kol = new THREE.Mesh(DESTEK_GEO, kenarMat);
   d.kol.visible = false; g.add(d.kol);
-  for (const k in d) g.add(d[k]);
+
+  // --- KARPUZ ENGEL AILESI (13 Eyl 2026) ---
+  // Kural (3 Eyl): ENGEL, HAREKETIN FIZIKSEL SEBEBIDIR. Dort hareket dort
+  // ayri sekil ailesi istiyor; tek meyvenin dort hali tam bunu veriyor:
+  //   hop/jump -> yolu enine kapatan YATAN BUTUN KARPUZ SIRASI (yuvarlak,
+  //               alcak, ustunden atlanir; tepe ~1,1 - kameranin cok altinda,
+  //               ust yuzu gorunuyor ve "yerde" okunuyor)
+  //   duck     -> ASMA DALI: bas hizasinda enine gecen kalin govde, uzerinde
+  //               iki karpuz oturuyor. Alt yuz 3,86 (kamera 3,7) - egilmek sart.
+  //   dodge    -> DIKINE DIKILMIS DEV DILIM: ince (derinlik 0,44), tepe 3,54;
+  //               genisligi bosluktan geliyor, yanindaki bosluktan gecilir.
+  //   wave     -> YAPRAK PERDESI: omuz hizasinda sarkan genis yapraklar,
+  //               kollarla acilir. Yolu KAPATMAZ - hedef seridin uzerinde.
+  const kabukMat = new THREE.MeshLambertMaterial({ map: karpuzKabukDoku(),
+    color: '#3f8a3a', fog: true });
+  const sapMat = new THREE.MeshLambertMaterial({ color: '#40613a', fog: true });
+  // Kesik yuz: MeshBasic. Tek DOYGUN yuzey burasi ve tepki verilecek nesne
+  // uzerinde - isik altinda degerinin dusmemesi gerekiyor, yoksa "tehlike"
+  // okunmuyor. (Gece koridorunda acik govdenin beyaza yikanmasi dersinin
+  // tersi: orada govde koyulasti, burada kesit sabit tutuluyor.)
+  const etMat = new THREE.MeshBasicMaterial({ map: karpuzEtDoku(), fog: true });
+  const yaprakMat = new THREE.MeshLambertMaterial({ map: karpuzYaprakDoku(),
+    transparent: true, alphaTest: 0.5, side: THREE.DoubleSide, fog: true });
+  d.kTop = [];
+  for (let i = 0; i < 5; i++){                     // hop: yatan karpuz sirasi
+    const m2 = new THREE.Mesh(KARPUZ_TOP_GEO, kabukMat);
+    m2.castShadow = true; m2.visible = false;
+    g.add(m2); d.kTop.push(m2);
+  }
+  d.kDal = new THREE.Mesh(KARPUZ_SILINDIR_GEO, sapMat);   // duck: asma govdesi
+  d.kDal.rotation.z = Math.PI / 2;
+  d.kDal.castShadow = true; d.kDal.visible = false; g.add(d.kDal);
+  d.kDalTop = [];
+  for (let i = 0; i < 2; i++){                     // duck: dalin USTUNDE duran
+    const m2 = new THREE.Mesh(KARPUZ_TOP_GEO, kabukMat);
+    m2.castShadow = true; m2.visible = false;
+    g.add(m2); d.kDalTop.push(m2);
+  }
+  d.kFiliz = [];
+  for (let i = 0; i < 2; i++){                     // duck: dali yukari baglayan filiz
+    const m2 = new THREE.Mesh(KARPUZ_SILINDIR_GEO, sapMat);
+    m2.visible = false; g.add(m2); d.kFiliz.push(m2);
+  }
+  d.kDilim = new THREE.Mesh(DESTEK_GEO, kabukMat); // dodge: dilimin kabuk govdesi
+  d.kDilim.castShadow = true; d.kDilim.visible = false; g.add(d.kDilim);
+  d.kEt = new THREE.Mesh(KARPUZ_YAPRAK_GEO, etMat); // dodge: kameraya bakan kesit
+  d.kEt.visible = false; g.add(d.kEt);
+  d.kYaprak = [];
+  for (let i = 0; i < 3; i++){                     // wave: yaprak perdesi
+    const m2 = new THREE.Mesh(KARPUZ_YAPRAK_GEO, yaprakMat);
+    m2.visible = false; g.add(m2); d.kYaprak.push(m2);
+  }
+  d.kAski = new THREE.Mesh(KARPUZ_SILINDIR_GEO, sapMat);  // wave: yapraklarin sapi
+  d.kAski.rotation.z = Math.PI / 2;
+  d.kAski.visible = false; g.add(d.kAski);
+
+  for (const k in d) if (!Array.isArray(d[k])) g.add(d[k]);
   g.userData = d;
   return g;
 }
 // gov: engel govdesinin OLCEKLENMIS olculeri {cx, y, w, h, d}
 function engelDestekGuncelle(g, tip, z, gov){
   const d = g.userData;
-  for (const k in d) d[k].visible = false;
+  for (const k in d){
+    if (Array.isArray(d[k])) { for (const q of d[k]) q.visible = false; }
+    else d[k].visible = false;
+  }
+  if (KARPUZ_MOD_AKTIF) {
+    // Engelin govdesi (nota kutusu) bu modda GIZLI - engeli bu parcalar
+    // kuruyor. Sebep: dort hareketin dordu de ayni kutunun olceklenmis hali
+    // olamaz (4 Eyl dersi); burada dordu de bitkinin farkli bir parcasi.
+    if (!gov) return;
+    if (tip === 'hop' || tip === 'jump') {
+      // YATAN KARPUZ SIRASI. Yolu bastan basa kapatiyor (yanindan gecilemez),
+      // ama alcak: tepe 1,10 - kameranin (3,7) cok altinda, ust yuzu gorunuyor
+      // ve "yerde duran hacim" okunuyor. Yuvarlaklik atlanabilirligi soyluyor.
+      const r = 0.55, ad = 5, adim = (YOL_GEN - 0.6) / (ad - 1);
+      for (let i = 0; i < ad; i++){
+        const q = d.kTop[i];
+        q.visible = true;
+        const ol = r * (i % 2 ? 0.92 : 1.0);       // sira tekduze olmasin
+        q.scale.set(ol * 1.12, ol, ol * 1.12);
+        q.position.set(-(YOL_GEN - 0.6) / 2 + i * adim, ol, z);
+        q.rotation.y = i * 1.1;                    // deterministik cesitleme
+      }
+      return;
+    }
+    if (tip === 'duck') {
+      // ASMA DALI. Yaricap 0,44 -> alt yuz 3,86 (~1,44 m): kamera 3,7'de
+      // oldugu icin altindan gecmek EGILMEYI zorunlu kiliyor. Bu sayi
+      // 4 Eyl 2026'da olculerek bulundu, degistirilmiyor.
+      d.kDal.visible = true;
+      d.kDal.scale.set(0.44, YOL_GEN + 2.6, 0.44);
+      d.kDal.position.set(0, 4.30, z);
+      // Karpuzlar dalin USTUNDE oturuyor: altina asilsalardi gecis
+      // yuksekligini dusurur ve engelin sozunu bozarlardi.
+      const yerler = [[-2.15, 0.95], [2.05, 0.82]];
+      for (let i = 0; i < 2; i++){
+        const [x, r] = yerler[i];
+        const q = d.kDalTop[i];
+        q.visible = true;
+        q.scale.set(r, r * 0.88, r);
+        q.position.set(x, 4.30 + 0.44 + r * 0.80, z);
+      }
+      // Filizler: dali yukaridaki asmaya baglayan iki ince sap. Dal
+      // boslukta asili kalmasin - 4 Eyl dersi ("onu tutan sey gorunmuyor").
+      for (let i = 0; i < 2; i++){
+        const x = i ? 3.5 : -3.5, boy = 7.0;
+        const q = d.kFiliz[i];
+        q.visible = true;
+        q.scale.set(0.10, boy, 0.10);
+        q.position.set(x, 4.30 + boy / 2, z);
+      }
+      return;
+    }
+    if (tip === 'wave_L' || tip === 'wave_R') {
+      // YAPRAK PERDESI. Omuz/kol hizasinda (2,6-4,0) sarkiyor, yolu
+      // kapatmiyor: hedef seridin uzerinde duruyor, kola deger ama govdeyi
+      // durdurmaz. Adim engelinden (dilim) bicimi ve yuksekligiyle ayriliyor.
+      const cx = gov.cx;
+      d.kAski.visible = true;
+      d.kAski.scale.set(0.12, 2.6, 0.12);
+      d.kAski.position.set(cx, 4.12, z);
+      for (let i = 0; i < 3; i++){
+        const q = d.kYaprak[i];
+        q.visible = true;
+        q.scale.set(1.30, 1.55, 1);
+        q.position.set(cx + (i - 1) * 0.86, 3.32 - (i % 2) * 0.14, z);
+        q.rotation.z = (i - 1) * 0.22;
+      }
+      return;
+    }
+    // DODGE / yana adim: DIKINE DIKILMIS DEV DILIM.
+    // Genislik gov.w'den geliyor - o genislik hedef seridi ACIK birakan
+    // bosluktan hesaplaniyor ve DEGISTIRILMIYOR (buyutmek boslugu kapatir,
+    // yon okunmaz olur; 3 Eyl 2026'da bir kez yasandi).
+    // Derinlik 0,44 ve tepe 3,54: 4 Eyl olcumu - daha derin olursa genis ust
+    // yuzu kameradan gorunuyor ve engel "yere serilmis rampa" gibi okunuyor.
+    const TEPE = 3.54, DER = 0.44;
+    d.kDilim.visible = true;
+    d.kDilim.scale.set(gov.w, TEPE, DER);
+    d.kDilim.position.set(gov.cx, TEPE / 2, z);
+    // Kesik yuz kameraya bakiyor: dilimin ne oldugu bu yuzden okunuyor.
+    // Karenin tek doygun mekan-disi yuzeyi burasi.
+    d.kEt.visible = true;
+    d.kEt.scale.set(gov.w * 0.97, TEPE * 0.95, 1);
+    d.kEt.position.set(gov.cx, TEPE / 2, z + DER / 2 + 0.02);
+    return;
+  }
   if (DENIZ_MOD_AKTIF) {
     // Deniz: tasiyici VAR ama gar dili degil. Engel boslukta asili durmuyor -
     // referansta her engelin fiziksel bir sebebi var (madde 5).
@@ -4456,6 +5066,18 @@ function kareKur(n){
     : THREE.MathUtils.clamp((suOlcu - O1.olcu) / GECIS_OLCU, 0, 1);
   const yumusak = gecis * gecis * (3 - 2 * gecis);        // smoothstep
 
+  // TABAN MODU (12 Eyl 2026): gokMod ustune kurulu; deniz ve sehir
+  // katmanlari kendi bayraklarina bagli oldugu icin kapali kalir. Ek olarak
+  // KEMER GECITLERI ve LAZERLER de kapatiliyor - onlar koridor mimarisi,
+  // bu modun kurali "yanlarda nesne yok". Bayrak BURADA tanimlaniyor cunku
+  // dolgu katmani donguleri (sutun, lazer) asagida DEGIL yukarida calisiyor.
+  const tabanMod = ((yumusak < 0.5 ? O0 : O1).taban === true);
+  // KARPUZ MODU (13 Eyl 2026, MEK-002 "ASKI"). TABAN ile paylastigi tek sey
+  // SADELIK: yanlarda nesne yok. Bu yuzden ikisi ortak bir bayrakta
+  // toplaniyor (sadeMod) - kapatilan katmanlar ayni. Ayrildiklari yer
+  // zemin shader'inin ritim katmani (uMod) ve bas ustundeki asma.
+  const karpuzMod = ((yumusak < 0.5 ? O0 : O1).karpuz === true);
+  const sadeMod = tabanMod || karpuzMod;
   const karistir = (a, b) => new THREE.Color(a).lerp(new THREE.Color(b), yumusak);
   zeminMat.uniforms.uGrid .value.copy(karistir(O0.grid[0], O1.grid[0]));
   zeminMat.uniforms.uGrid2.value.copy(karistir(O0.grid[1], O1.grid[1]));
@@ -4498,6 +5120,14 @@ function kareKur(n){
 
   scene.fog.near = SIS_YAKIN + gd * 62;
   scene.fog.far  = SIS_UZAK  + gd * 140;
+  // KARPUZ: sis UZAGA itiliyor. Sebep olculdu (13 Eyl 2026) - bu mekanda gok
+  // ACIK, sis rengi de goktan geliyor. Gece degerleriyle (20/78) birakilinca
+  // yol 78 birim icinde gok rengine yikaniyor ve kadrajin ortasinda PARLAK
+  // bir rampa olarak okunuyordu; oysa kural "yol tam ortada ve KOYU".
+  // Ayni tuzak acik alan uygulamasinda bir kez yasanmisti (ANALIZ.md:
+  // "gecede sis mekani kapatan bir arac, gunduzde DUSMAN").
+  // Ufka karisma isi sise degil, taban shader'inin kendi rampasina birakildi.
+  if (karpuzMod) { scene.fog.near = 96; scene.fog.far = 260; }
   zeminMat.uniforms.uSisYakin.value = SIS_YAKIN + gd * 62;
   zeminMat.uniforms.uSisUzak .value = SIS_UZAK  + gd * 140;
   if (gokyuzu) {
@@ -4525,6 +5155,10 @@ function kareKur(n){
   const kOlc  = O0.olcek + (O1.olcek - O0.olcek) * yumusak;
   const kapsam = ara * SUTUN_SAY;
   for (const s of sutunlar) {
+    // TABAN modu: kemer geciti KORIDOR MIMARISI - referans benzerligi
+    // buradan geliyordu (tel kafes / halka / kemer dizisi). Kapali.
+    if (sadeMod) { s.visible = false; continue; }
+    s.visible = true;
     const { i } = s.userData;
     s.position.z = Z_VURUS + 4 - kapsam + ((i * ara + t * HIZ) % kapsam);
     // kameraya cok yaklasan kemer kareyi basiyor - yakinda sondur
@@ -4562,6 +5196,9 @@ function kareKur(n){
   }
   // lazerler: tunelle ayni yonde akar, vurusta parlar
   for (const l of lazerler) {
+    // TABAN modu: yandan akan isin sutunlari da mekan nesnesi - kapali.
+    if (sadeMod) { l.visible = false; continue; }
+    l.visible = true;
     const d = l.userData;
     l.position.z = Z_VURUS + 6 - d.kapsam + ((d.i * d.ara + t * HIZ * 0.75) % d.kapsam);
     const vurusIci = t % VURUS;
@@ -4675,7 +5312,11 @@ function kareKur(n){
   // kararlari degismiyor.
   // Sehir referansinda ufuk %53 - tam oraya cikmak vurus cizgisini kadraj
   // disina itiyor (deniz icin hesaplandi). Ayni ara deger: ufuk ~%40.
-  camera.lookAt(0, (denizMod || sehirMod) ? 2.14 : 0.55, -6);
+  // KARPUZ'da ufuk 2,14 ile %41,5 olculdu - kural %42-50, kil payi disarida.
+  // Mekan yukaridan kuruldugu icin kadrajin ust seridi zaten dolu; egimi
+  // biraz artirmak hem ufku kurala sokuyor hem bas ustundeki kutleye yer
+  // aciyor. Oteki modlarin cerceveleme karari DEGISMIYOR.
+  camera.lookAt(0, karpuzMod ? 2.62 : ((denizMod || sehirMod || sadeMod) ? 2.14 : 0.55), -6);
 
   // --- KURULUS CEKIMI (5 Eyl 2026)
   // Referansta ilk 10 saniye piste DEGIL, denize bakiyor: tek platform
@@ -4797,6 +5438,7 @@ function kareKur(n){
   GOK_MOD_AKTIF = gokMod;
   DENIZ_MOD_AKTIF = denizMod;
   SEHIR_MOD_AKTIF = sehirMod;
+  KARPUZ_MOD_AKTIF = karpuzMod;
   if (sehirKok) {
     sehirKok.visible = sehirMod;
     if (sehirMod) sehirGuncelle(t, O0, O1, yumusak, karistir);
@@ -4811,6 +5453,37 @@ function kareKur(n){
         Z_VURUS + 20 - u.KAPB + ((u.z0 + t * HIZ * 0.22) % u.KAPB));
       m.quaternion.copy(camera.quaternion);      // her zaman kameraya bak
     }
+  }
+  // --- TABAN: tek yuzey + olcu cubugu + nabiz halkasi
+  if (tabanKok) {
+    tabanKok.visible = sadeMod;
+    if (sadeMod) {
+      const U = tabanMat.uniforms;
+      // uMod ritim katmanini secer: 0 = olcu cubugu + nabiz halkasi (MEK-001),
+      // 1 = bas ustunden gecen asma dalinin golgesi (MEK-002). Ayni duzlem,
+      // ayni rampa, farkli sayma ogesi.
+      U.uMod.value = karpuzMod ? 1 : 0;
+      U.uYakin.value.copy(karistir(O0.tabanYakin || O0.gok, O1.tabanYakin || O1.gok));
+      U.uUzak .value.copy(karistir(O0.tabanUzak  || O0.gok, O1.tabanUzak  || O1.gok));
+      U.uGok  .value.copy(karistir(O0.gok, O1.gok));
+      U.uVurus.value.copy(karistir(O0.tabanVurus || O0.gok, O1.tabanVurus || O1.gok));
+      U.uHalka.value.copy(karistir(O0.tabanHalka || O0.gok, O1.tabanHalka || O1.gok));
+      U.uT.value = t; U.uOLCU.value = OLCU; U.uHIZ.value = HIZ;
+      if (karpuzMod) {
+        U.uYol.value     .copy(karistir(O0.yolZemin   || O0.gok, O1.yolZemin   || O1.gok));
+        U.uSerit.value   .copy(karistir(O0.kabukSerit || O0.gok, O1.kabukSerit || O1.gok));
+        U.uAk.value      .copy(karistir(O0.akKabuk    || O0.gok, O1.akKabuk    || O1.gok));
+        U.uEt.value      .copy(karistir(O0.et         || O0.gok, O1.et         || O1.gok));
+        U.uCekirdek.value.copy(karistir(O0.cekirdek   || O0.gok, O1.cekirdek   || O1.gok));
+        U.uKFaz.value = KARPUZ_FAZ;
+      }
+    }
+  }
+  // --- KARPUZ: bas ustunden gecen asma dallari (mekani kuran kutle)
+  if (karpuzKok) {
+    karpuzKok.visible = karpuzMod;
+    if (tarlaIM) { tarlaIM.visible = karpuzMod; tarlaYaprakIM.visible = karpuzMod; }
+    if (karpuzMod) karpuzGuncelle(t, O0, O1, yumusak, karistir);
   }
   // --- DENIZ: su yuzeyi, guverte deseni, bordur, kule
   if (denizKok) {
@@ -4976,7 +5649,7 @@ function kareKur(n){
   if (legoKok) {
     // Deniz modunda lego yapilari KAPALI: referansta guvertenin iki yani
     // dogrudan su, kenarda yapi yok. Lego acik kalinca deniz gorunmuyordu.
-    legoKok.visible = gokMod && !denizMod && !sehirMod;
+    legoKok.visible = gokMod && !denizMod && !sehirMod && !sadeMod;
     if (gokMod && !denizMod) {
       const KAP = legoKok.userData.KAP;
       const M = new THREE.Matrix4(), V = new THREE.Vector3(), Q = new THREE.Quaternion(), S3 = new THREE.Vector3();
@@ -4998,7 +5671,7 @@ function kareKur(n){
     // Deniz modunda ucusan renkli cisim YOK: referansta gokte bulut disinda
     // hicbir sey yok, gokyuzu sakin. Cisimler acik kalinca deniz sahnesi
     // obby'ye geri donuyordu.
-    gokCop.visible = gokMod && !denizMod && !sehirMod;
+    gokCop.visible = gokMod && !denizMod && !sehirMod && !sadeMod;
     if (gokMod && !denizMod) for (const m of gokCop.children) {
       const u = m.userData;
       m.position.set(u.x, u.y, Z_VURUS + 10 - 220 + ((u.z0 + t * HIZ) % 220));
@@ -5006,9 +5679,22 @@ function kareKur(n){
     }
   }
   if (yolGovdeMesh) {
+    // KARPUZ: yol govdesi KAPALI - koridoru taban shader'i ciziyor (uYol).
+    // Sebep yukarida yazili: govde ile taban duzlemi arasindaki 0,055 birim
+    // yatik acida z-savasina giriyor ve koridor siyah bir seride donuyordu.
+    yolGovdeMesh.visible = !karpuzMod;
     // Yolun yan yuzu gecede neredeyse siyah (#07060f). Gunduz birakilinca
     // acik gokyuzunun altinda kara bir sedde gibi duruyordu.
-    if (gokMod) {
+    if (sadeMod) {
+      // TABAN / KARPUZ modu: yol, uzerine cue dusen KOYU MAT kutle. Doseme dokusu
+      // (obby fayansi) ve doygun serit rengi kapali - doygunluk yalnizca
+      // cue ve siluette kalacak (UYGULAMA.md kurali).
+      if (yolGovdeMesh.material.map) {
+        yolGovdeMesh.material.map = null;
+        yolGovdeMesh.material.needsUpdate = true;
+      }
+      yolGovdeMesh.material.color.copy(karistir(O0.yol || O0.gok, O1.yol || O1.gok));
+    } else if (gokMod) {
       // Referansta serit tek DOYGUN renk (mavi, kirmizi, yesil, sari...) ve
       // bolum bolum degisiyor; uzeri de kare kare doseli.
       yolGovdeMesh.material.color.copy(karistir(O0.grid[0], O1.grid[0]));
@@ -5035,6 +5721,11 @@ function kareKur(n){
 
   // parcaciklar: tunel hiziyla akar, mod ile dolasir
   for (const p of parcaciklar) {
+    // TABAN modu: havada ucusan parcacik da mekan nesnesi. Kural "yanlarda
+    // nesne yok" ve olcum onlari yakaladi: 12 Eyl 2026'da mekan bandinda
+    // S medyan 0,30 cikiyordu (kural <0,25), kaynagi bu elmaslardi.
+    if (sadeMod) { p.visible = false; continue; }
+    p.visible = true;
     const d = p.userData;
     p.position.set(d.x, d.y,
       Z_VURUS + 6 - d.kapsam + ((d.z0 + t * HIZ * d.hiz) % d.kapsam));
@@ -5071,7 +5762,12 @@ function kareKur(n){
     }
     else {
       m.visible = true;
-      const engelde = TB && gd > 0.5 && m.userData.engel;
+      // KARPUZ: engel katmani bu mekanda da acik. Kosul 'gd > 0.5' idi ve
+      // engelleri yalnizca gunduz bayrakli ortamlara baglıyordu; karpuz
+      // sahnesinde cue'lar duz levha olarak geliyordu. 'gunduz: true'
+      // yazmak yerine kapi genisletildi - o bayrak gok kubbesi, balast
+      // zemini ve yan hatlari da acardi.
+      const engelde = TB && (gd > 0.5 || KARPUZ_MOD_AKTIF) && m.userData.engel;
       const z = Z_DOGUM + (Z_VURUS - Z_DOGUM) * ilerleme;
       if (engelde) {
         // OBBY: gar dili olan sari-siyah seritli doku yerine duz doygun
@@ -5245,6 +5941,10 @@ function kareKur(n){
         }
         // Sehirde de duck govdesi gizli: kirisi neonBar tasiyor.
         if (GOK_MOD_AKTIF && !SEHIR_MOD_AKTIF && no.tip === 'duck') m.visible = false;
+        // KARPUZ: engelin govdesi HER cue'da gizli. Dort hareketin dordu de
+        // ayni kutunun olceklenmis hali olamaz (4 Eyl dersi) - engeli
+        // meyve / dal / kesit / yaprak kuruyor, kutu degil.
+        if (KARPUZ_MOD_AKTIF) m.visible = false;
         if (m.userData.destek){
           m.userData.destek.visible = true;
           engelDestekGuncelle(m.userData.destek, no.tip, z, gov ||

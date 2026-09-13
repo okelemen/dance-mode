@@ -28,6 +28,12 @@ on:
         description: "Bolumun TAM uzunlugu - ilerleme halkasi ve final karti buna gore"
         required: true
         default: "264"
+      ses:
+        description: "Muzik eklensin mi? Kaynak 120 BPM'lik HAM mp3 - baska tempolu bolumlerde HAYIR"
+        required: true
+        default: "evet"
+        type: choice
+        options: ["evet", "hayir"]
       tema:
         required: true
         default: "b"
@@ -57,6 +63,7 @@ jobs:
         run: npm install --no-audit --no-fund
 
       - name: Bolum muzigini uret
+        if: ${{ github.event.inputs.ses == 'evet' }}
         run: |
           python3 03-motor/muzik-bolum.py \
             "01-muzik/bolum-01-neon-grid-HAM.mp3" \
@@ -80,6 +87,7 @@ jobs:
             --cikti ../04-ciktilar/kesit-ham.mp4
 
       - name: Muzigi ayni ana denk getir
+        if: ${{ github.event.inputs.ses == 'evet' }}
         run: |
           # Olcu suresi spec'ten okunuyor - BPM degisirse burasi kendiliginden
           # dogru kalir, elle guncellemek gerekmez.
@@ -98,6 +106,14 @@ jobs:
             -ss "$OFS" -t "$SURE" -i 01-muzik/tam.wav \
             -c:v copy -c:a aac -b:a 192k -shortest \
             04-ciktilar/kesit.mp4
+          ls -lh 04-ciktilar/kesit.mp4
+
+      - name: Sessiz kesiti yerine koy
+        if: ${{ github.event.inputs.ses != 'evet' }}
+        run: |
+          # Ses istenmedi: ham render dogrudan kesit olarak veriliyor.
+          # Muzik yerelde ffmpeg ile eklenecek (montaj yerelde kurali).
+          mv 04-ciktilar/kesit-ham.mp4 04-ciktilar/kesit.mp4
           ls -lh 04-ciktilar/kesit.mp4
 
       - uses: actions/upload-artifact@v4

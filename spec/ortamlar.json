@@ -32,7 +32,20 @@
   "serit": "sehir: zemindeki serit cizgileri (dis surekli, ic kesikli)",
   "ufukIsik": "sehir: cikistan zemine vuran parlama",
   "sehirTon": "sehir: cam ardindaki ve cikistaki sehir dokusunun carpan rengi (beyaz = referans paleti)",
-  "neon4": "sehir: zemindeki mavi pencere yansimasi"
+  "neon4": "sehir: zemindeki mavi pencere yansimasi",
+  "taban": "true ise TABAN modu: mekan = zeminin kendisi. Ufka kadar tek yuzey, YANLARDA NESNE YOK (kemer/lazer/lego/ucan cisim/su/sehir hepsi kapanir). 'zemin: gok' ile birlikte. 12 Eyl 2026 karari: referans aldigimiz yapilarla benzerlik olmayacak. BAYRAK - renk degil.",
+  "tabanYakin": "taban: kameraya yakin zemin rengi - notr ve dusuk doygun (S<0,25)",
+  "tabanUzak": "taban: zeminin ufka dogru gittigi renk",
+  "tabanVurus": "taban: olcu cubugu rengi - zemini enine gecen metronom cizgisi",
+  "tabanHalka": "taban: vurus cizgisinden disa buyuyen nabiz halkasi rengi",
+  "yol": "taban: yol govdesinin rengi - uzerine cue dusen koyu mat kutle",
+  "karpuz": "true ise KARPUZ modu (13 Eyl 2026, MEK-002 'ASKI'): mekan YUKARIDAN kuruluyor. Yanlarda nesne yok (taban moduyla ayni sadelik), zemin tek koyu kabuk yuzeyi, ama zeminde olcu cubugu ve nabiz halkasi YOK - sayma gorevi tavandaki KUTLEDE. Her olcude bir asma dali bas ustunden gecer, uzerindeki karpuzlar yolu enine tarayan bir GOLGE birakir. 'zemin: gok' ile birlikte. BAYRAK - renk degil.",
+  "karpuzKabuk": "karpuz: bas ustundeki karpuz kabugu (siluet kutlesi). Doygunluk DUSUK: mekan bandinda olculuyor.",
+  "yolZemin": "karpuz: zemin shader'inin ciZdigi koyu koridor rengi. Yol sade modlarda ayri geometriyle gorunmuyor; koridoru zemin ciziyor. Gama duzeltmeli yazilir.",
+  "kabukSerit": "karpuz: kabugun dis yuzundeki koyu dalgali serit (yol deseni)",
+  "akKabuk": "karpuz: etle kabuk arasindaki beyaz katman - kesitin imzasi",
+  "et": "karpuz: doygun ic. Doygunluk oyun duzleminin YANINDA kalir, uzerinde degil",
+  "cekirdek": "karpuz: etteki cekirdekler. Dunya izgarasindan deterministik"
  },
  "ortamlar": {
   "NEON CITY": {
@@ -1132,6 +1145,70 @@
    ],
    "ufuk": "#ffb36b",
    "neon4": "#4a6bff"
+  },
+  "TABAN": {
+   "_": "TEK SAHNE (12 Eyl 2026). Mekan zeminin kendisi; yanlarda nesne yok. Degerler OLCUMLE bulundu, iki tur: (1) gok #0e0f16 / taban #1b1d28 -> kare %48,6 SIYAH (kural %0). (2) degerler yukseltildi ama lacivert aile S=0,40 veriyordu ve 'doygunluk mekanda olmaz' kuralini bozuyordu (olculen MEKAN S medyan 0,57). Simdi NOTR GRAFIT: mavi tutam birakildi ama S<0,20. Doygunluk artik yalnizca cue, nota ve siluette. (3) gok/zemin lacivert aile ekranda S=0,30 okunuyordu (kural <0,25) - daha da notrlestirildi; taban duzlemi 2600->9000 buyutuldu cunku kenari ufuk hattinda siyah cizgi birakiyordu.",
+   "gok": "#33353c",
+   "zemin": "gok",
+   "taban": true,
+   "dekor": "yok",
+   "bicim": "kemer",
+   "grid": [
+    "#b9bfcc",
+    "#6b7080",
+    "#42454f"
+   ],
+   "kemer": [
+    "#b9bfcc",
+    "#6b7080",
+    "#42454f",
+    "#33353e",
+    "#2c2e36"
+   ],
+   "ara": 27.7,
+   "olcek": 1.0,
+   "en": 1.0,
+   "boy": 1.0,
+   "yer": 5.3,
+   "tabanYakin": "#474a52",
+   "tabanUzak": "#3a3c43",
+   "tabanVurus": "#b9bfcc",
+   "tabanHalka": "#73788a",
+   "yol": "#22242b"
+  },
+  "KARPUZ": {
+   "_": "TEK SAHNE / ASKI (13 Eyl 2026, MEK-002). Tasiyici fikir: mekan YUKARIDAN kuruluyor - goz hizasi bombos, ust serit dolu. MEK-001 (TABAN) ile tek ortak yani sadelik; ritmi tasiyan oge farkli (zemindeki olcu cubugu DEGIL, tavandaki kutlenin golgesi), palet ailesi farkli (grafit degil kabuk yesili + olgunlasmamis ic), doluluk dengesi TERS. Palet kurali: bas ustundeki karpuzlar DOYGUN DEGIL - siluet kutlesi olarak okunuyorlar, cunku olc-mekan.py'nin mekan bandi tam orasi (ust %44). Doygun kirmizi YALNIZCA engellerin kesik yuzunde, yani oyun duzleminde ve tepki verilecek nesnede. PALET NOTU (olculdu): motor cikisi lineer yaziyor, ekran degeri ~ (hex/255)^4,46 (olculdu). Bu kayittaki hex'ler EKRANDA gorulmesi istenen degerden geri hesaplandi; sRGB gozuyle secilen ilk palet (#232b21 vb.) karenin %36,3'unu siyaha dusurmustu. IKI RENK YOLU (olculdu): shader uniformlari (gok/tabanYakin/tabanUzak/karpuzGolge) gama duzeltmeli yaziliyor, materyal renkleri (yol/karpuzKabuk) LITERAL. Ayni hex iki yerde ayni rengi vermiyor; yol bir kez bu yuzden zeminden parlak cikti. KABUK RENGI (13 Eyl 2026, kullanici karari): bas ustundeki karpuzlar GERCEK kabuk yesili (#3f8a3a). Dusuk doygunluk kurali mekanin GENEL yuzeyleri icin gecerli (zemin/gok/yol); mekani kuran kimlikli cisim kendi rengini tasir. KOMPLE KONSEPT (13 Eyl 2026, kullanici): mekan karpuzun UZERINDE degil karpuzun KENDISI. Zemin bir kesit yuzeyi: ortada kabugun koyu dis yuzu (yol), iki yaninda beyaz kabuk katmani, disinda cekirdekli doygun ic.",
+   "gok": "#98acba",
+   "zemin": "gok",
+   "karpuz": true,
+   "dekor": "yok",
+   "bicim": "kemer",
+   "grid": [
+    "#c8d3b5",
+    "#a4ae93",
+    "#828c75"
+   ],
+   "kemer": [
+    "#c8d3b5",
+    "#a4ae93",
+    "#828c75",
+    "#737c69",
+    "#666e5d"
+   ],
+   "ara": 27.7,
+   "olcek": 1.0,
+   "en": 1.0,
+   "boy": 1.0,
+   "yer": 5.3,
+   "tabanYakin": "#a8afa3",
+   "tabanUzak": "#b8beb3",
+   "karpuzKabuk": "#3f8a3a",
+   "yol": "#12160f",
+   "yolZemin": "#8da589",
+   "kabukSerit": "#b1c9a8",
+   "akKabuk": "#f1f2e9",
+   "et": "#d68b9c",
+   "cekirdek": "#968b8b"
   }
  },
  "_kaynak": "Bazi ortamlar rakip karelerinden OLCULEREK turetildi (docs/kanal-kareleri/). Olculen paletler ve parlaklik profilleri docs/OLCUM-KANAL-KARELERI.md icinde."
