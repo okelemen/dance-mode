@@ -229,6 +229,11 @@ const CUE = {
   // arm-wave klibi 5,20 sn - 130 BPM'de uc olcu (5,54 sn) ile 0,94x oluyor.
   wave_L:  { lane:0, sure:OLCU,    klip:'arm-wave', maxOlcu: 3 },
   wave_R:  { lane:2, sure:OLCU,    klip:'arm-wave', maxOlcu: 3 },
+  // SHIMMY (13 Eyl 2026, HAR-002/A1): omuz-govde titresimi, ayaklar sabit.
+  // Dorduncu sekil ailesi - comelme/yana egilme/uzanma disinda kalan tek
+  // okunakli aile. Olcum: en yuksek cifti duck ile 0,413 (esik 0,50).
+  // Lane 1: yer degistirme yok, oldugun yerde yapiliyor.
+  shimmy:  { lane:1, sure:OLCU,    klip:'shimmy', maxOlcu: 2 },
   // aktif mola cue'lari: yogunluk duser ama ekran BOSALMAZ
   reach_L: { lane:0, sure:OLCU,    klip:'arm-stretch' },
   reach_R: { lane:2, sure:OLCU,    klip:'arm-stretch' },
@@ -1920,6 +1925,20 @@ function insanSimge(g, tip, S, kal){
     g.beginPath(); g.arc(44*S, -26*S, 13*S, 0, 6.2832); g.fill();
     hat(P(-6,6), P(-26,26), P(-32,48));
     hat(P(-6,6), P(14,28), P(18,48));
+  }
+  else if (tip === 'shimmy') {
+    // OMUZ TITRESIMI: govde ustu kaymis, ayaklar SABIT (altta zemin cizgisi).
+    // Kollar dirsekten kirik ve asagida - uzanma (reach) ile karismasin.
+    bas(6, -48, 14);
+    hat(P(6,-32), P(-2,6));                   // govde egik: omuz hatti kaymis
+    hat(P(4,-26), P(-24,-18), P(-20,-2));     // sol kol, dirsekten kirik
+    hat(P(4,-26), P(28,-20), P(24,-4));       // sag kol, dirsekten kirik
+    hat(P(-2,6), P(-14,28), P(-14,48));       // bacaklar dik ve bitisik
+    hat(P(-2,6), P(12,28), P(14,48));
+    ok(-52, -24, -1, 0, 12); ok(52, -24, 1, 0, 12);   // iki yana kucuk ok
+    g.save(); g.lineWidth = kal * 0.8;
+    hat(P(-30,54), P(30,54));                 // zemin: ayak yer degistirmiyor
+    g.restore();
   }
   else if (tip === 'reach_L' || tip === 'reach_R') {
     // esneme: bir kol basin uzerinden karsi yona uzaniyor
@@ -4124,10 +4143,12 @@ function engelDestekGuncelle(g, tip, z, gov){
       }
       return;
     }
-    if (tip === 'wave_L' || tip === 'wave_R') {
+    if (tip === 'wave_L' || tip === 'wave_R' || tip === 'reach_L' || tip === 'reach_R') {
       // YAPRAK PERDESI. Omuz/kol hizasinda (2,6-4,0) sarkiyor, yolu
       // kapatmiyor: hedef seridin uzerinde duruyor, kola deger ama govdeyi
       // durdurmaz. Adim engelinden (dilim) bicimi ve yuksekligiyle ayriliyor.
+      // HAR-002'de bu engel reach_L/R'ye bagli: uzanma hareketinin fiziksel
+      // sebebi yapragi ARALAMAK.
       const cx = gov.cx;
       d.kAski.visible = true;
       d.kAski.scale.set(0.12, 2.6, 0.12);
@@ -4138,6 +4159,28 @@ function engelDestekGuncelle(g, tip, z, gov){
         q.scale.set(1.30, 1.55, 1);
         q.position.set(cx + (i - 1) * 0.86, 3.32 - (i % 2) * 0.14, z);
         q.rotation.z = (i - 1) * 0.22;
+      }
+      return;
+    }
+    if (tip === 'shimmy') {
+      // DARALAN GECIT: iki yandan yolu daraltan karpuz yigini, ortada omuz
+      // genisligi kadar bosluk. Hareketin fiziksel sebebi aradan omuz
+      // sikistirarak gecmek - bu yuzden bosluk DAR (2,2 birim ~ 0,8 m) ama
+      // kapali degil; kapali olsaydi dodge engeli olurdu.
+      // Yiginlar gogus hizasina kadar: tepe 2,6 - kameranin (3,7) altinda,
+      // yani uzerinden bakiliyor ve "yandan sikistiran kutle" okunuyor.
+      const BOSLUK = 1.10;                    // yarim bosluk
+      const dizi = [[0.95, 0.95], [1.25, 1.55], [0.85, 2.15]];
+      for (let i = 0; i < 3; i++) {
+        const [r, ofs] = dizi[i];
+        for (const yon of [-1, 1]) {
+          const q = d.kTop[i * 2 + (yon > 0 ? 1 : 0)];
+          if (!q) continue;
+          q.visible = true;
+          q.scale.set(r * 1.10, r, r * 1.10);
+          q.position.set(yon * (BOSLUK + ofs), r * 0.92, z + (i - 1) * 0.55);
+          q.rotation.y = i * 1.7 + (yon > 0 ? 0.8 : 0);
+        }
       }
       return;
     }

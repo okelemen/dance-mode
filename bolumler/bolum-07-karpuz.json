@@ -1,0 +1,317 @@
+{
+ "_": "KARPUZ bolumu (13 Eyl 2026). Mekan MEK-002 (komple karpuz kesiti + tarla), hareket seti HAR-002 = A1: duck + dodge + reach(arm-stretch) + shimmy. Muzik Neon Party Pulse, 135,961 BPM, 330 olcuye uzatildi. SURE KURALI (13 Eyl 2026): video 9:30-10:30 arasi; 330 olcu = 9:42,5.",
+ "no": 7,
+ "baslik": "KARPUZ | Tarla kosusu",
+ "tema": "b",
+ "bpm": 135.961,
+ "_bpm": "Muzikten OLCULDU, verilmedi. Dort yontem denendi; tarak (136,65) ve faz egimi (138,04) aykiri cikti. Hakem yontem vurus izleme + dogrusal oturtma: 135,961. Kendi kendini dogruladi - bu BPM'de kaynak parca (203,000 sn) tam 115,000 olcu. Olcum notu: 01-muzik/NEON-PARTY-PULSE-OLCUM.md",
+ "toplam_olcu": 330,
+ "muzik": "01-muzik/neon-party-pulse-330olcu.wav",
+ "_muzik": "Kaynak 203 sn = 115 olcu. muzik-uzat.py ile 330 olcuye cikarildi (giris 16 + govde x3 + 52 + cikis 16). Izgara dosya basindan 0,0816 sn kaymis oldugu icin ofset verildi; verilmeseydi her ekleme noktasi off-beat olurdu. ACIK: govde ucbucuk kez tekrar ediyor.",
+ "mekanik": "temel",
+ "_mekanik": "Ileri cue tipi (hold) YOK. Bu bolumun yeni ogrenilecek seyi: shimmy.",
+ "hareketler": [
+  "duck",
+  "dodge_L / dodge_R",
+  "reach_L / reach_R",
+  "shimmy"
+ ],
+ "_hareket_gerekce": "HAR-002 (A1). Kullanici once A'yi secti (duck+dodge+arm-stretch+twist-dance); OLCUM CURUTTU: arm-stretch x twist-dance 0,611 (esik 0,50) - siluet kutusunda ayni okunuyorlar. Uc gecerli onarim cikarildi, kullanici A1'i secti. Dort sekil ailesi: comelme (duck) / yana egilme (dodge) / uzanma (reach) / omuz-govde titresimi (shimmy). Olculen en yuksek cift 0,477 (arm-stretch x duck); digerleri: duck x dodge 0,474 - arm-stretch x shimmy 0,447 - duck x shimmy 0,413 - dodge x shimmy 0,404 - arm-stretch x dodge 0,309. Yontem TEPE FAZI (03-motor/olc-iou.py); 'tum faz ciftlerinde maksimum' yontemi reddedildi cunku butun klipler notr baslayip notr bitiyor ve o yontem bilinen siralamayi ters ceviriyordu. HAR-001'den tasinanlar duck ve dodge; hop ve wave cikti.",
+ "ortamlar": [
+  "KARPUZ"
+ ],
+ "ortam_olcu": [
+  0
+ ],
+ "_ortam": "Tek sahne. MEK-002; spec/ortamlar.json -> KARPUZ (karpuz: true).",
+ "_kaliplar": "Her kalip BIR olcu (dort vurus). Blok listesi olcu olcu donuyor. Adim (step) cue'su YOK: HAR-001'de baglayici olarak kullaniliyordu, bu bolumde set disi hicbir hareket cikmiyor.",
+ "kaliplar": {
+  "dk": [
+   "duck",
+   null,
+   null,
+   null
+  ],
+  "dk2": [
+   "duck",
+   null,
+   "duck",
+   null
+  ],
+  "dgR": [
+   "dodge_R",
+   null,
+   null,
+   null
+  ],
+  "dgL": [
+   "dodge_L",
+   null,
+   null,
+   null
+  ],
+  "rcR": [
+   "reach_R",
+   null,
+   null,
+   null
+  ],
+  "rcL": [
+   "reach_L",
+   null,
+   null,
+   null
+  ],
+  "sh": [
+   "shimmy",
+   null,
+   null,
+   null
+  ],
+  "sh2": [
+   "shimmy",
+   null,
+   "shimmy",
+   null
+  ],
+  "bos": [
+   null,
+   null,
+   null,
+   null
+  ]
+ },
+ "kademeler": {
+  "og1": [
+   "dk",
+   "bos"
+  ],
+  "og2": [
+   "dgR",
+   "bos",
+   "dgL",
+   "bos"
+  ],
+  "og3": [
+   "rcR",
+   "bos",
+   "rcL",
+   "bos"
+  ],
+  "og4": [
+   "sh",
+   "bos"
+  ],
+  "c1": [
+   "dk",
+   "bos",
+   "dgR",
+   "bos",
+   "dk",
+   "bos",
+   "dgL",
+   "bos"
+  ],
+  "c2": [
+   "dk",
+   "bos",
+   "dgR",
+   "bos",
+   "sh",
+   "bos",
+   "dgL",
+   "bos"
+  ],
+  "c3": [
+   "dk",
+   "dgR",
+   "bos",
+   "sh",
+   "dk",
+   "dgL",
+   "bos",
+   "sh"
+  ],
+  "c4": [
+   "dk2",
+   "dgR",
+   "sh",
+   "dgL",
+   "dk",
+   "sh2",
+   "dgR",
+   "dgL"
+  ],
+  "mola": [
+   "rcR",
+   "bos",
+   "rcL",
+   "bos"
+  ]
+ },
+ "iskelet": [
+  [
+   0,
+   6,
+   "bos",
+   "nefes"
+  ],
+  [
+   6,
+   11,
+   "og1",
+   "adim"
+  ],
+  [
+   11,
+   16,
+   "og2",
+   "adim"
+  ],
+  [
+   16,
+   21,
+   "og3",
+   "adim"
+  ],
+  [
+   21,
+   26,
+   "og4",
+   "adim"
+  ],
+  [
+   26,
+   42,
+   "c1",
+   "adim"
+  ],
+  [
+   42,
+   58,
+   "c1",
+   "adim"
+  ],
+  [
+   58,
+   74,
+   "c1",
+   "adim"
+  ],
+  [
+   74,
+   82,
+   "mola",
+   "nefes"
+  ],
+  [
+   82,
+   98,
+   "c2",
+   "adim"
+  ],
+  [
+   98,
+   114,
+   "c2",
+   "adim"
+  ],
+  [
+   114,
+   130,
+   "c2",
+   "adim"
+  ],
+  [
+   130,
+   138,
+   "mola",
+   "nefes"
+  ],
+  [
+   138,
+   154,
+   "c3",
+   "adim"
+  ],
+  [
+   154,
+   170,
+   "c3",
+   "adim"
+  ],
+  [
+   170,
+   186,
+   "c3",
+   "adim"
+  ],
+  [
+   186,
+   194,
+   "mola",
+   "nefes"
+  ],
+  [
+   194,
+   210,
+   "c4",
+   "adim"
+  ],
+  [
+   210,
+   226,
+   "c4",
+   "adim"
+  ],
+  [
+   226,
+   242,
+   "c4",
+   "adim"
+  ],
+  [
+   242,
+   250,
+   "mola",
+   "nefes"
+  ],
+  [
+   250,
+   266,
+   "c3",
+   "adim"
+  ],
+  [
+   266,
+   282,
+   "c4",
+   "adim"
+  ],
+  [
+   282,
+   298,
+   "c4",
+   "adim"
+  ],
+  [
+   298,
+   306,
+   "mola",
+   "nefes"
+  ],
+  [
+   306,
+   322,
+   "c4",
+   "adim"
+  ],
+  [
+   322,
+   330,
+   "mola",
+   "nefes"
+  ]
+ ],
+ "_iskelet": "26 ogretme (6 nefes + dort hareket x5) + 304 = 16 calisma blogu (16'lik) + 6 mola (8'lik). Bolum uzarken blok UZUNLUGU degil SAYISI artar. Dizilim: (3 calisma + 1 mola) x5, sonra 1 calisma + 1 mola."
+}
