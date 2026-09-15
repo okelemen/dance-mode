@@ -1,0 +1,156 @@
+{
+ "_": "ONIZLEME TEK SAHNE - ELMA / YIGIN (14 Eyl 2026, MEK-003). Mekan zeminin KENDISI degil, zemini kuran TANE: bastan sona elma yigini, yurunen yuzey tanelerin sirti. Yol bolum 01'in nota yolu (uc cizgi + olcu cubuklari + fayans, SIMGE YOK). Hareket seti HAR-003 (kullanici B'yi sectti): charleston + side-to-side + raise-roof + jacks. KURAL: hareketler/kaliplar/kademeler onceki bolumden KOPYALANMADI, yeniden kuruldu.",
+ "no": 8,
+ "baslik": "ONIZLEME | Tek sahne ELMA",
+ "tema": "b",
+ "toplam_olcu": 64,
+ "muzik": "01-muzik/subterranean-pulse-336olcu.wav",
+ "mekanik": "temel",
+ "hareketler": [
+  "charleston",
+  "side_L / side_R",
+  "roof",
+  "jacks"
+ ],
+ "_hareket_gerekce": "HAR-003, kullanici B sikkini sectti. Olculdu (olc-iou.py, tepe fazi, esik 0,50): en yuksek cift jacks x raise-roof 0,482 - SET GECERLI. Dort ayri sekil ailesi: ayak capraz savurma / govde yana salinim / dikey kol itisi / havada acilma.",
+ "ortamlar": [
+  "ELMA"
+ ],
+ "ortam_olcu": [
+  0
+ ],
+ "bpm": 132.5,
+ "kaliplar": {
+  "st": [
+   "step_L",
+   null,
+   "step_R",
+   null
+  ],
+  "stB": [
+   "step_R",
+   null,
+   null,
+   null
+  ],
+  "bos": [
+   null,
+   null,
+   null,
+   null
+  ],
+  "ch": [
+   "charleston",
+   null,
+   null,
+   null
+  ],
+  "rf": [
+   "roof",
+   null,
+   null,
+   null
+  ],
+  "jk": [
+   "jacks",
+   null,
+   null,
+   null
+  ],
+  "sdR": [
+   "side_R",
+   null,
+   null,
+   "step_R"
+  ],
+  "sdL": [
+   "side_L",
+   null,
+   null,
+   "step_L"
+  ]
+ },
+ "kademeler": {
+  "og1": [
+   "ch",
+   "bos"
+  ],
+  "og2": [
+   "sdR",
+   "st",
+   "sdL",
+   "st"
+  ],
+  "og3": [
+   "rf",
+   "bos"
+  ],
+  "og4": [
+   "jk",
+   "bos"
+  ],
+  "d16": [
+   "ch",
+   "bos",
+   "sdR",
+   "stB",
+   "rf",
+   "stB",
+   "jk",
+   "stB"
+  ],
+  "d32": [
+   "ch",
+   "bos",
+   "jk",
+   "st",
+   "sdL",
+   "st",
+   "rf",
+   "st"
+  ]
+ },
+ "iskelet": [
+  [
+   0,
+   8,
+   "bos",
+   "nefes"
+  ],
+  [
+   8,
+   16,
+   "og1",
+   "adim"
+  ],
+  [
+   16,
+   26,
+   "og2",
+   "adim"
+  ],
+  [
+   26,
+   36,
+   "og3",
+   "adim"
+  ],
+  [
+   36,
+   44,
+   "og4",
+   "adim"
+  ],
+  [
+   44,
+   64,
+   "d16",
+   "adim"
+  ]
+ ],
+ "nota_simge": false,
+ "_nota_simge": "13 Eyl 2026 aksami kullanici karari: fayans VAR, simge YOK. Cue'yu fayansin rengi ve seridi tasiyor.",
+ "_charleston": "charleston penceresi IKI OLCU (15 Eyl 2026, kullanici): dongusu 2,61 sn, tek olcuye (1,81 sn) sigmadigi icin 1,44x hizlaniyordu. Kendisinden sonraki olcu bos birakilarak pencere 3,62 sn'ye cikti -> 0,72x.",
+ "akis": "harman2",
+ "_akis": "15 Eyl 2026: cue klibi, kesilerek degil taban katmanla (adim/egzersiz) harmanlanarak biter. olc-siluet-akis.js ile olculdu."
+}

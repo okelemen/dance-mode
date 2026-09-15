@@ -112,9 +112,16 @@ function sunucuBaslat() {
   let BPM_IZGARA = SPEC.izgara.bpm;
   if (BOLUM) {
     try {
-      const bj = JSON.parse(fs.readFileSync(path.join(KOK, BOLUM), 'utf8'));
+      // YOL COZUMU (15 Eyl 2026): BOLUM parametresi SAYFAYA gore yazilir
+      // (sayfa /03-motor/sahne.html oldugu icin '../bolumler/...'), burada ise
+      // path.join(KOK, BOLUM) ile cozuluyordu -> C:\Users\eleme\bolumler\...
+      // Dosya bulunamayinca sessizce sabitler.json'daki 130 BPM'e dusuyordu:
+      // 132,5'lik bolumde kare sayisi VE SES OFSETI yanlis cikiyor, yani
+      // muzik kayiyor. Cozum sayfanin bakis acisindan cozmek.
+      const bolumYol = path.isAbsolute(BOLUM) ? BOLUM : path.resolve(KOK, '03-motor', BOLUM);
+      const bj = JSON.parse(fs.readFileSync(bolumYol, 'utf8'));
       if (bj.bpm) BPM_IZGARA = bj.bpm;
-    } catch (e) { console.log('bolum dosyasi okunamadi, sabitler.json BPM:', e.message); }
+    } catch (e) { console.log('UYARI - bolum dosyasi okunamadi, sabitler.json BPM kullanilacak:', e.message); }
   }
   const OLCU_SN = (60 / BPM_IZGARA) * SPEC.izgara.vurus_per_olcu;
   const FPS_SPEC = SPEC.video.fps;

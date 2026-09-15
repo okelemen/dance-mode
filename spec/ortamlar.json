@@ -1209,6 +1209,40 @@
    "akKabuk": "#f1f2e9",
    "et": "#d68b9c",
    "cekirdek": "#968b8b"
+  },
+  "ELMA": {
+   "_": "TEK SAHNE / YIGIN (14 Eyl 2026, MEK-003). Tasiyici fikir: zemin kati degil TANE - mekan bastan sona tane elmadan kurulu bir yigin, yurunen yuzey tanelerin sirti. TABAN ve KARPUZ ile paylastigi tek sey sadelik (yanlarda mimari yok). Yol: bolum 01'in nota yolu - koyu koridor + uc boyuna cizgi (sol camgobegi / orta pembe / sag mor) + enine olcu cubuklari + fayanslar (SIMGE YOK, 13 Eyl kullanici karari). Koridorun icine mekan malzemesinden nesne serpistirilmez; malzeme bagi RENKLE kurulur. Elmalar gercek PD/CC0 fotograftan kesilmis billboard (REF-009...REF-013), kodla cizilmis kure degil.",
+   "gok": "#b9c9d6",
+   "zemin": "gok",
+   "elma": true,
+   "dekor": "yok",
+   "bicim": "kemer",
+   "grid": [
+    "#6ce8e2",
+    "#ff6a9e",
+    "#ba78ff"
+   ],
+   "kemer": [
+    "#6ce8e2",
+    "#ff6a9e",
+    "#ba78ff",
+    "#8a5ca8",
+    "#6d4a7a"
+   ],
+   "ara": 27.7,
+   "olcek": 1.0,
+   "en": 1.0,
+   "boy": 1.0,
+   "yer": 5.3,
+   "tabanYakin": "#6e3038",
+   "tabanUzak": "#8a4650",
+   "tabanVurus": "#ffd6a8",
+   "tabanHalka": "#ba78ff",
+   "yol": "#5a2028",
+   "elmaCizgiSol": "#6ce8e2",
+   "elmaCizgiOrta": "#ff6a9e",
+   "elmaCizgiSag": "#ba78ff",
+   "ufuk": "#e8a2b4"
   }
  },
  "_kaynak": "Bazi ortamlar rakip karelerinden OLCULEREK turetildi (docs/kanal-kareleri/). Olculen paletler ve parlaklik profilleri docs/OLCUM-KANAL-KARELERI.md icinde."

@@ -234,6 +234,22 @@ const CUE = {
   // okunakli aile. Olcum: en yuksek cifti duck ile 0,413 (esik 0,50).
   // Lane 1: yer degistirme yok, oldugun yerde yapiliyor.
   shimmy:  { lane:1, sure:OLCU,    klip:'shimmy', maxOlcu: 2 },
+  // ---- KUTUPHANENIN GERI KALANI (13 Eyl 2026) ----
+  // Kullanici: "bir suru hareket tarzimiz var, hepsinin hazir olmasini
+  // istiyorum". Bu kliplerin cue'su yoktu, yani yeni bir set secilse motor
+  // cizemezdi. Hepsi tanimli; hangisinin sete girecegi OLCUMLE (olc-iou.py)
+  // ve kullanici secimiyle belirlenir.
+  charleston: { lane:1, sure:OLCU, klip:'charleston', maxOlcu: 2 },
+  jacks:      { lane:1, sure:OLCU, klip:'jacks',      maxOlcu: 2 },
+  neck_roll:  { lane:1, sure:OLCU, klip:'neck-roll',  maxOlcu: 2 },
+  running:    { lane:1, sure:OLCU, klip:'running-man',maxOlcu: 2 },
+  roof:       { lane:1, sure:OLCU, klip:'raise-roof', maxOlcu: 2 },
+  kick_L:     { lane:0, sure:OLCU, klip:'kick-step',  maxOlcu: 2 },
+  kick_R:     { lane:2, sure:OLCU, klip:'kick-step',  maxOlcu: 2 },
+  side_L:     { lane:0, sure:OLCU, klip:'side-to-side', maxOlcu: 2 },
+  side_R:     { lane:2, sure:OLCU, klip:'side-to-side', maxOlcu: 2 },
+  twist_L:    { lane:0, sure:OLCU, klip:'twist-dance',maxOlcu: 2 },
+  twist_R:    { lane:2, sure:OLCU, klip:'twist-dance',maxOlcu: 2 },
   // aktif mola cue'lari: yogunluk duser ama ekran BOSALMAZ
   reach_L: { lane:0, sure:OLCU,    klip:'arm-stretch' },
   reach_R: { lane:2, sure:OLCU,    klip:'arm-stretch' },
@@ -336,6 +352,59 @@ NOTALAR.forEach((n,i) => n.combo = i + 1);
 // ONALMA_PAY kadar once basliyor: karakteristik poz vurusun uzerine denk
 // geliyor.
 const ONALMA_PAY = 0.35;                       // pencerenin ne kadari vurustan once
+// TEPE FAZI TABLOSU (13 Eyl 2026, OLCULDU - 03-motor/olc-iou.py).
+// Her klibin "en okunakli" ani klibin neresinde? Pencere bu orana gore
+// kaydiriliyor ki o an VURUSA denk gelsin.
+//
+// Neden gerekti: test bolumunde yeni cue'lar calistirildi ve vurus aninda
+// jacks/kick/neck_roll/running/twist hala NOTR durusta cikti. Klip oynuyordu
+// ama tepe pozu vurustan sonra geliyordu - izleyici vurusta duz bir figur
+// goruyordu. Sabit %35 yalnizca tepesi erken gelen klipler icin dogruydu.
+//
+// Tabloda OLMAYAN klip eski davranisi (0,35) korur -> yayinlanmis bolumlerin
+// zamanlamasi degismez.
+// KLIP DONGUSU (15 Eyl 2026, olculdu: 03-motor/olc-klip-dongu.js).
+// Dans klipleri TEKRARLI: charleston 20,90 sn'lik klibin icinde ayni dongu
+// sekiz kez var. Motor cue penceresine klibin TAMAMINI sigdiriyordu ->
+// 11,5 KAT hiz (olc-tempo.js). Kullanicinin gordugu "garip hareketlilik"
+// buydu. Artik pencereye TAM SAYIDA DONGU sigdiriliyor, yani hareket kendi
+// dogal hizinda kaliyor ve olcuye oturuyor.
+// Tabloda OLMAYAN klip eski davranisini korur -> yayinlanmis bolumler
+// (hop/duck/dodge/wave/arm-stretch/shimmy) degismez.
+const KLIP_DONGU = {
+  'charleston': 2.61,      // 20,90 sn klip = 8 dongu
+  'side-to-side': 1.14,    // 13,63 sn klip = 12 dongu
+  'raise-roof': 0.51,      // 4,10 sn klip = 8 dongu
+  'jacks': 1.07,           // 1,07 sn - klibin kendisi tek dongu
+};
+// CUE BAZLI TEPE FAZI ve AYNALAMA (15 Eyl 2026, kullanici: "engellerle
+// siluetin hareketleri birbirini tutmuyor").
+// Olculdu (03-motor/olc-eslesme.js): vurusta engel z=4 (vurus cizgisi) ve
+// dogru klip agirlik 1,00 ile caliyordu - yani ZAMANLAMA dogruydu. Bozuk olan
+// YONDU: side_R cue'sunda siluetin yatay merkezi -0,056 ile +0,471 arasinda
+// degisiyordu, yani ayni cue'da bazen SOLA bazen SAGA yatiyordu. Sebep tek
+// klibin (side-to-side) iki yone de salinmasi ve cue yonunun faza
+// baglanmamis olmasi.
+// olc-yon.js ile dongu ici yon egrisi olculdu: en saga yatis faz 0,438
+// (com +0,137), en sola yatis faz 0,146 (com yalnizca -0,035) - klip
+// ASIMETRIK. Bu yuzden iki cue de AYNI fazi (0,438) kullaniyor, side_L
+// icin siluet kutusu AYNALANIYOR: iki yon de esit guclu okunuyor.
+const CUE_DONGU_FAZ = { 'side_L': 0.438, 'side_R': 0.438 };
+const AYNA_CUE = { 'side_L': true };
+let SILUET_AYNA = false;
+const TEPE_FAZI = {
+  'charleston': 0.30, 'running-man': 0.30,
+  'raise-roof': 0.45, 'side-to-side': 0.45, 'step-left': 0.45,
+  // jacks 0,60 -> 0,75 (14 Eyl 2026, HAR-003'te olculdu). Tepe fazi araci
+  // "faz 0'a en uzak kare"yi tepe sayiyor ve klibin faz 0'da NOTR durdugunu
+  // varsayiyor; jacks klibi kollar-bacaklar ACIK basliyor, bu yuzden arac
+  // KAPALI duz durusu (0,60) tepe ilan ediyordu. Siluet genisligi olculdu:
+  // 0,60'ta 78 px, 0,75'te 111 px. Not: asagidaki kirpma payi 0,70'te
+  // tutuyor - cikis harmanina denk gelmesin diye konmustu, dokunulmadi.
+  'jacks': 0.75, 'step-right': 0.60,
+  'neck-roll': 0.75,
+  'kick-step': 0.90, 'twist-dance': 0.90,
+};
 NOTALAR.forEach((n, i) => {
   const sonraki = NOTALAR[i + 1];
   // TAVAN ARTIK CUE TIPINE GORE (5 Eyl 2026). Onceki halde her cue en fazla
@@ -349,7 +418,21 @@ NOTALAR.forEach((n, i) => {
   let pencere = sonraki ? (sonraki.t - n.t) : tavan;
   pencere = Math.min(Math.max(pencere, VURUS), tavan);
   n.pencere = pencere;
-  n.bas = n.t - ONALMA_PAY * pencere;
+  // Pencere, klibin tepe fazi VURUSA denk gelecek sekilde kaydiriliyor.
+  // Pay [0,25 - 0,70] arasina KIRPILIYOR. Sebep olculdu: tepesi 0,90 olan
+  // klipte (kick-step, twist-dance) vurus pencerenin CIKIS HARMANINA denk
+  // geliyor ve motor orada notr klibe agirlik veriyor - vurusta yine duz
+  // figur cikiyordu. Kirpma tepe hizalamasini bozmuyor, yalnizca harman
+  // bolgesine girmesini engelliyor.
+  let pay = (TEPE_FAZI[n.klip] !== undefined) ? TEPE_FAZI[n.klip] : ONALMA_PAY;
+  // UST SINIR 0,70 -> 0,76 (15 Eyl 2026). 0,70 sinirinin sebebi 0,90'lik
+  // kliplerin CIKIS HARMANINA denk gelmesiydi; 0,75 orada degil. jacks 0,75
+  // isterken 0,70'e kirpiliyor ve tepe pozu yakalanamiyordu (siluet genisligi
+  // 111 px yerine ~90 px). Etkilenen diger klipler: kick-step ve twist-dance
+  // (0,90 -> artik 0,76); ikisi de YAYINLANMIS hicbir bolumde kullanilmiyor,
+  // yani gecmis zamanlama degismiyor.
+  pay = Math.min(0.76, Math.max(0.25, pay));
+  n.bas = n.t - pay * pencere;
 });
 
 // ------------------------------------------------------------------ SAHNE
@@ -430,6 +513,7 @@ const zeminMat = new THREE.ShaderMaterial({
     uZemin:  { value: new THREE.Color(PALET.zemin) },
     uSis:    { value: new THREE.Color(PALET.zemin) },
     uSisYakin:{ value: SIS_YAKIN }, uSisUzak:{ value: SIS_UZAK },
+    uSeritGuc:{ value: 1.0 }, uSeritSik:{ value: 9.0 },
     uTema:   { value: TB ? 1.0 : 0.0 },
     // GUNDUZ (2 Eyl 2026): 0 = gece neon, 1 = acik alan gunduz.
     // Ortam basina gelir ve gecisle yumusar. Bkz. 07-mekan/acik-alan/ANALIZ.md
@@ -445,7 +529,7 @@ const zeminMat = new THREE.ShaderMaterial({
     }`,
   fragmentShader: `
     uniform float uKaydir; uniform vec3 uGrid, uGrid2, uGrid3, uZemin, uSis;
-    uniform float uSisYakin, uSisUzak, uTema, uGunduz;
+    uniform float uSisYakin, uSisUzak, uTema, uGunduz, uSeritGuc, uSeritSik;
     varying vec2 vUv; varying vec3 vGoz;
     float cizgi(float k, float sik, float kal){
       float f = abs(fract(k*sik - 0.5) - 0.5) / fwidth(k*sik);
@@ -458,7 +542,7 @@ const zeminMat = new THREE.ShaderMaterial({
       // asil parlaklik lane ayraclarinda.
       // Cizgi SAYISI kritik: sik cizgiler ufka dogru birbirine karisip
       // tek parlak yuzeye donusuyordu. Seyrek cizgi = koyu yol.
-      float boyuna = cizgi(vUv.x, 9.0, 1.0);
+      float boyuna = cizgi(vUv.x, uSeritSik, 1.0);
       float enine  = cizgi(vUv.y + uKaydir, 16.0, 1.0);
       float g = max(boyuna * 0.40, enine * 0.16);
       // akan renk bantlari: tunel boyunca yumusak gecisli, 3 renkli
@@ -477,7 +561,7 @@ const zeminMat = new THREE.ShaderMaterial({
       // Yol her iki temada da KOYU. Olcum: referans karelerin %57'si
       // neredeyse siyah. Parlaklik yolda degil CIZGIDE.
       // uTema sadece kontrasti sertlestirir.
-      float kuv = uTema > 0.5 ? 1.45 : 1.0;          // B'de cizgi daha kuvvetli
+      float kuv = (uTema > 0.5 ? 1.45 : 1.0) * uSeritGuc;   // B'de cizgi daha kuvvetli; uSeritGuc ortam bazli kisar
       // B'de izgara YOLUN DISINA tasmaz. Referansta yolun disi bos uzay;
       // her yere yayilan izgara hem parlakligi hem dagitikligi artiriyordu.
       float gg = uTema > 0.5 ? max(boyuna * 0.40, enine * 0.16) * merkez : g;
@@ -491,7 +575,7 @@ const zeminMat = new THREE.ShaderMaterial({
       //   ERROR: 0:95: 'renk' : undeclared identifier
       vec3 renk = mix(yol, gr, min(1.0, gg * kuv));
       // parlama gucu: gunduz additive parlama beyaza doyuyor, kisiliyor
-      renk += gr * gg * mix(uTema > 0.5 ? 0.26 : 0.16, 0.05, uGunduz);
+      renk += gr * gg * mix(uTema > 0.5 ? 0.26 : 0.16, 0.05, uGunduz) * uSeritGuc;
       float mesafe = length(vGoz);                    // FRAGMENT basina - dogru
       float sis = smoothstep(uSisYakin, uSisUzak, mesafe);
       // sise KAPANMIYOR, SAYDAMLASIYOR - yoksa arkadaki ufuk/gunes kapanir
@@ -1926,6 +2010,94 @@ function insanSimge(g, tip, S, kal){
     hat(P(-6,6), P(-26,26), P(-32,48));
     hat(P(-6,6), P(14,28), P(18,48));
   }
+  else if (tip === 'charleston') {
+    // Dizler ICERDE birbirine yakin, eller dizlerde CAPRAZ - Charleston'un
+    // imzasi bu. Ayaklar disa donuk.
+    bas(0, -48, 14);
+    hat(P(0,-32), P(0,4));
+    hat(P(0,-24), P(-22,0), P(10,22));        // sol kol capraz, sag dize
+    hat(P(0,-24), P(22,0), P(-10,22));        // sag kol capraz, sol dize
+    hat(P(0,4), P(-8,26), P(-24,48));         // dizler icerde, ayaklar disa
+    hat(P(0,4), P(8,26), P(24,48));
+  }
+  else if (tip === 'jacks') {
+    // YILDIZ: kollar ve bacaklar disa acik. Tek bakista "acilma".
+    bas(0, -52, 13);
+    hat(P(0,-38), P(0,8));
+    hat(P(0,-30), P(-40,-56));
+    hat(P(0,-30), P(40,-56));
+    hat(P(0,8), P(-30,30), P(-40,50));
+    hat(P(0,8), P(30,30), P(40,50));
+  }
+  else if (tip === 'kick_L' || tip === 'kick_R') {
+    // ONE TEKME: bir bacak one uzanmis, govde hafif geride.
+    g.save(); if (tip === 'kick_L') g.scale(-1, 1);
+    bas(-6, -48, 14);
+    hat(P(-6,-32), P(-4,6));
+    hat(P(-6,-26), P(-28,-8));
+    hat(P(-6,-26), P(16,-14));
+    hat(P(-4,6), P(-18,28), P(-20,48));       // basma bacagi
+    hat(P(-4,6), P(26,14), P(46,8));          // tekme atan bacak - one/yukari
+    ok(66, 6, 1, 0, 12);
+    g.restore();
+  }
+  else if (tip === 'neck_roll') {
+    // BOYUN: bas yana egik, omuzlar SABIT. Basin yaninda kucuk yay.
+    bas(-12, -50, 14);
+    hat(P(-6,-36), P(0,6));
+    hat(P(-4,-28), P(-24,-10), P(-22,6));
+    hat(P(-4,-28), P(24,-10), P(22,6));
+    hat(P(0,6), P(-14,28), P(-14,48));
+    hat(P(0,6), P(14,28), P(14,48));
+    g.save(); g.lineWidth = kal * 0.7;
+    g.beginPath(); g.arc(-12*S, -50*S, 26*S, -2.6, -0.5); g.stroke();
+    g.restore();
+  }
+  else if (tip === 'running') {
+    // KOSU: bir diz yukari, kollar dirsekten kirik ve zit yonde.
+    bas(4, -50, 14);
+    hat(P(4,-34), P(0,4));
+    hat(P(2,-28), P(-26,-20), P(-18,-2));     // arka kol
+    hat(P(2,-28), P(26,-34), P(34,-16));      // on kol
+    hat(P(0,4), P(-16,24), P(-24,46));        // arka bacak
+    hat(P(0,4), P(22,12), P(14,34));          // on diz YUKARI
+  }
+  else if (tip === 'roof') {
+    // IKI KOL YUKARI ITIYOR: eller acik, dirsekler kirik, yukari ok.
+    bas(0, -48, 14);
+    hat(P(0,-32), P(0,6));
+    hat(P(0,-26), P(-26,-34), P(-22,-62));
+    hat(P(0,-26), P(26,-34), P(22,-62));
+    hat(P(0,6), P(-16,28), P(-18,48));
+    hat(P(0,6), P(16,28), P(18,48));
+    ok(0, -84, 0, -1, 13);
+  }
+  else if (tip === 'side_L' || tip === 'side_R') {
+    // YANA KAYMA: govde bir yana kaymis, ayaklar ACIK, yer degistirmiyor.
+    g.save(); if (tip === 'side_L') g.scale(-1, 1);
+    bas(14, -48, 14);
+    hat(P(12,-32), P(2,6));
+    hat(P(10,-26), P(-16,-16), P(-24,0));
+    hat(P(10,-26), P(32,-18), P(36,-2));
+    hat(P(2,6), P(-18,28), P(-26,48));        // ayaklar genis
+    hat(P(2,6), P(22,28), P(30,48));
+    ok(56, -24, 1, 0, 12);
+    g.restore();
+  }
+  else if (tip === 'twist_L' || tip === 'twist_R') {
+    // GOVDE DONUSU: omuz hatti donmus (bir omuz one), ayaklar SABIT.
+    g.save(); if (tip === 'twist_L') g.scale(-1, 1);
+    bas(0, -48, 14);
+    hat(P(0,-32), P(0,6));
+    hat(P(-4,-26), P(-30,-14), P(-34,4));     // geri giden omuz/kol
+    hat(P(4,-26), P(24,-20), P(18,-2));       // one gelen omuz/kol - kisa
+    hat(P(0,6), P(-14,28), P(-14,48));
+    hat(P(0,6), P(14,28), P(14,48));
+    g.save(); g.lineWidth = kal * 0.7;
+    g.beginPath(); g.arc(0, -14*S, 44*S, -0.9, 0.9); g.stroke();
+    g.restore();
+    g.restore();
+  }
   else if (tip === 'shimmy') {
     // OMUZ TITRESIMI: govde ustu kaymis, ayaklar SABIT (altta zemin cizgisi).
     // Kollar dirsekten kirik ve asagida - uzanma (reach) ile karismasin.
@@ -2007,6 +2179,14 @@ function insanSimge(g, tip, S, kal){
   }
 }
 
+const NOTA_SIMGE = !(BOLUM && BOLUM.nota_simge === false);
+// AKIS HARMANI (15 Eyl 2026, olculdu). Cue penceresi bitince siluet, o anda
+// calmasi gereken ADIM/EGZERSIZ klibine KESILEREK geciyordu: siluet kutusunda
+// yatay merkez tek karede medyanin 6-10 kati siciyordu (olc-siluet-akis.js).
+// 'akis: "harman2"' diyen bolumde cue klibi, taban katmani (adim/egzersiz) ile
+// harmanlaniyor - notr klip yerine GERCEKTEN bir sonra oynayacak klip ile.
+// Varsayilan kapali: yayinlanmis bolumlerin harmani degismiyor.
+const AKIS2 = !!(BOLUM && BOLUM.akis === 'harman2');
 function notaDoku(tip, renk, uzun){
   const c = document.createElement('canvas'); c.width = 320;
   // B'de ust yuz neredeyse kare (2.05 x 2.45) - doku da ona yakin olmali,
@@ -2054,11 +2234,17 @@ function notaDoku(tip, renk, uzun){
   const cx = 160, cy = yuk / 2;
   // Fayans yolun uzerinde yatik duruyor ve perspektifte dikeyde kisaliyor;
   // figur o yuzden dikeyde gerilmis ciziliyor, ekranda normal oranli gorunsun.
-  g.save();
-  g.translate(cx, cy + (TB ? 8 : 0));
-  if (TB) g.scale(1.0, 1.24);
-  insanSimge(g, tip, TB ? 1.58 : 0.74, TB ? 20 : 11);
-  g.restore();
+  // NOTA_SIMGE (13 Eyl 2026 aksami, kullanici: "fayanslar olsun sadece,
+  // uzerinde simgeler olmasin"). Bolum dosyasinda "nota_simge": false ise
+  // fayans cizilir, piktogram cizilmez - cue'yu fayansin RENGI ve seridi
+  // tasir. Varsayilan true: yayinlanmis bolumlerin dokusu degismez.
+  if (NOTA_SIMGE) {
+    g.save();
+    g.translate(cx, cy + (TB ? 8 : 0));
+    if (TB) g.scale(1.0, 1.24);
+    insanSimge(g, tip, TB ? 1.58 : 0.74, TB ? 20 : 11);
+    g.restore();
+  }
   g.globalCompositeOperation = 'source-over';
   return new THREE.CanvasTexture(c);
 }
@@ -2520,7 +2706,7 @@ let tabanKok = null, tabanMat = null;
       // gecen asma dalinin GOLGESI. Sayma gorevi zeminden TAVANA tasindi -
       // MEK-001 ile ayni desen katmanini tekrarlamamak icin sart (mekan-defteri
       // kurali: "ayni yapi, farkli palet yeni mekan sayilmaz").
-      uMod:    { value: 0 },                       // 0 = taban, 1 = karpuz
+      uMod:    { value: 0 },                       // 0 = taban, 1 = karpuz, 2 = elma
       uYol:    { value: new THREE.Color('#99ac96') },   // karpuz: kabugun koyu dis yuzu
       uSerit:  { value: new THREE.Color('#899e87') },   // karpuz: kabuk seridi
       uAk:     { value: new THREE.Color('#f1f2ea') },   // karpuz: beyaz kabuk katmani
@@ -2564,7 +2750,11 @@ let tabanKok = null, tabanMat = null;
       // akiyor; dunya istasyonu z - t*HIZ sabit kaliyor. Shader ayni ifadeyi
       // kullandigi icin golge, dalin GERCEK yerine kilitli - ayri bir
       // animasyon degil, ayni tek kaynaktan turuyor.
-      '  if (uMod > 0.5) {',
+      // DIKKAT (14 Eyl 2026): kosul once 'uMod > 0.5' idi; ELMA modu uMod=2
+      // gonderince KARPUZ dali calisiyor ve zemin karpuz ETI olarak PEMBE
+      // boyaniyordu (elma kaydinin uEt degeri = orta cizgi rengi). Dal artik
+      // araliga bakiyor.
+      '  if (uMod > 0.5 && uMod < 1.5) {',
       '    float sk = (vW.z - uT * uHIZ) / L - uKFaz;',
       '    float dd = (sk - floor(sk + 0.5)) * L;',      // en yakin dala uzaklik
       '    float g = exp(-(dd * dd) / (2.0 * 3.1 * 3.1));',
@@ -2634,6 +2824,29 @@ let tabanKok = null, tabanMat = null;
       '    gl_FragColor = vec4(c, 1.0);',
       '    return;',
       '  }',
+      // --- ELMA (14 Eyl 2026, MEK-003 "YIGIN"). Zemin iki parca:
+      //     (a) koridor DISI = yigin tabani, uzerini billboard elmalar kapatir,
+      //         burada yalnizca aralardan sizacak koyu bir taban rengi gerekli;
+      //     (b) koridor = bolum 01'in nota yolu - koyu bant + uc boyuna cizgi
+      //         + enine olcu cubuklari. Yol govdesi kutusu KAPALI (karpuzdaki
+      //         z-savasi tuzagi), koridor tamamen burada ciziliyor.
+      // --- ELMA (14 Eyl 2026, MEK-003 "YIGIN").
+      // Bu dal SADECE yigin tabanini boyar. Koridoru zeminMat ciziyor -
+      // bolum 01'in nota yolu (koyu yol + uc lane ayraci + akan renk bantlari)
+      // zaten o shader'da; burada bir kez daha cizilirse serit cift gorunuyor.
+      // Tabanin gorevi: elmalarin ARASINDAN sizan pikselin gok rengi degil,
+      // koyu yigin dibi olmasi (siyah %0 kurali icin de gerekli).
+      "      if (uMod > 1.5) {",
+      // Uzak alan: sahne sisi bu duzleme islemiyor (fog:false), bu yuzden
+      // gok rengine karisma shader icinde ve ERKEN yapiliyor - yoksa yiginin
+      // bittigi yerden ufka kadar duz bir zemin bandi kaliyor.
+      "        c = mix(c, uGok, clamp(pow(d * 2.6, 1.7), 0.0, 1.0));",
+      // koridora yaklastikca koyulasir: yigin dibi yolun kenarinda golgede
+      "        c *= mix(0.78, 1.0, smoothstep(3.2, 7.5, abs(vW.x)));",
+      "        c = mix(c, uGok, clamp((abs(vW.x) - 13.0) / 26.0, 0.0, 1.0) * 0.99);",
+      "        gl_FragColor = vec4(c, 1.0);",
+      "        return;",
+      "      }",
       '  float s = (vW.z - uT * uHIZ) / L;',
       '  float f = abs(fract(s) - 0.5);',
       '  float idx = floor(fract(floor(s) / 4.0) * 4.0 + 0.5);',
@@ -2847,24 +3060,31 @@ const KARPUZ_YAPRAK_GEO = new THREE.PlaneGeometry(1, 1);
 // castShadow KAPALI: 1600 ornegi golge gecisinde tekrar cizmek kare suresini
 // ikiye katliyordu; tarla parlak etin uzerinde zaten koyu siluet okunuyor.
 let tarlaIM = null, tarlaYaprakIM = null, tarlaVeri = [], tarlaYaprakVeri = [];
-const TARLA_SAY = 1600, TARLA_YAPRAK = 420, TARLA_KAPSAM = 300;
+const TARLA_SAY = 2200, TARLA_YAPRAK = 520, TARLA_KAPSAM = 300;
 {
   const rnd = (n) => { const x = Math.sin(n * 71.13) * 43758.5453; return x - Math.floor(x); };
   // Sasirtmali izgara: satirlar z'de 2,35 birim aralikli, her satir yarim adim
   // kaydirilmis. Duz izgara "dikili nizam" okunuyordu, sasirtmali olan tarla.
-  const SATIR = Math.ceil(TARLA_KAPSAM / 2.35);
+  const SATIR = Math.ceil(TARLA_KAPSAM / 1.70);   // 2,35 -> 1,70: yakin planda siralar arasi bosluk kapaniyor
   const SUTUN = Math.ceil(TARLA_SAY / (SATIR * 2));
   let n = 0;
   for (let r = 0; r < SATIR && n < TARLA_SAY; r++) {
-    const kaydir = (r % 2) * 1.45;
+    const kaydir = (r % 2) * 1.28;
     for (let c = 0; c < SUTUN && n < TARLA_SAY; c++) {
       for (const yon of [-1, 1]) {
         if (n >= TARLA_SAY) break;
         const h1 = rnd(n * 3 + 1), h2 = rnd(n * 3 + 2), h3 = rnd(n * 3 + 3);
-        const x = yon * (6.0 + kaydir + c * 2.90 + (h1 - 0.5) * 1.55);
-        const z0 = r * 2.35 + (h2 - 0.5) * 1.5;
-        // Boy da degisiyor: ayni capta karpuz dizisi desen gibi gorunuyordu.
-        const rr = 0.62 + h3 * 1.28;
+        // SINIR 4,35: koridorun kenari (ak kabuk 4,15'te biter) ile dolgunun
+        // basladigi yer arasinda BOS SERIT birakilmaz. Onceki deger 6,0 idi
+        // ve arada 1,85 birimlik bos et seridi kaliyordu; ufka dogru uzanan
+        // o serit izleyicinin gordugu tek buyuk boslukti (olculdu: yakin
+        // bantta %50,9 bosluk, kural <%25).
+        const x = yon * (4.35 + kaydir + c * 2.55 + (h1 - 0.5) * 1.35);
+        const z0 = r * 1.70 + (h2 - 0.5) * 1.1;
+        // Boy sutunla BUYUR: koridorun dibindeki ilk sira kucuk olmali,
+        // yoksa buyuk karpuz kadraji kapatiyor ve cue'yu gizliyor.
+        const yakinlik = Math.min(1, c / 3);
+        const rr = (0.34 + h3 * 0.42) + yakinlik * (0.36 + h3 * 0.78);
         tarlaVeri.push({ x, z0, r: rr, don: h1 * 6.28 });
         n++;
       }
@@ -2886,7 +3106,7 @@ const TARLA_SAY = 1600, TARLA_YAPRAK = 420, TARLA_KAPSAM = 300;
     const h1 = rnd(i2 * 5 + 101), h2 = rnd(i2 * 5 + 102), h3 = rnd(i2 * 5 + 103);
     const yon = h1 < 0.5 ? -1 : 1;
     tarlaYaprakVeri.push({
-      x: yon * (6.3 + h2 * 21.0),
+      x: yon * (4.6 + h2 * 22.0),
       z0: h3 * TARLA_KAPSAM,
       olc: 1.25 + h1 * 1.1,
       don: h2 * 6.28,
@@ -2898,6 +3118,156 @@ const TARLA_SAY = 1600, TARLA_YAPRAK = 420, TARLA_KAPSAM = 300;
   tarlaYaprakIM.frustumCulled = false;
   tarlaYaprakIM.visible = false;
   scene.add(tarlaYaprakIM);
+}
+
+// ================= ELMA YIGINI (14 Eyl 2026, MEK-003) =================
+// Mekani kuran kutle: gercek PD/CC0 elma fotograflarindan kesilmis BILLBOARD
+// (REF-009...REF-013). Kodla cizilmis kure DEGIL - foto-varlik-kurali.md.
+// Yedi ayri sprite, her biri kendi InstancedMesh'i (tek atlas + UV kaydirma
+// shader isterdi; yedi cizim cagrisi daha ucuz ve okunur).
+// Kamera sabit ve -z'ye bakiyor, bu yuzden duzlemin kendi normali (+z) zaten
+// kameraya donuk - kare basina quaternion hesabi yok.
+let elmaKok = null, elmaIM = [], elmaVeri = [];
+const ELMA_SPRITE = 7, ELMA_KAPSAM = 300, ELMA_SINIR = 3.45;
+{
+  const rnd = (n) => { const x = Math.sin(n * 61.71) * 43758.5453; return x - Math.floor(x); };
+  const yuk = new THREE.TextureLoader();
+  const dokular = [];
+  for (let i = 0; i < ELMA_SPRITE; i++) {
+    const d = yuk.load('../07-mekan/elma/sprite-' + i + '.png');
+    d.colorSpace = THREE.SRGBColorSpace;
+    dokular.push(d);
+  }
+  // Agirlik: gercek fotograflar agir basar, ton kaydirilan iki varyant seyrek
+  // (tasarim karesinde olculdu - esit dagitinca yesil neon gibi okunuyor).
+  const AGIRLIK = [3, 3, 3, 3, 2, 1, 1], TOPLAM_AG = 16;
+  const secSprite = (h) => {
+    let k = Math.floor(h * TOPLAM_AG), t = 0;
+    for (let i = 0; i < ELMA_SPRITE; i++) { t += AGIRLIK[i]; if (k < t) return i; }
+    return 0;
+  };
+  const kova = [];
+  for (let i = 0; i < ELMA_SPRITE; i++) kova.push([]);
+  let n = 0;
+  const SATIR = Math.ceil(ELMA_KAPSAM / 1.22), SUTUN = 26;
+  for (let r = 0; r < SATIR; r++) {
+    const kaydir = (r % 2) * 0.62;                 // sasirtmali izgara
+    for (let c = 0; c < SUTUN; c++) {
+      for (const yon of [-1, 1]) {
+        const h1 = rnd(n * 3 + 11), h2 = rnd(n * 3 + 12), h3 = rnd(n * 3 + 13);
+        const x = yon * (ELMA_SINIR + kaydir + c * 1.24 + (h1 - 0.5) * 0.62);
+        const z0 = r * 1.22 + (h2 - 0.5) * 0.8;
+        // Boy dagilimi: yigin duz bir hali gibi durmasin. Ayrica alcak
+        // frekansli iki dalga ile yigin kabarip cokuyor (tasarim karesindeki
+        // "yigilmis kutle" hissi bundan geliyor).
+        // Olcek: yakin plandaki elma kadraji kapatmamali. 1,52 denendi -
+        // on sirada kadrajin dortte birini yiyordu; 1,05'te yigin okunuyor,
+        // koridor ve cue acikta kaliyor.
+        const olc = 1.05 * (0.84 + h3 * 0.46);
+        const kabar = 0.42 * Math.sin(x * 0.31 + z0 * 0.17) + 0.26 * Math.sin(x * 0.11 - z0 * 0.07);
+        const sp = secSprite(rnd(n * 3 + 14));
+        kova[sp].push({ x, z0, olc, y: olc * 0.40 + kabar * 0.30 });
+        n++;
+      }
+    }
+  }
+  elmaKok = new THREE.Group();
+  elmaKok.visible = false;
+  const geo = new THREE.PlaneGeometry(1, 1);
+  for (let i = 0; i < ELMA_SPRITE; i++) {
+    // Renk 0,82: fotograflar parlak, bloom altinda beyaza doyuyordu.
+    const mat = new THREE.MeshBasicMaterial({ map: dokular[i], color: 0xd2d2d2, transparent: true,
+      alphaTest: 0.42, side: THREE.DoubleSide, fog: true, depthWrite: true });
+    const im = new THREE.InstancedMesh(geo, mat, Math.max(1, kova[i].length));
+    im.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+    im.castShadow = false; im.receiveShadow = false; im.frustumCulled = false;
+    elmaIM.push(im); elmaVeri.push(kova[i]); elmaKok.add(im);
+  }
+  scene.add(elmaKok);
+}
+
+// --- ELMA AGACLARI (14 Eyl 2026, kullanici: "saga ve sola elma agaclari
+// koyabilirsin" -> sonra "cok kotu ve silik duruyor, buyuk olsun").
+// ILK DENEME (silik serit) GERI ALINDI: uc kanopi kesiti sik bir cit gibi
+// diziliyordu, sis icinde acik yesil bir serit olarak okunuyordu.
+// SIMDI: TEK, BUTUN, MEYVELI agac (REF-017) - az sayida, BUYUK ve yakin.
+// Govde yigin tarafindan orculuyor, kanopi ufkun uzerinde duruyor.
+let elmaAgacKok = null, elmaAgacIM = [], elmaAgacVeri = [];
+const AGAC_SAY = 13;                       // her yan icin (7 idi - arkada bosluk kaliyordu)
+{
+  const rnd = (n) => { const x = Math.sin(n * 53.37) * 43758.5453; return x - Math.floor(x); };
+  const yuk = new THREE.TextureLoader();
+  elmaAgacKok = new THREE.Group();
+  elmaAgacKok.visible = false;
+  const geo = new THREE.PlaneGeometry(1, 1);
+  const d = yuk.load('../07-mekan/elma/agac-tek.png');
+  d.colorSpace = THREE.SRGBColorSpace;
+  // Renk BEYAZ: onceki 0xc8c8c8 kismasi sisle birlesince agaci soldurmustu.
+  const mat = new THREE.MeshBasicMaterial({ map: d, transparent: true,
+    alphaTest: 0.50, side: THREE.DoubleSide, fog: true, depthWrite: true });
+  const veri = [];
+  let n = 0;
+  for (let k = 0; k < AGAC_SAY; k++) {
+    for (const yon of [-1, 1]) {
+      const h1 = rnd(n * 4 + 41), h2 = rnd(n * 4 + 42), h3 = rnd(n * 4 + 43);
+      veri.push({
+        // Koridora GIRMEZ (|x| >= 12) ama yiginin icinde durur: govdenin
+        // kesik dibi elmalarin arkasinda kalsin.
+        x: yon * (11.0 + h1 * 19.0),
+        z0: (k / AGAC_SAY) * ELMA_KAPSAM + (h2 - 0.5) * 9.0,
+        boy: 16.5 + h3 * 6.5,             // BUYUK - kullanici karari (13-18 kucuk kaldi)
+        ayna: h2 < 0.5 ? -1 : 1,
+      });
+      n++;
+    }
+  }
+  const im = new THREE.InstancedMesh(geo, mat, veri.length);
+  im.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+  im.castShadow = false; im.receiveShadow = false; im.frustumCulled = false;
+  elmaAgacIM.push(im); elmaAgacVeri.push(veri); elmaAgacKok.add(im);
+  scene.add(elmaAgacKok);
+}
+
+function elmaAgacGuncelle(t){
+  const taban = Z_VURUS + 8 - ELMA_KAPSAM;
+  for (let k = 0; k < elmaAgacIM.length; k++) {
+    const dizi = elmaAgacVeri[k], im = elmaAgacIM[k];
+    for (let i = 0; i < dizi.length; i++) {
+      const o = dizi[i];
+      const z = taban + ((o.z0 + t * HIZ) % ELMA_KAPSAM);
+      // Dibi yiginin icinde kalir (y merkezi boy/2'den dusuk): yalnizca
+      // kanopi gorunur, govde yigin tarafindan orculur.
+      // Doku kare (1024x1024); en = boy. Dibi 1,2 birim gomulu.
+      // YAKIN KESME: kameraya 26 birimden fazla yaklasan agac kapatilir.
+      // Yakinda sprite'in bulanik alt kanopisi elmalarin uzerine biniyor ve
+      // "olu piksel" lekesi gibi okunuyordu (14 Eyl 2026, kullanici).
+      const yakinlik = z - (Z_VURUS - 26);
+      const gorun = yakinlik < 0 ? 1 : 0;
+      _eV.set(o.x, o.boy * 0.50 - 1.2, z);
+      _eS.set(o.boy * o.ayna * gorun, o.boy * gorun, 1);
+      _eM.compose(_eV, _eQ, _eS);
+      im.setMatrixAt(i, _eM);
+    }
+    im.instanceMatrix.needsUpdate = true;
+  }
+}
+
+const _eM = new THREE.Matrix4(), _eV = new THREE.Vector3(),
+      _eQ = new THREE.Quaternion(), _eS = new THREE.Vector3();
+function elmaGuncelle(t){
+  const taban = Z_VURUS + 8 - ELMA_KAPSAM;
+  for (let k = 0; k < elmaIM.length; k++) {
+    const dizi = elmaVeri[k], im = elmaIM[k];
+    for (let i = 0; i < dizi.length; i++) {
+      const o = dizi[i];
+      const z = taban + ((o.z0 + t * HIZ) % ELMA_KAPSAM);
+      _eV.set(o.x, o.y, z);
+      _eS.set(o.olc, o.olc, 1);
+      _eM.compose(_eV, _eQ, _eS);
+      im.setMatrixAt(i, _eM);
+    }
+    im.instanceMatrix.needsUpdate = true;
+  }
 }
 
 const _tM = new THREE.Matrix4(), _tV = new THREE.Vector3(),
@@ -3894,6 +4264,36 @@ const ENGEL_DOKU = [
 const DESTEK_MAT  = new THREE.MeshLambertMaterial({ color:'#454b53', fog:true });
 const DESTEK_KOYU = new THREE.MeshLambertMaterial({ color:'#24272c', fog:true });
 const DESTEK_GEO  = new THREE.BoxGeometry(1, 1, 1);
+// ENG-003 "GECIT" (14 Eyl 2026, kullanici B sikkini sectti). Engel mekanin
+// malzemesinden YAPILMAZ (elma/agac degil) - ayri nesne ailesi: AHSAP CIT.
+// Govde gercek PD fotograftan: dikey kalasli cit (REF-018) ve yatay kalas
+// (REF-019). Geometri bizim, doku fotograf - duz yuzey oldugu icin billboard
+// degil DOKU kurali gecerli (foto-varlik-kurali.md).
+const ELMA_TAHTA_DOKU = new THREE.TextureLoader().load('../07-mekan/elma/engel-tahta.png');
+const ELMA_KIRIS_DOKU = new THREE.TextureLoader().load('../07-mekan/elma/engel-kiris.png');
+for (const d0 of [ELMA_TAHTA_DOKU, ELMA_KIRIS_DOKU]) {
+  d0.colorSpace = THREE.SRGBColorSpace;
+  d0.wrapS = d0.wrapT = THREE.RepeatWrapping;
+}
+const ELMA_TAHTA_MAT = new THREE.MeshLambertMaterial({ map: ELMA_TAHTA_DOKU, fog: true });
+const ELMA_KIRIS_MAT = new THREE.MeshLambertMaterial({ map: ELMA_KIRIS_DOKU, fog: true });
+// ON UYARI: zeminde buyuyen golge halkasi. Nota fayansi cue'yu zaten
+// gosteriyor ama kural (engel-defteri madde 2.5) on uyariyi de sart kosuyor -
+// engelin kendisi de okunabilmeli.
+const ELMA_GOLGE_DOKU = (() => {
+  const c = document.createElement('canvas'); c.width = c.height = 256;
+  const g = c.getContext('2d');
+  const r = g.createRadialGradient(128, 128, 10, 128, 128, 126);
+  r.addColorStop(0.00, 'rgba(20,6,10,0.72)');
+  r.addColorStop(0.55, 'rgba(20,6,10,0.42)');
+  r.addColorStop(1.00, 'rgba(20,6,10,0.0)');
+  g.fillStyle = r; g.fillRect(0, 0, 256, 256);
+  return new THREE.CanvasTexture(c);
+})();
+const ELMA_GOLGE_MAT = new THREE.MeshBasicMaterial({ map: ELMA_GOLGE_DOKU,
+  transparent: true, depthWrite: false, fog: true });
+const ELMA_GOLGE_GEO = new THREE.PlaneGeometry(1, 1);
+let ELMA_MOD_AKTIF = false;
 // Halka kapi: yaricap 1 birim, olcek ile buyutuluyor. XY duzleminde.
 const SEHIR_HALKA_GEO = new THREE.TorusGeometry(1, 0.05, 10, 40);
 let SEHIR_PANO_DOKU = null, SEHIR_PLAKA_DOKU = null;
@@ -4080,6 +4480,21 @@ function engelDestekYap(){
     const m2 = new THREE.Mesh(KARPUZ_YAPRAK_GEO, yaprakMat);
     m2.visible = false; g.add(m2); d.kYaprak.push(m2);
   }
+  // ENG-003 GECIT parcalari: panel, lento, direk, capraz + on uyari golgesi
+  d.gPanel  = new THREE.Mesh(DESTEK_GEO, ELMA_TAHTA_MAT);
+  d.gLento  = new THREE.Mesh(DESTEK_GEO, ELMA_KIRIS_MAT);
+  d.gDirekL = new THREE.Mesh(DESTEK_GEO, ELMA_KIRIS_MAT);
+  d.gDirekR = new THREE.Mesh(DESTEK_GEO, ELMA_KIRIS_MAT);
+  d.gCapL   = new THREE.Mesh(DESTEK_GEO, ELMA_TAHTA_MAT);
+  d.gCapR   = new THREE.Mesh(DESTEK_GEO, ELMA_TAHTA_MAT);
+  d.gCap2L  = new THREE.Mesh(DESTEK_GEO, ELMA_TAHTA_MAT);
+  d.gCap2R  = new THREE.Mesh(DESTEK_GEO, ELMA_TAHTA_MAT);
+  d.gGolge  = new THREE.Mesh(ELMA_GOLGE_GEO, ELMA_GOLGE_MAT);
+  d.gGolge.rotation.x = -Math.PI / 2;
+  for (const k of ['gPanel','gLento','gDirekL','gDirekR','gCapL','gCapR','gCap2L','gCap2R','gGolge']) {
+    d[k].castShadow = false; d[k].visible = false;
+  }
+
   d.kAski = new THREE.Mesh(KARPUZ_SILINDIR_GEO, sapMat);  // wave: yapraklarin sapi
   d.kAski.rotation.z = Math.PI / 2;
   d.kAski.visible = false; g.add(d.kAski);
@@ -4089,11 +4504,138 @@ function engelDestekYap(){
   return g;
 }
 // gov: engel govdesinin OLCEKLENMIS olculeri {cx, y, w, h, d}
-function engelDestekGuncelle(g, tip, z, gov){
+// kimlik: notanin combo numarasi. Cesitleme BUNDAN turuyor - kare basina
+// rastgele YASAK (render kareleri sirayla gelmiyor, ayni engel karede
+// bicim degistirirdi). engel-defteri madde 3: 'ayni cue en az uc bicimde,
+// nota kimliginden deterministik'.
+function engelDestekGuncelle(g, tip, z, gov, kimlik){
   const d = g.userData;
   for (const k in d){
     if (Array.isArray(d[k])) { for (const q of d[k]) q.visible = false; }
     else d[k].visible = false;
+  }
+  if (ELMA_MOD_AKTIF) {
+    // ENG-003 GECIT (14 Eyl 2026). Dort cue, dort ACIKLIK: nesneyi degil
+    // GECILECEK BOSLUGU okursun. Gecis yukseklikleri engel-defterindeki
+    // sabitler - BICIM degisir, SAYI degismez.
+    // Her cue'nun UC bicimi var; hangisinin cizilecegi notanin kimliginden
+    // (combo) turuyor, yani ayni nota her karede ayni bicimi veriyor.
+    if (!gov) return;
+    const YARI = YOL_GEN / 2;                       // 3,5
+    const v = ((kimlik | 0) % 3 + 3) % 3;           // 0 / 1 / 2
+    d.gGolge.visible = true;
+    d.gGolge.scale.set(YOL_GEN * 1.5, YOL_GEN * 1.5, 1);
+    d.gGolge.position.set(0, 0.06, z + 6.0);
+    const direk = (q, x, h) => {
+      q.visible = true; q.scale.set(0.42, h, 0.42); q.position.set(x, h / 2, z);
+    };
+    const panel = (q, x, gen, yuk, der, zz) => {
+      q.visible = true; q.scale.set(gen, yuk, der || 0.44);
+      q.position.set(x, yuk / 2, zz === undefined ? z : zz);
+      q.rotation.z = 0;
+    };
+    const kalas = (q, x0, y0, x1, y1, zz) => {
+      const dx = x1 - x0, dy = y1 - y0, boy = Math.hypot(dx, dy);
+      q.visible = true; q.scale.set(0.50, boy, 0.46);
+      q.position.set((x0 + x1) / 2, (y0 + y1) / 2, zz === undefined ? z : zz);
+      q.rotation.z = -Math.atan2(dx, dy);
+    };
+
+    if (tip === 'charleston') {
+      // ALCAK ACIKLIK - tepe her bicimde 1,10; degisen NEREDE dolu oldugu.
+      if (v === 0) {
+        // 1) duz alcak kapi: koridoru bastan basa kapatir, ustu acik
+        panel(d.gPanel, 0, YOL_GEN + 3.2, 1.10);
+        direk(d.gDirekL, -(YARI + 0.9), 1.95);
+        direk(d.gDirekR,  (YARI + 0.9), 1.95);
+      } else if (v === 1) {
+        // 2) cift kanat: ortada 1,30 bosluk - ayak ORTADAN savrulur
+        const gen = YARI + 1.0;
+        panel(d.gPanel, -(0.65 + gen / 2), gen, 1.10);
+        panel(d.gCapL,   (0.65 + gen / 2), gen, 1.10);
+        direk(d.gDirekL, -(YARI + 0.9), 1.95);
+        direk(d.gDirekR,  (YARI + 0.9), 1.95);
+      } else {
+        // 3) kademeli: bir yari 1,10, oteki 0,72 - asimetrik siluet
+        panel(d.gPanel, -(YARI / 2 + 0.9), YARI + 1.6, 1.10);
+        panel(d.gCapR,   (YARI / 2 + 0.9), YARI + 1.6, 0.72);
+        direk(d.gDirekL, -(YARI + 0.9), 1.95);
+      }
+      return;
+    }
+
+    if (tip === 'side_L' || tip === 'side_R') {
+      // KAYIK ACIKLIK - derinlik 0,44 / tepe 3,54 her bicimde ayni.
+      const yon = (tip === 'side_L') ? 1 : -1;      // kapali yan
+      if (v === 0) {
+        panel(d.gPanel, yon * (YARI / 2 + 0.3), YARI + 0.6, 3.54);
+        direk(d.gDirekL, yon * (YOL_GEN / 2 + 0.9), 3.9);
+      } else if (v === 1) {
+        // 2) cerceve: yan panel + aciklikin ustunde kiris -> KAPI okumasi
+        panel(d.gPanel, yon * (YARI / 2 + 0.3), YARI + 0.6, 3.54);
+        d.gLento.visible = true;
+        d.gLento.scale.set(YOL_GEN + 2.0, 0.46, 0.5);
+        d.gLento.position.set(0, 3.54 + 0.23, z);
+        d.gLento.rotation.z = 0;
+        direk(d.gDirekL, -(YARI + 0.8), 3.7);
+        direk(d.gDirekR,  (YARI + 0.8), 3.7);
+      } else {
+        // 3) cift panel: ayni yanda arka arkaya iki ince panel (derinlik)
+        panel(d.gPanel, yon * (YARI / 2 + 0.3), YARI + 0.6, 3.54, 0.44, z);
+        panel(d.gCapL,  yon * (YARI / 2 + 0.3), YARI + 0.2, 3.10, 0.44, z + 1.6);
+        direk(d.gDirekL, yon * (YOL_GEN / 2 + 0.9), 3.9);
+      }
+      return;
+    }
+
+    if (tip === 'roof') {
+      // ALCAK LENTO - alt yuz her bicimde 2,55; ust sinir 4,10.
+      const lento = (q, alt, kal) => {
+        q.visible = true; q.scale.set(YOL_GEN + 2.4, kal, 0.55);
+        q.position.set(0, alt + kal / 2, z); q.rotation.z = 0;
+      };
+      if (v === 0) {
+        lento(d.gLento, 2.55, 1.55);
+      } else if (v === 1) {
+        // 2) cift kiris: 2,55 ve 3,55 - kol iki kez itiyor gibi okunur
+        lento(d.gLento, 2.55, 0.52);
+        lento(d.gPanel, 3.55, 0.52);
+      } else {
+        // 3) sarkitli lento: kirisden asagi inen iki kisa kalas
+        lento(d.gLento, 2.95, 1.15);
+        kalas(d.gCapL, -1.55, 2.55, -1.55, 3.10);
+        kalas(d.gCapR,  1.55, 2.55,  1.55, 3.10);
+      }
+      direk(d.gDirekL, -(YARI + 0.8), 3.3);
+      direk(d.gDirekR,  (YARI + 0.8), 3.3);
+      return;
+    }
+
+    if (tip === 'jacks') {
+      // PAPYON ACIKLIK - bel her bicimde 2,20 (y = 2,60).
+      const xd = YARI + 0.7, xi = 1.10, yBel = 2.60;
+      if (v === 0) {
+        kalas(d.gCapL, -xd, 0.0, -xi, yBel);
+        kalas(d.gCapR,  xd, 0.0,  xi, yBel);
+        kalas(d.gCap2L, -xi, yBel, -xd, 4.70);
+        kalas(d.gCap2R,  xi, yBel,  xd, 4.70);
+      } else if (v === 1) {
+        // 2) esikli papyon: yerde alcak kalas - bacak da acilmak zorunda
+        kalas(d.gCapL, -xd, 0.55, -xi, yBel);
+        kalas(d.gCapR,  xd, 0.55,  xi, yBel);
+        kalas(d.gCap2L, -xi, yBel, -xd, 4.40);
+        kalas(d.gCap2R,  xi, yBel,  xd, 4.40);
+        panel(d.gPanel, 0, YOL_GEN + 0.4, 0.55);
+      } else {
+        // 3) genis papyon: cevronlar daha yatik, ust aciklik daha genis
+        kalas(d.gCapL, -xd, 0.0, -xi, yBel);
+        kalas(d.gCapR,  xd, 0.0,  xi, yBel);
+        kalas(d.gCap2L, -xi, yBel, -(xd + 0.5), 3.95);
+        kalas(d.gCap2R,  xi, yBel,  (xd + 0.5), 3.95);
+      }
+      return;
+    }
+    return;
   }
   if (KARPUZ_MOD_AKTIF) {
     // Engelin govdesi (nota kutusu) bu modda GIZLI - engeli bu parcalar
@@ -4578,6 +5120,31 @@ if (mixer) {
     a.timeScale = klip.duration / hedef;
     aksiyon[ad] = { a, klip, hedef };
   }
+  // DONGUYE GORE YENIDEN HIZALAMA. n.bas yukarida hesaplandi ama orada klip
+  // sureleri henuz bilinmiyordu (klipler async yukleniyor). TEPE_FAZI degeri
+  // KLIBIN TAMAMINA gore yazilmis; dongu icindeki karsiligi farkli.
+  // Ornek: charleston tepe 0,30 -> 6,27 sn; dongu 2,61 sn oldugu icin
+  // dongu ici karsiligi (6,27 mod 2,61)/2,61 = 0,40.
+  for (const n of NOTALAR) {
+    const A = aksiyon[n.klip];
+    const dongu = KLIP_DONGU[n.klip];
+    if (!A || !dongu || !n.pencere) continue;
+    const dur = A.klip.duration;
+    const tekrar = Math.max(1, Math.round(n.pencere / dongu));
+    const payTam = (TEPE_FAZI[n.klip] !== undefined) ? TEPE_FAZI[n.klip] : ONALMA_PAY;
+    let payDongu = ((payTam * dur) % dongu) / dongu;
+    if (CUE_DONGU_FAZ[n.tip] !== undefined) payDongu = CUE_DONGU_FAZ[n.tip];
+    // Pencerede 'tekrar' adet dongu var; tepe bunlardan hangisine denk
+    // gelirse [0,25-0,76] bandina giren ilki secilir.
+    let pay = null;
+    for (let k = 0; k < tekrar; k++) {
+      const c = (payDongu + k) / tekrar;
+      if (c >= 0.25 && c <= 0.76) { pay = c; break; }
+    }
+    if (pay === null) pay = Math.min(0.76, Math.max(0.25, payDongu / tekrar));
+    n.bas = n.t - pay * n.pencere;
+    n.tekrar = tekrar;
+  }
 }
 
 // ---------------------------------------------------------------- HUD
@@ -5033,6 +5600,9 @@ const PY = Math.round(PANEL.y * H);
 kameraSiluet.aspect = PW / PH; kameraSiluet.updateProjectionMatrix();
 
 const maskeCv = document.createElement('canvas'); maskeCv.width = PW; maskeCv.height = PH;
+// AYNA kopyasi: sol yonlu cue'larda siluet yatay cevriliyor (bkz. AYNA_CUE).
+const aynaCv = document.createElement('canvas'); aynaCv.width = PW; aynaCv.height = PH;
+const ax2 = aynaCv.getContext('2d');
 const mx = maskeCv.getContext('2d');
 const icCv   = document.createElement('canvas'); icCv.width = PW; icCv.height = PH;
 const ix = icCv.getContext('2d');
@@ -5054,10 +5624,20 @@ function siluetPaneliCiz(renk){
 
   if (!siluet) return;
 
+  // AYNALAMA: sol yonlu cue'da maske yatay cevrilir. Klip asimetrik oldugu
+  // icin (sola yatis com -0,035, saga +0,137) iki yonu ayni klipten esit
+  // guclu okutmanin olculmus yolu bu.
+  const kaynak = SILUET_AYNA ? (() => {
+    ax2.clearRect(0, 0, PW, PH);
+    ax2.save(); ax2.translate(PW, 0); ax2.scale(-1, 1);
+    ax2.drawImage(maskeCv, 0, 0); ax2.restore();
+    return aynaCv;
+  })() : maskeCv;
+
   // ic dolgu icin maskenin siyah kopyasi
   ix.clearRect(0, 0, PW, PH);
   ix.globalCompositeOperation = 'source-over';
-  ix.drawImage(maskeCv, 0, 0);
+  ix.drawImage(kaynak, 0, 0);
   ix.globalCompositeOperation = 'source-in';
   ix.fillStyle = '#050110';
   ix.fillRect(0, 0, PW, PH);
@@ -5069,7 +5649,7 @@ function siluetPaneliCiz(renk){
   // yumusak dis parlama
   bx.globalAlpha = 0.55;
   bx.filter = `blur(${Math.round(0.007 * W)}px)`;
-  bx.drawImage(maskeCv, PX, PY);
+  bx.drawImage(kaynak, PX, PY);
   bx.filter = 'none';
 
   // KONTUR: maskeyi 8 yone kaydirip beyaz cizmek dis hat verir
@@ -5077,7 +5657,7 @@ function siluetPaneliCiz(renk){
   bx.globalAlpha = 1;
   for (let a = 0; a < 8; a++){
     const t = a * Math.PI / 4;
-    bx.drawImage(maskeCv, PX + Math.cos(t) * k, PY + Math.sin(t) * k);
+    bx.drawImage(kaynak, PX + Math.cos(t) * k, PY + Math.sin(t) * k);
   }
   // ic dolgu ustte -> geriye ince beyaz hat kalir
   bx.drawImage(icCv, PX, PY);
@@ -5120,18 +5700,32 @@ function kareKur(n){
   // toplaniyor (sadeMod) - kapatilan katmanlar ayni. Ayrildiklari yer
   // zemin shader'inin ritim katmani (uMod) ve bas ustundeki asma.
   const karpuzMod = ((yumusak < 0.5 ? O0 : O1).karpuz === true);
-  const sadeMod = tabanMod || karpuzMod;
+  // ELMA MODU (14 Eyl 2026, MEK-003 "YIGIN"). TABAN ve KARPUZ ile paylastigi
+  // tek sey yine SADELIK (yanlarda mimari yok) - bu yuzden ayni bayrakta
+  // toplaniyor. Ayrildigi yer: zemin shader'inin uMod=2 dali (yigin tabani +
+  // bolum 01'in nota yolu) ve billboard elma yigini.
+  const elmaMod = ((yumusak < 0.5 ? O0 : O1).elma === true);
+  const sadeMod = tabanMod || karpuzMod || elmaMod;
   const karistir = (a, b) => new THREE.Color(a).lerp(new THREE.Color(b), yumusak);
   zeminMat.uniforms.uGrid .value.copy(karistir(O0.grid[0], O1.grid[0]));
   zeminMat.uniforms.uGrid2.value.copy(karistir(O0.grid[1], O1.grid[1]));
   zeminMat.uniforms.uGrid3.value.copy(karistir(O0.grid[2], O1.grid[2]));
-  if (ufuk) ufuk.material.color.copy(karistir(O0.ufuk, O1.ufuk));
+  if (ufuk) {
+    ufuk.material.color.copy(karistir(O0.ufuk || O0.gok, O1.ufuk || O1.gok));
+    // ELMA: ufuk seridi yiginin arkasinda PARLAK bant olarak okunuyordu;
+    // bu mekanda ufku yigin siluetinin kendisi kuruyor.
+    ufuk.visible = !elmaMod;
+  }
   // Gokyuzu de ortamla degisir. A'da dort ortamin da gogu ayni koyu renk,
   // yani A icin bu satirlar gorunur bir sey degistirmez.
   const gok = karistir(O0.gok, O1.gok);
   scene.background.copy(gok);
   scene.fog.color.copy(gok);
   zeminMat.uniforms.uSis.value.copy(gok);
+  zeminMat.uniforms.uSeritGuc.value = elmaMod ? 0.42 : 1.0;
+  // ELMA: yol UC CIZGILI (bolum 01 dili) - sol / orta / sag. Varsayilan 9
+  // ayrac bu mekanda kalabalik okunuyordu.
+  zeminMat.uniforms.uSeritSik.value = elmaMod ? 3.0 : 9.0;
 
   // --- GUNDUZ KARISIMI (2 Eyl 2026)
   // Ortam 'gunduz: true' dediginde sahne acik alana doner. Gecis ortam
@@ -5171,6 +5765,10 @@ function kareKur(n){
   // "gecede sis mekani kapatan bir arac, gunduzde DUSMAN").
   // Ufka karisma isi sise degil, taban shader'inin kendi rampasina birakildi.
   if (karpuzMod) { scene.fog.near = 96; scene.fog.far = 260; }
+  // ELMA: gok acik, sis gece degerleriyle birakilirsa yol 78 birim icinde gok
+  // rengine yikaniyor (karpuzda olculmus tuzak). Ayrica yiginin ufka dogru
+  // gok rengine karismasi ISTENEN sey - sis o isi yapiyor, taban shaderi degil.
+  if (elmaMod) { scene.fog.near = 70; scene.fog.far = 235; }
   zeminMat.uniforms.uSisYakin.value = SIS_YAKIN + gd * 62;
   zeminMat.uniforms.uSisUzak .value = SIS_UZAK  + gd * 140;
   if (gokyuzu) {
@@ -5359,7 +5957,9 @@ function kareKur(n){
   // Mekan yukaridan kuruldugu icin kadrajin ust seridi zaten dolu; egimi
   // biraz artirmak hem ufku kurala sokuyor hem bas ustundeki kutleye yer
   // aciyor. Oteki modlarin cerceveleme karari DEGISMIYOR.
-  camera.lookAt(0, karpuzMod ? 2.62 : ((denizMod || sehirMod || sadeMod) ? 2.14 : 0.55), -6);
+  // ELMA: ufuk %41,6 olculmustu (kural %42-50). Bakis noktasi yukari alininca
+  // ufuk kadrajda asagi iner ve bant icine oturur - olculerek bulundu.
+  camera.lookAt(0, elmaMod ? 2.62 : (karpuzMod ? 2.62 : ((denizMod || sehirMod || sadeMod) ? 2.14 : 0.55)), -6);
 
   // --- KURULUS CEKIMI (5 Eyl 2026)
   // Referansta ilk 10 saniye piste DEGIL, denize bakiyor: tek platform
@@ -5482,6 +6082,7 @@ function kareKur(n){
   DENIZ_MOD_AKTIF = denizMod;
   SEHIR_MOD_AKTIF = sehirMod;
   KARPUZ_MOD_AKTIF = karpuzMod;
+  ELMA_MOD_AKTIF = elmaMod;
   if (sehirKok) {
     sehirKok.visible = sehirMod;
     if (sehirMod) sehirGuncelle(t, O0, O1, yumusak, karistir);
@@ -5505,7 +6106,7 @@ function kareKur(n){
       // uMod ritim katmanini secer: 0 = olcu cubugu + nabiz halkasi (MEK-001),
       // 1 = bas ustunden gecen asma dalinin golgesi (MEK-002). Ayni duzlem,
       // ayni rampa, farkli sayma ogesi.
-      U.uMod.value = karpuzMod ? 1 : 0;
+      U.uMod.value = elmaMod ? 2 : (karpuzMod ? 1 : 0);
       U.uYakin.value.copy(karistir(O0.tabanYakin || O0.gok, O1.tabanYakin || O1.gok));
       U.uUzak .value.copy(karistir(O0.tabanUzak  || O0.gok, O1.tabanUzak  || O1.gok));
       U.uGok  .value.copy(karistir(O0.gok, O1.gok));
@@ -5520,9 +6121,26 @@ function kareKur(n){
         U.uCekirdek.value.copy(karistir(O0.cekirdek   || O0.gok, O1.cekirdek   || O1.gok));
         U.uKFaz.value = KARPUZ_FAZ;
       }
+      if (elmaMod) {
+        // Shader'da: uYol = koridor koyu bandi, uSerit = SOL cizgi,
+        // uEt = ORTA cizgi, uHalka = SAG cizgi, uVurus = enine olcu cubugu.
+        U.uYol.value  .copy(karistir(O0.yol || O0.gok, O1.yol || O1.gok));
+        U.uSerit.value.copy(karistir(O0.elmaCizgiSol  || O0.grid[0], O1.elmaCizgiSol  || O1.grid[0]));
+        U.uEt.value   .copy(karistir(O0.elmaCizgiOrta || O0.grid[1], O1.elmaCizgiOrta || O1.grid[1]));
+        U.uHalka.value.copy(karistir(O0.elmaCizgiSag  || O0.grid[2], O1.elmaCizgiSag  || O1.grid[2]));
+      }
     }
   }
   // --- KARPUZ: bas ustunden gecen asma dallari (mekani kuran kutle)
+  // --- ELMA: billboard elma yigini (mekani kuran kutle)
+  if (elmaKok) {
+    elmaKok.visible = elmaMod;
+    if (elmaMod) elmaGuncelle(t);
+  }
+  if (elmaAgacKok) {
+    elmaAgacKok.visible = elmaMod;
+    if (elmaMod) elmaAgacGuncelle(t);
+  }
   if (karpuzKok) {
     karpuzKok.visible = karpuzMod;
     if (tarlaIM) { tarlaIM.visible = karpuzMod; tarlaYaprakIM.visible = karpuzMod; }
@@ -5725,7 +6343,7 @@ function kareKur(n){
     // KARPUZ: yol govdesi KAPALI - koridoru taban shader'i ciziyor (uYol).
     // Sebep yukarida yazili: govde ile taban duzlemi arasindaki 0,055 birim
     // yatik acida z-savasina giriyor ve koridor siyah bir seride donuyordu.
-    yolGovdeMesh.visible = !karpuzMod;
+    yolGovdeMesh.visible = !karpuzMod && !elmaMod;
     // Yolun yan yuzu gecede neredeyse siyah (#07060f). Gunduz birakilinca
     // acik gokyuzunun altinda kara bir sedde gibi duruyordu.
     if (sadeMod) {
@@ -5810,7 +6428,9 @@ function kareKur(n){
       // sahnesinde cue'lar duz levha olarak geliyordu. 'gunduz: true'
       // yazmak yerine kapi genisletildi - o bayrak gok kubbesi, balast
       // zemini ve yan hatlari da acardi.
-      const engelde = TB && (gd > 0.5 || KARPUZ_MOD_AKTIF) && m.userData.engel;
+      // ELMA (14 Eyl 2026): kapi bir kez daha genisletildi - ENG-003
+      // gecitleri bu mekanda da acik olmali, mekanin 'gunduz' bayragi yok.
+      const engelde = TB && (gd > 0.5 || KARPUZ_MOD_AKTIF || ELMA_MOD_AKTIF) && m.userData.engel;
       const z = Z_DOGUM + (Z_VURUS - Z_DOGUM) * ilerleme;
       if (engelde) {
         // OBBY: gar dili olan sari-siyah seritli doku yerine duz doygun
@@ -5987,12 +6607,12 @@ function kareKur(n){
         // KARPUZ: engelin govdesi HER cue'da gizli. Dort hareketin dordu de
         // ayni kutunun olceklenmis hali olamaz (4 Eyl dersi) - engeli
         // meyve / dal / kesit / yaprak kuruyor, kutu degil.
-        if (KARPUZ_MOD_AKTIF) m.visible = false;
+        if (KARPUZ_MOD_AKTIF || ELMA_MOD_AKTIF) m.visible = false;
         if (m.userData.destek){
           m.userData.destek.visible = true;
           engelDestekGuncelle(m.userData.destek, no.tip, z, gov ||
             { cx:m.position.x, y:m.position.y, w:2.05*m.scale.x,
-              h:0.34*m.scale.y, d:2.45*m.scale.z });
+              h:0.34*m.scale.y, d:2.45*m.scale.z }, no.combo || 0);
         }
       } else {
         if (m.userData.gece && m.material !== m.userData.gece) m.material = m.userData.gece;
@@ -6037,90 +6657,97 @@ function kareKur(n){
 
   // siluet: aktif cue varsa onun klibi, yoksa idle
   if (mixer){
-    // Blogun egzersizi, olcu izgarasina kilitli olarak dongude oynar.
     const suO = t / OLCU;
-    const blok = BLOKLAR.find(b => suO >= b[0] && suO < b[1]) || BLOKLAR[BLOKLAR.length-1];
-    const hareket = blok[3] || 'idle';
-    let ad = null, yerel = 0;
+    const blok0 = BLOKLAR.find(b => suO >= b[0] && suO < b[1]) || BLOKLAR[BLOKLAR.length-1];
 
-    // ============================================ SILUET ARTIK CUE'YU OYNUYOR
-    // HATA (2 Eyl 2026'ya kadar): siluet cue'lari HIC oynatmiyordu. Yalnizca
-    // bloguun 4. alanindaki "egzersiz" etiketini (jacks, charleston,
-    // running-man...) donguye aliyordu. Yani ekranda gelen nota 'duck' iken
-    // siluet charleston yapiyordu; ikisinin birbiriyle ilgisi yoktu.
-    // spec/cue-tipleri.md'nin kurali acikti ve ihlal ediliyordu:
-    //   "Siluetin cue ile AYNI VURUSTA tepki vermesi zorunlu."
-    // Artik oyle: o anda calisan cue varsa onun klibi oynar.
-    // NOTALAR t'ye gore sirali -> ikili arama, kare basina tarama yok.
-    let ozelSure = 0;
-    let lo = 0, hi = NOTALAR.length - 1, k = -1;
-    while (lo <= hi) { const m = (lo + hi) >> 1;
-      if (NOTALAR[m].bas <= t) { k = m; lo = m + 1; } else hi = m - 1; }
-    if (k >= 0) {
-      const n = NOTALAR[k];
-      if (t < n.bas + n.pencere && aksiyon[n.klip]) {
-        ad = n.klip; yerel = t - n.bas; ozelSure = n.pencere;
+    // ---------------------------------------------- SEGMAN (15 Eyl 2026)
+    // Siluetin o anda ne oynadigi TEK bir fonksiyondan cikiyor: cue varsa
+    // cue klibi, yoksa blogun adim/egzersiz klibi. Fonksiyon t'nin saf
+    // fonksiyonu oldugu icin BIR ONCEKI segman da hesaplanabiliyor - gecis
+    // harmani bundan turuyor.
+    // Sebep olculdu (olc-siluet-akis.js): klip degisimlerinde siluetin yatay
+    // merkezi tek karede medyanin 6-14 kati siciyordu; cue bitisi, cue
+    // baslangici ve step_L<->step_R takasi. Kullanici: "garip hareketler
+    // yapmasin".
+    const segAl = (tt) => {
+      let lo = 0, hi = NOTALAR.length - 1, kk = -1;
+      while (lo <= hi) { const m = (lo + hi) >> 1;
+        if (NOTALAR[m].bas <= tt) { kk = m; lo = m + 1; } else hi = m - 1; }
+      let cueBitis = 0;
+      if (kk >= 0) {
+        const n = NOTALAR[kk];
+        if (tt < n.bas + n.pencere && aksiyon[n.klip])
+          return { ad: n.klip, bas: n.bas, gecisBas: n.bas, sure: n.pencere, ayna: !!AYNA_CUE[n.tip] };
+        // Cue bitmis: dolgu segmani IZGARA basindan degil, cue'nun BITTIGI
+        // yerden baslar. Yoksa gecis harmani hic tetiklenmiyordu - cue tam
+        // ortasinda bittigi adim segmaninin basi cok geride kaliyor.
+        cueBitis = n.bas + n.pencere;
       }
-    }
+      const bl = BLOKLAR.find(b => tt / OLCU >= b[0] && tt / OLCU < b[1]) || BLOKLAR[BLOKLAR.length-1];
+      const hr = bl[3] || 'idle';
+      if (hr === 'adim') {
+        const yn = Math.floor(tt / (OLCU / 2));
+        const gb = yn * (OLCU / 2);
+        return { ad: (yn % 2) ? 'step-right' : 'step-left', bas: gb,
+                 gecisBas: Math.max(gb, cueBitis), sure: OLCU / 2, ayna: false };
+      }
+      if (hr !== 'nefes' && aksiyon[hr] && IZINLI_KLIP(hr)) {
+        const hd = HEDEF_SURE[hr] || OLCU;
+        const gb2 = Math.floor(tt / hd) * hd;
+        return { ad: hr, bas: gb2, gecisBas: Math.max(gb2, cueBitis), sure: hd, ayna: false };
+      }
+      const nb = aksiyon['idle-breathing'] ? 'idle-breathing' : 'idle';
+      const hd2 = HEDEF_SURE[nb] || OLCU;
+      const gb3 = Math.floor(tt / hd2) * hd2;
+      return { ad: nb, bas: gb3, gecisBas: Math.max(gb3, cueBitis), sure: hd2, ayna: false };
+    };
+    const olcek = (adx, surex) => {
+      const A0 = aksiyon[adx]; if (!A0) return 1;
+      const dg = KLIP_DONGU[adx];
+      if (dg) { const tk = Math.max(1, Math.round(surex / dg)); return (tk * dg) / surex; }
+      return A0.klip.duration / surex;
+    };
 
-    if (!ad) {
-      // cue yok: blogun kendi hareketi. Bolum dosyasi hangi hareketlerin
-      // serbest oldugunu soyluyor; listede olmayan bir etiket gelirse
-      // nefese duser - boylece "sadece su 3 hareket" sozu motorda GARANTI.
-      if (hareket === 'adim') {
-        const yariNo = Math.floor(t / (OLCU / 2));
-        ad = (yariNo % 2) ? 'step-right' : 'step-left';
-        yerel = t % (OLCU / 2);
-      } else if (hareket !== 'nefes' && aksiyon[hareket] && IZINLI_KLIP(hareket)) {
-        ad = hareket;
-        yerel = t % (HEDEF_SURE[ad] || OLCU);
-      } else {
-        ad = aksiyon['idle-breathing'] ? 'idle-breathing' : 'idle';
-        yerel = t % (HEDEF_SURE[ad] || OLCU);
-      }
+    const seg = segAl(t);
+    let ad = seg.ad, yerel = t - seg.bas, ozelSure = seg.sure;
+    SILUET_AYNA = seg.ayna;
+
+    // GECIS HARMANI: segman degisiminin ilk GECIS saniyesinde onceki segman
+    // hala calmaya devam ediyormus gibi hesaplanip uzerine harmanlaniyor.
+    const GECIS = AKIS2 ? 0.16 : 0;
+    let segOnce = null, w = 1;
+    const segBasi = (seg.gecisBas !== undefined) ? seg.gecisBas : seg.bas;
+    if (GECIS > 0 && (t - segBasi) < GECIS && segBasi > 0.001) {
+      segOnce = segAl(segBasi - 1e-4);
+      if (segOnce.ad === seg.ad) segOnce = null;
+      else { const x = (t - segBasi) / GECIS; w = x * x * (3 - 2 * x); }
     }
-    // ==================================================== HARMAN (CROSSFADE)
-    // 5 Eyl 2026. Onceki halde klip degisimi DUZ ANAHTARLAMAYDI: bir kare
-    // arm-wave, sonraki kare idle. Kliplerin hepsi notr duruşta baslayip
-    // bitseydi sorun olmazdi ama olculdu, bitmiyorlar (idle ile ortusme,
-    // 03-motor/faz-tarama.js):
-    //   duck 1,00  |  hop 0,48  |  dodge 0,48  |  arm-wave 0,29
-    // arm-wave hicbir fazda kollari indirmiyor - tek kareda sicriyordu.
-    // Cozum, klibin ILK ve SON HARMAN saniyesinde notr klibe agirlik verip
-    // araya gecis koymak. Deterministik: agirlik yalnizca 'yerel'den
-    // turetiliyor, onceki karenin durumu tutulmuyor - kare atlansa bile
-    // ayni sonuc cikar (render.js kareleri sirayla vermek zorunda degil).
-    const HARMAN = 0.10;                       // saniye
+    // Aynalama harman sirasinda BASKIN segmana gore secilir; yoksa yari yolda
+    // figur aniden cevriliyor.
+    if (segOnce) SILUET_AYNA = (w >= 0.5) ? seg.ayna : segOnce.ayna;
+
     const A = aksiyon[ad];
-    const N = aksiyon['idle-breathing'] || aksiyon['idle'];
+    const N = segOnce ? aksiyon[segOnce.ad] : null;
     if (A){
       const sure = ozelSure || A.hedef;
-      let w = 1;
-      if (N && A !== N && sure > HARMAN * 2){
-        w = Math.min(yerel / HARMAN, (sure - yerel) / HARMAN, 1);
-        w = Math.max(0, Math.min(1, w));
-        w = w * w * (3 - 2 * w);               // smoothstep - ucta yumusak
-      }
-      const harmanla = (w < 0.999) && N && A !== N;
+      const harmanla = !!N && N !== A && w < 0.999;
       for (const [k,v] of Object.entries(aksiyon))
         v.a.enabled = (k === ad) || (harmanla && v === N);
 
       A.a.play();
-      A.a.setEffectiveWeight(w);
-      // Klip cue'nun penceresine SIGDIRILIYOR: timeScale sabit degil,
-      // her cue icin yeniden hesaplaniyor. Boylece hareket bir sonraki
-      // cue gelmeden tamamlaniyor. Cue yokken klibin kendi hedefi gecerli.
-      A.a.timeScale = A.klip.duration / sure;
-      let nSure = 0;
+      A.a.setEffectiveWeight(harmanla ? w : 1);
+      A.a.timeScale = olcek(ad, sure);
+      let nSure = 0, nYerel = 0;
       if (harmanla){
-        nSure = N.hedef || OLCU;
+        nSure = segOnce.sure;
+        nYerel = t - segOnce.bas;              // onceki segman DEVAM ediyormus gibi
         N.a.play();
         N.a.setEffectiveWeight(1 - w);
-        N.a.timeScale = N.klip.duration / nSure;
+        N.a.timeScale = olcek(segOnce.ad, nSure);
       }
       mixer.setTime(0);
       A.a.time = (yerel % sure) * A.a.timeScale;
-      if (harmanla) N.a.time = (t % nSure) * N.a.timeScale;
+      if (harmanla) N.a.time = (nYerel % nSure) * N.a.timeScale;
       mixer.update(0);
       // root motion kilidi - poz korunur, yer degistirme silinir
       if (kokKemik && kokBaslangic) {
@@ -6280,7 +6907,8 @@ window.kareAl = (bicim, kalite) => {
 window.__T = { THREE, scene, camera, siluet, notaMesh, NOTALAR, halka, mixer, aksiyon };
 window.HAZIR = true;
 window.SILUET_VAR = !!siluet;
-window.insanSimge = insanSimge;   // simge sayfasi uretmek icin
+window.insanSimge = insanSimge;   // simge tablosu icin
+window.__CUE = CUE;                // cue tablosunun tamami - simge-tablosu.js okuyor   // simge sayfasi uretmek icin
 
 // Kapak icin tek siluet karesi: saydam arka plan, konturlu, istenen olcude.
 // Videodaki panelden bagimsiz - kapakta siluet ekranin ortasinda ve buyuk

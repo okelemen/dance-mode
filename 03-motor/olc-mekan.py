@@ -37,6 +37,32 @@ if '--ust' in sys.argv:
     UST = float(sys.argv[sys.argv.index('--ust') + 1])
 u0 = int(H * UST)
 ufuk = int(np.argmax(np.abs(np.diff(orta))[u0:int(H*0.8)])) + 1 + u0
+# --gok: IKINCI ufuk yontemi (14 Eyl 2026, MEK-003 elma yiginda gerekti).
+# Ziplama yontemi bu mekanda %71 diyordu: orta kolonlar bastan asagi KOYU
+# koridor oldugu icin gok/sahne siniri keskin bir ziplama yapmiyor, en buyuk
+# ziplama yakin plandaki parlak elmalarin ust kenarina denk geliyor.
+# Bu yontem dogrudan GOK RENGINI izliyor: ust 20 satirin medyani gok sayilir,
+# ufuk = gok rengine yakin piksel orani %50'nin altina dustugu ilk satir.
+# Yontem secimi olcumle degil MEKANLA ilgili: gokte kutle varsa --ust,
+# koridor koyuysa --gok. Hangi yontemin kullanildigi deftere yazilir.
+# --yigin: UCUNCU ufuk yontemi (14 Eyl 2026, MEK-003'e BUYUK agaclar girince
+# gerekti). Gokte buyuk kutle varsa --gok de sasiyor: agac gok rengini erken
+# bozuyor ve ufku yukari cekiyor (%38 dedi, gercek %45,7). Bu yontem mekanin
+# kendi yuzeyini ariyor: ufuk = ORTA kolonlarda DOYGUN-SICAK piksel oraninin
+# %50'yi astigi ilk satir (yigin yuzeyi). Gokteki/kanopideki her sey disarida
+# kalir. Kullanim: zemin doygun ve kimlikli bir malzemeyse.
+if '--yigin' in sys.argv:
+    _o = im[:, int(W*0.28):int(W*0.72)]
+    _mx = _o.max(2); _mn = _o.min(2)
+    _S = np.where(_mx > 0, (_mx - _mn) / np.maximum(_mx, 1e-6), 0)
+    _k = (_S > 0.38) & (_mx > 0.35) & (_o[:, :, 0] >= _o[:, :, 2])
+    ufuk = int(np.argmax(_k.mean(axis=1) > 0.5))
+if '--gok' in sys.argv:
+    _g = np.median(im[:20, int(W*0.30):int(W*0.70)].reshape(-1, 3), axis=0)
+    _o = im[:, int(W*0.28):int(W*0.72)]
+    # im 0-1 araliginda; esik 38/255 (sRGB'de ~15 birim fark).
+    _oran = (np.linalg.norm(_o - _g, axis=2) < 38 / 255.0).mean(axis=1)
+    ufuk = int(np.argmax(_oran < 0.5))
 # mekan bandi = kadrajin ust yarisi, oyun alani disi orta serit
 mekan = (slice(0, int(H*0.44)), slice(int(W*0.30), int(W*0.70)))
 Sm = S[mekan][gor[mekan] & ~hud[mekan]]
