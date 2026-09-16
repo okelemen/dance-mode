@@ -1,0 +1,186 @@
+{
+ "_": "ELMA bolumu (16 Eyl 2026). Mekan MEK-003 (elma YIGINI + cokmus oluk yol + elma agaclari), hareket seti HAR-003 = B: charleston + side-to-side + raise-roof + jacks. Muzik Subterranean Pulse, 132,500 BPM, 336 olcu. SURE KURALI (docs/KURALLAR.md md.1): video 9,5-10,5 dk; 336 olcu = 608,6 sn = 10:08,6.",
+ "no": 8,
+ "baslik": "ELMA | Yigin kosusu",
+ "tema": "b",
+ "bpm": 132.5,
+ "_bpm": "Sehir bolumunde olculdu ve kilitlendi: 132,500. Kaynak parca drop'tan kesilmis, izgara oradan kuruldu (bkz. sehir kayitlari). Onizleme (64 olcu) bu BPM ile ciktigi icin kesitler ve iskelet birebir tasiniyor.",
+ "toplam_olcu": 336,
+ "muzik": "01-muzik/subterranean-pulse-336olcu.wav",
+ "_muzik": "Dosya zaten 336 olcu (608,6 sn) - uzatmaya gerek yok, ofset 0. Sehir bolumu de ayni dosyayi kullaniyor.",
+ "mekanik": "temel",
+ "_mekanik": "Ileri cue tipi (hold) YOK. Bu bolumun yeni ogrenilecek seyi: charleston.",
+ "hareketler": [
+  "charleston",
+  "side_L / side_R",
+  "roof",
+  "jacks"
+ ],
+ "_hareket_gerekce": "HAR-003, kullanici B sikkini sectti. Olculdu (olc-iou.py, tepe fazi, esik 0,50): en yuksek cift jacks x raise-roof 0,482 - SET GECERLI. Dort ayri sekil ailesi: ayak capraz savurma / govde yana salinim / dikey kol itisi / havada acilma.",
+ "ortamlar": [
+  "ELMA"
+ ],
+ "ortam_olcu": [
+  0
+ ],
+ "_ortam": "Tek sahne. MEK-003; spec/ortamlar.json -> ELMA.",
+ "_kaliplar": "Her kalip BIR olcu (dort vurus). Adim (step) cue'su baglayici olarak duruyor - HAR-003 dort hareketi arasindaki gecisi tasiyor ve siluetin yerinde donmasini engelliyor.",
+ "kaliplar": {
+  "st": [
+   "step_L",
+   null,
+   "step_R",
+   null
+  ],
+  "stB": [
+   "step_R",
+   null,
+   null,
+   null
+  ],
+  "bos": [
+   null,
+   null,
+   null,
+   null
+  ],
+  "ch": [
+   "charleston",
+   null,
+   null,
+   null
+  ],
+  "rf": [
+   "roof",
+   null,
+   null,
+   null
+  ],
+  "jk": [
+   "jacks",
+   null,
+   null,
+   null
+  ],
+  "sdR": [
+   "side_R",
+   null,
+   null,
+   "step_R"
+  ],
+  "sdL": [
+   "side_L",
+   null,
+   null,
+   "step_L"
+  ]
+ },
+ "_charleston": "charleston penceresi IKI OLCU (15 Eyl 2026, kullanici): dongusu 2,61 sn, tek olcuye (1,81 sn) sigmadigi icin 1,44x hizlaniyordu. Kendisinden sonraki olcu bos birakilarak pencere 3,62 sn'ye cikti -> 0,72x. BU YUZDEN her kademede 'ch' daima 'bos' ile devam eder - en yogun kademede bile.",
+ "kademeler": {
+  "og1": [
+   "ch",
+   "bos"
+  ],
+  "og2": [
+   "sdR",
+   "st",
+   "sdL",
+   "st"
+  ],
+  "og3": [
+   "rf",
+   "bos"
+  ],
+  "og4": [
+   "jk",
+   "bos"
+  ],
+  "c1": [
+   "ch",
+   "bos",
+   "rf",
+   "bos",
+   "ch",
+   "bos",
+   "jk",
+   "bos"
+  ],
+  "c2": [
+   "ch",
+   "bos",
+   "sdR",
+   "stB",
+   "rf",
+   "bos",
+   "jk",
+   "stB"
+  ],
+  "c3": [
+   "ch",
+   "bos",
+   "jk",
+   "sdR",
+   "rf",
+   "stB",
+   "jk",
+   "sdL"
+  ],
+  "c4": [
+   "ch",
+   "bos",
+   "jk",
+   "rf",
+   "sdR",
+   "jk",
+   "rf",
+   "sdL"
+  ],
+  "mola": [
+   "sdR",
+   "st",
+   "sdL",
+   "st"
+  ]
+ },
+ "_kademe_gerekce": "Zorluk kademeler arasinda artiyor, blok icinde degil. c1'de sekiz olcunun dordu bos (yogunluk 0,50), c2'de ikisi bos + iki adim (0,75), c3'te bir bos (0,875), c4'te bir bos ama bos olmayanlarin hepsi set hareketi (1,00). charleston her kademede tek ve arkasi bos - pencere kurali kademeyle degismiyor.",
+ "iskelet": [
+  [0, 8, "bos", "nefes"],
+  [8, 16, "og1", "adim"],
+  [16, 24, "og2", "adim"],
+  [24, 32, "og3", "adim"],
+  [32, 40, "og4", "adim"],
+
+  [40, 56, "c1", "adim"],
+  [56, 72, "c1", "adim"],
+  [72, 88, "c1", "adim"],
+  [88, 96, "mola", "nefes"],
+
+  [96, 112, "c2", "adim"],
+  [112, 128, "c2", "adim"],
+  [128, 144, "c2", "adim"],
+  [144, 152, "mola", "nefes"],
+
+  [152, 168, "c3", "adim"],
+  [168, 184, "c3", "adim"],
+  [184, 200, "c3", "adim"],
+  [200, 208, "mola", "nefes"],
+
+  [208, 224, "c4", "adim"],
+  [224, 240, "c4", "adim"],
+  [240, 256, "c4", "adim"],
+  [256, 264, "mola", "nefes"],
+
+  [264, 280, "c3", "adim"],
+  [280, 296, "c4", "adim"],
+  [296, 312, "c4", "adim"],
+  [312, 320, "mola", "nefes"],
+
+  [320, 328, "c4", "adim"],
+  [328, 336, "mola", "nefes"]
+ ],
+ "_iskelet": "40 ogretme (8 nefes + dort hareket x8) + 296 = 16 calisma blogu (16'lik) + 6 mola (8'lik). Dizilim (3 calisma + 1 mola) x5, sonra 8 calisma + 8 mola kapanis. Bolum uzarken blok UZUNLUGU degil SAYISI artti - 64 olculuk onizlemenin ogretme sirasi (ch -> side -> roof -> jacks) aynen korundu.",
+ "nota_simge": false,
+ "_nota_simge": "13 Eyl 2026 aksami kullanici karari: fayans VAR, simge YOK. Cue'yu fayansin rengi ve seridi tasiyor.",
+ "akis": "harman2",
+ "_akis": "15 Eyl 2026: cue klibi, kesilerek degil taban katmanla (adim/egzersiz) harmanlanarak biter. olc-siluet-akis.js ile olculdu."
+}
