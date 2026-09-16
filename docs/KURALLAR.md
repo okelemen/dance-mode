@@ -36,6 +36,21 @@ Bölüm uzarken **blok UZUNLUĞU değil SAYISI artar.**
 - Dizilim: (3 çalışma + 1 mola) × N, sonda bir mola.
 - Zorluk kademeler arasında artar (c1 → c4), tek blok içinde değil.
 
+## 2a. LEVEL DAĞILIMI (16 Eyl 2026)
+
+**Her videoda HUD'daki LEVEL video boyunca 1 → 2 → 3 → 4 → 5 ilerler.**
+Süre bu beş levele eşit paylaştırılır (10 dakikalık bölümde her level ~2 dk).
+Bütün video boyunca "LEVEL 1" yazması kural ihlalidir.
+
+- Sınırlar: `toplam_olcu × k / 5` (k = 1…4). İskelet blok sınırına (tercihen
+  mola sonrasına) yuvarlanabilir, dilimler yaklaşık eşit kalır.
+- **Motor tuzağı:** `sahne.html`'de seviye ortama bağlı (`seviye: i + 1`).
+  Tek sahneli bölümde ortam bir tane olduğu için level hiç artmaz. Level,
+  ortamdan bağımsız olarak bölüm dosyasından gelmeli.
+- Geçişte "LEVEL UP" duyurusu çıkar.
+- Render sonrası kare kontrolünde her dilimden en az bir karede LEVEL okunur.
+- İlk ihlal: `DANCE-MODE-06-ELMA-1080p.mp4` baştan sona LEVEL 1.
+
 ## 3. MÜZİK
 
 - Müzik dosyası bölümün ölçü sayısıyla **birebir** aynı olmalı
