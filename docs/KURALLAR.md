@@ -51,6 +51,14 @@ Bütün video boyunca "LEVEL 1" yazması kural ihlalidir.
 - Render sonrası kare kontrolünde her dilimden en az bir karede LEVEL okunur.
 - İlk ihlal: `DANCE-MODE-06-ELMA-1080p.mp4` baştan sona LEVEL 1.
 
+## 2b. ENGEL = SİLUETİN HAREKETİ (16 Eyl 2026)
+
+Siluetin hareketi engeli **gerçekte geçmek için yapılacak** hareket olur.
+Üstte engel → eğil/çömel · yerde alçak engel → zıpla/yüksek adım · bir yanı
+kapalı → açık tarafa yana · hedef → o yöne uzan/it · dar geçit → gövdeyi daralt.
+Önce engel, sonra hareket; iki hareketle okunabilen engel kullanılmaz. Tam tablo:
+`Masaüstü/REFERANSLAR/engel-defteri.md`.
+
 ## 3. MÜZİK
 
 - Müzik dosyası bölümün ölçü sayısıyla **birebir** aynı olmalı

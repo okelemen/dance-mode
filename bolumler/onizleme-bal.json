@@ -1,0 +1,44 @@
+{
+ "_": "ONIZLEME TEK SAHNE - BAL PETEGI (17 Eyl 2026, MEK-004). Mekan kodla (fotograf yok, kullanici istisnasi sadece bu video). Engel ENG-004 mavi buz. Hareket seti HAR-004 ENGELDEN turetildi (kural: engel neyse siluetin hareketi o): alcak buz -> zipla, sacak -> egil, yarim levha -> acik tarafa yan adim, buz paneli -> iki elle it. KURAL: hareketler/kaliplar/kademeler onceki bolumden KOPYALANMADI.",
+ "no": 9,
+ "baslik": "ONIZLEME | Tek sahne BAL",
+ "tema": "b",
+ "toplam_olcu": 64,
+ "muzik": "01-muzik/subterranean-pulse-336olcu.wav",
+ "_muzik": "GECICI: kesit icin elde 132,5 BPM'de olculmus tek muzik bu. Bolumun muzigi ayrica secilecek.",
+ "mekanik": "temel",
+ "hareketler": ["zipla_a", "egil", "yanadim_L / yanadim_R", "it_c"],
+ "ortamlar": ["BAL"],
+ "ortam_olcu": [0],
+ "bpm": 132.5,
+ "seviye_bes": true,
+ "_seviye_bes": "KURAL (16 Eyl 2026): LEVEL 1-5 bolum suresine esit dagilir; ortamdan bagimsiz.",
+ "kaliplar": {
+  "st": ["step_L", null, "step_R", null],
+  "stB": ["step_R", null, null, null],
+  "bos": [null, null, null, null],
+  "zp": ["zipla_a", null, null, null],
+  "eg": ["egil", null, null, null],
+  "yL": ["yanadim_L", null, null, null],
+  "yR": ["yanadim_R", null, null, null],
+  "it": ["it_c", null, null, null]
+ },
+ "kademeler": {
+  "og1": ["zp", "bos"],
+  "og2": ["eg", "bos"],
+  "og3": ["yL", "st", "yR", "st"],
+  "og4": ["it", "bos"],
+  "d16": ["zp", "bos", "yL", "stB", "eg", "bos", "it", "stB", "yR", "bos", "zp", "stB", "it", "bos", "eg", "stB"]
+ },
+ "iskelet": [
+  [0, 8, "bos", "nefes"],
+  [8, 16, "og1", "adim"],
+  [16, 24, "og2", "adim"],
+  [24, 32, "og3", "adim"],
+  [32, 40, "og4", "adim"],
+  [40, 56, "d16", "adim"],
+  [56, 64, "bos", "nefes"]
+ ],
+ "nota_simge": false,
+ "akis": "harman2"
+}

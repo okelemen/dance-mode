@@ -1243,6 +1243,37 @@
    "elmaCizgiOrta": "#ff6a9e",
    "elmaCizgiSag": "#ba78ff",
    "ufuk": "#e8a2b4"
+  },
+  "BAL": {
+   "_": "TEK SAHNE / BAL PETEGI (16-17 Eyl 2026, MEK-004). Tasiyici fikir: malzeme mekani - ufka kadar bal dolu petek; hucrelerin cogu balla dolu ve parlak, bir kismi mum kapakli, birkaci bos. Yol: petek sirtina dokulmus koyu bal akintisi, duvarlar alttan seciliyor, kenarda parlak bal dudagi. Ritim: her olcude yolun iki yaninda yukselip kopan bal iplikleri. FOTOGRAF YOK (kullanici: 'Kendin yap. Sadece bu video icin') - her sey shader ve geometri. Engel ENG-004 mavi buz.",
+   "gok": "#ede0c7",
+   "zemin": "gok",
+   "dekor": "yok",
+   "bicim": "kemer",
+   "grid": [
+    "#6ce8e2",
+    "#ff6a9e",
+    "#ba78ff"
+   ],
+   "kemer": [
+    "#6ce8e2",
+    "#ff6a9e",
+    "#ba78ff",
+    "#8a5ca8",
+    "#6d4a7a"
+   ],
+   "ara": 27.7,
+   "olcek": 1.0,
+   "en": 1.0,
+   "boy": 1.0,
+   "yer": 5.3,
+   "tabanYakin": "#d99a2c",
+   "tabanUzak": "#e7c58a",
+   "tabanVurus": "#ffd6a8",
+   "tabanHalka": "#ba78ff",
+   "yol": "#4a2108",
+   "ufuk": "#ede0c7",
+   "bal": true
   }
  },
  "_kaynak": "Bazi ortamlar rakip karelerinden OLCULEREK turetildi (docs/kanal-kareleri/). Olculen paletler ve parlaklik profilleri docs/OLCUM-KANAL-KARELERI.md icinde."
