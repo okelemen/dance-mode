@@ -68,6 +68,11 @@ kapalı → açık tarafa yana · hedef → o yöne uzan/it · dar geçit → g�
 - Müzik depoya girmez (bkz. `.gitignore`), bu yüzden **ses Actions'ta değil
   yerelde eklenir.**
 
+### 3a. Her video yeni müzik (17 Eyl 2026)
+
+Her bölüm kendi müziğiyle çıkar. Bölüme özel, ölçülmüş müzik yoksa tam render
+başlamaz. Hata kaydı: BAL render'ı önceki bölümlerin müziğiyle başlatıldı, iptal edildi.
+
 ## 4. RENDER HATTI
 
 - Tam bölüm: GitHub Actions `render-bolum.yml`, paralel parçalar,
@@ -88,3 +93,28 @@ kapalı → açık tarafa yana · hedef → o yöne uzan/it · dar geçit → g�
 - O klasöre **önizleme, kesit, kare, not girmez.** Süre kuralına uymayan bir
   çıktı oraya master diye konmaz.
 - Oradaki hiçbir dosya sorulmadan taşınmaz/silinmez.
+
+## 6. KAPAK ŞABLONU — KİLİTLİ (17 Eyl 2026, kullanıcı: "artık stilimiz bu")
+
+Referans: `05-kapak/KAPAK-SABLON-REFERANS.jpg` (Elma, "APPLE RUN").
+Üretici: `05-kapak/kapak-sablon.py` — kilitli sabitler dosyanın başında;
+referansı piksel farkı 0 ile yeniden üretir.
+Tuval 1280×720. Koordinatlar bu tuvalde, piksel.
+
+**Kilitli — sormadan değişmez:**
+
+| Öğe | Kilitli olan | Değer |
+|---|---|---|
+| Başlık "DANCE MODE" | yazı tipi + konum | Impact, 190 px, sağa eğik (shear 0,22), beyaz dolgu, 8 px siyah kontur, arkada ışıma; **merkez (640, 105)**, en fazla 1180 px genişlik |
+| Tema şeridi | sadece konum | **merkez (640, 225)**, başlığın hemen altında, ortada |
+| Siluet | sadece konum | **yatay merkez x = 640** (tam orta, yolun ortası); boy 490 px; **üst kenar y = 255** (şeridin altı, hiçbir yazıyı kapatmaz); alt kenar y = 745 (ayak tabanı kareden taşar) |
+| NEW LEVEL rozeti (yıldız) | sadece konum | **sol alt, merkez (185, 545)**, yarıçap 150, −10° |
+| COMBO rozeti (yıldız) | sadece konum | **sağ alt, merkez (1080, 540)**, yarıçap 170, +8°; sayı + "COMBO" yıldızın içinde |
+
+Katman sırası: arka plan → siluet → başlık → şerit → rozetler. Yazılar
+siluetin üstünde durur; siluet yazıyı kapatmaz.
+
+**Serbest — videoya göre değişir:** arka plan karesi, tema adı, renkler (şerit,
+ışıma, rozet zeminleri), siluetin pozu, LEVEL ve COMBO sayıları, hız çizgileri.
+(Başlık metninin "NEON DANCE MODE" olup olmayacağı ayrı karar; yazı tipi ve
+konum yine yukarıdaki gibi.)
