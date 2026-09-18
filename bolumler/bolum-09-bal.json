@@ -1,70 +1,310 @@
 {
- "_": "BAL bolumu (17 Eyl 2026). Mekan MEK-004 (bal petegi + dokulmus bal kanali + olcuye kilitli bal iplikleri, kodla - fotograf yok). Engel ENG-004 mavi buz. Hareket seti HAR-004, ENGELDEN turetildi (kural: engel neyse siluetin hareketi o): alcak buz -> zipla, sacak -> egil, yarim levha -> acik tarafa yan adim, buz paneli -> iki elle it. SURE KURALI: 336 olcu @132,5 BPM = 608,6 sn = 10:08,6.",
+ "_": "BAL bolumu (17 Eyl 2026). Mekan MEK-004 (bal petegi + dokulmus bal kanali + olcuye kilitli bal iplikleri, kodla - fotograf yok). Engel ENG-004 mavi buz. Hareket seti HAR-004, ENGELDEN turetildi (kural: engel neyse siluetin hareketi o): alcak buz -> zipla, sacak -> egil, yarim levha -> acik tarafa yan adim, buz paneli -> iki elle it. SURE KURALI: 340 olcu @134,14 BPM = 608,3 sn = 10:08,3.",
  "no": 9,
  "baslik": "BAL | Petek kosusu",
  "tema": "b",
- "bpm": 132.5,
- "toplam_olcu": 336,
- "muzik": "01-muzik/subterranean-pulse-336olcu.wav",
- "_muzik": "GECICI SECIM: 132,5 BPM'de olculmus ve tam 336 olcu olan tek muzik. Kullanici bolumun muzigini ayrica secerse yeniden montaj yeterli (goruntu ayni kalir, BPM ayniysa).",
+ "bpm": 134.14,
+ "toplam_olcu": 340,
+ "muzik": "01-muzik/golden-groove-134-340olcu.wav",
+ "_muzik": "Golden Groove (Suno, kullanici verdi 17 Eyl 2026). OLCULDU 134,140 BPM - faz egimi +0,0001 ms/sn, parca ESNETILMEDI (bkz. 01-muzik/GOLDEN-GROOVE-OLCUM.md). Ilk vurus 0,410 sn kirpildi, muzik-uzat.py ile 340 olcuye cikarildi (giris 1 + govde 4,5 + cikis 1); uzatilmis dosyada en kotu faz hatasi 11,3 ms.",
  "mekanik": "temel",
- "hareketler": ["zipla_a", "egil", "yanadim_L / yanadim_R", "it_c"],
- "ortamlar": ["BAL"],
- "ortam_olcu": [0],
+ "hareketler": [
+  "zipla_a",
+  "egil",
+  "yanadim_L / yanadim_R",
+  "it_c"
+ ],
+ "ortamlar": [
+  "BAL"
+ ],
+ "ortam_olcu": [
+  0
+ ],
  "seviye_bes": true,
  "_seviye_bes": "KURAL (16 Eyl 2026): LEVEL 1-5 bolum suresine esit dagilir (0/67/134/202/269), ortamdan bagimsiz.",
  "kaliplar": {
-  "st": ["step_L", null, "step_R", null],
-  "stB": ["step_R", null, null, null],
-  "bos": [null, null, null, null],
-  "zp": ["zipla_a", null, null, null],
-  "eg": ["egil", null, null, null],
-  "yL": ["yanadim_L", null, null, null],
-  "yR": ["yanadim_R", null, null, null],
-  "it": ["it_c", null, null, null]
+  "st": [
+   "step_L",
+   null,
+   "step_R",
+   null
+  ],
+  "stB": [
+   "step_R",
+   null,
+   null,
+   null
+  ],
+  "bos": [
+   null,
+   null,
+   null,
+   null
+  ],
+  "zp": [
+   "zipla_a",
+   null,
+   null,
+   null
+  ],
+  "eg": [
+   "egil",
+   null,
+   null,
+   null
+  ],
+  "yL": [
+   "yanadim_L",
+   null,
+   null,
+   null
+  ],
+  "yR": [
+   "yanadim_R",
+   null,
+   null,
+   null
+  ],
+  "it": [
+   "it_c",
+   null,
+   null,
+   null
+  ]
  },
  "_zipla": "zipla_a penceresi 1,5 olcu (klip 2,40 sn): arkasindaki olcu HER kademede bos - yoksa pencere 1 olcuye duser ve hareket 1,33x hizlanir.",
  "kademeler": {
-  "og1": ["zp", "bos"],
-  "og2": ["eg", "bos"],
-  "og3": ["yL", "st", "yR", "st"],
-  "og4": ["it", "bos"],
-  "c1": ["zp", "bos", "eg", "bos", "yL", "st", "it", "bos"],
-  "c2": ["zp", "bos", "yR", "st", "eg", "bos", "it", "stB"],
-  "c3": ["zp", "bos", "eg", "yL", "it", "yR", "eg", "stB"],
-  "c4": ["zp", "bos", "eg", "yR", "it", "yL", "eg", "it"],
-  "mola": ["yL", "st", "yR", "st"]
+  "og1": [
+   "zp",
+   "bos"
+  ],
+  "og2": [
+   "eg",
+   "bos"
+  ],
+  "og3": [
+   "yL",
+   "st",
+   "yR",
+   "st"
+  ],
+  "og4": [
+   "it",
+   "bos"
+  ],
+  "c1": [
+   "zp",
+   "bos",
+   "eg",
+   "bos",
+   "yL",
+   "st",
+   "it",
+   "bos"
+  ],
+  "c2": [
+   "zp",
+   "bos",
+   "yR",
+   "st",
+   "eg",
+   "bos",
+   "it",
+   "stB"
+  ],
+  "c3": [
+   "zp",
+   "bos",
+   "eg",
+   "yL",
+   "it",
+   "yR",
+   "eg",
+   "stB"
+  ],
+  "c4": [
+   "zp",
+   "bos",
+   "eg",
+   "yR",
+   "it",
+   "yL",
+   "eg",
+   "it"
+  ],
+  "mola": [
+   "yL",
+   "st",
+   "yR",
+   "st"
+  ]
  },
  "_kademe_gerekce": "Zorluk kademeler arasinda artar: c1 dort cue/8 olcu, c2 dort cue + adim, c3 alti cue, c4 yedi cue. zp her kademede tek ve arkasi bos.",
  "iskelet": [
-  [0, 8, "bos", "nefes"],
-  [8, 16, "og1", "adim"],
-  [16, 24, "og2", "adim"],
-  [24, 32, "og3", "adim"],
-  [32, 40, "og4", "adim"],
-  [40, 56, "c1", "adim"],
-  [56, 72, "c1", "adim"],
-  [72, 88, "c1", "adim"],
-  [88, 96, "mola", "nefes"],
-  [96, 112, "c2", "adim"],
-  [112, 128, "c2", "adim"],
-  [128, 144, "c2", "adim"],
-  [144, 152, "mola", "nefes"],
-  [152, 168, "c3", "adim"],
-  [168, 184, "c3", "adim"],
-  [184, 200, "c3", "adim"],
-  [200, 208, "mola", "nefes"],
-  [208, 224, "c4", "adim"],
-  [224, 240, "c4", "adim"],
-  [240, 256, "c4", "adim"],
-  [256, 264, "mola", "nefes"],
-  [264, 280, "c3", "adim"],
-  [280, 296, "c4", "adim"],
-  [296, 312, "c4", "adim"],
-  [312, 320, "mola", "nefes"],
-  [320, 328, "c4", "adim"],
-  [328, 336, "mola", "nefes"]
+  [
+   0,
+   8,
+   "bos",
+   "nefes"
+  ],
+  [
+   8,
+   16,
+   "og1",
+   "adim"
+  ],
+  [
+   16,
+   24,
+   "og2",
+   "adim"
+  ],
+  [
+   24,
+   32,
+   "og3",
+   "adim"
+  ],
+  [
+   32,
+   40,
+   "og4",
+   "adim"
+  ],
+  [
+   40,
+   56,
+   "c1",
+   "adim"
+  ],
+  [
+   56,
+   72,
+   "c1",
+   "adim"
+  ],
+  [
+   72,
+   88,
+   "c1",
+   "adim"
+  ],
+  [
+   88,
+   96,
+   "mola",
+   "nefes"
+  ],
+  [
+   96,
+   112,
+   "c2",
+   "adim"
+  ],
+  [
+   112,
+   128,
+   "c2",
+   "adim"
+  ],
+  [
+   128,
+   144,
+   "c2",
+   "adim"
+  ],
+  [
+   144,
+   152,
+   "mola",
+   "nefes"
+  ],
+  [
+   152,
+   168,
+   "c3",
+   "adim"
+  ],
+  [
+   168,
+   184,
+   "c3",
+   "adim"
+  ],
+  [
+   184,
+   200,
+   "c3",
+   "adim"
+  ],
+  [
+   200,
+   208,
+   "mola",
+   "nefes"
+  ],
+  [
+   208,
+   224,
+   "c4",
+   "adim"
+  ],
+  [
+   224,
+   240,
+   "c4",
+   "adim"
+  ],
+  [
+   240,
+   256,
+   "c4",
+   "adim"
+  ],
+  [
+   256,
+   264,
+   "mola",
+   "nefes"
+  ],
+  [
+   264,
+   280,
+   "c3",
+   "adim"
+  ],
+  [
+   280,
+   296,
+   "c4",
+   "adim"
+  ],
+  [
+   296,
+   312,
+   "c4",
+   "adim"
+  ],
+  [
+   312,
+   320,
+   "mola",
+   "nefes"
+  ],
+  [
+   320,
+   328,
+   "c4",
+   "adim"
+  ],
+  [
+   328,
+   340,
+   "mola",
+   "nefes"
+  ]
  ],
  "nota_simge": false,
- "akis": "harman2"
+ "akis": "harman2",
+ "_iskelet": "40 ogretme (8 nefes + dort aile x8) + 16 calisma blogu (16'lik) + molalar. Kapanis molasi 12 olcu (328-340): muzik 340 olcu oldugu icin son blok uzatildi, bos olcu birakilmadi."
 }
