@@ -265,6 +265,19 @@ const CUE = {
   it_a:     { lane:1, sure:OLCU, klip:'push-start',    maxOlcu: 2 },
   it_b:     { lane:1, sure:OLCU, klip:'pushing',       maxOlcu: 2 },
   it_c:     { lane:1, sure:OLCU, klip:'push-it',       maxOlcu: 1 },
+  // ---- HAR-005 (19 Eyl 2026, MEK-005 BULUT / ENG-005). Cue adi ENGEL AILESI:
+  //   comel   -> bas ustunden gecen nesne, altindan    (Crouching pozu)
+  //   ustten  -> diz hizasinda enine nesne, ustunden    (Step Up To Jump Over)
+  //   sicra_L -> sag yari kapali, SOLA sicra            (Left Strafing Jump pozu)
+  //   sicra_R -> sol yari kapali, SAGA sicra (aynali)
+  //   don     -> omuz genisliginde dar gecit, yan don   (Idle To Twist Right pozu)
+  // Poz klipleri push-it gibi kurulur: idle -> Mixamo pozu -> tutus -> idle,
+  // 1,60 sn; 132 BPM'de 1 olcu (1,82) -> 0,88x.
+  comel:    { lane:1, sure:OLCU, klip:'comel-k',     maxOlcu: 1 },
+  ustten:   { lane:1, sure:OLCU, klip:'step-over-k', maxOlcu: 1 },
+  sicra_L:  { lane:0, sure:OLCU, klip:'sicra-k',     maxOlcu: 1 },
+  sicra_R:  { lane:2, sure:OLCU, klip:'sicra-k',     maxOlcu: 1 },
+  don:      { lane:1, sure:OLCU, klip:'don-k',       maxOlcu: 1 },
   // aktif mola cue'lari: yogunluk duser ama ekran BOSALMAZ
   reach_L: { lane:0, sure:OLCU,    klip:'arm-stretch' },
   reach_R: { lane:2, sure:OLCU,    klip:'arm-stretch' },
@@ -407,7 +420,7 @@ const KLIP_DONGU = {
 const CUE_DONGU_FAZ = { 'side_L': 0.438, 'side_R': 0.438 };
 // yanadim_L (17 Eyl 2026, olc-yon.js): long-left-side-step klibi siluet kutusunda
 // figuru SAGA gotururuyor (com -0,067 -> -0,024). Sola gitmesi gereken cue aynalanir.
-const AYNA_CUE = { 'side_L': true, 'yanadim_L': true };
+const AYNA_CUE = { 'side_L': true, 'yanadim_L': true, 'sicra_R': true };
 let SILUET_AYNA = false;
 const SILUET_DON = 1.1;   // push-it cue'sunda govdenin yana donus acisi (radyan)
 const TEPE_FAZI = {
@@ -424,6 +437,10 @@ const TEPE_FAZI = {
   'kick-step': 0.90, 'twist-dance': 0.90,
   // HAR-004 (17 Eyl 2026, olc-iou.py tepe fazi): havada / comelmis / hamle / itis
   'standing-jump': 0.45, 'ducking': 0.70, 'long-left-side-step': 0.30, 'push-it': 0.40,
+  // HAR-005 (19 Eyl 2026): poz kliplerinde tam poz 0,42-1,18 / 1,60 -> orta 0,50.
+  // step-over-k = klibin 0-%70'i. olc-iou tepe fazi 0,80: bacak engelin
+  // ustunden asirilan an (0,71 toplu sicrama; engel ustu okunmuyordu).
+  'comel-k': 0.50, 'sicra-k': 0.50, 'don-k': 0.50, 'step-over-k': 0.80,
 };
 NOTALAR.forEach((n, i) => {
   const sonraki = NOTALAR[i + 1];
@@ -472,7 +489,8 @@ renderer.setSize(W, H, false);
 renderer.setPixelRatio(1);
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(PALET.zemin);
+const ARKA_RENK = new THREE.Color(PALET.zemin);
+scene.background = ARKA_RENK;
 scene.fog = new THREE.Fog(PALET.zemin, SIS_YAKIN, SIS_UZAK);
 
 const camera = new THREE.PerspectiveCamera(52, W/H, 0.1, 300);
@@ -2737,6 +2755,12 @@ let tabanKok = null, tabanMat = null;
       uOLCU:   { value: 1.846 },
       uHIZ:    { value: 15 },
       uZV:     { value: Z_VURUS },
+      // BULUT (MEK-005): pist dokusu (REF-023 firtina bulutu) + simsek parlamasi
+      uBulut:  { value: null },
+      uFlas:   { value: 0 },
+      // BULUT HALLERI (19 Eyl 2026): halin pusu ve pist carpani (hal.json)
+      uBulutPus:  { value: new THREE.Color(0.80, 0.84, 0.89) },
+      uBulutRenk: { value: new THREE.Color(1, 1, 1) },
     },
     vertexShader: [
       'varying vec3 vW;',
@@ -2749,7 +2773,9 @@ let tabanKok = null, tabanMat = null;
       'precision highp float;',
       'varying vec3 vW;',
       'uniform vec3 uYakin,uUzak,uGok,uVurus,uHalka,uYol,uSerit,uAk,uEt,uCekirdek;',
-      'uniform float uT,uOLCU,uHIZ,uZV,uMod,uKFaz;',
+      'uniform float uT,uOLCU,uHIZ,uZV,uMod,uKFaz,uFlas;',
+      'uniform sampler2D uBulut;',
+      'uniform vec3 uBulutPus, uBulutRenk;',
       'void main(){',
       // 1. TEMEL RAMPA. Sis KAPALI (deniz modunda oldugu gibi): ufuk
       //    cizgisi keskin kalmali, sahne sisi grileştirince zemin ve gok
@@ -2862,6 +2888,33 @@ let tabanKok = null, tabanMat = null;
       "//     Color'lar dogrusal uzaya cevrilip ciktida geri cevrilmiyor ve koyu",
       "//     cikiyor (MEK-002 iki renk yolu tuzagi).",
       "//     Tasarim karesi: REFERANSLAR/foto/mek-004/kur.py - ayni algoritma.",
+      // --- BULUT / ASILI PIST (18 Eyl 2026, MEK-005). Bu dal BAL'in (uMod>2.5)
+      //     ONUNDE. Zemin YOK: koridor disi discard, arkadaki sabit arka plan
+      //     (gok + bulut denizi) gorunur. Koridor = koyu firtina bulutu seridi,
+      //     kenari dokunun parlakligiyla kabarik (duz cizgi yok), kenarda isik
+      //     yakalayan sis. Uzakta ufuk pusuna karisir - arka planla dikis yok.
+      //     Doku ham sRGB okunur ve oyle yazilir (MEK-002 iki renk yolu tuzagi).
+      //     Tasarim karesi: REFERANSLAR/foto/mek-005/kur.py pist().
+      "if (uMod > 3.5) {",
+      "  vec3 PUS = uBulutPus;",
+      "  float YR = 3.5;",
+      "  float ax = abs(vW.x);",
+      "  float Xs = vW.z - uT * uHIZ;",
+      "  vec3 tx = texture2D(uBulut, vec2(vW.x / (2.0 * YR) * 0.5 + 0.5, Xs / 14.0)).rgb;",
+      "  float lum = dot(tx, vec3(0.3333));",
+      "  float kenar = YR * (0.97 + 0.12 * (lum - 0.45));",
+      "  if (ax > kenar) discard;",
+      "  vec3 c2 = tx * 0.40 + vec3(0.05, 0.05, 0.07);",   // karenin en koyu yuzeyi (0,52 gri kaliyordu)
+      "  c2 += vec3(0.22) * smoothstep(kenar - 0.55, kenar - 0.02, ax);",
+      "  c2 *= uBulutRenk;",
+      "  c2 += vec3(0.80, 0.86, 1.0) * uFlas * 0.10;",
+      "  float mes = max(-vW.z + 10.8, 0.0);",
+      "  float pus = clamp(pow(mes / 150.0, 1.2), 0.0, 1.0);",
+      "  c2 = mix(c2, PUS, pus);",
+      "  if (mes > 170.0) discard;",
+      "  gl_FragColor = vec4(c2, 1.0);",
+      "  return;",
+      "}",
       "if (uMod > 2.5) {",
       "  vec3 GOKU = vec3(0.93, 0.88, 0.78);",
       "  vec3 GOKT = vec3(0.80, 0.77, 0.71);",
@@ -3357,6 +3410,171 @@ function elmaGuncelle(t){
       im.setMatrixAt(i, _eM);
     }
     im.instanceMatrix.needsUpdate = true;
+  }
+}
+
+// --- BULUT / ASILI PIST (18 Eyl 2026, MEK-005)
+// EKRAN BOS KALMAZ kurali (18 Eyl 2026): gok, ufuk ve denizin UZAK hali sabit
+// arka planda (07-mekan/bulut/arka.jpg - kamera sabit, sonsuz uzak katmanlar
+// tek resim). AKAN katmanlar burada, hepsi zemine kilitli (z + t*HIZ):
+//   KULE  : denizden yukselen cumulus kuleleri, |x| 13-68 (koridora girmez)
+//   DENIZ : deniz seviyesinde yassi bulut kumeleri - akisi ALTTA da okutur,
+//           alt koseleri doldurur
+//   SIMSEK: ritim - her olcu basinda denizin icinde parlama (additive)
+// Sprite'lar gercek fotograf (REF-021), 1024x1024; en/boy orani KULE_ORAN ile.
+// Engeller (ENG-005) henuz yok - kullanici isteyince ayri adim.
+let bulutMKok = null, bulutKuleIM = [], bulutKuleVeri = [], bulutDenizIM = [], bulutDenizVeri = [],
+    bulutSimsek = [], BULUT_ARKA = {}, BULUT_PIST = null, BULUT_ENG = {};
+// HER LEVEL BIR MEKAN (18 Eyl 2026 kurali): ortamin 'bulutHal' alani a...e.
+// Arka plan resmi, kule/deniz tonu, pist carpani, pus ve simsek gucu halden.
+// Tonlar REFERANSLAR/foto/mek-005/hal.py HALLER (motor-hazirla-hal.py -> hal.json).
+const BULUT_HAL = {
+  a: { kule: [1.00, 1.00, 1.00], pus: [0.80, 0.84, 0.89], pist: [1.00, 1.00, 1.00], flas: 1.00 },
+  b: { kule: [1.10, 0.88, 0.80], pus: [0.93, 0.76, 0.66], pist: [1.05, 0.92, 0.90], flas: 0.00 },
+  c: { kule: [0.60, 0.63, 0.70], pus: [0.40, 0.43, 0.50], pist: [0.85, 0.87, 0.95], flas: 1.35 },
+  d: { kule: [0.46, 0.53, 0.68], pus: [0.24, 0.29, 0.40], pist: [0.95, 1.00, 1.15], flas: 0.00 },
+  e: { kule: [1.06, 0.95, 0.98], pus: [0.92, 0.85, 0.86], pist: [1.00, 0.96, 1.00], flas: 0.00 },
+};
+let BULUT_HAL_AKTIF = 'a';
+// ENG-005 sprite oranlari (en/boy) - motor-hazirla-hal.py -> hal.json 'oran'
+const BULUT_ENG_ORAN = { 'sepet': 0.7197, 'halat': 6.8429, 'zarf-kirmizi': 0.9369, 'zarf-mor': 0.9901,
+  'delta': 1.6699, 'delta-dik': 0.5988, 'simsek-yatay': 3.6585, 'simsek-dik': 0.2775,
+  'fener-dizi6': 5.7167, 'fener-dizi7': 6.6875, 'fener-sutun': 0.229,
+  'parasut-mor': 1.5174, 'parasut-turuncu': 2.5935, 'parasut-mor-dik': 0.659, 'parasut-turuncu-dik': 0.3856 };
+// Dokular yuklenmeden HAZIR verilirse ilk karelerde pist siyah, bulutlar yok
+// (olculdu, bulut-test1 kare 60/230). HAZIR'dan once BULUT_BEKLE beklenir.
+const BULUT_BEKLE = [];
+const BULUT_KAPSAM = 320, BULUT_DENIZ_Y = -9.0;
+const KULE_ORAN = [1.462, 0.692, 0.692];      // motor-hazirla.py -> olcu.json
+function bulutMekanKur(){
+  const rnd = (n) => { const x = Math.sin(n * 47.13) * 43758.5453; return x - Math.floor(x); };
+  const yuk0 = new THREE.TextureLoader();
+  const yuk = { load: (u) => { let tx; BULUT_BEKLE.push(new Promise((ok, red) => { tx = yuk0.load(u, ok, undefined, red); })); return tx; } };
+  for (const h of ['a', 'b', 'c', 'd', 'e']) {
+    BULUT_ARKA[h] = yuk.load(h === 'a' ? '../07-mekan/bulut/arka.jpg' : `../07-mekan/bulut/arka-${h}.jpg`);
+    BULUT_ARKA[h].colorSpace = THREE.SRGBColorSpace;
+  }
+  for (const ad in BULUT_ENG_ORAN) {
+    BULUT_ENG[ad] = yuk.load(`../07-mekan/bulut/eng/${ad}.png`);
+    BULUT_ENG[ad].colorSpace = THREE.SRGBColorSpace;
+  }
+  BULUT_PIST = yuk.load('../07-mekan/bulut/pist.png');
+  BULUT_PIST.wrapS = BULUT_PIST.wrapT = THREE.MirroredRepeatWrapping;
+  tabanMat.uniforms.uBulut.value = BULUT_PIST;
+  bulutMKok = new THREE.Group();
+  const geo = new THREE.PlaneGeometry(1, 1);
+  const kova = [[], [], []], dkova = [[], [], []];
+  let n = 0;
+  // KULELER: iki yanda BUYUK kutleler. Koridora binmesin: yarim genislik
+  // |x| - 6'yi gecmez.
+  for (const yon of [-1, 1]) {
+    for (let k = 0; k < 26; k++) {
+      const h1 = rnd(n * 5 + 1), h2 = rnd(n * 5 + 2), h3 = rnd(n * 5 + 3), h4 = rnd(n * 5 + 4);
+      const sp = Math.min(2, Math.floor(h4 * 3));
+      const boy = 11 + h3 * 9;
+      const en = boy * KULE_ORAN[sp];
+      const x = yon * (13 + h1 * 55);
+      const enK = Math.min(en, 2 * (Math.abs(x) - 6));
+      kova[sp].push({ x, z0: (k / 26) * BULUT_KAPSAM + (h2 - 0.5) * 8, en: enK, boy: boy * enK / en,
+        ayna: h2 < 0.5 ? -1 : 1 });
+      n++;
+    }
+  }
+  // DENIZ KUMELERI: sayi alandan (doldurma kurali): 2 yan x 70 birim x 320
+  // birim / (~11 x 9 ayak izi) ~ 450.
+  for (const yon of [-1, 1]) {
+    for (let k = 0; k < 230; k++) {
+      const h1 = rnd(n * 5 + 1), h2 = rnd(n * 5 + 2), h3 = rnd(n * 5 + 3), h4 = rnd(n * 5 + 4);
+      const sp = Math.min(2, Math.floor(h4 * 3));
+      const en = 7 + h3 * 9;
+      dkova[sp].push({ x: yon * (5 + h1 * 70), z0: h2 * BULUT_KAPSAM, en, boy: en / KULE_ORAN[sp] * 0.45,
+        y: BULUT_DENIZ_Y + 0.4 + h3 * 1.2, ayna: h1 < 0.5 ? -1 : 1 });
+      n++;
+    }
+  }
+  for (let i = 0; i < 3; i++) {
+    const d = yuk.load('../07-mekan/bulut/kule-' + i + '.png');
+    d.colorSpace = THREE.SRGBColorSpace;
+    // KULE: cekirdek derinlik yazar, arkadaki kumeyi dogru orter
+    const mk = new THREE.MeshBasicMaterial({ map: d, transparent: true, alphaTest: 0.22,
+      depthWrite: true, fog: true, side: THREE.DoubleSide });
+    const ik = new THREE.InstancedMesh(geo, mk, Math.max(1, kova[i].length));
+    ik.frustumCulled = false; ik.renderOrder = 1;
+    bulutKuleIM.push(ik); bulutKuleVeri.push(kova[i]); bulutMKok.add(ik);
+    // DENIZ: yumusak kenarli, derinlik yazmaz (siralama hatasi bulutta okunmaz)
+    const md = new THREE.MeshBasicMaterial({ map: d, transparent: true, alphaTest: 0.03,
+      depthWrite: false, fog: true, side: THREE.DoubleSide, opacity: 0.92 });
+    const idn = new THREE.InstancedMesh(geo, md, Math.max(1, dkova[i].length));
+    idn.frustumCulled = false; idn.renderOrder = 2;
+    bulutDenizIM.push(idn); bulutDenizVeri.push(dkova[i]); bulutMKok.add(idn);
+  }
+  // SIMSEK: radyal parlama dokusu (isik, nesne degil - kodla uretilir).
+  const c = document.createElement('canvas'); c.width = c.height = 256;
+  const g = c.getContext('2d');
+  const gr = g.createRadialGradient(128, 128, 0, 128, 128, 128);
+  gr.addColorStop(0.0, 'rgba(240,244,255,1)');
+  gr.addColorStop(0.25, 'rgba(210,222,255,0.55)');
+  gr.addColorStop(1.0, 'rgba(180,196,240,0)');
+  g.fillStyle = gr; g.fillRect(0, 0, 256, 256);
+  const sd = new THREE.CanvasTexture(c);
+  for (let i = 0; i < 2; i++) {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({
+      map: sd, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, fog: false }));
+    m.renderOrder = 3; bulutSimsek.push(m); bulutMKok.add(m);
+  }
+  bulutMKok.visible = false;
+  scene.add(bulutMKok);
+}
+const _bM = new THREE.Matrix4(), _bV = new THREE.Vector3(), _bQ = new THREE.Quaternion(), _bS = new THREE.Vector3();
+function bulutMekanGuncelle(t){
+  const taban = Z_VURUS + 12 - BULUT_KAPSAM;
+  // RITIM: olcu basinda simsek. Konum olcu indeksinden deterministik; cift
+  // cakma (0 ve 0,09 sn) + hizli sonum. Ikinci parlama bir onceki olcununki,
+  // sonerek.
+  const oi = Math.floor(t / OLCU), ic = t - oi * OLCU;
+  const cak = (x) => (x < 0 ? 0 : Math.exp(-x / 0.22));
+  const flas = Math.min(1.2, cak(ic) + 0.7 * cak(ic - 0.09));
+  const hs = (k, a) => { const v = Math.sin(k * a) * 43758.5453; return v - Math.floor(v); };
+  for (let i = 0; i < bulutSimsek.length; i++) {
+    const k = oi - i;
+    const h1 = hs(k + 3, 12.9898), h2 = hs(k + 7, 78.233);
+    const m = bulutSimsek[i];
+    const z = Z_VURUS - 45 - h2 * 70 + (ic + i * OLCU) * HIZ;   // zeminle birlikte akar
+    m.position.set((h1 < 0.5 ? -1 : 1) * (14 + h1 * 30), BULUT_DENIZ_Y + 1.5, z);
+    m.scale.set(46, 20, 1);
+    m.quaternion.copy(camera.quaternion);
+    m.material.opacity = i === 0 ? flas : 0.35 * Math.exp(-(ic + OLCU) / 0.9);
+  }
+  // HAL: simsek gucu halden (gun batimi / gece / safak simseksiz, firtina guclu)
+  const HL = BULUT_HAL[BULUT_HAL_AKTIF] || BULUT_HAL.a;
+  const flasH = flas * HL.flas;
+  for (const m of bulutSimsek) m.material.opacity *= HL.flas;
+  tabanMat.uniforms.uFlas.value = flasH;
+  tabanMat.uniforms.uBulutPus.value.setRGB(HL.pus[0], HL.pus[1], HL.pus[2]);
+  tabanMat.uniforms.uBulutRenk.value.setRGB(HL.pist[0], HL.pist[1], HL.pist[2]);
+  // kule ve kumeler parlamayla hafif aydinlanir (alttan isik); ton halden
+  const aydin = 1 + 0.22 * flasH;
+  for (let k = 0; k < 3; k++) {
+    bulutKuleIM[k].material.color.setRGB(HL.kule[0] * aydin, HL.kule[1] * aydin, HL.kule[2] * aydin);
+    bulutDenizIM[k].material.color.setRGB(HL.kule[0] * aydin, HL.kule[1] * aydin, HL.kule[2] * aydin);
+    const dz = bulutKuleVeri[k], ik = bulutKuleIM[k];
+    for (let i = 0; i < dz.length; i++) {
+      const o = dz[i];
+      const z = taban + ((o.z0 + t * HIZ) % BULUT_KAPSAM);
+      _bV.set(o.x, BULUT_DENIZ_Y + o.boy * 0.5 - 1.0, z);
+      _bS.set(o.en * o.ayna, o.boy, 1);
+      _bM.compose(_bV, _bQ, _bS); ik.setMatrixAt(i, _bM);
+    }
+    ik.instanceMatrix.needsUpdate = true;
+    const dd = bulutDenizVeri[k], idn = bulutDenizIM[k];
+    for (let i = 0; i < dd.length; i++) {
+      const o = dd[i];
+      const z = taban + ((o.z0 + t * HIZ) % BULUT_KAPSAM);
+      _bV.set(o.x, o.y, z);
+      _bS.set(o.en * o.ayna, o.boy, 1);
+      _bM.compose(_bV, _bQ, _bS); idn.setMatrixAt(i, _bM);
+    }
+    idn.instanceMatrix.needsUpdate = true;
   }
 }
 
@@ -4387,6 +4605,10 @@ let ELMA_MOD_AKTIF = false;
 let BAL_MOD_AKTIF = false;   // MEK-004 BAL petegi (17 Eyl 2026)
 // Kamera bakis yuksekligi: ufuk %42-50 kurali icin OLCULEREK ayarlanir.
 const BAL_BAKIS = 2.70;   // olculdu: 2,14'te gorunen zemin kenari %41,8 (bandin alti)
+let BULUT_MOD_AKTIF = false; // MEK-005 BULUT / asili pist (18 Eyl 2026)
+// BULUT: arka plan resminin ufku bu bakistan HESAPLANDI (motor-hazirla.py,
+// satir 474 = %43,9). Bakis degisirse arka.jpg yeniden uretilmeli.
+const BULUT_BAKIS = 2.70;
 // Halka kapi: yaricap 1 birim, olcek ile buyutuluyor. XY duzleminde.
 const SEHIR_HALKA_GEO = new THREE.TorusGeometry(1, 0.05, 10, 40);
 let SEHIR_PANO_DOKU = null, SEHIR_PLAKA_DOKU = null;
@@ -4825,11 +5047,132 @@ function buzEngel(g, d, tip, z, kimlik){
   }
 }
 
-function engelDestekGuncelle(g, tip, z, gov, kimlik){
+// ================= ENG-005 (19 Eyl 2026) - HER LEVEL TEK NESNE =================
+// Kural (18-19 Eyl 2026): her levelin engeli o mekanin dunyasindan, levelde
+// TEK nesne, bir levelin nesnesi baska levelde yok. Dort aile ayni nesnenin
+// dort durusu; olculer engel-defteri sabitleri:
+//   comel   ALTINDAN : nesnenin alt yuzu 3,86 (kamera 3,7) - egilmek sart
+//   ustten  USTUNDEN : tepe 1,10, koridoru bastan basa - ustunden adim
+//   sicra_L YANA     : SAG yari kapali (x > -0,10) - acik taraf sol
+//   sicra_R YANA     : SOL yari kapali (aynasi)
+//   don     DAR      : iki kutle arasinda 0,9 (omuz genisligi) - yan don
+// a balon (REF-025..028) · b delta kanat · c simsek · d fener · e yamac parasutu.
+// Gorseller gercek fotograf kesimi (07-mekan/bulut/eng/, motor-hazirla-hal.py).
+// Tasarim: REFERANSLAR/foto/mek-005/eng.py, hal.py. Genislikler motor
+// koridoruna (yari 3,5) gore; yukseklikler mutlak.
+function bulutHalAt(tt){
+  const oi = (tt || 0) / OLCU;
+  let ix = 0;
+  for (let i = 0; i < ORTAMLAR.length; i++) if (oi >= ORTAMLAR[i].olcu) ix = i;
+  return ORTAMLAR[ix].bulutHal || 'a';
+}
+const BULUT_ENG_GEO = new THREE.PlaneGeometry(1, 1);
+const BULUT_UYARI_MAT = new THREE.MeshBasicMaterial({ map: ELMA_GOLGE_DOKU, color: '#1c1f2a',
+  transparent: true, opacity: 0.50, depthWrite: false, fog: true });
+function bulutEngelHazirla(g, d){
+  if (d.bSp) return;
+  d.bSp = [];
+  for (let i = 0; i < 12; i++) {
+    const m = new THREE.Mesh(BULUT_ENG_GEO, new THREE.MeshBasicMaterial({ transparent: true,
+      alphaTest: 0.04, depthWrite: false, side: THREE.DoubleSide, fog: true }));
+    m.visible = false; m.renderOrder = 4; g.add(m); d.bSp.push(m);
+  }
+  d.bUyari = new THREE.Mesh(ELMA_GOLGE_GEO, BULUT_UYARI_MAT);
+  d.bUyari.rotation.x = -Math.PI / 2; d.bUyari.visible = false; g.add(d.bUyari);
+}
+function bulutEngel(g, d, tip, z, kimlik, hal){
+  bulutEngelHazirla(g, d);
+  const YARI = YOL_GEN / 2;
+  const v = ((kimlik | 0) % 3 + 3) % 3;
+  let ii = 0;
+  const isik = (hal === 'c');                 // simsek = isik: toplama harman + hale
+  // koy: sprite'in sol/sag kenari x0/x1, alt kenari y0; boy verilmezse en/boy korunur
+  const koy = (ad, x0, x1, y0, boy, ayna) => {
+    const tx = BULUT_ENG[ad]; if (!tx) return;
+    const en = Math.abs(x1 - x0), h = boy || en / BULUT_ENG_ORAN[ad];
+    const kat = isik ? [1.22, 1.0] : [1.0];
+    for (const k of kat) {
+      const m = d.bSp[ii++]; if (!m) return;
+      const mt = m.material;
+      if (mt.map !== tx) { mt.map = tx; mt.needsUpdate = true; }
+      mt.blending = isik ? THREE.AdditiveBlending : THREE.NormalBlending;
+      mt.opacity = isik ? (k > 1 ? 0.45 : 1.0) : 1.0;
+      m.visible = true; m.rotation.z = 0;
+      m.scale.set(en * k * (ayna ? -1 : 1), h, 1);
+      m.position.set((x0 + x1) / 2, y0 + h / 2, z);
+    }
+  };
+  // on uyari: engelin altinda pistte koyu golge-halka
+  d.bUyari.visible = true;
+  d.bUyari.scale.set(YOL_GEN * 1.05, 3.0, 1);
+  d.bUyari.position.set(0, 0.06, z + 0.4);
+
+  const aile = tip === 'comel' ? 'ust' : tip === 'ustten' ? 'alcak'
+    : tip === 'sicra_L' ? 'yanR' : tip === 'sicra_R' ? 'yanL' : tip === 'don' ? 'dar' : null;
+  if (!aile) { d.bUyari.visible = false; return; }
+  const ayna = (v === 1);
+  if (aile === 'ust') {
+    // Koridordan genis: yanindan gecilmez, tek yol altindan. Alt yuz 3,86.
+    const EN = 2 * YARI + 1.2;
+    const ad = { a: 'sepet', b: 'delta', c: 'simsek-yatay', d: 'fener-dizi6', e: 'parasut-mor' }[hal];
+    koy(ad, -EN / 2, EN / 2, 3.86, 0, ayna);
+    return;
+  }
+  if (aile === 'alcak') {
+    const EN = 2 * YARI + 1.0;
+    if (hal === 'a') {
+      // uc gergin halat 0,40 / 0,75 / 1,10 + pist kenarinda iki kazik
+      for (const y of [0.40, 0.75, 1.10]) koy('halat', -EN / 2, EN / 2, y - 0.11, 0.22, ayna);
+      for (const x of [-EN / 2, EN / 2]) {
+        const m = d.bSp[ii++]; if (!m) continue;
+        const mt = m.material;
+        if (mt.map !== BULUT_ENG.halat) { mt.map = BULUT_ENG.halat; mt.needsUpdate = true; }
+        mt.blending = THREE.NormalBlending; mt.opacity = 1;
+        m.visible = true; m.rotation.z = Math.PI / 2;
+        m.scale.set(1.30, 0.30, 1); m.position.set(x, 0.65, z);
+      }
+      return;
+    }
+    const ad = { b: 'delta', c: 'simsek-yatay', d: 'fener-dizi7', e: 'parasut-turuncu' }[hal];
+    koy(ad, -EN / 2, EN / 2, 0.0, 1.10, ayna);
+    return;
+  }
+  if (aile === 'yanR' || aile === 'yanL') {
+    // KAPALI yari boydan kapanir; acik yari gidilecek yon.
+    const s = aile === 'yanR' ? 1 : -1;
+    const X = (a, b) => (s > 0 ? [a, b] : [-b, -a]);
+    const aynaY = s < 0;
+    if (hal === 'a') { const [x0, x1] = X(-0.10, YARI + 1.0); koy(v === 2 ? 'zarf-mor' : 'zarf-kirmizi', x0, x1, -1.2, 0, aynaY); }
+    else if (hal === 'b') { const [x0, x1] = X(-0.10, YARI + 0.5); koy('delta-dik', x0, x1, 0.0, 0, aynaY); }
+    else if (hal === 'c') { for (const x of [0.0, 1.25, 2.5]) { const [x0, x1] = X(x, x + 1.2); koy('simsek-dik', x0, x1, 0.0, 5.5, aynaY); } }
+    else if (hal === 'd') { for (const x of [0.05, 1.2, 2.35]) { const [x0, x1] = X(x, x + 1.05); koy('fener-sutun', x0, x1, 0.0, 0, false); } }
+    else if (hal === 'e') { const [x0, x1] = X(-0.10, YARI + 0.3); koy(v === 2 ? 'parasut-mor-dik' : 'parasut-turuncu-dik', x0, x1, 0.0, 0, aynaY); }
+    return;
+  }
+  if (aile === 'dar') {
+    const A = 0.45;                          // yari aralik: 0,9 omuz genisligi
+    if (hal === 'a') { koy('zarf-mor', -A - 3.6, -A, -0.6, 0, false); koy('zarf-kirmizi', A, A + 3.6, -0.6, 0, true); }
+    else if (hal === 'b') { koy('delta-dik', -A - 2.9, -A, 0.0, 0, false); koy('delta-dik', A, A + 2.9, 0.0, 0, true); }
+    else if (hal === 'c') { for (const x of [-3.3, -1.65]) koy('simsek-dik', x, x + 1.2, 0.0, 5.5, false);
+                            for (const x of [A, A + 1.65]) koy('simsek-dik', x, x + 1.2, 0.0, 5.5, true); }
+    else if (hal === 'd') { for (const x of [-3.3, -1.5]) koy('fener-sutun', x, x + 1.05, 0.0, 0, false);
+                            for (const x of [A, A + 1.8]) koy('fener-sutun', x, x + 1.05, 0.0, 0, false); }
+    else if (hal === 'e') { koy('parasut-mor-dik', -A - 3.0, -A, 0.0, 0, false); koy('parasut-turuncu-dik', A, A + 2.6, 0.0, 0, true); }
+    return;
+  }
+}
+
+function engelDestekGuncelle(g, tip, z, gov, kimlik, notaT){
   const d = g.userData;
   for (const k in d){
     if (Array.isArray(d[k])) { for (const q of d[k]) q.visible = false; }
     else d[k].visible = false;
+  }
+  if (BULUT_MOD_AKTIF) {
+    // Engelin hali NOTANIN zamanindan: LEVEL UP'tan hemen sonra gelecek
+    // notalar sinirdan ONCE uzakta gorunur - yeni levelin nesnesiyle gelmeli.
+    bulutEngel(g, d, tip, z, kimlik, bulutHalAt(notaT));
+    return;
   }
   if (BAL_MOD_AKTIF) {
     if (!gov) return;
@@ -5378,7 +5721,11 @@ const KLIP_ADLARI = ['idle','idle-breathing','step-left','step-right','jump',
                      // HAREKETIN FIZIKSEL SEBEBI. alcak buz -> zipla, sacak -> egil,
                      // yarim levha -> acik tarafa, buz paneli -> iki elle it.
                      'standing-jump','box-jump','jump-up','ducking',
-                     'long-left-side-step','push-start','pushing','push-pose'];
+                     'long-left-side-step','push-start','pushing','push-pose',
+                     // HAR-005 (19 Eyl 2026, MEK-005 BULUT, ENG-005). Engelden turetildi:
+                     // bas ustu -> comel, alcak -> ustunden adim, yan kapali -> acik tarafa
+                     // sicra, dar gecit -> yan don. Remy ile indirildi, In Place.
+                     'crouch-walk','step-over','quick-steps','twist-right','crouching','strafe-jump'];
 const klipler = {};
 let siluet = null, mixer = null, kokKemik = null, kokBaslangic = null;
 
@@ -5419,7 +5766,8 @@ if (govde) {
   // idle'in ilk karesine hizalaniyor; ziplamanin GORELI yuksekligi aynen kaliyor.
   if (klipler['idle']) {
     const iz0 = klipler['idle'].tracks.find(t => /Hips\.position$/.test(t.name));
-    for (const ad of ['standing-jump','box-jump','jump-up','ducking','long-left-side-step','push-start','pushing','push-pose']) {
+    for (const ad of ['standing-jump','box-jump','jump-up','ducking','long-left-side-step','push-start','pushing','push-pose',
+                      'crouch-walk','step-over','quick-steps','twist-right','crouching','strafe-jump']) {
       const k = klipler[ad]; if (!k || !iz0) continue;
       const iz = k.tracks.find(t => /Hips\.position$/.test(t.name)); if (!iz) continue;
       const dy = iz.values[1] - iz0.values[1];
@@ -5457,6 +5805,51 @@ if (govde) {
       izler.push(new Tur(tp.name, T, deger));
     }
     klipler['push-it'] = new THREE.AnimationClip('push-it', 1.60, izler);
+  }
+  // HAR-005 POZ KLIPLERI (19 Eyl 2026). Mixamo kliplerinin uclari NOTR degil
+  // (Crouching comelmis biter, Twist R yana donuk biter, Strafe Jump gard
+  // durusunda baslar) -> ALTIN KURAL geregi push-it yontemi: idle ilk karesi ->
+  // klibin OLCULMUS tepe karesi (faz-tarama, 04-ciktilar/faz-har005) -> tutus
+  // -> idle. Poz verisi klibin kendisinden (interpolant), uydurma aci yok.
+  const pozKlip = (ad, kaynak, oran) => {
+    const I = klipler['idle'], P = klipler[kaynak];
+    if (!I || !P) return;
+    const tp = oran * P.duration;
+    const T = [0.00, 0.14, 0.28, 0.42, 0.80, 1.18, 1.32, 1.46, 1.60];
+    const W = [0.00, 0.16, 0.62, 1.00, 1.00, 1.00, 0.62, 0.16, 0.00];
+    const qa = new THREE.Quaternion(), qb = new THREE.Quaternion(), qo = new THREE.Quaternion();
+    const izler = [];
+    for (const iz of P.tracks) {
+      const ti = I.tracks.find(t => t.name === iz.name);
+      if (!ti) continue;
+      const n = iz.getValueSize();
+      const va = ti.values.slice(0, n);
+      const vb = Array.from(iz.createInterpolant().evaluate(tp)).slice(0, n);
+      const quat = /quaternion/.test(iz.name);
+      const deger = [];
+      for (const w of W) {
+        if (quat) { qa.fromArray(va); qb.fromArray(vb); qo.slerpQuaternions(qa, qb, w); deger.push(qo.x, qo.y, qo.z, qo.w); }
+        else for (let j = 0; j < n; j++) deger.push(va[j] + (vb[j] - va[j]) * w);
+      }
+      const Tur = quat ? THREE.QuaternionKeyframeTrack : THREE.VectorKeyframeTrack;
+      izler.push(new Tur(iz.name, T, deger));
+    }
+    klipler[ad] = new THREE.AnimationClip(ad, 1.60, izler);
+  };
+  pozKlip('comel-k', 'crouching', 0.40);      // derin comelme, kompakt (faz 0,40)
+  // 0,40 -> 0,433 (olc-iou: don-k ile 0,515 IHLAL). 0,433 en sola kayik (com -0,155)
+  // ve en genis (46 px) an - yan donmeden ayrisir.
+  pozKlip('sicra-k', 'strafe-jump', 0.433);   // bacaklar acik, govde SOLA
+  pozKlip('don-k',   'twist-right', 0.99);    // govde profilde (yan donmus)
+  // Step Up To Jump Over: %70'ten sonra figur yana donup yuruyor (notr bitmiyor).
+  // Havadaki an %50'de; ilk %70 alinir, cikisi harman (akis) tasir.
+  if (klipler['step-over']) {
+    const k = klipler['step-over'];
+    klipler['step-over-k'] = THREE.AnimationUtils.subclip(k, 'step-over-k', 0, Math.round(k.duration * 0.70 * 30), 30);
+    // Sicrama cok yuksek: siluet kutusunun ustunden tasiyordu (olc-iou doluluk
+    // %3,1). Kalca yukselisi yariya indirilir - dizler cekili okuma korunur.
+    const iz = klipler['step-over-k'].tracks.find(t => /Hips\.position$/.test(t.name));
+    if (iz) { const y0 = iz.values[1]; for (let j = 1; j < iz.values.length; j += 3) iz.values[j] = y0 + (iz.values[j] - y0) * 0.5; }
   }
 }
 
@@ -6082,7 +6475,11 @@ function kareKur(n){
   // ayrildigi yer taban shader'inin uMod=3 dali (petek + dokulmus bal kanali)
   // ve ölçüye kilitli bal iplikleri. Fotograf yok.
   const balMod = ((yumusak < 0.5 ? O0 : O1).bal === true);
-  const sadeMod = tabanMod || karpuzMod || elmaMod || balMod;
+  // BULUT MODU (18 Eyl 2026, MEK-005). Sadelik ortak; ayrildigi yer taban
+  // shader'inin uMod=4 dali (asili pist, koridor disi discard), sabit arka
+  // plan resmi ve akan bulut katmanlari.
+  const bulutMod = ((yumusak < 0.5 ? O0 : O1).bulutMekan === true);
+  const sadeMod = tabanMod || karpuzMod || elmaMod || balMod || bulutMod;
   const karistir = (a, b) => new THREE.Color(a).lerp(new THREE.Color(b), yumusak);
   zeminMat.uniforms.uGrid .value.copy(karistir(O0.grid[0], O1.grid[0]));
   zeminMat.uniforms.uGrid2.value.copy(karistir(O0.grid[1], O1.grid[1]));
@@ -6091,18 +6488,23 @@ function kareKur(n){
     ufuk.material.color.copy(karistir(O0.ufuk || O0.gok, O1.ufuk || O1.gok));
     // ELMA: ufuk seridi yiginin arkasinda PARLAK bant olarak okunuyordu;
     // bu mekanda ufku yigin siluetinin kendisi kuruyor.
-    ufuk.visible = !elmaMod && !balMod;
+    ufuk.visible = !elmaMod && !balMod && !bulutMod;
   }
   // Gokyuzu de ortamla degisir. A'da dort ortamin da gogu ayni koyu renk,
   // yani A icin bu satirlar gorunur bir sey degistirmez.
   const gok = karistir(O0.gok, O1.gok);
-  scene.background.copy(gok);
+  // BULUT: arka plan RESIM (gok + bulut denizi). Renk nesnesi saklanir,
+  // oteki modlarda geri konur.
+  ARKA_RENK.copy(gok);
+  if (bulutMod && !bulutMKok) bulutMekanKur();
+  if (bulutMod) BULUT_HAL_AKTIF = (yumusak < 0.5 ? O0 : O1).bulutHal || 'a';
+  scene.background = bulutMod ? (BULUT_ARKA[BULUT_HAL_AKTIF] || BULUT_ARKA.a) : ARKA_RENK;
   scene.fog.color.copy(gok);
   zeminMat.uniforms.uSis.value.copy(gok);
-  zeminMat.uniforms.uSeritGuc.value = (elmaMod || balMod) ? 0.42 : 1.0;
+  zeminMat.uniforms.uSeritGuc.value = (elmaMod || balMod || bulutMod) ? 0.42 : 1.0;
   // ELMA: yol UC CIZGILI (bolum 01 dili) - sol / orta / sag. Varsayilan 9
   // ayrac bu mekanda kalabalik okunuyordu.
-  zeminMat.uniforms.uSeritSik.value = (elmaMod || balMod) ? 3.0 : 9.0;
+  zeminMat.uniforms.uSeritSik.value = (elmaMod || balMod || bulutMod) ? 3.0 : 9.0;
 
   // --- GUNDUZ KARISIMI (2 Eyl 2026)
   // Ortam 'gunduz: true' dediginde sahne acik alana doner. Gecis ortam
@@ -6148,6 +6550,8 @@ function kareKur(n){
   if (elmaMod) { scene.fog.near = 70; scene.fog.far = 235; }
   // BAL: gok acik (krem); karpuz/elma ile ayni tuzak - sis yakin kalirsa yol gok rengine yikanir.
   if (balMod) { scene.fog.near = 90; scene.fog.far = 280; }
+  // BULUT: sis rengi ufuk pusu (#ccd6e3) - uzak kule ve kumeler arka plana karisir.
+  if (bulutMod) { scene.fog.near = 60; scene.fog.far = 300; }
   zeminMat.uniforms.uSisYakin.value = SIS_YAKIN + gd * 62;
   zeminMat.uniforms.uSisUzak .value = SIS_UZAK  + gd * 140;
   if (gokyuzu) {
@@ -6353,7 +6757,7 @@ function kareKur(n){
   // aciyor. Oteki modlarin cerceveleme karari DEGISMIYOR.
   // ELMA: ufuk %41,6 olculmustu (kural %42-50). Bakis noktasi yukari alininca
   // ufuk kadrajda asagi iner ve bant icine oturur - olculerek bulundu.
-  camera.lookAt(0, balMod ? BAL_BAKIS : elmaMod ? 2.62 : (karpuzMod ? 2.62 : ((denizMod || sehirMod || sadeMod) ? 2.14 : 0.55)), -6);
+  camera.lookAt(0, bulutMod ? BULUT_BAKIS : balMod ? BAL_BAKIS : elmaMod ? 2.62 : (karpuzMod ? 2.62 : ((denizMod || sehirMod || sadeMod) ? 2.14 : 0.55)), -6);
 
   // --- KURULUS CEKIMI (5 Eyl 2026)
   // Referansta ilk 10 saniye piste DEGIL, denize bakiyor: tek platform
@@ -6478,6 +6882,7 @@ function kareKur(n){
   KARPUZ_MOD_AKTIF = karpuzMod;
   ELMA_MOD_AKTIF = elmaMod;
   BAL_MOD_AKTIF = balMod;
+  BULUT_MOD_AKTIF = bulutMod;
   if (sehirKok) {
     sehirKok.visible = sehirMod;
     if (sehirMod) sehirGuncelle(t, O0, O1, yumusak, karistir);
@@ -6501,7 +6906,7 @@ function kareKur(n){
       // uMod ritim katmanini secer: 0 = olcu cubugu + nabiz halkasi (MEK-001),
       // 1 = bas ustunden gecen asma dalinin golgesi (MEK-002). Ayni duzlem,
       // ayni rampa, farkli sayma ogesi.
-      U.uMod.value = balMod ? 3 : (elmaMod ? 2 : (karpuzMod ? 1 : 0));
+      U.uMod.value = bulutMod ? 4 : balMod ? 3 : (elmaMod ? 2 : (karpuzMod ? 1 : 0));
       U.uYakin.value.copy(karistir(O0.tabanYakin || O0.gok, O1.tabanYakin || O1.gok));
       U.uUzak .value.copy(karistir(O0.tabanUzak  || O0.gok, O1.tabanUzak  || O1.gok));
       U.uGok  .value.copy(karistir(O0.gok, O1.gok));
@@ -6537,6 +6942,10 @@ function kareKur(n){
     if (elmaMod) elmaAgacGuncelle(t);
   }
   // --- BAL: olcuye kilitli bal iplikleri (MEK-004 ritim ogesi)
+  if (bulutMKok) {
+    bulutMKok.visible = bulutMod;
+    if (bulutMod) bulutMekanGuncelle(t);
+  }
   if (balMod && !balIplikKok) balIplikKur();
   if (balIplikKok) {
     balIplikKok.visible = balMod;
@@ -6744,7 +7153,7 @@ function kareKur(n){
     // KARPUZ: yol govdesi KAPALI - koridoru taban shader'i ciziyor (uYol).
     // Sebep yukarida yazili: govde ile taban duzlemi arasindaki 0,055 birim
     // yatik acida z-savasina giriyor ve koridor siyah bir seride donuyordu.
-    yolGovdeMesh.visible = !karpuzMod && !elmaMod && !balMod;
+    yolGovdeMesh.visible = !karpuzMod && !elmaMod && !balMod && !bulutMod;
     // Yolun yan yuzu gecede neredeyse siyah (#07060f). Gunduz birakilinca
     // acik gokyuzunun altinda kara bir sedde gibi duruyordu.
     if (sadeMod) {
@@ -6831,7 +7240,7 @@ function kareKur(n){
       // zemini ve yan hatlari da acardi.
       // ELMA (14 Eyl 2026): kapi bir kez daha genisletildi - ENG-003
       // gecitleri bu mekanda da acik olmali, mekanin 'gunduz' bayragi yok.
-      const engelde = TB && (gd > 0.5 || KARPUZ_MOD_AKTIF || ELMA_MOD_AKTIF || BAL_MOD_AKTIF) && m.userData.engel;
+      const engelde = TB && (gd > 0.5 || KARPUZ_MOD_AKTIF || ELMA_MOD_AKTIF || BAL_MOD_AKTIF || BULUT_MOD_AKTIF) && m.userData.engel;
       const z = Z_DOGUM + (Z_VURUS - Z_DOGUM) * ilerleme;
       if (engelde) {
         // OBBY: gar dili olan sari-siyah seritli doku yerine duz doygun
@@ -7008,12 +7417,12 @@ function kareKur(n){
         // KARPUZ: engelin govdesi HER cue'da gizli. Dort hareketin dordu de
         // ayni kutunun olceklenmis hali olamaz (4 Eyl dersi) - engeli
         // meyve / dal / kesit / yaprak kuruyor, kutu degil.
-        if (KARPUZ_MOD_AKTIF || ELMA_MOD_AKTIF || BAL_MOD_AKTIF) m.visible = false;
+        if (KARPUZ_MOD_AKTIF || ELMA_MOD_AKTIF || BAL_MOD_AKTIF || BULUT_MOD_AKTIF) m.visible = false;
         if (m.userData.destek){
           m.userData.destek.visible = true;
           engelDestekGuncelle(m.userData.destek, no.tip, z, gov ||
             { cx:m.position.x, y:m.position.y, w:2.05*m.scale.x,
-              h:0.34*m.scale.y, d:2.45*m.scale.z }, no.combo || 0);
+              h:0.34*m.scale.y, d:2.45*m.scale.z }, no.combo || 0, no.t);
         }
       } else {
         if (m.userData.gece && m.material !== m.userData.gece) m.material = m.userData.gece;
@@ -7192,7 +7601,8 @@ function kareKur(n){
     // yeni kurulan gercek geometriyi yikiyordu. Gunduzde neredeyse kapali.
     // BAL (17 Eyl 2026): krem gok + parlak petek bloom altinda beyaza yikaniyordu
     // (ilk motor karesi). Gunduz gibi kisiliyor.
-    const bloomK = 1 - Math.max(gd * 0.86, BAL_MOD_AKTIF ? 0.80 : 0);
+    // BULUT (18 Eyl 2026): acik bulut gogu ayni tuzak - kisiliyor.
+    const bloomK = 1 - Math.max(gd * 0.86, (BAL_MOD_AKTIF || BULUT_MOD_AKTIF) ? 0.80 : 0);
     bx.globalAlpha = (TB ? 0.17 : 0.50) * bloomK;
     bx.filter = TB ? 'blur(10px)' : 'blur(14px)';
     bx.drawImage(canvas, 0, 0);
@@ -7322,6 +7732,11 @@ window.kareAl = (bicim, kalite) => {
   return cikisCv.toDataURL('image/webp', kalite || 1);
 };
 window.__T = { THREE, scene, camera, siluet, notaMesh, NOTALAR, halka, mixer, aksiyon };
+// BULUT (18 Eyl 2026): mekan bolumde varsa ACILISTA kurulur ve dokulari beklenir.
+if (ORTAMLAR.some(o => o.bulutMekan === true)) {
+  if (!bulutMKok) bulutMekanKur();
+  await Promise.all(BULUT_BEKLE);
+}
 window.HAZIR = true;
 window.SILUET_VAR = !!siluet;
 window.insanSimge = insanSimge;   // simge tablosu icin

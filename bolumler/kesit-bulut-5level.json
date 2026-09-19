@@ -1,0 +1,150 @@
+{
+ "_": "KESIT - 5 LEVEL, MUZIKSIZ (19 Eyl 2026). MEK-005 bulut 5 hal (her LEVEL bir mekan, degisim LEVEL UP aninda), ENG-005 her levelde TEK nesne (balon / delta kanat / simsek / fener / yamac parasutu), HAR-005 hareketleri (comel / ustten / sicra_L-R / don). Her level 10 olcu: 2 nefes + 8 olcu dort aile. Bolume ozel muzik henuz yok - kesit sessiz.",
+ "no": 10,
+ "baslik": "KESIT | BULUT 5 level",
+ "tema": "b",
+ "bpm": 132.0,
+ "toplam_olcu": 50,
+ "mekanik": "temel",
+ "hareketler": [
+  "comel",
+  "ustten",
+  "sicra_L / sicra_R",
+  "don"
+ ],
+ "ortamlar": [
+  "BULUT",
+  "BULUT-GUNBATIMI",
+  "BULUT-FIRTINA",
+  "BULUT-GECE",
+  "BULUT-SAFAK"
+ ],
+ "ortam_olcu": [
+  0,
+  10,
+  20,
+  30,
+  40
+ ],
+ "seviye_olcu": [
+  0,
+  10,
+  20,
+  30,
+  40
+ ],
+ "kaliplar": {
+  "bos": [
+   null,
+   null,
+   null,
+   null
+  ],
+  "cm": [
+   "comel",
+   null,
+   null,
+   null
+  ],
+  "us": [
+   "ustten",
+   null,
+   null,
+   null
+  ],
+  "sL": [
+   "sicra_L",
+   null,
+   null,
+   null
+  ],
+  "sR": [
+   "sicra_R",
+   null,
+   null,
+   null
+  ],
+  "dn": [
+   "don",
+   null,
+   null,
+   null
+  ]
+ },
+ "kademeler": {
+  "k1": [
+   "cm",
+   "bos",
+   "us",
+   "bos",
+   "sL",
+   "bos",
+   "dn",
+   "sR"
+  ]
+ },
+ "iskelet": [
+  [
+   0,
+   2,
+   "bos",
+   "nefes"
+  ],
+  [
+   2,
+   10,
+   "k1",
+   "adim"
+  ],
+  [
+   10,
+   12,
+   "bos",
+   "nefes"
+  ],
+  [
+   12,
+   20,
+   "k1",
+   "adim"
+  ],
+  [
+   20,
+   22,
+   "bos",
+   "nefes"
+  ],
+  [
+   22,
+   30,
+   "k1",
+   "adim"
+  ],
+  [
+   30,
+   32,
+   "bos",
+   "nefes"
+  ],
+  [
+   32,
+   40,
+   "k1",
+   "adim"
+  ],
+  [
+   40,
+   42,
+   "bos",
+   "nefes"
+  ],
+  [
+   42,
+   50,
+   "k1",
+   "adim"
+  ]
+ ],
+ "nota_simge": false,
+ "akis": "harman2"
+}

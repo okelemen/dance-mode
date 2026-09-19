@@ -1,0 +1,36 @@
+{
+ "_": "ONIZLEME TEK SAHNE - BULUT / ASILI PIST (18 Eyl 2026, MEK-005). SADECE MEKAN KONTROLU: cue YOK. Hareket seti (HAR-005) ve engel (ENG-005) secilmedi; onceki bolumlerin hareketleri TASINMADI (hareket-defteri kurali). Muzik yok - bolume ozel muzik henuz yapilmadi, kare kontrolu sessiz.",
+ "no": 10,
+ "baslik": "ONIZLEME | Tek sahne BULUT",
+ "tema": "b",
+ "toplam_olcu": 32,
+ "mekanik": "temel",
+ "hareketler": [],
+ "ortamlar": [
+  "BULUT"
+ ],
+ "ortam_olcu": [
+  0
+ ],
+ "bpm": 132.0,
+ "seviye_bes": true,
+ "kaliplar": {
+  "bos": [
+   null,
+   null,
+   null,
+   null
+  ]
+ },
+ "kademeler": {},
+ "iskelet": [
+  [
+   0,
+   32,
+   "bos",
+   "nefes"
+  ]
+ ],
+ "nota_simge": false,
+ "akis": "harman2"
+}

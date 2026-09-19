@@ -1274,6 +1274,166 @@
    "yol": "#4a2108",
    "ufuk": "#ede0c7",
    "bal": true
+  },
+  "BULUT": {
+   "_": "TEK SAHNE / BULUT - ASILI PIST (18 Eyl 2026, MEK-005). Tasiyici fikir: zemin yok; oyun duzlemi bosluga asili koyu firtina bulutu seridi, 9 birim altta ufka kadar bulut denizi. Ritim: her olcude bulut denizinin icinde simsek, sahne alttan aydinlanir. EKRAN BOS KALMAZ (18 Eyl kurali): gok cirrus, ufuk cumulus bankasi, yanlarda akan cumulus kuleleri, altta akan deniz bulutlari. Varliklar gercek fotograf CC0 REF-020...024, 07-mekan/bulut/.",
+   "gok": "#ccd6e3",
+   "zemin": "gok",
+   "dekor": "yok",
+   "bicim": "kemer",
+   "grid": [
+    "#6ce8e2",
+    "#ff6a9e",
+    "#ba78ff"
+   ],
+   "kemer": [
+    "#6ce8e2",
+    "#ff6a9e",
+    "#ba78ff",
+    "#8a5ca8",
+    "#6d4a7a"
+   ],
+   "ara": 27.7,
+   "olcek": 1.0,
+   "en": 1.0,
+   "boy": 1.0,
+   "yer": 5.3,
+   "tabanYakin": "#ccd6e3",
+   "tabanUzak": "#ccd6e3",
+   "tabanVurus": "#ffd6a8",
+   "tabanHalka": "#ba78ff",
+   "yol": "#2b2d35",
+   "ufuk": "#ccd6e3",
+   "bulutMekan": true,
+   "bulutHal": "a"
+  },
+  "BULUT-GUNBATIMI": {
+   "_": "MEK-005 b hali (19 Eyl 2026, her LEVEL bir mekan kurali). L2 GUN BATIMI: gunes diski ufuk bankasinin ustunde, kizil kenarli bulut denizi. Engel: delta kanat. Arka plan 07-mekan/bulut/arka-b.jpg (motor-hazirla-hal.py).",
+   "gok": "#edc2a8",
+   "zemin": "gok",
+   "dekor": "yok",
+   "bicim": "kemer",
+   "grid": [
+    "#6ce8e2",
+    "#ff6a9e",
+    "#ba78ff"
+   ],
+   "kemer": [
+    "#6ce8e2",
+    "#ff6a9e",
+    "#ba78ff",
+    "#8a5ca8",
+    "#6d4a7a"
+   ],
+   "ara": 27.7,
+   "olcek": 1.0,
+   "en": 1.0,
+   "boy": 1.0,
+   "yer": 5.3,
+   "tabanYakin": "#edc2a8",
+   "tabanUzak": "#edc2a8",
+   "tabanVurus": "#ffd6a8",
+   "tabanHalka": "#ba78ff",
+   "yol": "#2b2d35",
+   "ufuk": "#edc2a8",
+   "bulutMekan": true,
+   "bulutHal": "b"
+  },
+  "BULUT-FIRTINA": {
+   "_": "MEK-005 c hali (19 Eyl 2026, her LEVEL bir mekan kurali). L3 FIRTINA: koyu bulut duvari, uzak yagmur perdeleri, guclu simsek ritmi. Engel: simsek. Arka plan 07-mekan/bulut/arka-c.jpg (motor-hazirla-hal.py).",
+   "gok": "#666e80",
+   "zemin": "gok",
+   "dekor": "yok",
+   "bicim": "kemer",
+   "grid": [
+    "#6ce8e2",
+    "#ff6a9e",
+    "#ba78ff"
+   ],
+   "kemer": [
+    "#6ce8e2",
+    "#ff6a9e",
+    "#ba78ff",
+    "#8a5ca8",
+    "#6d4a7a"
+   ],
+   "ara": 27.7,
+   "olcek": 1.0,
+   "en": 1.0,
+   "boy": 1.0,
+   "yer": 5.3,
+   "tabanYakin": "#666e80",
+   "tabanUzak": "#666e80",
+   "tabanVurus": "#ffd6a8",
+   "tabanHalka": "#ba78ff",
+   "yol": "#2b2d35",
+   "ufuk": "#666e80",
+   "bulutMekan": true,
+   "bulutHal": "c"
+  },
+  "BULUT-GECE": {
+   "_": "MEK-005 d hali (19 Eyl 2026, her LEVEL bir mekan kurali). L4 GECE: ay + yildizlar, gumus-lacivert bulut denizi. Engel: kirmizi fener. Arka plan 07-mekan/bulut/arka-d.jpg (motor-hazirla-hal.py).",
+   "gok": "#3d4a66",
+   "zemin": "gok",
+   "dekor": "yok",
+   "bicim": "kemer",
+   "grid": [
+    "#6ce8e2",
+    "#ff6a9e",
+    "#ba78ff"
+   ],
+   "kemer": [
+    "#6ce8e2",
+    "#ff6a9e",
+    "#ba78ff",
+    "#8a5ca8",
+    "#6d4a7a"
+   ],
+   "ara": 27.7,
+   "olcek": 1.0,
+   "en": 1.0,
+   "boy": 1.0,
+   "yer": 5.3,
+   "tabanYakin": "#3d4a66",
+   "tabanUzak": "#3d4a66",
+   "tabanVurus": "#ffd6a8",
+   "tabanHalka": "#ba78ff",
+   "yol": "#2b2d35",
+   "ufuk": "#3d4a66",
+   "bulutMekan": true,
+   "bulutHal": "d"
+  },
+  "BULUT-SAFAK": {
+   "_": "MEK-005 e hali (19 Eyl 2026, her LEVEL bir mekan kurali). L5 SAFAK: pastel gok, alcak gunes isini. Engel: yamac parasutu. Arka plan 07-mekan/bulut/arka-e.jpg (motor-hazirla-hal.py).",
+   "gok": "#ebd9db",
+   "zemin": "gok",
+   "dekor": "yok",
+   "bicim": "kemer",
+   "grid": [
+    "#6ce8e2",
+    "#ff6a9e",
+    "#ba78ff"
+   ],
+   "kemer": [
+    "#6ce8e2",
+    "#ff6a9e",
+    "#ba78ff",
+    "#8a5ca8",
+    "#6d4a7a"
+   ],
+   "ara": 27.7,
+   "olcek": 1.0,
+   "en": 1.0,
+   "boy": 1.0,
+   "yer": 5.3,
+   "tabanYakin": "#ebd9db",
+   "tabanUzak": "#ebd9db",
+   "tabanVurus": "#ffd6a8",
+   "tabanHalka": "#ba78ff",
+   "yol": "#2b2d35",
+   "ufuk": "#ebd9db",
+   "bulutMekan": true,
+   "bulutHal": "e"
   }
  },
  "_kaynak": "Bazi ortamlar rakip karelerinden OLCULEREK turetildi (docs/kanal-kareleri/). Olculen paletler ve parlaklik profilleri docs/OLCUM-KANAL-KARELERI.md icinde."

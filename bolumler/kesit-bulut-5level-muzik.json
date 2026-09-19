@@ -1,0 +1,151 @@
+{
+ "_": "KESIT - 5 LEVEL, MUZIKLI (19 Eyl 2026). kesit-bulut-5level ile ayni iskelet; muzik Maximum Energy (Suno, REF-043 prompt'u). OLCULDU: 142,25 BPM, ilk vurus 0,0117 sn, drop 27,006 sn (vurus 64, olcu basi). Parca 90 sn sonra hizlaniyor (sabit izgara faz testi: 90-130 sn arasi -550 ms birikme) - o yuzden kesitte yalniz 27-88 sn kullanildi: 36 olcu drop + 14 olcu (drop'un 8-21. olculeri) = 50 olcu. Tam bolum icin bu parca YETMEZ (2:41, ikinci yarisi kayiyor).",
+ "no": 10,
+ "baslik": "KESIT | BULUT 5 level + muzik",
+ "tema": "b",
+ "bpm": 142.25,
+ "toplam_olcu": 50,
+ "mekanik": "temel",
+ "hareketler": [
+  "comel",
+  "ustten",
+  "sicra_L / sicra_R",
+  "don"
+ ],
+ "ortamlar": [
+  "BULUT",
+  "BULUT-GUNBATIMI",
+  "BULUT-FIRTINA",
+  "BULUT-GECE",
+  "BULUT-SAFAK"
+ ],
+ "ortam_olcu": [
+  0,
+  10,
+  20,
+  30,
+  40
+ ],
+ "seviye_olcu": [
+  0,
+  10,
+  20,
+  30,
+  40
+ ],
+ "kaliplar": {
+  "bos": [
+   null,
+   null,
+   null,
+   null
+  ],
+  "cm": [
+   "comel",
+   null,
+   null,
+   null
+  ],
+  "us": [
+   "ustten",
+   null,
+   null,
+   null
+  ],
+  "sL": [
+   "sicra_L",
+   null,
+   null,
+   null
+  ],
+  "sR": [
+   "sicra_R",
+   null,
+   null,
+   null
+  ],
+  "dn": [
+   "don",
+   null,
+   null,
+   null
+  ]
+ },
+ "kademeler": {
+  "k1": [
+   "cm",
+   "bos",
+   "us",
+   "bos",
+   "sL",
+   "bos",
+   "dn",
+   "sR"
+  ]
+ },
+ "iskelet": [
+  [
+   0,
+   2,
+   "bos",
+   "nefes"
+  ],
+  [
+   2,
+   10,
+   "k1",
+   "adim"
+  ],
+  [
+   10,
+   12,
+   "bos",
+   "nefes"
+  ],
+  [
+   12,
+   20,
+   "k1",
+   "adim"
+  ],
+  [
+   20,
+   22,
+   "bos",
+   "nefes"
+  ],
+  [
+   22,
+   30,
+   "k1",
+   "adim"
+  ],
+  [
+   30,
+   32,
+   "bos",
+   "nefes"
+  ],
+  [
+   32,
+   40,
+   "k1",
+   "adim"
+  ],
+  [
+   40,
+   42,
+   "bos",
+   "nefes"
+  ],
+  [
+   42,
+   50,
+   "k1",
+   "adim"
+  ]
+ ],
+ "nota_simge": false,
+ "akis": "harman2",
+ "muzik": "01-muzik/maximum-energy-142-kesit50.wav"
+}

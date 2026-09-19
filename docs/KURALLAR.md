@@ -75,6 +75,11 @@ başlamaz. Hata kaydı: BAL render'ı önceki bölümlerin müziğiyle başlatı
 
 ## 4. RENDER HATTI
 
+- **YEREL RENDER YASAK (19 Eyl 2026, kullanıcı kararı).** Kesit, önizleme, test, tam
+  bölüm — her render GitHub Actions'ta (`render-bolum.yml`). Yerelde `node render.js`
+  çalıştırılmaz. Yerelde yalnız ölçüm, müzik hazırlama, ffmpeg montaj/ses, kare kontrolü.
+  Hata kaydı: müzikli BULUT kesiti yerelde başlatıldı (~55 dk), kullanıcı durdurdu.
+
 - Tam bölüm: GitHub Actions `render-bolum.yml`, paralel parçalar,
   `birlestir: hayir` (workflow'un ses yolu 120 BPM'lik HAM mp3'e bağlı).
 - `--bolum` değeri **`../bolumler/x.json`** biçiminde yazılır. `bolumler/x.json`
@@ -118,3 +123,30 @@ siluetin üstünde durur; siluet yazıyı kapatmaz.
 ışıma, rozet zeminleri), siluetin pozu, LEVEL ve COMBO sayıları, hız çizgileri.
 (Başlık metninin "NEON DANCE MODE" olup olmayacağı ayrı karar; yazı tipi ve
 konum yine yukarıdaki gibi.)
+
+## 7. EKRAN BOŞ KALMAZ (18 Eyl 2026, kullanıcı: "izleyici boşluklu ekranı sevmiyor")
+
+Doldurma kuralı (`Masaüstü/REFERANSLAR/doldurma-kurali.md`) artık yalnız zemin
+bandı için değil **kadrajın tamamı** için geçerli: zemin, ufuk şeridi, gök,
+yanlar. Mekânın taşıyıcı fikri boşluk olsa bile (asılı pist, açık gök) ekran
+boş bırakılmaz; boşluk o konseptin kendi öğeleriyle kapatılır. Her mekân
+önerisinde eklenti listesi yazılır; kare kontrolünde belirgin, sürekli, düz
+renkli alan varsa (gök dâhil) mekân teslim edilmez. İlk uygulandığı yer:
+MEK-005 BULUT.
+
+## 8. HER LEVEL BİR MEKÂN (18 Eyl 2026 — "tek sahne" kararının yerine)
+
+Video 5 mekândan oluşur, **her LEVEL bir mekân**; değişim LEVEL UP anında
+(`ortam_olcu` = `seviye_olcu`). Mekânlar seçilen ilk mekânın kurgusundan türer;
+taşıyıcı fikir korunur, her biri farklı bir hâldir (saat, hava, ışık, gök öğesi;
+salt renk değişimi sayılmaz). **Engeller her mekânda o mekânın dünyasından
+yeniden kurulur**; hareket aileleri ve engel = hareket kuralı sabit.
+Kayıt: `Masaüstü/REFERANSLAR/mekan-defteri.md` → MEK-NNN a…e.
+
+### 8a. Engeller mekâna göre ve her levelde farklı (18 Eyl 2026)
+
+Her mekânın engel nesnesi o mekânın dünyasından ve mekânla uyumlu; bir levelin
+engel nesnesi başka bir levelde (ve önceki videolarda) tekrar edilmez. 5 level =
+5 ayrı engel dünyası. Öneri yazılırken her level için nesne + mekânla bağı yazılır.
+Her levelde TEK engel nesnesi (19 Eyl 2026): dört hareket ailesi aynı nesnenin farklı
+duruşlarıyla kurulur; 5 level = 5 nesne.
