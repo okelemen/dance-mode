@@ -313,5 +313,7 @@
    "nefes"
   ]
  ],
- "_iskelet": "26 ogretme (6 nefes + dort hareket x5) + 304 = 16 calisma blogu (16'lik) + 6 mola (8'lik). Bolum uzarken blok UZUNLUGU degil SAYISI artar. Dizilim: (3 calisma + 1 mola) x5, sonra 1 calisma + 1 mola."
+ "_iskelet": "26 ogretme (6 nefes + dort hareket x5) + 304 = 16 calisma blogu (16'lik) + 6 mola (8'lik). Bolum uzarken blok UZUNLUGU degil SAYISI artar. Dizilim: (3 calisma + 1 mola) x5, sonra 1 calisma + 1 mola.",
+ "seviye_bes": true,
+ "_seviye_bes": "LEVEL 1-5 esit dilim (20 Eyl 2026). Ilk render'da level bolum boyunca 1'de kalmisti (motor seviyeyi ortamdan aliyor, bu bolum tek ortamli) - CLAUDE.md madde 2 ihlali, yeniden render alindi."
 }

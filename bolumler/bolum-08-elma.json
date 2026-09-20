@@ -144,43 +144,174 @@
  },
  "_kademe_gerekce": "Zorluk kademeler arasinda artiyor, blok icinde degil. c1'de sekiz olcunun dordu bos (yogunluk 0,50), c2'de ikisi bos + iki adim (0,75), c3'te bir bos (0,875), c4'te bir bos ama bos olmayanlarin hepsi set hareketi (1,00). charleston her kademede tek ve arkasi bos - pencere kurali kademeyle degismiyor.",
  "iskelet": [
-  [0, 8, "bos", "nefes"],
-  [8, 16, "og1", "adim"],
-  [16, 24, "og2", "adim"],
-  [24, 32, "og3", "adim"],
-  [32, 40, "og4", "adim"],
-
-  [40, 56, "c1", "adim"],
-  [56, 72, "c1", "adim"],
-  [72, 88, "c1", "adim"],
-  [88, 96, "mola", "nefes"],
-
-  [96, 112, "c2", "adim"],
-  [112, 128, "c2", "adim"],
-  [128, 144, "c2", "adim"],
-  [144, 152, "mola", "nefes"],
-
-  [152, 168, "c3", "adim"],
-  [168, 184, "c3", "adim"],
-  [184, 200, "c3", "adim"],
-  [200, 208, "mola", "nefes"],
-
-  [208, 224, "c4", "adim"],
-  [224, 240, "c4", "adim"],
-  [240, 256, "c4", "adim"],
-  [256, 264, "mola", "nefes"],
-
-  [264, 280, "c3", "adim"],
-  [280, 296, "c4", "adim"],
-  [296, 312, "c4", "adim"],
-  [312, 320, "mola", "nefes"],
-
-  [320, 328, "c4", "adim"],
-  [328, 336, "mola", "nefes"]
+  [
+   0,
+   8,
+   "bos",
+   "nefes"
+  ],
+  [
+   8,
+   16,
+   "og1",
+   "adim"
+  ],
+  [
+   16,
+   24,
+   "og2",
+   "adim"
+  ],
+  [
+   24,
+   32,
+   "og3",
+   "adim"
+  ],
+  [
+   32,
+   40,
+   "og4",
+   "adim"
+  ],
+  [
+   40,
+   56,
+   "c1",
+   "adim"
+  ],
+  [
+   56,
+   72,
+   "c1",
+   "adim"
+  ],
+  [
+   72,
+   88,
+   "c1",
+   "adim"
+  ],
+  [
+   88,
+   96,
+   "mola",
+   "nefes"
+  ],
+  [
+   96,
+   112,
+   "c2",
+   "adim"
+  ],
+  [
+   112,
+   128,
+   "c2",
+   "adim"
+  ],
+  [
+   128,
+   144,
+   "c2",
+   "adim"
+  ],
+  [
+   144,
+   152,
+   "mola",
+   "nefes"
+  ],
+  [
+   152,
+   168,
+   "c3",
+   "adim"
+  ],
+  [
+   168,
+   184,
+   "c3",
+   "adim"
+  ],
+  [
+   184,
+   200,
+   "c3",
+   "adim"
+  ],
+  [
+   200,
+   208,
+   "mola",
+   "nefes"
+  ],
+  [
+   208,
+   224,
+   "c4",
+   "adim"
+  ],
+  [
+   224,
+   240,
+   "c4",
+   "adim"
+  ],
+  [
+   240,
+   256,
+   "c4",
+   "adim"
+  ],
+  [
+   256,
+   264,
+   "mola",
+   "nefes"
+  ],
+  [
+   264,
+   280,
+   "c3",
+   "adim"
+  ],
+  [
+   280,
+   296,
+   "c4",
+   "adim"
+  ],
+  [
+   296,
+   312,
+   "c4",
+   "adim"
+  ],
+  [
+   312,
+   320,
+   "mola",
+   "nefes"
+  ],
+  [
+   320,
+   328,
+   "c4",
+   "adim"
+  ],
+  [
+   328,
+   336,
+   "mola",
+   "nefes"
+  ]
  ],
  "_iskelet": "40 ogretme (8 nefes + dort hareket x8) + 296 = 16 calisma blogu (16'lik) + 6 mola (8'lik). Dizilim (3 calisma + 1 mola) x5, sonra 8 calisma + 8 mola kapanis. Bolum uzarken blok UZUNLUGU degil SAYISI artti - 64 olculuk onizlemenin ogretme sirasi (ch -> side -> roof -> jacks) aynen korundu.",
  "nota_simge": false,
  "_nota_simge": "13 Eyl 2026 aksami kullanici karari: fayans VAR, simge YOK. Cue'yu fayansin rengi ve seridi tasiyor.",
  "akis": "harman2",
- "_akis": "15 Eyl 2026: cue klibi, kesilerek degil taban katmanla (adim/egzersiz) harmanlanarak biter. olc-siluet-akis.js ile olculdu."
+ "_akis": "15 Eyl 2026: cue klibi, kesilerek degil taban katmanla (adim/egzersiz) harmanlanarak biter. olc-siluet-akis.js ile olculdu.",
+ "seviye_bes": true,
+ "_seviye_bes": "LEVEL 1-5 esit dilim (20 Eyl 2026). Ilk render'da level bolum boyunca 1'de kalmisti (motor seviyeyi ortamdan aliyor, bu bolum tek ortamli) - CLAUDE.md madde 2 ihlali, yeniden render alindi."
 }
