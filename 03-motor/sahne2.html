@@ -187,7 +187,7 @@ kamS.position.set(0, 1.05, 13.8); kamS.lookAt(0, 1.05, 0);
 
 const yukleyici = new FBXLoader();
 const yukle = ad => new Promise(res => yukleyici.load(`/02-hareketler/${ad}.fbx`, o => res(o), undefined, () => res(null)));
-const KLIP_ADLARI = ['idle', 'bob-weave', 'lateral-lunge', 'jump-reach', 'tuck-jump', 'walk', 'box-jump'];
+const KLIP_ADLARI = ['idle', 'bob-weave', 'lateral-lunge', 'jump-reach', 'tuck-jump', 'walk', 'box-jump', 'turn180-L', 'turn180-R'];
 const klipler = {};
 let siluet = null, mixer = null, kokKemik = null, kokBaslangic = null;
 const govde = await yukle('siluet-govde');
@@ -211,6 +211,18 @@ if (govde) {
       const dy = iz.values[1] - iz0.values[1];
       for (let j = 1; j < iz.values.length; j += 3) iz.values[j] -= dy;
     }
+  }
+}
+// BOX-JUMP SICRAMA YAYI: klip kendi alcak kutusu icin kalcayi 73 cm sicratiyor
+// (tepe 176 cm, kutuya inis ~128 cm). Bizim kaide boyunda siluet kutunun bir
+// kutu boyu USTUNE cikip oradan dusuyordu - "havada kaliyor". Ucus araliginda
+// inis seviyesinin ustundeki kisim %45'e indirilir: kutunun hemen ustunden
+// gecip dogrudan iner. Comelme ve inis pozlari degismez.
+if (klipler['box-jump']) {
+  const iz = klipler['box-jump'].tracks.find(t => /Hips\.position$/.test(t.name));
+  if (iz) for (let i = 0; i < iz.times.length; i++) {
+    const y = iz.values[i * 3 + 1];
+    if (iz.times[i] > 0.9 && iz.times[i] < 1.7 && y > 128) iz.values[i * 3 + 1] = 128 + (y - 128) * 0.45;
   }
 }
 const aksiyon = {};
@@ -272,15 +284,29 @@ const yon = (dx, dz) => Math.atan2(dx, -dz);   // dunya yonu -> maske yaw (model
 const ss = x => { x = Math.max(0, Math.min(1, x)); return x * x * (3 - 2 * x); };
 const aciKar = (a, b, w) => { let d = b - a; while (d > Math.PI) d -= 2 * Math.PI; while (d < -Math.PI) d += 2 * Math.PI; return a + d * w; };
 
-// box-jump: kalcanin EN YUKSEK oldugu an (sicramanin tepesi)
-let KT = 1.9;
-if (klipler['box-jump']) {
-  const iz = klipler['box-jump'].tracks.find(t => /Hips\.position$/.test(t.name));
-  if (iz) { let m = -1e9; for (let i = 0; i < iz.times.length; i++) if (iz.values[i * 3 + 1] > m) { m = iz.values[i * 3 + 1]; KT = iz.times[i]; } }
+// KUTUYA ZIPLAMA (23 Eyl 2026 duzeltme). "Jump Up On Box" klibinin kalca
+// yuksekligi olculdu: 0,8 sn comelme (70 cm) -> 1,3 sn tepe (176) -> 1,6-2,0 sn
+// KENDI kutusuna iniyor (124-135) -> sonra kutudan geri iniyor. Onceki surum
+// klibin kendi kutu yuksekligine bizim kaide yuksekligini EKLIYORDU -> siluet
+// havada kaliyordu. Artik pencere comelmeden (0,55) klibin kutuda dogruldugu
+// ana (2,0) kadar; klibin kutu yuksekligi MASKEDEN olculup yalniz FARK eklenir.
+const TIRMAN_BAS = 0.55, TIRMAN_SON = 2.0, TIRMAN = TIRMAN_SON - TIRMAN_BAS;
+const UCUS_BAS = 1.00, UCUS_SON = 1.55;          // ayaklarin yerden kesildigi / kutuya degdigi an
+let KLIP_KUTU = 0;                               // klibin kendi kutusu (dunya birimi)
+if (siluet && klipler['box-jump']) {
+  pozKur('box-jump', 1.95, 0);
+  const d = mx.getImageData(0, 0, MW, MH).data;
+  let alt = -1;
+  for (let y = MH - 1; y >= 0 && alt < 0; y--) for (let x = 0; x < MW; x++) if (d[(y * MW + x) * 4 + 3] > 40) { alt = y; break; }
+  if (alt > 0) KLIP_KUTU = (ZEMIN_SATIR - (alt + 1)) / FIGUR_PX * HF;
 }
-const TIRMAN_BAS = Math.max(0, KT - 0.75);
-const TIRMAN_SON = Math.min(klipler['box-jump'] ? klipler['box-jump'].duration : 3, KT + 0.70);
-const TIRMAN = TIRMAN_SON - TIRMAN_BAS;
+// DONUS (23 Eyl 2026): govdeyi yerinde dondurmek "makine" gibi duruyordu.
+// Mixamo "Standing 180 Left/Right Turn": insan adim atarak doner, kalca
+// 1,63 sn'de 176-180 derece doner. Klip kendi dondurur; model yonu yalniz
+// hedef yondeki farki donus boyunca yayar.
+const DON_L = klipler['turn180-L'] ? klipler['turn180-L'].duration : 1.63;
+const DON_R = klipler['turn180-R'] ? klipler['turn180-R'].duration : 1.63;
+const YUR_DONGU = klipler['walk'] ? klipler['walk'].duration : 1.17;
 
 for (let i = 0; i < CUELAR.length; i++) {
   const c = CUELAR[i], sonraki = CUELAR[i + 1];
@@ -298,17 +324,21 @@ for (let i = 0; i < CUELAR.length; i++) {
 const PLAN = {};
 if (CUELAR.length) {
   const c0 = CUELAR[0], p0 = KAIDE[c0.kaide];
-  const onu = { x: p0.x, z: p0.z - 0.55 }, ust = { x: p0.x, z: p0.z + p0.w / 2 };
+  const onu = { x: p0.x, z: p0.z - 0.60 }, ust = { x: p0.x, z: p0.z + p0.w / 2 };
   const mesafe = Math.hypot(onu.x - BAS_POZ.x, onu.z - BAS_POZ.z);
-  PLAN.donGeriBit = c0.t - 0.08;
-  PLAN.donGeriBas = PLAN.donGeriBit - DON;
+  // yuruyus TAM adim dongusu: ayaklar bitiste yan yana -> ziplamaya dikissiz gecis
+  const dongu = Math.max(1, Math.round(mesafe / (YUR_HIZ * YUR_DONGU)));
+  PLAN.yurSure    = dongu * YUR_DONGU;
+  PLAN.donGeriBit = c0.t - 0.05;
+  PLAN.donGeriBas = PLAN.donGeriBit - DON_R;
   PLAN.tirmanBas  = PLAN.donGeriBas - TIRMAN;
-  PLAN.yurBas     = PLAN.tirmanBas - mesafe / YUR_HIZ;
-  PLAN.donBas     = PLAN.yurBas - DON;
+  PLAN.yurBas     = PLAN.tirmanBas - PLAN.yurSure;
+  PLAN.donBas     = PLAN.yurBas - DON_L;
   PLAN.belir      = Math.max(0, ILK_VURUS) + 0.15;
-  PLAN.onu = onu; PLAN.ust = ust; PLAN.p0 = p0;
-  PLAN.yurYaw = yon(onu.x - BAS_POZ.x, onu.z - BAS_POZ.z);
+  PLAN.onu = onu; PLAN.ust = ust; PLAN.p0 = p0; PLAN.mesafe = mesafe;
+  PLAN.yurYaw = yon(onu.x - BAS_POZ.x, onu.z - BAS_POZ.z);      // ~pi: arkaya
   PLAN.tirYaw = yon(ust.x - onu.x, ust.z - onu.z);
+  PLAN.kaideH = p0.top - ZEMIN_YUR;
 }
 
 // t anindaki siluet durumu: { ad, zaman, yaw, x, y, z, alfa } ya da null
@@ -318,25 +348,33 @@ function durum(t) {
   if (t < c0.t) {
     if (t < P.belir) return null;
     const alfa = ss((t - P.belir) / 0.35);
-    if (t < P.donBas) return { ad: 'idle', zaman: t - P.belir, yaw: 0, x: BAS_POZ.x, y: ZEMIN_YUR, z: BAS_POZ.z, alfa };
-    if (t < P.yurBas) return { ad: 'idle', zaman: t - P.belir, yaw: aciKar(0, P.yurYaw, ss((t - P.donBas) / DON)),
-                               x: BAS_POZ.x, y: ZEMIN_YUR, z: BAS_POZ.z, alfa };
+    const B = { x: BAS_POZ.x, y: ZEMIN_YUR, z: BAS_POZ.z };
+    if (t < P.donBas) return { ad: 'idle', zaman: t - P.belir, yaw: 0, ...B, alfa };
+    if (t < P.yurBas) {
+      // klip ~180 derece dondurur; yuruyus yonune kalan fark donus boyunca yayilir
+      const w = (t - P.donBas) / DON_L;
+      return { ad: 'turn180-L', zaman: t - P.donBas, yaw: (P.yurYaw - Math.PI) * ss(w), ...B, alfa };
+    }
     if (t < P.tirmanBas) {
-      const w = (t - P.yurBas) / (P.tirmanBas - P.yurBas);
-      return { ad: 'walk', zaman: t - P.yurBas, yaw: P.yurYaw,
+      const w = (t - P.yurBas) / P.yurSure;
+      return { ad: 'walk', zaman: (t - P.yurBas) % YUR_DONGU, yaw: P.yurYaw,
                x: BAS_POZ.x + (P.onu.x - BAS_POZ.x) * w, y: ZEMIN_YUR,
                z: BAS_POZ.z + (P.onu.z - BAS_POZ.z) * w, alfa };
     }
     if (t < P.donGeriBas) {
       const tk = TIRMAN_BAS + (t - P.tirmanBas);
-      // yukselme sicramanin tepesi etrafinda: klibin kendi sicrama egrisi + kaide yuksekligi
-      const w = ss((tk - (KT - 0.30)) / 0.60);
+      const w = ss((tk - UCUS_BAS) / (UCUS_SON - UCUS_BAS));   // havadayken ilerle
+      // klip kendi kutusuna KLIP_KUTU kadar cikiyor; bizim kaideye kalan fark eklenir
       return { ad: 'box-jump', zaman: tk, yaw: aciKar(P.yurYaw, P.tirYaw, ss((t - P.tirmanBas) / 0.3)),
-               x: P.onu.x + (P.ust.x - P.onu.x) * w, y: ZEMIN_YUR + (P.p0.top - ZEMIN_YUR) * w,
+               x: P.onu.x + (P.ust.x - P.onu.x) * w, y: ZEMIN_YUR + (P.kaideH - KLIP_KUTU) * w,
                z: P.onu.z + (P.ust.z - P.onu.z) * w, alfa };
     }
-    return { ad: 'idle', zaman: t - P.donGeriBas, yaw: aciKar(P.tirYaw, 0, ss((t - P.donGeriBas) / DON)),
-             x: P.ust.x, y: P.p0.top, z: P.ust.z, alfa };
+    // kutunun ustunde izleyiciye don (klip -180 derece dondurur)
+    const w = (t - P.donGeriBas) / DON_R;
+    if (t < P.donGeriBas + DON_R)
+      return { ad: 'turn180-R', zaman: t - P.donGeriBas, yaw: aciKar(P.tirYaw, Math.PI, ss(w)),
+               x: P.ust.x, y: P.p0.top, z: P.ust.z, alfa };
+    return { ad: 'idle', zaman: t - P.donGeriBit, yaw: 0, x: P.ust.x, y: P.p0.top, z: P.ust.z, alfa };
   }
   for (let i = 0; i < CUELAR.length; i++) {
     const c = CUELAR[i], sonraki = CUELAR[i + 1];
@@ -399,7 +437,7 @@ function aktifKaide(t, d) {
   if (!d) return [];
   let en = -1, ed = 1e9;
   KAIDE.forEach((p, j) => { const m = Math.hypot(d.x - p.x, d.z - (p.z + p.w / 2)); if (m < ed) { ed = m; en = j; } });
-  return (ed < 1.0 && d.y > ZEMIN_YUR + 0.05) || ed < 0.3 ? [en] : [];
+  return (ed < 1.2 && (d.ad === 'box-jump' || d.y > ZEMIN_YUR + 0.05)) || ed < 0.3 ? [en] : [];
 }
 
 // ------------------------------------------------------------ HUD
@@ -470,7 +508,7 @@ window.NOTA_SAYISI = CUELAR.length;
 window.KLIP_SAYISI = Object.keys(klipler).length;
 window.SILUET_VAR = !!siluet;
 window.__CUELAR = CUELAR;
-window.__K = { klipler, THREE, PLAN, durum, kalib: () => ({ ZEMIN_SATIR, FIGUR_PX, MW, MH, KT, TIRMAN }) };
+window.__K = { klipler, THREE, PLAN, durum, kalib: () => ({ ZEMIN_SATIR, FIGUR_PX, MW, MH, KLIP_KUTU, TIRMAN, DON_L, DON_R }) };
 kareKur(0);
 window.HAZIR = true;
 </script>
