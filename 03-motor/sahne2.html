@@ -234,6 +234,9 @@ const rx = renkCv.getContext('2d');
 const icCv = document.createElement('canvas'); icCv.width = MW; icCv.height = MH;
 const ix = icCv.getContext('2d');
 const MAG = '#ff3aeb';
+const siluetCv = document.createElement('canvas');
+siluetCv.width = Math.ceil(MW * 0.90 + 60 * k); siluetCv.height = Math.ceil(MH * 0.90 + 60 * k);
+const sx = siluetCv.getContext('2d');
 
 const GIRIS = 0.22, CIKIS = 0.30;     // belirme / kaybolma (sn)
 // Cagrilar bir olcu arayla gelebiliyor, hareket ise ~5 vurus: ust uste binen
@@ -276,15 +279,23 @@ function siluetCiz(t, c) {
   ix.drawImage(maskeCv, 0, 0); ix.globalCompositeOperation = 'source-in';
   ix.fillStyle = '#16021c'; ix.fillRect(0, 0, MW, MH); ix.globalCompositeOperation = 'source-over';
 
-  cx.save();
-  cx.globalAlpha = alfa * 0.85;
-  cx.filter = `blur(${Math.round(12 * k)}px)`;          // yumusak dis parlama
-  cx.drawImage(renkCv, x0, y0, dw, dh);
-  cx.filter = 'none';
-  cx.globalAlpha = alfa;
+  // Siluet once TAM OPAK olarak ayri tuvalde kurulur, sonra tek parca
+  // saydamlikla basilir. (Ilk kesit: katmanlar ayri ayri saydam cizilince
+  // belirme/sonme anlarinda koyu ic dolgu magentayi ortemiyor, govde
+  // pembe dolu gorunuyordu.)
+  const pad = Math.round(30 * k);
+  sx.setTransform(1, 0, 0, 1, 0, 0);
+  sx.clearRect(0, 0, siluetCv.width, siluetCv.height);
+  sx.filter = `blur(${Math.round(12 * k)}px)`;             // yumusak dis parlama
+  sx.globalAlpha = 0.85;
+  sx.drawImage(renkCv, pad, pad, dw, dh);
+  sx.filter = 'none'; sx.globalAlpha = 1;
   const kk = Math.max(2, 4.5 * k);                         // KONTUR: 8 yone kaydir
-  for (let a = 0; a < 8; a++) { const q = a * Math.PI / 4; cx.drawImage(renkCv, x0 + Math.cos(q) * kk, y0 + Math.sin(q) * kk, dw, dh); }
-  cx.drawImage(icCv, x0, y0, dw, dh);                      // ic dolgu ustte -> parlak hat kalir
+  for (let a = 0; a < 8; a++) { const q = a * Math.PI / 4; sx.drawImage(renkCv, pad + Math.cos(q) * kk, pad + Math.sin(q) * kk, dw, dh); }
+  sx.drawImage(icCv, pad, pad, dw, dh);                    // ic dolgu ustte -> parlak hat kalir
+  cx.save();
+  cx.globalAlpha = alfa;
+  cx.drawImage(siluetCv, x0 - pad, y0 - pad);
   cx.restore();
 }
 
