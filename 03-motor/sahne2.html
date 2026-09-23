@@ -174,7 +174,7 @@ function sehirCiz(t, aktifKaideler) {
 }
 
 // ------------------------------------------------------------ SILUET (3B -> maske)
-const MW = Math.round(0.40 * H), MH = Math.round(0.56 * H);
+const MW = Math.round(0.64 * H), MH = Math.round(0.90 * H);
 const glCv = document.createElement('canvas'); glCv.width = MW; glCv.height = MH;
 const renderer = new THREE.WebGLRenderer({ canvas: glCv, antialias: true, alpha: true, preserveDrawingBuffer: true });
 renderer.setSize(MW, MH, false);
@@ -183,11 +183,11 @@ const sahneS = new THREE.Scene();
 const kamS = new THREE.PerspectiveCamera(26, MW / MH, 0.1, 60);
 kamS.position.set(0, 1.05, 13.8); kamS.lookAt(0, 1.05, 0);
 // zemin (y=0) maskede hangi satirda: merkez 1,05 yukarida, yarim gorus yuksekligi 13,8*tan(13)
-const ZEMIN_SATIR = MH * (0.5 + 0.5 * 1.05 / (13.8 * Math.tan(13 * Math.PI / 180)));
+// ZEMIN_SATIR asagida idle maskesinden OLCULUR (kalibrasyon).
 
 const yukleyici = new FBXLoader();
 const yukle = ad => new Promise(res => yukleyici.load(`/02-hareketler/${ad}.fbx`, o => res(o), undefined, () => res(null)));
-const KLIP_ADLARI = ['idle', 'bob-weave', 'lateral-lunge', 'jump-reach', 'tuck-jump'];
+const KLIP_ADLARI = ['idle', 'bob-weave', 'lateral-lunge', 'jump-reach', 'tuck-jump', 'walk', 'box-jump'];
 const klipler = {};
 let siluet = null, mixer = null, kokKemik = null, kokBaslangic = null;
 const govde = await yukle('siluet-govde');
@@ -215,63 +215,161 @@ if (govde) {
 }
 const aksiyon = {};
 if (mixer) for (const [ad, kl] of Object.entries(klipler)) {
-  const a = mixer.clipAction(kl); a.setLoop(THREE.LoopOnce, 1); a.clampWhenFinished = true;
+  const a = mixer.clipAction(kl); a.setLoop(THREE.LoopRepeat, Infinity);
   aksiyon[ad] = { a, kl };
 }
-// Her cue'nun penceresi: klibin dogal suresine en yakin TAM VURUS sayisi (en az 2)
-for (const c of CUELAR) {
-  const A = aksiyon[c.klip];
-  const dogal = A ? A.kl.duration : 2 * VURUS;
-  c.vurus_say = c.vurus_say || Math.max(2, Math.round(dogal / VURUS));
-  c.sure = c.vurus_say * VURUS;
-  c.kaide = (c.kutu !== undefined) ? c.kutu : KAIDE_SIRA[c.i % KAIDE_SIRA.length];
-}
 
+// ------------------------------------------------------------ MASKE / KALIBRASYON
 const maskeCv = document.createElement('canvas'); maskeCv.width = MW; maskeCv.height = MH;
-const mx = maskeCv.getContext('2d');
+const mx = maskeCv.getContext('2d', { willReadFrequently: true });
 const renkCv = document.createElement('canvas'); renkCv.width = MW; renkCv.height = MH;
 const rx = renkCv.getContext('2d');
 const icCv = document.createElement('canvas'); icCv.width = MW; icCv.height = MH;
 const ix = icCv.getContext('2d');
 const MAG = '#ff3aeb';
-const siluetCv = document.createElement('canvas');
-siluetCv.width = Math.ceil(MW * 0.90 + 60 * k); siluetCv.height = Math.ceil(MH * 0.90 + 60 * k);
-const sx = siluetCv.getContext('2d');
 
-const GIRIS = 0.22, CIKIS = 0.30;     // belirme / kaybolma (sn)
-// Cagrilar bir olcu arayla gelebiliyor, hareket ise ~5 vurus: ust uste binen
-// cue'lar AYNI ANDA cizilir (her biri kendi kutusunda), oncekisi sonerken
-// yenisi belirir.
-function aktifCueler(t) {
-  return CUELAR.filter(c => t >= c.t - GIRIS && t < c.t + c.sure + CIKIS);
-}
-
-function siluetCiz(t, c) {
-  if (!siluet || !c) return;
-  const A = aksiyon[c.klip];
+function pozKur(ad, zaman, yaw) {
   for (const v of Object.values(aksiyon)) v.a.enabled = false;
-  const yerel = Math.max(0, Math.min(c.sure, t - c.t));
+  const A = aksiyon[ad];
   if (A) {
-    A.a.enabled = true; A.a.play(); A.a.setEffectiveWeight(1);
-    A.a.timeScale = 1;
+    A.a.enabled = true; A.a.play(); A.a.setEffectiveWeight(1); A.a.timeScale = 1;
     mixer.setTime(0);
-    A.a.time = (yerel / c.sure) * A.kl.duration * 0.999;
+    A.a.time = Math.max(0, Math.min(A.kl.duration - 1e-3, zaman));
     mixer.update(0);
     if (kokKemik && kokBaslangic) { kokKemik.position.x = kokBaslangic.x; kokKemik.position.z = kokBaslangic.z; }
   }
+  siluet.rotation.y = yaw;
   renderer.render(sahneS, kamS);
   mx.clearRect(0, 0, MW, MH); mx.drawImage(glCv, 0, 0);
+}
+// ZEMIN SATIRI OLCULUR (ilk kesit: ayaklar hesaplanan satirin altindaydi,
+// siluet kutunun icine gomulu gorunuyordu). idle pozunun maskesindeki en alt
+// ve en ust dolu satir -> ayak cizgisi ve figur boyu.
+let ZEMIN_SATIR = MH * 0.665, FIGUR_PX = MH * 0.738;
+if (siluet) {
+  pozKur('idle', 0, 0);
+  const d = mx.getImageData(0, 0, MW, MH).data;
+  let ust = -1, alt = -1;
+  for (let y = 0; y < MH; y++) {
+    let dolu = false;
+    for (let x = 0; x < MW; x++) if (d[(y * MW + x) * 4 + 3] > 40) { dolu = true; break; }
+    if (dolu) { if (ust < 0) ust = y; alt = y; }
+  }
+  if (alt > 0) { ZEMIN_SATIR = alt + 1; FIGUR_PX = alt - ust + 1; }
+}
 
-  const gir = Math.min(1, (t - (c.t - GIRIS)) / GIRIS);
-  const cik = Math.min(1, (c.t + c.sure + CIKIS - t) / CIKIS);
-  const alfa = Math.max(0, Math.min(gir, cik));
-  const p = KAIDE[c.kaide];
-  const ax = px(p.x, p.z + p.w / 2), ay = py(p.top, p.z + p.w / 2);
-  const olcek = 0.90;
-  const dw = MW * olcek, dh = MH * olcek;
-  const x0 = ax - dw / 2, y0 = ay - ZEMIN_SATIR * olcek + (1 - gir) * 26 * k;
+// ------------------------------------------------------------ KOREOGRAFI (TEK SILUET)
+// Kullanici (23 Eyl 2026): muzik baslayinca siluet ONDE belirir, arkasini
+// donup geriye yurur, secilen kutunun ustune cikar, ilk hareketi orada yapar.
+// Sonra her cagrida kaybolup bir sonraki kutuda belirir. Ekranda HEP TEK siluet.
+const HF = 3.36;                         // siluet boyu (dunya birimi) - kaide ~1,35
+const ZEMIN_YUR = ZEMIN + 0.25;          // yuruyus zemini (alcak kutularin ustu)
+const BAS_POZ = { x: 0, z: 4.9 };        // onde belirme noktasi
+const YUR_HIZ = 2.3;                     // birim/sn - walk klibinin adim boyuna yakin
+const GIR = 0.18, CIK = 0.18;            // kutular arasi belirme/kaybolma
+const DON = 2 * VURUS;                   // donus suresi
+const yon = (dx, dz) => Math.atan2(dx, -dz);   // dunya yonu -> maske yaw (model +z'ye bakar)
+const ss = x => { x = Math.max(0, Math.min(1, x)); return x * x * (3 - 2 * x); };
+const aciKar = (a, b, w) => { let d = b - a; while (d > Math.PI) d -= 2 * Math.PI; while (d < -Math.PI) d += 2 * Math.PI; return a + d * w; };
 
-  // magenta boyali maske ve koyu ic dolgu
+// box-jump: kalcanin EN YUKSEK oldugu an (sicramanin tepesi)
+let KT = 1.9;
+if (klipler['box-jump']) {
+  const iz = klipler['box-jump'].tracks.find(t => /Hips\.position$/.test(t.name));
+  if (iz) { let m = -1e9; for (let i = 0; i < iz.times.length; i++) if (iz.values[i * 3 + 1] > m) { m = iz.values[i * 3 + 1]; KT = iz.times[i]; } }
+}
+const TIRMAN_BAS = Math.max(0, KT - 0.75);
+const TIRMAN_SON = Math.min(klipler['box-jump'] ? klipler['box-jump'].duration : 3, KT + 0.70);
+const TIRMAN = TIRMAN_SON - TIRMAN_BAS;
+
+for (let i = 0; i < CUELAR.length; i++) {
+  const c = CUELAR[i], sonraki = CUELAR[i + 1];
+  c.kaide = (c.kutu !== undefined) ? c.kutu : KAIDE_SIRA[i % KAIDE_SIRA.length];
+  const A = aksiyon[c.klip];
+  const dogal = A ? A.kl.duration : 2 * VURUS;
+  const bosluk = sonraki ? sonraki.t - c.t : 1e9;
+  // tek siluet: hareket bir sonraki cagridan once bitip kaybolmali
+  c.sure = Math.min(Math.max(2, Math.round(dogal / VURUS)) * VURUS, bosluk - GIR - CIK - 0.05);
+  // klip en fazla 1,25x hizlanir; sigmazsa klibin basindan o kadari oynar
+  c.hiz = Math.min(1.25, Math.max(0.8, dogal / c.sure));
+  c.bitis = c.t + c.sure;
+}
+// giris plani (ilk cagridan geriye dogru kurulur)
+const PLAN = {};
+if (CUELAR.length) {
+  const c0 = CUELAR[0], p0 = KAIDE[c0.kaide];
+  const onu = { x: p0.x, z: p0.z - 0.55 }, ust = { x: p0.x, z: p0.z + p0.w / 2 };
+  const mesafe = Math.hypot(onu.x - BAS_POZ.x, onu.z - BAS_POZ.z);
+  PLAN.donGeriBit = c0.t - 0.08;
+  PLAN.donGeriBas = PLAN.donGeriBit - DON;
+  PLAN.tirmanBas  = PLAN.donGeriBas - TIRMAN;
+  PLAN.yurBas     = PLAN.tirmanBas - mesafe / YUR_HIZ;
+  PLAN.donBas     = PLAN.yurBas - DON;
+  PLAN.belir      = Math.max(0, ILK_VURUS) + 0.15;
+  PLAN.onu = onu; PLAN.ust = ust; PLAN.p0 = p0;
+  PLAN.yurYaw = yon(onu.x - BAS_POZ.x, onu.z - BAS_POZ.z);
+  PLAN.tirYaw = yon(ust.x - onu.x, ust.z - onu.z);
+}
+
+// t anindaki siluet durumu: { ad, zaman, yaw, x, y, z, alfa } ya da null
+function durum(t) {
+  if (!CUELAR.length) return null;
+  const P = PLAN, c0 = CUELAR[0];
+  if (t < c0.t) {
+    if (t < P.belir) return null;
+    const alfa = ss((t - P.belir) / 0.35);
+    if (t < P.donBas) return { ad: 'idle', zaman: t - P.belir, yaw: 0, x: BAS_POZ.x, y: ZEMIN_YUR, z: BAS_POZ.z, alfa };
+    if (t < P.yurBas) return { ad: 'idle', zaman: t - P.belir, yaw: aciKar(0, P.yurYaw, ss((t - P.donBas) / DON)),
+                               x: BAS_POZ.x, y: ZEMIN_YUR, z: BAS_POZ.z, alfa };
+    if (t < P.tirmanBas) {
+      const w = (t - P.yurBas) / (P.tirmanBas - P.yurBas);
+      return { ad: 'walk', zaman: t - P.yurBas, yaw: P.yurYaw,
+               x: BAS_POZ.x + (P.onu.x - BAS_POZ.x) * w, y: ZEMIN_YUR,
+               z: BAS_POZ.z + (P.onu.z - BAS_POZ.z) * w, alfa };
+    }
+    if (t < P.donGeriBas) {
+      const tk = TIRMAN_BAS + (t - P.tirmanBas);
+      // yukselme sicramanin tepesi etrafinda: klibin kendi sicrama egrisi + kaide yuksekligi
+      const w = ss((tk - (KT - 0.30)) / 0.60);
+      return { ad: 'box-jump', zaman: tk, yaw: aciKar(P.yurYaw, P.tirYaw, ss((t - P.tirmanBas) / 0.3)),
+               x: P.onu.x + (P.ust.x - P.onu.x) * w, y: ZEMIN_YUR + (P.p0.top - ZEMIN_YUR) * w,
+               z: P.onu.z + (P.ust.z - P.onu.z) * w, alfa };
+    }
+    return { ad: 'idle', zaman: t - P.donGeriBas, yaw: aciKar(P.tirYaw, 0, ss((t - P.donGeriBas) / DON)),
+             x: P.ust.x, y: P.p0.top, z: P.ust.z, alfa };
+  }
+  for (let i = 0; i < CUELAR.length; i++) {
+    const c = CUELAR[i], sonraki = CUELAR[i + 1];
+    const p = KAIDE[c.kaide], ust = { x: p.x, y: p.top, z: p.z + p.w / 2 };
+    const pencereSon = sonraki ? sonraki.t : c.bitis + CIK + 0.01;
+    if (t >= c.t && t < pencereSon) {
+      if (t < c.bitis) return { ad: c.klip, zaman: (t - c.t) * c.hiz, yaw: 0, ...ust, alfa: 1 };
+      if (sonraki && t >= sonraki.t - GIR) {                  // bir sonraki kutuda belir
+        const q = KAIDE[sonraki.kaide];
+        return { ad: 'idle', zaman: t, yaw: 0, x: q.x, y: q.top, z: q.z + q.w / 2,
+                 alfa: ss((t - (sonraki.t - GIR)) / GIR) };
+      }
+      const kay = ss(1 - (t - c.bitis) / CIK);               // kaybol
+      if (kay <= 0) return null;
+      return { ad: c.klip, zaman: c.sure * c.hiz, yaw: 0, ...ust, alfa: kay };
+    }
+  }
+  return null;
+}
+
+const siluetCv = document.createElement('canvas');
+siluetCv.width = Math.ceil(MW * 1.25 + 80 * k); siluetCv.height = Math.ceil(MH * 1.25 + 80 * k);
+const sx = siluetCv.getContext('2d');
+
+function siluetCiz(d) {
+  if (!siluet || !d || d.alfa <= 0.001) return;
+  pozKur(d.ad, d.zaman, d.yaw);
+  // olcek: dunya boyu HF'nin bu derinlikteki piksel boyu / maskedeki figur boyu
+  const sc = (F * HF / d.z) / FIGUR_PX;
+  const dw = MW * sc, dh = MH * sc;
+  const ax = px(d.x, d.z), ay = py(d.y, d.z);
+  const x0 = ax - dw / 2, y0 = ay - ZEMIN_SATIR * sc;
+
   rx.globalCompositeOperation = 'source-over'; rx.clearRect(0, 0, MW, MH);
   rx.drawImage(maskeCv, 0, 0); rx.globalCompositeOperation = 'source-in';
   rx.fillStyle = MAG; rx.fillRect(0, 0, MW, MH); rx.globalCompositeOperation = 'source-over';
@@ -279,24 +377,29 @@ function siluetCiz(t, c) {
   ix.drawImage(maskeCv, 0, 0); ix.globalCompositeOperation = 'source-in';
   ix.fillStyle = '#16021c'; ix.fillRect(0, 0, MW, MH); ix.globalCompositeOperation = 'source-over';
 
-  // Siluet once TAM OPAK olarak ayri tuvalde kurulur, sonra tek parca
-  // saydamlikla basilir. (Ilk kesit: katmanlar ayri ayri saydam cizilince
-  // belirme/sonme anlarinda koyu ic dolgu magentayi ortemiyor, govde
-  // pembe dolu gorunuyordu.)
-  const pad = Math.round(30 * k);
-  sx.setTransform(1, 0, 0, 1, 0, 0);
+  // Siluet once TAM OPAK kurulur, sonra tek parca saydamlikla basilir
+  // (katmanlar ayri saydam cizilince belirme aninda govde pembe doluyordu).
+  const pad = Math.round(40 * k);
   sx.clearRect(0, 0, siluetCv.width, siluetCv.height);
-  sx.filter = `blur(${Math.round(12 * k)}px)`;             // yumusak dis parlama
+  sx.filter = `blur(${Math.round(12 * k)}px)`;
   sx.globalAlpha = 0.85;
   sx.drawImage(renkCv, pad, pad, dw, dh);
   sx.filter = 'none'; sx.globalAlpha = 1;
-  const kk = Math.max(2, 4.5 * k);                         // KONTUR: 8 yone kaydir
+  const kk = Math.max(2, 4.5 * k);
   for (let a = 0; a < 8; a++) { const q = a * Math.PI / 4; sx.drawImage(renkCv, pad + Math.cos(q) * kk, pad + Math.sin(q) * kk, dw, dh); }
-  sx.drawImage(icCv, pad, pad, dw, dh);                    // ic dolgu ustte -> parlak hat kalir
+  sx.drawImage(icCv, pad, pad, dw, dh);
   cx.save();
-  cx.globalAlpha = alfa;
-  cx.drawImage(siluetCv, x0 - pad, y0 - pad);
+  cx.globalAlpha = d.alfa;
+  cx.drawImage(siluetCv, 0, 0, dw + 2 * pad, dh + 2 * pad, x0 - pad, y0 - pad, dw + 2 * pad, dh + 2 * pad);
   cx.restore();
+}
+
+// hangi kaide su an sabit (siluet ustunde / ustune cikiyor)
+function aktifKaide(t, d) {
+  if (!d) return [];
+  let en = -1, ed = 1e9;
+  KAIDE.forEach((p, j) => { const m = Math.hypot(d.x - p.x, d.z - (p.z + p.w / 2)); if (m < ed) { ed = m; en = j; } });
+  return (ed < 1.0 && d.y > ZEMIN_YUR + 0.05) || ed < 0.3 ? [en] : [];
 }
 
 // ------------------------------------------------------------ HUD
@@ -349,9 +452,9 @@ function hudCiz(t, olcuNo) {
 // ------------------------------------------------------------ KARE
 function kareKur(n) {
   const t = n / FPS;                                  // DETERMINISTIK: duvar saati yok
-  const cs = aktifCueler(t);
-  sehirCiz(t, cs.map(c => c.kaide));
-  for (const c of cs) siluetCiz(t, c);
+  const d = durum(t);
+  sehirCiz(t, aktifKaide(t, d));
+  siluetCiz(d);
   hudCiz(t, (t - ILK_VURUS) / OLCU);
 }
 
@@ -367,6 +470,7 @@ window.NOTA_SAYISI = CUELAR.length;
 window.KLIP_SAYISI = Object.keys(klipler).length;
 window.SILUET_VAR = !!siluet;
 window.__CUELAR = CUELAR;
+window.__K = { klipler, THREE, PLAN, durum, kalib: () => ({ ZEMIN_SATIR, FIGUR_PX, MW, MH, KT, TIRMAN }) };
 kareKur(0);
 window.HAZIR = true;
 </script>
