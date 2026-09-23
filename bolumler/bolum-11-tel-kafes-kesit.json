@@ -1,0 +1,17 @@
+{
+  "ad": "Bolum 11 - TEL KAFES (motor 2) - 15 sn kesit",
+  "not": "Motor 2 (sahne2.html). REF-046 tel kafes, REF-045 muzik. HAR-006 A sikki. Kesit: olcu 0-9 (15,4 sn). Cagri anlari vokal izinden tahmin (olcu 5-8), kullanici kontrolu bekliyor.",
+  "motor": "sahne2.html",
+  "bpm": 140.033,
+  "ilk_vurus": -0.027,
+  "toplam_olcu": 9,
+  "bolum_olcu": 350,
+  "muzik": "01-muzik/bob-and-weave-140.wav",
+  "hareketler": ["bob-and-weave", "lateral-lunge", "jump-reach", "tuck-jump"],
+  "cuelar": [
+    { "olcu": 5, "vurus": 0, "hareket": "bob-and-weave", "kutu": 3 },
+    { "olcu": 6, "vurus": 0, "hareket": "bob-and-weave", "kutu": 1 },
+    { "olcu": 7, "vurus": 0, "hareket": "bob-and-weave", "kutu": 2 },
+    { "olcu": 8, "vurus": 0, "hareket": "bob-and-weave", "kutu": 4 }
+  ]
+}

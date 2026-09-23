@@ -1,0 +1,361 @@
+<meta charset="utf-8">
+<title>Dance Mode - motor 2 (tel kafes)</title>
+<style>
+  html,body { margin:0; background:#000; overflow:hidden; }
+  canvas { display:block; }
+</style>
+<canvas id="cikti"></canvas>
+
+<script type="importmap">
+{ "imports": {
+    "three": "/03-motor/node_modules/three/build/three.module.js",
+    "three/addons/": "/03-motor/node_modules/three/examples/jsm/"
+} }
+</script>
+
+<script type="module">
+// =====================================================================
+// MOTOR 2 — TEL KAFES (23 Eyl 2026). Kural kaynağı:
+//   REFERANSLAR/REF-NOT-2-mekan.md (REF-046), Masaüstü/CLAUDE.md madde 14.
+// sahne.html'den AYRI: bu videoda normal referans kuralları askıda.
+// Arayüz sahne.html ile aynı (kareKur / kareAl / HAZIR ...) -> render.js
+// ve render-bolum.yml değişmeden sürer (render.js --sayfa sahne2.html).
+//
+// Sahne: sabit kamera, siyah boşlukta camgöbeği tel kafes kutu şehri
+// (altta zeminden, üstte tavandan; ekran kenarından başlar, boşluk yok).
+// Kutular vuruşa kilitli büyüyüp küçülür. Çağrı anında magenta siluet
+// (normal motor siluet stili: dolu gövde + parlak kontur) bir kutunun
+// üstünde belirir, hareketi yapar, kaybolur; o kutu hareket boyunca sabit.
+// Hareket engeli YOK. HUD: sol üst LEVEL 1-5, sağ üst COMBO, SUBSCRIBE.
+// =====================================================================
+import * as THREE from 'three';
+import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
+
+const S = await fetch('/spec/sabitler.json').then(r => r.json());
+const FPS = S.video.fps;
+const SP = new URLSearchParams(location.search);
+const W = Number(SP.get('w') || 1280);
+const H = Number(SP.get('h') || 720);
+const k = H / 1080;                         // tasarım 1080p'de yapıldı
+
+// ------------------------------------------------------------ BOLUM
+const BOLUM_YOL = SP.get('bolum');
+const BOLUM = BOLUM_YOL ? await fetch(BOLUM_YOL).then(r => r.json()) : {};
+const BPM = BOLUM.bpm || 140;
+const VURUS = 60 / BPM;
+const OLCU = VURUS * 4;
+// muzigin ilk vurusu (sn). Negatifse parca vurustan az once baslıyor.
+const ILK_VURUS = BOLUM.ilk_vurus || 0;
+// render uzunlugu (render.js --toplam) ile bolumun GERCEK uzunlugu ayri:
+// LEVEL dagilimi hep tam bolume gore (kisa kesitte de LEVEL dogru kalir).
+const TOPLAM_OLCU = Number(SP.get('toplam') || BOLUM.toplam_olcu || 16);
+const BOLUM_OLCU = BOLUM.bolum_olcu || TOPLAM_OLCU;
+const SEVIYE_SAYI = 5;
+
+// CUE'LAR: { olcu, vurus (0-3, ondalik olabilir), hareket, kutu }
+const HAREKET_KLIP = { 'bob-and-weave':'bob-weave', 'lateral-lunge':'lateral-lunge',
+                       'jump-reach':'jump-reach', 'tuck-jump':'tuck-jump' };
+const CUELAR = (BOLUM.cuelar || []).map((c, i) => ({
+  ...c, i,
+  t: ILK_VURUS + (c.olcu * 4 + (c.vurus || 0)) * VURUS,
+  klip: HAREKET_KLIP[c.hareket] || c.hareket,
+})).sort((a, b) => a.t - b.t);
+
+// ------------------------------------------------------------ RASTGELE (deterministik)
+function rng(seed){ let s = seed >>> 0; return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
+
+// ------------------------------------------------------------ PROJEKSIYON
+const F = 1000 * k, CX = W / 2, CY = H * 0.47;
+const ZEMIN = -2.6, TAVAN = 3.4, HUCRE = 0.95;
+const px = (x, z) => CX + F * x / z;
+const py = (y, z) => CY - F * y / z;
+
+// Siluet kutulari (kaide): ekranin rahat gorulen bandinda, sol-orta-sag.
+const KAIDE = [
+  { x:-3.0, z:8.4 }, { x:-1.5, z:7.4 }, { x:0.0, z:8.8 }, { x:1.5, z:7.4 }, { x:3.0, z:8.4 },
+].map(o => ({ ...o, w:1.5, top:-1.25 }));
+const KAIDE_SIRA = [3, 1, 2, 4, 0, 2, 1, 3];   // cue'da kutu verilmezse bu sirayla
+
+// ------------------------------------------------------------ SEHIR
+// kutu: [z, x0, gen, y0, boy, derin, alt?, genlik, grup]
+const KUTULAR = [];
+{
+  const r = rng(11);
+  const kaideCakisir = (x, z) => KAIDE.some(p => Math.abs(x + HUCRE / 2 - p.x) < 1.05 && Math.abs(z + HUCRE / 2 - p.z) < 1.05);
+  for (const alt of [true, false]) {
+    for (let z = 2.2; z < 21; z += HUCRE) {
+      const yarim = z * CX / F + 1.5;
+      for (let x = -yarim; x < yarim; x += HUCRE) {
+        if (alt && kaideCakisir(x, z)) continue;
+        if (r() >= 0.9) continue;
+        const ic = Math.abs(x) < 3.9 && z < 16;          // kaidelerin onunde alcak kal
+        const h = ic ? 0.12 + r() * (alt ? 0.38 : 0.48) : 0.2 + r() * ((z < 12 ? 1.3 : 2.0));
+        KUTULAR.push({ z, x, g: HUCRE * 0.86, h, d: HUCRE * 0.86, alt,
+                       a: 0.10 + r() * 0.22, grup: r() < 0.5 ? 0 : 1, kaide: -1 });
+      }
+    }
+  }
+  for (let i = 0; i < 140; i++) {                        // uzak duvar dokusu
+    const z = 24 + r() * 66, x = -50 + r() * 100, w = 0.8 + r() * 1.4;
+    const alt = r() < 0.5;
+    const y = alt ? ZEMIN + r() * 5 : TAVAN - 6 + r() * 6;
+    KUTULAR.push({ z, x, g: w, h: 0.8 + r() * 1.7, d: w, alt: null, y, a: 0.06, grup: i & 1, kaide: -1 });
+  }
+  KAIDE.forEach((p, j) => KUTULAR.push({ z: p.z, x: p.x - p.w / 2, g: p.w, h: p.top - ZEMIN, d: p.w,
+                                         alt: true, a: 0.12, grup: j & 1, kaide: j }));
+  KUTULAR.sort((a, b) => b.z - a.z);
+}
+
+// ------------------------------------------------------------ KATMANLAR
+const cikti = document.getElementById('cikti');
+cikti.width = W; cikti.height = H;
+const cx = cikti.getContext('2d', { alpha: false });
+const cizgiCv = document.createElement('canvas'); cizgiCv.width = W; cizgiCv.height = H;
+const lx = cizgiCv.getContext('2d');
+const parCv = document.createElement('canvas'); parCv.width = W >> 1; parCv.height = H >> 1;
+const gx = parCv.getContext('2d');
+
+const PARLAKLIK_KOVA = 7;
+function sehirCiz(t, aktifKaideler) {
+  // vurus nabzi: her vurusta hizli buyume, yavas sonme; olcu basi daha guclu
+  const vf = (t - ILK_VURUS) / VURUS;
+  const vno = Math.floor(vf), vfaz = vf - vno;
+  const nabiz = Math.exp(-5.5 * Math.max(0, vfaz)) * ((((vno % 4) + 4) % 4) === 0 ? 1.25 : 1.0);
+  const kovalar = Array.from({ length: PARLAKLIK_KOVA }, () => []);
+  const kaideCizgi = [];
+  for (const b of KUTULAR) {
+    const sabit = b.kaide >= 0 && aktifKaideler.includes(b.kaide);
+    const esle = (((vno % 2) + 2) % 2) === b.grup ? 1 : 0.35;
+    const s = sabit ? 1 : 1 + b.a * (nabiz * esle * 1.6 - 0.35);
+    const g = b.g * Math.min(s, 1.10), gx0 = b.x + (b.g - g) / 2;
+    let y0, y1;
+    if (b.alt === true)       { y0 = ZEMIN; y1 = ZEMIN + b.h * s; }
+    else if (b.alt === false) { y1 = TAVAN; y0 = TAVAN - b.h * s; }
+    else                      { y0 = b.y;  y1 = b.y + b.h * s; }
+    const z0 = b.z, z1 = b.z + b.d;
+    const X0 = px(gx0, z0), X1 = px(gx0 + g, z0);
+    if (Math.max(X0, X1, px(gx0, z1), px(gx0 + g, z1)) < -40 || Math.min(X0, X1, px(gx0, z1), px(gx0 + g, z1)) > W + 40) continue;
+    const kova = sabit ? null
+      : kovalar[Math.min(PARLAKLIK_KOVA - 1, Math.floor((1 - Math.max(0.1, Math.min(1, Math.pow(7.5 / b.z, 1.3)))) * PARLAKLIK_KOVA))];
+    const hedef = sabit ? kaideCizgi : kova;
+    const v = [];
+    for (const xx of [gx0, gx0 + g]) for (const yy of [y0, y1]) for (const zz of [z0, z1]) v.push([px(xx, zz), py(yy, zz)]);
+    // 12 kenar: bir eksende farkli olan kose ciftleri
+    const E = [[0,1],[2,3],[4,5],[6,7],[0,2],[1,3],[4,6],[5,7],[0,4],[1,5],[2,6],[3,7]];
+    for (const [i, j] of E) hedef.push(v[i][0], v[i][1], v[j][0], v[j][1]);
+  }
+  lx.clearRect(0, 0, W, H);
+  lx.lineCap = 'round';
+  for (let q = 0; q < PARLAKLIK_KOVA; q++) {
+    const L = kovalar[q]; if (!L.length) continue;
+    const a = 1 - q / PARLAKLIK_KOVA;
+    lx.strokeStyle = `rgba(70,235,210,${Math.max(0.12, a)})`;
+    lx.lineWidth = Math.max(1, (q < 3 ? 2 : 1) * k);
+    lx.beginPath();
+    for (let i = 0; i < L.length; i += 4) { lx.moveTo(L[i], L[i+1]); lx.lineTo(L[i+2], L[i+3]); }
+    lx.stroke();
+  }
+  if (kaideCizgi.length) {
+    lx.strokeStyle = 'rgb(150,255,240)'; lx.lineWidth = 4 * k;
+    lx.beginPath();
+    for (let i = 0; i < kaideCizgi.length; i += 4) { lx.moveTo(kaideCizgi[i], kaideCizgi[i+1]); lx.lineTo(kaideCizgi[i+2], kaideCizgi[i+3]); }
+    lx.stroke();
+  }
+  // parlama: yarim cozunurlukte bulaniklastir, uzerine topla
+  gx.clearRect(0, 0, parCv.width, parCv.height);
+  gx.filter = `blur(${Math.max(2, Math.round(3 * k))}px)`;
+  gx.drawImage(cizgiCv, 0, 0, parCv.width, parCv.height);
+  gx.filter = 'none';
+  cx.fillStyle = '#000'; cx.fillRect(0, 0, W, H);
+  cx.globalCompositeOperation = 'lighter';
+  cx.globalAlpha = 0.95; cx.drawImage(parCv, 0, 0, W, H);
+  cx.globalAlpha = 1;    cx.drawImage(cizgiCv, 0, 0);
+  cx.globalCompositeOperation = 'source-over';
+}
+
+// ------------------------------------------------------------ SILUET (3B -> maske)
+const MW = Math.round(0.40 * H), MH = Math.round(0.56 * H);
+const glCv = document.createElement('canvas'); glCv.width = MW; glCv.height = MH;
+const renderer = new THREE.WebGLRenderer({ canvas: glCv, antialias: true, alpha: true, preserveDrawingBuffer: true });
+renderer.setSize(MW, MH, false);
+renderer.setClearColor(0x000000, 0);
+const sahneS = new THREE.Scene();
+const kamS = new THREE.PerspectiveCamera(26, MW / MH, 0.1, 60);
+kamS.position.set(0, 1.05, 13.8); kamS.lookAt(0, 1.05, 0);
+// zemin (y=0) maskede hangi satirda: merkez 1,05 yukarida, yarim gorus yuksekligi 13,8*tan(13)
+const ZEMIN_SATIR = MH * (0.5 + 0.5 * 1.05 / (13.8 * Math.tan(13 * Math.PI / 180)));
+
+const yukleyici = new FBXLoader();
+const yukle = ad => new Promise(res => yukleyici.load(`/02-hareketler/${ad}.fbx`, o => res(o), undefined, () => res(null)));
+const KLIP_ADLARI = ['idle', 'bob-weave', 'lateral-lunge', 'jump-reach', 'tuck-jump'];
+const klipler = {};
+let siluet = null, mixer = null, kokKemik = null, kokBaslangic = null;
+const govde = await yukle('siluet-govde');
+if (govde) {
+  govde.scale.setScalar(0.0125);
+  govde.traverse(o => { if (o.isMesh || o.isSkinnedMesh) { o.material = new THREE.MeshBasicMaterial({ color: '#ffffff' }); o.frustumCulled = false; } });
+  sahneS.add(govde); siluet = govde;
+  mixer = new THREE.AnimationMixer(govde);
+  govde.traverse(o => { if (o.isBone && /hips/i.test(o.name) && !kokKemik) kokKemik = o; });
+  if (kokKemik) kokBaslangic = kokKemik.position.clone();
+  for (const ad of KLIP_ADLARI) {
+    const o = await yukle(ad); const kl = o && o.animations[0];
+    if (kl && kl.tracks.length) klipler[ad] = kl;
+  }
+  // REMY HIZALAMASI (sahne.html ile ayni): kalca Y'si idle'in ilk karesine
+  if (klipler.idle) {
+    const iz0 = klipler.idle.tracks.find(t => /Hips\.position$/.test(t.name));
+    for (const ad of KLIP_ADLARI.slice(1)) {
+      const kl = klipler[ad]; if (!kl || !iz0) continue;
+      const iz = kl.tracks.find(t => /Hips\.position$/.test(t.name)); if (!iz) continue;
+      const dy = iz.values[1] - iz0.values[1];
+      for (let j = 1; j < iz.values.length; j += 3) iz.values[j] -= dy;
+    }
+  }
+}
+const aksiyon = {};
+if (mixer) for (const [ad, kl] of Object.entries(klipler)) {
+  const a = mixer.clipAction(kl); a.setLoop(THREE.LoopOnce, 1); a.clampWhenFinished = true;
+  aksiyon[ad] = { a, kl };
+}
+// Her cue'nun penceresi: klibin dogal suresine en yakin TAM VURUS sayisi (en az 2)
+for (const c of CUELAR) {
+  const A = aksiyon[c.klip];
+  const dogal = A ? A.kl.duration : 2 * VURUS;
+  c.vurus_say = c.vurus_say || Math.max(2, Math.round(dogal / VURUS));
+  c.sure = c.vurus_say * VURUS;
+  c.kaide = (c.kutu !== undefined) ? c.kutu : KAIDE_SIRA[c.i % KAIDE_SIRA.length];
+}
+
+const maskeCv = document.createElement('canvas'); maskeCv.width = MW; maskeCv.height = MH;
+const mx = maskeCv.getContext('2d');
+const renkCv = document.createElement('canvas'); renkCv.width = MW; renkCv.height = MH;
+const rx = renkCv.getContext('2d');
+const icCv = document.createElement('canvas'); icCv.width = MW; icCv.height = MH;
+const ix = icCv.getContext('2d');
+const MAG = '#ff3aeb';
+
+const GIRIS = 0.22, CIKIS = 0.30;     // belirme / kaybolma (sn)
+// Cagrilar bir olcu arayla gelebiliyor, hareket ise ~5 vurus: ust uste binen
+// cue'lar AYNI ANDA cizilir (her biri kendi kutusunda), oncekisi sonerken
+// yenisi belirir.
+function aktifCueler(t) {
+  return CUELAR.filter(c => t >= c.t - GIRIS && t < c.t + c.sure + CIKIS);
+}
+
+function siluetCiz(t, c) {
+  if (!siluet || !c) return;
+  const A = aksiyon[c.klip];
+  for (const v of Object.values(aksiyon)) v.a.enabled = false;
+  const yerel = Math.max(0, Math.min(c.sure, t - c.t));
+  if (A) {
+    A.a.enabled = true; A.a.play(); A.a.setEffectiveWeight(1);
+    A.a.timeScale = 1;
+    mixer.setTime(0);
+    A.a.time = (yerel / c.sure) * A.kl.duration * 0.999;
+    mixer.update(0);
+    if (kokKemik && kokBaslangic) { kokKemik.position.x = kokBaslangic.x; kokKemik.position.z = kokBaslangic.z; }
+  }
+  renderer.render(sahneS, kamS);
+  mx.clearRect(0, 0, MW, MH); mx.drawImage(glCv, 0, 0);
+
+  const gir = Math.min(1, (t - (c.t - GIRIS)) / GIRIS);
+  const cik = Math.min(1, (c.t + c.sure + CIKIS - t) / CIKIS);
+  const alfa = Math.max(0, Math.min(gir, cik));
+  const p = KAIDE[c.kaide];
+  const ax = px(p.x, p.z + p.w / 2), ay = py(p.top, p.z + p.w / 2);
+  const olcek = 0.90;
+  const dw = MW * olcek, dh = MH * olcek;
+  const x0 = ax - dw / 2, y0 = ay - ZEMIN_SATIR * olcek + (1 - gir) * 26 * k;
+
+  // magenta boyali maske ve koyu ic dolgu
+  rx.globalCompositeOperation = 'source-over'; rx.clearRect(0, 0, MW, MH);
+  rx.drawImage(maskeCv, 0, 0); rx.globalCompositeOperation = 'source-in';
+  rx.fillStyle = MAG; rx.fillRect(0, 0, MW, MH); rx.globalCompositeOperation = 'source-over';
+  ix.globalCompositeOperation = 'source-over'; ix.clearRect(0, 0, MW, MH);
+  ix.drawImage(maskeCv, 0, 0); ix.globalCompositeOperation = 'source-in';
+  ix.fillStyle = '#16021c'; ix.fillRect(0, 0, MW, MH); ix.globalCompositeOperation = 'source-over';
+
+  cx.save();
+  cx.globalAlpha = alfa * 0.85;
+  cx.filter = `blur(${Math.round(12 * k)}px)`;          // yumusak dis parlama
+  cx.drawImage(renkCv, x0, y0, dw, dh);
+  cx.filter = 'none';
+  cx.globalAlpha = alfa;
+  const kk = Math.max(2, 4.5 * k);                         // KONTUR: 8 yone kaydir
+  for (let a = 0; a < 8; a++) { const q = a * Math.PI / 4; cx.drawImage(renkCv, x0 + Math.cos(q) * kk, y0 + Math.sin(q) * kk, dw, dh); }
+  cx.drawImage(icCv, x0, y0, dw, dh);                      // ic dolgu ustte -> parlak hat kalir
+  cx.restore();
+}
+
+// ------------------------------------------------------------ HUD
+const FONT_B = 'Impact, Arial Black, sans-serif', FONT = 'Arial Black, sans-serif';
+function yaziParla(yazi, x, y, font, hiza, parla) {
+  cx.save();
+  cx.font = font; cx.textAlign = hiza; cx.textBaseline = 'top';
+  // arkadaki cizgilerden ayirmak icin koyu hale
+  cx.shadowColor = 'rgba(0,0,0,0.95)'; cx.shadowBlur = 26 * k;
+  cx.fillStyle = 'rgba(0,0,0,0.9)'; cx.fillText(yazi, x, y);
+  cx.shadowColor = parla; cx.shadowBlur = 22 * k;
+  cx.fillStyle = '#ffffff'; cx.fillText(yazi, x, y);
+  cx.restore();
+}
+function hudCiz(t, olcuNo) {
+  const dilim = BOLUM_OLCU / SEVIYE_SAYI;
+  const seviye = Math.min(SEVIYE_SAYI, Math.floor(Math.max(0, olcuNo) / dilim) + 1);
+  const seviyeBas = (seviye - 1) * dilim;
+  // LEVEL UP: seviye degistiginde 1 olcu parlama
+  const yeni = seviye > 1 && olcuNo - seviyeBas < 1 ? 1 - (olcuNo - seviyeBas) : 0;
+  yaziParla(`LEVEL ${seviye}`, 70 * k, 50 * k, `700 ${Math.round((64 + 24 * yeni) * k)}px ${FONT}`, 'left', MAG);
+  if (yeni > 0) yaziParla('LEVEL UP!', W / 2, H * 0.40, `700 ${Math.round(120 * k)}px ${FONT_B}`, 'center', MAG);
+
+  let combo = 0, sonT = -99;
+  for (const c of CUELAR) if (c.t <= t) { combo++; sonT = c.t; }
+  const pop = Math.max(0, 1 - (t - sonT) / 0.25);
+  yaziParla(String(combo), W - 70 * k, 20 * k, `700 ${Math.round((150 + 30 * pop) * k)}px ${FONT_B}`, 'right', MAG);
+  yaziParla('COMBO', W - 70 * k, 195 * k, `700 ${Math.round(50 * k)}px ${FONT}`, 'right', MAG);
+
+  // SUBSCRIBE: her 8 olcude bir, 2,6 sn (abone cagrisi kurali), alt orta
+  const AB_ARA = 8 * OLCU, AB_SURE = 2.6;
+  const tt = t - ILK_VURUS - 2 * OLCU;
+  const abT = ((tt % AB_ARA) + AB_ARA) % AB_ARA;
+  if (tt > 0 && abT < AB_SURE) {
+    const q = abT / AB_SURE;
+    const alfa = Math.min(1, q / 0.18, q > 0.82 ? 1 - (q - 0.82) / 0.18 : 1);
+    const vn = Math.max(0, 1 - (((t - ILK_VURUS) % VURUS + VURUS) % VURUS) / 0.18);
+    const o = 1 + 0.05 * vn;
+    const bw = 460 * k * o, bh = 80 * k * o, bx = W / 2 - bw / 2, by = H - 40 * k - bh;
+    cx.save(); cx.globalAlpha = alfa;
+    cx.shadowColor = '#ff1a2a'; cx.shadowBlur = 30 * k;
+    cx.fillStyle = '#e6141e'; cx.beginPath(); cx.roundRect(bx, by, bw, bh, bh / 2); cx.fill();
+    cx.shadowBlur = 0; cx.fillStyle = '#fff';
+    cx.font = `700 ${Math.round(46 * k * o)}px ${FONT}`; cx.textAlign = 'center'; cx.textBaseline = 'middle';
+    cx.fillText('SUBSCRIBE', W / 2, by + bh / 2 + 2 * k);
+    cx.restore();
+  }
+}
+
+// ------------------------------------------------------------ KARE
+function kareKur(n) {
+  const t = n / FPS;                                  // DETERMINISTIK: duvar saati yok
+  const cs = aktifCueler(t);
+  sehirCiz(t, cs.map(c => c.kaide));
+  for (const c of cs) siluetCiz(t, c);
+  hudCiz(t, (t - ILK_VURUS) / OLCU);
+}
+
+window.kareKur = kareKur;
+window.kareAl = (bicim, kalite) => {
+  if (bicim === 'png')  return cikti.toDataURL('image/png');
+  if (bicim === 'jpeg') return cikti.toDataURL('image/jpeg', kalite || 1);
+  return cikti.toDataURL('image/webp', kalite || 1);
+};
+window.SURE_OLCU = TOPLAM_OLCU;
+window.TOPLAM_KARE = Math.round(TOPLAM_OLCU * OLCU * FPS);
+window.NOTA_SAYISI = CUELAR.length;
+window.KLIP_SAYISI = Object.keys(klipler).length;
+window.SILUET_VAR = !!siluet;
+window.__CUELAR = CUELAR;
+kareKur(0);
+window.HAZIR = true;
+</script>

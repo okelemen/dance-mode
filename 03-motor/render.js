@@ -48,6 +48,8 @@ const MUZIK = path.resolve(arg('muzik', MUZIK_VAR));
 const BICIM = arg('bicim', 'webp');
 // Bolum tanimi (koreografi + ortam dizilisi). Verilmezse motordaki varsayilan.
 const BOLUM = arg('bolum', '');
+// Motor sayfasi (23 Eyl 2026): motor 2 (tel kafes) ayri sayfa, ayni arayuz.
+const SAYFA = arg('sayfa', 'sahne.html');
 const FF_GIRIS = BICIM === 'jpeg' ? 'mjpeg' : BICIM;
 
 const MIME = { '.html':'text/html', '.js':'text/javascript', '.mjs':'text/javascript',
@@ -85,9 +87,9 @@ function sunucuBaslat() {
   sayfa.on('pageerror', e => console.log('SAYFA HATASI:', e.message));
   sayfa.on('console', m => { if (m.type() === 'error') console.log('konsol:', m.text()); });
 
-  console.log(`tema: ${TEMA}  bolum: ${BOLUM_OLCU} olcu`);
+  console.log(`sayfa: ${SAYFA}  tema: ${TEMA}  bolum: ${BOLUM_OLCU} olcu`);
   await sayfa.goto(
-    `http://127.0.0.1:${port}/03-motor/sahne.html?w=${W}&h=${H}&tema=${TEMA}&toplam=${BOLUM_OLCU}` +
+    `http://127.0.0.1:${port}/03-motor/${SAYFA}?w=${W}&h=${H}&tema=${TEMA}&toplam=${BOLUM_OLCU}` +
     (BOLUM ? `&bolum=${encodeURIComponent(BOLUM)}` : '') + arg('ek',''),
                    { waitUntil: 'load', timeout: 120000 });
   await sayfa.waitForFunction('window.HAZIR === true', { timeout: 180000 });

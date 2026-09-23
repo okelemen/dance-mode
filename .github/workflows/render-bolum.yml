@@ -33,6 +33,10 @@ on:
         default: "b"
         type: choice
         options: ["b", "a"]
+      sayfa:
+        description: "Motor sayfasi: sahne.html (normal) veya sahne2.html (motor 2, tel kafes)"
+        required: true
+        default: "sahne.html"
       genislik:
         required: true
         default: "1920"
@@ -95,6 +99,7 @@ jobs:
             --baslangic ${{ matrix.p.baslangic }} \
             --olcu ${{ matrix.p.olcu }} \
             ${{ github.event.inputs.bolum && format('--bolum {0}', github.event.inputs.bolum) || '' }} \
+            --sayfa ${{ github.event.inputs.sayfa }} \
             --sessiz \
             --cikti "../04-ciktilar/parca-$(printf '%03d' ${{ matrix.p.i }}).mp4"
 
