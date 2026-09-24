@@ -53,13 +53,15 @@ const BOLUM_OLCU = BOLUM.bolum_olcu || TOPLAM_OLCU;
 const SEVIYE_SAYI = 5;
 
 // CUE'LAR: { olcu, vurus (0-3, ondalik olabilir), hareket, kutu }
-const HAREKET_KLIP = { 'bob-and-weave':'bob-weave', 'lateral-lunge':'lateral-lunge',
-                       'jump-reach':'jump-reach', 'tuck-jump':'tuck-jump' };
+const HAREKET_KLIP = { 'bob-and-weave':'bob-weave', 'lateral-lunge':'lateral-lunge-k',
+                       'jump-reach':'jump-reach-k', 'tuck-jump':'tuck-jump' };
 const CUELAR = (BOLUM.cuelar || []).map((c, i) => ({
   ...c, i,
   t: ILK_VURUS + (c.olcu * 4 + (c.vurus || 0)) * VURUS,
   klip: HAREKET_KLIP[c.hareket] || c.hareket,
 })).sort((a, b) => a.t - b.t);
+// lateral lunge sirayla sola ve saga (ayni yone ust uste iki hamle yok)
+{ let n = 0; for (const c of CUELAR) if (c.hareket === 'lateral-lunge') c.klip = (n++ % 2) ? 'lunge-R-k' : 'lunge-L-k'; }
 
 // ------------------------------------------------------------ RASTGELE (deterministik)
 function rng(seed){ let s = seed >>> 0; return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
@@ -116,7 +118,22 @@ const parCv = document.createElement('canvas'); parCv.width = W >> 1; parCv.heig
 const gx = parCv.getContext('2d');
 
 const PARLAKLIK_KOVA = 7;
+// LEVEL RENKLERI (24 Eyl 2026, kullanici): sehir her levelde renk degistirir,
+// magenta siluetle UYUMLU. Magentanin yanina oturan bes ton: camgobegi ->
+// elektrik mavisi -> mor -> altin -> neon yesil (tamamlayici). Gecis LEVEL UP
+// aninda baslar, bir olcude yumusakca tamamlanir.
+const LEVEL_RENK = [[70, 235, 210], [70, 150, 255], [160, 110, 255], [255, 190, 70], [110, 255, 140]];
+function sehirRengi(t) {
+  const olcuNo = (t - ILK_VURUS) / OLCU;
+  const dilim = BOLUM_OLCU / SEVIYE_SAYI;
+  const sv = Math.min(SEVIYE_SAYI - 1, Math.max(0, Math.floor(olcuNo / dilim)));
+  const w = sv > 0 ? Math.min(1, (olcuNo - sv * dilim) / 1) : 1;
+  const a = LEVEL_RENK[Math.max(0, sv - 1)], b = LEVEL_RENK[sv];
+  const e = w * w * (3 - 2 * w);
+  return a.map((x, i) => Math.round(x + (b[i] - x) * e));
+}
 function sehirCiz(t, aktifKaideler) {
+  const [R, G, Bm] = sehirRengi(t);
   // vurus nabzi: her vurusta hizli buyume, yavas sonme; olcu basi daha guclu
   const vf = (t - ILK_VURUS) / VURUS;
   const vno = Math.floor(vf), vfaz = vf - vno;
@@ -149,14 +166,14 @@ function sehirCiz(t, aktifKaideler) {
   for (let q = 0; q < PARLAKLIK_KOVA; q++) {
     const L = kovalar[q]; if (!L.length) continue;
     const a = 1 - q / PARLAKLIK_KOVA;
-    lx.strokeStyle = `rgba(70,235,210,${Math.max(0.12, a)})`;
+    lx.strokeStyle = `rgba(${R},${G},${Bm},${Math.max(0.12, a)})`;
     lx.lineWidth = Math.max(1, (q < 3 ? 2 : 1) * k);
     lx.beginPath();
     for (let i = 0; i < L.length; i += 4) { lx.moveTo(L[i], L[i+1]); lx.lineTo(L[i+2], L[i+3]); }
     lx.stroke();
   }
   if (kaideCizgi.length) {
-    lx.strokeStyle = 'rgb(150,255,240)'; lx.lineWidth = 4 * k;
+    lx.strokeStyle = `rgb(${Math.round(R + (255 - R) * 0.6)},${Math.round(G + (255 - G) * 0.6)},${Math.round(Bm + (255 - Bm) * 0.6)})`; lx.lineWidth = 4 * k;
     lx.beginPath();
     for (let i = 0; i < kaideCizgi.length; i += 4) { lx.moveTo(kaideCizgi[i], kaideCizgi[i+1]); lx.lineTo(kaideCizgi[i+2], kaideCizgi[i+3]); }
     lx.stroke();
@@ -187,7 +204,7 @@ kamS.position.set(0, 1.05, 13.8); kamS.lookAt(0, 1.05, 0);
 
 const yukleyici = new FBXLoader();
 const yukle = ad => new Promise(res => yukleyici.load(`/02-hareketler/${ad}.fbx`, o => res(o), undefined, () => res(null)));
-const KLIP_ADLARI = ['idle', 'bob-weave', 'lateral-lunge', 'jump-reach', 'tuck-jump', 'walk', 'box-jump', 'turn180-L', 'turn180-R'];
+const KLIP_ADLARI = ['idle', 'bob-weave', 'lateral-lunge', 'jump-reach', 'tuck-jump', 'walk', 'box-jump', 'turn180-L', 'turn180-R', 'lunge-pose-L', 'lunge-pose-R'];
 const klipler = {};
 let siluet = null, mixer = null, kokKemik = null, kokBaslangic = null;
 const govde = await yukle('siluet-govde');
@@ -206,6 +223,7 @@ if (govde) {
   if (klipler.idle) {
     const iz0 = klipler.idle.tracks.find(t => /Hips\.position$/.test(t.name));
     for (const ad of KLIP_ADLARI.slice(1)) {
+      if (/pose/.test(ad)) continue;
       const kl = klipler[ad]; if (!kl || !iz0) continue;
       const iz = kl.tracks.find(t => /Hips\.position$/.test(t.name)); if (!iz) continue;
       const dy = iz.values[1] - iz0.values[1];
@@ -225,6 +243,19 @@ if (klipler['box-jump']) {
     if (iz.times[i] > 0.9 && iz.times[i] < 1.7 && y > 128) iz.values[i * 3 + 1] = 128 + (y - 128) * 0.45;
   }
 }
+// JUMP REACH: "Jump And Catch With One Hand" topu yakaladiktan sonra YERE
+// DUSUYOR (kalca 102 cm -> -62 cm, olculdu). Sicramanin tepesinden sonra
+// ayakta inis anina (kalca tekrar ~105 cm alti) +0,20 sn kadari alinir.
+if (klipler['jump-reach']) {
+  const kl = klipler['jump-reach'];
+  const iz = kl.tracks.find(t => /Hips\.position$/.test(t.name));
+  let tp = 0, m = -1e9, son = kl.duration;
+  if (iz) {
+    for (let i = 0; i < iz.times.length; i++) if (iz.values[i * 3 + 1] > m) { m = iz.values[i * 3 + 1]; tp = iz.times[i]; }
+    for (let i = 0; i < iz.times.length; i++) if (iz.times[i] > tp && iz.values[i * 3 + 1] < 105) { son = Math.min(kl.duration, iz.times[i] + 0.20); break; }
+  }
+  klipler['jump-reach-k'] = THREE.AnimationUtils.subclip(kl, 'jump-reach-k', 0, Math.max(2, Math.round(son * 30)), 30);
+}
 const aksiyon = {};
 if (mixer) for (const [ad, kl] of Object.entries(klipler)) {
   const a = mixer.clipAction(kl); a.setLoop(THREE.LoopRepeat, Infinity);
@@ -240,6 +271,41 @@ const icCv = document.createElement('canvas'); icCv.width = MW; icCv.height = MH
 const ix = icCv.getContext('2d');
 const MAG = '#ff3aeb';
 
+// TUCK JUMP: "Jumping In Place" klibinde dizler gogse cekilmiyor. Havadayken
+// (kalca ayakta durustan yuksekken) uyluk one, diz arkaya bukulur; agirlik
+// sicramanin yuksekligiyle orantili -> kalkista ve iniste kendiliginden sifir.
+const kemik = {};
+if (siluet) siluet.traverse(o => { if (o.isBone) {
+  const ad = o.name.replace(/^mixamorig:?/, '');
+  if (['LeftUpLeg', 'RightUpLeg', 'LeftLeg', 'RightLeg', 'LeftFoot', 'RightFoot', 'LeftToeBase', 'RightToeBase'].includes(ad)) kemik[ad] = o;
+} });
+let TUCK_TEPE = 150;
+if (klipler['tuck-jump']) {
+  const iz = klipler['tuck-jump'].tracks.find(t => /Hips\.position$/.test(t.name));
+  if (iz) { TUCK_TEPE = -1e9; for (let i = 0; i < iz.times.length; i++) TUCK_TEPE = Math.max(TUCK_TEPE, iz.values[i * 3 + 1]); }
+}
+// Hedef poz MUTLAK: kemigin dinlenme (bind) yonelimi x eksen donusu. Onceki
+// deneme klibin kendi bukumune EKLIYORDU; klip zaten dizleri buktugu anlarda
+// toplam aci 150 dereceyi asiyor, deri kemikten kopup bacak sivri seritlere
+// donusuyordu (yandan olculdu). Artik klibin pozundan hedefe slerp -> toplam
+// bukum hedefle sinirli.
+const TUCK_UYLUK = -1.35, TUCK_DIZ = 1.75;     // radyan (yerel X ekseni)
+const _q = new THREE.Quaternion(), _x = new THREE.Vector3(1, 0, 0);
+const tuckHedef = {};
+for (const [ad, aci] of [['LeftUpLeg', TUCK_UYLUK], ['RightUpLeg', TUCK_UYLUK], ['LeftLeg', TUCK_DIZ], ['RightLeg', TUCK_DIZ]]) {
+  const b = kemik[ad]; if (!b) continue;
+  tuckHedef[ad] = b.quaternion.clone().multiply(new THREE.Quaternion().setFromAxisAngle(_x, aci));
+}
+// ayaklar havadayken notr aciya: ayak ucu asagi uzaninca siluette igne gibi gorunuyordu
+for (const ad of ['LeftFoot', 'RightFoot', 'LeftToeBase', 'RightToeBase']) if (kemik[ad]) tuckHedef[ad] = kemik[ad].quaternion.clone();
+function tuckUygula() {
+  if (!kokKemik) return;
+  const y = kokKemik.position.y;
+  let w = (y - 118) / Math.max(1, TUCK_TEPE - 8 - 118);
+  w = Math.max(0, Math.min(1, w)); w = w * w * (3 - 2 * w);
+  if (w <= 0) return;
+  for (const ad of Object.keys(tuckHedef)) kemik[ad].quaternion.slerp(tuckHedef[ad], w);
+}
 function pozKur(ad, zaman, yaw) {
   for (const v of Object.values(aksiyon)) v.a.enabled = false;
   const A = aksiyon[ad];
@@ -248,6 +314,7 @@ function pozKur(ad, zaman, yaw) {
     mixer.setTime(0);
     A.a.time = Math.max(0, Math.min(A.kl.duration - 1e-3, zaman));
     mixer.update(0);
+    if (ad === 'tuck-jump') tuckUygula();
     if (kokKemik && kokBaslangic) { kokKemik.position.x = kokBaslangic.x; kokKemik.position.z = kokBaslangic.z; }
   }
   siluet.rotation.y = yaw;
@@ -268,6 +335,53 @@ if (siluet) {
     if (dolu) { if (ust < 0) ust = y; alt = y; }
   }
   if (alt > 0) { ZEMIN_SATIR = alt + 1; FIGUR_PX = alt - ust + 1; }
+}
+
+// LATERAL LUNGE: "Goalkeeper Left Sidestep" 0,53 sn ve yana 2,5 m kayiyor.
+// push-it / HAR-005 yontemi: idle -> klibin OLCULEN tepe pozu -> tutus -> idle.
+// Tepe pozu = maskede siluetin EN GENIS oldugu an (bacaklar en acik).
+function pozKlipKur(ad, kaynak, oran) {
+  const I = klipler['idle'], P = klipler[kaynak];
+  if (!I || !P) return;
+  const tp = oran * P.duration;
+  const T = [0.00, 0.14, 0.28, 0.42, 0.80, 1.18, 1.32, 1.46, 1.60];
+  const W8 = [0.00, 0.16, 0.62, 1.00, 1.00, 1.00, 0.62, 0.16, 0.00];
+  const qa = new THREE.Quaternion(), qb = new THREE.Quaternion(), qo = new THREE.Quaternion();
+  const izler = [];
+  for (const iz of P.tracks) {
+    const ti = I.tracks.find(t => t.name === iz.name);
+    if (!ti) continue;
+    const n = iz.getValueSize();
+    const va = ti.values.slice(0, n);
+    const vb = Array.from(iz.createInterpolant().evaluate(tp)).slice(0, n);
+    const quat = /quaternion/.test(iz.name);
+    const deger = [];
+    for (const w of W8) {
+      if (quat) { qa.fromArray(va); qb.fromArray(vb); qo.slerpQuaternions(qa, qb, w); deger.push(qo.x, qo.y, qo.z, qo.w); }
+      else for (let j = 0; j < n; j++) deger.push(va[j] + (vb[j] - va[j]) * w);
+    }
+    izler.push(new (quat ? THREE.QuaternionKeyframeTrack : THREE.VectorKeyframeTrack)(iz.name, T, deger));
+  }
+  klipler[ad] = new THREE.AnimationClip(ad, 1.60, izler);
+  const a = mixer.clipAction(klipler[ad]); a.setLoop(THREE.LoopRepeat, Infinity);
+  aksiyon[ad] = { a, kl: klipler[ad] };
+}
+function maskeGenislik() {
+  const d = mx.getImageData(0, 0, MW, MH).data;
+  let x0 = MW, x1 = -1;
+  for (let y = 0; y < MH; y += 2) for (let x = 0; x < MW; x++) if (d[(y * MW + x) * 4 + 3] > 40) { if (x < x0) x0 = x; if (x > x1) x1 = x; }
+  return x1 - x0;
+}
+// LATERAL LUNGE (24 Eyl 2026): kaleci klibi olculdu, yana SICRIYOR (kalca
+// 103 -> 122 cm), icinde lunge pozu yok. Yerine Mixamo "Male Dance Pose -
+// Legs Spread Leaning Left/Right" durgun pozu: bacaklar acik, govde bir yana
+// yuklenmis. push-it yontemiyle harekete cevrilir (idle -> poz -> tutus -> idle).
+const LUNGE_ORAN = 0.5;
+pozKlipKur('lunge-L-k', 'lunge-pose-L', LUNGE_ORAN);
+pozKlipKur('lunge-R-k', 'lunge-pose-R', LUNGE_ORAN);
+if (mixer && klipler['jump-reach-k'] && !aksiyon['jump-reach-k']) {
+  const a = mixer.clipAction(klipler['jump-reach-k']); a.setLoop(THREE.LoopRepeat, Infinity);
+  aksiyon['jump-reach-k'] = { a, kl: klipler['jump-reach-k'] };
 }
 
 // ------------------------------------------------------------ KOREOGRAFI (TEK SILUET)
@@ -399,14 +513,26 @@ const siluetCv = document.createElement('canvas');
 siluetCv.width = Math.ceil(MW * 1.25 + 80 * k); siluetCv.height = Math.ceil(MH * 1.25 + 80 * k);
 const sx = siluetCv.getContext('2d');
 
+// YERE KILIT (24 Eyl 2026): yerde duran hareketlerde ayak cizgisi HER KAREDE
+// maskeden olculur ve kutu yuzeyine oturtulur. Poz dosyalarinin (lunge) kalca
+// yuksekligi kliplerden farkli; sabit ZEMIN_SATIR ile siluet kutunun ustunde
+// havada kaliyordu. Sicrama hareketleri (box-jump, jump-reach, tuck-jump)
+// kilitlenmez - havalanmalari gerekiyor.
+const YERE_KILIT = new Set(['idle', 'walk', 'turn180-L', 'turn180-R', 'bob-weave', 'lunge-L-k', 'lunge-R-k']);
+function ayakSatiri() {
+  const d = mx.getImageData(0, 0, MW, MH).data;
+  for (let y = MH - 1; y >= 0; y--) for (let x = 0; x < MW; x += 2) if (d[(y * MW + x) * 4 + 3] > 40) return y + 1;
+  return ZEMIN_SATIR;
+}
 function siluetCiz(d) {
   if (!siluet || !d || d.alfa <= 0.001) return;
   pozKur(d.ad, d.zaman, d.yaw);
+  const ayak = YERE_KILIT.has(d.ad) ? ayakSatiri() : ZEMIN_SATIR;
   // olcek: dunya boyu HF'nin bu derinlikteki piksel boyu / maskedeki figur boyu
   const sc = (F * HF / d.z) / FIGUR_PX;
   const dw = MW * sc, dh = MH * sc;
   const ax = px(d.x, d.z), ay = py(d.y, d.z);
-  const x0 = ax - dw / 2, y0 = ay - ZEMIN_SATIR * sc;
+  const x0 = ax - dw / 2, y0 = ay - ayak * sc;
 
   rx.globalCompositeOperation = 'source-over'; rx.clearRect(0, 0, MW, MH);
   rx.drawImage(maskeCv, 0, 0); rx.globalCompositeOperation = 'source-in';
@@ -508,7 +634,7 @@ window.NOTA_SAYISI = CUELAR.length;
 window.KLIP_SAYISI = Object.keys(klipler).length;
 window.SILUET_VAR = !!siluet;
 window.__CUELAR = CUELAR;
-window.__K = { klipler, THREE, PLAN, durum, kalib: () => ({ ZEMIN_SATIR, FIGUR_PX, MW, MH, KLIP_KUTU, TIRMAN, DON_L, DON_R }) };
+window.__K = { klipler, THREE, PLAN, durum, sehirRengi, pozKur, maskeCv, kalib: () => ({ ZEMIN_SATIR, FIGUR_PX, MW, MH, KLIP_KUTU, TIRMAN, DON_L, DON_R, LUNGE_ORAN, TUCK_TEPE, kemik: Object.keys(kemik) }) };
 kareKur(0);
 window.HAZIR = true;
 </script>

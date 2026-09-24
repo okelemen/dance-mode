@@ -1,0 +1,594 @@
+{
+ "ad": "Bolum 11 - TEL KAFES (motor 2)",
+ "not": "Motor 2 (sahne2.html). REF-046 tel kafes, REF-045 muzik. HAR-006 A sikki. Muzik bolum11-kur.py ile uzatildi: parca [0,80) + [16,80)x3 + [16,son]. Cagrilar vokal izinden, 2 olcude bir; sira sarki sozundeki gibi.",
+ "motor": "sahne2.html",
+ "bpm": 140.033,
+ "ilk_vurus": -0.027,
+ "toplam_olcu": 338,
+ "bolum_olcu": 338,
+ "muzik": "01-muzik/bob-and-weave-140-338olcu.wav",
+ "hareketler": [
+  "bob-and-weave",
+  "lateral-lunge",
+  "jump-reach",
+  "tuck-jump"
+ ],
+ "cuelar": [
+  {
+   "olcu": 8,
+   "vurus": 0,
+   "hareket": "bob-and-weave",
+   "kutu": 3
+  },
+  {
+   "olcu": 20,
+   "vurus": 0,
+   "hareket": "bob-and-weave",
+   "kutu": 1
+  },
+  {
+   "olcu": 22,
+   "vurus": 0,
+   "hareket": "bob-and-weave",
+   "kutu": 2
+  },
+  {
+   "olcu": 24,
+   "vurus": 0,
+   "hareket": "bob-and-weave",
+   "kutu": 4
+  },
+  {
+   "olcu": 26,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 0
+  },
+  {
+   "olcu": 44,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 2
+  },
+  {
+   "olcu": 46,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 3
+  },
+  {
+   "olcu": 48,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 1
+  },
+  {
+   "olcu": 50,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 4
+  },
+  {
+   "olcu": 52,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 2
+  },
+  {
+   "olcu": 54,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 0
+  },
+  {
+   "olcu": 56,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 3
+  },
+  {
+   "olcu": 58,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 3
+  },
+  {
+   "olcu": 60,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 1
+  },
+  {
+   "olcu": 62,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 2
+  },
+  {
+   "olcu": 68,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 4
+  },
+  {
+   "olcu": 70,
+   "vurus": 0,
+   "hareket": "bob-and-weave",
+   "kutu": 0
+  },
+  {
+   "olcu": 72,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 2
+  },
+  {
+   "olcu": 74,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 3
+  },
+  {
+   "olcu": 76,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 1
+  },
+  {
+   "olcu": 84,
+   "vurus": 0,
+   "hareket": "bob-and-weave",
+   "kutu": 4
+  },
+  {
+   "olcu": 86,
+   "vurus": 0,
+   "hareket": "bob-and-weave",
+   "kutu": 2
+  },
+  {
+   "olcu": 88,
+   "vurus": 0,
+   "hareket": "bob-and-weave",
+   "kutu": 0
+  },
+  {
+   "olcu": 90,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 3
+  },
+  {
+   "olcu": 108,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 3
+  },
+  {
+   "olcu": 110,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 1
+  },
+  {
+   "olcu": 112,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 2
+  },
+  {
+   "olcu": 114,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 4
+  },
+  {
+   "olcu": 116,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 0
+  },
+  {
+   "olcu": 118,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 2
+  },
+  {
+   "olcu": 120,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 3
+  },
+  {
+   "olcu": 122,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 1
+  },
+  {
+   "olcu": 124,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 4
+  },
+  {
+   "olcu": 126,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 2
+  },
+  {
+   "olcu": 132,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 0
+  },
+  {
+   "olcu": 134,
+   "vurus": 0,
+   "hareket": "bob-and-weave",
+   "kutu": 3
+  },
+  {
+   "olcu": 136,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 3
+  },
+  {
+   "olcu": 138,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 1
+  },
+  {
+   "olcu": 140,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 2
+  },
+  {
+   "olcu": 148,
+   "vurus": 0,
+   "hareket": "bob-and-weave",
+   "kutu": 4
+  },
+  {
+   "olcu": 150,
+   "vurus": 0,
+   "hareket": "bob-and-weave",
+   "kutu": 0
+  },
+  {
+   "olcu": 152,
+   "vurus": 0,
+   "hareket": "bob-and-weave",
+   "kutu": 2
+  },
+  {
+   "olcu": 154,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 3
+  },
+  {
+   "olcu": 172,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 1
+  },
+  {
+   "olcu": 174,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 4
+  },
+  {
+   "olcu": 176,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 2
+  },
+  {
+   "olcu": 178,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 0
+  },
+  {
+   "olcu": 180,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 3
+  },
+  {
+   "olcu": 182,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 3
+  },
+  {
+   "olcu": 184,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 1
+  },
+  {
+   "olcu": 186,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 2
+  },
+  {
+   "olcu": 188,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 4
+  },
+  {
+   "olcu": 190,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 0
+  },
+  {
+   "olcu": 196,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 2
+  },
+  {
+   "olcu": 198,
+   "vurus": 0,
+   "hareket": "bob-and-weave",
+   "kutu": 3
+  },
+  {
+   "olcu": 200,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 1
+  },
+  {
+   "olcu": 202,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 4
+  },
+  {
+   "olcu": 204,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 2
+  },
+  {
+   "olcu": 212,
+   "vurus": 0,
+   "hareket": "bob-and-weave",
+   "kutu": 0
+  },
+  {
+   "olcu": 214,
+   "vurus": 0,
+   "hareket": "bob-and-weave",
+   "kutu": 3
+  },
+  {
+   "olcu": 216,
+   "vurus": 0,
+   "hareket": "bob-and-weave",
+   "kutu": 3
+  },
+  {
+   "olcu": 218,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 1
+  },
+  {
+   "olcu": 236,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 2
+  },
+  {
+   "olcu": 238,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 4
+  },
+  {
+   "olcu": 240,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 0
+  },
+  {
+   "olcu": 242,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 2
+  },
+  {
+   "olcu": 244,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 3
+  },
+  {
+   "olcu": 246,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 1
+  },
+  {
+   "olcu": 248,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 4
+  },
+  {
+   "olcu": 250,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 2
+  },
+  {
+   "olcu": 252,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 0
+  },
+  {
+   "olcu": 254,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 3
+  },
+  {
+   "olcu": 260,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 3
+  },
+  {
+   "olcu": 262,
+   "vurus": 0,
+   "hareket": "bob-and-weave",
+   "kutu": 1
+  },
+  {
+   "olcu": 264,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 2
+  },
+  {
+   "olcu": 266,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 4
+  },
+  {
+   "olcu": 268,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 0
+  },
+  {
+   "olcu": 276,
+   "vurus": 0,
+   "hareket": "bob-and-weave",
+   "kutu": 2
+  },
+  {
+   "olcu": 278,
+   "vurus": 0,
+   "hareket": "bob-and-weave",
+   "kutu": 3
+  },
+  {
+   "olcu": 280,
+   "vurus": 0,
+   "hareket": "bob-and-weave",
+   "kutu": 1
+  },
+  {
+   "olcu": 282,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 4
+  },
+  {
+   "olcu": 300,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 2
+  },
+  {
+   "olcu": 302,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 0
+  },
+  {
+   "olcu": 304,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 3
+  },
+  {
+   "olcu": 306,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 3
+  },
+  {
+   "olcu": 308,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 1
+  },
+  {
+   "olcu": 310,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 2
+  },
+  {
+   "olcu": 312,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 4
+  },
+  {
+   "olcu": 314,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 0
+  },
+  {
+   "olcu": 316,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 2
+  },
+  {
+   "olcu": 318,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 3
+  },
+  {
+   "olcu": 324,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 1
+  },
+  {
+   "olcu": 326,
+   "vurus": 0,
+   "hareket": "bob-and-weave",
+   "kutu": 4
+  },
+  {
+   "olcu": 328,
+   "vurus": 0,
+   "hareket": "lateral-lunge",
+   "kutu": 2
+  },
+  {
+   "olcu": 330,
+   "vurus": 0,
+   "hareket": "jump-reach",
+   "kutu": 0
+  },
+  {
+   "olcu": 332,
+   "vurus": 0,
+   "hareket": "tuck-jump",
+   "kutu": 3
+  }
+ ]
+}
