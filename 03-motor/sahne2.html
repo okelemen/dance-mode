@@ -211,6 +211,10 @@ const govde = await yukle('siluet-govde');
 if (govde) {
   govde.scale.setScalar(0.0125);
   govde.traverse(o => { if (o.isMesh || o.isSkinnedMesh) { o.material = new THREE.MeshBasicMaterial({ color: '#ffffff' }); o.frustumCulled = false; } });
+  // AYAKKABI KAPALI (24 Eyl 2026): "Shoes" mesh'i diz bukulunce ayaktan ayrilip
+  // sivri parcalar halinde yelpazeleniyor (mesh tek tek gizlenerek olculdu:
+  // yalniz Shoes kapaninca temiz). Siluet dolu renk; Body'nin ayagi yeterli.
+  govde.traverse(o => { if (o.name === 'Shoes') o.visible = false; });
   sahneS.add(govde); siluet = govde;
   mixer = new THREE.AnimationMixer(govde);
   govde.traverse(o => { if (o.isBone && /hips/i.test(o.name) && !kokKemik) kokKemik = o; });
@@ -306,13 +310,37 @@ function tuckUygula() {
   if (w <= 0) return;
   for (const ad of Object.keys(tuckHedef)) kemik[ad].quaternion.slerp(tuckHedef[ad], w);
 }
-function pozKur(ad, zaman, yaw) {
+// AYAK KOPMASI (24 Eyl 2026, kullanici: "ayaklari kopuyor"): tuckUygula ayak
+// ve ayak ucu kemiklerini dogrudan bukuyor; bazi klipler bu kemiklere iz
+// tasimadigi icin mixer onlari sifirlamiyordu -> bozuk aci sonraki BUTUN
+// hareketlere tasiniyor, ayaklar sivri parcalar gibi gorunuyordu (ilk
+// tuck-jump'tan sonra her karede, olculdu). Her pozdan once dinlenme acisina.
+const ikizler = {};
+function ikiz(ad) {
+  if (!aksiyon[ad]) return null;
+  if (!ikizler[ad]) {
+    const kl = aksiyon[ad].kl.clone(); kl.name = ad + '#ikiz';
+    const a = mixer.clipAction(kl); a.setLoop(THREE.LoopRepeat, Infinity);
+    ikizler[ad] = { a, kl };
+  }
+  return ikizler[ad];
+}
+const kemikDinlenme = {};
+for (const [ad, b] of Object.entries(kemik)) kemikDinlenme[ad] = b.quaternion.clone();
+function pozKur(ad, zaman, yaw, harman) {
+  for (const [kad, q] of Object.entries(kemikDinlenme)) kemik[kad].quaternion.copy(q);
   for (const v of Object.values(aksiyon)) v.a.enabled = false;
+  for (const v of Object.values(ikizler)) v.a.enabled = false;
   const A = aksiyon[ad];
   if (A) {
-    A.a.enabled = true; A.a.play(); A.a.setEffectiveWeight(1); A.a.timeScale = 1;
+    // ayni hareket art arda: ayni aksiyon iki zamanda olamaz -> klibin ikizi
+    const B = !harman ? null : harman.ad !== ad ? aksiyon[harman.ad] : ikiz(harman.ad);
+    const wB = B ? harman.w : 0;
+    A.a.enabled = true; A.a.play(); A.a.setEffectiveWeight(1 - wB); A.a.timeScale = 1;
+    if (B) { B.a.enabled = true; B.a.play(); B.a.setEffectiveWeight(wB); B.a.timeScale = 1; }
     mixer.setTime(0);
     A.a.time = Math.max(0, Math.min(A.kl.duration - 1e-3, zaman));
+    if (B) B.a.time = Math.max(0, Math.min(B.kl.duration - 1e-3, harman.zaman));
     mixer.update(0);
     if (ad === 'tuck-jump') tuckUygula();
     if (kokKemik && kokBaslangic) { kokKemik.position.x = kokBaslangic.x; kokKemik.position.z = kokBaslangic.z; }
@@ -428,12 +456,19 @@ for (let i = 0; i < CUELAR.length; i++) {
   const A = aksiyon[c.klip];
   const dogal = A ? A.kl.duration : 2 * VURUS;
   const bosluk = sonraki ? sonraki.t - c.t : 1e9;
-  // tek siluet: hareket bir sonraki cagridan once bitip kaybolmali
-  c.sure = Math.min(Math.max(2, Math.round(dogal / VURUS)) * VURUS, bosluk - GIR - CIK - 0.05);
-  // klip en fazla 1,25x hizlanir; sigmazsa klibin basindan o kadari oynar
-  c.hiz = Math.min(1.25, Math.max(0.8, dogal / c.sure));
+  // AYNI KUTUDA ART ARDA (24 Eyl 2026, her olcude cagri): siluet kaybolmaz,
+  // hareket bir sonraki cagriya kadar surer, sonraki hareket GECIS kadar
+  // harmanlanarak baslar. Kutu degisiyorsa eski duzen: bitir, kaybol, belir.
+  const sonrakiKutu = sonraki ? (sonraki.kutu !== undefined ? sonraki.kutu : KAIDE_SIRA[(i + 1) % KAIDE_SIRA.length]) : -1;
+  c.zincir = !!sonraki && sonrakiKutu === c.kaide && bosluk < 4 * OLCU;
+  c.sure = c.zincir ? bosluk
+         : Math.min(Math.max(2, Math.round(dogal / VURUS)) * VURUS, bosluk - GIR - CIK - 0.05);
+  // klip en fazla 1,4x hizlanir (bob-weave 2,33 sn -> bir olcu 1,71 sn); sigmazsa
+  // klibin basindan o kadari oynar
+  c.hiz = Math.min(1.4, Math.max(0.8, dogal / c.sure));
   c.bitis = c.t + c.sure;
 }
+const GECIS = 0.12;                      // zincirde onceki hareketin son pozundan harman
 // giris plani (ilk cagridan geriye dogru kurulur)
 const PLAN = {};
 if (CUELAR.length) {
@@ -495,7 +530,15 @@ function durum(t) {
     const p = KAIDE[c.kaide], ust = { x: p.x, y: p.top, z: p.z + p.w / 2 };
     const pencereSon = sonraki ? sonraki.t : c.bitis + CIK + 0.01;
     if (t >= c.t && t < pencereSon) {
-      if (t < c.bitis) return { ad: c.klip, zaman: (t - c.t) * c.hiz, yaw: 0, ...ust, alfa: 1 };
+      if (t < c.bitis) {
+        const d = { ad: c.klip, zaman: (t - c.t) * c.hiz, yaw: 0, ...ust, alfa: 1 };
+        const once = CUELAR[i - 1];
+        if (once && once.zincir && t < c.t + GECIS) {
+          const tO = Math.min(once.sure * once.hiz, aksiyon[once.klip] ? aksiyon[once.klip].kl.duration - 1e-3 : 0);
+          d.harman = { ad: once.klip, zaman: tO, w: 1 - ss((t - c.t) / GECIS) };
+        }
+        return d;
+      }
       if (sonraki && t >= sonraki.t - GIR) {                  // bir sonraki kutuda belir
         const q = KAIDE[sonraki.kaide];
         return { ad: 'idle', zaman: t, yaw: 0, x: q.x, y: q.top, z: q.z + q.w / 2,
@@ -526,7 +569,7 @@ function ayakSatiri() {
 }
 function siluetCiz(d) {
   if (!siluet || !d || d.alfa <= 0.001) return;
-  pozKur(d.ad, d.zaman, d.yaw);
+  pozKur(d.ad, d.zaman, d.yaw, d.harman);
   const ayak = YERE_KILIT.has(d.ad) ? ayakSatiri() : ZEMIN_SATIR;
   // olcek: dunya boyu HF'nin bu derinlikteki piksel boyu / maskedeki figur boyu
   const sc = (F * HF / d.z) / FIGUR_PX;
@@ -634,7 +677,7 @@ window.NOTA_SAYISI = CUELAR.length;
 window.KLIP_SAYISI = Object.keys(klipler).length;
 window.SILUET_VAR = !!siluet;
 window.__CUELAR = CUELAR;
-window.__K = { klipler, THREE, PLAN, durum, sehirRengi, pozKur, maskeCv, kalib: () => ({ ZEMIN_SATIR, FIGUR_PX, MW, MH, KLIP_KUTU, TIRMAN, DON_L, DON_R, LUNGE_ORAN, TUCK_TEPE, kemik: Object.keys(kemik) }) };
+window.__K = { klipler, THREE, siluet, PLAN, durum, sehirRengi, pozKur, maskeCv, kalib: () => ({ ZEMIN_SATIR, FIGUR_PX, MW, MH, KLIP_KUTU, TIRMAN, DON_L, DON_R, LUNGE_ORAN, TUCK_TEPE, kemik: Object.keys(kemik) }) };
 kareKur(0);
 window.HAZIR = true;
 </script>

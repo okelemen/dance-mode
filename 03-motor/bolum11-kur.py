@@ -14,8 +14,14 @@ Dizilis (olcu, parcanin kendi izgarasinda):
   gecis 4 : parca [16, sona kadar]   - sarkinin kendi bitisi
   toplam = 80 + 3*64 + 65,66 = 337,66 olcu = 578,7 sn (9:38,7)
 
-Cagrilar: vokalin yogun oldugu bolumlerde 2 olcude bir (vokal izi, 23 Eyl 2026;
-whisper kurulmadi -> kelime ayirt edilemiyor, siralama sarki sozundeki gibi).
+Cagrilar (24 Eyl 2026, kullanici: "her bas vurdugunda hareketi gorelim, siluet
+cok az gorunuyor, ekran bastan bos"): HER OLCUDE bir hareket, olcu basinda.
+Bas bu parcada neredeyse kesintisiz sekizlik (olculdu); klipler 2,1-2,3 sn,
+tek vurus 0,43 sn -> vurus basina tam hareket sigmaz, olcu basina sigar.
+Ilk cagri olcu 4: oncesinde siluet onde belirip kutuya yuruyor (giris, 0,15 sn'den
+itibaren ekranda). Siluet 8 olcu ayni kutuda kalir, sarki cumlesi sinirinda
+(8'in kati) kutu degistirir. Hareketler ikiser olcu: BW BW LL LL JR JR TJ TJ.
+Eski duzen (vokal izi, 2 olcude bir, arada uzun bosluklar) kaldirildi.
 
 Kullanim: python bolum11-kur.py
 """
@@ -33,11 +39,9 @@ ILK_VURUS = -0.027
 OLCU = 60.0 / BPM * 4
 TOPLAM_OLCU = 338          # render izgarasi (tam sayi); muzik 337,66'da biter
 
-# parcadaki cagri olculeri ve hareketleri (her hareket parca basina 5 kez)
 BW, LL, JR, TJ = 'bob-and-weave', 'lateral-lunge', 'jump-reach', 'tuck-jump'
-PARCA_CAGRI = [(8, BW), (20, BW), (22, BW), (24, BW), (26, LL), (44, LL), (46, LL), (48, LL),
-               (50, JR), (52, JR), (54, JR), (56, JR), (58, TJ), (60, TJ), (62, TJ), (68, TJ),
-               (70, BW), (72, LL), (74, JR), (76, TJ)]
+HAREKET_SIRA = [BW, LL, JR, TJ]
+ILK_CAGRI = 4
 KUTU_SIRA = [3, 1, 2, 4, 0, 2, 3, 1, 4, 2, 0, 3]   # art arda ayni kutu yok
 
 y, sr = sf.read(KAYNAK, always_2d=True)
@@ -70,21 +74,15 @@ sf.write(CIKTI_WAV, ses, sr, subtype='PCM_16')
 sure = len(ses) / sr
 
 cuelar = []
-n = 0
-for bas, bit, vbas in GECIS:
-    ust = parca_olcu_son if bit is None else bit
-    for olcu, har in PARCA_CAGRI:
-        if bas <= olcu < ust:
-            v = vbas + (olcu - bas)
-            if v + 2 <= TOPLAM_OLCU:
-                cuelar.append({'olcu': v, 'vurus': 0, 'hareket': har, 'kutu': KUTU_SIRA[n % len(KUTU_SIRA)]})
-                n += 1
+for v in range(ILK_CAGRI, TOPLAM_OLCU - 1):
+    har = HAREKET_SIRA[((v - ILK_CAGRI) // 2) % 4]
+    cuelar.append({'olcu': v, 'vurus': 0, 'hareket': har, 'kutu': KUTU_SIRA[(v // 8) % len(KUTU_SIRA)]})
 
 bolum = {
     'ad': 'Bolum 11 - TEL KAFES (motor 2)',
     'not': 'Motor 2 (sahne2.html). REF-046 tel kafes, REF-045 muzik. HAR-006 A sikki. '
            'Muzik bolum11-kur.py ile uzatildi: parca [0,80) + [16,80)x3 + [16,son]. '
-           'Cagrilar vokal izinden, 2 olcude bir; sira sarki sozundeki gibi.',
+           'Her olcude bir cagri (olcu 4-336); 8 olcu ayni kutu, cumle sinirinda kutu degisir.',
     'motor': 'sahne2.html',
     'bpm': BPM,
     'ilk_vurus': ILK_VURUS,
