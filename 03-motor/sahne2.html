@@ -211,10 +211,8 @@ const govde = await yukle('siluet-govde');
 if (govde) {
   govde.scale.setScalar(0.0125);
   govde.traverse(o => { if (o.isMesh || o.isSkinnedMesh) { o.material = new THREE.MeshBasicMaterial({ color: '#ffffff' }); o.frustumCulled = false; } });
-  // AYAKKABI KAPALI (24 Eyl 2026): "Shoes" mesh'i diz bukulunce ayaktan ayrilip
-  // sivri parcalar halinde yelpazeleniyor (mesh tek tek gizlenerek olculdu:
-  // yalniz Shoes kapaninca temiz). Siluet dolu renk; Body'nin ayagi yeterli.
-  govde.traverse(o => { if (o.name === 'Shoes') o.visible = false; });
+  // "Shoes" mesh'i GIZLENMEZ (25 Eyl 2026): Body'de ayakkabinin altinda ayak
+  // yok, gizlenince siluet bilekte bitiyordu (kullanici: "ayaklari yok").
   sahneS.add(govde); siluet = govde;
   mixer = new THREE.AnimationMixer(govde);
   govde.traverse(o => { if (o.isBone && /hips/i.test(o.name) && !kokKemik) kokKemik = o; });
@@ -342,7 +340,11 @@ function pozKur(ad, zaman, yaw, harman) {
     A.a.time = Math.max(0, Math.min(A.kl.duration - 1e-3, zaman));
     if (B) B.a.time = Math.max(0, Math.min(B.kl.duration - 1e-3, harman.zaman));
     mixer.update(0);
-    if (ad === 'tuck-jump') tuckUygula();
+    // tuckUygula KAPALI (25 Eyl 2026): bacagi klibin duruşundan mutlak aciya
+    // zorlamak ayakkabiyi ayaktan ayirip sivri parcalar uretiyordu (diz 1,75 /
+    // 1,2 / 0,9 rad denendi, hepsinde var; kapaliyken temiz). Klip dizleri
+    // kendisi kaldiriyor.
+    if (ad === 'tuck-jump' && SP.has('tuck')) tuckUygula();
     if (kokKemik && kokBaslangic) { kokKemik.position.x = kokBaslangic.x; kokKemik.position.z = kokBaslangic.z; }
   }
   siluet.rotation.y = yaw;
@@ -677,7 +679,7 @@ window.NOTA_SAYISI = CUELAR.length;
 window.KLIP_SAYISI = Object.keys(klipler).length;
 window.SILUET_VAR = !!siluet;
 window.__CUELAR = CUELAR;
-window.__K = { klipler, THREE, siluet, PLAN, durum, sehirRengi, pozKur, maskeCv, kalib: () => ({ ZEMIN_SATIR, FIGUR_PX, MW, MH, KLIP_KUTU, TIRMAN, DON_L, DON_R, LUNGE_ORAN, TUCK_TEPE, kemik: Object.keys(kemik) }) };
+window.__K = { klipler, THREE, siluet, tuckHedef, PLAN, durum, sehirRengi, pozKur, maskeCv, kalib: () => ({ ZEMIN_SATIR, FIGUR_PX, MW, MH, KLIP_KUTU, TIRMAN, DON_L, DON_R, LUNGE_ORAN, TUCK_TEPE, kemik: Object.keys(kemik) }) };
 kareKur(0);
 window.HAZIR = true;
 </script>
