@@ -6490,6 +6490,68 @@ function sekerYazi(g, yazi, x, y, dolgu, kontur, kalin, k){
   g.fillStyle = dolgu; g.fillText(yazi, x, y);
   g.restore();
 }
+// --- KALORI CUBUGU (25 Eyl 2026, MEK-006; REF-048'deki CALORIES cubugundan olculdu:
+// sagda dik dikdortgen, alttan sari dolum, sagda dikey CALORIES, her harekette dolumun
+// ucundan "+0.2" cikip suzulur). Bizde tek seferde VIDEO SONUNDA tam dolar.
+// Toplam gercekci: dans-kardiyo MET ~7, 70 kg -> ~8,2 kcal/dk. Her hareket esit pay.
+// Bolum dosyasi 'kalori_toplam' verirse o kullanilir.
+const KAL_HAREKET = NOTALAR.map(no => no.t).sort((a, b) => a - b);
+function kaloriDurum(t){
+  const SON_T = TOPLAM_OLCU * OLCU;
+  const toplam = (BOLUM && BOLUM.kalori_toplam) || Math.round(8.2 * SON_T / 60 * 10) / 10;
+  // hareket listesi bossa (onizleme) her olcu basi bir hareket sayilir
+  const liste = KAL_HAREKET.length ? KAL_HAREKET
+    : Array.from({ length: Math.max(1, TOPLAM_OLCU - 1) }, (_, i) => (i + 1) * OLCU);
+  let n = 0; while (n < liste.length && liste[n] <= t) n++;
+  const pay = toplam / liste.length;
+  return { kal: n * pay, oran: n / liste.length, n, N: liste.length, pay, son: n > 0 ? liste[n - 1] : -9 };
+}
+function kaloriCiz(t, k){
+  const d = kaloriDurum(t);
+  const bw = 40 * k, x = W - 104 * k, y0 = 150 * k, y1 = H - 232 * k, bh = y1 - y0;
+  // dolum yumusak yukselir (0,25 sn) - basamak basamak ziplamasin
+  const ds = t - d.son, yum = Math.min(1, ds / 0.25);
+  const oran = d.n > 0 ? Math.max(0, (d.n - 1 + yum) / d.N) : 0;
+  hx.save();
+  hx.shadowBlur = 0;
+  // golge + krem ic + pembe kalin kenar (seker rozeti dili)
+  hx.fillStyle = SEKER_GOLGE;
+  hx.beginPath(); hx.roundRect(x, y0 + 6 * k, bw, bh, 12 * k); hx.fill();
+  hx.fillStyle = 'rgba(255,246,251,0.92)';
+  hx.beginPath(); hx.roundRect(x, y0, bw, bh, 12 * k); hx.fill();
+  const fh = bh * oran;
+  if (fh > 1) {
+    hx.save();
+    hx.beginPath(); hx.roundRect(x, y0, bw, bh, 12 * k); hx.clip();
+    const gr = hx.createLinearGradient(x, 0, x + bw, 0);
+    gr.addColorStop(0, '#ffc21f'); gr.addColorStop(0.45, '#ffe14d'); gr.addColorStop(1, '#ffb300');
+    hx.fillStyle = gr;
+    hx.fillRect(x, y1 - fh, bw, fh);
+    hx.fillStyle = 'rgba(255,255,255,0.45)';            // parlama seridi
+    hx.fillRect(x + bw * 0.18, y1 - fh + 4 * k, bw * 0.14, Math.max(0, fh - 8 * k));
+    hx.restore();
+  }
+  hx.lineWidth = 5 * k; hx.strokeStyle = SEKER_KONTUR;
+  hx.beginPath(); hx.roundRect(x, y0, bw, bh, 12 * k); hx.stroke();
+  // dikey CALORIES (alttan yukari okunur, REF-048 gibi)
+  hx.save();
+  hx.translate(x + bw + 26 * k, y1);
+  hx.rotate(-Math.PI / 2);
+  hx.textAlign = 'left'; hx.textBaseline = 'middle';
+  hx.font = `700 ${Math.round(26 * k)}px Arial Black, sans-serif`;
+  sekerYazi(hx, 'CALORIES', 0, 0, '#ffe14d', SEKER_KONTUR, 7, k);
+  hx.restore();
+  // "+0.2": dolumun ucundan cikar, 0,9 sn'de yukari suzulup kaybolur
+  if (ds >= 0 && ds < 0.9) {
+    const q = ds / 0.9;
+    hx.globalAlpha = q < 0.15 ? q / 0.15 : 1 - Math.max(0, (q - 0.55) / 0.45);
+    hx.textAlign = 'center'; hx.textBaseline = 'middle';
+    hx.font = `700 ${Math.round(34 * k)}px Arial Black, sans-serif`;
+    const py = Math.max(y0 - 20 * k, y1 - bh * d.oran) - 22 * k - q * 46 * k;
+    sekerYazi(hx, '+' + d.pay.toFixed(1), x + bw / 2 - 30 * k, py, '#ff2fd0', '#ffffff', 8, k);
+  }
+  hx.restore();
+}
 function hudCiz(t, combo, epic, kmCombo, seviye, duyuru, sonVurus, karistirHud){
   hx.clearRect(0,0,W,H);
   const k = W/1280;
@@ -6499,7 +6561,9 @@ function hudCiz(t, combo, epic, kmCombo, seviye, duyuru, sonVurus, karistirHud){
   const yaz = (yazi, x, y) => hx.fillText(yazi, x, y);
 
   // combo sayaci - ilk vurusa kadar gizli
-  if (combo > 0){
+  // SEKER (25 Eyl 2026, kullanici: "komboyu almayalim"): COMBO yok, yerine KALORI cubugu.
+  if (SK) kaloriCiz(t, k);
+  if (combo > 0 && !SK){
     hx.textAlign = 'right';
     hx.fillStyle = PALET.hud;
     hx.font = `700 ${Math.round(124*k)}px Impact, Arial Black, sans-serif`;
@@ -6704,6 +6768,8 @@ function hudCiz(t, combo, epic, kmCombo, seviye, duyuru, sonVurus, karistirHud){
       sekerYazi(hx, 'LEVEL UP', 0, -74*k, '#ffffff', SEKER_KONTUR, 12, k);
       hx.font = `700 ${Math.round(176*k)}px Impact, Arial Black, sans-serif`;
       sekerYazi(hx, String(seviye), 0, 40*k, '#ffe14d', SEKER_KONTUR, 20, k);
+      hx.font = `700 ${Math.round(40*k)}px Arial Black, sans-serif`;
+      sekerYazi(hx, 'YOU BURNED ' + kaloriDurum(t).kal.toFixed(1) + ' CALORIES', 0, 150*k, '#ffffff', SEKER_KONTUR, 9, k);
     } else {
       hx.fillStyle = '#ffffff'; hx.shadowColor = '#ffffff'; hx.shadowBlur = 40*k;
       hx.fillText('LEVEL UP', 0, -74*k);
