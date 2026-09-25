@@ -3966,7 +3966,7 @@ const SEKER_HAL = {};
 const SEKER_HAL_AYAR = {
   a: { hemi: ['#dff1ff', '#ffc8e3', 1.35], gunes: ['#fff0d8', 2.2, [-30, 42, 26]], sis: [150, 520] },
   b: { hemi: ['#ffd9b8', '#ff9a6b', 1.15], gunes: ['#ffb070', 2.3, [-60, 16, 6]],  sis: [120, 460] },
-  c: { hemi: ['#8a6ab8', '#4a2414', 0.75], gunes: ['#b8c4ff', 1.05, [30, 40, 20]], sis: [90, 400] },
+  c: { hemi: ['#9a7ac8', '#6a3418', 1.0], gunes: ['#c8d0ff', 1.25, [30, 40, 20]], sis: [90, 400] },
   d: { hemi: ['#eaf6ff', '#cfe6ff', 1.45], gunes: ['#ffffff', 1.9, [-25, 45, 30]], sis: [130, 480] },
   e: { hemi: ['#8a5ad0', '#402060', 0.85], gunes: ['#ffd8f0', 0.9, [20, 40, 30]],  sis: [120, 480] },
 };
@@ -4000,12 +4000,12 @@ function sekerDokular2(){
   });
   // d: BEYAZ NANE - buz sekeri karolar, mavi derz, kristal parlama
   D.yolH.d = sekerCanvas(512, 512, (g, w, h) => {
-    g.fillStyle = '#8fc9f0'; g.fillRect(0, 0, w, h);
+    g.fillStyle = '#2f7fc4'; g.fillRect(0, 0, w, h);
     const kx = w / 4, ky = h / 4;
     for (let j = 0; j < 4; j++) for (let i = 0; i < 4; i++) {
-      const x = i * kx + 6, y = j * ky + 6, kw = kx - 12, kh = ky - 12;
-      const gr = g.createRadialGradient(x + kw / 2, y + kh / 2, 4, x + kw / 2, y + kh / 2, kw * 0.7);
-      gr.addColorStop(0, '#ffffff'); gr.addColorStop(1, '#dbeffc');
+      const x = i * kx + 8, y = j * ky + 8, kw = kx - 16, kh = ky - 16;
+      const gr = g.createRadialGradient(x + kw / 2, y + kh / 2, 4, x + kw / 2, y + kh / 2, kw * 0.75);
+      gr.addColorStop(0, '#eaf7ff'); gr.addColorStop(1, '#8ccaf2');
       g.fillStyle = gr; g.beginPath(); g.roundRect(x, y, kw, kh, 16); g.fill();
       g.fillStyle = 'rgba(120,190,240,0.55)';
       for (let k = 0; k < 5; k++) { g.beginPath(); g.arc(x + sekerRnd(i * 9 + j * 3 + k) * kw, y + sekerRnd(i + j * 7 + k * 5) * kh, 2.5, 0, 6.28); g.fill(); }
@@ -4059,8 +4059,8 @@ function sekerDokular2(){
   });
   // ERIMIS CIKOLATA nehri (c) - akan
   D.nehir = sekerCanvas(256, 512, (g, w, h) => {
-    g.fillStyle = '#4a220e'; g.fillRect(0, 0, w, h);
-    for (let i = 0; i < 60; i++) { g.strokeStyle = `rgba(${150 + (i % 50)},${80 + (i % 30)},40,0.35)`; g.lineWidth = 3 + sekerRnd(i) * 5;
+    g.fillStyle = '#6b3416'; g.fillRect(0, 0, w, h);
+    for (let i = 0; i < 70; i++) { g.strokeStyle = `rgba(${190 + (i % 50)},${110 + (i % 40)},60,0.55)`; g.lineWidth = 4 + sekerRnd(i) * 7;
       g.beginPath(); const x = sekerRnd(i + 2) * w; g.moveTo(x, sekerRnd(i + 3) * h);
       g.bezierCurveTo(x + 20, sekerRnd(i + 4) * h, x - 20, sekerRnd(i + 5) * h, x + 10, sekerRnd(i + 6) * h); g.stroke(); }
   });
@@ -4128,9 +4128,11 @@ function sekerKaramelUcurum(){                  // b hedef: selaleli karamel ucu
   const selaleMat = new THREE.MeshBasicMaterial({ map: SEKER_DOKU.selale, fog: false });
   for (const x of [-45, -15, 15, 45]) {
     const s = new THREE.Mesh(new THREE.PlaneGeometry(10, 60), selaleMat);
-    s.position.set(x, 30, 22); g.add(s);
-    const havuz = new THREE.Mesh(new THREE.CylinderGeometry(9, 9, 1, 24), sekerMat('#e8962e', { roughness: 0.1 }));
-    havuz.position.set(x, 0.4, 26); g.add(havuz);
+    s.position.set(x, 30, 34); g.add(s);
+    const kopuk = new THREE.Mesh(new THREE.SphereGeometry(6, 18, 10, 0, 6.2832, 0, Math.PI / 2), sekerMat('#ffe0a0', { roughness: 0.3 }));
+    kopuk.scale.set(1.3, 0.5, 1); kopuk.position.set(x, 0, 36); g.add(kopuk);
+    const havuz = new THREE.Mesh(new THREE.CylinderGeometry(10, 10, 1, 24), sekerMat('#e8962e', { roughness: 0.1 }));
+    havuz.position.set(x, 0.4, 38); g.add(havuz);
   }
   // orta toffee kulesi
   const kule = new THREE.Mesh(new THREE.CylinderGeometry(7, 10, 88, 16), sekerMat('#d98b2b', { roughness: 0.3 }));
@@ -4140,9 +4142,9 @@ function sekerKaramelUcurum(){                  // b hedef: selaleli karamel ucu
   const tepe = new THREE.Mesh(new THREE.ConeGeometry(9, 18, 16), sekerMat('#8a4a14', { roughness: 0.3 })); tepe.position.set(0, 97, 10); g.add(tepe);
   // gunes diski (gun batimi) - kulenin arkasinda, ufka yakin
   const gunes = new THREE.Mesh(new THREE.CircleGeometry(34, 48), new THREE.MeshBasicMaterial({ color: '#ffd27a', fog: false }));
-  gunes.position.set(40, 44, -60); g.add(gunes);
+  gunes.position.set(62, 92, -40); g.add(gunes);
   const hale = new THREE.Mesh(new THREE.CircleGeometry(52, 48), new THREE.MeshBasicMaterial({ color: '#ffb36b', transparent: true, opacity: 0.35, fog: false }));
-  hale.position.set(40, 44, -61); g.add(hale);
+  hale.position.set(62, 92, -41); g.add(hale);
   g.position.set(0, 0, SEKER_SATO_Z);
   return g;
 }
@@ -4426,10 +4428,16 @@ function sekerMekanKur(){
   // c CIKOLATA KALESI - iki yanda erimis cikolata nehri
   SEKER_DOKU.nehir.repeat.set(1, 12);
   for (const yon of [-1, 1]) {
-    const n = new THREE.Mesh(new THREE.PlaneGeometry(9, 220), sekerMat('#ffffff', { map: SEKER_DOKU.nehir, roughness: 0.12, metalness: 0.1 }));
+    const n = new THREE.Mesh(new THREE.PlaneGeometry(9, 220), sekerMat('#ffffff', { map: SEKER_DOKU.nehir, roughness: 0.08, metalness: 0.15, emissive: '#5a2a0c', emissiveIntensity: 0.55 }));
     n.rotation.x = -Math.PI / 2; n.position.set(yon * 9.6, 0.03, -95); n.receiveShadow = true; SEKER_HAL.c.kok.add(n);
   }
   for (let k = 0; k < 28; k++) { const z0 = k * (SEKER_KAPSAM / 28); ekle('c', sekerMum(k), -5.8, z0); ekle('c', sekerMum(k + 40), 5.8, z0); }
+  for (let k = 0; k < 44; k++) {                       // nehirde kabarciklar (akarken kabarip iner)
+    const yon = k % 2 ? 1 : -1;
+    const b = new THREE.Mesh(new THREE.SphereGeometry(0.5 + sekerRnd(k + 1990) * 0.6, 12, 8, 0, 6.2832, 0, Math.PI / 2), sekerMat('#8a4a1c', { roughness: 0.05, metalness: 0.2 }));
+    const k2 = new THREE.Group(); k2.add(b); k2.userData.kabarcik = b;
+    ekle('c', k2, yon * (6.2 + sekerRnd(k + 1991) * 7), sekerRnd(k + 1992) * SEKER_KAPSAM);
+  }
   yanlar('c', 28, sekerCikSutun, 14.5, 18, 1700);
   yanlar('c', 40, sekerTruf, 14.5, 22, 1750);
   yanlar('c', 44, sekerDiken, 15, 26, 1800);
@@ -4502,7 +4510,7 @@ function sekerMekanGuncelle(t){
   const yd = SEKER_DOKU.yolH[h], bd = SEKER_DOKU.bordurH[h];
   if (SEKER_DOKU.yolUst.map !== yd) { SEKER_DOKU.yolUst.map = yd; SEKER_DOKU.yolUst.needsUpdate = true; }
   if (SEKER_DOKU.bordurMat.map !== bd) { SEKER_DOKU.bordurMat.map = bd; SEKER_DOKU.bordurMat.needsUpdate = true; }
-  SEKER_DOKU.yolYan.color.set({ a: '#c47a33', b: '#b8641a', c: '#2e140a', d: '#9fd2f5', e: '#6a3aa8' }[h]);
+  SEKER_DOKU.yolYan.color.set({ a: '#c47a33', b: '#b8641a', c: '#2e140a', d: '#2f7fc4', e: '#6a3aa8' }[h]);
   const yol = t * HIZ;
   yd.offset.y = (yol / SEKER_YOL_TEKRAR) % 1;
   H.zeminDoku.offset.y = (yol / SEKER_ZEMIN_TEKRAR) % 1;
@@ -4517,6 +4525,7 @@ function sekerMekanGuncelle(t){
     o.rotation.y = u.don;
     o.scale.setScalar(Math.min(1, (z - taban) / 14) * (u.olcek || 1));
     if (u.balon) u.balon.position.x = Math.sin(t * 1.1 + u.z0) * 0.4;
+    if (u.kabarcik) { const f = (t * 0.8 + u.z0 * 0.37) % 1; u.kabarcik.scale.setScalar(Math.sin(f * Math.PI)); }
     if (h === 'c') o.traverse(c => { if (c.userData.hale) { c.quaternion.copy(camera.quaternion); c.material.opacity = 0.28 + 0.12 * Math.sin(t * 9 + u.z0); } });
   }
   for (const o of H.gok) {
@@ -6925,15 +6934,15 @@ function kademeBaslangic(combo){
 let SEKER_KONTUR = '#d81b60', SEKER_GOLGE = 'rgba(110,20,60,0.40)';
 // Her mekanin arayuz paleti: panel, siluet, kalori cubugu ve yazi konturu o mekanin renginden.
 const SEKER_HUD = {
-  a: { kontur: '#d81b60', golge: 'rgba(110,20,60,0.40)', panel: ['#fff7fb', '#ffd9ec'], kenar: '#d81b60', sDolgu: '#2a1206', sKontur: '#ff2f7a',
+  a: { halka: '#ff3d8b', halkaYazi: '#5b2a12', halkaDisk: '#fff6fb', kontur: '#d81b60', golge: 'rgba(110,20,60,0.40)', panel: ['#fff7fb', '#ffd9ec'], kenar: '#d81b60', sDolgu: '#2a1206', sKontur: '#ff2f7a',
        kal: ['#ffc21f', '#ffe14d', '#ffb300'], kalIc: 'rgba(255,246,251,0.92)', kalYazi: '#ffe14d', arti: '#ff2fd0' },
-  b: { kontur: '#8a3a0a', golge: 'rgba(90,30,5,0.42)', panel: ['#fff4e0', '#ffd29a'], kenar: '#8a3a0a', sDolgu: '#3a1a06', sKontur: '#ff8a2a',
+  b: { halka: '#e8892a', halkaYazi: '#5b2a12', halkaDisk: '#fff4e0', kontur: '#8a3a0a', golge: 'rgba(90,30,5,0.42)', panel: ['#fff4e0', '#ffd29a'], kenar: '#8a3a0a', sDolgu: '#3a1a06', sKontur: '#ff8a2a',
        kal: ['#e8892a', '#ffd27a', '#c9701a'], kalIc: 'rgba(255,244,224,0.92)', kalYazi: '#ffd27a', arti: '#ff5a1f' },
-  c: { kontur: '#2a1206', golge: 'rgba(0,0,0,0.50)', panel: ['#5a2a12', '#2e140a'], kenar: '#ffb23b', sDolgu: '#140803', sKontur: '#ffb23b',
+  c: { halka: '#ffb23b', halkaYazi: '#ffc15a', halkaDisk: '#2e140a', kontur: '#2a1206', golge: 'rgba(0,0,0,0.50)', panel: ['#5a2a12', '#2e140a'], kenar: '#ffb23b', sDolgu: '#140803', sKontur: '#ffb23b',
        kal: ['#e0701a', '#ffc15a', '#ff9a2a'], kalIc: 'rgba(46,20,10,0.90)', kalYazi: '#ffc15a', arti: '#ffc15a' },
-  d: { kontur: '#1f7ad6', golge: 'rgba(20,60,120,0.35)', panel: ['#ffffff', '#d6eeff'], kenar: '#1f7ad6', sDolgu: '#0e2a4a', sKontur: '#38a8ff',
+  d: { halka: '#1f7ad6', halkaYazi: '#0e2a4a', halkaDisk: '#f4fbff', kontur: '#1f7ad6', golge: 'rgba(20,60,120,0.35)', panel: ['#ffffff', '#d6eeff'], kenar: '#1f7ad6', sDolgu: '#0e2a4a', sKontur: '#38a8ff',
        kal: ['#4fc3ff', '#d8f6ff', '#8fe0ff'], kalIc: 'rgba(240,250,255,0.92)', kalYazi: '#ffffff', arti: '#1f7ad6' },
-  e: { kontur: '#7a1fa8', golge: 'rgba(30,0,60,0.50)', panel: ['#3a1d6c', '#1e0e40'], kenar: '#ffe14d', sDolgu: '#0e0620', sKontur: '#ff5fa2',
+  e: { halka: '#ffe45c', halkaYazi: '#ffe45c', halkaDisk: '#1e0e40', kontur: '#7a1fa8', golge: 'rgba(30,0,60,0.50)', panel: ['#3a1d6c', '#1e0e40'], kenar: '#ffe14d', sDolgu: '#0e0620', sKontur: '#ff5fa2',
        kal: ['#ff5fa2', '#ffe45c', '#ff9a3b'], kalIc: 'rgba(30,14,64,0.90)', kalYazi: '#ffe45c', arti: '#ffe45c' },
 };
 let SEKER_HUD_AKTIF = SEKER_HUD.a;
@@ -7388,7 +7397,7 @@ function hudCiz(t, combo, epic, kmCombo, seviye, duyuru, sonVurus, karistirHud){
     if (SK) {
       hx.fillStyle = SEKER_GOLGE;
       hx.beginPath(); hx.arc(cx, cy + 6*k, r + 17*k, 0, 6.2832); hx.fill();
-      hx.fillStyle = '#fff6fb';
+      hx.fillStyle = SEKER_HUD_AKTIF.halkaDisk;
       hx.beginPath(); hx.arc(cx, cy, r + 17*k, 0, 6.2832); hx.fill();
       hx.lineWidth = 5*k; hx.strokeStyle = SEKER_KONTUR;
       hx.beginPath(); hx.arc(cx, cy, r + 17*k, 0, 6.2832); hx.stroke();
@@ -7398,10 +7407,10 @@ function hudCiz(t, combo, epic, kmCombo, seviye, duyuru, sonVurus, karistirHud){
     }
     // arka halka
     hx.lineWidth = 11*k;
-    hx.strokeStyle = SK ? 'rgba(216,27,96,0.15)' : 'rgba(255,255,255,0.16)';
+    hx.strokeStyle = SK ? 'rgba(128,128,128,0.18)' : 'rgba(255,255,255,0.16)';
     hx.beginPath(); hx.arc(cx, cy, r, 0, 6.2832); hx.stroke();
     // dolan yay - ortamin aksan renginde, 12 yonunden saat yonunde
-    const renk = SK ? '#ff3d8b' : '#' + karistirHud.getHexString();
+    const renk = SK ? SEKER_HUD_AKTIF.halka : '#' + karistirHud.getHexString();
     hx.strokeStyle = renk; hx.lineCap = 'round';
     hx.shadowColor = renk; hx.shadowBlur = SK ? 0 : (16 + 12*vn) * k;
     hx.beginPath();
@@ -7410,11 +7419,11 @@ function hudCiz(t, combo, epic, kmCombo, seviye, duyuru, sonVurus, karistirHud){
     hx.shadowBlur = 0; hx.lineCap = 'butt';
     // kalan sure
     hx.textAlign = 'center'; hx.textBaseline = 'middle';
-    hx.fillStyle = SK ? '#5b2a12' : '#ffffff';
+    hx.fillStyle = SK ? SEKER_HUD_AKTIF.halkaYazi : '#ffffff';
     hx.font = `700 ${Math.round(30*k)}px Arial Black, sans-serif`;
     hx.fillText(`${dk}:${String(sn).padStart(2,'0')}`, cx, cy - 2*k);
     hx.font = `700 ${Math.round(15*k)}px Arial, sans-serif`;
-    hx.fillStyle = SK ? 'rgba(91,42,18,0.70)' : 'rgba(255,255,255,0.62)';
+    if (SK) { hx.globalAlpha = 0.72; hx.fillStyle = SEKER_HUD_AKTIF.halkaYazi; } else hx.fillStyle = 'rgba(255,255,255,0.62)';
     hx.fillText('LEFT', cx, cy + 24*k);
     hx.restore();
     hx.textAlign = 'left'; hx.textBaseline = 'alphabetic';
