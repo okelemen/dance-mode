@@ -278,6 +278,17 @@ const CUE = {
   sicra_L:  { lane:0, sure:OLCU, klip:'sicra-k',     maxOlcu: 1 },
   sicra_R:  { lane:2, sure:OLCU, klip:'sicra-k',     maxOlcu: 1 },
   don:      { lane:1, sure:OLCU, klip:'don-k',       maxOlcu: 1 },
+  // ---- HAR-007 (26 Eyl 2026, MEK-006 SEKER, kardiyo). Engel = hareketin sebebi:
+  //   yumruk_L/R -> omuz hizasinda havada duran nesne, o tarafa yumruk (Cross Punch pozu + govde donusu)
+  //   seksek     -> yol tek ayaklik taslara doner, tek ayakla sekme (On Right Foot, Left Leg Raised + iki sekme)
+  //   kay_L/R    -> bir yandan yuvarlanan nesne, acik tarafa yana kayma (Side Step en genis faz + kalca kaymasi)
+  //   dizkol     -> yerde alcak nesne + ustte sarkan nesne: dize bas, iki elle uzan (Knee bacaklar + Cheering kollar)
+  yumruk_L: { lane:0, sure:OLCU, klip:'yumruk-k', maxOlcu: 1 },
+  yumruk_R: { lane:2, sure:OLCU, klip:'yumruk-k', maxOlcu: 1 },
+  seksek:   { lane:1, sure:OLCU, klip:'seksek-k', maxOlcu: 1 },
+  kay_L:    { lane:0, sure:OLCU, klip:'yana-k',   maxOlcu: 1 },
+  kay_R:    { lane:2, sure:OLCU, klip:'yana-k',   maxOlcu: 1 },
+  dizkol:   { lane:1, sure:OLCU, klip:'dizkol-k', maxOlcu: 1 },
   // aktif mola cue'lari: yogunluk duser ama ekran BOSALMAZ
   reach_L: { lane:0, sure:OLCU,    klip:'arm-stretch' },
   reach_R: { lane:2, sure:OLCU,    klip:'arm-stretch' },
@@ -420,9 +431,24 @@ const KLIP_DONGU = {
 const CUE_DONGU_FAZ = { 'side_L': 0.438, 'side_R': 0.438 };
 // yanadim_L (17 Eyl 2026, olc-yon.js): long-left-side-step klibi siluet kutusunda
 // figuru SAGA gotururuyor (com -0,067 -> -0,024). Sola gitmesi gereken cue aynalanir.
-const AYNA_CUE = { 'side_L': true, 'yanadim_L': true, 'sicra_R': true };
+const AYNA_CUE = { 'side_L': true, 'yanadim_L': true, 'sicra_R': true,
+  // HAR-007: yana-side-step en genis fazda figuru kutunun SOLUNA goturuyor (kareden olculdu);
+  // saga kayma aynalanir. Cross punch sag elle - sol taraftaki hedef icin aynalanir.
+  'kay_R': true, 'yumruk_L': true };
 let SILUET_AYNA = false;
 const SILUET_DON = 1.1;   // push-it cue'sunda govdenin yana donus acisi (radyan)
+// Govde donusu gereken poz klipleri. yumruk-k: onden bakista one atilan kol kisaliyor
+// (push-it ile ayni sorun) - govde yana donunce kol tam boyuyla okunur.
+const DON_KLIP = { 'push-it': SILUET_DON, 'yumruk-k': 0.95 };
+// HAR-007 kok ekleri (kalca kemigi, yerel birim ~cm): seksekte iki kucuk sekme,
+// yana kaymada kutu icinde yana kayis. p = poz klibinde 0-1 ilerleme.
+function HAR7_KOK(ad, p){
+  const yuk = (x, a0, a1) => { const k = Math.min(1, Math.max(0, (x - a0) / (a1 - a0))); return k * k * (3 - 2 * k); };
+  const w = yuk(p, 0.10, 0.26) - yuk(p, 0.74, 0.90);
+  if (ad === 'seksek-k') return { x: 0, y: 11 * Math.abs(Math.sin(Math.PI * 2 * (p - 0.26) / 0.48)) * w };
+  if (ad === 'yana-k') return { x: -16 * w, y: 0 };
+  return { x: 0, y: 0 };
+}
 const TEPE_FAZI = {
   'charleston': 0.30, 'running-man': 0.30,
   'raise-roof': 0.45, 'side-to-side': 0.45, 'step-left': 0.45,
@@ -441,6 +467,8 @@ const TEPE_FAZI = {
   // step-over-k = klibin 0-%70'i. olc-iou tepe fazi 0,80: bacak engelin
   // ustunden asirilan an (0,71 toplu sicrama; engel ustu okunmuyordu).
   'comel-k': 0.50, 'sicra-k': 0.50, 'don-k': 0.50, 'step-over-k': 0.80,
+  // HAR-007 poz klipleri: tam poz 0,42-1,18 / 1,60 -> orta 0,50
+  'yumruk-k': 0.50, 'seksek-k': 0.50, 'yana-k': 0.50, 'dizkol-k': 0.50,
 };
 NOTALAR.forEach((n, i) => {
   const sonraki = NOTALAR[i + 1];
@@ -4065,6 +4093,14 @@ function sekerDokular2(){
       g.bezierCurveTo(x + 20, sekerRnd(i + 4) * h, x - 20, sekerRnd(i + 5) * h, x + 10, sekerRnd(i + 6) * h); g.stroke(); }
   });
   D.nehir.wrapS = D.nehir.wrapT = THREE.RepeatWrapping;
+  // nehrin uzerinde kayan parlak yansima seritleri (sivi okumasi)
+  D.nehirIsik = sekerCanvas(256, 512, (g, w, h) => {
+    g.fillStyle = '#000000'; g.fillRect(0, 0, w, h);
+    for (let i = 0; i < 26; i++) { const x = sekerRnd(i + 90) * w, y = sekerRnd(i + 91) * h, l = 30 + sekerRnd(i + 92) * 90;
+      const gr = g.createLinearGradient(x, y, x, y + l); gr.addColorStop(0, 'rgba(255,200,140,0)'); gr.addColorStop(0.5, 'rgba(255,210,150,0.75)'); gr.addColorStop(1, 'rgba(255,200,140,0)');
+      g.fillStyle = gr; g.beginPath(); g.ellipse(x, y + l / 2, 3 + sekerRnd(i + 93) * 5, l / 2, 0, 0, 6.28); g.fill(); }
+  });
+  D.nehirIsik.wrapS = D.nehirIsik.wrapT = THREE.RepeatWrapping; D.nehirIsik.repeat.set(1, 12);
   // KARAMEL SELALE (b) - dikey akan
   D.selale = sekerCanvas(128, 512, (g, w, h) => {
     const gr = g.createLinearGradient(0, 0, w, 0);
@@ -4127,8 +4163,8 @@ function sekerKaramelUcurum(){                  // b hedef: selaleli karamel ucu
   }
   const selaleMat = new THREE.MeshBasicMaterial({ map: SEKER_DOKU.selale, fog: false });
   for (const x of [-45, -15, 15, 45]) {
-    const s = new THREE.Mesh(new THREE.PlaneGeometry(10, 60), selaleMat);
-    s.position.set(x, 30, 34); g.add(s);
+    const s = new THREE.Mesh(new THREE.PlaneGeometry(15, 72), selaleMat);
+    s.position.set(x, 36, 40); g.add(s);
     const kopuk = new THREE.Mesh(new THREE.SphereGeometry(6, 18, 10, 0, 6.2832, 0, Math.PI / 2), sekerMat('#ffe0a0', { roughness: 0.3 }));
     kopuk.scale.set(1.3, 0.5, 1); kopuk.position.set(x, 0, 36); g.add(kopuk);
     const havuz = new THREE.Mesh(new THREE.CylinderGeometry(10, 10, 1, 24), sekerMat('#e8962e', { roughness: 0.1 }));
@@ -4291,9 +4327,9 @@ function sekerBoya(o, renk, emissive){          // bir nesneyi mekanin rengine b
   o.traverse(c => { if (c.isMesh && !Array.isArray(c.material) && !c.material.map) { c.material = c.material.clone(); c.material.color.set(renk); if (emissive) { c.material.emissive = new THREE.Color(renk); c.material.emissiveIntensity = emissive; } } });
   return o;
 }
-function sekerUzak(h, n, yap, tohum, olcek){    // uzak sabit katman (a'daki gibi): tepelerin onunde
+function sekerUzak(h, n, yap, tohum, olcek, xMin){    // uzak sabit katman (a'daki gibi): tepelerin onunde
   for (let k = 0; k < n; k++) { const yon = k % 2 ? 1 : -1; const o = yap(k);
-    o.position.set(yon * (26 + sekerRnd(k + tohum) * 60), 0, -130 - sekerRnd(k + tohum + 1) * 70);
+    o.position.set(yon * ((xMin || 26) + sekerRnd(k + tohum) * 60), 0, -130 - sekerRnd(k + tohum + 1) * 70);
     o.scale.multiplyScalar(olcek); SEKER_HAL[h].kok.add(o); }
 }
 // HAVAI FISEK (e): olcu basina bir patlama, 4 es zamanli, deterministik (yalniz t)
@@ -4423,13 +4459,15 @@ function sekerMekanKur(){
   yanlar('b', 44, (k) => sekerBoya(sekerTruf(k + 300), ['#c97a22', '#8a4a14', '#fff0c8'][k % 3]), 7, 24, 1660);
   yanlar('b', 40, (k) => sekerKaramelKup(k + 200), 6.2, 12, 1670);
   yanlar('b', 12, (k) => sekerBoya(sekerDondurma(k + 50), ['#fff0c8', '#e8962e', '#c26a18'][k % 3]), 44, 26, 1680);
-  sekerUzak('b', 16, (k) => k % 2 ? sekerKaramelElma(k + 60) : sekerToffee(k + 60), 1690, 2.2);
+  sekerUzak('b', 16, (k) => k % 2 ? sekerKaramelElma(k + 60) : sekerToffee(k + 60), 1690, 2.2, 62);
   SEKER_HAL.b.kok.add(sekerKaramelUcurum());
   // c CIKOLATA KALESI - iki yanda erimis cikolata nehri
   SEKER_DOKU.nehir.repeat.set(1, 12);
   for (const yon of [-1, 1]) {
-    const n = new THREE.Mesh(new THREE.PlaneGeometry(9, 220), sekerMat('#ffffff', { map: SEKER_DOKU.nehir, roughness: 0.08, metalness: 0.15, emissive: '#5a2a0c', emissiveIntensity: 0.55 }));
+    const n = new THREE.Mesh(new THREE.PlaneGeometry(9, 220), sekerMat('#ffffff', { map: SEKER_DOKU.nehir, roughness: 0.03, metalness: 0.35, emissive: '#6a3212', emissiveIntensity: 0.7 }));
     n.rotation.x = -Math.PI / 2; n.position.set(yon * 9.6, 0.03, -95); n.receiveShadow = true; SEKER_HAL.c.kok.add(n);
+    const par = new THREE.Mesh(new THREE.PlaneGeometry(9, 220), new THREE.MeshBasicMaterial({ map: SEKER_DOKU.nehirIsik, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, fog: true }));
+    par.rotation.x = -Math.PI / 2; par.position.set(yon * 9.6, 0.06, -95); SEKER_HAL.c.kok.add(par);
   }
   for (let k = 0; k < 28; k++) { const z0 = k * (SEKER_KAPSAM / 28); ekle('c', sekerMum(k), -5.8, z0); ekle('c', sekerMum(k + 40), 5.8, z0); }
   for (let k = 0; k < 44; k++) {                       // nehirde kabarciklar (akarken kabarip iner)
@@ -4501,6 +4539,39 @@ function sekerMekanKur(){
   sekerMKok.visible = false;
   scene.add(sekerMKok);
 }
+// SEKER KAMERASI (26 Eyl 2026). Hiz duruma gore:
+//   kay_L/R : HIZLI konumlama - 0,12 sn'de o yone 0,9 birim, tutus, 0,30 sn'de geri
+//   seksek  : iki sekmede HIZLI minik titreme (0,05 birim, 0,18 sn sonum)
+//   yumruk  : SABIT
+//   dizkol  : YAVAS kalkis - hareket boyunca 0,22 birim yukari, yumusak donus
+//   nefes/LEVEL UP: YAVAS one suzulme (0,8 birim) ve geri
+const SEKER_KAM_NOTA = NOTALAR.filter(n => /^(kay_L|kay_R|seksek|dizkol)$/.test(n.tip)).sort((a, b) => a.t - b.t);
+function sekerKamera(t){
+  let x = 0, y = 0, z = 0;
+  const ss = (v) => v <= 0 ? 0 : v >= 1 ? 1 : v * v * (3 - 2 * v);
+  for (const n of SEKER_KAM_NOTA) {
+    const d = t - n.t;
+    if (d < -0.6 || d > 1.4) continue;
+    if (n.tip === 'kay_L' || n.tip === 'kay_R') {
+      const yon = n.tip === 'kay_L' ? -1 : 1;
+      const w = ss((d + 0.12) / 0.12) - ss((d - 0.45) / 0.30);
+      x += yon * 0.9 * w;
+    } else if (n.tip === 'seksek') {
+      for (const h of [0, OLCU * 0.30]) {
+        const e = d - h;
+        if (e >= 0 && e < 0.4) { const a = 0.05 * Math.exp(-e / 0.18); y += a * Math.sin(e * 95); x += a * 0.6 * Math.sin(e * 77 + 1.3); }
+      }
+    } else if (n.tip === 'dizkol') {
+      y += 0.22 * (ss((d + 0.5) / 0.7) - ss((d - 0.5) / 0.8));
+    }
+  }
+  // gecis / nefes: seviye sinirinda yavas one suzulme
+  for (const o of SEVIYE_SIN.slice(1)) {
+    const d = t - o * OLCU;
+    if (d > -2.8 && d < 2.6) z -= 0.8 * (ss((d + 2.8) / 2.2) - ss((d - 0.4) / 2.2));
+  }
+  return { x, y, z };
+}
 function sekerMekanGuncelle(t){
   const h = SEKER_HAL_AKTIF in SEKER_HAL ? SEKER_HAL_AKTIF : 'a';
   const H = SEKER_HAL[h];
@@ -4515,7 +4586,8 @@ function sekerMekanGuncelle(t){
   yd.offset.y = (yol / SEKER_YOL_TEKRAR) % 1;
   H.zeminDoku.offset.y = (yol / SEKER_ZEMIN_TEKRAR) % 1;
   bd.offset.y = (-yol / 1.6) % 1;
-  if (h === 'c') SEKER_DOKU.nehir.offset.y = (yol * 1.35 / (220 / 12)) % 1;      // cikolata biraz daha hizli akar
+  if (h === 'c') { SEKER_DOKU.nehir.offset.y = (yol * 1.35 / (220 / 12)) % 1;    // cikolata biraz daha hizli akar
+                   SEKER_DOKU.nehirIsik.offset.y = (yol * 1.9 / (220 / 12)) % 1; SEKER_DOKU.nehirIsik.offset.x = Math.sin(t * 0.7) * 0.05; }
   if (h === 'b') SEKER_DOKU.selale.offset.y = (t * 0.6) % 1;                     // selale asagi akar
   const taban = Z_VURUS + 14 - SEKER_KAPSAM;
   for (const o of H.akan) {
@@ -6140,6 +6212,7 @@ function engelDestekGuncelle(g, tip, z, gov, kimlik, notaT){
     if (Array.isArray(d[k])) { for (const q of d[k]) q.visible = false; }
     else d[k].visible = false;
   }
+  if (SEKER_MOD_AKTIF) return;   // MEK-006 engelleri secilince burada kurulacak
   if (BULUT_MOD_AKTIF) {
     // Engelin hali NOTANIN zamanindan: LEVEL UP'tan hemen sonra gelecek
     // notalar sinirdan ONCE uzakta gorunur - yeni levelin nesnesiyle gelmeli.
@@ -6697,7 +6770,12 @@ const KLIP_ADLARI = ['idle','idle-breathing','step-left','step-right','jump',
                      // HAR-005 (19 Eyl 2026, MEK-005 BULUT, ENG-005). Engelden turetildi:
                      // bas ustu -> comel, alcak -> ustunden adim, yan kapali -> acik tarafa
                      // sicra, dar gecit -> yan don. Remy ile indirildi, In Place.
-                     'crouch-walk','step-over','quick-steps','twist-right','crouching','strafe-jump'];
+                     'crouch-walk','step-over','quick-steps','twist-right','crouching','strafe-jump',
+                     // HAR-007 adaylari (25 Eyl 2026, MEK-006 SEKER, kardiyo). Remy, In Place.
+                     // yumruk / seksek (tek ayak pozu + motorda sekme) / yana kayma / diz + kollar yukari
+                     'yumruk-jab','yumruk-cross','tek-ayak-poz','yana-side-step','yana-boxing-orta',
+                     'yana-bacak-acik','kol-cheering','diz-knee',
+                     'seksek-ip','seksek-tek-ayak','seksek-parmak','star-jack'];
 const klipler = {};
 let siluet = null, mixer = null, kokKemik = null, kokBaslangic = null;
 
@@ -6739,7 +6817,10 @@ if (govde) {
   if (klipler['idle']) {
     const iz0 = klipler['idle'].tracks.find(t => /Hips\.position$/.test(t.name));
     for (const ad of ['standing-jump','box-jump','jump-up','ducking','long-left-side-step','push-start','pushing','push-pose',
-                      'crouch-walk','step-over','quick-steps','twist-right','crouching','strafe-jump']) {
+                      'crouch-walk','step-over','quick-steps','twist-right','crouching','strafe-jump',
+                      'yumruk-jab','yumruk-cross','tek-ayak-poz','yana-side-step','yana-boxing-orta',
+                      'yana-bacak-acik','kol-cheering','diz-knee',
+                     'seksek-ip','seksek-tek-ayak','seksek-parmak','star-jack']) {
       const k = klipler[ad]; if (!k || !iz0) continue;
       const iz = k.tracks.find(t => /Hips\.position$/.test(t.name)); if (!iz) continue;
       const dy = iz.values[1] - iz0.values[1];
@@ -6823,6 +6904,43 @@ if (govde) {
     const iz = klipler['step-over-k'].tracks.find(t => /Hips\.position$/.test(t.name));
     if (iz) { const y0 = iz.values[1]; for (let j = 1; j < iz.values.length; j += 3) iz.values[j] = y0 + (iz.values[j] - y0) * 0.5; }
   }
+}
+
+// ---- HAR-007 POZLARI (26 Eyl 2026). pozKlip ile ayni kalip (idle -> poz -> tutus -> idle,
+// 1,60 sn) ama parca parca kaynak secilebilir: dizkol-k = bacaklar diz klibinden, gövde
+// ve kollar Cheering'den. Veri tamamen Mixamo'dan, uydurma aci yok.
+{
+  const I = klipler['idle'];
+  const pozKur = (ad, parcalar) => {
+    if (!I) return;
+    for (const pr of parcalar) if (!klipler[pr.kaynak]) return;
+    const T = [0.00, 0.14, 0.28, 0.42, 0.80, 1.18, 1.32, 1.46, 1.60];
+    const W = [0.00, 0.16, 0.62, 1.00, 1.00, 1.00, 0.62, 0.16, 0.00];
+    const qa = new THREE.Quaternion(), qb = new THREE.Quaternion(), qo = new THREE.Quaternion();
+    const izler = [];
+    for (const ti of I.tracks) {
+      const pr = parcalar.find(q => !q.re || q.re.test(ti.name));
+      const P = klipler[pr.kaynak];
+      const iz = P.tracks.find(t => t.name === ti.name);
+      if (!iz) continue;
+      const n = iz.getValueSize();
+      const va = ti.values.slice(0, n);
+      const vb = Array.from(iz.createInterpolant().evaluate(pr.oran * P.duration)).slice(0, n);
+      const quat = /quaternion/.test(iz.name);
+      const deger = [];
+      for (const w of W) {
+        if (quat) { qa.fromArray(va); qb.fromArray(vb); qo.slerpQuaternions(qa, qb, w); deger.push(qo.x, qo.y, qo.z, qo.w); }
+        else for (let j = 0; j < n; j++) deger.push(va[j] + (vb[j] - va[j]) * w);
+      }
+      izler.push(new (quat ? THREE.QuaternionKeyframeTrack : THREE.VectorKeyframeTrack)(iz.name, T, deger));
+    }
+    klipler[ad] = new THREE.AnimationClip(ad, 1.60, izler);
+  };
+  const BACAK = /(Hips|UpLeg|Leg|Foot|Toe)/;
+  pozKur('yumruk-k', [{ kaynak: 'yumruk-cross', oran: 0.55 }]);
+  pozKur('seksek-k', [{ kaynak: 'seksek-tek-ayak', oran: 0 }]);
+  pozKur('yana-k',   [{ kaynak: 'yana-side-step', oran: 0.80 }]);
+  pozKur('dizkol-k', [{ kaynak: 'diz-knee', oran: 0.40, re: BACAK }, { kaynak: 'kol-cheering', oran: 0.50 }]);
 }
 
 // klipleri hedef sureye esnetip aksiyon olarak hazirla
@@ -6975,7 +7093,7 @@ function kaloriDurum(t){
 }
 function kaloriCiz(t, k){
   const d = kaloriDurum(t);
-  const bw = 40 * k, x = W - 104 * k, y0 = 150 * k, y1 = H - 232 * k, bh = y1 - y0;
+  const bw = 40 * k, x = W - 104 * k, y0 = 150 * k, y1 = H - 110 * k, bh = y1 - y0;
   // dolum yumusak yukselir (0,25 sn) - basamak basamak ziplamasin
   const ds = t - d.son, yum = Math.min(1, ds / 0.25);
   const oran = d.n > 0 ? Math.max(0, (d.n - 1 + yum) / d.N) : 0;
@@ -7020,6 +7138,48 @@ function kaloriCiz(t, k){
   }
   hx.restore();
 }
+// LEVEL SONU KALORI KARTI (25 Eyl 2026, kullanici: "her bolum gecisinde, yeni bolume gecmeden
+// ... tam ortasinda su kadar kalori yaktin ... toplamini belirteceksin"). Sinirdan KART_SN once
+// acilir, sinirda kapanir (LEVEL UP ondan sonra). Son level icin final kartindan once.
+const KAL_KART_SN = 2.6;
+const SEVIYE_SIN = (BOLUM && (BOLUM.seviye_olcu || BOLUM.seviye_bes))
+  ? (BOLUM.seviye_olcu || [0, 1, 2, 3, 4].map(q => Math.round(TOPLAM_OLCU * q / 5))) : ORTAM_OLCU;
+function kaloriKartCiz(t, k){
+  const SON_T = TOPLAM_OLCU * OLCU;
+  const bitisler = SEVIYE_SIN.slice(1).map(o => o * OLCU).concat([SON_T - 4.2]);
+  let lv = -1, bas = 0;
+  for (let i = 0; i < bitisler.length; i++) {
+    const b = bitisler[i];
+    if (t >= b - KAL_KART_SN && t < b) { lv = i + 1; bas = b - KAL_KART_SN; }
+  }
+  if (lv < 0) return;
+  const q = (t - bas) / KAL_KART_SN;
+  const olcek = q < 0.14 ? 0.5 + 0.5 * (q / 0.14) : 1;
+  const alfa = q > 0.88 ? 1 - (q - 0.88) / 0.12 : 1;
+  const kal = kaloriDurum(bas + 0.01).kal;       // kart acildigi andaki toplam - kart boyunca sabit
+  hx.save();
+  hx.globalAlpha = alfa;
+  hx.translate(W / 2, H * 0.42);
+  hx.scale(olcek, olcek);
+  hx.textAlign = 'center'; hx.textBaseline = 'middle';
+  const P = SEKER_HUD_AKTIF;
+  hx.fillStyle = P.golge;                        // rozet zemini: mekanin paletinde yuvarlak kart
+  hx.beginPath(); hx.roundRect(-330 * k, -150 * k + 8 * k, 660 * k, 300 * k, 36 * k); hx.fill();
+  hx.fillStyle = P.kalIc;
+  hx.beginPath(); hx.roundRect(-330 * k, -150 * k, 660 * k, 300 * k, 36 * k); hx.fill();
+  hx.lineWidth = 7 * k; hx.strokeStyle = SEKER_KONTUR;
+  hx.beginPath(); hx.roundRect(-330 * k, -150 * k, 660 * k, 300 * k, 36 * k); hx.stroke();
+  const son = lv >= bitisler.length;
+  hx.font = `700 ${Math.round(40 * k)}px Arial Black, sans-serif`;
+  sekerYazi(hx, son ? 'WORKOUT COMPLETE!' : 'LEVEL ' + lv + ' COMPLETE!', 0, -100 * k, '#ffffff', SEKER_KONTUR, 9, k);
+  hx.font = `700 ${Math.round(46 * k)}px Arial Black, sans-serif`;
+  sekerYazi(hx, 'YOU BURNED', 0, -38 * k, P.kalYazi, SEKER_KONTUR, 10, k);
+  hx.font = `700 ${Math.round(120 * k)}px Impact, Arial Black, sans-serif`;
+  sekerYazi(hx, kal.toFixed(1), 0, 50 * k, '#ffe14d', SEKER_KONTUR, 18, k);
+  hx.font = `700 ${Math.round(38 * k)}px Arial Black, sans-serif`;
+  sekerYazi(hx, 'CALORIES', 0, 118 * k, '#ffffff', SEKER_KONTUR, 9, k);
+  hx.restore();
+}
 function hudCiz(t, combo, epic, kmCombo, seviye, duyuru, sonVurus, karistirHud){
   hx.clearRect(0,0,W,H);
   const k = W/1280;
@@ -7030,7 +7190,7 @@ function hudCiz(t, combo, epic, kmCombo, seviye, duyuru, sonVurus, karistirHud){
 
   // combo sayaci - ilk vurusa kadar gizli
   // SEKER (25 Eyl 2026, kullanici: "komboyu almayalim"): COMBO yok, yerine KALORI cubugu.
-  if (SK) kaloriCiz(t, k);
+  if (SK) { kaloriCiz(t, k); kaloriKartCiz(t, k); }
   if (combo > 0 && !SK){
     hx.textAlign = 'right';
     hx.fillStyle = PALET.hud;
@@ -7251,8 +7411,7 @@ function hudCiz(t, combo, epic, kmCombo, seviye, duyuru, sonVurus, karistirHud){
         hx.font = `700 ${Math.round(176*k)}px Impact, Arial Black, sans-serif`;
         sekerYazi(hx, String(seviye), 0, 40*k, '#ffe14d', SEKER_KONTUR, 20, k);
       }
-      hx.font = `700 ${Math.round(40*k)}px Arial Black, sans-serif`;
-      sekerYazi(hx, 'YOU BURNED ' + kaloriDurum(t).kal.toFixed(1) + ' CALORIES', 0, (seviye >= 5 ? 190 : 150)*k, '#ffffff', SEKER_KONTUR, 9, k);
+
     } else {
       hx.fillStyle = '#ffffff'; hx.shadowColor = '#ffffff'; hx.shadowBlur = 40*k;
       hx.fillText('LEVEL UP', 0, -74*k);
@@ -7384,7 +7543,7 @@ function hudCiz(t, combo, epic, kmCombo, seviye, duyuru, sonVurus, karistirHud){
   // Duz cubuk yerine HALKA: sag alt kosede duruyor, karenin hicbir yerini
   // yatay olarak kesmiyor. Ortasinda KALAN SURE var - yuzde degil, cunku
   // egzersiz yapan biri icin anlamli olan sayi dakika.
-  {
+  if (!SK) {
     const SON_T = TOPLAM_OLCU * OLCU;
     const ilerle = Math.max(0, Math.min(1, t / SON_T));
     const kalan = Math.max(0, SON_T - t);
@@ -7952,6 +8111,11 @@ function kareKur(n){
   // aciyor. Oteki modlarin cerceveleme karari DEGISMIYOR.
   // ELMA: ufuk %41,6 olculmustu (kural %42-50). Bakis noktasi yukari alininca
   // ufuk kadrajda asagi iner ve bant icine oturur - olculerek bulundu.
+  if (sekerMod) {
+    const kk = sekerKamera(t);
+    camera.position.set(kk.x, 3.7 + kk.y, 10.8 + kk.z);
+    camera.lookAt(kk.x * 0.55, SEKER_BAKIS + kk.y, -6);
+  } else
   camera.lookAt(0, sekerMod ? SEKER_BAKIS : bulutMod ? BULUT_BAKIS : balMod ? BAL_BAKIS : elmaMod ? 2.62 : (karpuzMod ? 2.62 : ((denizMod || sehirMod || sadeMod) ? 2.14 : 0.55)), -6);
 
   // --- KURULUS CEKIMI (5 Eyl 2026)
@@ -8728,10 +8892,10 @@ function kareKur(n){
     // egrisiyle (0,14-0,42 sn cik, 1,18-1,46 sn don) yapiliyor - ani cevrilme yok.
     if (siluet) {
       let dn = 0;
-      if (seg.ad === 'push-it' && seg.sure > 0) {
+      if (DON_KLIP[seg.ad] && seg.sure > 0) {
         const p = Math.min(1, Math.max(0, (t - seg.bas) / seg.sure));
         const yuk = (x, a0, a1) => { const k = Math.min(1, Math.max(0, (x - a0) / (a1 - a0))); return k * k * (3 - 2 * k); };
-        dn = SILUET_DON * (yuk(p, 0.06, 0.26) - yuk(p, 0.74, 0.94));
+        dn = DON_KLIP[seg.ad] * (yuk(p, 0.06, 0.26) - yuk(p, 0.74, 0.94));
       }
       siluet.rotation.y = dn;
     }
@@ -8777,6 +8941,8 @@ function kareKur(n){
       if (kokKemik && kokBaslangic) {
         kokKemik.position.x = kokBaslangic.x;
         kokKemik.position.z = kokBaslangic.z;
+        const ek = HAR7_KOK(ad, Math.min(1, Math.max(0, yerel / (ozelSure || A.hedef))));
+        kokKemik.position.x += ek.x; kokKemik.position.y += ek.y;
       }
     } else {
       for (const [k,v] of Object.entries(aksiyon)) v.a.enabled = false;
@@ -8960,6 +9126,7 @@ window.siluetKaresi = function(klipAdi, faz, gen, yuk, don){
   mixer.setTime(0);
   A.a.time = (faz % 1) * A.hedef * A.a.timeScale;
   mixer.update(0);
+  if (don === undefined && DON_KLIP[ad]) siluet.rotation.y = DON_KLIP[ad] * (faz > 0.2 && faz < 0.8 ? 1 : 0);
   if (kokKemik && kokBaslangic) {
     kokKemik.position.x = kokBaslangic.x;
     kokKemik.position.z = kokBaslangic.z;

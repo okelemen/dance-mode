@@ -1,0 +1,162 @@
+{
+ "_": "KESIT - HAR-007 + MEK-006 SEKER 5 mekan (26 Eyl 2026). Kardiyo: her olcude bir hareket (yumruk_L/R, seksek, kay_L/R, dizkol); nefes yalniz level sinirinda 1 olcu. Muzik YOK (bolume ozel muzik sonra). Engeller henuz secilmedi: siluet + kamera + kalori karti kontrolu.",
+ "no": 12,
+ "baslik": "KESIT | SEKER HAR-007",
+ "tema": "b",
+ "bpm": 140.0,
+ "toplam_olcu": 31,
+ "mekanik": "temel",
+ "hareketler": [
+  "yumruk_L / yumruk_R",
+  "seksek",
+  "kay_L / kay_R",
+  "dizkol"
+ ],
+ "ortamlar": [
+  "SEKER",
+  "SEKER-KARAMEL",
+  "SEKER-CIKOLATA",
+  "SEKER-BUZ",
+  "SEKER-SENLIK"
+ ],
+ "ortam_olcu": [
+  0,
+  7,
+  13,
+  19,
+  25
+ ],
+ "seviye_olcu": [
+  0,
+  7,
+  13,
+  19,
+  25
+ ],
+ "kaliplar": {
+  "bos": [
+   null,
+   null,
+   null,
+   null
+  ],
+  "yL": [
+   "yumruk_L",
+   null,
+   null,
+   null
+  ],
+  "yR": [
+   "yumruk_R",
+   null,
+   null,
+   null
+  ],
+  "sk": [
+   "seksek",
+   null,
+   null,
+   null
+  ],
+  "kL": [
+   "kay_L",
+   null,
+   null,
+   null
+  ],
+  "kR": [
+   "kay_R",
+   null,
+   null,
+   null
+  ],
+  "dk": [
+   "dizkol",
+   null,
+   null,
+   null
+  ]
+ },
+ "kademeler": {
+  "k1": [
+   "yR",
+   "sk",
+   "kL",
+   "dk",
+   "yL",
+   "sk",
+   "kR",
+   "dk"
+  ]
+ },
+ "iskelet": [
+  [
+   0,
+   1,
+   "bos",
+   "nefes"
+  ],
+  [
+   1,
+   6,
+   "k1",
+   "adim"
+  ],
+  [
+   6,
+   7,
+   "bos",
+   "nefes"
+  ],
+  [
+   7,
+   12,
+   "k1",
+   "adim"
+  ],
+  [
+   12,
+   13,
+   "bos",
+   "nefes"
+  ],
+  [
+   13,
+   18,
+   "k1",
+   "adim"
+  ],
+  [
+   18,
+   19,
+   "bos",
+   "nefes"
+  ],
+  [
+   19,
+   24,
+   "k1",
+   "adim"
+  ],
+  [
+   24,
+   25,
+   "bos",
+   "nefes"
+  ],
+  [
+   25,
+   30,
+   "k1",
+   "adim"
+  ],
+  [
+   30,
+   31,
+   "bos",
+   "nefes"
+  ]
+ ],
+ "nota_simge": false,
+ "akis": "harman2"
+}
