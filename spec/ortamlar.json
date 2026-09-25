@@ -1434,6 +1434,28 @@
    "ufuk": "#ebd9db",
    "bulutMekan": true,
    "bulutHal": "e"
+  },
+  "SEKER": {
+   "_": "MEK-006 a hali (25 Eyl 2026). SEKER KRALLIGI L1 SEKER BAHCESI (gunduz). REF-048 oyun tarzi 3D; fotograf YOK, her sey geometri + canvas dokusu (sahne.html sekerMekanKur). Biskuvi yol, krema bordur, lolipop agaclari, seker damlalari, baston cit, cupcake evler, donutlar, pastel tepeler, pasta sato, pamuk seker bulutlar. Bu videoda 'doygunluk yalniz cue' ve 'yol koyu' ASKIDA (Masaustu CLAUDE.md md. 16).",
+   "gok": "#a8e2ff",
+   "zemin": "gok",
+   "dekor": "yok",
+   "bicim": "kemer",
+   "grid": ["#6ce8e2", "#ff6a9e", "#ba78ff"],
+   "kemer": ["#6ce8e2", "#ff6a9e", "#ba78ff", "#8a5ca8", "#6d4a7a"],
+   "ara": 27.7,
+   "olcek": 1.0,
+   "en": 1.0,
+   "boy": 1.0,
+   "yer": 5.3,
+   "tabanYakin": "#a8e2ff",
+   "tabanUzak": "#a8e2ff",
+   "tabanVurus": "#ffd6a8",
+   "tabanHalka": "#ff6fae",
+   "yol": "#e9a84c",
+   "ufuk": "#dff6ff",
+   "sekerMekan": true,
+   "sekerHal": "a"
   }
  },
  "_kaynak": "Bazi ortamlar rakip karelerinden OLCULEREK turetildi (docs/kanal-kareleri/). Olculen paletler ve parlaklik profilleri docs/OLCUM-KANAL-KARELERI.md icinde."

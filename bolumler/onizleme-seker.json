@@ -1,0 +1,36 @@
+{
+ "_": "ONIZLEME TEK SAHNE - SEKER KRALLIGI L1 (25 Eyl 2026, MEK-006 a). SADECE MEKAN KONTROLU: cue YOK, muzik YOK. Hareket seti ve engel secilmedi.",
+ "no": 12,
+ "baslik": "ONIZLEME | SEKER L1",
+ "tema": "b",
+ "toplam_olcu": 8,
+ "mekanik": "temel",
+ "hareketler": [],
+ "ortamlar": [
+  "SEKER"
+ ],
+ "ortam_olcu": [
+  0
+ ],
+ "bpm": 132.0,
+ "seviye_bes": true,
+ "kaliplar": {
+  "bos": [
+   null,
+   null,
+   null,
+   null
+  ]
+ },
+ "kademeler": {},
+ "iskelet": [
+  [
+   0,
+   8,
+   "bos",
+   "nefes"
+  ]
+ ],
+ "nota_simge": false,
+ "akis": "harman2"
+}
