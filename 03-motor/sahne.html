@@ -4269,6 +4269,31 @@ function sekerIsikliLolipop(i){
   g.traverse(c => { if (c.isMesh && Array.isArray(c.material)) for (const m of c.material) if (m.map) { m.emissive = new THREE.Color('#ffffff'); m.emissiveMap = m.map; m.emissiveIntensity = 0.55; } });
   return g;
 }
+function sekerKarYigin(i){
+  const m = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 10, 0, 6.2832, 0, Math.PI / 2), sekerMat('#ffffff', { roughness: 0.85 }));
+  const s = 0.7 + sekerRnd(i + 1260) * 1.3; m.scale.set(s * 1.4, s * 0.6, s);
+  const k = new THREE.Group(); k.add(m); return sekerGolge(k, true, false);
+}
+function sekerHediye(i){
+  const g = new THREE.Group();
+  const r = ['#ff4f8b', '#4fc3ff', '#ffd23f', '#7cdb4a', '#b46bff'][i % 5], s = 1 + sekerRnd(i + 1320) * 0.9;
+  const kutu = new THREE.Mesh(new THREE.BoxGeometry(1.6 * s, 1.4 * s, 1.6 * s), sekerMat(r, { roughness: 0.3, emissive: r, emissiveIntensity: 0.2 }));
+  kutu.position.y = 0.7 * s; g.add(kutu);
+  const kurdele = sekerMat('#fff6c8', { roughness: 0.3, emissive: '#fff6c8', emissiveIntensity: 0.3 });
+  for (const [w, d] of [[1.66 * s, 0.25 * s], [0.25 * s, 1.66 * s]]) { const b = new THREE.Mesh(new THREE.BoxGeometry(w, 1.42 * s, d), kurdele); b.position.y = 0.7 * s; g.add(b); }
+  const fiyonk = new THREE.Mesh(new THREE.TorusGeometry(0.3 * s, 0.1 * s, 8, 16), kurdele); fiyonk.position.y = 1.55 * s; g.add(fiyonk);
+  g.rotation.y = sekerRnd(i + 1321) * 6.28;
+  const k = new THREE.Group(); k.add(g); return sekerGolge(k, true, false);
+}
+function sekerBoya(o, renk, emissive){          // bir nesneyi mekanin rengine boyar (kopya malzeme)
+  o.traverse(c => { if (c.isMesh && !Array.isArray(c.material) && !c.material.map) { c.material = c.material.clone(); c.material.color.set(renk); if (emissive) { c.material.emissive = new THREE.Color(renk); c.material.emissiveIntensity = emissive; } } });
+  return o;
+}
+function sekerUzak(h, n, yap, tohum, olcek){    // uzak sabit katman (a'daki gibi): tepelerin onunde
+  for (let k = 0; k < n; k++) { const yon = k % 2 ? 1 : -1; const o = yap(k);
+    o.position.set(yon * (26 + sekerRnd(k + tohum) * 60), 0, -130 - sekerRnd(k + tohum + 1) * 70);
+    o.scale.multiplyScalar(olcek); SEKER_HAL[h].kok.add(o); }
+}
 // HAVAI FISEK (e): olcu basina bir patlama, 4 es zamanli, deterministik (yalniz t)
 const FISEK_N = 90, FISEK_ES = 4;
 function sekerFisekKur(kok){
@@ -4391,6 +4416,12 @@ function sekerMekanKur(){
   yanlar('b', 24, sekerKaramelKup, 8, 20, 1550);
   yanlar('b', 20, (k) => { const o = sekerToffee(k + 90); o.scale.multiplyScalar(3.2); return o; }, 34, 20, 1600);
   tepeler('b', ['#e0952e', '#c26a18', '#ffcf7a', '#b8621c', '#f2b45a', '#d98b2b']);
+  // b doluluk: yakin zemin karamel damlalari, trüf-karamel, dis bant karamel dondurma, uzak katman
+  yanlar('b', 56, (k) => sekerBoya(sekerDamla(k + 300), ['#e8962e', '#c26a18', '#ffcf7a', '#8a4a14'][k % 4]), 6.4, 18, 1650);
+  yanlar('b', 44, (k) => sekerBoya(sekerTruf(k + 300), ['#c97a22', '#8a4a14', '#fff0c8'][k % 3]), 7, 24, 1660);
+  yanlar('b', 40, (k) => sekerKaramelKup(k + 200), 6.2, 12, 1670);
+  yanlar('b', 12, (k) => sekerBoya(sekerDondurma(k + 50), ['#fff0c8', '#e8962e', '#c26a18'][k % 3]), 44, 26, 1680);
+  sekerUzak('b', 16, (k) => k % 2 ? sekerKaramelElma(k + 60) : sekerToffee(k + 60), 1690, 2.2);
   SEKER_HAL.b.kok.add(sekerKaramelUcurum());
   // c CIKOLATA KALESI - iki yanda erimis cikolata nehri
   SEKER_DOKU.nehir.repeat.set(1, 12);
@@ -4405,6 +4436,12 @@ function sekerMekanKur(){
   yanlar('c', 26, sekerTablet, 16, 24, 1850, (y, k) => y * (0.3 + sekerRnd(k + 1852) * 0.5));
   yanlar('c', 18, (k) => { const o = sekerCikSutun(k + 90); o.scale.multiplyScalar(2.6); return o; }, 36, 20, 1900);
   tepeler('c', ['#3a1a0a', '#4a220e', '#2e140a', '#5a2a12', '#3a1a0a', '#6b3416']);
+  // c doluluk: nehir disi yakin serit (mum + bonbon), dis bant dev dikenler, uzak katman
+  yanlar('c', 40, (k) => sekerMum(k + 100), 14.4, 20, 1950);
+  yanlar('c', 40, (k) => sekerSarili(k + 300), 14.4, 14, 1960);
+  yanlar('c', 22, (k) => { const o = sekerDiken(k + 200); o.scale.multiplyScalar(3.4); return o; }, 42, 26, 1970);
+  yanlar('c', 12, (k) => sekerBoya(sekerDondurma(k + 80), ['#4a220e', '#7a3d1c', '#fff1dc'][k % 3]), 50, 22, 1980);
+  sekerUzak('c', 16, (k) => k % 2 ? sekerCikSutun(k + 120) : sekerDiken(k + 120), 1990, 2.6);
   SEKER_HAL.c.kok.add(sekerCikKale());
   SEKER_HAL.c.yildiz = sekerNoktaKur(SEKER_HAL.c.kok, 500, '#fff4d8', 0.9);
   // d BUZ SEKERI KOYU
@@ -4415,6 +4452,12 @@ function sekerMekanKur(){
   yanlar('d', 34, (k) => { const o = sekerLolipop(k + 800); o.traverse(c => { if (c.isMesh && Array.isArray(c.material)) c.material.forEach(m => { if (m.map) m.map = SEKER_DOKU.lolipop[2]; }); }); return o; }, 8, 20, 2150);
   yanlar('d', 18, (k) => { const o = sekerKristal(k + 300); o.scale.multiplyScalar(3); return o; }, 36, 22, 2200);
   tepeler('d', ['#ffffff', '#e6f4ff', '#d8ecff', '#f4faff', '#cfe6ff', '#eef8ff']);
+  // d doluluk: yakin zemin kar yiginlari, beyaz-mavi seker damlalari, dis bant buz kuleleri, uzak katman
+  yanlar('d', 56, sekerKarYigin, 6.4, 22, 2250);
+  yanlar('d', 44, (k) => sekerBoya(sekerDamla(k + 400), ['#bfe8ff', '#ffffff', '#8fd0ff', '#e0d4ff'][k % 4]), 6.6, 18, 2260);
+  yanlar('d', 34, (k) => sekerBoya(sekerTruf(k + 400), ['#ffffff', '#cfe6ff', '#8fc9f0'][k % 3]), 9, 20, 2270);
+  yanlar('d', 12, (k) => sekerBoya(sekerDondurma(k + 90), ['#e6f4ff', '#bfe8ff', '#ffffff'][k % 3]), 44, 26, 2280);
+  sekerUzak('d', 16, (k) => k % 2 ? sekerZencefilEv(k + 60) : sekerKristal(k + 60), 2290, 2.0);
   SEKER_HAL.d.kok.add(sekerBuzSaray());
   SEKER_HAL.d.kar = sekerNoktaKur(SEKER_HAL.d.kok, 1400, '#ffffff', 0.55);
   // e SENLIK SARAYI (FINAL)
@@ -4425,6 +4468,12 @@ function sekerMekanKur(){
   yanlar('e', 16, sekerCupcake, 17, 18, 2450, (y) => -y * 0.5);
   yanlar('e', 12, sekerDondurma, 42, 26, 2500);
   tepeler('e', ['#6a3aa8', '#a04ac0', '#3a2a8a', '#c05aa0', '#5a3ab0', '#8a3aa0']);
+  // e doluluk: yakin zemin isikli damlalar, hediye kutulari, trüf, dis bant dev isikli lolipop, uzak katman
+  yanlar('e', 56, (k) => sekerBoya(sekerDamla(k + 500), ['#ff5fa2', '#ffe45c', '#5fe08a', '#4fc3ff', '#b77bff'][k % 5], 0.35), 6.6, 18, 2550);
+  yanlar('e', 36, sekerHediye, 7, 22, 2560);
+  yanlar('e', 34, (k) => sekerBoya(sekerTruf(k + 500), ['#ff7fb6', '#ffe45c', '#b77bff'][k % 3], 0.25), 9, 22, 2570);
+  yanlar('e', 22, (k) => { const o = sekerIsikliLolipop(k + 90); o.scale.multiplyScalar(2.2); return o; }, 32, 14, 2580);
+  sekerUzak('e', 16, (k) => k % 2 ? sekerBalon(k + 60) : sekerCupcake(k + 60), 2590, 1.8);
   SEKER_HAL.e.kok.add(sekerSato(true));
   SEKER_HAL.e.yildiz = sekerNoktaKur(SEKER_HAL.e.kok, 600, '#ffffff', 0.9);
   SEKER_HAL.e.fisek = sekerFisekKur(SEKER_HAL.e.kok);
