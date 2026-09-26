@@ -4572,6 +4572,163 @@ function sekerKamera(t){
   }
   return { x, y, z };
 }
+// ================= ENG-006 SEKER ENGELLERI (26 Eyl 2026, kullanici: A-A-A-C-A)
+// Her level TEK nesne (md. 8), dort hareket ailesi ayni nesnenin farkli durusuyla kurulur
+// (engel = hareketin fiziksel sebebi, md. 4):
+//   yumruk_L/R : nesne omuz hizasinda (y 1,7) o seritte HAVADA -> yumrukla patlar
+//   seksek     : kucuk nesneler yolu kaplar, her sirada TEK ayaklik bosluk -> tek ayakla sekme
+//   kay_L/R    : nesnenin DEV hali yolun bir yarisindan yuvarlanir (kay_L -> sagdan gelir) -> acik tarafa
+//   dizkol     : yerde alcak nesne (dize bas) + ustte ipten sarkan nesne (iki elle uzan)
+// Vurus karosuna geldigi an nesne PATLAR (mekanin renginde parcalar, 0,65 sn).
+//   a sakiz topu · b karamel topu · c cikolata bonbon · d nane sekeri (disk) · e hediye kutusu
+const SEKER_ENGEL_TIP = /^(yumruk_L|yumruk_R|seksek|kay_L|kay_R|dizkol)$/;
+const SEKER_ENG = { geo: {}, mat: {}, not: new Map(), pat: new Map(), kok: null };
+const SEKER_PAT_RENK = {
+  a: ['#ff3b7a', '#35c6ff', '#ffd23f', '#7cdb4a', '#b46bff', '#ffffff'],
+  b: ['#d98b2b', '#ffcf7a', '#8a4a14', '#fff0c8', '#e8892a'],
+  c: ['#3a1a0a', '#6b3416', '#fff1dc', '#8a5a34', '#ff7fb6'],
+  d: ['#e3102e', '#ffffff', '#bfe8ff', '#ff5a7a', '#ffffff'],
+  e: ['#ff5fa2', '#ffe45c', '#5fe08a', '#4fc3ff', '#b77bff', '#ffd700'],
+};
+function sekerEngHal(tn){
+  let hal = 'a';
+  for (let i = 0; i < ORTAMLAR.length; i++) if (tn / OLCU >= ORTAMLAR[i].olcu - 1e-6 && ORTAMLAR[i].sekerHal) hal = ORTAMLAR[i].sekerHal;
+  return hal;
+}
+function sekerEngKaynak(){
+  const G = SEKER_ENG.geo, M = SEKER_ENG.mat;
+  G.kure = new THREE.SphereGeometry(1, 24, 16);
+  G.disk = new THREE.CylinderGeometry(1, 1, 0.34, 32);
+  G.kutu = new THREE.BoxGeometry(1.6, 1.6, 1.6);
+  G.serit1 = new THREE.BoxGeometry(1.66, 1.62, 0.3); G.serit2 = new THREE.BoxGeometry(0.3, 1.62, 1.66);
+  G.halka = new THREE.TorusGeometry(0.72, 0.16, 8, 24);
+  G.ip = new THREE.CylinderGeometry(0.03, 0.03, 1, 5);
+  G.parca = new THREE.TetrahedronGeometry(1, 0);
+  M.sakiz = SEKER_PAT_RENK.a.slice(0, 5).map(r => sekerMat(r, { roughness: 0.12, metalness: 0.05 }));
+  M.karamel = [sekerMat('#d98b2b', { roughness: 0.06, metalness: 0.15, emissive: '#5a2a08', emissiveIntensity: 0.25 })];
+  M.bonbon = [sekerMat('#3a1a0a', { roughness: 0.25 }), sekerMat('#6b3416', { roughness: 0.25 })];
+  M.bonbonSos = sekerMat('#fff1dc', { roughness: 0.3 });
+  const nane = sekerCanvas(256, 256, (g, w, h) => {
+    g.fillStyle = '#ffffff'; g.fillRect(0, 0, w, h);
+    g.save(); g.translate(w / 2, h / 2);
+    for (let k = 0; k < 8; k++) { g.fillStyle = '#e3102e'; g.beginPath(); g.moveTo(0, 0);
+      g.arc(0, 0, w / 2, k * Math.PI / 4, k * Math.PI / 4 + Math.PI / 8); g.closePath(); g.fill(); }
+    g.restore();
+    const pr = g.createRadialGradient(w * 0.38, h * 0.34, 4, w / 2, h / 2, w / 2);
+    pr.addColorStop(0, 'rgba(255,255,255,0.55)'); pr.addColorStop(0.4, 'rgba(255,255,255,0)'); g.fillStyle = pr; g.fillRect(0, 0, w, h);
+  });
+  M.naneYuz = sekerMat('#ffffff', { map: nane, roughness: 0.12 });
+  M.naneKenar = sekerMat('#f4f4f4', { roughness: 0.2 });
+  M.hediye = ['#ff4f8b', '#4fc3ff', '#ffd23f', '#7cdb4a', '#b46bff'].map(r => sekerMat(r, { roughness: 0.3, emissive: r, emissiveIntensity: 0.22 }));
+  M.kurdele = sekerMat('#fff6c8', { roughness: 0.25, emissive: '#fff6c8', emissiveIntensity: 0.3 });
+  M.ip = sekerMat('#ffffff', { roughness: 0.6 });
+  SEKER_ENG.kok = new THREE.Group(); sekerMKok.add(SEKER_ENG.kok);
+}
+// hal'in tek nesnesi, yaricap r. rol: 'havada' | 'yer' | 'dev'
+function sekerEngNesne(hal, r, i, rol){
+  const G = SEKER_ENG.geo, M = SEKER_ENG.mat, g = new THREE.Group();
+  if (hal === 'a') { const m = new THREE.Mesh(G.kure, M.sakiz[i % 5]); m.scale.setScalar(r); g.add(m); }
+  else if (hal === 'b') { const m = new THREE.Mesh(G.kure, M.karamel[0]); m.scale.set(r, r * 0.9, r); g.add(m); }
+  else if (hal === 'c') { const m = new THREE.Mesh(G.kure, M.bonbon[i % 2]); m.scale.setScalar(r); g.add(m);
+    const s = new THREE.Mesh(G.halka, M.bonbonSos); s.scale.setScalar(r); s.rotation.x = Math.PI / 2; s.position.y = r * 0.62; g.add(s); }
+  else if (hal === 'd') { const m = new THREE.Mesh(G.disk, [M.naneKenar, M.naneYuz, M.naneYuz]); m.scale.set(r, r, r);
+    if (rol === 'havada') m.rotation.x = Math.PI / 2; // havada: yuzu kameraya
+    if (rol === 'dev') m.rotation.z = Math.PI / 2;    // yuvarlanan: ekseni x, yol boyunca teker gibi
+    g.add(m); }
+  else { const k = new THREE.Group(); k.add(new THREE.Mesh(G.kutu, M.hediye[i % 5]));
+    k.add(new THREE.Mesh(G.serit1, M.kurdele)); k.add(new THREE.Mesh(G.serit2, M.kurdele));
+    const f = new THREE.Mesh(G.halka, M.kurdele); f.scale.setScalar(0.45); f.position.y = 0.95; k.add(f);
+    k.scale.setScalar(r / 0.8); g.add(k); }
+  g.traverse(c => { if (c.isMesh) c.castShadow = true; });
+  return g;
+}
+// nota -> duzen (yerel koordinat, z = 0 vurus aninda nesnenin yeri)
+function sekerEngKur(no, idx){
+  const hal = sekerEngHal(no.t), g = new THREE.Group(), parca = [];
+  const ekle = (o, x, y, z, r) => { o.position.set(x, y, z); o.userData.r = r; g.add(o); parca.push(o); };
+  if (no.tip === 'yumruk_L' || no.tip === 'yumruk_R') {
+    const r = hal === 'e' ? 0.62 : 0.6;
+    ekle(sekerEngNesne(hal, r, idx, 'havada'), LANE_X[no.tip === 'yumruk_L' ? 0 : 2], 1.75, 0, r);
+  } else if (no.tip === 'seksek') {
+    const r = 0.36, xs = [-3.0, -1.5, 0, 1.5, 3.0];
+    for (let sira = 0; sira < 3; sira++) {
+      const bos = (idx + sira * 2) % 5;               // her sirada tek ayaklik bosluk, sira sira kayar
+      xs.forEach((x, j) => { if (j !== bos) ekle(sekerEngNesne(hal, r, idx + j + sira, 'yer'), x, hal === 'd' ? r * 0.18 : (hal === 'e' ? r : r), -sira * 1.35, r); });
+    }
+  } else if (no.tip === 'kay_L' || no.tip === 'kay_R') {
+    const r = 1.55, yon = no.tip === 'kay_L' ? 1 : -1; // kay_L: nesne SAGDAN (acik taraf sol)
+    const o = sekerEngNesne(hal, r, idx, 'dev'); o.userData.yuvarlan = true;
+    ekle(o, yon * 1.9, hal === 'e' ? r : r, 0, r);
+  } else if (no.tip === 'dizkol') {
+    const r = 0.46;
+    ekle(sekerEngNesne(hal, r, idx, 'yer'), 0, hal === 'd' ? r * 0.18 : r, 0, r);
+    const ust = sekerEngNesne(hal, r, idx + 1, 'havada');
+    ekle(ust, 0, 3.05, 0, r);
+    const ip = new THREE.Mesh(SEKER_ENG.geo.ip, SEKER_ENG.mat.ip); ip.scale.y = 3.2; ip.position.set(0, 3.05 + r + 1.6, 0); g.add(ip); g.userData.ip = ip;
+  }
+  g.userData = Object.assign(g.userData || {}, { hal, parca });
+  g.visible = false; SEKER_ENG.kok.add(g);
+  return g;
+}
+// patlama: nesne basina 12 parca, disari + yukari, yercekimi, kuculerek sonum
+function sekerPatKur(no, idx, eng){
+  const g = new THREE.Group(), R = SEKER_PAT_RENK[eng.userData.hal], p = [];
+  for (const o of eng.userData.parca) {
+    for (let k = 0; k < 12; k++) {
+      const m = new THREE.Mesh(SEKER_ENG.geo.parca, new THREE.MeshBasicMaterial({ color: R[(k + idx) % R.length], transparent: true }));
+      const a = sekerRnd(idx * 31 + k) * 6.2832, e = sekerRnd(idx * 17 + k + 3) * 1.2 - 0.2;
+      const hz = 3.5 + sekerRnd(idx * 7 + k) * 4.5;
+      m.userData = { x0: o.position.x, y0: o.position.y, z0: o.position.z, vx: Math.cos(a) * Math.cos(e) * hz, vy: Math.sin(e) * hz + 3, vz: Math.sin(a) * Math.cos(e) * hz * 0.6,
+                     s: o.userData.r * (0.22 + sekerRnd(idx + k * 5) * 0.2), don: sekerRnd(k + idx) * 12 };
+      g.add(m); p.push(m);
+    }
+  }
+  g.visible = false; SEKER_ENG.kok.add(g); g.userData.p = p;
+  return g;
+}
+function sekerEngelGuncelle(t){
+  if (!SEKER_ENG.kok) sekerEngKaynak();
+  const PAT = 0.65;
+  NOTALAR.forEach((no, i) => {
+    if (!SEKER_ENGEL_TIP.test(no.tip)) return;
+    const d = t - no.t;                               // <0 yaklasiyor, >=0 patladi
+    const gor = d >= -YAKLASMA && d < 0;
+    let eng = SEKER_ENG.not.get(i);
+    if (gor && !eng) { eng = sekerEngKur(no, i); SEKER_ENG.not.set(i, eng); }
+    if (eng) {
+      eng.visible = gor;
+      if (gor) {
+        const ilerleme = (d + YAKLASMA) / YAKLASMA;
+        const z = Z_DOGUM + (Z_VURUS - Z_DOGUM) * ilerleme;
+        eng.position.set(0, 0.3, z);
+        eng.scale.setScalar(Math.min(1, ilerleme / 0.15));
+        for (const o of eng.userData.parca) {
+          if (o.userData.yuvarlan) o.rotation.x = z / o.userData.r;   // yuvarlanma: yol aldikca doner
+          else if (o.position.y > 1.2) o.position.y += Math.sin(t * 5 + i) * 0.004;   // havadaki hafif salinim
+        }
+      }
+    }
+    // patlama
+    const patGor = d >= 0 && d < PAT;
+    let pat = SEKER_ENG.pat.get(i);
+    if (patGor && !pat) { const e2 = eng || sekerEngKur(no, i); SEKER_ENG.not.set(i, e2); pat = sekerPatKur(no, i, e2); SEKER_ENG.pat.set(i, pat); }
+    if (pat) {
+      pat.visible = patGor;
+      if (patGor) {
+        pat.position.set(0, 0.3, Z_VURUS);
+        const q = d / PAT;
+        for (const m of pat.userData.p) {
+          const u = m.userData;
+          m.position.set(u.x0 + u.vx * d, u.y0 + u.vy * d - 9.8 * d * d, u.z0 + u.vz * d);
+          m.rotation.set(u.don * d, u.don * d * 0.7, 0);
+          m.scale.setScalar(u.s * (1 - q * 0.7));
+          m.material.opacity = 1 - q * q;
+        }
+      }
+    }
+  });
+}
+
 function sekerMekanGuncelle(t){
   const h = SEKER_HAL_AKTIF in SEKER_HAL ? SEKER_HAL_AKTIF : 'a';
   const H = SEKER_HAL[h];
@@ -4617,6 +4774,7 @@ function sekerMekanGuncelle(t){
   }
   if (H.yildiz) H.yildiz.material.opacity = 0.75 + 0.2 * Math.sin(t * 2.3);
   if (H.fisek) sekerFisekGuncelle(H.fisek, t);
+  sekerEngelGuncelle(t);                                        // ENG-006
   const A = SEKER_HAL_AYAR[h];
   scene.fog.near = A.sis[0]; scene.fog.far = A.sis[1];
 }
