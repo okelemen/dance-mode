@@ -286,7 +286,7 @@ const CUE = {
   //   seksek     -> yol tek ayaklik taslara doner, tek ayakla sekme (On Right Foot, Left Leg Raised + iki sekme)
   //   kay_L/R    -> bir yandan yuvarlanan nesne, acik tarafa yana kayma (Side Step en genis faz + kalca kaymasi)
   //   dizkol     -> yerde alcak nesne + ustte sarkan nesne: dize bas, iki elle uzan (Knee bacaklar + Cheering kollar)
-  yumruk_L: { lane:0, sure:VURUS*2, klip:'yumruk-k', maxOlcu: 0.5 },
+  yumruk_L: { lane:0, sure:VURUS*2, klip:'yumruk-jab-k', maxOlcu: 0.5 },   // 26 Eyl: sol el jab (gercek akis)
   yumruk_R: { lane:2, sure:VURUS*2, klip:'yumruk-k', maxOlcu: 0.5 },
   seksek:   { lane:1, sure:VURUS*2, klip:'seksek-k', maxOlcu: 0.5 },
   kay_L:    { lane:0, sure:VURUS*2, klip:'yana-k',   maxOlcu: 0.5 },
@@ -436,22 +436,25 @@ const CUE_DONGU_FAZ = { 'side_L': 0.438, 'side_R': 0.438 };
 // yanadim_L (17 Eyl 2026, olc-yon.js): long-left-side-step klibi siluet kutusunda
 // figuru SAGA gotururuyor (com -0,067 -> -0,024). Sola gitmesi gereken cue aynalanir.
 const AYNA_CUE = { 'side_L': true, 'yanadim_L': true, 'sicra_R': true,
-  // HAR-007: yana-side-step en genis fazda figuru kutunun SOLUNA goturuyor (kareden olculdu);
-  // saga kayma aynalanir. Cross punch sag elle - sol taraftaki hedef icin aynalanir.
-  'kay_R': true, 'yumruk_L': true };
+  // HAR-007 AKIS (26 Eyl 2026, kullanici: "makine hareketi gibi"): yana-k artik side-step klibinin
+  // GERCEK akisi (-0,10..0,74 sn); en genis fazda kalca kutunun SAGINA gidiyor -> SOLA kayma aynalanir.
+  // Yumruk: sag = cross (sag el), sol = jab (sol el) - ikisi de aynasiz, her taraf kendi klibi.
+  'kay_L': true };
 let SILUET_AYNA = false;
 const SILUET_DON = 1.1;   // push-it cue'sunda govdenin yana donus acisi (radyan)
 // Govde donusu gereken poz klipleri. yumruk-k: onden bakista one atilan kol kisaliyor
 // (push-it ile ayni sorun) - govde yana donunce kol tam boyuyla okunur.
-const DON_KLIP = { 'push-it': SILUET_DON, 'yumruk-k': 0.95 };
+const DON_KLIP = { 'push-it': SILUET_DON, 'yumruk-k': 0.70, 'yumruk-jab-k': -0.70 };
+// HAR-007 akis klipleri: donus 'cik-bekle-don' degil, darbe aninda tepe yapan yumusak can egrisi
+const DON_CAN = { 'yumruk-k': true, 'yumruk-jab-k': true };
 // HAR-007 kok ekleri (kalca kemigi, yerel birim ~cm): seksekte iki kucuk sekme,
 // yana kaymada kutu icinde yana kayis. p = poz klibinde 0-1 ilerleme.
 function HAR7_KOK(ad, p){
   const yuk = (x, a0, a1) => { const k = Math.min(1, Math.max(0, (x - a0) / (a1 - a0))); return k * k * (3 - 2 * k); };
   const w = yuk(p, 0.10, 0.26) - yuk(p, 0.74, 0.90);
-  if (ad === 'seksek-k') return { x: 0, y: 11 * Math.abs(Math.sin(Math.PI * 2 * (p - 0.26) / 0.48)) * w };   // iki sekme = iki vurus
-  if (ad === 'yana-k') return { x: -16 * w, y: 0 };
-  return { x: 0, y: 0 };
+  // 26 Eyl 2026: seksek sekmesi ve yana kayma artik KLIBIN KENDI kok hareketinden geliyor
+  // (sinus/dogrusal ofset makine gibi okunuyordu). Fonksiyon eski bolumler icin duruyor.
+  void w; return { x: 0, y: 0 };
 }
 const TEPE_FAZI = {
   'charleston': 0.30, 'running-man': 0.30,
@@ -472,7 +475,8 @@ const TEPE_FAZI = {
   // ustunden asirilan an (0,71 toplu sicrama; engel ustu okunmuyordu).
   'comel-k': 0.50, 'sicra-k': 0.50, 'don-k': 0.50, 'step-over-k': 0.80,
   // HAR-007 poz klipleri: tam poz 0,42-1,18 / 1,60 -> orta 0,50
-  'yumruk-k': 0.50, 'seksek-k': 0.50, 'yana-k': 0.50, 'dizkol-k': 0.50,
+  // AKIS bolumleri (26 Eyl): darbe/inis/en genis/diz tepesi bolumun ortasina alindi -> 0,50
+  'yumruk-k': 0.50, 'yumruk-jab-k': 0.50, 'seksek-k': 0.50, 'yana-k': 0.50, 'dizkol-k': 0.50,
 };
 NOTALAR.forEach((n, i) => {
   const sonraki = NOTALAR[i + 1];
@@ -7111,10 +7115,43 @@ if (govde) {
     klipler[ad] = new THREE.AnimationClip(ad, 1.60, izler);
   };
   const BACAK = /(Hips|UpLeg|Leg|Foot|Toe)/;
-  pozKur('yumruk-k', [{ kaynak: 'yumruk-cross', oran: 0.55 }]);
-  pozKur('seksek-k', [{ kaynak: 'seksek-tek-ayak', oran: 0 }]);
-  pozKur('yana-k',   [{ kaynak: 'yana-side-step', oran: 0.80 }]);
-  pozKur('dizkol-k', [{ kaynak: 'diz-knee', oran: 0.40, re: BACAK }, { kaynak: 'kol-cheering', oran: 0.50 }]);
+  void pozKur;   // eski donmus-poz kurucusu (HAR-005 ve oncesi ayni kalibi kendi kodunda kullaniyor)
+
+  // ---- HAR-007 AKIS (26 Eyl 2026, kullanici: "silüet makine hareketi yapiyormus gibi ... insani olsun").
+  // Donmus tek kare YOK: her hareket kaynak klibin GERCEK hareket bolumu [t0,t1] - hazirlik, agirlik
+  // aktarimi, takip hareketi mocap'ten gelir. Bolumler olculdu (olc-klip-hareket.js): tepe ani
+  // (yumruk uzanimi / ayak inisi / en genis kayma / diz tepesi) bolumun ORTASINDA -> TEPE_FAZI 0,50,
+  // pencere 2 vurus (0,917 sn), hiz 0,92-1,20x. Parca parca kaynak: re eslesen kemik o parcadan;
+  // 'sabit' parca = klibin tek karesi (seksekte havadaki sol bacak).
+  const akisKur = (ad, parcalar) => {
+    if (!I) return;
+    for (const pr of parcalar) if (!klipler[pr.kaynak]) return;
+    const N = 41, D = parcalar[0].t1 - parcalar[0].t0;
+    const zaman = Array.from({ length: N }, (_, i) => D * i / (N - 1));
+    const izler = [];
+    for (const ti of I.tracks) {
+      const pr = parcalar.find(q => q.re && q.re.test(ti.name)) || parcalar.find(q => !q.re);
+      const P = klipler[pr.kaynak];
+      const iz = P.tracks.find(t => t.name === ti.name);
+      if (!iz) continue;
+      const n = iz.getValueSize(), ip = iz.createInterpolant(), deger = [];
+      for (let i = 0; i < N; i++) {
+        let ts = pr.sabit !== undefined ? pr.sabit * P.duration : pr.t0 + (pr.t1 - pr.t0) * i / (N - 1);
+        ts = ((ts % P.duration) + P.duration) % P.duration;         // dongulu klipte bolum basa sarabilir
+        const v = ip.evaluate(ts); for (let j = 0; j < n; j++) deger.push(v[j]);
+      }
+      izler.push(new (/quaternion/.test(iz.name) ? THREE.QuaternionKeyframeTrack : THREE.VectorKeyframeTrack)(iz.name, zaman, deger));
+    }
+    klipler[ad] = new THREE.AnimationClip(ad, D, izler);
+  };
+  const SOL_BACAK = /Left(UpLeg|Leg|Foot|Toe)/;
+  akisKur('yumruk-k',     [{ kaynak: 'yumruk-cross', t0: 0.55, t1: 1.65 }]);          // sag el cross, uzanim 1,10 sn
+  akisKur('yumruk-jab-k', [{ kaynak: 'yumruk-jab',   t0: 0.10, t1: 1.03 }]);          // sol el jab, uzanim 0,57 sn
+  akisKur('seksek-k',     [{ kaynak: 'seksek-ip',    t0: 0.43, t1: 1.28 },            // iki gercek sekme, inis 0,86 sn
+                           { kaynak: 'seksek-tek-ayak', sabit: 0, re: SOL_BACAK }]);  // sol bacak havada = tek ayak
+  akisKur('yana-k',       [{ kaynak: 'yana-side-step', t0: -0.10, t1: 0.74 }]);       // kalca yana gidip doner, en genis 0,30 sn
+  akisKur('dizkol-k',     [{ kaynak: 'diz-knee', t0: 0.28, t1: 1.24, re: BACAK },     // diz tepesi 0,76 sn
+                           { kaynak: 'kol-cheering', t0: 1.16, t1: 2.12 }]);          // govde + kollar yukarida, canli
 }
 
 // klipleri hedef sureye esnetip aksiyon olarak hazirla
@@ -7129,7 +7166,7 @@ const HEDEF_SABIT = { 'idle':OLCU, 'idle-breathing':OLCU*2,
                       'jacks':VURUS*2, 'jump':OLCU, 'duck':OLCU,
                       'dodge-right':OLCU, 'punch':OLCU, 'arms-up':OLCU,
                       // HAR-007 kardiyo (26 Eyl 2026): her hareket YARIM OLCU (2 vurus) - 1,60 sn poz ~1,7x hizlanir
-                      'yumruk-k':VURUS*2, 'seksek-k':VURUS*2, 'yana-k':VURUS*2, 'dizkol-k':VURUS*2 };
+                      'yumruk-k':VURUS*2, 'yumruk-jab-k':VURUS*2, 'seksek-k':VURUS*2, 'yana-k':VURUS*2, 'dizkol-k':VURUS*2 };
 // EGZERSIZ klipleri (charleston, running-man, shimmy...) blok boyunca dongude
 // oynuyor, bir vurusa tepki vermiyor. Onlarin hedefi klibin KENDI suresinden
 // turetiliyor: en yakin tam olcu.
@@ -9080,7 +9117,8 @@ function kareKur(n){
       if (DON_KLIP[seg.ad] && seg.sure > 0) {
         const p = Math.min(1, Math.max(0, (t - seg.bas) / seg.sure));
         const yuk = (x, a0, a1) => { const k = Math.min(1, Math.max(0, (x - a0) / (a1 - a0))); return k * k * (3 - 2 * k); };
-        dn = DON_KLIP[seg.ad] * (yuk(p, 0.06, 0.26) - yuk(p, 0.74, 0.94));
+        dn = DON_CAN[seg.ad] ? DON_KLIP[seg.ad] * Math.pow(Math.sin(Math.PI * p), 1.5)   // darbede tepe, bekleme yok
+                             : DON_KLIP[seg.ad] * (yuk(p, 0.06, 0.26) - yuk(p, 0.74, 0.94));
       }
       siluet.rotation.y = dn;
     }
@@ -9124,7 +9162,10 @@ function kareKur(n){
       mixer.update(0);
       // root motion kilidi - poz korunur, yer degistirme silinir
       if (kokKemik && kokBaslangic) {
-        kokKemik.position.x = kokBaslangic.x;
+        // yana-k (26 Eyl): kalcanin gercek yana gidisi klipten gelir - x kilitlenmez. Bolum merkezde
+        // basliyor ve bitiyor (olculdu -0,01 / -0,09), harmanda sicrama olmuyor.
+        const yanaAkis = ad === 'yana-k' || (harmanla && segOnce && segOnce.ad === 'yana-k');
+        if (!yanaAkis) kokKemik.position.x = kokBaslangic.x;
         kokKemik.position.z = kokBaslangic.z;
         const ek = HAR7_KOK(ad, Math.min(1, Math.max(0, yerel / (ozelSure || A.hedef))));
         kokKemik.position.x += ek.x; kokKemik.position.y += ek.y;
@@ -9293,6 +9334,25 @@ if (ORTAMLAR.some(o => o.bulutMekan === true)) {
 if (ORTAMLAR.some(o => o.sekerMekan === true) && !sekerMKok) sekerMekanKur();
 window.HAZIR = true;
 window.SILUET_VAR = !!siluet;
+// OLCUM (26 Eyl 2026, HAR-007 insan hareketi): ham klibi n noktada orneklenir, kemiklerin
+// dunya konumu (kalca/el/ayak/diz) doner. Yalniz olcum araci okur, render etkilenmez.
+window.__klipOlc = function(ad, n){
+  const K = klipler[ad]; if (!K || !mixer || !siluet) return null;
+  const a = mixer.clipAction(K); for (const v of Object.values(aksiyon)) v.a.enabled = false;
+  a.enabled = true; a.setEffectiveWeight(1); a.timeScale = 1; a.play();
+  const adlar = ['Hips','LeftHand','RightHand','LeftFoot','RightFoot','LeftLeg','RightLeg','Head'];
+  const kem = {}; siluet.traverse(o => { if (o.isBone) for (const b of adlar) if (o.name.endsWith(b) && !kem[b]) kem[b] = o; });
+  const v = new THREE.Vector3(), out = [];
+  for (let i = 0; i < n; i++) {
+    const t = K.duration * i / (n - 1);
+    mixer.setTime(0); a.time = t; mixer.update(0); siluet.updateMatrixWorld(true);
+    const r = { t: +t.toFixed(3) };
+    for (const b of adlar) if (kem[b]) { kem[b].getWorldPosition(v); r[b] = [+(v.x).toFixed(3), +(v.y).toFixed(3), +(v.z).toFixed(3)]; }
+    out.push(r);
+  }
+  a.enabled = false; a.stop();
+  return { ad, sure: K.duration, ornek: out };
+};
 window.insanSimge = insanSimge;   // simge tablosu icin
 window.__CUE = CUE;                // cue tablosunun tamami - simge-tablosu.js okuyor   // simge sayfasi uretmek icin
 
@@ -9311,9 +9371,10 @@ window.siluetKaresi = function(klipAdi, faz, gen, yuk, don){
   mixer.setTime(0);
   A.a.time = (faz % 1) * A.hedef * A.a.timeScale;
   mixer.update(0);
-  if (don === undefined && DON_KLIP[ad]) siluet.rotation.y = DON_KLIP[ad] * (faz > 0.2 && faz < 0.8 ? 1 : 0);
+  if (don === undefined && DON_KLIP[ad]) siluet.rotation.y = DON_CAN[ad] ? DON_KLIP[ad] * Math.pow(Math.sin(Math.PI * (faz % 1)), 1.5)
+                                                         : DON_KLIP[ad] * (faz > 0.2 && faz < 0.8 ? 1 : 0);
   if (kokKemik && kokBaslangic) {
-    kokKemik.position.x = kokBaslangic.x;
+    if (ad !== 'yana-k') kokKemik.position.x = kokBaslangic.x;   // yana-k: videodaki gibi kalca klipten
     kokKemik.position.z = kokBaslangic.z;
   }
 

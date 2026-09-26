@@ -36,7 +36,9 @@ const arg = (a, d) => { const i = process.argv.indexOf('--' + a); return i > -1 
     + (BOLUM ? `&bolum=${encodeURIComponent(BOLUM)}` : ''), { waitUntil: 'load', timeout: 240000 });
   await pg.waitForFunction('window.HAZIR===true', { timeout: 300000 });
 
-  const rapor = await pg.evaluate((BAS, SON) => {
+  const KAYDET = arg('kaydet', ''), ADIM = +arg('adim', 3);
+  if (KAYDET) fs.mkdirSync(KAYDET, { recursive: true });
+  const rapor = await pg.evaluate((BAS, SON, KAYDET, ADIM) => {
     const T = window.__T, FPS = 30;
     const kg = document.createElement('canvas'); kg.width = 96; kg.height = 128;
     const g2 = kg.getContext('2d', { willReadFrequently: true });
@@ -73,12 +75,18 @@ const arg = (a, d) => { const i = process.argv.indexOf('--' + a); return i > -1 
       window.kareKur(n);
       try { window.kareAl('png'); } catch (e) {}
       const r = oku();
+      if (KAYDET && (n - BAS) % ADIM === 0) { window.__PANEL = window.__PANEL || [];
+        const cv = window.__CIKIS, pc = document.createElement('canvas'); pc.width = 150; pc.height = 210;
+        pc.getContext('2d').drawImage(cv, Math.round(cv.width*0.02), Math.round(cv.height*0.24), Math.round(cv.width*0.22), Math.round(cv.height*0.62), 0, 0, 150, 210);
+        window.__PANEL.push([n, pc.toDataURL('image/png')]); }
       const fark = onceki ? farkHesap(onceki, r.m) : 0;
       kayit.push({ n, fark: +fark.toFixed(4), com: +r.com.toFixed(3), alan: r.say, cue: cueAd(n / FPS) });
       onceki = r.m;
     }
     return kayit;
-  }, BAS, SON);
+  }, BAS, SON, KAYDET, ADIM);
+  if (KAYDET) { const pn = await pg.evaluate(() => window.__PANEL || []);
+    for (const [n, u] of pn) fs.writeFileSync(path.join(KAYDET, `p${String(n).padStart(5,'0')}.png`), Buffer.from(u.split(',')[1], 'base64')); }
 
   fs.writeFileSync(path.join(KOK, '04-ciktilar', 'siluet-akis.json'), JSON.stringify(rapor));
   const f = rapor.map(x => x.fark).filter(x => x > 0);

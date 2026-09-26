@@ -18,7 +18,7 @@ const arg=(a,d)=>{const i=process.argv.indexOf('--'+a);return i>-1?process.argv[
     args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader','--no-sandbox']});
   const pg=await b.newPage(); await pg.setViewport({width:1280,height:720});
   pg.on('pageerror',e=>console.log('HATA:',e.message));
-  await pg.goto(`http://127.0.0.1:${s.address().port}/03-motor/sahne.html?w=1280&h=720&tema=b&toplam=264`,{waitUntil:'load',timeout:240000});
+  await pg.goto(`http://127.0.0.1:${s.address().port}/03-motor/sahne.html?w=1280&h=720&tema=b&toplam=${arg('toplam','264')}${arg('bolum','')?'&bolum='+arg('bolum',''):''}`,{waitUntil:'load',timeout:240000});
   await pg.waitForFunction('window.HAZIR===true',{timeout:300000});
   fs.mkdirSync(DIZIN,{recursive:true});
   for(const k of KLIPLER){
