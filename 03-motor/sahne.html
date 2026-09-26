@@ -4647,10 +4647,10 @@ function sekerEngKur(no, idx){
   const hal = sekerEngHal(no.t), g = new THREE.Group(), parca = [];
   const ekle = (o, x, y, z, r) => { o.position.set(x, y, z); o.userData.r = r; g.add(o); parca.push(o); };
   if (no.tip === 'yumruk_L' || no.tip === 'yumruk_R') {
-    const r = hal === 'e' ? 0.62 : 0.6;
-    ekle(sekerEngNesne(hal, r, idx, 'havada'), LANE_X[no.tip === 'yumruk_L' ? 0 : 2], 1.75, 0, r);
+    const r = 0.82;                                   // 26 Eyl: 0,6 karede zayif kaliyordu
+    ekle(sekerEngNesne(hal, r, idx, 'havada'), LANE_X[no.tip === 'yumruk_L' ? 0 : 2], 1.85, 0, r);
   } else if (no.tip === 'seksek') {
-    const r = 0.36, xs = [-3.0, -1.5, 0, 1.5, 3.0];
+    const r = 0.44, xs = [-3.0, -1.5, 0, 1.5, 3.0];
     for (let sira = 0; sira < 3; sira++) {
       const bos = (idx + sira * 2) % 5;               // her sirada tek ayaklik bosluk, sira sira kayar
       xs.forEach((x, j) => { if (j !== bos) ekle(sekerEngNesne(hal, r, idx + j + sira, 'yer'), x, hal === 'd' ? r * 0.18 : (hal === 'e' ? r : r), -sira * 1.35, r); });
@@ -4674,12 +4674,12 @@ function sekerEngKur(no, idx){
 function sekerPatKur(no, idx, eng){
   const g = new THREE.Group(), R = SEKER_PAT_RENK[eng.userData.hal], p = [];
   for (const o of eng.userData.parca) {
-    for (let k = 0; k < 12; k++) {
+    for (let k = 0; k < 18; k++) {
       const m = new THREE.Mesh(SEKER_ENG.geo.parca, new THREE.MeshBasicMaterial({ color: R[(k + idx) % R.length], transparent: true }));
       const a = sekerRnd(idx * 31 + k) * 6.2832, e = sekerRnd(idx * 17 + k + 3) * 1.2 - 0.2;
       const hz = 3.5 + sekerRnd(idx * 7 + k) * 4.5;
       m.userData = { x0: o.position.x, y0: o.position.y, z0: o.position.z, vx: Math.cos(a) * Math.cos(e) * hz, vy: Math.sin(e) * hz + 3, vz: Math.sin(a) * Math.cos(e) * hz * 0.6,
-                     s: o.userData.r * (0.22 + sekerRnd(idx + k * 5) * 0.2), don: sekerRnd(k + idx) * 12 };
+                     s: o.userData.r * (0.34 + sekerRnd(idx + k * 5) * 0.26), don: sekerRnd(k + idx) * 12 };
       g.add(m); p.push(m);
     }
   }
@@ -8974,7 +8974,8 @@ function kareKur(n){
     }
     // SEKER (26 Eyl 2026, kullanici): yolda HICBIR hareket isareti yok (nota kutusu, simge) -
     // hareket yalniz siluette gorunur; yolda yalniz engel olur.
-    if (SEKER_MOD_AKTIF) { m.visible = false; if (m.userData.destek) m.userData.destek.visible = false; }
+    if (SEKER_MOD_AKTIF) { m.visible = false; if (m.userData.destek) m.userData.destek.visible = false;
+                           if (TB && kartMesh[i]) kartMesh[i].visible = false; }   // havadaki simge karti da yok
     if (t >= no.t) { combo = no.combo; sonVurus = no.t; }
     if (t >= no.t && no.combo % 8 === 0) { sonKm = no.t; kmCombo = no.combo; }
   });
