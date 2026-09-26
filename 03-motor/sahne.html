@@ -4645,7 +4645,7 @@ function sekerEngNesne(hal, r, i, rol){
     const s = new THREE.Mesh(G.halka, M.bonbonSos); s.scale.setScalar(r); s.rotation.x = Math.PI / 2; s.position.y = r * 0.62; g.add(s); }
   else if (hal === 'd') { const m = new THREE.Mesh(G.disk, [M.naneKenar, M.naneYuz, M.naneYuz]); m.scale.set(r, r, r);
     if (rol === 'havada') m.rotation.x = Math.PI / 2; // havada: yuzu kameraya
-    if (rol === 'dev') m.rotation.z = Math.PI / 2;    // yuvarlanan: ekseni x, yol boyunca teker gibi
+    if (rol === 'dev') { m.rotation.z = Math.PI / 2; m.rotation.y = 0.55; }   // yuvarlanan teker; 0,55 rad acili - tam kenardan ince serit gibi okunuyordu
     g.add(m); }
   else { const k = new THREE.Group(); k.add(new THREE.Mesh(G.kutu, M.hediye[i % 5]));
     k.add(new THREE.Mesh(G.serit1, M.kurdele)); k.add(new THREE.Mesh(G.serit2, M.kurdele));
