@@ -8814,6 +8814,9 @@ function kareKur(n){
                             : 1;
       }
     }
+    // SEKER (26 Eyl 2026, kullanici): yolda HICBIR hareket isareti yok (nota kutusu, simge) -
+    // hareket yalniz siluette gorunur; yolda yalniz engel olur.
+    if (SEKER_MOD_AKTIF) { m.visible = false; if (m.userData.destek) m.userData.destek.visible = false; }
     if (t >= no.t) { combo = no.combo; sonVurus = no.t; }
     if (t >= no.t && no.combo % 8 === 0) { sonKm = no.t; kmCombo = no.combo; }
   });
@@ -8828,6 +8831,7 @@ function kareKur(n){
     halka.scale.setScalar(0.55 + k*1.9);
     halka.material.opacity = (1 - k) * (1 - k);
   } else halka.visible = false;
+  if (SEKER_MOD_AKTIF) halka.visible = false;   // yolda vurus halkasi da yok
 
   // siluet: aktif cue varsa onun klibi, yoksa idle
   if (mixer){
