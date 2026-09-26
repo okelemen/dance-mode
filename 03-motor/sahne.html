@@ -7518,7 +7518,10 @@ function hudCiz(t, combo, epic, kmCombo, seviye, duyuru, sonVurus, karistirHud){
   // tamamen yaziisizdi. Buraya vurusa nabiz atan tek bir soru koyuldu.
   // Genislik kadraja gore kuculuyor - Impact'te 14 karakter 1280 px'de tasar.
   const T_SORU = [0.45, Math.max(1.60, T_READY[0] - 0.40)];
-  if (t >= T_SORU[0] && t <= T_SORU[1]) {
+  // 26 Eyl 2026: ilk nota erkense (kardiyo, 2 olculuk giris) READY 0 sn'de basliyor;
+  // soru ona sigmiyorsa HIC gosterilmez - yoksa iki yazi ust uste biniyordu.
+  const soruSigar = T_READY[0] - 0.40 >= T_SORU[0] + 1.15;
+  if (soruSigar && t >= T_SORU[0] && t <= T_SORU[1]) {
     const giris = Math.min(1, (t - T_SORU[0]) / 0.55);
     const cikis = Math.min(1, (T_SORU[1] - t) / 0.55);
     const alfa  = Math.min(giris, cikis);

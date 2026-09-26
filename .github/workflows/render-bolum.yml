@@ -43,6 +43,10 @@ on:
       yukseklik:
         required: true
         default: "1080"
+      parcalar:
+        description: "Yalniz bu parca numaralari (virgullu, orn. 0 veya 0,5). Bos = hepsi. Tek parcayi yeniden almak icin"
+        required: false
+        default: ""
 
 jobs:
   hazirla:
@@ -58,7 +62,8 @@ jobs:
           LISTE=$(python3 -c "
           import json
           t=$TOPLAM; p=$PARCA
-          print(json.dumps([{'i':k//p,'baslangic':k,'olcu':min(p,t-k)} for k in range(0,t,p)]))
+          sec=[int(x) for x in '${{ github.event.inputs.parcalar }}'.replace(' ','').split(',') if x]
+          print(json.dumps([{'i':k//p,'baslangic':k,'olcu':min(p,t-k)} for k in range(0,t,p) if not sec or k//p in sec]))
           ")
           echo "matris=$LISTE" >> "$GITHUB_OUTPUT"
           echo "$LISTE"
