@@ -362,7 +362,8 @@ for (const [b0, b1, kademeAdi] of BLOKLAR) {
     // ortalama yogunlugu neredeyse hic degistirmiyor ama "burada bir sey
     // oldu" hissi veriyor. Molada ve giriste yok.
     const sonOlcu = (olcu + 1) % 8 === 0;
-    if (sonOlcu && kademeAdi !== 'mola' && kademeAdi !== 'bos') {
+    // SEKER (26 Eyl 2026): sekizlik patlama emekli step_L/R hareketini sokuyordu - bu videoda YOK
+    if (sonOlcu && kademeAdi !== 'mola' && kademeAdi !== 'bos' && !ORTAMLAR.some(o => o.sekerMekan)) {
       const t0 = olcu * OLCU + 3 * VURUS + VURUS / 2;
       const tip = aynala ? 'step_L' : 'step_R';
       NOTALAR.push({ tip, t: t0, ...CUE[tip], patlama: true });
