@@ -4545,32 +4545,44 @@ function sekerMekanKur(){
 //   yumruk  : SABIT
 //   dizkol  : YAVAS kalkis - hareket boyunca 0,22 birim yukari, yumusak donus
 //   nefes/LEVEL UP: YAVAS one suzulme (0,8 birim) ve geri
-const SEKER_KAM_NOTA = NOTALAR.filter(n => /^(kay_L|kay_R|seksek|dizkol)$/.test(n.tip)).sort((a, b) => a.t - b.t);
+const SEKER_KAM_NOTA = NOTALAR.filter(n => /^(yumruk_L|yumruk_R|kay_L|kay_R|seksek|dizkol)$/.test(n.tip)).sort((a, b) => a.t - b.t);
 function sekerKamera(t){
-  let x = 0, y = 0, z = 0;
+  // 26 Eyl 2026 (kullanici: "her engelde kamera konumu hep ayni"): HER ENGEL TIPININ KENDI
+  // KADRAJI. Kamera engel yaklasirken o kadraja gecer (gecis hizi tipe gore), vurustan sonra doner.
+  //   yumruk : HIZLI (0,22 sn) hedef tarafina 0,7 + alcal/yaklas; vurus aninda SABIT (titreme yok)
+  //   seksek : HIZLI (0,25 sn) YUKSEL + asagi bak (bosluklar gorunsun) + sekmelerde minik titreme
+  //   kay    : HIZLI (0,12 sn) o yone 1,7 + yone dogru hafif yatis (roll)
+  //   dizkol : YAVAS (0,7 sn) alcal + yukari bak (sarkan nesne one ciksin)
+  //   level siniri: YAVAS one suzulme
+  let x = 0, y = 0, z = 0, lx = 0, ly = 0, roll = 0;
   const ss = (v) => v <= 0 ? 0 : v >= 1 ? 1 : v * v * (3 - 2 * v);
+  const zarf = (d, gir, tut, cik) => ss((d + gir) / gir) - ss((d - tut) / cik);   // d<0 yaklasma
   for (const n of SEKER_KAM_NOTA) {
     const d = t - n.t;
-    if (d < -0.6 || d > 1.4) continue;
-    if (n.tip === 'kay_L' || n.tip === 'kay_R') {
-      const yon = n.tip === 'kay_L' ? -1 : 1;
-      const w = ss((d + 0.12) / 0.12) - ss((d - 0.45) / 0.30);
-      x += yon * 1.7 * w;                 // 26 Eyl kesit: 0,9 karede fark edilmiyordu
+    if (d < -1.2 || d > 1.6) continue;
+    if (n.tip === 'yumruk_L' || n.tip === 'yumruk_R') {
+      const yon = n.tip === 'yumruk_L' ? -1 : 1, w = zarf(d, 0.22, 0.30, 0.35);
+      x += yon * 0.7 * w; y -= 0.45 * w; z -= 1.4 * w; lx += yon * 0.5 * w; ly += 0.15 * w;
+    } else if (n.tip === 'kay_L' || n.tip === 'kay_R') {
+      const yon = n.tip === 'kay_L' ? -1 : 1, w = zarf(d, 0.12, 0.45, 0.30);
+      x += yon * 1.7 * w; roll -= yon * 0.06 * w;
     } else if (n.tip === 'seksek') {
+      const w = zarf(d, 0.25, 0.55, 0.35);
+      y += 1.5 * w; z += 0.6 * w; ly -= 0.9 * w;
       for (const h of [0, OLCU * 0.30]) {
         const e = d - h;
         if (e >= 0 && e < 0.4) { const a = 0.085 * Math.exp(-e / 0.18); y += a * Math.sin(e * 95); x += a * 0.6 * Math.sin(e * 77 + 1.3); }
       }
     } else if (n.tip === 'dizkol') {
-      y += 0.22 * (ss((d + 0.5) / 0.7) - ss((d - 0.5) / 0.8));
+      const w = zarf(d, 0.70, 0.45, 0.60);
+      y -= 0.9 * w; z -= 0.8 * w; ly += 0.95 * w;
     }
   }
-  // gecis / nefes: seviye sinirinda yavas one suzulme
   for (const o of SEVIYE_SIN.slice(1)) {
     const d = t - o * OLCU;
     if (d > -2.8 && d < 2.6) z -= 0.8 * (ss((d + 2.8) / 2.2) - ss((d - 0.4) / 2.2));
   }
-  return { x, y, z };
+  return { x, y, z, lx, ly, roll };
 }
 // ================= ENG-006 SEKER ENGELLERI (26 Eyl 2026, kullanici: A-A-A-C-A)
 // Her level TEK nesne (md. 8), dort hareket ailesi ayni nesnenin farkli durusuyla kurulur
@@ -8272,7 +8284,8 @@ function kareKur(n){
   if (sekerMod) {
     const kk = sekerKamera(t);
     camera.position.set(kk.x, 3.7 + kk.y, 10.8 + kk.z);
-    camera.lookAt(kk.x * 0.25, SEKER_BAKIS + kk.y, -6);
+    camera.lookAt(kk.x * 0.25 + kk.lx, SEKER_BAKIS + kk.y + kk.ly, -6);
+    camera.rotateZ(kk.roll);
   } else
   camera.lookAt(0, sekerMod ? SEKER_BAKIS : bulutMod ? BULUT_BAKIS : balMod ? BAL_BAKIS : elmaMod ? 2.62 : (karpuzMod ? 2.62 : ((denizMod || sehirMod || sadeMod) ? 2.14 : 0.55)), -6);
 
