@@ -1,5 +1,5 @@
 {
- "_": "BOLUM 12 - SEKER KRALLIGI KARDIYO (26 Eyl 2026). MEK-006 a-e, HAR-007, ENG-006. Muzik: 01-muzik/seker-kardiyo-327olcu.wav (kaynak 'Full Energy Drop.wav', Suno, kullanici uretimi; olculdu 130,84 BPM, 42 olcu, muzik-uzat.py GIRIS=4 CIKIS=6 ile 327 olcu = 599,82 sn). Her olcude bir hareket (md. 15), nefes yalniz level sinirinda 1 olcu; basta READY/GO 2 olcu, sonda kalori + final karti 4 olcu.",
+ "_": "BOLUM 12 - SEKER KRALLIGI KARDIYO (26 Eyl 2026). MEK-006 a-e, HAR-007, ENG-006. Muzik: 01-muzik/seker-kardiyo-327olcu.wav (kaynak 'Full Energy Drop.wav', Suno, kullanici uretimi; olculdu 130,84 BPM, 42 olcu, muzik-uzat.py GIRIS=4 CIKIS=6 ile 327 olcu = 599,82 sn). KARDIYO YOGUNLUGU (26 Eyl, kullanici: 'tempoya gore engeller cok yavas'): her olcude IKI hareket (1. ve 3. vurus), yaklasma 1,4 sn, nefes yalniz level sinirinda 1 olcu; basta READY/GO 2 olcu, sonda kalori + final karti 4 olcu.",
  "no": 12,
  "baslik": "DANCE MODE 12 | Candy Kingdom Cardio",
  "tema": "b",
@@ -40,73 +40,109 @@
    null,
    null
   ],
-  "yL": [
-   "yumruk_L",
-   null,
-   null,
-   null
-  ],
-  "yR": [
+  "a1": [
    "yumruk_R",
    null,
-   null,
-   null
-  ],
-  "sk": [
    "seksek",
-   null,
-   null,
    null
   ],
-  "kL": [
+  "a2": [
    "kay_L",
    null,
-   null,
+   "dizkol",
    null
   ],
-  "kR": [
+  "a3": [
+   "yumruk_L",
+   null,
+   "seksek",
+   null
+  ],
+  "a4": [
    "kay_R",
    null,
-   null,
+   "dizkol",
    null
   ],
-  "dk": [
+  "b1": [
+   "kay_L",
+   null,
+   "yumruk_R",
+   null
+  ],
+  "b2": [
    "dizkol",
    null,
+   "seksek",
+   null
+  ],
+  "b3": [
+   "kay_R",
    null,
+   "yumruk_L",
+   null
+  ],
+  "b4": [
+   "seksek",
+   null,
+   "dizkol",
+   null
+  ],
+  "c1": [
+   "yumruk_R",
+   null,
+   "yumruk_L",
+   null
+  ],
+  "c2": [
+   "seksek",
+   null,
+   "kay_L",
+   null
+  ],
+  "c3": [
+   "dizkol",
+   null,
+   "kay_R",
+   null
+  ],
+  "c4": [
+   "seksek",
+   null,
+   "dizkol",
    null
   ]
  },
  "kademeler": {
   "k1": [
-   "yR",
-   "sk",
-   "kL",
-   "dk",
-   "yL",
-   "sk",
-   "kR",
-   "dk"
+   "a1",
+   "a2",
+   "a3",
+   "a4",
+   "a1",
+   "a2",
+   "a3",
+   "a4"
   ],
   "k2": [
-   "kL",
-   "yR",
-   "dk",
-   "sk",
-   "kR",
-   "yL",
-   "dk",
-   "sk"
+   "b1",
+   "b2",
+   "b3",
+   "b4",
+   "b1",
+   "b2",
+   "b3",
+   "b4"
   ],
   "k3": [
-   "yR",
-   "yL",
-   "sk",
-   "kL",
-   "dk",
-   "kR",
-   "sk",
-   "dk"
+   "c1",
+   "c2",
+   "c3",
+   "c4",
+   "a1",
+   "b2",
+   "a3",
+   "b4"
   ]
  },
  "iskelet": [
@@ -394,5 +430,6 @@
   ]
  ],
  "nota_simge": false,
- "akis": "harman2"
+ "akis": "harman2",
+ "yaklasma": 1.4
 }

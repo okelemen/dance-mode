@@ -23,7 +23,7 @@ const FPS   = S.video.fps;                 // 30
 // let: bolum dosyasi kendi BPM'ini veriyorsa asagida yeniden hesaplaniyor.
 let OLCU  = S.izgara.saniye_per_olcu;      // 130 BPM -> 1.846 sn
 let VURUS = S.izgara.saniye_per_vurus;     // 130 BPM -> 0.4615 sn
-const YAKLASMA = S.oynanis.yaklasma_saniye;// 2.0 sn
+let YAKLASMA = S.oynanis.yaklasma_saniye;  // 2.0 sn (bolum 'yaklasma' verirse o)
 
 const SP = new URLSearchParams(location.search);
 const W = Number(SP.get('w') || 1280);
@@ -51,6 +51,9 @@ if (BOLUM && BOLUM.bpm) {
   OLCU  = VURUS * S.izgara.vurus_per_olcu;
   console.log('bolum BPM:', BOLUM.bpm, 'olcu:', OLCU.toFixed(4), 'sn');
 }
+// BOLUM BAZLI YAKLASMA (26 Eyl 2026, kardiyo: "tempoya gore engeller cok yavas"). Engelin
+// ufuktan vurus cizgisine gelis suresi; yol/mekan akis hizi da buna bagli (HIZ).
+if (BOLUM && BOLUM.yaklasma) YAKLASMA = BOLUM.yaklasma;
 
 // ---------------------------------------------------------------- TEMA
 // Iki gorsel dil, tek motor. Rakip analizinin bulduguu iki nis
@@ -283,12 +286,12 @@ const CUE = {
   //   seksek     -> yol tek ayaklik taslara doner, tek ayakla sekme (On Right Foot, Left Leg Raised + iki sekme)
   //   kay_L/R    -> bir yandan yuvarlanan nesne, acik tarafa yana kayma (Side Step en genis faz + kalca kaymasi)
   //   dizkol     -> yerde alcak nesne + ustte sarkan nesne: dize bas, iki elle uzan (Knee bacaklar + Cheering kollar)
-  yumruk_L: { lane:0, sure:OLCU, klip:'yumruk-k', maxOlcu: 1 },
-  yumruk_R: { lane:2, sure:OLCU, klip:'yumruk-k', maxOlcu: 1 },
-  seksek:   { lane:1, sure:OLCU, klip:'seksek-k', maxOlcu: 1 },
-  kay_L:    { lane:0, sure:OLCU, klip:'yana-k',   maxOlcu: 1 },
-  kay_R:    { lane:2, sure:OLCU, klip:'yana-k',   maxOlcu: 1 },
-  dizkol:   { lane:1, sure:OLCU, klip:'dizkol-k', maxOlcu: 1 },
+  yumruk_L: { lane:0, sure:VURUS*2, klip:'yumruk-k', maxOlcu: 0.5 },
+  yumruk_R: { lane:2, sure:VURUS*2, klip:'yumruk-k', maxOlcu: 0.5 },
+  seksek:   { lane:1, sure:VURUS*2, klip:'seksek-k', maxOlcu: 0.5 },
+  kay_L:    { lane:0, sure:VURUS*2, klip:'yana-k',   maxOlcu: 0.5 },
+  kay_R:    { lane:2, sure:VURUS*2, klip:'yana-k',   maxOlcu: 0.5 },
+  dizkol:   { lane:1, sure:VURUS*2, klip:'dizkol-k', maxOlcu: 0.5 },
   // aktif mola cue'lari: yogunluk duser ama ekran BOSALMAZ
   reach_L: { lane:0, sure:OLCU,    klip:'arm-stretch' },
   reach_R: { lane:2, sure:OLCU,    klip:'arm-stretch' },
@@ -446,7 +449,7 @@ const DON_KLIP = { 'push-it': SILUET_DON, 'yumruk-k': 0.95 };
 function HAR7_KOK(ad, p){
   const yuk = (x, a0, a1) => { const k = Math.min(1, Math.max(0, (x - a0) / (a1 - a0))); return k * k * (3 - 2 * k); };
   const w = yuk(p, 0.10, 0.26) - yuk(p, 0.74, 0.90);
-  if (ad === 'seksek-k') return { x: 0, y: 11 * Math.abs(Math.sin(Math.PI * 2 * (p - 0.26) / 0.48)) * w };
+  if (ad === 'seksek-k') return { x: 0, y: 11 * Math.abs(Math.sin(Math.PI * 2 * (p - 0.26) / 0.48)) * w };   // iki sekme = iki vurus
   if (ad === 'yana-k') return { x: -16 * w, y: 0 };
   return { x: 0, y: 0 };
 }
@@ -4562,20 +4565,20 @@ function sekerKamera(t){
     const d = t - n.t;
     if (d < -1.2 || d > 1.6) continue;
     if (n.tip === 'yumruk_L' || n.tip === 'yumruk_R') {
-      const yon = n.tip === 'yumruk_L' ? -1 : 1, w = zarf(d, 0.22, 0.30, 0.35);
+      const yon = n.tip === 'yumruk_L' ? -1 : 1, w = zarf(d, 0.15, 0.18, 0.22);
       x += yon * 0.7 * w; y -= 0.45 * w; z -= 1.4 * w; lx += yon * 0.5 * w; ly += 0.15 * w;
     } else if (n.tip === 'kay_L' || n.tip === 'kay_R') {
-      const yon = n.tip === 'kay_L' ? -1 : 1, w = zarf(d, 0.12, 0.45, 0.30);
+      const yon = n.tip === 'kay_L' ? -1 : 1, w = zarf(d, 0.10, 0.25, 0.22);
       x += yon * 1.7 * w; roll -= yon * 0.06 * w;
     } else if (n.tip === 'seksek') {
-      const w = zarf(d, 0.25, 0.55, 0.35);
+      const w = zarf(d, 0.15, 0.30, 0.22);
       y += 1.5 * w; z += 0.6 * w; ly -= 0.9 * w;
-      for (const h of [0, OLCU * 0.30]) {
+      for (const h of [0, VURUS]) {
         const e = d - h;
         if (e >= 0 && e < 0.4) { const a = 0.085 * Math.exp(-e / 0.18); y += a * Math.sin(e * 95); x += a * 0.6 * Math.sin(e * 77 + 1.3); }
       }
     } else if (n.tip === 'dizkol') {
-      const w = zarf(d, 0.70, 0.45, 0.60);
+      const w = zarf(d, 0.38, 0.25, 0.30);
       y -= 0.9 * w; z -= 0.8 * w; ly += 0.95 * w;
     }
   }
@@ -7124,7 +7127,9 @@ const aksiyon = {};
 const HEDEF_SABIT = { 'idle':OLCU, 'idle-breathing':OLCU*2,
                       'step-left':VURUS*2, 'step-right':VURUS*2,
                       'jacks':VURUS*2, 'jump':OLCU, 'duck':OLCU,
-                      'dodge-right':OLCU, 'punch':OLCU, 'arms-up':OLCU };
+                      'dodge-right':OLCU, 'punch':OLCU, 'arms-up':OLCU,
+                      // HAR-007 kardiyo (26 Eyl 2026): her hareket YARIM OLCU (2 vurus) - 1,60 sn poz ~1,7x hizlanir
+                      'yumruk-k':VURUS*2, 'seksek-k':VURUS*2, 'yana-k':VURUS*2, 'dizkol-k':VURUS*2 };
 // EGZERSIZ klipleri (charleston, running-man, shimmy...) blok boyunca dongude
 // oynuyor, bir vurusa tepki vermiyor. Onlarin hedefi klibin KENDI suresinden
 // turetiliyor: en yakin tam olcu.
