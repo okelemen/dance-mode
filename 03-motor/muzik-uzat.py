@@ -29,8 +29,10 @@ import sys
 import os
 import tempfile
 
-GIRIS = 16
-CIKIS = 16
+# Ortamdan degistirilebilir (26 Eyl 2026: 42 olculuk kisa parcada 16+16 govdeyi 10 olcuye
+# indiriyordu -> 30 kez ayni 10 olcu. GIRIS=4 CIKIS=6 ile govde 32 olcu).
+GIRIS = int(os.environ.get('GIRIS', 16))
+CIKIS = int(os.environ.get('CIKIS', 16))
 
 
 def parcala(kaynak_olcu, hedef_olcu):
