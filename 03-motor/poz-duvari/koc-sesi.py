@@ -50,7 +50,7 @@ for i, c in enumerate(koc):
         uzun = len(ses) / SR
         if uzun <= pencere or hiz >= 1.45 or c.get("kisa"):
             break
-        hiz = min(1.45, hiz * pencere / uzun * 1.02 + 0.02)
+        hiz = min(1.45, hiz * uzun / pencere * 1.02)   # sigmayan cumle HIZLANIR
     kesildi = False
     if uzun > pencere and not c.get("kisa"):
         n = int(pencere * SR)
