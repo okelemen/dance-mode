@@ -2,17 +2,17 @@
  "seri": "POSE WALL",
  "bolum": "pose-wall-01",
  "bpm": 120,
- "toplam_olcu": 49,
+ "toplam_olcu": 51,
  "toplam_duvar": 38,
  "zaman": {
-  "yaklas": 7.5,
-  "goster": 1.0,
+  "yaklas": 8.0,
+  "goster": 0.8,
   "tut": 1.5,
   "gec": 0.5,
   "say": [
-   4.5,
-   5.5,
-   6.5
+   5.0,
+   6.0,
+   7.0
   ]
  },
  "turlar": [
@@ -66,7 +66,7 @@
    "metin": "ROUND 1"
   },
   {
-   "t": 74.0,
+   "t": 77.0,
    "sure": 3.5,
    "tip": "tur",
    "tur": 2,
@@ -79,63 +79,63 @@
    "poz": 1,
    "tur": 1,
    "t0": 14.0,
-   "sure": 10.0,
+   "sure": 10.5,
    "ovgu": "NICE!"
   },
   {
    "no": 2,
    "poz": 2,
    "tur": 1,
-   "t0": 24.0,
-   "sure": 10.0,
+   "t0": 24.5,
+   "sure": 10.5,
    "ovgu": "GREAT!"
   },
   {
    "no": 3,
    "poz": 3,
    "tur": 1,
-   "t0": 34.0,
-   "sure": 10.0,
+   "t0": 35.0,
+   "sure": 10.5,
    "ovgu": "PERFECT!"
   },
   {
    "no": 4,
    "poz": 4,
    "tur": 1,
-   "t0": 44.0,
-   "sure": 10.0,
+   "t0": 45.5,
+   "sure": 10.5,
    "ovgu": "AWESOME!"
   },
   {
    "no": 5,
    "poz": 5,
    "tur": 1,
-   "t0": 54.0,
-   "sure": 10.0,
+   "t0": 56.0,
+   "sure": 10.5,
    "ovgu": "SUPER!"
   },
   {
    "no": 6,
    "poz": 6,
    "tur": 1,
-   "t0": 64.0,
-   "sure": 10.0,
+   "t0": 66.5,
+   "sure": 10.5,
    "ovgu": "NICE!"
   },
   {
    "no": 13,
    "poz": 13,
    "tur": 2,
-   "t0": 77.5,
-   "sure": 10.0,
+   "t0": 80.5,
+   "sure": 10.5,
    "ovgu": "GREAT!"
   },
   {
    "no": 14,
    "poz": 14,
    "tur": 2,
-   "t0": 87.5,
-   "sure": 10.0,
+   "t0": 91.0,
+   "sure": 10.5,
    "ovgu": "PERFECT!"
   }
  ],
@@ -161,266 +161,266 @@
    "metin": "Round one! Easy!"
   },
   {
-   "t": 15.1,
+   "t": 14.9,
    "metin": "Wall 1. Star!"
   },
   {
-   "t": 18.55,
+   "t": 19.05,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 19.55,
+   "t": 20.05,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 20.55,
+   "t": 21.05,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 21.55,
+   "t": 22.05,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 23.3,
+   "t": 23.8,
    "metin": "Nice!",
    "kisa": true
   },
   {
-   "t": 25.1,
+   "t": 25.4,
    "metin": "Wall 2. High five!"
   },
   {
-   "t": 26.5,
+   "t": 26.8,
    "metin": "Reach up and touch hands!"
   },
   {
-   "t": 28.55,
-   "metin": "Three!",
-   "kisa": true
-  },
-  {
    "t": 29.55,
-   "metin": "Two!",
+   "metin": "Three!",
    "kisa": true
   },
   {
    "t": 30.55,
-   "metin": "One!",
+   "metin": "Two!",
    "kisa": true
   },
   {
    "t": 31.55,
-   "metin": "Hold it!",
-   "kisa": true
-  },
-  {
-   "t": 33.3,
-   "metin": "Great job!",
-   "kisa": true
-  },
-  {
-   "t": 35.1,
-   "metin": "Wall 3. Rocket!"
-  },
-  {
-   "t": 36.5,
-   "metin": "Hands together, reach up high!"
-  },
-  {
-   "t": 38.55,
-   "metin": "Three!",
-   "kisa": true
-  },
-  {
-   "t": 39.55,
-   "metin": "Two!",
-   "kisa": true
-  },
-  {
-   "t": 40.55,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 41.55,
+   "t": 32.55,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 43.3,
+   "t": 34.3,
+   "metin": "Great job!",
+   "kisa": true
+  },
+  {
+   "t": 35.9,
+   "metin": "Wall 3. Rocket!"
+  },
+  {
+   "t": 37.3,
+   "metin": "Hands together, reach up high!"
+  },
+  {
+   "t": 40.05,
+   "metin": "Three!",
+   "kisa": true
+  },
+  {
+   "t": 41.05,
+   "metin": "Two!",
+   "kisa": true
+  },
+  {
+   "t": 42.05,
+   "metin": "One!",
+   "kisa": true
+  },
+  {
+   "t": 43.05,
+   "metin": "Hold it!",
+   "kisa": true
+  },
+  {
+   "t": 44.8,
    "metin": "Perfect!",
    "kisa": true
   },
   {
-   "t": 45.1,
+   "t": 46.4,
    "metin": "Wall 4. Mirror!"
   },
   {
-   "t": 46.5,
-   "metin": "Player one, left arm out. Player two, right arm out."
-  },
-  {
-   "t": 48.55,
-   "metin": "Three!",
-   "kisa": true
-  },
-  {
-   "t": 49.55,
-   "metin": "Two!",
-   "kisa": true
+   "t": 47.8,
+   "metin": "Player one, left arm. Player two, right arm."
   },
   {
    "t": 50.55,
-   "metin": "One!",
+   "metin": "Three!",
    "kisa": true
   },
   {
    "t": 51.55,
+   "metin": "Two!",
+   "kisa": true
+  },
+  {
+   "t": 52.55,
+   "metin": "One!",
+   "kisa": true
+  },
+  {
+   "t": 53.55,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 53.3,
+   "t": 55.3,
    "metin": "Awesome!",
    "kisa": true
   },
   {
-   "t": 55.1,
+   "t": 56.9,
    "metin": "Wall 5. Big arch!"
   },
   {
-   "t": 56.5,
-   "metin": "Inside hands up and together. Outside hand on your hip."
+   "t": 58.3,
+   "metin": "Inside hands up. Outside hand on hip."
   },
   {
-   "t": 58.55,
+   "t": 61.05,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 59.55,
+   "t": 62.05,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 60.55,
+   "t": 63.05,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 61.55,
+   "t": 64.05,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 63.3,
+   "t": 65.8,
    "metin": "Super!",
    "kisa": true
   },
   {
-   "t": 65.1,
+   "t": 67.4,
    "metin": "Wall 6. Robot!"
   },
   {
-   "t": 66.5,
-   "metin": "Player one, arms up. Player two, arms down."
+   "t": 68.8,
+   "metin": "Player one up. Player two down."
   },
   {
-   "t": 68.55,
+   "t": 71.55,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 69.55,
+   "t": 72.55,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 70.55,
+   "t": 73.55,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 71.55,
+   "t": 74.55,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 73.3,
+   "t": 76.3,
    "metin": "Nice!",
    "kisa": true
   },
   {
-   "t": 74.3,
+   "t": 77.3,
    "metin": "Round two! Medium!"
   },
   {
-   "t": 78.6,
+   "t": 81.4,
    "metin": "Wall 13. Low and high!"
   },
   {
-   "t": 80.0,
-   "metin": "Player one, squat low. Player two, reach up tall!"
+   "t": 82.8,
+   "metin": "Player one low. Player two tall!"
   },
   {
-   "t": 82.05,
+   "t": 85.55,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 83.05,
+   "t": 86.55,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 84.05,
+   "t": 87.55,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 85.05,
+   "t": 88.55,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 86.8,
+   "t": 90.3,
    "metin": "Great job!",
    "kisa": true
   },
   {
-   "t": 88.6,
+   "t": 91.9,
    "metin": "Wall 14. Lunge twins!"
   },
   {
-   "t": 90.0,
+   "t": 93.3,
    "metin": "Step forward into a lunge, arms up!"
   },
   {
-   "t": 92.05,
+   "t": 96.05,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 93.05,
+   "t": 97.05,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 94.05,
+   "t": 98.05,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 95.05,
+   "t": 99.05,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 96.8,
+   "t": 100.8,
    "metin": "Perfect!",
    "kisa": true
   }

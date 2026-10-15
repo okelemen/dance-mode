@@ -158,10 +158,12 @@ function figurCiz(n, olc, ox, oy, renk) {
   const P = q => [ox + q[0] * olc, oy - q[1] * olc];
   const parca = [
     ['kalca', 'boyun', KALINLIK.govde],
-    ['omuz', 'solDir', KALINLIK.kol], ['solDir', 'solEl', KALINLIK.kol],
-    ['omuz', 'sagDir', KALINLIK.kol], ['sagDir', 'sagEl', KALINLIK.kol],
-    ['kalca', 'solDiz', KALINLIK.bacak], ['solDiz', 'solAyak', KALINLIK.bacak],
-    ['kalca', 'sagDiz', KALINLIK.bacak], ['sagDiz', 'sagAyak', KALINLIK.bacak],
+    ['omuzSol', 'omuzSag', KALINLIK.kol], ['kalcaSol', 'kalcaSag', KALINLIK.bacak],
+    ['omuzSol', 'solDir', KALINLIK.kol], ['solDir', 'solEl', KALINLIK.kol],
+    ['omuzSag', 'sagDir', KALINLIK.kol], ['sagDir', 'sagEl', KALINLIK.kol],
+    ['kalcaSol', 'solDiz', KALINLIK.bacak], ['solDiz', 'solAyak', KALINLIK.bacak],
+    ['kalcaSag', 'sagDiz', KALINLIK.bacak], ['sagDiz', 'sagAyak', KALINLIK.bacak],
+    ['solAyak', 'solUc', KALINLIK.ayak], ['sagAyak', 'sagUc', KALINLIK.ayak],
   ];
   cx.lineCap = 'round'; cx.lineJoin = 'round';
   for (const [kat, ek] of [[renk, 7], [SILUET, 0]]) {   // önce renkli kontur, sonra koyu gövde
@@ -181,7 +183,7 @@ for (const no of Object.keys(POZLAR)) CIFT[no] = cift(POZLAR[no]);
 
 // ------------------------------------------------------------ PANEL
 function panelCiz(d, u, renk) {
-  const PW = 0.80 * W, PH = PW / 1.6;
+  const PW = 0.72 * W, PH = PW / 1.6;   // tam boyda üstte MATCH!/sayım için yer kalır
   let olc, alfa = 1;
   if (u < Z.yaklas) {
     const p = u / Z.yaklas;
@@ -194,7 +196,7 @@ function panelCiz(d, u, renk) {
   }
   if (alfa <= 0) return;
   const w = PW * olc, h = PH * olc;
-  const altY = lerp(UFUK + 30 * k, H * 0.97, kisit((olc - 1 / 6) / (1 - 1 / 6), 0, 1.4));
+  const altY = lerp(UFUK + 30 * k, H * 0.955, kisit((olc - 1 / 6) / (1 - 1 / 6), 0, 1.4));
   const x0 = W / 2 - w / 2, y0 = altY - h;
   cx.save(); cx.globalAlpha = alfa;
   // çerçeve: metal kafes (çift çizgi + çapraz)
@@ -311,12 +313,12 @@ function sayimCiz(d, u, renk) {
     const a0 = say[i], a1 = say[i + 1] ?? Z.yaklas;
     if (u >= a0 && u < a1) {
       const q = (u - a0) / (a1 - a0);
-      yazi(String(say.length - i), W / 2, H * 0.17, (170 - 50 * q) * k, '#ffffff', 1 - q * 0.6);
+      yazi(String(say.length - i), W / 2, H * 0.13, (150 - 45 * q) * k, '#ffffff', 1 - q * 0.6);
     }
   }
   if (u >= Z.yaklas && u < Z.yaklas + Z.tut) {
     const q = (u - Z.yaklas) / Z.tut;
-    yazi('MATCH!', W / 2, H * 0.12, (120 + 20 * Math.sin(q * 3.14)) * k, '#ffffff', 1);
+    yazi('MATCH!', W / 2, H * 0.075, (96 + 14 * Math.sin(q * 3.14)) * k, '#ffffff', 1);
   }
   const g0 = Z.yaklas + Z.tut + Z.gec * 0.4;
   if (u >= g0 && u < d.sure) {

@@ -12,8 +12,10 @@ import json, math, sys
 
 BPM = 120                       # muzik yok; olcu = 2 sn, render.js izgarasi
 OLCU = 60 / BPM * 4
-DUVAR = 10.0                    # bir duvarin toplam suresi (sn)
-ZAMAN = {"yaklas": 7.5, "goster": 1.0, "tut": 1.5, "gec": 0.5, "say": [4.5, 5.5, 6.5]}
+DUVAR = 10.5                    # bir duvarin toplam suresi (sn)
+# ipucu cumlesi (goster+1.5) ile sayim (say[0]) arasi >= 2,6 sn: 16 Eki kesitinde
+# 2,0 sn pencerede 4 ipucu kesildi.
+ZAMAN = {"yaklas": 8.0, "goster": 0.8, "tut": 1.5, "gec": 0.5, "say": [5.0, 6.0, 7.0]}
 
 TURLAR = [
     {"no": 1, "ad": "EASY", "renk": "#22d3ee"},
@@ -30,10 +32,10 @@ KOC = {
     1: ("Star!", None),
     2: ("High five!", "Reach up and touch hands!"),
     3: ("Rocket!", "Hands together, reach up high!"),
-    4: ("Mirror!", "Player one, left arm out. Player two, right arm out."),
-    5: ("Big arch!", "Inside hands up and together. Outside hand on your hip."),
-    6: ("Robot!", "Player one, arms up. Player two, arms down."),
-    13: ("Low and high!", "Player one, squat low. Player two, reach up tall!"),
+    4: ("Mirror!", "Player one, left arm. Player two, right arm."),
+    5: ("Big arch!", "Inside hands up. Outside hand on hip."),
+    6: ("Robot!", "Player one up. Player two down."),
+    13: ("Low and high!", "Player one low. Player two tall!"),
     14: ("Lunge twins!", "Step forward into a lunge, arms up!"),
 }
 

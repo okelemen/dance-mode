@@ -11,8 +11,9 @@
 // temas: [P1 noktası, P2 noktası] -> P2 yatayda kaydırılır, iki nokta buluşur.
 // =====================================================================
 
-export const BOY = { govde: 55, boyun: 20, bas: 14, ust: 30, on: 28, uyluk: 46, baldir: 46, omuz: 50 };
-export const KALINLIK = { govde: 24, kol: 11, bacak: 15 };
+export const BOY = { govde: 55, boyun: 20, bas: 14, ust: 30, on: 28, uyluk: 46, baldir: 46, omuz: 48,
+                     omuzEn: 11, kalcaEn: 7, ayak: 12 };
+export const KALINLIK = { govde: 24, kol: 11, bacak: 15, ayak: 10 };
 
 const yon = a => { const r = a * Math.PI / 180; return [Math.sin(r), -Math.cos(r)]; };
 const ekle = (p, a, l) => { const d = yon(a); return [p[0] + d[0] * l, p[1] + d[1] * l]; };
@@ -32,15 +33,28 @@ export function figur(tanim) {
   const boyun = ekle(kalca, p.govde, BOY.govde);
   const bas = ekle(boyun, p.govde + p.bas, BOY.boyun);
   const omuz = ekle(kalca, p.govde, BOY.omuz);
-  const solDir = ekle(omuz, p.sol[0], BOY.ust), solEl = ekle(solDir, p.sol[1], BOY.on);
-  const sagDir = ekle(omuz, p.sag[0], BOY.ust), sagEl = ekle(sagDir, p.sag[1], BOY.on);
-  const solDiz = ekle(kalca, p.solB[0], BOY.uyluk), solAyak = ekle(solDiz, p.solB[1], BOY.baldir);
-  const sagDiz = ekle(kalca, p.sagB[0], BOY.uyluk), sagAyak = ekle(sagDiz, p.sagB[1], BOY.baldir);
-  const n = { kalca, boyun, bas, omuz, solDir, solEl, sagDir, sagEl, solDiz, solAyak, sagDiz, sagAyak };
+  // Omuz ve kalça eklemleri gövdenin iki yanında (16 Eki kesiti: tek merkez
+  // noktadan çıkan kollar gövdeye gömülüyor, figür sütun gibi okunuyordu).
+  const sagA = p.govde + 90, solA = p.govde - 90;   // gövdeye dik, ekran sağı/solu
+  const omuzSol = ekle(omuz, -solA, BOY.omuzEn), omuzSag = ekle(omuz, -sagA, BOY.omuzEn);
+  const kalcaSol = ekle(kalca, -solA, BOY.kalcaEn), kalcaSag = ekle(kalca, -sagA, BOY.kalcaEn);
+  const solDir = ekle(omuzSol, p.sol[0], BOY.ust), solEl = ekle(solDir, p.sol[1], BOY.on);
+  const sagDir = ekle(omuzSag, p.sag[0], BOY.ust), sagEl = ekle(sagDir, p.sag[1], BOY.on);
+  const solDiz = ekle(kalcaSol, p.solB[0], BOY.uyluk), solAyak = ekle(solDiz, p.solB[1], BOY.baldir);
+  const sagDiz = ekle(kalcaSag, p.sagB[0], BOY.uyluk), sagAyak = ekle(sagDiz, p.sagB[1], BOY.baldir);
+  // ayak: bilekten yatay, gövde merkezinden dışa (yan duruşta baldırın gittiği yöne)
+  const ayakYon = (bilek, diz, kalcaX, vars) => {
+    const dx = bilek[0] - kalcaX;
+    const s = Math.abs(dx) > 6 ? Math.sign(dx) : (Math.abs(bilek[0] - diz[0]) > 4 ? Math.sign(bilek[0] - diz[0]) : vars);
+    return [bilek[0] + s * BOY.ayak, bilek[1] - 2];
+  };
+  const solUc = ayakYon(solAyak, solDiz, kalca[0], -1), sagUc = ayakYon(sagAyak, sagDiz, kalca[0], 1);
+  const n = { kalca, boyun, bas, omuz, omuzSol, omuzSag, kalcaSol, kalcaSag, solDir, solEl, sagDir, sagEl,
+              solDiz, solAyak, sagDiz, sagAyak, solUc, sagUc };
   // yere oturt: uzuv uçlarının alt kenarı y=0
   let enAlt = Infinity;
   for (const [ad, q] of Object.entries(n)) {
-    const r = ad === 'bas' ? BOY.bas : /Ayak|Diz/.test(ad) ? KALINLIK.bacak / 2
+    const r = ad === 'bas' ? BOY.bas : /Uc/.test(ad) ? KALINLIK.ayak / 2 : /Ayak|Diz/.test(ad) ? KALINLIK.bacak / 2
             : /El|Dir/.test(ad) ? KALINLIK.kol / 2 : KALINLIK.govde / 2;
     enAlt = Math.min(enAlt, q[1] - r);
   }
@@ -83,14 +97,14 @@ export const POZLAR = {
   3: { ad: 'Rocket', koc: 'Rocket!', ipucu: 'Hands together, reach up high!',
        p1: { sol: [-172, -178], sag: [172, 178], solB: [-3, -2], sagB: [3, 2] },
        p2: { sol: [-172, -178], sag: [172, 178], solB: [-3, -2], sagB: [3, 2] }, ara: 110 },
-  4: { ad: 'Mirror Wave', koc: 'Mirror!', ipucu: 'Player one, left arm out. Player two, right arm out.',
+  4: { ad: 'Mirror Wave', koc: 'Mirror!', ipucu: 'Player one, left arm. Player two, right arm.',
        p1: { sol: [-90, -90] }, p2: { sag: [90, 90] }, ara: 120 },
-  5: { ad: 'Big Arch', koc: 'Big arch!', ipucu: 'Inside hands up and together. Outside hand on your hip.',
+  5: { ad: 'Big Arch', koc: 'Big arch!', ipucu: 'Inside hands up. Outside hand on hip.',
        p1: { govde: 174, sag: [165, 125], sol: BEL_SOL },
        p2: { govde: 186, sol: [-165, -125], sag: BEL_SAG }, temas: ['sagEl', 'solEl'] },
-  6: { ad: 'Robot', koc: 'Robot!', ipucu: 'Player one, arms up. Player two, arms down.',
+  6: { ad: 'Robot', koc: 'Robot!', ipucu: 'Player one up. Player two down.',
        p1: { sol: [-90, 180], sag: [90, 180] }, p2: { sol: [-90, 0], sag: [90, 0] }, ara: 135 },
-  13: { ad: 'Low and High', koc: 'Low and high!', ipucu: 'Player one, squat low. Player two, reach up tall!',
+  13: { ad: 'Low and High', koc: 'Low and high!', ipucu: 'Player one low. Player two tall!',
        p1: { sol: [-25, 75], sag: [25, -75], solB: [-75, -15], sagB: [75, 15] },
        p2: { sol: [-176, -179], sag: [176, 179], solB: [-2, -1], sagB: [2, 1] }, ara: 135 },
   14: { ad: 'Lunge Twins', koc: 'Lunge twins!', ipucu: 'Step forward into a lunge, arms up!',
