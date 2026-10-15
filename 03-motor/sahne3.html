@@ -1,0 +1,357 @@
+<meta charset="utf-8">
+<title>POSE WALL - motor 3 (poz duvari)</title>
+<style>
+  html,body { margin:0; background:#0b1230; overflow:hidden; }
+  canvas { display:block; }
+</style>
+<canvas id="cikti"></canvas>
+
+<script type="module">
+// =====================================================================
+// MOTOR 3 — POZ DUVARI / POSE WALL (16 Eki 2026). Kural kaynağı:
+//   Masaüstü/POZ-DUVARI/TALIMATLAR.md, referans REF-051.
+// sahne.html ve sahne2.html'den AYRI; Dance Mode kuralları bu sayfaya taşınmaz.
+// Arayüz aynı (kareKur / kareAl / HAZIR ...) -> render.js --sayfa sahne3.html
+//
+// Sahne: sabit kamera, yıldızlı gece göğü + uzak tepeler, ortada koyu yol,
+// kenarda tur renginde neon korkuluk, yolda kameraya akan V çizgileri.
+// Uzaktan çerçeveli duvar paneli gelir; içinde iki oyuncunun pozu
+// (P1 pembe kontur, P2 mavi kontur). Geri sayım 3-2-1, MATCH!, panel geçer.
+// Tamamı 2B canvas: deterministik, hızlı. Zaman çizelgesi bölüm JSON'undan
+// (03-motor/poz-duvari/kesit-kur.py üretir), koç sesi aynı JSON'dan.
+// =====================================================================
+import { POZLAR, cift, KALINLIK, BOY } from './poz-duvari/pozlar.js';
+
+const S = await fetch('/spec/sabitler.json').then(r => r.json());
+const FPS = S.video.fps;
+const SP = new URLSearchParams(location.search);
+const W = Number(SP.get('w') || 1280);
+const H = Number(SP.get('h') || 720);
+const k = H / 1080;                          // tasarım 1080p'de yapıldı
+
+const BOLUM_YOL = SP.get('bolum');
+const BOLUM = BOLUM_YOL ? await fetch(BOLUM_YOL).then(r => r.json()) : {};
+const BPM = BOLUM.bpm || 120;
+const OLCU = 60 / BPM * 4;
+const TOPLAM_OLCU = Number(SP.get('toplam') || BOLUM.toplam_olcu || 16);
+const DUVARLAR = BOLUM.duvarlar || [];
+const KARTLAR = BOLUM.kartlar || [];
+const TURLAR = BOLUM.turlar || [{ no: 1, ad: 'EASY', renk: '#22d3ee' }];
+const TOPLAM_DUVAR = BOLUM.toplam_duvar || DUVARLAR.length;
+const Z = BOLUM.zaman || { yaklas: 7.5, goster: 1.0, tut: 1.5, gec: 0.5, say: [4.5, 5.5, 6.5] };
+
+const FONT = '900 1px "Arial Black", "DejaVu Sans", sans-serif';
+const font = px => FONT.replace('1px', `${Math.round(px)}px`);
+const P1_RENK = '#ff4fa3', P2_RENK = '#38bdf8';
+const SILUET = '#12162b';
+
+const cikti = document.getElementById('cikti');
+cikti.width = W; cikti.height = H;
+const cx = cikti.getContext('2d');
+
+// ------------------------------------------------------------ RASTGELE (sabit tohum)
+function rng(t) { let s = t >>> 0; return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
+const r = rng(51);
+const YILDIZ = Array.from({ length: 420 }, () => ({ x: r(), y: r() * 0.46, b: 0.4 + r() * 1.6, f: r() * 6.28, h: 0.4 + r() * 1.2 }));
+
+// ------------------------------------------------------------ GEOMETRİ
+const UFUK = 0.44 * H;                       // ufuk çizgisi
+const YOL_ALT = 0.46 * W;                    // yolun ekran altındaki yarı genişliği
+const YOL_UST = 0.035 * W;                   // ufuktaki yarı genişlik
+const yolX = (y, kenar) => {                 // y'deki yol kenarı (kenar -1 / +1)
+  const p = (y - UFUK) / (H - UFUK);
+  return W / 2 + kenar * (YOL_UST + (YOL_ALT - YOL_UST) * p);
+};
+
+const ease = p => p * p * (3 - 2 * p);
+const lerp = (a, b, p) => a + (b - a) * p;
+const kisit = (v, a, b) => Math.max(a, Math.min(b, v));
+
+function turBul(t) {
+  let aktif = TURLAR[0];
+  for (const kart of KARTLAR) if (kart.tur && kart.t <= t) aktif = TURLAR.find(x => x.no === kart.tur) || aktif;
+  for (const d of DUVARLAR) if (d.t0 <= t) aktif = TURLAR.find(x => x.no === d.tur) || aktif;
+  return aktif;
+}
+
+function hex(h, a) {
+  const n = parseInt(h.slice(1), 16);
+  return `rgba(${n >> 16 & 255},${n >> 8 & 255},${n & 255},${a})`;
+}
+function acik(h, m) {                        // rengi beyaza doğru aç
+  const n = parseInt(h.slice(1), 16);
+  const c = [n >> 16 & 255, n >> 8 & 255, n & 255].map(v => Math.round(v + (255 - v) * m));
+  return `rgb(${c[0]},${c[1]},${c[2]})`;
+}
+
+// ------------------------------------------------------------ ARKA PLAN
+function gokCiz(t) {
+  const g = cx.createLinearGradient(0, 0, 0, UFUK);
+  g.addColorStop(0, '#050a1f'); g.addColorStop(1, '#1a2350');
+  cx.fillStyle = g; cx.fillRect(0, 0, W, UFUK + 2);
+  for (const s of YILDIZ) {
+    const a = 0.35 + 0.65 * (0.5 + 0.5 * Math.sin(t * s.h + s.f));
+    cx.fillStyle = `rgba(220,230,255,${a.toFixed(3)})`;
+    cx.fillRect(s.x * W, s.y * H, s.b * k * 1.6, s.b * k * 1.6);
+  }
+  // uzak tepeler (iki kat)
+  const tepe = (renk, yuk, frek, faz) => {
+    cx.fillStyle = renk; cx.beginPath(); cx.moveTo(0, UFUK + 2);
+    for (let x = 0; x <= W; x += 8) {
+      const y = UFUK - yuk * k * (0.55 + 0.45 * Math.sin(x / W * frek + faz)) * (0.6 + 0.4 * Math.sin(x / W * frek * 2.3 + faz * 2));
+      cx.lineTo(x, y);
+    }
+    cx.lineTo(W, UFUK + 2); cx.closePath(); cx.fill();
+  };
+  tepe('#141b3f', 70, 7, 1.2);
+  tepe('#0e1430', 38, 11, 4.0);
+}
+
+function zeminCiz(t, renk) {
+  // yol dışı zemin
+  const g = cx.createLinearGradient(0, UFUK, 0, H);
+  g.addColorStop(0, '#0d1330'); g.addColorStop(1, '#070a1a');
+  cx.fillStyle = g; cx.fillRect(0, UFUK, W, H - UFUK);
+  // zemin ızgarası (yanlar boş kalmasın): ufka akan çizgiler
+  cx.strokeStyle = hex(renk, 0.10); cx.lineWidth = Math.max(1, 1.5 * k);
+  for (let i = -14; i <= 14; i++) {
+    cx.beginPath(); cx.moveTo(W / 2 + i * W * 0.012, UFUK); cx.lineTo(W / 2 + i * W * 0.16, H); cx.stroke();
+  }
+  // yol gövdesi
+  cx.fillStyle = '#1f2638';
+  cx.beginPath(); cx.moveTo(yolX(UFUK, -1), UFUK); cx.lineTo(yolX(UFUK, 1), UFUK);
+  cx.lineTo(yolX(H, 1), H); cx.lineTo(yolX(H, -1), H); cx.closePath(); cx.fill();
+  // V çizgileri: perspektifte kameraya akar (z ekseninde sabit hız)
+  const HIZ = 0.55;                          // döngü/sn
+  for (let i = 0; i < 9; i++) {
+    const d = ((i + t * HIZ) / 9) % 1;       // 0 uzak -> 1 yakın
+    const p = Math.pow(d, 2.4);
+    const y = UFUK + (H - UFUK) * p;
+    const yw = (yolX(y, 1) - W / 2) * 0.62;
+    const yh = 40 * k * p;
+    cx.strokeStyle = hex(renk, 0.25 + 0.6 * p); cx.lineWidth = Math.max(1, 9 * k * p);
+    cx.beginPath(); cx.moveTo(W / 2 - yw, y); cx.lineTo(W / 2, y + yh); cx.lineTo(W / 2 + yw, y); cx.stroke();
+  }
+  // neon korkuluklar (iki şerit + direkler)
+  for (const kenar of [-1, 1]) {
+    for (const [ofs, a, lw] of [[0, 0.95, 6], [0.035, 0.6, 4]]) {
+      cx.strokeStyle = hex(renk, a); cx.lineWidth = lw * k;
+      cx.shadowColor = renk; cx.shadowBlur = 18 * k;
+      cx.beginPath();
+      cx.moveTo(yolX(UFUK, kenar) + kenar * ofs * W * 0.08, UFUK);
+      cx.lineTo(yolX(H, kenar) + kenar * ofs * W, H);
+      cx.stroke();
+    }
+    cx.shadowBlur = 0;
+    for (let i = 0; i < 12; i++) {
+      const p = Math.pow(((i + t * 0.55 * 12 / 9) / 12) % 1, 2.4);
+      const y = UFUK + (H - UFUK) * p;
+      const x = yolX(y, kenar);
+      cx.strokeStyle = hex(renk, 0.25 + 0.5 * p); cx.lineWidth = Math.max(1, 5 * k * p);
+      cx.beginPath(); cx.moveTo(x, y); cx.lineTo(x + kenar * 0.035 * W * p, y - 60 * k * p); cx.stroke();
+    }
+  }
+}
+
+// ------------------------------------------------------------ SİLUET
+function figurCiz(n, olc, ox, oy, renk) {
+  const P = q => [ox + q[0] * olc, oy - q[1] * olc];
+  const parca = [
+    ['kalca', 'boyun', KALINLIK.govde],
+    ['omuz', 'solDir', KALINLIK.kol], ['solDir', 'solEl', KALINLIK.kol],
+    ['omuz', 'sagDir', KALINLIK.kol], ['sagDir', 'sagEl', KALINLIK.kol],
+    ['kalca', 'solDiz', KALINLIK.bacak], ['solDiz', 'solAyak', KALINLIK.bacak],
+    ['kalca', 'sagDiz', KALINLIK.bacak], ['sagDiz', 'sagAyak', KALINLIK.bacak],
+  ];
+  cx.lineCap = 'round'; cx.lineJoin = 'round';
+  for (const [kat, ek] of [[renk, 7], [SILUET, 0]]) {   // önce renkli kontur, sonra koyu gövde
+    cx.strokeStyle = kat; cx.fillStyle = kat;
+    for (const [a, b, kal] of parca) {
+      const A = P(n[a]), B = P(n[b]);
+      cx.lineWidth = (kal + ek) * olc;
+      cx.beginPath(); cx.moveTo(A[0], A[1]); cx.lineTo(B[0], B[1]); cx.stroke();
+    }
+    const B = P(n.bas);
+    cx.beginPath(); cx.arc(B[0], B[1], (BOY.bas + ek / 2) * olc, 0, Math.PI * 2); cx.fill();
+  }
+}
+
+const CIFT = {};
+for (const no of Object.keys(POZLAR)) CIFT[no] = cift(POZLAR[no]);
+
+// ------------------------------------------------------------ PANEL
+function panelCiz(d, u, renk) {
+  const PW = 0.80 * W, PH = PW / 1.6;
+  let olc, alfa = 1;
+  if (u < Z.yaklas) {
+    const p = u / Z.yaklas;
+    olc = 1 / (1 + 5 * (1 - ease(Math.min(1, p * 1.0))) * (1 - p * 0.15));
+  } else if (u < Z.yaklas + Z.tut) {
+    olc = 1 + 0.012 * Math.sin((u - Z.yaklas) * 9);
+  } else {
+    const p = (u - Z.yaklas - Z.tut) / Z.gec;
+    olc = 1 + 1.6 * p * p; alfa = 1 - p;
+  }
+  if (alfa <= 0) return;
+  const w = PW * olc, h = PH * olc;
+  const altY = lerp(UFUK + 30 * k, H * 0.97, kisit((olc - 1 / 6) / (1 - 1 / 6), 0, 1.4));
+  const x0 = W / 2 - w / 2, y0 = altY - h;
+  cx.save(); cx.globalAlpha = alfa;
+  // çerçeve: metal kafes (çift çizgi + çapraz)
+  const f = Math.max(3, 22 * k * olc);
+  cx.fillStyle = '#9aa3b5'; cx.fillRect(x0 - f, y0 - f, w + 2 * f, h + 2 * f);
+  cx.fillStyle = '#5b6375'; cx.fillRect(x0 - f * 0.55, y0 - f * 0.55, w + f * 1.1, h + f * 1.1);
+  cx.strokeStyle = '#c9d0de'; cx.lineWidth = Math.max(1, f * 0.12);
+  const capraz = (ax, ay, bx, by, adim) => {
+    const L = Math.hypot(bx - ax, by - ay), n = Math.max(2, Math.floor(L / adim));
+    for (let i = 0; i < n; i++) {
+      const p0 = i / n, p1 = (i + 0.5) / n, p2 = (i + 1) / n;
+      const nx = (by - ay) / L * f * 0.35, ny = -(bx - ax) / L * f * 0.35;
+      cx.beginPath();
+      cx.moveTo(lerp(ax, bx, p0) + nx, lerp(ay, by, p0) + ny);
+      cx.lineTo(lerp(ax, bx, p1) - nx, lerp(ay, by, p1) - ny);
+      cx.lineTo(lerp(ax, bx, p2) + nx, lerp(ay, by, p2) + ny);
+      cx.stroke();
+    }
+  };
+  const m = f * 0.78;
+  capraz(x0 - m, y0 - m, x0 + w + m, y0 - m, f * 1.6);
+  capraz(x0 - m, y0 + h + m, x0 + w + m, y0 + h + m, f * 1.6);
+  capraz(x0 - m, y0 - m, x0 - m, y0 + h + m, f * 1.6);
+  capraz(x0 + w + m, y0 - m, x0 + w + m, y0 + h + m, f * 1.6);
+
+  const acildi = u >= Z.goster;
+  if (!acildi) {
+    cx.fillStyle = '#0a0f24'; cx.fillRect(x0, y0, w, h);
+    cx.fillStyle = hex(renk, 0.9); cx.font = font(h * 0.16); cx.textAlign = 'center'; cx.textBaseline = 'middle';
+    cx.fillText(`WALL ${d.no}`, W / 2, y0 + h * 0.5);
+  } else {
+    const g = cx.createLinearGradient(0, y0, 0, y0 + h);
+    g.addColorStop(0, acik(renk, 0.55)); g.addColorStop(1, renk);
+    cx.fillStyle = g; cx.fillRect(x0, y0, w, h);
+    // pozlar: figür birimi -> piksel. Panel iç yüksekliği 290 birim.
+    const c = CIFT[d.poz];
+    const olcF = h / 290;
+    const zemin = y0 + h - 18 * olcF;
+    cx.save(); cx.beginPath(); cx.rect(x0, y0, w, h); cx.clip();
+    figurCiz(c.p1, olcF, W / 2, zemin, P1_RENK);
+    figurCiz(c.p2, olcF, W / 2, zemin, P2_RENK);
+    // P1 / P2 etiketleri başların üstünde
+    cx.font = font(22 * olcF); cx.textAlign = 'center'; cx.textBaseline = 'bottom';
+    for (const [n, renkE, ad] of [[c.p1, P1_RENK, 'P1'], [c.p2, P2_RENK, 'P2']]) {
+      const ust = Math.max(...Object.values(n).map(q => q[1])) + BOY.bas + 10;
+      cx.fillStyle = renkE; cx.lineWidth = 5 * olcF; cx.strokeStyle = '#0a0f24';
+      cx.strokeText(ad, W / 2 + n.bas[0] * olcF, zemin - ust * olcF);
+      cx.fillText(ad, W / 2 + n.bas[0] * olcF, zemin - ust * olcF);
+    }
+    cx.restore();
+    // açılma parlaması
+    const fl = 1 - (u - Z.goster) / 0.25;
+    if (fl > 0) { cx.fillStyle = `rgba(255,255,255,${(0.85 * fl).toFixed(3)})`; cx.fillRect(x0, y0, w, h); }
+  }
+  cx.restore();
+}
+
+// ------------------------------------------------------------ YAZILAR
+function yazi(metin, x, y, px, renk, alfa = 1, golge = true) {
+  cx.save(); cx.globalAlpha = alfa;
+  cx.font = font(px); cx.textAlign = 'center'; cx.textBaseline = 'middle';
+  cx.lineJoin = 'round';
+  if (golge) { cx.shadowColor = renk; cx.shadowBlur = px * 0.35; }
+  cx.lineWidth = px * 0.14; cx.strokeStyle = '#070b1c'; cx.strokeText(metin, x, y);
+  cx.fillStyle = renk; cx.fillText(metin, x, y);
+  cx.restore();
+}
+
+function kartCiz(kart, u, renk) {
+  const p = u / kart.sure;
+  const a = kisit(Math.min(u / 0.3, (kart.sure - u) / 0.3), 0, 1);
+  const s = 1 + 0.06 * (1 - ease(Math.min(1, u / 0.4)));
+  const y = H * 0.30;
+  if (kart.tip === 'buyuk') {
+    yazi(kart.metin, W / 2, y, 150 * k * s, kart.renk || renk, a);
+    if (kart.alt) yazi(kart.alt, W / 2, y + 130 * k, 64 * k, '#ffffff', a, false);
+  } else if (kart.tip === 'nasil') {
+    yazi('HOW TO PLAY', W / 2, H * 0.17, 90 * k, renk, a);
+    yazi('MATCH THE POSE', W / 2, H * 0.30, 74 * k, '#ffffff', a, false);
+    yazi('before the wall reaches you', W / 2, H * 0.38, 46 * k, '#cdd6f5', a, false);
+    yazi('P1', W * 0.40, H * 0.48, 64 * k, P1_RENK, a);
+    yazi('P2', W * 0.60, H * 0.48, 64 * k, P2_RENK, a);
+  } else if (kart.tip === 'tur') {
+    const tur = TURLAR.find(x => x.no === kart.tur);
+    yazi(kart.metin, W / 2, y - 20 * k, 150 * k * s, '#ffffff', a);
+    yazi(tur.ad, W / 2, y + 120 * k, 110 * k, tur.renk, a);
+  }
+}
+
+function hudCiz(t, tur, duvar) {
+  // sol üst: tur rozeti
+  const px = 34 * k, pad = 22 * k;
+  const metin = `ROUND ${tur.no} · ${tur.ad}`;
+  cx.font = font(px);
+  const tw = cx.measureText(metin).width;
+  const bx = 40 * k, by = 36 * k, bw = tw + pad * 2, bh = px + pad * 1.1;
+  cx.fillStyle = 'rgba(7,11,28,0.72)'; cx.strokeStyle = tur.renk; cx.lineWidth = 3 * k;
+  cx.beginPath(); cx.roundRect(bx, by, bw, bh, bh / 2); cx.fill(); cx.stroke();
+  cx.fillStyle = tur.renk; cx.textAlign = 'left'; cx.textBaseline = 'middle';
+  cx.fillText(metin, bx + pad, by + bh / 2 + 2 * k);
+  // sağ üst: duvar sayacı
+  if (duvar) {
+    const m2 = `WALL ${duvar.no} / ${TOPLAM_DUVAR}`;
+    const tw2 = cx.measureText(m2).width, bw2 = tw2 + pad * 2, bx2 = W - 40 * k - bw2;
+    cx.fillStyle = 'rgba(7,11,28,0.72)'; cx.strokeStyle = '#ffffff';
+    cx.beginPath(); cx.roundRect(bx2, by, bw2, bh, bh / 2); cx.fill(); cx.stroke();
+    cx.fillStyle = '#ffffff'; cx.fillText(m2, bx2 + pad, by + bh / 2 + 2 * k);
+  }
+}
+
+function sayimCiz(d, u, renk) {
+  const say = Z.say;
+  for (let i = 0; i < say.length; i++) {
+    const a0 = say[i], a1 = say[i + 1] ?? Z.yaklas;
+    if (u >= a0 && u < a1) {
+      const q = (u - a0) / (a1 - a0);
+      yazi(String(say.length - i), W / 2, H * 0.17, (170 - 50 * q) * k, '#ffffff', 1 - q * 0.6);
+    }
+  }
+  if (u >= Z.yaklas && u < Z.yaklas + Z.tut) {
+    const q = (u - Z.yaklas) / Z.tut;
+    yazi('MATCH!', W / 2, H * 0.12, (120 + 20 * Math.sin(q * 3.14)) * k, '#ffffff', 1);
+  }
+  const g0 = Z.yaklas + Z.tut + Z.gec * 0.4;
+  if (u >= g0 && u < d.sure) {
+    const q = (u - g0) / (d.sure - g0);
+    yazi(d.ovgu || 'NICE!', W / 2, H * 0.30 - 30 * k * q, 110 * k, renk, 1 - q);
+  }
+}
+
+// ------------------------------------------------------------ KARE
+function kareKur(n) {
+  const t = n / FPS;                         // DETERMINISTIK: duvar saati yok
+  const tur = turBul(t);
+  const renk = tur.renk;
+  gokCiz(t);
+  zeminCiz(t, renk);
+  const duvar = DUVARLAR.find(d => t >= d.t0 && t < d.t0 + d.sure);
+  if (duvar) panelCiz(duvar, t - duvar.t0, renk);
+  for (const kart of KARTLAR) if (t >= kart.t && t < kart.t + kart.sure) kartCiz(kart, t - kart.t, renk);
+  const sonDuvar = duvar || [...DUVARLAR].reverse().find(d => d.t0 <= t);
+  hudCiz(t, tur, sonDuvar);
+  if (duvar) sayimCiz(duvar, t - duvar.t0, renk);
+}
+
+window.kareKur = kareKur;
+window.kareAl = (bicim, kalite) => {
+  if (bicim === 'png')  return cikti.toDataURL('image/png');
+  if (bicim === 'jpeg') return cikti.toDataURL('image/jpeg', kalite || 1);
+  return cikti.toDataURL('image/webp', kalite || 1);
+};
+window.SURE_OLCU = TOPLAM_OLCU;
+window.TOPLAM_KARE = Math.round(TOPLAM_OLCU * OLCU * FPS);
+window.NOTA_SAYISI = DUVARLAR.length;
+window.KLIP_SAYISI = Object.keys(POZLAR).length;
+window.SILUET_VAR = DUVARLAR.every(d => CIFT[d.poz]);
+window.__K = { POZLAR, CIFT, DUVARLAR, KARTLAR };
+kareKur(0);
+window.HAZIR = true;
+</script>

@@ -1,0 +1,429 @@
+{
+ "seri": "POSE WALL",
+ "bolum": "pose-wall-01",
+ "bpm": 120,
+ "toplam_olcu": 49,
+ "toplam_duvar": 38,
+ "zaman": {
+  "yaklas": 7.5,
+  "goster": 1.0,
+  "tut": 1.5,
+  "gec": 0.5,
+  "say": [
+   4.5,
+   5.5,
+   6.5
+  ]
+ },
+ "turlar": [
+  {
+   "no": 1,
+   "ad": "EASY",
+   "renk": "#22d3ee"
+  },
+  {
+   "no": 2,
+   "ad": "MEDIUM",
+   "renk": "#facc15"
+  },
+  {
+   "no": 3,
+   "ad": "HARD",
+   "renk": "#fb923c"
+  },
+  {
+   "no": 4,
+   "ad": "FINAL",
+   "renk": "#e879f9"
+  }
+ ],
+ "kartlar": [
+  {
+   "t": 0.0,
+   "sure": 3.0,
+   "tip": "buyuk",
+   "metin": "WELCOME",
+   "alt": "POSE WALL",
+   "renk": "#fb923c"
+  },
+  {
+   "t": 3.0,
+   "sure": 5.5,
+   "tip": "nasil"
+  },
+  {
+   "t": 8.5,
+   "sure": 2.0,
+   "tip": "buyuk",
+   "metin": "READY?",
+   "renk": "#4ade80"
+  },
+  {
+   "t": 10.5,
+   "sure": 3.5,
+   "tip": "tur",
+   "tur": 1,
+   "metin": "ROUND 1"
+  },
+  {
+   "t": 74.0,
+   "sure": 3.5,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "ROUND 2"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "poz": 1,
+   "tur": 1,
+   "t0": 14.0,
+   "sure": 10.0,
+   "ovgu": "NICE!"
+  },
+  {
+   "no": 2,
+   "poz": 2,
+   "tur": 1,
+   "t0": 24.0,
+   "sure": 10.0,
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 3,
+   "poz": 3,
+   "tur": 1,
+   "t0": 34.0,
+   "sure": 10.0,
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 4,
+   "poz": 4,
+   "tur": 1,
+   "t0": 44.0,
+   "sure": 10.0,
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 5,
+   "poz": 5,
+   "tur": 1,
+   "t0": 54.0,
+   "sure": 10.0,
+   "ovgu": "SUPER!"
+  },
+  {
+   "no": 6,
+   "poz": 6,
+   "tur": 1,
+   "t0": 64.0,
+   "sure": 10.0,
+   "ovgu": "NICE!"
+  },
+  {
+   "no": 13,
+   "poz": 13,
+   "tur": 2,
+   "t0": 77.5,
+   "sure": 10.0,
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 14,
+   "poz": 14,
+   "tur": 2,
+   "t0": 87.5,
+   "sure": 10.0,
+   "ovgu": "PERFECT!"
+  }
+ ],
+ "koc": [
+  {
+   "t": 0.3,
+   "metin": "Welcome to Pose Wall!"
+  },
+  {
+   "t": 3.2,
+   "metin": "Grab a partner. Player one is pink, player two is blue."
+  },
+  {
+   "t": 6.2,
+   "metin": "Match the pose before the wall reaches you!"
+  },
+  {
+   "t": 8.7,
+   "metin": "Ready?"
+  },
+  {
+   "t": 10.8,
+   "metin": "Round one! Easy!"
+  },
+  {
+   "t": 15.1,
+   "metin": "Wall 1. Star!"
+  },
+  {
+   "t": 18.55,
+   "metin": "Three!",
+   "kisa": true
+  },
+  {
+   "t": 19.55,
+   "metin": "Two!",
+   "kisa": true
+  },
+  {
+   "t": 20.55,
+   "metin": "One!",
+   "kisa": true
+  },
+  {
+   "t": 21.55,
+   "metin": "Hold it!",
+   "kisa": true
+  },
+  {
+   "t": 23.3,
+   "metin": "Nice!",
+   "kisa": true
+  },
+  {
+   "t": 25.1,
+   "metin": "Wall 2. High five!"
+  },
+  {
+   "t": 26.5,
+   "metin": "Reach up and touch hands!"
+  },
+  {
+   "t": 28.55,
+   "metin": "Three!",
+   "kisa": true
+  },
+  {
+   "t": 29.55,
+   "metin": "Two!",
+   "kisa": true
+  },
+  {
+   "t": 30.55,
+   "metin": "One!",
+   "kisa": true
+  },
+  {
+   "t": 31.55,
+   "metin": "Hold it!",
+   "kisa": true
+  },
+  {
+   "t": 33.3,
+   "metin": "Great job!",
+   "kisa": true
+  },
+  {
+   "t": 35.1,
+   "metin": "Wall 3. Rocket!"
+  },
+  {
+   "t": 36.5,
+   "metin": "Hands together, reach up high!"
+  },
+  {
+   "t": 38.55,
+   "metin": "Three!",
+   "kisa": true
+  },
+  {
+   "t": 39.55,
+   "metin": "Two!",
+   "kisa": true
+  },
+  {
+   "t": 40.55,
+   "metin": "One!",
+   "kisa": true
+  },
+  {
+   "t": 41.55,
+   "metin": "Hold it!",
+   "kisa": true
+  },
+  {
+   "t": 43.3,
+   "metin": "Perfect!",
+   "kisa": true
+  },
+  {
+   "t": 45.1,
+   "metin": "Wall 4. Mirror!"
+  },
+  {
+   "t": 46.5,
+   "metin": "Player one, left arm out. Player two, right arm out."
+  },
+  {
+   "t": 48.55,
+   "metin": "Three!",
+   "kisa": true
+  },
+  {
+   "t": 49.55,
+   "metin": "Two!",
+   "kisa": true
+  },
+  {
+   "t": 50.55,
+   "metin": "One!",
+   "kisa": true
+  },
+  {
+   "t": 51.55,
+   "metin": "Hold it!",
+   "kisa": true
+  },
+  {
+   "t": 53.3,
+   "metin": "Awesome!",
+   "kisa": true
+  },
+  {
+   "t": 55.1,
+   "metin": "Wall 5. Big arch!"
+  },
+  {
+   "t": 56.5,
+   "metin": "Inside hands up and together. Outside hand on your hip."
+  },
+  {
+   "t": 58.55,
+   "metin": "Three!",
+   "kisa": true
+  },
+  {
+   "t": 59.55,
+   "metin": "Two!",
+   "kisa": true
+  },
+  {
+   "t": 60.55,
+   "metin": "One!",
+   "kisa": true
+  },
+  {
+   "t": 61.55,
+   "metin": "Hold it!",
+   "kisa": true
+  },
+  {
+   "t": 63.3,
+   "metin": "Super!",
+   "kisa": true
+  },
+  {
+   "t": 65.1,
+   "metin": "Wall 6. Robot!"
+  },
+  {
+   "t": 66.5,
+   "metin": "Player one, arms up. Player two, arms down."
+  },
+  {
+   "t": 68.55,
+   "metin": "Three!",
+   "kisa": true
+  },
+  {
+   "t": 69.55,
+   "metin": "Two!",
+   "kisa": true
+  },
+  {
+   "t": 70.55,
+   "metin": "One!",
+   "kisa": true
+  },
+  {
+   "t": 71.55,
+   "metin": "Hold it!",
+   "kisa": true
+  },
+  {
+   "t": 73.3,
+   "metin": "Nice!",
+   "kisa": true
+  },
+  {
+   "t": 74.3,
+   "metin": "Round two! Medium!"
+  },
+  {
+   "t": 78.6,
+   "metin": "Wall 13. Low and high!"
+  },
+  {
+   "t": 80.0,
+   "metin": "Player one, squat low. Player two, reach up tall!"
+  },
+  {
+   "t": 82.05,
+   "metin": "Three!",
+   "kisa": true
+  },
+  {
+   "t": 83.05,
+   "metin": "Two!",
+   "kisa": true
+  },
+  {
+   "t": 84.05,
+   "metin": "One!",
+   "kisa": true
+  },
+  {
+   "t": 85.05,
+   "metin": "Hold it!",
+   "kisa": true
+  },
+  {
+   "t": 86.8,
+   "metin": "Great job!",
+   "kisa": true
+  },
+  {
+   "t": 88.6,
+   "metin": "Wall 14. Lunge twins!"
+  },
+  {
+   "t": 90.0,
+   "metin": "Step forward into a lunge, arms up!"
+  },
+  {
+   "t": 92.05,
+   "metin": "Three!",
+   "kisa": true
+  },
+  {
+   "t": 93.05,
+   "metin": "Two!",
+   "kisa": true
+  },
+  {
+   "t": 94.05,
+   "metin": "One!",
+   "kisa": true
+  },
+  {
+   "t": 95.05,
+   "metin": "Hold it!",
+   "kisa": true
+  },
+  {
+   "t": 96.8,
+   "metin": "Perfect!",
+   "kisa": true
+  }
+ ],
+ "_not": "POZ DUVARI kesit (muziksiz). Uretici: 03-motor/poz-duvari/kesit-kur.py"
+}
