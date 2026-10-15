@@ -1,0 +1,70 @@
+name: Koc sesi (TTS) - POZ DUVARI
+
+# Bolum JSON'undaki "koc" cumlelerini Kokoro TTS ile okutur, zamanina yerlestirir.
+# Model runner'a iner (yerel makineye kurulum yok). Cikti: koc-sesi artifact'i.
+# Montaj (goruntu + koc sesi) yerelde ffmpeg ile yapilir.
+
+on:
+  workflow_dispatch:
+    inputs:
+      bolum:
+        description: "Bolum dosyasi"
+        required: true
+        default: "bolumler/pose-wall-01-kesit.json"
+      ses:
+        description: "Kokoro sesi (orn. am_michael, am_adam, af_heart, bm_george)"
+        required: true
+        default: "am_michael"
+      hiz:
+        description: "Konusma hizi"
+        required: true
+        default: "1.1"
+      ornekler:
+        description: "Ayrica ses ornekleri uret (welcome cumlesi, birkac sesle)"
+        required: true
+        default: "evet"
+        type: choice
+        options: ["evet", "hayir"]
+
+jobs:
+  ses:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install -q "kokoro-onnx>=0.4,<0.6" soundfile numpy
+      - name: Model dosyalari
+        run: |
+          mkdir -p model && cd model
+          curl -sSL -o kokoro-v1.0.onnx https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx
+          curl -sSL -o voices-v1.0.bin https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin
+          ls -la
+      - name: Koc izi
+        run: |
+          mkdir -p cikti
+          python 03-motor/poz-duvari/koc-sesi.py "${{ github.event.inputs.bolum }}" \
+            model/kokoro-v1.0.onnx model/voices-v1.0.bin cikti/koc-sesi.wav \
+            --ses ${{ github.event.inputs.ses }} --hiz ${{ github.event.inputs.hiz }}
+      - name: Ses ornekleri
+        if: ${{ github.event.inputs.ornekler == 'evet' }}
+        run: |
+          python - <<'EOF'
+          import soundfile as sf
+          from kokoro_onnx import Kokoro
+          k = Kokoro("model/kokoro-v1.0.onnx", "model/voices-v1.0.bin")
+          metin = "Welcome to Pose Wall! Grab a partner. Three! Two! One! Hold it! Great job!"
+          for v in ["am_michael", "am_adam", "am_puck", "af_heart", "bm_george"]:
+              try:
+                  s, sr = k.create(metin, voice=v, speed=1.1, lang="en-us")
+                  sf.write(f"cikti/ornek-{v}.wav", s, sr)
+                  print("ok", v)
+              except Exception as e:
+                  print("yok", v, e)
+          EOF
+      - uses: actions/upload-artifact@v4
+        with:
+          name: koc-sesi
+          path: cikti/
+          retention-days: 14
