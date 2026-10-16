@@ -90,6 +90,7 @@ def kur(dizi, son=True):
     ]
     t = 8.0
     sayac = 0
+    abone = []          # SUBSCRIBE hatirlatmasi: her 2 duvarda bir (14 sn), poz acildiktan sonra
     for tur, liste in dizi:
         kartlar.append({"t": t, "sure": 2.5, "tip": "tur", "tur": tur, "metin": f"ROUND {tur}"})
         koc.append({"t": t + 0.3, "metin": TUR_KOC[tur]})
@@ -106,6 +107,8 @@ def kur(dizi, son=True):
                 koc.append({"t": round(t + s + 0.05, 3), "metin": ["Three!", "Two!", "One!"][i], "kisa": True})
             koc.append({"t": round(t + ZAMAN["yaklas"] + 0.05, 3), "metin": "Hold it!", "kisa": True})
             koc.append({"t": round(t + ZAMAN["yaklas"] + ZAMAN["tut"] + 0.1, 3), "metin": OVGU_KOC[o], "kisa": True})
+            if sayac % 2 == 1:
+                abone.append(round(t + 0.6, 3))
             t += DUVAR
             sayac += 1
     if son:
@@ -117,7 +120,7 @@ def kur(dizi, son=True):
     return {
         "seri": "POSE WALL", "bolum": "pose-wall-01", "bpm": BPM, "toplam_olcu": olcu,
         "toplam_duvar": 80, "zaman": ZAMAN, "turlar": TURLAR,
-        "kartlar": kartlar, "duvarlar": duvarlar, "koc": koc,
+        "kartlar": kartlar, "duvarlar": duvarlar, "koc": koc, "abone": abone, "abone_sure": 3.0,
         "_not": "POZ DUVARI. Uretici: 03-motor/poz-duvari/kesit-kur.py",
     }
 

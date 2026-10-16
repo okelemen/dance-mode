@@ -89,6 +89,11 @@ def zap(sure=0.3):
     return x * 0.6
 
 
+def tik(sure=0.06):
+    n = int(sure * SR); t = np.arange(n) / SR
+    return filtre_bant(gurultu(sure), 2000, 8000) * np.exp(-t * 120) * 1.2
+
+
 def fanfar(sure=0.9):
     out = np.zeros(int(sure * SR))
     for i, f in enumerate([523.25, 659.25, 783.99, 1046.5]):
@@ -131,6 +136,11 @@ def main():
             yerlestir(ef, zap(), t0 + Z["yaklas"] + 0.05, 0.7)              # temas kıvılcımı
         yerlestir(ef, vuus(0.5, False, 0.9), t0 + Z["yaklas"] + Z["tut"] - 0.05)  # yanından geçti
         yerlestir(ef, piril(), t0 + Z["yaklas"] + Z["tut"] + 0.15, 0.55)    # övgü
+    # abone hatirlatmasi: girişte pop, 1,15 sn'de tik (sahne3.html aboneCiz ile ayni zaman)
+    for ta in B.get("abone", []):
+        yerlestir(ef, ding(990, 0.2) * 0.6, ta + 0.05, 0.5)
+        yerlestir(ef, tik(), ta + 1.15, 0.9)
+        yerlestir(ef, ding(1760, 0.5), ta + 1.2, 0.45)
     ef = ef[: int(sure * SR)]
 
     koc, ksr = sf.read(koc_yol, dtype="float32")

@@ -497,6 +497,62 @@ function sayimCiz(d, u, renk) {
   }
 }
 
+// ------------------------------------------------------------ ABONE HATIRLATMASI
+// Kullanıcı (16 Eki 2026): "subscribe yazısını her 15 saniyede bir ... insanların fark edeceği şekilde".
+// Zamanlar bölüm JSON'undaki "abone" listesinden (her 2 duvarda bir, poz açıldıktan sonra) — efekt.py
+// tık sesini aynı listeden koyar. Sol üst bantta: paneller, sayım ve MATCH! ortada, önleri kapanmaz.
+const ABONE = BOLUM.abone || [], ABONE_SURE = BOLUM.abone_sure || 3.0;
+function aboneCiz(t) {
+  const a0 = ABONE.find(x => t >= x && t < x + ABONE_SURE);
+  if (a0 === undefined) return;
+  const u = t - a0;
+  const gir = ease(kisit(u / 0.35, 0, 1)), cik = ease(kisit((ABONE_SURE - u) / 0.35, 0, 1));
+  const kay = (1 - Math.min(gir, cik)) * -560 * k;
+  const tik = 1.15, abone = u >= tik;
+  const bas = u >= tik && u < tik + 0.15 ? 0.92 : 1;              // tıklama anında içe basma
+  const pul = abone ? 1 : 1 + 0.05 * Math.sin(u * 12);
+  const bw = 430 * k * bas * pul, bh = 104 * k * bas * pul;
+  const x0 = 40 * k + kay, yM = H * 0.215;
+  cx.save();
+  cx.shadowColor = abone ? '#94a3b8' : '#ff1f3d'; cx.shadowBlur = 36 * k;
+  cx.fillStyle = abone ? '#3f3f52' : '#e11d2e';
+  cx.beginPath(); cx.roundRect(x0, yM - bh / 2, bw, bh, bh / 2); cx.fill();
+  cx.restore();
+  // oynat üçgeni rozeti
+  const ix = x0 + bh * 0.62, iy = yM;
+  cx.fillStyle = '#ffffff'; cx.beginPath(); cx.roundRect(ix - 30 * k, iy - 22 * k, 60 * k, 44 * k, 12 * k); cx.fill();
+  cx.fillStyle = abone ? '#3f3f52' : '#e11d2e';
+  cx.beginPath(); cx.moveTo(ix - 9 * k, iy - 12 * k); cx.lineTo(ix + 13 * k, iy); cx.lineTo(ix - 9 * k, iy + 12 * k); cx.closePath(); cx.fill();
+  cx.font = font(40 * k * bas); cx.textAlign = 'left'; cx.textBaseline = 'middle'; cx.fillStyle = '#ffffff';
+  cx.fillText(abone ? 'SUBSCRIBED' : 'SUBSCRIBE', ix + 44 * k, yM + 2 * k);
+  // zil (abone olunca sallanır)
+  const zx = x0 + bw + 46 * k, zy = yM;
+  const sal = abone ? Math.sin((u - tik) * 30) * Math.exp(-(u - tik) * 3) * 0.5 : 0;
+  cx.save(); cx.translate(zx, zy - 20 * k); cx.rotate(sal);
+  cx.fillStyle = '#facc15'; cx.shadowColor = '#facc15'; cx.shadowBlur = 20 * k;
+  cx.beginPath(); cx.moveTo(-24 * k, 34 * k); cx.quadraticCurveTo(-22 * k, 0, 0, -4 * k); cx.quadraticCurveTo(22 * k, 0, 24 * k, 34 * k); cx.closePath(); cx.fill();
+  cx.beginPath(); cx.arc(0, 40 * k, 7 * k, 0, 6.283); cx.fill();
+  cx.restore();
+  // el imleci: düğmeye gelir, tıklar
+  if (u > 0.45 && u < ABONE_SURE - 0.3) {
+    const q = ease(kisit((u - 0.45) / (tik - 0.45), 0, 1));
+    const hx = lerp(x0 + bw + 160 * k, x0 + bw * 0.7, q), hy = lerp(yM + 120 * k, yM + 18 * k, q);
+    const s = (u >= tik && u < tik + 0.15) ? 0.85 : 1;
+    cx.save(); cx.translate(hx, hy); cx.scale(s, s);
+    cx.fillStyle = '#ffffff'; cx.strokeStyle = '#111827'; cx.lineWidth = 3 * k;
+    cx.beginPath();
+    cx.moveTo(0, 0); cx.lineTo(0, 46 * k); cx.lineTo(11 * k, 35 * k); cx.lineTo(20 * k, 54 * k);
+    cx.lineTo(28 * k, 50 * k); cx.lineTo(19 * k, 32 * k); cx.lineTo(34 * k, 32 * k); cx.closePath();
+    cx.fill(); cx.stroke();
+    if (u >= tik && u < tik + 0.35) {                           // tık halkası
+      const r2 = (u - tik) / 0.35;
+      cx.strokeStyle = `rgba(255,255,255,${(1 - r2).toFixed(3)})`; cx.lineWidth = 4 * k;
+      cx.beginPath(); cx.arc(0, 0, 14 * k + 40 * k * r2, 0, 6.283); cx.stroke();
+    }
+    cx.restore();
+  }
+}
+
 // ------------------------------------------------------------ KATALOG (kontrol karesi)
 // bolum JSON'unda "katalog": true -> 80 poz tek karede ızgara (P1 | P2), numaralı.
 function katalogCiz() {
@@ -539,6 +595,7 @@ function kareKur(n) {
   const sonDuvar = duvar || [...DUVARLAR].reverse().find(d => d.t0 <= t);
   hudCiz(t, tur, sonDuvar);
   if (duvar) sayimCiz(duvar, t - duvar.t0, renk);
+  aboneCiz(t);
 }
 
 window.kareKur = kareKur;
