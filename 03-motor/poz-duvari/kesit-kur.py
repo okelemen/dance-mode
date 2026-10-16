@@ -44,7 +44,7 @@ KOC = {
     23: ("Low and high!", "One low, two tall!"), 24: ("Lunge twins!", "Lunge, arms up!"),
     25: ("Tree!", "Foot on knee!"), 26: ("Archer!", "Pull the bow!"),
     27: ("Teapot!", "Hand on hip, tip over!"), 28: ("Superhero!", "Fist up high!"),
-    29: ("Side bend!", "Arm over, bend!"), 30: ("Hands on knees!", "Bend your knees!"),
+    29: ("Side bend!", "Arm over, bend!"), 30: ("Knees!", "Hands on your knees!"),
     31: ("Side kick!", "Leg out to the side!"), 32: ("Surfer!", "Ride the wave!"),
     33: ("Windmill!", "One up, one down!"), 34: ("Take a bow!", "Bend forward!"),
     35: ("Runner!", "Knee up, arms swing!"), 36: ("Zombie!", "Arms out in front!"),
