@@ -2,8 +2,8 @@
  "seri": "POSE WALL",
  "bolum": "pose-wall-01",
  "bpm": 120,
- "toplam_olcu": 35,
- "toplam_duvar": 38,
+ "toplam_olcu": 55,
+ "toplam_duvar": 80,
  "zaman": {
   "yaklas": 5.2,
   "goster": 0.3,
@@ -66,11 +66,32 @@
    "metin": "ROUND 1"
   },
   {
-   "t": 52.5,
+   "t": 31.5,
    "sure": 2.5,
    "tip": "tur",
    "tur": 2,
    "metin": "ROUND 2"
+  },
+  {
+   "t": 55.0,
+   "sure": 2.5,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "ROUND 3"
+  },
+  {
+   "t": 78.5,
+   "sure": 2.5,
+   "tip": "tur",
+   "tur": 4,
+   "metin": "ROUND 4"
+  },
+  {
+   "t": 102.0,
+   "sure": 7.0,
+   "tip": "son",
+   "metin": "CHALLENGE",
+   "alt": "COMPLETE!"
   }
  ],
  "duvarlar": [
@@ -88,55 +109,91 @@
    "tur": 1,
    "t0": 17.5,
    "sure": 7.0,
-   "ovgu": "GREAT!"
+   "ovgu": "GREAT!",
+   "temas": true
   },
   {
-   "no": 3,
-   "poz": 3,
+   "no": 7,
+   "poz": 7,
    "tur": 1,
    "t0": 24.5,
    "sure": 7.0,
    "ovgu": "PERFECT!"
   },
   {
-   "no": 4,
-   "poz": 4,
-   "tur": 1,
-   "t0": 31.5,
+   "no": 21,
+   "poz": 21,
+   "tur": 2,
+   "t0": 34.0,
    "sure": 7.0,
-   "ovgu": "AWESOME!"
+   "ovgu": "AWESOME!",
+   "temas": true
   },
   {
-   "no": 5,
-   "poz": 5,
-   "tur": 1,
-   "t0": 38.5,
+   "no": 24,
+   "poz": 24,
+   "tur": 2,
+   "t0": 41.0,
    "sure": 7.0,
    "ovgu": "SUPER!"
   },
   {
-   "no": 6,
-   "poz": 6,
-   "tur": 1,
-   "t0": 45.5,
+   "no": 35,
+   "poz": 35,
+   "tur": 2,
+   "t0": 48.0,
    "sure": 7.0,
    "ovgu": "NICE!"
   },
   {
-   "no": 13,
-   "poz": 13,
-   "tur": 2,
-   "t0": 55.0,
+   "no": 46,
+   "poz": 46,
+   "tur": 3,
+   "t0": 57.5,
    "sure": 7.0,
    "ovgu": "GREAT!"
   },
   {
-   "no": 14,
-   "poz": 14,
-   "tur": 2,
-   "t0": 62.0,
+   "no": 55,
+   "poz": 55,
+   "tur": 3,
+   "t0": 64.5,
    "sure": 7.0,
    "ovgu": "PERFECT!"
+  },
+  {
+   "no": 58,
+   "poz": 58,
+   "tur": 3,
+   "t0": 71.5,
+   "sure": 7.0,
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 63,
+   "poz": 63,
+   "tur": 4,
+   "t0": 81.0,
+   "sure": 7.0,
+   "ovgu": "SUPER!",
+   "temas": true
+  },
+  {
+   "no": 76,
+   "poz": 76,
+   "tur": 4,
+   "t0": 88.0,
+   "sure": 7.0,
+   "ovgu": "NICE!"
+  },
+  {
+   "no": 80,
+   "poz": 80,
+   "tur": 4,
+   "t0": 95.0,
+   "sure": 7.0,
+   "ovgu": "GREAT!",
+   "temas": true
   }
  ],
  "koc": [
@@ -163,6 +220,10 @@
   {
    "t": 10.85,
    "metin": "Star!"
+  },
+  {
+   "t": 11.75,
+   "metin": "Arms and legs wide!"
   },
   {
    "t": 13.35,
@@ -224,11 +285,11 @@
   },
   {
    "t": 24.85,
-   "metin": "Rocket!"
+   "metin": "Flamingo!"
   },
   {
    "t": 25.75,
-   "metin": "Hands up high!"
+   "metin": "Stand on one leg!"
   },
   {
    "t": 27.35,
@@ -256,174 +317,322 @@
    "kisa": true
   },
   {
-   "t": 31.85,
-   "metin": "Mirror!"
-  },
-  {
-   "t": 32.75,
-   "metin": "Outside arm out!"
+   "t": 31.8,
+   "metin": "Round two! Medium!"
   },
   {
    "t": 34.35,
+   "metin": "Back to back!"
+  },
+  {
+   "t": 35.25,
+   "metin": "Backs together!"
+  },
+  {
+   "t": 36.85,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 35.15,
+   "t": 37.65,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 35.95,
+   "t": 38.45,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 36.75,
+   "t": 39.25,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 38.0,
+   "t": 40.5,
    "metin": "Awesome!",
    "kisa": true
   },
   {
-   "t": 38.85,
-   "metin": "Big arch!"
-  },
-  {
-   "t": 39.75,
-   "metin": "Inside hands up!"
-  },
-  {
    "t": 41.35,
+   "metin": "Lunge twins!"
+  },
+  {
+   "t": 42.25,
+   "metin": "Lunge, arms up!"
+  },
+  {
+   "t": 43.85,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 42.15,
+   "t": 44.65,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 42.95,
+   "t": 45.45,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 43.75,
+   "t": 46.25,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 45.0,
+   "t": 47.5,
    "metin": "Super!",
    "kisa": true
   },
   {
-   "t": 45.85,
-   "metin": "Robot!"
-  },
-  {
-   "t": 46.75,
-   "metin": "One up, two down!"
-  },
-  {
    "t": 48.35,
+   "metin": "Runner!"
+  },
+  {
+   "t": 49.25,
+   "metin": "Knee up, arms swing!"
+  },
+  {
+   "t": 50.85,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 49.15,
+   "t": 51.65,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 49.95,
+   "t": 52.45,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 50.75,
+   "t": 53.25,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 52.0,
+   "t": 54.5,
    "metin": "Nice!",
    "kisa": true
   },
   {
-   "t": 52.8,
-   "metin": "Round two! Medium!"
-  },
-  {
-   "t": 55.35,
-   "metin": "Low and high!"
-  },
-  {
-   "t": 56.25,
-   "metin": "One low, two tall!"
+   "t": 55.3,
+   "metin": "Round three! Hard!"
   },
   {
    "t": 57.85,
+   "metin": "Crab and tall!"
+  },
+  {
+   "t": 58.75,
+   "metin": "One crab, one tall!"
+  },
+  {
+   "t": 60.35,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 58.65,
+   "t": 61.15,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 59.45,
+   "t": 61.95,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 60.25,
+   "t": 62.75,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 61.5,
+   "t": 64.0,
    "metin": "Great!",
    "kisa": true
   },
   {
-   "t": 62.35,
-   "metin": "Lunge twins!"
-  },
-  {
-   "t": 63.25,
-   "metin": "Lunge, arms up!"
-  },
-  {
    "t": 64.85,
+   "metin": "Superman!"
+  },
+  {
+   "t": 65.75,
+   "metin": "Lie down and fly!"
+  },
+  {
+   "t": 67.35,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 65.65,
+   "t": 68.15,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 66.45,
+   "t": 68.95,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 67.25,
+   "t": 69.75,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 68.5,
+   "t": 71.0,
    "metin": "Perfect!",
    "kisa": true
+  },
+  {
+   "t": 71.85,
+   "metin": "Down dog!"
+  },
+  {
+   "t": 72.75,
+   "metin": "Hips up high!"
+  },
+  {
+   "t": 74.35,
+   "metin": "Three!",
+   "kisa": true
+  },
+  {
+   "t": 75.15,
+   "metin": "Two!",
+   "kisa": true
+  },
+  {
+   "t": 75.95,
+   "metin": "One!",
+   "kisa": true
+  },
+  {
+   "t": 76.75,
+   "metin": "Hold it!",
+   "kisa": true
+  },
+  {
+   "t": 78.0,
+   "metin": "Awesome!",
+   "kisa": true
+  },
+  {
+   "t": 78.8,
+   "metin": "Final round!"
+  },
+  {
+   "t": 81.35,
+   "metin": "Boat!"
+  },
+  {
+   "t": 82.25,
+   "metin": "Sit, feet together!"
+  },
+  {
+   "t": 83.85,
+   "metin": "Three!",
+   "kisa": true
+  },
+  {
+   "t": 84.65,
+   "metin": "Two!",
+   "kisa": true
+  },
+  {
+   "t": 85.45,
+   "metin": "One!",
+   "kisa": true
+  },
+  {
+   "t": 86.25,
+   "metin": "Hold it!",
+   "kisa": true
+  },
+  {
+   "t": 87.5,
+   "metin": "Super!",
+   "kisa": true
+  },
+  {
+   "t": 88.35,
+   "metin": "Bird dog!"
+  },
+  {
+   "t": 89.25,
+   "metin": "Arm and leg out!"
+  },
+  {
+   "t": 90.85,
+   "metin": "Three!",
+   "kisa": true
+  },
+  {
+   "t": 91.65,
+   "metin": "Two!",
+   "kisa": true
+  },
+  {
+   "t": 92.45,
+   "metin": "One!",
+   "kisa": true
+  },
+  {
+   "t": 93.25,
+   "metin": "Hold it!",
+   "kisa": true
+  },
+  {
+   "t": 94.5,
+   "metin": "Nice!",
+   "kisa": true
+  },
+  {
+   "t": 95.35,
+   "metin": "Champions!"
+  },
+  {
+   "t": 96.25,
+   "metin": "Hands up together!"
+  },
+  {
+   "t": 97.85,
+   "metin": "Three!",
+   "kisa": true
+  },
+  {
+   "t": 98.65,
+   "metin": "Two!",
+   "kisa": true
+  },
+  {
+   "t": 99.45,
+   "metin": "One!",
+   "kisa": true
+  },
+  {
+   "t": 100.25,
+   "metin": "Hold it!",
+   "kisa": true
+  },
+  {
+   "t": 101.5,
+   "metin": "Great!",
+   "kisa": true
+  },
+  {
+   "t": 102.3,
+   "metin": "Challenge complete! Amazing teamwork!"
+  },
+  {
+   "t": 105.6,
+   "metin": "Subscribe for the next wall!"
   }
  ],
- "_not": "POZ DUVARI kesit (muziksiz). Uretici: 03-motor/poz-duvari/kesit-kur.py"
+ "_not": "POZ DUVARI. Uretici: 03-motor/poz-duvari/kesit-kur.py"
 }

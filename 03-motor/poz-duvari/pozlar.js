@@ -98,7 +98,7 @@ export function ayna(f) {
   o.solB = ters(f.sagB || VARSAYILAN.sagB); o.sagB = ters(f.solB || VARSAYILAN.solB);
   return o;
 }
-const BEL_SOL = [-45, 20];
+const BEL_SOL = [-45, 20];   // el belde (ekran solu); sağ: [45, -20]
 const AYAKTA = { solB: [-3, -2], sagB: [3, 2] };
 const AYNA = (f, ek = {}) => ({ p1: f, p2: ayna(f), ...ek });
 const IKIZ = (f, ek = {}) => ({ p1: f, p2: f, ...ek });
@@ -124,11 +124,11 @@ export const POZLAR = {
   16: { ad: 'Lean', ...AYNA({ govde: 160, sol: [150, 150], sag: [160, 160] }) },
   17: { ad: 'Salute', ...IKIZ({ sag: [100, -130], ...AYAKTA }) },
   18: { ad: 'Step Out', ...AYNA({ solB: [-35, -35], sagB: [5, 3], sol: [-60, -60], sag: [30, 30] }) },
-  19: { ad: 'Arms Crossed', ...IKIZ({ sol: [-10, 110], sag: [10, -110], ...AYAKTA }) },
+  19: { ad: 'Hands on Hips', ...IKIZ({ sol: BEL_SOL, sag: [45, -20], solB: [-12, -8], sagB: [12, 8] }) },
   20: { ad: 'Disco', ...AYNA({ sag: [150, 150], sol: [-30, -30], sagB: [15, 10] }) },
 
   // ---------------- TUR 2 · MEDIUM
-  21: { ad: 'Back to Back', ...AYNA({ yan: 1, sol: [-15, -110], sag: [-15, -110], ...AYAKTA }, { temas: ['kalca', 'kalca', 26] }) },
+  21: { ad: 'Back to Back', ...AYNA({ yan: 1, sol: [-15, -110], sag: [-15, -110], ...AYAKTA }, { temas: ['kalca', 'kalca', 36] }) },
   22: { ad: 'Bridge Hands', ...AYNA({ govde: 155, sol: [125, 125], sag: [130, 130], solB: [-10, -8], sagB: [0, 0] }, { temas: ['sagEl', 'solEl'] }) },
   23: { ad: 'Low and High', p1: { sol: [-25, 75], sag: [25, -75], solB: [-75, -15], sagB: [75, 15] },
         p2: { sol: [-163, -170], sag: [163, 170], solB: [-2, -1], sagB: [2, 1] } },
@@ -145,7 +145,7 @@ export const POZLAR = {
   34: { ad: 'Bow', ...AYNA({ yan: 1, govde: 120, sol: [10, 5], sag: [10, 5], ...AYAKTA }) },
   35: { ad: 'Runner', ...AYNA({ yan: 1, govde: 172, sagB: [110, 10], solB: [-30, -70], sag: [50, 150], sol: [-45, -20] }) },
   36: { ad: 'Zombie', ...AYNA({ yan: 1, sol: [90, 90], sag: [90, 90], solB: [-10, -5], sagB: [12, 5] }) },
-  37: { ad: 'Penguin', ...IKIZ({ sol: [-12, -60], sag: [12, 60], ...AYAKTA }) },
+  37: { ad: 'Penguin', ...IKIZ({ sol: [-22, -80], sag: [22, 80], ...AYAKTA }) },
   38: { ad: 'Cross Legs', ...IKIZ({ solB: [12, 10], sagB: [-12, -10], sol: [-100, -100], sag: [100, 100] }) },
   39: { ad: 'Floor Reach', ...AYNA({ yan: 1, govde: 95, bas: 30, sol: [0, 0], sag: [0, 0], solB: [-8, -3], sagB: [8, 3] }) },
   40: { ad: 'Fists Up', ...AYNA({ sol: [-30, 160], sag: [30, -160], solB: [-15, -5], sagB: [25, 10] }) },
@@ -184,10 +184,10 @@ export const POZLAR = {
   65: { ad: 'Table and Chair', p1: { yan: 1, govde: 90, sol: [0, 0], sag: [0, 0], solB: [0, -90], sagB: [0, -90] },
         p2: { yan: 1, govde: 180, solB: [-90, 0], sagB: [-90, 0], sol: [-90, -90], sag: [-90, -90] } },
   66: { ad: 'Skater', ...AYNA({ govde: 160, sagB: [15, -5], solB: [-55, -55], sol: [-70, -70], sag: [130, 130] }) },
-  67: { ad: 'Fold Down', ...IKIZ({ govde: 0, sol: [-60, 30], sag: [60, -30], solB: [-15, -15], sagB: [15, 15] }) },
+  67: { ad: 'Fold Down', ...AYNA({ yan: 1, govde: 20, bas: 10, sol: [35, 35], sag: [35, 35], solB: [5, -5], sagB: [5, -5] }) },
   68: { ad: 'Thinker and Scratcher', p1: { solB: [-85, 100], sagB: [85, -100], sag: [60, -150], sol: [-40, -20] },
         p2: { sag: [150, -120], sol: BEL_SOL } },
-  69: { ad: 'Frog', ...IKIZ({ govde: 175, solB: [-75, -10], sagB: [75, 10], sol: [-5, -5], sag: [5, 5] }) },
+  69: { ad: 'Frog', ...IKIZ({ solB: [-75, -10], sagB: [75, 10], sol: [-35, -20], sag: [35, 20] }) },
   70: { ad: 'Lunge Punch', ...AYNA({ yan: 1, sagB: [75, 0], solB: [-40, -70], sag: [90, 90], sol: [30, 150] }) },
   71: { ad: 'Warrior Two', ...AYNA({ sagB: [55, -5], solB: [-55, -55], sol: [-90, -90], sag: [90, 90], bas: 15 }) },
   72: { ad: 'Hero Kneel', ...AYNA({ yan: 1, sagB: [90, 0], solB: [-15, -90], sag: [170, 175], sol: [40, 20] }) },

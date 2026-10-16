@@ -441,6 +441,19 @@ function kartCiz(kart, u, renk) {
     yazi('before the wall reaches you', W / 2, H * 0.35, 46 * k, '#e9d5ff', a, false);
     yazi('P1 = PINK', W * 0.33, H * 0.46, 60 * k, P1_RENK, a);
     yazi('P2 = BLUE', W * 0.67, H * 0.46, 60 * k, P2_RENK, a);
+  } else if (kart.tip === 'son') {
+    yazi(kart.metin, W / 2, H * 0.24, 140 * k * s, '#ffffff', a);
+    yazi(kart.alt, W / 2, H * 0.38, 120 * k * s, '#facc15', a);
+    // abone ol düğmesi (3. sn'den sonra, nabızlı)
+    if (u > 3.0) {
+      const q = ease(kisit((u - 3.0) / 0.4, 0, 1)), pul = 1 + 0.04 * Math.sin(u * 8);
+      const bw = 520 * k * q * pul, bh = 120 * k * q * pul;
+      cx.save(); cx.globalAlpha = a;
+      cx.shadowColor = '#ff2d2d'; cx.shadowBlur = 40 * k;
+      cx.fillStyle = '#e11d2e'; cx.beginPath(); cx.roundRect(W / 2 - bw / 2, H * 0.58 - bh / 2, bw, bh, bh / 2); cx.fill();
+      cx.restore();
+      if (q > 0.6) yazi('SUBSCRIBE', W / 2, H * 0.58, 64 * k * pul, '#ffffff', a, false);
+    }
   } else if (kart.tip === 'tur') {
     const tur = TURLAR.find(x => x.no === kart.tur);
     yazi(kart.metin, W / 2, y - 20 * k, 150 * k * s, '#ffffff', a);
