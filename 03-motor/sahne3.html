@@ -47,7 +47,12 @@ const SILUET = '#12162b';
 
 const cikti = document.getElementById('cikti');
 cikti.width = W; cikti.height = H;
-const cx = cikti.getContext('2d');
+let cx = cikti.getContext('2d');
+// Saydam geçiş katmanı: panel önce burada TAM OPAK çizilir, sonra tek parça
+// saydamlaştırılır. Doğrudan globalAlpha ile çizilince üst üste binen uzuv
+// çizgileri eklem yerlerinde koyu leke bırakıyordu (17 Eki 2026, tam bölüm kontrolü).
+const KAT = document.createElement('canvas'); KAT.width = W; KAT.height = H;
+const KAT_CX = KAT.getContext('2d');
 
 // ------------------------------------------------------------ YARDIMCI
 function rng(t) { let s = t >>> 0; return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
@@ -347,9 +352,17 @@ function cerceve(x0, y0, w, h, f, renk) {
   cx.strokeRect(x0 - f * 0.9, y0 - f * 0.9, w + f * 1.8, h + f * 1.8);
 }
 
-function panelCiz(d, u, renk) {
-  const { olc, alfa, ayril } = panelOlcek(u);
-  if (alfa <= 0) return;
+function panelCiz(d, u, renk, katta = false) {
+  const { olc, alfa: alfaG, ayril } = panelOlcek(u);
+  if (alfaG <= 0) return;
+  if (alfaG < 1 && !katta) {
+    const ana = cx;
+    cx = KAT_CX; cx.clearRect(0, 0, W, H);
+    try { panelCiz(d, u, renk, true); } finally { cx = ana; }
+    cx.save(); cx.globalAlpha = alfaG; cx.drawImage(KAT, 0, 0); cx.restore();
+    return;
+  }
+  const alfa = katta ? 1 : alfaG;
   const w = PW1 * olc, h = PH1 * olc, ara = ARA * olc;
   const altY = lerp(UFUK + 25 * k, H * 0.965, kisit((olc - 1 / 4.2) / (1 - 1 / 4.2), 0, 1.5));
   const y0 = altY - h;
