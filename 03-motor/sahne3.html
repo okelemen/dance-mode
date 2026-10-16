@@ -20,7 +20,7 @@
 // kameraya akan parıltılar. Tempo ~7 sn/duvar.
 // Tamamı 2B canvas, deterministik (her kare t = kare/fps'ten).
 // =====================================================================
-import { POZLAR, cift, KALINLIK, BOY } from './poz-duvari/pozlar.js';
+import { POZLAR, cift, dikisX, KALINLIK, BOY } from './poz-duvari/pozlar.js';
 
 const S = await fetch('/spec/sabitler.json').then(r => r.json());
 const FPS = S.video.fps;
@@ -381,8 +381,7 @@ function panelCiz(d, u, renk) {
     let ox;
     if (poz.temas) {
       // temaslı poz: temas noktası panellerin birleşim çizgisinde
-      const seamX = c.p1[poz.temas[0]][0];
-      ox = (i === 0 ? x0 + w : x0) - seamX * olcF;
+      ox = (i === 0 ? x0 + w : x0) - dikisX(poz, c) * olcF;
     } else {
       const [a, b] = kutu(n);
       ox = x0 + w / 2 - (a + b) / 2 * olcF;
@@ -401,7 +400,7 @@ function panelCiz(d, u, renk) {
   }
   // temas kıvılcımı (birleşim çizgisinde)
   if (acildi && poz.temas && ayril === 0) {
-    const ty = zemin - c.p1[poz.temas[0]][1] * olcF;
+    const ty = zemin - (c.p1[poz.temas[0]][1] + c.p2[poz.temas[1]][1]) / 2 * olcF;
     const pul = 0.6 + 0.4 * Math.sin(u * 14);
     cx.save(); cx.globalCompositeOperation = 'lighter';
     const rg = cx.createRadialGradient(W / 2, ty, 0, W / 2, ty, 60 * olcF * pul);
@@ -471,7 +470,7 @@ function sayimCiz(d, u, renk) {
     const a0 = say[i], a1 = say[i + 1] ?? Z.yaklas;
     if (u >= a0 && u < a1) {
       const q = (u - a0) / (a1 - a0);
-      yazi(String(say.length - i), W / 2, H * 0.17, (170 - 50 * q) * k, '#ffffff', 1 - q * 0.5);
+      yazi(String(say.length - i), W / 2, H * 0.17, (180 - 40 * q) * k, ['#facc15', '#fb923c', '#ff4fa3'][i], 1);
     }
   }
   if (u >= Z.yaklas && u < Z.yaklas + Z.tut) {
@@ -485,8 +484,35 @@ function sayimCiz(d, u, renk) {
   }
 }
 
+// ------------------------------------------------------------ KATALOG (kontrol karesi)
+// bolum JSON'unda "katalog": true -> 80 poz tek karede ızgara (P1 | P2), numaralı.
+function katalogCiz() {
+  cx.fillStyle = '#1a0b3d'; cx.fillRect(0, 0, W, H);
+  const nolar = Object.keys(POZLAR).map(Number).sort((a, b) => a - b);
+  const SUT = 10, SAT = Math.ceil(nolar.length / SUT);
+  const cw = W / SUT, ch = H / SAT;
+  nolar.forEach((no, j) => {
+    const x0 = (j % SUT) * cw, y0 = Math.floor(j / SUT) * ch;
+    const poz = POZLAR[no], c = CIFT[no];
+    const olcF = ch * 0.78 / 290, zemin = y0 + ch * 0.93;
+    for (let i = 0; i < 2; i++) {
+      const px = x0 + (i === 0 ? 2 : cw / 2 + 1), pw = cw / 2 - 3;
+      cx.fillStyle = i === 0 ? '#ff8cc6' : '#8fd8ff'; cx.fillRect(px, y0 + 2, pw, ch - 4);
+      const n = i === 0 ? c.p1 : c.p2;
+      let ox;
+      if (poz.temas) ox = x0 + cw / 2 - dikisX(poz, c) * olcF;
+      else { const [a, b] = kutu(n); ox = px + pw / 2 - (a + b) / 2 * olcF; }
+      cx.save(); cx.beginPath(); cx.rect(px, y0 + 2, pw, ch - 4); cx.clip();
+      figurCiz(n, olcF, ox, zemin); cx.restore();
+    }
+    cx.fillStyle = '#000'; cx.font = font(ch * 0.13); cx.textAlign = 'left'; cx.textBaseline = 'top';
+    cx.fillText(String(no), x0 + 5, y0 + 4);
+  });
+}
+
 // ------------------------------------------------------------ KARE
 function kareKur(n) {
+  if (BOLUM.katalog) { katalogCiz(); return; }
   const t = n / FPS;                         // DETERMINISTIK: duvar saati yok
   const tur = turBul(t);
   const renk = tur.renk;
