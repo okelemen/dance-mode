@@ -403,7 +403,7 @@ function kartCiz(kart, u, t) {
     yazi('TETRIS MODE · PVP BATTLE', W / 2, H * 0.84, 84 * k, '#ffffff', '#06122e', gir);
   } else if (kart.tip === 'basla') {
     // başlangıç geri sayımı 3-2-1-GO! (sahnenin üstünde, perde yok)
-    const adim = Math.min(3, Math.floor(u)), q = u - Math.floor(u);
+    const ad = kart.sure / 4, adim = Math.min(3, Math.floor(u / ad)), q = (u - adim * ad) / ad;   // 4 adım kartı eşit böler (müziğe kilitli)
     const metin = ['3', '2', '1', 'GO!'][adim];
     const s2 = 1.35 - 0.35 * ease(Math.min(1, q / 0.3)), a2 = Math.min(1, (1 - q) / 0.25);
     cx.globalAlpha = a * a2;

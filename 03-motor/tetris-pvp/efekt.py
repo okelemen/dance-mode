@@ -30,10 +30,11 @@ def main():
             yerlestir(ef, vuus(0.5, True, 0.6), t)
             yerlestir(ef, fanfar(), t + 0.15, 0.9)
         elif k["tip"] == "basla":
+            ad = k["sure"] / 4                                      # sahne4.html ile ayni adim
             for i in range(3):
-                yerlestir(ef, bip(660, 0.18), t + i + 0.02, 0.9)
-            yerlestir(ef, bip(1320, 0.4), t + 3.02, 1.0)
-            yerlestir(ef, vurus(), t + 3.02, 0.8)
+                yerlestir(ef, bip(660, 0.18), t + i * ad + 0.02, 0.9)
+            yerlestir(ef, bip(1320, 0.4), t + 3 * ad + 0.02, 1.0)
+            yerlestir(ef, vurus(), t + 3 * ad + 0.02, 0.8)
         elif k["tip"] == "wrap":
             yerlestir(ef, fanfar(1.2), t + 0.05, 1.0)
             yerlestir(ef, piril(0.8), t + 0.3, 0.8)
@@ -47,7 +48,7 @@ def main():
         yerlestir(ef, ding(990, 0.2), t0 + 0.05, 0.5)                    # oyuncu kartlari pop
         yerlestir(ef, ding(), a + 0.02, 0.6)                             # poz belirdi
         for i in range(3):
-            yerlestir(ef, bip([660, 784, 988][i]), a + i + 0.02, 0.9)    # 3-2-1 yukselen
+            yerlestir(ef, bip([660, 784, 988][i]), a + i * Z["say"] / 3 + 0.02, 0.9)    # 3-2-1 yukselen (sahne ile ayni adim)
         yerlestir(ef, vuus(Z["buyu"] * 0.6, True, 0.55), c - Z["buyu"] * 0.6)   # duvar yaklasiyor
         yerlestir(ef, vurus(), c - 0.05, 1.0)                            # en yakinda
         yerlestir(ef, vuus(0.6, False, 0.9), c)                          # icinden gecti
