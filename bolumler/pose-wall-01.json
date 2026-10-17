@@ -1,18 +1,18 @@
 {
  "seri": "POSE WALL",
  "bolum": "pose-wall-01",
- "bpm": 120,
- "toplam_olcu": 293,
+ "bpm": 135.1238,
+ "toplam_olcu": 337,
  "toplam_duvar": 80,
  "zaman": {
-  "yaklas": 5.2,
-  "goster": 0.3,
-  "tut": 1.2,
-  "gec": 0.4,
+  "yaklas": 5.3284,
+  "goster": 0.222,
+  "tut": 1.3321,
+  "gec": 0.444,
   "say": [
-   2.8,
-   3.6,
-   4.4
+   2.6642,
+   3.5523,
+   4.4404
   ]
  },
  "turlar": [
@@ -40,55 +40,55 @@
  "kartlar": [
   {
    "t": 0.0,
-   "sure": 2.5,
+   "sure": 2.6,
    "tip": "buyuk",
    "metin": "WELCOME",
    "alt": "POSE WALL",
    "renk": "#fb923c"
   },
   {
-   "t": 2.5,
-   "sure": 4.0,
+   "t": 2.6,
+   "sure": 4.580744916883629,
    "tip": "nasil"
   },
   {
-   "t": 6.5,
-   "sure": 1.5,
+   "t": 7.181,
+   "sure": 1.7,
    "tip": "buyuk",
    "metin": "READY?",
    "renk": "#4ade80"
   },
   {
-   "t": 8.0,
-   "sure": 2.5,
+   "t": 8.881,
+   "sure": 3.552,
    "tip": "tur",
    "tur": 1,
    "metin": "ROUND 1"
   },
   {
-   "t": 150.5,
-   "sure": 2.5,
+   "t": 154.525,
+   "sure": 3.552,
    "tip": "tur",
    "tur": 2,
    "metin": "ROUND 2"
   },
   {
-   "t": 293.0,
-   "sure": 2.5,
+   "t": 300.169,
+   "sure": 3.552,
    "tip": "tur",
    "tur": 3,
    "metin": "ROUND 3"
   },
   {
-   "t": 435.5,
-   "sure": 2.5,
+   "t": 445.813,
+   "sure": 3.552,
    "tip": "tur",
    "tur": 4,
    "metin": "ROUND 4"
   },
   {
-   "t": 578.0,
-   "sure": 7.0,
+   "t": 591.458,
+   "sure": 7.105,
    "tip": "son",
    "metin": "CHALLENGE",
    "alt": "COMPLETE!"
@@ -99,16 +99,16 @@
    "no": 1,
    "poz": 1,
    "tur": 1,
-   "t0": 10.5,
-   "sure": 7.0,
+   "t0": 12.433,
+   "sure": 7.1045959335069035,
    "ovgu": "NICE!"
   },
   {
    "no": 2,
    "poz": 2,
    "tur": 1,
-   "t0": 17.5,
-   "sure": 7.0,
+   "t0": 19.538,
+   "sure": 7.1045959335069035,
    "ovgu": "GREAT!",
    "temas": true
   },
@@ -116,24 +116,24 @@
    "no": 3,
    "poz": 3,
    "tur": 1,
-   "t0": 24.5,
-   "sure": 7.0,
+   "t0": 26.642,
+   "sure": 7.1045959335069035,
    "ovgu": "PERFECT!"
   },
   {
    "no": 4,
    "poz": 4,
    "tur": 1,
-   "t0": 31.5,
-   "sure": 7.0,
+   "t0": 33.747,
+   "sure": 7.1045959335069035,
    "ovgu": "AWESOME!"
   },
   {
    "no": 5,
    "poz": 5,
    "tur": 1,
-   "t0": 38.5,
-   "sure": 7.0,
+   "t0": 40.851,
+   "sure": 7.1045959335069035,
    "ovgu": "SUPER!",
    "temas": true
   },
@@ -141,128 +141,128 @@
    "no": 6,
    "poz": 6,
    "tur": 1,
-   "t0": 45.5,
-   "sure": 7.0,
+   "t0": 47.956,
+   "sure": 7.1045959335069035,
    "ovgu": "NICE!"
   },
   {
    "no": 7,
    "poz": 7,
    "tur": 1,
-   "t0": 52.5,
-   "sure": 7.0,
+   "t0": 55.061,
+   "sure": 7.1045959335069035,
    "ovgu": "GREAT!"
   },
   {
    "no": 8,
    "poz": 8,
    "tur": 1,
-   "t0": 59.5,
-   "sure": 7.0,
+   "t0": 62.165,
+   "sure": 7.1045959335069035,
    "ovgu": "PERFECT!"
   },
   {
    "no": 9,
    "poz": 9,
    "tur": 1,
-   "t0": 66.5,
-   "sure": 7.0,
+   "t0": 69.27,
+   "sure": 7.1045959335069035,
    "ovgu": "AWESOME!"
   },
   {
    "no": 10,
    "poz": 10,
    "tur": 1,
-   "t0": 73.5,
-   "sure": 7.0,
+   "t0": 76.374,
+   "sure": 7.1045959335069035,
    "ovgu": "SUPER!"
   },
   {
    "no": 11,
    "poz": 11,
    "tur": 1,
-   "t0": 80.5,
-   "sure": 7.0,
+   "t0": 83.479,
+   "sure": 7.1045959335069035,
    "ovgu": "NICE!"
   },
   {
    "no": 12,
    "poz": 12,
    "tur": 1,
-   "t0": 87.5,
-   "sure": 7.0,
+   "t0": 90.584,
+   "sure": 7.1045959335069035,
    "ovgu": "GREAT!"
   },
   {
    "no": 13,
    "poz": 13,
    "tur": 1,
-   "t0": 94.5,
-   "sure": 7.0,
+   "t0": 97.688,
+   "sure": 7.1045959335069035,
    "ovgu": "PERFECT!"
   },
   {
    "no": 14,
    "poz": 14,
    "tur": 1,
-   "t0": 101.5,
-   "sure": 7.0,
+   "t0": 104.793,
+   "sure": 7.1045959335069035,
    "ovgu": "AWESOME!"
   },
   {
    "no": 15,
    "poz": 15,
    "tur": 1,
-   "t0": 108.5,
-   "sure": 7.0,
+   "t0": 111.897,
+   "sure": 7.1045959335069035,
    "ovgu": "SUPER!"
   },
   {
    "no": 16,
    "poz": 16,
    "tur": 1,
-   "t0": 115.5,
-   "sure": 7.0,
+   "t0": 119.002,
+   "sure": 7.1045959335069035,
    "ovgu": "NICE!"
   },
   {
    "no": 17,
    "poz": 17,
    "tur": 1,
-   "t0": 122.5,
-   "sure": 7.0,
+   "t0": 126.107,
+   "sure": 7.1045959335069035,
    "ovgu": "GREAT!"
   },
   {
    "no": 18,
    "poz": 18,
    "tur": 1,
-   "t0": 129.5,
-   "sure": 7.0,
+   "t0": 133.211,
+   "sure": 7.1045959335069035,
    "ovgu": "PERFECT!"
   },
   {
    "no": 19,
    "poz": 19,
    "tur": 1,
-   "t0": 136.5,
-   "sure": 7.0,
+   "t0": 140.316,
+   "sure": 7.1045959335069035,
    "ovgu": "AWESOME!"
   },
   {
    "no": 20,
    "poz": 20,
    "tur": 1,
-   "t0": 143.5,
-   "sure": 7.0,
+   "t0": 147.42,
+   "sure": 7.1045959335069035,
    "ovgu": "SUPER!"
   },
   {
    "no": 21,
    "poz": 21,
    "tur": 2,
-   "t0": 153.0,
-   "sure": 7.0,
+   "t0": 158.077,
+   "sure": 7.1045959335069035,
    "ovgu": "NICE!",
    "temas": true
   },
@@ -270,8 +270,8 @@
    "no": 22,
    "poz": 22,
    "tur": 2,
-   "t0": 160.0,
-   "sure": 7.0,
+   "t0": 165.182,
+   "sure": 7.1045959335069035,
    "ovgu": "GREAT!",
    "temas": true
   },
@@ -279,160 +279,160 @@
    "no": 23,
    "poz": 23,
    "tur": 2,
-   "t0": 167.0,
-   "sure": 7.0,
+   "t0": 172.286,
+   "sure": 7.1045959335069035,
    "ovgu": "PERFECT!"
   },
   {
    "no": 24,
    "poz": 24,
    "tur": 2,
-   "t0": 174.0,
-   "sure": 7.0,
+   "t0": 179.391,
+   "sure": 7.1045959335069035,
    "ovgu": "AWESOME!"
   },
   {
    "no": 25,
    "poz": 25,
    "tur": 2,
-   "t0": 181.0,
-   "sure": 7.0,
+   "t0": 186.496,
+   "sure": 7.1045959335069035,
    "ovgu": "SUPER!"
   },
   {
    "no": 26,
    "poz": 26,
    "tur": 2,
-   "t0": 188.0,
-   "sure": 7.0,
+   "t0": 193.6,
+   "sure": 7.1045959335069035,
    "ovgu": "NICE!"
   },
   {
    "no": 27,
    "poz": 27,
    "tur": 2,
-   "t0": 195.0,
-   "sure": 7.0,
+   "t0": 200.705,
+   "sure": 7.1045959335069035,
    "ovgu": "GREAT!"
   },
   {
    "no": 28,
    "poz": 28,
    "tur": 2,
-   "t0": 202.0,
-   "sure": 7.0,
+   "t0": 207.809,
+   "sure": 7.1045959335069035,
    "ovgu": "PERFECT!"
   },
   {
    "no": 29,
    "poz": 29,
    "tur": 2,
-   "t0": 209.0,
-   "sure": 7.0,
+   "t0": 214.914,
+   "sure": 7.1045959335069035,
    "ovgu": "AWESOME!"
   },
   {
    "no": 30,
    "poz": 30,
    "tur": 2,
-   "t0": 216.0,
-   "sure": 7.0,
+   "t0": 222.019,
+   "sure": 7.1045959335069035,
    "ovgu": "SUPER!"
   },
   {
    "no": 31,
    "poz": 31,
    "tur": 2,
-   "t0": 223.0,
-   "sure": 7.0,
+   "t0": 229.123,
+   "sure": 7.1045959335069035,
    "ovgu": "NICE!"
   },
   {
    "no": 32,
    "poz": 32,
    "tur": 2,
-   "t0": 230.0,
-   "sure": 7.0,
+   "t0": 236.228,
+   "sure": 7.1045959335069035,
    "ovgu": "GREAT!"
   },
   {
    "no": 33,
    "poz": 33,
    "tur": 2,
-   "t0": 237.0,
-   "sure": 7.0,
+   "t0": 243.332,
+   "sure": 7.1045959335069035,
    "ovgu": "PERFECT!"
   },
   {
    "no": 34,
    "poz": 34,
    "tur": 2,
-   "t0": 244.0,
-   "sure": 7.0,
+   "t0": 250.437,
+   "sure": 7.1045959335069035,
    "ovgu": "AWESOME!"
   },
   {
    "no": 35,
    "poz": 35,
    "tur": 2,
-   "t0": 251.0,
-   "sure": 7.0,
+   "t0": 257.542,
+   "sure": 7.1045959335069035,
    "ovgu": "SUPER!"
   },
   {
    "no": 36,
    "poz": 36,
    "tur": 2,
-   "t0": 258.0,
-   "sure": 7.0,
+   "t0": 264.646,
+   "sure": 7.1045959335069035,
    "ovgu": "NICE!"
   },
   {
    "no": 37,
    "poz": 37,
    "tur": 2,
-   "t0": 265.0,
-   "sure": 7.0,
+   "t0": 271.751,
+   "sure": 7.1045959335069035,
    "ovgu": "GREAT!"
   },
   {
    "no": 38,
    "poz": 38,
    "tur": 2,
-   "t0": 272.0,
-   "sure": 7.0,
+   "t0": 278.855,
+   "sure": 7.1045959335069035,
    "ovgu": "PERFECT!"
   },
   {
    "no": 39,
    "poz": 39,
    "tur": 2,
-   "t0": 279.0,
-   "sure": 7.0,
+   "t0": 285.96,
+   "sure": 7.1045959335069035,
    "ovgu": "AWESOME!"
   },
   {
    "no": 40,
    "poz": 40,
    "tur": 2,
-   "t0": 286.0,
-   "sure": 7.0,
+   "t0": 293.065,
+   "sure": 7.1045959335069035,
    "ovgu": "SUPER!"
   },
   {
    "no": 41,
    "poz": 41,
    "tur": 3,
-   "t0": 295.5,
-   "sure": 7.0,
+   "t0": 303.721,
+   "sure": 7.1045959335069035,
    "ovgu": "NICE!"
   },
   {
    "no": 42,
    "poz": 42,
    "tur": 3,
-   "t0": 302.5,
-   "sure": 7.0,
+   "t0": 310.826,
+   "sure": 7.1045959335069035,
    "ovgu": "GREAT!",
    "temas": true
   },
@@ -440,8 +440,8 @@
    "no": 43,
    "poz": 43,
    "tur": 3,
-   "t0": 309.5,
-   "sure": 7.0,
+   "t0": 317.931,
+   "sure": 7.1045959335069035,
    "ovgu": "PERFECT!",
    "temas": true
   },
@@ -449,40 +449,40 @@
    "no": 44,
    "poz": 44,
    "tur": 3,
-   "t0": 316.5,
-   "sure": 7.0,
+   "t0": 325.035,
+   "sure": 7.1045959335069035,
    "ovgu": "AWESOME!"
   },
   {
    "no": 45,
    "poz": 45,
    "tur": 3,
-   "t0": 323.5,
-   "sure": 7.0,
+   "t0": 332.14,
+   "sure": 7.1045959335069035,
    "ovgu": "SUPER!"
   },
   {
    "no": 46,
    "poz": 46,
    "tur": 3,
-   "t0": 330.5,
-   "sure": 7.0,
+   "t0": 339.244,
+   "sure": 7.1045959335069035,
    "ovgu": "NICE!"
   },
   {
    "no": 47,
    "poz": 47,
    "tur": 3,
-   "t0": 337.5,
-   "sure": 7.0,
+   "t0": 346.349,
+   "sure": 7.1045959335069035,
    "ovgu": "GREAT!"
   },
   {
    "no": 48,
    "poz": 48,
    "tur": 3,
-   "t0": 344.5,
-   "sure": 7.0,
+   "t0": 353.454,
+   "sure": 7.1045959335069035,
    "ovgu": "PERFECT!",
    "temas": true
   },
@@ -490,112 +490,112 @@
    "no": 49,
    "poz": 49,
    "tur": 3,
-   "t0": 351.5,
-   "sure": 7.0,
+   "t0": 360.558,
+   "sure": 7.1045959335069035,
    "ovgu": "AWESOME!"
   },
   {
    "no": 50,
    "poz": 50,
    "tur": 3,
-   "t0": 358.5,
-   "sure": 7.0,
+   "t0": 367.663,
+   "sure": 7.1045959335069035,
    "ovgu": "SUPER!"
   },
   {
    "no": 51,
    "poz": 51,
    "tur": 3,
-   "t0": 365.5,
-   "sure": 7.0,
+   "t0": 374.767,
+   "sure": 7.1045959335069035,
    "ovgu": "NICE!"
   },
   {
    "no": 52,
    "poz": 52,
    "tur": 3,
-   "t0": 372.5,
-   "sure": 7.0,
+   "t0": 381.872,
+   "sure": 7.1045959335069035,
    "ovgu": "GREAT!"
   },
   {
    "no": 53,
    "poz": 53,
    "tur": 3,
-   "t0": 379.5,
-   "sure": 7.0,
+   "t0": 388.977,
+   "sure": 7.1045959335069035,
    "ovgu": "PERFECT!"
   },
   {
    "no": 54,
    "poz": 54,
    "tur": 3,
-   "t0": 386.5,
-   "sure": 7.0,
+   "t0": 396.081,
+   "sure": 7.1045959335069035,
    "ovgu": "AWESOME!"
   },
   {
    "no": 55,
    "poz": 55,
    "tur": 3,
-   "t0": 393.5,
-   "sure": 7.0,
+   "t0": 403.186,
+   "sure": 7.1045959335069035,
    "ovgu": "SUPER!"
   },
   {
    "no": 56,
    "poz": 56,
    "tur": 3,
-   "t0": 400.5,
-   "sure": 7.0,
+   "t0": 410.29,
+   "sure": 7.1045959335069035,
    "ovgu": "NICE!"
   },
   {
    "no": 57,
    "poz": 57,
    "tur": 3,
-   "t0": 407.5,
-   "sure": 7.0,
+   "t0": 417.395,
+   "sure": 7.1045959335069035,
    "ovgu": "GREAT!"
   },
   {
    "no": 58,
    "poz": 58,
    "tur": 3,
-   "t0": 414.5,
-   "sure": 7.0,
+   "t0": 424.5,
+   "sure": 7.1045959335069035,
    "ovgu": "PERFECT!"
   },
   {
    "no": 59,
    "poz": 59,
    "tur": 3,
-   "t0": 421.5,
-   "sure": 7.0,
+   "t0": 431.604,
+   "sure": 7.1045959335069035,
    "ovgu": "AWESOME!"
   },
   {
    "no": 60,
    "poz": 60,
    "tur": 3,
-   "t0": 428.5,
-   "sure": 7.0,
+   "t0": 438.709,
+   "sure": 7.1045959335069035,
    "ovgu": "SUPER!"
   },
   {
    "no": 61,
    "poz": 61,
    "tur": 4,
-   "t0": 438.0,
-   "sure": 7.0,
+   "t0": 449.366,
+   "sure": 7.1045959335069035,
    "ovgu": "NICE!"
   },
   {
    "no": 62,
    "poz": 62,
    "tur": 4,
-   "t0": 445.0,
-   "sure": 7.0,
+   "t0": 456.47,
+   "sure": 7.1045959335069035,
    "ovgu": "GREAT!",
    "temas": true
   },
@@ -603,8 +603,8 @@
    "no": 63,
    "poz": 63,
    "tur": 4,
-   "t0": 452.0,
-   "sure": 7.0,
+   "t0": 463.575,
+   "sure": 7.1045959335069035,
    "ovgu": "PERFECT!",
    "temas": true
   },
@@ -612,128 +612,128 @@
    "no": 64,
    "poz": 64,
    "tur": 4,
-   "t0": 459.0,
-   "sure": 7.0,
+   "t0": 470.679,
+   "sure": 7.1045959335069035,
    "ovgu": "AWESOME!"
   },
   {
    "no": 65,
    "poz": 65,
    "tur": 4,
-   "t0": 466.0,
-   "sure": 7.0,
+   "t0": 477.784,
+   "sure": 7.1045959335069035,
    "ovgu": "SUPER!"
   },
   {
    "no": 66,
    "poz": 66,
    "tur": 4,
-   "t0": 473.0,
-   "sure": 7.0,
+   "t0": 484.889,
+   "sure": 7.1045959335069035,
    "ovgu": "NICE!"
   },
   {
    "no": 67,
    "poz": 67,
    "tur": 4,
-   "t0": 480.0,
-   "sure": 7.0,
+   "t0": 491.993,
+   "sure": 7.1045959335069035,
    "ovgu": "GREAT!"
   },
   {
    "no": 68,
    "poz": 68,
    "tur": 4,
-   "t0": 487.0,
-   "sure": 7.0,
+   "t0": 499.098,
+   "sure": 7.1045959335069035,
    "ovgu": "PERFECT!"
   },
   {
    "no": 69,
    "poz": 69,
    "tur": 4,
-   "t0": 494.0,
-   "sure": 7.0,
+   "t0": 506.202,
+   "sure": 7.1045959335069035,
    "ovgu": "AWESOME!"
   },
   {
    "no": 70,
    "poz": 70,
    "tur": 4,
-   "t0": 501.0,
-   "sure": 7.0,
+   "t0": 513.307,
+   "sure": 7.1045959335069035,
    "ovgu": "SUPER!"
   },
   {
    "no": 71,
    "poz": 71,
    "tur": 4,
-   "t0": 508.0,
-   "sure": 7.0,
+   "t0": 520.412,
+   "sure": 7.1045959335069035,
    "ovgu": "NICE!"
   },
   {
    "no": 72,
    "poz": 72,
    "tur": 4,
-   "t0": 515.0,
-   "sure": 7.0,
+   "t0": 527.516,
+   "sure": 7.1045959335069035,
    "ovgu": "GREAT!"
   },
   {
    "no": 73,
    "poz": 73,
    "tur": 4,
-   "t0": 522.0,
-   "sure": 7.0,
+   "t0": 534.621,
+   "sure": 7.1045959335069035,
    "ovgu": "PERFECT!"
   },
   {
    "no": 74,
    "poz": 74,
    "tur": 4,
-   "t0": 529.0,
-   "sure": 7.0,
+   "t0": 541.725,
+   "sure": 7.1045959335069035,
    "ovgu": "AWESOME!"
   },
   {
    "no": 75,
    "poz": 75,
    "tur": 4,
-   "t0": 536.0,
-   "sure": 7.0,
+   "t0": 548.83,
+   "sure": 7.1045959335069035,
    "ovgu": "SUPER!"
   },
   {
    "no": 76,
    "poz": 76,
    "tur": 4,
-   "t0": 543.0,
-   "sure": 7.0,
+   "t0": 555.935,
+   "sure": 7.1045959335069035,
    "ovgu": "NICE!"
   },
   {
    "no": 77,
    "poz": 77,
    "tur": 4,
-   "t0": 550.0,
-   "sure": 7.0,
+   "t0": 563.039,
+   "sure": 7.1045959335069035,
    "ovgu": "GREAT!"
   },
   {
    "no": 78,
    "poz": 78,
    "tur": 4,
-   "t0": 557.0,
-   "sure": 7.0,
+   "t0": 570.144,
+   "sure": 7.1045959335069035,
    "ovgu": "PERFECT!"
   },
   {
    "no": 79,
    "poz": 79,
    "tur": 4,
-   "t0": 564.0,
-   "sure": 7.0,
+   "t0": 577.248,
+   "sure": 7.1045959335069035,
    "ovgu": "AWESOME!",
    "temas": true
   },
@@ -741,8 +741,8 @@
    "no": 80,
    "poz": 80,
    "tur": 4,
-   "t0": 571.0,
-   "sure": 7.0,
+   "t0": 584.353,
+   "sure": 7.1045959335069035,
    "ovgu": "SUPER!",
    "temas": true
   }
@@ -761,1319 +761,1286 @@
    "metin": "Match your pose!"
   },
   {
-   "t": 6.6,
+   "t": 7.281,
    "metin": "Ready?"
   },
   {
-   "t": 8.3,
+   "t": 9.181,
    "metin": "Round one! Easy!"
   },
   {
-   "t": 10.85,
+   "t": 12.783,
    "metin": "Star!"
   },
   {
-   "t": 11.75,
+   "t": 13.533,
    "metin": "Arms and legs wide!"
   },
   {
-   "t": 13.35,
+   "t": 15.147,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 14.15,
+   "t": 16.035,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 14.95,
+   "t": 16.923,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 15.75,
+   "t": 17.811,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 17.0,
+   "t": 18.744,
    "metin": "Nice!",
    "kisa": true
   },
   {
-   "t": 17.85,
+   "t": 19.888,
    "metin": "High five!"
   },
   {
-   "t": 18.75,
+   "t": 20.638,
    "metin": "Touch hands up high!"
   },
   {
-   "t": 20.35,
+   "t": 22.252,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 21.15,
+   "t": 23.14,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 21.95,
+   "t": 24.028,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 22.75,
+   "t": 24.916,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 24.0,
+   "t": 25.848,
    "metin": "Great!",
    "kisa": true
   },
   {
-   "t": 24.85,
+   "t": 26.992,
    "metin": "Rocket!"
   },
   {
-   "t": 25.75,
+   "t": 27.742,
    "metin": "Hands up high!"
   },
   {
-   "t": 27.35,
+   "t": 29.356,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 28.15,
+   "t": 30.245,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 28.95,
+   "t": 31.133,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 29.75,
+   "t": 32.021,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 31.0,
+   "t": 32.953,
    "metin": "Perfect!",
    "kisa": true
   },
   {
-   "t": 31.85,
+   "t": 34.097,
    "metin": "Mirror!"
   },
   {
-   "t": 32.75,
+   "t": 34.847,
    "metin": "Outside arm out!"
   },
   {
-   "t": 34.35,
+   "t": 36.461,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 35.15,
+   "t": 37.349,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 35.95,
+   "t": 38.237,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 36.75,
+   "t": 39.125,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 38.0,
+   "t": 40.057,
    "metin": "Awesome!",
    "kisa": true
   },
   {
-   "t": 38.85,
+   "t": 41.201,
    "metin": "Big arch!"
   },
   {
-   "t": 39.75,
+   "t": 41.951,
    "metin": "Inside hands up!"
   },
   {
-   "t": 41.35,
+   "t": 43.566,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 42.15,
+   "t": 44.454,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 42.95,
+   "t": 45.342,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 43.75,
+   "t": 46.23,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 45.0,
+   "t": 47.162,
    "metin": "Super!",
    "kisa": true
   },
   {
-   "t": 45.85,
+   "t": 48.306,
    "metin": "Robot!"
   },
   {
-   "t": 46.75,
+   "t": 49.056,
    "metin": "One up, two down!"
   },
   {
-   "t": 48.35,
+   "t": 50.67,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 49.15,
+   "t": 51.558,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 49.95,
+   "t": 52.446,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 50.75,
+   "t": 53.334,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 52.0,
+   "t": 54.267,
    "metin": "Nice!",
    "kisa": true
   },
   {
-   "t": 52.85,
+   "t": 55.411,
    "metin": "Flamingo!"
   },
   {
-   "t": 53.75,
+   "t": 56.161,
    "metin": "Stand on one leg!"
   },
   {
-   "t": 55.35,
+   "t": 57.775,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 56.15,
+   "t": 58.663,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 56.95,
+   "t": 59.551,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 57.75,
+   "t": 60.439,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 59.0,
+   "t": 61.371,
    "metin": "Great!",
    "kisa": true
   },
   {
-   "t": 59.85,
+   "t": 62.515,
    "metin": "Scarecrow!"
   },
   {
-   "t": 60.75,
+   "t": 63.265,
    "metin": "Floppy arms!"
   },
   {
-   "t": 62.35,
+   "t": 64.879,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 63.15,
+   "t": 65.768,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 63.95,
+   "t": 66.656,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 64.75,
+   "t": 67.544,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 66.0,
+   "t": 68.476,
    "metin": "Perfect!",
    "kisa": true
   },
   {
-   "t": 66.85,
+   "t": 69.62,
    "metin": "Point the way!"
   },
   {
-   "t": 67.75,
+   "t": 70.37,
    "metin": "Point up together!"
   },
   {
-   "t": 69.35,
+   "t": 71.984,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 70.15,
+   "t": 72.872,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 70.95,
+   "t": 73.76,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 71.75,
+   "t": 74.648,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 73.0,
+   "t": 75.58,
    "metin": "Awesome!",
    "kisa": true
   },
   {
-   "t": 73.85,
+   "t": 76.724,
    "metin": "Heart!"
   },
   {
-   "t": 74.75,
+   "t": 77.474,
    "metin": "Make a heart!"
   },
   {
-   "t": 76.35,
+   "t": 79.089,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 77.15,
+   "t": 79.977,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 77.95,
+   "t": 80.865,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 78.75,
+   "t": 81.753,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 80.0,
+   "t": 82.685,
    "metin": "Super!",
    "kisa": true
   },
   {
-   "t": 80.85,
+   "t": 83.829,
    "metin": "Dino arms!"
   },
   {
-   "t": 81.75,
+   "t": 84.579,
    "metin": "Little arms, bend knees!"
   },
   {
-   "t": 83.35,
+   "t": 86.193,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 84.15,
+   "t": 87.081,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 84.95,
+   "t": 87.969,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 85.75,
+   "t": 88.857,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 87.0,
+   "t": 89.79,
    "metin": "Nice!",
    "kisa": true
   },
   {
-   "t": 87.85,
+   "t": 90.934,
    "metin": "Goalkeeper!"
   },
   {
-   "t": 88.75,
+   "t": 91.684,
    "metin": "Wide and ready!"
   },
   {
-   "t": 90.35,
+   "t": 93.298,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 91.15,
+   "t": 94.186,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 91.95,
+   "t": 95.074,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 92.75,
+   "t": 95.962,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 94.0,
+   "t": 96.894,
    "metin": "Great!",
    "kisa": true
   },
   {
-   "t": 94.85,
+   "t": 98.038,
    "metin": "Wave hello!"
   },
   {
-   "t": 95.75,
+   "t": 98.788,
    "metin": "Wave to your partner!"
   },
   {
-   "t": 97.35,
+   "t": 100.402,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 98.15,
+   "t": 101.29,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 98.95,
+   "t": 102.179,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 99.75,
+   "t": 103.067,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 101.0,
+   "t": 103.999,
    "metin": "Perfect!",
    "kisa": true
   },
   {
-   "t": 101.85,
+   "t": 105.143,
    "metin": "Muscles!"
   },
   {
-   "t": 102.75,
+   "t": 105.893,
    "metin": "Show your muscles!"
   },
   {
-   "t": 104.35,
+   "t": 107.507,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 105.15,
+   "t": 108.395,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 105.95,
+   "t": 109.283,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 106.75,
+   "t": 110.171,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 108.0,
+   "t": 111.103,
    "metin": "Awesome!",
    "kisa": true
   },
   {
-   "t": 108.85,
+   "t": 112.247,
    "metin": "Thinking!"
   },
   {
-   "t": 109.75,
+   "t": 112.997,
    "metin": "Hand on chin!"
   },
   {
-   "t": 111.35,
+   "t": 114.612,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 112.15,
+   "t": 115.5,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 112.95,
+   "t": 116.388,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 113.75,
+   "t": 117.276,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 115.0,
+   "t": 118.208,
    "metin": "Super!",
    "kisa": true
   },
   {
-   "t": 115.85,
+   "t": 119.352,
    "metin": "Lean!"
   },
   {
-   "t": 116.75,
+   "t": 120.102,
    "metin": "Lean, arms up!"
   },
   {
-   "t": 118.35,
+   "t": 121.716,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 119.15,
+   "t": 122.604,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 119.95,
+   "t": 123.492,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 120.75,
+   "t": 124.38,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 122.0,
+   "t": 125.312,
    "metin": "Nice!",
    "kisa": true
   },
   {
-   "t": 122.85,
+   "t": 126.457,
    "metin": "Salute!"
   },
   {
-   "t": 123.75,
+   "t": 127.207,
    "metin": "Hand to forehead!"
   },
   {
-   "t": 125.35,
+   "t": 128.821,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 126.15,
+   "t": 129.709,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 126.95,
+   "t": 130.597,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 127.75,
+   "t": 131.485,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 129.0,
+   "t": 132.417,
    "metin": "Great!",
    "kisa": true
   },
   {
-   "t": 129.85,
+   "t": 133.561,
    "metin": "Step out!"
   },
   {
-   "t": 130.75,
+   "t": 134.311,
    "metin": "Big step, arms out!"
   },
   {
-   "t": 132.35,
+   "t": 135.925,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 133.15,
+   "t": 136.813,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 133.95,
+   "t": 137.702,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 134.75,
+   "t": 138.59,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 136.0,
+   "t": 139.522,
    "metin": "Perfect!",
    "kisa": true
   },
   {
-   "t": 136.85,
+   "t": 140.666,
    "metin": "Hands on hips!"
   },
   {
-   "t": 137.75,
+   "t": 141.416,
    "metin": "Stand tall!"
   },
   {
-   "t": 139.35,
+   "t": 143.03,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 140.15,
+   "t": 143.918,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 140.95,
+   "t": 144.806,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 141.75,
+   "t": 145.694,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 143.0,
+   "t": 146.626,
    "metin": "Awesome!",
    "kisa": true
   },
   {
-   "t": 143.85,
+   "t": 147.77,
    "metin": "Disco!"
   },
   {
-   "t": 144.75,
+   "t": 148.52,
    "metin": "Point up, point down!"
   },
   {
-   "t": 146.35,
+   "t": 150.135,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 147.15,
+   "t": 151.023,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 147.95,
+   "t": 151.911,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 148.75,
+   "t": 152.799,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 150.0,
+   "t": 153.731,
    "metin": "Super!",
    "kisa": true
   },
   {
-   "t": 150.8,
+   "t": 154.825,
    "metin": "Round two! Medium!"
   },
   {
-   "t": 153.35,
+   "t": 158.427,
    "metin": "Back to back!"
   },
   {
-   "t": 154.25,
+   "t": 159.177,
    "metin": "Backs together!"
   },
   {
-   "t": 155.85,
+   "t": 160.791,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 156.65,
+   "t": 161.68,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 157.45,
+   "t": 162.568,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 158.25,
+   "t": 163.456,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 159.5,
+   "t": 164.388,
    "metin": "Nice!",
    "kisa": true
   },
   {
-   "t": 160.35,
+   "t": 165.532,
    "metin": "Bridge hands!"
   },
   {
-   "t": 161.25,
+   "t": 166.282,
    "metin": "Lean in, hands up!"
   },
   {
-   "t": 162.85,
+   "t": 167.896,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 163.65,
+   "t": 168.784,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 164.45,
+   "t": 169.672,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 165.25,
+   "t": 170.56,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 166.5,
+   "t": 171.492,
    "metin": "Great!",
    "kisa": true
   },
   {
-   "t": 167.35,
+   "t": 172.636,
    "metin": "Low and high!"
   },
   {
-   "t": 168.25,
+   "t": 173.386,
    "metin": "One low, two tall!"
   },
   {
-   "t": 169.85,
+   "t": 175.001,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 170.65,
+   "t": 175.889,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 171.45,
+   "t": 176.777,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 172.25,
+   "t": 177.665,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 173.5,
+   "t": 178.597,
    "metin": "Perfect!",
    "kisa": true
   },
   {
-   "t": 174.35,
+   "t": 179.741,
    "metin": "Lunge twins!"
   },
   {
-   "t": 175.25,
+   "t": 180.491,
    "metin": "Lunge, arms up!"
   },
   {
-   "t": 176.85,
+   "t": 182.105,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 177.65,
+   "t": 182.993,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 178.45,
+   "t": 183.881,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 179.25,
+   "t": 184.769,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 180.5,
+   "t": 185.702,
    "metin": "Awesome!",
    "kisa": true
   },
   {
-   "t": 181.35,
+   "t": 186.846,
    "metin": "Tree!"
   },
   {
-   "t": 182.25,
+   "t": 187.596,
    "metin": "Foot on knee!"
   },
   {
-   "t": 183.85,
+   "t": 189.21,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 184.65,
+   "t": 190.098,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 185.45,
+   "t": 190.986,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 186.25,
+   "t": 191.874,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 187.5,
+   "t": 192.806,
    "metin": "Super!",
    "kisa": true
   },
   {
-   "t": 188.35,
+   "t": 193.95,
    "metin": "Archer!"
   },
   {
-   "t": 189.25,
+   "t": 194.7,
    "metin": "Pull the bow!"
   },
   {
-   "t": 190.85,
+   "t": 196.314,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 191.65,
+   "t": 197.203,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 192.45,
+   "t": 198.091,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 193.25,
+   "t": 198.979,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 194.5,
+   "t": 199.911,
    "metin": "Nice!",
    "kisa": true
   },
   {
-   "t": 195.35,
+   "t": 201.055,
    "metin": "Teapot!"
   },
   {
-   "t": 196.25,
+   "t": 201.805,
    "metin": "Hand on hip, tip over!"
   },
   {
-   "t": 197.85,
+   "t": 203.419,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 198.65,
+   "t": 204.307,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 199.45,
+   "t": 205.195,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 200.25,
+   "t": 206.083,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 201.5,
+   "t": 207.015,
    "metin": "Great!",
    "kisa": true
   },
   {
-   "t": 202.35,
+   "t": 208.159,
    "metin": "Superhero!"
   },
   {
-   "t": 203.25,
+   "t": 208.909,
    "metin": "Fist up high!"
   },
   {
-   "t": 204.85,
+   "t": 210.524,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 205.65,
+   "t": 211.412,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 206.45,
+   "t": 212.3,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 207.25,
+   "t": 213.188,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 208.5,
+   "t": 214.12,
    "metin": "Perfect!",
    "kisa": true
   },
   {
-   "t": 209.35,
+   "t": 215.264,
    "metin": "Side bend!"
   },
   {
-   "t": 210.25,
+   "t": 216.014,
    "metin": "Arm over, bend!"
   },
   {
-   "t": 211.85,
+   "t": 217.628,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 212.65,
+   "t": 218.516,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 213.45,
+   "t": 219.404,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 214.25,
+   "t": 220.292,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 215.5,
+   "t": 221.225,
    "metin": "Awesome!",
    "kisa": true
   },
   {
-   "t": 216.35,
+   "t": 222.369,
    "metin": "Knees!"
   },
   {
-   "t": 217.25,
+   "t": 223.119,
    "metin": "Hands on your knees!"
   },
   {
-   "t": 218.85,
+   "t": 224.733,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 219.65,
+   "t": 225.621,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 220.45,
+   "t": 226.509,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 221.25,
+   "t": 227.397,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 222.5,
+   "t": 228.329,
    "metin": "Super!",
    "kisa": true
   },
   {
-   "t": 223.35,
+   "t": 229.473,
    "metin": "Side kick!"
   },
   {
-   "t": 224.25,
+   "t": 230.223,
    "metin": "Leg out to the side!"
   },
   {
-   "t": 225.85,
+   "t": 231.837,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 226.65,
+   "t": 232.726,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 227.45,
+   "t": 233.614,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 228.25,
+   "t": 234.502,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 229.5,
+   "t": 235.434,
    "metin": "Nice!",
    "kisa": true
   },
   {
-   "t": 230.35,
+   "t": 236.578,
    "metin": "Surfer!"
   },
   {
-   "t": 231.25,
+   "t": 237.328,
    "metin": "Ride the wave!"
   },
   {
-   "t": 232.85,
+   "t": 238.942,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 233.65,
+   "t": 239.83,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 234.45,
+   "t": 240.718,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 235.25,
+   "t": 241.606,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 236.5,
+   "t": 242.538,
    "metin": "Great!",
    "kisa": true
   },
   {
-   "t": 237.35,
+   "t": 243.682,
    "metin": "Windmill!"
   },
   {
-   "t": 238.25,
+   "t": 244.432,
    "metin": "One up, one down!"
   },
   {
-   "t": 239.85,
+   "t": 246.047,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 240.65,
+   "t": 246.935,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 241.45,
+   "t": 247.823,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 242.25,
+   "t": 248.711,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 243.5,
+   "t": 249.643,
    "metin": "Perfect!",
    "kisa": true
   },
   {
-   "t": 244.35,
+   "t": 250.787,
    "metin": "Take a bow!"
   },
   {
-   "t": 245.25,
+   "t": 251.537,
    "metin": "Bend forward!"
   },
   {
-   "t": 246.85,
+   "t": 253.151,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 247.65,
+   "t": 254.039,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 248.45,
+   "t": 254.927,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 249.25,
+   "t": 255.815,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 250.5,
+   "t": 256.748,
    "metin": "Awesome!",
    "kisa": true
   },
   {
-   "t": 251.35,
+   "t": 257.892,
    "metin": "Runner!"
   },
   {
-   "t": 252.25,
+   "t": 258.642,
    "metin": "Knee up, arms swing!"
   },
   {
-   "t": 253.85,
+   "t": 260.256,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 254.65,
+   "t": 261.144,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 255.45,
+   "t": 262.032,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 256.25,
+   "t": 262.92,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 257.5,
+   "t": 263.852,
    "metin": "Super!",
    "kisa": true
   },
   {
-   "t": 258.35,
+   "t": 264.996,
    "metin": "Zombie!"
   },
   {
-   "t": 259.25,
+   "t": 265.746,
    "metin": "Arms out in front!"
   },
   {
-   "t": 260.85,
+   "t": 267.36,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 261.65,
+   "t": 268.248,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 262.45,
+   "t": 269.137,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 263.25,
+   "t": 270.025,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 264.5,
+   "t": 270.957,
    "metin": "Nice!",
    "kisa": true
   },
   {
-   "t": 265.35,
+   "t": 272.101,
    "metin": "Penguin!"
   },
   {
-   "t": 266.25,
+   "t": 272.851,
    "metin": "Flat hands out!"
   },
   {
-   "t": 267.85,
+   "t": 274.465,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 268.65,
+   "t": 275.353,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 269.45,
+   "t": 276.241,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 270.25,
+   "t": 277.129,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 271.5,
+   "t": 278.061,
    "metin": "Great!",
    "kisa": true
   },
   {
-   "t": 272.35,
+   "t": 279.205,
    "metin": "Cross legs!"
   },
   {
-   "t": 273.25,
+   "t": 279.955,
    "metin": "Cross and balance!"
   },
   {
-   "t": 274.85,
+   "t": 281.57,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 275.65,
+   "t": 282.458,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 276.45,
+   "t": 283.346,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 277.25,
+   "t": 284.234,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 278.5,
+   "t": 285.166,
    "metin": "Perfect!",
    "kisa": true
   },
   {
-   "t": 279.35,
+   "t": 286.31,
    "metin": "Floor reach!"
   },
   {
-   "t": 280.25,
+   "t": 287.06,
    "metin": "Reach for the floor!"
   },
   {
-   "t": 281.85,
+   "t": 288.674,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 282.65,
-   "metin": "Two!",
-   "kisa": true
-  },
-  {
-   "t": 283.45,
-   "metin": "One!",
-   "kisa": true
-  },
-  {
-   "t": 284.25,
-   "metin": "Hold it!",
-   "kisa": true
-  },
-  {
-   "t": 285.5,
-   "metin": "Awesome!",
-   "kisa": true
-  },
-  {
-   "t": 286.35,
-   "metin": "Fists up!"
-  },
-  {
-   "t": 287.25,
-   "metin": "Guard your face!"
-  },
-  {
-   "t": 288.85,
-   "metin": "Three!",
-   "kisa": true
-  },
-  {
-   "t": 289.65,
+   "t": 289.562,
    "metin": "Two!",
    "kisa": true
   },
@@ -2083,1393 +2050,1426 @@
    "kisa": true
   },
   {
-   "t": 291.25,
+   "t": 291.338,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 292.5,
+   "t": 292.27,
+   "metin": "Awesome!",
+   "kisa": true
+  },
+  {
+   "t": 293.415,
+   "metin": "Fists up!"
+  },
+  {
+   "t": 294.165,
+   "metin": "Guard your face!"
+  },
+  {
+   "t": 295.779,
+   "metin": "Three!",
+   "kisa": true
+  },
+  {
+   "t": 296.667,
+   "metin": "Two!",
+   "kisa": true
+  },
+  {
+   "t": 297.555,
+   "metin": "One!",
+   "kisa": true
+  },
+  {
+   "t": 298.443,
+   "metin": "Hold it!",
+   "kisa": true
+  },
+  {
+   "t": 299.375,
    "metin": "Super!",
    "kisa": true
   },
   {
-   "t": 293.3,
+   "t": 300.469,
    "metin": "Round three! Hard!"
   },
   {
-   "t": 295.85,
+   "t": 304.071,
    "metin": "Airplane!"
   },
   {
-   "t": 296.75,
+   "t": 304.821,
    "metin": "Leg out, wings out!"
   },
   {
-   "t": 298.35,
+   "t": 306.436,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 299.15,
+   "t": 307.324,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 299.95,
+   "t": 308.212,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 300.75,
+   "t": 309.1,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 302.0,
+   "t": 310.032,
    "metin": "Nice!",
    "kisa": true
   },
   {
-   "t": 302.85,
+   "t": 311.176,
    "metin": "Wall sit!"
   },
   {
-   "t": 303.75,
+   "t": 311.926,
    "metin": "Backs together, sit!"
   },
   {
-   "t": 305.35,
+   "t": 313.54,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 306.15,
+   "t": 314.428,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 306.95,
+   "t": 315.316,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 307.75,
+   "t": 316.204,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 309.0,
+   "t": 317.137,
    "metin": "Great!",
    "kisa": true
   },
   {
-   "t": 309.85,
+   "t": 318.281,
    "metin": "Leaning tower!"
   },
   {
-   "t": 310.75,
+   "t": 319.031,
    "metin": "Lean in, hands meet!"
   },
   {
-   "t": 312.35,
+   "t": 320.645,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 313.15,
+   "t": 321.533,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 313.95,
+   "t": 322.421,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 314.75,
+   "t": 323.309,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 316.0,
+   "t": 324.241,
    "metin": "Perfect!",
    "kisa": true
   },
   {
-   "t": 316.85,
+   "t": 325.385,
    "metin": "Warrior three!"
   },
   {
-   "t": 317.75,
+   "t": 326.135,
    "metin": "Tip forward, leg back!"
   },
   {
-   "t": 319.35,
+   "t": 327.749,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 320.15,
+   "t": 328.638,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 320.95,
+   "t": 329.526,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 321.75,
+   "t": 330.414,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 323.0,
+   "t": 331.346,
    "metin": "Awesome!",
    "kisa": true
   },
   {
-   "t": 323.85,
+   "t": 332.49,
    "metin": "Dancer!"
   },
   {
-   "t": 324.75,
+   "t": 333.24,
    "metin": "Hold your foot!"
   },
   {
-   "t": 326.35,
+   "t": 334.854,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 327.15,
+   "t": 335.742,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 327.95,
+   "t": 336.63,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 328.75,
+   "t": 337.518,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 330.0,
+   "t": 338.45,
    "metin": "Super!",
    "kisa": true
   },
   {
-   "t": 330.85,
+   "t": 339.594,
    "metin": "Crab and tall!"
   },
   {
-   "t": 331.75,
+   "t": 340.344,
    "metin": "One crab, one tall!"
   },
   {
-   "t": 333.35,
+   "t": 341.959,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 334.15,
+   "t": 342.847,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 334.95,
+   "t": 343.735,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 335.75,
+   "t": 344.623,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 337.0,
+   "t": 345.555,
    "metin": "Nice!",
    "kisa": true
   },
   {
-   "t": 337.85,
+   "t": 346.699,
    "metin": "Ski jump!"
   },
   {
-   "t": 338.75,
+   "t": 347.449,
    "metin": "Knees bent, arms back!"
   },
   {
-   "t": 340.35,
+   "t": 349.063,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 341.15,
+   "t": 349.951,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 341.95,
+   "t": 350.839,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 342.75,
+   "t": 351.727,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 344.0,
+   "t": 352.66,
    "metin": "Great!",
    "kisa": true
   },
   {
-   "t": 344.85,
+   "t": 353.804,
    "metin": "Seesaw!"
   },
   {
-   "t": 345.75,
+   "t": 354.554,
    "metin": "One down, one leans!"
   },
   {
-   "t": 347.35,
+   "t": 356.168,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 348.15,
+   "t": 357.056,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 348.95,
+   "t": 357.944,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 349.75,
+   "t": 358.832,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 351.0,
+   "t": 359.764,
    "metin": "Perfect!",
    "kisa": true
   },
   {
-   "t": 351.85,
+   "t": 360.908,
    "metin": "Side plank star!"
   },
   {
-   "t": 352.75,
+   "t": 361.658,
    "metin": "Plank and star!"
   },
   {
-   "t": 354.35,
+   "t": 363.272,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 355.15,
+   "t": 364.161,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 355.95,
+   "t": 365.049,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 356.75,
+   "t": 365.937,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 358.0,
+   "t": 366.869,
    "metin": "Awesome!",
    "kisa": true
   },
   {
-   "t": 358.85,
+   "t": 368.013,
    "metin": "Low lunge!"
   },
   {
-   "t": 359.75,
+   "t": 368.763,
    "metin": "Hands down, leg back!"
   },
   {
-   "t": 361.35,
+   "t": 370.377,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 362.15,
+   "t": 371.265,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 362.95,
+   "t": 372.153,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 363.75,
+   "t": 373.041,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 365.0,
+   "t": 373.973,
    "metin": "Super!",
    "kisa": true
   },
   {
-   "t": 365.85,
+   "t": 375.117,
    "metin": "Chair!"
   },
   {
-   "t": 366.75,
+   "t": 375.867,
    "metin": "Sit back, arms up!"
   },
   {
-   "t": 368.35,
+   "t": 377.482,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 369.15,
+   "t": 378.37,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 369.95,
+   "t": 379.258,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 370.75,
+   "t": 380.146,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 372.0,
+   "t": 381.078,
    "metin": "Nice!",
    "kisa": true
   },
   {
-   "t": 372.85,
+   "t": 382.222,
    "metin": "Half moon!"
   },
   {
-   "t": 373.75,
+   "t": 382.972,
    "metin": "Hand down, leg up!"
   },
   {
-   "t": 375.35,
+   "t": 384.586,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 376.15,
+   "t": 385.474,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 376.95,
+   "t": 386.362,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 377.75,
+   "t": 387.25,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 379.0,
+   "t": 388.183,
    "metin": "Great!",
    "kisa": true
   },
   {
-   "t": 379.85,
+   "t": 389.327,
    "metin": "Knee hug!"
   },
   {
-   "t": 380.75,
+   "t": 390.077,
    "metin": "Hug one knee!"
   },
   {
-   "t": 382.35,
+   "t": 391.691,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 383.15,
+   "t": 392.579,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 383.95,
+   "t": 393.467,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 384.75,
+   "t": 394.355,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 386.0,
+   "t": 395.287,
    "metin": "Perfect!",
    "kisa": true
   },
   {
-   "t": 386.85,
+   "t": 396.431,
    "metin": "Side lunge!"
   },
   {
-   "t": 387.75,
+   "t": 397.181,
    "metin": "Lunge to the side!"
   },
   {
-   "t": 389.35,
+   "t": 398.795,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 390.15,
+   "t": 399.684,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 390.95,
+   "t": 400.572,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 391.75,
+   "t": 401.46,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 393.0,
+   "t": 402.392,
    "metin": "Awesome!",
    "kisa": true
   },
   {
-   "t": 393.85,
+   "t": 403.536,
    "metin": "Superman!"
   },
   {
-   "t": 394.75,
+   "t": 404.286,
    "metin": "Lie down and fly!"
   },
   {
-   "t": 396.35,
+   "t": 405.9,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 397.15,
+   "t": 406.788,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 397.95,
+   "t": 407.676,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 398.75,
+   "t": 408.564,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 400.0,
+   "t": 409.496,
    "metin": "Super!",
    "kisa": true
   },
   {
-   "t": 400.85,
+   "t": 410.64,
    "metin": "Hips up!"
   },
   {
-   "t": 401.75,
+   "t": 411.39,
    "metin": "Lie back, lift hips!"
   },
   {
-   "t": 403.35,
+   "t": 413.005,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 404.15,
+   "t": 413.893,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 404.95,
+   "t": 414.781,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 405.75,
+   "t": 415.669,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 407.0,
+   "t": 416.601,
    "metin": "Nice!",
    "kisa": true
   },
   {
-   "t": 407.85,
+   "t": 417.745,
    "metin": "Mountain climber!"
   },
   {
-   "t": 408.75,
+   "t": 418.495,
    "metin": "Plank, knee in!"
   },
   {
-   "t": 410.35,
+   "t": 420.109,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 411.15,
+   "t": 420.997,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 411.95,
+   "t": 421.885,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 412.75,
+   "t": 422.773,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 414.0,
+   "t": 423.706,
    "metin": "Great!",
    "kisa": true
   },
   {
-   "t": 414.85,
+   "t": 424.85,
    "metin": "Down dog!"
   },
   {
-   "t": 415.75,
+   "t": 425.6,
    "metin": "Hips up high!"
   },
   {
-   "t": 417.35,
+   "t": 427.214,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 418.15,
+   "t": 428.102,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 418.95,
+   "t": 428.99,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 419.75,
+   "t": 429.878,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 421.0,
+   "t": 430.81,
    "metin": "Perfect!",
    "kisa": true
   },
   {
-   "t": 421.85,
+   "t": 431.954,
    "metin": "Lunge twist!"
   },
   {
-   "t": 422.75,
+   "t": 432.704,
    "metin": "Lunge, arms wide!"
   },
   {
-   "t": 424.35,
+   "t": 434.318,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 425.15,
+   "t": 435.207,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 425.95,
+   "t": 436.095,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 426.75,
+   "t": 436.983,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 428.0,
+   "t": 437.915,
    "metin": "Awesome!",
    "kisa": true
   },
   {
-   "t": 428.85,
+   "t": 439.059,
    "metin": "Triangle!"
   },
   {
-   "t": 429.75,
+   "t": 439.809,
    "metin": "Hand to your leg!"
   },
   {
-   "t": 431.35,
+   "t": 441.423,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 432.15,
+   "t": 442.311,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 432.95,
+   "t": 443.199,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 433.75,
+   "t": 444.087,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 435.0,
+   "t": 445.019,
    "metin": "Super!",
    "kisa": true
   },
   {
-   "t": 435.8,
+   "t": 446.113,
    "metin": "Final round!"
   },
   {
-   "t": 438.35,
+   "t": 449.716,
    "metin": "Statue!"
   },
   {
-   "t": 439.25,
+   "t": 450.466,
    "metin": "Freeze, knee up!"
   },
   {
-   "t": 440.85,
+   "t": 452.08,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 441.65,
+   "t": 452.968,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 442.45,
+   "t": 453.856,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 443.25,
+   "t": 454.744,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 444.5,
+   "t": 455.676,
    "metin": "Nice!",
    "kisa": true
   },
   {
-   "t": 445.35,
+   "t": 456.82,
    "metin": "Tunnel!"
   },
   {
-   "t": 446.25,
+   "t": 457.57,
    "metin": "Make a tunnel!"
   },
   {
-   "t": 447.85,
+   "t": 459.184,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 448.65,
+   "t": 460.073,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 449.45,
+   "t": 460.961,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 450.25,
+   "t": 461.849,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 451.5,
+   "t": 462.781,
    "metin": "Great!",
    "kisa": true
   },
   {
-   "t": 452.35,
+   "t": 463.925,
    "metin": "Boat!"
   },
   {
-   "t": 453.25,
+   "t": 464.675,
    "metin": "Sit, feet together!"
   },
   {
-   "t": 454.85,
+   "t": 466.289,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 455.65,
+   "t": 467.177,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 456.45,
+   "t": 468.065,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 457.25,
+   "t": 468.953,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 458.5,
+   "t": 469.885,
    "metin": "Perfect!",
    "kisa": true
   },
   {
-   "t": 459.35,
+   "t": 471.029,
    "metin": "Lightning!"
   },
   {
-   "t": 460.25,
+   "t": 471.779,
    "metin": "Zig zag arms!"
   },
   {
-   "t": 461.85,
+   "t": 473.394,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 462.65,
+   "t": 474.282,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 463.45,
+   "t": 475.17,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 464.25,
+   "t": 476.058,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 465.5,
+   "t": 476.99,
    "metin": "Awesome!",
    "kisa": true
   },
   {
-   "t": 466.35,
+   "t": 478.134,
    "metin": "Table and chair!"
   },
   {
-   "t": 467.25,
+   "t": 478.884,
    "metin": "One table, one chair!"
   },
   {
-   "t": 468.85,
+   "t": 480.498,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 469.65,
+   "t": 481.386,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 470.45,
+   "t": 482.274,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 471.25,
+   "t": 483.162,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 472.5,
+   "t": 484.095,
    "metin": "Super!",
    "kisa": true
   },
   {
-   "t": 473.35,
+   "t": 485.239,
    "metin": "Skater!"
   },
   {
-   "t": 474.25,
+   "t": 485.989,
    "metin": "Leg back, swing!"
   },
   {
-   "t": 475.85,
+   "t": 487.603,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 476.65,
+   "t": 488.491,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 477.45,
+   "t": 489.379,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 478.25,
+   "t": 490.267,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 479.5,
+   "t": 491.199,
    "metin": "Nice!",
    "kisa": true
   },
   {
-   "t": 480.35,
+   "t": 492.343,
    "metin": "Fold down!"
   },
   {
-   "t": 481.25,
+   "t": 493.093,
    "metin": "Hands to ankles!"
   },
   {
-   "t": 482.85,
+   "t": 494.707,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 483.65,
+   "t": 495.596,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 484.45,
+   "t": 496.484,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 485.25,
+   "t": 497.372,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 486.5,
+   "t": 498.304,
    "metin": "Great!",
    "kisa": true
   },
   {
-   "t": 487.35,
+   "t": 499.448,
    "metin": "Thinker!"
   },
   {
-   "t": 488.25,
+   "t": 500.198,
    "metin": "One sits, one scratches!"
   },
   {
-   "t": 489.85,
+   "t": 501.812,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 490.65,
+   "t": 502.7,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 491.45,
+   "t": 503.588,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 492.25,
+   "t": 504.476,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 493.5,
+   "t": 505.408,
    "metin": "Perfect!",
    "kisa": true
   },
   {
-   "t": 494.35,
+   "t": 506.552,
    "metin": "Frog!"
   },
   {
-   "t": 495.25,
+   "t": 507.302,
    "metin": "Squat, hands down!"
   },
   {
-   "t": 496.85,
+   "t": 508.917,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 497.65,
+   "t": 509.805,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 498.45,
+   "t": 510.693,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 499.25,
+   "t": 511.581,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 500.5,
+   "t": 512.513,
    "metin": "Awesome!",
    "kisa": true
   },
   {
-   "t": 501.35,
+   "t": 513.657,
    "metin": "Lunge punch!"
   },
   {
-   "t": 502.25,
+   "t": 514.407,
    "metin": "Lunge and punch!"
   },
   {
-   "t": 503.85,
+   "t": 516.021,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 504.65,
+   "t": 516.909,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 505.45,
+   "t": 517.797,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 506.25,
+   "t": 518.685,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 507.5,
+   "t": 519.618,
    "metin": "Super!",
    "kisa": true
   },
   {
-   "t": 508.35,
+   "t": 520.762,
    "metin": "Warrior two!"
   },
   {
-   "t": 509.25,
+   "t": 521.512,
    "metin": "Bend and arms out!"
   },
   {
-   "t": 510.85,
+   "t": 523.126,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 511.65,
+   "t": 524.014,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 512.45,
+   "t": 524.902,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 513.25,
+   "t": 525.79,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 514.5,
+   "t": 526.722,
    "metin": "Nice!",
    "kisa": true
   },
   {
-   "t": 515.35,
+   "t": 527.866,
    "metin": "Hero kneel!"
   },
   {
-   "t": 516.25,
+   "t": 528.616,
    "metin": "Kneel, arm up!"
   },
   {
-   "t": 517.85,
+   "t": 530.23,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 518.65,
+   "t": 531.119,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 519.45,
+   "t": 532.007,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 520.25,
+   "t": 532.895,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 521.5,
+   "t": 533.827,
    "metin": "Great!",
    "kisa": true
   },
   {
-   "t": 522.35,
+   "t": 534.971,
    "metin": "Hand to toe!"
   },
   {
-   "t": 523.25,
+   "t": 535.721,
    "metin": "Leg up, reach!"
   },
   {
-   "t": 524.85,
+   "t": 537.335,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 525.65,
+   "t": 538.223,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 526.45,
+   "t": 539.111,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 527.25,
+   "t": 539.999,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 528.5,
+   "t": 540.931,
    "metin": "Perfect!",
    "kisa": true
   },
   {
-   "t": 529.35,
+   "t": 542.075,
    "metin": "Squat arms up!"
   },
   {
-   "t": 530.25,
+   "t": 542.825,
    "metin": "Squat, reach up!"
   },
   {
-   "t": 531.85,
+   "t": 544.44,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 532.65,
+   "t": 545.328,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 533.45,
+   "t": 546.216,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 534.25,
+   "t": 547.104,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 535.5,
+   "t": 548.036,
    "metin": "Awesome!",
    "kisa": true
   },
   {
-   "t": 536.35,
+   "t": 549.18,
    "metin": "Toe touch!"
   },
   {
-   "t": 537.25,
+   "t": 549.93,
    "metin": "Sit and reach!"
   },
   {
-   "t": 538.85,
+   "t": 551.544,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 539.65,
+   "t": 552.432,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 540.45,
+   "t": 553.32,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 541.25,
+   "t": 554.208,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 542.5,
+   "t": 555.141,
    "metin": "Super!",
    "kisa": true
   },
   {
-   "t": 543.35,
+   "t": 556.285,
    "metin": "Bird dog!"
   },
   {
-   "t": 544.25,
+   "t": 557.035,
    "metin": "Arm and leg out!"
   },
   {
-   "t": 545.85,
+   "t": 558.649,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 546.65,
+   "t": 559.537,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 547.45,
+   "t": 560.425,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 548.25,
+   "t": 561.313,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 549.5,
+   "t": 562.245,
    "metin": "Nice!",
    "kisa": true
   },
   {
-   "t": 550.35,
+   "t": 563.389,
    "metin": "Rock star!"
   },
   {
-   "t": 551.25,
+   "t": 564.139,
    "metin": "Play the guitar!"
   },
   {
-   "t": 552.85,
+   "t": 565.753,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 553.65,
+   "t": 566.642,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 554.45,
+   "t": 567.53,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 555.25,
+   "t": 568.418,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 556.5,
+   "t": 569.35,
    "metin": "Great!",
    "kisa": true
   },
   {
-   "t": 557.35,
+   "t": 570.494,
    "metin": "Victory lunge!"
   },
   {
-   "t": 558.25,
+   "t": 571.244,
    "metin": "Lunge, arms up!"
   },
   {
-   "t": 559.85,
+   "t": 572.858,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 560.65,
+   "t": 573.746,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 561.45,
+   "t": 574.634,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 562.25,
+   "t": 575.522,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 563.5,
+   "t": 576.454,
    "metin": "Perfect!",
    "kisa": true
   },
   {
-   "t": 564.35,
+   "t": 577.598,
    "metin": "Big hug!"
   },
   {
-   "t": 565.25,
+   "t": 578.348,
    "metin": "Arms around!"
   },
   {
-   "t": 566.85,
+   "t": 579.963,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 567.65,
+   "t": 580.851,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 568.45,
+   "t": 581.739,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 569.25,
+   "t": 582.627,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 570.5,
+   "t": 583.559,
    "metin": "Awesome!",
    "kisa": true
   },
   {
-   "t": 571.35,
+   "t": 584.703,
    "metin": "Champions!"
   },
   {
-   "t": 572.25,
+   "t": 585.453,
    "metin": "Hands up together!"
   },
   {
-   "t": 573.85,
+   "t": 587.067,
    "metin": "Three!",
    "kisa": true
   },
   {
-   "t": 574.65,
+   "t": 587.955,
    "metin": "Two!",
    "kisa": true
   },
   {
-   "t": 575.45,
+   "t": 588.843,
    "metin": "One!",
    "kisa": true
   },
   {
-   "t": 576.25,
+   "t": 589.731,
    "metin": "Hold it!",
    "kisa": true
   },
   {
-   "t": 577.5,
+   "t": 590.664,
    "metin": "Super!",
    "kisa": true
   },
   {
-   "t": 578.3,
+   "t": 591.758,
    "metin": "Challenge complete! Amazing teamwork!"
   },
   {
-   "t": 581.6,
+   "t": 595.058,
    "metin": "Subscribe for the next wall!"
   }
  ],
  "abone": [
-  18.1,
-  32.1,
-  46.1,
-  60.1,
-  74.1,
-  88.1,
-  102.1,
-  116.1,
-  130.1,
-  144.1,
-  160.6,
-  174.6,
-  188.6,
-  202.6,
-  216.6,
-  230.6,
-  244.6,
-  258.6,
-  272.6,
-  286.6,
-  303.1,
-  317.1,
-  331.1,
-  345.1,
-  359.1,
-  373.1,
-  387.1,
-  401.1,
-  415.1,
-  429.1,
-  445.6,
-  459.6,
-  473.6,
-  487.6,
-  501.6,
-  515.6,
-  529.6,
-  543.6,
-  557.6,
-  571.6
+  20.138,
+  34.347,
+  48.556,
+  62.765,
+  76.974,
+  91.184,
+  105.393,
+  119.602,
+  133.811,
+  148.02,
+  165.782,
+  179.991,
+  194.2,
+  208.409,
+  222.619,
+  236.828,
+  251.037,
+  265.246,
+  279.455,
+  293.665,
+  311.426,
+  325.635,
+  339.844,
+  354.054,
+  368.263,
+  382.472,
+  396.681,
+  410.89,
+  425.1,
+  439.309,
+  457.07,
+  471.279,
+  485.489,
+  499.698,
+  513.907,
+  528.116,
+  542.325,
+  556.535,
+  570.744,
+  584.953
  ],
  "abone_sure": 3.0,
  "_not": "POZ DUVARI. Uretici: 03-motor/poz-duvari/kesit-kur.py"

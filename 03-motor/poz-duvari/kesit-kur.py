@@ -11,11 +11,22 @@ Yapi (16 Eki 2026, kullanici: "10 dakikalik ... hepsi birbirinden farkli"):
 """
 import json, math, sys
 
-BPM = 120                       # muzik yokken izgara; muzik gelince olculur ve degisir
-OLCU = 60 / BPM * 4
-DUVAR = 7.0                     # bir duvarin suresi (kesit 2: "tempoyu hizlandir")
-# koc: poz adi (0,35) + kisa ipucu (1,25), ipucu penceresi 1,55 sn. Sayim 0,8 sn arayla.
-ZAMAN = {"yaklas": 5.2, "goster": 0.3, "tut": 1.2, "gec": 0.4, "say": [2.8, 3.6, 4.4]}
+# Muzik gelince (17 Eki 2026, Suno "Main Groove", hakem 135,1238 BPM) zaman cizelgesi VURUSA kilitlenir:
+# duvar = 4 olcu (16 vurus), MATCH! 13. vurusta (4. olcunun basi), sayim 7/9/11. vuruslarda.
+# --bpm verilmezse eski muziksiz 120 izgarasi (duvar 7 sn).
+BPM = float(sys.argv[sys.argv.index("--bpm") + 1]) if "--bpm" in sys.argv else 120.0
+VURUS = 60 / BPM
+OLCU = VURUS * 4
+if "--bpm" in sys.argv:
+    DUVAR = 4 * OLCU
+    ZAMAN = {"yaklas": 12 * VURUS, "goster": 0.5 * VURUS, "tut": 3 * VURUS, "gec": 1 * VURUS,
+             "say": [6 * VURUS, 8 * VURUS, 10 * VURUS]}
+    GIRIS_SN, TUR_SN, SON_SN = 5 * OLCU, 2 * OLCU, 4 * OLCU
+else:
+    DUVAR = 7.0
+    ZAMAN = {"yaklas": 5.2, "goster": 0.3, "tut": 1.2, "gec": 0.4, "say": [2.8, 3.6, 4.4]}
+    GIRIS_SN, TUR_SN, SON_SN = 8.0, 2.5, 7.0
+ZAMAN = {a: ([round(x, 4) for x in b] if isinstance(b, list) else round(b, 4)) for a, b in ZAMAN.items()}
 
 TURLAR = [
     {"no": 1, "ad": "EASY", "renk": "#22d3ee"},
@@ -78,23 +89,23 @@ def kur(dizi, son=True):
     """dizi: [(tur, [duvar_no, ...]), ...] - poz no = duvar no"""
     kartlar, duvarlar, koc = [], [], []
     kartlar += [
-        {"t": 0.0, "sure": 2.5, "tip": "buyuk", "metin": "WELCOME", "alt": "POSE WALL", "renk": "#fb923c"},
-        {"t": 2.5, "sure": 4.0, "tip": "nasil"},
-        {"t": 6.5, "sure": 1.5, "tip": "buyuk", "metin": "READY?", "renk": "#4ade80"},
+        {"t": 0.0, "sure": 2.6, "tip": "buyuk", "metin": "WELCOME", "alt": "POSE WALL", "renk": "#fb923c"},
+        {"t": 2.6, "sure": GIRIS_SN - 4.3, "tip": "nasil"},
+        {"t": round(GIRIS_SN - 1.7, 3), "sure": 1.7, "tip": "buyuk", "metin": "READY?", "renk": "#4ade80"},
     ]
     koc += [
         {"t": 0.3, "metin": "Welcome to Pose Wall!"},
         {"t": 2.6, "metin": "Player one, pink wall. Player two, blue wall."},
         {"t": 5.2, "metin": "Match your pose!"},
-        {"t": 6.6, "metin": "Ready?"},
+        {"t": round(GIRIS_SN - 1.6, 3), "metin": "Ready?"},
     ]
-    t = 8.0
+    t = GIRIS_SN
     sayac = 0
     abone = []          # SUBSCRIBE hatirlatmasi: her 2 duvarda bir (14 sn), poz acildiktan sonra
     for tur, liste in dizi:
-        kartlar.append({"t": t, "sure": 2.5, "tip": "tur", "tur": tur, "metin": f"ROUND {tur}"})
-        koc.append({"t": t + 0.3, "metin": TUR_KOC[tur]})
-        t += 2.5
+        kartlar.append({"t": round(t, 3), "sure": round(TUR_SN, 3), "tip": "tur", "tur": tur, "metin": f"ROUND {tur}"})
+        koc.append({"t": round(t + 0.3, 3), "metin": TUR_KOC[tur]})
+        t += TUR_SN
         for no in liste:
             ad, ipucu = KOC[no]
             o = sayac % len(OVGU)
@@ -102,21 +113,21 @@ def kur(dizi, son=True):
                              "ovgu": OVGU[o], **({"temas": True} if no in TEMAS else {})})
             koc.append({"t": round(t + 0.35, 3), "metin": ad})
             if ipucu:
-                koc.append({"t": round(t + 1.25, 3), "metin": ipucu})
+                koc.append({"t": round(t + 1.1, 3), "metin": ipucu})
             for i, s in enumerate(ZAMAN["say"]):
                 koc.append({"t": round(t + s + 0.05, 3), "metin": ["Three!", "Two!", "One!"][i], "kisa": True})
             koc.append({"t": round(t + ZAMAN["yaklas"] + 0.05, 3), "metin": "Hold it!", "kisa": True})
-            koc.append({"t": round(t + ZAMAN["yaklas"] + ZAMAN["tut"] + 0.1, 3), "metin": OVGU_KOC[o], "kisa": True})
+            koc.append({"t": round(t + ZAMAN["yaklas"] + ZAMAN["tut"] - 0.35, 3), "metin": OVGU_KOC[o], "kisa": True})
             if sayac % 2 == 1:
                 abone.append(round(t + 0.6, 3))
             t += DUVAR
             sayac += 1
     if son:
-        kartlar.append({"t": round(t, 3), "sure": 7.0, "tip": "son", "metin": "CHALLENGE", "alt": "COMPLETE!"})
+        kartlar.append({"t": round(t, 3), "sure": round(SON_SN, 3), "tip": "son", "metin": "CHALLENGE", "alt": "COMPLETE!"})
         koc.append({"t": round(t + 0.3, 3), "metin": "Challenge complete! Amazing teamwork!"})
         koc.append({"t": round(t + 3.6, 3), "metin": "Subscribe for the next wall!"})
-        t += 7.0
-    olcu = math.ceil(t / OLCU)
+        t += SON_SN
+    olcu = math.ceil(t / OLCU - 1e-6)
     return {
         "seri": "POSE WALL", "bolum": "pose-wall-01", "bpm": BPM, "toplam_olcu": olcu,
         "toplam_duvar": 80, "zaman": ZAMAN, "turlar": TURLAR,
