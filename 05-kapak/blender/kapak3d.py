@@ -273,6 +273,10 @@ def karakter(klip, kip, siyah, kabuk_b, kabuk_d):
     for m in mesler:
         m.data.materials.clear()
         m.data.materials.append(siyah)
+        # govdenin tum yuzleri slot 0'a (duz siyah): ozgun FBX cok malzemeli, eski indeksler kontur
+        # malzemesine dusup govdeyi saydam yapiyordu (deneme 2)
+        for poly in m.data.polygons:
+            poly.material_index = 0
         kabuk_ekle(m, KABUK_KARAKTER, kabuk_b)          # mesh yerel birimi (Mixamo: cm)
     return arm, mesler, kr
 
@@ -405,8 +409,8 @@ for v in AYAR["varyant"]:
     on.data.energy = 250; on.data.size = 6; on.rotation_euler = (math.radians(35), 0, 0)
 
     # kamera: alcak, hafif yukari, genis aci (figurler dev, panel uzakta)
-    bpy.ops.object.camera_add(location=(0, -1.9, 0.62), rotation=(math.radians(95), 0, 0))
-    kam = bpy.context.active_object; kam.data.lens = 20; sc.camera = kam
+    bpy.ops.object.camera_add(location=(0, -1.25, 0.72), rotation=(math.radians(96), 0, 0))
+    kam = bpy.context.active_object; kam.data.lens = 18; sc.camera = kam
     if not AYAR.get("yazi_3d", False):
         render_et("KAPAK-3D-" + v["ad"])
         continue
