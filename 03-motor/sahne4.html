@@ -1,0 +1,341 @@
+<meta charset="utf-8">
+<title>TETRIS MODE PVP - motor 4</title>
+<style>
+  html,body { margin:0; background:#040824; overflow:hidden; }
+  canvas { display:block; }
+</style>
+<canvas id="cikti"></canvas>
+
+<script type="module">
+// =====================================================================
+// MOTOR 4 — TETRIS MODE PVP (1v1). Kural kaynağı: REF-053 (Glow Motion "HUMAN TETRIS PVP BATTLE #3"),
+// Masaüstü/POZ-DUVARI/TALIMATLAR.md, Masaüstü CLAUDE.md md. 22 (referansta ne görülüyorsa o).
+// Kullanıcı (17 Eki 2026): "konsept aynı olsun, renkleri değiştir ... benzemesin ... zararlı gördüklerini çıkar".
+//
+// Referansın yapısı: ekran ikiye bölünmüş, her oyuncunun KENDİ şeridi (jöle yol + kafes kapı); sabit kamera.
+// Duvar = parlak jöle panel, poz panelde OYUK (içinden arkası görünür). Döngü ~12 sn:
+// PLAYER kartları -> ortada 3-2-1 (duvar kapıda küçük) -> duvar büyüyüp ekranı doldurur -> saydamlaşıp geçer.
+// Bizim farkımız: P1 ZÜMRÜT, P2 KEHRİBAR; gökte fener + ışık küreleri; robot/çizgi film/TV görüntüsü YOK.
+// Arka plan ve duvar dokuları Blender'da (tetris-pvp/varlik.py, Actions), burada yalnız 2B birleştirme.
+// Deterministik: her kare t = kare/fps.
+// =====================================================================
+const S = await fetch('/spec/sabitler.json').then(r => r.json());
+const FPS = S.video.fps;
+const SP = new URLSearchParams(location.search);
+const W = Number(SP.get('w') || 1920);
+const H = Number(SP.get('h') || 1080);
+const k = H / 1080;
+const BOLUM_YOL = SP.get('bolum');
+const BOLUM = BOLUM_YOL ? await fetch(BOLUM_YOL).then(r => r.json()) : {};
+const BPM = BOLUM.bpm || 120;
+const OLCU = 60 / BPM * 4;
+const TOPLAM_OLCU = Number(SP.get('toplam') || BOLUM.toplam_olcu || 16);
+const DUVARLAR = BOLUM.duvarlar || [];
+const KARTLAR = BOLUM.kartlar || [];
+const Z = BOLUM.zaman || { kart: 2.0, say: 3.0, buyu: 5.0, gec: 1.2, sure: 12.0 };
+const TOPLAM_DUVAR = BOLUM.toplam_duvar || DUVARLAR.length;
+
+const VARLIK = '/03-motor/tetris-pvp/varlik/';
+const YER = await fetch(VARLIK + 'yerlesim.json').then(r => r.json());
+const P1 = '#22e07a', P2 = '#ff9a1f', ALTIN = '#ffc93a', CAMGOBEGI = '#3ff0e0';
+const RENK = [P1, P2];
+
+// ------------------------------------------------------------ YÜKLEME
+function resim(yol) {
+  return new Promise((ok, hata) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => hata(new Error(yol)); i.src = yol; });
+}
+const font = new FontFace('Titan', 'url(/05-kapak/fontlar/TitanOne.ttf)');
+document.fonts.add(await font.load());
+const [GOK, SERIT1, SERIT2, PANEL1, PANEL2] = await Promise.all(
+  ['gok.png', 'serit-p1.png', 'serit-p2.png', 'panel-p1.png', 'panel-p2.png'].map(a => resim(VARLIK + a)));
+const POZ_ADLAR = [...new Set(DUVARLAR.flatMap(d => [d.p1, d.p2]))];
+const MASKE = {};
+await Promise.all(POZ_ADLAR.map(async a => { MASKE[a] = await resim(VARLIK + 'poz/' + a + '.png'); }));
+
+const cikti = document.getElementById('cikti');
+cikti.width = W; cikti.height = H;
+const cx = cikti.getContext('2d');
+const KAT = document.createElement('canvas'); KAT.width = W; KAT.height = H;
+const kc = KAT.getContext('2d');
+
+// ------------------------------------------------------------ YARDIMCI
+function rng(t) { let s = t >>> 0; return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
+const ease = p => p * p * (3 - 2 * p);
+const lerp = (a, b, p) => a + (b - a) * p;
+const kisit = (v, a, b) => Math.max(a, Math.min(b, v));
+function hex(h, a) { const n = parseInt(h.slice(1), 16); return `rgba(${n >> 16 & 255},${n >> 8 & 255},${n & 255},${a})`; }
+const F = px => `${Math.round(px)}px Titan, "Arial Black", sans-serif`;
+
+function yazi(metin, x, y, px, dolgu, kontur = '#06122e', alfa = 1, isilti = null, ctx = cx) {
+  ctx.save(); ctx.globalAlpha = kisit(alfa, 0, 1);
+  ctx.font = F(px); ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round';
+  if (isilti) { ctx.shadowColor = isilti; ctx.shadowBlur = px * 0.35; }
+  ctx.lineWidth = px * 0.2; ctx.strokeStyle = kontur; ctx.strokeText(metin, x, y + px * 0.06);
+  ctx.shadowBlur = 0;
+  if (Array.isArray(dolgu)) {
+    const g = ctx.createLinearGradient(0, y - px * 0.5, 0, y + px * 0.5);
+    dolgu.forEach((c, i) => g.addColorStop(i / (dolgu.length - 1), c));
+    ctx.fillStyle = g;
+  } else ctx.fillStyle = dolgu;
+  ctx.fillText(metin, x, y);
+  ctx.globalAlpha *= 0.55; ctx.fillStyle = 'rgba(255,255,255,0.9)';
+  ctx.save(); ctx.beginPath(); ctx.rect(x - px * 8, y - px * 0.5, px * 16, px * 0.32); ctx.clip();
+  ctx.fillText(metin, x, y); ctx.restore();                       // üst parlama bandı
+  ctx.restore();
+}
+
+// ------------------------------------------------------------ SAHNE (sabit kamera)
+const PAR = rng(53);
+const PARILTI = Array.from({ length: 70 }, () => ({ x: PAR(), y: PAR() * 0.5, f: PAR() * 6.28, h: 0.6 + PAR() * 1.8, b: 0.8 + PAR() * 1.8 }));
+function sahneCiz(t) {
+  cx.drawImage(GOK, 0, 0, W, H);
+  cx.save(); cx.globalCompositeOperation = 'lighter';
+  for (const s of PARILTI) {
+    const a = Math.max(0, Math.sin(t * s.h + s.f)) ** 3;
+    if (a < 0.02) continue;
+    const x = s.x * W, y = s.y * H + Math.sin(t * 0.3 + s.f) * 6 * k, r = s.b * k * (2 + 6 * a);
+    const g = cx.createRadialGradient(x, y, 0, x, y, r * 3);
+    g.addColorStop(0, `rgba(255,240,200,${0.9 * a})`); g.addColorStop(1, 'rgba(255,200,120,0)');
+    cx.fillStyle = g; cx.beginPath(); cx.arc(x, y, r * 3, 0, 6.283); cx.fill();
+  }
+  cx.restore();
+  cx.drawImage(SERIT1, 0, 0, W / 2, H);
+  cx.drawImage(SERIT2, W / 2, 0, W / 2, H);
+}
+
+// kapı açıklığı (ekran px): şerit görüntüsü 960x1080 -> ekran yarısı
+function aciklik(i) {
+  const a = YER['aciklik_p' + (i + 1)];
+  const sx = (W / 2) / 960, sy = H / 1080, ox = i * W / 2;
+  return { x: ox + a[0] * sx, y: a[1] * sy, w: (a[2] - a[0]) * sx, h: (a[3] - a[1]) * sy };
+}
+function buyukKutu(i) {
+  const ox = i * W / 2, w = W / 2 * 0.95, h = w / (1100 / 904);
+  return { x: ox + (W / 2 - w) / 2, y: H * 0.52 - h / 2, w, h };
+}
+
+// ------------------------------------------------------------ DUVAR (jöle panel + poz oyuğu)
+function duvarCiz(i, kutu, maske, alfa) {
+  if (alfa <= 0) return;
+  const { x, y, w, h } = kutu;
+  const panel = i === 0 ? PANEL1 : PANEL2;
+  // 1) oyuğun içi: arkası görünür ama koyulaşır (siluet okunur)
+  kc.clearRect(0, 0, W, H);
+  kc.drawImage(maske, x, y, w, h);
+  kc.globalCompositeOperation = 'source-in';
+  kc.fillStyle = 'rgba(4,10,28,0.62)'; kc.fillRect(x, y, w, h);
+  kc.globalCompositeOperation = 'source-over';
+  cx.save(); cx.globalAlpha = alfa; cx.drawImage(KAT, 0, 0); cx.restore();
+  // 2) panel, oyuk delinmiş; gölgesi (renkli ışıltı) oyuğun kenarına taşar = parlak kenar
+  kc.clearRect(0, 0, W, H);
+  kc.drawImage(panel, x, y, w, h);
+  kc.globalCompositeOperation = 'destination-out';
+  kc.drawImage(maske, x, y, w, h);
+  kc.globalCompositeOperation = 'source-over';
+  cx.save(); cx.globalAlpha = alfa;
+  cx.shadowColor = hex(i === 0 ? '#c8ffe0' : '#ffe2b8', 0.95); cx.shadowBlur = Math.max(4, w * 0.018);
+  cx.drawImage(KAT, 0, 0);
+  cx.restore();
+}
+
+function evre(u) {
+  const a = Z.kart, b = a + Z.say, c = b + Z.buyu, d = c + Z.gec;
+  if (u < a) return { ad: 'kart', p: u / Z.kart };
+  if (u < b) return { ad: 'say', p: (u - a) / Z.say };
+  if (u < c) return { ad: 'buyu', p: (u - b) / Z.buyu };
+  if (u < d) return { ad: 'gec', p: (u - c) / Z.gec };
+  return { ad: 'bos', p: (u - d) / Math.max(0.01, Z.sure - d) };
+}
+
+function kutuLerp(A, B, q) { return { x: lerp(A.x, B.x, q), y: lerp(A.y, B.y, q), w: lerp(A.w, B.w, q), h: lerp(A.h, B.h, q) }; }
+function olcekle(K, s) { return { x: K.x + K.w / 2 - K.w * s / 2, y: K.y + K.h / 2 - K.h * s / 2, w: K.w * s, h: K.h * s }; }
+
+function oyuncuKarti(i, p) {
+  const A = aciklik(i);
+  const giris = ease(kisit(p / 0.18, 0, 1)), cikis = ease(kisit((1 - p) / 0.12, 0, 1));
+  const s = 0.7 + 0.3 * giris, a = Math.min(giris, cikis);
+  const w = A.w * 0.62 * s, h = A.h * 0.78 * s, x = A.x + A.w / 2 - w / 2, y = A.y + A.h / 2 - h / 2;
+  cx.save(); cx.globalAlpha = a;
+  cx.shadowColor = RENK[i]; cx.shadowBlur = 30 * k;
+  cx.fillStyle = '#07163a'; cx.beginPath(); cx.roundRect(x, y, w, h, 26 * k); cx.fill();
+  cx.shadowBlur = 0;
+  cx.lineWidth = 9 * k; cx.strokeStyle = RENK[i]; cx.stroke();
+  cx.lineWidth = 3 * k; cx.strokeStyle = 'rgba(255,255,255,0.7)';
+  cx.beginPath(); cx.roundRect(x + 12 * k, y + 12 * k, w - 24 * k, h - 24 * k, 18 * k); cx.stroke();
+  // ızgara doku
+  cx.save(); cx.beginPath(); cx.roundRect(x + 12 * k, y + 12 * k, w - 24 * k, h - 24 * k, 18 * k); cx.clip();
+  cx.strokeStyle = hex(RENK[i], 0.18); cx.lineWidth = 2 * k;
+  for (let gx = x; gx < x + w; gx += 28 * k) { cx.beginPath(); cx.moveTo(gx, y); cx.lineTo(gx, y + h); cx.stroke(); }
+  for (let gy = y; gy < y + h; gy += 28 * k) { cx.beginPath(); cx.moveTo(x, gy); cx.lineTo(x + w, gy); cx.stroke(); }
+  cx.restore();
+  cx.restore();
+  yazi(i === 0 ? 'PLAYER 1' : 'PLAYER 2', x + w / 2, y + h * 0.17, h * 0.11, '#ffffff', '#06122e', a);
+  yazi(i === 0 ? 'P1' : 'P2', x + w / 2, y + h * 0.58, h * 0.42, i === 0 ? ['#d9ffe9', P1, '#0f9a52'] : ['#fff1d6', P2, '#c45f00'], '#06122e', a, RENK[i]);
+}
+
+function duvarlarCiz(d, u) {
+  const e = evre(u);
+  if (e.ad === 'kart') { oyuncuKarti(0, e.p); oyuncuKarti(1, e.p); return e; }
+  for (let i = 0; i < 2; i++) {
+    const maske = MASKE[i === 0 ? d.p1 : d.p2];
+    const A = aciklik(i), B = buyukKutu(i);
+    // panel kapı açıklığını doldurur (oran korunur, ortalanır)
+    const ar = 1100 / 904;
+    let aw = A.w, ah = A.w / ar; if (ah > A.h) { ah = A.h; aw = ah * ar; }
+    const A2 = { x: A.x + (A.w - aw) / 2, y: A.y + A.h - ah, w: aw, h: ah };
+    if (e.ad === 'say') {
+      const fl = kisit(1 - e.p * Z.say / 0.25, 0, 1);
+      duvarCiz(i, A2, maske, ease(kisit(e.p * Z.say / 0.2, 0, 1)));
+      if (fl > 0) { cx.fillStyle = `rgba(255,255,255,${0.7 * fl})`; cx.fillRect(A2.x, A2.y, A2.w, A2.h); }
+    } else if (e.ad === 'buyu') {
+      const q = Math.pow(e.p, 2.1);                 // perspektif: önce yavaş, sonra hızlanır
+      duvarCiz(i, kutuLerp(A2, B, q), maske, 1);
+    } else if (e.ad === 'gec') {
+      const q = ease(e.p);
+      duvarCiz(i, olcekle(B, 1 + 0.45 * q), maske, 1 - q);
+    }
+  }
+  return e;
+}
+
+function sayimCiz(e) {
+  if (e.ad !== 'say') return;
+  const n = 3 - Math.min(2, Math.floor(e.p * 3));
+  const q = (e.p * 3) % 1;
+  const A = aciklik(0);
+  const s = 1.25 - 0.25 * ease(Math.min(1, q / 0.25));
+  const px = 210 * k * s;
+  yazi(String(n), W / 2, A.y + A.h * 0.5, px, ['#ffffff', ALTIN, '#ff7a00'], '#2a0a46', 1, ALTIN);
+}
+
+const OVGU = ['GREAT!', 'EXCELLENT!', 'PERFECT!', 'AWESOME!'];
+function ovguCiz(d, e) {
+  if (!(e.ad === 'gec' && e.p > 0.35) && e.ad !== 'bos') return;
+  const p = e.ad === 'gec' ? (e.p - 0.35) / 0.65 * 0.6 : 0.6 + 0.4 * e.p;
+  const a = Math.min(1, p / 0.15) * Math.min(1, (1 - p) / 0.2);
+  const s = 0.8 + 0.2 * ease(Math.min(1, p / 0.2));
+  const metin = d.ovgu || OVGU[(d.no - 1) % OVGU.length];
+  yazi(metin, W / 2, H * 0.30, 150 * k * s, ['#fffbe0', '#7dffc0', '#18b8ff'], '#06122e', a, CAMGOBEGI);
+}
+
+// ------------------------------------------------------------ HUD (üst bant)
+function hudCiz(t, tur, ilerleme) {
+  const y = 34 * k, h = 34 * k;
+  const x0 = 120 * k, x1 = W - 120 * k;
+  cx.save();
+  cx.fillStyle = 'rgba(4,12,36,0.72)'; cx.beginPath(); cx.roundRect(x0 - 70 * k, y - 10 * k, x1 - x0 + 140 * k, h + 20 * k, 26 * k); cx.fill();
+  for (let i = 0; i < 2; i++) {
+    const bx0 = i === 0 ? x0 : W / 2 + 170 * k, bx1 = i === 0 ? W / 2 - 170 * k : x1;
+    cx.fillStyle = 'rgba(255,255,255,0.12)'; cx.beginPath(); cx.roundRect(bx0, y, bx1 - bx0, h, h / 2); cx.fill();
+    const L = (bx1 - bx0) * kisit(ilerleme, 0.03, 1);
+    const g = cx.createLinearGradient(0, y, 0, y + h); g.addColorStop(0, hex(RENK[i], 1)); g.addColorStop(1, i === 0 ? '#0c8a48' : '#b85400');
+    cx.fillStyle = g; cx.shadowColor = RENK[i]; cx.shadowBlur = 16 * k;
+    cx.beginPath(); if (i === 0) cx.roundRect(bx1 - L, y, L, h, h / 2); else cx.roundRect(bx0, y, L, h, h / 2); cx.fill();
+    cx.shadowBlur = 0;
+    // rozet P1 / P2 uçlarda
+    const rx = i === 0 ? x0 - 40 * k : x1 + 40 * k;
+    cx.fillStyle = RENK[i]; cx.beginPath(); cx.arc(rx, y + h / 2, 30 * k, 0, 6.283); cx.fill();
+    cx.lineWidth = 4 * k; cx.strokeStyle = '#ffffff'; cx.stroke();
+    yazi(i === 0 ? 'P1' : 'P2', rx, y + h / 2, 30 * k, '#ffffff', '#06122e');
+  }
+  cx.restore();
+  yazi(`ROUND ${tur}`, W / 2, y + h / 2, 46 * k, ['#ffffff', '#fff1a8', ALTIN], '#06122e', 1, ALTIN);
+}
+
+// ------------------------------------------------------------ KARTLAR
+function isinPatlamasi(t, renkA, renkB) {
+  const g = cx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, W * 0.7);
+  g.addColorStop(0, renkA); g.addColorStop(1, renkB);
+  cx.fillStyle = g; cx.fillRect(0, 0, W, H);
+  cx.save(); cx.translate(W / 2, H / 2); cx.rotate(t * 0.25);
+  cx.globalCompositeOperation = 'lighter';
+  const n = 28;
+  for (let i = 0; i < n; i++) {
+    const a = i / n * 6.283, da = 6.283 / n * (0.18 + 0.22 * ((i * 7) % 5) / 5);
+    cx.fillStyle = `rgba(255,255,255,${0.10 + 0.08 * (i % 3)})`;
+    cx.beginPath(); cx.moveTo(0, 0); cx.arc(0, 0, W, a, a + da); cx.closePath(); cx.fill();
+  }
+  const c = cx.createRadialGradient(0, 0, 0, 0, 0, H * 0.45);
+  c.addColorStop(0, 'rgba(255,255,255,0.85)'); c.addColorStop(1, 'rgba(255,255,255,0)');
+  cx.fillStyle = c; cx.beginPath(); cx.arc(0, 0, H * 0.45, 0, 6.283); cx.fill();
+  cx.restore();
+}
+
+function kartCiz(kart, u, t) {
+  const a = kisit(Math.min(u / 0.2, (kart.sure - u) / 0.2), 0, 1);
+  const s = 1 + 0.15 * (1 - ease(Math.min(1, u / 0.35)));
+  cx.save(); cx.globalAlpha = a;
+  if (kart.tip === 'vs') {
+    // iki renkli bölünmüş ekran, ortada şimşek çizgisi + VS rozeti (kendi tasarımımız, karakter yok)
+    const ek = Math.sin(u * 3) * 10 * k;
+    const sol = cx.createLinearGradient(0, 0, W / 2, H); sol.addColorStop(0, '#0d6b3d'); sol.addColorStop(1, '#04241a');
+    const sag = cx.createLinearGradient(W, 0, W / 2, H); sag.addColorStop(0, '#9a4a00'); sag.addColorStop(1, '#2a1200');
+    const zig = [[W * 0.56 + ek, 0], [W * 0.47, H * 0.38], [W * 0.54, H * 0.42], [W * 0.44 - ek, H]];
+    cx.fillStyle = sol; cx.beginPath(); cx.moveTo(0, 0); zig.forEach(p => cx.lineTo(p[0], p[1])); cx.lineTo(0, H); cx.closePath(); cx.fill();
+    cx.fillStyle = sag; cx.beginPath(); cx.moveTo(W, 0); zig.forEach(p => cx.lineTo(p[0], p[1])); cx.lineTo(W, H); cx.closePath(); cx.fill();
+    cx.save(); cx.shadowColor = '#ffffff'; cx.shadowBlur = 40 * k; cx.strokeStyle = '#fffbe8'; cx.lineWidth = 10 * k;
+    cx.beginPath(); zig.forEach((p, j) => j ? cx.lineTo(p[0], p[1]) : cx.moveTo(p[0], p[1])); cx.stroke(); cx.restore();
+    const gir = ease(kisit(u / 0.5, 0, 1));
+    yazi('P1', lerp(-W * 0.2, W * 0.25, gir), H * 0.5, 330 * k, ['#e6fff0', P1, '#0d8a47'], '#03140c', 1, P1);
+    yazi('P2', lerp(W * 1.2, W * 0.75, gir), H * 0.5, 330 * k, ['#fff3dc', P2, '#b85200'], '#1a0b00', 1, P2);
+    const vs = 1 + 0.08 * Math.sin(u * 9);
+    yazi('VS', W / 2, H * 0.47, 230 * k * vs * gir + 1, ['#ffffff', '#fff27a', ALTIN, '#ff6a00'], '#2a0a46', 1, ALTIN);
+    yazi('TETRIS MODE · PVP BATTLE', W / 2, H * 0.84, 84 * k, '#ffffff', '#06122e', gir);
+  } else if (kart.tip === 'tur') {
+    isinPatlamasi(t, '#1fb5a0', '#06264a');
+    yazi(kart.metin, W / 2, H * (kart.alt ? 0.40 : 0.5), 200 * k * s, ['#ffffff', '#fff1a8', ALTIN], '#06122e', 1, ALTIN);
+    if (kart.alt) yazi(kart.alt, W / 2, H * 0.62, 150 * k * s, ['#ffffff', '#b9ffe0', P1], '#06122e', 1, P1);
+  } else if (kart.tip === 'wrap') {
+    isinPatlamasi(t, '#ffb43a', '#3a1200');
+    const harf = ["THAT'S", 'A WRAP!'];
+    harf.forEach((m, j) => {
+      const g = ease(kisit((u - j * 0.25) / 0.4, 0, 1));
+      yazi(m, W / 2, H * (0.38 + j * 0.24), 190 * k * (0.6 + 0.4 * g), ['#ffffff', '#fff1a8', ALTIN], '#2a0a00', g, '#ffffff');
+    });
+  } else if (kart.tip === 'abone') {
+    isinPatlamasi(t, '#1fb5a0', '#06264a');
+    const g = ease(kisit(u / 0.4, 0, 1)), pul = 1 + 0.05 * Math.sin(u * 8);
+    const bw = 820 * k * g * pul, bh = 190 * k * g * pul;
+    cx.save(); cx.shadowColor = '#ff1f3d'; cx.shadowBlur = 50 * k;
+    cx.fillStyle = '#e11d2e'; cx.beginPath(); cx.roundRect(W / 2 - bw / 2, H * 0.48 - bh / 2, bw, bh, bh / 2); cx.fill(); cx.restore();
+    if (g > 0.6) yazi('SUBSCRIBE', W / 2, H * 0.48, 120 * k * pul, '#ffffff', '#5a0010');
+    yazi('NEW BATTLE EVERY WEEK', W / 2, H * 0.68, 70 * k * g + 1, ['#ffffff', '#b9ffe0'], '#06122e', g);
+  }
+  cx.restore();
+}
+
+// ------------------------------------------------------------ KARE
+function turBul(t) {
+  let tur = 1;
+  for (const kart of KARTLAR) if (kart.tip === 'tur' && kart.t <= t) tur = kart.tur || tur;
+  return tur;
+}
+
+function kareKur(n) {
+  const t = n / FPS;
+  sahneCiz(t);
+  const d = DUVARLAR.find(x => t >= x.t0 && t < x.t0 + Z.sure);
+  let e = null;
+  if (d) e = duvarlarCiz(d, t - d.t0);
+  if (e) sayimCiz(e);
+  const bitti = DUVARLAR.filter(x => t >= x.t0 + Z.kart + Z.say + Z.buyu).length;
+  const kartVar = KARTLAR.some(kk => t >= kk.t && t < kk.t + kk.sure && kk.tip !== 'yok');
+  if (!kartVar) hudCiz(t, turBul(t), bitti / Math.max(1, TOPLAM_DUVAR));
+  if (d && e) ovguCiz(d, e);
+  for (const kart of KARTLAR) if (t >= kart.t && t < kart.t + kart.sure) kartCiz(kart, t - kart.t, t);
+}
+
+window.kareKur = kareKur;
+window.kareAl = (bicim, kalite) => {
+  if (bicim === 'png') return cikti.toDataURL('image/png');
+  if (bicim === 'jpeg') return cikti.toDataURL('image/jpeg', kalite || 1);
+  return cikti.toDataURL('image/webp', kalite || 1);
+};
+window.SURE_OLCU = TOPLAM_OLCU;
+window.TOPLAM_KARE = Math.round(TOPLAM_OLCU * OLCU * FPS);
+window.NOTA_SAYISI = DUVARLAR.length;
+window.KLIP_SAYISI = POZ_ADLAR.length;
+window.SILUET_VAR = POZ_ADLAR.every(a => MASKE[a]);
+kareKur(0);
+window.HAZIR = true;
+</script>
