@@ -136,7 +136,7 @@
  },
  {
   "tur": 2,
-  "p1": "toe-reach-fold",
+  "p1": "front-leg-reach",
   "p2": "low-v-curtsy"
  },
  {
@@ -186,8 +186,8 @@
  },
  {
   "tur": 3,
-  "p1": "kneeling-wide-arms",
-  "p2": "kneeling-cactus"
+  "p1": "half-kneel-v",
+  "p2": "half-kneel-cactus"
  },
  {
   "tur": 3,
@@ -201,8 +201,8 @@
  },
  {
   "tur": 3,
-  "p1": "kneeling-reach-side",
-  "p2": "kneeling-side-lean"
+  "p1": "half-kneel-w",
+  "p2": "half-kneel-lean"
  },
  {
   "tur": 3,

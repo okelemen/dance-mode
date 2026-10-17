@@ -1,0 +1,463 @@
+{
+ "seri": "TETRIS MODE PVP",
+ "bolum": "tetris-pvp-01",
+ "bpm": 133.0827,
+ "toplam_olcu": 330,
+ "toplam_duvar": 45,
+ "zaman": {
+  "kart": 1.8034,
+  "say": 2.7051,
+  "buyu": 5.4102,
+  "gec": 0.9017,
+  "sure": 12.6237
+ },
+ "kartlar": [
+  {
+   "t": 0.0,
+   "sure": 3.6068,
+   "tip": "vs"
+  },
+  {
+   "t": 3.6068,
+   "sure": 3.6068,
+   "tip": "tur",
+   "tur": 1,
+   "metin": "ROUND 1"
+  },
+  {
+   "t": 7.2136,
+   "sure": 3.6068,
+   "tip": "basla"
+  },
+  {
+   "t": 200.1758,
+   "sure": 3.6068,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "ROUND 2",
+   "alt": "SKILL CHECK"
+  },
+  {
+   "t": 393.1381,
+   "sure": 3.6068,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "ROUND 3",
+   "alt": "TIME TO GO ALL OUT!"
+  },
+  {
+   "t": 586.1004,
+   "sure": 3.6068,
+   "tip": "wrap"
+  },
+  {
+   "t": 589.7072,
+   "sure": 5.4102,
+   "tip": "abone"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 10.8203,
+   "p1": "big-v",
+   "p2": "cactus",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 2,
+   "tur": 1,
+   "t0": 23.444,
+   "p1": "w-arms",
+   "p2": "hands-on-head",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 3,
+   "tur": 1,
+   "t0": 36.0677,
+   "p1": "goddess-squat",
+   "p2": "low-v-stance",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 4,
+   "tur": 1,
+   "t0": 48.6914,
+   "p1": "knee-lift-cactus",
+   "p2": "elbows-back-stretch",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 5,
+   "tur": 1,
+   "t0": 61.3151,
+   "p1": "goddess-v",
+   "p2": "reach-and-tap",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 6,
+   "tur": 1,
+   "t0": 73.9388,
+   "p1": "horse-stance",
+   "p2": "knee-lift-v",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 7,
+   "tur": 1,
+   "t0": 86.5625,
+   "p1": "curtsy-reach",
+   "p2": "side-tap-t",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 8,
+   "tur": 1,
+   "t0": 99.1862,
+   "p1": "wide-w",
+   "p2": "banana-reach",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 9,
+   "tur": 1,
+   "t0": 111.8099,
+   "p1": "diagonal-line",
+   "p2": "goddess-hands-on-head",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 10,
+   "tur": 1,
+   "t0": 124.4336,
+   "p1": "one-arm-up-knee-lift",
+   "p2": "wide-cactus",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 11,
+   "tur": 1,
+   "t0": 137.0573,
+   "p1": "horse-w",
+   "p2": "tall-reach",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 12,
+   "tur": 1,
+   "t0": 149.681,
+   "p1": "lean-left-reach",
+   "p2": "lean-right-reach",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 13,
+   "tur": 1,
+   "t0": 162.3047,
+   "p1": "knee-in-twist",
+   "p2": "flexed-arms-wide",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 14,
+   "tur": 1,
+   "t0": 174.9284,
+   "p1": "low-horse-reach",
+   "p2": "curtsy-cactus",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 15,
+   "tur": 1,
+   "t0": 187.5521,
+   "p1": "side-lean-squat",
+   "p2": "elbows-down-knee-lift",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 16,
+   "tur": 2,
+   "t0": 203.7826,
+   "p1": "warrior-one",
+   "p2": "standing-knee-out",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 17,
+   "tur": 2,
+   "t0": 216.4063,
+   "p1": "crescent-lunge",
+   "p2": "split-stance-fold",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 18,
+   "tur": 2,
+   "t0": 229.03,
+   "p1": "flat-back",
+   "p2": "standing-knee-hold",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 19,
+   "tur": 2,
+   "t0": 241.6537,
+   "p1": "lunge-arms-back",
+   "p2": "goddess-side-bend",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 20,
+   "tur": 2,
+   "t0": 254.2774,
+   "p1": "reverse-warrior",
+   "p2": "wide-side-reach",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 21,
+   "tur": 2,
+   "t0": 266.9011,
+   "p1": "garland-squat",
+   "p2": "gate-pose",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 22,
+   "tur": 2,
+   "t0": 279.5248,
+   "p1": "runner-lunge-low",
+   "p2": "extended-side-angle",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 23,
+   "tur": 2,
+   "t0": 292.1485,
+   "p1": "standing-split-low",
+   "p2": "balance-t-knee",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 24,
+   "tur": 2,
+   "t0": 304.7722,
+   "p1": "kick-back-reach",
+   "p2": "wide-elbow-stretch",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 25,
+   "tur": 2,
+   "t0": 317.3959,
+   "p1": "quad-stretch-reach",
+   "p2": "hip-shift-reach",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 26,
+   "tur": 2,
+   "t0": 330.0196,
+   "p1": "chair-reach-back",
+   "p2": "squat-cross-arms",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 27,
+   "tur": 2,
+   "t0": 342.6433,
+   "p1": "lunge-prayer-twist",
+   "p2": "knee-up-diagonal",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 28,
+   "tur": 2,
+   "t0": 355.267,
+   "p1": "front-leg-reach",
+   "p2": "low-v-curtsy",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 29,
+   "tur": 2,
+   "t0": 367.8907,
+   "p1": "single-leg-reach-forward",
+   "p2": "squat-diagonal-reach",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 30,
+   "tur": 2,
+   "t0": 380.5144,
+   "p1": "deep-lunge-hands-down",
+   "p2": "squat-elbows-down",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 31,
+   "tur": 3,
+   "t0": 396.7449,
+   "p1": "kneeling-reach",
+   "p2": "camel",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 32,
+   "tur": 3,
+   "t0": 409.3686,
+   "p1": "kneeling-lunge-arms-up",
+   "p2": "seated-staff",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 33,
+   "tur": 3,
+   "t0": 421.9923,
+   "p1": "seated-forward-reach",
+   "p2": "high-plank",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 34,
+   "tur": 3,
+   "t0": 434.616,
+   "p1": "cobra",
+   "p2": "kneeling-side-arm",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 35,
+   "tur": 3,
+   "t0": 447.2397,
+   "p1": "hero-seat-arms-up",
+   "p2": "tabletop-leg-lift",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 36,
+   "tur": 3,
+   "t0": 459.8634,
+   "p1": "seated-knees-up",
+   "p2": "kneeling-camel-reach",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 37,
+   "tur": 3,
+   "t0": 472.4871,
+   "p1": "plank-knee-drive",
+   "p2": "seated-reach-back",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 38,
+   "tur": 3,
+   "t0": 485.1108,
+   "p1": "half-kneel-v",
+   "p2": "half-kneel-cactus",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 39,
+   "tur": 3,
+   "t0": 497.7345,
+   "p1": "low-lunge-twist-back",
+   "p2": "seated-leg-lift",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 40,
+   "tur": 3,
+   "t0": 510.3582,
+   "p1": "puppy-stretch",
+   "p2": "kneeling-lean-back",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 41,
+   "tur": 3,
+   "t0": 522.9819,
+   "p1": "half-kneel-w",
+   "p2": "half-kneel-lean",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 42,
+   "tur": 3,
+   "t0": 535.6056,
+   "p1": "sphinx-lift",
+   "p2": "seated-twist-arms",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 43,
+   "tur": 3,
+   "t0": 548.2293,
+   "p1": "plank-arm-reach",
+   "p2": "hero-seat-lean-back",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 44,
+   "tur": 3,
+   "t0": 560.853,
+   "p1": "kneeling-lunge-reach-back",
+   "p2": "seated-wide-arms",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 45,
+   "tur": 3,
+   "t0": 573.4767,
+   "p1": "kneel-torch-up",
+   "p2": "tabletop-reach",
+   "ovgu": "PERFECT!"
+  }
+ ],
+ "abone": [
+  15.0,
+  30.0,
+  45.0,
+  60.0,
+  75.0,
+  90.0,
+  105.0,
+  120.0,
+  135.0,
+  150.0,
+  165.0,
+  180.0,
+  195.0,
+  210.0,
+  225.0,
+  240.0,
+  255.0,
+  270.0,
+  285.0,
+  300.0,
+  315.0,
+  330.0,
+  345.0,
+  360.0,
+  375.0,
+  397.0,
+  420.0,
+  435.0,
+  450.0,
+  465.0,
+  480.0,
+  495.0,
+  510.0,
+  525.0,
+  540.0,
+  555.0,
+  570.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "Victory Rush.wav (Suno, kullanici)",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne4.html."
+}

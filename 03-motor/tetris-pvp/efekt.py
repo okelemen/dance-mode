@@ -59,13 +59,37 @@ def main():
         yerlestir(ef, ding(1760, 0.5), ta + 1.35, 0.5)
         yerlestir(ef, piril(0.5), ta + 1.4, 0.35)
     ef = ef[: int(sure * SR)]
-    karisim = ef * 0.5
+    ef = ef / (np.max(np.abs(ef)) + 1e-9)
+    eg = float(sys.argv[sys.argv.index("--efekt-kazanc") + 1]) if "--efekt-kazanc" in sys.argv else 0.5
+    karisim = ef * eg
     if "--muzik" in sys.argv:
+        # Kullanici (18 Eki 2026): "efekt duyulsun ... muzigin sesini kisip artiracagin yerleri sen ayarla".
+        # Efekt zarfi muzigi kisar (sidechain ducking): hizli atak 15 ms, yavas birakma 350 ms; efekt yokken muzik tam.
         m, msr = sf.read(sys.argv[sys.argv.index("--muzik") + 1], dtype="float32", always_2d=True)
         assert msr == SR, f"muzik {msr} Hz, {SR} bekleniyor"
         m = np.pad(m, ((0, max(0, len(ef) - len(m))), (0, 0)))[: len(ef)]
         mg = float(sys.argv[sys.argv.index("--muzik-kazanc") + 1]) if "--muzik-kazanc" in sys.argv else 0.5
-        karisim = karisim[:, None] + m * mg
+        kis = float(sys.argv[sys.argv.index("--kisma") + 1]) if "--kisma" in sys.argv else 0.55
+        pen = int(0.03 * SR)
+        env = np.convolve(np.abs(ef), np.ones(pen) / pen, mode="same")
+        env = env / (np.percentile(env[env > 1e-4], 95) + 1e-9) if np.any(env > 1e-4) else env
+        hedef = 1 - kis * np.clip(env * 2.5, 0, 1)
+        # zarf takibi: bloklar halinde (her ornekte python dongusu yavas) 5 ms adim
+        adim = int(0.005 * SR); g = np.ones(len(hedef)); son = 1.0
+        a_at, a_bir = np.exp(-adim / (0.015 * SR)), np.exp(-adim / (0.35 * SR))
+        for i in range(0, len(hedef), adim):
+            h = hedef[i:i + adim].min()
+            kk = a_at if h < son else a_bir
+            son = kk * son + (1 - kk) * h
+            g[i:i + adim] = son
+        mb = m * (mg * g)[:, None]
+        karisim = karisim[:, None] + mb
+        if "--olcum" in sys.argv:
+            rms = lambda v: 20 * np.log10(np.sqrt(np.mean(np.square(v))) + 1e-9)
+            var = env > 0.2
+            print(f"OLCUM efekt (calarken) {rms(ef[var] * eg):.1f} dBFS | muzik (efekt calarken) {rms(mb.mean(1)[var]):.1f} dBFS"
+                  f" | muzik (efekt yokken) {rms(mb.mean(1)[~var]):.1f} dBFS | efekt/muzik farki {rms(ef[var] * eg) - rms(mb.mean(1)[var]):.1f} dB"
+                  f" | efekt orani %{100 * var.mean():.0f}")
     karisim = karisim / (np.max(np.abs(karisim)) + 1e-9) * 0.89
     sf.write(cikti, karisim.astype(np.float32), SR, subtype="PCM_16")
     print(f"-> {cikti}  {sure:.1f} sn  {len(B['duvarlar'])} duvar, {len(B['kartlar'])} kart")
