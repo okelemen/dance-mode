@@ -1,0 +1,459 @@
+"""TETRIS MODE PVP (REF-053) - sahne varliklari, Blender (headless) GitHub Actions'ta.
+
+    blender -b --factory-startup -noaudio -P 03-motor/tetris-pvp/varlik.py -- --cikti cikti [--ornek 64] [--yalniz poz]
+
+Referans (REF-053) ekranin iki yarisinda her oyuncunun KENDI seridini gosterir: parlak jole kafes kapi,
+jole yol (chevron basamak, korkuluk babalari), arkada dolu gece goku; duvar = parlak jole panel, poz
+panelde OYUK. Kullanici (17 Eki 2026): "konsept ayni olsun, renkleri degistir ... benzemesin".
+Bizim renk: P1 ZUMRUT/LIME, P2 KEHRIBAR/TURUNCU; gok lacivert-camgobegi, altin fenerler + yesil kureler.
+
+Ciktilar (sahne4.html bunlari 2B'de birlestirir; arka plan sabit, yalniz duvar buyur - referansta da kamera sabit):
+  gok.png            1920x1080  gok (tam ekran)
+  serit-p1.png       960x1080   P1 seridi (yol + kapi), gokte saydam
+  serit-p2.png       960x1080   P2 seridi
+  panel-p1.png       1100x904   P1 jole duvar paneli (saydam koseler)
+  panel-p2.png
+  poz/<ad>.png       900x740    duz siyah siluet maskesi (Mixamo govdesi, pozlar.json acilariyla bukulur)
+  yerlesim.json      kapi acikliginin serit goruntusundeki piksel kutusu
+"""
+import bpy, os, sys, json, math, random
+from mathutils import Vector, Matrix
+from bpy_extras.object_utils import world_to_camera_view
+
+argv = sys.argv[sys.argv.index("--") + 1:]
+arg = lambda ad, v=None: argv[argv.index(ad) + 1] if ad in argv else v
+KOK = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+CIKTI = os.path.abspath(arg("--cikti", "cikti"))
+ORNEK = int(arg("--ornek", "64"))
+YALNIZ = arg("--yalniz", "hepsi")          # hepsi | poz | sahne
+os.makedirs(os.path.join(CIKTI, "poz"), exist_ok=True)
+POZLAR = json.load(open(os.path.join(KOK, "03-motor/tetris-pvp/pozlar.json"), encoding="utf-8"))["pozlar"]
+
+RENK = {"p1": "#22e07a", "p2": "#ff9a1f"}
+YERLESIM = {}
+
+
+def log(*a):
+    print("[varlik]", *a, flush=True)
+
+
+def hex3(h):
+    h = h.lstrip("#"); return tuple(int(h[i:i + 2], 16) / 255 for i in (0, 2, 4))
+
+
+def lin(c):
+    return tuple(((x + 0.055) / 1.055) ** 2.4 if x > 0.04045 else x / 12.92 for x in c)
+
+
+def acik(c, m):
+    return tuple(x + (1 - x) * m for x in c)
+
+
+def koyu(c, m):
+    return tuple(x * (1 - m) for x in c)
+
+
+# ------------------------------------------------------------------ temel
+def bos_sahne(motor="CYCLES", w=1920, h=1080, saydam=False, ornek=None):
+    bpy.ops.wm.read_factory_settings(use_empty=True)
+    sc = bpy.context.scene
+    sc.render.engine = motor
+    if motor == "CYCLES":
+        sc.cycles.device = "CPU"; sc.cycles.samples = ornek or ORNEK; sc.cycles.use_denoising = True
+        sc.view_settings.view_transform = "AgX"
+        try:
+            sc.view_settings.look = "AgX - Punchy"
+        except Exception:
+            pass
+    sc.render.resolution_x, sc.render.resolution_y = w, h
+    sc.render.resolution_percentage = 100
+    sc.render.film_transparent = saydam
+    sc.render.image_settings.file_format = "PNG"
+    sc.render.image_settings.color_mode = "RGBA" if saydam else "RGB"
+    wd = bpy.data.worlds.new("dunya"); sc.world = wd; wd.use_nodes = True
+    bg = wd.node_tree.nodes["Background"]; bg.inputs[0].default_value = (*lin((0.02, 0.05, 0.10)), 1); bg.inputs[1].default_value = 0.6
+    return sc
+
+
+def mat_emis(ad, renk, guc):
+    m = bpy.data.materials.new(ad); m.use_nodes = True
+    nt = m.node_tree; nt.nodes.clear()
+    e = nt.nodes.new("ShaderNodeEmission"); e.inputs[0].default_value = (*renk, 1); e.inputs[1].default_value = guc
+    o = nt.nodes.new("ShaderNodeOutputMaterial"); nt.links.new(e.outputs[0], o.inputs[0])
+    return m
+
+
+def mat_jole(ad, renk, emis=0.12, purluk=0.07):
+    """parlak jole/plastik: doygun renk, ust kaplama (coat), hafif ic isilti"""
+    m = bpy.data.materials.new(ad); m.use_nodes = True
+    b = m.node_tree.nodes["Principled BSDF"]
+    b.inputs["Base Color"].default_value = (*renk, 1)
+    b.inputs["Roughness"].default_value = purluk
+    b.inputs["Coat Weight"].default_value = 1.0
+    b.inputs["Coat Roughness"].default_value = 0.03
+    b.inputs["Subsurface Weight"].default_value = 0.25
+    b.inputs["Subsurface Radius"].default_value = (0.4, 0.4, 0.4)
+    b.inputs["Emission Color"].default_value = (*acik(renk, 0.3), 1)
+    b.inputs["Emission Strength"].default_value = emis
+    return m
+
+
+def mat_cam(ad):
+    m = bpy.data.materials.new(ad); m.use_nodes = True
+    b = m.node_tree.nodes["Principled BSDF"]
+    b.inputs["Base Color"].default_value = (1, 1, 1, 1)
+    b.inputs["Roughness"].default_value = 0.0
+    b.inputs["Transmission Weight"].default_value = 1.0
+    b.inputs["IOR"].default_value = 1.33
+    return m
+
+
+def yuvarlak_kutu(ad, konum, boyut, mat, egim=0.08, seg=4):
+    bpy.ops.mesh.primitive_cube_add(size=1, location=konum)
+    o = bpy.context.active_object; o.name = ad; o.scale = boyut
+    bpy.ops.object.transform_apply(scale=True)
+    bv = o.modifiers.new("egim", "BEVEL"); bv.width = egim; bv.segments = seg; bv.limit_method = "NONE"
+    o.data.materials.append(mat)
+    bpy.ops.object.shade_smooth()
+    return o
+
+
+def boru(a, b, r, mat):
+    a, b = Vector(a), Vector(b); d = b - a
+    bpy.ops.mesh.primitive_cylinder_add(radius=r, depth=d.length, location=(a + b) / 2, vertices=20)
+    c = bpy.context.active_object; c.rotation_euler = d.to_track_quat("Z", "Y").to_euler()
+    c.data.materials.append(mat); bpy.ops.object.shade_smooth()
+    return c
+
+
+def kure(konum, r, mat, sub=3):
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=r, location=konum, segments=24, ring_count=12)
+    o = bpy.context.active_object; o.data.materials.append(mat); bpy.ops.object.shade_smooth()
+    return o
+
+
+def isik(tip, konum, enerji, renk=(1, 1, 1), boy=2.0, yon=None):
+    bpy.ops.object.light_add(type=tip, location=konum)
+    L = bpy.context.active_object; L.data.energy = enerji; L.data.color = renk
+    if tip == "AREA":
+        L.data.size = boy
+    if yon is not None:
+        L.rotation_euler = (Vector(yon) - Vector(konum)).to_track_quat("-Z", "Y").to_euler()
+    return L
+
+
+def yaz(sc, ad):
+    sc.render.filepath = os.path.join(CIKTI, ad)
+    bpy.ops.render.render(write_still=True)
+    log("yazildi", ad)
+
+
+# ------------------------------------------------------------------ GOK (tam ekran)
+def gok():
+    sc = bos_sahne(w=1920, h=1080, ornek=min(ORNEK, 48))
+    rnd = random.Random(53)
+    # arka plan duzlemi: dikey gecis lacivert -> camgobegi + gurultulu bulutsu (nebula)
+    bpy.ops.mesh.primitive_plane_add(size=1, location=(0, 60, 8), rotation=(math.pi / 2, 0, 0))
+    p = bpy.context.active_object; p.scale = (150, 90, 1)
+    m = bpy.data.materials.new("gok"); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+    tc = nt.nodes.new("ShaderNodeTexCoord")
+    sep = nt.nodes.new("ShaderNodeSeparateXYZ"); nt.links.new(tc.outputs["Generated"], sep.inputs[0])
+    rmp = nt.nodes.new("ShaderNodeValToRGB")
+    cr = rmp.color_ramp
+    cr.elements[0].position = 0.0; cr.elements[0].color = (*lin(hex3("#0b5466")), 1)
+    cr.elements[1].position = 1.0; cr.elements[1].color = (*lin(hex3("#040824")), 1)
+    e2 = cr.elements.new(0.45); e2.color = (*lin(hex3("#0a2a4a")), 1)
+    nt.links.new(sep.outputs["Y"], rmp.inputs[0])
+    nz = nt.nodes.new("ShaderNodeTexNoise"); nz.inputs["Scale"].default_value = 3.2; nz.inputs["Detail"].default_value = 6
+    nz.inputs["Distortion"].default_value = 0.6
+    nt.links.new(tc.outputs["Generated"], nz.inputs["Vector"])
+    nr = nt.nodes.new("ShaderNodeValToRGB"); c2 = nr.color_ramp
+    c2.elements[0].position = 0.52; c2.elements[0].color = (0, 0, 0, 1)
+    c2.elements[1].position = 0.80; c2.elements[1].color = (*lin(hex3("#1fb5a0")), 1)
+    nt.links.new(nz.outputs["Fac"], nr.inputs[0])
+    nz2 = nt.nodes.new("ShaderNodeTexNoise"); nz2.inputs["Scale"].default_value = 5.5; nz2.inputs["Detail"].default_value = 4
+    nt.links.new(tc.outputs["Generated"], nz2.inputs["Vector"])
+    nr2 = nt.nodes.new("ShaderNodeValToRGB"); c3 = nr2.color_ramp
+    c3.elements[0].position = 0.60; c3.elements[0].color = (0, 0, 0, 1)
+    c3.elements[1].position = 0.85; c3.elements[1].color = (*lin(hex3("#d99a2b")), 1)
+    nt.links.new(nz2.outputs["Fac"], nr2.inputs[0])
+    ad1 = nt.nodes.new("ShaderNodeMix"); ad1.data_type = "RGBA"; ad1.blend_type = "ADD"; ad1.inputs[0].default_value = 0.55
+    nt.links.new(rmp.outputs[0], ad1.inputs[6]); nt.links.new(nr.outputs[0], ad1.inputs[7])
+    ad2 = nt.nodes.new("ShaderNodeMix"); ad2.data_type = "RGBA"; ad2.blend_type = "ADD"; ad2.inputs[0].default_value = 0.35
+    nt.links.new(ad1.outputs[2], ad2.inputs[6]); nt.links.new(nr2.outputs[0], ad2.inputs[7])
+    em = nt.nodes.new("ShaderNodeEmission"); em.inputs[1].default_value = 1.0
+    nt.links.new(ad2.outputs[2], em.inputs[0])
+    o = nt.nodes.new("ShaderNodeOutputMaterial"); nt.links.new(em.outputs[0], o.inputs[0])
+    p.data.materials.append(m)
+    # yildizlar
+    ym = mat_emis("yildiz", (1, 1, 1), 8)
+    for i in range(420):
+        kure((rnd.uniform(-75, 75), rnd.uniform(50, 58), rnd.uniform(-20, 48)), rnd.uniform(0.05, 0.16), ym, sub=1)
+    # yuzen fenerler (altin, ici isikli) - gogu dolduran ana oge (referanstaki denizanalarinin yerine bizim oge)
+    gov = mat_emis("fener", lin(hex3("#ffb43a")), 6.0)
+    ust = mat_jole("fener_ust", lin(hex3("#7a3d10")), emis=0.0, purluk=0.3)
+    for i in range(46):
+        x, y, z = rnd.uniform(-32, 32), rnd.uniform(18, 46), rnd.uniform(-6, 26)
+        s = rnd.uniform(0.6, 1.4) * (y / 30)
+        bpy.ops.mesh.primitive_cylinder_add(radius=0.45 * s, depth=0.9 * s, location=(x, y, z), vertices=24)
+        f = bpy.context.active_object; f.data.materials.append(gov)
+        bv = f.modifiers.new("egim", "BEVEL"); bv.width = 0.18 * s; bv.segments = 5
+        bpy.ops.object.shade_smooth()
+        yuvarlak_kutu("kapak", (x, y, z + 0.5 * s), (0.62 * s, 0.62 * s, 0.12 * s), ust, egim=0.04 * s)
+        isik("POINT", (x, y - 1.2 * s, z), 60 * s * s, lin(hex3("#ffb43a")))
+    # yesil/camgobegi isik kureleri (bubble) + kucuk parilti
+    for i in range(60):
+        c = lin(hex3(rnd.choice(["#3dffa8", "#2be0e0", "#b6ff5c"])))
+        kure((rnd.uniform(-34, 34), rnd.uniform(16, 44), rnd.uniform(-8, 28)), rnd.uniform(0.15, 0.55), mat_emis("kure%d" % i, c, rnd.uniform(3, 7)))
+    bpy.ops.object.camera_add(location=(0, -6, 9), rotation=(math.radians(90), 0, 0))
+    kam = bpy.context.active_object; kam.data.lens = 26; sc.camera = kam
+    yaz(sc, "gok.png")
+
+
+# ------------------------------------------------------------------ SERIT (yol + kafes kapi), her oyuncu
+KAM = {"z": 2.6, "egim": 10.5, "lens": 21.85, "sensor": 24.0}
+KAPI = {"y": 8.0, "w": 6.0, "h": 4.1, "kiris": 0.5, "kule": 0.5}
+
+
+def kafes_kule(x0, y0, z0, z1, kal, mat, ince):
+    k = kal / 2
+    for dx in (-k, k):
+        for dy in (-k, k):
+            boru((x0 + dx, y0 + dy, z0), (x0 + dx, y0 + dy, z1), 0.065, mat)
+    n = max(2, int((z1 - z0) / kal))
+    adim = (z1 - z0) / n
+    for i in range(n):
+        za, zb = z0 + i * adim, z0 + (i + 1) * adim
+        for (ax, ay, bx, by) in ((-k, -k, k, -k), (k, -k, k, k), (k, k, -k, k), (-k, k, -k, -k)):
+            boru((x0 + ax, y0 + ay, za), (x0 + bx, y0 + by, zb), 0.032, ince)
+        for (ax, ay, bx, by) in ((-k, -k, k, -k), (k, -k, k, k), (k, k, -k, k), (-k, k, -k, -k)):
+            boru((x0 + ax, y0 + ay, zb), (x0 + bx, y0 + by, zb), 0.032, ince)
+
+
+def kafes_kiris(x0, x1, y0, z0, kal, mat, ince):
+    k = kal / 2
+    for dy in (-k, k):
+        for dz in (-k, k):
+            boru((x0, y0 + dy, z0 + dz), (x1, y0 + dy, z0 + dz), 0.065, mat)
+    n = max(2, int((x1 - x0) / kal))
+    adim = (x1 - x0) / n
+    for i in range(n):
+        xa, xb = x0 + i * adim, x0 + (i + 1) * adim
+        for (ay, az, by_, bz) in ((-k, -k, -k, k), (-k, k, k, k), (k, k, k, -k), (k, -k, -k, -k)):
+            boru((xa, y0 + ay, z0 + az), (xb, y0 + by_, z0 + bz), 0.032, ince)
+
+
+def serit(oyuncu):
+    sc = bos_sahne(w=960, h=1080, saydam=True)
+    R = lin(hex3(RENK[oyuncu]))
+    ana = mat_jole("ana", R, emis=0.18)
+    acikm = mat_jole("acik", acik(R, 0.45), emis=0.25)
+    koyum = mat_jole("koyu", koyu(R, 0.35), emis=0.05)
+    ince = mat_jole("ince", acik(R, 0.2), emis=0.3)
+    Y = KAPI["y"]
+    # yol: kalin jole doseme (kamerdan kapiya ve biraz otesine)
+    yuvarlak_kutu("yol", (0, (0.8 + Y + 2) / 2, -0.18), (4.4, Y + 2 - 0.8, 0.36), koyum, egim=0.12)
+    yuvarlak_kutu("yol_ust", (0, (0.8 + Y + 2) / 2, 0.0), (3.9, Y + 2 - 0.8, 0.06), ana, egim=0.03)
+    # chevron basamaklar (V, kameraya bakar)
+    y = 1.2
+    while y < Y - 0.4:
+        for s in (-1, 1):
+            o = yuvarlak_kutu("chev", (s * 0.85, y, 0.07), (1.9, 0.34, 0.1), acikm, egim=0.05)
+            o.rotation_euler = (0, 0, s * math.radians(-24))
+        y += 0.95
+    # korkuluk babalari + halat korkuluk (iki yanda)
+    for s in (-1, 1):
+        ys = [1.0 + i * 1.25 for i in range(int((Y - 1.0) / 1.25) + 1)]
+        for yy in ys:
+            yuvarlak_kutu("baba", (s * 2.35, yy, 0.32), (0.34, 0.34, 0.64), ana, egim=0.12)
+            kure((s * 2.35, yy, 0.68), 0.15, acikm)
+        boru((s * 2.35, ys[0], 0.46), (s * 2.35, ys[-1], 0.46), 0.05, ince)
+        boru((s * 2.35, ys[0], 0.22), (s * 2.35, ys[-1], 0.22), 0.04, ince)
+    # kafes kapi: iki kule + ust kiris + birlesim kupleri
+    W, H, KK, KR = KAPI["w"], KAPI["h"], KAPI["kule"], KAPI["kiris"]
+    xk = W / 2 - KK / 2
+    for s in (-1, 1):
+        kafes_kule(s * xk, Y, 0.0, H + KR, KK, ana, ince)
+        yuvarlak_kutu("taban", (s * xk, Y, 0.12), (KK + 0.3, KK + 0.3, 0.24), koyum, egim=0.06)
+        for zz in (H, H + KR):
+            yuvarlak_kutu("dugum", (s * xk, Y, zz), (KK * 0.55, KK * 0.55, KK * 0.55), acikm, egim=0.08)
+    kafes_kiris(-xk, xk, Y, H + KR / 2, KR, ana, ince)
+    # kapi acikligi arkasi: hafif renkli parlama zemini (panel yokken bos gorunmesin)
+    bpy.ops.mesh.primitive_plane_add(size=1, location=(0, Y + 0.6, H / 2), rotation=(math.pi / 2, 0, 0))
+    pz = bpy.context.active_object; pz.scale = (W - 2 * KK, H, 1)
+    pz.data.materials.append(mat_emis("aciklik", acik(R, 0.55), 0.35))
+    # isiklar
+    isik("AREA", (0, -1.5, 6.5), 900, (1, 1, 1), 6, yon=(0, Y * 0.6, 0))
+    isik("AREA", (-4, 3, 3), 350, acik(R, 0.5), 3, yon=(0, Y, 2))
+    isik("AREA", (4, 3, 3), 350, lin(hex3("#7fe7ff")), 3, yon=(0, Y, 2))
+    isik("AREA", (0, Y + 3, 6), 700, acik(R, 0.3), 5, yon=(0, Y, 1))
+    # kamera
+    rx = math.radians(90 - KAM["egim"])
+    bpy.ops.object.camera_add(location=(0, 0, KAM["z"]), rotation=(rx, 0, 0))
+    kam = bpy.context.active_object; sc.camera = kam
+    kam.data.sensor_fit = "VERTICAL"; kam.data.sensor_height = KAM["sensor"]; kam.data.lens = KAM["lens"]
+    # kapi acikligi piksel kutusu (sahne4.html duvari buraya oturtur)
+    ic = W / 2 - KK
+    noktalar = [Vector((-ic, Y, 0)), Vector((ic, Y, 0)), Vector((-ic, Y, H)), Vector((ic, Y, H))]
+    bpy.context.view_layer.update()
+    px = [world_to_camera_view(sc, kam, p) for p in noktalar]
+    xs = [p.x * 960 for p in px]; ys = [(1 - p.y) * 1080 for p in px]
+    YERLESIM["aciklik_" + oyuncu] = [round(min(xs), 1), round(min(ys), 1), round(max(xs), 1), round(max(ys), 1)]
+    log("aciklik", oyuncu, YERLESIM["aciklik_" + oyuncu])
+    yaz(sc, "serit-%s.png" % oyuncu)
+
+
+# ------------------------------------------------------------------ PANEL (jole duvar)
+def panel(oyuncu):
+    sc = bos_sahne(w=1100, h=904, saydam=True)
+    R = lin(hex3(RENK[oyuncu]))
+    PW, PH = 5.0, 4.1
+    bpy.ops.mesh.primitive_cube_add(size=1, location=(0, 0, 0))
+    p = bpy.context.active_object; p.scale = (PW, 0.25, PH); bpy.ops.object.transform_apply(scale=True)
+    bv = p.modifiers.new("egim", "BEVEL"); bv.width = 0.22; bv.segments = 8; bv.limit_method = "NONE"
+    bpy.ops.object.shade_smooth()
+    # jole: acik-orta renk dalgali seritler (wave texture) + kabarcik pürüzü
+    m = bpy.data.materials.new("panel"); m.use_nodes = True; nt = m.node_tree
+    b = nt.nodes["Principled BSDF"]
+    tc = nt.nodes.new("ShaderNodeTexCoord")
+    wv = nt.nodes.new("ShaderNodeTexWave"); wv.wave_type = "BANDS"; wv.bands_direction = "DIAGONAL"
+    wv.inputs["Scale"].default_value = 0.9; wv.inputs["Distortion"].default_value = 7.0; wv.inputs["Detail"].default_value = 3
+    nt.links.new(tc.outputs["Object"], wv.inputs["Vector"])
+    rp = nt.nodes.new("ShaderNodeValToRGB"); cr = rp.color_ramp
+    cr.elements[0].position = 0.25; cr.elements[0].color = (*acik(R, 0.62), 1)
+    cr.elements[1].position = 0.85; cr.elements[1].color = (*acik(R, 0.18), 1)
+    nt.links.new(wv.outputs["Fac"], rp.inputs[0])
+    nt.links.new(rp.outputs[0], b.inputs["Base Color"])
+    bm = nt.nodes.new("ShaderNodeBump"); bm.inputs["Strength"].default_value = 0.35
+    nt.links.new(wv.outputs["Fac"], bm.inputs["Height"]); nt.links.new(bm.outputs[0], b.inputs["Normal"])
+    b.inputs["Roughness"].default_value = 0.05
+    b.inputs["Coat Weight"].default_value = 1.0; b.inputs["Coat Roughness"].default_value = 0.02
+    b.inputs["Subsurface Weight"].default_value = 0.35
+    b.inputs["Emission Color"].default_value = (*acik(R, 0.5), 1); b.inputs["Emission Strength"].default_value = 0.35
+    p.data.materials.append(m)
+    # kabarciklar (on yuzde yarim gomulu cam kureler)
+    rnd = random.Random(7 if oyuncu == "p1" else 11)
+    cam = mat_cam("kabarcik")
+    for i in range(38):
+        r = rnd.choice([0.05, 0.07, 0.09, 0.12, 0.18, 0.28])
+        kure((rnd.uniform(-PW / 2 + 0.3, PW / 2 - 0.3), -0.13, rnd.uniform(-PH / 2 + 0.3, PH / 2 - 0.3)), r, cam)
+    isik("AREA", (-3, -4, 4), 700, (1, 1, 1), 3, yon=(0, 0, 0))
+    isik("AREA", (3.5, -3, -2), 300, acik(R, 0.4), 4, yon=(0, 0, 0))
+    isik("AREA", (0, -3, 0), 120, (1, 1, 1), 8, yon=(0, 0, 0))
+    bpy.ops.object.camera_add(location=(0, -10, 0), rotation=(math.radians(90), 0, 0))
+    kam = bpy.context.active_object; sc.camera = kam
+    kam.data.type = "ORTHO"; kam.data.ortho_scale = PW + 0.08
+    yaz(sc, "panel-%s.png" % oyuncu)
+
+
+# ------------------------------------------------------------------ POZ MASKELERI
+def kemik(arm, son):
+    for b in arm.pose.bones:
+        if b.name.endswith(":" + son) or b.name == son:
+            return b
+    raise KeyError(son)
+
+
+def yon_vek(a, ileri):
+    """ekran acisi -> dunya yonu (kamera -Y'de, +Y'ye bakar; ekran sag = +X, yukari = +Z)"""
+    r = math.radians(a)
+    return Vector((math.sin(r), 0, -math.cos(r)))
+
+
+def yonelt(arm, pb, d_dunya):
+    bpy.context.view_layer.update()
+    d = (arm.matrix_world.to_3x3().inverted() @ d_dunya).normalized()
+    M = pb.matrix.copy()
+    bas = M.translation.copy()
+    cur = Vector(M.col[1][:3]).normalized()
+    q = cur.rotation_difference(d)
+    yeni = Matrix.Translation(bas) @ q.to_matrix().to_4x4() @ Matrix.Translation(-bas) @ M
+    pb.matrix = yeni
+    bpy.context.view_layer.update()
+
+
+def dunya_kutusu(objs):
+    xs, ys, zs = [], [], []
+    dg = bpy.context.evaluated_depsgraph_get()
+    for o in objs:
+        oe = o.evaluated_get(dg); me = oe.to_mesh()
+        for v in me.vertices:
+            q = oe.matrix_world @ v.co
+            xs.append(q.x); ys.append(q.y); zs.append(q.z)
+        oe.to_mesh_clear()
+    return Vector((min(xs), min(ys), min(zs))), Vector((max(xs), max(ys), max(zs)))
+
+
+def poz_maskeleri():
+    # Cycles + duz siyah emisyon (Workbench headless runner'da OpenGL baglami istiyor; Cycles her yerde calisir)
+    sc = bos_sahne(motor="CYCLES", w=900, h=740, saydam=True, ornek=16)
+    sc.cycles.use_denoising = False
+    sc.view_settings.view_transform = "Standard"
+    once = set(bpy.data.objects)
+    bpy.ops.import_scene.fbx(filepath=os.path.join(KOK, "02-hareketler/siluet-govde.fbx"), automatic_bone_orientation=False)
+    yeni = [o for o in bpy.data.objects if o not in once]
+    arm = [o for o in yeni if o.type == "ARMATURE"][0]
+    mesler = [o for o in yeni if o.type == "MESH"]
+    siyah = mat_emis("siluet", (0, 0, 0), 0.0)
+    for m in mesler:
+        m.data.materials.clear(); m.data.materials.append(siyah)
+        for poly in m.data.polygons:
+            poly.material_index = 0
+    log("mesler", [m.name for m in mesler], "kemik", len(arm.pose.bones))
+    # yuzu kameraya: sol omuz +X'te
+    pb = arm.pose.bones
+    L = arm.matrix_world @ kemik(arm, "LeftArm").head; Rr = arm.matrix_world @ kemik(arm, "RightArm").head
+    v = L - Rr; v.z = 0
+    arm.rotation_euler.z -= math.atan2(v.y, v.x)
+    bpy.context.view_layer.update()
+    taban_rot = arm.rotation_euler.z
+    bpy.ops.object.camera_add(location=(0, -12, 1), rotation=(math.radians(90), 0, 0))
+    kam = bpy.context.active_object; sc.camera = kam; kam.data.type = "ORTHO"
+    ASPECT = 900 / 740
+    for ad, P in POZLAR.items():
+        for b in pb:
+            b.matrix_basis = Matrix.Identity(4)
+        arm.rotation_euler.z = taban_rot + (math.radians(90) if P.get("yon") == "sag" else 0)
+        bpy.context.view_layer.update()
+        ileri = Vector((1, 0, 0)) if P.get("yon") == "sag" else Vector((0, -1, 0))
+        g = P.get("govde", 180); ba = P.get("bas", 0)
+        for k, aci in (("Spine", g), ("Spine1", g), ("Spine2", g), ("Neck", g + ba), ("Head", g + ba)):
+            try:
+                yonelt(arm, kemik(arm, k), yon_vek(aci, ileri))
+            except KeyError:
+                pass
+        for taraf, anah in (("Left", "sol"), ("Right", "sag")):
+            kol = P.get(anah + "Kol", [-12 if anah == "sag" else 12] * 2)
+            yonelt(arm, kemik(arm, taraf + "Arm"), yon_vek(kol[0], ileri))
+            yonelt(arm, kemik(arm, taraf + "ForeArm"), yon_vek(kol[1], ileri))
+            yonelt(arm, kemik(arm, taraf + "Hand"), yon_vek(kol[1], ileri))
+            bac = P.get(anah + "Bacak", [-3 if anah == "sag" else 3, 0])
+            yonelt(arm, kemik(arm, taraf + "UpLeg"), yon_vek(bac[0], ileri))
+            yonelt(arm, kemik(arm, taraf + "Leg"), yon_vek(bac[1], ileri))
+            baldir = yon_vek(bac[1], ileri)
+            yonelt(arm, kemik(arm, taraf + "Foot"), (ileri * 0.9 + baldir * 0.35).normalized())
+        alt, ust = dunya_kutusu(mesler)
+        gen, yuk = ust.x - alt.x, ust.z - alt.z
+        olc = 2.55                                   # cerceve yuksekligi (m): ayakta figur ~%72
+        if yuk > olc * 0.92:
+            olc = yuk / 0.92
+        if gen > olc * ASPECT * 0.92:
+            olc = gen / (ASPECT * 0.92)
+        kam.data.ortho_scale = olc * ASPECT          # ortho_scale genis kenara (yatay) uygulanir
+        kam.location = ((alt.x + ust.x) / 2, -12, alt.z - olc * 0.04 + olc / 2)
+        bpy.context.view_layer.update()
+        YERLESIM.setdefault("poz", {})[ad] = {"cerceve_m": round(olc, 3), "gen_m": round(gen, 3), "yuk_m": round(yuk, 3)}
+        log("poz", ad, "gen", round(gen, 2), "yuk", round(yuk, 2), "cerceve", round(olc, 2))
+        yaz(sc, "poz/%s.png" % ad)
+
+
+# ------------------------------------------------------------------ ana akis
+if YALNIZ in ("hepsi", "poz"):
+    poz_maskeleri()
+if YALNIZ in ("hepsi", "sahne"):
+    gok()
+    for o in ("p1", "p2"):
+        serit(o)
+        panel(o)
+json.dump(YERLESIM, open(os.path.join(CIKTI, "yerlesim.json"), "w"), indent=1)
+log("bitti", YERLESIM)

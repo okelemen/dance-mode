@@ -1,0 +1,49 @@
+name: TETRIS MODE PVP varliklari (Blender)
+
+# REF-053 konsepti: gok, iki oyuncu seridi (jole yol + kafes kapi), jole duvar paneli, poz maskeleri.
+# Blender headless, Cycles CPU (sahne) + Workbench (maske). Yerel render yok (Masaustu CLAUDE.md md. 9).
+# Cikti: tetris-varlik artifact -> 03-motor/tetris-pvp/varlik/ altina konur, sahne4.html okur.
+
+on:
+  workflow_dispatch:
+    inputs:
+      yalniz:
+        description: "hepsi | poz | sahne"
+        required: true
+        default: "hepsi"
+      ornek:
+        description: "Cycles ornek sayisi"
+        required: true
+        default: "64"
+
+jobs:
+  varlik:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Blender onbellek
+        id: bc
+        uses: actions/cache@v4
+        with:
+          path: ~/blender
+          key: blender-4.2.3-linux-x64
+      - name: Blender indir (4.2.3 LTS)
+        if: steps.bc.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ~/blender && cd ~/blender
+          curl -sSL -o b.tar.xz https://download.blender.org/release/Blender4.2/blender-4.2.3-linux-x64.tar.xz
+          tar -xf b.tar.xz --strip-components=1 && rm b.tar.xz
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq libxi6 libxxf86vm1 libxfixes3 libxrender1 libgl1 libegl1 libxkbcommon0 libsm6
+      - name: Render
+        run: |
+          mkdir -p cikti
+          ~/blender/blender -b --factory-startup -noaudio -P 03-motor/tetris-pvp/varlik.py -- \
+            --cikti cikti --ornek ${{ github.event.inputs.ornek }} --yalniz ${{ github.event.inputs.yalniz }} 2>&1 | grep -v "^Fra:" | tail -n 120
+          ls -laR cikti
+          test -f cikti/yerlesim.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tetris-varlik
+          path: cikti/
+          retention-days: 14
