@@ -22,6 +22,7 @@ p = argparse.ArgumentParser()
 p.add_argument("--arka", required=True, help="masterdan 1920x1080 kare: duvar uzakta, poz gorunur")
 p.add_argument("--kutu", default="160,90,1760,990", help="HUD/abone dugmesi disarida kalacak kirpma")
 p.add_argument("--poz", type=int, default=0)
+p.add_argument("--maske", help="Blender siluet maskesi (beyaz=figur): duz siyah + dis beyaz kontur en uste basilir")
 p.add_argument("--sadece-yazi", action="store_true",
                help="arka = Blender 3B render (siluetler icinde); yalniz baslik/etiket/NEW eklenir (md. 21)")
 p.add_argument("--sol", default="2 Player|Co-op")
@@ -52,6 +53,15 @@ if a.sadece_yazi:
     # baslik bandi okunurlugu: ust bandi hafif karart (referansta baslik arkasi koyu gok)
     bant = Image.new("RGBA", (W, H)); ImageDraw.Draw(bant).rectangle((0, 0, W, 175), fill=(10, 4, 30, 90))
     im.alpha_composite(bant.filter(ImageFilter.GaussianBlur(30)))
+    if a.maske:
+        # referans: siluet DUZ simsiyah, yalniz dis hatta kalin beyaz kontur + hafif renkli isilti; ic cizgi yok
+        mk = Image.open(a.maske).convert("L").resize((W, H), Image.LANCZOS).point(lambda v: 255 if v > 110 else 0)
+        mk = mk.filter(ImageFilter.MaxFilter(3)).filter(ImageFilter.MinFilter(3))       # kucuk delikleri kapat
+        kontur = mk.filter(ImageFilter.MaxFilter(13))
+        isilti = kontur.filter(ImageFilter.MaxFilter(9)).filter(ImageFilter.GaussianBlur(16))
+        im.alpha_composite(Image.merge("RGBA", [Image.new("L", (W, H), c) for c in (255, 120, 230)] + [isilti.point(lambda v: int(v * 0.8))]))
+        im.alpha_composite(Image.merge("RGBA", [Image.new("L", (W, H), 255)] * 3 + [kontur]))
+        im.alpha_composite(Image.merge("RGBA", [Image.new("L", (W, H), c) for c in (6, 4, 14)] + [mk.filter(ImageFilter.GaussianBlur(0.7))]))
 else:
     # ---------------------------------------------------------------- arka plan (videonun kendi karesi)
     x0, y0, x1, y1 = (int(v) for v in a.kutu.split(","))

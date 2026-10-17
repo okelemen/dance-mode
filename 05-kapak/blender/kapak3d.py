@@ -277,7 +277,10 @@ def karakter(klip, kip, siyah, kabuk_b, kabuk_d):
         # malzemesine dusup govdeyi saydam yapiyordu (deneme 2)
         for poly in m.data.polygons:
             poly.material_index = 0
-        kabuk_ekle(m, KABUK_KARAKTER, kabuk_b)          # mesh yerel birimi (Mixamo: cm)
+        # 3B kabuk kontur YOK (yuz/yaka/cep ic cizgisi cikariyordu). Siluet sekli ayri MASKE olarak
+        # yazilir (Object Index 1), duz siyah dolgu + yalniz DIS beyaz kontur 2B'de en uste basilir
+        # (deneme 3: isilti siyah govdeyi deliyordu, referansta siluet simsiyah).
+        m.pass_index = 1
     return arm, mesler, kr
 
 
@@ -344,10 +347,18 @@ def render_et(ad):
     sc = bpy.context.scene
     sc.use_nodes = True
     nt = sc.node_tree; nt.nodes.clear()
+    bpy.context.view_layer.use_pass_object_index = True
     rl = nt.nodes.new("CompositorNodeRLayers")
     gl = nt.nodes.new("CompositorNodeGlare"); gl.glare_type = "FOG_GLOW"; gl.threshold = 0.9; gl.size = 8; gl.mix = 0.15
     out = nt.nodes.new("CompositorNodeComposite")
     nt.links.new(rl.outputs[0], gl.inputs[0]); nt.links.new(gl.outputs[0], out.inputs[0])
+    # siluet maskesi (Object Index 1) -> ayri PNG
+    idm = nt.nodes.new("CompositorNodeIDMask"); idm.index = 1; idm.use_antialiasing = True
+    nt.links.new(rl.outputs["IndexOB"], idm.inputs[0])
+    fo = nt.nodes.new("CompositorNodeOutputFile"); fo.base_path = CIKTI
+    fo.format.file_format = "PNG"; fo.format.color_mode = "BW"
+    fo.file_slots[0].path = ad + "-maske-"
+    nt.links.new(idm.outputs[0], fo.inputs[0])
     sc.render.filepath = os.path.join(CIKTI, ad + ".png")
     bpy.ops.render.render(write_still=True)
     log("yazildi", sc.render.filepath)
