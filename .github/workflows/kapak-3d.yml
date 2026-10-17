@@ -1,0 +1,48 @@
+name: Kapak 3B (Blender)
+
+# Kapak 3B yazilimda kurulur (Masaustu CLAUDE.md md. 21): Blender (headless, Cycles CPU) GitHub Actions'ta.
+# Kendi sahnemiz: 3B kabartma yazi, yansimali neon zemin, motorun Mixamo karakteri + poz klipleri.
+# Yapay zeka gorseli yok (md. 17), yerel render yok (md. 9). Cikti: kapak-3d artifact (PNG).
+
+on:
+  workflow_dispatch:
+    inputs:
+      ayar:
+        description: "Kapak ayar dosyasi (JSON, depo kokune gore)"
+        required: true
+        default: "05-kapak/blender/tetris-01.json"
+      ornek:
+        description: "Cycles ornek sayisi"
+        required: true
+        default: "96"
+
+jobs:
+  kapak:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Blender onbellek
+        id: bc
+        uses: actions/cache@v4
+        with:
+          path: ~/blender
+          key: blender-4.2.3-linux-x64
+      - name: Blender indir (4.2.3 LTS)
+        if: steps.bc.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ~/blender && cd ~/blender
+          curl -sSL -o b.tar.xz https://download.blender.org/release/Blender4.2/blender-4.2.3-linux-x64.tar.xz
+          tar -xf b.tar.xz --strip-components=1 && rm b.tar.xz
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq libxi6 libxxf86vm1 libxfixes3 libxrender1 libgl1 libegl1 libxkbcommon0 libsm6
+      - name: Render
+        run: |
+          mkdir -p cikti
+          ~/blender/blender -b --factory-startup -noaudio -P 05-kapak/blender/kapak3d.py -- \
+            --ayar "${{ github.event.inputs.ayar }}" --ornek ${{ github.event.inputs.ornek }} --cikti cikti 2>&1 | tail -n 80
+          ls -la cikti
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kapak-3d
+          path: cikti/
+          retention-days: 14

@@ -1,0 +1,11 @@
+{
+ "baslik": "TETRIS MODE",
+ "font": "05-kapak/fontlar/TitanOne.ttf",
+ "harf_renk": ["#ff1e8c", "#ff7800", "#ffcd00", "#28d23c", "#00aaff", "#8c46ff"],
+ "panel_renk": [[1.0, 0.31, 0.64], [0.22, 0.74, 0.97]],
+ "kenar": "#22d3ee", "ok": "#f472b6", "iki": "#ff4fa3",
+ "varyant": [
+  {"ad": "A", "klip": "02-hareketler/arms-up.fbx", "kare": "el_tepe", "sol": ["2 Player", "Co-op"], "sag": ["80 Walls", "10 MIN"]},
+  {"ad": "B", "klip": "02-hareketler/star-jack.fbx", "kare": "en_genis", "sol": ["2 Players", "Full Body"], "sag": ["80 Poses", "Warm Up"]}
+ ]
+}
