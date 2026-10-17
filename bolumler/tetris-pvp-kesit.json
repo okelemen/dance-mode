@@ -82,5 +82,11 @@
    "p2": "triangle",
    "ovgu": "AWESOME!"
   }
- ]
+ ],
+ "abone": [
+  15.0,
+  30.0,
+  47.5
+ ],
+ "abone_sure": 3.2
 }

@@ -332,7 +332,7 @@ function ovguCiz(d, e) {
   const a = Math.min(1, p / 0.15) * Math.min(1, (1 - p) / 0.2);
   const s = 0.8 + 0.2 * ease(Math.min(1, p / 0.2));
   const metin = d.ovgu || OVGU[(d.no - 1) % OVGU.length];
-  yazi(metin, W / 2, H * 0.30, 150 * k * s, ['#fffbe0', '#7dffc0', '#18b8ff'], '#06122e', a, CAMGOBEGI);
+  yazi(metin, W / 2, H * 0.42, 150 * k * s, ['#fffbe0', '#7dffc0', '#18b8ff'], '#06122e', a, CAMGOBEGI);
 }
 
 // ------------------------------------------------------------ HUD (üst bant)
@@ -452,6 +452,85 @@ function kareKur(n) {
   if (!kartVar) hudCiz(t, turBul(t), bitti / Math.max(1, TOPLAM_DUVAR));
   if (d && e) ovguCiz(d, e);
   for (const kart of KARTLAR) if (t >= kart.t && t < kart.t + kart.sure) kartCiz(kart, t - kart.t, t);
+  if (!kartVar) aboneCiz(t);
+}
+
+// ------------------------------------------------------------ ABONE HATIRLATMASI
+// Kullanıcı (18 Eki 2026): "subscribe yazısı belirgin şekilde gözüksün ... ortada ... üstteki ROUND ile ortadaki
+// 3-2-1 sayımının ARASINDA ... konsepte uygun ... 15 saniyelik aralıklarla". Zamanlar bölüm JSON'unda `abone`
+// (efekt.py pop + tık sesini aynı listeden koyar). Tam ekran kartlar sırasında çizilmez.
+const ABONE = BOLUM.abone || [], ABONE_SURE = BOLUM.abone_sure || 3.2;
+function aboneCiz(t) {
+  const a0 = ABONE.find(x => t >= x && t < x + ABONE_SURE);
+  if (a0 === undefined) return;
+  const u = t - a0;
+  const gir = kisit(u / 0.35, 0, 1), cik = ease(kisit((ABONE_SURE - u) / 0.3, 0, 1));
+  const zip = gir < 1 ? 1 + 0.25 * Math.sin(gir * Math.PI) : 1;       // jöle gibi zıplayarak girer
+  const TIK = 1.3, abone = u >= TIK;
+  const bas = u >= TIK && u < TIK + 0.12 ? 0.9 : 1;
+  const pul = abone ? 1 : 1 + 0.045 * Math.sin(u * 11);
+  const s = ease(gir) * zip * bas * pul * cik;
+  if (s <= 0.01) return;
+  const yM = 190 * k, bw = 600 * k * s, bh = 118 * k * s, x0 = W / 2 - bw / 2;
+  cx.save();
+  // dış ışıltı + altın çerçeve + jöle kırmızı gövde
+  cx.shadowColor = abone ? P1 : '#ff2d4a'; cx.shadowBlur = 50 * k;
+  cx.fillStyle = ALTIN; cx.beginPath(); cx.roundRect(x0 - 8 * k * s, yM - bh / 2 - 8 * k * s, bw + 16 * k * s, bh + 16 * k * s, (bh + 16 * k * s) / 2); cx.fill();
+  cx.shadowBlur = 0;
+  const g = cx.createLinearGradient(0, yM - bh / 2, 0, yM + bh / 2);
+  if (abone) { g.addColorStop(0, '#7dffb4'); g.addColorStop(1, '#0c8a48'); } else { g.addColorStop(0, '#ff6a7a'); g.addColorStop(1, '#c4001c'); }
+  cx.fillStyle = g; cx.beginPath(); cx.roundRect(x0, yM - bh / 2, bw, bh, bh / 2); cx.fill();
+  cx.fillStyle = 'rgba(255,255,255,0.35)';                                // üst parlama
+  cx.beginPath(); cx.roundRect(x0 + bh * 0.3, yM - bh / 2 + 7 * k * s, bw - bh * 0.6, bh * 0.3, bh * 0.15); cx.fill();
+  cx.restore();
+  // oynat rozeti
+  const ix = x0 + bh * 0.62;
+  cx.fillStyle = '#ffffff'; cx.beginPath(); cx.roundRect(ix - 34 * k * s, yM - 25 * k * s, 68 * k * s, 50 * k * s, 14 * k * s); cx.fill();
+  cx.fillStyle = abone ? '#0c8a48' : '#e0102c';
+  cx.beginPath(); cx.moveTo(ix - 10 * k * s, yM - 14 * k * s); cx.lineTo(ix + 15 * k * s, yM); cx.lineTo(ix - 10 * k * s, yM + 14 * k * s); cx.closePath(); cx.fill();
+  yazi(abone ? 'SUBSCRIBED!' : 'SUBSCRIBE', x0 + bw / 2 + bh * 0.3, yM, 62 * k * s, '#ffffff', '#5a0010');
+  // zil (sağda, abone olunca sallanır)
+  const zx = x0 + bw + 62 * k * s, zy = yM;
+  const sal = abone ? Math.sin((u - TIK) * 28) * Math.exp(-(u - TIK) * 2.5) * 0.55 : Math.sin(u * 6) * 0.08;
+  cx.save(); cx.translate(zx, zy - 26 * k * s); cx.rotate(sal); cx.scale(s, s);
+  cx.fillStyle = ALTIN; cx.shadowColor = ALTIN; cx.shadowBlur = 24 * k;
+  // turuncu P2 duvarının üstünde kaybolmasın: koyu kontur + beyaz parlama (kesit 3 kontrolü)
+  cx.lineWidth = 6 * k; cx.strokeStyle = '#3a1400'; cx.lineJoin = 'round';
+  cx.beginPath(); cx.moveTo(-30 * k, 44 * k); cx.quadraticCurveTo(-28 * k, 0, 0, -6 * k); cx.quadraticCurveTo(28 * k, 0, 30 * k, 44 * k); cx.closePath();
+  cx.stroke(); cx.fill();
+  cx.shadowBlur = 0;
+  cx.beginPath(); cx.arc(0, 52 * k, 9 * k, 0, 6.283); cx.stroke(); cx.fill();
+  cx.fillStyle = 'rgba(255,255,255,0.75)'; cx.beginPath(); cx.ellipse(-10 * k, 14 * k, 5 * k, 14 * k, 0.3, 0, 6.283); cx.fill();
+  cx.restore();
+  // el imleci gelir ve tıklar
+  if (u > 0.5 && u < ABONE_SURE - 0.35) {
+    const q = ease(kisit((u - 0.5) / (TIK - 0.5), 0, 1));
+    const hx = lerp(x0 + bw + 200 * k, x0 + bw * 0.62, q), hy = lerp(yM + 150 * k, yM + 22 * k, q);
+    const sc = (u >= TIK && u < TIK + 0.15) ? 0.85 : 1;
+    cx.save(); cx.translate(hx, hy); cx.scale(sc, sc);
+    cx.fillStyle = '#ffffff'; cx.strokeStyle = '#111827'; cx.lineWidth = 3.5 * k;
+    cx.beginPath();
+    cx.moveTo(0, 0); cx.lineTo(0, 54 * k); cx.lineTo(13 * k, 41 * k); cx.lineTo(23 * k, 63 * k);
+    cx.lineTo(32 * k, 59 * k); cx.lineTo(22 * k, 37 * k); cx.lineTo(40 * k, 37 * k); cx.closePath();
+    cx.fill(); cx.stroke();
+    if (u >= TIK && u < TIK + 0.4) {
+      const r2 = (u - TIK) / 0.4;
+      cx.strokeStyle = `rgba(255,255,255,${(1 - r2).toFixed(3)})`; cx.lineWidth = 5 * k;
+      cx.beginPath(); cx.arc(0, 0, 16 * k + 50 * k * r2, 0, 6.283); cx.stroke();
+    }
+    cx.restore();
+  }
+  // tıklamada pırıltı
+  if (abone && u < TIK + 0.7) {
+    const r3 = (u - TIK) / 0.7;
+    cx.save(); cx.globalCompositeOperation = 'lighter';
+    for (let j = 0; j < 14; j++) {
+      const ang = j / 14 * 6.283, d = (60 + 260 * r3) * k;
+      const px = W / 2 + Math.cos(ang) * d * 1.6, py = yM + Math.sin(ang) * d * 0.6;
+      cx.fillStyle = hex(j % 2 ? ALTIN : P1, 1 - r3); cx.beginPath(); cx.arc(px, py, 7 * k, 0, 6.283); cx.fill();
+    }
+    cx.restore();
+  }
 }
 
 window.kareKur = kareKur;

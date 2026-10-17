@@ -52,6 +52,12 @@ def main():
         yerlestir(ef, vurus(), c - 0.05, 1.0)                            # en yakinda
         yerlestir(ef, vuus(0.6, False, 0.9), c)                          # icinden gecti
         yerlestir(ef, piril(), c + Z["gec"] * 0.35, 0.6)                 # ovgu
+    # SUBSCRIBE hatirlatmasi (her ~15 sn, sahne4.html aboneCiz ile ayni zaman): giriste pop, 1,3 sn'de tik + zil
+    for ta in B.get("abone", []):
+        yerlestir(ef, ding(990, 0.2), ta + 0.05, 0.55)
+        yerlestir(ef, tik(), ta + 1.3, 0.9)
+        yerlestir(ef, ding(1760, 0.5), ta + 1.35, 0.5)
+        yerlestir(ef, piril(0.5), ta + 1.4, 0.35)
     ef = ef[: int(sure * SR)]
     karisim = ef * 0.5
     if "--muzik" in sys.argv:
