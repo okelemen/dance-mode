@@ -54,17 +54,14 @@ def koyu(c, m):
 
 
 # ------------------------------------------------------------------ temel
-def bos_sahne(motor="CYCLES", w=1920, h=1080, saydam=False, ornek=None):
+def bos_sahne(motor="CYCLES", w=1920, h=1080, saydam=False, ornek=None, doygun=True):
     bpy.ops.wm.read_factory_settings(use_empty=True)
     sc = bpy.context.scene
     sc.render.engine = motor
     if motor == "CYCLES":
         sc.cycles.device = "CPU"; sc.cycles.samples = ornek or ORNEK; sc.cycles.use_denoising = True
-        sc.view_settings.view_transform = "AgX"
-        try:
-            sc.view_settings.look = "AgX - Punchy"
-        except Exception:
-            pass
+        # deneme 1: AgX doygun jole rengini pastele ceviriyordu (referans neon-doygun) -> Standard
+        sc.view_settings.view_transform = "Standard" if doygun else "AgX"
     sc.render.resolution_x, sc.render.resolution_y = w, h
     sc.render.resolution_percentage = 100
     sc.render.film_transparent = saydam
@@ -83,7 +80,7 @@ def mat_emis(ad, renk, guc):
     return m
 
 
-def mat_jole(ad, renk, emis=0.12, purluk=0.07):
+def mat_jole(ad, renk, emis=0.04, purluk=0.12):
     """parlak jole/plastik: doygun renk, ust kaplama (coat), hafif ic isilti"""
     m = bpy.data.materials.new(ad); m.use_nodes = True
     b = m.node_tree.nodes["Principled BSDF"]
@@ -91,7 +88,7 @@ def mat_jole(ad, renk, emis=0.12, purluk=0.07):
     b.inputs["Roughness"].default_value = purluk
     b.inputs["Coat Weight"].default_value = 1.0
     b.inputs["Coat Roughness"].default_value = 0.03
-    b.inputs["Subsurface Weight"].default_value = 0.25
+    b.inputs["Subsurface Weight"].default_value = 0.0
     b.inputs["Subsurface Radius"].default_value = (0.4, 0.4, 0.4)
     b.inputs["Emission Color"].default_value = (*acik(renk, 0.3), 1)
     b.inputs["Emission Strength"].default_value = emis
@@ -190,7 +187,7 @@ def gok():
     for i in range(420):
         kure((rnd.uniform(-75, 75), rnd.uniform(50, 58), rnd.uniform(-20, 48)), rnd.uniform(0.05, 0.16), ym, sub=1)
     # yuzen fenerler (altin, ici isikli) - gogu dolduran ana oge (referanstaki denizanalarinin yerine bizim oge)
-    gov = mat_emis("fener", lin(hex3("#ffb43a")), 6.0)
+    gov = mat_emis("fener", lin(hex3("#ff8a1a")), 14.0)
     ust = mat_jole("fener_ust", lin(hex3("#7a3d10")), emis=0.0, purluk=0.3)
     for i in range(46):
         x, y, z = rnd.uniform(-32, 32), rnd.uniform(18, 46), rnd.uniform(-6, 26)
@@ -204,9 +201,15 @@ def gok():
     # yesil/camgobegi isik kureleri (bubble) + kucuk parilti
     for i in range(60):
         c = lin(hex3(rnd.choice(["#3dffa8", "#2be0e0", "#b6ff5c"])))
-        kure((rnd.uniform(-34, 34), rnd.uniform(16, 44), rnd.uniform(-8, 28)), rnd.uniform(0.15, 0.55), mat_emis("kure%d" % i, c, rnd.uniform(3, 7)))
+        kure((rnd.uniform(-34, 34), rnd.uniform(16, 44), rnd.uniform(-8, 28)), rnd.uniform(0.15, 0.55), mat_emis("kure%d" % i, c, rnd.uniform(6, 12)))
     bpy.ops.object.camera_add(location=(0, -6, 9), rotation=(math.radians(90), 0, 0))
     kam = bpy.context.active_object; kam.data.lens = 26; sc.camera = kam
+    sc.use_nodes = True
+    nt2 = sc.node_tree; nt2.nodes.clear()
+    rl = nt2.nodes.new("CompositorNodeRLayers")
+    gl = nt2.nodes.new("CompositorNodeGlare"); gl.glare_type = "FOG_GLOW"; gl.threshold = 0.8; gl.size = 9; gl.mix = 0.25
+    ou = nt2.nodes.new("CompositorNodeComposite")
+    nt2.links.new(rl.outputs[0], gl.inputs[0]); nt2.links.new(gl.outputs[0], ou.inputs[0])
     yaz(sc, "gok.png")
 
 
@@ -246,10 +249,10 @@ def kafes_kiris(x0, x1, y0, z0, kal, mat, ince):
 def serit(oyuncu):
     sc = bos_sahne(w=960, h=1080, saydam=True)
     R = lin(hex3(RENK[oyuncu]))
-    ana = mat_jole("ana", R, emis=0.18)
-    acikm = mat_jole("acik", acik(R, 0.45), emis=0.25)
-    koyum = mat_jole("koyu", koyu(R, 0.35), emis=0.05)
-    ince = mat_jole("ince", acik(R, 0.2), emis=0.3)
+    ana = mat_jole("ana", R, emis=0.08)
+    acikm = mat_jole("acik", acik(R, 0.35), emis=0.15)
+    koyum = mat_jole("koyu", koyu(R, 0.45), emis=0.02)
+    ince = mat_jole("ince", acik(R, 0.1), emis=0.12)
     Y = KAPI["y"]
     # yol: kalin jole doseme (kamerdan kapiya ve biraz otesine)
     yuvarlak_kutu("yol", (0, (0.8 + Y + 2) / 2, -0.18), (4.4, Y + 2 - 0.8, 0.36), koyum, egim=0.12)
@@ -281,12 +284,12 @@ def serit(oyuncu):
     # kapi acikligi arkasi: hafif renkli parlama zemini (panel yokken bos gorunmesin)
     bpy.ops.mesh.primitive_plane_add(size=1, location=(0, Y + 0.6, H / 2), rotation=(math.pi / 2, 0, 0))
     pz = bpy.context.active_object; pz.scale = (W - 2 * KK, H, 1)
-    pz.data.materials.append(mat_emis("aciklik", acik(R, 0.55), 0.35))
+    pz.data.materials.append(mat_emis("aciklik", koyu(R, 0.55), 0.6))
     # isiklar
-    isik("AREA", (0, -1.5, 6.5), 900, (1, 1, 1), 6, yon=(0, Y * 0.6, 0))
-    isik("AREA", (-4, 3, 3), 350, acik(R, 0.5), 3, yon=(0, Y, 2))
-    isik("AREA", (4, 3, 3), 350, lin(hex3("#7fe7ff")), 3, yon=(0, Y, 2))
-    isik("AREA", (0, Y + 3, 6), 700, acik(R, 0.3), 5, yon=(0, Y, 1))
+    isik("AREA", (0, -1.5, 6.5), 380, (1, 1, 1), 6, yon=(0, Y * 0.6, 0))
+    isik("AREA", (-4, 3, 3), 260, acik(R, 0.2), 3, yon=(0, Y, 2))
+    isik("AREA", (4, 3, 3), 220, lin(hex3("#7fe7ff")), 3, yon=(0, Y, 2))
+    isik("AREA", (0, Y + 3, 6), 500, acik(R, 0.1), 5, yon=(0, Y, 1))
     # kamera
     rx = math.radians(90 - KAM["egim"])
     bpy.ops.object.camera_add(location=(0, 0, KAM["z"]), rotation=(rx, 0, 0))
@@ -320,8 +323,8 @@ def panel(oyuncu):
     wv.inputs["Scale"].default_value = 0.9; wv.inputs["Distortion"].default_value = 7.0; wv.inputs["Detail"].default_value = 3
     nt.links.new(tc.outputs["Object"], wv.inputs["Vector"])
     rp = nt.nodes.new("ShaderNodeValToRGB"); cr = rp.color_ramp
-    cr.elements[0].position = 0.25; cr.elements[0].color = (*acik(R, 0.62), 1)
-    cr.elements[1].position = 0.85; cr.elements[1].color = (*acik(R, 0.18), 1)
+    cr.elements[0].position = 0.25; cr.elements[0].color = (*acik(R, 0.38), 1)
+    cr.elements[1].position = 0.85; cr.elements[1].color = (*R, 1)
     nt.links.new(wv.outputs["Fac"], rp.inputs[0])
     nt.links.new(rp.outputs[0], b.inputs["Base Color"])
     bm = nt.nodes.new("ShaderNodeBump"); bm.inputs["Strength"].default_value = 0.35
@@ -329,7 +332,7 @@ def panel(oyuncu):
     b.inputs["Roughness"].default_value = 0.05
     b.inputs["Coat Weight"].default_value = 1.0; b.inputs["Coat Roughness"].default_value = 0.02
     b.inputs["Subsurface Weight"].default_value = 0.35
-    b.inputs["Emission Color"].default_value = (*acik(R, 0.5), 1); b.inputs["Emission Strength"].default_value = 0.35
+    b.inputs["Emission Color"].default_value = (*acik(R, 0.3), 1); b.inputs["Emission Strength"].default_value = 0.12
     p.data.materials.append(m)
     # kabarciklar (on yuzde yarim gomulu cam kureler)
     rnd = random.Random(7 if oyuncu == "p1" else 11)
@@ -337,9 +340,9 @@ def panel(oyuncu):
     for i in range(38):
         r = rnd.choice([0.05, 0.07, 0.09, 0.12, 0.18, 0.28])
         kure((rnd.uniform(-PW / 2 + 0.3, PW / 2 - 0.3), -0.13, rnd.uniform(-PH / 2 + 0.3, PH / 2 - 0.3)), r, cam)
-    isik("AREA", (-3, -4, 4), 700, (1, 1, 1), 3, yon=(0, 0, 0))
-    isik("AREA", (3.5, -3, -2), 300, acik(R, 0.4), 4, yon=(0, 0, 0))
-    isik("AREA", (0, -3, 0), 120, (1, 1, 1), 8, yon=(0, 0, 0))
+    isik("AREA", (-3, -4, 4), 420, (1, 1, 1), 3, yon=(0, 0, 0))
+    isik("AREA", (3.5, -3, -2), 200, acik(R, 0.2), 4, yon=(0, 0, 0))
+    isik("AREA", (0, -3, 0), 60, (1, 1, 1), 8, yon=(0, 0, 0))
     bpy.ops.object.camera_add(location=(0, -10, 0), rotation=(math.radians(90), 0, 0))
     kam = bpy.context.active_object; sc.camera = kam
     kam.data.type = "ORTHO"; kam.data.ortho_scale = PW + 0.08
@@ -387,6 +390,7 @@ def dunya_kutusu(objs):
 def poz_maskeleri():
     # Cycles + duz siyah emisyon (Workbench headless runner'da OpenGL baglami istiyor; Cycles her yerde calisir)
     sc = bos_sahne(motor="CYCLES", w=900, h=740, saydam=True, ornek=16)
+    sc.frame_set(1)
     sc.cycles.use_denoising = False
     sc.view_settings.view_transform = "Standard"
     once = set(bpy.data.objects)
@@ -399,7 +403,11 @@ def poz_maskeleri():
         m.data.materials.clear(); m.data.materials.append(siyah)
         for poly in m.data.polygons:
             poly.material_index = 0
-    log("mesler", [m.name for m in mesler], "kemik", len(arm.pose.bones))
+    log("mesler", [m.name for m in mesler], "kemik", len(arm.pose.bones), "aksiyon", bool(arm.animation_data and arm.animation_data.action))
+    # FBX bir dinlenme aksiyonu tasiyor: render aninda kare guncellemesi pozu sifirliyordu (deneme 1: 8 maske de duz durus)
+    arm.animation_data_clear()
+    for o in mesler:
+        o.animation_data_clear()
     # yuzu kameraya: sol omuz +X'te
     pb = arm.pose.bones
     L = arm.matrix_world @ kemik(arm, "LeftArm").head; Rr = arm.matrix_world @ kemik(arm, "RightArm").head
