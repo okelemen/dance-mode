@@ -111,9 +111,9 @@ def kur(dizi, son=True):
             o = sayac % len(OVGU)
             duvarlar.append({"no": no, "poz": no, "tur": tur, "t0": round(t, 3), "sure": DUVAR,
                              "ovgu": OVGU[o], **({"temas": True} if no in TEMAS else {})})
-            koc.append({"t": round(t + 0.35, 3), "metin": ad})
-            if ipucu:
-                koc.append({"t": round(t + 1.1, 3), "metin": ipucu})
+            # poz adi + ipucu TEK cumle (17 Eki 2026: muzige kilitli 7,1 sn'lik duvarda ayri cumlelerde
+            # ad penceresi 0,67 sn'ye dustu, 14 ad kesildi). Pencere: say[0] - 0,3 = ~2,3 sn.
+            koc.append({"t": round(t + 0.3, 3), "metin": f"{ad} {ipucu}" if ipucu else ad})
             for i, s in enumerate(ZAMAN["say"]):
                 koc.append({"t": round(t + s + 0.05, 3), "metin": ["Three!", "Two!", "One!"][i], "kisa": True})
             koc.append({"t": round(t + ZAMAN["yaklas"] + 0.05, 3), "metin": "Hold it!", "kisa": True})

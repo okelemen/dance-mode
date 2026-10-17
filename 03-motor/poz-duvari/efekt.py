@@ -4,7 +4,7 @@ Efektler dalga biciminden SENTEZLENIR (indirme yok, telif yok). Zamanlar bolum
 JSON'undan (kartlar, duvarlar, zaman) - koc sesi ve goruntuyle ayni kaynak.
 Kullanici (16 Eki 2026): "ses efektleri ... her geciste" -> TALIMATLAR §11.
 
-    python efekt.py <bolum.json> <koc-sesi.wav> <cikti.wav> [--efekt-iz efekt.wav]
+    python efekt.py <bolum.json> <koc-sesi.wav> <cikti.wav> [--efekt-iz efekt.wav] [--muzik muzik.wav [--muzik-kazanc 0.5]]
 
 Karisim: efektler koc konusurken kisilir (zarf takibi, -9 dB'e kadar), tepe -1 dBFS.
 Muzik geldiginde ayni karisima ucuncu katman olarak eklenir.
@@ -155,6 +155,20 @@ def main():
     env = env / (np.max(env) + 1e-9)
     kis = 1 - 0.65 * np.clip(env * 3, 0, 1)
     karisim = koc * 1.0 + ef * 0.42 * kis
+    if "--muzik" in sys.argv:
+        # MUZIK katmani (17 Eki 2026, kullanici: "konusma duyulmasi gerekiyor, ona gore ses ayarini yap").
+        # Koc konusurken muzik ~-10 dB kisilir: hizli atak (30 ms), yavas birakma (350 ms).
+        m, msr = sf.read(sys.argv[sys.argv.index("--muzik") + 1], dtype="float32", always_2d=True)
+        assert msr == SR, f"muzik {msr} Hz, {SR} bekleniyor"
+        m = np.pad(m, ((0, max(0, len(ef) - len(m))), (0, 0)))[: len(ef)]
+        hedef = 1 - 0.68 * np.clip(env * 3, 0, 1)            # 1 -> ~0,32 (-10 dB)
+        g = np.empty_like(hedef); g[0] = 1.0
+        a_at, a_bir = np.exp(-1 / (0.03 * SR)), np.exp(-1 / (0.35 * SR))
+        for i in range(1, len(hedef)):
+            k_ = a_at if hedef[i] < g[i - 1] else a_bir
+            g[i] = k_ * g[i - 1] + (1 - k_) * hedef[i]
+        mg = float(sys.argv[sys.argv.index("--muzik-kazanc") + 1]) if "--muzik-kazanc" in sys.argv else 0.5
+        karisim = karisim[:, None] + m * (mg * g)[:, None]       # stereo
     karisim = karisim / (np.max(np.abs(karisim)) + 1e-9) * 0.89
     sf.write(cikti, karisim.astype(np.float32), SR, subtype="PCM_16")
     if "--efekt-iz" in sys.argv:
