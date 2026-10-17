@@ -257,13 +257,13 @@ def serit(oyuncu):
     # yol: kalin jole doseme (kamerdan kapiya ve biraz otesine)
     yuvarlak_kutu("yol", (0, (0.8 + Y + 2) / 2, -0.18), (4.4, Y + 2 - 0.8, 0.36), koyum, egim=0.12)
     yuvarlak_kutu("yol_ust", (0, (0.8 + Y + 2) / 2, 0.0), (3.9, Y + 2 - 0.8, 0.06), ana, egim=0.03)
-    # chevron basamaklar (V, kameraya bakar)
-    y = 1.2
-    while y < Y - 0.4:
-        for s in (-1, 1):
-            o = yuvarlak_kutu("chev", (s * 0.85, y, 0.07), (1.9, 0.34, 0.1), acikm, egim=0.05)
-            o.rotation_euler = (0, 0, s * math.radians(-24))
-        y += 0.95
+    # yol kabarciklari: yuzeye yarim gomulu cam kureler (kullanici 17 Eki: "kabarciklarini ... nasil yaparsin").
+    # Yon oklari sahne4.html'de hareketli cizilir (kameraya akar), burada yok.
+    rnd = random.Random(21 if oyuncu == "p1" else 23)
+    cam = mat_cam("yol_kabarcik")
+    for i in range(70):
+        r = rnd.choice([0.04, 0.06, 0.08, 0.1, 0.14, 0.2])
+        kure((rnd.uniform(-1.85, 1.85), rnd.uniform(2.6, Y + 1.5), 0.03), r, cam)
     # korkuluk babalari + halat korkuluk (iki yanda)
     for s in (-1, 1):
         ys = [1.0 + i * 1.25 for i in range(int((Y - 1.0) / 1.25) + 1)]
@@ -281,10 +281,54 @@ def serit(oyuncu):
         for zz in (H, H + KR):
             yuvarlak_kutu("dugum", (s * xk, Y, zz), (KK * 0.55, KK * 0.55, KK * 0.55), acikm, egim=0.08)
     kafes_kiris(-xk, xk, Y, H + KR / 2, KR, ana, ince)
-    # kapi acikligi arkasi: hafif renkli parlama zemini (panel yokken bos gorunmesin)
-    bpy.ops.mesh.primitive_plane_add(size=1, location=(0, Y + 0.6, H / 2), rotation=(math.pi / 2, 0, 0))
-    pz = bpy.context.active_object; pz.scale = (W - 2 * KK, H, 1)
-    pz.data.materials.append(mat_emis("aciklik", koyu(R, 0.55), 0.6))
+    # --- zenginlestirme (kullanici 17 Eki: "kapilar ... cok sade ... gorsel solen"):
+    # neon tup acikligi cevreler, ampul dizisi (sahne4.html yakip sondurur), ust tabela, kose yildizlari, isikli kaide
+    ic = W / 2 - KK
+    neon = mat_emis("neon", acik(R, 0.35), 9.0)
+    for a, b in (((-ic + 0.12, Y - 0.3, 0.05), (-ic + 0.12, Y - 0.3, H - 0.12)), ((ic - 0.12, Y - 0.3, 0.05), (ic - 0.12, Y - 0.3, H - 0.12)),
+                 ((-ic + 0.12, Y - 0.3, H - 0.12), (ic - 0.12, Y - 0.3, H - 0.12))):
+        boru(a, b, 0.045, neon)
+    amp = mat_emis("ampul", lin(hex3("#fff1c4")), 2.5)
+    AMPUL = []
+    n_ust = 15
+    for i in range(n_ust):
+        x = -ic + 0.25 + i * (2 * ic - 0.5) / (n_ust - 1)
+        AMPUL.append(Vector((x, Y - KK / 2 + 0.05, H - 0.06)))          # kirisin alt yuzu (tabela onde)
+    for s_ in (-1, 1):
+        for j in range(11):
+            AMPUL.append(Vector((s_ * xk, Y - KK / 2 - 0.05, 0.35 + j * (H - 0.5) / 10)))
+    for q in AMPUL:
+        kure(q, 0.075, amp)
+    # ust tabela: yuvarlak jole plaka + kabartma yazi
+    # kadraj ustu ~5,2 m'de bitiyor: tabela kirisin ONUNDE (ustunde degil)
+    yuvarlak_kutu("tabela", (0, Y - KK / 2 - 0.2, H + KR / 2), (2.3, 0.14, 0.56), koyum, egim=0.14, seg=6)
+    yuvarlak_kutu("tabela_cerceve", (0, Y - KK / 2 - 0.14, H + KR / 2), (2.5, 0.12, 0.68), acikm, egim=0.18, seg=6)
+    try:
+        font = bpy.data.fonts.load(os.path.join(KOK, "05-kapak/fontlar/TitanOne.ttf"))
+        bpy.ops.object.text_add(location=(0, Y - KK / 2 - 0.29, H + KR / 2 - 0.02), rotation=(math.pi / 2, 0, 0))
+        tx = bpy.context.active_object
+        tx.data.body = "PLAYER 1" if oyuncu == "p1" else "PLAYER 2"
+        tx.data.font = font; tx.data.size = 0.38; tx.data.extrude = 0.04; tx.data.bevel_depth = 0.012
+        tx.data.align_x = "CENTER"; tx.data.align_y = "CENTER"
+        tx.data.materials.append(mat_emis("tabela_yazi", (1, 1, 1), 3.5))
+    except Exception as e:
+        log("tabela yazisi atlandi:", e)
+    # kose yildizlari (jole, kule tepelerinde) + kure tepelikler
+    yildiz_m = mat_jole("yildiz", lin(hex3("#ffd23a")), emis=0.25)
+    for s_ in (-1, 1):
+        bpy.ops.mesh.primitive_circle_add(vertices=10, radius=0.4, fill_type="NGON", location=(s_ * xk, Y - KK / 2 - 0.15, H + KR + 0.25), rotation=(math.pi / 2, 0, 0))
+        yo = bpy.context.active_object
+        bpy.ops.object.mode_set(mode="EDIT"); bpy.ops.object.mode_set(mode="OBJECT")
+        for i, v in enumerate(yo.data.vertices):
+            if i % 2:
+                v.co *= 0.45
+        so = yo.modifiers.new("kal", "SOLIDIFY"); so.thickness = 0.22; so.offset = 0
+        bv = yo.modifiers.new("egim", "BEVEL"); bv.width = 0.06; bv.segments = 4; bv.limit_method = "NONE"
+        yo.data.materials.append(yildiz_m); bpy.ops.object.shade_smooth()
+
+    # isikli kaide basamagi (kapinin onunde)
+    yuvarlak_kutu("kaide", (0, Y - 0.55, 0.06), (W + 0.4, 0.7, 0.16), koyum, egim=0.06)
+    boru((-W / 2 - 0.1, Y - 0.92, 0.12), (W / 2 + 0.1, Y - 0.92, 0.12), 0.035, neon)
     # isiklar
     isik("AREA", (0, -1.5, 6.5), 380, (1, 1, 1), 6, yon=(0, Y * 0.6, 0))
     isik("AREA", (-4, 3, 3), 260, acik(R, 0.2), 3, yon=(0, Y, 2))
@@ -303,6 +347,7 @@ def serit(oyuncu):
     xs = [p.x * 960 for p in px]; ys = [(1 - p.y) * 1080 for p in px]
     YERLESIM["aciklik_" + oyuncu] = [round(min(xs), 1), round(min(ys), 1), round(max(xs), 1), round(max(ys), 1)]
     log("aciklik", oyuncu, YERLESIM["aciklik_" + oyuncu])
+    YERLESIM["ampul_" + oyuncu] = [[round(p.x * 960, 1), round((1 - p.y) * 1080, 1)] for p in (world_to_camera_view(sc, kam, q) for q in AMPUL)]
     yaz(sc, "serit-%s.png" % oyuncu)
 
 
