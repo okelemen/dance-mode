@@ -403,7 +403,10 @@ def kemik(arm, son):
 
 
 def yon_vek(a, ileri):
-    """ekran acisi -> dunya yonu (kamera -Y'de, +Y'ye bakar; ekran sag = +X, yukari = +Z)"""
+    """ekran acisi -> dunya yonu (kamera -Y'de, +Y'ye bakar; ekran sag = +X, yukari = +Z).
+    "geri": kameradan uzaga (onden diz cokmede baldir) - ekran duzlemi acisiyla cizilemiyordu."""
+    if a == "geri":
+        return Vector((0, 1, 0))
     r = math.radians(a)
     return Vector((math.sin(r), 0, -math.cos(r)))
 
@@ -484,7 +487,11 @@ def poz_maskeleri():
             yonelt(arm, kemik(arm, taraf + "UpLeg"), yon_vek(bac[0], ileri))
             yonelt(arm, kemik(arm, taraf + "Leg"), yon_vek(bac[1], ileri))
             baldir = yon_vek(bac[1], ileri)
-            yonelt(arm, kemik(arm, taraf + "Foot"), (ileri * 0.9 + baldir * 0.35).normalized())
+            if baldir.dot(ileri) < -0.5 or bac[1] == "geri":      # diz cokme: baldir geride yatay -> ayak da geriye, yere
+                ayak = (baldir * 0.7 + Vector((0, 0, -0.7))).normalized()
+            else:
+                ayak = (ileri * 0.9 + baldir * 0.35).normalized()
+            yonelt(arm, kemik(arm, taraf + "Foot"), ayak)
         alt, ust = dunya_kutusu(mesler)
         gen, yuk = ust.x - alt.x, ust.z - alt.z
         olc = 2.55                                   # cerceve yuksekligi (m): ayakta figur ~%72

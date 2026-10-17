@@ -1,0 +1,227 @@
+[
+ {
+  "tur": 1,
+  "p1": "big-v",
+  "p2": "cactus"
+ },
+ {
+  "tur": 1,
+  "p1": "w-arms",
+  "p2": "hands-on-head"
+ },
+ {
+  "tur": 1,
+  "p1": "goddess-squat",
+  "p2": "low-v-stance"
+ },
+ {
+  "tur": 1,
+  "p1": "knee-lift-cactus",
+  "p2": "elbows-back-stretch"
+ },
+ {
+  "tur": 1,
+  "p1": "goddess-v",
+  "p2": "reach-and-tap"
+ },
+ {
+  "tur": 1,
+  "p1": "horse-stance",
+  "p2": "knee-lift-v"
+ },
+ {
+  "tur": 1,
+  "p1": "curtsy-reach",
+  "p2": "side-tap-t"
+ },
+ {
+  "tur": 1,
+  "p1": "wide-w",
+  "p2": "banana-reach"
+ },
+ {
+  "tur": 1,
+  "p1": "diagonal-line",
+  "p2": "goddess-hands-on-head"
+ },
+ {
+  "tur": 1,
+  "p1": "one-arm-up-knee-lift",
+  "p2": "wide-cactus"
+ },
+ {
+  "tur": 1,
+  "p1": "horse-w",
+  "p2": "tall-reach"
+ },
+ {
+  "tur": 1,
+  "p1": "lean-left-reach",
+  "p2": "lean-right-reach"
+ },
+ {
+  "tur": 1,
+  "p1": "knee-in-twist",
+  "p2": "flexed-arms-wide"
+ },
+ {
+  "tur": 1,
+  "p1": "low-horse-reach",
+  "p2": "curtsy-cactus"
+ },
+ {
+  "tur": 1,
+  "p1": "side-lean-squat",
+  "p2": "elbows-down-knee-lift"
+ },
+ {
+  "tur": 2,
+  "p1": "warrior-one",
+  "p2": "standing-knee-out"
+ },
+ {
+  "tur": 2,
+  "p1": "crescent-lunge",
+  "p2": "split-stance-fold"
+ },
+ {
+  "tur": 2,
+  "p1": "flat-back",
+  "p2": "standing-knee-hold"
+ },
+ {
+  "tur": 2,
+  "p1": "lunge-arms-back",
+  "p2": "goddess-side-bend"
+ },
+ {
+  "tur": 2,
+  "p1": "reverse-warrior",
+  "p2": "wide-side-reach"
+ },
+ {
+  "tur": 2,
+  "p1": "garland-squat",
+  "p2": "gate-pose"
+ },
+ {
+  "tur": 2,
+  "p1": "runner-lunge-low",
+  "p2": "extended-side-angle"
+ },
+ {
+  "tur": 2,
+  "p1": "standing-split-low",
+  "p2": "balance-t-knee"
+ },
+ {
+  "tur": 2,
+  "p1": "kick-back-reach",
+  "p2": "wide-elbow-stretch"
+ },
+ {
+  "tur": 2,
+  "p1": "quad-stretch-reach",
+  "p2": "hip-shift-reach"
+ },
+ {
+  "tur": 2,
+  "p1": "chair-reach-back",
+  "p2": "squat-cross-arms"
+ },
+ {
+  "tur": 2,
+  "p1": "lunge-prayer-twist",
+  "p2": "knee-up-diagonal"
+ },
+ {
+  "tur": 2,
+  "p1": "toe-reach-fold",
+  "p2": "low-v-curtsy"
+ },
+ {
+  "tur": 2,
+  "p1": "single-leg-reach-forward",
+  "p2": "squat-diagonal-reach"
+ },
+ {
+  "tur": 2,
+  "p1": "deep-lunge-hands-down",
+  "p2": "squat-elbows-down"
+ },
+ {
+  "tur": 3,
+  "p1": "kneeling-reach",
+  "p2": "camel"
+ },
+ {
+  "tur": 3,
+  "p1": "kneeling-lunge-arms-up",
+  "p2": "seated-staff"
+ },
+ {
+  "tur": 3,
+  "p1": "seated-forward-reach",
+  "p2": "high-plank"
+ },
+ {
+  "tur": 3,
+  "p1": "cobra",
+  "p2": "kneeling-side-arm"
+ },
+ {
+  "tur": 3,
+  "p1": "hero-seat-arms-up",
+  "p2": "tabletop-leg-lift"
+ },
+ {
+  "tur": 3,
+  "p1": "seated-knees-up",
+  "p2": "kneeling-camel-reach"
+ },
+ {
+  "tur": 3,
+  "p1": "plank-knee-drive",
+  "p2": "seated-reach-back"
+ },
+ {
+  "tur": 3,
+  "p1": "kneeling-wide-arms",
+  "p2": "kneeling-cactus"
+ },
+ {
+  "tur": 3,
+  "p1": "low-lunge-twist-back",
+  "p2": "seated-leg-lift"
+ },
+ {
+  "tur": 3,
+  "p1": "puppy-stretch",
+  "p2": "kneeling-lean-back"
+ },
+ {
+  "tur": 3,
+  "p1": "kneeling-reach-side",
+  "p2": "kneeling-side-lean"
+ },
+ {
+  "tur": 3,
+  "p1": "sphinx-lift",
+  "p2": "seated-twist-arms"
+ },
+ {
+  "tur": 3,
+  "p1": "plank-arm-reach",
+  "p2": "hero-seat-lean-back"
+ },
+ {
+  "tur": 3,
+  "p1": "kneeling-lunge-reach-back",
+  "p2": "seated-wide-arms"
+ },
+ {
+  "tur": 3,
+  "p1": "kneel-torch-up",
+  "p2": "tabletop-reach"
+ }
+]
