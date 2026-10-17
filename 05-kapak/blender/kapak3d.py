@@ -136,7 +136,7 @@ def zemin_ve_yol(renk_kenar, renk_ok, renk_iki):
         bpy.ops.mesh.primitive_cylinder_add(radius=0.06, depth=140, location=(kx, 60, 0.07), rotation=(math.pi / 2, 0, 0))
         bpy.context.active_object.data.materials.append(mat_emisyon("kenar", rr, 18))
     # V oklari
-    okm = mat_emisyon("ok", renk_ok, 7)
+    okm = mat_emisyon("ok", (1, 1, 1), 4)                       # referansta oklar beyaz
     for j in range(2, 40):
         yj = j * 3.0
         for s_ in (-1, 1):
@@ -176,11 +176,16 @@ def sehir():
 
 def gok_ve_kemerler(renkler):
     """referanstaki gibi yolun ustunden gecen neon kemerler + yildizli gok (gok bos kalmaz)"""
-    for j, y in enumerate((5, 12, 19, 26)):
-        bpy.ops.mesh.primitive_torus_add(major_radius=4.6, minor_radius=0.07, location=(0, y, 0.4),
-                                         rotation=(math.pi / 2, 0, 0), major_segments=96, minor_segments=12)
-        k = bpy.context.active_object
-        k.data.materials.append(mat_emisyon("kemer%d" % j, lin(renkler[j % len(renkler)]), 12))
+    # havai fisek (referans: 5,9 Mn'luk kapak) — gokte isinsal patlamalar
+    for j in range(6):
+        cx_, cz_ = rnd.uniform(-26, 26), rnd.uniform(14, 30); cy_ = rnd.uniform(60, 90)
+        fm = mat_emisyon("fisek%d" % j, lin(renkler[j % len(renkler)]), 14)
+        for i in range(36):
+            a1 = rnd.uniform(0, 2 * math.pi); a2 = rnd.uniform(-1.2, 1.2); L = rnd.uniform(2.5, 5.0)
+            d = Vector((math.cos(a1) * math.cos(a2), 0.2 * math.sin(a2), math.sin(a1) * math.cos(a2)))
+            bpy.ops.mesh.primitive_cylinder_add(radius=0.05, depth=L, location=Vector((cx_, cy_, cz_)) + d * (L / 2 + 0.6))
+            c = bpy.context.active_object; c.rotation_euler = d.to_track_quat("Z", "Y").to_euler()
+            c.data.materials.append(fm)
     ym = mat_emisyon("yildiz", (1, 1, 1), 6)
     for i in range(380):
         x = rnd.uniform(-160, 160); z = rnd.uniform(18, 120); y = rnd.uniform(180, 220)
@@ -191,13 +196,29 @@ def gok_ve_kemerler(renkler):
 def paneller(renkler):
     cer = mat_parlak("cerceve", lin((0.75, 0.75, 0.82)), purluk=0.25, metal=1.0, coat=0.0)
     for s_, r in ((-1, renkler[0]), (1, renkler[1])):
-        bpy.ops.mesh.primitive_plane_add(size=1, location=(s_ * 2.05, 34, 2.4), rotation=(math.pi / 2, 0, 0))
+        bpy.ops.mesh.primitive_plane_add(size=1, location=(s_ * 2.05, 18, 2.2), rotation=(math.pi / 2, 0, 0))
         p = bpy.context.active_object; p.scale = (4.0, 3.2, 1)
-        p.data.materials.append(mat_emisyon("panel", lin(r), 3.5))
-        for (dx, dz, sx, sz) in ((0, 1.65, 4.2, 0.12), (0, -1.65, 4.2, 0.12), (-2.05, 0, 0.12, 3.4), (2.05, 0, 0.12, 3.4)):
-            kutu("cer", (s_ * 2.05 + dx, 33.95, 2.4 + dz), (sx, 0.12, sz), cer)
-    # kafes ust kirisi
-    kutu("kiris", (0, 33.9, 4.4), (8.6, 0.2, 0.2), cer)
+        p.data.materials.append(mat_emisyon("panel", lin(r), 3.0))
+    # kafes (truss) kapi: iki dikme + ust kiris, capraz cubuklu — referanstaki metal cerceve
+    def kafes(a, b, kal=0.09):
+        a, b = Vector(a), Vector(b); d = b - a
+        for off in ((-0.18, -0.18), (0.18, -0.18), (-0.18, 0.18), (0.18, 0.18)):
+            pass
+        bpy.ops.mesh.primitive_cylinder_add(radius=kal, depth=d.length, location=(a + b) / 2)
+        c = bpy.context.active_object; c.rotation_euler = d.to_track_quat("Z", "Y").to_euler(); c.data.materials.append(cer)
+    for x0 in (-4.5, 4.5):
+        for dx in (-0.2, 0.2):
+            for dyy in (-0.2, 0.2):
+                kafes((x0 + dx, 18 + dyy, 0), (x0 + dx, 18 + dyy, 4.6))
+        for k in range(8):
+            z0 = k * 0.55
+            kafes((x0 - 0.2, 17.8, z0), (x0 + 0.2, 18.2, z0 + 0.55), 0.04)
+    for z0 in (4.4, 4.8):
+        for dyy in (-0.2, 0.2):
+            kafes((-4.7, 18 + dyy, z0), (4.7, 18 + dyy, z0))
+    for k in range(16):
+        x0 = -4.5 + k * 0.6
+        kafes((x0, 17.8, 4.4), (x0 + 0.6, 18.2, 4.8), 0.04)
 
 
 # ------------------------------------------------------------------ karakter
@@ -337,8 +358,10 @@ for v in AYAR["varyant"]:
     paneller([tuple(c) for c in AYAR["panel_renk"]])
     gok_ve_kemerler([hex3(h) for h in ("#ff4fa3", "#22d3ee", "#a855f7", "#38bdf8")])
 
-    siyah = mat_parlak("siluet", (0.004, 0.004, 0.008), purluk=0.35, coat=0.5)
-    kab_b = mat_kabuk("kabuk_beyaz", (1, 1, 1), 2.5)
+    # Referansta siluet DUZ simsiyah (isik/golge yok) + duz beyaz kontur; 3B model yalniz SEKIL kaynagi
+    # (kullanici 17 Eki: "normal siyah siluet olarak alman gerekiyor ... 3D yapman gerekmiyor").
+    siyah = mat_emisyon("siluet", (0, 0, 0), 0.0)
+    kab_b = mat_kabuk("kabuk_beyaz", (1, 1, 1), 1.6)
     kab_d = mat_kabuk("kabuk_koyu", lin((0.11, 0.03, 0.27)), 1.0)
 
     figurler = []
@@ -382,8 +405,11 @@ for v in AYAR["varyant"]:
     on.data.energy = 250; on.data.size = 6; on.rotation_euler = (math.radians(35), 0, 0)
 
     # kamera: alcak, hafif yukari, genis aci (figurler dev, panel uzakta)
-    bpy.ops.object.camera_add(location=(0, -2.7, 0.75), rotation=(math.radians(93), 0, 0))
-    kam = bpy.context.active_object; kam.data.lens = 22; sc.camera = kam
+    bpy.ops.object.camera_add(location=(0, -1.9, 0.62), rotation=(math.radians(95), 0, 0))
+    kam = bpy.context.active_object; kam.data.lens = 20; sc.camera = kam
+    if not AYAR.get("yazi_3d", False):
+        render_et("KAPAK-3D-" + v["ad"])
+        continue
     font = bpy.data.fonts.load(os.path.join(KOK, AYAR["font"]))
     renk = [hex3(h) for h in AYAR["harf_renk"]]
     D = 1.8; f = D / 4.2                                # yazilar figurlerin ONUNDE (kameraya 1,8 m)
