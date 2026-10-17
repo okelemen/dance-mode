@@ -27,8 +27,8 @@
  "varyant": [
   {
    "ad": "A",
-   "klip": "02-hareketler/arms-up.fbx",
-   "kare": "el_tepe",
+   "klip": "02-hareketler/star-jack.fbx",
+   "kare": "en_genis",
    "sol": [
     "2 Player",
     "Co-op"
@@ -40,7 +40,7 @@
   },
   {
    "ad": "B",
-   "klip": "02-hareketler/star-jack.fbx",
+   "klip": "02-hareketler/jacks.fbx",
    "kare": "en_genis",
    "sol": [
     "2 Players",

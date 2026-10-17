@@ -380,14 +380,11 @@ for v in AYAR["varyant"]:
     kab_d = mat_kabuk("kabuk_koyu", lin((0.11, 0.03, 0.27)), 1.0)
 
     def yuzu_kameraya(arm):
+        """omuz cizgisi (sol kol - sag kol) dunya +X'e paralel -> govde TAM kameraya (-Y) donuk, yamukluk yok"""
         pb = arm.pose.bones
-        try:
-            ileri = (arm.matrix_world @ pb["mixamorig:LeftToeBase"].head) - (arm.matrix_world @ pb["mixamorig:LeftFoot"].head)
-        except KeyError:
-            ileri = Vector((0, -1, 0))
-        ileri.z = 0
-        aci = math.atan2(ileri.x, -ileri.y) if ileri.length > 1e-6 else 0
-        arm.rotation_euler.z -= aci
+        L = arm.matrix_world @ pb["mixamorig:LeftArm"].head; R = arm.matrix_world @ pb["mixamorig:RightArm"].head
+        v = L - R; v.z = 0
+        arm.rotation_euler.z -= math.atan2(v.y, v.x)
         bpy.context.view_layer.update()
 
     def boya_getir(arm, mesler, hedef):
@@ -412,30 +409,32 @@ for v in AYAR["varyant"]:
         pb = arm.pose.bones
         return [arm.matrix_world @ pb[n].tail for n in ("mixamorig:LeftHand", "mixamorig:RightHand")]
 
-    # --- on plan: iki oyuncu, birbirine yaslanmis, ic elleri ortada TEMAS halinde (referans: co-op kapaklari)
-    figurler = []
-    for idx, s_ in enumerate((-1, 1)):
-        arm, mesler, kr = karakter(v["klip"], v.get("kare", "el_tepe"), siyah, kab_b, kab_d)
-        boya_getir(arm, mesler, 1.85)
-        yuzu_kameraya(arm)
-        tasi(arm, mesler, s_ * 0.9, 1.2, 0)
-        egdir(arm, mesler, -s_ * v.get("egim", 9))           # sol figurun tepesi saga (+x), sag figurunki sola
-        figurler.append((arm, mesler, s_))
-    # ic eller (merkeze en yakin) tam ortada bulussun
-    for arm, mesler, s_ in figurler:
-        ic = min(eller(arm), key=lambda q: abs(q.x))
-        arm.location.x += (s_ * 0.025) - ic.x
-        bpy.context.view_layer.update()
-        log("figur", s_, "ic el", tuple(round(c, 2) for c in ic))
-    # --- panellerde ayni pozun kucuk siyah siluetleri (referans: duvarda ayni poz)
-    for s_ in (-1, 1):
-        arm, mesler, kr = karakter(v["klip"], v.get("kare", "el_tepe"), siyah, kab_b, kab_d)
+    # --- on plan: iki oyuncu TAM kameraya donuk, SIMETRIK (sag = solun aynasi), egim YOK; temas ic kollarla
+    # (kullanici 17 Eki: "yamuk duruyorlar ... tam kamera karsisinda ... simetrik olmasi daha iyi")
+    def oyuncu(hedef_boy, x, y, z_alt, ayna, maske):
+        arm, mesler, kr = karakter(v["klip"], v.get("kare", "en_genis"), siyah, kab_b, kab_d)
         for m in mesler:
-            m.pass_index = 0                                   # maskeye girmez; uzakta duz siyah
-        boya_getir(arm, mesler, 2.6)
+            m.pass_index = 1 if maske else 0
+        boya_getir(arm, mesler, hedef_boy)
         yuzu_kameraya(arm)
-        egdir(arm, mesler, -s_ * v.get("egim", 9))
-        tasi(arm, mesler, s_ * 2.05, 17.75, 0.75)
+        if ayna:
+            arm.scale.x *= -1                                  # yerel X aynasi -> birebir simetrik
+            bpy.context.view_layer.update()
+        tasi(arm, mesler, x, y, z_alt)
+        return arm, mesler
+
+    sol = oyuncu(1.85, -0.9, 1.2, 0, False, True)
+    sag = oyuncu(1.85, 0.9, 1.2, 0, True, True)
+    # ic eller ortada bulussun: sol figurun en sagdaki eli, sag figurun en soldaki eli x=0'a
+    for (arm, mesler), isaret in ((sol, -1), (sag, 1)):
+        el = eller(arm)
+        ic = max(el, key=lambda q: q.x) if isaret < 0 else min(el, key=lambda q: q.x)
+        arm.location.x += isaret * 0.02 - ic.x
+        bpy.context.view_layer.update()
+        log("figur", isaret, "ic el", tuple(round(c, 2) for c in ic))
+    # panellerde ayni pozun kucuk siluetleri (simetrik, maskede degil)
+    oyuncu(2.6, -2.05, 17.75, 0.75, False, False)
+    oyuncu(2.6, 2.05, 17.75, 0.75, True, False)
 
     # kontra isiklar
     for s_, r in ((-1, lin(hex3("#ff4fa3"))), (1, lin(hex3("#38bdf8")))):
