@@ -65,7 +65,9 @@ def mat_kabuk(ad, renk, guc=1.0):
     mx = nt.nodes.new("ShaderNodeMixShader")
     o = nt.nodes.new("ShaderNodeOutputMaterial")
     nt.links.new(g.outputs["Backfacing"], mx.inputs[0])
-    nt.links.new(t.outputs[0], mx.inputs[1]); nt.links.new(e.outputs[0], mx.inputs[2])
+    # ters kabukta kameraya en yakin yuzler (cevrilmis normal -> Backfacing=1) SAYDAM olmali, yalniz
+    # siluetin kenarindan tasan uzak yuzler (Backfacing=0) renkli gorunur. (ilk render'da tersti: figur bembeyaz)
+    nt.links.new(e.outputs[0], mx.inputs[1]); nt.links.new(t.outputs[0], mx.inputs[2])
     nt.links.new(mx.outputs[0], o.inputs[0])
     return m
 
@@ -168,8 +170,22 @@ def sehir():
             kutu("neon", (x, y_ - 1.56, h_), (w_, 0.03, 0.08), rnd.choice(pen))
         x += w_ + rnd.uniform(0.3, 1.8)
     # gezegen
-    bpy.ops.mesh.primitive_uv_sphere_add(radius=9, location=(38, 150, 34), segments=48, ring_count=24)
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=9, location=(62, 170, 46), segments=48, ring_count=24)
     bpy.context.active_object.data.materials.append(mat_emisyon("gezegen", lin(hex3("#e05cc4")), 2.2))
+
+
+def gok_ve_kemerler(renkler):
+    """referanstaki gibi yolun ustunden gecen neon kemerler + yildizli gok (gok bos kalmaz)"""
+    for j, y in enumerate((5, 12, 19, 26)):
+        bpy.ops.mesh.primitive_torus_add(major_radius=4.6, minor_radius=0.07, location=(0, y, 0.4),
+                                         rotation=(math.pi / 2, 0, 0), major_segments=96, minor_segments=12)
+        k = bpy.context.active_object
+        k.data.materials.append(mat_emisyon("kemer%d" % j, lin(renkler[j % len(renkler)]), 12))
+    ym = mat_emisyon("yildiz", (1, 1, 1), 6)
+    for i in range(380):
+        x = rnd.uniform(-160, 160); z = rnd.uniform(18, 120); y = rnd.uniform(180, 220)
+        bpy.ops.mesh.primitive_ico_sphere_add(radius=rnd.uniform(0.12, 0.35), subdivisions=1, location=(x, y, z))
+        bpy.context.active_object.data.materials.append(ym)
 
 
 def paneller(renkler):
@@ -214,7 +230,7 @@ def kare_sec(arm, kip, bas, son):
     return kr
 
 
-KABUK_KARAKTER = 2.2
+KABUK_KARAKTER = 1.8
 
 
 def karakter(klip, kip, siyah, kabuk_b, kabuk_d):
@@ -319,6 +335,7 @@ for v in AYAR["varyant"]:
     zemin_ve_yol(kenar, ok, iki)
     sehir()
     paneller([tuple(c) for c in AYAR["panel_renk"]])
+    gok_ve_kemerler([hex3(h) for h in ("#ff4fa3", "#22d3ee", "#a855f7", "#38bdf8")])
 
     siyah = mat_parlak("siluet", (0.004, 0.004, 0.008), purluk=0.35, coat=0.5)
     kab_b = mat_kabuk("kabuk_beyaz", (1, 1, 1), 2.5)
