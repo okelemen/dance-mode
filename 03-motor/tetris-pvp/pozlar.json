@@ -1,11 +1,11 @@
 {
  "_not": "TETRIS MODE PVP (REF-053) poz tanimlari. Acilar EKRAN duzleminde (pozlar.js dili): 0 asagi, 90 ekran-sag, 180 yukari, -90 ekran-sol. Kollar [ust kol, on kol], bacaklar [uyluk, baldir]. sol*/sag* = KARAKTERIN solu/sagi; karakter kameraya donukken sol = ekran SAGI. yon: on (kameraya donuk) | sag (profil, yuzu ekran sagina). govde: kalcadan boyna aci, bas: govdeye ek aci. Mixamo govdesi (siluet-govde.fbx) bu acilarla bukulur, duz siyah maske cikar (varlik.py).",
  "pozlar": {
-  "tree":        { "ad": "Tree", "yon": "on", "sagKol": [-160, 165], "solKol": [160, -165], "sagBacak": [-2, 0], "solBacak": [70, -45] },
+  "tree":        { "ad": "Tree", "yon": "on", "sagKol": [-150, 155], "solKol": [150, -155], "sagBacak": [-2, 0], "solBacak": [70, -45] },
   "warrior2":    { "ad": "Warrior Two", "yon": "on", "sagKol": [-90, -90], "solKol": [90, 90], "sagBacak": [-62, -2], "solBacak": [48, 45] },
   "goddess":     { "ad": "Goddess Squat", "yon": "on", "sagKol": [-95, 180], "solKol": [95, 180], "sagBacak": [-62, -4], "solBacak": [62, 4] },
   "star":        { "ad": "Star", "yon": "on", "sagKol": [-130, -130], "solKol": [130, 130], "sagBacak": [-24, -24], "solBacak": [24, 24] },
-  "sidebend":    { "ad": "Side Bend", "yon": "on", "govde": 200, "solKol": [195, 235], "sagKol": [-15, -10], "sagBacak": [-3, -2], "solBacak": [3, 2] },
+  "sidebend":    { "ad": "Side Bend", "yon": "on", "govde": 218, "solKol": [205, 245], "sagKol": [-15, -10], "sagBacak": [-3, -2], "solBacak": [3, 2] },
   "airplane":    { "ad": "Airplane", "yon": "on", "govde": 160, "sagKol": [-110, -110], "solKol": [70, 70], "sagBacak": [-75, -75], "solBacak": [5, 3] },
   "crescent":    { "ad": "Crescent Lunge", "yon": "sag", "govde": 178, "sagKol": [176, 180], "solKol": [174, 178], "solBacak": [82, 2], "sagBacak": [-42, -80] },
   "triangle":    { "ad": "Triangle", "yon": "on", "govde": 105, "solKol": [5, 5], "sagKol": [178, 178], "solBacak": [35, 35], "sagBacak": [-35, -35] }
