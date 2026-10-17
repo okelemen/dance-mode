@@ -49,7 +49,11 @@ BOY, KAL = P["BOY"], P["KALINLIK"]
 poz = P["poz"].get(str(a.poz))
 
 if a.sadece_yazi:
-    im = Image.open(a.arka).convert("RGB").resize((W, H), Image.LANCZOS).convert("RGBA")
+    # kullanici 17 Eki: "parlakliklari kaybetsen daha iyi, siluetler hic gozukmuyor" -> arka plan kisilir,
+    # siluet (simsiyah + beyaz kontur) on plana cikar
+    im = Image.open(a.arka).convert("RGB").resize((W, H), Image.LANCZOS)
+    im = ImageEnhance.Brightness(im).enhance(0.72)
+    im = ImageEnhance.Contrast(im).enhance(1.08).convert("RGBA")
     # baslik bandi okunurlugu: ust bandi hafif karart (referansta baslik arkasi koyu gok)
     bant = Image.new("RGBA", (W, H)); ImageDraw.Draw(bant).rectangle((0, 0, W, 175), fill=(10, 4, 30, 90))
     im.alpha_composite(bant.filter(ImageFilter.GaussianBlur(30)))
