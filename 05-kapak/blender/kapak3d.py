@@ -16,7 +16,7 @@ Sahne (referans: @HumanWarmUp kapaklari, olcum REFERANS-KANALLAR/10-HUMANWARMUP-
 - arkadan pembe/mavi kontra isik, compositor Glare (Fog Glow) ile isik patlamasi
 """
 import bpy, bmesh, json, math, os, sys, random
-from mathutils import Vector, Euler
+from mathutils import Vector, Euler, Matrix
 
 argv = sys.argv[sys.argv.index("--") + 1:]
 arg = lambda ad, v=None: argv[argv.index(ad) + 1] if ad in argv else v
@@ -121,7 +121,7 @@ def zemin_ve_yol(renk_kenar, renk_ok, renk_iki):
     z = bpy.context.active_object; z.name = "zemin"
     z.data.materials.append(mat_parlak("zemin", lin((0.05, 0.02, 0.10)), purluk=0.12, metal=0.4, coat=0.6))
     # zemin izgarasi (ince emisyon cizgileri, yanlarda)
-    izg = mat_emisyon("izgara", lin((0.55, 0.25, 0.9)), 1.2)
+    izg = mat_emisyon("izgara", lin((0.55, 0.25, 0.9)), 0.6)
     for i in range(-30, 31):
         if abs(i) < 3: continue
         kutu("izgX%d" % i, (i * 1.6, 60, 0.005), (0.025, 120, 0.004), izg)
@@ -134,9 +134,9 @@ def zemin_ve_yol(renk_kenar, renk_ok, renk_iki):
     # neon kenarlar
     for kx, rr in ((-3.1, renk_kenar), (3.1, renk_kenar)):
         bpy.ops.mesh.primitive_cylinder_add(radius=0.06, depth=140, location=(kx, 60, 0.07), rotation=(math.pi / 2, 0, 0))
-        bpy.context.active_object.data.materials.append(mat_emisyon("kenar", rr, 18))
+        bpy.context.active_object.data.materials.append(mat_emisyon("kenar", rr, 6))
     # V oklari
-    okm = mat_emisyon("ok", (1, 1, 1), 4)                       # referansta oklar beyaz
+    okm = mat_emisyon("ok", (1, 1, 1), 2.2)                       # referansta oklar beyaz
     for j in range(2, 40):
         yj = j * 3.0
         for s_ in (-1, 1):
@@ -148,7 +148,7 @@ def zemin_ve_yol(renk_kenar, renk_ok, renk_iki):
         for j in range(0, 40):
             kutu("direk%d%d" % (s_, j), (s_ * 4.0, j * 3.0, 0.6), (0.08, 0.08, 1.2), dm)
         bpy.ops.mesh.primitive_cylinder_add(radius=0.05, depth=140, location=(s_ * 4.0, 60, 1.22), rotation=(math.pi / 2, 0, 0))
-        bpy.context.active_object.data.materials.append(mat_emisyon("korkuluk", rr, 14))
+        bpy.context.active_object.data.materials.append(mat_emisyon("korkuluk", rr, 5))
 
 
 def sehir():
@@ -179,7 +179,7 @@ def gok_ve_kemerler(renkler):
     # havai fisek (referans: 5,9 Mn'luk kapak) — gokte isinsal patlamalar
     for j in range(6):
         cx_, cz_ = rnd.uniform(-26, 26), rnd.uniform(14, 30); cy_ = rnd.uniform(60, 90)
-        fm = mat_emisyon("fisek%d" % j, lin(renkler[j % len(renkler)]), 14)
+        fm = mat_emisyon("fisek%d" % j, lin(renkler[j % len(renkler)]), 5)
         for i in range(36):
             a1 = rnd.uniform(0, 2 * math.pi); a2 = rnd.uniform(-1.2, 1.2); L = rnd.uniform(2.5, 5.0)
             d = Vector((math.cos(a1) * math.cos(a2), 0.2 * math.sin(a2), math.sin(a1) * math.cos(a2)))
@@ -198,7 +198,7 @@ def paneller(renkler):
     for s_, r in ((-1, renkler[0]), (1, renkler[1])):
         bpy.ops.mesh.primitive_plane_add(size=1, location=(s_ * 2.05, 18, 2.2), rotation=(math.pi / 2, 0, 0))
         p = bpy.context.active_object; p.scale = (4.0, 3.2, 1)
-        p.data.materials.append(mat_emisyon("panel", lin(r), 3.0))
+        p.data.materials.append(mat_emisyon("panel", lin(r), 1.6))
     # kafes (truss) kapi: iki dikme + ust kiris, capraz cubuklu — referanstaki metal cerceve
     def kafes(a, b, kal=0.09):
         a, b = Vector(a), Vector(b); d = b - a
@@ -351,7 +351,7 @@ def render_et(ad):
     rl = nt.nodes.new("CompositorNodeRLayers")
     gl = nt.nodes.new("CompositorNodeGlare"); gl.glare_type = "FOG_GLOW"; gl.threshold = 0.9; gl.size = 8; gl.mix = 0.15
     out = nt.nodes.new("CompositorNodeComposite")
-    nt.links.new(rl.outputs[0], gl.inputs[0]); nt.links.new(gl.outputs[0], out.inputs[0])
+    nt.links.new(rl.outputs[0], out.inputs[0])            # glare KALDIRILDI (17 Eki: parlaklik siluetleri yutuyordu)
     # siluet maskesi (Object Index 1) -> ayri PNG
     idm = nt.nodes.new("CompositorNodeIDMask"); idm.index = 1; idm.use_antialiasing = True
     nt.links.new(rl.outputs["IndexOB"], idm.inputs[0])
@@ -379,20 +379,7 @@ for v in AYAR["varyant"]:
     kab_b = mat_kabuk("kabuk_beyaz", (1, 1, 1), 1.6)
     kab_d = mat_kabuk("kabuk_koyu", lin((0.11, 0.03, 0.27)), 1.0)
 
-    figurler = []
-    for s_ in (-1, 1):
-        arm, mesler, kr = karakter(v["klip"], v.get("kare", "el_tepe"), siyah, kab_b, kab_d)
-        figurler.append((arm, mesler))
-    # boyut/konum: govde boyu ~1.85 m; yuze donuk (Mixamo -> Blender: +Y ileri ise 180 cevir)
-    for idx, (arm, mesler) in enumerate(figurler):
-        s_ = -1 if idx == 0 else 1
-        dg = bpy.context.evaluated_depsgraph_get()
-        alt, ust = dunya_kutusu(mesler)
-        boy = ust.z - alt.z
-        olcek = 1.85 / max(boy, 1e-6)
-        arm.scale = arm.scale * olcek
-        bpy.context.view_layer.update()
-        # ileri yon: ayak bilegi -> parmak
+    def yuzu_kameraya(arm):
         pb = arm.pose.bones
         try:
             ileri = (arm.matrix_world @ pb["mixamorig:LeftToeBase"].head) - (arm.matrix_world @ pb["mixamorig:LeftFoot"].head)
@@ -400,16 +387,55 @@ for v in AYAR["varyant"]:
             ileri = Vector((0, -1, 0))
         ileri.z = 0
         aci = math.atan2(ileri.x, -ileri.y) if ileri.length > 1e-6 else 0
-        arm.rotation_euler.z -= aci                       # yuz -Y'ye (kameraya)
-        arm.rotation_euler.z += math.radians(14) * (-s_)  # birbirine hafif donuk
+        arm.rotation_euler.z -= aci
         bpy.context.view_layer.update()
+
+    def boya_getir(arm, mesler, hedef):
         alt, ust = dunya_kutusu(mesler)
-        merkez = (alt + ust) / 2
-        arm.location.x += s_ * 1.05 - merkez.x
-        arm.location.y += 1.2 - merkez.y
-        arm.location.z += -alt.z
+        arm.scale = arm.scale * (hedef / max(ust.z - alt.z, 1e-6))
         bpy.context.view_layer.update()
-        log("figur", idx, "boy", round(boy * olcek, 2), "aci", round(math.degrees(aci), 1))
+
+    def tasi(arm, mesler, x, y, z_alt):
+        alt, ust = dunya_kutusu(mesler); m = (alt + ust) / 2
+        arm.location.x += x - m.x; arm.location.y += y - m.y; arm.location.z += z_alt - alt.z
+        bpy.context.view_layer.update()
+
+    def egdir(arm, mesler, derece):
+        """ayak tabanindan, dunya Y ekseni etrafinda yana egim (+ -> tepe +x'e)"""
+        alt, ust = dunya_kutusu(mesler)
+        piv = Vector(((alt.x + ust.x) / 2, (alt.y + ust.y) / 2, alt.z))
+        T = Matrix.Translation(piv)
+        arm.matrix_world = T @ Matrix.Rotation(math.radians(derece), 4, "Y") @ T.inverted() @ arm.matrix_world
+        bpy.context.view_layer.update()
+
+    def eller(arm):
+        pb = arm.pose.bones
+        return [arm.matrix_world @ pb[n].tail for n in ("mixamorig:LeftHand", "mixamorig:RightHand")]
+
+    # --- on plan: iki oyuncu, birbirine yaslanmis, ic elleri ortada TEMAS halinde (referans: co-op kapaklari)
+    figurler = []
+    for idx, s_ in enumerate((-1, 1)):
+        arm, mesler, kr = karakter(v["klip"], v.get("kare", "el_tepe"), siyah, kab_b, kab_d)
+        boya_getir(arm, mesler, 1.85)
+        yuzu_kameraya(arm)
+        tasi(arm, mesler, s_ * 0.9, 1.2, 0)
+        egdir(arm, mesler, -s_ * v.get("egim", 9))           # sol figurun tepesi saga (+x), sag figurunki sola
+        figurler.append((arm, mesler, s_))
+    # ic eller (merkeze en yakin) tam ortada bulussun
+    for arm, mesler, s_ in figurler:
+        ic = min(eller(arm), key=lambda q: abs(q.x))
+        arm.location.x += (s_ * 0.025) - ic.x
+        bpy.context.view_layer.update()
+        log("figur", s_, "ic el", tuple(round(c, 2) for c in ic))
+    # --- panellerde ayni pozun kucuk siyah siluetleri (referans: duvarda ayni poz)
+    for s_ in (-1, 1):
+        arm, mesler, kr = karakter(v["klip"], v.get("kare", "el_tepe"), siyah, kab_b, kab_d)
+        for m in mesler:
+            m.pass_index = 0                                   # maskeye girmez; uzakta duz siyah
+        boya_getir(arm, mesler, 2.6)
+        yuzu_kameraya(arm)
+        egdir(arm, mesler, -s_ * v.get("egim", 9))
+        tasi(arm, mesler, s_ * 2.05, 17.75, 0.75)
 
     # kontra isiklar
     for s_, r in ((-1, lin(hex3("#ff4fa3"))), (1, lin(hex3("#38bdf8")))):
@@ -420,8 +446,8 @@ for v in AYAR["varyant"]:
     on.data.energy = 250; on.data.size = 6; on.rotation_euler = (math.radians(35), 0, 0)
 
     # kamera: alcak, hafif yukari, genis aci (figurler dev, panel uzakta)
-    bpy.ops.object.camera_add(location=(0, -1.25, 0.72), rotation=(math.radians(96), 0, 0))
-    kam = bpy.context.active_object; kam.data.lens = 18; sc.camera = kam
+    bpy.ops.object.camera_add(location=(0, -2.0, 0.3), rotation=(math.radians(108.5), 0, 0))
+    kam = bpy.context.active_object; kam.data.lens = 22; sc.camera = kam
     if not AYAR.get("yazi_3d", False):
         render_et("KAPAK-3D-" + v["ad"])
         continue

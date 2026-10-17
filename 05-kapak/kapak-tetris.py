@@ -52,20 +52,11 @@ if a.sadece_yazi:
     # kullanici 17 Eki: "parlakliklari kaybetsen daha iyi, siluetler hic gozukmuyor" -> arka plan kisilir,
     # siluet (simsiyah + beyaz kontur) on plana cikar
     im = Image.open(a.arka).convert("RGB").resize((W, H), Image.LANCZOS)
-    im = ImageEnhance.Brightness(im).enhance(0.72)
+    im = ImageEnhance.Brightness(im).enhance(0.85)
     im = ImageEnhance.Contrast(im).enhance(1.08).convert("RGBA")
     # baslik bandi okunurlugu: ust bandi hafif karart (referansta baslik arkasi koyu gok)
     bant = Image.new("RGBA", (W, H)); ImageDraw.Draw(bant).rectangle((0, 0, W, 175), fill=(10, 4, 30, 90))
     im.alpha_composite(bant.filter(ImageFilter.GaussianBlur(30)))
-    if a.maske:
-        # referans: siluet DUZ simsiyah, yalniz dis hatta kalin beyaz kontur + hafif renkli isilti; ic cizgi yok
-        mk = Image.open(a.maske).convert("L").resize((W, H), Image.LANCZOS).point(lambda v: 255 if v > 110 else 0)
-        mk = mk.filter(ImageFilter.MaxFilter(3)).filter(ImageFilter.MinFilter(3))       # kucuk delikleri kapat
-        kontur = mk.filter(ImageFilter.MaxFilter(13))
-        isilti = kontur.filter(ImageFilter.MaxFilter(9)).filter(ImageFilter.GaussianBlur(16))
-        im.alpha_composite(Image.merge("RGBA", [Image.new("L", (W, H), c) for c in (255, 120, 230)] + [isilti.point(lambda v: int(v * 0.8))]))
-        im.alpha_composite(Image.merge("RGBA", [Image.new("L", (W, H), 255)] * 3 + [kontur]))
-        im.alpha_composite(Image.merge("RGBA", [Image.new("L", (W, H), c) for c in (6, 4, 14)] + [mk.filter(ImageFilter.GaussianBlur(0.7))]))
 else:
     # ---------------------------------------------------------------- arka plan (videonun kendi karesi)
     x0, y0, x1, y1 = (int(v) for v in a.kutu.split(","))
@@ -234,15 +225,30 @@ def koy(k, merkez, genislik=None):
 
 
 GOKKUSAGI = [(255, 30, 140), (255, 120, 0), (255, 205, 0), (40, 210, 60), (0, 170, 255), (140, 70, 255)]
-koy(parlak_yazi("TETRIS MODE", yfont(150), GOKKUSAGI, kontur=9, derinlik=14,
-                 parlama=(255, 70, 210), zipla=7, don=4), (W / 2, 98), genislik=1210)
 
-kucuk = yfont(54)
+# CIZIM SIRASI (17 Eki: "siluetler net gorunsun, yazilarin arkasinda kalmasin"):
+# 1) yan etiketler (kenarlarda)  2) siluetler (etiketlerin USTUNDE)  3) baslik (figur tepesi basligin altinda)
+kucuk = yfont(50)
 s1, s2 = a.sol.split("|"); g1, g2 = a.sag.split("|")
-for metin, merkez, aci, renk in [(s1, (190, 238), 6, (60, 200, 255)), (s2, (175, 318), 6, (255, 80, 190)),
-                                 (g1, (1090, 238), -6, (255, 200, 30)), (g2, (1110, 318), -6, (90, 230, 120))]:
+yan = [(s1, (150, 300), 6, (60, 200, 255)), (s2, (140, 372), 6, (255, 80, 190)),
+       (g1, (1130, 300), -6, (255, 200, 30)), (g2, (1140, 372), -6, (90, 230, 120))] if a.maske else       [(s1, (190, 238), 6, (60, 200, 255)), (s2, (175, 318), 6, (255, 80, 190)),
+       (g1, (1090, 238), -6, (255, 200, 30)), (g2, (1110, 318), -6, (90, 230, 120))]
+for metin, merkez, aci, renk in yan:
     k_ = parlak_yazi(metin, kucuk, [renk], kontur=6, derinlik=7, parlama=(255, 255, 255), zipla=3, don=2, aralik=2)
     koy(k_.rotate(aci, Image.BICUBIC, expand=True), merkez)
+
+if a.maske:
+    # referans: siluet DUZ simsiyah, yalniz dis hatta kalin beyaz kontur; ic cizgi yok
+    mk = Image.open(a.maske).convert("L").resize((W, H), Image.LANCZOS).point(lambda v: 255 if v > 110 else 0)
+    mk = mk.filter(ImageFilter.MaxFilter(3)).filter(ImageFilter.MinFilter(3))
+    kontur = mk.filter(ImageFilter.MaxFilter(13))
+    isilti = kontur.filter(ImageFilter.MaxFilter(9)).filter(ImageFilter.GaussianBlur(14))
+    im.alpha_composite(Image.merge("RGBA", [Image.new("L", (W, H), c) for c in (255, 120, 230)] + [isilti.point(lambda v: int(v * 0.6))]))
+    im.alpha_composite(Image.merge("RGBA", [Image.new("L", (W, H), 255)] * 3 + [kontur]))
+    im.alpha_composite(Image.merge("RGBA", [Image.new("L", (W, H), c) for c in (6, 4, 14)] + [mk.filter(ImageFilter.GaussianBlur(0.7))]))
+
+koy(parlak_yazi("TETRIS MODE", yfont(150), GOKKUSAGI, kontur=9, derinlik=14,
+                 parlama=(255, 70, 210), zipla=7, don=4), (W / 2, 98), genislik=1210)
 
 
 def rozet_new(merkez, r=74):
