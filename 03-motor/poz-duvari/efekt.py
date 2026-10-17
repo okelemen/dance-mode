@@ -169,6 +169,13 @@ def main():
             g[i] = k_ * g[i - 1] + (1 - k_) * hedef[i]
         mg = float(sys.argv[sys.argv.index("--muzik-kazanc") + 1]) if "--muzik-kazanc" in sys.argv else 0.5
         karisim = karisim[:, None] + m * (mg * g)[:, None]       # stereo
+        if "--olcum" in sys.argv:                                 # konusma netligi olcumu (kullanici: "konusma duyulmasi gerekiyor")
+            kon = env > 0.15                                      # koc konusuyor
+            rms = lambda x: 20 * np.log10(np.sqrt(np.mean(np.square(x))) + 1e-9)
+            mb = (m * (mg * g)[:, None]).mean(axis=1)
+            print(f"OLCUM koc (konusurken) {rms(koc[kon]):.1f} dBFS | muzik (koc konusurken) {rms(mb[kon]):.1f} dBFS"
+                  f" | muzik (sessizken) {rms(mb[~kon]):.1f} dBFS | efekt {rms((ef * 0.42 * kis)[ef != 0]):.1f} dBFS"
+                  f" | konusma/muzik farki {rms(koc[kon]) - rms(mb[kon]):.1f} dB | konusma orani %{100 * kon.mean():.0f}")
     karisim = karisim / (np.max(np.abs(karisim)) + 1e-9) * 0.89
     sf.write(cikti, karisim.astype(np.float32), SR, subtype="PCM_16")
     if "--efekt-iz" in sys.argv:

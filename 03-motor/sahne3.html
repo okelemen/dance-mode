@@ -75,9 +75,10 @@ function koyu(h, m) {
 }
 
 function turBul(t) {
-  let aktif = TURLAR[0];
-  for (const kart of KARTLAR) if (kart.tur && kart.t <= t) aktif = TURLAR.find(x => x.no === kart.tur) || aktif;
-  for (const d of DUVARLAR) if (d.t0 <= t) aktif = TURLAR.find(x => x.no === d.tur) || aktif;
+  // en son BAŞLAYAN olay belirler (17 Eki 2026: tur kartı sırasında rozet önceki turun son duvarını gösteriyordu)
+  let aktif = TURLAR[0], son = -Infinity;
+  for (const kart of KARTLAR) if (kart.tur && kart.t <= t && kart.t >= son) { son = kart.t; aktif = TURLAR.find(x => x.no === kart.tur) || aktif; }
+  for (const d of DUVARLAR) if (d.t0 <= t && d.t0 >= son) { son = d.t0; aktif = TURLAR.find(x => x.no === d.tur) || aktif; }
   return aktif;
 }
 
