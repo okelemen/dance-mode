@@ -1,22 +1,86 @@
 {
  "seri": "TETRIS MODE PVP",
  "bolum": "tetris-pvp-kesit",
- "_not": "REF-053 konsepti, ~1 dk ornek kesit (17 Eki 2026). Motor 03-motor/sahne4.html. Duvar dongusu 12 sn: kart 2 + sayim 3 + buyume 5 + gecis 1,2.",
+ "_not": "REF-053 konsepti, ~1 dk ornek kesit (kesit 2, 17 Eki 2026). Motor 03-motor/sahne4.html. Duvar dongusu 12 sn: kart 2 + sayim 3 + buyume 5 + gecis 1,2. Baslangicta 3-2-1-GO.",
  "bpm": 120,
- "toplam_olcu": 31,
+ "toplam_olcu": 33,
  "toplam_duvar": 4,
- "zaman": { "kart": 2.0, "say": 3.0, "buyu": 5.0, "gec": 1.2, "sure": 12.0 },
+ "zaman": {
+  "kart": 2.0,
+  "say": 3.0,
+  "buyu": 5.0,
+  "gec": 1.2,
+  "sure": 12.0
+ },
  "kartlar": [
-  { "t": 0.0, "sure": 3.0, "tip": "vs" },
-  { "t": 3.0, "sure": 2.0, "tip": "tur", "tur": 1, "metin": "ROUND 1" },
-  { "t": 41.0, "sure": 2.5, "tip": "tur", "tur": 2, "metin": "ROUND 2", "alt": "SKILL CHECK" },
-  { "t": 55.5, "sure": 2.5, "tip": "wrap" },
-  { "t": 58.0, "sure": 4.0, "tip": "abone" }
+  {
+   "t": 0.0,
+   "sure": 3.0,
+   "tip": "vs"
+  },
+  {
+   "t": 3.0,
+   "sure": 2.0,
+   "tip": "tur",
+   "tur": 1,
+   "metin": "ROUND 1"
+  },
+  {
+   "t": 5.0,
+   "sure": 4.0,
+   "tip": "basla"
+  },
+  {
+   "t": 45.0,
+   "sure": 2.5,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "ROUND 2",
+   "alt": "SKILL CHECK"
+  },
+  {
+   "t": 59.5,
+   "sure": 2.5,
+   "tip": "wrap"
+  },
+  {
+   "t": 62.0,
+   "sure": 4.0,
+   "tip": "abone"
+  }
  ],
  "duvarlar": [
-  { "no": 1, "tur": 1, "t0": 5.0,  "p1": "tree",     "p2": "warrior2", "ovgu": "GREAT!" },
-  { "no": 2, "tur": 1, "t0": 17.0, "p1": "goddess",  "p2": "star",     "ovgu": "EXCELLENT!" },
-  { "no": 3, "tur": 1, "t0": 29.0, "p1": "sidebend", "p2": "airplane", "ovgu": "PERFECT!" },
-  { "no": 4, "tur": 2, "t0": 43.5, "p1": "crescent", "p2": "triangle", "ovgu": "AWESOME!" }
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 9.0,
+   "p1": "tree",
+   "p2": "warrior2",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 2,
+   "tur": 1,
+   "t0": 21.0,
+   "p1": "goddess",
+   "p2": "star",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 3,
+   "tur": 1,
+   "t0": 33.0,
+   "p1": "sidebend",
+   "p2": "airplane",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 4,
+   "tur": 2,
+   "t0": 47.5,
+   "p1": "crescent",
+   "p2": "triangle",
+   "ovgu": "AWESOME!"
+  }
  ]
 }
