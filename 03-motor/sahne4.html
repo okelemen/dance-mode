@@ -379,7 +379,10 @@ function isinPatlamasi(t, renkA, renkB) {
 }
 
 function kartCiz(kart, u, t) {
-  const a = kisit(Math.min(u / 0.2, (kart.sure - u) / 0.2), 0, 1);
+  // art arda gelen kartlar arasında ve videonun ilk karesinde solma yok (kesit 2: arada sahne bir an görünüyordu)
+  const once = kart.t === 0 || KARTLAR.some(kk => kk !== kart && Math.abs(kk.t + kk.sure - kart.t) < 0.01);
+  const sonra = KARTLAR.some(kk => kk !== kart && Math.abs(kart.t + kart.sure - kk.t) < 0.01);
+  const a = kisit(Math.min(once ? 1 : u / 0.2, sonra ? 1 : (kart.sure - u) / 0.2), 0, 1);
   const s = 1 + 0.15 * (1 - ease(Math.min(1, u / 0.35)));
   cx.save(); cx.globalAlpha = a;
   if (kart.tip === 'vs') {
