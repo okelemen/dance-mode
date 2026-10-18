@@ -1,0 +1,1985 @@
+{
+ "_not": "TETRIS MODE PVP 3. video (REF-054) poz tanimlari. Acilar EKRAN duzleminde (pozlar.js dili): 0 asagi, 90 ekran-sag, 180 yukari, -90 ekran-sol. Kollar [ust kol, on kol], bacaklar [uyluk, baldir]. sol*/sag* = KARAKTERIN solu/sagi; karakter kameraya donukken sol = ekran SAGI. yon: on (kameraya donuk) | sag (profil, yuzu ekran sagina). govde: kalcadan boyna aci, bas: govdeye ek aci. Mixamo govdesi (siluet-govde.fbx) bu acilarla bukulur, duz siyah maske cikar (varlik.py).",
+ "pozlar": {
+  "eagle-arms": {
+   "ad": "Eagle Arms",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    55,
+    170
+   ],
+   "solKol": [
+    -55,
+    -170
+   ],
+   "sagBacak": [
+    -12,
+    6
+   ],
+   "solBacak": [
+    12,
+    -6
+   ]
+  },
+  "sunrise-arch": {
+   "ad": "Sunrise Arch",
+   "yon": "sag",
+   "govde": 195,
+   "bas": 0,
+   "solKol": [
+    -165,
+    -160
+   ],
+   "sagKol": [
+    -160,
+    -158
+   ],
+   "solBacak": [
+    3,
+    2
+   ],
+   "sagBacak": [
+    -4,
+    -3
+   ]
+  },
+  "easy-seat-prayer-up": {
+   "ad": "Easy Seat Prayer Up",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -160,
+    165
+   ],
+   "solKol": [
+    160,
+    -165
+   ],
+   "sagBacak": [
+    -78,
+    75
+   ],
+   "solBacak": [
+    78,
+    -75
+   ]
+  },
+  "wide-leg-fold": {
+   "ad": "Wide Leg Fold",
+   "yon": "on",
+   "govde": 0,
+   "bas": 0,
+   "sagKol": [
+    -10,
+    -5
+   ],
+   "solKol": [
+    10,
+    5
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "solBacak": [
+    30,
+    30
+   ]
+  },
+  "childs-pose": {
+   "ad": "Child's Pose",
+   "yon": "sag",
+   "govde": 75,
+   "bas": 0,
+   "solKol": [
+    92,
+    90
+   ],
+   "sagKol": [
+    90,
+    88
+   ],
+   "solBacak": [
+    72,
+    -90
+   ],
+   "sagBacak": [
+    70,
+    -90
+   ]
+  },
+  "cat-back": {
+   "ad": "Cat Back",
+   "yon": "sag",
+   "govde": 100,
+   "bas": -60,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "cow-lift": {
+   "ad": "Cow Lift",
+   "yon": "sag",
+   "govde": 85,
+   "bas": 70,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "thread-the-needle": {
+   "ad": "Thread the Needle",
+   "yon": "sag",
+   "govde": 65,
+   "bas": 0,
+   "solKol": [
+    -85,
+    -90
+   ],
+   "sagKol": [
+    175,
+    178
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "butterfly": {
+   "ad": "Butterfly",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    20,
+    5
+   ],
+   "solKol": [
+    -20,
+    -5
+   ],
+   "sagBacak": [
+    -68,
+    62
+   ],
+   "solBacak": [
+    68,
+    -62
+   ]
+  },
+  "seated-side-stretch": {
+   "ad": "Seated Side Stretch",
+   "yon": "on",
+   "govde": 160,
+   "bas": 0,
+   "sagKol": [
+    -178,
+    135
+   ],
+   "solKol": [
+    40,
+    15
+   ],
+   "sagBacak": [
+    -78,
+    75
+   ],
+   "solBacak": [
+    78,
+    -75
+   ]
+  },
+  "pyramid-fold": {
+   "ad": "Pyramid Fold",
+   "yon": "sag",
+   "govde": 35,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -170
+   ],
+   "sagKol": [
+    -150,
+    -170
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "sagBacak": [
+    -28,
+    -28
+   ]
+  },
+  "standing-backbend": {
+   "ad": "Standing Backbend",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 20,
+   "solKol": [
+    -30,
+    10
+   ],
+   "sagKol": [
+    -25,
+    10
+   ],
+   "solBacak": [
+    3,
+    3
+   ],
+   "sagBacak": [
+    -3,
+    -3
+   ]
+  },
+  "humble-warrior": {
+   "ad": "Humble Warrior",
+   "yon": "sag",
+   "govde": 45,
+   "bas": 0,
+   "solKol": [
+    -160,
+    -165
+   ],
+   "sagKol": [
+    -155,
+    -160
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ]
+  },
+  "wide-leg-twist": {
+   "ad": "Wide Leg Twist",
+   "yon": "on",
+   "govde": 5,
+   "bas": 0,
+   "sagKol": [
+    5,
+    0
+   ],
+   "solKol": [
+    178,
+    178
+   ],
+   "sagBacak": [
+    -32,
+    -32
+   ],
+   "solBacak": [
+    32,
+    32
+   ]
+  },
+  "lizard-lunge": {
+   "ad": "Lizard Lunge",
+   "yon": "sag",
+   "govde": 80,
+   "bas": 0,
+   "solKol": [
+    0,
+    90
+   ],
+   "sagKol": [
+    0,
+    90
+   ],
+   "solBacak": [
+    88,
+    0
+   ],
+   "sagBacak": [
+    -62,
+    -90
+   ]
+  },
+  "mermaid-seat": {
+   "ad": "Mermaid Seat",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -40,
+    -10
+   ],
+   "solKol": [
+    175,
+    -130
+   ],
+   "sagBacak": [
+    80,
+    10
+   ],
+   "solBacak": [
+    85,
+    20
+   ]
+  },
+  "happy-baby": {
+   "ad": "Happy Baby",
+   "yon": "sag",
+   "govde": -90,
+   "bas": 0,
+   "solKol": [
+    -165,
+    175
+   ],
+   "sagKol": [
+    -160,
+    178
+   ],
+   "solBacak": [
+    -160,
+    178
+   ],
+   "sagBacak": [
+    -155,
+    180
+   ]
+  },
+  "supine-twist": {
+   "ad": "Supine Twist",
+   "yon": "on",
+   "govde": 90,
+   "bas": 0,
+   "sagKol": [
+    180,
+    180
+   ],
+   "solKol": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -150,
+    -90
+   ],
+   "solBacak": [
+    -140,
+    -90
+   ]
+  },
+  "legs-up": {
+   "ad": "Legs Up",
+   "yon": "sag",
+   "govde": -90,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    88,
+    88
+   ],
+   "solBacak": [
+    180,
+    180
+   ],
+   "sagBacak": [
+    178,
+    178
+   ]
+  },
+  "reclined-butterfly": {
+   "ad": "Reclined Butterfly",
+   "yon": "on",
+   "govde": 90,
+   "bas": 0,
+   "sagKol": [
+    95,
+    90
+   ],
+   "solKol": [
+    85,
+    90
+   ],
+   "sagBacak": [
+    -135,
+    -45
+   ],
+   "solBacak": [
+    -45,
+    -135
+   ]
+  },
+  "head-to-knee": {
+   "ad": "Head to Knee",
+   "yon": "sag",
+   "govde": 100,
+   "bas": 0,
+   "solKol": [
+    92,
+    95
+   ],
+   "sagKol": [
+    90,
+    93
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    90,
+    -90
+   ]
+  },
+  "wide-angle-fold": {
+   "ad": "Wide Angle Fold",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -70,
+    -80
+   ],
+   "solKol": [
+    70,
+    80
+   ],
+   "sagBacak": [
+    -88,
+    -88
+   ],
+   "solBacak": [
+    88,
+    88
+   ]
+  },
+  "crescent-moon-bend": {
+   "ad": "Crescent Moon Bend",
+   "yon": "on",
+   "govde": 158,
+   "bas": 0,
+   "sagKol": [
+    165,
+    140
+   ],
+   "solKol": [
+    150,
+    135
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "tiptoe-prayer": {
+   "ad": "Tiptoe Prayer",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -160,
+    165
+   ],
+   "solKol": [
+    160,
+    -165
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "toe-touch-twist": {
+   "ad": "Toe Touch Twist",
+   "yon": "on",
+   "govde": 35,
+   "bas": 0,
+   "sagKol": [
+    20,
+    15
+   ],
+   "solKol": [
+    178,
+    178
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ]
+  },
+  "clasp-fold": {
+   "ad": "Clasp Fold",
+   "yon": "sag",
+   "govde": 15,
+   "bas": 0,
+   "solKol": [
+    150,
+    150
+   ],
+   "sagKol": [
+    148,
+    148
+   ],
+   "solBacak": [
+    2,
+    2
+   ],
+   "sagBacak": [
+    -2,
+    -2
+   ]
+  },
+  "cow-face-arms": {
+   "ad": "Cow Face Arms",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -175,
+    10
+   ],
+   "solKol": [
+    15,
+    -170
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "kneeling-twist": {
+   "ad": "Kneeling Twist",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    30,
+    -60
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    0,
+    "geri"
+   ]
+  },
+  "side-lying-leg-lift": {
+   "ad": "Side Lying Leg Lift",
+   "yon": "on",
+   "govde": -90,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -170
+   ],
+   "solKol": [
+    20,
+    0
+   ],
+   "sagBacak": [
+    92,
+    90
+   ],
+   "solBacak": [
+    130,
+    128
+   ]
+  },
+  "kneeling-arm-sweep": {
+   "ad": "Kneeling Arm Sweep",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    130,
+    130
+   ],
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "eagle-pose": {
+   "ad": "Eagle Pose",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    95,
+    175
+   ],
+   "sagKol": [
+    95,
+    175
+   ],
+   "solBacak": [
+    50,
+    -15
+   ],
+   "sagBacak": [
+    40,
+    -10
+   ]
+  },
+  "standing-figure-four": {
+   "ad": "Standing Figure Four",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    -8,
+    10
+   ],
+   "solBacak": [
+    80,
+    -100
+   ]
+  },
+  "revolved-triangle": {
+   "ad": "Revolved Triangle",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    180,
+    180
+   ],
+   "solBacak": [
+    25,
+    25
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ]
+  },
+  "bound-side-angle": {
+   "ad": "Bound Side Angle",
+   "yon": "on",
+   "govde": -130,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    30
+   ],
+   "solKol": [
+    -120,
+    -40
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    45,
+    45
+   ]
+  },
+  "pigeon-upright": {
+   "ad": "Pigeon Upright",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    10,
+    0
+   ],
+   "sagKol": [
+    8,
+    0
+   ],
+   "solBacak": [
+    85,
+    -95
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ]
+  },
+  "sage-twist": {
+   "ad": "Sage Twist",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    110,
+    170
+   ],
+   "sagKol": [
+    -35,
+    -25
+   ],
+   "solBacak": [
+    140,
+    2
+   ],
+   "sagBacak": [
+    90,
+    90
+   ]
+  },
+  "forearm-plank": {
+   "ad": "Forearm Plank",
+   "yon": "sag",
+   "govde": 95,
+   "bas": 0,
+   "solKol": [
+    0,
+    90
+   ],
+   "sagKol": [
+    0,
+    90
+   ],
+   "solBacak": [
+    -85,
+    -85
+   ],
+   "sagBacak": [
+    -85,
+    -85
+   ]
+  },
+  "reverse-tabletop": {
+   "ad": "Reverse Tabletop",
+   "yon": "sag",
+   "govde": -90,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    90,
+    0
+   ]
+  },
+  "single-leg-bridge": {
+   "ad": "Single Leg Bridge",
+   "yon": "sag",
+   "govde": -65,
+   "bas": 0,
+   "solKol": [
+    85,
+    90
+   ],
+   "sagKol": [
+    85,
+    90
+   ],
+   "solBacak": [
+    150,
+    150
+   ],
+   "sagBacak": [
+    100,
+    5
+   ]
+  },
+  "locust": {
+   "ad": "Locust",
+   "yon": "sag",
+   "govde": 105,
+   "bas": 0,
+   "solKol": [
+    -100,
+    -100
+   ],
+   "sagKol": [
+    -98,
+    -98
+   ],
+   "solBacak": [
+    -100,
+    -100
+   ],
+   "sagBacak": [
+    -98,
+    -98
+   ]
+  },
+  "kneeling-side-plank": {
+   "ad": "Kneeling Side Plank",
+   "yon": "on",
+   "govde": 120,
+   "bas": 0,
+   "sagKol": [
+    178,
+    178
+   ],
+   "solKol": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    20
+   ],
+   "solBacak": [
+    -75,
+    -75
+   ]
+  },
+  "dolphin": {
+   "ad": "Dolphin",
+   "yon": "sag",
+   "govde": 45,
+   "bas": 0,
+   "solKol": [
+    30,
+    90
+   ],
+   "sagKol": [
+    30,
+    90
+   ],
+   "solBacak": [
+    -35,
+    -35
+   ],
+   "sagBacak": [
+    -33,
+    -33
+   ]
+  },
+  "stork-fold": {
+   "ad": "Stork Fold",
+   "yon": "sag",
+   "govde": 30,
+   "bas": 0,
+   "solKol": [
+    5,
+    5
+   ],
+   "sagKol": [
+    3,
+    3
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -150
+   ]
+  },
+  "arabesque-reach": {
+   "ad": "Arabesque Reach",
+   "yon": "sag",
+   "govde": 150,
+   "bas": 0,
+   "solKol": [
+    170,
+    170
+   ],
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -100,
+    -100
+   ]
+  },
+  "reverse-plank": {
+   "ad": "Reverse Plank",
+   "yon": "sag",
+   "govde": -105,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    75,
+    75
+   ],
+   "sagBacak": [
+    75,
+    75
+   ]
+  },
+  "wild-thing-lite": {
+   "ad": "Wild Thing Lite",
+   "yon": "on",
+   "govde": 140,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    -10
+   ],
+   "solKol": [
+    120,
+    100
+   ],
+   "sagBacak": [
+    -45,
+    -100
+   ],
+   "solBacak": [
+    -20,
+    -5
+   ]
+  },
+  "fire-log-seat": {
+   "ad": "Fire Log Seat",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -60,
+    -20
+   ],
+   "solKol": [
+    60,
+    20
+   ],
+   "sagBacak": [
+    -85,
+    85
+   ],
+   "solBacak": [
+    85,
+    -85
+   ]
+  },
+  "compass-prep": {
+   "ad": "Compass Prep",
+   "yon": "on",
+   "govde": 190,
+   "bas": 0,
+   "sagKol": [
+    -30,
+    -10
+   ],
+   "solKol": [
+    130,
+    140
+   ],
+   "sagBacak": [
+    -80,
+    80
+   ],
+   "solBacak": [
+    135,
+    150
+   ]
+  },
+  "gate-lift": {
+   "ad": "Gate Lift",
+   "yon": "on",
+   "govde": -140,
+   "bas": 0,
+   "sagKol": [
+    -10,
+    0
+   ],
+   "solKol": [
+    170,
+    175
+   ],
+   "sagBacak": [
+    -20,
+    "geri"
+   ],
+   "solBacak": [
+    90,
+    92
+   ]
+  },
+  "low-boat": {
+   "ad": "Low Boat",
+   "yon": "sag",
+   "govde": 215,
+   "bas": 0,
+   "solKol": [
+    95,
+    95
+   ],
+   "sagKol": [
+    93,
+    93
+   ],
+   "solBacak": [
+    105,
+    105
+   ],
+   "sagBacak": [
+    103,
+    103
+   ]
+  },
+  "hand-to-toe-side": {
+   "ad": "Hand to Toe Side",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    100,
+    100
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    100,
+    100
+   ]
+  },
+  "tiptoe-squat": {
+   "ad": "Tiptoe Squat",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    88,
+    88
+   ],
+   "solBacak": [
+    92,
+    -25
+   ],
+   "sagBacak": [
+    90,
+    -25
+   ]
+  },
+  "plank-leg-lift": {
+   "ad": "Plank Leg Lift",
+   "yon": "sag",
+   "govde": 75,
+   "bas": 0,
+   "solKol": [
+    2,
+    2
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -105,
+    -105
+   ],
+   "sagBacak": [
+    -125,
+    -125
+   ]
+  },
+  "down-dog-split": {
+   "ad": "Down Dog Split",
+   "yon": "sag",
+   "govde": 40,
+   "bas": 0,
+   "solKol": [
+    38,
+    38
+   ],
+   "sagKol": [
+    38,
+    38
+   ],
+   "solBacak": [
+    -35,
+    -35
+   ],
+   "sagBacak": [
+    -150,
+    -150
+   ]
+  },
+  "half-bow": {
+   "ad": "Half Bow",
+   "yon": "sag",
+   "govde": 100,
+   "bas": 0,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    -110,
+    -120
+   ],
+   "solBacak": [
+    -92,
+    -92
+   ],
+   "sagBacak": [
+    -95,
+    -170
+   ]
+  },
+  "floor-swimmer": {
+   "ad": "Floor Swimmer",
+   "yon": "sag",
+   "govde": 95,
+   "bas": 0,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    95,
+    90
+   ],
+   "solBacak": [
+    -100,
+    -100
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ]
+  },
+  "heron-seat": {
+   "ad": "Heron Seat",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    140,
+    140
+   ],
+   "sagKol": [
+    138,
+    138
+   ],
+   "solBacak": [
+    150,
+    150
+   ],
+   "sagBacak": [
+    88,
+    -92
+   ]
+  },
+  "seated-leg-cradle": {
+   "ad": "Seated Leg Cradle",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    60,
+    120
+   ],
+   "sagKol": [
+    60,
+    120
+   ],
+   "solBacak": [
+    110,
+    -100
+   ],
+   "sagBacak": [
+    85,
+    -95
+   ]
+  },
+  "half-split": {
+   "ad": "Half Split",
+   "yon": "sag",
+   "govde": 105,
+   "bas": 0,
+   "solKol": [
+    10,
+    5
+   ],
+   "sagKol": [
+    8,
+    3
+   ],
+   "solBacak": [
+    80,
+    80
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "wide-squat-twist": {
+   "ad": "Wide Squat Twist",
+   "yon": "on",
+   "govde": 170,
+   "bas": 0,
+   "sagKol": [
+    -40,
+    -20
+   ],
+   "solKol": [
+    150,
+    170
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ]
+  },
+  "king-pigeon-reach": {
+   "ad": "King Pigeon Reach",
+   "yon": "sag",
+   "govde": 190,
+   "bas": 0,
+   "solKol": [
+    150,
+    150
+   ],
+   "sagKol": [
+    -120,
+    -150
+   ],
+   "solBacak": [
+    85,
+    -95
+   ],
+   "sagBacak": [
+    -90,
+    -170
+   ]
+  },
+  "fish-pose": {
+   "ad": "Fish Pose",
+   "yon": "sag",
+   "govde": -115,
+   "bas": 70,
+   "solKol": [
+    60,
+    90
+   ],
+   "sagKol": [
+    60,
+    90
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    90,
+    90
+   ]
+  },
+  "front-split-prep": {
+   "ad": "Front Split Prep",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    85,
+    85
+   ],
+   "sagBacak": [
+    -80,
+    -80
+   ]
+  },
+  "hurdler-stretch": {
+   "ad": "Hurdler Stretch",
+   "yon": "on",
+   "govde": -135,
+   "bas": 0,
+   "sagKol": [
+    -85,
+    -88
+   ],
+   "solKol": [
+    -110,
+    -95
+   ],
+   "sagBacak": [
+    -88,
+    -88
+   ],
+   "solBacak": [
+    80,
+    -100
+   ]
+  },
+  "crow-lean": {
+   "ad": "Crow Lean",
+   "yon": "sag",
+   "govde": 100,
+   "bas": -10,
+   "solKol": [
+    10,
+    0
+   ],
+   "sagKol": [
+    8,
+    0
+   ],
+   "solBacak": [
+    125,
+    -15
+   ],
+   "sagBacak": [
+    120,
+    -15
+   ]
+  },
+  "forearm-side-plank": {
+   "ad": "Forearm Side Plank",
+   "yon": "on",
+   "govde": 110,
+   "bas": 0,
+   "sagKol": [
+    5,
+    95
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -70,
+    -70
+   ],
+   "solBacak": [
+    -72,
+    -72
+   ]
+  },
+  "hollow-hold": {
+   "ad": "Hollow Hold",
+   "yon": "sag",
+   "govde": -100,
+   "bas": 0,
+   "solKol": [
+    -110,
+    -110
+   ],
+   "sagKol": [
+    -108,
+    -108
+   ],
+   "solBacak": [
+    100,
+    100
+   ],
+   "sagBacak": [
+    98,
+    98
+   ]
+  },
+  "upward-plank-leg-lift": {
+   "ad": "Upward Plank Leg Lift",
+   "yon": "sag",
+   "govde": -105,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    75,
+    75
+   ],
+   "sagBacak": [
+    120,
+    120
+   ]
+  },
+  "mermaid-pigeon": {
+   "ad": "Mermaid Pigeon",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    -175,
+    -115
+   ],
+   "sagKol": [
+    -170,
+    -120
+   ],
+   "solBacak": [
+    85,
+    -95
+   ],
+   "sagBacak": [
+    -90,
+    -175
+   ]
+  },
+  "tortoise-prep": {
+   "ad": "Tortoise Prep",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -88,
+    -92
+   ],
+   "solKol": [
+    88,
+    92
+   ],
+   "sagBacak": [
+    -105,
+    -15
+   ],
+   "solBacak": [
+    105,
+    15
+   ]
+  },
+  "toe-stand-prep": {
+   "ad": "Toe Stand Prep",
+   "yon": "sag",
+   "govde": 150,
+   "bas": 0,
+   "solKol": [
+    20,
+    0
+   ],
+   "sagKol": [
+    18,
+    0
+   ],
+   "solBacak": [
+    95,
+    -20
+   ],
+   "sagBacak": [
+    80,
+    80
+   ]
+  },
+  "revolved-side-angle": {
+   "ad": "Revolved Side Angle",
+   "yon": "sag",
+   "govde": 100,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    180,
+    180
+   ],
+   "solBacak": [
+    75,
+    0
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ]
+  },
+  "l-sit-prep": {
+   "ad": "L-Sit Prep",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ]
+  },
+  "tabletop-twist-reach": {
+   "ad": "Tabletop Twist Reach",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    180,
+    180
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "lizard-twist": {
+   "ad": "Lizard Twist",
+   "yon": "sag",
+   "govde": 100,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    88,
+    0
+   ],
+   "sagBacak": [
+    -62,
+    -90
+   ]
+  },
+  "humble-pigeon": {
+   "ad": "Humble Pigeon",
+   "yon": "sag",
+   "govde": 80,
+   "bas": 0,
+   "solKol": [
+    95,
+    90
+   ],
+   "sagKol": [
+    93,
+    88
+   ],
+   "solBacak": [
+    85,
+    -95
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ]
+  },
+  "dolphin-leg-lift": {
+   "ad": "Dolphin Leg Lift",
+   "yon": "sag",
+   "govde": 45,
+   "bas": 0,
+   "solKol": [
+    30,
+    90
+   ],
+   "sagKol": [
+    30,
+    90
+   ],
+   "solBacak": [
+    -35,
+    -35
+   ],
+   "sagBacak": [
+    -150,
+    -150
+   ]
+  },
+  "bear-hold": {
+   "ad": "Bear Hold",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    10,
+    -70
+   ],
+   "sagBacak": [
+    10,
+    -70
+   ]
+  },
+  "open-wide-boat": {
+   "ad": "Open Wide Boat",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -150
+   ],
+   "solKol": [
+    150,
+    150
+   ],
+   "sagBacak": [
+    -140,
+    -140
+   ],
+   "solBacak": [
+    140,
+    140
+   ]
+  },
+  "cross-leg-fold": {
+   "ad": "Cross Leg Fold",
+   "yon": "sag",
+   "govde": 100,
+   "bas": 0,
+   "solKol": [
+    95,
+    90
+   ],
+   "sagKol": [
+    93,
+    88
+   ],
+   "solBacak": [
+    85,
+    -80
+   ],
+   "sagBacak": [
+    85,
+    -80
+   ]
+  },
+  "tiger-pose": {
+   "ad": "Tiger Pose",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    -120,
+    -150
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -100,
+    -170
+   ]
+  },
+  "side-plank-tree": {
+   "ad": "Side Plank Tree",
+   "yon": "on",
+   "govde": 115,
+   "bas": 0,
+   "sagKol": [
+    0,
+    0
+   ],
+   "solKol": [
+    178,
+    178
+   ],
+   "sagBacak": [
+    -65,
+    -65
+   ],
+   "solBacak": [
+    -150,
+    -30
+   ]
+  },
+  "wide-angle-side-bend": {
+   "ad": "Wide Angle Side Bend",
+   "yon": "on",
+   "govde": -150,
+   "bas": 0,
+   "sagKol": [
+    -85,
+    -88
+   ],
+   "solKol": [
+    175,
+    -140
+   ],
+   "sagBacak": [
+    -88,
+    -88
+   ],
+   "solBacak": [
+    88,
+    88
+   ]
+  },
+  "kneeling-quad-hold": {
+   "ad": "Kneeling Quad Hold",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    140,
+    140
+   ],
+   "sagKol": [
+    -150,
+    -170
+   ],
+   "solBacak": [
+    85,
+    0
+   ],
+   "sagBacak": [
+    -45,
+    -170
+   ]
+  },
+  "side-split-prep": {
+   "ad": "Side Split Prep",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    0,
+    0
+   ],
+   "solKol": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -80,
+    -80
+   ],
+   "solBacak": [
+    80,
+    80
+   ]
+  },
+  "reverse-prayer-fold": {
+   "ad": "Reverse Prayer Fold",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    -35,
+    170
+   ],
+   "sagKol": [
+    -35,
+    170
+   ],
+   "solBacak": [
+    3,
+    3
+   ],
+   "sagBacak": [
+    -3,
+    -3
+   ]
+  },
+  "side-lying-quad-hold": {
+   "ad": "Side Lying Quad Hold",
+   "yon": "on",
+   "govde": -90,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -170
+   ],
+   "solKol": [
+    60,
+    90
+   ],
+   "sagBacak": [
+    92,
+    90
+   ],
+   "solBacak": [
+    90,
+    -120
+   ]
+  },
+  "knee-to-nose": {
+   "ad": "Knee to Nose",
+   "yon": "sag",
+   "govde": 95,
+   "bas": -60,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    60,
+    -30
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "bound-lunge": {
+   "ad": "Bound Lunge",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    -25,
+    -25
+   ],
+   "sagKol": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ]
+  },
+  "seated-straddle-reach-up": {
+   "ad": "Seated Straddle Reach Up",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -88,
+    -88
+   ],
+   "solBacak": [
+    88,
+    88
+   ]
+  }
+ }
+}

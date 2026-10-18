@@ -27,7 +27,7 @@ CIKTI = os.path.abspath(arg("--cikti", "cikti"))
 ORNEK = int(arg("--ornek", "64"))
 YALNIZ = arg("--yalniz", "hepsi")          # hepsi | poz | sahne
 os.makedirs(os.path.join(CIKTI, "poz"), exist_ok=True)
-POZLAR = json.load(open(os.path.join(KOK, "03-motor/tetris-pvp/pozlar.json"), encoding="utf-8"))["pozlar"]
+POZLAR = json.load(open(os.path.join(KOK, arg("--pozlar", "03-motor/tetris-pvp/pozlar.json")), encoding="utf-8"))["pozlar"]
 
 RENK = {"p1": "#22e07a", "p2": "#ff9a1f"}
 YERLESIM = {}

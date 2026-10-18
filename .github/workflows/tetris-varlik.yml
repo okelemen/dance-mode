@@ -15,6 +15,10 @@ on:
         description: "Cycles ornek sayisi"
         required: true
         default: "64"
+      pozlar:
+        description: "poz dosyasi (KOK'e gore)"
+        required: true
+        default: "03-motor/tetris-pvp/pozlar.json"
 
 jobs:
   varlik:
@@ -39,7 +43,7 @@ jobs:
         run: |
           mkdir -p cikti
           ~/blender/blender -b --factory-startup -noaudio -P 03-motor/tetris-pvp/varlik.py -- \
-            --cikti cikti --ornek ${{ github.event.inputs.ornek }} --yalniz ${{ github.event.inputs.yalniz }} 2>&1 | grep -v "^Fra:" | tail -n 120
+            --cikti cikti --ornek ${{ github.event.inputs.ornek }} --yalniz ${{ github.event.inputs.yalniz }} --pozlar ${{ github.event.inputs.pozlar }} 2>&1 | grep -v "^Fra:" | tail -n 120
           ls -laR cikti
           test -f cikti/yerlesim.json
       - uses: actions/upload-artifact@v4
