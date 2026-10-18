@@ -35,9 +35,17 @@ const KARTLAR = BOLUM.kartlar || [];
 const Z = BOLUM.zaman || { kart: 2.0, say: 3.0, buyu: 5.0, gec: 1.2, sure: 12.0 };
 const TOPLAM_DUVAR = BOLUM.toplam_duvar || DUVARLAR.length;
 
-const VARLIK = '/03-motor/tetris-pvp/varlik/';
+// Tema: varsayılan = 2. video (REF-053, zümrüt/kehribar). Sonraki videolar bölüm JSON'undaki "tema" ile ezer (3. video REF-054: mor/sarı).
+const TEMA = Object.assign({
+  varlik: '/03-motor/tetris-pvp/varlik/', p1: '#22e07a', p2: '#ff9a1f', altin: '#ffc93a', camgobegi: '#3ff0e0',
+  p1koyu: '#0d8a47', p2koyu: '#b85200', p1acik: '#d9ffe9', p2acik: '#fff1d6', p1parlak: '#c8ffe0', p2parlak: '#ffe2b8',
+  vsSol: ['#0d6b3d', '#04241a'], vsSag: ['#9a4a00', '#2a1200'], isin: ['#1fb5a0', '#06264a'], wrapIsin: ['#ffb43a', '#3a1200'],
+  ovguRenk: ['#fffbe0', '#7dffc0', '#18b8ff'], parca: ['#7dff9c', '#ffd27a', '#7fe7ff'], abone: ['#7dffb4', '#0c8a48'],
+  vsAlt: 'TETRIS MODE · PVP BATTLE', wrap: ["THAT'S", 'A WRAP!'], ovgu: ['GREAT!', 'EXCELLENT!', 'PERFECT!', 'AWESOME!'],
+}, BOLUM.tema || {});
+const VARLIK = TEMA.varlik;
 const YER = await fetch(VARLIK + 'yerlesim.json').then(r => r.json());
-const P1 = '#22e07a', P2 = '#ff9a1f', ALTIN = '#ffc93a', CAMGOBEGI = '#3ff0e0';
+const P1 = TEMA.p1, P2 = TEMA.p2, ALTIN = TEMA.altin, CAMGOBEGI = TEMA.camgobegi;
 const RENK = [P1, P2];
 
 // ------------------------------------------------------------ YÜKLEME
@@ -113,7 +121,7 @@ const FISEK_ARALIK = 1.6;
 function gokHareket(t) {
   cx.save(); cx.globalCompositeOperation = 'lighter';
   // tarayan ışık huzmeleri (şeritlerin arkasından)
-  for (const [bx, faz, renk] of [[0.08, 0, CAMGOBEGI], [0.5, 2.1, ALTIN], [0.92, 4.2, '#7dff9c'], [0.3, 1.0, '#ffd27a'], [0.7, 3.3, '#7fe7ff']]) {
+  for (const [bx, faz, renk] of [[0.08, 0, CAMGOBEGI], [0.5, 2.1, ALTIN], [0.92, 4.2, TEMA.parca[0]], [0.3, 1.0, TEMA.parca[1]], [0.7, 3.3, TEMA.parca[2]]]) {
     const a = Math.sin(t * 0.55 + faz) * 0.5, L = H * 1.1, x0 = W * bx, y0 = H * 0.75;
     const ux = Math.sin(a), uy = -Math.cos(a), gen = 60 * k;
     const g = cx.createLinearGradient(x0, y0, x0 + ux * L, y0 + uy * L);
@@ -140,7 +148,7 @@ function gokHareket(t) {
     const u = t - j * FISEK_ARALIK; if (u > 1.8) continue;
     const r = rng(1000 + j);
     const cx0 = W * (0.06 + 0.88 * r()), cy0 = H * (0.08 + 0.3 * r());
-    const renk = [ALTIN, CAMGOBEGI, '#7dff9c', '#ffffff', '#ff9a1f'][Math.floor(r() * 5)];
+    const renk = [ALTIN, CAMGOBEGI, TEMA.parca[0], '#ffffff', P2][Math.floor(r() * 5)];
     const n = 36, R = (120 + 90 * r()) * k;
     const yay = ease(Math.min(1, u / 0.9)), a = 1 - Math.max(0, (u - 0.5) / 1.3);
     for (let i = 0; i < n; i++) {
@@ -242,7 +250,7 @@ function duvarIc(i, x, y, w, h, panel, maske, alfa) {
   kc.drawImage(maske, x, y, w, h);
   kc.globalCompositeOperation = 'source-over';
   cx.save(); cx.globalAlpha = alfa;
-  cx.shadowColor = hex(i === 0 ? '#c8ffe0' : '#ffe2b8', 0.95); cx.shadowBlur = Math.max(4, w * 0.018);
+  cx.shadowColor = hex(i === 0 ? TEMA.p1parlak : TEMA.p2parlak, 0.95); cx.shadowBlur = Math.max(4, w * 0.018);
   cx.drawImage(KAT, 0, 0);
   cx.restore();
 }
@@ -279,7 +287,7 @@ function oyuncuKarti(i, p) {
   cx.restore();
   cx.restore();
   yazi(i === 0 ? 'PLAYER 1' : 'PLAYER 2', x + w / 2, y + h * 0.17, h * 0.11, '#ffffff', '#06122e', a);
-  yazi(i === 0 ? 'P1' : 'P2', x + w / 2, y + h * 0.58, h * 0.42, i === 0 ? ['#d9ffe9', P1, '#0f9a52'] : ['#fff1d6', P2, '#c45f00'], '#06122e', a, RENK[i]);
+  yazi(i === 0 ? 'P1' : 'P2', x + w / 2, y + h * 0.58, h * 0.42, i === 0 ? [TEMA.p1acik, P1, TEMA.p1koyu] : [TEMA.p2acik, P2, TEMA.p2koyu], '#06122e', a, RENK[i]);
 }
 
 function kapiKutusu(i) {
@@ -325,14 +333,14 @@ function sayimCiz(e) {
   yazi(String(n), W / 2, A.y + A.h * 0.5, px, ['#ffffff', ALTIN, '#ff7a00'], '#2a0a46', 1, ALTIN);
 }
 
-const OVGU = ['GREAT!', 'EXCELLENT!', 'PERFECT!', 'AWESOME!'];
+const OVGU = TEMA.ovgu;
 function ovguCiz(d, e) {
   if (!(e.ad === 'gec' && e.p > 0.35) && e.ad !== 'bos') return;
   const p = e.ad === 'gec' ? (e.p - 0.35) / 0.65 * 0.6 : 0.6 + 0.4 * e.p;
   const a = Math.min(1, p / 0.15) * Math.min(1, (1 - p) / 0.2);
   const s = 0.8 + 0.2 * ease(Math.min(1, p / 0.2));
   const metin = d.ovgu || OVGU[(d.no - 1) % OVGU.length];
-  yazi(metin, W / 2, H * 0.42, 150 * k * s, ['#fffbe0', '#7dffc0', '#18b8ff'], '#06122e', a, CAMGOBEGI);
+  yazi(metin, W / 2, H * 0.42, 150 * k * s, TEMA.ovguRenk, '#06122e', a, CAMGOBEGI);
 }
 
 // ------------------------------------------------------------ HUD (üst bant)
@@ -345,7 +353,7 @@ function hudCiz(t, tur, ilerleme) {
     const bx0 = i === 0 ? x0 : W / 2 + 170 * k, bx1 = i === 0 ? W / 2 - 170 * k : x1;
     cx.fillStyle = 'rgba(255,255,255,0.12)'; cx.beginPath(); cx.roundRect(bx0, y, bx1 - bx0, h, h / 2); cx.fill();
     const L = (bx1 - bx0) * kisit(ilerleme, 0.03, 1);
-    const g = cx.createLinearGradient(0, y, 0, y + h); g.addColorStop(0, hex(RENK[i], 1)); g.addColorStop(1, i === 0 ? '#0c8a48' : '#b85400');
+    const g = cx.createLinearGradient(0, y, 0, y + h); g.addColorStop(0, hex(RENK[i], 1)); g.addColorStop(1, i === 0 ? TEMA.p1koyu : TEMA.p2koyu);
     cx.fillStyle = g; cx.shadowColor = RENK[i]; cx.shadowBlur = 16 * k;
     cx.beginPath(); if (i === 0) cx.roundRect(bx1 - L, y, L, h, h / 2); else cx.roundRect(bx0, y, L, h, h / 2); cx.fill();
     cx.shadowBlur = 0;
@@ -388,47 +396,47 @@ function kartCiz(kart, u, t) {
   if (kart.tip === 'vs') {
     // iki renkli bölünmüş ekran, ortada şimşek çizgisi + VS rozeti (kendi tasarımımız, karakter yok)
     const ek = Math.sin(u * 3) * 10 * k;
-    const sol = cx.createLinearGradient(0, 0, W / 2, H); sol.addColorStop(0, '#0d6b3d'); sol.addColorStop(1, '#04241a');
-    const sag = cx.createLinearGradient(W, 0, W / 2, H); sag.addColorStop(0, '#9a4a00'); sag.addColorStop(1, '#2a1200');
+    const sol = cx.createLinearGradient(0, 0, W / 2, H); sol.addColorStop(0, TEMA.vsSol[0]); sol.addColorStop(1, TEMA.vsSol[1]);
+    const sag = cx.createLinearGradient(W, 0, W / 2, H); sag.addColorStop(0, TEMA.vsSag[0]); sag.addColorStop(1, TEMA.vsSag[1]);
     const zig = [[W * 0.56 + ek, 0], [W * 0.47, H * 0.38], [W * 0.54, H * 0.42], [W * 0.44 - ek, H]];
     cx.fillStyle = sol; cx.beginPath(); cx.moveTo(0, 0); zig.forEach(p => cx.lineTo(p[0], p[1])); cx.lineTo(0, H); cx.closePath(); cx.fill();
     cx.fillStyle = sag; cx.beginPath(); cx.moveTo(W, 0); zig.forEach(p => cx.lineTo(p[0], p[1])); cx.lineTo(W, H); cx.closePath(); cx.fill();
     cx.save(); cx.shadowColor = '#ffffff'; cx.shadowBlur = 40 * k; cx.strokeStyle = '#fffbe8'; cx.lineWidth = 10 * k;
     cx.beginPath(); zig.forEach((p, j) => j ? cx.lineTo(p[0], p[1]) : cx.moveTo(p[0], p[1])); cx.stroke(); cx.restore();
     const gir = ease(kisit(u / 0.5, 0, 1));
-    yazi('P1', lerp(-W * 0.2, W * 0.25, gir), H * 0.5, 330 * k, ['#e6fff0', P1, '#0d8a47'], '#03140c', 1, P1);
-    yazi('P2', lerp(W * 1.2, W * 0.75, gir), H * 0.5, 330 * k, ['#fff3dc', P2, '#b85200'], '#1a0b00', 1, P2);
+    yazi('P1', lerp(-W * 0.2, W * 0.25, gir), H * 0.5, 330 * k, [TEMA.p1acik, P1, TEMA.p1koyu], '#03140c', 1, P1);
+    yazi('P2', lerp(W * 1.2, W * 0.75, gir), H * 0.5, 330 * k, [TEMA.p2acik, P2, TEMA.p2koyu], '#1a0b00', 1, P2);
     const vs = 1 + 0.08 * Math.sin(u * 9);
     yazi('VS', W / 2, H * 0.47, 230 * k * vs * gir + 1, ['#ffffff', '#fff27a', ALTIN, '#ff6a00'], '#2a0a46', 1, ALTIN);
-    yazi('TETRIS MODE · PVP BATTLE', W / 2, H * 0.84, 84 * k, '#ffffff', '#06122e', gir);
+    yazi(TEMA.vsAlt, W / 2, H * 0.84, 84 * k, '#ffffff', '#06122e', gir);
   } else if (kart.tip === 'basla') {
     // başlangıç geri sayımı 3-2-1-GO! (sahnenin üstünde, perde yok)
     const ad = kart.sure / 4, adim = Math.min(3, Math.floor(u / ad)), q = (u - adim * ad) / ad;   // 4 adım kartı eşit böler (müziğe kilitli)
     const metin = ['3', '2', '1', 'GO!'][adim];
     const s2 = 1.35 - 0.35 * ease(Math.min(1, q / 0.3)), a2 = Math.min(1, (1 - q) / 0.25);
     cx.globalAlpha = a * a2;
-    const renk = adim === 3 ? ['#ffffff', '#b9ffe0', P1, '#0d8a47'] : ['#ffffff', ALTIN, '#ff7a00'];
+    const renk = adim === 3 ? ['#ffffff', TEMA.p1acik, P1, TEMA.p1koyu] : ['#ffffff', ALTIN, '#ff7a00'];
     yazi(metin, W / 2, H * 0.47, (adim === 3 ? 300 : 340) * k * s2, renk, '#2a0a46', 1, adim === 3 ? P1 : ALTIN);
     if (adim === 0 && q < 0.6) yazi('GET READY!', W / 2, H * 0.2, 110 * k, '#ffffff', '#06122e', 1 - q / 0.6);
   } else if (kart.tip === 'tur') {
-    isinPatlamasi(t, '#1fb5a0', '#06264a');
+    isinPatlamasi(t, TEMA.isin[0], TEMA.isin[1]);
     yazi(kart.metin, W / 2, H * (kart.alt ? 0.40 : 0.5), 200 * k * s, ['#ffffff', '#fff1a8', ALTIN], '#06122e', 1, ALTIN);
-    if (kart.alt) yazi(kart.alt, W / 2, H * 0.62, 150 * k * s, ['#ffffff', '#b9ffe0', P1], '#06122e', 1, P1);
+    if (kart.alt) yazi(kart.alt, W / 2, H * 0.62, 150 * k * s, ['#ffffff', TEMA.p1acik, P1], '#06122e', 1, P1);
   } else if (kart.tip === 'wrap') {
-    isinPatlamasi(t, '#ffb43a', '#3a1200');
-    const harf = ["THAT'S", 'A WRAP!'];
+    isinPatlamasi(t, TEMA.wrapIsin[0], TEMA.wrapIsin[1]);
+    const harf = TEMA.wrap;
     harf.forEach((m, j) => {
       const g = ease(kisit((u - j * 0.25) / 0.4, 0, 1));
       yazi(m, W / 2, H * (0.38 + j * 0.24), 190 * k * (0.6 + 0.4 * g), ['#ffffff', '#fff1a8', ALTIN], '#2a0a00', g, '#ffffff');
     });
   } else if (kart.tip === 'abone') {
-    isinPatlamasi(t, '#1fb5a0', '#06264a');
+    isinPatlamasi(t, TEMA.isin[0], TEMA.isin[1]);
     const g = ease(kisit(u / 0.4, 0, 1)), pul = 1 + 0.05 * Math.sin(u * 8);
     const bw = 820 * k * g * pul, bh = 190 * k * g * pul;
     cx.save(); cx.shadowColor = '#ff1f3d'; cx.shadowBlur = 50 * k;
     cx.fillStyle = '#e11d2e'; cx.beginPath(); cx.roundRect(W / 2 - bw / 2, H * 0.48 - bh / 2, bw, bh, bh / 2); cx.fill(); cx.restore();
     if (g > 0.6) yazi('SUBSCRIBE', W / 2, H * 0.48, 120 * k * pul, '#ffffff', '#5a0010');
-    yazi('NEW BATTLE EVERY WEEK', W / 2, H * 0.68, 70 * k * g + 1, ['#ffffff', '#b9ffe0'], '#06122e', g);
+    yazi('NEW BATTLE EVERY WEEK', W / 2, H * 0.68, 70 * k * g + 1, ['#ffffff', TEMA.p1acik], '#06122e', g);
   }
   cx.restore();
 }
@@ -478,7 +486,7 @@ function aboneCiz(t) {
   cx.fillStyle = ALTIN; cx.beginPath(); cx.roundRect(x0 - 8 * k * s, yM - bh / 2 - 8 * k * s, bw + 16 * k * s, bh + 16 * k * s, (bh + 16 * k * s) / 2); cx.fill();
   cx.shadowBlur = 0;
   const g = cx.createLinearGradient(0, yM - bh / 2, 0, yM + bh / 2);
-  if (abone) { g.addColorStop(0, '#7dffb4'); g.addColorStop(1, '#0c8a48'); } else { g.addColorStop(0, '#ff6a7a'); g.addColorStop(1, '#c4001c'); }
+  if (abone) { g.addColorStop(0, TEMA.abone[0]); g.addColorStop(1, TEMA.abone[1]); } else { g.addColorStop(0, '#ff6a7a'); g.addColorStop(1, '#c4001c'); }
   cx.fillStyle = g; cx.beginPath(); cx.roundRect(x0, yM - bh / 2, bw, bh, bh / 2); cx.fill();
   cx.fillStyle = 'rgba(255,255,255,0.35)';                                // üst parlama
   cx.beginPath(); cx.roundRect(x0 + bh * 0.3, yM - bh / 2 + 7 * k * s, bw - bh * 0.6, bh * 0.3, bh * 0.15); cx.fill();
@@ -486,7 +494,7 @@ function aboneCiz(t) {
   // oynat rozeti
   const ix = x0 + bh * 0.62;
   cx.fillStyle = '#ffffff'; cx.beginPath(); cx.roundRect(ix - 34 * k * s, yM - 25 * k * s, 68 * k * s, 50 * k * s, 14 * k * s); cx.fill();
-  cx.fillStyle = abone ? '#0c8a48' : '#e0102c';
+  cx.fillStyle = abone ? TEMA.abone[1] : '#e0102c';
   cx.beginPath(); cx.moveTo(ix - 10 * k * s, yM - 14 * k * s); cx.lineTo(ix + 15 * k * s, yM); cx.lineTo(ix - 10 * k * s, yM + 14 * k * s); cx.closePath(); cx.fill();
   yazi(abone ? 'SUBSCRIBED!' : 'SUBSCRIBE', x0 + bw / 2 + bh * 0.3, yM, 62 * k * s, '#ffffff', '#5a0010');
   // zil (sağda, abone olunca sallanır)

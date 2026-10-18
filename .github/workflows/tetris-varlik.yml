@@ -19,6 +19,10 @@ on:
         description: "poz dosyasi (KOK'e gore)"
         required: true
         default: "03-motor/tetris-pvp/pozlar.json"
+      ek:
+        description: "ek varlik.py argumanlari (3. video: --renk1 #A64DFF --renk2 #F5FF3D --gok galaksi --kapi blok)"
+        required: false
+        default: ""
 
 jobs:
   varlik:
@@ -43,7 +47,7 @@ jobs:
         run: |
           mkdir -p cikti
           ~/blender/blender -b --factory-startup -noaudio -P 03-motor/tetris-pvp/varlik.py -- \
-            --cikti cikti --ornek ${{ github.event.inputs.ornek }} --yalniz ${{ github.event.inputs.yalniz }} --pozlar ${{ github.event.inputs.pozlar }} 2>&1 | grep -v "^Fra:" | tail -n 120
+            --cikti cikti --ornek ${{ github.event.inputs.ornek }} --yalniz ${{ github.event.inputs.yalniz }} --pozlar ${{ github.event.inputs.pozlar }} ${{ github.event.inputs.ek }} 2>&1 | grep -v "^Fra:" | tail -n 120
           ls -laR cikti
           test -f cikti/yerlesim.json
       - uses: actions/upload-artifact@v4

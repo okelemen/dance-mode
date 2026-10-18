@@ -29,7 +29,10 @@ YALNIZ = arg("--yalniz", "hepsi")          # hepsi | poz | sahne
 os.makedirs(os.path.join(CIKTI, "poz"), exist_ok=True)
 POZLAR = json.load(open(os.path.join(KOK, arg("--pozlar", "03-motor/tetris-pvp/pozlar.json")), encoding="utf-8"))["pozlar"]
 
-RENK = {"p1": "#22e07a", "p2": "#ff9a1f"}
+RENK = {"p1": arg("--renk1", "#22e07a"), "p2": arg("--renk2", "#ff9a1f")}
+# 3. video (REF-054): gokte dev galaksi sarmali + mor/sari kureler (--gok galaksi), kapilar blok kuleli (--kapi blok)
+GOK = arg("--gok", "fener")
+KAPI_TIP = arg("--kapi", "kafes")
 YERLESIM = {}
 
 
@@ -157,22 +160,23 @@ def gok():
     sep = nt.nodes.new("ShaderNodeSeparateXYZ"); nt.links.new(tc.outputs["Generated"], sep.inputs[0])
     rmp = nt.nodes.new("ShaderNodeValToRGB")
     cr = rmp.color_ramp
-    cr.elements[0].position = 0.0; cr.elements[0].color = (*lin(hex3("#0b5466")), 1)
-    cr.elements[1].position = 1.0; cr.elements[1].color = (*lin(hex3("#040824")), 1)
-    e2 = cr.elements.new(0.45); e2.color = (*lin(hex3("#0a2a4a")), 1)
+    G3 = GOK == "galaksi"
+    cr.elements[0].position = 0.0; cr.elements[0].color = (*lin(hex3("#2a0f5e" if G3 else "#0b5466")), 1)
+    cr.elements[1].position = 1.0; cr.elements[1].color = (*lin(hex3("#05041c" if G3 else "#040824")), 1)
+    e2 = cr.elements.new(0.45); e2.color = (*lin(hex3("#120a3a" if G3 else "#0a2a4a")), 1)
     nt.links.new(sep.outputs["Y"], rmp.inputs[0])
     nz = nt.nodes.new("ShaderNodeTexNoise"); nz.inputs["Scale"].default_value = 3.2; nz.inputs["Detail"].default_value = 6
     nz.inputs["Distortion"].default_value = 0.6
     nt.links.new(tc.outputs["Generated"], nz.inputs["Vector"])
     nr = nt.nodes.new("ShaderNodeValToRGB"); c2 = nr.color_ramp
     c2.elements[0].position = 0.52; c2.elements[0].color = (0, 0, 0, 1)
-    c2.elements[1].position = 0.80; c2.elements[1].color = (*lin(hex3("#1fb5a0")), 1)
+    c2.elements[1].position = 0.80; c2.elements[1].color = (*lin(hex3("#7a2bd6" if G3 else "#1fb5a0")), 1)
     nt.links.new(nz.outputs["Fac"], nr.inputs[0])
     nz2 = nt.nodes.new("ShaderNodeTexNoise"); nz2.inputs["Scale"].default_value = 5.5; nz2.inputs["Detail"].default_value = 4
     nt.links.new(tc.outputs["Generated"], nz2.inputs["Vector"])
     nr2 = nt.nodes.new("ShaderNodeValToRGB"); c3 = nr2.color_ramp
     c3.elements[0].position = 0.60; c3.elements[0].color = (0, 0, 0, 1)
-    c3.elements[1].position = 0.85; c3.elements[1].color = (*lin(hex3("#d99a2b")), 1)
+    c3.elements[1].position = 0.85; c3.elements[1].color = (*lin(hex3("#d9c22b" if G3 else "#d99a2b")), 1)
     nt.links.new(nz2.outputs["Fac"], nr2.inputs[0])
     ad1 = nt.nodes.new("ShaderNodeMix"); ad1.data_type = "RGBA"; ad1.blend_type = "ADD"; ad1.inputs[0].default_value = 0.55
     nt.links.new(rmp.outputs[0], ad1.inputs[6]); nt.links.new(nr.outputs[0], ad1.inputs[7])
@@ -186,10 +190,12 @@ def gok():
     ym = mat_emis("yildiz", (1, 1, 1), 8)
     for i in range(420):
         kure((rnd.uniform(-75, 75), rnd.uniform(50, 58), rnd.uniform(-20, 48)), rnd.uniform(0.05, 0.16), ym, sub=1)
+    if G3:
+        galaksi(rnd)
     # yuzen fenerler (altin, ici isikli) - gogu dolduran ana oge (referanstaki denizanalarinin yerine bizim oge)
     gov = mat_emis("fener", lin(hex3("#ff8a1a")), 14.0)
     ust = mat_jole("fener_ust", lin(hex3("#7a3d10")), emis=0.0, purluk=0.3)
-    for i in range(46):
+    for i in range(0 if G3 else 46):
         x, y, z = rnd.uniform(-32, 32), rnd.uniform(18, 46), rnd.uniform(-6, 26)
         s = rnd.uniform(0.6, 1.4) * (y / 30)
         bpy.ops.mesh.primitive_cylinder_add(radius=0.45 * s, depth=0.9 * s, location=(x, y, z), vertices=24)
@@ -200,7 +206,7 @@ def gok():
         isik("POINT", (x, y - 1.2 * s, z), 60 * s * s, lin(hex3("#ffb43a")))
     # yesil/camgobegi isik kureleri (bubble) + kucuk parilti
     for i in range(60):
-        c = lin(hex3(rnd.choice(["#3dffa8", "#2be0e0", "#b6ff5c"])))
+        c = lin(hex3(rnd.choice(["#b45cff", "#f5ff3d", "#ffffff"] if G3 else ["#3dffa8", "#2be0e0", "#b6ff5c"])))
         kure((rnd.uniform(-34, 34), rnd.uniform(16, 44), rnd.uniform(-8, 28)), rnd.uniform(0.15, 0.55), mat_emis("kure%d" % i, c, rnd.uniform(6, 12)))
     bpy.ops.object.camera_add(location=(0, -6, 9), rotation=(math.radians(90), 0, 0))
     kam = bpy.context.active_object; kam.data.lens = 26; sc.camera = kam
@@ -246,6 +252,42 @@ def kafes_kiris(x0, x1, y0, z0, kal, mat, ince):
             boru((xa, y0 + ay, z0 + az), (xb, y0 + by_, z0 + bz), 0.032, ince)
 
 
+def blok_kule(x0, y0, z0, z1, kal, mat, ince):
+    """REF-054 kapisi bloklardan: ust uste yuvarlak bloklar (kendi tasarimimiz, civi/marka deseni yok) + ince capraz destek"""
+    n = max(2, round((z1 - z0) / kal))
+    adim = (z1 - z0) / n
+    for i in range(n):
+        z = z0 + (i + 0.5) * adim
+        yuvarlak_kutu("blok", (x0, y0, z), (kal * 0.96, kal * 0.96, adim * 0.92), mat if i % 2 == 0 else ince, egim=0.1, seg=5)
+    for i in range(n - 1):
+        za, zb = z0 + (i + 0.5) * adim, z0 + (i + 1.5) * adim
+        boru((x0 - kal * 0.5, y0 - kal * 0.52, za), (x0 + kal * 0.5, y0 - kal * 0.52, zb), 0.035, ince)
+
+
+def blok_kiris(x0, x1, y0, z0, kal, mat, ince):
+    n = max(2, round((x1 - x0) / kal))
+    adim = (x1 - x0) / n
+    for i in range(n + 1):
+        yuvarlak_kutu("blok", (x0 + i * adim, y0, z0), (adim * 0.92, kal * 0.96, kal * 0.96), mat if i % 2 == 0 else ince, egim=0.1, seg=5)
+
+
+def galaksi(rnd):
+    """REF-054: gogun ortasinda dev galaksi sarmali (parlak cekirdek + iki kol, mor/sari/beyaz yildiz kumesi)"""
+    cx_, cy_, cz_ = 0.0, 52.0, 16.0
+    kure((cx_, cy_ + 1, cz_), 2.4, mat_emis("cekirdek", lin(hex3("#fff3c4")), 22))
+    kure((cx_, cy_ + 2, cz_), 5.0, mat_emis("hale", lin(hex3("#c58cff")), 2.2))
+    mats = [mat_emis("g%d" % i, lin(hex3(c)), e) for i, (c, e) in enumerate(
+        (("#ffffff", 14), ("#f5ff3d", 12), ("#b45cff", 12), ("#ff7ae6", 10), ("#8fb4ff", 10)))]
+    for kol in (0, math.pi):
+        for i in range(520):
+            u = rnd.random() ** 0.8
+            r = 2.5 + u * 30
+            a = kol + 2.6 * math.log(r / 2.5 + 1) * 1.9 + rnd.gauss(0, 0.22)
+            x = cx_ + r * math.cos(a) + rnd.gauss(0, 0.9)
+            z = cz_ + 0.55 * r * math.sin(a) + rnd.gauss(0, 0.6)
+            kure((x, cy_ + rnd.uniform(-1, 1), z), rnd.uniform(0.07, 0.3) * (1.2 - u * 0.6), rnd.choice(mats), sub=1)
+
+
 def serit(oyuncu):
     sc = bos_sahne(w=960, h=1080, saydam=True)
     R = lin(hex3(RENK[oyuncu]))
@@ -276,11 +318,11 @@ def serit(oyuncu):
     W, H, KK, KR = KAPI["w"], KAPI["h"], KAPI["kule"], KAPI["kiris"]
     xk = W / 2 - KK / 2
     for s in (-1, 1):
-        kafes_kule(s * xk, Y, 0.0, H + KR, KK, ana, ince)
+        (blok_kule if KAPI_TIP == "blok" else kafes_kule)(s * xk, Y, 0.0, H + KR, KK, ana, ince)
         yuvarlak_kutu("taban", (s * xk, Y, 0.12), (KK + 0.3, KK + 0.3, 0.24), koyum, egim=0.06)
         for zz in (H, H + KR):
             yuvarlak_kutu("dugum", (s * xk, Y, zz), (KK * 0.55, KK * 0.55, KK * 0.55), acikm, egim=0.08)
-    kafes_kiris(-xk, xk, Y, H + KR / 2, KR, ana, ince)
+    (blok_kiris if KAPI_TIP == "blok" else kafes_kiris)(-xk, xk, Y, H + KR / 2, KR, ana, ince)
     # --- zenginlestirme (kullanici 17 Eki: "kapilar ... cok sade ... gorsel solen"):
     # neon tup acikligi cevreler, ampul dizisi (sahne4.html yakip sondurur), ust tabela, kose yildizlari, isikli kaide
     ic = W / 2 - KK
