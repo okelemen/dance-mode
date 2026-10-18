@@ -2,7 +2,7 @@
  "seri": "TETRIS MODE PVP",
  "bolum": "tetris-mode-03",
  "bpm": 141.9742,
- "toplam_olcu": 330,
+ "toplam_olcu": 342,
  "toplam_duvar": 45,
  "zaman": {
   "kart": 1.6904,
@@ -14,46 +14,46 @@
  "kartlar": [
   {
    "t": 0.0,
-   "sure": 3.3809,
+   "sure": 6.7618,
    "tip": "vs"
   },
   {
-   "t": 3.3809,
-   "sure": 3.3809,
+   "t": 6.7618,
+   "sure": 6.7618,
    "tip": "tur",
    "tur": 1,
    "metin": "ROUND 1",
    "alt": "STRETCH & SURVIVE"
   },
   {
-   "t": 6.7618,
+   "t": 13.5236,
    "sure": 3.3809,
    "tip": "basla"
   },
   {
-   "t": 187.6392,
-   "sure": 3.3809,
+   "t": 194.401,
+   "sure": 6.7618,
    "tip": "tur",
    "tur": 2,
    "metin": "ROUND 2",
    "alt": "BALANCE BATTLE"
   },
   {
-   "t": 368.5166,
-   "sure": 3.3809,
+   "t": 378.6593,
+   "sure": 6.7618,
    "tip": "tur",
    "tur": 3,
    "metin": "ROUND 3",
    "alt": "FINAL FLEX!"
   },
   {
-   "t": 549.394,
-   "sure": 3.3809,
+   "t": 562.9176,
+   "sure": 6.7618,
    "tip": "wrap"
   },
   {
-   "t": 552.7749,
-   "sure": 5.0713,
+   "t": 569.6794,
+   "sure": 8.4522,
    "tip": "abone"
   }
  ],
@@ -61,7 +61,7 @@
   {
    "no": 1,
    "tur": 1,
-   "t0": 10.1427,
+   "t0": 16.9045,
    "p1": "eagle-arms",
    "p2": "sunrise-arch",
    "ovgu": "SUPERB!"
@@ -69,7 +69,7 @@
   {
    "no": 2,
    "tur": 1,
-   "t0": 21.9758,
+   "t0": 28.7376,
    "p1": "easy-seat-prayer-up",
    "p2": "wide-leg-fold",
    "ovgu": "STELLAR!"
@@ -77,7 +77,7 @@
   {
    "no": 3,
    "tur": 1,
-   "t0": 33.8089,
+   "t0": 40.5707,
    "p1": "childs-pose",
    "p2": "cat-back",
    "ovgu": "GREAT!"
@@ -85,7 +85,7 @@
   {
    "no": 4,
    "tur": 1,
-   "t0": 45.642,
+   "t0": 52.4038,
    "p1": "cow-lift",
    "p2": "thread-the-needle",
    "ovgu": "NAILED IT!"
@@ -93,7 +93,7 @@
   {
    "no": 5,
    "tur": 1,
-   "t0": 57.4751,
+   "t0": 64.2369,
    "p1": "butterfly",
    "p2": "seated-side-stretch",
    "ovgu": "COSMIC!"
@@ -101,7 +101,7 @@
   {
    "no": 6,
    "tur": 1,
-   "t0": 69.3082,
+   "t0": 76.07,
    "p1": "pyramid-fold",
    "p2": "standing-backbend",
    "ovgu": "AWESOME!"
@@ -109,7 +109,7 @@
   {
    "no": 7,
    "tur": 1,
-   "t0": 81.1413,
+   "t0": 87.9031,
    "p1": "humble-warrior",
    "p2": "wide-leg-twist",
    "ovgu": "SUPERB!"
@@ -117,7 +117,7 @@
   {
    "no": 8,
    "tur": 1,
-   "t0": 92.9744,
+   "t0": 99.7362,
    "p1": "lizard-lunge",
    "p2": "mermaid-seat",
    "ovgu": "STELLAR!"
@@ -125,7 +125,7 @@
   {
    "no": 9,
    "tur": 1,
-   "t0": 104.8075,
+   "t0": 111.5693,
    "p1": "happy-baby",
    "p2": "supine-twist",
    "ovgu": "GREAT!"
@@ -133,7 +133,7 @@
   {
    "no": 10,
    "tur": 1,
-   "t0": 116.6406,
+   "t0": 123.4024,
    "p1": "legs-up",
    "p2": "reclined-butterfly",
    "ovgu": "NAILED IT!"
@@ -141,7 +141,7 @@
   {
    "no": 11,
    "tur": 1,
-   "t0": 128.4737,
+   "t0": 135.2355,
    "p1": "head-to-knee",
    "p2": "wide-angle-fold",
    "ovgu": "COSMIC!"
@@ -149,7 +149,7 @@
   {
    "no": 12,
    "tur": 1,
-   "t0": 140.3068,
+   "t0": 147.0686,
    "p1": "crescent-moon-bend",
    "p2": "tiptoe-prayer",
    "ovgu": "AWESOME!"
@@ -157,7 +157,7 @@
   {
    "no": 13,
    "tur": 1,
-   "t0": 152.1399,
+   "t0": 158.9017,
    "p1": "toe-touch-twist",
    "p2": "clasp-fold",
    "ovgu": "SUPERB!"
@@ -165,7 +165,7 @@
   {
    "no": 14,
    "tur": 1,
-   "t0": 163.973,
+   "t0": 170.7348,
    "p1": "cow-face-arms",
    "p2": "heel-sit-reach-forward",
    "ovgu": "STELLAR!"
@@ -173,7 +173,7 @@
   {
    "no": 15,
    "tur": 1,
-   "t0": 175.8061,
+   "t0": 182.5679,
    "p1": "side-lying-leg-lift",
    "p2": "kneeling-arm-sweep",
    "ovgu": "GREAT!"
@@ -181,7 +181,7 @@
   {
    "no": 16,
    "tur": 2,
-   "t0": 191.0201,
+   "t0": 201.1628,
    "p1": "eagle-pose",
    "p2": "standing-figure-four",
    "ovgu": "NAILED IT!"
@@ -189,7 +189,7 @@
   {
    "no": 17,
    "tur": 2,
-   "t0": 202.8532,
+   "t0": 212.9959,
    "p1": "revolved-triangle",
    "p2": "bound-side-angle",
    "ovgu": "COSMIC!"
@@ -197,7 +197,7 @@
   {
    "no": 18,
    "tur": 2,
-   "t0": 214.6863,
+   "t0": 224.829,
    "p1": "pigeon-upright",
    "p2": "sage-twist",
    "ovgu": "AWESOME!"
@@ -205,7 +205,7 @@
   {
    "no": 19,
    "tur": 2,
-   "t0": 226.5194,
+   "t0": 236.6621,
    "p1": "forearm-plank",
    "p2": "reverse-tabletop",
    "ovgu": "SUPERB!"
@@ -213,7 +213,7 @@
   {
    "no": 20,
    "tur": 2,
-   "t0": 238.3525,
+   "t0": 248.4952,
    "p1": "single-leg-bridge",
    "p2": "locust",
    "ovgu": "STELLAR!"
@@ -221,7 +221,7 @@
   {
    "no": 21,
    "tur": 2,
-   "t0": 250.1856,
+   "t0": 260.3283,
    "p1": "kneeling-side-plank",
    "p2": "dolphin",
    "ovgu": "GREAT!"
@@ -229,7 +229,7 @@
   {
    "no": 22,
    "tur": 2,
-   "t0": 262.0187,
+   "t0": 272.1614,
    "p1": "stork-fold",
    "p2": "arabesque-reach",
    "ovgu": "NAILED IT!"
@@ -237,7 +237,7 @@
   {
    "no": 23,
    "tur": 2,
-   "t0": 273.8518,
+   "t0": 283.9945,
    "p1": "reverse-plank",
    "p2": "wild-thing-lite",
    "ovgu": "COSMIC!"
@@ -245,7 +245,7 @@
   {
    "no": 24,
    "tur": 2,
-   "t0": 285.6849,
+   "t0": 295.8276,
    "p1": "fire-log-seat",
    "p2": "compass-prep",
    "ovgu": "AWESOME!"
@@ -253,7 +253,7 @@
   {
    "no": 25,
    "tur": 2,
-   "t0": 297.518,
+   "t0": 307.6607,
    "p1": "gate-lift",
    "p2": "low-boat",
    "ovgu": "SUPERB!"
@@ -261,7 +261,7 @@
   {
    "no": 26,
    "tur": 2,
-   "t0": 309.3511,
+   "t0": 319.4938,
    "p1": "hand-to-toe-side",
    "p2": "tiptoe-squat",
    "ovgu": "STELLAR!"
@@ -269,7 +269,7 @@
   {
    "no": 27,
    "tur": 2,
-   "t0": 321.1842,
+   "t0": 331.3269,
    "p1": "plank-leg-lift",
    "p2": "down-dog-split",
    "ovgu": "GREAT!"
@@ -277,7 +277,7 @@
   {
    "no": 28,
    "tur": 2,
-   "t0": 333.0173,
+   "t0": 343.16,
    "p1": "half-bow",
    "p2": "floor-swimmer",
    "ovgu": "NAILED IT!"
@@ -285,7 +285,7 @@
   {
    "no": 29,
    "tur": 2,
-   "t0": 344.8504,
+   "t0": 354.9931,
    "p1": "heron-seat",
    "p2": "seated-leg-cradle",
    "ovgu": "COSMIC!"
@@ -293,7 +293,7 @@
   {
    "no": 30,
    "tur": 2,
-   "t0": 356.6835,
+   "t0": 366.8262,
    "p1": "half-split",
    "p2": "wide-squat-twist",
    "ovgu": "AWESOME!"
@@ -301,7 +301,7 @@
   {
    "no": 31,
    "tur": 3,
-   "t0": 371.8975,
+   "t0": 385.4211,
    "p1": "king-pigeon-reach",
    "p2": "fish-pose",
    "ovgu": "SUPERB!"
@@ -309,7 +309,7 @@
   {
    "no": 32,
    "tur": 3,
-   "t0": 383.7306,
+   "t0": 397.2542,
    "p1": "front-split-prep",
    "p2": "hurdler-stretch",
    "ovgu": "STELLAR!"
@@ -317,7 +317,7 @@
   {
    "no": 33,
    "tur": 3,
-   "t0": 395.5637,
+   "t0": 409.0873,
    "p1": "low-lunge-arms-forward",
    "p2": "forearm-side-plank",
    "ovgu": "GREAT!"
@@ -325,7 +325,7 @@
   {
    "no": 34,
    "tur": 3,
-   "t0": 407.3968,
+   "t0": 420.9204,
    "p1": "hollow-hold",
    "p2": "upward-plank-leg-lift",
    "ovgu": "NAILED IT!"
@@ -333,7 +333,7 @@
   {
    "no": 35,
    "tur": 3,
-   "t0": 419.2299,
+   "t0": 432.7535,
    "p1": "mermaid-pigeon",
    "p2": "tortoise-prep",
    "ovgu": "COSMIC!"
@@ -341,7 +341,7 @@
   {
    "no": 36,
    "tur": 3,
-   "t0": 431.063,
+   "t0": 444.5866,
    "p1": "toe-stand-prep",
    "p2": "revolved-side-angle",
    "ovgu": "AWESOME!"
@@ -349,7 +349,7 @@
   {
    "no": 37,
    "tur": 3,
-   "t0": 442.8961,
+   "t0": 456.4197,
    "p1": "l-sit-prep",
    "p2": "tabletop-twist-reach",
    "ovgu": "SUPERB!"
@@ -357,7 +357,7 @@
   {
    "no": 38,
    "tur": 3,
-   "t0": 454.7292,
+   "t0": 468.2528,
    "p1": "lizard-twist",
    "p2": "humble-pigeon",
    "ovgu": "STELLAR!"
@@ -365,7 +365,7 @@
   {
    "no": 39,
    "tur": 3,
-   "t0": 466.5623,
+   "t0": 480.0859,
    "p1": "crane-stand",
    "p2": "bear-hold",
    "ovgu": "GREAT!"
@@ -373,7 +373,7 @@
   {
    "no": 40,
    "tur": 3,
-   "t0": 478.3954,
+   "t0": 491.919,
    "p1": "open-wide-boat",
    "p2": "cross-leg-fold",
    "ovgu": "NAILED IT!"
@@ -381,7 +381,7 @@
   {
    "no": 41,
    "tur": 3,
-   "t0": 490.2285,
+   "t0": 503.7521,
    "p1": "tiger-pose",
    "p2": "side-plank-tree",
    "ovgu": "COSMIC!"
@@ -389,7 +389,7 @@
   {
    "no": 42,
    "tur": 3,
-   "t0": 502.0616,
+   "t0": 515.5852,
    "p1": "wide-angle-side-bend",
    "p2": "kneeling-quad-hold",
    "ovgu": "AWESOME!"
@@ -397,7 +397,7 @@
   {
    "no": 43,
    "tur": 3,
-   "t0": 513.8947,
+   "t0": 527.4183,
    "p1": "side-split-prep",
    "p2": "reverse-prayer-fold",
    "ovgu": "SUPERB!"
@@ -405,7 +405,7 @@
   {
    "no": 44,
    "tur": 3,
-   "t0": 525.7278,
+   "t0": 539.2514,
    "p1": "side-lying-quad-hold",
    "p2": "knee-to-nose",
    "ovgu": "STELLAR!"
@@ -413,7 +413,7 @@
   {
    "no": 45,
    "tur": 3,
-   "t0": 537.5609,
+   "t0": 551.0845,
    "p1": "bound-lunge",
    "p2": "seated-straddle-reach-up",
    "ovgu": "GREAT!"
@@ -432,8 +432,7 @@
   150.0,
   165.0,
   180.0,
-  195.0,
-  210.0,
+  201.5,
   225.0,
   240.0,
   255.0,
@@ -455,7 +454,8 @@
   495.0,
   510.0,
   525.0,
-  540.0
+  540.0,
+  555.0
  ],
  "abone_sure": 3.2,
  "muzik": "Starlight Sprint.wav (Suno, kullanici) -> starlight-sprint-142.wav",

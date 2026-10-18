@@ -20,7 +20,9 @@ BPM = float(arg("--bpm", AYAR.get("bpm", 133.0827)))
 V = 60 / BPM
 r = lambda x: round(x, 4)
 Z = {"kart": r(4 * V), "say": r(6 * V), "buyu": r(12 * V), "gec": r(2 * V), "sure": r(28 * V)}
+KV = AYAR.get("kart_vurus", {})   # kart suresi vurus olarak (varsayilan 8 = 2 olcu); 3. video: tam bolum 9,5-10 dk icin uzun kartlar
 KART = 8 * V
+KS = lambda tip, v=8: KV.get(tip, v) * V
 
 DUVAR = json.load(open(os.path.join(BURA, AYAR.get("duvar", "duvar-listesi.json")), encoding="utf-8"))
 OVGU = AYAR.get("ovgu", ["GREAT!", "EXCELLENT!", "PERFECT!", "AWESOME!", "AMAZING!", "NICE MOVE!"])
@@ -30,23 +32,23 @@ for i, d in enumerate(DUVAR):
 
 kartlar, duvarlar = [], []
 t = 0.0
-kartlar.append({"t": r(t), "sure": r(KART), "tip": "vs"}); t += KART
+kartlar.append({"t": r(t), "sure": r(KS("vs")), "tip": "vs"}); t += KS("vs")
 for tur in (1, 2, 3):
     if KESIT and not any(d["tur"] == tur and d["no"] in KESIT for d in DUVAR):
         continue
     m, alt = TUR_KART[tur]
-    k = {"t": r(t), "sure": r(KART), "tip": "tur", "tur": tur, "metin": m}
+    k = {"t": r(t), "sure": r(KS("tur")), "tip": "tur", "tur": tur, "metin": m}
     if alt: k["alt"] = alt
-    kartlar.append(k); t += KART
+    kartlar.append(k); t += KS("tur")
     if tur == 1:
-        kartlar.append({"t": r(t), "sure": r(KART), "tip": "basla"}); t += KART
+        kartlar.append({"t": r(t), "sure": r(KS("basla")), "tip": "basla"}); t += KS("basla")
     for d in [x for x in DUVAR if x["tur"] == tur and (not KESIT or x["no"] in KESIT)]:
         n = d["no"]
         duvarlar.append({"no": n, "tur": tur, "t0": r(t), "p1": d["p1"], "p2": d["p2"], "ovgu": OVGU[(n - 1) % len(OVGU)]})
         t += Z["sure"]
 if not KESIT:
-    kartlar.append({"t": r(t), "sure": r(KART), "tip": "wrap"}); t += KART
-    kartlar.append({"t": r(t), "sure": r(12 * V), "tip": "abone"}); t += 12 * V
+    kartlar.append({"t": r(t), "sure": r(KS("wrap")), "tip": "wrap"}); t += KS("wrap")
+    kartlar.append({"t": r(t), "sure": r(KS("abone", 12)), "tip": "abone"}); t += KS("abone", 12)
 toplam_olcu = round(t / (4 * V))
 assert abs(toplam_olcu * 4 * V - t) < 0.01, (t, toplam_olcu)
 

@@ -4,6 +4,7 @@
  "bpm": 141.9742,
  "muzik": "Starlight Sprint.wav (Suno, kullanici) -> starlight-sprint-142.wav",
  "duvar": "duvar-listesi-03.json",
+ "kart_vurus": {"vs": 16, "tur": 16, "basla": 8, "wrap": 16, "abone": 20},
  "tur_kart": {"1": ["ROUND 1", "STRETCH & SURVIVE"], "2": ["ROUND 2", "BALANCE BATTLE"], "3": ["ROUND 3", "FINAL FLEX!"]},
  "ovgu": ["SUPERB!", "STELLAR!", "GREAT!", "NAILED IT!", "COSMIC!", "AWESOME!"],
  "tema": {
