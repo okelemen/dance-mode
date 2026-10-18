@@ -20,7 +20,7 @@ on:
         required: true
         default: "03-motor/tetris-pvp/pozlar.json"
       ek:
-        description: "ek varlik.py argumanlari (3. video: --renk1 #A64DFF --renk2 #F5FF3D --gok galaksi --kapi blok)"
+        description: "ek varlik.py argumanlari (3. video, # yok: --renk1 A64DFF --renk2 F5FF3D --gok galaksi --kapi blok)"
         required: false
         default: ""
 
