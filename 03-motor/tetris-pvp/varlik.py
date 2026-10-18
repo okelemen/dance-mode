@@ -165,7 +165,8 @@ def gok():
     G3 = GOK == "galaksi"
     G4 = GOK == "gezegen"
     # renk sirasi: (alt, ust, orta, bulutsu 1, bulutsu 2)
-    GR = (("#0a3b44", "#02070d", "#06202a", "#1f9e8f", "#ff5a6e") if G4 else
+    # deneme 1 (gezegen): ust yarisi neredeyse siyahti, REF-055'te gok bastan basa bulutsu -> daha acik taban + guclu bulutsu
+    GR = (("#127a7e", "#0a1a3a", "#0d4a5e", "#2fd6c0", "#ff4f78") if G4 else
           ("#2a0f5e", "#05041c", "#120a3a", "#7a2bd6", "#d9c22b") if G3 else
           ("#0b5466", "#040824", "#0a2a4a", "#1fb5a0", "#d99a2b"))
     cr.elements[0].position = 0.0; cr.elements[0].color = (*lin(hex3(GR[0])), 1)
@@ -176,18 +177,18 @@ def gok():
     nz.inputs["Distortion"].default_value = 0.6
     nt.links.new(tc.outputs["Generated"], nz.inputs["Vector"])
     nr = nt.nodes.new("ShaderNodeValToRGB"); c2 = nr.color_ramp
-    c2.elements[0].position = 0.52; c2.elements[0].color = (0, 0, 0, 1)
+    c2.elements[0].position = 0.40 if G4 else 0.52; c2.elements[0].color = (0, 0, 0, 1)
     c2.elements[1].position = 0.80; c2.elements[1].color = (*lin(hex3(GR[3])), 1)
     nt.links.new(nz.outputs["Fac"], nr.inputs[0])
     nz2 = nt.nodes.new("ShaderNodeTexNoise"); nz2.inputs["Scale"].default_value = 5.5; nz2.inputs["Detail"].default_value = 4
     nt.links.new(tc.outputs["Generated"], nz2.inputs["Vector"])
     nr2 = nt.nodes.new("ShaderNodeValToRGB"); c3 = nr2.color_ramp
-    c3.elements[0].position = 0.60; c3.elements[0].color = (0, 0, 0, 1)
+    c3.elements[0].position = 0.50 if G4 else 0.60; c3.elements[0].color = (0, 0, 0, 1)
     c3.elements[1].position = 0.85; c3.elements[1].color = (*lin(hex3(GR[4])), 1)
     nt.links.new(nz2.outputs["Fac"], nr2.inputs[0])
-    ad1 = nt.nodes.new("ShaderNodeMix"); ad1.data_type = "RGBA"; ad1.blend_type = "ADD"; ad1.inputs[0].default_value = 0.55
+    ad1 = nt.nodes.new("ShaderNodeMix"); ad1.data_type = "RGBA"; ad1.blend_type = "ADD"; ad1.inputs[0].default_value = 0.85 if G4 else 0.55
     nt.links.new(rmp.outputs[0], ad1.inputs[6]); nt.links.new(nr.outputs[0], ad1.inputs[7])
-    ad2 = nt.nodes.new("ShaderNodeMix"); ad2.data_type = "RGBA"; ad2.blend_type = "ADD"; ad2.inputs[0].default_value = 0.35
+    ad2 = nt.nodes.new("ShaderNodeMix"); ad2.data_type = "RGBA"; ad2.blend_type = "ADD"; ad2.inputs[0].default_value = 0.6 if G4 else 0.35
     nt.links.new(ad1.outputs[2], ad2.inputs[6]); nt.links.new(nr2.outputs[0], ad2.inputs[7])
     em = nt.nodes.new("ShaderNodeEmission"); em.inputs[1].default_value = 1.0
     nt.links.new(ad2.outputs[2], em.inputs[0])
@@ -307,20 +308,31 @@ def gezegen(rnd):
     g.rotation_euler = (math.radians(-18), math.radians(14), 0)
     m = bpy.data.materials.new("gezegen"); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
     tc = nt.nodes.new("ShaderNodeTexCoord")
+    # deneme 1: Object koordinati (R=13) x olcek 2,4 -> nokta/moire deseni. Generated (0-1) + dusuk bozulma = gaz devi seritleri
     wv = nt.nodes.new("ShaderNodeTexWave"); wv.wave_type = "BANDS"; wv.bands_direction = "Z"
-    wv.inputs["Scale"].default_value = 2.4; wv.inputs["Distortion"].default_value = 4.5; wv.inputs["Detail"].default_value = 4
-    nt.links.new(tc.outputs["Object"], wv.inputs["Vector"])
+    wv.inputs["Scale"].default_value = 3.5; wv.inputs["Distortion"].default_value = 1.6; wv.inputs["Detail"].default_value = 3
+    wv.inputs["Detail Scale"].default_value = 2.0
+    nt.links.new(tc.outputs["Generated"], wv.inputs["Vector"])
     rp = nt.nodes.new("ShaderNodeValToRGB"); cr = rp.color_ramp
     cr.elements[0].position = 0.0; cr.elements[0].color = (*lin(hex3("#7a0f2a")), 1)
     cr.elements[1].position = 1.0; cr.elements[1].color = (*lin(hex3("#ffd27a")), 1)
     for pos, c in ((0.3, "#e8304f"), (0.55, "#ff8a3a"), (0.8, "#ffb35c")):
         e = cr.elements.new(pos); e.color = (*lin(hex3(c)), 1)
     nt.links.new(wv.outputs["Fac"], rp.inputs[0])
-    em = nt.nodes.new("ShaderNodeEmission"); em.inputs[1].default_value = 1.6
-    nt.links.new(rp.outputs[0], em.inputs[0])
+    # hacim: kenara dogru kararan (fresnel tersi) parlaklik -> duz disk degil kure okunur
+    fr = nt.nodes.new("ShaderNodeLayerWeight"); fr.inputs["Blend"].default_value = 0.55
+    kr = nt.nodes.new("ShaderNodeMath"); kr.operation = "SUBTRACT"; kr.inputs[0].default_value = 1.15
+    nt.links.new(fr.outputs["Facing"], kr.inputs[1])
+    gm = nt.nodes.new("ShaderNodeMath"); gm.operation = "MULTIPLY"; gm.inputs[1].default_value = 2.2
+    nt.links.new(kr.outputs[0], gm.inputs[0])
+    em = nt.nodes.new("ShaderNodeEmission")
+    nt.links.new(rp.outputs[0], em.inputs[0]); nt.links.new(gm.outputs[0], em.inputs[1])
     o = nt.nodes.new("ShaderNodeOutputMaterial"); nt.links.new(em.outputs[0], o.inputs[0])
     g.data.materials.append(m)
-    kure((cx_, cy_ + 1.5, cz_), R_ * 1.12, mat_emis("gezegen_hale", lin(hex3("#ff6a5a")), 0.9))
+    # hale: deneme 1'de 24 dilimli kure kose kose gorunuyordu -> 96 dilim, daha soluk
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=R_ * 1.08, location=(cx_, cy_ + 2.0, cz_), segments=96, ring_count=48)
+    h_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
+    h_.data.materials.append(mat_emis("gezegen_hale", lin(hex3("#ff6a5a")), 0.45))
     # halka: altin/beyaz parcaciklar egik elips uzerinde
     mats = [mat_emis("h%d" % i, lin(hex3(c)), e) for i, (c, e) in enumerate((("#ffd27a", 9), ("#ffffff", 12), ("#ff8fa0", 8)))]
     for i in range(900):
@@ -445,16 +457,30 @@ def mat_girdap(R):
     m = bpy.data.materials.new("girdap"); m.use_nodes = True; nt = m.node_tree
     b = nt.nodes["Principled BSDF"]
     tc = nt.nodes.new("ShaderNodeTexCoord")
-    # sarmal: halka dalgasi (RINGS) + yuksek bozulma, merkezden donen firca izleri gibi
-    wv = nt.nodes.new("ShaderNodeTexWave"); wv.wave_type = "RINGS"; wv.rings_direction = "Y"
-    wv.inputs["Scale"].default_value = 1.6; wv.inputs["Distortion"].default_value = 9.0; wv.inputs["Detail"].default_value = 6
-    wv.inputs["Detail Scale"].default_value = 1.4
-    nt.links.new(tc.outputs["Object"], wv.inputs["Vector"])
+    # sarmal (deneme 1'de RINGS ic ice halka = hedef tahtasi okunuyordu): s = sin(4*r + 2*aci + gurultu) -> iki kollu girdap,
+    # gurultu firca izi verir. Panel on yuzu XZ duzleminde (Object koordinati, merkez 0).
+    sp = nt.nodes.new("ShaderNodeSeparateXYZ"); nt.links.new(tc.outputs["Object"], sp.inputs[0])
+    at = nt.nodes.new("ShaderNodeMath"); at.operation = "ARCTAN2"
+    nt.links.new(sp.outputs["Z"], at.inputs[0]); nt.links.new(sp.outputs["X"], at.inputs[1])
+    uz = nt.nodes.new("ShaderNodeVectorMath"); uz.operation = "LENGTH"; nt.links.new(tc.outputs["Object"], uz.inputs[0])
+    m1 = nt.nodes.new("ShaderNodeMath"); m1.operation = "MULTIPLY"; m1.inputs[1].default_value = 4.0
+    nt.links.new(uz.outputs["Value"], m1.inputs[0])
+    m2 = nt.nodes.new("ShaderNodeMath"); m2.operation = "MULTIPLY"; m2.inputs[1].default_value = 2.0
+    nt.links.new(at.outputs[0], m2.inputs[0])
+    gz = nt.nodes.new("ShaderNodeTexNoise"); gz.inputs["Scale"].default_value = 2.5; gz.inputs["Detail"].default_value = 8
+    gz.inputs["Distortion"].default_value = 1.5; nt.links.new(tc.outputs["Object"], gz.inputs["Vector"])
+    m3 = nt.nodes.new("ShaderNodeMath"); m3.operation = "MULTIPLY"; m3.inputs[1].default_value = 2.4
+    nt.links.new(gz.outputs["Fac"], m3.inputs[0])
+    t1 = nt.nodes.new("ShaderNodeMath"); t1.operation = "ADD"; nt.links.new(m1.outputs[0], t1.inputs[0]); nt.links.new(m2.outputs[0], t1.inputs[1])
+    t2 = nt.nodes.new("ShaderNodeMath"); t2.operation = "ADD"; nt.links.new(t1.outputs[0], t2.inputs[0]); nt.links.new(m3.outputs[0], t2.inputs[1])
+    sn = nt.nodes.new("ShaderNodeMath"); sn.operation = "SINE"; nt.links.new(t2.outputs[0], sn.inputs[0])
+    wv = nt.nodes.new("ShaderNodeMath"); wv.operation = "MULTIPLY_ADD"; wv.inputs[1].default_value = 0.5; wv.inputs[2].default_value = 0.5
+    nt.links.new(sn.outputs[0], wv.inputs[0])
     rp = nt.nodes.new("ShaderNodeValToRGB"); cr = rp.color_ramp
     cr.elements[0].position = 0.15; cr.elements[0].color = (*koyu(R, 0.25), 1)
     cr.elements[1].position = 0.9; cr.elements[1].color = (*acik(R, 0.7), 1)
     e = cr.elements.new(0.5); e.color = (*R, 1)
-    nt.links.new(wv.outputs["Fac"], rp.inputs[0])
+    nt.links.new(wv.outputs[0], rp.inputs[0])
     # merkez parlama: kuresel gecis (Object koordinati 0 merkezde)
     mp = nt.nodes.new("ShaderNodeMapping"); mp.inputs["Scale"].default_value = (0.42, 1.0, 0.5)
     nt.links.new(tc.outputs["Object"], mp.inputs["Vector"])
@@ -470,7 +496,7 @@ def mat_girdap(R):
     nt.links.new(mx.outputs[2], b.inputs["Base Color"])
     nt.links.new(mx.outputs[2], b.inputs["Emission Color"]); b.inputs["Emission Strength"].default_value = 0.55
     bm = nt.nodes.new("ShaderNodeBump"); bm.inputs["Strength"].default_value = 0.25
-    nt.links.new(wv.outputs["Fac"], bm.inputs["Height"]); nt.links.new(bm.outputs[0], b.inputs["Normal"])
+    nt.links.new(wv.outputs[0], bm.inputs["Height"]); nt.links.new(bm.outputs[0], b.inputs["Normal"])
     b.inputs["Roughness"].default_value = 0.35
     b.inputs["Coat Weight"].default_value = 0.6; b.inputs["Coat Roughness"].default_value = 0.05
     return m

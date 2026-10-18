@@ -12,7 +12,7 @@
  {
   "tur": 1,
   "p1": "elbow-to-knee",
-  "p2": "tree-arms-wide"
+  "p2": "knee-out-steeple"
  },
  {
   "tur": 1,
@@ -27,7 +27,7 @@
  {
   "tur": 1,
   "p1": "kneel-hands-on-hips",
-  "p2": "half-camel"
+  "p2": "kneeling-clasp-behind-lift"
  },
  {
   "tur": 1,
@@ -36,7 +36,7 @@
  },
  {
   "tur": 1,
-  "p1": "ballerina-arms",
+  "p1": "standing-clasp-behind-lift",
   "p2": "lateral-lunge-reach-across"
  },
  {
@@ -52,7 +52,7 @@
  {
   "tur": 1,
   "p1": "seated-toe-point-arms-forward",
-  "p2": "seated-hands-on-knees"
+  "p2": "seated-leg-hold-up"
  },
  {
   "tur": 1,
@@ -62,7 +62,7 @@
  {
   "tur": 1,
   "p1": "standing-arms-forward-tiptoe-lean",
-  "p2": "hands-behind-head-wide-stance"
+  "p2": "wide-stance-punch-up"
  },
  {
   "tur": 1,
@@ -106,7 +106,7 @@
  },
  {
   "tur": 2,
-  "p1": "kneeling-kick-back",
+  "p1": "tabletop-knee-tuck",
   "p2": "kneeling-arms-diagonal"
  },
  {
@@ -132,7 +132,7 @@
  {
   "tur": 2,
   "p1": "inchworm-walk-out",
-  "p2": "bear-knee-lift"
+  "p2": "squat-hands-behind-head"
  },
  {
   "tur": 2,
@@ -172,7 +172,7 @@
  {
   "tur": 3,
   "p1": "boat-twist-arms",
-  "p2": "pike-seat-arms-up"
+  "p2": "seated-leg-lift-arms-up"
  },
  {
   "tur": 3,
@@ -222,6 +222,6 @@
  {
   "tur": 3,
   "p1": "seated-splits-lean",
-  "p2": "victory-kneel-v"
+  "p2": "kneeling-hands-on-head-lean"
  }
 ]
