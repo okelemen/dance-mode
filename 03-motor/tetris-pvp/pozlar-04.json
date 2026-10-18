@@ -1,0 +1,1985 @@
+{
+ "_not": "TETRIS MODE PVP 4. video (REF-055) poz tanimlari. Acilar EKRAN duzleminde (pozlar.js dili): 0 asagi, 90 ekran-sag, 180 yukari, -90 ekran-sol. Kollar [ust kol, on kol], bacaklar [uyluk, baldir]. sol*/sag* = KARAKTERIN solu/sagi; karakter kameraya donukken sol = ekran SAGI. yon: on (kameraya donuk) | sag (profil, yuzu ekran sagina). govde: kalcadan boyna aci, bas: govdeye ek aci. Mixamo govdesi (siluet-govde.fbx) bu acilarla bukulur, duz siyah maske cikar (varlik.py).",
+ "pozlar": {
+  "lotus-prayer": {
+   "ad": "Lotus Prayer",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    150
+   ],
+   "solKol": [
+    20,
+    -150
+   ],
+   "sagBacak": [
+    -78,
+    75
+   ],
+   "solBacak": [
+    78,
+    -75
+   ]
+  },
+  "lotus-arms-wide": {
+   "ad": "Lotus Arms Wide",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -78,
+    75
+   ],
+   "solBacak": [
+    78,
+    -75
+   ]
+  },
+  "crescent-prayer": {
+   "ad": "Crescent Prayer",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    30,
+    160
+   ],
+   "sagKol": [
+    28,
+    158
+   ],
+   "solBacak": [
+    75,
+    0
+   ],
+   "sagBacak": [
+    -42,
+    -42
+   ]
+  },
+  "skandasana-prayer": {
+   "ad": "Skandasana Prayer",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    150
+   ],
+   "solKol": [
+    20,
+    -150
+   ],
+   "sagBacak": [
+    -75,
+    -5
+   ],
+   "solBacak": [
+    52,
+    52
+   ]
+  },
+  "elbow-to-knee": {
+   "ad": "Elbow to Knee",
+   "yon": "on",
+   "govde": 192,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    -35,
+    -15
+   ],
+   "sagBacak": [
+    -60,
+    40
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "tree-arms-wide": {
+   "ad": "Tree Arms Wide",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -65,
+    35
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "front-kick-hold": {
+   "ad": "Front Kick Hold",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solBacak": [
+    70,
+    70
+   ],
+   "sagBacak": [
+    0,
+    0
+   ]
+  },
+  "starfish-lean": {
+   "ad": "Starfish Lean",
+   "yon": "on",
+   "govde": 160,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ]
+  },
+  "half-lift-hands-shins": {
+   "ad": "Half Lift Hands Shins",
+   "yon": "sag",
+   "govde": 50,
+   "bas": 0,
+   "solKol": [
+    5,
+    5
+   ],
+   "sagKol": [
+    3,
+    3
+   ],
+   "solBacak": [
+    2,
+    2
+   ],
+   "sagBacak": [
+    -2,
+    -2
+   ]
+  },
+  "chair-prayer": {
+   "ad": "Chair Prayer",
+   "yon": "sag",
+   "govde": 150,
+   "bas": 0,
+   "solKol": [
+    30,
+    160
+   ],
+   "sagKol": [
+    28,
+    158
+   ],
+   "solBacak": [
+    60,
+    -10
+   ],
+   "sagBacak": [
+    58,
+    -12
+   ]
+  },
+  "kneel-hands-on-hips": {
+   "ad": "Kneel Hands on Hips",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    0,
+    "geri"
+   ]
+  },
+  "half-camel": {
+   "ad": "Half Camel",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 0,
+   "solKol": [
+    -170,
+    -170
+   ],
+   "sagKol": [
+    -30,
+    -30
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "staff-arms-up": {
+   "ad": "Staff Arms Up",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    176,
+    176
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ]
+  },
+  "kneeling-lunge-hands-on-knee": {
+   "ad": "Kneeling Lunge Hands on Knee",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    45,
+    10
+   ],
+   "sagKol": [
+    43,
+    8
+   ],
+   "solBacak": [
+    85,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "ballerina-arms": {
+   "ad": "Ballerina Arms",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    120
+   ],
+   "solKol": [
+    150,
+    -120
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "lateral-lunge-reach-across": {
+   "ad": "Lateral Lunge Reach Across",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    130,
+    120
+   ],
+   "solKol": [
+    130,
+    120
+   ],
+   "sagBacak": [
+    -75,
+    -5
+   ],
+   "solBacak": [
+    52,
+    52
+   ]
+  },
+  "knee-raise-arms-up": {
+   "ad": "Knee Raise Arms Up",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    176,
+    176
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ]
+  },
+  "side-leg-lift-arms-up": {
+   "ad": "Side Leg Lift Arms Up",
+   "yon": "on",
+   "govde": 170,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    45,
+    45
+   ]
+  },
+  "kneel-arms-wide-lean": {
+   "ad": "Kneel Arms Wide Lean",
+   "yon": "on",
+   "govde": 160,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    0,
+    "geri"
+   ]
+  },
+  "child-arms-back": {
+   "ad": "Child Arms Back",
+   "yon": "sag",
+   "govde": 70,
+   "bas": 0,
+   "solKol": [
+    -80,
+    -80
+   ],
+   "sagKol": [
+    -78,
+    -78
+   ],
+   "solBacak": [
+    100,
+    -95
+   ],
+   "sagBacak": [
+    98,
+    -95
+   ]
+  },
+  "seated-toe-point-arms-forward": {
+   "ad": "Seated Toe Point Arms Forward",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    88,
+    88
+   ],
+   "solBacak": [
+    80,
+    80
+   ],
+   "sagBacak": [
+    78,
+    78
+   ]
+  },
+  "seated-hands-on-knees": {
+   "ad": "Seated Hands on Knees",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -30,
+    10
+   ],
+   "solKol": [
+    30,
+    -10
+   ],
+   "sagBacak": [
+    -62,
+    62
+   ],
+   "solBacak": [
+    62,
+    -62
+   ]
+  },
+  "kneeling-arms-up-back": {
+   "ad": "Kneeling Arms Up Back",
+   "yon": "sag",
+   "govde": 195,
+   "bas": 0,
+   "solKol": [
+    -175,
+    -175
+   ],
+   "sagKol": [
+    -172,
+    -172
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "kneeling-side-lean-arm-over": {
+   "ad": "Kneeling Side Lean Arm Over",
+   "yon": "on",
+   "govde": 210,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    0
+   ],
+   "solKol": [
+    170,
+    -140
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    0,
+    "geri"
+   ]
+  },
+  "standing-arms-forward-tiptoe-lean": {
+   "ad": "Standing Arms Forward Tiptoe Lean",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    98,
+    98
+   ],
+   "solBacak": [
+    -15,
+    -15
+   ],
+   "sagBacak": [
+    -17,
+    -17
+   ]
+  },
+  "hands-behind-head-wide-stance": {
+   "ad": "Hands Behind Head Wide Stance",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ]
+  },
+  "seated-arms-up-twist-lean": {
+   "ad": "Seated Arms Up Twist Lean",
+   "yon": "on",
+   "govde": 168,
+   "bas": 0,
+   "sagKol": [
+    -170,
+    -150
+   ],
+   "solKol": [
+    140,
+    120
+   ],
+   "sagBacak": [
+    -78,
+    75
+   ],
+   "solBacak": [
+    78,
+    -75
+   ]
+  },
+  "seated-lean-back-arms-forward": {
+   "ad": "Seated Lean Back Arms Forward",
+   "yon": "sag",
+   "govde": 210,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    88,
+    88
+   ],
+   "solBacak": [
+    70,
+    -20
+   ],
+   "sagBacak": [
+    68,
+    -22
+   ]
+  },
+  "low-lunge-arms-wide-back": {
+   "ad": "Low Lunge Arms Wide Back",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    -120,
+    -120
+   ],
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solBacak": [
+    85,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "kneeling-arms-v-up": {
+   "ad": "Kneeling Arms V Up",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    0,
+    "geri"
+   ]
+  },
+  "plank-shoulder-tap": {
+   "ad": "Plank Shoulder Tap",
+   "yon": "sag",
+   "govde": 95,
+   "bas": 0,
+   "solKol": [
+    40,
+    160
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -85,
+    -85
+   ],
+   "sagBacak": [
+    -85,
+    -85
+   ]
+  },
+  "knee-plank-feet-up": {
+   "ad": "Knee Plank Feet Up",
+   "yon": "sag",
+   "govde": 115,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -45,
+    -130
+   ],
+   "sagBacak": [
+    -47,
+    -132
+   ]
+  },
+  "dead-bug": {
+   "ad": "Dead Bug",
+   "yon": "sag",
+   "govde": -90,
+   "bas": 0,
+   "solKol": [
+    180,
+    180
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    180,
+    90
+   ],
+   "sagBacak": [
+    178,
+    88
+   ]
+  },
+  "bicycle-hold": {
+   "ad": "Bicycle Hold",
+   "yon": "sag",
+   "govde": -105,
+   "bas": 0,
+   "solKol": [
+    -140,
+    60
+   ],
+   "sagKol": [
+    -138,
+    62
+   ],
+   "solBacak": [
+    150,
+    90
+   ],
+   "sagBacak": [
+    95,
+    95
+   ]
+  },
+  "scissor-legs": {
+   "ad": "Scissor Legs",
+   "yon": "sag",
+   "govde": -90,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    88,
+    88
+   ],
+   "solBacak": [
+    180,
+    180
+   ],
+   "sagBacak": [
+    100,
+    100
+   ]
+  },
+  "glute-bridge-arms-up": {
+   "ad": "Glute Bridge Arms Up",
+   "yon": "sag",
+   "govde": -60,
+   "bas": 0,
+   "solKol": [
+    180,
+    180
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    60,
+    0
+   ],
+   "sagBacak": [
+    58,
+    -2
+   ]
+  },
+  "crab-kick": {
+   "ad": "Crab Kick",
+   "yon": "sag",
+   "govde": -80,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    150,
+    150
+   ],
+   "sagBacak": [
+    90,
+    0
+   ]
+  },
+  "prone-arms-forward-lift": {
+   "ad": "Prone Arms Forward Lift",
+   "yon": "sag",
+   "govde": 100,
+   "bas": 0,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    98,
+    98
+   ],
+   "solBacak": [
+    -90,
+    -90
+   ],
+   "sagBacak": [
+    -88,
+    -88
+   ]
+  },
+  "warrior-lunge-arms-back": {
+   "ad": "Warrior Lunge Arms Back",
+   "yon": "sag",
+   "govde": 150,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -40
+   ],
+   "sagKol": [
+    -38,
+    -38
+   ],
+   "solBacak": [
+    75,
+    0
+   ],
+   "sagBacak": [
+    -42,
+    -42
+   ]
+  },
+  "goddess-arms-crossed-up": {
+   "ad": "Goddess Arms Crossed Up",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    140,
+    170
+   ],
+   "solKol": [
+    -140,
+    -170
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ]
+  },
+  "standing-leg-back-arms-up": {
+   "ad": "Standing Leg Back Arms Up",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    176,
+    176
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -35,
+    -35
+   ]
+  },
+  "one-leg-hug-knee-side": {
+   "ad": "One Leg Hug Knee Side",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -10
+   ]
+  },
+  "kneeling-kick-back": {
+   "ad": "Kneeling Kick Back",
+   "yon": "sag",
+   "govde": 95,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ]
+  },
+  "kneeling-arms-diagonal": {
+   "ad": "Kneeling Arms Diagonal",
+   "yon": "on",
+   "govde": 170,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    0,
+    "geri"
+   ]
+  },
+  "side-lunge-fold-hands-floor": {
+   "ad": "Side Lunge Fold Hands Floor",
+   "yon": "sag",
+   "govde": 35,
+   "bas": 0,
+   "solKol": [
+    5,
+    5
+   ],
+   "sagKol": [
+    3,
+    3
+   ],
+   "solBacak": [
+    40,
+    -40
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ]
+  },
+  "wide-stance-toe-reach": {
+   "ad": "Wide Stance Toe Reach",
+   "yon": "on",
+   "govde": 30,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    -20
+   ],
+   "solKol": [
+    130,
+    140
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ]
+  },
+  "pistol-squat-prep": {
+   "ad": "Pistol Squat Prep",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    88,
+    88
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    80,
+    -60
+   ]
+  },
+  "cossack-reach": {
+   "ad": "Cossack Reach",
+   "yon": "on",
+   "govde": 175,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -80,
+    -5
+   ],
+   "solBacak": [
+    70,
+    70
+   ]
+  },
+  "hands-down-lunge-knee-up": {
+   "ad": "Hands Down Lunge Knee Up",
+   "yon": "sag",
+   "govde": 60,
+   "bas": 0,
+   "solKol": [
+    10,
+    10
+   ],
+   "sagKol": [
+    8,
+    8
+   ],
+   "solBacak": [
+    95,
+    -10
+   ],
+   "sagBacak": [
+    -50,
+    -50
+   ]
+  },
+  "fallen-lunge-arms-up": {
+   "ad": "Fallen Lunge Arms Up",
+   "yon": "sag",
+   "govde": 170,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    176,
+    176
+   ],
+   "solBacak": [
+    60,
+    -20
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ]
+  },
+  "seated-leg-raise-hold": {
+   "ad": "Seated Leg Raise Hold",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    -20,
+    -20
+   ],
+   "sagKol": [
+    -18,
+    -18
+   ],
+   "solBacak": [
+    120,
+    120
+   ],
+   "sagBacak": [
+    90,
+    90
+   ]
+  },
+  "v-sit-hands-floor": {
+   "ad": "V Sit Hands Floor",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -30,
+    -10
+   ],
+   "solKol": [
+    30,
+    10
+   ],
+   "sagBacak": [
+    -140,
+    -150
+   ],
+   "solBacak": [
+    140,
+    150
+   ]
+  },
+  "inchworm-walk-out": {
+   "ad": "Inchworm Walk Out",
+   "yon": "sag",
+   "govde": 105,
+   "bas": 0,
+   "solKol": [
+    30,
+    30
+   ],
+   "sagKol": [
+    28,
+    28
+   ],
+   "solBacak": [
+    -60,
+    -60
+   ],
+   "sagBacak": [
+    -62,
+    -62
+   ]
+  },
+  "bear-knee-lift": {
+   "ad": "Bear Knee Lift",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    60,
+    -60
+   ],
+   "sagBacak": [
+    10,
+    -70
+   ]
+  },
+  "toe-touch-kick": {
+   "ad": "Toe Touch Kick",
+   "yon": "sag",
+   "govde": 120,
+   "bas": 0,
+   "solKol": [
+    130,
+    130
+   ],
+   "sagKol": [
+    -30,
+    -30
+   ],
+   "solBacak": [
+    100,
+    100
+   ],
+   "sagBacak": [
+    0,
+    0
+   ]
+  },
+  "side-bend-leg-out": {
+   "ad": "Side Bend Leg Out",
+   "yon": "on",
+   "govde": 200,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    -10
+   ],
+   "solKol": [
+    175,
+    -150
+   ],
+   "sagBacak": [
+    -38,
+    -38
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "kneel-one-leg-forward-arms-up": {
+   "ad": "Kneel One Leg Forward Arms Up",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    176,
+    176
+   ],
+   "solBacak": [
+    70,
+    70
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "kneeling-twist-arms-t": {
+   "ad": "Kneeling Twist Arms T",
+   "yon": "on",
+   "govde": 175,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    100,
+    100
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    0,
+    "geri"
+   ]
+  },
+  "reverse-lunge-reach-up": {
+   "ad": "Reverse Lunge Reach Up",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    175,
+    175
+   ],
+   "sagKol": [
+    173,
+    173
+   ],
+   "solBacak": [
+    60,
+    0
+   ],
+   "sagBacak": [
+    -20,
+    -110
+   ]
+  },
+  "prone-snow-angel": {
+   "ad": "Prone Snow Angel",
+   "yon": "sag",
+   "govde": 100,
+   "bas": 0,
+   "solKol": [
+    180,
+    180
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    -90,
+    -90
+   ],
+   "sagBacak": [
+    -88,
+    -88
+   ]
+  },
+  "full-bow": {
+   "ad": "Full Bow",
+   "yon": "sag",
+   "govde": 100,
+   "bas": 0,
+   "solKol": [
+    -120,
+    -120
+   ],
+   "sagKol": [
+    -118,
+    -118
+   ],
+   "solBacak": [
+    -80,
+    -170
+   ],
+   "sagBacak": [
+    -78,
+    -168
+   ]
+  },
+  "kneeling-backbend-hands-heels": {
+   "ad": "Kneeling Backbend Hands Heels",
+   "yon": "sag",
+   "govde": 230,
+   "bas": 0,
+   "solKol": [
+    -30,
+    -30
+   ],
+   "sagKol": [
+    -28,
+    -28
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "standing-bow-pull": {
+   "ad": "Standing Bow Pull",
+   "yon": "sag",
+   "govde": 120,
+   "bas": 0,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    -120,
+    -150
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -120,
+    -175
+   ]
+  },
+  "side-plank-leg-lift": {
+   "ad": "Side Plank Leg Lift",
+   "yon": "on",
+   "govde": 115,
+   "bas": 0,
+   "sagKol": [
+    0,
+    0
+   ],
+   "solKol": [
+    178,
+    178
+   ],
+   "sagBacak": [
+    -70,
+    -70
+   ],
+   "solBacak": [
+    -120,
+    -120
+   ]
+  },
+  "seated-forward-fold-arms-long": {
+   "ad": "Seated Forward Fold Arms Long",
+   "yon": "sag",
+   "govde": 120,
+   "bas": 0,
+   "solKol": [
+    110,
+    110
+   ],
+   "sagKol": [
+    108,
+    108
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ]
+  },
+  "straddle-side-reach": {
+   "ad": "Straddle Side Reach",
+   "yon": "on",
+   "govde": -145,
+   "bas": 0,
+   "sagKol": [
+    -80,
+    -85
+   ],
+   "solKol": [
+    175,
+    -120
+   ],
+   "sagBacak": [
+    -88,
+    -88
+   ],
+   "solBacak": [
+    88,
+    88
+   ]
+  },
+  "splits-prep-arms-wide": {
+   "ad": "Splits Prep Arms Wide",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    -90,
+    -90
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    85,
+    85
+   ],
+   "sagBacak": [
+    -80,
+    -80
+   ]
+  },
+  "lunge-backbend-arms-up": {
+   "ad": "Lunge Backbend Arms Up",
+   "yon": "sag",
+   "govde": 200,
+   "bas": 0,
+   "solKol": [
+    -160,
+    -160
+   ],
+   "sagKol": [
+    -158,
+    -158
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    -40,
+    -90
+   ]
+  },
+  "boat-twist-arms": {
+   "ad": "Boat Twist Arms",
+   "yon": "sag",
+   "govde": 215,
+   "bas": 0,
+   "solKol": [
+    -60,
+    -60
+   ],
+   "sagKol": [
+    120,
+    120
+   ],
+   "solBacak": [
+    110,
+    110
+   ],
+   "sagBacak": [
+    108,
+    108
+   ]
+  },
+  "pike-seat-arms-up": {
+   "ad": "Pike Seat Arms Up",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    176,
+    176
+   ],
+   "solBacak": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    93,
+    93
+   ]
+  },
+  "standing-split-hands-floor": {
+   "ad": "Standing Split Hands Floor",
+   "yon": "sag",
+   "govde": 20,
+   "bas": 0,
+   "solKol": [
+    5,
+    5
+   ],
+   "sagKol": [
+    3,
+    3
+   ],
+   "solBacak": [
+    2,
+    2
+   ],
+   "sagBacak": [
+    -150,
+    -150
+   ]
+  },
+  "warrior-three-hands-prayer": {
+   "ad": "Warrior Three Hands Prayer",
+   "yon": "sag",
+   "govde": 95,
+   "bas": 0,
+   "solKol": [
+    30,
+    160
+   ],
+   "sagKol": [
+    28,
+    158
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ]
+  },
+  "kneeling-lunge-quad-pull": {
+   "ad": "Kneeling Lunge Quad Pull",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    175,
+    175
+   ],
+   "sagKol": [
+    -120,
+    -160
+   ],
+   "solBacak": [
+    80,
+    0
+   ],
+   "sagBacak": [
+    -10,
+    -150
+   ]
+  },
+  "gate-arms-up-lean": {
+   "ad": "Gate Arms Up Lean",
+   "yon": "on",
+   "govde": 150,
+   "bas": 0,
+   "sagKol": [
+    -170,
+    -170
+   ],
+   "solKol": [
+    -150,
+    -150
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    70,
+    70
+   ]
+  },
+  "reclined-hero-lite": {
+   "ad": "Reclined Hero Lite",
+   "yon": "sag",
+   "govde": -130,
+   "bas": 0,
+   "solKol": [
+    -60,
+    -60
+   ],
+   "sagKol": [
+    -58,
+    -58
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "lying-leg-hug": {
+   "ad": "Lying Leg Hug",
+   "yon": "sag",
+   "govde": -90,
+   "bas": 0,
+   "solKol": [
+    150,
+    90
+   ],
+   "sagKol": [
+    148,
+    88
+   ],
+   "solBacak": [
+    150,
+    70
+   ],
+   "sagBacak": [
+    92,
+    92
+   ]
+  },
+  "low-squat-prayer-twist": {
+   "ad": "Low Squat Prayer Twist",
+   "yon": "sag",
+   "govde": 140,
+   "bas": 0,
+   "solKol": [
+    40,
+    170
+   ],
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solBacak": [
+    80,
+    -20
+   ],
+   "sagBacak": [
+    78,
+    -22
+   ]
+  },
+  "wide-squat-arms-up": {
+   "ad": "Wide Squat Arms Up",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ]
+  },
+  "plank-knee-to-elbow": {
+   "ad": "Plank Knee to Elbow",
+   "yon": "sag",
+   "govde": 95,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    120,
+    -40
+   ],
+   "sagBacak": [
+    -85,
+    -85
+   ]
+  },
+  "side-lunge-hands-prayer-deep": {
+   "ad": "Side Lunge Hands Prayer Deep",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    30,
+    160
+   ],
+   "sagKol": [
+    28,
+    158
+   ],
+   "solBacak": [
+    95,
+    -5
+   ],
+   "sagBacak": [
+    -35,
+    -35
+   ]
+  },
+  "seated-lean-back-leg-up": {
+   "ad": "Seated Lean Back Leg Up",
+   "yon": "sag",
+   "govde": 220,
+   "bas": 0,
+   "solKol": [
+    -30,
+    -30
+   ],
+   "sagKol": [
+    -28,
+    -28
+   ],
+   "solBacak": [
+    140,
+    140
+   ],
+   "sagBacak": [
+    70,
+    -20
+   ]
+  },
+  "seated-wide-twist-reach": {
+   "ad": "Seated Wide Twist Reach",
+   "yon": "on",
+   "govde": 200,
+   "bas": 0,
+   "sagKol": [
+    -80,
+    -80
+   ],
+   "solKol": [
+    170,
+    170
+   ],
+   "sagBacak": [
+    -85,
+    -85
+   ],
+   "solBacak": [
+    85,
+    85
+   ]
+  },
+  "kneeling-arch-one-arm": {
+   "ad": "Kneeling Arch One Arm",
+   "yon": "sag",
+   "govde": 220,
+   "bas": 0,
+   "solKol": [
+    -175,
+    -175
+   ],
+   "sagKol": [
+    -40,
+    -40
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "low-lunge-hands-on-back-knee": {
+   "ad": "Low Lunge Hands on Back Knee",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    -30,
+    -30
+   ],
+   "sagKol": [
+    -28,
+    -28
+   ],
+   "solBacak": [
+    85,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -150
+   ]
+  },
+  "forearm-plank-leg-up": {
+   "ad": "Forearm Plank Leg Up",
+   "yon": "sag",
+   "govde": 100,
+   "bas": 0,
+   "solKol": [
+    10,
+    90
+   ],
+   "sagKol": [
+    10,
+    90
+   ],
+   "solBacak": [
+    -85,
+    -85
+   ],
+   "sagBacak": [
+    -130,
+    -130
+   ]
+  },
+  "kneeling-star": {
+   "ad": "Kneeling Star",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    60,
+    60
+   ]
+  },
+  "stork-arms-up": {
+   "ad": "Stork Arms Up",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    176,
+    176
+   ],
+   "solBacak": [
+    100,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    0
+   ]
+  },
+  "deep-lunge-arms-forward-low": {
+   "ad": "Deep Lunge Arms Forward Low",
+   "yon": "sag",
+   "govde": 120,
+   "bas": 0,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    98,
+    98
+   ],
+   "solBacak": [
+    100,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -60
+   ]
+  },
+  "seated-splits-lean": {
+   "ad": "Seated Splits Lean",
+   "yon": "sag",
+   "govde": 200,
+   "bas": 0,
+   "solKol": [
+    -170,
+    -170
+   ],
+   "sagKol": [
+    -168,
+    -168
+   ],
+   "solBacak": [
+    88,
+    88
+   ],
+   "sagBacak": [
+    -88,
+    -88
+   ]
+  },
+  "victory-kneel-v": {
+   "ad": "Victory Kneel V",
+   "yon": "on",
+   "govde": 185,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    0,
+    "geri"
+   ]
+  }
+ }
+}

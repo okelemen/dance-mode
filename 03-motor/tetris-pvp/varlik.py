@@ -33,6 +33,8 @@ RENK = {"p1": arg("--renk1", "#22e07a"), "p2": arg("--renk2", "#ff9a1f")}
 # 3. video (REF-054): gokte dev galaksi sarmali + mor/sari kureler (--gok galaksi), kapilar blok kuleli (--kapi blok)
 GOK = arg("--gok", "fener")
 KAPI_TIP = arg("--kapi", "kafes")
+# 4. video (REF-055): gokte dev halkali gezegen (--gok gezegen), duvar paneli parlak merkezli girdap (--panel girdap)
+PANEL_TIP = arg("--panel", "jole")
 YERLESIM = {}
 
 
@@ -161,22 +163,27 @@ def gok():
     rmp = nt.nodes.new("ShaderNodeValToRGB")
     cr = rmp.color_ramp
     G3 = GOK == "galaksi"
-    cr.elements[0].position = 0.0; cr.elements[0].color = (*lin(hex3("#2a0f5e" if G3 else "#0b5466")), 1)
-    cr.elements[1].position = 1.0; cr.elements[1].color = (*lin(hex3("#05041c" if G3 else "#040824")), 1)
-    e2 = cr.elements.new(0.45); e2.color = (*lin(hex3("#120a3a" if G3 else "#0a2a4a")), 1)
+    G4 = GOK == "gezegen"
+    # renk sirasi: (alt, ust, orta, bulutsu 1, bulutsu 2)
+    GR = (("#0a3b44", "#02070d", "#06202a", "#1f9e8f", "#ff5a6e") if G4 else
+          ("#2a0f5e", "#05041c", "#120a3a", "#7a2bd6", "#d9c22b") if G3 else
+          ("#0b5466", "#040824", "#0a2a4a", "#1fb5a0", "#d99a2b"))
+    cr.elements[0].position = 0.0; cr.elements[0].color = (*lin(hex3(GR[0])), 1)
+    cr.elements[1].position = 1.0; cr.elements[1].color = (*lin(hex3(GR[1])), 1)
+    e2 = cr.elements.new(0.45); e2.color = (*lin(hex3(GR[2])), 1)
     nt.links.new(sep.outputs["Y"], rmp.inputs[0])
     nz = nt.nodes.new("ShaderNodeTexNoise"); nz.inputs["Scale"].default_value = 3.2; nz.inputs["Detail"].default_value = 6
     nz.inputs["Distortion"].default_value = 0.6
     nt.links.new(tc.outputs["Generated"], nz.inputs["Vector"])
     nr = nt.nodes.new("ShaderNodeValToRGB"); c2 = nr.color_ramp
     c2.elements[0].position = 0.52; c2.elements[0].color = (0, 0, 0, 1)
-    c2.elements[1].position = 0.80; c2.elements[1].color = (*lin(hex3("#7a2bd6" if G3 else "#1fb5a0")), 1)
+    c2.elements[1].position = 0.80; c2.elements[1].color = (*lin(hex3(GR[3])), 1)
     nt.links.new(nz.outputs["Fac"], nr.inputs[0])
     nz2 = nt.nodes.new("ShaderNodeTexNoise"); nz2.inputs["Scale"].default_value = 5.5; nz2.inputs["Detail"].default_value = 4
     nt.links.new(tc.outputs["Generated"], nz2.inputs["Vector"])
     nr2 = nt.nodes.new("ShaderNodeValToRGB"); c3 = nr2.color_ramp
     c3.elements[0].position = 0.60; c3.elements[0].color = (0, 0, 0, 1)
-    c3.elements[1].position = 0.85; c3.elements[1].color = (*lin(hex3("#d9c22b" if G3 else "#d99a2b")), 1)
+    c3.elements[1].position = 0.85; c3.elements[1].color = (*lin(hex3(GR[4])), 1)
     nt.links.new(nz2.outputs["Fac"], nr2.inputs[0])
     ad1 = nt.nodes.new("ShaderNodeMix"); ad1.data_type = "RGBA"; ad1.blend_type = "ADD"; ad1.inputs[0].default_value = 0.55
     nt.links.new(rmp.outputs[0], ad1.inputs[6]); nt.links.new(nr.outputs[0], ad1.inputs[7])
@@ -192,10 +199,12 @@ def gok():
         kure((rnd.uniform(-75, 75), rnd.uniform(50, 58), rnd.uniform(-20, 48)), rnd.uniform(0.05, 0.16), ym, sub=1)
     if G3:
         galaksi(rnd)
+    if G4:
+        gezegen(rnd)
     # yuzen fenerler (altin, ici isikli) - gogu dolduran ana oge (referanstaki denizanalarinin yerine bizim oge)
     gov = mat_emis("fener", lin(hex3("#ff8a1a")), 14.0)
     ust = mat_jole("fener_ust", lin(hex3("#7a3d10")), emis=0.0, purluk=0.3)
-    for i in range(0 if G3 else 46):
+    for i in range(0 if (G3 or G4) else 46):
         x, y, z = rnd.uniform(-32, 32), rnd.uniform(18, 46), rnd.uniform(-6, 26)
         s = rnd.uniform(0.6, 1.4) * (y / 30)
         bpy.ops.mesh.primitive_cylinder_add(radius=0.45 * s, depth=0.9 * s, location=(x, y, z), vertices=24)
@@ -206,7 +215,8 @@ def gok():
         isik("POINT", (x, y - 1.2 * s, z), 60 * s * s, lin(hex3("#ffb43a")))
     # yesil/camgobegi isik kureleri (bubble) + kucuk parilti
     for i in range(60):
-        c = lin(hex3(rnd.choice(["#b45cff", "#f5ff3d", "#ffffff"] if G3 else ["#3dffa8", "#2be0e0", "#b6ff5c"])))
+        c = lin(hex3(rnd.choice(["#ff2d55", "#5a78ff", "#ffd27a", "#ffffff"] if G4 else
+                                ["#b45cff", "#f5ff3d", "#ffffff"] if G3 else ["#3dffa8", "#2be0e0", "#b6ff5c"])))
         kure((rnd.uniform(-34, 34), rnd.uniform(16, 44), rnd.uniform(-8, 28)), rnd.uniform(0.15, 0.55), mat_emis("kure%d" % i, c, rnd.uniform(6, 12)))
     bpy.ops.object.camera_add(location=(0, -6, 9), rotation=(math.radians(90), 0, 0))
     kam = bpy.context.active_object; kam.data.lens = 26; sc.camera = kam
@@ -286,6 +296,42 @@ def galaksi(rnd):
             x = cx_ + r * math.cos(a) + rnd.gauss(0, 0.9)
             z = cz_ + 0.55 * r * math.sin(a) + rnd.gauss(0, 0.6)
             kure((x, cy_ + rnd.uniform(-1, 1), z), rnd.uniform(0.07, 0.3) * (1.2 - u * 0.6), rnd.choice(mats), sub=1)
+
+
+def gezegen(rnd):
+    """REF-055: gogun ortasinda kapilarin arkasindan yukselen dev gezegen. Bizimki halkali, kizil-kehribar seritli
+    (referansin pembe gezegeni yerine), altin parcacik halkasi + iki kucuk uydu."""
+    cx_, cy_, cz_, R_ = 0.0, 50.0, 13.0, 13.0
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=R_, location=(cx_, cy_, cz_), segments=96, ring_count=48)
+    g = bpy.context.active_object; bpy.ops.object.shade_smooth()
+    g.rotation_euler = (math.radians(-18), math.radians(14), 0)
+    m = bpy.data.materials.new("gezegen"); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+    tc = nt.nodes.new("ShaderNodeTexCoord")
+    wv = nt.nodes.new("ShaderNodeTexWave"); wv.wave_type = "BANDS"; wv.bands_direction = "Z"
+    wv.inputs["Scale"].default_value = 2.4; wv.inputs["Distortion"].default_value = 4.5; wv.inputs["Detail"].default_value = 4
+    nt.links.new(tc.outputs["Object"], wv.inputs["Vector"])
+    rp = nt.nodes.new("ShaderNodeValToRGB"); cr = rp.color_ramp
+    cr.elements[0].position = 0.0; cr.elements[0].color = (*lin(hex3("#7a0f2a")), 1)
+    cr.elements[1].position = 1.0; cr.elements[1].color = (*lin(hex3("#ffd27a")), 1)
+    for pos, c in ((0.3, "#e8304f"), (0.55, "#ff8a3a"), (0.8, "#ffb35c")):
+        e = cr.elements.new(pos); e.color = (*lin(hex3(c)), 1)
+    nt.links.new(wv.outputs["Fac"], rp.inputs[0])
+    em = nt.nodes.new("ShaderNodeEmission"); em.inputs[1].default_value = 1.6
+    nt.links.new(rp.outputs[0], em.inputs[0])
+    o = nt.nodes.new("ShaderNodeOutputMaterial"); nt.links.new(em.outputs[0], o.inputs[0])
+    g.data.materials.append(m)
+    kure((cx_, cy_ + 1.5, cz_), R_ * 1.12, mat_emis("gezegen_hale", lin(hex3("#ff6a5a")), 0.9))
+    # halka: altin/beyaz parcaciklar egik elips uzerinde
+    mats = [mat_emis("h%d" % i, lin(hex3(c)), e) for i, (c, e) in enumerate((("#ffd27a", 9), ("#ffffff", 12), ("#ff8fa0", 8)))]
+    for i in range(900):
+        a = rnd.uniform(0, 2 * math.pi); r = R_ * rnd.uniform(1.35, 1.95)
+        x = cx_ + r * math.cos(a); z = cz_ + 0.24 * r * math.sin(a) - 0.08 * r * math.cos(a)
+        y = cy_ - 0.25 * r * math.sin(a)
+        if y > cy_ and abs(x - cx_) < R_ * 0.95:      # gezegenin arkasinda kalan parcaciklar gorunmez, atla
+            continue
+        kure((x, y, z), rnd.uniform(0.08, 0.26), rnd.choice(mats), sub=1)
+    for (x, z, r, c) in ((-24, 27, 2.2, "#5a78ff"), (22, 30, 1.4, "#ffe0c4")):
+        kure((x, cy_ - 4, z), r, mat_emis("uydu", lin(hex3(c)), 3.0))
 
 
 def serit(oyuncu):
@@ -394,6 +440,42 @@ def serit(oyuncu):
 
 
 # ------------------------------------------------------------------ PANEL (jole duvar)
+def mat_girdap(R):
+    """REF-055 duvari: ortasi beyaz parlayan, oyuncu renginde sarmal girdap (boya firca dokulu), cevresi koyulasir"""
+    m = bpy.data.materials.new("girdap"); m.use_nodes = True; nt = m.node_tree
+    b = nt.nodes["Principled BSDF"]
+    tc = nt.nodes.new("ShaderNodeTexCoord")
+    # sarmal: halka dalgasi (RINGS) + yuksek bozulma, merkezden donen firca izleri gibi
+    wv = nt.nodes.new("ShaderNodeTexWave"); wv.wave_type = "RINGS"; wv.rings_direction = "Y"
+    wv.inputs["Scale"].default_value = 1.6; wv.inputs["Distortion"].default_value = 9.0; wv.inputs["Detail"].default_value = 6
+    wv.inputs["Detail Scale"].default_value = 1.4
+    nt.links.new(tc.outputs["Object"], wv.inputs["Vector"])
+    rp = nt.nodes.new("ShaderNodeValToRGB"); cr = rp.color_ramp
+    cr.elements[0].position = 0.15; cr.elements[0].color = (*koyu(R, 0.25), 1)
+    cr.elements[1].position = 0.9; cr.elements[1].color = (*acik(R, 0.7), 1)
+    e = cr.elements.new(0.5); e.color = (*R, 1)
+    nt.links.new(wv.outputs["Fac"], rp.inputs[0])
+    # merkez parlama: kuresel gecis (Object koordinati 0 merkezde)
+    mp = nt.nodes.new("ShaderNodeMapping"); mp.inputs["Scale"].default_value = (0.42, 1.0, 0.5)
+    nt.links.new(tc.outputs["Object"], mp.inputs["Vector"])
+    gr = nt.nodes.new("ShaderNodeTexGradient"); gr.gradient_type = "SPHERICAL"
+    nt.links.new(mp.outputs[0], gr.inputs["Vector"])
+    rp2 = nt.nodes.new("ShaderNodeValToRGB"); c2 = rp2.color_ramp
+    c2.elements[0].position = 0.0; c2.elements[0].color = (0, 0, 0, 1)
+    c2.elements[1].position = 0.75; c2.elements[1].color = (1, 1, 1, 1)
+    nt.links.new(gr.outputs["Fac"], rp2.inputs[0])
+    mx = nt.nodes.new("ShaderNodeMix"); mx.data_type = "RGBA"; mx.blend_type = "SCREEN"
+    nt.links.new(rp2.outputs[0], mx.inputs[0]); nt.links.new(rp.outputs[0], mx.inputs[6])
+    mx.inputs[7].default_value = (1, 0.97, 0.95, 1)
+    nt.links.new(mx.outputs[2], b.inputs["Base Color"])
+    nt.links.new(mx.outputs[2], b.inputs["Emission Color"]); b.inputs["Emission Strength"].default_value = 0.55
+    bm = nt.nodes.new("ShaderNodeBump"); bm.inputs["Strength"].default_value = 0.25
+    nt.links.new(wv.outputs["Fac"], bm.inputs["Height"]); nt.links.new(bm.outputs[0], b.inputs["Normal"])
+    b.inputs["Roughness"].default_value = 0.35
+    b.inputs["Coat Weight"].default_value = 0.6; b.inputs["Coat Roughness"].default_value = 0.05
+    return m
+
+
 def panel(oyuncu):
     sc = bos_sahne(w=1100, h=904, saydam=True)
     R = lin(hex3(RENK[oyuncu]))
@@ -402,6 +484,18 @@ def panel(oyuncu):
     p = bpy.context.active_object; p.scale = (PW, 0.25, PH); bpy.ops.object.transform_apply(scale=True)
     bv = p.modifiers.new("egim", "BEVEL"); bv.width = 0.22; bv.segments = 8; bv.limit_method = "NONE"
     bpy.ops.object.shade_smooth()
+    if PANEL_TIP == "girdap":
+        p.data.materials.append(mat_girdap(R))
+        rnd = random.Random(7 if oyuncu == "p1" else 11)
+        par = mat_emis("parilti", (1, 1, 1), 10.0)
+        for i in range(60):
+            kure((rnd.uniform(-PW / 2 + 0.2, PW / 2 - 0.2), -0.14, rnd.uniform(-PH / 2 + 0.2, PH / 2 - 0.2)), rnd.choice([0.02, 0.03, 0.04, 0.06]), par, sub=1)
+        isik("AREA", (-3, -4, 4), 260, (1, 1, 1), 3, yon=(0, 0, 0))
+        bpy.ops.object.camera_add(location=(0, -10, 0), rotation=(math.radians(90), 0, 0))
+        kam = bpy.context.active_object; sc.camera = kam
+        kam.data.type = "ORTHO"; kam.data.ortho_scale = PW + 0.08
+        yaz(sc, "panel-%s.png" % oyuncu)
+        return
     # jole: acik-orta renk dalgali seritler (wave texture) + kabarcik pürüzü
     m = bpy.data.materials.new("panel"); m.use_nodes = True; nt = m.node_tree
     b = nt.nodes["Principled BSDF"]
