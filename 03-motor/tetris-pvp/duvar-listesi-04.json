@@ -26,7 +26,7 @@
  },
  {
   "tur": 1,
-  "p1": "kneel-hands-on-hips",
+  "p1": "kneeling-hands-on-hips",
   "p2": "kneeling-clasp-behind-lift"
  },
  {
@@ -46,7 +46,7 @@
  },
  {
   "tur": 1,
-  "p1": "kneel-arms-wide-lean",
+  "p1": "kneeling-diagonal-reach",
   "p2": "child-arms-back"
  },
  {
@@ -57,7 +57,7 @@
  {
   "tur": 1,
   "p1": "kneeling-arms-up-back",
-  "p2": "kneeling-side-lean-arm-over"
+  "p2": "heel-sit-clasp-behind"
  },
  {
   "tur": 1,
@@ -72,7 +72,7 @@
  {
   "tur": 1,
   "p1": "low-lunge-arms-wide-back",
-  "p2": "kneeling-arms-v-up"
+  "p2": "seated-straddle-arms-t"
  },
  {
   "tur": 2,
@@ -107,7 +107,7 @@
  {
   "tur": 2,
   "p1": "tabletop-knee-tuck",
-  "p2": "kneeling-arms-diagonal"
+  "p2": "kneeling-arm-swing-back"
  },
  {
   "tur": 2,
@@ -142,7 +142,7 @@
  {
   "tur": 2,
   "p1": "kneel-one-leg-forward-arms-up",
-  "p2": "kneeling-twist-arms-t"
+  "p2": "side-lunge-arms-up"
  },
  {
   "tur": 2,
@@ -182,11 +182,11 @@
  {
   "tur": 3,
   "p1": "kneeling-lunge-quad-pull",
-  "p2": "gate-arms-up-lean"
+  "p2": "half-kneel-arms-back-lift"
  },
  {
   "tur": 3,
-  "p1": "reclined-hero-lite",
+  "p1": "lying-reach-up",
   "p2": "lying-leg-hug"
  },
  {
@@ -212,7 +212,7 @@
  {
   "tur": 3,
   "p1": "forearm-plank-leg-up",
-  "p2": "kneeling-star"
+  "p2": "kneeling-airplane-arms"
  },
  {
   "tur": 3,
@@ -222,6 +222,6 @@
  {
   "tur": 3,
   "p1": "seated-splits-lean",
-  "p2": "kneeling-hands-on-head-lean"
+  "p2": "lunge-victory-reach"
  }
 ]

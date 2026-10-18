@@ -221,26 +221,26 @@
     -12
    ]
   },
-  "kneel-hands-on-hips": {
-   "ad": "Kneel Hands on Hips",
-   "yon": "on",
+  "kneeling-hands-on-hips": {
+   "ad": "Kneeling Hands on Hips",
+   "yon": "sag",
    "govde": 180,
    "bas": 0,
-   "sagKol": [
-    -45,
-    20
-   ],
    "solKol": [
-    45,
-    -20
+    -40,
+    60
    ],
-   "sagBacak": [
-    0,
-    "geri"
+   "sagKol": [
+    -38,
+    62
    ],
    "solBacak": [
     0,
-    "geri"
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
    ]
   },
   "kneeling-clasp-behind-lift": {
@@ -397,26 +397,26 @@
     45
    ]
   },
-  "kneel-arms-wide-lean": {
-   "ad": "Kneel Arms Wide Lean",
-   "yon": "on",
+  "kneeling-diagonal-reach": {
+   "ad": "Kneeling Diagonal Reach",
+   "yon": "sag",
    "govde": 160,
    "bas": 0,
-   "sagKol": [
-    -90,
-    -90
-   ],
    "solKol": [
-    90,
-    90
+    140,
+    140
    ],
-   "sagBacak": [
-    0,
-    "geri"
+   "sagKol": [
+    138,
+    138
    ],
    "solBacak": [
     0,
-    "geri"
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
    ]
   },
   "child-arms-back": {
@@ -507,26 +507,26 @@
     -90
    ]
   },
-  "kneeling-side-lean-arm-over": {
-   "ad": "Kneeling Side Lean Arm Over",
-   "yon": "on",
-   "govde": 210,
+  "heel-sit-clasp-behind": {
+   "ad": "Heel Sit Clasp Behind",
+   "yon": "sag",
+   "govde": 165,
    "bas": 0,
-   "sagKol": [
-    -20,
-    0
-   ],
    "solKol": [
-    170,
+    -140,
     -140
    ],
-   "sagBacak": [
-    0,
-    "geri"
+   "sagKol": [
+    -138,
+    -138
    ],
    "solBacak": [
-    0,
-    "geri"
+    90,
+    -90
+   ],
+   "sagBacak": [
+    88,
+    -90
    ]
   },
   "standing-arms-forward-tiptoe-lean": {
@@ -609,12 +609,12 @@
     88
    ],
    "solBacak": [
-    70,
-    -20
+    125,
+    30
    ],
    "sagBacak": [
-    68,
-    -22
+    123,
+    28
    ]
   },
   "low-lunge-arms-wide-back": {
@@ -639,26 +639,26 @@
     -90
    ]
   },
-  "kneeling-arms-v-up": {
-   "ad": "Kneeling Arms V Up",
+  "seated-straddle-arms-t": {
+   "ad": "Seated Straddle Arms T",
    "yon": "on",
    "govde": 180,
    "bas": 0,
    "sagKol": [
-    -148,
-    -148
+    -90,
+    -90
    ],
    "solKol": [
-    148,
-    148
+    90,
+    90
    ],
    "sagBacak": [
-    0,
-    "geri"
+    -80,
+    -80
    ],
    "solBacak": [
-    0,
-    "geri"
+    80,
+    80
    ]
   },
   "plank-shoulder-tap": {
@@ -947,26 +947,26 @@
     -40
    ]
   },
-  "kneeling-arms-diagonal": {
-   "ad": "Kneeling Arms Diagonal",
-   "yon": "on",
-   "govde": 170,
+  "kneeling-arm-swing-back": {
+   "ad": "Kneeling Arm Swing Back",
+   "yon": "sag",
+   "govde": 175,
    "bas": 0,
-   "sagKol": [
-    -174,
-    -176
-   ],
    "solKol": [
-    35,
-    35
+    150,
+    150
    ],
-   "sagBacak": [
-    0,
-    "geri"
+   "sagKol": [
+    -60,
+    -60
    ],
    "solBacak": [
     0,
-    "geri"
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
    ]
   },
   "side-lunge-fold-hands-floor": {
@@ -1255,26 +1255,26 @@
     -90
    ]
   },
-  "kneeling-twist-arms-t": {
-   "ad": "Kneeling Twist Arms T",
+  "side-lunge-arms-up": {
+   "ad": "Side Lunge Arms Up",
    "yon": "on",
-   "govde": 175,
+   "govde": 172,
    "bas": 0,
    "sagKol": [
-    -90,
-    -90
+    -174,
+    -176
    ],
    "solKol": [
-    100,
-    100
+    174,
+    176
    ],
    "sagBacak": [
-    0,
-    "geri"
+    -75,
+    -5
    ],
    "solBacak": [
-    0,
-    "geri"
+    52,
+    52
    ]
   },
   "reverse-lunge-reach-up": {
@@ -1607,48 +1607,48 @@
     -150
    ]
   },
-  "gate-arms-up-lean": {
-   "ad": "Gate Arms Up Lean",
-   "yon": "on",
-   "govde": 150,
+  "half-kneel-arms-back-lift": {
+   "ad": "Half Kneel Arms Back Lift",
+   "yon": "sag",
+   "govde": 185,
    "bas": 0,
-   "sagKol": [
-    -170,
-    -170
-   ],
    "solKol": [
-    -150,
-    -150
+    -140,
+    -140
+   ],
+   "sagKol": [
+    -138,
+    -138
+   ],
+   "solBacak": [
+    80,
+    0
    ],
    "sagBacak": [
     0,
-    "geri"
-   ],
-   "solBacak": [
-    70,
-    70
+    -90
    ]
   },
-  "reclined-hero-lite": {
-   "ad": "Reclined Hero Lite",
+  "lying-reach-up": {
+   "ad": "Lying Reach Up",
    "yon": "sag",
-   "govde": -130,
+   "govde": -90,
    "bas": 0,
    "solKol": [
-    -60,
-    -60
+    180,
+    180
    ],
    "sagKol": [
-    -58,
-    -58
+    178,
+    178
    ],
    "solBacak": [
-    0,
-    -90
+    180,
+    180
    ],
    "sagBacak": [
-    0,
-    -90
+    178,
+    178
    ]
   },
   "lying-leg-hug": {
@@ -1764,23 +1764,23 @@
   "seated-lean-back-leg-up": {
    "ad": "Seated Lean Back Leg Up",
    "yon": "sag",
-   "govde": 220,
+   "govde": 215,
    "bas": 0,
    "solKol": [
-    -30,
-    -30
+    -35,
+    -35
    ],
    "sagKol": [
-    -28,
-    -28
+    -33,
+    -33
    ],
    "solBacak": [
     140,
     140
    ],
    "sagBacak": [
-    70,
-    -20
+    125,
+    25
    ]
   },
   "seated-wide-twist-reach": {
@@ -1871,26 +1871,26 @@
     -130
    ]
   },
-  "kneeling-star": {
-   "ad": "Kneeling Star",
-   "yon": "on",
+  "kneeling-airplane-arms": {
+   "ad": "Kneeling Airplane Arms",
+   "yon": "sag",
    "govde": 165,
    "bas": 0,
-   "sagKol": [
-    -148,
-    -148
-   ],
    "solKol": [
-    148,
-    148
+    90,
+    90
+   ],
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solBacak": [
+    0,
+    -90
    ],
    "sagBacak": [
     0,
-    "geri"
-   ],
-   "solBacak": [
-    60,
-    60
+    -90
    ]
   },
   "stork-arms-up": {
@@ -1959,26 +1959,26 @@
     -88
    ]
   },
-  "kneeling-hands-on-head-lean": {
-   "ad": "Kneeling Hands on Head Lean",
-   "yon": "on",
-   "govde": 200,
+  "lunge-victory-reach": {
+   "ad": "Lunge Victory Reach",
+   "yon": "sag",
+   "govde": 180,
    "bas": 0,
-   "sagKol": [
-    -128,
-    62
-   ],
    "solKol": [
-    128,
-    -62
+    150,
+    150
    ],
-   "sagBacak": [
-    0,
-    "geri"
+   "sagKol": [
+    -160,
+    -160
    ],
    "solBacak": [
-    0,
-    "geri"
+    75,
+    0
+   ],
+   "sagBacak": [
+    -42,
+    -42
    ]
   }
  }
