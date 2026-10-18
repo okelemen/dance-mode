@@ -33,11 +33,14 @@ def olcu_ornek(k):
 
 N_OLCU = int((len(mono) / sr - ILK) / OLCU)        # 81
 GOVDE = 8
-parcalar = [(olcu_ornek(0), olcu_ornek(N_OLCU - 1))]
-toplam = N_OLCU - 1
-while toplam + (N_OLCU - 1 - GOVDE) <= B["toplam_olcu"] - 4:
-    parcalar.append((olcu_ornek(GOVDE), olcu_ornek(N_OLCU - 1)))
-    toplam += N_OLCU - 1 - GOVDE
+# --govde-son K (19 Eki 2026, Red Orbit Rally): parcanin sonunda K. olcuden itibaren cikis bolumu var (82-90, 85'te dusus);
+# tekrarlar K'da biter ki cikis videonun ortasinda calmasin. Verilmezse eski davranis (son olcuye kadar).
+SON = int(sys.argv[sys.argv.index("--govde-son") + 1]) if "--govde-son" in sys.argv else N_OLCU - 1
+parcalar = [(olcu_ornek(0), olcu_ornek(SON))]
+toplam = SON
+while toplam + (SON - GOVDE) <= B["toplam_olcu"] - 4:
+    parcalar.append((olcu_ornek(GOVDE), olcu_ornek(SON)))
+    toplam += SON - GOVDE
 kalan = B["toplam_olcu"] - toplam
 parcalar.append((olcu_ornek(N_OLCU - kalan), len(mono)))   # orijinal bitisle kapanis
 print("parcalar (olcu):", [(round((a / sr - ILK) / OLCU, 2), round((b / sr - ILK) / OLCU, 2)) for a, b in parcalar], "kalan", kalan)

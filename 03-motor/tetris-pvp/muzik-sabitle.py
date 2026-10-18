@@ -38,6 +38,13 @@ def yerel_tempo(yol, merkez):
 
 ts, bs, sure = yerel_tempo(giris, HEDEF)
 egri = np.polyfit(ts, bs, 2)
+if "--dogrusal" in sys.argv:
+    # 19 Eki 2026 (Red Orbit Rally): 2. derece egri sondaki sert durus penceresini (134 BPM, aykiri) de izleyip egriyi
+    # bukuyordu, cikti 137,1-138,3 arasinda gezdi. Aykiri pencereler (medyandan > 1,5 BPM) atilir, yerel tempo
+    # 5 pencerelik kayan ortalama + parca parca dogrusal (np.interp) izlenir.
+    iyi = np.abs(bs - np.median(bs)) <= 1.5
+    t_, b_ = ts[iyi], np.convolve(np.pad(bs[iyi], 2, mode="edge"), np.ones(5) / 5, mode="valid")
+    np.polyval = lambda _e, t: np.interp(t, t_, b_)      # asagidaki komut uretimi ayni kalsin diye
 print("yerel BPM:", " ".join(f"{t:.0f}s={b:.2f}" for t, b in zip(ts[::4], bs[::4])))
 with tempfile.TemporaryDirectory() as td:
     cmd = os.path.join(td, "tempo.txt")

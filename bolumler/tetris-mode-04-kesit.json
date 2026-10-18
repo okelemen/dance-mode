@@ -1,46 +1,46 @@
 {
  "seri": "TETRIS MODE PVP",
  "bolum": "tetris-mode-04",
- "bpm": 136.0,
+ "bpm": 137.5,
  "toplam_olcu": 38,
  "toplam_duvar": 4,
  "zaman": {
-  "kart": 1.7647,
-  "say": 2.6471,
-  "buyu": 5.2941,
-  "gec": 0.8824,
-  "sure": 12.3529
+  "kart": 1.7455,
+  "say": 2.6182,
+  "buyu": 5.2364,
+  "gec": 0.8727,
+  "sure": 12.2182
  },
  "kartlar": [
   {
    "t": 0.0,
-   "sure": 3.5294,
+   "sure": 3.4909,
    "tip": "vs"
   },
   {
-   "t": 3.5294,
-   "sure": 3.5294,
+   "t": 3.4909,
+   "sure": 3.4909,
    "tip": "tur",
    "tur": 1,
    "metin": "LEVEL 1",
    "alt": "EASY"
   },
   {
-   "t": 7.0588,
-   "sure": 3.5294,
+   "t": 6.9818,
+   "sure": 3.4909,
    "tip": "basla"
   },
   {
-   "t": 35.294,
-   "sure": 3.5294,
+   "t": 34.9091,
+   "sure": 3.4909,
    "tip": "tur",
    "tur": 2,
    "metin": "LEVEL 2",
    "alt": "MEDIUM"
   },
   {
-   "t": 51.1763,
-   "sure": 3.5294,
+   "t": 50.6182,
+   "sure": 3.4909,
    "tip": "tur",
    "tur": 3,
    "metin": "LEVEL 3",
@@ -51,7 +51,7 @@
   {
    "no": 1,
    "tur": 1,
-   "t0": 10.5882,
+   "t0": 10.4727,
    "p1": "lotus-prayer",
    "p2": "lotus-arms-wide",
    "ovgu": "ON FIRE!"
@@ -59,7 +59,7 @@
   {
    "no": 2,
    "tur": 1,
-   "t0": 22.9411,
+   "t0": 22.6909,
    "p1": "crescent-prayer",
    "p2": "skandasana-prayer",
    "ovgu": "SOLID!"
@@ -67,7 +67,7 @@
   {
    "no": 16,
    "tur": 2,
-   "t0": 38.8234,
+   "t0": 38.4,
    "p1": "plank-shoulder-tap",
    "p2": "knee-plank-feet-up",
    "ovgu": "UNSTOPPABLE!"
@@ -75,7 +75,7 @@
   {
    "no": 31,
    "tur": 3,
-   "t0": 54.7058,
+   "t0": 54.1091,
    "p1": "full-bow",
    "p2": "kneeling-backbend-hands-heels",
    "ovgu": "ON FIRE!"
@@ -88,7 +88,7 @@
   60.0
  ],
  "abone_sure": 3.2,
- "muzik": "BEKLENIYOR (Suno, kullanici) - brief POZ-DUVARI/SUNO-BRIEF-TETRIS-MODE-04.md",
+ "muzik": "Red Orbit Rally.wav (Suno, kullanici, ilk gitarli prompt - aynen kullanilir) -> red-orbit-rally-1375.wav (muzik-sabitle.py --dogrusal, 137,5)",
  "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne4.html.",
  "tema": {
   "varlik": "/03-motor/tetris-pvp/varlik-04/",
