@@ -364,7 +364,15 @@ function hudCiz(t, tur, ilerleme) {
     yazi(i === 0 ? 'P1' : 'P2', rx, y + h / 2, 30 * k, '#ffffff', '#06122e');
   }
   cx.restore();
-  yazi(`ROUND ${tur}`, W / 2, y + h / 2, 46 * k, ['#ffffff', '#fff1a8', ALTIN], '#06122e', 1, ALTIN);
+  // 4. video (REF-055): üst bantta seviye adı + o seviyedeki duvar sayacı ("EASY : 3/15"); tema.seviye yoksa eski "ROUND N"
+  let bant = `ROUND ${tur}`;
+  if (TEMA.seviye) {
+    const turD = DUVARLAR.filter(x => x.tur === tur);
+    const n = Math.max(1, turD.filter(x => t >= x.t0).length);
+    bant = `${TEMA.seviye[tur - 1]} : ${n}/${turD.length}`;
+  }
+  // iki çubuk arası ~340 px: uzun metin küçülür ("MEDIUM : 15/15" çubuklara taşmasın)
+  yazi(bant, W / 2, y + h / 2, Math.min(46, 520 / bant.length) * k, ['#ffffff', '#fff1a8', ALTIN], '#06122e', 1, ALTIN);
 }
 
 // ------------------------------------------------------------ KARTLAR

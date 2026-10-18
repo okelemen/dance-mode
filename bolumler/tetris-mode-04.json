@@ -1,0 +1,526 @@
+{
+ "seri": "TETRIS MODE PVP",
+ "bolum": "tetris-mode-04",
+ "bpm": 136.0,
+ "toplam_olcu": 330,
+ "toplam_duvar": 45,
+ "zaman": {
+  "kart": 1.7647,
+  "say": 2.6471,
+  "buyu": 5.2941,
+  "gec": 0.8824,
+  "sure": 12.3529
+ },
+ "kartlar": [
+  {
+   "t": 0.0,
+   "sure": 3.5294,
+   "tip": "vs"
+  },
+  {
+   "t": 3.5294,
+   "sure": 3.5294,
+   "tip": "tur",
+   "tur": 1,
+   "metin": "LEVEL 1",
+   "alt": "EASY"
+  },
+  {
+   "t": 7.0588,
+   "sure": 3.5294,
+   "tip": "basla"
+  },
+  {
+   "t": 195.8817,
+   "sure": 3.5294,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "LEVEL 2",
+   "alt": "MEDIUM"
+  },
+  {
+   "t": 384.7046,
+   "sure": 3.5294,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "LEVEL 3",
+   "alt": "HARD"
+  },
+  {
+   "t": 573.5276,
+   "sure": 3.5294,
+   "tip": "wrap"
+  },
+  {
+   "t": 577.057,
+   "sure": 5.2941,
+   "tip": "abone"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 10.5882,
+   "p1": "lotus-prayer",
+   "p2": "lotus-arms-wide",
+   "ovgu": "ON FIRE!"
+  },
+  {
+   "no": 2,
+   "tur": 1,
+   "t0": 22.9411,
+   "p1": "crescent-prayer",
+   "p2": "skandasana-prayer",
+   "ovgu": "SOLID!"
+  },
+  {
+   "no": 3,
+   "tur": 1,
+   "t0": 35.294,
+   "p1": "elbow-to-knee",
+   "p2": "tree-arms-wide",
+   "ovgu": "PERFECT FIT!"
+  },
+  {
+   "no": 4,
+   "tur": 1,
+   "t0": 47.6469,
+   "p1": "front-kick-hold",
+   "p2": "starfish-lean",
+   "ovgu": "UNSTOPPABLE!"
+  },
+  {
+   "no": 5,
+   "tur": 1,
+   "t0": 59.9998,
+   "p1": "half-lift-hands-shins",
+   "p2": "chair-prayer",
+   "ovgu": "SMOOTH!"
+  },
+  {
+   "no": 6,
+   "tur": 1,
+   "t0": 72.3527,
+   "p1": "kneel-hands-on-hips",
+   "p2": "half-camel",
+   "ovgu": "LEGEND!"
+  },
+  {
+   "no": 7,
+   "tur": 1,
+   "t0": 84.7056,
+   "p1": "staff-arms-up",
+   "p2": "kneeling-lunge-hands-on-knee",
+   "ovgu": "ON FIRE!"
+  },
+  {
+   "no": 8,
+   "tur": 1,
+   "t0": 97.0585,
+   "p1": "ballerina-arms",
+   "p2": "lateral-lunge-reach-across",
+   "ovgu": "SOLID!"
+  },
+  {
+   "no": 9,
+   "tur": 1,
+   "t0": 109.4114,
+   "p1": "knee-raise-arms-up",
+   "p2": "side-leg-lift-arms-up",
+   "ovgu": "PERFECT FIT!"
+  },
+  {
+   "no": 10,
+   "tur": 1,
+   "t0": 121.7643,
+   "p1": "kneel-arms-wide-lean",
+   "p2": "child-arms-back",
+   "ovgu": "UNSTOPPABLE!"
+  },
+  {
+   "no": 11,
+   "tur": 1,
+   "t0": 134.1172,
+   "p1": "seated-toe-point-arms-forward",
+   "p2": "seated-hands-on-knees",
+   "ovgu": "SMOOTH!"
+  },
+  {
+   "no": 12,
+   "tur": 1,
+   "t0": 146.4701,
+   "p1": "kneeling-arms-up-back",
+   "p2": "kneeling-side-lean-arm-over",
+   "ovgu": "LEGEND!"
+  },
+  {
+   "no": 13,
+   "tur": 1,
+   "t0": 158.823,
+   "p1": "standing-arms-forward-tiptoe-lean",
+   "p2": "hands-behind-head-wide-stance",
+   "ovgu": "ON FIRE!"
+  },
+  {
+   "no": 14,
+   "tur": 1,
+   "t0": 171.1759,
+   "p1": "seated-arms-up-twist-lean",
+   "p2": "seated-lean-back-arms-forward",
+   "ovgu": "SOLID!"
+  },
+  {
+   "no": 15,
+   "tur": 1,
+   "t0": 183.5288,
+   "p1": "low-lunge-arms-wide-back",
+   "p2": "kneeling-arms-v-up",
+   "ovgu": "PERFECT FIT!"
+  },
+  {
+   "no": 16,
+   "tur": 2,
+   "t0": 199.4111,
+   "p1": "plank-shoulder-tap",
+   "p2": "knee-plank-feet-up",
+   "ovgu": "UNSTOPPABLE!"
+  },
+  {
+   "no": 17,
+   "tur": 2,
+   "t0": 211.764,
+   "p1": "dead-bug",
+   "p2": "bicycle-hold",
+   "ovgu": "SMOOTH!"
+  },
+  {
+   "no": 18,
+   "tur": 2,
+   "t0": 224.1169,
+   "p1": "scissor-legs",
+   "p2": "glute-bridge-arms-up",
+   "ovgu": "LEGEND!"
+  },
+  {
+   "no": 19,
+   "tur": 2,
+   "t0": 236.4698,
+   "p1": "crab-kick",
+   "p2": "prone-arms-forward-lift",
+   "ovgu": "ON FIRE!"
+  },
+  {
+   "no": 20,
+   "tur": 2,
+   "t0": 248.8227,
+   "p1": "warrior-lunge-arms-back",
+   "p2": "goddess-arms-crossed-up",
+   "ovgu": "SOLID!"
+  },
+  {
+   "no": 21,
+   "tur": 2,
+   "t0": 261.1756,
+   "p1": "standing-leg-back-arms-up",
+   "p2": "one-leg-hug-knee-side",
+   "ovgu": "PERFECT FIT!"
+  },
+  {
+   "no": 22,
+   "tur": 2,
+   "t0": 273.5285,
+   "p1": "kneeling-kick-back",
+   "p2": "kneeling-arms-diagonal",
+   "ovgu": "UNSTOPPABLE!"
+  },
+  {
+   "no": 23,
+   "tur": 2,
+   "t0": 285.8814,
+   "p1": "side-lunge-fold-hands-floor",
+   "p2": "wide-stance-toe-reach",
+   "ovgu": "SMOOTH!"
+  },
+  {
+   "no": 24,
+   "tur": 2,
+   "t0": 298.2343,
+   "p1": "pistol-squat-prep",
+   "p2": "cossack-reach",
+   "ovgu": "LEGEND!"
+  },
+  {
+   "no": 25,
+   "tur": 2,
+   "t0": 310.5872,
+   "p1": "hands-down-lunge-knee-up",
+   "p2": "fallen-lunge-arms-up",
+   "ovgu": "ON FIRE!"
+  },
+  {
+   "no": 26,
+   "tur": 2,
+   "t0": 322.9401,
+   "p1": "seated-leg-raise-hold",
+   "p2": "v-sit-hands-floor",
+   "ovgu": "SOLID!"
+  },
+  {
+   "no": 27,
+   "tur": 2,
+   "t0": 335.293,
+   "p1": "inchworm-walk-out",
+   "p2": "bear-knee-lift",
+   "ovgu": "PERFECT FIT!"
+  },
+  {
+   "no": 28,
+   "tur": 2,
+   "t0": 347.6459,
+   "p1": "toe-touch-kick",
+   "p2": "side-bend-leg-out",
+   "ovgu": "UNSTOPPABLE!"
+  },
+  {
+   "no": 29,
+   "tur": 2,
+   "t0": 359.9988,
+   "p1": "kneel-one-leg-forward-arms-up",
+   "p2": "kneeling-twist-arms-t",
+   "ovgu": "SMOOTH!"
+  },
+  {
+   "no": 30,
+   "tur": 2,
+   "t0": 372.3517,
+   "p1": "reverse-lunge-reach-up",
+   "p2": "prone-snow-angel",
+   "ovgu": "LEGEND!"
+  },
+  {
+   "no": 31,
+   "tur": 3,
+   "t0": 388.2341,
+   "p1": "full-bow",
+   "p2": "kneeling-backbend-hands-heels",
+   "ovgu": "ON FIRE!"
+  },
+  {
+   "no": 32,
+   "tur": 3,
+   "t0": 400.587,
+   "p1": "standing-bow-pull",
+   "p2": "side-plank-leg-lift",
+   "ovgu": "SOLID!"
+  },
+  {
+   "no": 33,
+   "tur": 3,
+   "t0": 412.9399,
+   "p1": "seated-forward-fold-arms-long",
+   "p2": "straddle-side-reach",
+   "ovgu": "PERFECT FIT!"
+  },
+  {
+   "no": 34,
+   "tur": 3,
+   "t0": 425.2928,
+   "p1": "splits-prep-arms-wide",
+   "p2": "lunge-backbend-arms-up",
+   "ovgu": "UNSTOPPABLE!"
+  },
+  {
+   "no": 35,
+   "tur": 3,
+   "t0": 437.6457,
+   "p1": "boat-twist-arms",
+   "p2": "pike-seat-arms-up",
+   "ovgu": "SMOOTH!"
+  },
+  {
+   "no": 36,
+   "tur": 3,
+   "t0": 449.9986,
+   "p1": "standing-split-hands-floor",
+   "p2": "warrior-three-hands-prayer",
+   "ovgu": "LEGEND!"
+  },
+  {
+   "no": 37,
+   "tur": 3,
+   "t0": 462.3515,
+   "p1": "kneeling-lunge-quad-pull",
+   "p2": "gate-arms-up-lean",
+   "ovgu": "ON FIRE!"
+  },
+  {
+   "no": 38,
+   "tur": 3,
+   "t0": 474.7044,
+   "p1": "reclined-hero-lite",
+   "p2": "lying-leg-hug",
+   "ovgu": "SOLID!"
+  },
+  {
+   "no": 39,
+   "tur": 3,
+   "t0": 487.0573,
+   "p1": "low-squat-prayer-twist",
+   "p2": "wide-squat-arms-up",
+   "ovgu": "PERFECT FIT!"
+  },
+  {
+   "no": 40,
+   "tur": 3,
+   "t0": 499.4102,
+   "p1": "plank-knee-to-elbow",
+   "p2": "side-lunge-hands-prayer-deep",
+   "ovgu": "UNSTOPPABLE!"
+  },
+  {
+   "no": 41,
+   "tur": 3,
+   "t0": 511.7631,
+   "p1": "seated-lean-back-leg-up",
+   "p2": "seated-wide-twist-reach",
+   "ovgu": "SMOOTH!"
+  },
+  {
+   "no": 42,
+   "tur": 3,
+   "t0": 524.116,
+   "p1": "kneeling-arch-one-arm",
+   "p2": "low-lunge-hands-on-back-knee",
+   "ovgu": "LEGEND!"
+  },
+  {
+   "no": 43,
+   "tur": 3,
+   "t0": 536.4689,
+   "p1": "forearm-plank-leg-up",
+   "p2": "kneeling-star",
+   "ovgu": "ON FIRE!"
+  },
+  {
+   "no": 44,
+   "tur": 3,
+   "t0": 548.8218,
+   "p1": "stork-arms-up",
+   "p2": "deep-lunge-arms-forward-low",
+   "ovgu": "SOLID!"
+  },
+  {
+   "no": 45,
+   "tur": 3,
+   "t0": 561.1747,
+   "p1": "seated-splits-lean",
+   "p2": "victory-kneel-v",
+   "ovgu": "PERFECT FIT!"
+  }
+ ],
+ "abone": [
+  15.0,
+  30.0,
+  45.0,
+  60.0,
+  75.0,
+  90.0,
+  105.0,
+  120.0,
+  135.0,
+  150.0,
+  165.0,
+  180.0,
+  199.5,
+  210.0,
+  225.0,
+  240.0,
+  255.0,
+  270.0,
+  285.0,
+  300.0,
+  315.0,
+  330.0,
+  345.0,
+  360.0,
+  375.0,
+  390.0,
+  405.0,
+  420.0,
+  435.0,
+  450.0,
+  465.0,
+  480.0,
+  495.0,
+  510.0,
+  525.0,
+  540.0,
+  555.0,
+  570.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "BEKLENIYOR (Suno, kullanici) - brief POZ-DUVARI/SUNO-BRIEF-TETRIS-MODE-04.md",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne4.html.",
+ "tema": {
+  "varlik": "/03-motor/tetris-pvp/varlik-04/",
+  "p1": "#FF2D55",
+  "p2": "#2F54FF",
+  "altin": "#ffd27a",
+  "camgobegi": "#5fe6d0",
+  "p1koyu": "#a80a2c",
+  "p2koyu": "#1426a8",
+  "p1acik": "#ffd6de",
+  "p2acik": "#d9e0ff",
+  "p1parlak": "#ffb8c6",
+  "p2parlak": "#b8c6ff",
+  "vsSol": [
+   "#a8102e",
+   "#2a0410"
+  ],
+  "vsSag": [
+   "#1a2fb0",
+   "#050a2e"
+  ],
+  "isin": [
+   "#0f6f6a",
+   "#02101a"
+  ],
+  "wrapIsin": [
+   "#ffb35c",
+   "#2a0a06"
+  ],
+  "ovguRenk": [
+   "#ffffff",
+   "#ffd27a",
+   "#ff5a78"
+  ],
+  "parca": [
+   "#ff2d55",
+   "#5a78ff",
+   "#ffd27a"
+  ],
+  "abone": [
+   "#ff6a85",
+   "#c4102f"
+  ],
+  "vsAlt": "TETRIS MODE · PVP BATTLE",
+  "wrap": [
+   "ORBIT",
+   "CONQUERED!"
+  ],
+  "seviye": [
+   "EASY",
+   "MEDIUM",
+   "HARD"
+  ],
+  "ovgu": [
+   "ON FIRE!",
+   "SOLID!",
+   "PERFECT FIT!",
+   "UNSTOPPABLE!",
+   "SMOOTH!",
+   "LEGEND!"
+  ]
+ }
+}

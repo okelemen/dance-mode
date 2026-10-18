@@ -1,0 +1,766 @@
+{
+ "poz": {
+  "lotus-prayer": {
+   "cerceve_m": 2.617,
+   "gen_m": 2.136,
+   "yuk_m": 2.408
+  },
+  "lotus-arms-wide": {
+   "cerceve_m": 3.48,
+   "gen_m": 3.894,
+   "yuk_m": 2.408
+  },
+  "crescent-prayer": {
+   "cerceve_m": 3.922,
+   "gen_m": 2.717,
+   "yuk_m": 3.609
+  },
+  "skandasana-prayer": {
+   "cerceve_m": 3.429,
+   "gen_m": 2.988,
+   "yuk_m": 3.154
+  },
+  "elbow-to-knee": {
+   "cerceve_m": 4.077,
+   "gen_m": 1.526,
+   "yuk_m": 3.751
+  },
+  "knee-out-steeple": {
+   "cerceve_m": 4.935,
+   "gen_m": 1.921,
+   "yuk_m": 4.541
+  },
+  "front-kick-hold": {
+   "cerceve_m": 4.126,
+   "gen_m": 3.46,
+   "yuk_m": 3.796
+  },
+  "starfish-lean": {
+   "cerceve_m": 4.636,
+   "gen_m": 2.451,
+   "yuk_m": 4.265
+  },
+  "half-lift-hands-shins": {
+   "cerceve_m": 2.641,
+   "gen_m": 1.443,
+   "yuk_m": 2.43
+  },
+  "chair-prayer": {
+   "cerceve_m": 3.496,
+   "gen_m": 1.418,
+   "yuk_m": 3.217
+  },
+  "kneeling-hands-on-hips": {
+   "cerceve_m": 3.409,
+   "gen_m": 1.577,
+   "yuk_m": 3.137
+  },
+  "kneeling-clasp-behind-lift": {
+   "cerceve_m": 4.026,
+   "gen_m": 1.721,
+   "yuk_m": 3.704
+  },
+  "staff-arms-up": {
+   "cerceve_m": 3.136,
+   "gen_m": 2.533,
+   "yuk_m": 2.885
+  },
+  "kneeling-lunge-hands-on-knee": {
+   "cerceve_m": 3.407,
+   "gen_m": 2.484,
+   "yuk_m": 3.135
+  },
+  "standing-clasp-behind-lift": {
+   "cerceve_m": 4.518,
+   "gen_m": 1.543,
+   "yuk_m": 4.156
+  },
+  "lateral-lunge-reach-across": {
+   "cerceve_m": 3.587,
+   "gen_m": 3.093,
+   "yuk_m": 3.3
+  },
+  "knee-raise-arms-up": {
+   "cerceve_m": 4.98,
+   "gen_m": 1.7,
+   "yuk_m": 4.582
+  },
+  "side-leg-lift-arms-up": {
+   "cerceve_m": 4.979,
+   "gen_m": 2.128,
+   "yuk_m": 4.581
+  },
+  "kneeling-diagonal-reach": {
+   "cerceve_m": 3.845,
+   "gen_m": 2.362,
+   "yuk_m": 3.537
+  },
+  "child-arms-back": {
+   "cerceve_m": 2.55,
+   "gen_m": 2.295,
+   "yuk_m": 0.813
+  },
+  "seated-toe-point-arms-forward": {
+   "cerceve_m": 2.621,
+   "gen_m": 2.469,
+   "yuk_m": 2.411
+  },
+  "seated-leg-hold-up": {
+   "cerceve_m": 2.55,
+   "gen_m": 2.63,
+   "yuk_m": 2.052
+  },
+  "kneeling-arms-up-back": {
+   "cerceve_m": 4.219,
+   "gen_m": 1.465,
+   "yuk_m": 3.881
+  },
+  "heel-sit-clasp-behind": {
+   "cerceve_m": 2.98,
+   "gen_m": 1.809,
+   "yuk_m": 2.741
+  },
+  "standing-arms-forward-tiptoe-lean": {
+   "cerceve_m": 3.973,
+   "gen_m": 2.31,
+   "yuk_m": 3.656
+  },
+  "wide-stance-punch-up": {
+   "cerceve_m": 4.781,
+   "gen_m": 1.979,
+   "yuk_m": 4.399
+  },
+  "seated-arms-up-twist-lean": {
+   "cerceve_m": 3.339,
+   "gen_m": 2.828,
+   "yuk_m": 3.072
+  },
+  "seated-lean-back-arms-forward": {
+   "cerceve_m": 2.556,
+   "gen_m": 2.86,
+   "yuk_m": 1.951
+  },
+  "low-lunge-arms-wide-back": {
+   "cerceve_m": 3.438,
+   "gen_m": 2.822,
+   "yuk_m": 3.163
+  },
+  "seated-straddle-arms-t": {
+   "cerceve_m": 3.777,
+   "gen_m": 4.227,
+   "yuk_m": 2.273
+  },
+  "plank-shoulder-tap": {
+   "cerceve_m": 3.097,
+   "gen_m": 3.465,
+   "yuk_m": 2.108
+  },
+  "knee-plank-feet-up": {
+   "cerceve_m": 2.645,
+   "gen_m": 2.959,
+   "yuk_m": 2.033
+  },
+  "dead-bug": {
+   "cerceve_m": 2.606,
+   "gen_m": 2.915,
+   "yuk_m": 1.985
+  },
+  "bicycle-hold": {
+   "cerceve_m": 3.301,
+   "gen_m": 3.694,
+   "yuk_m": 1.159
+  },
+  "scissor-legs": {
+   "cerceve_m": 3.307,
+   "gen_m": 3.7,
+   "yuk_m": 2.2
+  },
+  "glute-bridge-arms-up": {
+   "cerceve_m": 3.338,
+   "gen_m": 2.605,
+   "yuk_m": 3.071
+  },
+  "crab-kick": {
+   "cerceve_m": 3.45,
+   "gen_m": 2.873,
+   "yuk_m": 3.174
+  },
+  "prone-arms-forward-lift": {
+   "cerceve_m": 3.727,
+   "gen_m": 4.17,
+   "yuk_m": 1.387
+  },
+  "warrior-lunge-arms-back": {
+   "cerceve_m": 3.758,
+   "gen_m": 2.717,
+   "yuk_m": 3.457
+  },
+  "goddess-arms-crossed-up": {
+   "cerceve_m": 4.331,
+   "gen_m": 2.33,
+   "yuk_m": 3.984
+  },
+  "standing-leg-back-arms-up": {
+   "cerceve_m": 4.976,
+   "gen_m": 1.726,
+   "yuk_m": 4.578
+  },
+  "one-leg-hug-knee-side": {
+   "cerceve_m": 4.123,
+   "gen_m": 2.622,
+   "yuk_m": 3.793
+  },
+  "tabletop-knee-tuck": {
+   "cerceve_m": 2.55,
+   "gen_m": 2.562,
+   "yuk_m": 2.212
+  },
+  "kneeling-arm-swing-back": {
+   "cerceve_m": 4.041,
+   "gen_m": 2.215,
+   "yuk_m": 3.718
+  },
+  "side-lunge-fold-hands-floor": {
+   "cerceve_m": 2.55,
+   "gen_m": 2.285,
+   "yuk_m": 2.26
+  },
+  "wide-stance-toe-reach": {
+   "cerceve_m": 2.716,
+   "gen_m": 2.134,
+   "yuk_m": 2.499
+  },
+  "pistol-squat-prep": {
+   "cerceve_m": 3.126,
+   "gen_m": 2.497,
+   "yuk_m": 2.876
+  },
+  "cossack-reach": {
+   "cerceve_m": 3.495,
+   "gen_m": 3.911,
+   "yuk_m": 3.088
+  },
+  "hands-down-lunge-knee-up": {
+   "cerceve_m": 2.552,
+   "gen_m": 2.856,
+   "yuk_m": 2.087
+  },
+  "fallen-lunge-arms-up": {
+   "cerceve_m": 4.82,
+   "gen_m": 2.292,
+   "yuk_m": 4.435
+  },
+  "seated-leg-raise-hold": {
+   "cerceve_m": 2.614,
+   "gen_m": 2.924,
+   "yuk_m": 2.276
+  },
+  "v-sit-hands-floor": {
+   "cerceve_m": 2.55,
+   "gen_m": 2.701,
+   "yuk_m": 2.27
+  },
+  "inchworm-walk-out": {
+   "cerceve_m": 2.837,
+   "gen_m": 3.174,
+   "yuk_m": 2.293
+  },
+  "squat-hands-behind-head": {
+   "cerceve_m": 3.634,
+   "gen_m": 1.432,
+   "yuk_m": 3.343
+  },
+  "toe-touch-kick": {
+   "cerceve_m": 4.047,
+   "gen_m": 2.461,
+   "yuk_m": 3.723
+  },
+  "side-bend-leg-out": {
+   "cerceve_m": 4.918,
+   "gen_m": 1.888,
+   "yuk_m": 4.525
+  },
+  "kneel-one-leg-forward-arms-up": {
+   "cerceve_m": 4.263,
+   "gen_m": 3.23,
+   "yuk_m": 3.922
+  },
+  "side-lunge-arms-up": {
+   "cerceve_m": 4.282,
+   "gen_m": 2.988,
+   "yuk_m": 3.939
+  },
+  "reverse-lunge-reach-up": {
+   "cerceve_m": 4.497,
+   "gen_m": 2.669,
+   "yuk_m": 4.137
+  },
+  "prone-snow-angel": {
+   "cerceve_m": 3.036,
+   "gen_m": 3.397,
+   "yuk_m": 2.606
+  },
+  "full-bow": {
+   "cerceve_m": 2.55,
+   "gen_m": 2.496,
+   "yuk_m": 1.715
+  },
+  "kneeling-backbend-hands-heels": {
+   "cerceve_m": 2.88,
+   "gen_m": 1.761,
+   "yuk_m": 2.65
+  },
+  "standing-bow-pull": {
+   "cerceve_m": 4.125,
+   "gen_m": 3.066,
+   "yuk_m": 3.795
+  },
+  "side-plank-leg-lift": {
+   "cerceve_m": 3.037,
+   "gen_m": 3.398,
+   "yuk_m": 2.615
+  },
+  "seated-forward-fold-arms-long": {
+   "cerceve_m": 2.55,
+   "gen_m": 2.491,
+   "yuk_m": 1.596
+  },
+  "straddle-side-reach": {
+   "cerceve_m": 3.924,
+   "gen_m": 4.391,
+   "yuk_m": 2.459
+  },
+  "splits-prep-arms-wide": {
+   "cerceve_m": 3.674,
+   "gen_m": 4.11,
+   "yuk_m": 2.601
+  },
+  "lunge-backbend-arms-up": {
+   "cerceve_m": 4.211,
+   "gen_m": 2.981,
+   "yuk_m": 3.874
+  },
+  "boat-twist-arms": {
+   "cerceve_m": 3.533,
+   "gen_m": 3.953,
+   "yuk_m": 1.845
+  },
+  "seated-leg-lift-arms-up": {
+   "cerceve_m": 3.065,
+   "gen_m": 2.74,
+   "yuk_m": 2.82
+  },
+  "standing-split-hands-floor": {
+   "cerceve_m": 4.067,
+   "gen_m": 1.553,
+   "yuk_m": 3.742
+  },
+  "warrior-three-hands-prayer": {
+   "cerceve_m": 3.147,
+   "gen_m": 3.42,
+   "yuk_m": 2.895
+  },
+  "kneeling-lunge-quad-pull": {
+   "cerceve_m": 4.195,
+   "gen_m": 2.343,
+   "yuk_m": 3.859
+  },
+  "half-kneel-arms-back-lift": {
+   "cerceve_m": 3.886,
+   "gen_m": 2.529,
+   "yuk_m": 3.575
+  },
+  "lying-reach-up": {
+   "cerceve_m": 2.55,
+   "gen_m": 2.027,
+   "yuk_m": 2.127
+  },
+  "lying-leg-hug": {
+   "cerceve_m": 3.334,
+   "gen_m": 3.731,
+   "yuk_m": 1.121
+  },
+  "low-squat-prayer-twist": {
+   "cerceve_m": 3.013,
+   "gen_m": 2.014,
+   "yuk_m": 2.772
+  },
+  "wide-squat-arms-up": {
+   "cerceve_m": 4.483,
+   "gen_m": 2.33,
+   "yuk_m": 4.124
+  },
+  "plank-knee-to-elbow": {
+   "cerceve_m": 3.038,
+   "gen_m": 3.399,
+   "yuk_m": 1.849
+  },
+  "side-lunge-hands-prayer-deep": {
+   "cerceve_m": 4.065,
+   "gen_m": 2.5,
+   "yuk_m": 3.74
+  },
+  "seated-lean-back-leg-up": {
+   "cerceve_m": 2.951,
+   "gen_m": 3.302,
+   "yuk_m": 1.996
+  },
+  "seated-wide-twist-reach": {
+   "cerceve_m": 3.81,
+   "gen_m": 4.263,
+   "yuk_m": 2.962
+  },
+  "kneeling-arch-one-arm": {
+   "cerceve_m": 4.041,
+   "gen_m": 1.86,
+   "yuk_m": 3.718
+  },
+  "low-lunge-hands-on-back-knee": {
+   "cerceve_m": 3.272,
+   "gen_m": 2.264,
+   "yuk_m": 3.01
+  },
+  "forearm-plank-leg-up": {
+   "cerceve_m": 3.314,
+   "gen_m": 3.708,
+   "yuk_m": 1.912
+  },
+  "kneeling-airplane-arms": {
+   "cerceve_m": 3.377,
+   "gen_m": 3.099,
+   "yuk_m": 3.107
+  },
+  "stork-arms-up": {
+   "cerceve_m": 4.98,
+   "gen_m": 1.208,
+   "yuk_m": 4.582
+  },
+  "deep-lunge-arms-forward-low": {
+   "cerceve_m": 3.416,
+   "gen_m": 3.823,
+   "yuk_m": 2.591
+  },
+  "seated-splits-lean": {
+   "cerceve_m": 3.72,
+   "gen_m": 4.162,
+   "yuk_m": 3.058
+  },
+  "lunge-victory-reach": {
+   "cerceve_m": 4.634,
+   "gen_m": 2.717,
+   "yuk_m": 4.263
+  }
+ },
+ "aciklik_p1": [
+  156.3,
+  160.2,
+  803.7,
+  669.5
+ ],
+ "ampul_p1": [
+  [
+   181.3,
+   163.4
+  ],
+  [
+   224.0,
+   163.4
+  ],
+  [
+   266.7,
+   163.4
+  ],
+  [
+   309.3,
+   163.4
+  ],
+  [
+   352.0,
+   163.4
+  ],
+  [
+   394.7,
+   163.4
+  ],
+  [
+   437.3,
+   163.4
+  ],
+  [
+   480.0,
+   163.4
+  ],
+  [
+   522.7,
+   163.4
+  ],
+  [
+   565.3,
+   163.4
+  ],
+  [
+   608.0,
+   163.4
+  ],
+  [
+   650.7,
+   163.4
+  ],
+  [
+   693.3,
+   163.4
+  ],
+  [
+   736.0,
+   163.4
+  ],
+  [
+   778.7,
+   163.4
+  ],
+  [
+   141.2,
+   639.7
+  ],
+  [
+   138.4,
+   596.5
+  ],
+  [
+   135.5,
+   552.7
+  ],
+  [
+   132.6,
+   508.1
+  ],
+  [
+   129.7,
+   462.7
+  ],
+  [
+   126.7,
+   416.6
+  ],
+  [
+   123.6,
+   369.6
+  ],
+  [
+   120.5,
+   321.9
+  ],
+  [
+   117.4,
+   273.3
+  ],
+  [
+   114.1,
+   223.8
+  ],
+  [
+   110.9,
+   173.5
+  ],
+  [
+   818.8,
+   639.7
+  ],
+  [
+   821.6,
+   596.5
+  ],
+  [
+   824.5,
+   552.7
+  ],
+  [
+   827.4,
+   508.1
+  ],
+  [
+   830.3,
+   462.7
+  ],
+  [
+   833.3,
+   416.6
+  ],
+  [
+   836.4,
+   369.6
+  ],
+  [
+   839.5,
+   321.9
+  ],
+  [
+   842.6,
+   273.3
+  ],
+  [
+   845.9,
+   223.8
+  ],
+  [
+   849.1,
+   173.5
+  ]
+ ],
+ "aciklik_p2": [
+  156.3,
+  160.2,
+  803.7,
+  669.5
+ ],
+ "ampul_p2": [
+  [
+   181.3,
+   163.4
+  ],
+  [
+   224.0,
+   163.4
+  ],
+  [
+   266.7,
+   163.4
+  ],
+  [
+   309.3,
+   163.4
+  ],
+  [
+   352.0,
+   163.4
+  ],
+  [
+   394.7,
+   163.4
+  ],
+  [
+   437.3,
+   163.4
+  ],
+  [
+   480.0,
+   163.4
+  ],
+  [
+   522.7,
+   163.4
+  ],
+  [
+   565.3,
+   163.4
+  ],
+  [
+   608.0,
+   163.4
+  ],
+  [
+   650.7,
+   163.4
+  ],
+  [
+   693.3,
+   163.4
+  ],
+  [
+   736.0,
+   163.4
+  ],
+  [
+   778.7,
+   163.4
+  ],
+  [
+   141.2,
+   639.7
+  ],
+  [
+   138.4,
+   596.5
+  ],
+  [
+   135.5,
+   552.7
+  ],
+  [
+   132.6,
+   508.1
+  ],
+  [
+   129.7,
+   462.7
+  ],
+  [
+   126.7,
+   416.6
+  ],
+  [
+   123.6,
+   369.6
+  ],
+  [
+   120.5,
+   321.9
+  ],
+  [
+   117.4,
+   273.3
+  ],
+  [
+   114.1,
+   223.8
+  ],
+  [
+   110.9,
+   173.5
+  ],
+  [
+   818.8,
+   639.7
+  ],
+  [
+   821.6,
+   596.5
+  ],
+  [
+   824.5,
+   552.7
+  ],
+  [
+   827.4,
+   508.1
+  ],
+  [
+   830.3,
+   462.7
+  ],
+  [
+   833.3,
+   416.6
+  ],
+  [
+   836.4,
+   369.6
+  ],
+  [
+   839.5,
+   321.9
+  ],
+  [
+   842.6,
+   273.3
+  ],
+  [
+   845.9,
+   223.8
+  ],
+  [
+   849.1,
+   173.5
+  ]
+ ]
+}

@@ -1,0 +1,19 @@
+{
+ "_not": "TETRIS MODE 4. video (REF-055, Glow Motion PVP BATTLE#1). bolum-kur.py --ayar ayar-04.json. Renk (18 Eki 2026, kullanici 'onceki renkleri kullanamazsin ... onay beklemene gerek yok'): P1 Yakut Kirmizisi, P2 Safir/Kobalt. Seviye adlari ve ust bant sayaci REF-055'ten (EASY/MEDIUM/HARD, 'EASY : 1/15'). Muzik EN SONA birakildi: bpm 136 GECICI (kesit icin); Suno parcasi gelince olculen BPM ile yeniden kurulur.",
+ "bolum": "tetris-mode-04",
+ "bpm": 136.0,
+ "muzik": "BEKLENIYOR (Suno, kullanici) - brief POZ-DUVARI/SUNO-BRIEF-TETRIS-MODE-04.md",
+ "duvar": "duvar-listesi-04.json",
+ "tur_kart": {"1": ["LEVEL 1", "EASY"], "2": ["LEVEL 2", "MEDIUM"], "3": ["LEVEL 3", "HARD"]},
+ "ovgu": ["ON FIRE!", "SOLID!", "PERFECT FIT!", "UNSTOPPABLE!", "SMOOTH!", "LEGEND!"],
+ "tema": {
+  "varlik": "/03-motor/tetris-pvp/varlik-04/",
+  "p1": "#FF2D55", "p2": "#2F54FF", "altin": "#ffd27a", "camgobegi": "#5fe6d0",
+  "p1koyu": "#a80a2c", "p2koyu": "#1426a8", "p1acik": "#ffd6de", "p2acik": "#d9e0ff", "p1parlak": "#ffb8c6", "p2parlak": "#b8c6ff",
+  "vsSol": ["#a8102e", "#2a0410"], "vsSag": ["#1a2fb0", "#050a2e"], "isin": ["#0f6f6a", "#02101a"], "wrapIsin": ["#ffb35c", "#2a0a06"],
+  "ovguRenk": ["#ffffff", "#ffd27a", "#ff5a78"], "parca": ["#ff2d55", "#5a78ff", "#ffd27a"], "abone": ["#ff6a85", "#c4102f"],
+  "vsAlt": "TETRIS MODE · PVP BATTLE", "wrap": ["ORBIT", "CONQUERED!"],
+  "seviye": ["EASY", "MEDIUM", "HARD"],
+  "ovgu": ["ON FIRE!", "SOLID!", "PERFECT FIT!", "UNSTOPPABLE!", "SMOOTH!", "LEGEND!"]
+ }
+}
