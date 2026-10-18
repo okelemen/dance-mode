@@ -49,7 +49,7 @@ TUR1 = [  # LEVEL 1 - EASY: ayakta + oturma, yumusak yoga
     (profil("Standing Arms Forward Tiptoe Lean", 160, [100, 100], [98, 98], [-15, -15], [-17, -17]),
      on("Wide Stance Punch Up", "up", "chest", "wide", "wide")),
     (on("Seated Arms Up Twist Lean", [-170, -150], [140, 120], OTUR_L, OTUR_R, govde=168),
-     profil("Seated Lean Back Arms Forward", 210, [90, 90], [88, 88], [125, 30], [123, 28])),
+     profil("Seated Lean Back Arms Forward", 210, [90, 90], [88, 88], [125, 55], [123, 53])),
     (profil("Low Lunge Arms Wide Back", 180, [-120, -120], [-60, -60], [85, 0], [0, -90]),
      on("Seated Straddle Arms T", "t", "t", [-80, -80], [80, 80])),
 ]
@@ -108,7 +108,7 @@ TUR3 = [  # LEVEL 3 - HARD: esneklik + denge finali (guvenli surumler)
      on("Wide Squat Arms Up", "up", "up", "goddess", "goddess", govde=180)),
     (profil("Plank Knee to Elbow", 95, [0, 0], [0, 0], [120, -40], [-85, -85]),
      profil("Side Lunge Hands Prayer Deep", 180, [30, 160], [28, 158], [95, -5], [-35, -35])),
-    (profil("Seated Lean Back Leg Up", 215, [-35, -35], [-33, -33], [140, 140], [125, 25]),
+    (profil("Seated Lean Back Leg Up", 215, [-35, -35], [-33, -33], [140, 140], [125, 55]),
      on("Seated Wide Twist Reach", [-80, -80], [170, 170], [-85, -85], [85, 85], govde=200)),
     (profil("Kneeling Arch One Arm", 220, [-175, -175], [-40, -40], [0, -90], [0, -90]),
      profil("Low Lunge Hands on Back Knee", 180, [-30, -30], [-28, -28], [85, 0], [0, -150])),
