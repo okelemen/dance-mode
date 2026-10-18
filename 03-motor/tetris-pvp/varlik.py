@@ -310,13 +310,14 @@ def gezegen(rnd):
     tc = nt.nodes.new("ShaderNodeTexCoord")
     # deneme 1: Object koordinati (R=13) x olcek 2,4 -> nokta/moire deseni. Generated (0-1) + dusuk bozulma = gaz devi seritleri
     wv = nt.nodes.new("ShaderNodeTexWave"); wv.wave_type = "BANDS"; wv.bands_direction = "Z"
-    wv.inputs["Scale"].default_value = 3.5; wv.inputs["Distortion"].default_value = 1.6; wv.inputs["Detail"].default_value = 3
+    wv.inputs["Scale"].default_value = 2.2; wv.inputs["Distortion"].default_value = 3.0; wv.inputs["Detail"].default_value = 3
     wv.inputs["Detail Scale"].default_value = 2.0
     nt.links.new(tc.outputs["Generated"], wv.inputs["Vector"])
     rp = nt.nodes.new("ShaderNodeValToRGB"); cr = rp.color_ramp
-    cr.elements[0].position = 0.0; cr.elements[0].color = (*lin(hex3("#7a0f2a")), 1)
-    cr.elements[1].position = 1.0; cr.elements[1].color = (*lin(hex3("#ffd27a")), 1)
-    for pos, c in ((0.3, "#e8304f"), (0.55, "#ff8a3a"), (0.8, "#ffb35c")):
+    # deneme 2: koyu bordo <-> acik sari seritler iki serit arasindaki dar boslukta "berber diregi" gibi okundu -> dar aralik
+    cr.elements[0].position = 0.0; cr.elements[0].color = (*lin(hex3("#c2283f")), 1)
+    cr.elements[1].position = 1.0; cr.elements[1].color = (*lin(hex3("#ffb070")), 1)
+    for pos, c in ((0.35, "#e0405a"), (0.65, "#f26a4a")):
         e = cr.elements.new(pos); e.color = (*lin(hex3(c)), 1)
     nt.links.new(wv.outputs["Fac"], rp.inputs[0])
     # hacim: kenara dogru kararan (fresnel tersi) parlaklik -> duz disk degil kure okunur
