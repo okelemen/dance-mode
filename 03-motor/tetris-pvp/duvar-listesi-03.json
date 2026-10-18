@@ -67,7 +67,7 @@
  {
   "tur": 1,
   "p1": "cow-face-arms",
-  "p2": "kneeling-twist"
+  "p2": "heel-sit-reach-forward"
  },
  {
   "tur": 1,
@@ -161,7 +161,7 @@
  },
  {
   "tur": 3,
-  "p1": "crow-lean",
+  "p1": "low-lunge-arms-forward",
   "p2": "forearm-side-plank"
  },
  {
@@ -191,7 +191,7 @@
  },
  {
   "tur": 3,
-  "p1": "dolphin-leg-lift",
+  "p1": "crane-stand",
   "p2": "bear-hold"
  },
  {
