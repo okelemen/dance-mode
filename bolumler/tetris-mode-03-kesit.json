@@ -1,0 +1,149 @@
+{
+ "seri": "TETRIS MODE PVP",
+ "bolum": "tetris-mode-03",
+ "bpm": 141.9742,
+ "toplam_olcu": 38,
+ "toplam_duvar": 4,
+ "zaman": {
+  "kart": 1.6904,
+  "say": 2.5357,
+  "buyu": 5.0713,
+  "gec": 0.8452,
+  "sure": 11.8331
+ },
+ "kartlar": [
+  {
+   "t": 0.0,
+   "sure": 3.3809,
+   "tip": "vs"
+  },
+  {
+   "t": 3.3809,
+   "sure": 3.3809,
+   "tip": "tur",
+   "tur": 1,
+   "metin": "ROUND 1",
+   "alt": "STRETCH & SURVIVE"
+  },
+  {
+   "t": 6.7618,
+   "sure": 3.3809,
+   "tip": "basla"
+  },
+  {
+   "t": 33.8089,
+   "sure": 3.3809,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "ROUND 2",
+   "alt": "BALANCE BATTLE"
+  },
+  {
+   "t": 49.0229,
+   "sure": 3.3809,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "ROUND 3",
+   "alt": "FINAL FLEX!"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 10.1427,
+   "p1": "eagle-arms",
+   "p2": "sunrise-arch",
+   "ovgu": "SUPERB!"
+  },
+  {
+   "no": 2,
+   "tur": 1,
+   "t0": 21.9758,
+   "p1": "easy-seat-prayer-up",
+   "p2": "wide-leg-fold",
+   "ovgu": "STELLAR!"
+  },
+  {
+   "no": 16,
+   "tur": 2,
+   "t0": 37.1898,
+   "p1": "eagle-pose",
+   "p2": "standing-figure-four",
+   "ovgu": "NAILED IT!"
+  },
+  {
+   "no": 31,
+   "tur": 3,
+   "t0": 52.4038,
+   "p1": "king-pigeon-reach",
+   "p2": "fish-pose",
+   "ovgu": "SUPERB!"
+  }
+ ],
+ "abone": [
+  15.0,
+  30.0,
+  45.0,
+  60.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "Starlight Sprint.wav (Suno, kullanici) -> starlight-sprint-142.wav",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne4.html.",
+ "tema": {
+  "varlik": "/03-motor/tetris-pvp/varlik-03/",
+  "p1": "#A64DFF",
+  "p2": "#F5FF3D",
+  "altin": "#ffcf3a",
+  "camgobegi": "#8fb4ff",
+  "p1koyu": "#5a12b0",
+  "p2koyu": "#a8a400",
+  "p1acik": "#efdcff",
+  "p2acik": "#fdffd6",
+  "p1parlak": "#e3c8ff",
+  "p2parlak": "#faffc8",
+  "vsSol": [
+   "#4a1590",
+   "#12052e"
+  ],
+  "vsSag": [
+   "#8a8a00",
+   "#262400"
+  ],
+  "isin": [
+   "#7a2bd6",
+   "#120a3a"
+  ],
+  "wrapIsin": [
+   "#f5ff3d",
+   "#2a2400"
+  ],
+  "ovguRenk": [
+   "#ffffff",
+   "#f5ff3d",
+   "#b45cff"
+  ],
+  "parca": [
+   "#b45cff",
+   "#f5ff3d",
+   "#ff7ae6"
+  ],
+  "abone": [
+   "#c79bff",
+   "#6a1fc4"
+  ],
+  "vsAlt": "TETRIS MODE · PVP BATTLE",
+  "wrap": [
+   "BATTLE",
+   "CLEARED!"
+  ],
+  "ovgu": [
+   "SUPERB!",
+   "STELLAR!",
+   "GREAT!",
+   "NAILED IT!",
+   "COSMIC!",
+   "AWESOME!"
+  ]
+ }
+}

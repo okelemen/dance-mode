@@ -1,0 +1,519 @@
+{
+ "seri": "TETRIS MODE PVP",
+ "bolum": "tetris-mode-03",
+ "bpm": 141.9742,
+ "toplam_olcu": 330,
+ "toplam_duvar": 45,
+ "zaman": {
+  "kart": 1.6904,
+  "say": 2.5357,
+  "buyu": 5.0713,
+  "gec": 0.8452,
+  "sure": 11.8331
+ },
+ "kartlar": [
+  {
+   "t": 0.0,
+   "sure": 3.3809,
+   "tip": "vs"
+  },
+  {
+   "t": 3.3809,
+   "sure": 3.3809,
+   "tip": "tur",
+   "tur": 1,
+   "metin": "ROUND 1",
+   "alt": "STRETCH & SURVIVE"
+  },
+  {
+   "t": 6.7618,
+   "sure": 3.3809,
+   "tip": "basla"
+  },
+  {
+   "t": 187.6392,
+   "sure": 3.3809,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "ROUND 2",
+   "alt": "BALANCE BATTLE"
+  },
+  {
+   "t": 368.5166,
+   "sure": 3.3809,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "ROUND 3",
+   "alt": "FINAL FLEX!"
+  },
+  {
+   "t": 549.394,
+   "sure": 3.3809,
+   "tip": "wrap"
+  },
+  {
+   "t": 552.7749,
+   "sure": 5.0713,
+   "tip": "abone"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 10.1427,
+   "p1": "eagle-arms",
+   "p2": "sunrise-arch",
+   "ovgu": "SUPERB!"
+  },
+  {
+   "no": 2,
+   "tur": 1,
+   "t0": 21.9758,
+   "p1": "easy-seat-prayer-up",
+   "p2": "wide-leg-fold",
+   "ovgu": "STELLAR!"
+  },
+  {
+   "no": 3,
+   "tur": 1,
+   "t0": 33.8089,
+   "p1": "childs-pose",
+   "p2": "cat-back",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 4,
+   "tur": 1,
+   "t0": 45.642,
+   "p1": "cow-lift",
+   "p2": "thread-the-needle",
+   "ovgu": "NAILED IT!"
+  },
+  {
+   "no": 5,
+   "tur": 1,
+   "t0": 57.4751,
+   "p1": "butterfly",
+   "p2": "seated-side-stretch",
+   "ovgu": "COSMIC!"
+  },
+  {
+   "no": 6,
+   "tur": 1,
+   "t0": 69.3082,
+   "p1": "pyramid-fold",
+   "p2": "standing-backbend",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 7,
+   "tur": 1,
+   "t0": 81.1413,
+   "p1": "humble-warrior",
+   "p2": "wide-leg-twist",
+   "ovgu": "SUPERB!"
+  },
+  {
+   "no": 8,
+   "tur": 1,
+   "t0": 92.9744,
+   "p1": "lizard-lunge",
+   "p2": "mermaid-seat",
+   "ovgu": "STELLAR!"
+  },
+  {
+   "no": 9,
+   "tur": 1,
+   "t0": 104.8075,
+   "p1": "happy-baby",
+   "p2": "supine-twist",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 10,
+   "tur": 1,
+   "t0": 116.6406,
+   "p1": "legs-up",
+   "p2": "reclined-butterfly",
+   "ovgu": "NAILED IT!"
+  },
+  {
+   "no": 11,
+   "tur": 1,
+   "t0": 128.4737,
+   "p1": "head-to-knee",
+   "p2": "wide-angle-fold",
+   "ovgu": "COSMIC!"
+  },
+  {
+   "no": 12,
+   "tur": 1,
+   "t0": 140.3068,
+   "p1": "crescent-moon-bend",
+   "p2": "tiptoe-prayer",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 13,
+   "tur": 1,
+   "t0": 152.1399,
+   "p1": "toe-touch-twist",
+   "p2": "clasp-fold",
+   "ovgu": "SUPERB!"
+  },
+  {
+   "no": 14,
+   "tur": 1,
+   "t0": 163.973,
+   "p1": "cow-face-arms",
+   "p2": "heel-sit-reach-forward",
+   "ovgu": "STELLAR!"
+  },
+  {
+   "no": 15,
+   "tur": 1,
+   "t0": 175.8061,
+   "p1": "side-lying-leg-lift",
+   "p2": "kneeling-arm-sweep",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 16,
+   "tur": 2,
+   "t0": 191.0201,
+   "p1": "eagle-pose",
+   "p2": "standing-figure-four",
+   "ovgu": "NAILED IT!"
+  },
+  {
+   "no": 17,
+   "tur": 2,
+   "t0": 202.8532,
+   "p1": "revolved-triangle",
+   "p2": "bound-side-angle",
+   "ovgu": "COSMIC!"
+  },
+  {
+   "no": 18,
+   "tur": 2,
+   "t0": 214.6863,
+   "p1": "pigeon-upright",
+   "p2": "sage-twist",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 19,
+   "tur": 2,
+   "t0": 226.5194,
+   "p1": "forearm-plank",
+   "p2": "reverse-tabletop",
+   "ovgu": "SUPERB!"
+  },
+  {
+   "no": 20,
+   "tur": 2,
+   "t0": 238.3525,
+   "p1": "single-leg-bridge",
+   "p2": "locust",
+   "ovgu": "STELLAR!"
+  },
+  {
+   "no": 21,
+   "tur": 2,
+   "t0": 250.1856,
+   "p1": "kneeling-side-plank",
+   "p2": "dolphin",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 22,
+   "tur": 2,
+   "t0": 262.0187,
+   "p1": "stork-fold",
+   "p2": "arabesque-reach",
+   "ovgu": "NAILED IT!"
+  },
+  {
+   "no": 23,
+   "tur": 2,
+   "t0": 273.8518,
+   "p1": "reverse-plank",
+   "p2": "wild-thing-lite",
+   "ovgu": "COSMIC!"
+  },
+  {
+   "no": 24,
+   "tur": 2,
+   "t0": 285.6849,
+   "p1": "fire-log-seat",
+   "p2": "compass-prep",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 25,
+   "tur": 2,
+   "t0": 297.518,
+   "p1": "gate-lift",
+   "p2": "low-boat",
+   "ovgu": "SUPERB!"
+  },
+  {
+   "no": 26,
+   "tur": 2,
+   "t0": 309.3511,
+   "p1": "hand-to-toe-side",
+   "p2": "tiptoe-squat",
+   "ovgu": "STELLAR!"
+  },
+  {
+   "no": 27,
+   "tur": 2,
+   "t0": 321.1842,
+   "p1": "plank-leg-lift",
+   "p2": "down-dog-split",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 28,
+   "tur": 2,
+   "t0": 333.0173,
+   "p1": "half-bow",
+   "p2": "floor-swimmer",
+   "ovgu": "NAILED IT!"
+  },
+  {
+   "no": 29,
+   "tur": 2,
+   "t0": 344.8504,
+   "p1": "heron-seat",
+   "p2": "seated-leg-cradle",
+   "ovgu": "COSMIC!"
+  },
+  {
+   "no": 30,
+   "tur": 2,
+   "t0": 356.6835,
+   "p1": "half-split",
+   "p2": "wide-squat-twist",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 31,
+   "tur": 3,
+   "t0": 371.8975,
+   "p1": "king-pigeon-reach",
+   "p2": "fish-pose",
+   "ovgu": "SUPERB!"
+  },
+  {
+   "no": 32,
+   "tur": 3,
+   "t0": 383.7306,
+   "p1": "front-split-prep",
+   "p2": "hurdler-stretch",
+   "ovgu": "STELLAR!"
+  },
+  {
+   "no": 33,
+   "tur": 3,
+   "t0": 395.5637,
+   "p1": "low-lunge-arms-forward",
+   "p2": "forearm-side-plank",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 34,
+   "tur": 3,
+   "t0": 407.3968,
+   "p1": "hollow-hold",
+   "p2": "upward-plank-leg-lift",
+   "ovgu": "NAILED IT!"
+  },
+  {
+   "no": 35,
+   "tur": 3,
+   "t0": 419.2299,
+   "p1": "mermaid-pigeon",
+   "p2": "tortoise-prep",
+   "ovgu": "COSMIC!"
+  },
+  {
+   "no": 36,
+   "tur": 3,
+   "t0": 431.063,
+   "p1": "toe-stand-prep",
+   "p2": "revolved-side-angle",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 37,
+   "tur": 3,
+   "t0": 442.8961,
+   "p1": "l-sit-prep",
+   "p2": "tabletop-twist-reach",
+   "ovgu": "SUPERB!"
+  },
+  {
+   "no": 38,
+   "tur": 3,
+   "t0": 454.7292,
+   "p1": "lizard-twist",
+   "p2": "humble-pigeon",
+   "ovgu": "STELLAR!"
+  },
+  {
+   "no": 39,
+   "tur": 3,
+   "t0": 466.5623,
+   "p1": "crane-stand",
+   "p2": "bear-hold",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 40,
+   "tur": 3,
+   "t0": 478.3954,
+   "p1": "open-wide-boat",
+   "p2": "cross-leg-fold",
+   "ovgu": "NAILED IT!"
+  },
+  {
+   "no": 41,
+   "tur": 3,
+   "t0": 490.2285,
+   "p1": "tiger-pose",
+   "p2": "side-plank-tree",
+   "ovgu": "COSMIC!"
+  },
+  {
+   "no": 42,
+   "tur": 3,
+   "t0": 502.0616,
+   "p1": "wide-angle-side-bend",
+   "p2": "kneeling-quad-hold",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 43,
+   "tur": 3,
+   "t0": 513.8947,
+   "p1": "side-split-prep",
+   "p2": "reverse-prayer-fold",
+   "ovgu": "SUPERB!"
+  },
+  {
+   "no": 44,
+   "tur": 3,
+   "t0": 525.7278,
+   "p1": "side-lying-quad-hold",
+   "p2": "knee-to-nose",
+   "ovgu": "STELLAR!"
+  },
+  {
+   "no": 45,
+   "tur": 3,
+   "t0": 537.5609,
+   "p1": "bound-lunge",
+   "p2": "seated-straddle-reach-up",
+   "ovgu": "GREAT!"
+  }
+ ],
+ "abone": [
+  15.0,
+  30.0,
+  45.0,
+  60.0,
+  75.0,
+  90.0,
+  105.0,
+  120.0,
+  135.0,
+  150.0,
+  165.0,
+  180.0,
+  195.0,
+  210.0,
+  225.0,
+  240.0,
+  255.0,
+  270.0,
+  285.0,
+  300.0,
+  315.0,
+  330.0,
+  345.0,
+  360.0,
+  375.0,
+  390.0,
+  405.0,
+  420.0,
+  435.0,
+  450.0,
+  465.0,
+  480.0,
+  495.0,
+  510.0,
+  525.0,
+  540.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "Starlight Sprint.wav (Suno, kullanici) -> starlight-sprint-142.wav",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne4.html.",
+ "tema": {
+  "varlik": "/03-motor/tetris-pvp/varlik-03/",
+  "p1": "#A64DFF",
+  "p2": "#F5FF3D",
+  "altin": "#ffcf3a",
+  "camgobegi": "#8fb4ff",
+  "p1koyu": "#5a12b0",
+  "p2koyu": "#a8a400",
+  "p1acik": "#efdcff",
+  "p2acik": "#fdffd6",
+  "p1parlak": "#e3c8ff",
+  "p2parlak": "#faffc8",
+  "vsSol": [
+   "#4a1590",
+   "#12052e"
+  ],
+  "vsSag": [
+   "#8a8a00",
+   "#262400"
+  ],
+  "isin": [
+   "#7a2bd6",
+   "#120a3a"
+  ],
+  "wrapIsin": [
+   "#f5ff3d",
+   "#2a2400"
+  ],
+  "ovguRenk": [
+   "#ffffff",
+   "#f5ff3d",
+   "#b45cff"
+  ],
+  "parca": [
+   "#b45cff",
+   "#f5ff3d",
+   "#ff7ae6"
+  ],
+  "abone": [
+   "#c79bff",
+   "#6a1fc4"
+  ],
+  "vsAlt": "TETRIS MODE · PVP BATTLE",
+  "wrap": [
+   "BATTLE",
+   "CLEARED!"
+  ],
+  "ovgu": [
+   "SUPERB!",
+   "STELLAR!",
+   "GREAT!",
+   "NAILED IT!",
+   "COSMIC!",
+   "AWESOME!"
+  ]
+ }
+}

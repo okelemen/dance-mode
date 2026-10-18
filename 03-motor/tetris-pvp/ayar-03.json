@@ -1,0 +1,18 @@
+{
+ "_not": "TETRIS MODE 3. video (REF-054). bolum-kur.py --ayar ayar-03.json. Renk karari kullanici 18 Eki 2026: P1 Elektrik Mor, P2 Limon Sarisi. Muzik Starlight Sprint (Suno, kullanici), muzik-sabitle.py ile 142'ye sabitlendi, hakem 141,9742 BPM.",
+ "bolum": "tetris-mode-03",
+ "bpm": 141.9742,
+ "muzik": "Starlight Sprint.wav (Suno, kullanici) -> starlight-sprint-142.wav",
+ "duvar": "duvar-listesi-03.json",
+ "tur_kart": {"1": ["ROUND 1", "STRETCH & SURVIVE"], "2": ["ROUND 2", "BALANCE BATTLE"], "3": ["ROUND 3", "FINAL FLEX!"]},
+ "ovgu": ["SUPERB!", "STELLAR!", "GREAT!", "NAILED IT!", "COSMIC!", "AWESOME!"],
+ "tema": {
+  "varlik": "/03-motor/tetris-pvp/varlik-03/",
+  "p1": "#A64DFF", "p2": "#F5FF3D", "altin": "#ffcf3a", "camgobegi": "#8fb4ff",
+  "p1koyu": "#5a12b0", "p2koyu": "#a8a400", "p1acik": "#efdcff", "p2acik": "#fdffd6", "p1parlak": "#e3c8ff", "p2parlak": "#faffc8",
+  "vsSol": ["#4a1590", "#12052e"], "vsSag": ["#8a8a00", "#262400"], "isin": ["#7a2bd6", "#120a3a"], "wrapIsin": ["#f5ff3d", "#2a2400"],
+  "ovguRenk": ["#ffffff", "#f5ff3d", "#b45cff"], "parca": ["#b45cff", "#f5ff3d", "#ff7ae6"], "abone": ["#c79bff", "#6a1fc4"],
+  "vsAlt": "TETRIS MODE · PVP BATTLE", "wrap": ["BATTLE", "CLEARED!"],
+  "ovgu": ["SUPERB!", "STELLAR!", "GREAT!", "NAILED IT!", "COSMIC!", "AWESOME!"]
+ }
+}
