@@ -1,0 +1,11390 @@
+{
+ "_not": "TETRIS MODE PVP 5. video ADAY havuzu (REF-056) poz tanimlari. Acilar EKRAN duzleminde (pozlar.js dili): 0 asagi, 90 ekran-sag, 180 yukari, -90 ekran-sol. Kollar [ust kol, on kol], bacaklar [uyluk, baldir]. sol*/sag* = KARAKTERIN solu/sagi; karakter kameraya donukken sol = ekran SAGI. yon: on (kameraya donuk) | sag (profil, yuzu ekran sagina). govde: kalcadan boyna aci, bas: govdeye ek aci. Mixamo govdesi (siluet-govde.fbx) bu acilarla bukulur, duz siyah maske cikar (varlik.py).",
+ "pozlar": {
+  "fog-point-v-tree-lean-r": {
+   "ad": "Fog Point V Tree Lean R",
+   "yon": "on",
+   "govde": 155,
+   "bas": 0,
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 1
+  },
+  "haunted-chest-point-curtsy-lean-r": {
+   "ad": "Haunted Chest Point Curtsy Lean R",
+   "yon": "on",
+   "govde": 155,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    60,
+    60
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "lantern-reach-down-half-goddess": {
+   "ad": "Lantern Reach Down Half Goddess",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    8,
+    5
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "werewolf-hip-hook-horse": {
+   "ad": "Werewolf Hip Hook Horse",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    130,
+    40
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "ghoul-w-hook-leg-out": {
+   "ad": "Ghoul W Hook Leg Out",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    130,
+    40
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "broom-v-t-curtsy": {
+   "ad": "Broom V T Curtsy",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "scarecrow-reach-flex-leg-out": {
+   "ad": "Scarecrow Reach Flex Leg Out",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "zombie-head-elbow-goddess-lean-r": {
+   "ad": "Zombie Head Elbow Goddess Lean R",
+   "yon": "on",
+   "govde": 155,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    30,
+    150
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "raven-flex-swing-kick": {
+   "ad": "Raven Flex Swing Kick",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    150,
+    110
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 1
+  },
+  "banshee-head-t-leg-out-lean-r": {
+   "ad": "Banshee Head T Leg Out Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "pumpkin-v-w-half-goddess": {
+   "ad": "Pumpkin V W Half Goddess",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "mummy-hook-v-leg-out-lean-l": {
+   "ad": "Mummy Hook V Leg Out Lean L",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -130,
+    -40
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "wizard-salute-elbow-kick": {
+   "ad": "Wizard Salute Elbow Kick",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -100,
+    140
+   ],
+   "solKol": [
+    30,
+    150
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 1
+  },
+  "shadow-down-flex-leg-out-lean-r": {
+   "ad": "Shadow Down Flex Leg Out Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -8,
+    -5
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "tombstone-w-flex-goddess": {
+   "ad": "Tombstone W Flex Goddess",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "goblin-t-v-horse": {
+   "ad": "Goblin T V Horse",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "vampire-hook-hip-tree": {
+   "ad": "Vampire Hook Hip Tree",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -130,
+    -40
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 1
+  },
+  "crypt-v-chest-leg-out": {
+   "ad": "Crypt V Chest Leg Out",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "graveyard-cactus-w-half-goddess-lean-l": {
+   "ad": "Graveyard Cactus W Half Goddess Lean L",
+   "yon": "on",
+   "govde": 205,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "crypt-elbow-low-hop": {
+   "ad": "Crypt Elbow Low Hop",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -30,
+    -150
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    -60
+   ],
+   "tur": 1
+  },
+  "werewolf-salute-point-knee-lean-l": {
+   "ad": "Werewolf Salute Point Knee Lean L",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -100,
+    140
+   ],
+   "solKol": [
+    60,
+    60
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 1
+  },
+  "hex-w-back-goddess": {
+   "ad": "Hex W Back Goddess",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    152,
+    -38
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "bat-hook-t-leg-out-lean-r": {
+   "ad": "Bat Hook T Leg Out Lean R",
+   "yon": "on",
+   "govde": 155,
+   "bas": 0,
+   "sagKol": [
+    -130,
+    -40
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "shadow-w-w-kick-lean-r": {
+   "ad": "Shadow W W Kick Lean R",
+   "yon": "on",
+   "govde": 155,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 1
+  },
+  "ghost-hip-reach-leg-out": {
+   "ad": "Ghost Hip Reach Leg Out",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "spider-hip-t-half-goddess-lean-l": {
+   "ad": "Spider Hip T Half Goddess Lean L",
+   "yon": "on",
+   "govde": 205,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "spider-elbow-low-horse-lean-l": {
+   "ad": "Spider Elbow Low Horse Lean L",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -30,
+    -150
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "spider-diag-t-leg-out": {
+   "ad": "Spider Diag T Leg Out",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "mummy-low-back-hop-lean-r": {
+   "ad": "Mummy Low Back Hop Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    152,
+    -38
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    -60
+   ],
+   "tur": 1
+  },
+  "skeleton-flex-low-knee": {
+   "ad": "Skeleton Flex Low Knee",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 1
+  },
+  "black-cat-flex-reach-stand-lean-r": {
+   "ad": "Black Cat Flex Reach Stand Lean R",
+   "yon": "on",
+   "govde": 155,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "goblin-point-chest-half-goddess-lean-l": {
+   "ad": "Goblin Point Chest Half Goddess Lean L",
+   "yon": "on",
+   "govde": 205,
+   "bas": 0,
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "phantom-hook-point-curtsy-lean-r": {
+   "ad": "Phantom Hook Point Curtsy Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -130,
+    -40
+   ],
+   "solKol": [
+    60,
+    60
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "ghoul-w-swing-tree": {
+   "ad": "Ghoul W Swing Tree",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    150,
+    110
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 1
+  },
+  "moonlight-reach-down-curtsy-lean-l": {
+   "ad": "Moonlight Reach Down Curtsy Lean L",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    8,
+    5
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "banshee-reach-cross-goddess-lean-r": {
+   "ad": "Banshee Reach Cross Goddess Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    20,
+    -110
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "bat-cross-chest-horse-lean-l": {
+   "ad": "Bat Cross Chest Horse Lean L",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    110
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "graveyard-back-cactus-curtsy": {
+   "ad": "Graveyard Back Cactus Curtsy",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -152,
+    38
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "vampire-hip-low-stand-lean-r": {
+   "ad": "Vampire Hip Low Stand Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "spider-flex-elbow-tap-lean-l": {
+   "ad": "Spider Flex Elbow Tap Lean L",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    30,
+    150
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "haunted-hip-w-tree-lean-l": {
+   "ad": "Haunted Hip W Tree Lean L",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 1
+  },
+  "tombstone-down-v-kick": {
+   "ad": "Tombstone Down V Kick",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -8,
+    -5
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 1
+  },
+  "mummy-head-back-hop": {
+   "ad": "Mummy Head Back Hop",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    152,
+    -38
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    -60
+   ],
+   "tur": 1
+  },
+  "wizard-head-down-curtsy": {
+   "ad": "Wizard Head Down Curtsy",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    8,
+    5
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "tombstone-diag-t-leg-out-lean-l": {
+   "ad": "Tombstone Diag T Leg Out Lean L",
+   "yon": "on",
+   "govde": 205,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "wizard-v-back-horse": {
+   "ad": "Wizard V Back Horse",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    152,
+    -38
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "spider-salute-reach-horse-lean-r": {
+   "ad": "Spider Salute Reach Horse Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -100,
+    140
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "ghoul-down-v-horse-lean-l": {
+   "ad": "Ghoul Down V Horse Lean L",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -8,
+    -5
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "spell-diag-salute-wide-lean-r": {
+   "ad": "Spell Diag Salute Wide Lean R",
+   "yon": "on",
+   "govde": 155,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    100,
+    -140
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "moonlight-hook-diag-horse-lean-l": {
+   "ad": "Moonlight Hook Diag Horse Lean L",
+   "yon": "on",
+   "govde": 205,
+   "bas": 0,
+   "sagKol": [
+    -130,
+    -40
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "mummy-salute-hook-wide": {
+   "ad": "Mummy Salute Hook Wide",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -100,
+    140
+   ],
+   "solKol": [
+    130,
+    40
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "spider-salute-w-leg-out": {
+   "ad": "Spider Salute W Leg Out",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -100,
+    140
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "cobweb-diag-point-knee-lean-l": {
+   "ad": "Cobweb Diag Point Knee Lean L",
+   "yon": "on",
+   "govde": 205,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    60,
+    60
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 1
+  },
+  "graveyard-hip-flex-goddess": {
+   "ad": "Graveyard Hip Flex Goddess",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "werewolf-t-point-horse": {
+   "ad": "Werewolf T Point Horse",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    60,
+    60
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "hex-chest-elbow-tree-lean-r": {
+   "ad": "Hex Chest Elbow Tree Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    30,
+    150
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 1
+  },
+  "bat-salute-chest-half-goddess-lean-l": {
+   "ad": "Bat Salute Chest Half Goddess Lean L",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -100,
+    140
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "vampire-head-t-tap": {
+   "ad": "Vampire Head T Tap",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "owl-t-cactus-horse": {
+   "ad": "Owl T Cactus Horse",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "candle-flex-w-wide": {
+   "ad": "Candle Flex W Wide",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "hex-low-diag-stand-lean-l": {
+   "ad": "Hex Low Diag Stand Lean L",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "owl-reach-down-goddess-lean-r": {
+   "ad": "Owl Reach Down Goddess Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    8,
+    5
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "coffin-low-point-wide-lean-l": {
+   "ad": "Coffin Low Point Wide Lean L",
+   "yon": "on",
+   "govde": 205,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    60,
+    60
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "candle-v-point-goddess-lean-l": {
+   "ad": "Candle V Point Goddess Lean L",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    60,
+    60
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "owl-cactus-head-half-goddess": {
+   "ad": "Owl Cactus Head Half Goddess",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "goblin-v-low-leg-out": {
+   "ad": "Goblin V Low Leg Out",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "witch-v-w-kick": {
+   "ad": "Witch V W Kick",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 1
+  },
+  "black-cat-chest-t-goddess": {
+   "ad": "Black Cat Chest T Goddess",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "fog-low-back-curtsy-lean-r": {
+   "ad": "Fog Low Back Curtsy Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    152,
+    -38
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "graveyard-v-hip-hop-lean-r": {
+   "ad": "Graveyard V Hip Hop Lean R",
+   "yon": "on",
+   "govde": 155,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    -60
+   ],
+   "tur": 1
+  },
+  "broom-back-cactus-stand": {
+   "ad": "Broom Back Cactus Stand",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -152,
+    38
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "spider-cross-t-stand": {
+   "ad": "Spider Cross T Stand",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    110
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "spider-v-head-horse-lean-l": {
+   "ad": "Spider V Head Horse Lean L",
+   "yon": "on",
+   "govde": 205,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "crypt-back-point-kick": {
+   "ad": "Crypt Back Point Kick",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -152,
+    38
+   ],
+   "solKol": [
+    60,
+    60
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 1
+  },
+  "wizard-t-low-curtsy-lean-l": {
+   "ad": "Wizard T Low Curtsy Lean L",
+   "yon": "on",
+   "govde": 205,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "coffin-t-swing-hop": {
+   "ad": "Coffin T Swing Hop",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    150,
+    110
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    -60
+   ],
+   "tur": 1
+  },
+  "werewolf-cross-salute-stand-lean-l": {
+   "ad": "Werewolf Cross Salute Stand Lean L",
+   "yon": "on",
+   "govde": 205,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    110
+   ],
+   "solKol": [
+    100,
+    -140
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "cauldron-diag-back-stand": {
+   "ad": "Cauldron Diag Back Stand",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    152,
+    -38
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "owl-t-v-leg-out-lean-l": {
+   "ad": "Owl T V Leg Out Lean L",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "pumpkin-head-reach-half-goddess-lean-l": {
+   "ad": "Pumpkin Head Reach Half Goddess Lean L",
+   "yon": "on",
+   "govde": 205,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "spider-reach-t-kick": {
+   "ad": "Spider Reach T Kick",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 1
+  },
+  "crypt-diag-v-stand": {
+   "ad": "Crypt Diag V Stand",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "phantom-hip-swing-stand": {
+   "ad": "Phantom Hip Swing Stand",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    150,
+    110
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "ghost-v-reach-horse-lean-r": {
+   "ad": "Ghost V Reach Horse Lean R",
+   "yon": "on",
+   "govde": 155,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "zombie-down-back-half-goddess": {
+   "ad": "Zombie Down Back Half Goddess",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -8,
+    -5
+   ],
+   "solKol": [
+    152,
+    -38
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "potion-cactus-low-knee": {
+   "ad": "Potion Cactus Low Knee",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 1
+  },
+  "hex-elbow-swing-horse-lean-r": {
+   "ad": "Hex Elbow Swing Horse Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -30,
+    -150
+   ],
+   "solKol": [
+    150,
+    110
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "bat-t-hip-stand": {
+   "ad": "Bat T Hip Stand",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "moonlight-cactus-chest-curtsy-lean-r": {
+   "ad": "Moonlight Cactus Chest Curtsy Lean R",
+   "yon": "on",
+   "govde": 155,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "wizard-low-cross-tree": {
+   "ad": "Wizard Low Cross Tree",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    20,
+    -110
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 1
+  },
+  "phantom-chest-flex-knee-lean-l": {
+   "ad": "Phantom Chest Flex Knee Lean L",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 1
+  },
+  "wizard-head-low-kick-lean-l": {
+   "ad": "Wizard Head Low Kick Lean L",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 1
+  },
+  "black-cat-chest-swing-goddess-lean-r": {
+   "ad": "Black Cat Chest Swing Goddess Lean R",
+   "yon": "on",
+   "govde": 155,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    150,
+    110
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "lantern-t-cross-hop-lean-r": {
+   "ad": "Lantern T Cross Hop Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    20,
+    -110
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    -60
+   ],
+   "tur": 1
+  },
+  "black-cat-hip-back-knee-lean-l": {
+   "ad": "Black Cat Hip Back Knee Lean L",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    152,
+    -38
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 1
+  },
+  "bat-reach-hook-horse": {
+   "ad": "Bat Reach Hook Horse",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    130,
+    40
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "wizard-hip-head-tree-lean-r": {
+   "ad": "Wizard Hip Head Tree Lean R",
+   "yon": "on",
+   "govde": 155,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 1
+  },
+  "hex-reach-diag-hop-lean-l": {
+   "ad": "Hex Reach Diag Hop Lean L",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    -60
+   ],
+   "tur": 1
+  },
+  "haunted-v-salute-knee-lean-l": {
+   "ad": "Haunted V Salute Knee Lean L",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    100,
+    -140
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 1
+  },
+  "ghost-swing-diag-leg-out-lean-l": {
+   "ad": "Ghost Swing Diag Leg Out Lean L",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -110
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "bat-t-salute-leg-out": {
+   "ad": "Bat T Salute Leg Out",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    100,
+    -140
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "zombie-cactus-head-curtsy-lean-l": {
+   "ad": "Zombie Cactus Head Curtsy Lean L",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "cauldron-back-diag-hop-lean-l": {
+   "ad": "Cauldron Back Diag Hop Lean L",
+   "yon": "on",
+   "govde": 205,
+   "bas": 0,
+   "sagKol": [
+    -152,
+    38
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    -60
+   ],
+   "tur": 1
+  },
+  "werewolf-hip-t-knee-lean-r": {
+   "ad": "Werewolf Hip T Knee Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 1
+  },
+  "broom-hip-cross-goddess": {
+   "ad": "Broom Hip Cross Goddess",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    20,
+    -110
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "zombie-hip-point-stand-lean-r": {
+   "ad": "Zombie Hip Point Stand Lean R",
+   "yon": "on",
+   "govde": 155,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    60,
+    60
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "coffin-point-low-tree-lean-r": {
+   "ad": "Coffin Point Low Tree Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 1
+  },
+  "cobweb-reach-hip-wide-lean-r": {
+   "ad": "Cobweb Reach Hip Wide Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "haunted-w-hip-leg-out-lean-r": {
+   "ad": "Haunted W Hip Leg Out Lean R",
+   "yon": "on",
+   "govde": 155,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "banshee-diag-elbow-curtsy": {
+   "ad": "Banshee Diag Elbow Curtsy",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    30,
+    150
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "moonlight-elbow-elbow-kick": {
+   "ad": "Moonlight Elbow Elbow Kick",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -30,
+    -150
+   ],
+   "solKol": [
+    30,
+    150
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 1
+  },
+  "coffin-hip-chest-hop": {
+   "ad": "Coffin Hip Chest Hop",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    -60
+   ],
+   "tur": 1
+  },
+  "fog-head-cactus-kick": {
+   "ad": "Fog Head Cactus Kick",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 1
+  },
+  "vampire-elbow-cross-kick": {
+   "ad": "Vampire Elbow Cross Kick",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -30,
+    -150
+   ],
+   "solKol": [
+    20,
+    -110
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 1
+  },
+  "broom-t-salute-curtsy-lean-l": {
+   "ad": "Broom T Salute Curtsy Lean L",
+   "yon": "on",
+   "govde": 205,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    100,
+    -140
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "crypt-cross-salute-curtsy-lean-r": {
+   "ad": "Crypt Cross Salute Curtsy Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    110
+   ],
+   "solKol": [
+    100,
+    -140
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "candle-salute-swing-tap-lean-r": {
+   "ad": "Candle Salute Swing Tap Lean R",
+   "yon": "on",
+   "govde": 155,
+   "bas": 0,
+   "sagKol": [
+    -100,
+    140
+   ],
+   "solKol": [
+    150,
+    110
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "spell-diag-w-tap-lean-r": {
+   "ad": "Spell Diag W Tap Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "shadow-low-flex-tree": {
+   "ad": "Shadow Low Flex Tree",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 1
+  },
+  "raven-down-reach-curtsy": {
+   "ad": "Raven Down Reach Curtsy",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -8,
+    -5
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "fog-hip-swing-tree": {
+   "ad": "Fog Hip Swing Tree",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    150,
+    110
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 1
+  },
+  "scarecrow-elbow-point-half-goddess-lean-l": {
+   "ad": "Scarecrow Elbow Point Half Goddess Lean L",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -30,
+    -150
+   ],
+   "solKol": [
+    60,
+    60
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "ghost-chest-point-leg-out": {
+   "ad": "Ghost Chest Point Leg Out",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    60,
+    60
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "mummy-reach-cross-knee": {
+   "ad": "Mummy Reach Cross Knee",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    20,
+    -110
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 1
+  },
+  "shadow-swing-diag-hop": {
+   "ad": "Shadow Swing Diag Hop",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -110
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    -60
+   ],
+   "tur": 1
+  },
+  "haunted-chest-salute-hop": {
+   "ad": "Haunted Chest Salute Hop",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    100,
+    -140
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    -60
+   ],
+   "tur": 1
+  },
+  "moonlight-salute-chest-horse": {
+   "ad": "Moonlight Salute Chest Horse",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -100,
+    140
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "fog-salute-salute-tap": {
+   "ad": "Fog Salute Salute Tap",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -100,
+    140
+   ],
+   "solKol": [
+    100,
+    -140
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "spell-hook-head-hop": {
+   "ad": "Spell Hook Head Hop",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -130,
+    -40
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    -60
+   ],
+   "tur": 1
+  },
+  "phantom-t-t-kick-lean-l": {
+   "ad": "Phantom T T Kick Lean L",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 1
+  },
+  "vampire-t-elbow-leg-out": {
+   "ad": "Vampire T Elbow Leg Out",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    30,
+    150
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "witch-down-hip-tap": {
+   "ad": "Witch Down Hip Tap",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -8,
+    -5
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "lantern-head-diag-tap": {
+   "ad": "Lantern Head Diag Tap",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "tombstone-w-low-knee-lean-r": {
+   "ad": "Tombstone W Low Knee Lean R",
+   "yon": "on",
+   "govde": 155,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 1
+  },
+  "werewolf-back-swing-tap-lean-l": {
+   "ad": "Werewolf Back Swing Tap Lean L",
+   "yon": "on",
+   "govde": 205,
+   "bas": 0,
+   "sagKol": [
+    -152,
+    38
+   ],
+   "solKol": [
+    150,
+    110
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "cobweb-head-cactus-leg-out": {
+   "ad": "Cobweb Head Cactus Leg Out",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "shadow-point-cactus-stand": {
+   "ad": "Shadow Point Cactus Stand",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "pumpkin-cross-salute-wide-lean-l": {
+   "ad": "Pumpkin Cross Salute Wide Lean L",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    110
+   ],
+   "solKol": [
+    100,
+    -140
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "pumpkin-point-back-horse-lean-r": {
+   "ad": "Pumpkin Point Back Horse Lean R",
+   "yon": "on",
+   "govde": 155,
+   "bas": 0,
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solKol": [
+    152,
+    -38
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "spider-chest-diag-tap": {
+   "ad": "Spider Chest Diag Tap",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "goblin-diag-hip-tap-lean-l": {
+   "ad": "Goblin Diag Hip Tap Lean L",
+   "yon": "on",
+   "govde": 205,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "ghost-v-chest-goddess": {
+   "ad": "Ghost V Chest Goddess",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "ghost-low-head-stand-lean-l": {
+   "ad": "Ghost Low Head Stand Lean L",
+   "yon": "on",
+   "govde": 205,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "potion-reach-diag-tree-lean-r": {
+   "ad": "Potion Reach Diag Tree Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 1
+  },
+  "moonlight-hip-head-wide-lean-r": {
+   "ad": "Moonlight Hip Head Wide Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "goblin-low-swing-leg-out-lean-r": {
+   "ad": "Goblin Low Swing Leg Out Lean R",
+   "yon": "on",
+   "govde": 155,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    150,
+    110
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "skeleton-w-down-curtsy": {
+   "ad": "Skeleton W Down Curtsy",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    8,
+    5
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "cauldron-t-flex-leg-out": {
+   "ad": "Cauldron T Flex Leg Out",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "black-cat-cross-down-kick": {
+   "ad": "Black Cat Cross Down Kick",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    110
+   ],
+   "solKol": [
+    8,
+    5
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 1
+  },
+  "graveyard-reach-t-kick": {
+   "ad": "Graveyard Reach T Kick",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 1
+  },
+  "raven-v-cross-tap-lean-l": {
+   "ad": "Raven V Cross Tap Lean L",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    20,
+    -110
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "candle-w-cross-knee": {
+   "ad": "Candle W Cross Knee",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    20,
+    -110
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 1
+  },
+  "phantom-hook-t-horse-lean-r": {
+   "ad": "Phantom Hook T Horse Lean R",
+   "yon": "on",
+   "govde": 155,
+   "bas": 0,
+   "sagKol": [
+    -130,
+    -40
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "zombie-reach-elbow-half-goddess": {
+   "ad": "Zombie Reach Elbow Half Goddess",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    30,
+    150
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "cauldron-reach-hook-kick-lean-r": {
+   "ad": "Cauldron Reach Hook Kick Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    130,
+    40
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 1
+  },
+  "hex-diag-salute-kick": {
+   "ad": "Hex Diag Salute Kick",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    100,
+    -140
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 1
+  },
+  "hex-v-v-wide-lean-l": {
+   "ad": "Hex V V Wide Lean L",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "banshee-w-low-knee-lean-r": {
+   "ad": "Banshee W Low Knee Lean R",
+   "yon": "on",
+   "govde": 155,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 1
+  },
+  "spider-point-low-tap-lean-r": {
+   "ad": "Spider Point Low Tap Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "werewolf-head-flex-half-goddess": {
+   "ad": "Werewolf Head Flex Half Goddess",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "goblin-salute-cactus-curtsy": {
+   "ad": "Goblin Salute Cactus Curtsy",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -100,
+    140
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "scarecrow-diag-hip-tree-lean-r": {
+   "ad": "Scarecrow Diag Hip Tree Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 1
+  },
+  "ghost-cross-head-tree-lean-r": {
+   "ad": "Ghost Cross Head Tree Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    110
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 1
+  },
+  "mummy-cross-back-leg-out-lean-r": {
+   "ad": "Mummy Cross Back Leg Out Lean R",
+   "yon": "on",
+   "govde": 155,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    110
+   ],
+   "solKol": [
+    152,
+    -38
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "crypt-low-salute-tree": {
+   "ad": "Crypt Low Salute Tree",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    100,
+    -140
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 1
+  },
+  "wizard-v-down-wide": {
+   "ad": "Wizard V Down Wide",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    8,
+    5
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "banshee-down-down-wide-lean-r": {
+   "ad": "Banshee Down Down Wide Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -8,
+    -5
+   ],
+   "solKol": [
+    8,
+    5
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "owl-hip-cactus-wide-lean-l": {
+   "ad": "Owl Hip Cactus Wide Lean L",
+   "yon": "on",
+   "govde": 205,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "hex-point-point-knee": {
+   "ad": "Hex Point Point Knee",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solKol": [
+    60,
+    60
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 1
+  },
+  "zombie-reach-cross-wide-lean-r": {
+   "ad": "Zombie Reach Cross Wide Lean R",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    20,
+    -110
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "potion-kneel-forward-prayer": {
+   "ad": "Potion Kneel Forward Prayer",
+   "yon": "sag",
+   "govde": 190,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    30,
+    160
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 2
+  },
+  "vampire-kneel-lunge-back-prayer": {
+   "ad": "Vampire Kneel Lunge Back Prayer",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    -60,
+    -60
+   ],
+   "sagKol": [
+    30,
+    160
+   ],
+   "solBacak": [
+    80,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 2
+  },
+  "bat-low-lunge-prayer-hip": {
+   "ad": "Bat Low Lunge Prayer Hip",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    30,
+    160
+   ],
+   "sagKol": [
+    -40,
+    60
+   ],
+   "solBacak": [
+    95,
+    -5
+   ],
+   "sagBacak": [
+    -55,
+    -55
+   ],
+   "tur": 2
+  },
+  "haunted-warrior-hip-low-forward": {
+   "ad": "Haunted Warrior Hip Low Forward",
+   "yon": "sag",
+   "govde": 85,
+   "bas": 0,
+   "solKol": [
+    -40,
+    60
+   ],
+   "sagKol": [
+    50,
+    50
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 2
+  },
+  "coffin-knee-raise-back-up": {
+   "ad": "Coffin Knee Raise Back Up",
+   "yon": "sag",
+   "govde": 170,
+   "bas": 0,
+   "solKol": [
+    -60,
+    -60
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "skeleton-kneel-lunge-bent-up-forward": {
+   "ad": "Skeleton Kneel Lunge Bent Up Forward",
+   "yon": "sag",
+   "govde": 170,
+   "bas": 0,
+   "solKol": [
+    90,
+    170
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    80,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 2
+  },
+  "coffin-lunge-down-prayer": {
+   "ad": "Coffin Lunge Down Prayer",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    5,
+    5
+   ],
+   "sagKol": [
+    30,
+    160
+   ],
+   "solBacak": [
+    75,
+    0
+   ],
+   "sagBacak": [
+    -42,
+    -42
+   ],
+   "tur": 2
+  },
+  "wizard-heel-sit-bent-up-prayer": {
+   "ad": "Wizard Heel Sit Bent Up Prayer",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    90,
+    170
+   ],
+   "sagKol": [
+    30,
+    160
+   ],
+   "solBacak": [
+    90,
+    -90
+   ],
+   "sagBacak": [
+    88,
+    -90
+   ],
+   "tur": 2
+  },
+  "wizard-warrior-prayer-up": {
+   "ad": "Wizard Warrior Prayer Up",
+   "yon": "sag",
+   "govde": 95,
+   "bas": 0,
+   "solKol": [
+    30,
+    160
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 2
+  },
+  "vampire-kneel-forward-diag": {
+   "ad": "Vampire Kneel Forward Diag",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 2
+  },
+  "pumpkin-low-lunge-forward-bent-up": {
+   "ad": "Pumpkin Low Lunge Forward Bent Up",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    90,
+    170
+   ],
+   "solBacak": [
+    95,
+    -5
+   ],
+   "sagBacak": [
+    -55,
+    -55
+   ],
+   "tur": 2
+  },
+  "goblin-lunge-low-forward-down": {
+   "ad": "Goblin Lunge Low Forward Down",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    50,
+    50
+   ],
+   "sagKol": [
+    5,
+    5
+   ],
+   "solBacak": [
+    75,
+    0
+   ],
+   "sagBacak": [
+    -42,
+    -42
+   ],
+   "tur": 2
+  },
+  "werewolf-stork-down-up": {
+   "ad": "Werewolf Stork Down Up",
+   "yon": "sag",
+   "govde": 190,
+   "bas": 0,
+   "solKol": [
+    5,
+    5
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    100,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "graveyard-low-lunge-low-forward-diag": {
+   "ad": "Graveyard Low Lunge Low Forward Diag",
+   "yon": "sag",
+   "govde": 155,
+   "bas": 0,
+   "solKol": [
+    50,
+    50
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    95,
+    -5
+   ],
+   "sagBacak": [
+    -55,
+    -55
+   ],
+   "tur": 2
+  },
+  "coffin-heel-sit-up-back": {
+   "ad": "Coffin Heel Sit Up Back",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solBacak": [
+    90,
+    -90
+   ],
+   "sagBacak": [
+    88,
+    -90
+   ],
+   "tur": 2
+  },
+  "spider-stork-up-down": {
+   "ad": "Spider Stork Up Down",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    5,
+    5
+   ],
+   "solBacak": [
+    100,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "hex-kneel-down-down": {
+   "ad": "Hex Kneel Down Down",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    5,
+    5
+   ],
+   "sagKol": [
+    5,
+    5
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 2
+  },
+  "bat-heel-sit-bent-up-back": {
+   "ad": "Bat Heel Sit Bent Up Back",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    90,
+    170
+   ],
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solBacak": [
+    90,
+    -90
+   ],
+   "sagBacak": [
+    88,
+    -90
+   ],
+   "tur": 2
+  },
+  "zombie-chair-prayer-high-back": {
+   "ad": "Zombie Chair Prayer High Back",
+   "yon": "sag",
+   "govde": 150,
+   "bas": 0,
+   "solKol": [
+    30,
+    160
+   ],
+   "sagKol": [
+    -150,
+    -150
+   ],
+   "solBacak": [
+    60,
+    -10
+   ],
+   "sagBacak": [
+    58,
+    -12
+   ],
+   "tur": 2
+  },
+  "vampire-lunge-low-forward-up": {
+   "ad": "Vampire Lunge Low Forward Up",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    50,
+    50
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    75,
+    0
+   ],
+   "sagBacak": [
+    -42,
+    -42
+   ],
+   "tur": 2
+  },
+  "mummy-heel-sit-hip-prayer": {
+   "ad": "Mummy Heel Sit Hip Prayer",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    -40,
+    60
+   ],
+   "sagKol": [
+    30,
+    160
+   ],
+   "solBacak": [
+    90,
+    -90
+   ],
+   "sagBacak": [
+    88,
+    -90
+   ],
+   "tur": 2
+  },
+  "cauldron-knee-raise-bent-up-prayer": {
+   "ad": "Cauldron Knee Raise Bent Up Prayer",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    90,
+    170
+   ],
+   "sagKol": [
+    30,
+    160
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "cauldron-knee-raise-bent-up-bent-up": {
+   "ad": "Cauldron Knee Raise Bent Up Bent Up",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    90,
+    170
+   ],
+   "sagKol": [
+    90,
+    170
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "candle-knee-raise-back-hip": {
+   "ad": "Candle Knee Raise Back Hip",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    -60,
+    -60
+   ],
+   "sagKol": [
+    -40,
+    60
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "phantom-kneel-lunge-down-diag": {
+   "ad": "Phantom Kneel Lunge Down Diag",
+   "yon": "sag",
+   "govde": 170,
+   "bas": 0,
+   "solKol": [
+    5,
+    5
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    80,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 2
+  },
+  "coffin-kick-back-down-prayer": {
+   "ad": "Coffin Kick Back Down Prayer",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    5,
+    5
+   ],
+   "sagKol": [
+    30,
+    160
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -60
+   ],
+   "tur": 2
+  },
+  "bat-knee-raise-down-diag": {
+   "ad": "Bat Knee Raise Down Diag",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    5,
+    5
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "potion-knee-raise-bent-up-high-back": {
+   "ad": "Potion Knee Raise Bent Up High Back",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    90,
+    170
+   ],
+   "sagKol": [
+    -150,
+    -150
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "spell-kneel-lunge-diag-forward": {
+   "ad": "Spell Kneel Lunge Diag Forward",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    80,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 2
+  },
+  "tombstone-warrior-down-low-forward": {
+   "ad": "Tombstone Warrior Down Low Forward",
+   "yon": "sag",
+   "govde": 85,
+   "bas": 0,
+   "solKol": [
+    5,
+    5
+   ],
+   "sagKol": [
+    50,
+    50
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 2
+  },
+  "spell-kneel-high-back-forward": {
+   "ad": "Spell Kneel High Back Forward",
+   "yon": "sag",
+   "govde": 190,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -150
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 2
+  },
+  "zombie-heel-sit-back-prayer": {
+   "ad": "Zombie Heel Sit Back Prayer",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    -60,
+    -60
+   ],
+   "sagKol": [
+    30,
+    160
+   ],
+   "solBacak": [
+    90,
+    -90
+   ],
+   "sagBacak": [
+    88,
+    -90
+   ],
+   "tur": 2
+  },
+  "coffin-knee-raise-diag-high-back": {
+   "ad": "Coffin Knee Raise Diag High Back",
+   "yon": "sag",
+   "govde": 170,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    -150,
+    -150
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "wizard-knee-raise-back-forward": {
+   "ad": "Wizard Knee Raise Back Forward",
+   "yon": "sag",
+   "govde": 170,
+   "bas": 0,
+   "solKol": [
+    -60,
+    -60
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "spider-kneel-low-forward-low-forward": {
+   "ad": "Spider Kneel Low Forward Low Forward",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    50,
+    50
+   ],
+   "sagKol": [
+    50,
+    50
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 2
+  },
+  "zombie-kneel-lunge-back-bent-up": {
+   "ad": "Zombie Kneel Lunge Back Bent Up",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    -60,
+    -60
+   ],
+   "sagKol": [
+    90,
+    170
+   ],
+   "solBacak": [
+    80,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 2
+  },
+  "tombstone-stork-back-hip": {
+   "ad": "Tombstone Stork Back Hip",
+   "yon": "sag",
+   "govde": 170,
+   "bas": 0,
+   "solKol": [
+    -60,
+    -60
+   ],
+   "sagKol": [
+    -40,
+    60
+   ],
+   "solBacak": [
+    100,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "vampire-warrior-forward-up": {
+   "ad": "Vampire Warrior Forward Up",
+   "yon": "sag",
+   "govde": 85,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 2
+  },
+  "fog-chair-prayer-prayer": {
+   "ad": "Fog Chair Prayer Prayer",
+   "yon": "sag",
+   "govde": 140,
+   "bas": 0,
+   "solKol": [
+    30,
+    160
+   ],
+   "sagKol": [
+    30,
+    160
+   ],
+   "solBacak": [
+    60,
+    -10
+   ],
+   "sagBacak": [
+    58,
+    -12
+   ],
+   "tur": 2
+  },
+  "spell-chair-back-up": {
+   "ad": "Spell Chair Back Up",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    -60,
+    -60
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    60,
+    -10
+   ],
+   "sagBacak": [
+    58,
+    -12
+   ],
+   "tur": 2
+  },
+  "owl-split-stance-diag-hip": {
+   "ad": "Owl Split Stance Diag Hip",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    -40,
+    60
+   ],
+   "solBacak": [
+    25,
+    25
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "tur": 2
+  },
+  "tombstone-kick-back-low-forward-up": {
+   "ad": "Tombstone Kick Back Low Forward Up",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    50,
+    50
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -60
+   ],
+   "tur": 2
+  },
+  "lantern-chair-hip-bent-up": {
+   "ad": "Lantern Chair Hip Bent Up",
+   "yon": "sag",
+   "govde": 150,
+   "bas": 0,
+   "solKol": [
+    -40,
+    60
+   ],
+   "sagKol": [
+    90,
+    170
+   ],
+   "solBacak": [
+    60,
+    -10
+   ],
+   "sagBacak": [
+    58,
+    -12
+   ],
+   "tur": 2
+  },
+  "goblin-chair-up-low-forward": {
+   "ad": "Goblin Chair Up Low Forward",
+   "yon": "sag",
+   "govde": 150,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    50,
+    50
+   ],
+   "solBacak": [
+    60,
+    -10
+   ],
+   "sagBacak": [
+    58,
+    -12
+   ],
+   "tur": 2
+  },
+  "werewolf-low-lunge-hip-diag": {
+   "ad": "Werewolf Low Lunge Hip Diag",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    -40,
+    60
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    95,
+    -5
+   ],
+   "sagBacak": [
+    -55,
+    -55
+   ],
+   "tur": 2
+  },
+  "haunted-knee-raise-up-back": {
+   "ad": "Haunted Knee Raise Up Back",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "cauldron-kneel-back-down": {
+   "ad": "Cauldron Kneel Back Down",
+   "yon": "sag",
+   "govde": 190,
+   "bas": 0,
+   "solKol": [
+    -60,
+    -60
+   ],
+   "sagKol": [
+    5,
+    5
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 2
+  },
+  "cauldron-quad-hold-down": {
+   "ad": "Cauldron Quad Hold Down",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    5,
+    5
+   ],
+   "sagKol": [
+    -120,
+    -160
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -10,
+    -150
+   ],
+   "tur": 2
+  },
+  "pumpkin-kneel-lunge-down-forward": {
+   "ad": "Pumpkin Kneel Lunge Down Forward",
+   "yon": "sag",
+   "govde": 190,
+   "bas": 0,
+   "solKol": [
+    5,
+    5
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    80,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 2
+  },
+  "banshee-split-stance-forward-down": {
+   "ad": "Banshee Split Stance Forward Down",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    5,
+    5
+   ],
+   "solBacak": [
+    25,
+    25
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "tur": 2
+  },
+  "haunted-quad-hold-diag": {
+   "ad": "Haunted Quad Hold Diag",
+   "yon": "sag",
+   "govde": 170,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    -120,
+    -160
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -10,
+    -150
+   ],
+   "tur": 2
+  },
+  "hex-split-stance-diag-down": {
+   "ad": "Hex Split Stance Diag Down",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    5,
+    5
+   ],
+   "solBacak": [
+    25,
+    25
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "tur": 2
+  },
+  "bat-warrior-high-back-hip": {
+   "ad": "Bat Warrior High Back Hip",
+   "yon": "sag",
+   "govde": 85,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -150
+   ],
+   "sagKol": [
+    -40,
+    60
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 2
+  },
+  "werewolf-kick-back-back-back": {
+   "ad": "Werewolf Kick Back Back Back",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    -60,
+    -60
+   ],
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -60
+   ],
+   "tur": 2
+  },
+  "pumpkin-kick-back-prayer-up": {
+   "ad": "Pumpkin Kick Back Prayer Up",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    30,
+    160
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -60
+   ],
+   "tur": 2
+  },
+  "skeleton-chair-hip-up": {
+   "ad": "Skeleton Chair Hip Up",
+   "yon": "sag",
+   "govde": 150,
+   "bas": 0,
+   "solKol": [
+    -40,
+    60
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    60,
+    -10
+   ],
+   "sagBacak": [
+    58,
+    -12
+   ],
+   "tur": 2
+  },
+  "shadow-knee-raise-up-diag": {
+   "ad": "Shadow Knee Raise Up Diag",
+   "yon": "sag",
+   "govde": 190,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "lantern-split-stance-hip-bent-up": {
+   "ad": "Lantern Split Stance Hip Bent Up",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    -40,
+    60
+   ],
+   "sagKol": [
+    90,
+    170
+   ],
+   "solBacak": [
+    25,
+    25
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "tur": 2
+  },
+  "bat-low-lunge-diag-diag": {
+   "ad": "Bat Low Lunge Diag Diag",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    95,
+    -5
+   ],
+   "sagBacak": [
+    -55,
+    -55
+   ],
+   "tur": 2
+  },
+  "candle-stork-diag-high-back": {
+   "ad": "Candle Stork Diag High Back",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    -150,
+    -150
+   ],
+   "solBacak": [
+    100,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "broom-stork-down-diag": {
+   "ad": "Broom Stork Down Diag",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    5,
+    5
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    100,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "banshee-quad-hold-up": {
+   "ad": "Banshee Quad Hold Up",
+   "yon": "sag",
+   "govde": 190,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    -120,
+    -160
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -10,
+    -150
+   ],
+   "tur": 2
+  },
+  "crypt-kick-back-up-bent-up": {
+   "ad": "Crypt Kick Back Up Bent Up",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    90,
+    170
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -60
+   ],
+   "tur": 2
+  },
+  "ghost-kneel-hip-diag": {
+   "ad": "Ghost Kneel Hip Diag",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    -40,
+    60
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 2
+  },
+  "werewolf-chair-hip-forward": {
+   "ad": "Werewolf Chair Hip Forward",
+   "yon": "sag",
+   "govde": 140,
+   "bas": 0,
+   "solKol": [
+    -40,
+    60
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    60,
+    -10
+   ],
+   "sagBacak": [
+    58,
+    -12
+   ],
+   "tur": 2
+  },
+  "black-cat-low-lunge-prayer-low-forward": {
+   "ad": "Black Cat Low Lunge Prayer Low Forward",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    30,
+    160
+   ],
+   "sagKol": [
+    50,
+    50
+   ],
+   "solBacak": [
+    95,
+    -5
+   ],
+   "sagBacak": [
+    -55,
+    -55
+   ],
+   "tur": 2
+  },
+  "ghoul-quad-hold-prayer": {
+   "ad": "Ghoul Quad Hold Prayer",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    30,
+    160
+   ],
+   "sagKol": [
+    -120,
+    -160
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -10,
+    -150
+   ],
+   "tur": 2
+  },
+  "wizard-kneel-low-forward-forward": {
+   "ad": "Wizard Kneel Low Forward Forward",
+   "yon": "sag",
+   "govde": 170,
+   "bas": 0,
+   "solKol": [
+    50,
+    50
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 2
+  },
+  "vampire-lunge-bent-up-diag": {
+   "ad": "Vampire Lunge Bent Up Diag",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    90,
+    170
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    75,
+    0
+   ],
+   "sagBacak": [
+    -42,
+    -42
+   ],
+   "tur": 2
+  },
+  "haunted-warrior-down-down": {
+   "ad": "Haunted Warrior Down Down",
+   "yon": "sag",
+   "govde": 85,
+   "bas": 0,
+   "solKol": [
+    5,
+    5
+   ],
+   "sagKol": [
+    5,
+    5
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 2
+  },
+  "owl-quad-hold-bent-up": {
+   "ad": "Owl Quad Hold Bent Up",
+   "yon": "sag",
+   "govde": 170,
+   "bas": 0,
+   "solKol": [
+    90,
+    170
+   ],
+   "sagKol": [
+    -120,
+    -160
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -10,
+    -150
+   ],
+   "tur": 2
+  },
+  "mummy-heel-sit-forward-back": {
+   "ad": "Mummy Heel Sit Forward Back",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solBacak": [
+    90,
+    -90
+   ],
+   "sagBacak": [
+    88,
+    -90
+   ],
+   "tur": 2
+  },
+  "potion-warrior-hip-forward": {
+   "ad": "Potion Warrior Hip Forward",
+   "yon": "sag",
+   "govde": 95,
+   "bas": 0,
+   "solKol": [
+    -40,
+    60
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 2
+  },
+  "goblin-stork-diag-forward": {
+   "ad": "Goblin Stork Diag Forward",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    100,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "cauldron-knee-raise-diag-low-forward": {
+   "ad": "Cauldron Knee Raise Diag Low Forward",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    50,
+    50
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "graveyard-split-stance-up-up": {
+   "ad": "Graveyard Split Stance Up Up",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    25,
+    25
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "tur": 2
+  },
+  "haunted-chair-high-back-down": {
+   "ad": "Haunted Chair High Back Down",
+   "yon": "sag",
+   "govde": 140,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -150
+   ],
+   "sagKol": [
+    5,
+    5
+   ],
+   "solBacak": [
+    60,
+    -10
+   ],
+   "sagBacak": [
+    58,
+    -12
+   ],
+   "tur": 2
+  },
+  "raven-heel-sit-diag-prayer": {
+   "ad": "Raven Heel Sit Diag Prayer",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    30,
+    160
+   ],
+   "solBacak": [
+    90,
+    -90
+   ],
+   "sagBacak": [
+    88,
+    -90
+   ],
+   "tur": 2
+  },
+  "shadow-split-stance-diag-diag": {
+   "ad": "Shadow Split Stance Diag Diag",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    25,
+    25
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "tur": 2
+  },
+  "shadow-kick-back-diag-up": {
+   "ad": "Shadow Kick Back Diag Up",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -60
+   ],
+   "tur": 2
+  },
+  "shadow-chair-prayer-down": {
+   "ad": "Shadow Chair Prayer Down",
+   "yon": "sag",
+   "govde": 150,
+   "bas": 0,
+   "solKol": [
+    30,
+    160
+   ],
+   "sagKol": [
+    5,
+    5
+   ],
+   "solBacak": [
+    60,
+    -10
+   ],
+   "sagBacak": [
+    58,
+    -12
+   ],
+   "tur": 2
+  },
+  "mummy-kneel-lunge-forward-low-forward": {
+   "ad": "Mummy Kneel Lunge Forward Low Forward",
+   "yon": "sag",
+   "govde": 190,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    50,
+    50
+   ],
+   "solBacak": [
+    80,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 2
+  },
+  "werewolf-kneel-lunge-back-diag": {
+   "ad": "Werewolf Kneel Lunge Back Diag",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    -60,
+    -60
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    80,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 2
+  },
+  "hex-lunge-down-down": {
+   "ad": "Hex Lunge Down Down",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    5,
+    5
+   ],
+   "sagKol": [
+    5,
+    5
+   ],
+   "solBacak": [
+    75,
+    0
+   ],
+   "sagBacak": [
+    -42,
+    -42
+   ],
+   "tur": 2
+  },
+  "werewolf-chair-back-down": {
+   "ad": "Werewolf Chair Back Down",
+   "yon": "sag",
+   "govde": 150,
+   "bas": 0,
+   "solKol": [
+    -60,
+    -60
+   ],
+   "sagKol": [
+    5,
+    5
+   ],
+   "solBacak": [
+    60,
+    -10
+   ],
+   "sagBacak": [
+    58,
+    -12
+   ],
+   "tur": 2
+  },
+  "potion-heel-sit-down-up": {
+   "ad": "Potion Heel Sit Down Up",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    5,
+    5
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    90,
+    -90
+   ],
+   "sagBacak": [
+    88,
+    -90
+   ],
+   "tur": 2
+  },
+  "black-cat-split-stance-hip-bent-up": {
+   "ad": "Black Cat Split Stance Hip Bent Up",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    -40,
+    60
+   ],
+   "sagKol": [
+    90,
+    170
+   ],
+   "solBacak": [
+    25,
+    25
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "tur": 2
+  },
+  "spider-quad-hold-bent-up": {
+   "ad": "Spider Quad Hold Bent Up",
+   "yon": "sag",
+   "govde": 190,
+   "bas": 0,
+   "solKol": [
+    90,
+    170
+   ],
+   "sagKol": [
+    -120,
+    -160
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -10,
+    -150
+   ],
+   "tur": 2
+  },
+  "hex-lunge-back-hip": {
+   "ad": "Hex Lunge Back Hip",
+   "yon": "sag",
+   "govde": 170,
+   "bas": 0,
+   "solKol": [
+    -60,
+    -60
+   ],
+   "sagKol": [
+    -40,
+    60
+   ],
+   "solBacak": [
+    75,
+    0
+   ],
+   "sagBacak": [
+    -42,
+    -42
+   ],
+   "tur": 2
+  },
+  "phantom-kick-back-down-prayer": {
+   "ad": "Phantom Kick Back Down Prayer",
+   "yon": "sag",
+   "govde": 155,
+   "bas": 0,
+   "solKol": [
+    5,
+    5
+   ],
+   "sagKol": [
+    30,
+    160
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -60
+   ],
+   "tur": 2
+  },
+  "shadow-low-lunge-back-back": {
+   "ad": "Shadow Low Lunge Back Back",
+   "yon": "sag",
+   "govde": 155,
+   "bas": 0,
+   "solKol": [
+    -60,
+    -60
+   ],
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solBacak": [
+    95,
+    -5
+   ],
+   "sagBacak": [
+    -55,
+    -55
+   ],
+   "tur": 2
+  },
+  "fog-warrior-high-back-hip": {
+   "ad": "Fog Warrior High Back Hip",
+   "yon": "sag",
+   "govde": 105,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -150
+   ],
+   "sagKol": [
+    -40,
+    60
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 2
+  },
+  "raven-low-lunge-bent-up-low-forward": {
+   "ad": "Raven Low Lunge Bent Up Low Forward",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    90,
+    170
+   ],
+   "sagKol": [
+    50,
+    50
+   ],
+   "solBacak": [
+    95,
+    -5
+   ],
+   "sagBacak": [
+    -55,
+    -55
+   ],
+   "tur": 2
+  },
+  "shadow-low-lunge-low-forward-high-back": {
+   "ad": "Shadow Low Lunge Low Forward High Back",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    50,
+    50
+   ],
+   "sagKol": [
+    -150,
+    -150
+   ],
+   "solBacak": [
+    95,
+    -5
+   ],
+   "sagBacak": [
+    -55,
+    -55
+   ],
+   "tur": 2
+  },
+  "wizard-heel-sit-bent-up-low-forward": {
+   "ad": "Wizard Heel Sit Bent Up Low Forward",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    90,
+    170
+   ],
+   "sagKol": [
+    50,
+    50
+   ],
+   "solBacak": [
+    90,
+    -90
+   ],
+   "sagBacak": [
+    88,
+    -90
+   ],
+   "tur": 2
+  },
+  "witch-quad-hold-high-back": {
+   "ad": "Witch Quad Hold High Back",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -150
+   ],
+   "sagKol": [
+    -120,
+    -160
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -10,
+    -150
+   ],
+   "tur": 2
+  },
+  "hex-heel-sit-low-forward-diag": {
+   "ad": "Hex Heel Sit Low Forward Diag",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    50,
+    50
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    90,
+    -90
+   ],
+   "sagBacak": [
+    88,
+    -90
+   ],
+   "tur": 2
+  },
+  "ghoul-kick-back-back-down": {
+   "ad": "Ghoul Kick Back Back Down",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    -60,
+    -60
+   ],
+   "sagKol": [
+    5,
+    5
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -60
+   ],
+   "tur": 2
+  },
+  "crypt-kick-back-forward-forward": {
+   "ad": "Crypt Kick Back Forward Forward",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -60
+   ],
+   "tur": 2
+  },
+  "skeleton-low-lunge-low-forward-forward": {
+   "ad": "Skeleton Low Lunge Low Forward Forward",
+   "yon": "sag",
+   "govde": 155,
+   "bas": 0,
+   "solKol": [
+    50,
+    50
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    95,
+    -5
+   ],
+   "sagBacak": [
+    -55,
+    -55
+   ],
+   "tur": 2
+  },
+  "vampire-heel-sit-bent-up-down": {
+   "ad": "Vampire Heel Sit Bent Up Down",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    90,
+    170
+   ],
+   "sagKol": [
+    5,
+    5
+   ],
+   "solBacak": [
+    90,
+    -90
+   ],
+   "sagBacak": [
+    88,
+    -90
+   ],
+   "tur": 2
+  },
+  "wizard-knee-raise-high-back-prayer": {
+   "ad": "Wizard Knee Raise High Back Prayer",
+   "yon": "sag",
+   "govde": 190,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -150
+   ],
+   "sagKol": [
+    30,
+    160
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "pumpkin-lunge-forward-high-back": {
+   "ad": "Pumpkin Lunge Forward High Back",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    -150,
+    -150
+   ],
+   "solBacak": [
+    75,
+    0
+   ],
+   "sagBacak": [
+    -42,
+    -42
+   ],
+   "tur": 2
+  },
+  "mummy-low-lunge-diag-high-back": {
+   "ad": "Mummy Low Lunge Diag High Back",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    -150,
+    -150
+   ],
+   "solBacak": [
+    95,
+    -5
+   ],
+   "sagBacak": [
+    -55,
+    -55
+   ],
+   "tur": 2
+  },
+  "coffin-kneel-lunge-up-up": {
+   "ad": "Coffin Kneel Lunge Up Up",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    80,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 2
+  },
+  "fog-lunge-bent-up-forward": {
+   "ad": "Fog Lunge Bent Up Forward",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    90,
+    170
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    75,
+    0
+   ],
+   "sagBacak": [
+    -42,
+    -42
+   ],
+   "tur": 2
+  },
+  "bat-knee-raise-diag-back": {
+   "ad": "Bat Knee Raise Diag Back",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "spell-stork-hip-back": {
+   "ad": "Spell Stork Hip Back",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    -40,
+    60
+   ],
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solBacak": [
+    100,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "coffin-heel-sit-down-forward": {
+   "ad": "Coffin Heel Sit Down Forward",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    5,
+    5
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    90,
+    -90
+   ],
+   "sagBacak": [
+    88,
+    -90
+   ],
+   "tur": 2
+  },
+  "spell-low-lunge-bent-up-bent-up": {
+   "ad": "Spell Low Lunge Bent Up Bent Up",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    90,
+    170
+   ],
+   "sagKol": [
+    90,
+    170
+   ],
+   "solBacak": [
+    95,
+    -5
+   ],
+   "sagBacak": [
+    -55,
+    -55
+   ],
+   "tur": 2
+  },
+  "bat-heel-sit-down-bent-up": {
+   "ad": "Bat Heel Sit Down Bent Up",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    5,
+    5
+   ],
+   "sagKol": [
+    90,
+    170
+   ],
+   "solBacak": [
+    90,
+    -90
+   ],
+   "sagBacak": [
+    88,
+    -90
+   ],
+   "tur": 2
+  },
+  "raven-kneel-high-back-high-back": {
+   "ad": "Raven Kneel High Back High Back",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -150
+   ],
+   "sagKol": [
+    -150,
+    -150
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 2
+  },
+  "coffin-heel-sit-low-forward-forward": {
+   "ad": "Coffin Heel Sit Low Forward Forward",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    50,
+    50
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    90,
+    -90
+   ],
+   "sagBacak": [
+    88,
+    -90
+   ],
+   "tur": 2
+  },
+  "spider-heel-sit-up-high-back": {
+   "ad": "Spider Heel Sit Up High Back",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    -150,
+    -150
+   ],
+   "solBacak": [
+    90,
+    -90
+   ],
+   "sagBacak": [
+    88,
+    -90
+   ],
+   "tur": 2
+  },
+  "fog-lunge-low-forward-diag": {
+   "ad": "Fog Lunge Low Forward Diag",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    50,
+    50
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    75,
+    0
+   ],
+   "sagBacak": [
+    -42,
+    -42
+   ],
+   "tur": 2
+  },
+  "witch-kick-back-hip-prayer": {
+   "ad": "Witch Kick Back Hip Prayer",
+   "yon": "sag",
+   "govde": 155,
+   "bas": 0,
+   "solKol": [
+    -40,
+    60
+   ],
+   "sagKol": [
+    30,
+    160
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -60
+   ],
+   "tur": 2
+  },
+  "ghoul-quad-hold-diag": {
+   "ad": "Ghoul Quad Hold Diag",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    -120,
+    -160
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -10,
+    -150
+   ],
+   "tur": 2
+  },
+  "moonlight-split-stance-back-diag": {
+   "ad": "Moonlight Split Stance Back Diag",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    -60,
+    -60
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    25,
+    25
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "tur": 2
+  },
+  "vampire-quad-hold-bent-up": {
+   "ad": "Vampire Quad Hold Bent Up",
+   "yon": "sag",
+   "govde": 190,
+   "bas": 0,
+   "solKol": [
+    90,
+    170
+   ],
+   "sagKol": [
+    -120,
+    -160
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -10,
+    -150
+   ],
+   "tur": 2
+  },
+  "lantern-knee-raise-diag-low-forward": {
+   "ad": "Lantern Knee Raise Diag Low Forward",
+   "yon": "sag",
+   "govde": 190,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    50,
+    50
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "phantom-quad-hold-up": {
+   "ad": "Phantom Quad Hold Up",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    -120,
+    -160
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -10,
+    -150
+   ],
+   "tur": 2
+  },
+  "lantern-quad-hold-diag": {
+   "ad": "Lantern Quad Hold Diag",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    -120,
+    -160
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -10,
+    -150
+   ],
+   "tur": 2
+  },
+  "spell-kneel-lunge-high-back-bent-up": {
+   "ad": "Spell Kneel Lunge High Back Bent Up",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -150
+   ],
+   "sagKol": [
+    90,
+    170
+   ],
+   "solBacak": [
+    80,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 2
+  },
+  "fog-low-lunge-diag-up": {
+   "ad": "Fog Low Lunge Diag Up",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    95,
+    -5
+   ],
+   "sagBacak": [
+    -55,
+    -55
+   ],
+   "tur": 2
+  },
+  "cauldron-lunge-up-hip": {
+   "ad": "Cauldron Lunge Up Hip",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    -40,
+    60
+   ],
+   "solBacak": [
+    75,
+    0
+   ],
+   "sagBacak": [
+    -42,
+    -42
+   ],
+   "tur": 2
+  },
+  "banshee-lunge-bent-up-high-back": {
+   "ad": "Banshee Lunge Bent Up High Back",
+   "yon": "sag",
+   "govde": 190,
+   "bas": 0,
+   "solKol": [
+    90,
+    170
+   ],
+   "sagKol": [
+    -150,
+    -150
+   ],
+   "solBacak": [
+    75,
+    0
+   ],
+   "sagBacak": [
+    -42,
+    -42
+   ],
+   "tur": 2
+  },
+  "graveyard-lunge-high-back-forward": {
+   "ad": "Graveyard Lunge High Back Forward",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -150
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    75,
+    0
+   ],
+   "sagBacak": [
+    -42,
+    -42
+   ],
+   "tur": 2
+  },
+  "bat-chair-bent-up-high-back": {
+   "ad": "Bat Chair Bent Up High Back",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    90,
+    170
+   ],
+   "sagKol": [
+    -150,
+    -150
+   ],
+   "solBacak": [
+    60,
+    -10
+   ],
+   "sagBacak": [
+    58,
+    -12
+   ],
+   "tur": 2
+  },
+  "fog-low-lunge-forward-up": {
+   "ad": "Fog Low Lunge Forward Up",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    95,
+    -5
+   ],
+   "sagBacak": [
+    -55,
+    -55
+   ],
+   "tur": 2
+  },
+  "tombstone-stork-prayer-forward": {
+   "ad": "Tombstone Stork Prayer Forward",
+   "yon": "sag",
+   "govde": 170,
+   "bas": 0,
+   "solKol": [
+    30,
+    160
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    100,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "ghoul-split-stance-forward-high-back": {
+   "ad": "Ghoul Split Stance Forward High Back",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    -150,
+    -150
+   ],
+   "solBacak": [
+    25,
+    25
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "tur": 2
+  },
+  "shadow-quad-hold-hip": {
+   "ad": "Shadow Quad Hold Hip",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    -40,
+    60
+   ],
+   "sagKol": [
+    -120,
+    -160
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -10,
+    -150
+   ],
+   "tur": 2
+  },
+  "candle-knee-raise-prayer-up": {
+   "ad": "Candle Knee Raise Prayer Up",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    30,
+    160
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "werewolf-knee-raise-low-forward-bent-up": {
+   "ad": "Werewolf Knee Raise Low Forward Bent Up",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    50,
+    50
+   ],
+   "sagKol": [
+    90,
+    170
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "potion-quad-hold-hip": {
+   "ad": "Potion Quad Hold Hip",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    -40,
+    60
+   ],
+   "sagKol": [
+    -120,
+    -160
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -10,
+    -150
+   ],
+   "tur": 2
+  },
+  "witch-low-lunge-prayer-high-back": {
+   "ad": "Witch Low Lunge Prayer High Back",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    30,
+    160
+   ],
+   "sagKol": [
+    -150,
+    -150
+   ],
+   "solBacak": [
+    95,
+    -5
+   ],
+   "sagBacak": [
+    -55,
+    -55
+   ],
+   "tur": 2
+  },
+  "haunted-knee-raise-bent-up-forward": {
+   "ad": "Haunted Knee Raise Bent Up Forward",
+   "yon": "sag",
+   "govde": 190,
+   "bas": 0,
+   "solKol": [
+    90,
+    170
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "banshee-stork-low-forward-bent-up": {
+   "ad": "Banshee Stork Low Forward Bent Up",
+   "yon": "sag",
+   "govde": 170,
+   "bas": 0,
+   "solKol": [
+    50,
+    50
+   ],
+   "sagKol": [
+    90,
+    170
+   ],
+   "solBacak": [
+    100,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "broom-kick-back-high-back-high-back": {
+   "ad": "Broom Kick Back High Back High Back",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -150
+   ],
+   "sagKol": [
+    -150,
+    -150
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -60
+   ],
+   "tur": 2
+  },
+  "skeleton-heel-sit-high-back-diag": {
+   "ad": "Skeleton Heel Sit High Back Diag",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -150
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    90,
+    -90
+   ],
+   "sagBacak": [
+    88,
+    -90
+   ],
+   "tur": 2
+  },
+  "goblin-side-lunge-reach-head": {
+   "ad": "Goblin Side Lunge Reach Head",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "goblin-side-lunge-head-back": {
+   "ad": "Goblin Side Lunge Head Back",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    152,
+    -38
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "wizard-skater-hook-diag": {
+   "ad": "Wizard Skater Hook Diag",
+   "yon": "on",
+   "govde": 170,
+   "bas": 0,
+   "sagKol": [
+    -130,
+    -40
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -30,
+    40
+   ],
+   "solBacak": [
+    20,
+    -70
+   ],
+   "tur": 2
+  },
+  "owl-wide-lunge-reach-flex": {
+   "ad": "Owl Wide Lunge Reach Flex",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    62,
+    2
+   ],
+   "tur": 2
+  },
+  "owl-wide-lunge-low-salute": {
+   "ad": "Owl Wide Lunge Low Salute",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    100,
+    -140
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    62,
+    2
+   ],
+   "tur": 2
+  },
+  "cauldron-side-lunge-salute-flex": {
+   "ad": "Cauldron Side Lunge Salute Flex",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -100,
+    140
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "owl-wide-lunge-swing-salute": {
+   "ad": "Owl Wide Lunge Swing Salute",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -110
+   ],
+   "solKol": [
+    100,
+    -140
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    62,
+    2
+   ],
+   "tur": 2
+  },
+  "scarecrow-deep-goddess-flex-down": {
+   "ad": "Scarecrow Deep Goddess Flex Down",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    8,
+    5
+   ],
+   "sagBacak": [
+    -70,
+    20
+   ],
+   "solBacak": [
+    70,
+    -20
+   ],
+   "tur": 2
+  },
+  "witch-side-lunge-down-w": {
+   "ad": "Witch Side Lunge Down W",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -8,
+    -5
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "fog-skater-hip-cactus": {
+   "ad": "Fog Skater Hip Cactus",
+   "yon": "on",
+   "govde": 170,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -30,
+    40
+   ],
+   "solBacak": [
+    20,
+    -70
+   ],
+   "tur": 2
+  },
+  "ghost-wide-lunge-down-swing": {
+   "ad": "Ghost Wide Lunge Down Swing",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -8,
+    -5
+   ],
+   "solKol": [
+    150,
+    110
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    62,
+    2
+   ],
+   "tur": 2
+  },
+  "spell-skater-head-elbow": {
+   "ad": "Spell Skater Head Elbow",
+   "yon": "on",
+   "govde": 170,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    30,
+    150
+   ],
+   "sagBacak": [
+    -30,
+    40
+   ],
+   "solBacak": [
+    20,
+    -70
+   ],
+   "tur": 2
+  },
+  "tombstone-skater-cactus-head": {
+   "ad": "Tombstone Skater Cactus Head",
+   "yon": "on",
+   "govde": 170,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -30,
+    40
+   ],
+   "solBacak": [
+    20,
+    -70
+   ],
+   "tur": 2
+  },
+  "black-cat-skater-down-flex": {
+   "ad": "Black Cat Skater Down Flex",
+   "yon": "on",
+   "govde": 170,
+   "bas": 0,
+   "sagKol": [
+    -8,
+    -5
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -30,
+    40
+   ],
+   "solBacak": [
+    20,
+    -70
+   ],
+   "tur": 2
+  },
+  "candle-wide-lunge-salute-low": {
+   "ad": "Candle Wide Lunge Salute Low",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -100,
+    140
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    62,
+    2
+   ],
+   "tur": 2
+  },
+  "potion-wide-lunge-low-back": {
+   "ad": "Potion Wide Lunge Low Back",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    152,
+    -38
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    62,
+    2
+   ],
+   "tur": 2
+  },
+  "spell-skater-v-elbow": {
+   "ad": "Spell Skater V Elbow",
+   "yon": "on",
+   "govde": 170,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    30,
+    150
+   ],
+   "sagBacak": [
+    -30,
+    40
+   ],
+   "solBacak": [
+    20,
+    -70
+   ],
+   "tur": 2
+  },
+  "scarecrow-wide-lunge-elbow-w": {
+   "ad": "Scarecrow Wide Lunge Elbow W",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -30,
+    -150
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    62,
+    2
+   ],
+   "tur": 2
+  },
+  "owl-side-lunge-head-w": {
+   "ad": "Owl Side Lunge Head W",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "shadow-side-lunge-cross-back": {
+   "ad": "Shadow Side Lunge Cross Back",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    110
+   ],
+   "solKol": [
+    152,
+    -38
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "phantom-side-lunge-hook-hook": {
+   "ad": "Phantom Side Lunge Hook Hook",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -130,
+    -40
+   ],
+   "solKol": [
+    130,
+    40
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "broom-side-lunge-salute-v": {
+   "ad": "Broom Side Lunge Salute V",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -100,
+    140
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "bat-deep-goddess-point-w": {
+   "ad": "Bat Deep Goddess Point W",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -70,
+    20
+   ],
+   "solBacak": [
+    70,
+    -20
+   ],
+   "tur": 2
+  },
+  "tombstone-deep-goddess-w-w": {
+   "ad": "Tombstone Deep Goddess W W",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -70,
+    20
+   ],
+   "solBacak": [
+    70,
+    -20
+   ],
+   "tur": 2
+  },
+  "vampire-skater-swing-hip": {
+   "ad": "Vampire Skater Swing Hip",
+   "yon": "on",
+   "govde": 170,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -110
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -30,
+    40
+   ],
+   "solBacak": [
+    20,
+    -70
+   ],
+   "tur": 2
+  },
+  "shadow-deep-goddess-point-low": {
+   "ad": "Shadow Deep Goddess Point Low",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -70,
+    20
+   ],
+   "solBacak": [
+    70,
+    -20
+   ],
+   "tur": 2
+  },
+  "cobweb-side-lunge-elbow-back": {
+   "ad": "Cobweb Side Lunge Elbow Back",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -30,
+    -150
+   ],
+   "solKol": [
+    152,
+    -38
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "cauldron-skater-cactus-v": {
+   "ad": "Cauldron Skater Cactus V",
+   "yon": "on",
+   "govde": 170,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -30,
+    40
+   ],
+   "solBacak": [
+    20,
+    -70
+   ],
+   "tur": 2
+  },
+  "potion-deep-goddess-swing-hook": {
+   "ad": "Potion Deep Goddess Swing Hook",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -110
+   ],
+   "solKol": [
+    130,
+    40
+   ],
+   "sagBacak": [
+    -70,
+    20
+   ],
+   "solBacak": [
+    70,
+    -20
+   ],
+   "tur": 2
+  },
+  "haunted-side-lunge-back-cross": {
+   "ad": "Haunted Side Lunge Back Cross",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -152,
+    38
+   ],
+   "solKol": [
+    20,
+    -110
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "skeleton-deep-goddess-reach-point": {
+   "ad": "Skeleton Deep Goddess Reach Point",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    60,
+    60
+   ],
+   "sagBacak": [
+    -70,
+    20
+   ],
+   "solBacak": [
+    70,
+    -20
+   ],
+   "tur": 2
+  },
+  "witch-side-lunge-elbow-hip": {
+   "ad": "Witch Side Lunge Elbow Hip",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -30,
+    -150
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "shadow-deep-goddess-hook-flex": {
+   "ad": "Shadow Deep Goddess Hook Flex",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -130,
+    -40
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -70,
+    20
+   ],
+   "solBacak": [
+    70,
+    -20
+   ],
+   "tur": 2
+  },
+  "mummy-skater-v-cactus": {
+   "ad": "Mummy Skater V Cactus",
+   "yon": "on",
+   "govde": 170,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -30,
+    40
+   ],
+   "solBacak": [
+    20,
+    -70
+   ],
+   "tur": 2
+  },
+  "scarecrow-wide-lunge-low-reach": {
+   "ad": "Scarecrow Wide Lunge Low Reach",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    62,
+    2
+   ],
+   "tur": 2
+  },
+  "ghost-knee-plank-floor-floor": {
+   "ad": "Ghost Knee Plank Floor Floor",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -40,
+    -130
+   ],
+   "sagBacak": [
+    -42,
+    -132
+   ],
+   "tur": 3
+  },
+  "tombstone-high-plank-forward-floor": {
+   "ad": "Tombstone High Plank Forward Floor",
+   "yon": "sag",
+   "govde": 98,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -82,
+    -82
+   ],
+   "sagBacak": [
+    -84,
+    -84
+   ],
+   "tur": 3
+  },
+  "ghoul-kneel-head-w": {
+   "ad": "Ghoul Kneel Head W",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    0,
+    "geri"
+   ],
+   "tur": 3
+  },
+  "werewolf-bird-dog-wide-floor": {
+   "ad": "Werewolf Bird Dog Wide Floor",
+   "yon": "sag",
+   "govde": 92,
+   "bas": 0,
+   "solKol": [
+    90,
+    -90
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -90,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "cauldron-half-kneel-side-v-t": {
+   "ad": "Cauldron Half Kneel Side V T",
+   "yon": "on",
+   "govde": 163,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    60,
+    -10
+   ],
+   "tur": 3
+  },
+  "crypt-warrior-three-diag-wide": {
+   "ad": "Crypt Warrior Three Diag Wide",
+   "yon": "sag",
+   "govde": 95,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    90,
+    -90
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "lantern-crab-back-floor-floor": {
+   "ad": "Lantern Crab Back Floor Floor",
+   "yon": "sag",
+   "govde": -80,
+   "bas": 0,
+   "solKol": [
+    -25,
+    -25
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    88,
+    0
+   ],
+   "tur": 3
+  },
+  "scarecrow-child-diag-back-floor": {
+   "ad": "Scarecrow Child Diag Back Floor",
+   "yon": "sag",
+   "govde": 70,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    -25,
+    -25
+   ],
+   "solBacak": [
+    100,
+    -95
+   ],
+   "sagBacak": [
+    98,
+    -95
+   ],
+   "tur": 3
+  },
+  "mummy-seated-knees-up-floor-up": {
+   "ad": "Mummy Seated Knees Up Floor Up",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    135,
+    -5
+   ],
+   "sagBacak": [
+    133,
+    -7
+   ],
+   "tur": 3
+  },
+  "hex-knee-plank-floor-floor": {
+   "ad": "Hex Knee Plank Floor Floor",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -40,
+    -130
+   ],
+   "sagBacak": [
+    -42,
+    -132
+   ],
+   "tur": 3
+  },
+  "candle-lying-wide-wide": {
+   "ad": "Candle Lying Wide Wide",
+   "yon": "sag",
+   "govde": -90,
+   "bas": 0,
+   "solKol": [
+    90,
+    -90
+   ],
+   "sagKol": [
+    90,
+    -90
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ],
+   "tur": 3
+  },
+  "potion-child-forward-back-floor": {
+   "ad": "Potion Child Forward Back Floor",
+   "yon": "sag",
+   "govde": 70,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    -25,
+    -25
+   ],
+   "solBacak": [
+    100,
+    -95
+   ],
+   "sagBacak": [
+    98,
+    -95
+   ],
+   "tur": 3
+  },
+  "scarecrow-side-sit-lowv-head": {
+   "ad": "Scarecrow Side Sit Lowv Head",
+   "yon": "on",
+   "govde": 170,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -80,
+    60
+   ],
+   "solBacak": [
+    70,
+    -100
+   ],
+   "tur": 3
+  },
+  "vampire-standing-split-hug-floor": {
+   "ad": "Vampire Standing Split Hug Floor",
+   "yon": "sag",
+   "govde": 30,
+   "bas": 0,
+   "solKol": [
+    110,
+    -10
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    2,
+    2
+   ],
+   "sagBacak": [
+    -120,
+    -120
+   ],
+   "tur": 3
+  },
+  "shadow-warrior-three-wide-floor": {
+   "ad": "Shadow Warrior Three Wide Floor",
+   "yon": "sag",
+   "govde": 95,
+   "bas": 0,
+   "solKol": [
+    90,
+    -90
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "crypt-side-sit-flex-up45": {
+   "ad": "Crypt Side Sit Flex Up45",
+   "yon": "on",
+   "govde": 170,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -80,
+    60
+   ],
+   "solBacak": [
+    70,
+    -100
+   ],
+   "tur": 3
+  },
+  "banshee-bridge-floor-hug": {
+   "ad": "Banshee Bridge Floor Hug",
+   "yon": "sag",
+   "govde": -60,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    110,
+    -10
+   ],
+   "solBacak": [
+    60,
+    0
+   ],
+   "sagBacak": [
+    58,
+    -2
+   ],
+   "tur": 3
+  },
+  "wizard-child-up-floor": {
+   "ad": "Wizard Child Up Floor",
+   "yon": "sag",
+   "govde": 70,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    100,
+    -95
+   ],
+   "sagBacak": [
+    98,
+    -95
+   ],
+   "tur": 3
+  },
+  "black-cat-lying-wide-diag": {
+   "ad": "Black Cat Lying Wide Diag",
+   "yon": "sag",
+   "govde": -90,
+   "bas": 0,
+   "solKol": [
+    90,
+    -90
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ],
+   "tur": 3
+  },
+  "mummy-knee-plank-floor-floor": {
+   "ad": "Mummy Knee Plank Floor Floor",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -40,
+    -130
+   ],
+   "sagBacak": [
+    -42,
+    -132
+   ],
+   "tur": 3
+  },
+  "haunted-crab-forward-floor": {
+   "ad": "Haunted Crab Forward Floor",
+   "yon": "sag",
+   "govde": -80,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    88,
+    0
+   ],
+   "tur": 3
+  },
+  "ghoul-bridge-up-wide": {
+   "ad": "Ghoul Bridge Up Wide",
+   "yon": "sag",
+   "govde": -60,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    90,
+    -90
+   ],
+   "solBacak": [
+    60,
+    0
+   ],
+   "sagBacak": [
+    58,
+    -2
+   ],
+   "tur": 3
+  },
+  "cobweb-child-diag-wide": {
+   "ad": "Cobweb Child Diag Wide",
+   "yon": "sag",
+   "govde": 70,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    90,
+    -90
+   ],
+   "solBacak": [
+    100,
+    -95
+   ],
+   "sagBacak": [
+    98,
+    -95
+   ],
+   "tur": 3
+  },
+  "candle-half-kneel-side-up45-head": {
+   "ad": "Candle Half Kneel Side Up45 Head",
+   "yon": "on",
+   "govde": 175,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    60,
+    -10
+   ],
+   "tur": 3
+  },
+  "graveyard-seated-knees-up-diag-forward": {
+   "ad": "Graveyard Seated Knees Up Diag Forward",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    135,
+    -5
+   ],
+   "sagBacak": [
+    133,
+    -7
+   ],
+   "tur": 3
+  },
+  "tombstone-cross-legged-flex-lowv": {
+   "ad": "Tombstone Cross Legged Flex Lowv",
+   "yon": "on",
+   "govde": 168,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -78,
+    75
+   ],
+   "solBacak": [
+    78,
+    -75
+   ],
+   "tur": 3
+  },
+  "spell-kneel-up-cactus": {
+   "ad": "Spell Kneel Up Cactus",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    0,
+    "geri"
+   ],
+   "tur": 3
+  },
+  "owl-bridge-wide-wide": {
+   "ad": "Owl Bridge Wide Wide",
+   "yon": "sag",
+   "govde": -60,
+   "bas": 0,
+   "solKol": [
+    90,
+    -90
+   ],
+   "sagKol": [
+    90,
+    -90
+   ],
+   "solBacak": [
+    60,
+    0
+   ],
+   "sagBacak": [
+    58,
+    -2
+   ],
+   "tur": 3
+  },
+  "pumpkin-knee-plank-up-floor": {
+   "ad": "Pumpkin Knee Plank Up Floor",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -40,
+    -130
+   ],
+   "sagBacak": [
+    -42,
+    -132
+   ],
+   "tur": 3
+  },
+  "skeleton-standing-split-forward-diag": {
+   "ad": "Skeleton Standing Split Forward Diag",
+   "yon": "sag",
+   "govde": 30,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    2,
+    2
+   ],
+   "sagBacak": [
+    -120,
+    -120
+   ],
+   "tur": 3
+  },
+  "graveyard-knee-plank-wide-floor": {
+   "ad": "Graveyard Knee Plank Wide Floor",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    90,
+    -90
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -40,
+    -130
+   ],
+   "sagBacak": [
+    -42,
+    -132
+   ],
+   "tur": 3
+  },
+  "hex-straddle-chest-w": {
+   "ad": "Hex Straddle Chest W",
+   "yon": "on",
+   "govde": 168,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -80,
+    -80
+   ],
+   "solBacak": [
+    80,
+    80
+   ],
+   "tur": 3
+  },
+  "ghost-boat-forward-diag": {
+   "ad": "Ghost Boat Forward Diag",
+   "yon": "sag",
+   "govde": 210,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    125,
+    55
+   ],
+   "sagBacak": [
+    123,
+    53
+   ],
+   "tur": 3
+  },
+  "ghost-seated-staff-diag-back-floor": {
+   "ad": "Ghost Seated Staff Diag Back Floor",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    -25,
+    -25
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ],
+   "tur": 3
+  },
+  "cauldron-bird-dog-back-floor-floor": {
+   "ad": "Cauldron Bird Dog Back Floor Floor",
+   "yon": "sag",
+   "govde": 92,
+   "bas": 0,
+   "solKol": [
+    -25,
+    -25
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -90,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "ghoul-side-sit-w-flex": {
+   "ad": "Ghoul Side Sit W Flex",
+   "yon": "on",
+   "govde": 170,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -80,
+    60
+   ],
+   "solBacak": [
+    70,
+    -100
+   ],
+   "tur": 3
+  },
+  "haunted-low-squat-w-cactus": {
+   "ad": "Haunted Low Squat W Cactus",
+   "yon": "on",
+   "govde": 168,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -70,
+    25
+   ],
+   "solBacak": [
+    70,
+    -25
+   ],
+   "tur": 3
+  },
+  "wizard-child-forward-back-floor": {
+   "ad": "Wizard Child Forward Back Floor",
+   "yon": "sag",
+   "govde": 70,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    -25,
+    -25
+   ],
+   "solBacak": [
+    100,
+    -95
+   ],
+   "sagBacak": [
+    98,
+    -95
+   ],
+   "tur": 3
+  },
+  "broom-low-squat-t-v": {
+   "ad": "Broom Low Squat T V",
+   "yon": "on",
+   "govde": 192,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -70,
+    25
+   ],
+   "solBacak": [
+    70,
+    -25
+   ],
+   "tur": 3
+  },
+  "bat-seated-staff-forward-hug": {
+   "ad": "Bat Seated Staff Forward Hug",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    110,
+    -10
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ],
+   "tur": 3
+  },
+  "black-cat-bird-dog-forward-floor": {
+   "ad": "Black Cat Bird Dog Forward Floor",
+   "yon": "sag",
+   "govde": 92,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -90,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "spell-bird-dog-wide-floor": {
+   "ad": "Spell Bird Dog Wide Floor",
+   "yon": "sag",
+   "govde": 92,
+   "bas": 0,
+   "solKol": [
+    90,
+    -90
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -90,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "spell-cross-legged-t-up45": {
+   "ad": "Spell Cross Legged T Up45",
+   "yon": "on",
+   "govde": 168,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -78,
+    75
+   ],
+   "solBacak": [
+    78,
+    -75
+   ],
+   "tur": 3
+  },
+  "raven-kneel-cactus-lowv": {
+   "ad": "Raven Kneel Cactus Lowv",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    0,
+    "geri"
+   ],
+   "tur": 3
+  },
+  "mummy-bird-dog-up-floor": {
+   "ad": "Mummy Bird Dog Up Floor",
+   "yon": "sag",
+   "govde": 92,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -90,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "broom-seated-staff-back-floor-wide": {
+   "ad": "Broom Seated Staff Back Floor Wide",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    -25,
+    -25
+   ],
+   "sagKol": [
+    90,
+    -90
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ],
+   "tur": 3
+  },
+  "tombstone-half-kneel-side-hip-up45": {
+   "ad": "Tombstone Half Kneel Side Hip Up45",
+   "yon": "on",
+   "govde": 187,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    60,
+    -10
+   ],
+   "tur": 3
+  },
+  "banshee-straddle-flex-v": {
+   "ad": "Banshee Straddle Flex V",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -80,
+    -80
+   ],
+   "solBacak": [
+    80,
+    80
+   ],
+   "tur": 3
+  },
+  "owl-boat-floor-up": {
+   "ad": "Owl Boat Floor Up",
+   "yon": "sag",
+   "govde": 210,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    125,
+    55
+   ],
+   "sagBacak": [
+    123,
+    53
+   ],
+   "tur": 3
+  },
+  "graveyard-tabletop-hug-floor": {
+   "ad": "Graveyard Tabletop Hug Floor",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    110,
+    -10
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "graveyard-cobra-hug-up": {
+   "ad": "Graveyard Cobra Hug Up",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    110,
+    -10
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    -90,
+    -90
+   ],
+   "sagBacak": [
+    -88,
+    -88
+   ],
+   "tur": 3
+  },
+  "spider-crab-up-floor": {
+   "ad": "Spider Crab Up Floor",
+   "yon": "sag",
+   "govde": -80,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    88,
+    0
+   ],
+   "tur": 3
+  },
+  "phantom-tabletop-up-floor": {
+   "ad": "Phantom Tabletop Up Floor",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "goblin-high-plank-hug-floor": {
+   "ad": "Goblin High Plank Hug Floor",
+   "yon": "sag",
+   "govde": 98,
+   "bas": 0,
+   "solKol": [
+    110,
+    -10
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -82,
+    -82
+   ],
+   "sagBacak": [
+    -84,
+    -84
+   ],
+   "tur": 3
+  },
+  "cauldron-half-kneel-side-t-lowv": {
+   "ad": "Cauldron Half Kneel Side T Lowv",
+   "yon": "on",
+   "govde": 175,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    60,
+    -10
+   ],
+   "tur": 3
+  },
+  "cauldron-crab-forward-floor": {
+   "ad": "Cauldron Crab Forward Floor",
+   "yon": "sag",
+   "govde": -80,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    88,
+    0
+   ],
+   "tur": 3
+  },
+  "coffin-seated-staff-forward-diag": {
+   "ad": "Coffin Seated Staff Forward Diag",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ],
+   "tur": 3
+  },
+  "lantern-cobra-up-up": {
+   "ad": "Lantern Cobra Up Up",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    -90,
+    -90
+   ],
+   "sagBacak": [
+    -88,
+    -88
+   ],
+   "tur": 3
+  },
+  "fog-tabletop-hug-floor": {
+   "ad": "Fog Tabletop Hug Floor",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    110,
+    -10
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "black-cat-cobra-hug-diag": {
+   "ad": "Black Cat Cobra Hug Diag",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    110,
+    -10
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    -90,
+    -90
+   ],
+   "sagBacak": [
+    -88,
+    -88
+   ],
+   "tur": 3
+  },
+  "witch-tabletop-up-floor": {
+   "ad": "Witch Tabletop Up Floor",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "crypt-cobra-floor-up": {
+   "ad": "Crypt Cobra Floor Up",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    -90,
+    -90
+   ],
+   "sagBacak": [
+    -88,
+    -88
+   ],
+   "tur": 3
+  },
+  "spider-cross-legged-cactus-flex": {
+   "ad": "Spider Cross Legged Cactus Flex",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -78,
+    75
+   ],
+   "solBacak": [
+    78,
+    -75
+   ],
+   "tur": 3
+  },
+  "spider-crab-hug-floor": {
+   "ad": "Spider Crab Hug Floor",
+   "yon": "sag",
+   "govde": -80,
+   "bas": 0,
+   "solKol": [
+    110,
+    -10
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    88,
+    0
+   ],
+   "tur": 3
+  },
+  "coffin-cobra-wide-wide": {
+   "ad": "Coffin Cobra Wide Wide",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    90,
+    -90
+   ],
+   "sagKol": [
+    90,
+    -90
+   ],
+   "solBacak": [
+    -90,
+    -90
+   ],
+   "sagBacak": [
+    -88,
+    -88
+   ],
+   "tur": 3
+  },
+  "ghost-warrior-three-hug-floor": {
+   "ad": "Ghost Warrior Three Hug Floor",
+   "yon": "sag",
+   "govde": 95,
+   "bas": 0,
+   "solKol": [
+    110,
+    -10
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "crypt-seated-knees-up-floor-hug": {
+   "ad": "Crypt Seated Knees Up Floor Hug",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    110,
+    -10
+   ],
+   "solBacak": [
+    135,
+    -5
+   ],
+   "sagBacak": [
+    133,
+    -7
+   ],
+   "tur": 3
+  },
+  "candle-cross-legged-head-lowv": {
+   "ad": "Candle Cross Legged Head Lowv",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -78,
+    75
+   ],
+   "solBacak": [
+    78,
+    -75
+   ],
+   "tur": 3
+  },
+  "broom-side-sit-up45-w": {
+   "ad": "Broom Side Sit Up45 W",
+   "yon": "on",
+   "govde": 182,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -80,
+    60
+   ],
+   "solBacak": [
+    70,
+    -100
+   ],
+   "tur": 3
+  },
+  "graveyard-standing-split-forward-floor": {
+   "ad": "Graveyard Standing Split Forward Floor",
+   "yon": "sag",
+   "govde": 30,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    2,
+    2
+   ],
+   "sagBacak": [
+    -120,
+    -120
+   ],
+   "tur": 3
+  },
+  "ghoul-half-kneel-side-up45-chest": {
+   "ad": "Ghoul Half Kneel Side Up45 Chest",
+   "yon": "on",
+   "govde": 175,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    60,
+    -10
+   ],
+   "tur": 3
+  },
+  "haunted-seated-knees-up-hug-forward": {
+   "ad": "Haunted Seated Knees Up Hug Forward",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    110,
+    -10
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    135,
+    -5
+   ],
+   "sagBacak": [
+    133,
+    -7
+   ],
+   "tur": 3
+  },
+  "candle-high-plank-diag-floor": {
+   "ad": "Candle High Plank Diag Floor",
+   "yon": "sag",
+   "govde": 98,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -82,
+    -82
+   ],
+   "sagBacak": [
+    -84,
+    -84
+   ],
+   "tur": 3
+  },
+  "mummy-lying-back-floor-forward": {
+   "ad": "Mummy Lying Back Floor Forward",
+   "yon": "sag",
+   "govde": -90,
+   "bas": 0,
+   "solKol": [
+    -25,
+    -25
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ],
+   "tur": 3
+  },
+  "mummy-cobra-wide-forward": {
+   "ad": "Mummy Cobra Wide Forward",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    90,
+    -90
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    -90,
+    -90
+   ],
+   "sagBacak": [
+    -88,
+    -88
+   ],
+   "tur": 3
+  },
+  "lantern-cross-legged-flex-lowv": {
+   "ad": "Lantern Cross Legged Flex Lowv",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -78,
+    75
+   ],
+   "solBacak": [
+    78,
+    -75
+   ],
+   "tur": 3
+  },
+  "candle-crab-hug-floor": {
+   "ad": "Candle Crab Hug Floor",
+   "yon": "sag",
+   "govde": -80,
+   "bas": 0,
+   "solKol": [
+    110,
+    -10
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    88,
+    0
+   ],
+   "tur": 3
+  },
+  "hex-seated-staff-diag-forward": {
+   "ad": "Hex Seated Staff Diag Forward",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ],
+   "tur": 3
+  },
+  "goblin-seated-knees-up-floor-hug": {
+   "ad": "Goblin Seated Knees Up Floor Hug",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    110,
+    -10
+   ],
+   "solBacak": [
+    135,
+    -5
+   ],
+   "sagBacak": [
+    133,
+    -7
+   ],
+   "tur": 3
+  },
+  "skeleton-warrior-three-diag-forward": {
+   "ad": "Skeleton Warrior Three Diag Forward",
+   "yon": "sag",
+   "govde": 95,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "cauldron-straddle-cactus-t": {
+   "ad": "Cauldron Straddle Cactus T",
+   "yon": "on",
+   "govde": 168,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -80,
+    -80
+   ],
+   "solBacak": [
+    80,
+    80
+   ],
+   "tur": 3
+  },
+  "coffin-crab-wide-floor": {
+   "ad": "Coffin Crab Wide Floor",
+   "yon": "sag",
+   "govde": -80,
+   "bas": 0,
+   "solKol": [
+    90,
+    -90
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    88,
+    0
+   ],
+   "tur": 3
+  },
+  "pumpkin-kneel-up45-hip": {
+   "ad": "Pumpkin Kneel Up45 Hip",
+   "yon": "on",
+   "govde": 192,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    0,
+    "geri"
+   ],
+   "tur": 3
+  },
+  "lantern-half-kneel-side-flex-w": {
+   "ad": "Lantern Half Kneel Side Flex W",
+   "yon": "on",
+   "govde": 175,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    60,
+    -10
+   ],
+   "tur": 3
+  },
+  "mummy-bridge-up-forward": {
+   "ad": "Mummy Bridge Up Forward",
+   "yon": "sag",
+   "govde": -60,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    60,
+    0
+   ],
+   "sagBacak": [
+    58,
+    -2
+   ],
+   "tur": 3
+  },
+  "raven-low-squat-w-t": {
+   "ad": "Raven Low Squat W T",
+   "yon": "on",
+   "govde": 192,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -70,
+    25
+   ],
+   "solBacak": [
+    70,
+    -25
+   ],
+   "tur": 3
+  },
+  "banshee-warrior-three-wide-floor": {
+   "ad": "Banshee Warrior Three Wide Floor",
+   "yon": "sag",
+   "govde": 95,
+   "bas": 0,
+   "solKol": [
+    90,
+    -90
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "werewolf-straddle-v-up45": {
+   "ad": "Werewolf Straddle V Up45",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -80,
+    -80
+   ],
+   "solBacak": [
+    80,
+    80
+   ],
+   "tur": 3
+  },
+  "zombie-bridge-back-floor-up": {
+   "ad": "Zombie Bridge Back Floor Up",
+   "yon": "sag",
+   "govde": -60,
+   "bas": 0,
+   "solKol": [
+    -25,
+    -25
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    60,
+    0
+   ],
+   "sagBacak": [
+    58,
+    -2
+   ],
+   "tur": 3
+  },
+  "coffin-tabletop-up-floor": {
+   "ad": "Coffin Tabletop Up Floor",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "cobweb-bridge-wide-diag": {
+   "ad": "Cobweb Bridge Wide Diag",
+   "yon": "sag",
+   "govde": -60,
+   "bas": 0,
+   "solKol": [
+    90,
+    -90
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    60,
+    0
+   ],
+   "sagBacak": [
+    58,
+    -2
+   ],
+   "tur": 3
+  },
+  "spider-cobra-hug-up": {
+   "ad": "Spider Cobra Hug Up",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    110,
+    -10
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    -90,
+    -90
+   ],
+   "sagBacak": [
+    -88,
+    -88
+   ],
+   "tur": 3
+  },
+  "cobweb-tabletop-floor-floor": {
+   "ad": "Cobweb Tabletop Floor Floor",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "pumpkin-crab-wide-floor": {
+   "ad": "Pumpkin Crab Wide Floor",
+   "yon": "sag",
+   "govde": -80,
+   "bas": 0,
+   "solKol": [
+    90,
+    -90
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    88,
+    0
+   ],
+   "tur": 3
+  },
+  "raven-half-kneel-side-cactus-up45": {
+   "ad": "Raven Half Kneel Side Cactus Up45",
+   "yon": "on",
+   "govde": 163,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    60,
+    -10
+   ],
+   "tur": 3
+  },
+  "owl-lying-diag-back-floor": {
+   "ad": "Owl Lying Diag Back Floor",
+   "yon": "sag",
+   "govde": -90,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    -25,
+    -25
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ],
+   "tur": 3
+  },
+  "zombie-kneel-up45-up45": {
+   "ad": "Zombie Kneel Up45 Up45",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    0,
+    "geri"
+   ],
+   "tur": 3
+  },
+  "coffin-bridge-back-floor-diag": {
+   "ad": "Coffin Bridge Back Floor Diag",
+   "yon": "sag",
+   "govde": -60,
+   "bas": 0,
+   "solKol": [
+    -25,
+    -25
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    60,
+    0
+   ],
+   "sagBacak": [
+    58,
+    -2
+   ],
+   "tur": 3
+  },
+  "shadow-lying-up-back-floor": {
+   "ad": "Shadow Lying Up Back Floor",
+   "yon": "sag",
+   "govde": -90,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    -25,
+    -25
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ],
+   "tur": 3
+  },
+  "owl-bridge-back-floor-back-floor": {
+   "ad": "Owl Bridge Back Floor Back Floor",
+   "yon": "sag",
+   "govde": -60,
+   "bas": 0,
+   "solKol": [
+    -25,
+    -25
+   ],
+   "sagKol": [
+    -25,
+    -25
+   ],
+   "solBacak": [
+    60,
+    0
+   ],
+   "sagBacak": [
+    58,
+    -2
+   ],
+   "tur": 3
+  },
+  "ghoul-lying-floor-forward": {
+   "ad": "Ghoul Lying Floor Forward",
+   "yon": "sag",
+   "govde": -90,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ],
+   "tur": 3
+  },
+  "werewolf-half-kneel-side-flex-w": {
+   "ad": "Werewolf Half Kneel Side Flex W",
+   "yon": "on",
+   "govde": 187,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    60,
+    -10
+   ],
+   "tur": 3
+  },
+  "mummy-seated-staff-floor-up": {
+   "ad": "Mummy Seated Staff Floor Up",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ],
+   "tur": 3
+  },
+  "zombie-bird-dog-up-floor": {
+   "ad": "Zombie Bird Dog Up Floor",
+   "yon": "sag",
+   "govde": 92,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -90,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "broom-bird-dog-hug-floor": {
+   "ad": "Broom Bird Dog Hug Floor",
+   "yon": "sag",
+   "govde": 92,
+   "bas": 0,
+   "solKol": [
+    110,
+    -10
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -90,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "ghoul-standing-split-up-forward": {
+   "ad": "Ghoul Standing Split Up Forward",
+   "yon": "sag",
+   "govde": 30,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    2,
+    2
+   ],
+   "sagBacak": [
+    -120,
+    -120
+   ],
+   "tur": 3
+  },
+  "graveyard-seated-knees-up-wide-back-floor": {
+   "ad": "Graveyard Seated Knees Up Wide Back Floor",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    90,
+    -90
+   ],
+   "sagKol": [
+    -25,
+    -25
+   ],
+   "solBacak": [
+    135,
+    -5
+   ],
+   "sagBacak": [
+    133,
+    -7
+   ],
+   "tur": 3
+  },
+  "witch-half-kneel-side-v-chest": {
+   "ad": "Witch Half Kneel Side V Chest",
+   "yon": "on",
+   "govde": 187,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    60,
+    -10
+   ],
+   "tur": 3
+  },
+  "goblin-kneel-up-lowv": {
+   "ad": "Goblin Kneel Up Lowv",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    0,
+    "geri"
+   ],
+   "tur": 3
+  },
+  "lantern-seated-staff-floor-forward": {
+   "ad": "Lantern Seated Staff Floor Forward",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ],
+   "tur": 3
+  },
+  "spell-bridge-wide-wide": {
+   "ad": "Spell Bridge Wide Wide",
+   "yon": "sag",
+   "govde": -60,
+   "bas": 0,
+   "solKol": [
+    90,
+    -90
+   ],
+   "sagKol": [
+    90,
+    -90
+   ],
+   "solBacak": [
+    60,
+    0
+   ],
+   "sagBacak": [
+    58,
+    -2
+   ],
+   "tur": 3
+  },
+  "ghost-boat-floor-floor": {
+   "ad": "Ghost Boat Floor Floor",
+   "yon": "sag",
+   "govde": 210,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    125,
+    55
+   ],
+   "sagBacak": [
+    123,
+    53
+   ],
+   "tur": 3
+  },
+  "skeleton-low-squat-hip-up45": {
+   "ad": "Skeleton Low Squat Hip Up45",
+   "yon": "on",
+   "govde": 192,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -70,
+    25
+   ],
+   "solBacak": [
+    70,
+    -25
+   ],
+   "tur": 3
+  },
+  "spider-seated-knees-up-forward-floor": {
+   "ad": "Spider Seated Knees Up Forward Floor",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    135,
+    -5
+   ],
+   "sagBacak": [
+    133,
+    -7
+   ],
+   "tur": 3
+  },
+  "wizard-warrior-three-diag-diag": {
+   "ad": "Wizard Warrior Three Diag Diag",
+   "yon": "sag",
+   "govde": 95,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "werewolf-knee-plank-wide-floor": {
+   "ad": "Werewolf Knee Plank Wide Floor",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    90,
+    -90
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -40,
+    -130
+   ],
+   "sagBacak": [
+    -42,
+    -132
+   ],
+   "tur": 3
+  },
+  "mummy-child-diag-back-floor": {
+   "ad": "Mummy Child Diag Back Floor",
+   "yon": "sag",
+   "govde": 70,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    -25,
+    -25
+   ],
+   "solBacak": [
+    100,
+    -95
+   ],
+   "sagBacak": [
+    98,
+    -95
+   ],
+   "tur": 3
+  },
+  "wizard-seated-staff-back-floor-diag": {
+   "ad": "Wizard Seated Staff Back Floor Diag",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    -25,
+    -25
+   ],
+   "sagKol": [
+    135,
+    135
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ],
+   "tur": 3
+  },
+  "potion-high-plank-back-floor-floor": {
+   "ad": "Potion High Plank Back Floor Floor",
+   "yon": "sag",
+   "govde": 98,
+   "bas": 0,
+   "solKol": [
+    -25,
+    -25
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -82,
+    -82
+   ],
+   "sagBacak": [
+    -84,
+    -84
+   ],
+   "tur": 3
+  },
+  "cobweb-side-sit-lowv-hip": {
+   "ad": "Cobweb Side Sit Lowv Hip",
+   "yon": "on",
+   "govde": 170,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -80,
+    60
+   ],
+   "solBacak": [
+    70,
+    -100
+   ],
+   "tur": 3
+  },
+  "coffin-standing-split-hug-up": {
+   "ad": "Coffin Standing Split Hug Up",
+   "yon": "sag",
+   "govde": 30,
+   "bas": 0,
+   "solKol": [
+    110,
+    -10
+   ],
+   "sagKol": [
+    178,
+    178
+   ],
+   "solBacak": [
+    2,
+    2
+   ],
+   "sagBacak": [
+    -120,
+    -120
+   ],
+   "tur": 3
+  },
+  "cobweb-standing-split-floor-hug": {
+   "ad": "Cobweb Standing Split Floor Hug",
+   "yon": "sag",
+   "govde": 30,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    110,
+    -10
+   ],
+   "solBacak": [
+    2,
+    2
+   ],
+   "sagBacak": [
+    -120,
+    -120
+   ],
+   "tur": 3
+  },
+  "cauldron-standing-split-forward-wide": {
+   "ad": "Cauldron Standing Split Forward Wide",
+   "yon": "sag",
+   "govde": 30,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    90,
+    -90
+   ],
+   "solBacak": [
+    2,
+    2
+   ],
+   "sagBacak": [
+    -120,
+    -120
+   ],
+   "tur": 3
+  },
+  "werewolf-straddle-cactus-up45": {
+   "ad": "Werewolf Straddle Cactus Up45",
+   "yon": "on",
+   "govde": 168,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -80,
+    -80
+   ],
+   "solBacak": [
+    80,
+    80
+   ],
+   "tur": 3
+  },
+  "broom-high-plank-floor-floor": {
+   "ad": "Broom High Plank Floor Floor",
+   "yon": "sag",
+   "govde": 98,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -82,
+    -82
+   ],
+   "sagBacak": [
+    -84,
+    -84
+   ],
+   "tur": 3
+  },
+  "candle-tabletop-back-floor-floor": {
+   "ad": "Candle Tabletop Back Floor Floor",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    -25,
+    -25
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "skeleton-half-kneel-side-w-flex": {
+   "ad": "Skeleton Half Kneel Side W Flex",
+   "yon": "on",
+   "govde": 175,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    60,
+    -10
+   ],
+   "tur": 3
+  },
+  "fog-half-kneel-side-cactus-up": {
+   "ad": "Fog Half Kneel Side Cactus Up",
+   "yon": "on",
+   "govde": 175,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    60,
+    -10
+   ],
+   "tur": 3
+  },
+  "crypt-lying-forward-back-floor": {
+   "ad": "Crypt Lying Forward Back Floor",
+   "yon": "sag",
+   "govde": -90,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    -25,
+    -25
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ],
+   "tur": 3
+  },
+  "banshee-lying-diag-back-floor": {
+   "ad": "Banshee Lying Diag Back Floor",
+   "yon": "sag",
+   "govde": -90,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    -25,
+    -25
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ],
+   "tur": 3
+  },
+  "zombie-knee-plank-hug-floor": {
+   "ad": "Zombie Knee Plank Hug Floor",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    110,
+    -10
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -40,
+    -130
+   ],
+   "sagBacak": [
+    -42,
+    -132
+   ],
+   "tur": 3
+  },
+  "cauldron-cross-legged-chest-cactus": {
+   "ad": "Cauldron Cross Legged Chest Cactus",
+   "yon": "on",
+   "govde": 168,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -78,
+    75
+   ],
+   "solBacak": [
+    78,
+    -75
+   ],
+   "tur": 3
+  },
+  "scarecrow-warrior-three-hug-hug": {
+   "ad": "Scarecrow Warrior Three Hug Hug",
+   "yon": "sag",
+   "govde": 95,
+   "bas": 0,
+   "solKol": [
+    110,
+    -10
+   ],
+   "sagKol": [
+    110,
+    -10
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "cobweb-warrior-three-back-floor-forward": {
+   "ad": "Cobweb Warrior Three Back Floor Forward",
+   "yon": "sag",
+   "govde": 95,
+   "bas": 0,
+   "solKol": [
+    -25,
+    -25
+   ],
+   "sagKol": [
+    90,
+    90
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "ghoul-bird-dog-floor-floor": {
+   "ad": "Ghoul Bird Dog Floor Floor",
+   "yon": "sag",
+   "govde": 92,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -90,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "candle-standing-split-hug-hug": {
+   "ad": "Candle Standing Split Hug Hug",
+   "yon": "sag",
+   "govde": 30,
+   "bas": 0,
+   "solKol": [
+    110,
+    -10
+   ],
+   "sagKol": [
+    110,
+    -10
+   ],
+   "solBacak": [
+    2,
+    2
+   ],
+   "sagBacak": [
+    -120,
+    -120
+   ],
+   "tur": 3
+  },
+  "spider-lying-diag-floor": {
+   "ad": "Spider Lying Diag Floor",
+   "yon": "sag",
+   "govde": -90,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ],
+   "tur": 3
+  },
+  "spider-child-up-wide": {
+   "ad": "Spider Child Up Wide",
+   "yon": "sag",
+   "govde": 70,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    90,
+    -90
+   ],
+   "solBacak": [
+    100,
+    -95
+   ],
+   "sagBacak": [
+    98,
+    -95
+   ],
+   "tur": 3
+  },
+  "skeleton-crab-floor-floor": {
+   "ad": "Skeleton Crab Floor Floor",
+   "yon": "sag",
+   "govde": -80,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    88,
+    0
+   ],
+   "tur": 3
+  },
+  "cobweb-seated-knees-up-back-floor-hug": {
+   "ad": "Cobweb Seated Knees Up Back Floor Hug",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    -25,
+    -25
+   ],
+   "sagKol": [
+    110,
+    -10
+   ],
+   "solBacak": [
+    135,
+    -5
+   ],
+   "sagBacak": [
+    133,
+    -7
+   ],
+   "tur": 3
+  },
+  "ghost-tabletop-forward-floor": {
+   "ad": "Ghost Tabletop Forward Floor",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "werewolf-knee-plank-diag-floor": {
+   "ad": "Werewolf Knee Plank Diag Floor",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -40,
+    -130
+   ],
+   "sagBacak": [
+    -42,
+    -132
+   ],
+   "tur": 3
+  },
+  "ghost-standing-split-diag-floor": {
+   "ad": "Ghost Standing Split Diag Floor",
+   "yon": "sag",
+   "govde": 30,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    2,
+    2
+   ],
+   "sagBacak": [
+    -120,
+    -120
+   ],
+   "tur": 3
+  },
+  "haunted-seated-staff-wide-back-floor": {
+   "ad": "Haunted Seated Staff Wide Back Floor",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    90,
+    -90
+   ],
+   "sagKol": [
+    -25,
+    -25
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ],
+   "tur": 3
+  },
+  "phantom-low-squat-hip-w": {
+   "ad": "Phantom Low Squat Hip W",
+   "yon": "on",
+   "govde": 192,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -70,
+    25
+   ],
+   "solBacak": [
+    70,
+    -25
+   ],
+   "tur": 3
+  },
+  "potion-half-kneel-side-w-t": {
+   "ad": "Potion Half Kneel Side W T",
+   "yon": "on",
+   "govde": 175,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    0,
+    "geri"
+   ],
+   "solBacak": [
+    60,
+    -10
+   ],
+   "tur": 3
+  },
+  "skeleton-cross-legged-up-lowv": {
+   "ad": "Skeleton Cross Legged Up Lowv",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -78,
+    75
+   ],
+   "solBacak": [
+    78,
+    -75
+   ],
+   "tur": 3
+  },
+  "tombstone-knee-plank-diag-floor": {
+   "ad": "Tombstone Knee Plank Diag Floor",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    135,
+    135
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -40,
+    -130
+   ],
+   "sagBacak": [
+    -42,
+    -132
+   ],
+   "tur": 3
+  },
+  "fog-tabletop-up-floor": {
+   "ad": "Fog Tabletop Up Floor",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "scarecrow-high-plank-floor-floor": {
+   "ad": "Scarecrow High Plank Floor Floor",
+   "yon": "sag",
+   "govde": 98,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -82,
+    -82
+   ],
+   "sagBacak": [
+    -84,
+    -84
+   ],
+   "tur": 3
+  }
+ }
+}

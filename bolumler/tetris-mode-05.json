@@ -1,0 +1,541 @@
+{
+ "seri": "TETRIS MODE x3",
+ "bolum": "tetris-mode-05",
+ "bpm": 128.0,
+ "toplam_olcu": 330,
+ "toplam_duvar": 45,
+ "zaman": {
+  "kart": 1.875,
+  "say": 2.8125,
+  "buyu": 5.625,
+  "gec": 0.9375,
+  "sure": 13.125
+ },
+ "kartlar": [
+  {
+   "t": 0.0,
+   "sure": 3.75,
+   "tip": "giris"
+  },
+  {
+   "t": 3.75,
+   "sure": 3.75,
+   "tip": "tur",
+   "tur": 1,
+   "metin": "ROUND 1",
+   "alt": "BEGINNER"
+  },
+  {
+   "t": 7.5,
+   "sure": 3.75,
+   "tip": "basla"
+  },
+  {
+   "t": 208.125,
+   "sure": 3.75,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "ROUND 2",
+   "alt": "CHALLENGER"
+  },
+  {
+   "t": 408.75,
+   "sure": 3.75,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "ROUND 3",
+   "alt": "FINAL LEVEL"
+  },
+  {
+   "t": 609.375,
+   "sure": 3.75,
+   "tip": "wrap"
+  },
+  {
+   "t": 613.125,
+   "sure": 5.625,
+   "tip": "abone"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 11.25,
+   "p1": "pumpkin-v-stand",
+   "p2": "phantom-diagonal-curtsy",
+   "p3": "pumpkin-w-horse",
+   "ovgu": "SPOOKY GOOD!"
+  },
+  {
+   "no": 2,
+   "tur": 1,
+   "t0": 24.375,
+   "p1": "bat-low-v-horse",
+   "p2": "candle-wide-reach-leg-out",
+   "p3": "bat-hips-curtsy",
+   "ovgu": "BOO-TIFUL!"
+  },
+  {
+   "no": 3,
+   "tur": 1,
+   "t0": 37.5,
+   "p1": "ghost-w-reach-curtsy",
+   "p2": "coffin-hands-head-goddess",
+   "p3": "ghost-v-t-leg-out",
+   "ovgu": "WICKED!"
+  },
+  {
+   "no": 4,
+   "tur": 1,
+   "t0": 50.625,
+   "p1": "witch-cactus-leg-out",
+   "p2": "graveyard-chest-reach-side-tap",
+   "p3": "witch-reach-goddess",
+   "ovgu": "FANG-TASTIC!"
+  },
+  {
+   "no": 5,
+   "tur": 1,
+   "t0": 63.75,
+   "p1": "zombie-one-up-goddess",
+   "p2": "moonlight-v-soft-knee",
+   "p3": "zombie-diagonal-side-tap",
+   "ovgu": "SPOOK-TACULAR!"
+  },
+  {
+   "no": 6,
+   "tur": 1,
+   "t0": 76.875,
+   "p1": "skeleton-head-t-side-tap",
+   "p2": "potion-low-v-goddess",
+   "p3": "skeleton-wide-reach-soft-knee",
+   "ovgu": "SPELLBINDING!"
+  },
+  {
+   "no": 7,
+   "tur": 1,
+   "t0": 90.0,
+   "p1": "mummy-t-soft-knee",
+   "p2": "lantern-w-reach-side-tap",
+   "p3": "mummy-hands-head-wide",
+   "ovgu": "SPOOKY GOOD!"
+  },
+  {
+   "no": 8,
+   "tur": 1,
+   "t0": 103.125,
+   "p1": "spider-half-cactus-wide",
+   "p2": "cobweb-cactus-soft-knee",
+   "p3": "spider-chest-reach-knee-up",
+   "ovgu": "BOO-TIFUL!"
+  },
+  {
+   "no": 9,
+   "tur": 1,
+   "t0": 116.25,
+   "p1": "vampire-flex-reach-knee-up",
+   "p2": "banshee-one-up-wide",
+   "p3": "vampire-v-tree",
+   "ovgu": "WICKED!"
+  },
+  {
+   "no": 10,
+   "tur": 1,
+   "t0": 129.375,
+   "p1": "goblin-flex-tree",
+   "p2": "ghoul-head-t-knee-up",
+   "p3": "goblin-low-v-stand",
+   "ovgu": "FANG-TASTIC!"
+  },
+  {
+   "no": 11,
+   "tur": 1,
+   "t0": 142.5,
+   "p1": "cauldron-elbows-down-wide",
+   "p2": "spell-t-tree",
+   "p3": "cauldron-w-reach-knee-up",
+   "ovgu": "SPOOK-TACULAR!"
+  },
+  {
+   "no": 12,
+   "tur": 1,
+   "t0": 155.625,
+   "p1": "broom-w-knee-up",
+   "p2": "owl-half-cactus-stand",
+   "p3": "broom-cactus-tree",
+   "ovgu": "SPELLBINDING!"
+  },
+  {
+   "no": 13,
+   "tur": 1,
+   "t0": 168.75,
+   "p1": "raven-hips-tree",
+   "p2": "black-cat-flex-reach-horse",
+   "p3": "raven-one-up-stand",
+   "ovgu": "SPOOKY GOOD!"
+  },
+  {
+   "no": 14,
+   "tur": 1,
+   "t0": 181.875,
+   "p1": "werewolf-v-t-stand",
+   "p2": "scarecrow-flex-curtsy",
+   "p3": "werewolf-head-t-horse",
+   "ovgu": "BOO-TIFUL!"
+  },
+  {
+   "no": 15,
+   "tur": 1,
+   "t0": 195.0,
+   "p1": "haunted-reach-horse",
+   "p2": "tombstone-elbows-down-leg-out",
+   "p3": "haunted-t-curtsy",
+   "ovgu": "WICKED!"
+  },
+  {
+   "no": 16,
+   "tur": 2,
+   "t0": 211.875,
+   "p1": "spider-lunge-arms-up",
+   "p2": "cobweb-lunge-arms-back",
+   "p3": "spider-wide-lunge-v",
+   "ovgu": "FANG-TASTIC!"
+  },
+  {
+   "no": 17,
+   "tur": 2,
+   "t0": 225.0,
+   "p1": "vampire-kneel-lunge-archer",
+   "p2": "banshee-deep-goddess-v",
+   "p3": "vampire-lunge-prayer",
+   "ovgu": "SPOOK-TACULAR!"
+  },
+  {
+   "no": 18,
+   "tur": 2,
+   "t0": 238.125,
+   "p1": "goblin-kneel-arms-forward",
+   "p2": "ghoul-kneel-diagonal-reach",
+   "p3": "goblin-kneel-lunge-arms-up",
+   "ovgu": "SPELLBINDING!"
+  },
+  {
+   "no": 19,
+   "tur": 2,
+   "t0": 251.25,
+   "p1": "cauldron-side-lunge-v",
+   "p2": "spell-stork-prayer",
+   "p3": "cauldron-kneel-archer",
+   "ovgu": "SPOOKY GOOD!"
+  },
+  {
+   "no": 20,
+   "tur": 2,
+   "t0": 264.375,
+   "p1": "broom-stork-arms-back",
+   "p2": "owl-wide-lunge-t",
+   "p3": "broom-side-lunge-cactus",
+   "ovgu": "BOO-TIFUL!"
+  },
+  {
+   "no": 21,
+   "tur": 2,
+   "t0": 277.5,
+   "p1": "raven-knee-raise-airplane",
+   "p2": "black-cat-split-stance-archer",
+   "p3": "raven-stork-hands-hips",
+   "ovgu": "WICKED!"
+  },
+  {
+   "no": 22,
+   "tur": 2,
+   "t0": 290.625,
+   "p1": "werewolf-split-stance-diagonal-reach",
+   "p2": "scarecrow-heel-sit-arms-forward",
+   "p3": "werewolf-knee-raise-arms-back",
+   "ovgu": "FANG-TASTIC!"
+  },
+  {
+   "no": 23,
+   "tur": 2,
+   "t0": 303.75,
+   "p1": "haunted-deep-goddess-t",
+   "p2": "tombstone-side-lunge-reach",
+   "p3": "haunted-split-stance-airplane",
+   "ovgu": "SPOOK-TACULAR!"
+  },
+  {
+   "no": 24,
+   "tur": 2,
+   "t0": 316.875,
+   "p1": "phantom-lunge-arms-forward",
+   "p2": "pumpkin-kneel-lunge-arms-down",
+   "p3": "phantom-deep-goddess-reach",
+   "ovgu": "SPELLBINDING!"
+  },
+  {
+   "no": 25,
+   "tur": 2,
+   "t0": 330.0,
+   "p1": "candle-kneel-lunge-hands-hips",
+   "p2": "bat-kneel-prayer",
+   "p3": "candle-warrior-arms-down",
+   "ovgu": "SPOOKY GOOD!"
+  },
+  {
+   "no": 26,
+   "tur": 2,
+   "t0": 343.125,
+   "p1": "coffin-wide-lunge-cactus",
+   "p2": "ghost-chair-arms-up",
+   "p3": "coffin-lunge-archer",
+   "ovgu": "BOO-TIFUL!"
+  },
+  {
+   "no": 27,
+   "tur": 2,
+   "t0": 356.25,
+   "p1": "graveyard-stork-diagonal-reach",
+   "p2": "witch-deep-goddess-w",
+   "p3": "graveyard-kneel-lunge-arms-forward",
+   "ovgu": "WICKED!"
+  },
+  {
+   "no": 28,
+   "tur": 2,
+   "t0": 369.375,
+   "p1": "moonlight-knee-raise-arms-down",
+   "p2": "zombie-knee-raise-arms-forward",
+   "p3": "moonlight-wide-lunge-w",
+   "ovgu": "FANG-TASTIC!"
+  },
+  {
+   "no": 29,
+   "tur": 2,
+   "t0": 382.5,
+   "p1": "potion-side-lunge-w",
+   "p2": "skeleton-split-stance-hands-hips",
+   "p3": "potion-stork-airplane",
+   "ovgu": "SPOOK-TACULAR!"
+  },
+  {
+   "no": 30,
+   "tur": 2,
+   "t0": 395.625,
+   "p1": "lantern-heel-sit-arms-up",
+   "p2": "mummy-heel-sit-arms-back",
+   "p3": "lantern-knee-raise-diagonal-reach",
+   "ovgu": "SPELLBINDING!"
+  },
+  {
+   "no": 31,
+   "tur": 3,
+   "t0": 412.5,
+   "p1": "werewolf-seated-staff-arms-up",
+   "p2": "scarecrow-crab-kick",
+   "p3": "werewolf-seated-straddle-t",
+   "ovgu": "SPOOKY GOOD!"
+  },
+  {
+   "no": 32,
+   "tur": 3,
+   "t0": 425.625,
+   "p1": "haunted-seated-staff-hands-back",
+   "p2": "tombstone-lying-arms-up",
+   "p3": "haunted-seated-straddle-lean",
+   "ovgu": "BOO-TIFUL!"
+  },
+  {
+   "no": 33,
+   "tur": 3,
+   "t0": 438.75,
+   "p1": "phantom-boat-arms-forward",
+   "p2": "pumpkin-lying-knees-tuck",
+   "p3": "phantom-cross-legged-cactus",
+   "ovgu": "WICKED!"
+  },
+  {
+   "no": 34,
+   "tur": 3,
+   "t0": 451.875,
+   "p1": "candle-boat-arms-up",
+   "p2": "bat-dead-bug-reach",
+   "p3": "candle-cross-legged-v",
+   "ovgu": "FANG-TASTIC!"
+  },
+  {
+   "no": 35,
+   "tur": 3,
+   "t0": 465.0,
+   "p1": "coffin-tabletop",
+   "p2": "ghost-child-arms-forward",
+   "p3": "coffin-low-squat-prayer",
+   "ovgu": "SPOOK-TACULAR!"
+  },
+  {
+   "no": 36,
+   "tur": 3,
+   "t0": 478.125,
+   "p1": "graveyard-bird-dog",
+   "p2": "witch-child-arms-back",
+   "p3": "graveyard-low-squat-reach",
+   "ovgu": "SPELLBINDING!"
+  },
+  {
+   "no": 37,
+   "tur": 3,
+   "t0": 491.25,
+   "p1": "moonlight-tabletop-leg-back",
+   "p2": "zombie-cobra",
+   "p3": "moonlight-frog-hands-floor",
+   "ovgu": "SPOOKY GOOD!"
+  },
+  {
+   "no": 38,
+   "tur": 3,
+   "t0": 504.375,
+   "p1": "potion-high-plank",
+   "p2": "skeleton-superman-lite",
+   "p3": "potion-standing-split-lite",
+   "ovgu": "BOO-TIFUL!"
+  },
+  {
+   "no": 39,
+   "tur": 3,
+   "t0": 517.5,
+   "p1": "lantern-forearm-plank",
+   "p2": "mummy-side-kneel-reach",
+   "p3": "lantern-warrior-three-arms-up",
+   "ovgu": "WICKED!"
+  },
+  {
+   "no": 40,
+   "tur": 3,
+   "t0": 530.625,
+   "p1": "cobweb-plank-leg-lift",
+   "p2": "spider-kneel-v",
+   "p3": "cobweb-dancer-lite",
+   "ovgu": "FANG-TASTIC!"
+  },
+  {
+   "no": 41,
+   "tur": 3,
+   "t0": 543.75,
+   "p1": "banshee-knee-plank",
+   "p2": "vampire-kneel-w",
+   "p3": "banshee-half-moon-lite",
+   "ovgu": "SPOOK-TACULAR!"
+  },
+  {
+   "no": 42,
+   "tur": 3,
+   "t0": 556.875,
+   "p1": "ghoul-glute-bridge",
+   "p2": "goblin-kneel-cactus",
+   "p3": "ghoul-side-lunge-fold",
+   "ovgu": "SPELLBINDING!"
+  },
+  {
+   "no": 43,
+   "tur": 3,
+   "t0": 570.0,
+   "p1": "spell-bridge-arms-up",
+   "p2": "cauldron-kneel-hands-head",
+   "p3": "spell-pistol-prep",
+   "ovgu": "SPOOKY GOOD!"
+  },
+  {
+   "no": 44,
+   "tur": 3,
+   "t0": 583.125,
+   "p1": "owl-bridge-leg-up",
+   "p2": "broom-kneel-one-up",
+   "p3": "owl-reverse-tabletop",
+   "ovgu": "BOO-TIFUL!"
+  },
+  {
+   "no": 45,
+   "tur": 3,
+   "t0": 596.25,
+   "p1": "black-cat-crab",
+   "p2": "raven-seated-straddle-reach",
+   "p3": "black-cat-seated-twist-reach",
+   "ovgu": "WICKED!"
+  }
+ ],
+ "abone": [
+  15.0,
+  30.0,
+  45.0,
+  60.0,
+  75.0,
+  90.0,
+  105.0,
+  120.0,
+  135.0,
+  150.0,
+  165.0,
+  180.0,
+  195.0,
+  212.0,
+  225.0,
+  240.0,
+  255.0,
+  270.0,
+  285.0,
+  300.0,
+  315.0,
+  330.0,
+  345.0,
+  360.0,
+  375.0,
+  390.0,
+  405.0,
+  420.0,
+  435.0,
+  450.0,
+  465.0,
+  480.0,
+  495.0,
+  510.0,
+  525.0,
+  540.0,
+  555.0,
+  570.0,
+  585.0,
+  600.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "(bekleniyor - kullanici Suno, brief SUNO-BRIEF-TETRIS-MODE-05.md)",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne5.html.",
+ "tema": {
+  "varlik": "/03-motor/tetris-pvp/varlik-05/",
+  "turuncu": "#ff7a1a",
+  "mor": "#9b4dff",
+  "zehir": "#7dff6a",
+  "kemik": "#fff1d6",
+  "sayac": "WALLS",
+  "giris": [
+   "3 PLAYERS",
+   "HALLOWEEN HUMAN TETRIS"
+  ],
+  "wrap": [
+   "HAPPY",
+   "HALLOWEEN!"
+  ],
+  "ovgu": [
+   "SPOOKY GOOD!",
+   "BOO-TIFUL!",
+   "WICKED!",
+   "FANG-TASTIC!",
+   "SPOOK-TACULAR!",
+   "SPELLBINDING!"
+  ],
+  "renk": [
+   "#ff7a1a",
+   "#7dff4a",
+   "#a35cff"
+  ]
+ }
+}

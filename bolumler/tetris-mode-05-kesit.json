@@ -1,0 +1,126 @@
+{
+ "seri": "TETRIS MODE x3",
+ "bolum": "tetris-mode-05",
+ "bpm": 128.0,
+ "toplam_olcu": 38,
+ "toplam_duvar": 4,
+ "zaman": {
+  "kart": 1.875,
+  "say": 2.8125,
+  "buyu": 5.625,
+  "gec": 0.9375,
+  "sure": 13.125
+ },
+ "kartlar": [
+  {
+   "t": 0.0,
+   "sure": 3.75,
+   "tip": "giris"
+  },
+  {
+   "t": 3.75,
+   "sure": 3.75,
+   "tip": "tur",
+   "tur": 1,
+   "metin": "ROUND 1",
+   "alt": "BEGINNER"
+  },
+  {
+   "t": 7.5,
+   "sure": 3.75,
+   "tip": "basla"
+  },
+  {
+   "t": 37.5,
+   "sure": 3.75,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "ROUND 2",
+   "alt": "CHALLENGER"
+  },
+  {
+   "t": 54.375,
+   "sure": 3.75,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "ROUND 3",
+   "alt": "FINAL LEVEL"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 11.25,
+   "p1": "pumpkin-v-stand",
+   "p2": "phantom-diagonal-curtsy",
+   "p3": "pumpkin-w-horse",
+   "ovgu": "SPOOKY GOOD!"
+  },
+  {
+   "no": 2,
+   "tur": 1,
+   "t0": 24.375,
+   "p1": "bat-low-v-horse",
+   "p2": "candle-wide-reach-leg-out",
+   "p3": "bat-hips-curtsy",
+   "ovgu": "BOO-TIFUL!"
+  },
+  {
+   "no": 16,
+   "tur": 2,
+   "t0": 41.25,
+   "p1": "spider-lunge-arms-up",
+   "p2": "cobweb-lunge-arms-back",
+   "p3": "spider-wide-lunge-v",
+   "ovgu": "FANG-TASTIC!"
+  },
+  {
+   "no": 31,
+   "tur": 3,
+   "t0": 58.125,
+   "p1": "werewolf-seated-staff-arms-up",
+   "p2": "scarecrow-crab-kick",
+   "p3": "werewolf-seated-straddle-t",
+   "ovgu": "SPOOKY GOOD!"
+  }
+ ],
+ "abone": [
+  15.0,
+  30.0,
+  45.0,
+  60.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "(bekleniyor - kullanici Suno, brief SUNO-BRIEF-TETRIS-MODE-05.md)",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne5.html.",
+ "tema": {
+  "varlik": "/03-motor/tetris-pvp/varlik-05/",
+  "turuncu": "#ff7a1a",
+  "mor": "#9b4dff",
+  "zehir": "#7dff6a",
+  "kemik": "#fff1d6",
+  "sayac": "WALLS",
+  "giris": [
+   "3 PLAYERS",
+   "HALLOWEEN HUMAN TETRIS"
+  ],
+  "wrap": [
+   "HAPPY",
+   "HALLOWEEN!"
+  ],
+  "ovgu": [
+   "SPOOKY GOOD!",
+   "BOO-TIFUL!",
+   "WICKED!",
+   "FANG-TASTIC!",
+   "SPOOK-TACULAR!",
+   "SPELLBINDING!"
+  ],
+  "renk": [
+   "#ff7a1a",
+   "#7dff4a",
+   "#a35cff"
+  ]
+ }
+}

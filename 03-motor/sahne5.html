@@ -8,11 +8,12 @@
 
 <script type="module">
 // =====================================================================
-// MOTOR 5 — TETRIS MODE x3 (3 oyuncu, tek ortak duvar). Kural kaynağı: REF-056 (Glow Motion "HUMAN TETRIS x3 player |
+// MOTOR 5 — TETRIS MODE x3 (3 oyuncu). Kullanıcı 19 Eki 2026: "her karede tek siluet, 3 tane yan yana" -> ekran ÜÇE
+// bölünür (P1 | P2 | P3): her oyuncunun kendi şeridi + kafes kapısı + paneli, her panelde TEK siluet oyuğu. Kural kaynağı: REF-056 (Glow Motion "HUMAN TETRIS x3 player |
 // Nobody Fits Alone"), Masaüstü/POZ-DUVARI/TALIMATLAR.md §16-19, CLAUDE.md md. 22 (referansta ne görülüyorsa o).
 //
-// REF-056 yapısı: tek geniş şerit, ortada TEK kafes kapı; duvar = renk geçişli panel, 3 kişilik siluet OYUK (içinden
-// sahne görünür); döngü ~13 sn: kapıda pırıltı -> poz kapıda -> sağda 3-2-1 -> duvar büyüyüp ekranı kaplar -> geçer.
+// REF-056'dan: renk geçişli panel, siluet OYUK (içinden sahne görünür); döngü ~13 sn: kapıda pırıltı -> poz kapıda ->
+// 3-2-1 -> duvar büyüyüp kendi şeridini kaplar -> geçer.
 // HUD: sol üst ROUND N, ortada sayaç + ilerleme çubuğu + kupa. Kamera sabit.
 // Bu videoda (kullanıcı 19 Eki 2026): dünya HALLOWEEN — dolunay + ruh girdabı, yarasalar, cadı süpürgesi geçişi,
 // balkabakları, mezar taşı korkuluk, yer sisi. Seri kuralları: efekt, dolu gök, yol okları, 3-2-1-GO, duvar ekranı
@@ -38,7 +39,7 @@ const TOPLAM_DUVAR = BOLUM.toplam_duvar || DUVARLAR.length;
 const TEMA = Object.assign({
   varlik: '/03-motor/tetris-pvp/varlik-05/', turuncu: '#ff7a1a', mor: '#9b4dff', zehir: '#7dff6a', kemik: '#fff1d6',
   sayac: 'WALLS', giris: ['3 PLAYERS', 'HALLOWEEN HUMAN TETRIS'], wrap: ['HAPPY', 'HALLOWEEN!'],
-  ovgu: ['SPOOKY GOOD!', 'BOO-TIFUL!', 'WICKED!'], panel: ['kabak', 'zehir', 'gece'],
+  ovgu: ['SPOOKY GOOD!', 'BOO-TIFUL!', 'WICKED!'],
 }, BOLUM.tema || {});
 const VARLIK = TEMA.varlik;
 const YER = await fetch(VARLIK + 'yerlesim.json').then(r => r.json());
@@ -50,13 +51,16 @@ function resim(yol) {
 }
 const font = new FontFace('Titan', 'url(/05-kapak/fontlar/TitanOne.ttf)');
 document.fonts.add(await font.load());
-const [GOK, SERIT] = await Promise.all(['gok.png', 'serit.png'].map(a => resim(VARLIK + a)));
-const PANEL = {};
-await Promise.all(TEMA.panel.map(async a => { PANEL[a] = await resim(VARLIK + 'panel-' + a + '.png'); }));
-const GRUP_ADLAR = [...new Set(DUVARLAR.map(d => d.grup))];
+const N = 3, OY = ['p1', 'p2', 'p3'];
+const [GOK, ...RESIM] = await Promise.all(['gok.png', ...OY.map(o => 'serit-' + o + '.png'), ...OY.map(o => 'panel-' + o + '.png')].map(a => resim(VARLIK + a)));
+const SERIT = RESIM.slice(0, N), PANEL = RESIM.slice(N);
+const RENK = TEMA.renk || ['#ff7a1a', '#7dff4a', '#a35cff'];
+const POZ_ADLAR = [...new Set(DUVARLAR.flatMap(d => OY.map(o => d[o])))];
 const MASKE = {};
-await Promise.all(GRUP_ADLAR.map(async a => { MASKE[a] = await resim(VARLIK + 'grup/' + a + '.png'); }));
-const PAR_ORAN = 1600 / 900;
+await Promise.all(POZ_ADLAR.map(async a => { MASKE[a] = await resim(VARLIK + 'poz/' + a + '.png'); }));
+const PAR_ORAN = 1100 / 904;
+const SW = (YER.yol && YER.yol.serit_w) || 640;          // şerit görüntüsü genişliği (px)
+const LW = W / N;                                          // ekranda bir şerit
 
 const cikti = document.getElementById('cikti');
 cikti.width = W; cikti.height = H;
@@ -94,10 +98,13 @@ function yazi(metin, x, y, px, dolgu, kontur = '#14051f', alfa = 1, isilti = nul
 function sahneCiz(t) {
   cx.drawImage(GOK, 0, 0, W, H);
   gokHareket(t);
-  cx.drawImage(SERIT, 0, 0, W, H);
   sisAkisi(t);
-  yolOklari(t);
-  ampulCiz(t);
+  for (let i = 0; i < N; i++) cx.drawImage(SERIT[i], i * LW, 0, LW, H);
+  for (let i = 0; i < N; i++) { yolOklari(t, i); ampulCiz(t, i); }
+  // şerit ayırıcı: ince parlak çizgi (oyuncu alanları okunsun)
+  cx.save(); cx.fillStyle = 'rgba(10,3,24,0.9)';
+  for (let i = 1; i < N; i++) cx.fillRect(i * LW - 3 * k, 0, 6 * k, H);
+  cx.restore();
 }
 
 // yarasa (kanat çırpan): kanat ucu yüksekliği faza göre değişir
@@ -165,56 +172,55 @@ function gokHareket(t) {
     cadi(x, y, 70 * k, Math.sin(t * 6));
   }
 }
-// yer sisi: yol kenarında yavaş akan yeşil-mor bulut (REF-056'nın ışıklı bulut kümelerinin canlı karşılığı)
+// ufuk sisi: şeritlerin arkasında yavaş akan yeşil-mor bant (gökte, ufuk hizasında)
 const SR = rng(88);
-const SIS = Array.from({ length: 22 }, () => ({ x: SR(), y: 0.62 + SR() * 0.38, r: 90 + SR() * 160, hiz: 0.01 + SR() * 0.02, c: SR() }));
+const SIS = Array.from({ length: 22 }, () => ({ x: SR(), y: 0.30 + SR() * 0.14, r: 90 + SR() * 160, hiz: 0.01 + SR() * 0.02, c: SR() }));
 function sisAkisi(t) {
   cx.save(); cx.globalCompositeOperation = 'lighter';
   for (const s of SIS) {
-    const x = ((s.x + t * s.hiz) % 1.2 - 0.1) * W;
-    if (Math.abs(x - W / 2) < W * 0.26) continue;              // koridora (yola) girmez
-    const y = s.y * H, r = s.r * k;
+    const x = ((s.x + t * s.hiz) % 1.2 - 0.1) * W, y = s.y * H, r = s.r * k;
     const renk = s.c < 0.55 ? ZEHIR : MOR;
     const g = cx.createRadialGradient(x, y, 0, x, y, r);
-    g.addColorStop(0, hex(renk, 0.13)); g.addColorStop(1, hex(renk, 0));
-    cx.fillStyle = g; cx.beginPath(); cx.ellipse(x, y, r * 1.6, r * 0.6, 0, 0, 6.283); cx.fill();
+    g.addColorStop(0, hex(renk, 0.10)); g.addColorStop(1, hex(renk, 0));
+    cx.fillStyle = g; cx.beginPath(); cx.ellipse(x, y, r * 1.6, r * 0.5, 0, 0, 6.283); cx.fill();
   }
   cx.restore();
 }
 
-// şerit kamerası (varlik.py ile aynı): z 2,6 m, 10,5° aşağı, dikey yarı-FOV tan = 12/21,85; görüntü 1920 geniş
+// şerit kamerası (varlik.py ile aynı): z 2,6 m, 10,5° aşağı, dikey yarı-FOV tan = 12/21,85; şerit görüntüsü SW x 1080
 const KAM = { z: 2.6, p: 10.5 * Math.PI / 180, tv: 12 / 21.85 };
-KAM.th = KAM.tv * 1920 / 1080;
-function izdus(X, Y, Zd) {
+KAM.th = KAM.tv * SW / 1080;
+function izdus(i, X, Y, Zd) {
   const dz = Zd - KAM.z, cp = Math.cos(KAM.p), sp = Math.sin(KAM.p);
   const zc = Y * cp - dz * sp, yc = Y * sp + dz * cp;
-  return [(960 + (X / zc) / KAM.th * 960) * W / 1920, (540 - (yc / zc) / KAM.tv * 540) * H / 1080];
+  const sx = SW / 2 + (X / zc) / KAM.th * SW / 2, sy = 540 - (yc / zc) / KAM.tv * 540;
+  return [i * LW + sx * LW / SW, sy * H / 1080];
 }
 // yolda kameraya akan parlak yön okları (seri kuralı)
-const YK = (YER.yol && YER.yol.y_kapi) || 16;
-function yolOklari(t) {
-  const ARA = 2.0, HIZ_OK = 2.4, N = 8;
-  cx.save();
-  for (let j = 0; j < N; j++) {
-    const y = YK - 1.2 - ((j * ARA + t * HIZ_OK) % (ARA * N));
-    if (y < 3.0 || y > YK - 1.4) continue;
-    const a = Math.min(1, (YK - 1.4 - y) / 1.5) * Math.min(1, (y - 3.0) / 0.8);
-    const z = 0.05, w = 1.5, d = 0.6, kal = 0.4;
-    const pts = [[-w, y + d], [0, y], [w, y + d], [w, y + d + kal], [0, y + kal], [-w, y + d + kal]].map(q => izdus(q[0], q[1], z));
+const YK = (YER.yol && YER.yol.y_kapi) || 8;
+function yolOklari(t, i) {
+  const ARA = 1.25, HIZ_OK = 1.6, N_ = 7;
+  cx.save(); cx.beginPath(); cx.rect(i * LW, 0, LW, H); cx.clip();
+  for (let j = 0; j < N_; j++) {
+    const y = YK + 0.6 - ((j * ARA + t * HIZ_OK) % (ARA * N_));
+    if (y < 3.0 || y > YK + 0.4) continue;
+    const a = Math.min(1, (YK + 0.4 - y) / 1.2) * Math.min(1, (y - 3.0) / 0.6);
+    const z = 0.05, w = 0.8, d = 0.36, kal = 0.24;
+    const pts = [[-w, y + d], [0, y], [w, y + d], [w, y + d + kal], [0, y + kal], [-w, y + d + kal]].map(q => izdus(i, q[0], q[1], z));
     cx.beginPath(); pts.forEach((q, n) => n ? cx.lineTo(q[0], q[1]) : cx.moveTo(q[0], q[1])); cx.closePath();
-    cx.shadowColor = TUR; cx.shadowBlur = 20 * k;
-    cx.fillStyle = `rgba(255,236,200,${0.85 * a})`; cx.fill();
-    cx.shadowBlur = 0; cx.lineWidth = 3 * k; cx.strokeStyle = hex(TUR, 0.9 * a); cx.stroke();
+    cx.shadowColor = RENK[i]; cx.shadowBlur = 16 * k;
+    cx.fillStyle = `rgba(255,240,215,${0.85 * a})`; cx.fill();
+    cx.shadowBlur = 0; cx.lineWidth = 3 * k; cx.strokeStyle = hex(RENK[i], 0.9 * a); cx.stroke();
   }
   cx.restore();
 }
-function ampulCiz(t) {
-  const L = YER.ampul; if (!L) return;
-  const sx = W / 1920, sy = H / 1080;
+function ampulCiz(t, i) {
+  const L = YER['ampul_' + OY[i]]; if (!L) return;
+  const sx = LW / SW, sy = H / 1080;
   cx.save(); cx.globalCompositeOperation = 'lighter';
   L.forEach((q, n) => {
     const a = 0.35 + 0.65 * Math.max(0, Math.sin(t * 7 - n * 0.9)) ** 2;
-    const x = q[0] * sx, y = q[1] * sy, r = 13 * k;
+    const x = i * LW + q[0] * sx, y = q[1] * sy, r = 11 * k;
     const g = cx.createRadialGradient(x, y, 0, x, y, r);
     g.addColorStop(0, `rgba(255,240,200,${a})`); g.addColorStop(0.35, `rgba(255,150,50,${0.7 * a})`); g.addColorStop(1, 'rgba(255,100,20,0)');
     cx.fillStyle = g; cx.beginPath(); cx.arc(x, y, r, 0, 6.283); cx.fill();
@@ -223,24 +229,28 @@ function ampulCiz(t) {
 }
 
 // kapı açıklığı (ekran px)
-function aciklik() {
-  const a = YER.aciklik, sx = W / 1920, sy = H / 1080;
-  return { x: a[0] * sx, y: a[1] * sy, w: (a[2] - a[0]) * sx, h: (a[3] - a[1]) * sy };
+function aciklik(i) {
+  const a = YER['aciklik_' + OY[i]], sx = LW / SW, sy = H / 1080;
+  return { x: i * LW + a[0] * sx, y: a[1] * sy, w: (a[2] - a[0]) * sx, h: (a[3] - a[1]) * sy };
 }
-function kapiKutusu() {
-  const A = aciklik();
+function kapiKutusu(i) {
+  const A = aciklik(i);
   let aw = A.w, ah = A.w / PAR_ORAN; if (ah > A.h) { ah = A.h; aw = ah * PAR_ORAN; }
   return { x: A.x + (A.w - aw) / 2, y: A.y + A.h - ah, w: aw, h: ah };
 }
-// en yakında duvar ekranı TAMAMEN kaplar (seri kuralı: boşluk bırakmasın)
-function buyukKutu() {
-  const w = Math.max(W, H * PAR_ORAN) * 1.04, h = w / PAR_ORAN;
-  return { x: (W - w) / 2, y: H / 2 - h / 2, w, h };
+// en yakında duvar kendi şeridini TAMAMEN kaplar (seri kuralı: boşluk bırakmasın)
+function buyukKutu(i) {
+  const w = Math.max(LW, H * PAR_ORAN) * 1.04, h = w / PAR_ORAN;
+  return { x: i * LW + (LW - w) / 2, y: H / 2 - h / 2, w, h };
 }
 
 // ------------------------------------------------------------ DUVAR (renk geçişli panel + 3 kişilik oyuk)
-function duvarCiz(kutu, panel, maske, alfa) {
+function duvarCiz(i, kutu, maske, alfa) {
   if (alfa <= 0) return;
+  cx.save(); cx.beginPath(); cx.rect(i * LW, 0, LW, H); cx.clip();
+  try { duvarIc(kutu, PANEL[i], maske, alfa); } finally { cx.restore(); }
+}
+function duvarIc(kutu, panel, maske, alfa) {
   const { x, y, w, h } = kutu;
   if (!maske) { cx.save(); cx.globalAlpha = alfa; cx.drawImage(panel, x, y, w, h); cx.restore(); return; }
   // 1) oyuğun içi: sahne görünür ama hafif koyulaşır (REF-056: oyukta arka plan dokusu)
@@ -262,13 +272,14 @@ function duvarCiz(kutu, panel, maske, alfa) {
   cx.restore();
 }
 // boş kapı paneli: koyu cam + ortada pırıltı yıldızı (REF-056'da duvar gelmeden kapıda pırıltı)
-function bosKapi(t, alfa = 1) {
-  const B = kapiKutusu();
+function bosKapi(t, alfa = 1) { for (let i = 0; i < N; i++) bosKapi1(i, t, alfa); }
+function bosKapi1(i, t, alfa) {
+  const B = kapiKutusu(i);
   cx.save(); cx.globalAlpha = alfa;
   const g = cx.createLinearGradient(0, B.y, 0, B.y + B.h); g.addColorStop(0, 'rgba(40,10,70,0.85)'); g.addColorStop(1, 'rgba(10,2,24,0.9)');
   cx.fillStyle = g; cx.fillRect(B.x, B.y, B.w, B.h);
   const cxp = B.x + B.w / 2, cyp = B.y + B.h / 2, r = B.h * 0.32 * (1 + 0.08 * Math.sin(t * 5));
-  cx.shadowColor = ZEHIR; cx.shadowBlur = 25 * k; cx.strokeStyle = hex(KEMIK, 0.95); cx.lineWidth = 4 * k;
+  cx.shadowColor = RENK[i]; cx.shadowBlur = 25 * k; cx.strokeStyle = hex(KEMIK, 0.95); cx.lineWidth = 4 * k;
   cx.beginPath();
   for (let i = 0; i < 8; i++) {
     const a = i / 8 * 6.283 - Math.PI / 2, rr = i % 2 ? r * 0.28 : r;
@@ -292,31 +303,33 @@ function olcekle(K, s) { return { x: K.x + K.w / 2 - K.w * s / 2, y: K.y + K.h /
 
 function duvarSurecCiz(d, u, t) {
   const e = evre(u);
-  const panel = PANEL[TEMA.panel[(d.no - 1) % TEMA.panel.length]];
-  const maske = MASKE[d.grup];
-  const A2 = kapiKutusu(), B = buyukKutu();
-  if (e.ad === 'kart') {
-    // önce kapıda pırıltı (yarısı), sonra poz panelle kapıda belirir
-    if (e.p < 0.5) bosKapi(t);
-    else { duvarCiz(A2, panel, maske, ease((e.p - 0.5) / 0.5)); }
-  } else if (e.ad === 'say') {
-    duvarCiz(A2, panel, maske, 1);
-  } else if (e.ad === 'buyu') {
-    duvarCiz(kutuLerp(A2, B, Math.pow(e.p, 2.1)), panel, maske, 1);
-  } else if (e.ad === 'gec') {
-    const q = ease(e.p);
-    duvarCiz(olcekle(B, 1 + 0.45 * q), panel, maske, 1 - q);
-  } else bosKapi(t, ease(Math.min(1, e.p * 2)));
+  for (let i = 0; i < N; i++) {
+    const maske = MASKE[d[OY[i]]];
+    const A2 = kapiKutusu(i), B = buyukKutu(i);
+    if (e.ad === 'kart') {
+      // önce kapıda pırıltı (yarısı), sonra poz panelle kapıda belirir
+      if (e.p < 0.5) bosKapi1(i, t, 1);
+      else duvarCiz(i, A2, maske, ease((e.p - 0.5) / 0.5));
+    } else if (e.ad === 'say') {
+      duvarCiz(i, A2, maske, 1);
+    } else if (e.ad === 'buyu') {
+      duvarCiz(i, kutuLerp(A2, B, Math.pow(e.p, 2.1)), maske, 1);
+    } else if (e.ad === 'gec') {
+      const q = ease(e.p);
+      duvarCiz(i, olcekle(B, 1 + 0.45 * q), maske, 1 - q);
+    } else bosKapi1(i, t, ease(Math.min(1, e.p * 2)));
+  }
   return e;
 }
 
-// REF-056: 3-2-1 sağda, kapının üst-sağında büyük parlak rakam
+// 3-2-1: kapıların altında, ortada (üstte SUBSCRIBE y≈190 ile çakışmasın — seri kuralı §16)
 function sayimCiz(e) {
   if (e.ad !== 'say') return;
   const n = 3 - Math.min(2, Math.floor(e.p * 3));
   const q = (e.p * 3) % 1;
   const s = 1.3 - 0.3 * ease(Math.min(1, q / 0.25));
-  yazi(String(n), W * 0.82, H * 0.29, 200 * k * s, ['#ffffff', KEMIK, TUR], '#2a0a46', 1, TUR);
+  const A = aciklik(1);
+  yazi(String(n), W / 2, A.y + A.h + 120 * k, 170 * k * s, ['#ffffff', KEMIK, TUR], '#2a0a46', 1, TUR);
 }
 
 const OVGU = TEMA.ovgu;
@@ -520,8 +533,8 @@ window.kareAl = (bicim, kalite) => {
 window.SURE_OLCU = TOPLAM_OLCU;
 window.TOPLAM_KARE = Math.round(TOPLAM_OLCU * OLCU * FPS);
 window.NOTA_SAYISI = DUVARLAR.length;
-window.KLIP_SAYISI = GRUP_ADLAR.length;
-window.SILUET_VAR = GRUP_ADLAR.every(a => MASKE[a]);
+window.KLIP_SAYISI = POZ_ADLAR.length;
+window.SILUET_VAR = POZ_ADLAR.every(a => MASKE[a]);
 kareKur(0);
 window.HAZIR = true;
 </script>
