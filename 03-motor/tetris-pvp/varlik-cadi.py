@@ -154,13 +154,13 @@ def ay_ve_gok(rnd):
             z = AY.z + 0.5 * r * math.sin(a) + rnd.gauss(0, 0.9)
             kure((x, AY.y - 14 + rnd.uniform(-2, 2), z), rnd.uniform(0.12, 0.5) * (1.25 - u * 0.6), rnd.choice(mats))
     # sarmalin ici: yari saydam sis kollari (parcaciklarin altinda yumusak bant)
-    sis_m = [mat_sis("sk%d" % i, lin(hex3(c)), 3.0, 0.18) for i, c in enumerate(("#7dff6a", "#b45cff", "#5ef0ff"))]
+    sis_m = [mat_sis("sk%d" % i, lin(hex3(c)), 1.1, 0.08) for i, c in enumerate(("#7dff6a", "#b45cff", "#5ef0ff"))]
     for kol in (0, math.pi):
         for i in range(70):
             u = i / 70
             r = R_ * 1.2 + u * 60
             a = kol + 2.3 * math.log(r / (R_ * 1.15) + 1) * 2.0
-            kure((AY.x + r * math.cos(a), AY.y - 10, AY.z + 0.5 * r * math.sin(a)), 3.5 + 4 * u, sis_m[i % 3])
+            kure((AY.x + r * math.cos(a), AY.y - 10, AY.z + 0.5 * r * math.sin(a)), 2.2 + 2.5 * u, sis_m[i % 3])
     # YARASA SURULERI: girdap kollari boyunca siyah yarasalar, aya yakin olanlar ayin onunde siluet
     siyah = mat_emis("yarasa", lin(hex3("#05020a")), 0.0)
     for i in range(110):
@@ -250,7 +250,7 @@ def zemin_ve_yol(rnd, oyuncu):
     o = nt.nodes.new("ShaderNodeOutputMaterial"); nt.links.new(em.outputs[0], o.inputs[0])
     g.data.materials.append(m)
     # yol: koyu mor doseme + REF-056'daki gibi isikli chevron basamaklar (bizde turuncu-mor)
-    yol = mat_jole("yol", lin(hex3("#2a1048")), emis=0.05, purluk=0.2)
+    yol = mat_jole("yol", lin(hex3("#2a1048")), emis=0.05, purluk=0.55)
     yuvarlak_kutu("yol", (0, (0.5 + Y + 3) / 2, -0.2), (YOL_W, Y + 3 - 0.5, 0.4), yol, egim=0.12)
     chev_a = mat_emis("chev_a", lin(hex3("#ff7a1a")), 5.0)
     chev_b = mat_emis("chev_b", lin(hex3("#b45cff")), 4.0)
@@ -299,7 +299,7 @@ def zemin_ve_yol(rnd, oyuncu):
         x = s * rnd.uniform(YOL_W / 2 + 3 + yy * 0.2, 14 + yy * 0.9)
         mezar(x, yy, tas, fener)
         bpy.context.active_object.rotation_euler.y = rnd.uniform(-0.2, 0.2)
-    sis = [mat_sis("sis%d" % i, lin(hex3(c)), 2.2, 0.22) for i, c in enumerate(("#4dff9a", "#9a5cff", "#c7b8ff"))]
+    sis = [mat_sis("sis%d" % i, lin(hex3(c)), 0.9, 0.12) for i, c in enumerate(("#4dff9a", "#9a5cff", "#c7b8ff"))]
     for i in range(160):
         s = rnd.choice((-1, 1)); yy = rnd.uniform(0.5, 70)
         x = s * rnd.uniform(YOL_W / 2 + 0.5, YOL_W / 2 + 4 + yy * 0.9)
