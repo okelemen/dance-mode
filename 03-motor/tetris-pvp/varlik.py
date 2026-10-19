@@ -671,12 +671,16 @@ def poz_maskeleri():
 
 
 # ------------------------------------------------------------------ ana akis
-if YALNIZ in ("hepsi", "poz"):
-    poz_maskeleri()
-if YALNIZ in ("hepsi", "sahne"):
-    gok()
-    for o in ("p1", "p2"):
-        serit(o)
-        panel(o)
-json.dump(YERLESIM, open(os.path.join(CIKTI, "yerlesim.json"), "w"), indent=1)
-log("bitti", YERLESIM)
+# 5. video (REF-056, 3 oyuncu, Halloween): ayri betik, buradaki yardimcilarla calisir
+if arg("--mod", "pvp") == "cadi":
+    exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-cadi.py"), encoding="utf-8").read(), "varlik-cadi.py", "exec"))
+else:
+    if YALNIZ in ("hepsi", "poz"):
+        poz_maskeleri()
+    if YALNIZ in ("hepsi", "sahne"):
+        gok()
+        for o in ("p1", "p2"):
+            serit(o)
+            panel(o)
+    json.dump(YERLESIM, open(os.path.join(CIKTI, "yerlesim.json"), "w"), indent=1)
+    log("bitti", YERLESIM)

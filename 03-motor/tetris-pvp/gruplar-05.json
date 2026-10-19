@@ -1,0 +1,3530 @@
+{
+ "_not": "TETRIS MODE 5. video (REF-056, 3 oyuncu, Halloween) grup pozlari. Figurler soldan saga A B C; aci dili pozlar.json _not. temas: [sol eklem, sag eklem] ya da 'yan'.",
+ "gruplar": {
+  "bat-trio": {
+   "ad": "Bat Trio",
+   "figurler": [
+    {
+     "ad": "Bat Trio A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -55,
+      -160
+     ],
+     "solKol": [
+      122,
+      122
+     ],
+     "sagBacak": [
+      -22,
+      -22
+     ],
+     "solBacak": [
+      22,
+      22
+     ]
+    },
+    {
+     "ad": "Bat Trio B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -55,
+      -160
+     ],
+     "solKol": [
+      55,
+      160
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ],
+     "solBacak": [
+      62,
+      4
+     ]
+    },
+    {
+     "ad": "Bat Trio C",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      55,
+      160
+     ],
+     "sagKol": [
+      -122,
+      -122
+     ],
+     "solBacak": [
+      22,
+      22
+     ],
+     "sagBacak": [
+      -22,
+      -22
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ],
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "pumpkin-ring": {
+   "ad": "Pumpkin Ring",
+   "figurler": [
+    {
+     "ad": "Pumpkin Ring A",
+     "yon": "on",
+     "govde": 172,
+     "bas": 0,
+     "sagKol": [
+      -45,
+      20
+     ],
+     "solKol": [
+      122,
+      122
+     ],
+     "sagBacak": [
+      -12,
+      6
+     ],
+     "solBacak": [
+      12,
+      -6
+     ]
+    },
+    {
+     "ad": "Pumpkin Ring B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -148,
+      -148
+     ],
+     "solKol": [
+      148,
+      148
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Pumpkin Ring C",
+     "yon": "on",
+     "govde": -172,
+     "bas": 0,
+     "solKol": [
+      45,
+      -20
+     ],
+     "sagKol": [
+      -122,
+      -122
+     ],
+     "solBacak": [
+      12,
+      -6
+     ],
+     "sagBacak": [
+      -12,
+      6
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ],
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "witch-hat": {
+   "ad": "Witch Hat",
+   "figurler": [
+    {
+     "ad": "Witch Hat A",
+     "yon": "on",
+     "govde": 160,
+     "bas": 0,
+     "sagKol": [
+      -8,
+      -5
+     ],
+     "solKol": [
+      110,
+      110
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Witch Hat B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -165,
+      170
+     ],
+     "solKol": [
+      165,
+      -170
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Witch Hat C",
+     "yon": "on",
+     "govde": -160,
+     "bas": 0,
+     "solKol": [
+      8,
+      5
+     ],
+     "sagKol": [
+      -110,
+      -110
+     ],
+     "solBacak": [
+      3,
+      1
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "omuz"
+    ],
+    [
+     "omuz",
+     "el"
+    ]
+   ]
+  },
+  "haunted-gate": {
+   "ad": "Haunted Gate",
+   "figurler": [
+    {
+     "ad": "Haunted Gate A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -35,
+      -35
+     ],
+     "solKol": [
+      90,
+      90
+     ],
+     "sagBacak": [
+      -38,
+      4
+     ],
+     "solBacak": [
+      38,
+      -4
+     ]
+    },
+    {
+     "ad": "Haunted Gate B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solKol": [
+      90,
+      90
+     ],
+     "sagBacak": [
+      -38,
+      4
+     ],
+     "solBacak": [
+      38,
+      -4
+     ]
+    },
+    {
+     "ad": "Haunted Gate C",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      35,
+      35
+     ],
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solBacak": [
+      38,
+      -4
+     ],
+     "sagBacak": [
+      -38,
+      4
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ],
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "zombie-line": {
+   "ad": "Zombie Line",
+   "figurler": [
+    {
+     "ad": "Zombie Line A",
+     "yon": "sag",
+     "govde": 175,
+     "bas": 0,
+     "solKol": [
+      90,
+      90
+     ],
+     "sagKol": [
+      88,
+      88
+     ],
+     "solBacak": [
+      25,
+      10
+     ],
+     "sagBacak": [
+      -20,
+      -25
+     ]
+    },
+    {
+     "ad": "Zombie Line B",
+     "yon": "sag",
+     "govde": 175,
+     "bas": 0,
+     "solKol": [
+      90,
+      90
+     ],
+     "sagKol": [
+      88,
+      88
+     ],
+     "solBacak": [
+      -20,
+      -25
+     ],
+     "sagBacak": [
+      25,
+      10
+     ]
+    },
+    {
+     "ad": "Zombie Line C",
+     "yon": "sag",
+     "govde": 175,
+     "bas": 0,
+     "solKol": [
+      90,
+      90
+     ],
+     "sagKol": [
+      88,
+      88
+     ],
+     "solBacak": [
+      25,
+      10
+     ],
+     "sagBacak": [
+      -20,
+      -25
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "omuz"
+    ],
+    [
+     "el",
+     "omuz"
+    ]
+   ]
+  },
+  "mummy-wrap": {
+   "ad": "Mummy Wrap",
+   "figurler": [
+    {
+     "ad": "Mummy Wrap A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -22,
+      95
+     ],
+     "solKol": [
+      22,
+      -95
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Mummy Wrap B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -22,
+      95
+     ],
+     "solKol": [
+      22,
+      -95
+     ],
+     "sagBacak": [
+      -12,
+      6
+     ],
+     "solBacak": [
+      12,
+      -6
+     ]
+    },
+    {
+     "ad": "Mummy Wrap C",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      22,
+      -95
+     ],
+     "sagKol": [
+      -22,
+      95
+     ],
+     "solBacak": [
+      3,
+      1
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    "yan",
+    "yan"
+   ]
+  },
+  "skeleton-shake": {
+   "ad": "Skeleton Shake",
+   "figurler": [
+    {
+     "ad": "Skeleton Shake A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solKol": [
+      90,
+      90
+     ],
+     "sagBacak": [
+      -80,
+      -8
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Skeleton Shake B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solKol": [
+      90,
+      90
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      80,
+      8
+     ]
+    },
+    {
+     "ad": "Skeleton Shake C",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      174,
+      176
+     ],
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solBacak": [
+      80,
+      8
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ],
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "ghost-float": {
+   "ad": "Ghost Float",
+   "figurler": [
+    {
+     "ad": "Ghost Float A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -35,
+      -35
+     ],
+     "solKol": [
+      35,
+      35
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      -18,
+      12
+     ]
+    },
+    {
+     "ad": "Ghost Float B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -35,
+      -35
+     ],
+     "solKol": [
+      35,
+      35
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Ghost Float C",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      35,
+      35
+     ],
+     "sagKol": [
+      -35,
+      -35
+     ],
+     "solBacak": [
+      3,
+      1
+     ],
+     "sagBacak": [
+      18,
+      -12
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ],
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "cauldron-circle": {
+   "ad": "Cauldron Circle",
+   "figurler": [
+    {
+     "ad": "Cauldron Circle A",
+     "yon": "on",
+     "govde": 165,
+     "bas": 0,
+     "sagKol": [
+      -35,
+      -35
+     ],
+     "solKol": [
+      55,
+      20
+     ],
+     "sagBacak": [
+      -22,
+      -22
+     ],
+     "solBacak": [
+      22,
+      22
+     ]
+    },
+    {
+     "ad": "Cauldron Circle B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -55,
+      -20
+     ],
+     "solKol": [
+      55,
+      20
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ],
+     "solBacak": [
+      62,
+      4
+     ]
+    },
+    {
+     "ad": "Cauldron Circle C",
+     "yon": "on",
+     "govde": -165,
+     "bas": 0,
+     "solKol": [
+      35,
+      35
+     ],
+     "sagKol": [
+      -55,
+      -20
+     ],
+     "solBacak": [
+      22,
+      22
+     ],
+     "sagBacak": [
+      -22,
+      -22
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ],
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "haunted-tree": {
+   "ad": "Haunted Tree",
+   "figurler": [
+    {
+     "ad": "Haunted Tree A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solKol": [
+      90,
+      90
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      60,
+      -40
+     ]
+    },
+    {
+     "ad": "Haunted Tree B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -122,
+      -122
+     ],
+     "solKol": [
+      148,
+      148
+     ],
+     "sagBacak": [
+      -60,
+      40
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Haunted Tree C",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      174,
+      176
+     ],
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solBacak": [
+      3,
+      1
+     ],
+     "sagBacak": [
+      -60,
+      40
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ],
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "scarecrow-row": {
+   "ad": "Scarecrow Row",
+   "figurler": [
+    {
+     "ad": "Scarecrow Row A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 15,
+     "sagKol": [
+      -90,
+      -20
+     ],
+     "solKol": [
+      90,
+      20
+     ],
+     "sagBacak": [
+      -12,
+      6
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Scarecrow Row B",
+     "yon": "on",
+     "govde": 180,
+     "bas": -15,
+     "sagKol": [
+      -90,
+      -20
+     ],
+     "solKol": [
+      90,
+      20
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Scarecrow Row C",
+     "yon": "on",
+     "govde": -180,
+     "bas": -15,
+     "solKol": [
+      90,
+      20
+     ],
+     "sagKol": [
+      -90,
+      -20
+     ],
+     "solBacak": [
+      12,
+      -6
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ],
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "candle-trio": {
+   "ad": "Candle Trio",
+   "figurler": [
+    {
+     "ad": "Candle Trio A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -165,
+      170
+     ],
+     "solKol": [
+      165,
+      -170
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Candle Trio B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -165,
+      170
+     ],
+     "solKol": [
+      165,
+      -170
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Candle Trio C",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      165,
+      -170
+     ],
+     "sagKol": [
+      -165,
+      170
+     ],
+     "solBacak": [
+      3,
+      1
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    "yan",
+    "yan"
+   ]
+  },
+  "vampire-cape": {
+   "ad": "Vampire Cape",
+   "figurler": [
+    {
+     "ad": "Vampire Cape A",
+     "yon": "on",
+     "govde": 172,
+     "bas": 0,
+     "sagKol": [
+      -22,
+      95
+     ],
+     "solKol": [
+      100,
+      60
+     ],
+     "sagBacak": [
+      -62,
+      -2
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Vampire Cape B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -148,
+      -148
+     ],
+     "solKol": [
+      148,
+      148
+     ],
+     "sagBacak": [
+      -22,
+      -22
+     ],
+     "solBacak": [
+      22,
+      22
+     ]
+    },
+    {
+     "ad": "Vampire Cape C",
+     "yon": "on",
+     "govde": -172,
+     "bas": 0,
+     "solKol": [
+      22,
+      -95
+     ],
+     "sagKol": [
+      -100,
+      -60
+     ],
+     "solBacak": [
+      62,
+      2
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "omuz"
+    ],
+    [
+     "omuz",
+     "el"
+    ]
+   ]
+  },
+  "monster-flex": {
+   "ad": "Monster Flex",
+   "figurler": [
+    {
+     "ad": "Monster Flex A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -95,
+      150
+     ],
+     "solKol": [
+      95,
+      -150
+     ],
+     "sagBacak": [
+      -22,
+      -22
+     ],
+     "solBacak": [
+      22,
+      22
+     ]
+    },
+    {
+     "ad": "Monster Flex B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -95,
+      150
+     ],
+     "solKol": [
+      95,
+      -150
+     ],
+     "sagBacak": [
+      -38,
+      4
+     ],
+     "solBacak": [
+      38,
+      -4
+     ]
+    },
+    {
+     "ad": "Monster Flex C",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      95,
+      -150
+     ],
+     "sagKol": [
+      -95,
+      150
+     ],
+     "solBacak": [
+      22,
+      22
+     ],
+     "sagBacak": [
+      -22,
+      -22
+     ]
+    }
+   ],
+   "temas": [
+    "yan",
+    "yan"
+   ]
+  },
+  "spooky-wave": {
+   "ad": "Spooky Wave",
+   "figurler": [
+    {
+     "ad": "Spooky Wave A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -90,
+      180
+     ],
+     "solKol": [
+      90,
+      90
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      30,
+      30
+     ]
+    },
+    {
+     "ad": "Spooky Wave B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solKol": [
+      35,
+      35
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Spooky Wave C",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      90,
+      -180
+     ],
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solBacak": [
+      3,
+      1
+     ],
+     "sagBacak": [
+      -30,
+      -30
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ],
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "black-cat-stretch": {
+   "ad": "Black Cat Stretch",
+   "figurler": [
+    {
+     "ad": "Black Cat Stretch A",
+     "yon": "sag",
+     "govde": 92,
+     "bas": 0,
+     "solKol": [
+      0,
+      0
+     ],
+     "sagKol": [
+      0,
+      0
+     ],
+     "solBacak": [
+      0,
+      -90
+     ],
+     "sagBacak": [
+      0,
+      -90
+     ]
+    },
+    {
+     "ad": "Black Cat Stretch B",
+     "yon": "sag",
+     "govde": 80,
+     "bas": 0,
+     "solKol": [
+      0,
+      0
+     ],
+     "sagKol": [
+      0,
+      0
+     ],
+     "solBacak": [
+      0,
+      -90
+     ],
+     "sagBacak": [
+      0,
+      -90
+     ]
+    },
+    {
+     "ad": "Black Cat Stretch C",
+     "yon": "sag",
+     "govde": 92,
+     "bas": 0,
+     "solKol": [
+      0,
+      0
+     ],
+     "sagKol": [
+      0,
+      0
+     ],
+     "solBacak": [
+      0,
+      -90
+     ],
+     "sagBacak": [
+      0,
+      -90
+     ]
+    }
+   ],
+   "temas": [
+    "yan",
+    "yan"
+   ]
+  },
+  "werewolf-howl": {
+   "ad": "Werewolf Howl",
+   "figurler": [
+    {
+     "ad": "Werewolf Howl A",
+     "yon": "sag",
+     "govde": 180,
+     "bas": 0,
+     "solKol": [
+      120,
+      120
+     ],
+     "sagKol": [
+      118,
+      118
+     ],
+     "solBacak": [
+      0,
+      -90
+     ],
+     "sagBacak": [
+      0,
+      -90
+     ]
+    },
+    {
+     "ad": "Werewolf Howl B",
+     "yon": "sag",
+     "govde": 195,
+     "bas": 25,
+     "solKol": [
+      178,
+      178
+     ],
+     "sagKol": [
+      176,
+      176
+     ],
+     "solBacak": [
+      75,
+      0
+     ],
+     "sagBacak": [
+      -42,
+      -42
+     ]
+    },
+    {
+     "ad": "Werewolf Howl C",
+     "yon": "sag",
+     "govde": 180,
+     "bas": 0,
+     "solKol": [
+      120,
+      120
+     ],
+     "sagKol": [
+      118,
+      118
+     ],
+     "solBacak": [
+      0,
+      -90
+     ],
+     "sagBacak": [
+      0,
+      -90
+     ]
+    }
+   ],
+   "temas": [
+    "yan",
+    "yan"
+   ]
+  },
+  "gravestone-row": {
+   "ad": "Gravestone Row",
+   "figurler": [
+    {
+     "ad": "Gravestone Row A",
+     "yon": "sag",
+     "govde": 180,
+     "bas": 0,
+     "solKol": [
+      178,
+      178
+     ],
+     "sagKol": [
+      176,
+      176
+     ],
+     "solBacak": [
+      0,
+      -90
+     ],
+     "sagBacak": [
+      0,
+      -90
+     ]
+    },
+    {
+     "ad": "Gravestone Row B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solKol": [
+      174,
+      176
+     ],
+     "sagBacak": [
+      0,
+      "geri"
+     ],
+     "solBacak": [
+      0,
+      "geri"
+     ]
+    },
+    {
+     "ad": "Gravestone Row C",
+     "yon": "sol",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      -176,
+      -176
+     ],
+     "sagKol": [
+      -178,
+      -178
+     ],
+     "solBacak": [
+      0,
+      90
+     ],
+     "sagBacak": [
+      0,
+      90
+     ]
+    }
+   ],
+   "temas": [
+    "yan",
+    "yan"
+   ]
+  },
+  "pumpkin-patch": {
+   "ad": "Pumpkin Patch",
+   "figurler": [
+    {
+     "ad": "Pumpkin Patch A",
+     "yon": "sag",
+     "govde": 160,
+     "bas": 0,
+     "solKol": [
+      110,
+      -10
+     ],
+     "sagKol": [
+      108,
+      -12
+     ],
+     "solBacak": [
+      135,
+      -5
+     ],
+     "sagBacak": [
+      133,
+      -7
+     ]
+    },
+    {
+     "ad": "Pumpkin Patch B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -22,
+      95
+     ],
+     "solKol": [
+      22,
+      -95
+     ],
+     "sagBacak": [
+      -78,
+      75
+     ],
+     "solBacak": [
+      78,
+      -75
+     ]
+    },
+    {
+     "ad": "Pumpkin Patch C",
+     "yon": "sol",
+     "govde": -160,
+     "bas": 0,
+     "solKol": [
+      -108,
+      12
+     ],
+     "sagKol": [
+      -110,
+      10
+     ],
+     "solBacak": [
+      -133,
+      7
+     ],
+     "sagBacak": [
+      -135,
+      5
+     ]
+    }
+   ],
+   "temas": [
+    "yan",
+    "yan"
+   ]
+  },
+  "broom-ride": {
+   "ad": "Broom Ride",
+   "figurler": [
+    {
+     "ad": "Broom Ride A",
+     "yon": "sag",
+     "govde": 160,
+     "bas": 0,
+     "solKol": [
+      60,
+      60
+     ],
+     "sagKol": [
+      58,
+      58
+     ],
+     "solBacak": [
+      70,
+      0
+     ],
+     "sagBacak": [
+      -35,
+      -35
+     ]
+    },
+    {
+     "ad": "Broom Ride B",
+     "yon": "sag",
+     "govde": 160,
+     "bas": 0,
+     "solKol": [
+      60,
+      60
+     ],
+     "sagKol": [
+      58,
+      58
+     ],
+     "solBacak": [
+      70,
+      0
+     ],
+     "sagBacak": [
+      -35,
+      -35
+     ]
+    },
+    {
+     "ad": "Broom Ride C",
+     "yon": "sag",
+     "govde": 160,
+     "bas": 0,
+     "solKol": [
+      60,
+      60
+     ],
+     "sagKol": [
+      58,
+      58
+     ],
+     "solBacak": [
+      70,
+      0
+     ],
+     "sagBacak": [
+      -35,
+      -35
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "kalca"
+    ],
+    [
+     "el",
+     "kalca"
+    ]
+   ]
+  },
+  "witch-hat-lunge": {
+   "ad": "Witch Hat Lunge",
+   "figurler": [
+    {
+     "ad": "Witch Hat Lunge A",
+     "yon": "on",
+     "govde": 170,
+     "bas": 0,
+     "sagKol": [
+      -35,
+      -35
+     ],
+     "solKol": [
+      70,
+      70
+     ],
+     "sagBacak": [
+      -62,
+      -2
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Witch Hat Lunge B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -165,
+      170
+     ],
+     "solKol": [
+      165,
+      -170
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ],
+     "solBacak": [
+      62,
+      4
+     ]
+    },
+    {
+     "ad": "Witch Hat Lunge C",
+     "yon": "on",
+     "govde": -170,
+     "bas": 0,
+     "solKol": [
+      35,
+      35
+     ],
+     "sagKol": [
+      -70,
+      -70
+     ],
+     "solBacak": [
+      62,
+      2
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "kalca"
+    ],
+    [
+     "kalca",
+     "el"
+    ]
+   ]
+  },
+  "ghost-glide": {
+   "ad": "Ghost Glide",
+   "figurler": [
+    {
+     "ad": "Ghost Glide A",
+     "yon": "on",
+     "govde": 172,
+     "bas": 0,
+     "sagKol": [
+      -35,
+      -35
+     ],
+     "solKol": [
+      90,
+      90
+     ],
+     "sagBacak": [
+      -45,
+      -45
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Ghost Glide B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solKol": [
+      90,
+      90
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Ghost Glide C",
+     "yon": "on",
+     "govde": -172,
+     "bas": 0,
+     "solKol": [
+      35,
+      35
+     ],
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solBacak": [
+      45,
+      45
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ],
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "spider-crouch": {
+   "ad": "Spider Crouch",
+   "figurler": [
+    {
+     "ad": "Spider Crouch A",
+     "yon": "on",
+     "govde": 40,
+     "bas": 0,
+     "sagKol": [
+      -30,
+      -10
+     ],
+     "solKol": [
+      30,
+      10
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ],
+     "solBacak": [
+      62,
+      4
+     ]
+    },
+    {
+     "ad": "Spider Crouch B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -55,
+      -160
+     ],
+     "solKol": [
+      55,
+      160
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ],
+     "solBacak": [
+      62,
+      4
+     ]
+    },
+    {
+     "ad": "Spider Crouch C",
+     "yon": "on",
+     "govde": -40,
+     "bas": 0,
+     "solKol": [
+      30,
+      10
+     ],
+     "sagKol": [
+      -30,
+      -10
+     ],
+     "solBacak": [
+      62,
+      4
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ]
+    }
+   ],
+   "temas": [
+    "yan",
+    "yan"
+   ]
+  },
+  "bat-hang": {
+   "ad": "Bat Hang",
+   "figurler": [
+    {
+     "ad": "Bat Hang A",
+     "yon": "sag",
+     "govde": 40,
+     "bas": 0,
+     "solKol": [
+      -150,
+      -150
+     ],
+     "sagKol": [
+      -148,
+      -148
+     ],
+     "solBacak": [
+      0,
+      0
+     ],
+     "sagBacak": [
+      -2,
+      -2
+     ]
+    },
+    {
+     "ad": "Bat Hang B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -148,
+      -148
+     ],
+     "solKol": [
+      148,
+      148
+     ],
+     "sagBacak": [
+      -22,
+      -22
+     ],
+     "solBacak": [
+      22,
+      22
+     ]
+    },
+    {
+     "ad": "Bat Hang C",
+     "yon": "sol",
+     "govde": -40,
+     "bas": 0,
+     "solKol": [
+      148,
+      148
+     ],
+     "sagKol": [
+      150,
+      150
+     ],
+     "solBacak": [
+      2,
+      2
+     ],
+     "sagBacak": [
+      0,
+      0
+     ]
+    }
+   ],
+   "temas": [
+    "yan",
+    "yan"
+   ]
+  },
+  "frankenstein-steps": {
+   "ad": "Frankenstein Steps",
+   "figurler": [
+    {
+     "ad": "Frankenstein Steps A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solKol": [
+      90,
+      90
+     ],
+     "sagBacak": [
+      -80,
+      -8
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Frankenstein Steps B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solKol": [
+      90,
+      90
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      80,
+      8
+     ]
+    },
+    {
+     "ad": "Frankenstein Steps C",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      90,
+      90
+     ],
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solBacak": [
+      80,
+      8
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ],
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "haunted-house": {
+   "ad": "Haunted House",
+   "figurler": [
+    {
+     "ad": "Haunted House A",
+     "yon": "on",
+     "govde": 168,
+     "bas": 0,
+     "sagKol": [
+      -8,
+      -5
+     ],
+     "solKol": [
+      122,
+      122
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Haunted House B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -165,
+      170
+     ],
+     "solKol": [
+      165,
+      -170
+     ],
+     "sagBacak": [
+      -22,
+      -22
+     ],
+     "solBacak": [
+      22,
+      22
+     ]
+    },
+    {
+     "ad": "Haunted House C",
+     "yon": "on",
+     "govde": -168,
+     "bas": 0,
+     "solKol": [
+      8,
+      5
+     ],
+     "sagKol": [
+      -122,
+      -122
+     ],
+     "solBacak": [
+      3,
+      1
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ],
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "candy-corn": {
+   "ad": "Candy Corn",
+   "figurler": [
+    {
+     "ad": "Candy Corn A",
+     "yon": "sag",
+     "govde": 180,
+     "bas": 0,
+     "solKol": [
+      140,
+      140
+     ],
+     "sagKol": [
+      138,
+      138
+     ],
+     "solBacak": [
+      80,
+      0
+     ],
+     "sagBacak": [
+      0,
+      -90
+     ]
+    },
+    {
+     "ad": "Candy Corn B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solKol": [
+      174,
+      176
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Candy Corn C",
+     "yon": "sol",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      -138,
+      -138
+     ],
+     "sagKol": [
+      -140,
+      -140
+     ],
+     "solBacak": [
+      0,
+      90
+     ],
+     "sagBacak": [
+      -80,
+      0
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "kalca"
+    ],
+    [
+     "kalca",
+     "el"
+    ]
+   ]
+  },
+  "mummy-bend": {
+   "ad": "Mummy Bend",
+   "figurler": [
+    {
+     "ad": "Mummy Bend A",
+     "yon": "sag",
+     "govde": 25,
+     "bas": 0,
+     "solKol": [
+      5,
+      5
+     ],
+     "sagKol": [
+      3,
+      3
+     ],
+     "solBacak": [
+      2,
+      2
+     ],
+     "sagBacak": [
+      -2,
+      -2
+     ]
+    },
+    {
+     "ad": "Mummy Bend B",
+     "yon": "sag",
+     "govde": 25,
+     "bas": 0,
+     "solKol": [
+      5,
+      5
+     ],
+     "sagKol": [
+      3,
+      3
+     ],
+     "solBacak": [
+      2,
+      2
+     ],
+     "sagBacak": [
+      -2,
+      -2
+     ]
+    },
+    {
+     "ad": "Mummy Bend C",
+     "yon": "sag",
+     "govde": 25,
+     "bas": 0,
+     "solKol": [
+      5,
+      5
+     ],
+     "sagKol": [
+      3,
+      3
+     ],
+     "solBacak": [
+      2,
+      2
+     ],
+     "sagBacak": [
+      -2,
+      -2
+     ]
+    }
+   ],
+   "temas": [
+    "yan",
+    "yan"
+   ]
+  },
+  "cauldron-squat": {
+   "ad": "Cauldron Squat",
+   "figurler": [
+    {
+     "ad": "Cauldron Squat A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -128,
+      62
+     ],
+     "solKol": [
+      128,
+      -62
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ],
+     "solBacak": [
+      62,
+      4
+     ]
+    },
+    {
+     "ad": "Cauldron Squat B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -128,
+      62
+     ],
+     "solKol": [
+      128,
+      -62
+     ],
+     "sagBacak": [
+      -38,
+      4
+     ],
+     "solBacak": [
+      38,
+      -4
+     ]
+    },
+    {
+     "ad": "Cauldron Squat C",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      128,
+      -62
+     ],
+     "sagKol": [
+      -128,
+      62
+     ],
+     "solBacak": [
+      62,
+      4
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ]
+    }
+   ],
+   "temas": [
+    "yan",
+    "yan"
+   ]
+  },
+  "skeleton-lunge": {
+   "ad": "Skeleton Lunge",
+   "figurler": [
+    {
+     "ad": "Skeleton Lunge A",
+     "yon": "on",
+     "govde": 172,
+     "bas": 0,
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solKol": [
+      90,
+      90
+     ],
+     "sagBacak": [
+      -62,
+      -2
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Skeleton Lunge B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solKol": [
+      90,
+      90
+     ],
+     "sagBacak": [
+      -62,
+      -2
+     ],
+     "solBacak": [
+      62,
+      2
+     ]
+    },
+    {
+     "ad": "Skeleton Lunge C",
+     "yon": "on",
+     "govde": -172,
+     "bas": 0,
+     "solKol": [
+      174,
+      176
+     ],
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solBacak": [
+      62,
+      2
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ],
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "raven-wings": {
+   "ad": "Raven Wings",
+   "figurler": [
+    {
+     "ad": "Raven Wings A",
+     "yon": "sag",
+     "govde": 95,
+     "bas": 0,
+     "solKol": [
+      -60,
+      -60
+     ],
+     "sagKol": [
+      -58,
+      -58
+     ],
+     "solBacak": [
+      0,
+      0
+     ],
+     "sagBacak": [
+      -90,
+      -90
+     ]
+    },
+    {
+     "ad": "Raven Wings B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -148,
+      -148
+     ],
+     "solKol": [
+      148,
+      148
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Raven Wings C",
+     "yon": "sol",
+     "govde": -95,
+     "bas": 0,
+     "solKol": [
+      58,
+      58
+     ],
+     "sagKol": [
+      60,
+      60
+     ],
+     "solBacak": [
+      90,
+      90
+     ],
+     "sagBacak": [
+      0,
+      0
+     ]
+    }
+   ],
+   "temas": [
+    "yan",
+    "yan"
+   ]
+  },
+  "dance-of-the-dead": {
+   "ad": "Dance of the Dead",
+   "figurler": [
+    {
+     "ad": "Dance of the Dead A",
+     "yon": "sag",
+     "govde": 170,
+     "bas": 0,
+     "solKol": [
+      150,
+      150
+     ],
+     "sagKol": [
+      -130,
+      -160
+     ],
+     "solBacak": [
+      0,
+      0
+     ],
+     "sagBacak": [
+      -40,
+      -150
+     ]
+    },
+    {
+     "ad": "Dance of the Dead B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solKol": [
+      174,
+      176
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      60,
+      -40
+     ]
+    },
+    {
+     "ad": "Dance of the Dead C",
+     "yon": "sol",
+     "govde": -170,
+     "bas": 0,
+     "solKol": [
+      130,
+      160
+     ],
+     "sagKol": [
+      -150,
+      -150
+     ],
+     "solBacak": [
+      40,
+      150
+     ],
+     "sagBacak": [
+      0,
+      0
+     ]
+    }
+   ],
+   "temas": [
+    "yan",
+    "yan"
+   ]
+  },
+  "coffin-bridge": {
+   "ad": "Coffin Bridge",
+   "figurler": [
+    {
+     "ad": "Coffin Bridge A",
+     "yon": "sag",
+     "govde": -60,
+     "bas": 0,
+     "solKol": [
+      180,
+      180
+     ],
+     "sagKol": [
+      178,
+      178
+     ],
+     "solBacak": [
+      60,
+      0
+     ],
+     "sagBacak": [
+      58,
+      -2
+     ]
+    },
+    {
+     "ad": "Coffin Bridge B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -148,
+      -148
+     ],
+     "solKol": [
+      148,
+      148
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ],
+     "solBacak": [
+      62,
+      4
+     ]
+    },
+    {
+     "ad": "Coffin Bridge C",
+     "yon": "sol",
+     "govde": 60,
+     "bas": 0,
+     "solKol": [
+      -178,
+      -178
+     ],
+     "sagKol": [
+      -180,
+      -180
+     ],
+     "solBacak": [
+      -58,
+      2
+     ],
+     "sagBacak": [
+      -60,
+      0
+     ]
+    }
+   ],
+   "temas": [
+    "yan",
+    "yan"
+   ]
+  },
+  "tombstone-plank": {
+   "ad": "Tombstone Plank",
+   "figurler": [
+    {
+     "ad": "Tombstone Plank A",
+     "yon": "on",
+     "govde": 118,
+     "bas": 0,
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solKol": [
+      -25,
+      -25
+     ],
+     "sagBacak": [
+      -45,
+      -45
+     ],
+     "solBacak": [
+      45,
+      45
+     ]
+    },
+    {
+     "ad": "Tombstone Plank B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -148,
+      -148
+     ],
+     "solKol": [
+      148,
+      148
+     ],
+     "sagBacak": [
+      0,
+      "geri"
+     ],
+     "solBacak": [
+      0,
+      "geri"
+     ]
+    },
+    {
+     "ad": "Tombstone Plank C",
+     "yon": "on",
+     "govde": -118,
+     "bas": 0,
+     "solKol": [
+      174,
+      176
+     ],
+     "sagKol": [
+      25,
+      25
+     ],
+     "solBacak": [
+      45,
+      45
+     ],
+     "sagBacak": [
+      -45,
+      -45
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ],
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "boat-of-souls": {
+   "ad": "Boat of Souls",
+   "figurler": [
+    {
+     "ad": "Boat of Souls A",
+     "yon": "sag",
+     "govde": 210,
+     "bas": 0,
+     "solKol": [
+      90,
+      90
+     ],
+     "sagKol": [
+      88,
+      88
+     ],
+     "solBacak": [
+      125,
+      55
+     ],
+     "sagBacak": [
+      123,
+      53
+     ]
+    },
+    {
+     "ad": "Boat of Souls B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solKol": [
+      174,
+      176
+     ],
+     "sagBacak": [
+      -80,
+      -80
+     ],
+     "solBacak": [
+      80,
+      80
+     ]
+    },
+    {
+     "ad": "Boat of Souls C",
+     "yon": "sol",
+     "govde": -210,
+     "bas": 0,
+     "solKol": [
+      -88,
+      -88
+     ],
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solBacak": [
+      -123,
+      -53
+     ],
+     "sagBacak": [
+      -125,
+      -55
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "ayak",
+     "ayak"
+    ],
+    [
+     "ayak",
+     "ayak"
+    ]
+   ]
+  },
+  "black-cat-balance": {
+   "ad": "Black Cat Balance",
+   "figurler": [
+    {
+     "ad": "Black Cat Balance A",
+     "yon": "sag",
+     "govde": 95,
+     "bas": 0,
+     "solKol": [
+      90,
+      90
+     ],
+     "sagKol": [
+      0,
+      0
+     ],
+     "solBacak": [
+      -90,
+      -90
+     ],
+     "sagBacak": [
+      0,
+      -90
+     ]
+    },
+    {
+     "ad": "Black Cat Balance B",
+     "yon": "sag",
+     "govde": 95,
+     "bas": 0,
+     "solKol": [
+      90,
+      90
+     ],
+     "sagKol": [
+      0,
+      0
+     ],
+     "solBacak": [
+      -90,
+      -90
+     ],
+     "sagBacak": [
+      0,
+      -90
+     ]
+    },
+    {
+     "ad": "Black Cat Balance C",
+     "yon": "sag",
+     "govde": 95,
+     "bas": 0,
+     "solKol": [
+      90,
+      90
+     ],
+     "sagKol": [
+      0,
+      0
+     ],
+     "solBacak": [
+      -90,
+      -90
+     ],
+     "sagBacak": [
+      0,
+      -90
+     ]
+    }
+   ],
+   "temas": [
+    "yan",
+    "yan"
+   ]
+  },
+  "reaper-reach": {
+   "ad": "Reaper Reach",
+   "figurler": [
+    {
+     "ad": "Reaper Reach A",
+     "yon": "sag",
+     "govde": 170,
+     "bas": 0,
+     "solKol": [
+      135,
+      135
+     ],
+     "sagKol": [
+      133,
+      133
+     ],
+     "solBacak": [
+      80,
+      0
+     ],
+     "sagBacak": [
+      -45,
+      -45
+     ]
+    },
+    {
+     "ad": "Reaper Reach B",
+     "yon": "sag",
+     "govde": 170,
+     "bas": 0,
+     "solKol": [
+      135,
+      135
+     ],
+     "sagKol": [
+      133,
+      133
+     ],
+     "solBacak": [
+      80,
+      0
+     ],
+     "sagBacak": [
+      -45,
+      -45
+     ]
+    },
+    {
+     "ad": "Reaper Reach C",
+     "yon": "sag",
+     "govde": 170,
+     "bas": 0,
+     "solKol": [
+      135,
+      135
+     ],
+     "sagKol": [
+      133,
+      133
+     ],
+     "solBacak": [
+      80,
+      0
+     ],
+     "sagBacak": [
+      -45,
+      -45
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "omuz"
+    ],
+    [
+     "el",
+     "omuz"
+    ]
+   ]
+  },
+  "ghost-tree": {
+   "ad": "Ghost Tree",
+   "figurler": [
+    {
+     "ad": "Ghost Tree A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solKol": [
+      122,
+      122
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      60,
+      -40
+     ]
+    },
+    {
+     "ad": "Ghost Tree B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -122,
+      -122
+     ],
+     "solKol": [
+      122,
+      122
+     ],
+     "sagBacak": [
+      -60,
+      40
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Ghost Tree C",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      174,
+      176
+     ],
+     "sagKol": [
+      -122,
+      -122
+     ],
+     "solBacak": [
+      3,
+      1
+     ],
+     "sagBacak": [
+      -60,
+      40
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ],
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "coffin-candle": {
+   "ad": "Coffin Candle",
+   "figurler": [
+    {
+     "ad": "Coffin Candle A",
+     "yon": "sag",
+     "govde": -90,
+     "bas": 0,
+     "solKol": [
+      -10,
+      -10
+     ],
+     "sagKol": [
+      -8,
+      -8
+     ],
+     "solBacak": [
+      180,
+      180
+     ],
+     "sagBacak": [
+      178,
+      178
+     ]
+    },
+    {
+     "ad": "Coffin Candle B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solKol": [
+      174,
+      176
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Coffin Candle C",
+     "yon": "sol",
+     "govde": 90,
+     "bas": 0,
+     "solKol": [
+      8,
+      8
+     ],
+     "sagKol": [
+      10,
+      10
+     ],
+     "solBacak": [
+      -178,
+      -178
+     ],
+     "sagBacak": [
+      -180,
+      -180
+     ]
+    }
+   ],
+   "temas": [
+    "yan",
+    "yan"
+   ]
+  },
+  "hat-peak-fold": {
+   "ad": "Hat Peak Fold",
+   "figurler": [
+    {
+     "ad": "Hat Peak Fold A",
+     "yon": "sag",
+     "govde": 20,
+     "bas": 0,
+     "solKol": [
+      5,
+      5
+     ],
+     "sagKol": [
+      3,
+      3
+     ],
+     "solBacak": [
+      2,
+      2
+     ],
+     "sagBacak": [
+      -150,
+      -150
+     ]
+    },
+    {
+     "ad": "Hat Peak Fold B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -165,
+      170
+     ],
+     "solKol": [
+      165,
+      -170
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Hat Peak Fold C",
+     "yon": "sol",
+     "govde": -20,
+     "bas": 0,
+     "solKol": [
+      -3,
+      -3
+     ],
+     "sagKol": [
+      -5,
+      -5
+     ],
+     "solBacak": [
+      150,
+      150
+     ],
+     "sagBacak": [
+      -2,
+      -2
+     ]
+    }
+   ],
+   "temas": [
+    "yan",
+    "yan"
+   ]
+  },
+  "bat-swarm": {
+   "ad": "Bat Swarm",
+   "figurler": [
+    {
+     "ad": "Bat Swarm A",
+     "yon": "on",
+     "govde": 165,
+     "bas": 0,
+     "sagKol": [
+      -55,
+      -160
+     ],
+     "solKol": [
+      55,
+      160
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ],
+     "solBacak": [
+      62,
+      4
+     ]
+    },
+    {
+     "ad": "Bat Swarm B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -148,
+      -148
+     ],
+     "solKol": [
+      148,
+      148
+     ],
+     "sagBacak": [
+      -22,
+      -22
+     ],
+     "solBacak": [
+      22,
+      22
+     ]
+    },
+    {
+     "ad": "Bat Swarm C",
+     "yon": "on",
+     "govde": -165,
+     "bas": 0,
+     "solKol": [
+      55,
+      160
+     ],
+     "sagKol": [
+      -55,
+      -160
+     ],
+     "solBacak": [
+      62,
+      4
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ]
+    }
+   ],
+   "temas": [
+    "yan",
+    "yan"
+   ]
+  },
+  "pumpkin-roll": {
+   "ad": "Pumpkin Roll",
+   "figurler": [
+    {
+     "ad": "Pumpkin Roll A",
+     "yon": "sag",
+     "govde": 70,
+     "bas": 0,
+     "solKol": [
+      100,
+      100
+     ],
+     "sagKol": [
+      98,
+      98
+     ],
+     "solBacak": [
+      100,
+      -95
+     ],
+     "sagBacak": [
+      98,
+      -95
+     ]
+    },
+    {
+     "ad": "Pumpkin Roll B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -22,
+      95
+     ],
+     "solKol": [
+      22,
+      -95
+     ],
+     "sagBacak": [
+      0,
+      "geri"
+     ],
+     "solBacak": [
+      0,
+      "geri"
+     ]
+    },
+    {
+     "ad": "Pumpkin Roll C",
+     "yon": "sol",
+     "govde": -70,
+     "bas": 0,
+     "solKol": [
+      -98,
+      -98
+     ],
+     "sagKol": [
+      -100,
+      -100
+     ],
+     "solBacak": [
+      -98,
+      95
+     ],
+     "sagBacak": [
+      -100,
+      95
+     ]
+    }
+   ],
+   "temas": [
+    "yan",
+    "yan"
+   ]
+  },
+  "zombie-rise": {
+   "ad": "Zombie Rise",
+   "figurler": [
+    {
+     "ad": "Zombie Rise A",
+     "yon": "sag",
+     "govde": 175,
+     "bas": 0,
+     "solKol": [
+      150,
+      150
+     ],
+     "sagKol": [
+      -30,
+      -30
+     ],
+     "solBacak": [
+      0,
+      -90
+     ],
+     "sagBacak": [
+      80,
+      0
+     ]
+    },
+    {
+     "ad": "Zombie Rise B",
+     "yon": "sag",
+     "govde": 175,
+     "bas": 0,
+     "solKol": [
+      150,
+      150
+     ],
+     "sagKol": [
+      -30,
+      -30
+     ],
+     "solBacak": [
+      0,
+      -90
+     ],
+     "sagBacak": [
+      80,
+      0
+     ]
+    },
+    {
+     "ad": "Zombie Rise C",
+     "yon": "sag",
+     "govde": 175,
+     "bas": 0,
+     "solKol": [
+      150,
+      150
+     ],
+     "sagKol": [
+      -30,
+      -30
+     ],
+     "solBacak": [
+      0,
+      -90
+     ],
+     "sagBacak": [
+      80,
+      0
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "omuz"
+    ],
+    [
+     "el",
+     "omuz"
+    ]
+   ]
+  },
+  "spider-bridge": {
+   "ad": "Spider Bridge",
+   "figurler": [
+    {
+     "ad": "Spider Bridge A",
+     "yon": "sag",
+     "govde": -80,
+     "bas": 0,
+     "solKol": [
+      0,
+      0
+     ],
+     "sagKol": [
+      0,
+      0
+     ],
+     "solBacak": [
+      90,
+      0
+     ],
+     "sagBacak": [
+      88,
+      0
+     ]
+    },
+    {
+     "ad": "Spider Bridge B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solKol": [
+      174,
+      176
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ],
+     "solBacak": [
+      62,
+      4
+     ]
+    },
+    {
+     "ad": "Spider Bridge C",
+     "yon": "sol",
+     "govde": 80,
+     "bas": 0,
+     "solKol": [
+      0,
+      0
+     ],
+     "sagKol": [
+      0,
+      0
+     ],
+     "solBacak": [
+      -88,
+      0
+     ],
+     "sagBacak": [
+      -90,
+      0
+     ]
+    }
+   ],
+   "temas": [
+    "yan",
+    "yan"
+   ]
+  },
+  "final-fright": {
+   "ad": "Final Fright",
+   "figurler": [
+    {
+     "ad": "Final Fright A",
+     "yon": "on",
+     "govde": 170,
+     "bas": 0,
+     "sagKol": [
+      -35,
+      -35
+     ],
+     "solKol": [
+      122,
+      122
+     ],
+     "sagBacak": [
+      -62,
+      -2
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Final Fright B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -148,
+      -148
+     ],
+     "solKol": [
+      148,
+      148
+     ],
+     "sagBacak": [
+      -22,
+      -22
+     ],
+     "solBacak": [
+      22,
+      22
+     ]
+    },
+    {
+     "ad": "Final Fright C",
+     "yon": "on",
+     "govde": -170,
+     "bas": 0,
+     "solKol": [
+      35,
+      35
+     ],
+     "sagKol": [
+      -122,
+      -122
+     ],
+     "solBacak": [
+      62,
+      2
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ],
+    [
+     "el",
+     "el"
+    ]
+   ]
+  }
+ }
+}
