@@ -49,9 +49,26 @@ for ad, p in ilk.items():
     havuz.append((0, ad, p, ilk_tur[ad], os.path.join(BURA, "varlik-05-tek/poz", ad + ".png")))
 for ad, p in aday.items():
     havuz.append((1, ad, p, p["tur"], os.path.join(BURA, "varlik-05-aday/poz", ad + ".png")))
+# kontak sayfasi 1 (19 Eki 2026): bu tabanlar siluette bas asagi / tam kopru gibi okunuyor -> guvenlik kurali (§2) geregi alinmaz
+YASAK3 = ("Bridge", "Standing Split", "Half Moon", "Dead Bug", "Lying Knees", "Child", "Lying Floor", "Lying Diag Floor", "Lying Back Floor")
+
+
+def uygun(p, tur):
+    a = p["ad"]
+    if tur != 3:
+        return True
+    if any(y in a for y in YASAK3):
+        return False
+    if " Child " in a + " " and any(y in a for y in (" Up", " Diag", " Wide", " Hug")):
+        return False
+    if (" Boat " in a + " " or " Lying " in a + " ") and "Floor" in a:      # yatarken/kayikta kol yere dogru: kol zeminden gecer
+        return False
+    return True
+
+
 olcu = []
 for sira, ad, p, tur, yol in havuz:
-    if not os.path.exists(yol):
+    if not os.path.exists(yol) or not uygun(p, tur):
         continue
     m = maske(yol)
     en, deg = max(((k, iou(m, v)) for k, v in eski.items()), key=lambda x: x[1])
