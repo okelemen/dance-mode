@@ -351,6 +351,8 @@ def kapi_cadi(oyuncu, tabela_yazi=True):
         font = bpy.data.fonts.load(os.path.join(KOK, "05-kapak/fontlar/TitanOne.ttf"))
         bpy.ops.object.text_add(location=(0, Y - KK / 2 - 0.31, H + KR / 2 - 0.03), rotation=(math.pi / 2, 0, 0))
         tx = bpy.context.active_object
+        if not tabela_yazi:          # kapak: kullanici "yazi yalniz TETRIS MODE + HALLOWEEN" -> tabelada yazi yok
+            bpy.data.objects.remove(tx); raise RuntimeError("kapak: tabela yazisiz")
         tx.data.body = "PLAYER " + oyuncu[1]; tx.data.font = font; tx.data.size = 0.34; tx.data.extrude = 0.04; tx.data.bevel_depth = 0.012
         tx.data.align_x = "CENTER"; tx.data.align_y = "CENTER"
         tx.data.materials.append(mat_emis("tabela_yazi", lin(hex3("#ffe0a0")), 4.0))
