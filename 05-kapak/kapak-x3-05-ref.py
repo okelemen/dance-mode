@@ -62,7 +62,8 @@ g = GR.crop(bb); gs = min(ph * 0.84 / g.height, pw * 0.88 / g.width)
 g = g.resize((int(g.width * gs), int(g.height * gs)), Image.LANCZOS)
 mm = Image.new("L", (pw, ph)); mm.paste(g, ((pw - g.width) // 2, ph - g.height - int(ph * 0.03)))
 pn.alpha_composite(Image.merge("RGBA", [Image.new("L", (pw, ph), c) for c in (8, 4, 16)] + [mm]))
-im.alpha_composite(pn, (int(ax0 + (ax1 - ax0 - pw) / 2), int(ay1 - ph)))
+PX, PY = int(ax0 + (ax1 - ax0 - pw) / 2), int(ay1 - ph)
+im.alpha_composite(pn, (PX, PY))
 
 # ---------------------------------------------------------------- 3) etiket yerleri: goruntu (balkabagi + yarasa)
 def oge(ad, merkez_x, alt_y, gen, isilti=0.55):
@@ -116,6 +117,14 @@ def yerles(m):
 
 
 K = [yerles(m) for m in kisi]
+# ince ayar (kullanici 19 Eki: "A olsun, son ince ayarlari yap"): siluetin arkasi REF-056'daki gibi sade ve parlak ->
+# kume cevresinde arka plan hafif bulanik + mor-pembe isik halesi (galaksi parlamasinin bizdeki karsiligi)
+bolge = Image.new("L", (W, H)); ImageDraw.Draw(bolge).ellipse((cx_ - 380, 150, cx_ + 200, H + 160), fill=255)   # sagdaki kapiya tasmaz
+bolge = bolge.filter(ImageFilter.GaussianBlur(70))
+im = Image.composite(im.filter(ImageFilter.GaussianBlur(5)), im, bolge)
+hale = Image.new("L", (W, H)); ImageDraw.Draw(hale).ellipse((cx_ - 300, 190, cx_ + 300, H + 120), fill=255)
+hale = hale.filter(ImageFilter.GaussianBlur(90))
+im.alpha_composite(Image.merge("RGBA", [Image.new("L", (W, H), c) for c in (200, 90, 255)] + [hale.point(lambda v: int(v * 0.42))]))
 birlesik = ImageChops.lighter(ImageChops.lighter(K[0], K[1]), K[2]).filter(ImageFilter.MaxFilter(3)).filter(ImageFilter.MinFilter(3))
 dis = birlesik.filter(ImageFilter.MaxFilter(KON))
 isilti = dis.filter(ImageFilter.MaxFilter(9)).filter(ImageFilter.GaussianBlur(18))
@@ -129,9 +138,19 @@ print("grup kutusu", birlesik.getbbox(), "baslik alti", baslik_alt)
 
 # ---------------------------------------------------------------- 6) baslik + HALLOWEEN etiketi (REF-056 "Full Body" yeri: sag ust, egik)
 im.alpha_composite(yz, (int(W / 2 - yz.width / 2), by))
+yazi_m = Image.new("L", (W, H)); yazi_m.paste(yz.getchannel("A"), (int(W / 2 - yz.width / 2), by))
 hw = parlak_yazi("HALLOWEEN", yfont(64), gecis(9, (255, 150, 40), (190, 110, 255)), kontur=8, derinlik=9, dis=(50, 10, 70),
                  parlama=(255, 170, 90), zipla=3, don=3, aralik=4)
 hw = hw.rotate(-14, Image.BICUBIC, expand=True)
+_hx = min(W - 8 - hw.width, int(1060 - hw.width / 2)); _hy = int(int(ac[1]) - 95 - hw.height / 2)
+yazi_m.paste(hw.getchannel("A"), (_hx, _hy), hw.getchannel("A"))
 im.alpha_composite(hw, (min(W - 8 - hw.width, int(1060 - hw.width / 2)), int(int(ac[1]) - 95 - hw.height / 2)))   # kapinin ust-saginda (REF "Full Body" yeri), kadraja sigar
-im.convert("RGB").save(a.cikti, quality=93)
+# doygunluk referansa yaklasir (0,63), sicaklik mor-mavi ile dengelenir (deneme 2 sicak 0,20 / ref 0,08)
+# ince ayar 1 olcumu: mor tonlama siluetin siyahini da aciyordu (siyah 0,000) -> yalniz ARKA PLANA; siluet + kontur + yazilar korunur
+ham = im.convert("RGB")
+son = ImageEnhance.Color(ham).enhance(1.18)
+son = Image.blend(son, ImageChops.screen(son, Image.new("RGB", (W, H), (70, 40, 160))), 0.18)
+kart_m = Image.new("L", (W, H)); ImageDraw.Draw(kart_m).rectangle((PX - 4, PY - 4, PX + pw + 4, PY + ph + 4), fill=255)
+koru = ImageChops.lighter(ImageChops.lighter(dis, yazi_m), kart_m).filter(ImageFilter.MaxFilter(3))   # kart + kucuk siluet de korunur
+Image.composite(ham, son, koru).save(a.cikti, quality=93)
 print(a.cikti, os.path.getsize(a.cikti) // 1024, "KB")
