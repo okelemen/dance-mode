@@ -445,6 +445,25 @@ def panel_cadi(tip):
     yaz(sc, "panel-%s.png" % tip)
 
 
+# ------------------------------------------------------------------ KAPAK OGELERI (kullanici 19 Eki: kapakta yazi yalniz TETRIS MODE + HALLOWEEN,
+# referanstaki etiket/NEW! yerleri GORUNTU ile dolar) -> yuzu oyulmus 3B balkabagi fenerleri, saydam PNG
+def kapak_ogeleri():
+    for ad, dizilim in (("kapak-kabak.png", [(0, 0, 1.0, True)]),
+                        ("kapak-kabak-kume.png", [(0, 0, 1.0, True), (-1.25, 0.5, 0.62, True), (1.15, 0.4, 0.55, False)])):
+        sc = bos_sahne(w=900, h=700, saydam=True, ornek=min(ORNEK, 64))
+        sc.world.node_tree.nodes["Background"].inputs[1].default_value = 0.3
+        kabuk = mat_jole("kk", lin(hex3("#ff6a10")), emis=0.12, purluk=0.35)
+        sap = mat_duz("ks", lin(hex3("#3a5a12")), 0.6)
+        yuz = mat_emis("ky", lin(hex3("#ffd23a")), 24)
+        for x, y, r, yz in dizilim:
+            kabak((x, y, 0), r, kabuk, sap, yuz if yz else None)
+        isik("AREA", (-2, -4, 3), 300, lin(hex3("#ffd8b0")), 4, yon=(0, 0, 0.6))
+        isik("AREA", (3, -2, 1.5), 160, lin(hex3("#b48cff")), 3, yon=(0, 0, 0.6))
+        bpy.ops.object.camera_add(location=(0, -9, 1.2), rotation=(math.radians(86), 0, 0))
+        kam = bpy.context.active_object; sc.camera = kam; kam.data.lens = 50
+        yaz(sc, ad)
+
+
 # ------------------------------------------------------------------ ana akis (cadi)
 # tek kisilik poz maskeleri: varlik.py poz_maskeleri() (--pozlar pozlar-05.json). 3 kisilik grup maskesi iptal (kullanici 19 Eki).
 if YALNIZ in ("hepsi", "poz"):
@@ -453,5 +472,7 @@ if YALNIZ in ("hepsi", "sahne"):
     sahne_cadi()
     for o_ in OYUNCU:
         panel_cadi(o_)
+if YALNIZ == "kapak":
+    kapak_ogeleri()
 json.dump(YERLESIM, open(os.path.join(CIKTI, "yerlesim.json"), "w"), indent=1)
 log("bitti (cadi)")
