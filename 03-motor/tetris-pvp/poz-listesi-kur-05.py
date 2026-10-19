@@ -1,16 +1,12 @@
-"""TETRIS MODE 5. video (REF-056, 3 OYUNCU, HALLOWEEN) - 45 grup pozu (3 tur x 15) -> gruplar-05.json.
+"""TETRIS MODE 5. video (REF-056, 3 OYUNCU, HALLOWEEN) - 135 tek kisilik poz (45 duvar x 3 oyuncu) -> pozlar-05.json + duvar-listesi-05.json.
 
     python poz-listesi-kur-05.py
 
-REF-056 dili (Glow Motion "HUMAN TETRIS x3 player"): her duvarda UC kisilik TEK siluet, uc oyuncu birbirine DEGER
-(el ele, omuz omuza, dayanma, kollarla sekil, yerde yan yana). ROUND 1 BEGINNER -> ROUND 2 CHALLENGER -> ROUND 3 (final).
-Kullanici 19 Eki 2026: "Hareketleri sen cikartacaksin" + Halloween temasi (yalniz bu video) -> grup sekilleri Halloween
-nesnelerinden: yarasa, balkabagi, cadi sapkasi, mezar tasi, mumya, zombi, iskelet, orumcek, kara kedi, hayalet ...
-Guvenlik (POZ-DUVARI/TALIMATLAR.md §2): KALDIRMA / TASIMA / UST USTE YOK (referanstaki kaldirma pozlari alinmadi),
-amuda kalkma, kopru, bas durusu yok; her figur kendi ayagi/dizi/eli ile yerde.
-Aci dili pozlar.json _not ile ayni (on/profil yardimcilari poz-listesi-kur.py'den).
-Temas: varlik-cadi.py sag figuru x'te kaydirir; ["el","el"] = soldakinin en sagdaki eli ile sagdakinin en soldaki eli
-bulusur; "yan" = silüetler yan yana deger. Dikey fark (dz) Actions logunda/yerlesim.json'da olculur.
+Kullanici 19 Eki 2026: "Her karede tek bir siluet ... 3 tane yan yana" -> ekran uce bolunur (P1 | P2 | P3), her panelde TEK
+siluet; 3 kisilik grup pozu yok (ilk deneme grup-listesi-kur-05.py iptal). "Hareketleri sen cikartacaksin" -> pozlar burada;
+Halloween adlari (yalniz bu video). ROUND 1 BEGINNER: ayakta, onden · ROUND 2 CHALLENGER: hamle, diz cokme, denge ·
+ROUND 3 FINAL: yer pozlari + zor denge. Guvenlik (TALIMATLAR §2): amuda kalkma, tam kopru, bas/omuz durusu, kaldirma yok.
+Aci dili pozlar.json _not (on/profil poz-listesi-kur.py'den). Ad tekrari assert; sekil tekrari maskeler inince olc-poz-iou.py.
 """
 import json, os
 
@@ -18,104 +14,134 @@ BURA = os.path.dirname(os.path.abspath(__file__))
 _kaynak = open(os.path.join(BURA, "poz-listesi-kur.py"), encoding="utf-8").read().split("TUR1 = [")[0]
 _g = {}
 exec(compile(_kaynak, "poz-listesi-kur.py", "exec"), _g)
-on, profil, K, B = _g["on"], _g["profil"], _g["K"], _g["B"]
+on, profil = _g["on"], _g["profil"]
 
+KELIME = ["Pumpkin", "Bat", "Ghost", "Witch", "Zombie", "Skeleton", "Mummy", "Spider", "Vampire", "Goblin", "Cauldron", "Broom",
+          "Raven", "Werewolf", "Haunted", "Phantom", "Candle", "Coffin", "Graveyard", "Moonlight", "Potion", "Lantern", "Cobweb",
+          "Banshee", "Ghoul", "Spell", "Owl", "Black Cat", "Scarecrow", "Tombstone"]
 
-def ayna_poz(P):
-    Q = {"ad": P["ad"], "yon": {"on": "on", "sag": "sol", "sol": "sag"}[P.get("yon", "on")]}
-    neg = lambda v: [x if x == "geri" else -x for x in v]
-    Q["govde"] = -P.get("govde", 180); Q["bas"] = -P.get("bas", 0)
-    for a, b in (("sagKol", "solKol"), ("sagBacak", "solBacak")):
-        if a in P: Q[b] = neg(P[a])
-        if b in P: Q[a] = neg(P[b])
-    return Q
+# ---------------------------------------------------------------- ROUND 1: ayakta, onden
+KOL1 = [("v", "v", "V"), ("w", "w", "W"), ("cactus", "cactus", "Cactus"), ("up", "up", "Reach"), ("t", "t", "T"), ("head", "head", "Hands Head"),
+        ("flex", "flex", "Flex"), ("lowv", "lowv", "Low V"), ("hip", "hip", "Hips"), ("up", "hip", "One Up"), ("up45", "lowv", "Diagonal"),
+        ("cactus", "t", "Half Cactus"), ("chest", "up", "Chest Reach"), ("elbowdown", "elbowdown", "Elbows Down"), ("w", "up", "W Reach"),
+        ("v", "t", "V T"), ("head", "t", "Head T"), ("up45", "up45", "Wide Reach"), ("flex", "up", "Flex Reach")]
+BAC1 = [("tog", "tog", "Stand"), ("wide", "wide", "Wide"), ("goddess", "goddess", "Goddess"), ("horse", "horse", "Horse"),
+        ("tog", "kneeup", "Knee Up"), ("tog", "sidetap", "Side Tap"), ("curtsy", "softknee", "Curtsy"), ("tog", "kneein", "Tree"),
+        ("softknee", "softknee", "Soft Knee"), ("straight", "tog", "Leg Out")]
+TUR1, kul, i = [], set(), 0
+while len(TUR1) < 45:
+    a = KOL1[(i * 7) % len(KOL1)]; b = BAC1[(i * 3 + i // len(BAC1)) % len(BAC1)]
+    i += 1
+    if (a[2], b[2]) in kul:
+        continue
+    kul.add((a[2], b[2]))
+    gv = (168 if len(TUR1) % 6 == 2 else 192 if len(TUR1) % 6 == 5 else 180) if b[0] == "tog" else 180
+    TUR1.append(on(f"{KELIME[len(TUR1) % len(KELIME)]} {a[2]} {b[2]}", a[0], a[1], b[0], b[1], govde=gv))
 
+# ---------------------------------------------------------------- ROUND 2: hamle, diz cokme, denge (profil) + onden hamle
+BAC2 = [("Lunge", [75, 0], [-42, -42], 180), ("Kneel Lunge", [80, 0], [0, -90], 180), ("Kneel", [0, -90], [0, -90], 180),
+        ("Chair", [60, -10], [58, -12], 150), ("Stork", [100, -90], [0, 0], 180), ("Knee Raise", [90, 0], [0, 0], 180),
+        ("Split Stance", [25, 25], [-30, -30], 175), ("Heel Sit", [90, -90], [88, -90], 175), ("Warrior", [0, 0], [-90, -90], 95)]
+KOL2 = [("Arms Up", [178, 178], [176, 176]), ("Arms Forward", [90, 90], [88, 88]), ("Arms Back", [-60, -60], [-58, -58]),
+        ("Diagonal Reach", [135, 135], [133, 133]), ("Prayer", [30, 160], [28, 158]), ("Archer", [150, 150], [-60, -60]),
+        ("Hands Hips", [-40, 60], [-38, 62]), ("Airplane", [90, 90], [-90, -90]), ("Arms Down", [5, 5], [3, 3])]
+UYAR = {"Warrior": {"Arms Forward", "Arms Back", "Airplane", "Arms Down"}, "Chair": {"Arms Up", "Arms Forward", "Prayer", "Diagonal Reach"}}
+ON2 = [("Side Lunge", "lunge", "tog", 172), ("Deep Goddess", [-70, 20], [70, -20], 180), ("Wide Lunge", "lunge", "lunge", 180)]
+KOLON2 = [("V", "v", "v"), ("T", "t", "t"), ("Cactus", "cactus", "cactus"), ("Reach", "up", "up"), ("W", "w", "w")]
+TUR2, govdeler = [], set()
+for j in range(400):
+    if len(TUR2) >= 45:
+        break
+    if j % 4 == 3:
+        bb = ON2[(j // 4) % len(ON2)]; kk = KOLON2[(j // 4 + j // 12) % len(KOLON2)]
+        govde = f"{bb[0]} {kk[0]}"
+        if govde in govdeler:
+            continue
+        govdeler.add(govde)
+        TUR2.append(on(f"{KELIME[(len(TUR2) + 7) % len(KELIME)]} {govde}", kk[1], kk[2], bb[1], bb[2], govde=bb[3]))
+        continue
+    bb = BAC2[j % len(BAC2)]; kk = KOL2[(j * 5 + j // len(BAC2)) % len(KOL2)]
+    if bb[0] in UYAR and kk[0] not in UYAR[bb[0]]:
+        continue
+    govde = f"{bb[0]} {kk[0]}"
+    if govde in govdeler:
+        continue
+    govdeler.add(govde)
+    TUR2.append(profil(f"{KELIME[(len(TUR2) + 7) % len(KELIME)]} {govde}", bb[3], kk[1], kk[2], bb[1], bb[2]))
 
-def grup(ad, sol, orta, sag=None, temas=("el", "el"), temas2=None, zincir=False):
-    """sol = ekranin solundaki oyuncu, orta, sag (verilmezse solun aynasi; zincir=True ise solun kopyasi, ayni yone bakar)"""
-    if sag is None:
-        sag = dict(sol) if zincir else ayna_poz(sol)
-    if temas2 is None:
-        temas2 = temas if (zincir or temas == "yan") else list(reversed(temas))
-    return {"ad": ad, "figurler": [sol, orta, sag], "temas": [temas if temas == "yan" else list(temas),
-                                                            temas2 if temas2 == "yan" else list(temas2)]}
-
-
-DUA_UST = ([-165, 170], [165, -170])          # eller basin ustunde birlesik (sapka ucu)
-KNEEL = [0, -90]                               # profilde diz cokme
-OTUR_L, OTUR_R = [-78, 75], [78, -75]          # onden bagdas
-
-TUR1 = [  # ROUND 1 - BEGINNER: ayakta, onden, yumusak (herkes yapar)
-    grup("Bat Trio", on("", "w", "up45", "goddess", "goddess"), on("", "cactus", "cactus", "goddess", "goddess")),
-    grup("Pumpkin Ring", on("", "hip", "v", "softknee", "softknee", govde=172), on("", "v", "v", "tog", "tog")),
-    grup("Witch Hat", on("", "down", [110, 110], "tog", "tog", govde=160), on("", DUA_UST[0], DUA_UST[1], "tog", "tog"),
-         temas=("el", "omuz")),
-    grup("Haunted Gate", on("", "lowv", "t", "horse", "horse"), on("", "t", "t", "horse", "horse")),
-    grup("Zombie Line", profil("", 175, [90, 90], [88, 88], [25, 10], [-20, -25]), profil("", 175, [90, 90], [88, 88], [-20, -25], [25, 10]),
-         temas=("el", "omuz"), zincir=True),
-    grup("Mummy Wrap", on("", "chest", "chest", "tog", "tog"), on("", "chest", "chest", "softknee", "softknee"), temas="yan"),
-    grup("Skeleton Shake", on("", "up", "t", "kneeup", "tog"), on("", "t", "t", "tog", "kneeup")),
-    grup("Ghost Float", on("", "lowv", "lowv", "tog", "curtsy"), on("", "lowv", "lowv", "tog", "tog")),
-    grup("Cauldron Circle", on("", "lowv", [55, 20], "wide", "wide", govde=165), on("", [-55, -20], [55, 20], "goddess", "goddess")),
-    grup("Haunted Tree", on("", "up", "up45", "tog", "kneein"), on("", "up45", "up45", "kneein", "tog")),
-    grup("Scarecrow Row", on("", [-90, -20], [90, 20], "softknee", "tog", bas=15), on("", [-90, -20], [90, 20], "tog", "tog", bas=-15)),
-    grup("Candle Trio", on("", DUA_UST[0], DUA_UST[1], "tog", "tog"), on("", DUA_UST[0], DUA_UST[1], "tog", "tog"), temas="yan"),
-    grup("Vampire Cape", on("", "chest", [100, 60], "lunge", "tog", govde=172), on("", "v", "v", "wide", "wide"), temas=("el", "omuz")),
-    grup("Monster Flex", on("", "flex", "flex", "wide", "wide"), on("", "flex", "flex", "horse", "horse"), temas="yan"),
-    grup("Spooky Wave", on("", "cactus", "t", "tog", "sidetap"), on("", "t", "t", "sidetap", "tog")),
+# ---------------------------------------------------------------- ROUND 3: yer pozlari + zor denge (guvenli surumler)
+DIZ2 = [0, "geri"]
+B3 = [
+    ("Seated Staff Arms Up", lambda a: profil(a, 175, [178, 178], [176, 176], [90, 90], [88, 88])),
+    ("Seated Staff Hands Back", lambda a: profil(a, 160, [-25, -25], [-23, -23], [90, 90], [88, 88])),
+    ("Boat Arms Forward", lambda a: profil(a, 210, [90, 90], [88, 88], [125, 55], [123, 53])),
+    ("Boat Arms Up", lambda a: profil(a, 210, [175, 175], [173, 173], [125, 55], [123, 53])),
+    ("Tabletop", lambda a: profil(a, 90, [0, 0], [0, 0], [0, -90], [0, -90])),
+    ("Bird Dog", lambda a: profil(a, 92, [90, 90], [0, 0], [-90, -90], [0, -90])),
+    ("Tabletop Leg Back", lambda a: profil(a, 90, [0, 0], [0, 0], [-90, -90], [0, -90])),
+    ("High Plank", lambda a: profil(a, 98, [0, 0], [0, 0], [-82, -82], [-84, -84])),
+    ("Forearm Plank", lambda a: profil(a, 95, [0, 90], [0, 90], [-85, -85], [-87, -87])),
+    ("Plank Leg Lift", lambda a: profil(a, 98, [0, 0], [0, 0], [-120, -120], [-84, -84])),
+    ("Knee Plank", lambda a: profil(a, 110, [0, 0], [0, 0], [-40, -130], [-42, -132])),
+    ("Glute Bridge", lambda a: profil(a, -60, [-10, -10], [-8, -8], [60, 0], [58, -2])),
+    ("Bridge Arms Up", lambda a: profil(a, -60, [180, 180], [178, 178], [60, 0], [58, -2])),
+    ("Bridge Leg Up", lambda a: profil(a, -60, [-10, -10], [-8, -8], [150, 150], [58, -2])),
+    ("Crab", lambda a: profil(a, -80, [0, 0], [0, 0], [90, 0], [88, 0])),
+    ("Crab Kick", lambda a: profil(a, -80, [0, 0], [0, 0], [150, 150], [88, 0])),
+    ("Lying Arms Up", lambda a: profil(a, -90, [180, 180], [178, 178], [90, 90], [88, 88])),
+    ("Lying Knees Tuck", lambda a: profil(a, -90, [150, 90], [148, 88], [150, 70], [148, 68])),
+    ("Dead Bug Reach", lambda a: profil(a, -90, [180, 180], [90, 90], [180, 90], [90, 90])),
+    ("Child Arms Forward", lambda a: profil(a, 70, [100, 100], [98, 98], [100, -95], [98, -95])),
+    ("Child Arms Back", lambda a: profil(a, 70, [-20, -20], [-18, -18], [100, -95], [98, -95])),
+    ("Cobra", lambda a: profil(a, 130, [0, 0], [0, 0], [-90, -90], [-88, -88])),
+    ("Superman Lite", lambda a: profil(a, 100, [100, 100], [98, 98], [-95, -95], [-93, -93])),
+    ("Side Kneel Reach", lambda a: on(a, "up", [40, 40], [0, "geri"], [60, -10], govde=160)),
+    ("Kneel V", lambda a: on(a, "v", "v", DIZ2, DIZ2)),
+    ("Kneel W", lambda a: on(a, "w", "w", DIZ2, DIZ2)),
+    ("Kneel Cactus", lambda a: on(a, "cactus", "cactus", DIZ2, DIZ2)),
+    ("Kneel Hands Head", lambda a: on(a, "head", "head", DIZ2, DIZ2)),
+    ("Kneel One Up", lambda a: on(a, "up", "hip", DIZ2, DIZ2, govde=190)),
+    ("Seated Straddle Reach", lambda a: on(a, "up", "up", [-80, -80], [80, 80])),
+    ("Seated Straddle T", lambda a: on(a, "t", "t", [-80, -80], [80, 80])),
+    ("Seated Straddle Lean", lambda a: on(a, "down", [140, 140], [-80, -80], [80, 80], govde=200)),
+    ("Cross Legged Cactus", lambda a: on(a, "cactus", "cactus", [-78, 75], [78, -75])),
+    ("Cross Legged V", lambda a: on(a, "v", "v", [-78, 75], [78, -75])),
+    ("Low Squat Prayer", lambda a: on(a, "chest", "chest", [-70, 25], [70, -25])),
+    ("Low Squat Reach", lambda a: on(a, "up", "up", [-70, 25], [70, -25])),
+    ("Frog Hands Floor", lambda a: on(a, [-12, -5], [12, 5], [-70, 25], [70, -25], govde=150)),
+    ("Standing Split Lite", lambda a: profil(a, 30, [5, 5], [3, 3], [2, 2], [-120, -120])),
+    ("Warrior Three Arms Up", lambda a: profil(a, 95, [95, 95], [93, 93], [0, 0], [-90, -90])),
+    ("Dancer Lite", lambda a: profil(a, 160, [150, 150], [-130, -160], [0, 0], [-40, -150])),
+    ("Half Moon Lite", lambda a: on(a, [-5, -5], [170, 170], "tog", [80, 80], govde=105)),
+    ("Side Lunge Fold", lambda a: profil(a, 35, [5, 5], [3, 3], [40, -40], [-40, -40])),
+    ("Pistol Prep", lambda a: profil(a, 165, [90, 90], [88, 88], [90, 90], [80, -60])),
+    ("Reverse Tabletop", lambda a: profil(a, -85, [0, 0], [0, 0], [90, 0], [88, 0])),
+    ("Seated Twist Reach", lambda a: on(a, [-80, -80], [170, 170], [-85, -85], [85, 85], govde=200)),
 ]
+TUR3 = [f(f"{KELIME[(n + 13) % len(KELIME)]} {ad}") for n, (ad, f) in enumerate(B3)]
+assert len(TUR1) == 45 and len(TUR2) == 45 and len(TUR3) == 45, (len(TUR1), len(TUR2), len(TUR3))
 
-TUR2 = [  # ROUND 2 - CHALLENGER: hamle, diz cokme, denge, yer pozlari
-    grup("Black Cat Stretch", profil("", 92, [0, 0], [0, 0], KNEEL, KNEEL), profil("", 80, [0, 0], [0, 0], KNEEL, KNEEL), temas="yan", zincir=True),
-    grup("Werewolf Howl", profil("", 180, [120, 120], [118, 118], KNEEL, KNEEL), profil("", 195, [178, 178], [176, 176], [75, 0], [-42, -42], bas=25),
-         sag=profil("", 180, [120, 120], [118, 118], KNEEL, KNEEL), temas="yan", temas2="yan"),
-    grup("Gravestone Row", profil("", 180, [178, 178], [176, 176], KNEEL, KNEEL), on("", "up", "up", [0, "geri"], [0, "geri"]), temas="yan"),
-    grup("Pumpkin Patch", profil("", 160, [110, -10], [108, -12], [135, -5], [133, -7]), on("", "chest", "chest", OTUR_L, OTUR_R), temas="yan"),
-    grup("Broom Ride", profil("", 160, [60, 60], [58, 58], [70, 0], [-35, -35]), profil("", 160, [60, 60], [58, 58], [70, 0], [-35, -35]),
-         temas=("el", "kalca"), zincir=True),
-    grup("Witch Hat Lunge", on("", "lowv", [70, 70], "lunge", "tog", govde=170), on("", DUA_UST[0], DUA_UST[1], "goddess", "goddess"), temas=("el", "kalca")),
-    grup("Ghost Glide", on("", "lowv", "t", "straight", "tog", govde=172), on("", "t", "t", "tog", "tog")),
-    grup("Spider Crouch", on("", [-30, -10], [30, 10], "goddess", "goddess", govde=40), on("", "w", "w", "goddess", "goddess"), temas="yan"),
-    grup("Bat Hang", profil("", 15, [0, 0], [-2, -2], [0, 0], [-2, -2]), on("", "v", "v", "wide", "wide"), temas="yan"),
-    grup("Frankenstein Steps", on("", "t", "t", "kneeup", "tog"), on("", "t", "t", "tog", "kneeup")),
-    grup("Haunted House", on("", "down", "up45", "tog", "tog", govde=168), on("", DUA_UST[0], DUA_UST[1], "wide", "wide")),
-    grup("Candy Corn", profil("", 180, [140, 140], [138, 138], [80, 0], [0, -90]), on("", "up", "up", "tog", "tog"), temas="yan"),
-    grup("Ghoul Lean", on("", "up", "up45", "tog", "sidetap", govde=158), on("", "up", "up45", "tog", "sidetap", govde=158), temas="yan", zincir=True),
-    grup("Cauldron Squat", on("", "head", "head", "goddess", "goddess"), on("", "head", "head", "horse", "horse"), temas="yan"),
-    grup("Skeleton Lunge", on("", "up", [55, 55], "lunge", "tog", govde=172), on("", "t", "t", "lunge", "lunge")),
-]
-
-TUR3 = [  # ROUND 3 - FINAL: zor denge ve yer pozlari (guvenli surumler)
-    grup("Raven Wings", profil("", 95, [-60, -60], [-58, -58], [0, 0], [-90, -90]), on("", "v", "v", "tog", "tog"), temas="yan"),
-    grup("Dance of the Dead", profil("", 170, [150, 150], [-130, -160], [0, 0], [-40, -150]), on("", "up", "up", "tog", "kneein"), temas="yan"),
-    grup("Coffin Bridge", profil("", -60, [180, 180], [178, 178], [60, 0], [58, -2]), on("", "v", "v", "goddess", "goddess"), temas="yan"),
-    grup("Skull Squat", profil("", 170, [160, 160], [158, 158], [80, 0], [0, -90]), on("", "head", "head", "horse", "horse"), temas="yan"),
-    grup("Boat of Souls", profil("", 210, [90, 90], [88, 88], [125, 55], [123, 53]), on("", "up", "up", [-80, -80], [80, 80]), temas=("ayak", "ayak")),
-    grup("Black Cat Balance", profil("", 95, [90, 90], [0, 0], [-90, -90], KNEEL), on("", "v", "v", "tog", "kneeup"), temas="yan"),
-    grup("Reaper Reach", profil("", 170, [135, 135], [133, 133], [80, 0], [-45, -45]), profil("", 170, [135, 135], [133, 133], [80, 0], [-45, -45]),
-         temas="yan", zincir=True),
-    grup("Ghost Tree", on("", "up", "up45", "tog", "kneein"), on("", "up45", "up45", "kneein", "tog")),
-    grup("Candle Flame", on("", "v", "v", [0, "geri"], [0, "geri"]), on("", DUA_UST[0], DUA_UST[1], "tog", "tog"), temas="yan"),
-    grup("Hat Peak Fold", profil("", 20, [5, 5], [3, 3], [2, 2], [-150, -150]), on("", DUA_UST[0], DUA_UST[1], "tog", "tog"), temas="yan"),
-    grup("Bat Swarm", on("", "w", "w", "goddess", "goddess", govde=165), on("", "v", "v", "wide", "wide"), temas="yan"),
-    grup("Pumpkin Roll", profil("", 70, [100, 100], [98, 98], [100, -95], [98, -95]), on("", "chest", "chest", [0, "geri"], [0, "geri"]), temas="yan"),
-    grup("Zombie Rise", on("", "up", "up45", [0, "geri"], [0, "geri"]), on("", "up45", "up45", [0, "geri"], [0, "geri"])),
-    grup("Spider Bridge", profil("", -80, [0, 0], [0, 0], [90, 0], [88, 0]), on("", "up", "up", "goddess", "goddess"), temas="yan"),
-    grup("Final Fright", on("", "lowv", "up45", "lunge", "tog", govde=170), on("", "v", "v", "wide", "wide")),
-]
-
-gruplar, duvarlar = {}, []
+# ---------------------------------------------------------------- duvarlar: her duvar 3 farkli poz (P1 | P2 | P3)
+anah = lambda p: p["ad"].lower().replace(" ", "-").replace("'", "")
+pozlar, duvarlar, adlar = {}, [], set()
 for tur, liste in ((1, TUR1), (2, TUR2), (3, TUR3)):
-    for G in liste:
-        k = G["ad"].lower().replace(" ", "-").replace("'", "")
-        assert k not in gruplar, k
-        for i, f in enumerate(G["figurler"]):
-            f["ad"] = f"{G['ad']} {'ABC'[i]}"
-        gruplar[k] = G
-        duvarlar.append({"tur": tur, "grup": k})
-assert len(duvarlar) == 45, len(duvarlar)
-json.dump({"_not": "TETRIS MODE 5. video (REF-056, 3 oyuncu, Halloween) grup pozlari. Figurler soldan saga A B C; aci dili pozlar.json _not. "
-                   "temas: [sol eklem, sag eklem] ya da 'yan'.", "gruplar": gruplar},
-          open(os.path.join(BURA, "gruplar-05.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    for w in range(15):            # liste aile aile ilerliyor: ayni duvara w, w+15, w+30 (benzer pozlar yan yana gelmez)
+        uc = [liste[w], liste[w + 15], liste[w + 30]]
+        for p in uc:
+            assert p["ad"] not in adlar, p["ad"]
+            adlar.add(p["ad"]); pozlar[anah(p)] = p
+        duvarlar.append({"tur": tur, "p1": anah(uc[0]), "p2": anah(uc[1]), "p3": anah(uc[2])})
+assert len(duvarlar) == 45 and len(pozlar) == 135, (len(duvarlar), len(pozlar))
+
+eski = set()
+for f in ("pozlar.json", "pozlar-03.json", "pozlar-04.json"):
+    eski |= {p["ad"].lower() for p in json.load(open(os.path.join(BURA, f), encoding="utf-8"))["pozlar"].values()}
+_kul = open(os.path.join(BURA, "poz-listesi-kur.py"), encoding="utf-8").read().split("KULLANILMIS = ")[1].split("}")[0] + "}"
+eski |= eval(_kul)
+cakisan = sorted(a for a in adlar if a.lower() in eski)
+assert not cakisan, cakisan
+
+not_ = json.load(open(os.path.join(BURA, "pozlar.json"), encoding="utf-8"))["_not"].replace("(REF-053)", "5. video (REF-056, 3 oyuncu, Halloween)")
+json.dump({"_not": not_, "pozlar": pozlar}, open(os.path.join(BURA, "pozlar-05.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 json.dump(duvarlar, open(os.path.join(BURA, "duvar-listesi-05.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-print(f"{len(gruplar)} grup ({3 * len(gruplar)} figur), {len(duvarlar)} duvar -> gruplar-05.json")
+print(f"{len(pozlar)} poz, {len(duvarlar)} duvar -> pozlar-05.json")

@@ -1,8 +1,8 @@
-"""TETRIS MODE 5. video (REF-056, 3 oyuncu) - HALLOWEEN sahne varliklari + 3 kisilik grup poz maskeleri.
+"""TETRIS MODE 5. video (REF-056, 3 oyuncu) - HALLOWEEN sahne varliklari + tek kisilik poz maskeleri, 3 serit yan yana.
 
 varlik.py tarafindan calistirilir (yardimcilar oradan gelir):
     blender -b --factory-startup -noaudio -P 03-motor/tetris-pvp/varlik.py -- --mod cadi --cikti cikti \
-        [--ornek 64] [--yalniz hepsi|poz|sahne] [--gruplar 03-motor/tetris-pvp/gruplar-05.json]
+        [--ornek 64] [--yalniz hepsi|poz|sahne] --pozlar 03-motor/tetris-pvp/pozlar-05.json
 
 REF-056'nin yapisi (tek genis serit, ortada TEK kafes kapi, chevron basamakli parlak yol, babali korkuluk,
 yol kenarinda isikli bulut kumeleri, ufkun ustunde dev sarmal) korunur; dunya HALLOWEEN olur (kullanici 19 Eki 2026,
@@ -12,18 +12,21 @@ ufukta perili tepe + carpik agaclar + sato silueti. Genel Halloween nesneleri; m
 
 Ciktilar (sahne5.html 2B'de birlestirir, kamera sabit):
   gok.png            1920x1080  gok + ay + girdap + uzak tepeler (tam ekran)
-  serit.png          1920x1080  zemin, yol, korkuluk, kapi, balkabaklari, sis (gokte saydam)
-  panel-<tip>.png    1600x900   renk gecisli duvar paneli (kabak | zehir | gece)
-  grup/<ad>.png      1600x900   3 kisilik duz siyah siluet maskesi (3 Mixamo govdesi, temas otomatik hizalanir)
-  yerlesim.json      kapi acikligi, ampuller, grup temas olculeri
+  serit-p1..p3.png   640x1080   her oyuncunun seridi: zemin, yol, mezar tasi korkuluk, kapi, balkabaklari, sis (gokte saydam)
+  panel-p1..p3.png   1100x904   oyuncu renginde renk gecisli duvar paneli
+  poz/<ad>.png       900x740    tek kisilik duz siyah siluet maskesi (varlik.py poz_maskeleri, --pozlar pozlar-05.json)
+  yerlesim.json      kapi acikliklari (aciklik_p1..p3, serit koordinati), ampuller
+Kullanici 19 Eki 2026: "her karede tek siluet, 3 tane yan yana" -> ekran 3 serit (P1 | P2 | P3).
 """
 
-GRUPLAR = json.load(open(os.path.join(KOK, arg("--gruplar", "03-motor/tetris-pvp/gruplar-05.json")), encoding="utf-8"))["gruplar"]
 YERLESIM.clear()
+# Kullanici 19 Eki 2026: "her karede tek siluet, 3 tane yan yana" -> ekran uce bolunur, her oyuncunun kendi seridi/kapisi/paneli.
+OYUNCU = {"p1": "#ff7a1a", "p2": "#7dff4a", "p3": "#a35cff"}          # balkabagi turuncu | zehir yesili | cadi moru
+SERIT_W = 640
 
 # kamera: varlik.py serit kamerasi ile ayni (z 2,6 m, 10,5 derece asagi), goruntu tam genislik 1920x1080
-KAP = {"y": 16.0, "w": 7.6, "h": 4.3, "kule": 0.6, "kiris": 0.6}     # acıklık 6,4 x 4,3 ~ panel orani 16:9
-YOL_W = 9.0
+KAP = {"y": 8.0, "w": 4.6, "h": 3.1, "kule": 0.45, "kiris": 0.45}     # acıklık 6,4 x 4,3 ~ panel orani 16:9
+YOL_W = 3.6
 
 
 def kamera(sc):
@@ -229,7 +232,7 @@ def mezar(x, y, mat, fener):
     kure((x, y, 1.42), 0.11, fener)
 
 
-def zemin_ve_yol(rnd):
+def zemin_ve_yol(rnd, oyuncu):
     Y = KAP["y"]
     # zemin: koyu mor, yesil sis lekeli (ekran bos kalmasin)
     bpy.ops.mesh.primitive_plane_add(size=1, location=(0, 60, -0.02))
@@ -257,7 +260,7 @@ def zemin_ve_yol(rnd):
             a = (0, yy + 0.55, 0.02); b = (s * (YOL_W / 2 - 0.35), yy, 0.02)
             boru(a, b, 0.07, chev_a if j % 2 == 0 else chev_b)
     # kenar seritleri
-    neon_k = mat_emis("kenar", lin(hex3("#ff8a2a")), 6.0)
+    neon_k = mat_emis("kenar", lin(hex3(OYUNCU[oyuncu])), 6.0)
     for s in (-1, 1):
         boru((s * (YOL_W / 2 - 0.1), 0.5, 0.02), (s * (YOL_W / 2 - 0.1), Y + 2.5, 0.02), 0.06, neon_k)
     # korkuluk: fenerli mezar taslari (REF-056'nin yuvarlak babalarinin yerine) + dovme demir parmaklik
@@ -283,8 +286,8 @@ def zemin_ve_yol(rnd):
     for s in (-1, 1):
         yy = 1.2
         while yy < Y + 30:
-            r = rnd.uniform(0.35, 0.75) * (1 + yy / 30)
-            x = s * (YOL_W / 2 + 1.3 + rnd.uniform(0, 2.5) + yy * 0.25)
+            r = rnd.uniform(0.3, 0.6) * (1 + yy / 30)
+            x = s * (YOL_W / 2 + 0.9 + rnd.uniform(0, 1.6) + yy * 0.2)
             kabak((x, yy, 0), r, rnd.choice((kabuk, kabuk2)), sap, yuz if rnd.random() < 0.55 else None)
             if rnd.random() < 0.6:
                 r2 = r * rnd.uniform(0.5, 0.75)
@@ -305,11 +308,12 @@ def zemin_ve_yol(rnd):
         o.scale = (rr * 1.8, rr, rr * 0.5); o.data.materials.append(rnd.choice(sis)); bpy.ops.object.shade_smooth()
 
 
-def kapi_cadi():
+def kapi_cadi(oyuncu):
     """REF-056 kafes kapisi (yapi ayni) + mezarlik demir susu, kule tepelerinde balkabagi fenerleri, HALLOWEEN tabelasi"""
     Y, W, H, KK, KR = KAP["y"], KAP["w"], KAP["h"], KAP["kule"], KAP["kiris"]
-    ana = mat_jole("kapi_ana", lin(hex3("#7a3fd6")), emis=0.25, purluk=0.15)
-    ince = mat_jole("kapi_ince", lin(hex3("#c08cff")), emis=0.35, purluk=0.15)
+    R = lin(hex3(OYUNCU[oyuncu]))
+    ana = mat_jole("kapi_ana", R, emis=0.25, purluk=0.15)
+    ince = mat_jole("kapi_ince", acik(R, 0.35), emis=0.35, purluk=0.15)
     koyum = mat_jole("kapi_koyu", lin(hex3("#2a0f4a")), emis=0.02)
     demir = mat_duz("kapi_demir", lin(hex3("#0b0612")), 0.35)
     xk = W / 2 - KK / 2
@@ -318,8 +322,8 @@ def kapi_cadi():
         yuvarlak_kutu("taban", (s * xk, Y, 0.14), (KK + 0.35, KK + 0.35, 0.28), koyum, egim=0.06)
     kafes_kiris(-xk, xk, Y, H + KR / 2, KR, ana, ince)
     # demir sus: kirisin ustunde kivrimli halkalar + sivri uclar
-    for i in range(9):
-        x = -xk + 0.5 + i * (2 * xk - 1.0) / 8
+    for i in range(7):
+        x = -xk + 0.4 + i * (2 * xk - 0.8) / 6
         bpy.ops.mesh.primitive_torus_add(major_radius=0.22, minor_radius=0.035, location=(x, Y - KK / 2, H + KR + 0.28), rotation=(math.pi / 2, 0, 0))
         bpy.context.active_object.data.materials.append(demir)
         bpy.ops.mesh.primitive_cone_add(radius1=0.06, depth=0.35, location=(x, Y - KK / 2, H + KR + 0.62), vertices=8)
@@ -333,21 +337,21 @@ def kapi_cadi():
     # ampuller (sahne5.html yakip sondurur)
     amp = mat_emis("ampul", lin(hex3("#ffd08a")), 2.5)
     AMPUL = []
-    for i in range(19):
-        AMPUL.append(Vector((-ic + 0.25 + i * (2 * ic - 0.5) / 18, Y - KK / 2 - 0.05, H - 0.06)))
+    for i in range(13):
+        AMPUL.append(Vector((-ic + 0.2 + i * (2 * ic - 0.4) / 12, Y - KK / 2 - 0.05, H - 0.06)))
     for s_ in (-1, 1):
-        for j in range(12):
-            AMPUL.append(Vector((s_ * xk, Y - KK / 2 - 0.06, 0.4 + j * (H - 0.5) / 11)))
+        for j in range(9):
+            AMPUL.append(Vector((s_ * xk, Y - KK / 2 - 0.06, 0.35 + j * (H - 0.45) / 8)))
     for q in AMPUL:
-        kure(q, 0.08, amp)
+        kure(q, 0.065, amp)
     # tabela
-    yuvarlak_kutu("tabela", (0, Y - KK / 2 - 0.22, H + KR / 2), (3.2, 0.14, 0.62), koyum, egim=0.14, seg=6)
-    yuvarlak_kutu("tabela_cerceve", (0, Y - KK / 2 - 0.16, H + KR / 2), (3.45, 0.12, 0.76), mat_jole("tc", lin(hex3("#ff7a1a")), emis=0.3), egim=0.18, seg=6)
+    yuvarlak_kutu("tabela", (0, Y - KK / 2 - 0.22, H + KR / 2), (2.2, 0.14, 0.5), koyum, egim=0.12, seg=6)
+    yuvarlak_kutu("tabela_cerceve", (0, Y - KK / 2 - 0.16, H + KR / 2), (2.4, 0.12, 0.62), mat_jole("tc", acik(R, 0.2), emis=0.3), egim=0.16, seg=6)
     try:
         font = bpy.data.fonts.load(os.path.join(KOK, "05-kapak/fontlar/TitanOne.ttf"))
         bpy.ops.object.text_add(location=(0, Y - KK / 2 - 0.31, H + KR / 2 - 0.03), rotation=(math.pi / 2, 0, 0))
         tx = bpy.context.active_object
-        tx.data.body = "HALLOWEEN"; tx.data.font = font; tx.data.size = 0.44; tx.data.extrude = 0.04; tx.data.bevel_depth = 0.012
+        tx.data.body = "PLAYER " + oyuncu[1]; tx.data.font = font; tx.data.size = 0.34; tx.data.extrude = 0.04; tx.data.bevel_depth = 0.012
         tx.data.align_x = "CENTER"; tx.data.align_y = "CENTER"
         tx.data.materials.append(mat_emis("tabela_yazi", lin(hex3("#ffe0a0")), 4.0))
     except Exception as e:
@@ -357,7 +361,7 @@ def kapi_cadi():
     sap = mat_duz("ks", lin(hex3("#3a5a12")), 0.6)
     yuz = mat_emis("ky", lin(hex3("#ffd23a")), 20)
     for s_ in (-1, 1):
-        kabak((s_ * xk, Y - 0.1, H + KR + 0.05), 0.42, kabuk, sap, yuz)
+        kabak((s_ * xk, Y - 0.1, H + KR + 0.04), 0.3, kabuk, sap, yuz)
     # kaide
     yuvarlak_kutu("kaide", (0, Y - 0.6, 0.07), (W + 0.5, 0.8, 0.18), koyum, egim=0.06)
     boru((-W / 2 - 0.15, Y - 1.02, 0.14), (W / 2 + 0.15, Y - 1.02, 0.14), 0.04, neon)
@@ -366,14 +370,12 @@ def kapi_cadi():
 
 def sahne_cadi():
     rnd = random.Random(56)
+    # --- 1) GOK (tam ekran 1920x1080, serit kamerasi ile ayni egim)
     sc = bos_sahne(w=1920, h=1080, ornek=min(ORNEK, 64))
-    kam = kamera(sc)
+    kamera(sc)
     sc.world.node_tree.nodes["Background"].inputs[1].default_value = 0.15
-    # --- 1) GOK katmani
-    once = set(bpy.data.objects)
     ay_ve_gok(rnd)
     uzak_tepeler(rnd)
-    gok_obj = [o for o in bpy.data.objects if o not in once]
     sc.use_nodes = True
     nt2 = sc.node_tree; nt2.nodes.clear()
     rl = nt2.nodes.new("CompositorNodeRLayers")
@@ -381,39 +383,40 @@ def sahne_cadi():
     ou = nt2.nodes.new("CompositorNodeComposite")
     nt2.links.new(rl.outputs[0], gl.inputs[0]); nt2.links.new(gl.outputs[0], ou.inputs[0])
     yaz(sc, "gok.png")
-    # --- 2) SERIT katmani (gok gizli, saydam film)
-    for o in gok_obj:
-        o.hide_render = True
-    sc.render.film_transparent = True; sc.render.image_settings.color_mode = "RGBA"
-    zemin_ve_yol(rnd)
-    AMPUL = kapi_cadi()
-    isik("AREA", (0, -2, 8), 900, lin(hex3("#d8c8ff")), 10, yon=(0, KAP["y"] * 0.6, 0))
-    isik("AREA", (-7, 6, 4), 500, lin(hex3("#ff8a3a")), 4, yon=(0, KAP["y"], 2))
-    isik("AREA", (7, 6, 4), 500, lin(hex3("#7dff9a")), 4, yon=(0, KAP["y"], 2))
-    isik("AREA", (0, KAP["y"] + 4, 7), 900, lin(hex3("#b48cff")), 6, yon=(0, KAP["y"], 1))
-    isik("SUN", (0, 0, 10), 0.6, lin(hex3("#c8d0ff")), yon=(0, 40, 0))
-    # kapi acikligi piksel kutusu + ampuller (1920x1080)
-    Y, W, H, KK = KAP["y"], KAP["w"], KAP["h"], KAP["kule"]
-    ic = W / 2 - KK
-    bpy.context.view_layer.update()
-    px = [world_to_camera_view(sc, kam, Vector(p)) for p in ((-ic, Y, 0), (ic, Y, 0), (-ic, Y, H), (ic, Y, H))]
-    xs = [p.x * 1920 for p in px]; ys = [(1 - p.y) * 1080 for p in px]
-    YERLESIM["aciklik"] = [round(min(xs), 1), round(min(ys), 1), round(max(xs), 1), round(max(ys), 1)]
-    YERLESIM["ampul"] = [[round(p.x * 1920, 1), round((1 - p.y) * 1080, 1)] for p in (world_to_camera_view(sc, kam, q) for q in AMPUL)]
-    # yol oklarinin izdusumu icin kamera + yol olculeri
-    YERLESIM["yol"] = {"y_kapi": Y, "genislik": YOL_W, "kam": KAM}
-    log("aciklik", YERLESIM["aciklik"])
-    yaz(sc, "serit.png")
+    # --- 2) her oyuncunun SERIDI (640x1080, gokte saydam)
+    for oyuncu in OYUNCU:
+        rnd = random.Random({"p1": 21, "p2": 23, "p3": 29}[oyuncu])
+        sc = bos_sahne(w=SERIT_W, h=1080, saydam=True, ornek=min(ORNEK, 64))
+        kam = kamera(sc)
+        sc.world.node_tree.nodes["Background"].inputs[1].default_value = 0.15
+        zemin_ve_yol(rnd, oyuncu)
+        AMPUL = kapi_cadi(oyuncu)
+        R = lin(hex3(OYUNCU[oyuncu]))
+        isik("AREA", (0, -1.5, 6.5), 420, lin(hex3("#d8c8ff")), 6, yon=(0, KAP["y"] * 0.6, 0))
+        isik("AREA", (-3, 3, 3), 260, acik(R, 0.2), 3, yon=(0, KAP["y"], 2))
+        isik("AREA", (3, 3, 3), 220, lin(hex3("#b48cff")), 3, yon=(0, KAP["y"], 2))
+        isik("AREA", (0, KAP["y"] + 3, 5), 500, acik(R, 0.1), 5, yon=(0, KAP["y"], 1))
+        Y, W_, H_, KK = KAP["y"], KAP["w"], KAP["h"], KAP["kule"]
+        ic = W_ / 2 - KK
+        bpy.context.view_layer.update()
+        px = [world_to_camera_view(sc, kam, Vector(p)) for p in ((-ic, Y, 0), (ic, Y, 0), (-ic, Y, H_), (ic, Y, H_))]
+        xs = [p.x * SERIT_W for p in px]; ys = [(1 - p.y) * 1080 for p in px]
+        YERLESIM["aciklik_" + oyuncu] = [round(min(xs), 1), round(min(ys), 1), round(max(xs), 1), round(max(ys), 1)]
+        YERLESIM["ampul_" + oyuncu] = [[round(p.x * SERIT_W, 1), round((1 - p.y) * 1080, 1)] for p in (world_to_camera_view(sc, kam, q) for q in AMPUL)]
+        log("aciklik", oyuncu, YERLESIM["aciklik_" + oyuncu])
+        yaz(sc, "serit-%s.png" % oyuncu)
+    YERLESIM["yol"] = {"y_kapi": KAP["y"], "genislik": YOL_W, "kam": KAM, "serit_w": SERIT_W}
 
 
 # ------------------------------------------------------------------ PANELLER (renk gecisli, ince taneli)
-PANEL_RENK = {"kabak": ("#ffb02a", "#c8102e"), "zehir": ("#7dff4a", "#f4ecd2"), "gece": ("#7a2bd6", "#ffe9b0")}
+PANEL_RENK = {"p1": ("#ffc23a", "#d0122e"), "p2": ("#d6ff5a", "#139a52"), "p3": ("#e0b8ff", "#5a1ab0")}
 
 
 def panel_cadi(tip):
-    sc = bos_sahne(w=1600, h=900, saydam=True, ornek=min(ORNEK, 32))
+    """oyuncu renginde renk gecisli panel (REF-056 duvari), 1100x904 (sahne4 ile ayni oran)"""
+    sc = bos_sahne(w=1100, h=904, saydam=True, ornek=min(ORNEK, 32))
     A, B = (lin(hex3(c)) for c in PANEL_RENK[tip])
-    PW, PH = 6.4, 3.6
+    PW, PH = 5.0, 4.1
     bpy.ops.mesh.primitive_cube_add(size=1, location=(0, 0, 0))
     p = bpy.context.active_object; p.scale = (PW, 0.2, PH); bpy.ops.object.transform_apply(scale=True)
     bv = p.modifiers.new("egim", "BEVEL"); bv.width = 0.12; bv.segments = 6; bv.limit_method = "NONE"
@@ -442,131 +445,13 @@ def panel_cadi(tip):
     yaz(sc, "panel-%s.png" % tip)
 
 
-# ------------------------------------------------------------------ 3 KISILIK GRUP MASKELERI
-def ayna_poz(P):
-    """ekran aynasi: sol/sag uzuvlar yer degistirir, acilar eksi olur, profil yonu doner"""
-    Q = {"ad": P["ad"], "yon": {"on": "on", "sag": "sol", "sol": "sag"}[P.get("yon", "on")]}
-    neg = lambda v: [x if x == "geri" else -x for x in v]
-    Q["govde"] = -P.get("govde", 180); Q["bas"] = -P.get("bas", 0)
-    for a, b in (("sagKol", "solKol"), ("sagBacak", "solBacak")):
-        if a in P: Q[b] = neg(P[a])
-        if b in P: Q[a] = neg(P[b])
-    return Q
-
-
-def figur_pozla(arm, mesler, P, taban_rot):
-    for b in arm.pose.bones:
-        b.matrix_basis = Matrix.Identity(4)
-    yon = P.get("yon", "on")
-    arm.rotation_euler.z = taban_rot + {"on": 0, "sag": math.radians(90), "sol": math.radians(-90)}[yon]
-    arm.location = (0, 0, 0)
-    bpy.context.view_layer.update()
-    ileri = {"on": Vector((0, -1, 0)), "sag": Vector((1, 0, 0)), "sol": Vector((-1, 0, 0))}[yon]
-    g = P.get("govde", 180); ba = P.get("bas", 0)
-    for k_, aci in (("Spine", g), ("Spine1", g), ("Spine2", g), ("Neck", g + ba), ("Head", g + ba)):
-        try:
-            yonelt(arm, kemik(arm, k_), yon_vek(aci, ileri))
-        except KeyError:
-            pass
-    for taraf, anah in (("Left", "sol"), ("Right", "sag")):
-        kol = P.get(anah + "Kol", [-12 if anah == "sag" else 12] * 2)
-        yonelt(arm, kemik(arm, taraf + "Arm"), yon_vek(kol[0], ileri))
-        yonelt(arm, kemik(arm, taraf + "ForeArm"), yon_vek(kol[1], ileri))
-        yonelt(arm, kemik(arm, taraf + "Hand"), yon_vek(kol[1], ileri))
-        bac = P.get(anah + "Bacak", [-3 if anah == "sag" else 3, 0])
-        yonelt(arm, kemik(arm, taraf + "UpLeg"), yon_vek(bac[0], ileri))
-        yonelt(arm, kemik(arm, taraf + "Leg"), yon_vek(bac[1], ileri))
-        baldir = yon_vek(bac[1], ileri)
-        if baldir.dot(ileri) < -0.5 or bac[1] == "geri":
-            ayak = (baldir * 0.7 + Vector((0, 0, -0.7))).normalized()
-        else:
-            ayak = (ileri * 0.9 + baldir * 0.35).normalized()
-        yonelt(arm, kemik(arm, taraf + "Foot"), ayak)
-    # zemine oturt (kaldirma/tasima yok: her figur kendi ayagi/dizi/eli ile yerde)
-    alt, ust = dunya_kutusu(mesler)
-    arm.location.z -= alt.z
-    bpy.context.view_layer.update()
-
-
-EKLEM = {"el": [("LeftHand", "kuyruk"), ("RightHand", "kuyruk")], "omuz": [("LeftArm", "bas"), ("RightArm", "bas")],
-         "ayak": [("LeftToeBase", "bas"), ("RightToeBase", "bas")], "diz": [("LeftLeg", "bas"), ("RightLeg", "bas")],
-         "kalca": [("LeftUpLeg", "bas"), ("RightUpLeg", "bas")], "bas": [("Head", "kuyruk")], "sirt": [("Spine2", "bas")]}
-
-
-def eklemler(arm, tur):
-    out = []
-    for ad, uc in EKLEM[tur]:
-        b = kemik(arm, ad)
-        out.append(arm.matrix_world @ (b.tail if uc == "kuyruk" else b.head))
-    return out
-
-
-def hizala(solA, solM, sagA, sagM, temas):
-    """sag figuru x'te kaydirir: temas = [sol figurun eklem turu, sag figurun eklem turu] ya da "yan" (silüetler deger)"""
-    bpy.context.view_layer.update()
-    if temas == "yan":
-        a1, u1 = dunya_kutusu(solM); a2, u2 = dunya_kutusu(sagM)
-        sagA.location.x += (u1.x - 0.22) - a2.x      # 0,22 m bindirme: silüetler gercekten deger
-        bpy.context.view_layer.update()
-        return {"tip": "yan", "dz": 0.0}
-    p = max(eklemler(solA, temas[0]), key=lambda v: v.x)
-    q = min(eklemler(sagA, temas[1]), key=lambda v: v.x)
-    sagA.location.x += (p.x - 0.04) - q.x
-    bpy.context.view_layer.update()
-    return {"tip": "-".join(temas), "dz": round(q.z - p.z, 3)}
-
-
-def grup_maskeleri():
-    sc = bos_sahne(motor="CYCLES", w=1600, h=900, saydam=True, ornek=16)
-    sc.frame_set(1); sc.cycles.use_denoising = False; sc.view_settings.view_transform = "Standard"
-    siyah = mat_emis("siluet", (0, 0, 0), 0.0)
-    FIG = []
-    for i in range(3):
-        once = set(bpy.data.objects)
-        bpy.ops.import_scene.fbx(filepath=os.path.join(KOK, "02-hareketler/siluet-govde.fbx"), automatic_bone_orientation=False)
-        yeni = [o for o in bpy.data.objects if o not in once]
-        arm = [o for o in yeni if o.type == "ARMATURE"][0]
-        mesler = [o for o in yeni if o.type == "MESH"]
-        for m in mesler:
-            m.data.materials.clear(); m.data.materials.append(siyah)
-            for poly in m.data.polygons:
-                poly.material_index = 0
-            m.animation_data_clear()
-        arm.animation_data_clear()
-        L = arm.matrix_world @ kemik(arm, "LeftArm").head; Rr = arm.matrix_world @ kemik(arm, "RightArm").head
-        v = L - Rr; v.z = 0
-        arm.rotation_euler.z -= math.atan2(v.y, v.x)
-        bpy.context.view_layer.update()
-        FIG.append((arm, mesler, arm.rotation_euler.z))
-    bpy.ops.object.camera_add(location=(0, -14, 1), rotation=(math.radians(90), 0, 0))
-    kam = bpy.context.active_object; sc.camera = kam; kam.data.type = "ORTHO"
-    ASPECT = 1600 / 900
-    for ad, G in GRUPLAR.items():
-        for (arm, mesler, rot), P in zip(FIG, G["figurler"]):
-            figur_pozla(arm, mesler, P, rot)
-        olcu = []
-        for j in range(2):
-            olcu.append(hizala(FIG[j][0], FIG[j][1], FIG[j + 1][0], FIG[j + 1][1], G["temas"][j]))
-        tum = [m for f in FIG for m in f[1]]
-        alt, ust = dunya_kutusu(tum)
-        gen, yuk = ust.x - alt.x, ust.z - alt.z
-        olc = 2.3
-        if yuk > olc * 0.88: olc = yuk / 0.88
-        if gen > olc * ASPECT * 0.9: olc = gen / (ASPECT * 0.9)
-        kam.data.ortho_scale = olc * ASPECT
-        kam.location = ((alt.x + ust.x) / 2, -14, alt.z - olc * 0.05 + olc / 2)
-        bpy.context.view_layer.update()
-        YERLESIM.setdefault("grup", {})[ad] = {"cerceve_m": round(olc, 3), "gen_m": round(gen, 3), "yuk_m": round(yuk, 3), "temas": olcu}
-        log("grup", ad, "gen", round(gen, 2), "yuk", round(yuk, 2), "temas", olcu)
-        yaz(sc, "grup/%s.png" % ad)
-
-
-os.makedirs(os.path.join(CIKTI, "grup"), exist_ok=True)
+# ------------------------------------------------------------------ ana akis (cadi)
+# tek kisilik poz maskeleri: varlik.py poz_maskeleri() (--pozlar pozlar-05.json). 3 kisilik grup maskesi iptal (kullanici 19 Eki).
 if YALNIZ in ("hepsi", "poz"):
-    grup_maskeleri()
+    poz_maskeleri()
 if YALNIZ in ("hepsi", "sahne"):
     sahne_cadi()
-    for t_ in PANEL_RENK:
-        panel_cadi(t_)
+    for o_ in OYUNCU:
+        panel_cadi(o_)
 json.dump(YERLESIM, open(os.path.join(CIKTI, "yerlesim.json"), "w"), indent=1)
 log("bitti (cadi)")
