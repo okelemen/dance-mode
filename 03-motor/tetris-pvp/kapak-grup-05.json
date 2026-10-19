@@ -1,0 +1,167 @@
+{
+ "_not": "Kapak grup pozlari (5. video). Figurler soldan saga; temas [sol eklem, sag eklem] ya da 'yan'.",
+ "gruplar": {
+  "a": {
+   "ad": "Halloween Party",
+   "figurler": [
+    {
+     "ad": "Halloween Party A",
+     "yon": "on",
+     "govde": 170,
+     "bas": 0,
+     "sagKol": [
+      -35,
+      -35
+     ],
+     "solKol": [
+      148,
+      148
+     ],
+     "sagBacak": [
+      -62,
+      -2
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Halloween Party B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -148,
+      -148
+     ],
+     "solKol": [
+      148,
+      148
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ],
+     "solBacak": [
+      62,
+      4
+     ]
+    },
+    {
+     "ad": "Halloween Party C",
+     "yon": "on",
+     "govde": -170,
+     "bas": 0,
+     "solKol": [
+      35,
+      35
+     ],
+     "sagKol": [
+      -148,
+      -148
+     ],
+     "solBacak": [
+      62,
+      2
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ],
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "b": {
+   "ad": "Bat Wing Hug",
+   "figurler": [
+    {
+     "ad": "Bat Wing Hug A",
+     "yon": "on",
+     "govde": 165,
+     "bas": 0,
+     "sagKol": [
+      -55,
+      -160
+     ],
+     "solKol": [
+      105,
+      105
+     ],
+     "sagBacak": [
+      -80,
+      -8
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Bat Wing Hug B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -55,
+      -160
+     ],
+     "solKol": [
+      55,
+      160
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ],
+     "solBacak": [
+      62,
+      4
+     ]
+    },
+    {
+     "ad": "Bat Wing Hug C",
+     "yon": "on",
+     "govde": -165,
+     "bas": 0,
+     "solKol": [
+      55,
+      160
+     ],
+     "sagKol": [
+      -105,
+      -105
+     ],
+     "solBacak": [
+      80,
+      8
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "omuz"
+    ],
+    [
+     "omuz",
+     "el"
+    ]
+   ]
+  }
+ }
+}
