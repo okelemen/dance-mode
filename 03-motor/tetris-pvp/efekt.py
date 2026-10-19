@@ -22,7 +22,7 @@ def main():
     ef = np.zeros(int(sure * SR) + SR)
     for k in B["kartlar"]:
         t = k["t"]
-        if k["tip"] == "vs":
+        if k["tip"] in ("vs", "giris"):          # 5. video: giris karti (3 PLAYERS) VS ile ayni carpisma
             yerlestir(ef, vuus(0.7, True, 0.9), t)
             yerlestir(ef, vurus(), t + 0.45, 1.0)
             yerlestir(ef, zap(0.4), t + 0.5, 0.7)
