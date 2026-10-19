@@ -46,8 +46,8 @@ KNEEL = [0, -90]                               # profilde diz cokme
 OTUR_L, OTUR_R = [-78, 75], [78, -75]          # onden bagdas
 
 TUR1 = [  # ROUND 1 - BEGINNER: ayakta, onden, yumusak (herkes yapar)
-    grup("Bat Trio", on("", "w", "up45", "wide", "wide"), on("", "w", "w", "goddess", "goddess")),
-    grup("Pumpkin Ring", on("", "hip", "up45", "softknee", "softknee", govde=172), on("", "v", "v", "tog", "tog")),
+    grup("Bat Trio", on("", "w", "up45", "goddess", "goddess"), on("", "cactus", "cactus", "goddess", "goddess")),
+    grup("Pumpkin Ring", on("", "hip", "v", "softknee", "softknee", govde=172), on("", "v", "v", "tog", "tog")),
     grup("Witch Hat", on("", "down", [110, 110], "tog", "tog", govde=160), on("", DUA_UST[0], DUA_UST[1], "tog", "tog"),
          temas=("el", "omuz")),
     grup("Haunted Gate", on("", "lowv", "t", "horse", "horse"), on("", "t", "t", "horse", "horse")),
@@ -57,12 +57,12 @@ TUR1 = [  # ROUND 1 - BEGINNER: ayakta, onden, yumusak (herkes yapar)
     grup("Skeleton Shake", on("", "up", "t", "kneeup", "tog"), on("", "t", "t", "tog", "kneeup")),
     grup("Ghost Float", on("", "lowv", "lowv", "tog", "curtsy"), on("", "lowv", "lowv", "tog", "tog")),
     grup("Cauldron Circle", on("", "lowv", [55, 20], "wide", "wide", govde=165), on("", [-55, -20], [55, 20], "goddess", "goddess")),
-    grup("Haunted Tree", on("", "up", "t", "tog", "kneein"), on("", "up45", "v", "kneein", "tog")),
+    grup("Haunted Tree", on("", "up", "up45", "tog", "kneein"), on("", "up45", "up45", "kneein", "tog")),
     grup("Scarecrow Row", on("", [-90, -20], [90, 20], "softknee", "tog", bas=15), on("", [-90, -20], [90, 20], "tog", "tog", bas=-15)),
     grup("Candle Trio", on("", DUA_UST[0], DUA_UST[1], "tog", "tog"), on("", DUA_UST[0], DUA_UST[1], "tog", "tog"), temas="yan"),
     grup("Vampire Cape", on("", "chest", [100, 60], "lunge", "tog", govde=172), on("", "v", "v", "wide", "wide"), temas=("el", "omuz")),
     grup("Monster Flex", on("", "flex", "flex", "wide", "wide"), on("", "flex", "flex", "horse", "horse"), temas="yan"),
-    grup("Spooky Wave", on("", "cactus", "t", "tog", "sidetap"), on("", "up", "lowv", "tog", "tog")),
+    grup("Spooky Wave", on("", "cactus", "t", "tog", "sidetap"), on("", "t", "t", "sidetap", "tog")),
 ]
 
 TUR2 = [  # ROUND 2 - CHALLENGER: hamle, diz cokme, denge, yer pozlari
@@ -76,33 +76,30 @@ TUR2 = [  # ROUND 2 - CHALLENGER: hamle, diz cokme, denge, yer pozlari
     grup("Witch Hat Lunge", on("", "lowv", [70, 70], "lunge", "tog", govde=170), on("", DUA_UST[0], DUA_UST[1], "goddess", "goddess"), temas=("el", "kalca")),
     grup("Ghost Glide", on("", "lowv", "t", "straight", "tog", govde=172), on("", "t", "t", "tog", "tog")),
     grup("Spider Crouch", on("", [-30, -10], [30, 10], "goddess", "goddess", govde=40), on("", "w", "w", "goddess", "goddess"), temas="yan"),
-    grup("Bat Hang", profil("", 40, [-150, -150], [-148, -148], [0, 0], [-2, -2]), on("", "v", "v", "wide", "wide"),
-         sag=None, temas="yan"),
+    grup("Bat Hang", profil("", 15, [0, 0], [-2, -2], [0, 0], [-2, -2]), on("", "v", "v", "wide", "wide"), temas="yan"),
     grup("Frankenstein Steps", on("", "t", "t", "kneeup", "tog"), on("", "t", "t", "tog", "kneeup")),
     grup("Haunted House", on("", "down", "up45", "tog", "tog", govde=168), on("", DUA_UST[0], DUA_UST[1], "wide", "wide")),
-    grup("Candy Corn", profil("", 180, [140, 140], [138, 138], [80, 0], [0, -90]), on("", "up", "up", "tog", "tog"), temas=("el", "kalca")),
-    grup("Mummy Bend", profil("", 25, [5, 5], [3, 3], [2, 2], [-2, -2]), profil("", 25, [5, 5], [3, 3], [2, 2], [-2, -2]), temas="yan", zincir=True),
+    grup("Candy Corn", profil("", 180, [140, 140], [138, 138], [80, 0], [0, -90]), on("", "up", "up", "tog", "tog"), temas="yan"),
+    grup("Ghoul Lean", on("", "up", "up45", "tog", "sidetap", govde=158), on("", "up", "up45", "tog", "sidetap", govde=158), temas="yan", zincir=True),
     grup("Cauldron Squat", on("", "head", "head", "goddess", "goddess"), on("", "head", "head", "horse", "horse"), temas="yan"),
-    grup("Skeleton Lunge", on("", "up", "t", "lunge", "tog", govde=172), on("", "t", "t", "lunge", "lunge")),
+    grup("Skeleton Lunge", on("", "up", [55, 55], "lunge", "tog", govde=172), on("", "t", "t", "lunge", "lunge")),
 ]
 
 TUR3 = [  # ROUND 3 - FINAL: zor denge ve yer pozlari (guvenli surumler)
     grup("Raven Wings", profil("", 95, [-60, -60], [-58, -58], [0, 0], [-90, -90]), on("", "v", "v", "tog", "tog"), temas="yan"),
     grup("Dance of the Dead", profil("", 170, [150, 150], [-130, -160], [0, 0], [-40, -150]), on("", "up", "up", "tog", "kneein"), temas="yan"),
     grup("Coffin Bridge", profil("", -60, [180, 180], [178, 178], [60, 0], [58, -2]), on("", "v", "v", "goddess", "goddess"), temas="yan"),
-    grup("Tombstone Plank", on("", "up", [-25, -25], "straight", "straight", govde=118), on("", "v", "v", [0, "geri"], [0, "geri"])),
+    grup("Skull Squat", profil("", 170, [160, 160], [158, 158], [80, 0], [0, -90]), on("", "head", "head", "horse", "horse"), temas="yan"),
     grup("Boat of Souls", profil("", 210, [90, 90], [88, 88], [125, 55], [123, 53]), on("", "up", "up", [-80, -80], [80, 80]), temas=("ayak", "ayak")),
-    grup("Black Cat Balance", profil("", 95, [90, 90], [0, 0], [-90, -90], KNEEL), profil("", 95, [90, 90], [0, 0], [-90, -90], KNEEL),
-         temas="yan", zincir=True),
+    grup("Black Cat Balance", profil("", 95, [90, 90], [0, 0], [-90, -90], KNEEL), on("", "v", "v", "tog", "kneeup"), temas="yan"),
     grup("Reaper Reach", profil("", 170, [135, 135], [133, 133], [80, 0], [-45, -45]), profil("", 170, [135, 135], [133, 133], [80, 0], [-45, -45]),
-         temas=("el", "omuz"), zincir=True),
+         temas="yan", zincir=True),
     grup("Ghost Tree", on("", "up", "up45", "tog", "kneein"), on("", "up45", "up45", "kneein", "tog")),
-    grup("Coffin Candle", profil("", -90, [-10, -10], [-8, -8], [180, 180], [178, 178]), on("", "up", "up", "tog", "tog"), temas="yan"),
+    grup("Candle Flame", on("", "v", "v", [0, "geri"], [0, "geri"]), on("", DUA_UST[0], DUA_UST[1], "tog", "tog"), temas="yan"),
     grup("Hat Peak Fold", profil("", 20, [5, 5], [3, 3], [2, 2], [-150, -150]), on("", DUA_UST[0], DUA_UST[1], "tog", "tog"), temas="yan"),
     grup("Bat Swarm", on("", "w", "w", "goddess", "goddess", govde=165), on("", "v", "v", "wide", "wide"), temas="yan"),
     grup("Pumpkin Roll", profil("", 70, [100, 100], [98, 98], [100, -95], [98, -95]), on("", "chest", "chest", [0, "geri"], [0, "geri"]), temas="yan"),
-    grup("Zombie Rise", profil("", 175, [150, 150], [-30, -30], KNEEL, [80, 0]), profil("", 175, [150, 150], [-30, -30], KNEEL, [80, 0]),
-         temas=("el", "omuz"), zincir=True),
+    grup("Zombie Rise", on("", "up", "up45", [0, "geri"], [0, "geri"]), on("", "up45", "up45", [0, "geri"], [0, "geri"])),
     grup("Spider Bridge", profil("", -80, [0, 0], [0, 0], [90, 0], [88, 0]), on("", "up", "up", "goddess", "goddess"), temas="yan"),
     grup("Final Fright", on("", "lowv", "up45", "lunge", "tog", govde=170), on("", "v", "v", "wide", "wide")),
 ]

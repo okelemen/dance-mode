@@ -506,7 +506,7 @@ def hizala(solA, solM, sagA, sagM, temas):
     bpy.context.view_layer.update()
     if temas == "yan":
         a1, u1 = dunya_kutusu(solM); a2, u2 = dunya_kutusu(sagM)
-        sagA.location.x += (u1.x - 0.05) - a2.x
+        sagA.location.x += (u1.x - 0.22) - a2.x      # 0,22 m bindirme: silüetler gercekten deger
         bpy.context.view_layer.update()
         return {"tip": "yan", "dz": 0.0}
     p = max(eklemler(solA, temas[0]), key=lambda v: v.x)

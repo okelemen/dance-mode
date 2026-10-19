@@ -18,12 +18,12 @@
       122
      ],
      "sagBacak": [
-      -22,
-      -22
+      -62,
+      -4
      ],
      "solBacak": [
-      22,
-      22
+      62,
+      4
      ]
     },
     {
@@ -32,12 +32,12 @@
      "govde": 180,
      "bas": 0,
      "sagKol": [
-      -55,
-      -160
+      -90,
+      180
      ],
      "solKol": [
-      55,
-      160
+      90,
+      -180
      ],
      "sagBacak": [
       -62,
@@ -62,12 +62,12 @@
       -122
      ],
      "solBacak": [
-      22,
-      22
+      62,
+      4
      ],
      "sagBacak": [
-      -22,
-      -22
+      -62,
+      -4
      ]
     }
    ],
@@ -95,8 +95,8 @@
       20
      ],
      "solKol": [
-      122,
-      122
+      148,
+      148
      ],
      "sagBacak": [
       -12,
@@ -139,8 +139,8 @@
       -20
      ],
      "sagKol": [
-      -122,
-      -122
+      -148,
+      -148
      ],
      "solBacak": [
       12,
@@ -737,8 +737,8 @@
       -176
      ],
      "solKol": [
-      90,
-      90
+      122,
+      122
      ],
      "sagBacak": [
       -3,
@@ -759,8 +759,8 @@
       -122
      ],
      "solKol": [
-      148,
-      148
+      122,
+      122
      ],
      "sagBacak": [
       -60,
@@ -781,8 +781,8 @@
       176
      ],
      "sagKol": [
-      -90,
-      -90
+      -122,
+      -122
      ],
      "solBacak": [
       3,
@@ -1148,16 +1148,16 @@
      "govde": 180,
      "bas": 0,
      "sagKol": [
-      -174,
-      -176
+      -90,
+      -90
      ],
      "solKol": [
-      35,
-      35
+      90,
+      90
      ],
      "sagBacak": [
-      -3,
-      -1
+      -30,
+      -30
      ],
      "solBacak": [
       3,
@@ -1822,15 +1822,15 @@
     {
      "ad": "Bat Hang A",
      "yon": "sag",
-     "govde": 40,
+     "govde": 15,
      "bas": 0,
      "solKol": [
-      -150,
-      -150
+      0,
+      0
      ],
      "sagKol": [
-      -148,
-      -148
+      -2,
+      -2
      ],
      "solBacak": [
       0,
@@ -1866,15 +1866,15 @@
     {
      "ad": "Bat Hang C",
      "yon": "sol",
-     "govde": -40,
+     "govde": -15,
      "bas": 0,
      "solKol": [
-      148,
-      148
+      2,
+      2
      ],
      "sagKol": [
-      150,
-      150
+      0,
+      0
      ],
      "solBacak": [
       2,
@@ -2124,83 +2124,77 @@
     }
    ],
    "temas": [
-    [
-     "el",
-     "kalca"
-    ],
-    [
-     "kalca",
-     "el"
-    ]
+    "yan",
+    "yan"
    ]
   },
-  "mummy-bend": {
-   "ad": "Mummy Bend",
+  "ghoul-lean": {
+   "ad": "Ghoul Lean",
    "figurler": [
     {
-     "ad": "Mummy Bend A",
-     "yon": "sag",
-     "govde": 25,
+     "ad": "Ghoul Lean A",
+     "yon": "on",
+     "govde": 158,
      "bas": 0,
-     "solKol": [
-      5,
-      5
-     ],
      "sagKol": [
-      3,
-      3
+      -174,
+      -176
      ],
-     "solBacak": [
-      2,
-      2
+     "solKol": [
+      122,
+      122
      ],
      "sagBacak": [
-      -2,
-      -2
+      -3,
+      -1
+     ],
+     "solBacak": [
+      30,
+      30
      ]
     },
     {
-     "ad": "Mummy Bend B",
-     "yon": "sag",
-     "govde": 25,
+     "ad": "Ghoul Lean B",
+     "yon": "on",
+     "govde": 158,
      "bas": 0,
-     "solKol": [
-      5,
-      5
-     ],
      "sagKol": [
-      3,
-      3
+      -174,
+      -176
      ],
-     "solBacak": [
-      2,
-      2
+     "solKol": [
+      122,
+      122
      ],
      "sagBacak": [
-      -2,
-      -2
+      -3,
+      -1
+     ],
+     "solBacak": [
+      30,
+      30
      ]
     },
     {
-     "ad": "Mummy Bend C",
-     "yon": "sag",
-     "govde": 25,
+     "ad": "Ghoul Lean C",
+     "yon": "on",
+     "govde": 158,
      "bas": 0,
-     "solKol": [
-      5,
-      5
-     ],
      "sagKol": [
-      3,
-      3
+      -174,
+      -176
      ],
-     "solBacak": [
-      2,
-      2
+     "solKol": [
+      122,
+      122
      ],
      "sagBacak": [
-      -2,
-      -2
+      -3,
+      -1
+     ],
+     "solBacak": [
+      30,
+      30
      ]
     }
    ],
@@ -2297,8 +2291,8 @@
       -176
      ],
      "solKol": [
-      90,
-      90
+      55,
+      55
      ],
      "sagBacak": [
       -62,
@@ -2341,8 +2335,8 @@
       176
      ],
      "sagKol": [
-      -90,
-      -90
+      -55,
+      -55
      ],
      "solBacak": [
       62,
@@ -2590,85 +2584,79 @@
     "yan"
    ]
   },
-  "tombstone-plank": {
-   "ad": "Tombstone Plank",
+  "skull-squat": {
+   "ad": "Skull Squat",
    "figurler": [
     {
-     "ad": "Tombstone Plank A",
-     "yon": "on",
-     "govde": 118,
+     "ad": "Skull Squat A",
+     "yon": "sag",
+     "govde": 170,
      "bas": 0,
-     "sagKol": [
-      -174,
-      -176
-     ],
      "solKol": [
-      -25,
-      -25
+      160,
+      160
      ],
-     "sagBacak": [
-      -45,
-      -45
+     "sagKol": [
+      158,
+      158
      ],
      "solBacak": [
-      45,
-      45
+      80,
+      0
+     ],
+     "sagBacak": [
+      0,
+      -90
      ]
     },
     {
-     "ad": "Tombstone Plank B",
+     "ad": "Skull Squat B",
      "yon": "on",
      "govde": 180,
      "bas": 0,
      "sagKol": [
-      -148,
-      -148
+      -128,
+      62
      ],
      "solKol": [
-      148,
-      148
+      128,
+      -62
      ],
      "sagBacak": [
-      0,
-      "geri"
+      -38,
+      4
      ],
      "solBacak": [
-      0,
-      "geri"
+      38,
+      -4
      ]
     },
     {
-     "ad": "Tombstone Plank C",
-     "yon": "on",
-     "govde": -118,
+     "ad": "Skull Squat C",
+     "yon": "sol",
+     "govde": -170,
      "bas": 0,
      "solKol": [
-      174,
-      176
+      -158,
+      -158
      ],
      "sagKol": [
-      25,
-      25
+      -160,
+      -160
      ],
      "solBacak": [
-      45,
-      45
+      0,
+      90
      ],
      "sagBacak": [
-      -45,
-      -45
+      -80,
+      0
      ]
     }
    ],
    "temas": [
-    [
-     "el",
-     "el"
-    ],
-    [
-     "el",
-     "el"
-    ]
+    "yan",
+    "yan"
    ]
   },
   "boat-of-souls": {
@@ -2779,46 +2767,46 @@
     },
     {
      "ad": "Black Cat Balance B",
-     "yon": "sag",
-     "govde": 95,
+     "yon": "on",
+     "govde": 180,
      "bas": 0,
-     "solKol": [
-      90,
-      90
-     ],
      "sagKol": [
-      0,
-      0
+      -148,
+      -148
      ],
-     "solBacak": [
-      -90,
-      -90
+     "solKol": [
+      148,
+      148
      ],
      "sagBacak": [
-      0,
-      -90
+      -3,
+      -1
+     ],
+     "solBacak": [
+      80,
+      8
      ]
     },
     {
      "ad": "Black Cat Balance C",
-     "yon": "sag",
-     "govde": 95,
+     "yon": "sol",
+     "govde": -95,
      "bas": 0,
      "solKol": [
-      90,
-      90
-     ],
-     "sagKol": [
       0,
       0
      ],
-     "solBacak": [
+     "sagKol": [
       -90,
       -90
      ],
-     "sagBacak": [
+     "solBacak": [
       0,
-      -90
+      90
+     ],
+     "sagBacak": [
+      90,
+      90
      ]
     }
    ],
@@ -2898,14 +2886,8 @@
     }
    ],
    "temas": [
-    [
-     "el",
-     "omuz"
-    ],
-    [
-     "el",
-     "omuz"
-    ]
+    "yan",
+    "yan"
    ]
   },
   "ghost-tree": {
@@ -2989,43 +2971,43 @@
     ]
    ]
   },
-  "coffin-candle": {
-   "ad": "Coffin Candle",
+  "candle-flame": {
+   "ad": "Candle Flame",
    "figurler": [
     {
-     "ad": "Coffin Candle A",
-     "yon": "sag",
-     "govde": -90,
-     "bas": 0,
-     "solKol": [
-      -10,
-      -10
-     ],
-     "sagKol": [
-      -8,
-      -8
-     ],
-     "solBacak": [
-      180,
-      180
-     ],
-     "sagBacak": [
-      178,
-      178
-     ]
-    },
-    {
-     "ad": "Coffin Candle B",
+     "ad": "Candle Flame A",
      "yon": "on",
      "govde": 180,
      "bas": 0,
      "sagKol": [
-      -174,
-      -176
+      -148,
+      -148
      ],
      "solKol": [
-      174,
-      176
+      148,
+      148
+     ],
+     "sagBacak": [
+      0,
+      "geri"
+     ],
+     "solBacak": [
+      0,
+      "geri"
+     ]
+    },
+    {
+     "ad": "Candle Flame B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -165,
+      170
+     ],
+     "solKol": [
+      165,
+      -170
      ],
      "sagBacak": [
       -3,
@@ -3037,25 +3019,25 @@
      ]
     },
     {
-     "ad": "Coffin Candle C",
-     "yon": "sol",
-     "govde": 90,
+     "ad": "Candle Flame C",
+     "yon": "on",
+     "govde": -180,
      "bas": 0,
      "solKol": [
-      8,
-      8
+      148,
+      148
      ],
      "sagKol": [
-      10,
-      10
+      -148,
+      -148
      ],
      "solBacak": [
-      -178,
-      -178
+      0,
+      "geri"
      ],
      "sagBacak": [
-      -180,
-      -180
+      0,
+      "geri"
      ]
     }
    ],
@@ -3294,79 +3276,79 @@
    "figurler": [
     {
      "ad": "Zombie Rise A",
-     "yon": "sag",
-     "govde": 175,
+     "yon": "on",
+     "govde": 180,
      "bas": 0,
-     "solKol": [
-      150,
-      150
-     ],
      "sagKol": [
-      -30,
-      -30
+      -174,
+      -176
+     ],
+     "solKol": [
+      122,
+      122
+     ],
+     "sagBacak": [
+      0,
+      "geri"
      ],
      "solBacak": [
       0,
-      -90
-     ],
-     "sagBacak": [
-      80,
-      0
+      "geri"
      ]
     },
     {
      "ad": "Zombie Rise B",
-     "yon": "sag",
-     "govde": 175,
+     "yon": "on",
+     "govde": 180,
      "bas": 0,
-     "solKol": [
-      150,
-      150
-     ],
      "sagKol": [
-      -30,
-      -30
+      -122,
+      -122
+     ],
+     "solKol": [
+      122,
+      122
+     ],
+     "sagBacak": [
+      0,
+      "geri"
      ],
      "solBacak": [
       0,
-      -90
-     ],
-     "sagBacak": [
-      80,
-      0
+      "geri"
      ]
     },
     {
      "ad": "Zombie Rise C",
-     "yon": "sag",
-     "govde": 175,
+     "yon": "on",
+     "govde": -180,
      "bas": 0,
      "solKol": [
-      150,
-      150
+      174,
+      176
      ],
      "sagKol": [
-      -30,
-      -30
+      -122,
+      -122
      ],
      "solBacak": [
       0,
-      -90
+      "geri"
      ],
      "sagBacak": [
-      80,
-      0
+      0,
+      "geri"
      ]
     }
    ],
    "temas": [
     [
      "el",
-     "omuz"
+     "el"
     ],
     [
      "el",
-     "omuz"
+     "el"
     ]
    ]
   },

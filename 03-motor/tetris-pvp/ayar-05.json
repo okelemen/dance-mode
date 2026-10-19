@@ -1,0 +1,28 @@
+{
+ "_not": "TETRIS MODE 5. video (REF-056, Glow Motion 'HUMAN TETRIS x3 player', kanalin 4. en cok izleneni). 3 OYUNCU, tek ortak duvar, grup pozlari (gruplar-05.json). Mekan HALLOWEEN (kullanici 19 Eki 2026, yalniz bu video). bolum-kur.py --ayar ayar-05.json. BPM GECICI: muzik gelince olculen BPM ile yeniden kurulur.",
+ "seri": "TETRIS MODE x3",
+ "sayfa": "sahne5.html",
+ "bolum": "tetris-mode-05",
+ "bpm": 128.0,
+ "muzik": "(bekleniyor - kullanici Suno, brief SUNO-BRIEF-TETRIS-MODE-05.md)",
+ "duvar": "duvar-listesi-05.json",
+ "giris_kart": "giris",
+ "tur_kart": {
+  "1": ["ROUND 1", "BEGINNER"],
+  "2": ["ROUND 2", "CHALLENGER"],
+  "3": ["ROUND 3", "FINAL LEVEL"]
+ },
+ "ovgu": ["SPOOKY GOOD!", "BOO-TIFUL!", "WICKED!", "FANG-TASTIC!", "SPOOK-TACULAR!", "SPELLBINDING!"],
+ "tema": {
+  "varlik": "/03-motor/tetris-pvp/varlik-05/",
+  "turuncu": "#ff7a1a",
+  "mor": "#9b4dff",
+  "zehir": "#7dff6a",
+  "kemik": "#fff1d6",
+  "sayac": "WALLS",
+  "giris": ["3 PLAYERS", "HALLOWEEN HUMAN TETRIS"],
+  "wrap": ["HAPPY", "HALLOWEEN!"],
+  "ovgu": ["SPOOKY GOOD!", "BOO-TIFUL!", "WICKED!", "FANG-TASTIC!", "SPOOK-TACULAR!", "SPELLBINDING!"],
+  "panel": ["kabak", "zehir", "gece"]
+ }
+}

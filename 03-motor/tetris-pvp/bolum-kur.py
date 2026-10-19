@@ -32,7 +32,8 @@ for i, d in enumerate(DUVAR):
 
 kartlar, duvarlar = [], []
 t = 0.0
-kartlar.append({"t": r(t), "sure": r(KS("vs")), "tip": "vs"}); t += KS("vs")
+GIRIS = AYAR.get("giris_kart", "vs")      # 5. video: "giris" (3 PLAYERS karti, VS yok - REF-056)
+kartlar.append({"t": r(t), "sure": r(KS(GIRIS)), "tip": GIRIS}); t += KS(GIRIS)
 for tur in (1, 2, 3):
     if KESIT and not any(d["tur"] == tur and d["no"] in KESIT for d in DUVAR):
         continue
@@ -44,7 +45,9 @@ for tur in (1, 2, 3):
         kartlar.append({"t": r(t), "sure": r(KS("basla")), "tip": "basla"}); t += KS("basla")
     for d in [x for x in DUVAR if x["tur"] == tur and (not KESIT or x["no"] in KESIT)]:
         n = d["no"]
-        duvarlar.append({"no": n, "tur": tur, "t0": r(t), "p1": d["p1"], "p2": d["p2"], "ovgu": OVGU[(n - 1) % len(OVGU)]})
+        # 5. video (REF-056, 3 oyuncu): duvarda p1/p2 yerine tek "grup" maskesi; duvar listesindeki alanlar aynen tasinir
+        duvarlar.append({"no": n, "tur": tur, "t0": r(t), **{k_: v_ for k_, v_ in d.items() if k_ not in ("tur", "no")},
+                         "ovgu": OVGU[(n - 1) % len(OVGU)]})
         t += Z["sure"]
 if not KESIT:
     kartlar.append({"t": r(t), "sure": r(KS("wrap")), "tip": "wrap"}); t += KS("wrap")
@@ -52,7 +55,7 @@ if not KESIT:
 toplam_olcu = round(t / (4 * V))
 assert abs(toplam_olcu * 4 * V - t) < 0.01, (t, toplam_olcu)
 
-TAM = {"vs", "tur", "wrap", "abone"}; AS = 3.2
+TAM = {"vs", "giris", "tur", "ovgu_kart", "wrap", "abone"}; AS = 3.2
 def bos(x):
     return not any(k["tip"] in TAM and x < k["t"] + k["sure"] and x + AS > k["t"] for k in kartlar)
 abone, x = [], 15.0
@@ -64,10 +67,10 @@ while x + AS < t:
         abone.append(r(u))
     x += 15.0
 
-b = {"seri": "TETRIS MODE PVP", "bolum": AYAR.get("bolum", "tetris-pvp-01"), "bpm": BPM, "toplam_olcu": toplam_olcu,
+b = {"seri": AYAR.get("seri", "TETRIS MODE PVP"), "bolum": AYAR.get("bolum", "tetris-pvp-01"), "bpm": BPM, "toplam_olcu": toplam_olcu,
      "toplam_duvar": len(duvarlar), "zaman": Z, "kartlar": kartlar, "duvarlar": duvarlar,
      "abone": abone, "abone_sure": AS, "muzik": AYAR.get("muzik", "Victory Rush.wav (Suno, kullanici)"),
-     "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne4.html."}
+     "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/" + AYAR.get("sayfa", "sahne4.html") + "."}
 if "tema" in AYAR:
     b["tema"] = AYAR["tema"]
 json.dump(b, open(sys.argv[1], "w", encoding="utf-8"), ensure_ascii=False, indent=1)
