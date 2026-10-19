@@ -554,6 +554,11 @@ def grup_maskeleri():
         olcu = []
         for j in range(2):
             olcu.append(hizala(FIG[j][0], FIG[j][1], FIG[j + 1][0], FIG[j + 1][1], G["temas"][j]))
+            # kapak deneme 2 (kullanici "hic begenmedim"): REF-056 kumesi sikisik, kisiler ic ice -> ek bindirme (m)
+            if G.get("bindirme"):
+                for f in FIG[j + 1:]:
+                    f[0].location.x -= G["bindirme"]
+                bpy.context.view_layer.update()
         tum = [m for f in FIG for m in f[1]]
         alt, ust = dunya_kutusu(tum)
         gen, yuk = ust.x - alt.x, ust.z - alt.z
@@ -566,6 +571,15 @@ def grup_maskeleri():
         YERLESIM.setdefault("grup", {})[ad] = {"cerceve_m": round(olc, 3), "gen_m": round(gen, 3), "yuk_m": round(yuk, 3), "temas": olcu}
         log("grup", ad, "gen", round(gen, 2), "yuk", round(yuk, 2), "temas", olcu)
         yaz(sc, "kapak-grup-%s.png" % ad)
+        # kisi basi ayri maske (ayni kamera): kapakta her kisinin kendi beyaz cizgisi (REF-056'da kisiler arasi ince beyaz hat)
+        for j in range(3):
+            for k_, f in enumerate(FIG):
+                for m in f[1]:
+                    m.hide_render = (k_ != j)
+            yaz(sc, "kapak-grup-%s-%d.png" % (ad, j))
+        for f in FIG:
+            for m in f[1]:
+                m.hide_render = False
 
 
 

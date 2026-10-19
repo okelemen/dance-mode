@@ -14,13 +14,15 @@ _g = {"__file__": os.path.join(BURA, "grup-listesi-kur-05.py")}
 exec(compile(_k, "grup-listesi-kur-05.py", "exec"), _g)
 on, grup = _g["on"], _g["grup"]
 
+DUA_UST = ([-165, 170], [165, -170])
 G = {
-    # A - "Parti": ortada genis V kollar + derin goddess; yanlar DISA derin hamle, ic kol yukari ortadakinin eline, dis kol asagi-disa
-    "a": grup("Halloween Party", on("", "lowv", "v", "lunge", "tog", govde=170), on("", "v", "v", "goddess", "goddess")),
-    # B - "Yarasa kanadi": yanlar ice egilip ic eli ortadakinin omzuna koyar, dis kol yarasa kanadi (W), dis diz yukari;
-    #     ortada W kanat kollar + goddess
-    "b": grup("Bat Wing Hug", on("", "w", [105, 105], "kneeup", "tog", govde=165), on("", "w", "w", "goddess", "goddess"),
-              temas=("el", "omuz")),
+    # deneme 2 (kullanici "hic begenmedim"): REF-056 kumesi gibi SIKISIK ve UZUN, kisiler ic ice (yan + bindirme); hareketler farkli.
+    # A - "Cadi sapkasi": ortada eller basin ustunde birlesik (sapka ucu, kumeyi uzatir); yanlar dis dizini kaldirir, dis kol kaktus
+    "a": dict(grup("Witch Hat Huddle", on("", "cactus", "chest", "kneeup", "tog", govde=174), on("", DUA_UST[0], DUA_UST[1], "tog", "tog"),
+                   temas="yan"), bindirme=0.38),
+    # B - "Ucan yarasa": ortada Y kollar; yanlar disa egilir, dis kol capraz yukari, dis bacak yana tekme (kanat gibi acilan kume)
+    "b": dict(grup("Spooky Kick", on("", "up", "hip", "straight", "tog", govde=196), on("", "v", "v", "tog", "tog"), temas="yan"),
+              bindirme=0.34),
 }
 for k, g in G.items():
     for i, f in enumerate(g["figurler"]):

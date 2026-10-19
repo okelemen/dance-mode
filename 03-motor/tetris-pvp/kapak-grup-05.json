@@ -2,101 +2,20 @@
  "_not": "Kapak grup pozlari (5. video). Figurler soldan saga; temas [sol eklem, sag eklem] ya da 'yan'.",
  "gruplar": {
   "a": {
-   "ad": "Halloween Party",
+   "ad": "Witch Hat Huddle",
    "figurler": [
     {
-     "ad": "Halloween Party A",
+     "ad": "Witch Hat Huddle A",
      "yon": "on",
-     "govde": 170,
+     "govde": 174,
      "bas": 0,
      "sagKol": [
-      -35,
-      -35
+      -90,
+      180
      ],
      "solKol": [
-      148,
-      148
-     ],
-     "sagBacak": [
-      -62,
-      -2
-     ],
-     "solBacak": [
-      3,
-      1
-     ]
-    },
-    {
-     "ad": "Halloween Party B",
-     "yon": "on",
-     "govde": 180,
-     "bas": 0,
-     "sagKol": [
-      -148,
-      -148
-     ],
-     "solKol": [
-      148,
-      148
-     ],
-     "sagBacak": [
-      -62,
-      -4
-     ],
-     "solBacak": [
-      62,
-      4
-     ]
-    },
-    {
-     "ad": "Halloween Party C",
-     "yon": "on",
-     "govde": -170,
-     "bas": 0,
-     "solKol": [
-      35,
-      35
-     ],
-     "sagKol": [
-      -148,
-      -148
-     ],
-     "solBacak": [
-      62,
-      2
-     ],
-     "sagBacak": [
-      -3,
-      -1
-     ]
-    }
-   ],
-   "temas": [
-    [
-     "el",
-     "el"
-    ],
-    [
-     "el",
-     "el"
-    ]
-   ]
-  },
-  "b": {
-   "ad": "Bat Wing Hug",
-   "figurler": [
-    {
-     "ad": "Bat Wing Hug A",
-     "yon": "on",
-     "govde": 165,
-     "bas": 0,
-     "sagKol": [
-      -55,
-      -160
-     ],
-     "solKol": [
-      105,
-      105
+      22,
+      -95
      ],
      "sagBacak": [
       -80,
@@ -108,39 +27,39 @@
      ]
     },
     {
-     "ad": "Bat Wing Hug B",
+     "ad": "Witch Hat Huddle B",
      "yon": "on",
      "govde": 180,
      "bas": 0,
      "sagKol": [
-      -55,
-      -160
+      -165,
+      170
      ],
      "solKol": [
-      55,
-      160
+      165,
+      -170
      ],
      "sagBacak": [
-      -62,
-      -4
+      -3,
+      -1
      ],
      "solBacak": [
-      62,
-      4
+      3,
+      1
      ]
     },
     {
-     "ad": "Bat Wing Hug C",
+     "ad": "Witch Hat Huddle C",
      "yon": "on",
-     "govde": -165,
+     "govde": -174,
      "bas": 0,
      "solKol": [
-      55,
-      160
+      90,
+      -180
      ],
      "sagKol": [
-      -105,
-      -105
+      -22,
+      95
      ],
      "solBacak": [
       80,
@@ -153,15 +72,86 @@
     }
    ],
    "temas": [
-    [
-     "el",
-     "omuz"
-    ],
-    [
-     "omuz",
-     "el"
-    ]
-   ]
+    "yan",
+    "yan"
+   ],
+   "bindirme": 0.38
+  },
+  "b": {
+   "ad": "Spooky Kick",
+   "figurler": [
+    {
+     "ad": "Spooky Kick A",
+     "yon": "on",
+     "govde": 196,
+     "bas": 0,
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solKol": [
+      45,
+      -20
+     ],
+     "sagBacak": [
+      -45,
+      -45
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Spooky Kick B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -148,
+      -148
+     ],
+     "solKol": [
+      148,
+      148
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Spooky Kick C",
+     "yon": "on",
+     "govde": -196,
+     "bas": 0,
+     "solKol": [
+      174,
+      176
+     ],
+     "sagKol": [
+      -45,
+      20
+     ],
+     "solBacak": [
+      45,
+      45
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    "yan",
+    "yan"
+   ],
+   "bindirme": 0.34
   }
  }
 }
