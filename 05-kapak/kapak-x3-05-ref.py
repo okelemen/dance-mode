@@ -132,6 +132,6 @@ im.alpha_composite(yz, (int(W / 2 - yz.width / 2), by))
 hw = parlak_yazi("HALLOWEEN", yfont(64), gecis(9, (255, 150, 40), (190, 110, 255)), kontur=8, derinlik=9, dis=(50, 10, 70),
                  parlama=(255, 170, 90), zipla=3, don=3, aralik=4)
 hw = hw.rotate(-14, Image.BICUBIC, expand=True)
-im.alpha_composite(hw, (int(1075 - hw.width / 2), int(int(ac[1]) - 95 - hw.height / 2)))   # kapinin ust-saginda (REF "Full Body" yeri)
+im.alpha_composite(hw, (min(W - 8 - hw.width, int(1060 - hw.width / 2)), int(int(ac[1]) - 95 - hw.height / 2)))   # kapinin ust-saginda (REF "Full Body" yeri), kadraja sigar
 im.convert("RGB").save(a.cikti, quality=93)
 print(a.cikti, os.path.getsize(a.cikti) // 1024, "KB")
