@@ -25,7 +25,7 @@ OYUNCU = {"p1": "#ff7a1a", "p2": "#7dff4a", "p3": "#a35cff"}          # balkabag
 SERIT_W = 640
 
 # kamera: varlik.py serit kamerasi ile ayni (z 2,6 m, 10,5 derece asagi), goruntu tam genislik 1920x1080
-KAP = {"y": 8.0, "w": 4.6, "h": 3.1, "kule": 0.45, "kiris": 0.45}     # acıklık 6,4 x 4,3 ~ panel orani 16:9
+KAP = {"y": 12.0, "w": 4.6, "h": 3.1, "kule": 0.45, "kiris": 0.45}     # acıklık 6,4 x 4,3 ~ panel orani 16:9
 YOL_W = 3.6
 
 
@@ -250,7 +250,7 @@ def zemin_ve_yol(rnd, oyuncu):
     o = nt.nodes.new("ShaderNodeOutputMaterial"); nt.links.new(em.outputs[0], o.inputs[0])
     g.data.materials.append(m)
     # yol: koyu mor doseme + REF-056'daki gibi isikli chevron basamaklar (bizde turuncu-mor)
-    yol = mat_jole("yol", lin(hex3("#2a1048")), emis=0.05, purluk=0.55)
+    yol = mat_duz("yol", lin(hex3("#2a1048")), 0.75, emis=0.08)
     yuvarlak_kutu("yol", (0, (0.5 + Y + 3) / 2, -0.2), (YOL_W, Y + 3 - 0.5, 0.4), yol, egim=0.12)
     chev_a = mat_emis("chev_a", lin(hex3("#ff7a1a")), 5.0)
     chev_b = mat_emis("chev_b", lin(hex3("#b45cff")), 4.0)
@@ -299,9 +299,9 @@ def zemin_ve_yol(rnd, oyuncu):
         x = s * rnd.uniform(YOL_W / 2 + 3 + yy * 0.2, 14 + yy * 0.9)
         mezar(x, yy, tas, fener)
         bpy.context.active_object.rotation_euler.y = rnd.uniform(-0.2, 0.2)
-    sis = [mat_sis("sis%d" % i, lin(hex3(c)), 0.9, 0.12) for i, c in enumerate(("#4dff9a", "#9a5cff", "#c7b8ff"))]
-    for i in range(160):
-        s = rnd.choice((-1, 1)); yy = rnd.uniform(0.5, 70)
+    sis = [mat_sis("sis%d" % i, lin(hex3(c)), 0.6, 0.06) for i, c in enumerate(("#4dff9a", "#9a5cff", "#c7b8ff"))]
+    for i in range(60):
+        s = rnd.choice((-1, 1)); yy = rnd.uniform(KAP["y"] + 2, 70)
         x = s * rnd.uniform(YOL_W / 2 + 0.5, YOL_W / 2 + 4 + yy * 0.9)
         bpy.ops.mesh.primitive_uv_sphere_add(radius=1, location=(x, yy, 0.1), segments=24, ring_count=12)
         o = bpy.context.active_object; rr = rnd.uniform(0.8, 2.2) * (1 + yy / 40)

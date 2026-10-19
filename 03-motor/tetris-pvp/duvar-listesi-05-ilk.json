@@ -1,0 +1,272 @@
+[
+ {
+  "tur": 1,
+  "p1": "pumpkin-v-stand",
+  "p2": "phantom-diagonal-curtsy",
+  "p3": "pumpkin-w-horse"
+ },
+ {
+  "tur": 1,
+  "p1": "bat-low-v-horse",
+  "p2": "candle-wide-reach-leg-out",
+  "p3": "bat-hips-curtsy"
+ },
+ {
+  "tur": 1,
+  "p1": "ghost-w-reach-curtsy",
+  "p2": "coffin-hands-head-goddess",
+  "p3": "ghost-v-t-leg-out"
+ },
+ {
+  "tur": 1,
+  "p1": "witch-cactus-leg-out",
+  "p2": "graveyard-chest-reach-side-tap",
+  "p3": "witch-reach-goddess"
+ },
+ {
+  "tur": 1,
+  "p1": "zombie-one-up-goddess",
+  "p2": "moonlight-v-soft-knee",
+  "p3": "zombie-diagonal-side-tap"
+ },
+ {
+  "tur": 1,
+  "p1": "skeleton-head-t-side-tap",
+  "p2": "potion-low-v-goddess",
+  "p3": "skeleton-wide-reach-soft-knee"
+ },
+ {
+  "tur": 1,
+  "p1": "mummy-t-soft-knee",
+  "p2": "lantern-w-reach-side-tap",
+  "p3": "mummy-hands-head-wide"
+ },
+ {
+  "tur": 1,
+  "p1": "spider-half-cactus-wide",
+  "p2": "cobweb-cactus-soft-knee",
+  "p3": "spider-chest-reach-knee-up"
+ },
+ {
+  "tur": 1,
+  "p1": "vampire-flex-reach-knee-up",
+  "p2": "banshee-one-up-wide",
+  "p3": "vampire-v-tree"
+ },
+ {
+  "tur": 1,
+  "p1": "goblin-flex-tree",
+  "p2": "ghoul-head-t-knee-up",
+  "p3": "goblin-low-v-stand"
+ },
+ {
+  "tur": 1,
+  "p1": "cauldron-elbows-down-wide",
+  "p2": "spell-t-tree",
+  "p3": "cauldron-w-reach-knee-up"
+ },
+ {
+  "tur": 1,
+  "p1": "broom-w-knee-up",
+  "p2": "owl-half-cactus-stand",
+  "p3": "broom-cactus-tree"
+ },
+ {
+  "tur": 1,
+  "p1": "raven-hips-tree",
+  "p2": "black-cat-flex-reach-horse",
+  "p3": "raven-one-up-stand"
+ },
+ {
+  "tur": 1,
+  "p1": "werewolf-v-t-stand",
+  "p2": "scarecrow-flex-curtsy",
+  "p3": "werewolf-head-t-horse"
+ },
+ {
+  "tur": 1,
+  "p1": "haunted-reach-horse",
+  "p2": "tombstone-elbows-down-leg-out",
+  "p3": "haunted-t-curtsy"
+ },
+ {
+  "tur": 2,
+  "p1": "spider-lunge-arms-up",
+  "p2": "cobweb-lunge-arms-back",
+  "p3": "spider-wide-lunge-v"
+ },
+ {
+  "tur": 2,
+  "p1": "vampire-kneel-lunge-archer",
+  "p2": "banshee-deep-goddess-v",
+  "p3": "vampire-lunge-prayer"
+ },
+ {
+  "tur": 2,
+  "p1": "goblin-kneel-arms-forward",
+  "p2": "ghoul-kneel-diagonal-reach",
+  "p3": "goblin-kneel-lunge-arms-up"
+ },
+ {
+  "tur": 2,
+  "p1": "cauldron-side-lunge-v",
+  "p2": "spell-stork-prayer",
+  "p3": "cauldron-kneel-archer"
+ },
+ {
+  "tur": 2,
+  "p1": "broom-stork-arms-back",
+  "p2": "owl-wide-lunge-t",
+  "p3": "broom-side-lunge-cactus"
+ },
+ {
+  "tur": 2,
+  "p1": "raven-knee-raise-airplane",
+  "p2": "black-cat-split-stance-archer",
+  "p3": "raven-stork-hands-hips"
+ },
+ {
+  "tur": 2,
+  "p1": "werewolf-split-stance-diagonal-reach",
+  "p2": "scarecrow-heel-sit-arms-forward",
+  "p3": "werewolf-knee-raise-arms-back"
+ },
+ {
+  "tur": 2,
+  "p1": "haunted-deep-goddess-t",
+  "p2": "tombstone-side-lunge-reach",
+  "p3": "haunted-split-stance-airplane"
+ },
+ {
+  "tur": 2,
+  "p1": "phantom-lunge-arms-forward",
+  "p2": "pumpkin-kneel-lunge-arms-down",
+  "p3": "phantom-deep-goddess-reach"
+ },
+ {
+  "tur": 2,
+  "p1": "candle-kneel-lunge-hands-hips",
+  "p2": "bat-kneel-prayer",
+  "p3": "candle-warrior-arms-down"
+ },
+ {
+  "tur": 2,
+  "p1": "coffin-wide-lunge-cactus",
+  "p2": "ghost-chair-arms-up",
+  "p3": "coffin-lunge-archer"
+ },
+ {
+  "tur": 2,
+  "p1": "graveyard-stork-diagonal-reach",
+  "p2": "witch-deep-goddess-w",
+  "p3": "graveyard-kneel-lunge-arms-forward"
+ },
+ {
+  "tur": 2,
+  "p1": "moonlight-knee-raise-arms-down",
+  "p2": "zombie-knee-raise-arms-forward",
+  "p3": "moonlight-wide-lunge-w"
+ },
+ {
+  "tur": 2,
+  "p1": "potion-side-lunge-w",
+  "p2": "skeleton-split-stance-hands-hips",
+  "p3": "potion-stork-airplane"
+ },
+ {
+  "tur": 2,
+  "p1": "lantern-heel-sit-arms-up",
+  "p2": "mummy-heel-sit-arms-back",
+  "p3": "lantern-knee-raise-diagonal-reach"
+ },
+ {
+  "tur": 3,
+  "p1": "werewolf-seated-staff-arms-up",
+  "p2": "scarecrow-crab-kick",
+  "p3": "werewolf-seated-straddle-t"
+ },
+ {
+  "tur": 3,
+  "p1": "haunted-seated-staff-hands-back",
+  "p2": "tombstone-lying-arms-up",
+  "p3": "haunted-seated-straddle-lean"
+ },
+ {
+  "tur": 3,
+  "p1": "phantom-boat-arms-forward",
+  "p2": "pumpkin-lying-knees-tuck",
+  "p3": "phantom-cross-legged-cactus"
+ },
+ {
+  "tur": 3,
+  "p1": "candle-boat-arms-up",
+  "p2": "bat-dead-bug-reach",
+  "p3": "candle-cross-legged-v"
+ },
+ {
+  "tur": 3,
+  "p1": "coffin-tabletop",
+  "p2": "ghost-child-arms-forward",
+  "p3": "coffin-low-squat-prayer"
+ },
+ {
+  "tur": 3,
+  "p1": "graveyard-bird-dog",
+  "p2": "witch-child-arms-back",
+  "p3": "graveyard-low-squat-reach"
+ },
+ {
+  "tur": 3,
+  "p1": "moonlight-tabletop-leg-back",
+  "p2": "zombie-cobra",
+  "p3": "moonlight-frog-hands-floor"
+ },
+ {
+  "tur": 3,
+  "p1": "potion-high-plank",
+  "p2": "skeleton-superman-lite",
+  "p3": "potion-standing-split-lite"
+ },
+ {
+  "tur": 3,
+  "p1": "lantern-forearm-plank",
+  "p2": "mummy-side-kneel-reach",
+  "p3": "lantern-warrior-three-arms-up"
+ },
+ {
+  "tur": 3,
+  "p1": "cobweb-plank-leg-lift",
+  "p2": "spider-kneel-v",
+  "p3": "cobweb-dancer-lite"
+ },
+ {
+  "tur": 3,
+  "p1": "banshee-knee-plank",
+  "p2": "vampire-kneel-w",
+  "p3": "banshee-half-moon-lite"
+ },
+ {
+  "tur": 3,
+  "p1": "ghoul-glute-bridge",
+  "p2": "goblin-kneel-cactus",
+  "p3": "ghoul-side-lunge-fold"
+ },
+ {
+  "tur": 3,
+  "p1": "spell-bridge-arms-up",
+  "p2": "cauldron-kneel-hands-head",
+  "p3": "spell-pistol-prep"
+ },
+ {
+  "tur": 3,
+  "p1": "owl-bridge-leg-up",
+  "p2": "broom-kneel-one-up",
+  "p3": "owl-reverse-tabletop"
+ },
+ {
+  "tur": 3,
+  "p1": "black-cat-crab",
+  "p2": "raven-seated-straddle-reach",
+  "p3": "black-cat-seated-twist-reach"
+ }
+]
