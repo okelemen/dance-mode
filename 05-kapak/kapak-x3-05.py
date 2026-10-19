@@ -15,8 +15,9 @@ from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont, ImageEnhan
 
 KOK = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 p = argparse.ArgumentParser()
-p.add_argument("--duzen", required=True, choices=["1", "2"])
-p.add_argument("--sol", required=True); p.add_argument("--orta", required=True)
+p.add_argument("--duzen", required=True, choices=["1", "2", "ref"])
+p.add_argument("--grup", default="a")          # duzen ref: kapak-grup-<x>.png
+p.add_argument("--sol", default="spider-half-cactus-wide"); p.add_argument("--orta", default="vampire-v-tree")
 p.add_argument("--varlik", default=os.path.join(KOK, "03-motor", "tetris-pvp", "varlik-05"))
 p.add_argument("--oge", default=os.path.join(KOK, "03-motor", "tetris-pvp", "varlik-05-kapak"))
 p.add_argument("--cikti", required=True)
@@ -47,10 +48,18 @@ def maske(ad, ayna=False):
 POZ = [(a.sol, False), (a.orta, False), (a.sol, True)]        # P1 | P2 | P3: yanlar ayna (simetri, §14c)
 
 # ---------------------------------------------------------------- arka plan: videonun sahnesi (gok + 3 serit)
-im = Image.open(os.path.join(V, "gok.png")).convert("RGBA").resize((W, H), Image.LANCZOS)
-for i in range(3):
-    s = Image.open(os.path.join(V, f"serit-p{i + 1}.png")).convert("RGBA").resize((int(LW) + 1, H), Image.LANCZOS)
-    im.alpha_composite(s, (int(i * LW), 0))
+REF = a.duzen == "ref"
+if REF:
+    # kullanici 19 Eki 2026: "referans kanalin kapagi ... o ne yaptiysa aynisini yap ama siluetin hareketleri farkli olsun" ->
+    # REF-056 kapak duzeni: tek kapi SAGDA (kamera sola kayik Blender sahnesi), onde 3 kisilik TEK grup siluet, kapida ayni grubun kucugu
+    im = Image.open(os.path.join(a.oge, "kapak-gok.png")).convert("RGBA")
+    im.alpha_composite(Image.open(os.path.join(a.oge, "kapak-serit.png")).convert("RGBA"))
+    YK = json.load(open(os.path.join(a.oge, "yerlesim.json"), encoding="utf-8"))
+else:
+    im = Image.open(os.path.join(V, "gok.png")).convert("RGBA").resize((W, H), Image.LANCZOS)
+    for i in range(3):
+        s = Image.open(os.path.join(V, f"serit-p{i + 1}.png")).convert("RGBA").resize((int(LW) + 1, H), Image.LANCZOS)
+        im.alpha_composite(s, (int(i * LW), 0))
 Y = json.load(open(os.path.join(V, "yerlesim.json"), encoding="utf-8"))
 SW = Y.get("yol", {}).get("serit_w", 640)
 ORAN = 1100 / 904
@@ -82,9 +91,24 @@ def kapi_kutusu(i):
 if a.duzen == "2":
     for i, (ad, ay) in enumerate(POZ):
         kart(i, kapi_kutusu(i), ad, ay)
+GRUP = None
+if REF:
+    GRUP = Image.open(os.path.join(a.oge, f"kapak-grup-{a.grup}.png")).getchannel("A")
+    GRUP = GRUP.crop(GRUP.getbbox())
+    ac = YK["kapak_aciklik"]; aw = ac[2] - ac[0]; ah = ac[3] - ac[1]
+    pw = aw; ph = pw / ORAN
+    if ph > ah:
+        ph = ah; pw = ph * ORAN
+    x0 = int(ac[0] + (aw - pw) / 2); y0 = int(ac[3] - ph); pw, ph = int(pw), int(ph)
+    pn = Image.open(os.path.join(V, "panel-p1.png")).convert("RGBA").resize((pw, ph), Image.LANCZOS)
+    gs = min(ph * 0.82 / GRUP.height, pw * 0.86 / GRUP.width)
+    gm = GRUP.resize((int(GRUP.width * gs), int(GRUP.height * gs)), Image.LANCZOS)
+    mm = Image.new("L", (pw, ph)); mm.paste(gm, ((pw - gm.width) // 2, ph - gm.height - int(ph * 0.04)))
+    pn.alpha_composite(Image.merge("RGBA", [Image.new("L", (pw, ph), c) for c in (8, 4, 16)] + [mm]))
+    im.alpha_composite(pn, (x0, y0))
 # ampul isiltisi
 gl = Image.new("RGBA", (W, H)); dg = ImageDraw.Draw(gl)
-for i in range(3):
+for i in range(0 if REF else 3):            # ref duzeninde videonun 3 serit ampulu yok (deneme 1: solda bos ampul cercevesi kaldi)
     for q in Y.get(f"ampul_p{i + 1}", []):
         x = i * LW + q[0] * LW / SW; y = q[1] * H / 1080
         dg.ellipse((x - 5, y - 5, x + 5, y + 5), fill=(255, 210, 150, 230))
@@ -106,11 +130,14 @@ def yarasa(x, y, s, kanat):
 
 
 # deneme 1: duzen 2'de yarasalar arkadaki kartlarin ustune biniyordu -> kart kutularinin disinda kalan gok/kenar alanlari
-kartlar = [kapi_kutusu(i) for i in range(3)]
+kartlar = ([(YK["kapak_aciklik"][0], YK["kapak_aciklik"][1], YK["kapak_aciklik"][2] - YK["kapak_aciklik"][0], YK["kapak_aciklik"][3] - YK["kapak_aciklik"][1])]
+           if REF else [kapi_kutusu(i) for i in range(3)])
 konan = 0
 while konan < 14:
     x, y, s_ = rnd.uniform(10, 1270), rnd.uniform(150, 340), rnd.uniform(22, 46)
     if any(k[0] - s_ < x < k[0] + k[2] + s_ and k[1] - s_ < y < k[1] + k[3] + s_ for k in kartlar):
+        continue
+    if REF and not (x > 960 or x < 260):           # ref: yarasalar referansin etiket yerlerinde (sag ust "Full Body", sol "x3 player")
         continue
     yarasa(x, y, s_, rnd.random() < 0.5); konan += 1
 im.alpha_composite(fx)
@@ -130,8 +157,12 @@ def oge(ad, merkez_x, alt_y, gen):
     im.alpha_composite(o, (int(merkez_x - o.width / 2), int(alt_y - o.height)))
 
 
-oge("kapak-kabak.png", 120, 712, 210)
-oge("kapak-kabak-kume.png", 1150, 712, 270)
+if REF:   # referansin "x3 player" (sol orta-alt) ve NEW! (sag alt) yerleri
+    oge("kapak-kabak.png", 165, 640, 190)
+    oge("kapak-kabak-kume.png", 1120, 712, 290)
+else:
+    oge("kapak-kabak.png", 120, 712, 210)
+    oge("kapak-kabak-kume.png", 1150, 712, 270)
 
 # ---------------------------------------------------------------- baslik + HALLOWEEN (ayri yazi)
 renk = gecis(6, (255, 122, 26), (255, 205, 60)) + [(255, 255, 255)] + gecis(4, (163, 92, 255), (215, 160, 255))
@@ -195,6 +226,20 @@ if a.duzen == "2":
     im.alpha_composite(Image.merge("RGBA", [Image.new("L", (W, H), c) for c in (6, 4, 14)] + [mk.filter(ImageFilter.GaussianBlur(0.7))]))
     print("siluet kutusu", mk.getbbox(), "yazi alti", yazi_alt)
 
+if REF:
+    ust = yazi_alt + KONTUR + 6
+    hh = H - 4 - ust; s_ = hh / GRUP.height
+    if GRUP.width * s_ > 720:
+        s_ = 720 / GRUP.width
+    gm = GRUP.resize((int(GRUP.width * s_), int(GRUP.height * s_)), Image.LANCZOS)
+    mk = Image.new("L", (W, H)); mk.paste(gm, (int(470 - gm.width / 2), H - 4 - gm.height))
+    mk = mk.point(lambda v: 255 if v > 110 else 0).filter(ImageFilter.MaxFilter(3)).filter(ImageFilter.MinFilter(3))
+    kontur = mk.filter(ImageFilter.MaxFilter(KONTUR))
+    isilti = kontur.filter(ImageFilter.MaxFilter(9)).filter(ImageFilter.GaussianBlur(16))
+    im.alpha_composite(Image.merge("RGBA", [Image.new("L", (W, H), c) for c in (255, 200, 140)] + [isilti.point(lambda v: int(v * 0.5))]))
+    im.alpha_composite(Image.merge("RGBA", [Image.new("L", (W, H), 255)] * 3 + [kontur]))
+    im.alpha_composite(Image.merge("RGBA", [Image.new("L", (W, H), c) for c in (6, 4, 14)] + [mk.filter(ImageFilter.GaussianBlur(0.7))]))
+    print("grup siluet kutusu", mk.getbbox())
 im.alpha_composite(yz, (int(W / 2 - yz.width / 2), by))
 im.alpha_composite(hw, (int(W / 2 - hw.width / 2), hy))
 im.convert("RGB").save(a.cikti, quality=93)
