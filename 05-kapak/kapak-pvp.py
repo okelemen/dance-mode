@@ -12,8 +12,8 @@ import argparse, math, os
 from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont, ImageEnhance
 
 KOK = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-V = os.path.join(KOK, "03-motor", "tetris-pvp", "varlik")
 p = argparse.ArgumentParser()
+p.add_argument("--tema", default="02", choices=["02", "03"])   # 03: REF-054, mor/sari, galaksi, jole VS
 p.add_argument("--p1", required=True); p.add_argument("--p2", required=True)
 p.add_argument("--ayna1", action="store_true"); p.add_argument("--ayna2", action="store_true")
 p.add_argument("--baslik", default="TETRIS MODE")
@@ -21,6 +21,8 @@ p.add_argument("--boy1", type=float, default=540); p.add_argument("--boy2", type
 p.add_argument("--gen1", type=float, default=600); p.add_argument("--gen2", type=float, default=600)
 p.add_argument("--cikti", required=True)
 a = p.parse_args()
+T3 = a.tema == "03"
+V = os.path.join(KOK, "03-motor", "tetris-pvp", "varlik-03" if T3 else "varlik")
 W, H = 1280, 720
 FONT = os.path.join(KOK, "05-kapak", "fontlar", "TitanOne.ttf")
 yfont = lambda boy: ImageFont.truetype(FONT, boy)
@@ -37,6 +39,8 @@ for i, (ad, ac) in enumerate((("panel-p1.png", Y["aciklik_p1"]), ("panel-p2.png"
     x0, y0, x1, y1 = ac[0] * sx + i * W / 2, ac[1] * sy, ac[2] * sx + i * W / 2, ac[3] * sy
     pw = x1 - x0; ph = pw / (1100 / 904)
     pn = Image.open(os.path.join(V, ad)).convert("RGBA").resize((int(pw), int(ph)), Image.LANCZOS)
+    if T3:   # REF-054 kapaginda kapi icinden isin patlamasi + arkadaki gok goruluyor: panel yari saydam
+        pn.putalpha(pn.getchannel("A").point(lambda v: int(v * 0.38)))
     im.alpha_composite(pn, (int(x0), int(y1 - ph)))
 # ampul isiltisi (videodaki kayan isik)
 gl = Image.new("RGBA", (W, H)); dg = ImageDraw.Draw(gl)
@@ -48,30 +52,33 @@ im.alpha_composite(gl.filter(ImageFilter.GaussianBlur(3)))
 im.alpha_composite(gl)
 # deneme 1 olcumu: referanstan koyu (0,64 / 0,78), az renkli (0,38 / 0,57), az ayrintili (0,10 / 0,26) -> kisma katmani
 # kaldirildi, arka plan canlandirildi, goge videodaki gibi havai fisek + huzme + parilti (REF-053'te gok denizanasiyla dolu)
-im = ImageEnhance.Color(im).enhance(1.35)
-im = ImageEnhance.Brightness(im).enhance(1.12)
+im = ImageEnhance.Color(im).enhance(1.0 if T3 else 1.35)   # 3. video: limon sarisi zaten doygun, yazi/siluet yutulmasin
+im = ImageEnhance.Brightness(im).enhance(0.9 if T3 else 1.12)
 import random
 rnd = random.Random(53)
 fx = Image.new("RGBA", (W, H)); df = ImageDraw.Draw(fx)
-for bx, ang, renk in ((0.06, -0.25, (90, 255, 240)), (0.5, 0.0, (255, 220, 120)), (0.94, 0.25, (140, 255, 160))):
+for bx, ang, renk in (((0.06, -0.25, (190, 120, 255)), (0.5, 0.0, (255, 250, 140)), (0.94, 0.25, (230, 255, 110))) if T3 else
+                      ((0.06, -0.25, (90, 255, 240)), (0.5, 0.0, (255, 220, 120)), (0.94, 0.25, (140, 255, 160)))):
     x0, y0, L = W * bx, H * 0.95, H * 1.2
     ux, uy = math.sin(ang), -math.cos(ang)
     df.polygon([(x0, y0), (x0 + ux * L - uy * 60, y0 + uy * L + ux * 60), (x0 + ux * L + uy * 60, y0 + uy * L - ux * 60)], fill=renk + (60,))
 for _ in range(7):                                            # havai fisek patlamalari (gokte, kapilarin ustunde ve ortada)
     cx_, cy_ = rnd.choice([rnd.uniform(560, 720), rnd.uniform(20, 1260)]), rnd.uniform(150, 330)
-    renk = rnd.choice([(255, 215, 90), (90, 255, 230), (150, 255, 140), (255, 255, 255), (255, 160, 60)])
+    renk = rnd.choice([(245, 255, 61), (180, 92, 255), (255, 122, 230), (255, 255, 255), (143, 180, 255)] if T3 else
+                      [(255, 215, 90), (90, 255, 230), (150, 255, 140), (255, 255, 255), (255, 160, 60)])
     R = rnd.uniform(40, 80)
     for i in range(28):
         an = i / 28 * 2 * math.pi; rr = R * rnd.uniform(0.75, 1.05)
         df.line([(cx_ + math.cos(an) * rr * 0.35, cy_ + math.sin(an) * rr * 0.35), (cx_ + math.cos(an) * rr, cy_ + math.sin(an) * rr)], fill=renk + (230,), width=3)
 for _ in range(26):                                           # jole isik kureleri (parlak ust, renkli govde)
     x, y, r = rnd.uniform(0, W), rnd.uniform(140, H * 0.7), rnd.uniform(8, 26)
-    renk = rnd.choice([(90, 255, 220), (170, 255, 120), (255, 210, 110), (120, 220, 255)])
+    renk = rnd.choice([(180, 92, 255), (245, 255, 61), (255, 122, 230), (143, 180, 255)] if T3 else
+                      [(90, 255, 220), (170, 255, 120), (255, 210, 110), (120, 220, 255)])
     df.ellipse((x - r, y - r, x + r, y + r), fill=renk + (150,), outline=(255, 255, 255, 200), width=2)
     df.ellipse((x - r * 0.55, y - r * 0.7, x - r * 0.05, y - r * 0.25), fill=(255, 255, 255, 210))
 for _ in range(10):                                           # kucuk havai fisekler
     cx_, cy_ = rnd.uniform(0, W), rnd.uniform(160, 420); R = rnd.uniform(16, 32)
-    renk = rnd.choice([(255, 230, 120), (120, 255, 230), (255, 255, 255)])
+    renk = rnd.choice([(245, 255, 61), (200, 140, 255), (255, 255, 255)] if T3 else [(255, 230, 120), (120, 255, 230), (255, 255, 255)])
     for i in range(16):
         an = i / 16 * 2 * math.pi
         df.line([(cx_ + math.cos(an) * R * 0.3, cy_ + math.sin(an) * R * 0.3), (cx_ + math.cos(an) * R, cy_ + math.sin(an) * R)], fill=renk + (220,), width=2)
@@ -123,12 +130,45 @@ def siluetleri_ciz(maskeler):
     mk = mk.filter(ImageFilter.MaxFilter(3)).filter(ImageFilter.MinFilter(3))
     kontur = mk.filter(ImageFilter.MaxFilter(KONTUR))
     isilti = kontur.filter(ImageFilter.MaxFilter(9)).filter(ImageFilter.GaussianBlur(16))
-    im.alpha_composite(Image.merge("RGBA", [Image.new("L", (W, H), c) for c in (255, 236, 160)] + [isilti.point(lambda v: int(v * 0.55))]))
+    # 3. video: limon sarisi zeminde beyaz kontur kayboluyordu -> konturun disinda koyu mor hale (beyaz kontur ayrisir)
+    hale_renk, hale_guc = ((40, 8, 80), 0.85) if T3 else ((255, 236, 160), 0.55)
+    im.alpha_composite(Image.merge("RGBA", [Image.new("L", (W, H), c) for c in hale_renk] + [isilti.point(lambda v: int(v * hale_guc))]))
     im.alpha_composite(Image.merge("RGBA", [Image.new("L", (W, H), 255)] * 3 + [kontur]))
     im.alpha_composite(Image.merge("RGBA", [Image.new("L", (W, H), c) for c in (6, 4, 14)] + [mk.filter(ImageFilter.GaussianBlur(0.7))]))
 
 
 # ---------------------------------------------------------------- VS rozeti (bizim: camgobegi simsek + altin harf)
+def vs_jole(merkez, r=150):
+    """REF-054 kapagindaki VS: parlak yesil jole harf + arkasinda sari simsek + egik halka ve jole kabarciklar (bizim cizim)"""
+    k = Image.new("RGBA", (int(r * 3.4), int(r * 3.4))); d = ImageDraw.Draw(k); c = (k.width / 2, k.height / 2)
+    sm = [(c[0] + 40, c[1] - r * 1.35), (c[0] - 55, c[1] + 5), (c[0] + 5, c[1] + 2), (c[0] - 45, c[1] + r * 1.35),
+          (c[0] + 70, c[1] - 20), (c[0] + 8, c[1] - 16)]
+    d.polygon(sm, fill=(245, 255, 61), outline=(255, 255, 255), width=5)
+    halka = Image.new("RGBA", k.size); dh = ImageDraw.Draw(halka)
+    dh.ellipse((c[0] - r * 1.45, c[1] - r * 0.42, c[0] + r * 1.45, c[1] + r * 0.42), outline=(150, 255, 60), width=9)
+    k.alpha_composite(halka.rotate(-12, Image.BICUBIC, center=c))
+    import random as _r
+    rr_ = _r.Random(11)
+    for _ in range(9):
+        an = rr_.uniform(0, 2 * math.pi); uz = r * rr_.uniform(1.1, 1.5); br = rr_.uniform(9, 20)
+        x, y = c[0] + math.cos(an) * uz, c[1] + math.sin(an) * uz * 0.6
+        d.ellipse((x - br, y - br, x + br, y + br), fill=(150, 240, 50), outline=(230, 255, 180), width=2)
+        d.ellipse((x - br * 0.5, y - br * 0.65, x - br * 0.05, y - br * 0.25), fill=(255, 255, 255))
+    g = k.getchannel("A").filter(ImageFilter.MaxFilter(9)).filter(ImageFilter.GaussianBlur(16))
+    gl = Image.merge("RGBA", [Image.new("L", k.size, c_) for c_ in (200, 255, 120)] + [g.point(lambda v: int(v * 0.6))])
+    dolu = k.getchannel("A")
+    gl.alpha_composite(k); k = gl
+    kat = Image.new("RGBA", (W, H)); ox, oy = int(merkez[0] - k.width / 2), int(merkez[1] - k.height / 2)
+    kat.alpha_composite(k, (ox, oy))
+    engel = Image.new("L", (W, H)); engel.paste(dolu.point(lambda v: 255 if v > 60 else 0), (ox, oy))
+    yz2 = parlak_yazi("VS", yfont(210), [(190, 255, 70), (90, 220, 40)], kontur=12, derinlik=16, dis=(20, 70, 10),
+                      parlama=(220, 255, 140), zipla=0, don=7)
+    tx, ty = int(merkez[0] - yz2.width / 2), int(merkez[1] - yz2.height / 2 - 6)
+    kat.alpha_composite(yz2, (tx, ty))
+    ym = Image.new("L", (W, H)); ym.paste(yz2.getchannel("A").point(lambda v: 255 if v > 120 else 0), (tx, ty))
+    return kat, ImageChops.lighter(engel, ym)
+
+
 def vs(merkez, r=150):
     """deneme 3: VS buyuk ve en onde (kullanici: "VS yazisini biraz daha buyutelim ... ön planda olsun"),
     atesli: altin-turuncu alev patlamasi + kivilcimlar + camgobegi simsekler (referanstaki kirmizi atesin bizim tonu)"""
@@ -225,13 +265,20 @@ def parlak_yazi(metin, f, renkler, kontur=9, derinlik=12, dis=(30, 0, 70), parla
 def gecis(n, c0, c1):          # kelime ici soldan saga renk gecisi (referanstaki gibi kelime basina tek degrade)
     return [tuple(int(c0[j] + (c1[j] - c0[j]) * (i / max(1, n - 1))) for j in range(3)) for i in range(n)]
 w1, w2 = a.baslik.split(" ", 1)
-renk = gecis(len(w1), (40, 230, 230), (150, 255, 40)) + [(255, 255, 255)] + gecis(len(w2), (255, 225, 40), (255, 100, 20))
-yz = parlak_yazi(a.baslik, yfont(160), renk, kontur=10, derinlik=15, dis=(20, 10, 60), parlama=(255, 236, 150), zipla=7, don=4)
+renk = (gecis(len(w1), (150, 70, 255), (255, 110, 235)) + [(255, 255, 255)] + gecis(len(w2), (255, 250, 70), (190, 255, 40)) if T3 else
+        gecis(len(w1), (40, 230, 230), (150, 255, 40)) + [(255, 255, 255)] + gecis(len(w2), (255, 225, 40), (255, 100, 20)))
+if T3:
+    # kullanici 19 Eki 2026: "ayni yazi fontunda kalsin ama harfler asagida veya yukarida olmasin, normal duz olsun ... sigsin,
+    # okunacak, dikkat cekecek" -> Titan One kalir; ziplama/donme 0, tek satir tam genislik, renkler video ile uyumlu
+    renk = [(178, 92, 255)] * len(w1) + [(255, 255, 255)] + [(245, 255, 61)] * len(w2)
+    yz = parlak_yazi(a.baslik, yfont(160), renk, kontur=10, derinlik=15, dis=(45, 8, 95), parlama=(200, 120, 255), zipla=0, don=0)
+else:
+    yz = parlak_yazi(a.baslik, yfont(160), renk, kontur=10, derinlik=15, dis=(20, 10, 60), parlama=(255, 236, 150), zipla=7, don=4)
 if yz.width > 1240:
     yz = yz.resize((1240, int(yz.height * 1240 / yz.width)), Image.LANCZOS)
 by = int(96 - yz.height / 2)
 baslik_alt = by + int(yz.getchannel("A").point(lambda v: 255 if v > 200 else 0).getbbox()[3])
-vs_kat, vs_engel = vs((640, 455))
+vs_kat, vs_engel = (vs_jole if T3 else vs)((640, 455))
 m1 = yerlestir(a.p1, a.ayna1, 310, a.boy1, a.gen1, vs_engel, -1, baslik_alt + 4)
 m2 = yerlestir(a.p2, a.ayna2, 970, a.boy2, a.gen2, vs_engel, +1, baslik_alt + 4)
 print("siluet kutulari:", m1.getbbox(), m2.getbbox(), "baslik alti", baslik_alt)
