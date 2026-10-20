@@ -358,8 +358,8 @@ def aurora(rnd):
     # deneme 1: 7 perde gogun tamamini dikey cizgiyle doldurdu (yagmur perdesi gibi) -> 4 perde, yalniz ust yari, yumusak
     for i in range(4):
         x0, y0 = -36 + i * 24 + rnd.uniform(-6, 6), rnd.uniform(46, 54)
-        bpy.ops.mesh.primitive_plane_add(size=1, location=(x0, y0, 31 + rnd.uniform(-2, 3)), rotation=(math.pi / 2, 0, rnd.uniform(-0.35, 0.35)))
-        p = bpy.context.active_object; p.scale = (rnd.uniform(34, 48), rnd.uniform(9, 13), 1)
+        bpy.ops.mesh.primitive_plane_add(size=1, location=(x0, y0, 22.5 + rnd.uniform(-1.5, 2)), rotation=(math.pi / 2, 0, rnd.uniform(-0.35, 0.35)))
+        p = bpy.context.active_object; p.scale = (rnd.uniform(34, 48), rnd.uniform(8, 10), 1)      # deneme 2: z 31 kadraj ustune kacti
         bpy.ops.object.mode_set(mode="EDIT"); bpy.ops.mesh.subdivide(number_cuts=40); bpy.ops.object.mode_set(mode="OBJECT")
         faz, gen = rnd.uniform(0, 6.28), rnd.uniform(1.5, 3.2)
         for v in p.data.vertices:                      # perde dalgasi: yerel x boyunca derinlik + yukseklikte kivrim
@@ -387,8 +387,8 @@ def aurora(rnd):
         m.blend_method = "BLEND"
         p.data.materials.append(m)
     # karli buzlu daglar: ufuk boyunca iki sira sivri koni kumesi (on sira daha acik/buz mavisi)
-    kar = mat_jole("kar", lin(hex3("#eaf4ff")), emis=0.10, purluk=0.35)
-    buz = mat_jole("buz", lin(hex3("#7fb8ff")), emis=0.06, purluk=0.25)
+    kar = mat_jole("kar", lin(hex3("#f2f8ff")), emis=0.45, purluk=0.25)
+    buz = mat_jole("buz", lin(hex3("#8cc8ff")), emis=0.35, purluk=0.18)
     for sira, (yy, zb, boy, mat) in enumerate(((44, -1.0, 14, buz), (36, -1.5, 9, kar))):
         x = -70.0
         while x < 70:
@@ -396,7 +396,6 @@ def aurora(rnd):
             bpy.ops.mesh.primitive_cone_add(vertices=rnd.choice([5, 6, 7]), radius1=r, depth=h, location=(x, yy + rnd.uniform(-2, 2), zb + h / 2),
                                             rotation=(0, 0, rnd.uniform(0, 3.14)))
             c = bpy.context.active_object; c.data.materials.append(mat)
-            kure((x, yy - 0.5, zb + h * 0.82), r * 0.22, kar, sub=2)               # karli tepe parlamasi
             x += r * rnd.uniform(0.9, 1.4)
     # deniz: koyu mavi parlak yuzey (gok ve isik yansir) + yuzen buz kutleleri
     bpy.ops.mesh.primitive_plane_add(size=1, location=(0, 22, -1.6)); d = bpy.context.active_object; d.scale = (160, 50, 1)
@@ -404,9 +403,6 @@ def aurora(rnd):
     b.inputs["Base Color"].default_value = (*lin(hex3("#123a8a")), 1); b.inputs["Roughness"].default_value = 0.08
     b.inputs["Metallic"].default_value = 0.3
     d.data.materials.append(dm)
-    for i in range(26):
-        x = rnd.choice([-1, 1]) * rnd.uniform(9, 45); y = rnd.uniform(14, 34); s_ = rnd.uniform(0.6, 2.2)
-        yuvarlak_kutu("buzkutle", (x, y, -1.4), (s_ * 2.2, s_ * 1.6, s_ * 0.9), rnd.choice([kar, buz]), egim=0.25 * s_)
     isik("SUN", (0, 0, 30), 2.2, lin(hex3("#d6e4ff")), yon=(8, 40, 0))
 
 
