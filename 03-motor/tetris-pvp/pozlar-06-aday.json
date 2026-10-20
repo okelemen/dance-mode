@@ -1,0 +1,4425 @@
+{
+ "_not": "TETRIS MODE PVP 6. video ADAY (REF-057) poz tanimlari. Acilar EKRAN duzleminde (pozlar.js dili): 0 asagi, 90 ekran-sag, 180 yukari, -90 ekran-sol. Kollar [ust kol, on kol], bacaklar [uyluk, baldir]. sol*/sag* = KARAKTERIN solu/sagi; karakter kameraya donukken sol = ekran SAGI. yon: on (kameraya donuk) | sag (profil, yuzu ekran sagina). govde: kalcadan boyna aci, bas: govdeye ek aci. Mixamo govdesi (siluet-govde.fbx) bu acilarla bukulur, duz siyah maske cikar (varlik.py).",
+ "pozlar": {
+  "aurora-crescent-arms-wide": {
+   "ad": "Aurora Crescent Arms Wide",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    120,
+    120
+   ],
+   "sagKol": [
+    -120,
+    -120
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    -38,
+    -38
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "aurora-tree-arms-crown": {
+   "ad": "Aurora Tree Arms Crown",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    120
+   ],
+   "solKol": [
+    150,
+    -120
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "aurora-airplane-lean-back-arms": {
+   "ad": "Aurora Airplane Lean Back Arms",
+   "yon": "sag",
+   "govde": 150,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -40
+   ],
+   "sagKol": [
+    -38,
+    -38
+   ],
+   "solBacak": [
+    60,
+    -5
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "aurora-half-moon-side-reach": {
+   "ad": "Aurora Half Moon Side Reach",
+   "yon": "on",
+   "govde": 205,
+   "bas": 0,
+   "sagKol": [
+    -10,
+    -10
+   ],
+   "solKol": [
+    160,
+    130
+   ],
+   "sagBacak": [
+    -8,
+    -6
+   ],
+   "solBacak": [
+    10,
+    10
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "aurora-standing-hug-knee": {
+   "ad": "Aurora Standing Hug Knee",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    60,
+    -40
+   ],
+   "sagKol": [
+    58,
+    -42
+   ],
+   "solBacak": [
+    110,
+    -30
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "aurora-victory-lunge-side": {
+   "ad": "Aurora Victory Lunge Side",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -60,
+    -5
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "aurora-gate-reach-up": {
+   "ad": "Aurora Gate Reach Up",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    170,
+    170
+   ],
+   "sagKol": [
+    168,
+    168
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    45,
+    45
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "aurora-dancer-arms-fan": {
+   "ad": "Aurora Dancer Arms Fan",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -120,
+    -60
+   ],
+   "solKol": [
+    120,
+    60
+   ],
+   "sagBacak": [
+    -10,
+    10
+   ],
+   "solBacak": [
+    70,
+    -110
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "aurora-heel-raise-reach-forward": {
+   "ad": "Aurora Heel Raise Reach Forward",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    110,
+    120
+   ],
+   "sagKol": [
+    108,
+    118
+   ],
+   "solBacak": [
+    -6,
+    -6
+   ],
+   "sagBacak": [
+    -8,
+    -8
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "aurora-side-step-reach-diagonal": {
+   "ad": "Aurora Side Step Reach Diagonal",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -160,
+    -165
+   ],
+   "solKol": [
+    40,
+    20
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "aurora-kneeling-prayer-up": {
+   "ad": "Aurora Kneeling Prayer Up",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    176,
+    176
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "aurora-wide-stance-elbow-frame": {
+   "ad": "Aurora Wide Stance Elbow Frame",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -60,
+    170
+   ],
+   "solKol": [
+    60,
+    -170
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "aurora-mountain-lean-arms-back": {
+   "ad": "Aurora Mountain Lean Arms Back",
+   "yon": "sag",
+   "govde": 170,
+   "bas": 0,
+   "solKol": [
+    -60,
+    -60
+   ],
+   "sagKol": [
+    -58,
+    -58
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -2,
+    -2
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "aurora-goddess-one-arm-up": {
+   "ad": "Aurora Goddess One Arm Up",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "aurora-tiptoe-arms-forward-bend": {
+   "ad": "Aurora Tiptoe Arms Forward Bend",
+   "yon": "sag",
+   "govde": 135,
+   "bas": 0,
+   "solKol": [
+    120,
+    120
+   ],
+   "sagKol": [
+    118,
+    118
+   ],
+   "solBacak": [
+    -4,
+    -4
+   ],
+   "sagBacak": [
+    -6,
+    -6
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "aurora-hip-sway-arms-wave": {
+   "ad": "Aurora Hip Sway Arms Wave",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -110,
+    -170
+   ],
+   "solKol": [
+    110,
+    -10
+   ],
+   "sagBacak": [
+    -12,
+    6
+   ],
+   "solBacak": [
+    8,
+    8
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "aurora-warrior-lean-forward-arms-back": {
+   "ad": "Aurora Warrior Lean Forward Arms Back",
+   "yon": "sag",
+   "govde": 125,
+   "bas": 0,
+   "solKol": [
+    -60,
+    -60
+   ],
+   "sagKol": [
+    -58,
+    -58
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    -38,
+    -38
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "aurora-tree-hands-overhead-tilt": {
+   "ad": "Aurora Tree Hands Overhead Tilt",
+   "yon": "on",
+   "govde": 170,
+   "bas": 0,
+   "sagKol": [
+    -165,
+    -170
+   ],
+   "solKol": [
+    170,
+    165
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "aurora-knee-pull-lean": {
+   "ad": "Aurora Knee Pull Lean",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    90,
+    -10
+   ],
+   "sagKol": [
+    88,
+    -12
+   ],
+   "solBacak": [
+    120,
+    -20
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "aurora-leg-back-arms-forward": {
+   "ad": "Aurora Leg Back Arms Forward",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    110,
+    110
+   ],
+   "sagKol": [
+    108,
+    108
+   ],
+   "solBacak": [
+    5,
+    5
+   ],
+   "sagBacak": [
+    -70,
+    -70
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "aurora-side-kneel-arch": {
+   "ad": "Aurora Side Kneel Arch",
+   "yon": "sag",
+   "govde": 200,
+   "bas": 0,
+   "solKol": [
+    175,
+    175
+   ],
+   "sagKol": [
+    -40,
+    -40
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    30,
+    -60
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "aurora-deep-goddess-prayer-up": {
+   "ad": "Aurora Deep Goddess Prayer Up",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -175,
+    -178
+   ],
+   "solKol": [
+    175,
+    178
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "aurora-low-lunge-twist-open": {
+   "ad": "Aurora Low Lunge Twist Open",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solBacak": [
+    95,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -150
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "aurora-pyramid-hands-back": {
+   "ad": "Aurora Pyramid Hands Back",
+   "yon": "sag",
+   "govde": 70,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -150
+   ],
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solBacak": [
+    25,
+    25
+   ],
+   "sagBacak": [
+    -25,
+    -25
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "aurora-kneeling-side-stretch-leg-out": {
+   "ad": "Aurora Kneeling Side Stretch Leg Out",
+   "yon": "on",
+   "govde": 200,
+   "bas": 0,
+   "sagKol": [
+    -30,
+    -10
+   ],
+   "solKol": [
+    160,
+    -160
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "solBacak": [
+    60,
+    60
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "aurora-seated-hug-knees": {
+   "ad": "Aurora Seated Hug Knees",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    70,
+    0
+   ],
+   "sagKol": [
+    68,
+    -2
+   ],
+   "solBacak": [
+    130,
+    -20
+   ],
+   "sagBacak": [
+    128,
+    -22
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "aurora-single-leg-squat-prep": {
+   "ad": "Aurora Single Leg Squat Prep",
+   "yon": "sag",
+   "govde": 150,
+   "bas": 0,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    98,
+    98
+   ],
+   "solBacak": [
+    80,
+    -10
+   ],
+   "sagBacak": [
+    45,
+    45
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "aurora-star-balance-lean": {
+   "ad": "Aurora Star Balance Lean",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -120,
+    -120
+   ],
+   "solKol": [
+    120,
+    120
+   ],
+   "sagBacak": [
+    -5,
+    -5
+   ],
+   "solBacak": [
+    70,
+    70
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "aurora-table-top-leg-lift": {
+   "ad": "Aurora Table Top Leg Lift",
+   "yon": "sag",
+   "govde": 95,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    -2,
+    -2
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "aurora-squat-arms-up-lean": {
+   "ad": "Aurora Squat Arms Up Lean",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    170,
+    170
+   ],
+   "sagKol": [
+    168,
+    168
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    88,
+    -12
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "aurora-lunge-cross-reach": {
+   "ad": "Aurora Lunge Cross Reach",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -30,
+    30
+   ],
+   "solKol": [
+    -150,
+    -150
+   ],
+   "sagBacak": [
+    -60,
+    -5
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "aurora-kneeling-one-leg-side-arms-up": {
+   "ad": "Aurora Kneeling One Leg Side Arms Up",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    175,
+    175
+   ],
+   "sagKol": [
+    173,
+    173
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    90,
+    0
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "aurora-dancer-deep-reach": {
+   "ad": "Aurora Dancer Deep Reach",
+   "yon": "sag",
+   "govde": 115,
+   "bas": 0,
+   "solKol": [
+    115,
+    115
+   ],
+   "sagKol": [
+    -120,
+    -170
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -110,
+    -170
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "aurora-warrior-three-arms-wide": {
+   "ad": "Aurora Warrior Three Arms Wide",
+   "yon": "sag",
+   "govde": 92,
+   "bas": 0,
+   "solKol": [
+    180,
+    180
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "aurora-standing-split-hand-ankle": {
+   "ad": "Aurora Standing Split Hand Ankle",
+   "yon": "sag",
+   "govde": 15,
+   "bas": 0,
+   "solKol": [
+    -5,
+    -5
+   ],
+   "sagKol": [
+    -3,
+    -3
+   ],
+   "solBacak": [
+    2,
+    2
+   ],
+   "sagBacak": [
+    -160,
+    -160
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "aurora-half-split-arms-up": {
+   "ad": "Aurora Half Split Arms Up",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    176,
+    176
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "aurora-camel-prep-one-hand-heel": {
+   "ad": "Aurora Camel Prep One Hand Heel",
+   "yon": "sag",
+   "govde": 215,
+   "bas": 0,
+   "solKol": [
+    -30,
+    -30
+   ],
+   "sagKol": [
+    175,
+    175
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "aurora-king-pigeon-prep": {
+   "ad": "Aurora King Pigeon Prep",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -150
+   ],
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solBacak": [
+    90,
+    -5
+   ],
+   "sagBacak": [
+    -90,
+    -160
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "aurora-side-plank-star": {
+   "ad": "Aurora Side Plank Star",
+   "yon": "on",
+   "govde": 118,
+   "bas": 0,
+   "sagKol": [
+    0,
+    0
+   ],
+   "solKol": [
+    175,
+    175
+   ],
+   "sagBacak": [
+    -70,
+    -70
+   ],
+   "solBacak": [
+    -30,
+    -30
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "aurora-boat-arms-back": {
+   "ad": "Aurora Boat Arms Back",
+   "yon": "sag",
+   "govde": 215,
+   "bas": 0,
+   "solKol": [
+    -80,
+    -80
+   ],
+   "sagKol": [
+    -78,
+    -78
+   ],
+   "solBacak": [
+    130,
+    130
+   ],
+   "sagBacak": [
+    128,
+    128
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "aurora-seated-leg-hold-stretch": {
+   "ad": "Aurora Seated Leg Hold Stretch",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    150,
+    150
+   ],
+   "sagKol": [
+    148,
+    148
+   ],
+   "solBacak": [
+    150,
+    150
+   ],
+   "sagBacak": [
+    90,
+    90
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "aurora-bow-kneeling-reach": {
+   "ad": "Aurora Bow Kneeling Reach",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    175,
+    175
+   ],
+   "sagKol": [
+    -150,
+    -170
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -10,
+    -170
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "aurora-extended-side-angle-bind": {
+   "ad": "Aurora Extended Side Angle Bind",
+   "yon": "sag",
+   "govde": 125,
+   "bas": 0,
+   "solKol": [
+    -20,
+    -20
+   ],
+   "sagKol": [
+    -150,
+    -150
+   ],
+   "solBacak": [
+    85,
+    0
+   ],
+   "sagBacak": [
+    -42,
+    -42
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "aurora-front-split-prep-hands-floor": {
+   "ad": "Aurora Front Split Prep Hands Floor",
+   "yon": "sag",
+   "govde": 120,
+   "bas": 0,
+   "solKol": [
+    45,
+    45
+   ],
+   "sagKol": [
+    43,
+    43
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -85,
+    -85
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "aurora-wide-straddle-fold-arms-out": {
+   "ad": "Aurora Wide Straddle Fold Arms Out",
+   "yon": "on",
+   "govde": 125,
+   "bas": 0,
+   "sagKol": [
+    -100,
+    -100
+   ],
+   "solKol": [
+    100,
+    100
+   ],
+   "sagBacak": [
+    -88,
+    -88
+   ],
+   "solBacak": [
+    88,
+    88
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "aurora-low-lunge-back-bind-lift": {
+   "ad": "Aurora Low Lunge Back Bind Lift",
+   "yon": "sag",
+   "govde": 195,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -150
+   ],
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solBacak": [
+    95,
+    0
+   ],
+   "sagBacak": [
+    -55,
+    -150
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "aurora-standing-leg-hold-forward": {
+   "ad": "Aurora Standing Leg Hold Forward",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    -30,
+    -30
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "aurora-mermaid-seated-arch": {
+   "ad": "Aurora Mermaid Seated Arch",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    176,
+    176
+   ],
+   "solBacak": [
+    90,
+    -90
+   ],
+   "sagBacak": [
+    -90,
+    -150
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "aurora-arabesque-arms-up": {
+   "ad": "Aurora Arabesque Arms Up",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    176,
+    176
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -80,
+    -80
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "aurora-tiger-kneel-leg-up": {
+   "ad": "Aurora Tiger Kneel Leg Up",
+   "yon": "sag",
+   "govde": 95,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -120,
+    -170
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "pulsar-v-head-wide": {
+   "ad": "Pulsar V Head Wide",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "halo-head-low-leg-out": {
+   "ad": "Halo Head Low Leg Out",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "stardust-v-cross-knee": {
+   "ad": "Stardust V Cross Knee",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    -20,
+    110
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "boreal-head-flex-lunge": {
+   "ad": "Boreal Head Flex Lunge",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "nova-swing-low-leg-out": {
+   "ad": "Nova Swing Low Leg Out",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -110
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "lumen-diag-cactus-knee": {
+   "ad": "Lumen Diag Cactus Knee",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "orbit-cactus-cross-lunge": {
+   "ad": "Orbit Cactus Cross Lunge",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    -20,
+    110
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "pulsar-diag-flex-kick": {
+   "ad": "Pulsar Diag Flex Kick",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 2
+  },
+  "halo-hip-reach-tree": {
+   "ad": "Halo Hip Reach Tree",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 2
+  },
+  "polar-swing-reach-lunge": {
+   "ad": "Polar Swing Reach Lunge",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -110
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "halo-swing-low-curtsy": {
+   "ad": "Halo Swing Low Curtsy",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -110
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "pulsar-v-diag-kick": {
+   "ad": "Pulsar V Diag Kick",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 2
+  },
+  "boreal-salute-v-curtsy": {
+   "ad": "Boreal Salute V Curtsy",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -100,
+    140
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "prism-v-t-wide": {
+   "ad": "Prism V T Wide",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "glacier-v-low-knee": {
+   "ad": "Glacier V Low Knee",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "snowflake-t-hook-knee": {
+   "ad": "Snowflake T Hook Knee",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    -130,
+    -40
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "boreal-hook-flex-tree": {
+   "ad": "Boreal Hook Flex Tree",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -130,
+    -40
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 2
+  },
+  "snowflake-hook-v-goddess": {
+   "ad": "Snowflake Hook V Goddess",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -130,
+    -40
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "iceberg-head-reach-knee": {
+   "ad": "Iceberg Head Reach Knee",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "lumen-swing-cross-wide": {
+   "ad": "Lumen Swing Cross Wide",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -110
+   ],
+   "solKol": [
+    -20,
+    110
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "tundra-cactus-v-goddess": {
+   "ad": "Tundra Cactus V Goddess",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "orbit-hip-cactus-goddess": {
+   "ad": "Orbit Hip Cactus Goddess",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "meteor-cross-cactus-lunge": {
+   "ad": "Meteor Cross Cactus Lunge",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    110
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "comet-reach-salute-lunge": {
+   "ad": "Comet Reach Salute Lunge",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    -100,
+    140
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "polar-salute-v-tree": {
+   "ad": "Polar Salute V Tree",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -100,
+    140
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 2
+  },
+  "polar-v-salute-curtsy": {
+   "ad": "Polar V Salute Curtsy",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    -100,
+    140
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "crystal-diag-cross-leg-out": {
+   "ad": "Crystal Diag Cross Leg Out",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    -20,
+    110
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "halo-head-hook-kick": {
+   "ad": "Halo Head Hook Kick",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    -130,
+    -40
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 2
+  },
+  "halo-flex-hip-lunge": {
+   "ad": "Halo Flex Hip Lunge",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "crystal-hook-head-kick": {
+   "ad": "Crystal Hook Head Kick",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -130,
+    -40
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 2
+  },
+  "pulsar-flex-swing-wide": {
+   "ad": "Pulsar Flex Swing Wide",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    -150,
+    -110
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "halo-flex-w-lunge": {
+   "ad": "Halo Flex W Lunge",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "glacier-v-w-leg-out": {
+   "ad": "Glacier V W Leg Out",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "orbit-v-swing-goddess": {
+   "ad": "Orbit V Swing Goddess",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    -150,
+    -110
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "orbit-hook-low-tree": {
+   "ad": "Orbit Hook Low Tree",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -130,
+    -40
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 2
+  },
+  "iceberg-v-salute-kick": {
+   "ad": "Iceberg V Salute Kick",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    -100,
+    140
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 2
+  },
+  "glacier-flex-v-wide": {
+   "ad": "Glacier Flex V Wide",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "northern-flex-swing-tree": {
+   "ad": "Northern Flex Swing Tree",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    -150,
+    -110
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 2
+  },
+  "snowflake-hook-diag-curtsy": {
+   "ad": "Snowflake Hook Diag Curtsy",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -130,
+    -40
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "polar-v-low-tree": {
+   "ad": "Polar V Low Tree",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 2
+  },
+  "comet-cactus-low-knee": {
+   "ad": "Comet Cactus Low Knee",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "tundra-hip-hook-curtsy": {
+   "ad": "Tundra Hip Hook Curtsy",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    -130,
+    -40
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "prism-head-cross-knee": {
+   "ad": "Prism Head Cross Knee",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    -20,
+    110
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "tundra-diag-reach-tree": {
+   "ad": "Tundra Diag Reach Tree",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 2
+  },
+  "prism-swing-cactus-wide": {
+   "ad": "Prism Swing Cactus Wide",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -110
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "prism-t-cactus-tree": {
+   "ad": "Prism T Cactus Tree",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 2
+  },
+  "pulsar-diag-swing-leg-out": {
+   "ad": "Pulsar Diag Swing Leg Out",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    -150,
+    -110
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "iceberg-cactus-cross-kick": {
+   "ad": "Iceberg Cactus Cross Kick",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    -20,
+    110
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 2
+  },
+  "crystal-hook-salute-knee": {
+   "ad": "Crystal Hook Salute Knee",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -130,
+    -40
+   ],
+   "solKol": [
+    -100,
+    140
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "boreal-salute-swing-leg-out": {
+   "ad": "Boreal Salute Swing Leg Out",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -100,
+    140
+   ],
+   "solKol": [
+    -150,
+    -110
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "meteor-hip-cactus-curtsy": {
+   "ad": "Meteor Hip Cactus Curtsy",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "halo-t-head-wide": {
+   "ad": "Halo T Head Wide",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "zenith-t-swing-goddess": {
+   "ad": "Zenith T Swing Goddess",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    -150,
+    -110
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "tundra-swing-flex-leg-out": {
+   "ad": "Tundra Swing Flex Leg Out",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -110
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "stardust-swing-w-kick": {
+   "ad": "Stardust Swing W Kick",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -110
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 2
+  },
+  "zenith-head-hook-goddess": {
+   "ad": "Zenith Head Hook Goddess",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    -130,
+    -40
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "comet-reach-cross-goddess": {
+   "ad": "Comet Reach Cross Goddess",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    -20,
+    110
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "iceberg-swing-low-lunge": {
+   "ad": "Iceberg Swing Low Lunge",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -110
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "lumen-hook-hip-tree": {
+   "ad": "Lumen Hook Hip Tree",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -130,
+    -40
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 2
+  },
+  "snowflake-flex-v-goddess": {
+   "ad": "Snowflake Flex V Goddess",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "meteor-cactus-hip-leg-out": {
+   "ad": "Meteor Cactus Hip Leg Out",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "pulsar-cross-v-kick": {
+   "ad": "Pulsar Cross V Kick",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    110
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 2
+  },
+  "iceberg-w-head-kick": {
+   "ad": "Iceberg W Head Kick",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 2
+  },
+  "fjord-reach-hook-curtsy": {
+   "ad": "Fjord Reach Hook Curtsy",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    -130,
+    -40
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "halo-flex-hip-wide": {
+   "ad": "Halo Flex Hip Wide",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "snowflake-v-cactus-tree": {
+   "ad": "Snowflake V Cactus Tree",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 2
+  },
+  "iceberg-hook-cactus-knee": {
+   "ad": "Iceberg Hook Cactus Knee",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -130,
+    -40
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "crystal-hip-t-knee": {
+   "ad": "Crystal Hip T Knee",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "tundra-cactus-head-kick": {
+   "ad": "Tundra Cactus Head Kick",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 2
+  },
+  "halo-hook-cross-goddess": {
+   "ad": "Halo Hook Cross Goddess",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -130,
+    -40
+   ],
+   "solKol": [
+    -20,
+    110
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "meteor-flow-70": {
+   "ad": "Meteor Flow 70",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 0,
+   "solKol": [
+    45,
+    43
+   ],
+   "sagKol": [
+    -40,
+    -42
+   ],
+   "solBacak": [
+    110,
+    -40
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ],
+   "tur": 2
+  },
+  "boreal-flow-71": {
+   "ad": "Boreal Flow 71",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    45,
+    43
+   ],
+   "sagKol": [
+    178,
+    176
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "lumen-flow-72": {
+   "ad": "Lumen Flow 72",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -152
+   ],
+   "sagKol": [
+    178,
+    176
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 3
+  },
+  "northern-flow-73": {
+   "ad": "Northern Flow 73",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    120,
+    118
+   ],
+   "sagKol": [
+    -40,
+    -42
+   ],
+   "solBacak": [
+    110,
+    -40
+   ],
+   "sagBacak": [
+    -110,
+    -170
+   ],
+   "tur": 3
+  },
+  "comet-flow-74": {
+   "ad": "Comet Flow 74",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    150,
+    148
+   ],
+   "sagKol": [
+    -90,
+    -92
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -110,
+    -170
+   ],
+   "tur": 3
+  },
+  "comet-flow-75": {
+   "ad": "Comet Flow 75",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    120,
+    118
+   ],
+   "sagKol": [
+    178,
+    176
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "sagBacak": [
+    -110,
+    -170
+   ],
+   "tur": 3
+  },
+  "pulsar-flow-76": {
+   "ad": "Pulsar Flow 76",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    120,
+    118
+   ],
+   "sagKol": [
+    120,
+    118
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ],
+   "tur": 2
+  },
+  "nova-flow-77": {
+   "ad": "Nova Flow 77",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    120,
+    118
+   ],
+   "sagKol": [
+    120,
+    118
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "halo-flow-78": {
+   "ad": "Halo Flow 78",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    90,
+    88
+   ],
+   "sagKol": [
+    120,
+    118
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "frost-flow-79": {
+   "ad": "Frost Flow 79",
+   "yon": "sag",
+   "govde": 60,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -42
+   ],
+   "sagKol": [
+    45,
+    43
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "halo-flow-80": {
+   "ad": "Halo Flow 80",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -42
+   ],
+   "sagKol": [
+    -90,
+    -92
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ],
+   "tur": 2
+  },
+  "crystal-flow-81": {
+   "ad": "Crystal Flow 81",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -42
+   ],
+   "sagKol": [
+    120,
+    118
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ],
+   "tur": 2
+  },
+  "glacier-flow-82": {
+   "ad": "Glacier Flow 82",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    45,
+    43
+   ],
+   "sagKol": [
+    -40,
+    -42
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "zenith-flow-83": {
+   "ad": "Zenith Flow 83",
+   "yon": "sag",
+   "govde": 60,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -42
+   ],
+   "sagKol": [
+    120,
+    118
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "halo-flow-84": {
+   "ad": "Halo Flow 84",
+   "yon": "sag",
+   "govde": 60,
+   "bas": 0,
+   "solKol": [
+    150,
+    148
+   ],
+   "sagKol": [
+    45,
+    43
+   ],
+   "solBacak": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    -110,
+    -170
+   ],
+   "tur": 3
+  },
+  "fjord-flow-85": {
+   "ad": "Fjord Flow 85",
+   "yon": "sag",
+   "govde": 60,
+   "bas": 0,
+   "solKol": [
+    150,
+    148
+   ],
+   "sagKol": [
+    90,
+    88
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 3
+  },
+  "comet-flow-86": {
+   "ad": "Comet Flow 86",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -152
+   ],
+   "sagKol": [
+    178,
+    176
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 2
+  },
+  "tundra-flow-87": {
+   "ad": "Tundra Flow 87",
+   "yon": "sag",
+   "govde": 60,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -42
+   ],
+   "sagKol": [
+    -40,
+    -42
+   ],
+   "solBacak": [
+    110,
+    -40
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ],
+   "tur": 3
+  },
+  "polar-flow-88": {
+   "ad": "Polar Flow 88",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -152
+   ],
+   "sagKol": [
+    120,
+    118
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -60,
+    -150
+   ],
+   "tur": 2
+  },
+  "snowflake-flow-89": {
+   "ad": "Snowflake Flow 89",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    45,
+    43
+   ],
+   "sagKol": [
+    178,
+    176
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ],
+   "tur": 2
+  },
+  "meteor-flow-90": {
+   "ad": "Meteor Flow 90",
+   "yon": "sag",
+   "govde": 60,
+   "bas": 0,
+   "solKol": [
+    120,
+    118
+   ],
+   "sagKol": [
+    -90,
+    -92
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    -110,
+    -170
+   ],
+   "tur": 3
+  },
+  "stardust-flow-91": {
+   "ad": "Stardust Flow 91",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    -90,
+    -92
+   ],
+   "sagKol": [
+    -150,
+    -152
+   ],
+   "solBacak": [
+    110,
+    -40
+   ],
+   "sagBacak": [
+    -60,
+    -150
+   ],
+   "tur": 3
+  },
+  "iceberg-flow-92": {
+   "ad": "Iceberg Flow 92",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -42
+   ],
+   "sagKol": [
+    -150,
+    -152
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "iceberg-flow-93": {
+   "ad": "Iceberg Flow 93",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    178,
+    176
+   ],
+   "sagKol": [
+    -150,
+    -152
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -60,
+    -150
+   ],
+   "tur": 2
+  },
+  "iceberg-flow-94": {
+   "ad": "Iceberg Flow 94",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 0,
+   "solKol": [
+    150,
+    148
+   ],
+   "sagKol": [
+    178,
+    176
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -60,
+    -150
+   ],
+   "tur": 2
+  },
+  "halo-flow-95": {
+   "ad": "Halo Flow 95",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    -90,
+    -92
+   ],
+   "sagKol": [
+    90,
+    88
+   ],
+   "solBacak": [
+    110,
+    -40
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ],
+   "tur": 2
+  },
+  "northern-flow-96": {
+   "ad": "Northern Flow 96",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    90,
+    88
+   ],
+   "sagKol": [
+    -90,
+    -92
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "frost-flow-97": {
+   "ad": "Frost Flow 97",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    150,
+    148
+   ],
+   "sagKol": [
+    45,
+    43
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "northern-flow-98": {
+   "ad": "Northern Flow 98",
+   "yon": "sag",
+   "govde": 60,
+   "bas": 0,
+   "solKol": [
+    45,
+    43
+   ],
+   "sagKol": [
+    45,
+    43
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "prism-flow-99": {
+   "ad": "Prism Flow 99",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -42
+   ],
+   "sagKol": [
+    -150,
+    -152
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -60,
+    -150
+   ],
+   "tur": 2
+  },
+  "fjord-flow-100": {
+   "ad": "Fjord Flow 100",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -152
+   ],
+   "sagKol": [
+    178,
+    176
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -70,
+    -70
+   ],
+   "tur": 3
+  },
+  "polar-flow-101": {
+   "ad": "Polar Flow 101",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    120,
+    118
+   ],
+   "sagKol": [
+    150,
+    148
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ],
+   "tur": 3
+  },
+  "frost-flow-102": {
+   "ad": "Frost Flow 102",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    45,
+    43
+   ],
+   "sagKol": [
+    45,
+    43
+   ],
+   "solBacak": [
+    110,
+    -40
+   ],
+   "sagBacak": [
+    -70,
+    -70
+   ],
+   "tur": 3
+  },
+  "pulsar-flow-103": {
+   "ad": "Pulsar Flow 103",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    90,
+    88
+   ],
+   "sagKol": [
+    90,
+    88
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ],
+   "tur": 3
+  },
+  "tundra-flow-104": {
+   "ad": "Tundra Flow 104",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    120,
+    118
+   ],
+   "sagKol": [
+    -40,
+    -42
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "halo-flow-105": {
+   "ad": "Halo Flow 105",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    -90,
+    -92
+   ],
+   "sagKol": [
+    90,
+    88
+   ],
+   "solBacak": [
+    110,
+    -40
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "nova-flow-106": {
+   "ad": "Nova Flow 106",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    120,
+    118
+   ],
+   "sagKol": [
+    150,
+    148
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -110,
+    -170
+   ],
+   "tur": 3
+  },
+  "prism-flow-107": {
+   "ad": "Prism Flow 107",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -152
+   ],
+   "sagKol": [
+    -90,
+    -92
+   ],
+   "solBacak": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    -70,
+    -70
+   ],
+   "tur": 3
+  },
+  "comet-flow-108": {
+   "ad": "Comet Flow 108",
+   "yon": "sag",
+   "govde": 60,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -42
+   ],
+   "sagKol": [
+    -40,
+    -42
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 3
+  },
+  "zenith-flow-109": {
+   "ad": "Zenith Flow 109",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    150,
+    148
+   ],
+   "sagKol": [
+    45,
+    43
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "orbit-flow-110": {
+   "ad": "Orbit Flow 110",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    45,
+    43
+   ],
+   "sagKol": [
+    45,
+    43
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -110,
+    -170
+   ],
+   "tur": 3
+  },
+  "comet-flow-111": {
+   "ad": "Comet Flow 111",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    -90,
+    -92
+   ],
+   "sagKol": [
+    150,
+    148
+   ],
+   "solBacak": [
+    110,
+    -40
+   ],
+   "sagBacak": [
+    -70,
+    -70
+   ],
+   "tur": 3
+  },
+  "meteor-flow-112": {
+   "ad": "Meteor Flow 112",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -152
+   ],
+   "sagKol": [
+    -40,
+    -42
+   ],
+   "solBacak": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "prism-flow-113": {
+   "ad": "Prism Flow 113",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    178,
+    176
+   ],
+   "sagKol": [
+    150,
+    148
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "snowflake-flow-114": {
+   "ad": "Snowflake Flow 114",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -42
+   ],
+   "sagKol": [
+    45,
+    43
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "snowflake-flow-115": {
+   "ad": "Snowflake Flow 115",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -152
+   ],
+   "sagKol": [
+    90,
+    88
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -60,
+    -150
+   ],
+   "tur": 3
+  },
+  "prism-flow-116": {
+   "ad": "Prism Flow 116",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 0,
+   "solKol": [
+    178,
+    176
+   ],
+   "sagKol": [
+    150,
+    148
+   ],
+   "solBacak": [
+    110,
+    -40
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "nova-flow-117": {
+   "ad": "Nova Flow 117",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    -90,
+    -92
+   ],
+   "sagKol": [
+    45,
+    43
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -110,
+    -170
+   ],
+   "tur": 3
+  },
+  "zenith-flow-118": {
+   "ad": "Zenith Flow 118",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -152
+   ],
+   "sagKol": [
+    -90,
+    -92
+   ],
+   "solBacak": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    -60,
+    -150
+   ],
+   "tur": 3
+  },
+  "fjord-flow-119": {
+   "ad": "Fjord Flow 119",
+   "yon": "sag",
+   "govde": 60,
+   "bas": 0,
+   "solKol": [
+    150,
+    148
+   ],
+   "sagKol": [
+    90,
+    88
+   ],
+   "solBacak": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    -110,
+    -170
+   ],
+   "tur": 3
+  },
+  "halo-flow-120": {
+   "ad": "Halo Flow 120",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    90,
+    88
+   ],
+   "sagKol": [
+    -150,
+    -152
+   ],
+   "solBacak": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    -70,
+    -70
+   ],
+   "tur": 3
+  },
+  "comet-flow-121": {
+   "ad": "Comet Flow 121",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -152
+   ],
+   "sagKol": [
+    90,
+    88
+   ],
+   "solBacak": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "lumen-flow-122": {
+   "ad": "Lumen Flow 122",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 0,
+   "solKol": [
+    178,
+    176
+   ],
+   "sagKol": [
+    120,
+    118
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 2
+  },
+  "boreal-flow-123": {
+   "ad": "Boreal Flow 123",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 0,
+   "solKol": [
+    45,
+    43
+   ],
+   "sagKol": [
+    -40,
+    -42
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "sagBacak": [
+    -60,
+    -150
+   ],
+   "tur": 2
+  },
+  "iceberg-flow-124": {
+   "ad": "Iceberg Flow 124",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    178,
+    176
+   ],
+   "sagKol": [
+    45,
+    43
+   ],
+   "solBacak": [
+    110,
+    -40
+   ],
+   "sagBacak": [
+    -110,
+    -170
+   ],
+   "tur": 3
+  },
+  "snowflake-flow-125": {
+   "ad": "Snowflake Flow 125",
+   "yon": "sag",
+   "govde": 60,
+   "bas": 0,
+   "solKol": [
+    -90,
+    -92
+   ],
+   "sagKol": [
+    120,
+    118
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ],
+   "tur": 3
+  },
+  "boreal-flow-126": {
+   "ad": "Boreal Flow 126",
+   "yon": "sag",
+   "govde": 60,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -42
+   ],
+   "sagKol": [
+    90,
+    88
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 3
+  },
+  "lumen-flow-127": {
+   "ad": "Lumen Flow 127",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    150,
+    148
+   ],
+   "sagKol": [
+    150,
+    148
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "iceberg-flow-128": {
+   "ad": "Iceberg Flow 128",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    178,
+    176
+   ],
+   "sagKol": [
+    120,
+    118
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 3
+  },
+  "tundra-flow-129": {
+   "ad": "Tundra Flow 129",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    150,
+    148
+   ],
+   "sagKol": [
+    -40,
+    -42
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -110,
+    -170
+   ],
+   "tur": 3
+  },
+  "snowflake-flow-130": {
+   "ad": "Snowflake Flow 130",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    -90,
+    -92
+   ],
+   "sagKol": [
+    -90,
+    -92
+   ],
+   "solBacak": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    -110,
+    -170
+   ],
+   "tur": 3
+  },
+  "northern-flow-131": {
+   "ad": "Northern Flow 131",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    150,
+    148
+   ],
+   "sagKol": [
+    45,
+    43
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "sagBacak": [
+    -110,
+    -170
+   ],
+   "tur": 3
+  },
+  "lumen-flow-132": {
+   "ad": "Lumen Flow 132",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 0,
+   "solKol": [
+    178,
+    176
+   ],
+   "sagKol": [
+    -90,
+    -92
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "glacier-flow-133": {
+   "ad": "Glacier Flow 133",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    -90,
+    -92
+   ],
+   "sagKol": [
+    178,
+    176
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ],
+   "tur": 2
+  },
+  "nova-flow-134": {
+   "ad": "Nova Flow 134",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    178,
+    176
+   ],
+   "sagKol": [
+    120,
+    118
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "northern-flow-135": {
+   "ad": "Northern Flow 135",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -152
+   ],
+   "sagKol": [
+    90,
+    88
+   ],
+   "solBacak": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "frost-flow-136": {
+   "ad": "Frost Flow 136",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    45,
+    43
+   ],
+   "sagKol": [
+    90,
+    88
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -110,
+    -170
+   ],
+   "tur": 3
+  },
+  "frost-flow-137": {
+   "ad": "Frost Flow 137",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    -90,
+    -92
+   ],
+   "sagKol": [
+    45,
+    43
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ],
+   "tur": 3
+  },
+  "fjord-flow-138": {
+   "ad": "Fjord Flow 138",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -152
+   ],
+   "sagKol": [
+    -90,
+    -92
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "orbit-flow-139": {
+   "ad": "Orbit Flow 139",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    150,
+    148
+   ],
+   "sagKol": [
+    150,
+    148
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  }
+ }
+}
