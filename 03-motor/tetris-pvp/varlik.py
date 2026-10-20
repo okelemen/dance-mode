@@ -356,7 +356,9 @@ def aurora(rnd):
     """REF-057: gokte pembe/mor/camgobegi kuzey isigi perdeleri, ufukta karli buzlu daglar, onde parlak deniz + buz kutleleri."""
     renkler = ("#ff5ad8", "#9b6bff", "#3fe0ff", "#7dffd8")
     # deneme 1: 7 perde gogun tamamini dikey cizgiyle doldurdu (yagmur perdesi gibi) -> 4 perde, yalniz ust yari, yumusak
-    for i in range(4):
+    # deneme 3: perdeler bulanik renkli bloklar gibi okundu -> Blender'da perde YOK; kuzey isigi sahne4.html'de
+    # akan, hareketli seritler olarak cizilir (tema.kuzeyIsigi). Asagidaki dongu kalir ama calismaz.
+    for i in range(0):
         x0, y0 = -36 + i * 24 + rnd.uniform(-6, 6), rnd.uniform(46, 54)
         bpy.ops.mesh.primitive_plane_add(size=1, location=(x0, y0, 22.5 + rnd.uniform(-1.5, 2)), rotation=(math.pi / 2, 0, rnd.uniform(-0.35, 0.35)))
         p = bpy.context.active_object; p.scale = (rnd.uniform(34, 48), rnd.uniform(8, 10), 1)      # deneme 2: z 31 kadraj ustune kacti
