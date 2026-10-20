@@ -2,7 +2,7 @@
  "seri": "TETRIS MODE",
  "bolum": "tetris-mode-06",
  "bpm": 128.0,
- "toplam_olcu": 40,
+ "toplam_olcu": 41,
  "toplam_duvar": 4,
  "zaman": {
   "kart": 1.875,
@@ -15,31 +15,31 @@
   {
    "tip": "acilis",
    "t": 0.0,
-   "sure": 3.75
+   "sure": 5.625
   },
   {
    "tip": "yazi",
    "metin": "WELCOME,",
    "alt": "CHALLENGERS!",
-   "t": 3.75,
+   "t": 5.625,
    "sure": 2.8125
   },
   {
    "tip": "yazi",
    "metin": "TWO PLAYERS.",
    "alt": "ONE CROWN.",
-   "t": 6.5625,
+   "t": 8.4375,
    "sure": 2.8125
   },
   {
    "tip": "nasil",
    "metin": "COPY THE SHAPE",
    "alt": "BEFORE THE WALL HITS YOU!",
-   "t": 9.375,
+   "t": 11.25,
    "sure": 5.625
   },
   {
-   "t": 15.0,
+   "t": 16.875,
    "sure": 3.75,
    "tip": "tur",
    "tur": 1,
@@ -47,12 +47,12 @@
    "alt": "WARM UP"
   },
   {
-   "t": 18.75,
+   "t": 20.625,
    "sure": 3.75,
    "tip": "basla"
   },
   {
-   "t": 45.0,
+   "t": 46.875,
    "sure": 3.75,
    "tip": "tur",
    "tur": 2,
@@ -60,7 +60,7 @@
    "alt": "NO HOLDING BACK"
   },
   {
-   "t": 60.0,
+   "t": 61.875,
    "sure": 3.75,
    "tip": "tur",
    "tur": 3,
@@ -72,7 +72,7 @@
   {
    "no": 1,
    "tur": 1,
-   "t0": 22.5,
+   "t0": 24.375,
    "p1": "aurora-airplane-lean-back-arms",
    "p2": "aurora-victory-lunge-side",
    "ovgu": "NAILED IT!"
@@ -80,7 +80,7 @@
   {
    "no": 2,
    "tur": 1,
-   "t0": 33.75,
+   "t0": 35.625,
    "p1": "aurora-heel-raise-reach-forward",
    "p2": "aurora-hip-sway-arms-wave",
    "ovgu": "SMOOTH!"
@@ -88,7 +88,7 @@
   {
    "no": 8,
    "tur": 2,
-   "t0": 48.75,
+   "t0": 50.625,
    "p1": "aurora-leg-back-arms-forward",
    "p2": "aurora-pyramid-hands-back",
    "ovgu": "SMOOTH!"
@@ -96,17 +96,16 @@
   {
    "no": 15,
    "tur": 3,
-   "t0": 63.75,
+   "t0": 65.625,
    "p1": "aurora-boat-arms-back",
    "p2": "aurora-arabesque-arms-up",
    "ovgu": "GREAT FIT!"
   }
  ],
  "abone": [
-  19.0,
-  30.0,
-  49.0,
-  64.0
+  21.0,
+  51.0,
+  66.0
  ],
  "abone_sure": 3.2,
  "muzik": "HENUZ YOK - kullanici Suno'da uretecek (SUNO-BRIEF-TETRIS-MODE-06.md)",

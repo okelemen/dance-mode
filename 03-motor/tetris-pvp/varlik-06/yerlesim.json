@@ -1,0 +1,542 @@
+{
+ "aciklik_p1": [
+  156.3,
+  160.2,
+  803.7,
+  669.5
+ ],
+ "ampul_p1": [
+  [
+   181.3,
+   163.4
+  ],
+  [
+   224.0,
+   163.4
+  ],
+  [
+   266.7,
+   163.4
+  ],
+  [
+   309.3,
+   163.4
+  ],
+  [
+   352.0,
+   163.4
+  ],
+  [
+   394.7,
+   163.4
+  ],
+  [
+   437.3,
+   163.4
+  ],
+  [
+   480.0,
+   163.4
+  ],
+  [
+   522.7,
+   163.4
+  ],
+  [
+   565.3,
+   163.4
+  ],
+  [
+   608.0,
+   163.4
+  ],
+  [
+   650.7,
+   163.4
+  ],
+  [
+   693.3,
+   163.4
+  ],
+  [
+   736.0,
+   163.4
+  ],
+  [
+   778.7,
+   163.4
+  ],
+  [
+   141.2,
+   639.7
+  ],
+  [
+   138.4,
+   596.5
+  ],
+  [
+   135.5,
+   552.7
+  ],
+  [
+   132.6,
+   508.1
+  ],
+  [
+   129.7,
+   462.7
+  ],
+  [
+   126.7,
+   416.6
+  ],
+  [
+   123.6,
+   369.6
+  ],
+  [
+   120.5,
+   321.9
+  ],
+  [
+   117.4,
+   273.3
+  ],
+  [
+   114.1,
+   223.8
+  ],
+  [
+   110.9,
+   173.5
+  ],
+  [
+   818.8,
+   639.7
+  ],
+  [
+   821.6,
+   596.5
+  ],
+  [
+   824.5,
+   552.7
+  ],
+  [
+   827.4,
+   508.1
+  ],
+  [
+   830.3,
+   462.7
+  ],
+  [
+   833.3,
+   416.6
+  ],
+  [
+   836.4,
+   369.6
+  ],
+  [
+   839.5,
+   321.9
+  ],
+  [
+   842.6,
+   273.3
+  ],
+  [
+   845.9,
+   223.8
+  ],
+  [
+   849.1,
+   173.5
+  ]
+ ],
+ "aciklik_p2": [
+  156.3,
+  160.2,
+  803.7,
+  669.5
+ ],
+ "ampul_p2": [
+  [
+   181.3,
+   163.4
+  ],
+  [
+   224.0,
+   163.4
+  ],
+  [
+   266.7,
+   163.4
+  ],
+  [
+   309.3,
+   163.4
+  ],
+  [
+   352.0,
+   163.4
+  ],
+  [
+   394.7,
+   163.4
+  ],
+  [
+   437.3,
+   163.4
+  ],
+  [
+   480.0,
+   163.4
+  ],
+  [
+   522.7,
+   163.4
+  ],
+  [
+   565.3,
+   163.4
+  ],
+  [
+   608.0,
+   163.4
+  ],
+  [
+   650.7,
+   163.4
+  ],
+  [
+   693.3,
+   163.4
+  ],
+  [
+   736.0,
+   163.4
+  ],
+  [
+   778.7,
+   163.4
+  ],
+  [
+   141.2,
+   639.7
+  ],
+  [
+   138.4,
+   596.5
+  ],
+  [
+   135.5,
+   552.7
+  ],
+  [
+   132.6,
+   508.1
+  ],
+  [
+   129.7,
+   462.7
+  ],
+  [
+   126.7,
+   416.6
+  ],
+  [
+   123.6,
+   369.6
+  ],
+  [
+   120.5,
+   321.9
+  ],
+  [
+   117.4,
+   273.3
+  ],
+  [
+   114.1,
+   223.8
+  ],
+  [
+   110.9,
+   173.5
+  ],
+  [
+   818.8,
+   639.7
+  ],
+  [
+   821.6,
+   596.5
+  ],
+  [
+   824.5,
+   552.7
+  ],
+  [
+   827.4,
+   508.1
+  ],
+  [
+   830.3,
+   462.7
+  ],
+  [
+   833.3,
+   416.6
+  ],
+  [
+   836.4,
+   369.6
+  ],
+  [
+   839.5,
+   321.9
+  ],
+  [
+   842.6,
+   273.3
+  ],
+  [
+   845.9,
+   223.8
+  ],
+  [
+   849.1,
+   173.5
+  ]
+ ],
+ "boksor": {
+  "p1-gard": 16,
+  "p1-jab": 12,
+  "p2-gard": 16,
+  "p2-jab": 12
+ },
+ "poz": {
+  "aurora-crescent-arms-wide": {
+   "cerceve_m": 4.006,
+   "gen_m": 2.787,
+   "yuk_m": 3.686
+  },
+  "aurora-tree-arms-crown": {
+   "cerceve_m": 4.372,
+   "gen_m": 1.828,
+   "yuk_m": 4.022
+  },
+  "aurora-airplane-lean-back-arms": {
+   "cerceve_m": 3.687,
+   "gen_m": 2.146,
+   "yuk_m": 3.392
+  },
+  "aurora-half-moon-side-reach": {
+   "cerceve_m": 4.639,
+   "gen_m": 1.952,
+   "yuk_m": 4.268
+  },
+  "aurora-victory-lunge-side": {
+   "cerceve_m": 4.465,
+   "gen_m": 2.476,
+   "yuk_m": 4.108
+  },
+  "aurora-dancer-arms-fan": {
+   "cerceve_m": 4.1,
+   "gen_m": 3.48,
+   "yuk_m": 3.772
+  },
+  "aurora-heel-raise-reach-forward": {
+   "cerceve_m": 4.104,
+   "gen_m": 1.723,
+   "yuk_m": 3.775
+  },
+  "aurora-side-step-reach-diagonal": {
+   "cerceve_m": 4.896,
+   "gen_m": 2.41,
+   "yuk_m": 4.504
+  },
+  "aurora-mountain-lean-arms-back": {
+   "cerceve_m": 4.112,
+   "gen_m": 1.851,
+   "yuk_m": 3.783
+  },
+  "aurora-tiptoe-arms-forward-bend": {
+   "cerceve_m": 3.954,
+   "gen_m": 2.132,
+   "yuk_m": 3.637
+  },
+  "aurora-hip-sway-arms-wave": {
+   "cerceve_m": 4.539,
+   "gen_m": 2.154,
+   "yuk_m": 4.175
+  },
+  "aurora-warrior-lean-forward-arms-back": {
+   "cerceve_m": 3.458,
+   "gen_m": 2.601,
+   "yuk_m": 3.181
+  },
+  "aurora-knee-pull-lean": {
+   "cerceve_m": 4.057,
+   "gen_m": 1.259,
+   "yuk_m": 3.732
+  },
+  "aurora-leg-back-arms-forward": {
+   "cerceve_m": 3.526,
+   "gen_m": 3.945,
+   "yuk_m": 3.18
+  },
+  "aurora-low-lunge-twist-open": {
+   "cerceve_m": 3.112,
+   "gen_m": 3.097,
+   "yuk_m": 2.863
+  },
+  "aurora-pyramid-hands-back": {
+   "cerceve_m": 3.607,
+   "gen_m": 2.231,
+   "yuk_m": 3.319
+  },
+  "aurora-kneeling-side-stretch-leg-out": {
+   "cerceve_m": 3.979,
+   "gen_m": 3.19,
+   "yuk_m": 3.66
+  },
+  "aurora-seated-hug-knees": {
+   "cerceve_m": 2.55,
+   "gen_m": 1.157,
+   "yuk_m": 2.316
+  },
+  "aurora-single-leg-squat-prep": {
+   "cerceve_m": 3.42,
+   "gen_m": 2.133,
+   "yuk_m": 3.147
+  },
+  "aurora-star-balance-lean": {
+   "cerceve_m": 4.172,
+   "gen_m": 3.572,
+   "yuk_m": 3.838
+  },
+  "aurora-squat-arms-up-lean": {
+   "cerceve_m": 4.025,
+   "gen_m": 1.513,
+   "yuk_m": 3.703
+  },
+  "aurora-lunge-cross-reach": {
+   "cerceve_m": 4.358,
+   "gen_m": 2.364,
+   "yuk_m": 4.009
+  },
+  "aurora-dancer-deep-reach": {
+   "cerceve_m": 4.193,
+   "gen_m": 3.057,
+   "yuk_m": 3.857
+  },
+  "aurora-half-split-arms-up": {
+   "cerceve_m": 4.263,
+   "gen_m": 3.321,
+   "yuk_m": 3.922
+  },
+  "aurora-camel-prep-one-hand-heel": {
+   "cerceve_m": 4.04,
+   "gen_m": 1.632,
+   "yuk_m": 3.717
+  },
+  "aurora-king-pigeon-prep": {
+   "cerceve_m": 3.834,
+   "gen_m": 2.476,
+   "yuk_m": 3.527
+  },
+  "aurora-boat-arms-back": {
+   "cerceve_m": 3.435,
+   "gen_m": 3.843,
+   "yuk_m": 1.72
+  },
+  "aurora-seated-leg-hold-stretch": {
+   "cerceve_m": 2.861,
+   "gen_m": 2.524,
+   "yuk_m": 2.632
+  },
+  "aurora-extended-side-angle-bind": {
+   "cerceve_m": 4.206,
+   "gen_m": 2.743,
+   "yuk_m": 3.87
+  },
+  "aurora-low-lunge-back-bind-lift": {
+   "cerceve_m": 3.722,
+   "gen_m": 2.518,
+   "yuk_m": 3.424
+  },
+  "aurora-standing-leg-hold-forward": {
+   "cerceve_m": 4.124,
+   "gen_m": 3.07,
+   "yuk_m": 3.794
+  },
+  "aurora-mermaid-seated-arch": {
+   "cerceve_m": 3.235,
+   "gen_m": 2.188,
+   "yuk_m": 2.977
+  },
+  "aurora-arabesque-arms-up": {
+   "cerceve_m": 4.963,
+   "gen_m": 2.428,
+   "yuk_m": 4.566
+  },
+  "aurora-tiger-kneel-leg-up": {
+   "cerceve_m": 3.128,
+   "gen_m": 3.343,
+   "yuk_m": 2.878
+  },
+  "aurora-walking-stance-arms-up": {
+   "cerceve_m": 4.803,
+   "gen_m": 2.069,
+   "yuk_m": 4.419
+  },
+  "aurora-split-stance-arms-forward-back": {
+   "cerceve_m": 3.912,
+   "gen_m": 2.891,
+   "yuk_m": 3.599
+  },
+  "aurora-wide-stance-side-bend-arm-over": {
+   "cerceve_m": 3.891,
+   "gen_m": 2.797,
+   "yuk_m": 3.579
+  },
+  "aurora-low-squat-arms-forward": {
+   "cerceve_m": 2.55,
+   "gen_m": 2.133,
+   "yuk_m": 2.316
+  },
+  "aurora-lunge-arms-back-wings": {
+   "cerceve_m": 3.967,
+   "gen_m": 2.937,
+   "yuk_m": 3.65
+  },
+  "aurora-horse-stance-arms-diagonal": {
+   "cerceve_m": 4.341,
+   "gen_m": 2.789,
+   "yuk_m": 3.993
+  },
+  "aurora-lizard-lunge-arms-up": {
+   "cerceve_m": 3.985,
+   "gen_m": 3.045,
+   "yuk_m": 3.666
+  },
+  "aurora-gate-side-bend-over": {
+   "cerceve_m": 3.36,
+   "gen_m": 3.76,
+   "yuk_m": 2.744
+  },
+  "aurora-kneeling-lunge-prayer-twist": {
+   "cerceve_m": 3.409,
+   "gen_m": 2.715,
+   "yuk_m": 3.136
+  },
+  "aurora-warrior-reverse-reach": {
+   "cerceve_m": 4.695,
+   "gen_m": 2.601,
+   "yuk_m": 4.319
+  }
+ }
+}

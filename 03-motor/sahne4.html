@@ -440,7 +440,8 @@ function boksorCiz(o, u, x, y, boy, carpma) {
   const B = BOKSOR[o];
   if (!B.gard.length) return;
   let im;
-  if (carpma !== null && u >= carpma && u < carpma + 0.5 && B.jab.length) im = B.jab[Math.min(B.jab.length - 1, Math.floor((u - carpma) / 0.5 * B.jab.length))];
+  if (carpma === 'jab' && B.jab.length) im = B.jab[Math.floor(u * 16) % B.jab.length];        // yakın plan: jab döngüsü
+  else if (carpma !== null && u >= carpma && u < carpma + 0.5 && B.jab.length) im = B.jab[Math.min(B.jab.length - 1, Math.floor((u - carpma) / 0.5 * B.jab.length))];
   else im = B.gard[Math.floor(u * 14) % B.gard.length];
   const w = boy * im.width / im.height;
   cx.save(); cx.translate(x, y);
@@ -448,50 +449,177 @@ function boksorCiz(o, u, x, y, boy, carpma) {
   cx.drawImage(im, -w / 2, -boy, w, boy);
   cx.restore();
 }
+// REF-057 açılışı (kare kare incelendi, 20 Eki 2026): (1) çapraz renk bantları, her bantta karakter yakın plan yumruk +
+// patlama rozetinde P1/P2 + kalpli can barı; (2) VS ekranı: zikzak şimşekle bölünmüş renkli paneller (noktalı doku),
+// tam boy karakterler + renkli parlama + elektrik kıvılcımı, ortada sivri patlama rozeti üstünde iki renkli eğik VS,
+// altta eğik P1/P2. Bizde 2 oyuncu KARŞILIKLI (kullanıcı): P1 mavi solda sağa bakar, P2 pembe sağda (aynalı).
+function patlamaSekli(x, y, r, uc, dolgu, kontur, egim = 0, sivri = 0.62) {
+  cx.save(); cx.translate(x, y); cx.rotate(egim);
+  cx.beginPath();
+  for (let i = 0; i < uc * 2; i++) {
+    const a = i / (uc * 2) * 6.283, rr = r * (i % 2 ? sivri + 0.12 * ((i * 7) % 3) / 2 : 1);
+    i ? cx.lineTo(Math.cos(a) * rr, Math.sin(a) * rr) : cx.moveTo(Math.cos(a) * rr, Math.sin(a) * rr);
+  }
+  cx.closePath();
+  cx.lineJoin = 'round'; cx.lineWidth = r * 0.09; cx.strokeStyle = kontur; cx.stroke();
+  cx.fillStyle = dolgu; cx.fill();
+  cx.restore();
+}
+function noktaDoku(x0, y0, w, h, renk, alfa) {
+  cx.save(); cx.beginPath(); cx.rect(x0, y0, w, h); cx.clip();
+  const ad = 18 * k;
+  for (let y = y0; y < y0 + h; y += ad) for (let x = x0 + ((y / ad) % 2) * ad / 2; x < x0 + w; x += ad) {
+    const r = ad * 0.32 * (0.35 + 0.65 * ((y - y0) / h));
+    cx.fillStyle = hex(renk, alfa); cx.beginPath(); cx.arc(x, y, r, 0, 6.283); cx.fill();
+  }
+  cx.restore();
+}
+function parilti4(x, y, r, a) {
+  cx.save(); cx.globalAlpha = a; cx.fillStyle = '#ffffff'; cx.shadowColor = '#ffffff'; cx.shadowBlur = r;
+  cx.beginPath(); cx.moveTo(x, y - r); cx.quadraticCurveTo(x, y, x + r * 0.32, y); cx.quadraticCurveTo(x, y, x, y + r);
+  cx.quadraticCurveTo(x, y, x - r * 0.32, y); cx.quadraticCurveTo(x, y, x, y - r); cx.fill();
+  cx.beginPath(); cx.moveTo(x - r * 0.7, y); cx.quadraticCurveTo(x, y, x, y - r * 0.22); cx.quadraticCurveTo(x, y, x + r * 0.7, y);
+  cx.quadraticCurveTo(x, y, x, y + r * 0.22); cx.quadraticCurveTo(x, y, x - r * 0.7, y); cx.fill();
+  cx.restore();
+}
+function elektrik(x, y, r, renk, t, tohum) {
+  const rr = rng(Math.floor(t * 15) + tohum);
+  cx.save(); cx.globalCompositeOperation = 'lighter'; cx.lineJoin = 'round';
+  for (let j = 0; j < 5; j++) {
+    let a = rr() * 6.283, px = x + Math.cos(a) * r * (0.6 + 0.4 * rr()), py = y + Math.sin(a) * r * 1.3 * (0.6 + 0.4 * rr());
+    cx.beginPath(); cx.moveTo(px, py);
+    for (let s = 0; s < 6; s++) { px += (rr() - 0.5) * 70 * k; py += (rr() - 0.5) * 70 * k; cx.lineTo(px, py); }
+    cx.strokeStyle = hex(renk, 0.9); cx.lineWidth = 5 * k; cx.shadowColor = renk; cx.shadowBlur = 18 * k; cx.stroke();
+    cx.strokeStyle = 'rgba(255,255,255,0.95)'; cx.lineWidth = 1.8 * k; cx.stroke();
+  }
+  cx.restore();
+}
+function canBari(x, y, renk, ters) {
+  const s = ters ? -1 : 1;
+  cx.save(); cx.translate(x, y); cx.scale(s, 1);
+  cx.fillStyle = '#ffffff'; cx.strokeStyle = '#1a0630'; cx.lineWidth = 4 * k;
+  cx.beginPath(); cx.moveTo(0, 10 * k); cx.bezierCurveTo(-26 * k, -8 * k, -10 * k, -26 * k, 0, -12 * k);
+  cx.bezierCurveTo(10 * k, -26 * k, 26 * k, -8 * k, 0, 10 * k); cx.fill(); cx.stroke();
+  cx.fillStyle = 'rgba(10,10,40,0.6)'; cx.beginPath(); cx.roundRect(30 * k, -12 * k, 300 * k, 24 * k, 12 * k); cx.fill();
+  for (let i = 0; i < 9; i++) { cx.fillStyle = i < 7 ? renk : 'rgba(255,255,255,0.25)'; cx.fillRect(38 * k + i * 32 * k, -7 * k, 26 * k, 14 * k); }
+  cx.restore();
+}
+function pYazi(m, x, y, px, renk, a) {
+  patlamaSekli(x, y + px * 0.05, px * 0.78, 12, '#ffffff', '#1a0630', -0.1, 0.72);
+  cx.save(); cx.translate(x, y); cx.transform(1, 0, -0.22, 1, 0, 0);
+  yazi(m, 0, 0, px, ['#ffffff', renk, renk], '#ffffff', a, renk);
+  cx.restore();
+}
 function acilisCiz(kart, u, t) {
-  isinPatlamasi(t, TEMA.acilisZemin[0], TEMA.acilisZemin[1]);
-  kivilcim(t, u);
-  const GIR = 0.7, CARP = 1.05;                                      // giriş süresi, VS çarpma anı
-  const g = ease(kisit(u / GIR, 0, 1));
-  const boy = H * 0.86, yT = H * 0.97;
-  [['p1', -1, P1], ['p2', 1, P2]].forEach(([o, s, renk]) => {
-    const x = W / 2 + s * lerp(W * 0.75, W * 0.24, g);
-    cx.save(); cx.globalCompositeOperation = 'lighter';
-    const gg = cx.createRadialGradient(x, yT, 0, x, yT, 320 * k);
-    gg.addColorStop(0, hex(renk, 0.75)); gg.addColorStop(1, hex(renk, 0));
-    cx.fillStyle = gg; cx.beginPath(); cx.ellipse(x, yT, 320 * k, 70 * k, 0, 0, 6.283); cx.fill();
-    if (g < 1) for (let j = 0; j < 9; j++) {                         // giriş hız çizgileri
-      const yy = H * (0.25 + 0.075 * j), L = (300 + 200 * ((j * 37) % 5) / 5) * k * (1 - g);
-      cx.strokeStyle = hex(renk, 0.8 * (1 - g)); cx.lineWidth = (6 + j % 3 * 3) * k;
-      cx.beginPath(); cx.moveTo(x + s * 160 * k, yy); cx.lineTo(x + s * (160 * k + L), yy); cx.stroke();
-    }
+  const BANT = Math.min(1.7, kart.sure * 0.36);                      // 1. bölüm: çapraz bantlar
+  const RENKLER = [[P1, TEMA.p1koyu, TEMA.p1acik], [P2, TEMA.p2koyu, TEMA.p2acik]];
+  if (u < BANT) {
+    const g = ease(kisit(u / 0.35, 0, 1));
+    // iki çapraz bant: üst P1 (soldan girer), alt P2 (sağdan girer); aralarında beyaz şimşekli ayrım
+    const egim = H * 0.10;
+    [[0, -1], [1, 1]].forEach(([i, s]) => {
+      const [ana, koyu, acik] = RENKLER[i];
+      const y0 = i === 0 ? 0 : H * 0.5 - egim, y1 = i === 0 ? H * 0.5 + egim : H;
+      const ofs = s * W * (1 - g);
+      cx.save(); cx.translate(ofs, 0);
+      cx.beginPath();
+      if (i === 0) { cx.moveTo(0, 0); cx.lineTo(W, 0); cx.lineTo(W, H * 0.5 - egim); cx.lineTo(0, H * 0.5 + egim); }
+      else { cx.moveTo(0, H * 0.5 + egim); cx.lineTo(W, H * 0.5 - egim); cx.lineTo(W, H); cx.lineTo(0, H); }
+      cx.closePath(); cx.clip();
+      const gr = cx.createLinearGradient(i === 0 ? 0 : W, 0, i === 0 ? W : 0, 0);
+      gr.addColorStop(0, koyu); gr.addColorStop(0.55, ana); gr.addColorStop(1, acik);
+      cx.fillStyle = gr; cx.fillRect(0, y0, W, y1 - y0);
+      noktaDoku(0, y0, W, y1 - y0, '#ffffff', 0.10);
+      cx.save(); cx.globalCompositeOperation = 'lighter';                // hız çizgileri
+      for (let j = 0; j < 14; j++) {
+        const yy = y0 + (y1 - y0) * ((j * 0.37) % 1), L = (200 + 300 * ((j * 13) % 7) / 7) * k;
+        const xx = ((t * 1400 * k * (i ? -1 : 1) + j * 380 * k) % (W + L) + W + L) % (W + L) - L;
+        cx.fillStyle = 'rgba(255,255,255,0.18)'; cx.fillRect(xx, yy, L, 4 * k);
+      }
+      cx.restore();
+      // karakter yakın plan (gövdenin üst yarısı), jab döngüsü
+      const bx = i === 0 ? W * 0.40 : W * 0.60, boy = H * 1.25;
+      cx.save(); cx.shadowColor = ana; cx.shadowBlur = 40 * k;
+      boksorCiz(i === 0 ? 'p1' : 'p2', u, bx, i === 0 ? H * 0.95 : H * 1.42, boy, 'jab');
+      cx.restore();
+      cx.restore();
+      for (let j = 0; j < 5; j++) parilti4(ofs + W * (0.1 + 0.2 * j + 0.05 * i), y0 + (y1 - y0) * (0.25 + 0.4 * ((j * 3 + i) % 4) / 4), (18 + 10 * ((j + i) % 3)) * k, 0.5 + 0.5 * Math.sin(t * 6 + j));
+      const px = i === 0 ? W * 0.80 : W * 0.20, py = i === 0 ? H * 0.22 : H * 0.78;
+      pYazi(i === 0 ? 'P1' : 'P2', px + ofs, py, 170 * k * (1 + 0.15 * Math.exp(-u * 6)), ana, g);
+      canBari(i === 0 ? 40 * k + ofs : W - 40 * k + ofs, i === 0 ? H * 0.06 : H * 0.94, ana, i === 1);
+    });
+    // bantların arasındaki beyaz şimşekli kenar
+    cx.save(); cx.strokeStyle = '#ffffff'; cx.lineWidth = 12 * k; cx.shadowColor = '#ffffff'; cx.shadowBlur = 30 * k;
+    cx.beginPath(); cx.moveTo(0, H * 0.5 + egim); cx.lineTo(W * 0.45, H * 0.5 + egim * 0.1); cx.lineTo(W * 0.5, H * 0.5 + egim * 0.35);
+    cx.lineTo(W, H * 0.5 - egim); cx.stroke(); cx.restore();
+    return;
+  }
+  // 2. bölüm: VS ekranı
+  const u2 = u - BANT;
+  const zig = [[W * 0.53, -10], [W * 0.47, H * 0.33], [W * 0.535, H * 0.36], [W * 0.46, H * 0.70], [W * 0.525, H * 0.72], [W * 0.47, H + 10]];
+  [[0, P1, TEMA.p1koyu], [1, P2, TEMA.p2koyu]].forEach(([i, ana, koyu]) => {
+    cx.save(); cx.beginPath();
+    if (i === 0) { cx.moveTo(0, 0); zig.forEach(p => cx.lineTo(p[0], p[1])); cx.lineTo(0, H); }
+    else { cx.moveTo(W, 0); zig.forEach(p => cx.lineTo(p[0], p[1])); cx.lineTo(W, H); }
+    cx.closePath(); cx.clip();
+    const gx = i === 0 ? W * 0.25 : W * 0.75;
+    const gr = cx.createRadialGradient(gx, H * 0.5, 0, gx, H * 0.5, W * 0.5);
+    gr.addColorStop(0, ana); gr.addColorStop(0.55, koyu); gr.addColorStop(1, '#0a0420');
+    cx.fillStyle = gr; cx.fillRect(0, 0, W, H);
+    noktaDoku(i === 0 ? 0 : W * 0.45, 0, W * 0.55, H, '#ffffff', 0.08);
     cx.restore();
-    boksorCiz(o, u, x, yT, boy, CARP);
-    yazi(o === 'p1' ? 'PLAYER 1' : 'PLAYER 2', x, H * 0.12, 70 * k, ['#ffffff', o === 'p1' ? TEMA.p1acik : TEMA.p2acik, renk], '#06122e', g, renk);
   });
-  if (u >= CARP) {                                                   // VS çarpması: flaş + şok halkası + kıvılcım
-    const q = u - CARP;
-    if (q < 0.25) { cx.save(); cx.fillStyle = `rgba(255,255,255,${0.7 * (1 - q / 0.25)})`; cx.fillRect(0, 0, W, H); cx.restore(); }
+  // şimşek ayrım çizgisi (iki renkli parlama + beyaz çekirdek)
+  cx.save(); cx.lineJoin = 'miter';
+  const titre = Math.sin(u2 * 40) * 3 * k;
+  for (const [renk, gen] of [[P1, 34], [P2, 22], ['#ffffff', 9]]) {
+    cx.strokeStyle = renk; cx.lineWidth = gen * k; cx.shadowColor = renk; cx.shadowBlur = 30 * k;
+    cx.beginPath(); zig.forEach((p, j) => j ? cx.lineTo(p[0] + titre, p[1]) : cx.moveTo(p[0] + titre, p[1])); cx.stroke();
+  }
+  cx.restore();
+  // karakterler: tam boy, karşılıklı, renkli parlama + elektrik
+  const gir = ease(kisit(u2 / 0.4, 0, 1));
+  [['p1', P1, W * 0.26, -1], ['p2', P2, W * 0.74, 1]].forEach(([o, renk, x, s], i) => {
+    const xx = x + s * W * 0.3 * (1 - gir);
     cx.save(); cx.globalCompositeOperation = 'lighter';
-    for (let j = 0; j < 2; j++) {
-      const r2 = Math.min(1, (q - j * 0.12) / 0.6); if (r2 <= 0) continue;
-      cx.strokeStyle = `rgba(255,255,255,${(1 - r2) * 0.9})`; cx.lineWidth = 18 * k * (1 - r2);
-      cx.beginPath(); cx.arc(W / 2, H * 0.5, (80 + 700 * r2) * k, 0, 6.283); cx.stroke();
-    }
-    const r = rng(4242);
-    for (let j = 0; j < 46; j++) {
-      const ang = r() * 6.283, sp = (300 + 900 * r()) * k, d = sp * Math.min(q, 0.8), a = 1 - Math.min(1, q / 0.8);
-      if (a <= 0) break;
-      cx.fillStyle = hex(['#ffffff', '#ffe27a', P1, P2][j % 4], a);
-      cx.beginPath(); cx.arc(W / 2 + Math.cos(ang) * d, H * 0.5 + Math.sin(ang) * d, (4 + 6 * r()) * k, 0, 6.283); cx.fill();
-    }
+    const au = cx.createRadialGradient(xx, H * 0.52, 0, xx, H * 0.52, H * 0.45);
+    au.addColorStop(0, hex(renk, 0.55)); au.addColorStop(1, hex(renk, 0));
+    cx.fillStyle = au; cx.fillRect(xx - H * 0.45, H * 0.07, H * 0.9, H * 0.9);
     cx.restore();
-    const vs = q < 0.18 ? lerp(3.2, 0.9, ease(q / 0.18)) : 1 + 0.1 * Math.exp(-(q - 0.18) * 6) * Math.sin((q - 0.18) * 30) + 0.04 * Math.sin(u * 8);
-    cx.save(); cx.translate(W / 2, H * 0.5); cx.rotate(-0.08);
-    yazi('VS', 0, 0, 300 * k * vs, ['#ffffff', '#fff27a', ALTIN, '#ff6a00'], '#2a0a46', Math.min(1, q / 0.06), '#ffffff');
+    cx.save(); cx.shadowColor = renk; cx.shadowBlur = 45 * k;
+    boksorCiz(o, u2, xx, H * 0.88, H * 0.80, null);
     cx.restore();
+    if (gir >= 1) elektrik(xx, H * 0.5, H * 0.26, renk, t, 77 + i * 31);
+    pYazi(o === 'p1' ? 'P1' : 'P2', xx, H * 0.89, 150 * k, renk, gir);
+  });
+  // VS rozeti: girişte büyükten çarpar, sonra hafif nabız
+  const q = u2 - 0.25;
+  if (q >= 0) {
+    if (q < 0.18) { cx.save(); cx.fillStyle = `rgba(255,255,255,${0.6 * (1 - q / 0.18)})`; cx.fillRect(0, 0, W, H); cx.restore(); }
+    const vs = q < 0.16 ? lerp(2.6, 0.92, ease(q / 0.16)) : 1 + 0.08 * Math.exp(-(q - 0.16) * 6) * Math.sin((q - 0.16) * 30) + 0.03 * Math.sin(u * 7);
+    const vx = W * 0.5, vy = H * 0.47, R = 190 * k * vs;
+    patlamaSekli(vx, vy, R, 14, '#ffffff', '#1a0630', -0.12 + 0.02 * Math.sin(u * 3), 0.66);
+    patlamaSekli(vx, vy, R * 0.80, 14, '#fff7d6', '#ffffff', 0.1, 0.70);
+    cx.save(); cx.translate(vx, vy); cx.rotate(-0.12); cx.transform(1, 0, -0.18, 1, 0, 0);
+    const px = 175 * k * vs;
+    cx.font = F(px); const wV = cx.measureText('V').width, wS = cx.measureText('S').width;
+    yazi('V', -wS / 2 + 4 * k, 0, px, ['#ffffff', TEMA.p1acik, P1, TEMA.p1koyu], '#1a0630', Math.min(1, q / 0.05), null);
+    yazi('S', wV / 2 - 4 * k, 0, px, ['#ffffff', TEMA.p2acik, P2, TEMA.p2koyu], '#1a0630', Math.min(1, q / 0.05), null);
+    cx.restore();
+    parilti4(vx - R * 0.72, vy - R * 0.72, 34 * k * vs, 0.6 + 0.4 * Math.sin(u * 9));
+    if (q < 0.7) {                                                   // çarpma kıvılcımları
+      cx.save(); cx.globalCompositeOperation = 'lighter';
+      const r = rng(4242);
+      for (let j = 0; j < 40; j++) {
+        const ang = r() * 6.283, d = (250 + 700 * r()) * k * q, a = 1 - q / 0.7;
+        cx.fillStyle = hex(['#ffffff', '#ffe27a', P1, P2][j % 4], a);
+        cx.beginPath(); cx.arc(vx + Math.cos(ang) * d, vy + Math.sin(ang) * d, (4 + 6 * r()) * k, 0, 6.283); cx.fill();
+      }
+      cx.restore();
+    }
   }
 }
+
 function nasilCiz(kart, u, t) {
   // HOW TO PLAY: bizim animasyonumuz - duvar paneli + oyuk, siyah siluet oyuğa kayar, oturunca PERFECT!
   isinPatlamasi(t, TEMA.acilisZemin[0], TEMA.acilisZemin[1]);

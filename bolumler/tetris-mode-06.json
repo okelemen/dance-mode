@@ -2,7 +2,7 @@
  "seri": "TETRIS MODE",
  "bolum": "tetris-mode-06",
  "bpm": 128.0,
- "toplam_olcu": 160,
+ "toplam_olcu": 161,
  "toplam_duvar": 22,
  "zaman": {
   "kart": 1.875,
@@ -15,31 +15,31 @@
   {
    "tip": "acilis",
    "t": 0.0,
-   "sure": 3.75
+   "sure": 5.625
   },
   {
    "tip": "yazi",
    "metin": "WELCOME,",
    "alt": "CHALLENGERS!",
-   "t": 3.75,
+   "t": 5.625,
    "sure": 2.8125
   },
   {
    "tip": "yazi",
    "metin": "TWO PLAYERS.",
    "alt": "ONE CROWN.",
-   "t": 6.5625,
+   "t": 8.4375,
    "sure": 2.8125
   },
   {
    "tip": "nasil",
    "metin": "COPY THE SHAPE",
    "alt": "BEFORE THE WALL HITS YOU!",
-   "t": 9.375,
+   "t": 11.25,
    "sure": 5.625
   },
   {
-   "t": 15.0,
+   "t": 16.875,
    "sure": 3.75,
    "tip": "tur",
    "tur": 1,
@@ -47,25 +47,25 @@
    "alt": "WARM UP"
   },
   {
-   "t": 18.75,
+   "t": 20.625,
    "sure": 3.75,
    "tip": "basla"
   },
   {
    "tip": "yazi",
    "metin": "SOLID START!",
-   "t": 101.25,
+   "t": 103.125,
    "sure": 2.8125
   },
   {
    "tip": "yazi",
    "metin": "WHO'S AHEAD",
    "alt": "RIGHT NOW?",
-   "t": 104.0625,
+   "t": 105.9375,
    "sure": 2.8125
   },
   {
-   "t": 106.875,
+   "t": 108.75,
    "sure": 3.75,
    "tip": "tur",
    "tur": 2,
@@ -75,18 +75,18 @@
   {
    "tip": "yazi",
    "metin": "IT'S HEATING UP!",
-   "t": 189.375,
+   "t": 191.25,
    "sure": 2.8125
   },
   {
    "tip": "yazi",
    "metin": "NOBODY'S",
    "alt": "QUITTING!",
-   "t": 192.1875,
+   "t": 194.0625,
    "sure": 2.8125
   },
   {
-   "t": 195.0,
+   "t": 196.875,
    "sure": 3.75,
    "tip": "tur",
    "tur": 3,
@@ -97,18 +97,18 @@
    "tip": "yazi",
    "metin": "BATTLE",
    "alt": "COMPLETE!",
-   "t": 288.75,
+   "t": 290.625,
    "sure": 2.8125
   },
   {
    "tip": "yazi",
    "metin": "WHO WON?",
    "alt": "TELL US BELOW!",
-   "t": 291.5625,
+   "t": 293.4375,
    "sure": 2.8125
   },
   {
-   "t": 294.375,
+   "t": 296.25,
    "sure": 5.625,
    "tip": "abone"
   }
@@ -117,7 +117,7 @@
   {
    "no": 1,
    "tur": 1,
-   "t0": 22.5,
+   "t0": 24.375,
    "p1": "aurora-airplane-lean-back-arms",
    "p2": "aurora-victory-lunge-side",
    "ovgu": "NAILED IT!"
@@ -125,7 +125,7 @@
   {
    "no": 2,
    "tur": 1,
-   "t0": 33.75,
+   "t0": 35.625,
    "p1": "aurora-heel-raise-reach-forward",
    "p2": "aurora-hip-sway-arms-wave",
    "ovgu": "SMOOTH!"
@@ -133,7 +133,7 @@
   {
    "no": 3,
    "tur": 1,
-   "t0": 45.0,
+   "t0": 46.875,
    "p1": "aurora-tiptoe-arms-forward-bend",
    "p2": "aurora-dancer-arms-fan",
    "ovgu": "GREAT FIT!"
@@ -141,7 +141,7 @@
   {
    "no": 4,
    "tur": 1,
-   "t0": 56.25,
+   "t0": 58.125,
    "p1": "aurora-walking-stance-arms-up",
    "p2": "aurora-crescent-arms-wide",
    "ovgu": "SO CLOSE!"
@@ -149,7 +149,7 @@
   {
    "no": 5,
    "tur": 1,
-   "t0": 67.5,
+   "t0": 69.375,
    "p1": "aurora-mountain-lean-arms-back",
    "p2": "aurora-split-stance-arms-forward-back",
    "ovgu": "BRILLIANT!"
@@ -157,7 +157,7 @@
   {
    "no": 6,
    "tur": 1,
-   "t0": 78.75,
+   "t0": 80.625,
    "p1": "aurora-wide-stance-side-bend-arm-over",
    "p2": "aurora-side-step-reach-diagonal",
    "ovgu": "LEGEND!"
@@ -165,7 +165,7 @@
   {
    "no": 7,
    "tur": 1,
-   "t0": 90.0,
+   "t0": 91.875,
    "p1": "aurora-half-moon-side-reach",
    "p2": "aurora-tree-arms-crown",
    "ovgu": "NAILED IT!"
@@ -173,7 +173,7 @@
   {
    "no": 8,
    "tur": 2,
-   "t0": 110.625,
+   "t0": 112.5,
    "p1": "aurora-leg-back-arms-forward",
    "p2": "aurora-pyramid-hands-back",
    "ovgu": "SMOOTH!"
@@ -181,7 +181,7 @@
   {
    "no": 9,
    "tur": 2,
-   "t0": 121.875,
+   "t0": 123.75,
    "p1": "aurora-kneeling-side-stretch-leg-out",
    "p2": "aurora-low-lunge-twist-open",
    "ovgu": "GREAT FIT!"
@@ -189,7 +189,7 @@
   {
    "no": 10,
    "tur": 2,
-   "t0": 133.125,
+   "t0": 135.0,
    "p1": "aurora-warrior-lean-forward-arms-back",
    "p2": "aurora-lunge-cross-reach",
    "ovgu": "SO CLOSE!"
@@ -197,7 +197,7 @@
   {
    "no": 11,
    "tur": 2,
-   "t0": 144.375,
+   "t0": 146.25,
    "p1": "aurora-low-squat-arms-forward",
    "p2": "aurora-squat-arms-up-lean",
    "ovgu": "BRILLIANT!"
@@ -205,7 +205,7 @@
   {
    "no": 12,
    "tur": 2,
-   "t0": 155.625,
+   "t0": 157.5,
    "p1": "aurora-single-leg-squat-prep",
    "p2": "aurora-horse-stance-arms-diagonal",
    "ovgu": "LEGEND!"
@@ -213,7 +213,7 @@
   {
    "no": 13,
    "tur": 2,
-   "t0": 166.875,
+   "t0": 168.75,
    "p1": "aurora-seated-hug-knees",
    "p2": "aurora-star-balance-lean",
    "ovgu": "NAILED IT!"
@@ -221,7 +221,7 @@
   {
    "no": 14,
    "tur": 2,
-   "t0": 178.125,
+   "t0": 180.0,
    "p1": "aurora-lunge-arms-back-wings",
    "p2": "aurora-knee-pull-lean",
    "ovgu": "SMOOTH!"
@@ -229,7 +229,7 @@
   {
    "no": 15,
    "tur": 3,
-   "t0": 198.75,
+   "t0": 200.625,
    "p1": "aurora-boat-arms-back",
    "p2": "aurora-arabesque-arms-up",
    "ovgu": "GREAT FIT!"
@@ -237,7 +237,7 @@
   {
    "no": 16,
    "tur": 3,
-   "t0": 210.0,
+   "t0": 211.875,
    "p1": "aurora-gate-side-bend-over",
    "p2": "aurora-seated-leg-hold-stretch",
    "ovgu": "SO CLOSE!"
@@ -245,7 +245,7 @@
   {
    "no": 17,
    "tur": 3,
-   "t0": 221.25,
+   "t0": 223.125,
    "p1": "aurora-lizard-lunge-arms-up",
    "p2": "aurora-mermaid-seated-arch",
    "ovgu": "BRILLIANT!"
@@ -253,7 +253,7 @@
   {
    "no": 18,
    "tur": 3,
-   "t0": 232.5,
+   "t0": 234.375,
    "p1": "aurora-standing-leg-hold-forward",
    "p2": "aurora-half-split-arms-up",
    "ovgu": "LEGEND!"
@@ -261,7 +261,7 @@
   {
    "no": 19,
    "tur": 3,
-   "t0": 243.75,
+   "t0": 245.625,
    "p1": "aurora-low-lunge-back-bind-lift",
    "p2": "aurora-camel-prep-one-hand-heel",
    "ovgu": "NAILED IT!"
@@ -269,7 +269,7 @@
   {
    "no": 20,
    "tur": 3,
-   "t0": 255.0,
+   "t0": 256.875,
    "p1": "aurora-king-pigeon-prep",
    "p2": "aurora-warrior-reverse-reach",
    "ovgu": "SMOOTH!"
@@ -277,7 +277,7 @@
   {
    "no": 21,
    "tur": 3,
-   "t0": 266.25,
+   "t0": 268.125,
    "p1": "aurora-extended-side-angle-bind",
    "p2": "aurora-tiger-kneel-leg-up",
    "ovgu": "GREAT FIT!"
@@ -285,26 +285,24 @@
   {
    "no": 22,
    "tur": 3,
-   "t0": 277.5,
+   "t0": 279.375,
    "p1": "aurora-dancer-deep-reach",
    "p2": "aurora-kneeling-lunge-prayer-twist",
    "ovgu": "SO CLOSE!"
   }
  ],
  "abone": [
-  19.0,
-  30.0,
+  21.0,
   45.0,
   60.0,
   75.0,
   90.0,
-  111.0,
+  112.5,
   135.0,
   150.0,
   165.0,
   180.0,
-  199.0,
-  210.0,
+  201.0,
   225.0,
   240.0,
   255.0,
