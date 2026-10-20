@@ -355,10 +355,11 @@ def gezegen(rnd):
 def aurora(rnd):
     """REF-057: gokte pembe/mor/camgobegi kuzey isigi perdeleri, ufukta karli buzlu daglar, onde parlak deniz + buz kutleleri."""
     renkler = ("#ff5ad8", "#9b6bff", "#3fe0ff", "#7dffd8")
-    for i in range(7):
-        x0, y0 = rnd.uniform(-40, 40), rnd.uniform(40, 54)
-        bpy.ops.mesh.primitive_plane_add(size=1, location=(x0, y0, 22 + rnd.uniform(-3, 5)), rotation=(math.pi / 2, 0, rnd.uniform(-0.35, 0.35)))
-        p = bpy.context.active_object; p.scale = (rnd.uniform(28, 46), rnd.uniform(16, 24), 1)
+    # deneme 1: 7 perde gogun tamamini dikey cizgiyle doldurdu (yagmur perdesi gibi) -> 4 perde, yalniz ust yari, yumusak
+    for i in range(4):
+        x0, y0 = -36 + i * 24 + rnd.uniform(-6, 6), rnd.uniform(46, 54)
+        bpy.ops.mesh.primitive_plane_add(size=1, location=(x0, y0, 31 + rnd.uniform(-2, 3)), rotation=(math.pi / 2, 0, rnd.uniform(-0.35, 0.35)))
+        p = bpy.context.active_object; p.scale = (rnd.uniform(34, 48), rnd.uniform(9, 13), 1)
         bpy.ops.object.mode_set(mode="EDIT"); bpy.ops.mesh.subdivide(number_cuts=40); bpy.ops.object.mode_set(mode="OBJECT")
         faz, gen = rnd.uniform(0, 6.28), rnd.uniform(1.5, 3.2)
         for v in p.data.vertices:                      # perde dalgasi: yerel x boyunca derinlik + yukseklikte kivrim
@@ -371,14 +372,14 @@ def aurora(rnd):
         e = cr.elements.new(0.12); e.color = (1, 1, 1, 1)
         e = cr.elements.new(0.45); e.color = (0.35, 0.35, 0.35, 1)
         nt.links.new(sep.outputs["Y"], rmp.inputs[0])
-        wv = nt.nodes.new("ShaderNodeTexWave"); wv.bands_direction = "X"; wv.inputs["Scale"].default_value = rnd.uniform(6, 11)
-        wv.inputs["Distortion"].default_value = 4.0; wv.inputs["Detail"].default_value = 2
+        wv = nt.nodes.new("ShaderNodeTexWave"); wv.bands_direction = "X"; wv.inputs["Scale"].default_value = rnd.uniform(2.5, 4.0)
+        wv.inputs["Distortion"].default_value = 1.4; wv.inputs["Detail"].default_value = 2
         nt.links.new(tc.outputs["Generated"], wv.inputs["Vector"])
         mu = nt.nodes.new("ShaderNodeMath"); mu.operation = "MULTIPLY"
         nt.links.new(rmp.outputs[0], mu.inputs[0]); nt.links.new(wv.outputs["Fac"], mu.inputs[1])
-        mu2 = nt.nodes.new("ShaderNodeMath"); mu2.operation = "MULTIPLY"; mu2.inputs[1].default_value = 0.85
+        mu2 = nt.nodes.new("ShaderNodeMath"); mu2.operation = "MULTIPLY"; mu2.inputs[1].default_value = 0.55
         nt.links.new(mu.outputs[0], mu2.inputs[0])
-        em = nt.nodes.new("ShaderNodeEmission"); em.inputs[0].default_value = (*lin(hex3(renkler[i % 4])), 1); em.inputs[1].default_value = 3.2
+        em = nt.nodes.new("ShaderNodeEmission"); em.inputs[0].default_value = (*lin(hex3(renkler[i % 4])), 1); em.inputs[1].default_value = 2.0
         tr = nt.nodes.new("ShaderNodeBsdfTransparent")
         mx = nt.nodes.new("ShaderNodeMixShader")
         nt.links.new(mu2.outputs[0], mx.inputs[0]); nt.links.new(tr.outputs[0], mx.inputs[1]); nt.links.new(em.outputs[0], mx.inputs[2])
