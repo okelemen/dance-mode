@@ -103,6 +103,11 @@ def boksor(oyuncu):
     for p_ in kask.data.polygons:
         p_.use_smooth = True
     EKIP.append((kask, "Head", Matrix.Translation((0, 0.42 * Lh, 0))))
+    # yuz: kask penceresinde Mixamo yuzunun sac/goz ayrintisi dagnik gorunuyordu (deneme 2) -> REF-057 gibi puruzsuz beyaz yuz
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=0.93 * rk, segments=40, ring_count=24)
+    yz = bpy.context.active_object; yz.data.materials.append(mat_jole("yuz_" + oyuncu, (0.96, 0.97, 1.0), emis=0.25, purluk=0.12))
+    bpy.ops.object.shade_smooth(); yz.data.transform(Matrix.Diagonal((1.0, 1.08, 1.0, 1.0)))
+    EKIP.append((yz, "Head", Matrix.Translation((0, 0.42 * Lh, 0))))
     # eldivenler
     rg = 0.062 * boy
     for taraf in ("Left", "Right"):
