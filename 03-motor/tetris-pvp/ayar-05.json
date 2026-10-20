@@ -3,8 +3,8 @@
  "seri": "TETRIS MODE x3",
  "sayfa": "sahne5.html",
  "bolum": "tetris-mode-05",
- "bpm": 132.512,
- "muzik": "Pumpkin Patch Panic.wav (Suno, kullanici 20 Eki 2026); ilk 100 sn 132,5 BPM, sonra ~136 -> tam bolumde muzik-sabitle",
+ "bpm": 134.0,
+ "muzik": "Pumpkin Patch Panic.wav (Suno, kullanici 20 Eki 2026) -> muzik-sabitle --dogrusal --hedef 134 (ilk yari 132,7, ikinci 135,5)",
  "duvar": "duvar-listesi-05.json",
  "giris_kart": "giris",
  "tur_kart": {

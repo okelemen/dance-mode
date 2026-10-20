@@ -1,59 +1,59 @@
 {
  "seri": "TETRIS MODE x3",
  "bolum": "tetris-mode-05",
- "bpm": 130.0,
+ "bpm": 134.0,
  "toplam_olcu": 330,
  "toplam_duvar": 45,
  "zaman": {
-  "kart": 1.8462,
-  "say": 2.7692,
-  "buyu": 5.5385,
-  "gec": 0.9231,
-  "sure": 12.9231
+  "kart": 1.791,
+  "say": 2.6866,
+  "buyu": 5.3731,
+  "gec": 0.8955,
+  "sure": 12.5373
  },
  "kartlar": [
   {
    "t": 0.0,
-   "sure": 3.6923,
+   "sure": 3.5821,
    "tip": "giris"
   },
   {
-   "t": 3.6923,
-   "sure": 3.6923,
+   "t": 3.5821,
+   "sure": 3.5821,
    "tip": "tur",
    "tur": 1,
    "metin": "ROUND 1",
    "alt": "BEGINNER"
   },
   {
-   "t": 7.3846,
-   "sure": 3.6923,
+   "t": 7.1642,
+   "sure": 3.5821,
    "tip": "basla"
   },
   {
-   "t": 204.9234,
-   "sure": 3.6923,
+   "t": 198.8058,
+   "sure": 3.5821,
    "tip": "tur",
    "tur": 2,
    "metin": "ROUND 2",
    "alt": "CHALLENGER"
   },
   {
-   "t": 402.4622,
-   "sure": 3.6923,
+   "t": 390.4474,
+   "sure": 3.5821,
    "tip": "tur",
    "tur": 3,
    "metin": "ROUND 3",
    "alt": "FINAL LEVEL"
   },
   {
-   "t": 600.001,
-   "sure": 3.6923,
+   "t": 582.0889,
+   "sure": 3.5821,
    "tip": "wrap"
   },
   {
-   "t": 603.6933,
-   "sure": 5.5385,
+   "t": 585.671,
+   "sure": 5.3731,
    "tip": "abone"
   }
  ],
@@ -61,7 +61,7 @@
   {
    "no": 1,
    "tur": 1,
-   "t0": 11.0769,
+   "t0": 10.7463,
    "p1": "spider-half-cactus-wide",
    "p2": "cauldron-w-reach-knee-up",
    "p3": "scarecrow-diag-hip-tree-lean-r",
@@ -70,7 +70,7 @@
   {
    "no": 2,
    "tur": 1,
-   "t0": 24.0,
+   "t0": 23.2836,
    "p1": "ghost-v-t-leg-out",
    "p2": "ghost-w-reach-curtsy",
    "p3": "spell-hook-head-hop",
@@ -79,7 +79,7 @@
   {
    "no": 3,
    "tur": 1,
-   "t0": 36.9231,
+   "t0": 35.8209,
    "p1": "zombie-diagonal-side-tap",
    "p2": "lantern-w-reach-side-tap",
    "p3": "bat-hook-t-leg-out-lean-r",
@@ -88,7 +88,7 @@
   {
    "no": 4,
    "tur": 1,
-   "t0": 49.8462,
+   "t0": 48.3582,
    "p1": "werewolf-v-t-stand",
    "p2": "tombstone-elbows-down-leg-out",
    "p3": "bat-t-salute-leg-out",
@@ -97,7 +97,7 @@
   {
    "no": 5,
    "tur": 1,
-   "t0": 62.7693,
+   "t0": 60.8955,
    "p1": "werewolf-head-t-horse",
    "p2": "goblin-flex-tree",
    "p3": "owl-t-cactus-horse",
@@ -106,7 +106,7 @@
   {
    "no": 6,
    "tur": 1,
-   "t0": 75.6924,
+   "t0": 73.4328,
    "p1": "broom-cactus-tree",
    "p2": "broom-w-knee-up",
    "p3": "zombie-hip-point-stand-lean-r",
@@ -115,7 +115,7 @@
   {
    "no": 7,
    "tur": 1,
-   "t0": 88.6155,
+   "t0": 85.9701,
    "p1": "skeleton-head-t-side-tap",
    "p2": "raven-one-up-stand",
    "p3": "banshee-head-t-leg-out-lean-r",
@@ -124,7 +124,7 @@
   {
    "no": 8,
    "tur": 1,
-   "t0": 101.5386,
+   "t0": 98.5074,
    "p1": "witch-cactus-leg-out",
    "p2": "haunted-reach-horse",
    "p3": "werewolf-hip-hook-horse",
@@ -133,7 +133,7 @@
   {
    "no": 9,
    "tur": 1,
-   "t0": 114.4617,
+   "t0": 111.0447,
    "p1": "graveyard-chest-reach-side-tap",
    "p2": "haunted-t-curtsy",
    "p3": "broom-v-t-curtsy",
@@ -142,7 +142,7 @@
   {
    "no": 10,
    "tur": 1,
-   "t0": 127.3848,
+   "t0": 123.582,
    "p1": "ghoul-head-t-knee-up",
    "p2": "goblin-low-v-stand",
    "p3": "goblin-t-v-horse",
@@ -151,7 +151,7 @@
   {
    "no": 11,
    "tur": 1,
-   "t0": 140.3079,
+   "t0": 136.1193,
    "p1": "owl-half-cactus-stand",
    "p2": "skeleton-wide-reach-soft-knee",
    "p3": "haunted-chest-point-curtsy-lean-r",
@@ -160,7 +160,7 @@
   {
    "no": 12,
    "tur": 1,
-   "t0": 153.231,
+   "t0": 148.6566,
    "p1": "phantom-diagonal-curtsy",
    "p2": "spider-chest-reach-knee-up",
    "p3": "wizard-head-low-kick-lean-l",
@@ -169,7 +169,7 @@
   {
    "no": 13,
    "tur": 1,
-   "t0": 166.1541,
+   "t0": 161.1939,
    "p1": "vampire-v-tree",
    "p2": "cobweb-diag-point-knee-lean-l",
    "p3": "wizard-t-low-curtsy-lean-l",
@@ -178,7 +178,7 @@
   {
    "no": 14,
    "tur": 1,
-   "t0": 179.0772,
+   "t0": 173.7312,
    "p1": "vampire-flex-reach-knee-up",
    "p2": "spider-hip-t-half-goddess-lean-l",
    "p3": "broom-t-salute-curtsy-lean-l",
@@ -187,7 +187,7 @@
   {
    "no": 15,
    "tur": 1,
-   "t0": 192.0003,
+   "t0": 186.2685,
    "p1": "black-cat-flex-reach-horse",
    "p2": "goblin-diag-hip-tap-lean-l",
    "p3": "phantom-hook-t-horse-lean-r",
@@ -196,7 +196,7 @@
   {
    "no": 16,
    "tur": 2,
-   "t0": 208.6157,
+   "t0": 202.3879,
    "p1": "mummy-heel-sit-arms-back",
    "p2": "haunted-deep-goddess-t",
    "p3": "coffin-lunge-archer",
@@ -205,7 +205,7 @@
   {
    "no": 17,
    "tur": 2,
-   "t0": 221.5388,
+   "t0": 214.9252,
    "p1": "broom-stork-arms-back",
    "p2": "potion-side-lunge-w",
    "p3": "werewolf-chair-hip-forward",
@@ -214,7 +214,7 @@
   {
    "no": 18,
    "tur": 2,
-   "t0": 234.4619,
+   "t0": 227.4625,
    "p1": "potion-stork-airplane",
    "p2": "tombstone-side-lunge-reach",
    "p3": "haunted-warrior-hip-low-forward",
@@ -223,7 +223,7 @@
   {
    "no": 19,
    "tur": 2,
-   "t0": 247.385,
+   "t0": 239.9998,
    "p1": "graveyard-stork-diagonal-reach",
    "p2": "ghoul-kneel-diagonal-reach",
    "p3": "vampire-warrior-forward-up",
@@ -232,7 +232,7 @@
   {
    "no": 20,
    "tur": 2,
-   "t0": 260.3081,
+   "t0": 252.5371,
    "p1": "werewolf-split-stance-diagonal-reach",
    "p2": "ghost-chair-arms-up",
    "p3": "zombie-heel-sit-back-prayer",
@@ -241,7 +241,7 @@
   {
    "no": 21,
    "tur": 2,
-   "t0": 273.2312,
+   "t0": 265.0744,
    "p1": "spell-stork-prayer",
    "p2": "phantom-lunge-arms-forward",
    "p3": "banshee-split-stance-forward-down",
@@ -250,7 +250,7 @@
   {
    "no": 22,
    "tur": 2,
-   "t0": 286.1543,
+   "t0": 277.6117,
    "p1": "vampire-kneel-lunge-archer",
    "p2": "goblin-kneel-lunge-arms-up",
    "p3": "wizard-warrior-prayer-up",
@@ -259,7 +259,7 @@
   {
    "no": 23,
    "tur": 2,
-   "t0": 299.0774,
+   "t0": 290.149,
    "p1": "skeleton-split-stance-hands-hips",
    "p2": "witch-deep-goddess-w",
    "p3": "bat-heel-sit-bent-up-back",
@@ -268,7 +268,7 @@
   {
    "no": 24,
    "tur": 2,
-   "t0": 312.0005,
+   "t0": 302.6863,
    "p1": "goblin-kneel-arms-forward",
    "p2": "cauldron-side-lunge-v",
    "p3": "fog-warrior-high-back-hip",
@@ -277,7 +277,7 @@
   {
    "no": 25,
    "tur": 2,
-   "t0": 324.9236,
+   "t0": 315.2236,
    "p1": "werewolf-knee-raise-arms-back",
    "p2": "broom-side-lunge-cactus",
    "p3": "vampire-skater-swing-hip",
@@ -286,7 +286,7 @@
   {
    "no": 26,
    "tur": 2,
-   "t0": 337.8467,
+   "t0": 327.7609,
    "p1": "raven-stork-hands-hips",
    "p2": "bat-kneel-prayer",
    "p3": "witch-kick-back-hip-prayer",
@@ -295,7 +295,7 @@
   {
    "no": 27,
    "tur": 2,
-   "t0": 350.7698,
+   "t0": 340.2982,
    "p1": "lantern-knee-raise-diagonal-reach",
    "p2": "moonlight-knee-raise-arms-down",
    "p3": "shadow-low-lunge-back-back",
@@ -304,7 +304,7 @@
   {
    "no": 28,
    "tur": 2,
-   "t0": 363.6929,
+   "t0": 352.8355,
    "p1": "zombie-knee-raise-arms-forward",
    "p2": "banshee-deep-goddess-v",
    "p3": "black-cat-low-lunge-prayer-low-forward",
@@ -313,7 +313,7 @@
   {
    "no": 29,
    "tur": 2,
-   "t0": 376.616,
+   "t0": 365.3728,
    "p1": "haunted-split-stance-airplane",
    "p2": "cobweb-lunge-arms-back",
    "p3": "ghoul-kick-back-back-down",
@@ -322,7 +322,7 @@
   {
    "no": 30,
    "tur": 2,
-   "t0": 389.5391,
+   "t0": 377.9101,
    "p1": "black-cat-split-stance-archer",
    "p2": "spider-lunge-arms-up",
    "p3": "shadow-low-lunge-low-forward-high-back",
@@ -331,7 +331,7 @@
   {
    "no": 31,
    "tur": 3,
-   "t0": 406.1545,
+   "t0": 394.0294,
    "p1": "lantern-warrior-three-arms-up",
    "p2": "skeleton-superman-lite",
    "p3": "raven-low-squat-w-t",
@@ -340,7 +340,7 @@
   {
    "no": 32,
    "tur": 3,
-   "t0": 419.0776,
+   "t0": 406.5667,
    "p1": "graveyard-bird-dog",
    "p2": "graveyard-low-squat-reach",
    "p3": "skeleton-low-squat-hip-up45",
@@ -349,7 +349,7 @@
   {
    "no": 33,
    "tur": 3,
-   "t0": 432.0007,
+   "t0": 419.104,
    "p1": "haunted-seated-straddle-lean",
    "p2": "black-cat-crab",
    "p3": "werewolf-knee-plank-diag-floor",
@@ -358,7 +358,7 @@
   {
    "no": 34,
    "tur": 3,
-   "t0": 444.9238,
+   "t0": 431.6413,
    "p1": "moonlight-frog-hands-floor",
    "p2": "candle-cross-legged-v",
    "p3": "raven-half-kneel-side-cactus-up45",
@@ -367,7 +367,7 @@
   {
    "no": 35,
    "tur": 3,
-   "t0": 457.8469,
+   "t0": 444.1786,
    "p1": "mummy-side-kneel-reach",
    "p2": "coffin-low-squat-prayer",
    "p3": "candle-high-plank-diag-floor",
@@ -376,7 +376,7 @@
   {
    "no": 36,
    "tur": 3,
-   "t0": 470.77,
+   "t0": 456.7159,
    "p1": "broom-kneel-one-up",
    "p2": "raven-seated-straddle-reach",
    "p3": "mummy-cobra-wide-forward",
@@ -385,7 +385,7 @@
   {
    "no": 37,
    "tur": 3,
-   "t0": 483.6931,
+   "t0": 469.2532,
    "p1": "cobweb-dancer-lite",
    "p2": "candle-boat-arms-up",
    "p3": "broom-side-sit-up45-w",
@@ -394,7 +394,7 @@
   {
    "no": 38,
    "tur": 3,
-   "t0": 496.6162,
+   "t0": 481.7905,
    "p1": "haunted-seated-staff-hands-back",
    "p2": "zombie-cobra",
    "p3": "tombstone-half-kneel-side-hip-up45",
@@ -403,7 +403,7 @@
   {
    "no": 39,
    "tur": 3,
-   "t0": 509.5393,
+   "t0": 494.3278,
    "p1": "goblin-kneel-cactus",
    "p2": "wizard-warrior-three-diag-diag",
    "p3": "coffin-cobra-wide-wide",
@@ -412,7 +412,7 @@
   {
    "no": 40,
    "tur": 3,
-   "t0": 522.4624,
+   "t0": 506.8651,
    "p1": "tombstone-lying-arms-up",
    "p2": "broom-low-squat-t-v",
    "p3": "cauldron-half-kneel-side-v-t",
@@ -421,7 +421,7 @@
   {
    "no": 41,
    "tur": 3,
-   "t0": 535.3855,
+   "t0": 519.4024,
    "p1": "cauldron-kneel-hands-head",
    "p2": "cauldron-half-kneel-side-t-lowv",
    "p3": "haunted-seated-knees-up-hug-forward",
@@ -430,7 +430,7 @@
   {
    "no": 42,
    "tur": 3,
-   "t0": 548.3086,
+   "t0": 531.9397,
    "p1": "coffin-tabletop",
    "p2": "candle-half-kneel-side-up45-head",
    "p3": "pumpkin-kneel-up45-hip",
@@ -439,7 +439,7 @@
   {
    "no": 43,
    "tur": 3,
-   "t0": 561.2317,
+   "t0": 544.477,
    "p1": "phantom-cross-legged-cactus",
    "p2": "crypt-side-sit-flex-up45",
    "p3": "graveyard-seated-knees-up-diag-forward",
@@ -448,7 +448,7 @@
   {
    "no": 44,
    "tur": 3,
-   "t0": 574.1548,
+   "t0": 557.0143,
    "p1": "spider-kneel-v",
    "p2": "potion-half-kneel-side-w-t",
    "p3": "spell-kneel-up-cactus",
@@ -457,7 +457,7 @@
   {
    "no": 45,
    "tur": 3,
-   "t0": 587.0779,
+   "t0": 569.5516,
    "p1": "cobweb-plank-leg-lift",
    "p2": "tombstone-high-plank-forward-floor",
    "p3": "mummy-seated-knees-up-floor-up",
@@ -490,8 +490,8 @@
   345.0,
   360.0,
   375.0,
-  390.0,
-  406.5,
+  394.5,
+  405.0,
   420.0,
   435.0,
   450.0,
@@ -502,11 +502,10 @@
   525.0,
   540.0,
   555.0,
-  570.0,
-  585.0
+  570.0
  ],
  "abone_sure": 3.2,
- "muzik": "(bekleniyor - kullanici Suno, brief SUNO-BRIEF-TETRIS-MODE-05.md)",
+ "muzik": "Pumpkin Patch Panic.wav (Suno, kullanici 20 Eki 2026) -> muzik-sabitle --dogrusal --hedef 134 (ilk yari 132,7, ikinci 135,5)",
  "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne5.html.",
  "tema": {
   "varlik": "/03-motor/tetris-pvp/varlik-05/",
