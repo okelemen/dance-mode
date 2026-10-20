@@ -19,14 +19,14 @@ def mat_neon_govde(ad, renk):
     """parlak jole govde + kenarda (fresnel) oyuncu renginde guclu isilti"""
     m = bpy.data.materials.new(ad); m.use_nodes = True; nt = m.node_tree
     b = nt.nodes["Principled BSDF"]
-    b.inputs["Base Color"].default_value = (*koyu(renk, 0.25), 1)
+    b.inputs["Base Color"].default_value = (*renk, 1)
     b.inputs["Roughness"].default_value = 0.15
     b.inputs["Coat Weight"].default_value = 1.0
     b.inputs["Coat Roughness"].default_value = 0.02
     lw = nt.nodes.new("ShaderNodeLayerWeight"); lw.inputs["Blend"].default_value = 0.35
-    mu = nt.nodes.new("ShaderNodeMath"); mu.operation = "MULTIPLY"; mu.inputs[1].default_value = 6.0
+    mu = nt.nodes.new("ShaderNodeMath"); mu.operation = "MULTIPLY"; mu.inputs[1].default_value = 2.6
     nt.links.new(lw.outputs["Facing"], mu.inputs[0])
-    b.inputs["Emission Color"].default_value = (*acik(renk, 0.35), 1)
+    b.inputs["Emission Color"].default_value = (*acik(renk, 0.15), 1)
     nt.links.new(mu.outputs[0], b.inputs["Emission Strength"])
     return m
 
@@ -63,18 +63,19 @@ def boksor(oyuncu):
     # eldivenler: el kemigine bagli tombul kure (ust yarisi beyaz parlak, govde rengi bilek bandi)
     eld = mat_jole("eldiven_" + oyuncu, acik(R, 0.55), emis=0.25, purluk=0.08)
     bant = mat_jole("bant_" + oyuncu, R, emis=0.6, purluk=0.1)
+    ELDIVEN = []
     for taraf in ("Left", "Right"):
-        kb = kemik(arm, taraf + "Hand")
-        for r_, mat, ofs in ((0.062 * boy, eld, 0.55), (0.040 * boy, bant, 0.0)):
+        for r_, mat, ofs in ((0.052 * boy, eld, 0.6), (0.032 * boy, bant, 0.0)):
             bpy.ops.mesh.primitive_uv_sphere_add(radius=r_, segments=32, ring_count=16)
             k = bpy.context.active_object; k.data.materials.append(mat); bpy.ops.object.shade_smooth()
-            k.parent = arm; k.parent_type = "BONE"; k.parent_bone = kb.name
-            k.location = (0, kb.length * ofs, 0)          # kemik ekseni boyunca (bone uzayi Y)
+            ELDIVEN.append((k, taraf, ofs))
+
+    def eldiven_yerlestir():
+        for k, taraf, ofs in ELDIVEN:
+            kb = kemik(arm, taraf + "Hand")
+            bas = arm.matrix_world @ kb.head; uc = arm.matrix_world @ kb.tail
+            k.location = bas + (uc - bas) * (ofs * 2.2)
     # kafa bandi: oyuncu renginde parlak halka
-    kk = kemik(arm, "Head")
-    bpy.ops.mesh.primitive_torus_add(major_radius=0.062 * boy, minor_radius=0.010 * boy)
-    t = bpy.context.active_object; t.data.materials.append(mat_emis("kafabandi_" + oyuncu, acik(R, 0.2), 6.0))
-    t.parent = arm; t.parent_type = "BONE"; t.parent_bone = kk.name; t.location = (0, kk.length * 0.35, 0)
     # yuzu: once kameraya, sonra 3/4 aciyla ekran sagina
     L = arm.matrix_world @ kemik(arm, "LeftArm").head; Rr = arm.matrix_world @ kemik(arm, "RightArm").head
     v = L - Rr; v.z = 0
@@ -82,12 +83,14 @@ def boksor(oyuncu):
     arm.rotation_euler.z += math.radians(62)
     bpy.context.view_layer.update()
     # kamera + isik: on dolgu, iki yandan oyuncu renginde kenar isigi, arkadan beyaz kontur
-    bpy.ops.object.camera_add(location=(0, -5.2 * boy / 1.8, alt.z + boy * 0.55), rotation=(math.radians(88), 0, 0))
+    # deneme 1: figur kadrajin %40'iydi -> dikey FOV'a gore mesafe (lens 50, sensor 36 dikey): boy*1.12 sigar
+    bpy.ops.object.camera_add(location=(0.08 * boy, -1.75 * boy, alt.z + boy * 0.52), rotation=(math.radians(90), 0, 0))
     kam = bpy.context.active_object; sc.camera = kam; kam.data.lens = 50
-    isik("AREA", (-2.5, -3.5, alt.z + boy * 1.3), 380, (1, 1, 1), boy=2.5, yon=(0, 0, alt.z + boy * 0.6))
-    isik("AREA", (3.0, 1.5, alt.z + boy * 0.9), 650, acik(R, 0.2), boy=1.5, yon=(0, 0, alt.z + boy * 0.6))
-    isik("AREA", (-3.0, 2.0, alt.z + boy * 0.9), 500, acik(R, 0.4), boy=1.5, yon=(0, 0, alt.z + boy * 0.6))
-    isik("AREA", (0, 3.5, alt.z + boy * 1.6), 420, (1, 1, 1), boy=2.0, yon=(0, 0, alt.z + boy * 0.6))
+    m_ = (boy / 1.8) ** 2                                    # govde 1,8 m degil (3,76 birim): isik enerjisi mesafeyle olceklenir
+    isik("AREA", (-1.3 * boy, -1.8 * boy, alt.z + boy * 1.3), 380 * m_, (1, 1, 1), boy=1.2 * boy, yon=(0, 0, alt.z + boy * 0.6))
+    isik("AREA", (1.6 * boy, 0.8 * boy, alt.z + boy * 0.9), 650 * m_, acik(R, 0.2), boy=0.8 * boy, yon=(0, 0, alt.z + boy * 0.6))
+    isik("AREA", (-1.6 * boy, 1.0 * boy, alt.z + boy * 0.9), 500 * m_, acik(R, 0.4), boy=0.8 * boy, yon=(0, 0, alt.z + boy * 0.6))
+    isik("AREA", (0, 1.8 * boy, alt.z + boy * 1.6), 420 * m_, (1, 1, 1), boy=1.0 * boy, yon=(0, 0, alt.z + boy * 0.6))
     for tur, (yol, n) in KLIP.items():
         akt = klip_aksiyonu(yol)
         # klip ve govdenin kemik oneki farkli olabilir (mixamorig: / mixamorig1:) -> yollari govdenin adlarina cevir
@@ -111,6 +114,8 @@ def boksor(oyuncu):
             if x0 is None:
                 x0 = (g.x, g.y)
             arm.location.x -= g.x - x0[0]; arm.location.y -= g.y - x0[1]
+            bpy.context.view_layer.update()
+            eldiven_yerlestir()
             bpy.context.view_layer.update()
             yaz(sc, "boksor/%s-%s-%02d.png" % (oyuncu, tur, i))
         YERLESIM.setdefault("boksor", {})["%s-%s" % (oyuncu, tur)] = n

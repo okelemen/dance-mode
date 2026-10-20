@@ -19,7 +19,9 @@ KESIT = [int(x) for x in arg("--kesit").split(",")] if arg("--kesit") else None
 BPM = float(arg("--bpm", AYAR.get("bpm", 133.0827)))
 V = 60 / BPM
 r = lambda x: round(x, 4)
-Z = {"kart": r(4 * V), "say": r(6 * V), "buyu": r(12 * V), "gec": r(2 * V), "sure": r(28 * V)}
+# duvar_vurus: 6. video (REF-057, dongu 12,0 sn olculdu) 24 vurus; eskiler 28
+DV = AYAR.get("duvar_vurus", 28)
+Z = {"kart": r(4 * V), "say": r(6 * V), "buyu": r(12 * V), "gec": r(2 * V), "sure": r(DV * V)}
 KV = AYAR.get("kart_vurus", {})   # kart suresi vurus olarak (varsayilan 8 = 2 olcu); 3. video: tam bolum 9,5-10 dk icin uzun kartlar
 KART = 8 * V
 KS = lambda tip, v=8: KV.get(tip, v) * V
@@ -33,10 +35,26 @@ for i, d in enumerate(DUVAR):
 kartlar, duvarlar = [], []
 t = 0.0
 GIRIS = AYAR.get("giris_kart", "vs")      # 5. video: "giris" (3 PLAYERS karti, VS yok - REF-056)
-kartlar.append({"t": r(t), "sure": r(KS(GIRIS)), "tip": GIRIS}); t += KS(GIRIS)
+
+
+def dizi(liste):
+    """6. video: kart dizisi [{"tip": ..., "vurus": 8, "metin": ..., "alt": ...}] -> art arda kartlar"""
+    global t
+    for kd in liste:
+        kk = {k_: v_ for k_, v_ in kd.items() if k_ != "vurus"}
+        kk.update({"t": r(t), "sure": r(kd.get("vurus", 8) * V)})
+        kartlar.append(kk); t += kd.get("vurus", 8) * V
+
+
+if "giris_dizisi" in AYAR:                 # 6. video (REF-057): acilis boksorleri + karsilama + HOW TO PLAY
+    dizi(AYAR["giris_dizisi"])
+else:
+    kartlar.append({"t": r(t), "sure": r(KS(GIRIS)), "tip": GIRIS}); t += KS(GIRIS)
 for tur in (1, 2, 3):
     if KESIT and not any(d["tur"] == tur and d["no"] in KESIT for d in DUVAR):
         continue
+    if str(tur) in AYAR.get("gecis", {}) and not KESIT:   # tur kartindan once iki kiskirtici kart (REF-057)
+        dizi(AYAR["gecis"][str(tur)])
     m, alt = TUR_KART[tur]
     k = {"t": r(t), "sure": r(KS("tur")), "tip": "tur", "tur": tur, "metin": m}
     if alt: k["alt"] = alt
@@ -49,13 +67,16 @@ for tur in (1, 2, 3):
         duvarlar.append({"no": n, "tur": tur, "t0": r(t), **{k_: v_ for k_, v_ in d.items() if k_ not in ("tur", "no")},
                          "ovgu": OVGU[(n - 1) % len(OVGU)]})
         t += Z["sure"]
-if not KESIT:
+if not KESIT and "kapanis" in AYAR:       # 6. video: WRAP yerine kendi kapanis kartlarimiz
+    dizi(AYAR["kapanis"])
+    kartlar.append({"t": r(t), "sure": r(KS("abone", 12)), "tip": "abone"}); t += KS("abone", 12)
+elif not KESIT:
     kartlar.append({"t": r(t), "sure": r(KS("wrap")), "tip": "wrap"}); t += KS("wrap")
     kartlar.append({"t": r(t), "sure": r(KS("abone", 12)), "tip": "abone"}); t += KS("abone", 12)
 toplam_olcu = round(t / (4 * V))
 assert abs(toplam_olcu * 4 * V - t) < 0.01, (t, toplam_olcu)
 
-TAM = {"vs", "giris", "tur", "ovgu_kart", "wrap", "abone"}; AS = 3.2
+TAM = {"vs", "giris", "tur", "ovgu_kart", "wrap", "abone", "acilis", "yazi", "nasil"}; AS = 3.2
 def bos(x):
     return not any(k["tip"] in TAM and x < k["t"] + k["sure"] and x + AS > k["t"] for k in kartlar)
 abone, x = [], 15.0

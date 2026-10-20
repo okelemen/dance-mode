@@ -1,0 +1,160 @@
+{
+ "seri": "TETRIS MODE",
+ "bolum": "tetris-mode-06",
+ "bpm": 128.0,
+ "toplam_olcu": 40,
+ "toplam_duvar": 4,
+ "zaman": {
+  "kart": 1.875,
+  "say": 2.8125,
+  "buyu": 5.625,
+  "gec": 0.9375,
+  "sure": 11.25
+ },
+ "kartlar": [
+  {
+   "tip": "acilis",
+   "t": 0.0,
+   "sure": 3.75
+  },
+  {
+   "tip": "yazi",
+   "metin": "WELCOME,",
+   "alt": "CHALLENGERS!",
+   "t": 3.75,
+   "sure": 2.8125
+  },
+  {
+   "tip": "yazi",
+   "metin": "TWO PLAYERS.",
+   "alt": "ONE CROWN.",
+   "t": 6.5625,
+   "sure": 2.8125
+  },
+  {
+   "tip": "nasil",
+   "metin": "COPY THE SHAPE",
+   "alt": "BEFORE THE WALL HITS YOU!",
+   "t": 9.375,
+   "sure": 5.625
+  },
+  {
+   "t": 15.0,
+   "sure": 3.75,
+   "tip": "tur",
+   "tur": 1,
+   "metin": "ROUND 1",
+   "alt": "WARM UP"
+  },
+  {
+   "t": 18.75,
+   "sure": 3.75,
+   "tip": "basla"
+  },
+  {
+   "t": 45.0,
+   "sure": 3.75,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "ROUND 2",
+   "alt": "NO HOLDING BACK"
+  },
+  {
+   "t": 60.0,
+   "sure": 3.75,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "ROUND 3",
+   "alt": "FINAL SHOWDOWN"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 22.5,
+   "p1": "aurora-airplane-lean-back-arms",
+   "p2": "aurora-victory-lunge-side",
+   "ovgu": "NAILED IT!"
+  },
+  {
+   "no": 2,
+   "tur": 1,
+   "t0": 33.75,
+   "p1": "aurora-heel-raise-reach-forward",
+   "p2": "aurora-hip-sway-arms-wave",
+   "ovgu": "SMOOTH!"
+  },
+  {
+   "no": 8,
+   "tur": 2,
+   "t0": 48.75,
+   "p1": "aurora-leg-back-arms-forward",
+   "p2": "aurora-pyramid-hands-back",
+   "ovgu": "SMOOTH!"
+  },
+  {
+   "no": 15,
+   "tur": 3,
+   "t0": 63.75,
+   "p1": "aurora-boat-arms-back",
+   "p2": "aurora-arabesque-arms-up",
+   "ovgu": "GREAT FIT!"
+  }
+ ],
+ "abone": [
+  19.0,
+  30.0,
+  49.0,
+  64.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "HENUZ YOK - kullanici Suno'da uretecek (SUNO-BRIEF-TETRIS-MODE-06.md)",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne4.html.",
+ "tema": {
+  "varlik": "/03-motor/tetris-pvp/varlik-06/",
+  "p1": "#2E9BFF",
+  "p2": "#FF3EA5",
+  "altin": "#ffd94a",
+  "camgobegi": "#5ff2ff",
+  "p1koyu": "#0b4fb0",
+  "p2koyu": "#b0136a",
+  "p1acik": "#d6ecff",
+  "p2acik": "#ffd9ee",
+  "p1parlak": "#b8dcff",
+  "p2parlak": "#ffb8dd",
+  "vsSol": [
+   "#1f6fe0",
+   "#04163f"
+  ],
+  "vsSag": [
+   "#e0287f",
+   "#3a0420"
+  ],
+  "isin": [
+   "#3d8bff",
+   "#071a6e"
+  ],
+  "wrapIsin": [
+   "#ff6ac8",
+   "#2a0638"
+  ],
+  "ovguRenk": [
+   "#ffffff",
+   "#ffc2ec",
+   "#5fd0ff"
+  ],
+  "parca": [
+   "#ff7ad8",
+   "#7fe7ff",
+   "#c9a6ff"
+  ],
+  "abone": [
+   "#7dffb4",
+   "#0c8a48"
+  ],
+  "vsAlt": "HUMAN TETRIS · 1 VS 1",
+  "fener": false,
+  "kuzeyIsigi": true
+ }
+}

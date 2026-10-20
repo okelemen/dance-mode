@@ -1,0 +1,38 @@
+{
+ "_not": "TETRIS MODE 6. video (REF-057, Glow Motion 3 PLAYER BATTLE#2 -> kullanici karari 2 oyuncu, 20 Eki 2026). 5 dk denemesi video 1 (TALIMATLAR §20-21). Duvar dongusu 12 sn (REF-057 olcumu) = 24 vurus @128 BPM gecici; tur yapisi 7/7/8. Acilis: karsilikli boksorler (boksor.py) + mavi zemin pembe neon yazi (kullanici). Metinler bizim (REF-057'nin kartlari birebir alinmadi). BPM muzik gelince olculur, bolum yeniden kurulur.",
+ "seri": "TETRIS MODE",
+ "bolum": "tetris-mode-06",
+ "bpm": 128,
+ "muzik": "HENUZ YOK - kullanici Suno'da uretecek (SUNO-BRIEF-TETRIS-MODE-06.md)",
+ "duvar": "duvar-listesi-06.json",
+ "duvar_vurus": 24,
+ "kart_vurus": {"tur": 8, "basla": 8, "abone": 12},
+ "giris_dizisi": [
+  {"tip": "acilis", "vurus": 8},
+  {"tip": "yazi", "metin": "WELCOME,", "alt": "CHALLENGERS!", "vurus": 6},
+  {"tip": "yazi", "metin": "TWO PLAYERS.", "alt": "ONE CROWN.", "vurus": 6},
+  {"tip": "nasil", "metin": "COPY THE SHAPE", "alt": "BEFORE THE WALL HITS YOU!", "vurus": 12}
+ ],
+ "tur_kart": {"1": ["ROUND 1", "WARM UP"], "2": ["ROUND 2", "NO HOLDING BACK"], "3": ["ROUND 3", "FINAL SHOWDOWN"]},
+ "gecis": {
+  "2": [{"tip": "yazi", "metin": "SOLID START!", "vurus": 6}, {"tip": "yazi", "metin": "WHO'S AHEAD", "alt": "RIGHT NOW?", "vurus": 6}],
+  "3": [{"tip": "yazi", "metin": "IT'S HEATING UP!", "vurus": 6}, {"tip": "yazi", "metin": "NOBODY'S", "alt": "QUITTING!", "vurus": 6}]
+ },
+ "kapanis": [
+  {"tip": "yazi", "metin": "BATTLE", "alt": "COMPLETE!", "vurus": 6},
+  {"tip": "yazi", "metin": "WHO WON?", "alt": "TELL US BELOW!", "vurus": 6}
+ ],
+ "ovgu": ["NAILED IT!", "SMOOTH!", "GREAT FIT!", "SO CLOSE!", "BRILLIANT!", "LEGEND!"],
+ "sayfa": "sahne4.html",
+ "tema": {
+  "varlik": "/03-motor/tetris-pvp/varlik-06/",
+  "p1": "#2E9BFF", "p2": "#FF3EA5", "altin": "#ffd94a", "camgobegi": "#5ff2ff",
+  "p1koyu": "#0b4fb0", "p2koyu": "#b0136a", "p1acik": "#d6ecff", "p2acik": "#ffd9ee",
+  "p1parlak": "#b8dcff", "p2parlak": "#ffb8dd",
+  "vsSol": ["#1f6fe0", "#04163f"], "vsSag": ["#e0287f", "#3a0420"],
+  "isin": ["#3d8bff", "#071a6e"], "wrapIsin": ["#ff6ac8", "#2a0638"],
+  "ovguRenk": ["#ffffff", "#ffc2ec", "#5fd0ff"], "parca": ["#ff7ad8", "#7fe7ff", "#c9a6ff"], "abone": ["#7dffb4", "#0c8a48"],
+  "vsAlt": "HUMAN TETRIS · 1 VS 1",
+  "fener": false, "kuzeyIsigi": true
+ }
+}
