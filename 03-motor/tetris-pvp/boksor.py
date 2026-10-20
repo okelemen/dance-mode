@@ -5,7 +5,7 @@
 Kullanici 20 Eki 2026: "Acilista box yapan mavi ve pembe siluetler ... farkli sekilde bir oyuncu koyabilirsin ... efektli
 bir sekilde gelsin" + "2 karakterli ... karsilikli duracak". Glow'un robot karakterinin kopyasi DEGIL: Mixamo govdesi
 (siluet-govde.fbx) gercek boks klipleriyle (yana-boxing-orta = gard + ayak oyunu, yumruk-jab = jab) oynar; malzeme
-oyuncu renginde parlak jole + kenar isiltisi, beyaz-renkli eldivenler. Karakter 3/4 acida ekran SAGINA bakar;
+oyuncu renginde parlak jole + kenar isiltisi, oyuncu renginde boks kaski + eldiven (beyaz mansetli). Karakter 3/4 acida ekran SAGINA bakar;
 P2 sahne4.html'de yatay aynalanir (karsilikli durus).
 Cikti: boksor/<oyuncu>-gard-NN.png (16 kare dongu), boksor/<oyuncu>-jab-NN.png (12 kare), 720x900 saydam.
 """
@@ -19,7 +19,7 @@ def mat_neon_govde(ad, renk):
     """parlak jole govde + kenarda (fresnel) oyuncu renginde guclu isilti"""
     m = bpy.data.materials.new(ad); m.use_nodes = True; nt = m.node_tree
     b = nt.nodes["Principled BSDF"]
-    b.inputs["Base Color"].default_value = (*renk, 1)
+    b.inputs["Base Color"].default_value = (*acik(renk, 0.78), 1)      # govde acik parlak, ekipman renkli (deneme 2)
     b.inputs["Roughness"].default_value = 0.15
     b.inputs["Coat Weight"].default_value = 1.0
     b.inputs["Coat Roughness"].default_value = 0.02
@@ -60,28 +60,70 @@ def boksor(oyuncu):
     alt, ust = dunya_kutusu(mesler)
     boy = ust.z - alt.z
     log("boksor govde boy", round(boy, 3))
-    # eldivenler: el kemigine bagli tombul kure (ust yarisi beyaz parlak, govde rengi bilek bandi)
-    eld = mat_jole("eldiven_" + oyuncu, acik(R, 0.55), emis=0.25, purluk=0.08)
-    bant = mat_jole("bant_" + oyuncu, R, emis=0.6, purluk=0.1)
-    ELDIVEN = []
-    for taraf in ("Left", "Right"):
-        for r_, mat, ofs in ((0.052 * boy, eld, 0.6), (0.032 * boy, bant, 0.0)):
-            bpy.ops.mesh.primitive_uv_sphere_add(radius=r_, segments=32, ring_count=16)
-            k = bpy.context.active_object; k.data.materials.append(mat); bpy.ops.object.shade_smooth()
-            ELDIVEN.append((k, taraf, ofs))
-
-    def eldiven_yerlestir():
-        for k, taraf, ofs in ELDIVEN:
-            kb = kemik(arm, taraf + "Hand")
-            bas = arm.matrix_world @ kb.head; uc = arm.matrix_world @ kb.tail
-            k.location = bas + (uc - bas) * (ofs * 2.2)
-    # kafa bandi: oyuncu renginde parlak halka
     # yuzu: once kameraya, sonra 3/4 aciyla ekran sagina
     L = arm.matrix_world @ kemik(arm, "LeftArm").head; Rr = arm.matrix_world @ kemik(arm, "RightArm").head
     v = L - Rr; v.z = 0
     arm.rotation_euler.z -= math.atan2(v.y, v.x)
     arm.rotation_euler.z += math.radians(62)
     bpy.context.view_layer.update()
+    # ---- BOKS EKIPMANI (kullanici 20 Eki 2026: "kafasinda normal boksorlerin ne takiyorsa ... ellerinde eldivenleri")
+    # kask: basin ustunu, sakaklari, yanaklari ve enseyi saran, YUZU ACIK amator boks kaski (dolgulu kabuk + beyaz kenar)
+    # eldiven: tombul yumruk + bilekte beyaz mansetli gercek boks eldiveni. Govde acik/beyaz parlak, ekipman oyuncu renginde.
+    import bmesh
+    ekip = mat_jole("ekipman_" + oyuncu, R, emis=0.35, purluk=0.06)
+    beyaz = mat_jole("kenar_" + oyuncu, (0.92, 0.94, 1.0), emis=0.15, purluk=0.08)
+    EKIP = []                                            # (obje, kemik adi, yerel matris)
+
+    def kemik_boy(ad):
+        b = kemik(arm, ad)
+        return ((arm.matrix_world @ b.tail) - (arm.matrix_world @ b.head)).length
+
+    def kemik_rot(ad):
+        return (arm.matrix_world @ kemik(arm, ad).matrix).decompose()[1]
+
+    # yuzun baktigi yon (karakter 62 derece ekran sagina donuk): kask yuz acikligi bu yone kesilir
+    ileri = Vector((math.sin(math.radians(62)), -math.cos(math.radians(62)), 0))
+    f_yerel = (kemik_rot("Head").to_matrix().inverted() @ ileri).normalized()
+    Lh = kemik_boy("Head")
+    rk = max(0.6 * Lh, 0.066 * boy)
+    log("boksor kafa kemigi", round(Lh, 3), "kask r", round(rk, 3), "yuz yerel", tuple(round(x, 2) for x in f_yerel))
+    me = bpy.data.meshes.new("kask_" + oyuncu); bm = bmesh.new()
+    bmesh.ops.create_uvsphere(bm, u_segments=40, v_segments=24, radius=rk)
+    bmesh.ops.scale(bm, vec=(1.0, 1.1, 1.0), verts=bm.verts)
+    sil = [v for v in bm.verts if (v.co.normalized().dot(f_yerel) > 0.42 and v.co.y > -0.55 * rk) or v.co.y < -0.62 * rk]
+    bmesh.ops.delete(bm, geom=sil, context="VERTS")
+    bm.to_mesh(me); bm.free()
+    kask = bpy.data.objects.new("kask_" + oyuncu, me); bpy.context.collection.objects.link(kask)
+    kask.data.materials.append(ekip)
+    so = kask.modifiers.new("dolgu", "SOLIDIFY"); so.thickness = 0.22 * rk; so.offset = 1.0
+    so.use_rim = True; so.material_offset_rim = 1
+    kask.data.materials.append(beyaz)                     # dolgu kenari (yuz acikligi ve alt kenar) beyaz
+    sb = kask.modifiers.new("yumusak", "SUBSURF"); sb.levels = 1; sb.render_levels = 2
+    for p_ in kask.data.polygons:
+        p_.use_smooth = True
+    EKIP.append((kask, "Head", Matrix.Translation((0, 0.42 * Lh, 0))))
+    # eldivenler
+    rg = 0.062 * boy
+    for taraf in ("Left", "Right"):
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=rg, segments=40, ring_count=20)
+        g_ = bpy.context.active_object; g_.data.materials.append(ekip); bpy.ops.object.shade_smooth()
+        g_.data.transform(Matrix.Diagonal((1.0, 1.3, 1.05, 1.0)))       # yumruk: el boyunca uzun, tombul
+        EKIP.append((g_, taraf + "Hand", Matrix.Translation((0, 0.85 * rg, 0))))
+        bpy.ops.mesh.primitive_cylinder_add(radius=0.78 * rg, depth=1.0 * rg, vertices=40)
+        m_ = bpy.context.active_object; m_.data.materials.append(beyaz); bpy.ops.object.shade_smooth()
+        m_.data.transform(Matrix.Rotation(math.radians(90), 4, "X"))      # silindir ekseni kemik ekseni (Y)
+        bv = m_.modifiers.new("egim", "BEVEL"); bv.width = 0.12 * rg; bv.segments = 4
+        EKIP.append((m_, taraf + "Hand", Matrix.Translation((0, -0.25 * rg, 0))))
+        bpy.ops.mesh.primitive_torus_add(major_radius=0.80 * rg, minor_radius=0.09 * rg)
+        s_ = bpy.context.active_object; s_.data.materials.append(ekip); bpy.ops.object.shade_smooth()
+        s_.data.transform(Matrix.Rotation(math.radians(90), 4, "X"))
+        EKIP.append((s_, taraf + "Hand", Matrix.Translation((0, -0.05 * rg, 0))))   # manset ustunde renkli serit
+
+    def eldiven_yerlestir():
+        for ob, ad, yerel in EKIP:
+            Mb = arm.matrix_world @ kemik(arm, ad).matrix
+            loc, rot, _ = Mb.decompose()
+            ob.matrix_world = Matrix.LocRotScale(loc, rot, Vector((1, 1, 1))) @ yerel
     # kamera + isik: on dolgu, iki yandan oyuncu renginde kenar isigi, arkadan beyaz kontur
     # deneme 1: figur kadrajin %40'iydi -> dikey FOV'a gore mesafe (lens 50, sensor 36 dikey): boy*1.12 sigar
     bpy.ops.object.camera_add(location=(0.08 * boy, -1.75 * boy, alt.z + boy * 0.52), rotation=(math.radians(90), 0, 0))
