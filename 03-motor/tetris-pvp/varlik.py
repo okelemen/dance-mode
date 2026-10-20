@@ -164,9 +164,11 @@ def gok():
     cr = rmp.color_ramp
     G3 = GOK == "galaksi"
     G4 = GOK == "gezegen"
+    G5 = GOK == "aurora"      # 6. video (REF-057): kuzey isigi + buzlu daglar + deniz
     # renk sirasi: (alt, ust, orta, bulutsu 1, bulutsu 2)
     # deneme 1 (gezegen): ust yarisi neredeyse siyahti, REF-055'te gok bastan basa bulutsu -> daha acik taban + guclu bulutsu
-    GR = (("#127a7e", "#0a1a3a", "#0d4a5e", "#2fd6c0", "#ff4f78") if G4 else
+    GR = (("#4a86e8", "#120a46", "#2e2f9a", "#ff5ad8", "#3fe0ff") if G5 else
+          ("#127a7e", "#0a1a3a", "#0d4a5e", "#2fd6c0", "#ff4f78") if G4 else
           ("#2a0f5e", "#05041c", "#120a3a", "#7a2bd6", "#d9c22b") if G3 else
           ("#0b5466", "#040824", "#0a2a4a", "#1fb5a0", "#d99a2b"))
     cr.elements[0].position = 0.0; cr.elements[0].color = (*lin(hex3(GR[0])), 1)
@@ -202,10 +204,12 @@ def gok():
         galaksi(rnd)
     if G4:
         gezegen(rnd)
+    if G5:
+        aurora(rnd)
     # yuzen fenerler (altin, ici isikli) - gogu dolduran ana oge (referanstaki denizanalarinin yerine bizim oge)
     gov = mat_emis("fener", lin(hex3("#ff8a1a")), 14.0)
     ust = mat_jole("fener_ust", lin(hex3("#7a3d10")), emis=0.0, purluk=0.3)
-    for i in range(0 if (G3 or G4) else 46):
+    for i in range(0 if (G3 or G4 or G5) else 46):
         x, y, z = rnd.uniform(-32, 32), rnd.uniform(18, 46), rnd.uniform(-6, 26)
         s = rnd.uniform(0.6, 1.4) * (y / 30)
         bpy.ops.mesh.primitive_cylinder_add(radius=0.45 * s, depth=0.9 * s, location=(x, y, z), vertices=24)
@@ -216,7 +220,8 @@ def gok():
         isik("POINT", (x, y - 1.2 * s, z), 60 * s * s, lin(hex3("#ffb43a")))
     # yesil/camgobegi isik kureleri (bubble) + kucuk parilti
     for i in range(60):
-        c = lin(hex3(rnd.choice(["#ff2d55", "#5a78ff", "#ffd27a", "#ffffff"] if G4 else
+        c = lin(hex3(rnd.choice(["#ff5ad8", "#6fd8ff", "#ffffff", "#b98cff"] if G5 else
+                                ["#ff2d55", "#5a78ff", "#ffd27a", "#ffffff"] if G4 else
                                 ["#b45cff", "#f5ff3d", "#ffffff"] if G3 else ["#3dffa8", "#2be0e0", "#b6ff5c"])))
         kure((rnd.uniform(-34, 34), rnd.uniform(16, 44), rnd.uniform(-8, 28)), rnd.uniform(0.15, 0.55), mat_emis("kure%d" % i, c, rnd.uniform(6, 12)))
     bpy.ops.object.camera_add(location=(0, -6, 9), rotation=(math.radians(90), 0, 0))
@@ -345,6 +350,63 @@ def gezegen(rnd):
         kure((x, y, z), rnd.uniform(0.08, 0.26), rnd.choice(mats), sub=1)
     for (x, z, r, c) in ((-24, 27, 2.2, "#5a78ff"), (22, 30, 1.4, "#ffe0c4")):
         kure((x, cy_ - 4, z), r, mat_emis("uydu", lin(hex3(c)), 3.0))
+
+
+def aurora(rnd):
+    """REF-057: gokte pembe/mor/camgobegi kuzey isigi perdeleri, ufukta karli buzlu daglar, onde parlak deniz + buz kutleleri."""
+    renkler = ("#ff5ad8", "#9b6bff", "#3fe0ff", "#7dffd8")
+    for i in range(7):
+        x0, y0 = rnd.uniform(-40, 40), rnd.uniform(40, 54)
+        bpy.ops.mesh.primitive_plane_add(size=1, location=(x0, y0, 22 + rnd.uniform(-3, 5)), rotation=(math.pi / 2, 0, rnd.uniform(-0.35, 0.35)))
+        p = bpy.context.active_object; p.scale = (rnd.uniform(28, 46), rnd.uniform(16, 24), 1)
+        bpy.ops.object.mode_set(mode="EDIT"); bpy.ops.mesh.subdivide(number_cuts=40); bpy.ops.object.mode_set(mode="OBJECT")
+        faz, gen = rnd.uniform(0, 6.28), rnd.uniform(1.5, 3.2)
+        for v in p.data.vertices:                      # perde dalgasi: yerel x boyunca derinlik + yukseklikte kivrim
+            v.co.z += gen * 0.06 * math.sin(v.co.x * 9 + faz) + 0.03 * math.sin(v.co.x * 23 + faz * 2)
+        m = bpy.data.materials.new("aurora%d" % i); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+        tc = nt.nodes.new("ShaderNodeTexCoord"); sep = nt.nodes.new("ShaderNodeSeparateXYZ"); nt.links.new(tc.outputs["Generated"], sep.inputs[0])
+        rmp = nt.nodes.new("ShaderNodeValToRGB"); cr = rmp.color_ramp           # alt parlak -> ust saydam
+        cr.elements[0].position = 0.0; cr.elements[0].color = (0, 0, 0, 1)
+        cr.elements[1].position = 1.0; cr.elements[1].color = (0, 0, 0, 1)
+        e = cr.elements.new(0.12); e.color = (1, 1, 1, 1)
+        e = cr.elements.new(0.45); e.color = (0.35, 0.35, 0.35, 1)
+        nt.links.new(sep.outputs["Y"], rmp.inputs[0])
+        wv = nt.nodes.new("ShaderNodeTexWave"); wv.bands_direction = "X"; wv.inputs["Scale"].default_value = rnd.uniform(6, 11)
+        wv.inputs["Distortion"].default_value = 4.0; wv.inputs["Detail"].default_value = 2
+        nt.links.new(tc.outputs["Generated"], wv.inputs["Vector"])
+        mu = nt.nodes.new("ShaderNodeMath"); mu.operation = "MULTIPLY"
+        nt.links.new(rmp.outputs[0], mu.inputs[0]); nt.links.new(wv.outputs["Fac"], mu.inputs[1])
+        mu2 = nt.nodes.new("ShaderNodeMath"); mu2.operation = "MULTIPLY"; mu2.inputs[1].default_value = 0.85
+        nt.links.new(mu.outputs[0], mu2.inputs[0])
+        em = nt.nodes.new("ShaderNodeEmission"); em.inputs[0].default_value = (*lin(hex3(renkler[i % 4])), 1); em.inputs[1].default_value = 3.2
+        tr = nt.nodes.new("ShaderNodeBsdfTransparent")
+        mx = nt.nodes.new("ShaderNodeMixShader")
+        nt.links.new(mu2.outputs[0], mx.inputs[0]); nt.links.new(tr.outputs[0], mx.inputs[1]); nt.links.new(em.outputs[0], mx.inputs[2])
+        o = nt.nodes.new("ShaderNodeOutputMaterial"); nt.links.new(mx.outputs[0], o.inputs[0])
+        m.blend_method = "BLEND"
+        p.data.materials.append(m)
+    # karli buzlu daglar: ufuk boyunca iki sira sivri koni kumesi (on sira daha acik/buz mavisi)
+    kar = mat_jole("kar", lin(hex3("#eaf4ff")), emis=0.10, purluk=0.35)
+    buz = mat_jole("buz", lin(hex3("#7fb8ff")), emis=0.06, purluk=0.25)
+    for sira, (yy, zb, boy, mat) in enumerate(((44, -1.0, 14, buz), (36, -1.5, 9, kar))):
+        x = -70.0
+        while x < 70:
+            h = rnd.uniform(0.5, 1.0) * boy; r = h * rnd.uniform(0.55, 0.85)
+            bpy.ops.mesh.primitive_cone_add(vertices=rnd.choice([5, 6, 7]), radius1=r, depth=h, location=(x, yy + rnd.uniform(-2, 2), zb + h / 2),
+                                            rotation=(0, 0, rnd.uniform(0, 3.14)))
+            c = bpy.context.active_object; c.data.materials.append(mat)
+            kure((x, yy - 0.5, zb + h * 0.82), r * 0.22, kar, sub=2)               # karli tepe parlamasi
+            x += r * rnd.uniform(0.9, 1.4)
+    # deniz: koyu mavi parlak yuzey (gok ve isik yansir) + yuzen buz kutleleri
+    bpy.ops.mesh.primitive_plane_add(size=1, location=(0, 22, -1.6)); d = bpy.context.active_object; d.scale = (160, 50, 1)
+    dm = bpy.data.materials.new("deniz"); dm.use_nodes = True; b = dm.node_tree.nodes["Principled BSDF"]
+    b.inputs["Base Color"].default_value = (*lin(hex3("#123a8a")), 1); b.inputs["Roughness"].default_value = 0.08
+    b.inputs["Metallic"].default_value = 0.3
+    d.data.materials.append(dm)
+    for i in range(26):
+        x = rnd.choice([-1, 1]) * rnd.uniform(9, 45); y = rnd.uniform(14, 34); s_ = rnd.uniform(0.6, 2.2)
+        yuvarlak_kutu("buzkutle", (x, y, -1.4), (s_ * 2.2, s_ * 1.6, s_ * 0.9), rnd.choice([kar, buz]), egim=0.25 * s_)
+    isik("SUN", (0, 0, 30), 2.2, lin(hex3("#d6e4ff")), yon=(8, 40, 0))
 
 
 def serit(oyuncu):
@@ -672,7 +734,9 @@ def poz_maskeleri():
 
 # ------------------------------------------------------------------ ana akis
 # 5. video (REF-056, 3 oyuncu, Halloween): ayri betik, buradaki yardimcilarla calisir
-if arg("--mod", "pvp") == "cadi":
+if arg("--mod", "pvp") == "boksor":       # 6. video (REF-057) acilis boksorleri
+    exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "boksor.py"), encoding="utf-8").read(), "boksor.py", "exec"))
+elif arg("--mod", "pvp") == "cadi":
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-cadi.py"), encoding="utf-8").read(), "varlik-cadi.py", "exec"))
 else:
     if YALNIZ in ("hepsi", "poz"):
