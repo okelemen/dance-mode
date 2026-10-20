@@ -14,12 +14,18 @@ from PIL import Image
 ap = argparse.ArgumentParser()
 ap.add_argument("--esik-eski", type=float, default=0.78)
 ap.add_argument("--esik-ic", type=float, default=0.75)
-A = ap.parse_args()
+
 BURA = os.path.dirname(os.path.abspath(__file__))
 N = 128
 DUVAR_SAYI = {1: 7, 2: 7, 3: 8}
 # siluette bas asagi / tam kopru gibi okunan tabanlar (5. video kontak dersi, TALIMATLAR §2 guvenlik)
 YASAK = ("Standing Split", "Bridge", "Headstand", "Handstand")
+# kontak 1 (20 Eki 2026): siluette havada / dusuyor / tam yer spagati gibi okunanlar
+HARIC = {"aurora-gate-reach-up", "aurora-side-kneel-arch", "glacier-flow-133", "aurora-side-plank-star",
+         "aurora-wide-straddle-fold-arms-out", "aurora-front-split-prep-hands-floor"}
+ap.add_argument("--havuz", action="store_true", help="elle tasarlananlar yetmezse rastgele havuzu da kullan")
+A = ap.parse_args()
+A_havuz = lambda: A.havuz
 
 
 def maske(yol):
@@ -48,7 +54,7 @@ for ad, p in aday.items():
     yol = os.path.join(BURA, "varlik-06-aday/poz", ad + ".png")
     if not os.path.exists(yol):
         eksik.append(ad); continue
-    if any(y in p["ad"] for y in YASAK):
+    if any(y in p["ad"] for y in YASAK) or ad in HARIC or (not p.get("el") and not A_havuz()):
         continue
     m = maske(yol)
     en, deg = max(((k, iou(m, v)) for k, v in eski.items()), key=lambda x: x[1])

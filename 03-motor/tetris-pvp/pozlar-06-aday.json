@@ -385,6 +385,78 @@
    "tur": 1,
    "el": true
   },
+  "aurora-walking-stance-arms-up": {
+   "ad": "Aurora Walking Stance Arms Up",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    176,
+    176
+   ],
+   "solBacak": [
+    25,
+    25
+   ],
+   "sagBacak": [
+    -25,
+    -25
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "aurora-split-stance-arms-forward-back": {
+   "ad": "Aurora Split Stance Arms Forward Back",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solBacak": [
+    28,
+    28
+   ],
+   "sagBacak": [
+    -28,
+    -28
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "aurora-wide-stance-side-bend-arm-over": {
+   "ad": "Aurora Wide Stance Side Bend Arm Over",
+   "yon": "on",
+   "govde": 200,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -110
+   ],
+   "solKol": [
+    20,
+    10
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1,
+   "el": true
+  },
   "aurora-warrior-lean-forward-arms-back": {
    "ad": "Aurora Warrior Lean Forward Arms Back",
    "yon": "sag",
@@ -765,6 +837,102 @@
    "sagBacak": [
     90,
     0
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "aurora-kneeling-hands-behind-head-lean": {
+   "ad": "Aurora Kneeling Hands Behind Head Lean",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    150,
+    -130
+   ],
+   "sagKol": [
+    148,
+    -128
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "aurora-low-squat-arms-forward": {
+   "ad": "Aurora Low Squat Arms Forward",
+   "yon": "sag",
+   "govde": 150,
+   "bas": 0,
+   "solKol": [
+    95,
+    95
+   ],
+   "sagKol": [
+    93,
+    93
+   ],
+   "solBacak": [
+    110,
+    -60
+   ],
+   "sagBacak": [
+    108,
+    -62
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "aurora-lunge-arms-back-wings": {
+   "ad": "Aurora Lunge Arms Back Wings",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    -100,
+    -100
+   ],
+   "sagKol": [
+    -98,
+    -98
+   ],
+   "solBacak": [
+    80,
+    0
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "aurora-horse-stance-arms-diagonal": {
+   "ad": "Aurora Horse Stance Arms Diagonal",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -140,
+    -140
+   ],
+   "solKol": [
+    40,
+    40
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
    ],
    "tur": 2,
    "el": true
@@ -1197,6 +1365,126 @@
    "sagBacak": [
     -120,
     -170
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "aurora-lizard-lunge-arms-up": {
+   "ad": "Aurora Lizard Lunge Arms Up",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    176,
+    176
+   ],
+   "solBacak": [
+    100,
+    -10
+   ],
+   "sagBacak": [
+    -70,
+    -70
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "aurora-seated-forward-reach-toes": {
+   "ad": "Aurora Seated Forward Reach Toes",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    98,
+    98
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "aurora-gate-side-bend-over": {
+   "ad": "Aurora Gate Side Bend Over",
+   "yon": "on",
+   "govde": 205,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -110
+   ],
+   "solKol": [
+    20,
+    10
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "solBacak": [
+    60,
+    60
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "aurora-kneeling-lunge-prayer-twist": {
+   "ad": "Aurora Kneeling Lunge Prayer Twist",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    40,
+    170
+   ],
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solBacak": [
+    95,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "aurora-warrior-reverse-reach": {
+   "ad": "Aurora Warrior Reverse Reach",
+   "yon": "sag",
+   "govde": 200,
+   "bas": 0,
+   "solKol": [
+    160,
+    160
+   ],
+   "sagKol": [
+    -30,
+    -30
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    -38,
+    -38
    ],
    "tur": 3,
    "el": true

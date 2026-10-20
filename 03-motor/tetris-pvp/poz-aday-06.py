@@ -82,6 +82,21 @@ el(3, profil("Mermaid Seated Arch", 205, [178, 178], [176, 176], [90, -90], [-90
 el(3, profil("Arabesque Arms Up", 165, [178, 178], [176, 176], [0, 0], [-80, -80]))
 el(3, profil("Tiger Kneel Leg Up", 95, [90, 90], [0, 0], [0, -90], [-120, -170]))
 
+# ---- kontak 1 duzeltmesi (20 Eki 2026): havada/dusuyor gibi okunan ve tam yer spagati gibi gorunen pozlarin yerine
+# YERE SAGLAM BASAN yedekler (secici HARIC listesiyle eskileri atar)
+el(1, profil("Walking Stance Arms Up", 185, [178, 178], [176, 176], [25, 25], [-25, -25]))
+el(1, profil("Split Stance Arms Forward Back", 180, [90, 90], [-60, -60], [28, 28], [-28, -28]))
+el(1, on("Wide Stance Side Bend Arm Over", [-150, -110], [20, 10], "wide", "wide", govde=200))
+el(2, profil("Kneeling Hands Behind Head Lean", 160, [150, -130], [148, -128], [0, -90], [0, -90]))
+el(2, profil("Low Squat Arms Forward", 150, [95, 95], [93, 93], [110, -60], [108, -62]))
+el(2, profil("Lunge Arms Back Wings", 175, [-100, -100], [-98, -98], [80, 0], [-40, -40]))
+el(2, on("Horse Stance Arms Diagonal", [-140, -140], [40, 40], "horse", "horse"))
+el(3, profil("Lizard Lunge Arms Up", 160, [178, 178], [176, 176], [100, -10], [-70, -70]))
+el(3, profil("Seated Forward Reach Toes", 110, [100, 100], [98, 98], [90, 90], [88, 88]))
+el(3, on("Gate Side Bend Over", [-150, -110], [20, 10], [0, -90], [60, 60], govde=205))
+el(3, profil("Kneeling Lunge Prayer Twist", 175, [40, 170], [-60, -60], [95, 0], [0, -90]))
+el(3, profil("Warrior Reverse Reach", 200, [160, 160], [-30, -30], [70, 0], [-38, -38]))
+
 # ---- HAVUZ: asimetrik kombinasyonlar (seciciye yedek; once EL kullanilir)
 KOL = {"V": "v", "W": "w", "Cactus": "cactus", "Reach": "up", "T": "t", "Head": "head", "Flex": "flex", "Low": "lowv",
        "Hip": "hip", "Diag": "up45", "Swing": [-150, -110], "Hook": [-130, -40], "Salute": [-100, 140], "Cross": [-20, 110]}
