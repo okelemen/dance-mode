@@ -67,7 +67,8 @@ def boksor(oyuncu):
     arm.rotation_euler.z += math.radians(62)
     bpy.context.view_layer.update()
     # ---- BOKS EKIPMANI (kullanici 20 Eki 2026: "kafasinda normal boksorlerin ne takiyorsa ... ellerinde eldivenleri")
-    # kask: basin ustunu, sakaklari, yanaklari ve enseyi saran, YUZU ACIK amator boks kaski (dolgulu kabuk + beyaz kenar)
+    # kullanici 20 Eki 2026 (2): "elinde eldiveni, dizinde dizlikleri, kafasinda normal sembolik kafasini saran bir kask.
+    # Mavi ve pembe renkli" -> kask basi tamamen sarar (yalniz yuz penceresi acik, yanak ve cene korumali), dizlik iki dizde.
     # eldiven: tombul yumruk + bilekte beyaz mansetli gercek boks eldiveni. Govde acik/beyaz parlak, ekipman oyuncu renginde.
     import bmesh
     ekip = mat_jole("ekipman_" + oyuncu, R, emis=0.35, purluk=0.06)
@@ -90,7 +91,7 @@ def boksor(oyuncu):
     me = bpy.data.meshes.new("kask_" + oyuncu); bm = bmesh.new()
     bmesh.ops.create_uvsphere(bm, u_segments=40, v_segments=24, radius=rk)
     bmesh.ops.scale(bm, vec=(1.0, 1.1, 1.0), verts=bm.verts)
-    sil = [v for v in bm.verts if (v.co.normalized().dot(f_yerel) > 0.42 and v.co.y > -0.55 * rk) or v.co.y < -0.62 * rk]
+    sil = [v for v in bm.verts if (v.co.normalized().dot(f_yerel) > 0.66 and -0.45 * rk < v.co.y < 0.45 * rk) or v.co.y < -0.80 * rk]
     bmesh.ops.delete(bm, geom=sil, context="VERTS")
     bm.to_mesh(me); bm.free()
     kask = bpy.data.objects.new("kask_" + oyuncu, me); bpy.context.collection.objects.link(kask)
@@ -118,6 +119,25 @@ def boksor(oyuncu):
         s_ = bpy.context.active_object; s_.data.materials.append(ekip); bpy.ops.object.shade_smooth()
         s_.data.transform(Matrix.Rotation(math.radians(90), 4, "X"))
         EKIP.append((s_, taraf + "Hand", Matrix.Translation((0, -0.05 * rg, 0))))   # manset ustunde renkli serit
+
+    # dizlikler: dizi saran tombul ped (kaval kemiginin basinda), onde yuvarlak kapak, ust/alt beyaz bant
+    rd = 0.048 * boy
+    for taraf in ("Left", "Right"):
+        fd = (kemik_rot(taraf + "Leg").to_matrix().inverted() @ ileri).normalized()
+        bpy.ops.mesh.primitive_cylinder_add(radius=rd, depth=1.5 * rd, vertices=40)
+        d_ = bpy.context.active_object; d_.data.materials.append(ekip); bpy.ops.object.shade_smooth()
+        d_.data.transform(Matrix.Rotation(math.radians(90), 4, "X"))
+        bv = d_.modifiers.new("egim", "BEVEL"); bv.width = 0.35 * rd; bv.segments = 6
+        EKIP.append((d_, taraf + "Leg", Matrix.Translation((0, 0.12 * rd, 0))))
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=0.62 * rd, segments=32, ring_count=16)
+        c_ = bpy.context.active_object; c_.data.materials.append(ekip); bpy.ops.object.shade_smooth()
+        c_.data.transform(Matrix.Diagonal((1.0, 1.15, 0.6, 1.0)))
+        EKIP.append((c_, taraf + "Leg", Matrix.Translation(fd * (0.85 * rd) + Vector((0, 0.1 * rd, 0)))))
+        for yy in (-0.62, 0.86):
+            bpy.ops.mesh.primitive_torus_add(major_radius=1.0 * rd, minor_radius=0.12 * rd)
+            b_ = bpy.context.active_object; b_.data.materials.append(beyaz); bpy.ops.object.shade_smooth()
+            b_.data.transform(Matrix.Rotation(math.radians(90), 4, "X"))
+            EKIP.append((b_, taraf + "Leg", Matrix.Translation((0, yy * rd, 0))))
 
     def eldiven_yerlestir():
         for ob, ad, yerel in EKIP:
