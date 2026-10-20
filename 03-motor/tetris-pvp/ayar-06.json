@@ -2,8 +2,8 @@
  "_not": "TETRIS MODE 6. video (REF-057, Glow Motion 3 PLAYER BATTLE#2 -> kullanici karari 2 oyuncu, 20 Eki 2026). 5 dk denemesi video 1 (TALIMATLAR §20-21). Duvar dongusu 12 sn (REF-057 olcumu) = 24 vurus @128 BPM gecici; tur yapisi 7/7/8. Acilis: karsilikli boksorler (boksor.py) + mavi zemin pembe neon yazi (kullanici). Metinler bizim (REF-057'nin kartlari birebir alinmadi). BPM muzik gelince olculur, bolum yeniden kurulur.",
  "seri": "TETRIS MODE",
  "bolum": "tetris-mode-06",
- "bpm": 128,
- "muzik": "HENUZ YOK - kullanici Suno'da uretecek (SUNO-BRIEF-TETRIS-MODE-06.md)",
+ "bpm": 126,
+ "muzik": "Frostbite Knockout.wav (Suno, kullanici, 21 Eki 2026) 123->129 BPM hizlaniyordu -> frostbite-126.wav (muzik-sabitle.py --hedef 126, sapma <=0,34)",
  "duvar": "duvar-listesi-06.json",
  "duvar_vurus": 24,
  "kart_vurus": {
