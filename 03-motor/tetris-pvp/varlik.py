@@ -735,6 +735,8 @@ def poz_maskeleri():
 # 5. video (REF-056, 3 oyuncu, Halloween): ayri betik, buradaki yardimcilarla calisir
 if arg("--mod", "pvp") == "boksor":       # 6. video (REF-057) acilis boksorleri
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "boksor.py"), encoding="utf-8").read(), "boksor.py", "exec"))
+elif arg("--mod", "pvp") == "gunbatimi":   # 7. video (REF-058, CO-OP): synthwave gun batimi, tek serit
+    exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-gunbatimi.py"), encoding="utf-8").read(), "varlik-gunbatimi.py", "exec"))
 elif arg("--mod", "pvp") == "cadi":
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-cadi.py"), encoding="utf-8").read(), "varlik-cadi.py", "exec"))
 else:
