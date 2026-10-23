@@ -44,9 +44,9 @@ SIRT = lambda P: ayna_poz(P)               # profil sag'in aynasi: sola bakar (s
 TUR1 = [  # IN SYNC - ayakta, temasli, herkes yapar
     ikili("Heart Hands", on("", "hip", [140, 110], "tog", "tog")),
     ikili("High Ten", on("", [150, 150], [140, 140], "softknee", "tog", govde=170)),
-    ikili("Side Lean Arch", on("", "hip", [165, 140], "wide", "tog", govde=160)),
-    ikili("Back to Back Reach Up", SIRT(profil("", 180, [178, 178], [176, 176], [0, 0], [-2, -2])),
-          profil("", 180, [178, 178], [176, 176], [0, 0], [-2, -2]), temas="yan"),
+    ikili("Elbow Hook Side Kick", on("", "up45", [100, 40], "straight", "tog")),
+    # kontak 1: profilde sirt sirta tek figur gibi okundu -> onden omuz omuza, disa yatma (lale)
+    ikili("Shoulder to Shoulder Lean Out", on("", [-160, -120], "down", "sidetap", "tog", govde=195), temas="yan"),
     ikili("Mirror Knee Hold", on("", "t", [60, 60], "tog", "kneeup")),
     ikili("Shoulder Hug Tree", on("", "up45", [75, 80], "kneein", "tog"), temas=("el", "omuz")),
     ikili("Star Link", on("", "v", [120, 120], "wide", "wide")),
@@ -59,9 +59,11 @@ TUR2 = [  # TRUST TEST - hamle, tek ayak denge, diz cokme
     ikili("Kneeling Heart", profil("", 180, [150, 110], [-20, -20], KNEEL, KNEEL)),
     ikili("Tree Palm Press", on("", "up", [90, 90], "kneein", "tog")),
     ikili("Chair Squat Hand Link", profil("", 160, [90, 90], [88, 88], [90, -10], [88, -12])),
-    ikili("Side Lunge Shoulder Reach", on("", "t", [70, 60], "lunge", [40, 40]), temas=("el", "omuz")),
-    ikili("Dance Dip", profil("", 205, [120, 100], [-130, -130], [20, 10], [-25, -25]),
-          ayna_poz(profil("", 160, [100, 60], [60, 30], [35, 0], [-30, -30]))),
+    # kontak 1: kollar/bacaklar caprazlandi -> sirt donuk hamle, arka eller yukarida bulusur (V)
+    ikili("Lunge Back Hand Link", SIRT(profil("", 175, [178, 178], [-120, -120], [70, 0], [-40, -40])),
+          profil("", 175, [178, 178], [-120, -120], [70, 0], [-40, -40])),
+    # kontak 1: dans yaslanmasinda temas yoktu (dz 0,72) + agirlik verme -> karsilikli dansci, on eller deger
+    ikili("Dancer Reach Hands", profil("", 150, [110, 110], [-60, -60], [0, 0], [-60, -120])),
     ikili("Knee Up Elbow Touch", on("", "up", "flex", "tog", "kneeup"), temas="yan"),
 ]
 
@@ -72,7 +74,8 @@ TUR3 = [  # MAX POWER - yer pozlari + esneklik (guvenli surumler)
           profil("", 190, [40, 140], [38, 138], [90, 0], [88, -2]), temas="yan"),
     ikili("Plank Hand Touch", profil("", 100, [90, 90], [0, 0], [-80, -80], [-78, -78])),
     ikili("Kneeling Gate Arch", on("", [-30, -30], [150, 120], [-60, -60], [0, "geri"], govde=155)),
-    ikili("Low Lunge Crescent Arch", profil("", 175, [165, 140], [163, 138], [95, 0], [-55, -150])),
+    # kontak 1: alcak hamle bacaklari bozuk okundu -> karsilikli bird dog (masa + tek bacak geri), on eller deger
+    ikili("Bird Dog Hand Touch", profil("", 90, [90, 90], [0, 0], KNEEL, [-90, -90])),
     ikili("Seated Side Bend Overhead", on("", [150, 110], [40, 30], OTUR_L, OTUR_R, govde=150)),
     ikili("Pyramid Fold Hand Link", profil("", 80, [60, 60], [58, 58], [25, 25], [-25, -25])),
 ]
