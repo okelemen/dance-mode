@@ -1,6 +1,6 @@
 {
  "_not": "TETRIS MODE 7. video (REF-058, Glow Motion 'Can You Two Fit? | HUMAN TETRIS x 2 player', 2 oyunculu CO-OP; kullanici 23 Eki 2026: tek duvar, iki kisilik ortak delik, ~5 dk, 24 duvar). 5 dk denemesi video 2 (TALIMATLAR §20). Duvar dongusu 11 sn (REF-058 olcumu) ~ 24 vurus @128 BPM GECICI; tur yapisi 8/8/8. Acilis §20: mavi/pembe boksorler (varlik-06) + mavi zemin pembe neon yazi; VS yerine CO / OP rozeti (REF-058'de VS yok, oyuncular takim). Metinler bizim (REF-058 kartlari birebir alinmadi). BPM muzik gelince olculur, bolum yeniden kurulur.",
- "seri": "TETRIS MODE",
+ "seri": "HUMAN TETRIS",
  "bolum": "tetris-mode-07",
  "bpm": 128,
  "muzik": "HENUZ YOK - kullanici Suno'da uretecek",
@@ -33,7 +33,7 @@
   "p1parlak": "#b8dcff", "p2parlak": "#ffb8dd",
   "isin": ["#ff4fb8", "#3a0640"], "wrapIsin": ["#ff9a3a", "#3a0640"],
   "ovguRenk": ["#ffffff", "#ffc2ec", "#ff9a3a"], "parca": ["#ff7ad8", "#ffb45a", "#7fe7ff"],
-  "abone": ["#7dffb4", "#0c8a48"], "vsHarf": ["CO-", "OP"], "sayac": "WALLS",
+  "abone": ["#7dffb4", "#0c8a48"], "vsHarf": ["CO-", "OP"], "sayac": "WALLS", "vsAlt": "HUMAN TETRIS · CO-OP", "aboneAlt": "NEW HUMAN TETRIS EVERY DAY",
   "fener": false, "kuzeyIsigi": false
  }
 }

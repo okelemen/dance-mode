@@ -1,5 +1,5 @@
 <meta charset="utf-8">
-<title>TETRIS MODE CO-OP - motor 6</title>
+<title>HUMAN TETRIS CO-OP - motor 6</title>
 <style>
   html,body { margin:0; background:#040824; overflow:hidden; }
   canvas { display:block; }
@@ -8,7 +8,7 @@
 
 <script type="module">
 // =====================================================================
-// MOTOR 6 — TETRIS MODE CO-OP (2 oyuncu, TEK duvar + iki kişilik ORTAK delik). sahne4.html'den türedi (açılış, kartlar,
+// MOTOR 6 — HUMAN TETRIS CO-OP (kullanıcı 23 Eki 2026: ekranda/başlıkta/kapakta "TETRIS MODE" yok, yalnız HUMAN TETRIS) (2 oyuncu, TEK duvar + iki kişilik ORTAK delik). sahne4.html'den türedi (açılış, kartlar,
 // abone aynı). Kural kaynağı: REF-058 (Glow Motion "Can You Two Fit? | HUMAN TETRIS x 2 player"), kullanıcı 23 Eki 2026:
 // "Referanstaki gibi CO-OP olsun (tek duvar, iki kişilik ortak delik), ~5 dk, 24 duvar."
 // REF-058 düzeni: tek geniş yol, ortada kırmızı kafes kapı; döngü ~11 sn: kapıda boş panel + neon yıldız -> poz panelde ->
@@ -49,7 +49,7 @@ const TEMA = Object.assign({
   fener: true, kuzeyIsigi: false,
   // 6. video (REF-057) açılışı: mavi ışınlı zemin + pembe neon yazı (kullanıcı 20 Eki 2026)
   acilisZemin: ['#3d8bff', '#071a6e'], acilisYazi: ['#ffffff', '#ffc2ec', '#ff3ea5', '#c4167a'], acilisKontur: '#2a0638', acilisIsilti: '#ff4fc8',
-  vsAlt: 'TETRIS MODE · PVP BATTLE', wrap: ["THAT'S", 'A WRAP!'], ovgu: ['GREAT!', 'EXCELLENT!', 'PERFECT!', 'AWESOME!'],
+  vsAlt: 'HUMAN TETRIS · CO-OP', aboneAlt: 'NEW HUMAN TETRIS EVERY DAY', wrap: ["THAT'S", 'A WRAP!'], ovgu: ['GREAT!', 'EXCELLENT!', 'PERFECT!', 'AWESOME!'],
 }, BOLUM.tema || {});
 const VARLIK = TEMA.varlik;
 const YER = await fetch(VARLIK + 'yerlesim.json').then(r => r.json());
@@ -707,7 +707,7 @@ function kartCiz(kart, u, t) {
     cx.save(); cx.shadowColor = '#ff1f3d'; cx.shadowBlur = 50 * k;
     cx.fillStyle = '#e11d2e'; cx.beginPath(); cx.roundRect(W / 2 - bw / 2, H * 0.48 - bh / 2, bw, bh, bh / 2); cx.fill(); cx.restore();
     if (g > 0.6) yazi('SUBSCRIBE', W / 2, H * 0.48, 120 * k * pul, '#ffffff', '#5a0010');
-    yazi('NEW BATTLE EVERY WEEK', W / 2, H * 0.68, 70 * k * g + 1, ['#ffffff', TEMA.p1acik], '#06122e', g);
+    yazi(TEMA.aboneAlt, W / 2, H * 0.68, 70 * k * g + 1, ['#ffffff', TEMA.p1acik], '#06122e', g);
   }
   cx.restore();
 }

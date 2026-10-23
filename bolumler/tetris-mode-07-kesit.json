@@ -1,5 +1,5 @@
 {
- "seri": "TETRIS MODE",
+ "seri": "HUMAN TETRIS",
  "bolum": "tetris-mode-07",
  "bpm": 128.0,
  "toplam_olcu": 41,
@@ -147,6 +147,8 @@
    "OP"
   ],
   "sayac": "WALLS",
+  "vsAlt": "HUMAN TETRIS · CO-OP",
+  "aboneAlt": "NEW HUMAN TETRIS EVERY DAY",
   "fener": false,
   "kuzeyIsigi": false
  }
