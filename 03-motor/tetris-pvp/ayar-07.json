@@ -1,0 +1,39 @@
+{
+ "_not": "TETRIS MODE 7. video (REF-058, Glow Motion 'Can You Two Fit? | HUMAN TETRIS x 2 player', 2 oyunculu CO-OP; kullanici 23 Eki 2026: tek duvar, iki kisilik ortak delik, ~5 dk, 24 duvar). 5 dk denemesi video 2 (TALIMATLAR §20). Duvar dongusu 11 sn (REF-058 olcumu) ~ 24 vurus @128 BPM GECICI; tur yapisi 8/8/8. Acilis §20: mavi/pembe boksorler (varlik-06) + mavi zemin pembe neon yazi; VS yerine CO / OP rozeti (REF-058'de VS yok, oyuncular takim). Metinler bizim (REF-058 kartlari birebir alinmadi). BPM muzik gelince olculur, bolum yeniden kurulur.",
+ "seri": "TETRIS MODE",
+ "bolum": "tetris-mode-07",
+ "bpm": 128,
+ "muzik": "HENUZ YOK - kullanici Suno'da uretecek",
+ "duvar": "duvar-listesi-07.json",
+ "duvar_vurus": 24,
+ "kart_vurus": {"tur": 8, "basla": 8, "abone": 12},
+ "giris_dizisi": [
+  {"tip": "acilis", "vurus": 12},
+  {"tip": "yazi", "metin": "WELCOME,", "alt": "DREAM TEAM!", "vurus": 6},
+  {"tip": "yazi", "metin": "TWO PLAYERS.", "alt": "ONE SHAPE.", "vurus": 6},
+  {"tip": "nasil", "metin": "MOVE AS ONE", "alt": "FIT THROUGH TOGETHER!", "vurus": 12}
+ ],
+ "tur_kart": {"1": ["ROUND 1", "IN SYNC"], "2": ["ROUND 2", "TRUST TEST"], "3": ["ROUND 3", "MAX POWER"]},
+ "gecis": {
+  "2": [{"tip": "yazi", "metin": "WHAT A DUO!", "vurus": 6}, {"tip": "yazi", "metin": "STILL", "alt": "IN SYNC?", "vurus": 6}],
+  "3": [{"tip": "yazi", "metin": "TEAMWORK", "alt": "ON FIRE!", "vurus": 6}, {"tip": "yazi", "metin": "LAST ROUND.", "alt": "STAY TOGETHER!", "vurus": 6}]
+ },
+ "kapanis": [
+  {"tip": "yazi", "metin": "TEAM", "alt": "COMPLETE!", "vurus": 6},
+  {"tip": "yazi", "metin": "WHO LED", "alt": "THE MOVES?", "vurus": 6}
+ ],
+ "ovgu": ["PERFECT FIT!", "IN SYNC!", "TEAMWORK!", "SO SMOOTH!", "DREAM DUO!", "NAILED IT!"],
+ "sayfa": "sahne6.html",
+ "tema": {
+  "varlik": "/03-motor/tetris-pvp/varlik-07/",
+  "maskeVarlik": "/03-motor/tetris-pvp/varlik-07-poz2/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-06/",
+  "p1": "#2E9BFF", "p2": "#FF3EA5", "altin": "#ffd94a", "camgobegi": "#7fe7ff",
+  "p1koyu": "#0b4fb0", "p2koyu": "#b0136a", "p1acik": "#d6ecff", "p2acik": "#ffd9ee",
+  "p1parlak": "#b8dcff", "p2parlak": "#ffb8dd",
+  "isin": ["#ff4fb8", "#3a0640"], "wrapIsin": ["#ff9a3a", "#3a0640"],
+  "ovguRenk": ["#ffffff", "#ffc2ec", "#ff9a3a"], "parca": ["#ff7ad8", "#ffb45a", "#7fe7ff"],
+  "abone": ["#7dffb4", "#0c8a48"], "vsHarf": ["CO-", "OP"], "sayac": "WALLS",
+  "fener": false, "kuzeyIsigi": false
+ }
+}

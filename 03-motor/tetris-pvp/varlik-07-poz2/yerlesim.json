@@ -1,0 +1,268 @@
+{
+ "grup": {
+  "duo-heart-hands": {
+   "cerceve_m": 4.31,
+   "gen_m": 4.565,
+   "yuk_m": 3.793,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.024
+    }
+   ]
+  },
+  "duo-high-ten": {
+   "cerceve_m": 5.03,
+   "gen_m": 3.829,
+   "yuk_m": 4.426,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.036
+    }
+   ]
+  },
+  "duo-elbow-hook-side-kick": {
+   "cerceve_m": 4.371,
+   "gen_m": 6.215,
+   "yuk_m": 3.847,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": 0.02
+    }
+   ]
+  },
+  "duo-shoulder-to-shoulder-lean-out": {
+   "cerceve_m": 4.452,
+   "gen_m": 3.936,
+   "yuk_m": 3.918,
+   "temas": [
+    {
+     "tip": "yan",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-mirror-knee-hold": {
+   "cerceve_m": 4.31,
+   "gen_m": 6.89,
+   "yuk_m": 3.793,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.006
+    }
+   ]
+  },
+  "duo-shoulder-hug-tree": {
+   "cerceve_m": 4.371,
+   "gen_m": 5.449,
+   "yuk_m": 3.847,
+   "temas": [
+    {
+     "tip": "el-omuz",
+     "dz": 0.265
+    }
+   ]
+  },
+  "duo-star-link": {
+   "cerceve_m": 4.795,
+   "gen_m": 5.458,
+   "yuk_m": 4.22,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.032
+    }
+   ]
+  },
+  "duo-cactus-elbow-link": {
+   "cerceve_m": 4.066,
+   "gen_m": 4.44,
+   "yuk_m": 3.578,
+   "temas": [
+    {
+     "tip": "yan",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-lunge-arch-bridge": {
+   "cerceve_m": 4.609,
+   "gen_m": 4.926,
+   "yuk_m": 4.056,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.031
+    }
+   ]
+  },
+  "duo-warrior-three-hand-link": {
+   "cerceve_m": 4.912,
+   "gen_m": 7.86,
+   "yuk_m": 2.625,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.04
+    }
+   ]
+  },
+  "duo-kneeling-heart": {
+   "cerceve_m": 3.654,
+   "gen_m": 3.985,
+   "yuk_m": 3.216,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.024
+    }
+   ]
+  },
+  "duo-tree-palm-press": {
+   "cerceve_m": 5.2,
+   "gen_m": 5.478,
+   "yuk_m": 4.576,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.011
+    }
+   ]
+  },
+  "duo-chair-squat-hand-link": {
+   "cerceve_m": 3.28,
+   "gen_m": 3.494,
+   "yuk_m": 2.887,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.058
+    }
+   ]
+  },
+  "duo-lunge-back-hand-link": {
+   "cerceve_m": 5.043,
+   "gen_m": 4.886,
+   "yuk_m": 4.438,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.03
+    }
+   ]
+  },
+  "duo-dancer-reach-hands": {
+   "cerceve_m": 4.139,
+   "gen_m": 6.585,
+   "yuk_m": 3.643,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.029
+    }
+   ]
+  },
+  "duo-knee-up-elbow-touch": {
+   "cerceve_m": 5.194,
+   "gen_m": 3.634,
+   "yuk_m": 4.57,
+   "temas": [
+    {
+     "tip": "yan",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-seated-feet-together-arms-up": {
+   "cerceve_m": 3.279,
+   "gen_m": 4.723,
+   "yuk_m": 2.885,
+   "temas": [
+    {
+     "tip": "ayak-ayak",
+     "dz": -0.076
+    }
+   ]
+  },
+  "duo-boat-feet-touch": {
+   "cerceve_m": 3.37,
+   "gen_m": 5.392,
+   "yuk_m": 1.72,
+   "temas": [
+    {
+     "tip": "ayak-ayak",
+     "dz": 0.003
+    }
+   ]
+  },
+  "duo-back-to-back-chair": {
+   "cerceve_m": 3.352,
+   "gen_m": 3.601,
+   "yuk_m": 2.95,
+   "temas": [
+    {
+     "tip": "yan",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-plank-hand-touch": {
+   "cerceve_m": 4.798,
+   "gen_m": 7.677,
+   "yuk_m": 1.899,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.023
+    }
+   ]
+  },
+  "duo-kneeling-gate-arch": {
+   "cerceve_m": 4.324,
+   "gen_m": 6.918,
+   "yuk_m": 3.115,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.034
+    }
+   ]
+  },
+  "duo-bird-dog-hand-touch": {
+   "cerceve_m": 4.886,
+   "gen_m": 7.817,
+   "yuk_m": 1.926,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.031
+    }
+   ]
+  },
+  "duo-seated-side-bend-overhead": {
+   "cerceve_m": 3.09,
+   "gen_m": 4.944,
+   "yuk_m": 2.619,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": 0.01
+    }
+   ]
+  },
+  "duo-pyramid-fold-hand-link": {
+   "cerceve_m": 3.271,
+   "gen_m": 5.233,
+   "yuk_m": 2.329,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.035
+    }
+   ]
+  }
+ }
+}
