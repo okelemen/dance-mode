@@ -1,0 +1,222 @@
+{
+ "_not": "7. video KAPAK ikili pozlari (videodaki pozlar, gruplar-07.json'dan). kapakgrup: birlesik + kisi basi maske.",
+ "gruplar": {
+  "duo-lunge-back-hand-link": {
+   "ad": "Duo Lunge Back Hand Link",
+   "figurler": [
+    {
+     "ad": "Duo Lunge Back Hand Link A",
+     "yon": "sol",
+     "govde": -175,
+     "bas": 0,
+     "solKol": [
+      120,
+      120
+     ],
+     "sagKol": [
+      -178,
+      -178
+     ],
+     "solBacak": [
+      40,
+      40
+     ],
+     "sagBacak": [
+      -70,
+      0
+     ]
+    },
+    {
+     "ad": "Duo Lunge Back Hand Link B",
+     "yon": "sag",
+     "govde": 175,
+     "bas": 0,
+     "solKol": [
+      178,
+      178
+     ],
+     "sagKol": [
+      -120,
+      -120
+     ],
+     "solBacak": [
+      70,
+      0
+     ],
+     "sagBacak": [
+      -40,
+      -40
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-dancer-reach-hands": {
+   "ad": "Duo Dancer Reach Hands",
+   "figurler": [
+    {
+     "ad": "Duo Dancer Reach Hands A",
+     "yon": "sag",
+     "govde": 150,
+     "bas": 0,
+     "solKol": [
+      110,
+      110
+     ],
+     "sagKol": [
+      -60,
+      -60
+     ],
+     "solBacak": [
+      0,
+      0
+     ],
+     "sagBacak": [
+      -60,
+      -120
+     ]
+    },
+    {
+     "ad": "Duo Dancer Reach Hands B",
+     "yon": "sol",
+     "govde": -150,
+     "bas": 0,
+     "solKol": [
+      60,
+      60
+     ],
+     "sagKol": [
+      -110,
+      -110
+     ],
+     "solBacak": [
+      60,
+      120
+     ],
+     "sagBacak": [
+      0,
+      0
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-shoulder-to-shoulder-lean-out": {
+   "ad": "Duo Shoulder to Shoulder Lean Out",
+   "figurler": [
+    {
+     "ad": "Duo Shoulder to Shoulder Lean Out A",
+     "yon": "on",
+     "govde": 195,
+     "bas": 0,
+     "sagKol": [
+      -160,
+      -120
+     ],
+     "solKol": [
+      8,
+      5
+     ],
+     "sagBacak": [
+      -30,
+      -30
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Duo Shoulder to Shoulder Lean Out B",
+     "yon": "on",
+     "govde": -195,
+     "bas": 0,
+     "solKol": [
+      160,
+      120
+     ],
+     "sagKol": [
+      -8,
+      -5
+     ],
+     "solBacak": [
+      30,
+      30
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    "yan"
+   ]
+  },
+  "duo-kneeling-heart": {
+   "ad": "Duo Kneeling Heart",
+   "figurler": [
+    {
+     "ad": "Duo Kneeling Heart A",
+     "yon": "sag",
+     "govde": 180,
+     "bas": 0,
+     "solKol": [
+      150,
+      110
+     ],
+     "sagKol": [
+      -20,
+      -20
+     ],
+     "solBacak": [
+      0,
+      -90
+     ],
+     "sagBacak": [
+      0,
+      -90
+     ]
+    },
+    {
+     "ad": "Duo Kneeling Heart B",
+     "yon": "sol",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      20,
+      20
+     ],
+     "sagKol": [
+      -150,
+      -110
+     ],
+     "solBacak": [
+      0,
+      90
+     ],
+     "sagBacak": [
+      0,
+      90
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  }
+ }
+}

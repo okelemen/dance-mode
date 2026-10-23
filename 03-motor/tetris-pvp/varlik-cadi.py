@@ -657,5 +657,7 @@ if YALNIZ == "kapak2":
     grup_maskeleri()
 if YALNIZ == "grup":        # 7. video (REF-058, CO-OP): duvar basina 2 kisilik TEK siluet -> grup/<ad>.png
     grup_maskeleri("grup/%s.png", kisi_basi=False)
+if YALNIZ == "kapakgrup":   # 7. video kapagi: ikili siluet + kisi basi maske (kisiler arasi ince beyaz hat, REF-058 kapagi)
+    grup_maskeleri()
 json.dump(YERLESIM, open(os.path.join(CIKTI, "yerlesim.json"), "w"), indent=1)
 log("bitti (cadi)")

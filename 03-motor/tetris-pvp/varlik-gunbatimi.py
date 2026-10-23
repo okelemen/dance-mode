@@ -21,9 +21,12 @@ YOL_W = 4.8
 KIRMIZI = "#ff2d55"
 
 
+KAYMA = [0.0, 0.0]          # kapak: kamera x/y kaymasi (REF-058 kapaginda kapi sagda ve daha yakin)
+
+
 def kamera(sc):
     rx = math.radians(90 - KAM["egim"])
-    bpy.ops.object.camera_add(location=(0, 0, KAM["z"]), rotation=(rx, 0, 0))
+    bpy.ops.object.camera_add(location=(KAYMA[0], KAYMA[1], KAM["z"]), rotation=(rx, 0, 0))
     kam = bpy.context.active_object; sc.camera = kam
     kam.data.sensor_fit = "VERTICAL"; kam.data.sensor_height = KAM["sensor"]; kam.data.lens = KAM["lens"]
     kam.data.clip_end = 600
@@ -217,7 +220,7 @@ def gok_katmani():
     gl = nt2.nodes.new("CompositorNodeGlare"); gl.glare_type = "FOG_GLOW"; gl.threshold = 0.9; gl.size = 8; gl.mix = 0.15
     ou = nt2.nodes.new("CompositorNodeComposite")
     nt2.links.new(rl.outputs[0], gl.inputs[0]); nt2.links.new(gl.outputs[0], ou.inputs[0])
-    yaz(sc, "gok.png")
+    yaz(sc, ON_EK + "gok.png")
 
 
 # ------------------------------------------------------------------ SERIT katmani (tek genis yol + kapi)
@@ -337,11 +340,11 @@ def serit_katmani():
     bpy.context.view_layer.update()
     px = [world_to_camera_view(sc, kam, Vector(p)) for p in ((-ic, Y, 0), (ic, Y, 0), (-ic, Y, H_), (ic, Y, H_))]
     xs = [p.x * 1920 for p in px]; ys = [(1 - p.y) * 1080 for p in px]
-    YERLESIM["aciklik_p1"] = [round(min(xs), 1), round(min(ys), 1), round(max(xs), 1), round(max(ys), 1)]
+    YERLESIM[ON_EK + "aciklik_p1"] = [round(min(xs), 1), round(min(ys), 1), round(max(xs), 1), round(max(ys), 1)]
     YERLESIM["ampul_p1"] = [[round(p.x * 1920, 1), round((1 - p.y) * 1080, 1)] for p in (world_to_camera_view(sc, kam, q) for q in AMPUL)]
     YERLESIM["yol"] = {"y_kapi": Y, "genislik": YOL_W, "kam": KAM, "serit_w": 1920}
-    log("aciklik", YERLESIM["aciklik_p1"])
-    yaz(sc, "serit.png")
+    log("aciklik", YERLESIM[ON_EK + "aciklik_p1"])
+    yaz(sc, ON_EK + "serit.png")
 
 
 # ------------------------------------------------------------------ PANELLER (REF-058: renk gecisli, 16:9)
@@ -374,6 +377,10 @@ def panel_gunbatimi(tip):
 
 
 # ------------------------------------------------------------------ ana akis (gunbatimi)
+ON_EK = ""
+if YALNIZ == "kapak":       # REF-058 kapagi: kapi kadrajin sag-ortasinda (x ~%62) ve biraz daha buyuk -> kamera sola + one kayar
+    ON_EK = "kapak-"; KAYMA[0], KAYMA[1] = -2.35, 1.5
+    gok_katmani(); serit_katmani()
 if YALNIZ in ("hepsi", "sahne"):
     gok_katmani()
     serit_katmani()
