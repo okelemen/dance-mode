@@ -1,0 +1,1313 @@
+{
+ "_not": "7. video (REF-058) CO-OP ikili pozlar. Figurler soldan saga; temas [sol eklem, sag eklem] ya da 'yan'.",
+ "gruplar": {
+  "duo-heart-hands": {
+   "ad": "Duo Heart Hands",
+   "figurler": [
+    {
+     "ad": "Duo Heart Hands A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -45,
+      20
+     ],
+     "solKol": [
+      140,
+      110
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Duo Heart Hands B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      45,
+      -20
+     ],
+     "sagKol": [
+      -140,
+      -110
+     ],
+     "solBacak": [
+      3,
+      1
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-high-ten": {
+   "ad": "Duo High Ten",
+   "figurler": [
+    {
+     "ad": "Duo High Ten A",
+     "yon": "on",
+     "govde": 170,
+     "bas": 0,
+     "sagKol": [
+      150,
+      150
+     ],
+     "solKol": [
+      140,
+      140
+     ],
+     "sagBacak": [
+      -12,
+      6
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Duo High Ten B",
+     "yon": "on",
+     "govde": -170,
+     "bas": 0,
+     "solKol": [
+      -150,
+      -150
+     ],
+     "sagKol": [
+      -140,
+      -140
+     ],
+     "solBacak": [
+      12,
+      -6
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-side-lean-arch": {
+   "ad": "Duo Side Lean Arch",
+   "figurler": [
+    {
+     "ad": "Duo Side Lean Arch A",
+     "yon": "on",
+     "govde": 160,
+     "bas": 0,
+     "sagKol": [
+      -45,
+      20
+     ],
+     "solKol": [
+      165,
+      140
+     ],
+     "sagBacak": [
+      -22,
+      -22
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Duo Side Lean Arch B",
+     "yon": "on",
+     "govde": -160,
+     "bas": 0,
+     "solKol": [
+      45,
+      -20
+     ],
+     "sagKol": [
+      -165,
+      -140
+     ],
+     "solBacak": [
+      22,
+      22
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-back-to-back-reach-up": {
+   "ad": "Duo Back to Back Reach Up",
+   "figurler": [
+    {
+     "ad": "Duo Back to Back Reach Up A",
+     "yon": "sol",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      -176,
+      -176
+     ],
+     "sagKol": [
+      -178,
+      -178
+     ],
+     "solBacak": [
+      2,
+      2
+     ],
+     "sagBacak": [
+      0,
+      0
+     ]
+    },
+    {
+     "ad": "Duo Back to Back Reach Up B",
+     "yon": "sag",
+     "govde": 180,
+     "bas": 0,
+     "solKol": [
+      178,
+      178
+     ],
+     "sagKol": [
+      176,
+      176
+     ],
+     "solBacak": [
+      0,
+      0
+     ],
+     "sagBacak": [
+      -2,
+      -2
+     ]
+    }
+   ],
+   "temas": [
+    "yan"
+   ]
+  },
+  "duo-mirror-knee-hold": {
+   "ad": "Duo Mirror Knee Hold",
+   "figurler": [
+    {
+     "ad": "Duo Mirror Knee Hold A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solKol": [
+      60,
+      60
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      80,
+      8
+     ]
+    },
+    {
+     "ad": "Duo Mirror Knee Hold B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      90,
+      90
+     ],
+     "sagKol": [
+      -60,
+      -60
+     ],
+     "solBacak": [
+      3,
+      1
+     ],
+     "sagBacak": [
+      -80,
+      -8
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-shoulder-hug-tree": {
+   "ad": "Duo Shoulder Hug Tree",
+   "figurler": [
+    {
+     "ad": "Duo Shoulder Hug Tree A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -122,
+      -122
+     ],
+     "solKol": [
+      75,
+      80
+     ],
+     "sagBacak": [
+      -60,
+      40
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Duo Shoulder Hug Tree B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      122,
+      122
+     ],
+     "sagKol": [
+      -75,
+      -80
+     ],
+     "solBacak": [
+      60,
+      -40
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "omuz"
+    ]
+   ]
+  },
+  "duo-star-link": {
+   "ad": "Duo Star Link",
+   "figurler": [
+    {
+     "ad": "Duo Star Link A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -148,
+      -148
+     ],
+     "solKol": [
+      120,
+      120
+     ],
+     "sagBacak": [
+      -22,
+      -22
+     ],
+     "solBacak": [
+      22,
+      22
+     ]
+    },
+    {
+     "ad": "Duo Star Link B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      148,
+      148
+     ],
+     "sagKol": [
+      -120,
+      -120
+     ],
+     "solBacak": [
+      22,
+      22
+     ],
+     "sagBacak": [
+      -22,
+      -22
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-cactus-elbow-link": {
+   "ad": "Duo Cactus Elbow Link",
+   "figurler": [
+    {
+     "ad": "Duo Cactus Elbow Link A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -90,
+      180
+     ],
+     "solKol": [
+      90,
+      -180
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ],
+     "solBacak": [
+      62,
+      4
+     ]
+    },
+    {
+     "ad": "Duo Cactus Elbow Link B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      90,
+      -180
+     ],
+     "sagKol": [
+      -90,
+      180
+     ],
+     "solBacak": [
+      62,
+      4
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ]
+    }
+   ],
+   "temas": [
+    "yan"
+   ]
+  },
+  "duo-lunge-arch-bridge": {
+   "ad": "Duo Lunge Arch Bridge",
+   "figurler": [
+    {
+     "ad": "Duo Lunge Arch Bridge A",
+     "yon": "on",
+     "govde": 165,
+     "bas": 0,
+     "sagKol": [
+      -45,
+      20
+     ],
+     "solKol": [
+      160,
+      130
+     ],
+     "sagBacak": [
+      -62,
+      -2
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Duo Lunge Arch Bridge B",
+     "yon": "on",
+     "govde": -165,
+     "bas": 0,
+     "solKol": [
+      45,
+      -20
+     ],
+     "sagKol": [
+      -160,
+      -130
+     ],
+     "solBacak": [
+      62,
+      2
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-warrior-three-hand-link": {
+   "ad": "Duo Warrior Three Hand Link",
+   "figurler": [
+    {
+     "ad": "Duo Warrior Three Hand Link A",
+     "yon": "sag",
+     "govde": 92,
+     "bas": 0,
+     "solKol": [
+      90,
+      90
+     ],
+     "sagKol": [
+      88,
+      88
+     ],
+     "solBacak": [
+      0,
+      0
+     ],
+     "sagBacak": [
+      -90,
+      -90
+     ]
+    },
+    {
+     "ad": "Duo Warrior Three Hand Link B",
+     "yon": "sol",
+     "govde": -92,
+     "bas": 0,
+     "solKol": [
+      -88,
+      -88
+     ],
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solBacak": [
+      90,
+      90
+     ],
+     "sagBacak": [
+      0,
+      0
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-kneeling-heart": {
+   "ad": "Duo Kneeling Heart",
+   "figurler": [
+    {
+     "ad": "Duo Kneeling Heart A",
+     "yon": "sag",
+     "govde": 180,
+     "bas": 0,
+     "solKol": [
+      150,
+      110
+     ],
+     "sagKol": [
+      -20,
+      -20
+     ],
+     "solBacak": [
+      0,
+      -90
+     ],
+     "sagBacak": [
+      0,
+      -90
+     ]
+    },
+    {
+     "ad": "Duo Kneeling Heart B",
+     "yon": "sol",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      20,
+      20
+     ],
+     "sagKol": [
+      -150,
+      -110
+     ],
+     "solBacak": [
+      0,
+      90
+     ],
+     "sagBacak": [
+      0,
+      90
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-tree-palm-press": {
+   "ad": "Duo Tree Palm Press",
+   "figurler": [
+    {
+     "ad": "Duo Tree Palm Press A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solKol": [
+      90,
+      90
+     ],
+     "sagBacak": [
+      -60,
+      40
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Duo Tree Palm Press B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      174,
+      176
+     ],
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solBacak": [
+      60,
+      -40
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-chair-squat-hand-link": {
+   "ad": "Duo Chair Squat Hand Link",
+   "figurler": [
+    {
+     "ad": "Duo Chair Squat Hand Link A",
+     "yon": "sag",
+     "govde": 160,
+     "bas": 0,
+     "solKol": [
+      90,
+      90
+     ],
+     "sagKol": [
+      88,
+      88
+     ],
+     "solBacak": [
+      90,
+      -10
+     ],
+     "sagBacak": [
+      88,
+      -12
+     ]
+    },
+    {
+     "ad": "Duo Chair Squat Hand Link B",
+     "yon": "sol",
+     "govde": -160,
+     "bas": 0,
+     "solKol": [
+      -88,
+      -88
+     ],
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solBacak": [
+      -88,
+      12
+     ],
+     "sagBacak": [
+      -90,
+      10
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-side-lunge-shoulder-reach": {
+   "ad": "Duo Side Lunge Shoulder Reach",
+   "figurler": [
+    {
+     "ad": "Duo Side Lunge Shoulder Reach A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solKol": [
+      70,
+      60
+     ],
+     "sagBacak": [
+      -62,
+      -2
+     ],
+     "solBacak": [
+      40,
+      40
+     ]
+    },
+    {
+     "ad": "Duo Side Lunge Shoulder Reach B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      90,
+      90
+     ],
+     "sagKol": [
+      -70,
+      -60
+     ],
+     "solBacak": [
+      62,
+      2
+     ],
+     "sagBacak": [
+      -40,
+      -40
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "omuz"
+    ]
+   ]
+  },
+  "duo-dance-dip": {
+   "ad": "Duo Dance Dip",
+   "figurler": [
+    {
+     "ad": "Duo Dance Dip A",
+     "yon": "sag",
+     "govde": 205,
+     "bas": 0,
+     "solKol": [
+      120,
+      100
+     ],
+     "sagKol": [
+      -130,
+      -130
+     ],
+     "solBacak": [
+      20,
+      10
+     ],
+     "sagBacak": [
+      -25,
+      -25
+     ]
+    },
+    {
+     "ad": "Duo Dance Dip B",
+     "yon": "sol",
+     "govde": -160,
+     "bas": 0,
+     "solKol": [
+      -60,
+      -30
+     ],
+     "sagKol": [
+      -100,
+      -60
+     ],
+     "solBacak": [
+      30,
+      30
+     ],
+     "sagBacak": [
+      -35,
+      0
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-knee-up-elbow-touch": {
+   "ad": "Duo Knee Up Elbow Touch",
+   "figurler": [
+    {
+     "ad": "Duo Knee Up Elbow Touch A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solKol": [
+      95,
+      -150
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      80,
+      8
+     ]
+    },
+    {
+     "ad": "Duo Knee Up Elbow Touch B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      174,
+      176
+     ],
+     "sagKol": [
+      -95,
+      150
+     ],
+     "solBacak": [
+      3,
+      1
+     ],
+     "sagBacak": [
+      -80,
+      -8
+     ]
+    }
+   ],
+   "temas": [
+    "yan"
+   ]
+  },
+  "duo-seated-feet-together-arms-up": {
+   "ad": "Duo Seated Feet Together Arms Up",
+   "figurler": [
+    {
+     "ad": "Duo Seated Feet Together Arms Up A",
+     "yon": "sag",
+     "govde": 180,
+     "bas": 0,
+     "solKol": [
+      178,
+      178
+     ],
+     "sagKol": [
+      176,
+      176
+     ],
+     "solBacak": [
+      90,
+      90
+     ],
+     "sagBacak": [
+      88,
+      88
+     ]
+    },
+    {
+     "ad": "Duo Seated Feet Together Arms Up B",
+     "yon": "sol",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      -176,
+      -176
+     ],
+     "sagKol": [
+      -178,
+      -178
+     ],
+     "solBacak": [
+      -88,
+      -88
+     ],
+     "sagBacak": [
+      -90,
+      -90
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "ayak",
+     "ayak"
+    ]
+   ]
+  },
+  "duo-boat-feet-touch": {
+   "ad": "Duo Boat Feet Touch",
+   "figurler": [
+    {
+     "ad": "Duo Boat Feet Touch A",
+     "yon": "sag",
+     "govde": 215,
+     "bas": 0,
+     "solKol": [
+      90,
+      90
+     ],
+     "sagKol": [
+      88,
+      88
+     ],
+     "solBacak": [
+      130,
+      130
+     ],
+     "sagBacak": [
+      128,
+      128
+     ]
+    },
+    {
+     "ad": "Duo Boat Feet Touch B",
+     "yon": "sol",
+     "govde": -215,
+     "bas": 0,
+     "solKol": [
+      -88,
+      -88
+     ],
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solBacak": [
+      -128,
+      -128
+     ],
+     "sagBacak": [
+      -130,
+      -130
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "ayak",
+     "ayak"
+    ]
+   ]
+  },
+  "duo-back-to-back-chair": {
+   "ad": "Duo Back to Back Chair",
+   "figurler": [
+    {
+     "ad": "Duo Back to Back Chair A",
+     "yon": "sol",
+     "govde": -190,
+     "bas": 0,
+     "solKol": [
+      -38,
+      -138
+     ],
+     "sagKol": [
+      -40,
+      -140
+     ],
+     "solBacak": [
+      -88,
+      2
+     ],
+     "sagBacak": [
+      -90,
+      0
+     ]
+    },
+    {
+     "ad": "Duo Back to Back Chair B",
+     "yon": "sag",
+     "govde": 190,
+     "bas": 0,
+     "solKol": [
+      40,
+      140
+     ],
+     "sagKol": [
+      38,
+      138
+     ],
+     "solBacak": [
+      90,
+      0
+     ],
+     "sagBacak": [
+      88,
+      -2
+     ]
+    }
+   ],
+   "temas": [
+    "yan"
+   ]
+  },
+  "duo-plank-hand-touch": {
+   "ad": "Duo Plank Hand Touch",
+   "figurler": [
+    {
+     "ad": "Duo Plank Hand Touch A",
+     "yon": "sag",
+     "govde": 100,
+     "bas": 0,
+     "solKol": [
+      90,
+      90
+     ],
+     "sagKol": [
+      0,
+      0
+     ],
+     "solBacak": [
+      -80,
+      -80
+     ],
+     "sagBacak": [
+      -78,
+      -78
+     ]
+    },
+    {
+     "ad": "Duo Plank Hand Touch B",
+     "yon": "sol",
+     "govde": -100,
+     "bas": 0,
+     "solKol": [
+      0,
+      0
+     ],
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solBacak": [
+      78,
+      78
+     ],
+     "sagBacak": [
+      80,
+      80
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-kneeling-gate-arch": {
+   "ad": "Duo Kneeling Gate Arch",
+   "figurler": [
+    {
+     "ad": "Duo Kneeling Gate Arch A",
+     "yon": "on",
+     "govde": 155,
+     "bas": 0,
+     "sagKol": [
+      -30,
+      -30
+     ],
+     "solKol": [
+      150,
+      120
+     ],
+     "sagBacak": [
+      -60,
+      -60
+     ],
+     "solBacak": [
+      0,
+      "geri"
+     ]
+    },
+    {
+     "ad": "Duo Kneeling Gate Arch B",
+     "yon": "on",
+     "govde": -155,
+     "bas": 0,
+     "solKol": [
+      30,
+      30
+     ],
+     "sagKol": [
+      -150,
+      -120
+     ],
+     "solBacak": [
+      60,
+      60
+     ],
+     "sagBacak": [
+      0,
+      "geri"
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-low-lunge-crescent-arch": {
+   "ad": "Duo Low Lunge Crescent Arch",
+   "figurler": [
+    {
+     "ad": "Duo Low Lunge Crescent Arch A",
+     "yon": "sag",
+     "govde": 175,
+     "bas": 0,
+     "solKol": [
+      165,
+      140
+     ],
+     "sagKol": [
+      163,
+      138
+     ],
+     "solBacak": [
+      95,
+      0
+     ],
+     "sagBacak": [
+      -55,
+      -150
+     ]
+    },
+    {
+     "ad": "Duo Low Lunge Crescent Arch B",
+     "yon": "sol",
+     "govde": -175,
+     "bas": 0,
+     "solKol": [
+      -163,
+      -138
+     ],
+     "sagKol": [
+      -165,
+      -140
+     ],
+     "solBacak": [
+      55,
+      150
+     ],
+     "sagBacak": [
+      -95,
+      0
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-seated-side-bend-overhead": {
+   "ad": "Duo Seated Side Bend Overhead",
+   "figurler": [
+    {
+     "ad": "Duo Seated Side Bend Overhead A",
+     "yon": "on",
+     "govde": 150,
+     "bas": 0,
+     "sagKol": [
+      150,
+      110
+     ],
+     "solKol": [
+      40,
+      30
+     ],
+     "sagBacak": [
+      -78,
+      75
+     ],
+     "solBacak": [
+      78,
+      -75
+     ]
+    },
+    {
+     "ad": "Duo Seated Side Bend Overhead B",
+     "yon": "on",
+     "govde": -150,
+     "bas": 0,
+     "solKol": [
+      -150,
+      -110
+     ],
+     "sagKol": [
+      -40,
+      -30
+     ],
+     "solBacak": [
+      78,
+      -75
+     ],
+     "sagBacak": [
+      -78,
+      75
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-pyramid-fold-hand-link": {
+   "ad": "Duo Pyramid Fold Hand Link",
+   "figurler": [
+    {
+     "ad": "Duo Pyramid Fold Hand Link A",
+     "yon": "sag",
+     "govde": 80,
+     "bas": 0,
+     "solKol": [
+      60,
+      60
+     ],
+     "sagKol": [
+      58,
+      58
+     ],
+     "solBacak": [
+      25,
+      25
+     ],
+     "sagBacak": [
+      -25,
+      -25
+     ]
+    },
+    {
+     "ad": "Duo Pyramid Fold Hand Link B",
+     "yon": "sol",
+     "govde": -80,
+     "bas": 0,
+     "solKol": [
+      -58,
+      -58
+     ],
+     "sagKol": [
+      -60,
+      -60
+     ],
+     "solBacak": [
+      25,
+      25
+     ],
+     "sagBacak": [
+      -25,
+      -25
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  }
+ }
+}

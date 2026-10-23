@@ -525,12 +525,16 @@ def hizala(solA, solM, sagA, sagM, temas):
     return {"tip": "-".join(temas), "dz": round(q.z - p.z, 3)}
 
 
-def grup_maskeleri():
+def grup_maskeleri(dosya="kapak-grup-%s.png", kisi_basi=True):
+    """grup siluetleri: figur sayisi grup dosyasindan (5. video kapagi 3 kisi; 7. video CO-OP 2 kisi, --yalniz grup)"""
+    GRUPLAR = json.load(open(os.path.join(KOK, arg("--gruplar", "03-motor/tetris-pvp/kapak-grup-05.json")), encoding="utf-8"))["gruplar"]
+    NFIG = max(len(G["figurler"]) for G in GRUPLAR.values())
+    os.makedirs(os.path.dirname(os.path.join(CIKTI, dosya % "x")), exist_ok=True)
     sc = bos_sahne(motor="CYCLES", w=1600, h=900, saydam=True, ornek=16)
     sc.frame_set(1); sc.cycles.use_denoising = False; sc.view_settings.view_transform = "Standard"
     siyah = mat_emis("siluet", (0, 0, 0), 0.0)
     FIG = []
-    for i in range(3):
+    for i in range(NFIG):
         once = set(bpy.data.objects)
         bpy.ops.import_scene.fbx(filepath=os.path.join(KOK, "02-hareketler/siluet-govde.fbx"), automatic_bone_orientation=False)
         yeni = [o for o in bpy.data.objects if o not in once]
@@ -550,18 +554,22 @@ def grup_maskeleri():
     bpy.ops.object.camera_add(location=(0, -14, 1), rotation=(math.radians(90), 0, 0))
     kam = bpy.context.active_object; sc.camera = kam; kam.data.type = "ORTHO"
     ASPECT = 1600 / 900
-    for ad, G in json.load(open(os.path.join(KOK, arg("--gruplar", "03-motor/tetris-pvp/kapak-grup-05.json")), encoding="utf-8"))["gruplar"].items():
-        for (arm, mesler, rot), P in zip(FIG, G["figurler"]):
+    for ad, G in GRUPLAR.items():
+        FG = FIG[:len(G["figurler"])]
+        for k_, f in enumerate(FIG):
+            for m in f[1]:
+                m.hide_render = k_ >= len(FG)
+        for (arm, mesler, rot), P in zip(FG, G["figurler"]):
             figur_pozla(arm, mesler, P, rot)
         olcu = []
-        for j in range(2):
-            olcu.append(hizala(FIG[j][0], FIG[j][1], FIG[j + 1][0], FIG[j + 1][1], G["temas"][j]))
+        for j in range(len(FG) - 1):
+            olcu.append(hizala(FG[j][0], FG[j][1], FG[j + 1][0], FG[j + 1][1], G["temas"][j]))
             # kapak deneme 2 (kullanici "hic begenmedim"): REF-056 kumesi sikisik, kisiler ic ice -> ek bindirme (m)
             if G.get("bindirme"):
-                for f in FIG[j + 1:]:
+                for f in FG[j + 1:]:
                     f[0].location.x -= G["bindirme"]
                 bpy.context.view_layer.update()
-        tum = [m for f in FIG for m in f[1]]
+        tum = [m for f in FG for m in f[1]]
         alt, ust = dunya_kutusu(tum)
         gen, yuk = ust.x - alt.x, ust.z - alt.z
         olc = 2.3
@@ -572,14 +580,16 @@ def grup_maskeleri():
         bpy.context.view_layer.update()
         YERLESIM.setdefault("grup", {})[ad] = {"cerceve_m": round(olc, 3), "gen_m": round(gen, 3), "yuk_m": round(yuk, 3), "temas": olcu}
         log("grup", ad, "gen", round(gen, 2), "yuk", round(yuk, 2), "temas", olcu)
-        yaz(sc, "kapak-grup-%s.png" % ad)
+        yaz(sc, dosya % ad)
+        if not kisi_basi:
+            continue
         # kisi basi ayri maske (ayni kamera): kapakta her kisinin kendi beyaz cizgisi (REF-056'da kisiler arasi ince beyaz hat)
-        for j in range(3):
-            for k_, f in enumerate(FIG):
+        for j in range(len(FG)):
+            for k_, f in enumerate(FG):
                 for m in f[1]:
                     m.hide_render = (k_ != j)
             yaz(sc, "kapak-grup-%s-%d.png" % (ad, j))
-        for f in FIG:
+        for f in FG:
             for m in f[1]:
                 m.hide_render = False
 
@@ -645,5 +655,7 @@ if YALNIZ == "kapak":
 if YALNIZ == "kapak2":
     kapak_sahne()
     grup_maskeleri()
+if YALNIZ == "grup":        # 7. video (REF-058, CO-OP): duvar basina 2 kisilik TEK siluet -> grup/<ad>.png
+    grup_maskeleri("grup/%s.png", kisi_basi=False)
 json.dump(YERLESIM, open(os.path.join(CIKTI, "yerlesim.json"), "w"), indent=1)
 log("bitti (cadi)")
