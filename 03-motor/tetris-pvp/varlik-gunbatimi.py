@@ -229,11 +229,9 @@ def chevron_yol(Y):
     adim, hw = 1.25, YOL_W / 2 - 0.25
     yy, j = 0.8, 0
     while yy < Y - 0.9:
-        for s in (-1, 1):        # tepe kameraya bakar (REF-058: basamaklar kameraya dogru sivri)
-            a, b = Vector((0, yy, 0.02)), Vector((s * hw, yy + 0.75, 0.02))
-            d = b - a
-            o = yuvarlak_kutu("chev", ((a + b) / 2), (d.length, 0.34, 0.05), ca if j % 2 == 0 else cb, egim=0.02, seg=1)
-            o.rotation_euler.z = math.atan2(d.y, d.x)
+        # tek parca V bant, tepe kameraya bakar (REF-058). Deneme 1: iki donuk kutu -> kollardan biri gorunmedi
+        sekil("chev", [(-hw, yy + 0.75), (0, yy), (hw, yy + 0.75), (hw, yy + 1.09), (0, yy + 0.34), (-hw, yy + 1.09)],
+              ca if j % 2 == 0 else cb, duzlem="xy", konum=(0, 0, 0.03))
         yy += adim; j += 1
     kenar = mat_emis("kenar", lin(hex3("#ff5ac8")), 6.0)
     for s in (-1, 1):
