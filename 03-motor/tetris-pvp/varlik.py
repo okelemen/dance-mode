@@ -739,6 +739,8 @@ elif arg("--mod", "pvp") == "gunbatimi":   # 7. video (REF-058, CO-OP): synthwav
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-gunbatimi.py"), encoding="utf-8").read(), "varlik-gunbatimi.py", "exec"))
 elif arg("--mod", "pvp") == "disko":       # 8. video (REF-059, 1v1): disko topu, ayna-karo zemin, pelus kapi
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-disko.py"), encoding="utf-8").read(), "varlik-disko.py", "exec"))
+elif arg("--mod", "pvp") == "uzay":        # 9. video (REF-060, 1v1): yanardoner gezegen, galaksi halkasi, pelus zemin, civatali kafes kapi
+    exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-uzay.py"), encoding="utf-8").read(), "varlik-uzay.py", "exec"))
 elif arg("--mod", "pvp") == "cadi":
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-cadi.py"), encoding="utf-8").read(), "varlik-cadi.py", "exec"))
 else:
