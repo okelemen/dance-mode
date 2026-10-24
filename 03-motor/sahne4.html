@@ -731,7 +731,8 @@ function kartCiz(kart, u, t) {
     cx.save(); cx.shadowColor = '#ff1f3d'; cx.shadowBlur = 50 * k;
     cx.fillStyle = '#e11d2e'; cx.beginPath(); cx.roundRect(W / 2 - bw / 2, H * 0.48 - bh / 2, bw, bh, bh / 2); cx.fill(); cx.restore();
     if (g > 0.6) yazi('SUBSCRIBE', W / 2, H * 0.48, 120 * k * pul, '#ffffff', '#5a0010');
-    yazi('NEW BATTLE EVERY WEEK', W / 2, H * 0.68, 70 * k * g + 1, ['#ffffff', TEMA.p1acik], '#06122e', g);
+    // 9. video: sabit 'EVERY WEEK' yanlis (yayin her gun, TALIMATLAR §20) -> tema.aboneAlt; yoksa eski metin
+    yazi(TEMA.aboneAlt || 'NEW BATTLE EVERY WEEK', W / 2, H * 0.68, 70 * k * g + 1, ['#ffffff', TEMA.p1acik], '#06122e', g);
   }
   cx.restore();
 }
