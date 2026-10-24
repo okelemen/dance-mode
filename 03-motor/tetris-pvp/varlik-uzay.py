@@ -60,7 +60,7 @@ def gezegen(merkez, R):
         nt.links.new(bn.outputs[0], mx.inputs[0]); nt.links.new(renk, mx.inputs[6])
         mx.inputs[7].default_value = (1.2, 1.2, 1.3, 1)
         return mx.outputs[2]
-    m, nt, em = mat_desen("gezegen", kur); em.inputs[1].default_value = 2.1
+    m, nt, em = mat_desen("gezegen", kur); em.inputs[1].default_value = 0.95   # sahne 1: 2,1 beyaza kacti
     bpy.ops.mesh.primitive_uv_sphere_add(radius=R, location=merkez, segments=96, ring_count=48)
     g = bpy.context.active_object; g.data.materials.append(m); bpy.ops.object.shade_smooth()
     g.rotation_euler = (0.4, 0.2, 0.7)
@@ -69,7 +69,7 @@ def gezegen(merkez, R):
     h = bpy.context.active_object; bpy.ops.object.shade_smooth()
     hm = bpy.data.materials.new("hale"); hm.use_nodes = True; hn = hm.node_tree; hn.nodes.clear()
     lw = hn.nodes.new("ShaderNodeLayerWeight"); lw.inputs[0].default_value = 0.25
-    e2 = hn.nodes.new("ShaderNodeEmission"); e2.inputs[0].default_value = (*lin(hex3("#9fe8ff")), 1); e2.inputs[1].default_value = 3.0
+    e2 = hn.nodes.new("ShaderNodeEmission"); e2.inputs[0].default_value = (*lin(hex3("#9fe8ff")), 1); e2.inputs[1].default_value = 1.6
     tr = hn.nodes.new("ShaderNodeBsdfTransparent"); mx2 = hn.nodes.new("ShaderNodeMixShader")
     hn.links.new(lw.outputs["Facing"], mx2.inputs[0]); hn.links.new(tr.outputs[0], mx2.inputs[1]); hn.links.new(e2.outputs[0], mx2.inputs[2])
     o2 = hn.nodes.new("ShaderNodeOutputMaterial"); hn.links.new(mx2.outputs[0], o2.inputs[0])
@@ -121,6 +121,32 @@ def galaksi_halkasi(merkez, R):
     d.rotation_euler = (math.radians(74), math.radians(-12), 0)      # REF-060: egik, gezegeni yatay saran halka
 
 
+def galaksi_tanecik(merkez, R, rnd):
+    """REF-060 galaksisi: egik diskte iki log-sarmal kol boyunca binlerce parlak tanecik (camgobegi / mor / pembe / beyaz).
+    Sahne 1: duz disk + gurultu malzemesi kalin pembe boru gibi okundu -> tek mesh'te kucuk ikosferler (bmesh, hizli)."""
+    import bmesh
+    from mathutils import Matrix
+    renk = ["#5ff2ff", "#b06bff", "#ff6ad0", "#ffffff"]
+    mats = [mat_emis("gx%d" % i, lin(hex3(c)), 5.0) for i, c in enumerate(renk)]
+    me = bpy.data.meshes.new("galaksi"); bm = bmesh.new()
+    egim = Matrix.Rotation(math.radians(74), 4, "X") @ Matrix.Rotation(math.radians(-12), 4, "Y")
+    for i in range(2600):
+        kol = i % 2
+        r = R * (0.22 + 0.78 * rnd.random() ** 0.8)
+        a = kol * math.pi + 2.6 * math.log(r / (R * 0.22) + 1) + rnd.gauss(0, 0.22)
+        p = Vector((math.cos(a) * r + rnd.gauss(0, 0.6), math.sin(a) * r + rnd.gauss(0, 0.6), rnd.gauss(0, 0.25)))
+        q = egim @ p + Vector(merkez)
+        m = Matrix.Translation(q) @ Matrix.Scale(rnd.choice([0.05, 0.07, 0.1, 0.14]), 4)
+        g = bmesh.ops.create_icosphere(bm, subdivisions=1, radius=1.0, matrix=m)
+        mi = rnd.choices(range(4), weights=(34, 26, 24, 16))[0]
+        for f in {f for v in g["verts"] for f in v.link_faces}:
+            f.material_index = mi
+    bm.to_mesh(me); bm.free()
+    o = bpy.data.objects.new("galaksi", me); bpy.context.collection.objects.link(o)
+    for m in mats:
+        o.data.materials.append(m)
+
+
 def gok_uzay():
     sc = bos_sahne(w=1920, h=1080, ornek=min(ORNEK, 48))
     rnd = random.Random(60)
@@ -140,8 +166,8 @@ def gok_uzay():
         kure((x, y, z), rnd.choice([0.05, 0.07, 0.09, 0.13]), yb if rnd.random() < 0.7 else
              mat_emis("yr%d" % i, lin(hex3(rnd.choice(renkler))), 8.0), sub=1)
     # galaksi halkasi + gezegen: ekranin ortasi, kapilarin ustunden ve arasindan gorunur (REF-060)
-    galaksi_halkasi((0, 38, 12.5), 30)
-    gezegen((0, 34, 12.2), 6.6)
+    galaksi_tanecik((0, 40, 13.5), 30, rnd)
+    gezegen((0, 34, 13.8), 8.6)
     # renkli isik noktalari (REF-060: gezegen cevresinde pembe/mavi/yesil benekler)
     for i in range(110):
         ac = rnd.uniform(0, 6.283); r = rnd.uniform(9, 40)
@@ -199,16 +225,16 @@ def serit_uzay(oyuncu):
     R = lin(hex3(RENK[oyuncu]))
     tuy = mat_tuy("tuy", R, acik_m=0.45)
     neon = mat_emis("neon", acik(R, 0.45), 10.0)
-    Y = KAPI["y"]; W, H = KAPI["w"], KAPI["h"]
+    Y = 11.0; W, H = KAPI["w"], KAPI["h"]       # sahne 1: KAPI y=8 kadrajin tepesine kadar cikti; REF-060 kapisi uzakta
     KK = 0.9
     # pelus zemin: REF-060'da yol oyuncu renginde tuylu; kisa sik tuy
     bpy.ops.mesh.primitive_plane_add(size=1, location=(0, (Y + 3) / 2 - 0.5, 0))
     z = bpy.context.active_object; z.scale = (11.0, Y + 4, 1); bpy.ops.object.transform_apply(scale=True)
-    tuylu(z, mat_tuy("tuy_zemin", acik(R, 0.08), acik_m=0.4), yogun=170, boy=0.06)
+    tuylu(z, mat_tuy("tuy_zemin", R, acik_m=0.25), yogun=120, boy=0.06)
     # beyaz pelus chevron'lar, altinda oyuncu rengi neon (REF-060: beyaz, kenari parlayan V'ler)
     tuy_chev = mat_tuy("tuy_chev", acik(R, 0.75), acik_m=0.9)
     CHEV = []
-    for yy in (2.6, 4.4, 6.2):
+    for yy in (2.6, 4.6, 6.6, 8.6):
         for s in (-1, 1):
             o = yuvarlak_kutu("chev", (s * 0.95, yy + 0.5, 0.15), (2.3, 0.42, 0.26), tuy_chev, egim=0.12)
             o.rotation_euler = (0, 0, -s * math.radians(26))
@@ -239,10 +265,7 @@ def serit_uzay(oyuncu):
     for s in (-1, 1):
         kafes_kiris((s * xk, Y + 0.6, 0.0), (s * xk, Y + 0.6, H + KK / 2), KK, kafes2, kafes2, dikey=True)
     kafes_kiris((-xk, Y + 0.6, H + KK / 2), (xk, Y + 0.6, H + KK / 2), KK, kafes2, kafes2, dikey=False)
-    ic = W / 2 - KK
-    for a, b in (((-ic + 0.06, Y - 0.2, 0.04), (-ic + 0.06, Y - 0.2, H - 0.06)), ((ic - 0.06, Y - 0.2, 0.04), (ic - 0.06, Y - 0.2, H - 0.06)),
-                 ((-ic + 0.06, Y - 0.2, H - 0.06), (ic - 0.06, Y - 0.2, H - 0.06))):
-        boru(a, b, 0.05, neon)
+    ic = W / 2 - KK                              # sahne 1: ic beyaz neon cerceve REF-060'ta yok -> kaldirildi
     par = mat_emis("parilti", (1, 1, 1), 6.0)
     AMPUL = []
     rnd = random.Random(41 if oyuncu == "p1" else 43)
@@ -253,10 +276,10 @@ def serit_uzay(oyuncu):
         AMPUL.append(Vector((-ic + 0.4 + i * (2 * ic - 0.8) / 6, Y - 0.3, H + KK / 2 + rnd.uniform(-0.2, 0.2))))
     for q in AMPUL:
         yildiz_mesh(q, 0.1, par, kal=0.02, uc=4)
-    isik("AREA", (0, -1.5, 6.5), 420, (1, 1, 1), 6, yon=(0, Y * 0.6, 0))
+    isik("AREA", (0, -1.5, 6.5), 200, (1, 1, 1), 6, yon=(0, Y * 0.6, 0))   # sahne 1: 420 zemini pastele soldurdu
     isik("AREA", (-4, 3, 3), 300, acik(R, 0.2), 3, yon=(0, Y, 2))
     isik("AREA", (4, 3, 3), 260, lin(hex3(MOR)), 3, yon=(0, Y, 2))
-    isik("AREA", (0, Y - 2.5, 5.5), 380, acik(R, 0.3), 4, yon=(0, Y, 2))
+    isik("AREA", (0, Y - 2.5, 5.5), 260, acik(R, 0.3), 4, yon=(0, Y, 2))
     rx = math.radians(90 - KAM["egim"])
     bpy.ops.object.camera_add(location=(0, -1.6 if KAPAK else 0, KAM["z"] + (0.35 if KAPAK else 0)), rotation=(rx, 0, 0))
     kam = bpy.context.active_object; sc.camera = kam
