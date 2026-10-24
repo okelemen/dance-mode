@@ -1,0 +1,4435 @@
+{
+ "_not": "TETRIS MODE PVP 8. video ADAY (REF-059) poz tanimlari. Acilar EKRAN duzleminde (pozlar.js dili): 0 asagi, 90 ekran-sag, 180 yukari, -90 ekran-sol. Kollar [ust kol, on kol], bacaklar [uyluk, baldir]. sol*/sag* = KARAKTERIN solu/sagi; karakter kameraya donukken sol = ekran SAGI. yon: on (kameraya donuk) | sag (profil, yuzu ekran sagina). govde: kalcadan boyna aci, bas: govdeye ek aci. Mixamo govdesi (siluet-govde.fbx) bu acilarla bukulur, duz siyah maske cikar (varlik.py).",
+ "pozlar": {
+  "disco-saturday-point": {
+   "ad": "Disco Saturday Point",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "disco-point-diagonal-hip-pop": {
+   "ad": "Disco Point Diagonal Hip Pop",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -12,
+    6
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "disco-hip-bump-arms-up": {
+   "ad": "Disco Hip Bump Arms Up",
+   "yon": "on",
+   "govde": 168,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -12,
+    6
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "disco-runner-arms-swing": {
+   "ad": "Disco Runner Arms Swing",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solBacak": [
+    70,
+    -20
+   ],
+   "sagBacak": [
+    -30,
+    -60
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "disco-star-tiptoe-arm-flag": {
+   "ad": "Disco Star Tiptoe Arm Flag",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "disco-lasso-overhead": {
+   "ad": "Disco Lasso Overhead",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -60
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "disco-reach-forward-lunge": {
+   "ad": "Disco Reach Forward Lunge",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    120,
+    120
+   ],
+   "sagKol": [
+    118,
+    118
+   ],
+   "solBacak": [
+    75,
+    0
+   ],
+   "sagBacak": [
+    -35,
+    -35
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "disco-wide-lean-arms-over-right": {
+   "ad": "Disco Wide Lean Arms Over Right",
+   "yon": "on",
+   "govde": 158,
+   "bas": 0,
+   "sagKol": [
+    150,
+    140
+   ],
+   "solKol": [
+    148,
+    138
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "disco-heel-kick-back-arms-swing": {
+   "ad": "Disco Heel Kick Back Arms Swing",
+   "yon": "sag",
+   "govde": 178,
+   "bas": 0,
+   "solKol": [
+    60,
+    60
+   ],
+   "sagKol": [
+    -50,
+    -50
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -5,
+    -150
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "disco-elbow-pump-goddess": {
+   "ad": "Disco Elbow Pump Goddess",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -30,
+    -150
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "disco-back-lean-arms-open": {
+   "ad": "Disco Back Lean Arms Open",
+   "yon": "sag",
+   "govde": 195,
+   "bas": 0,
+   "solKol": [
+    150,
+    150
+   ],
+   "sagKol": [
+    -130,
+    -130
+   ],
+   "solBacak": [
+    10,
+    10
+   ],
+   "sagBacak": [
+    -10,
+    -10
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "disco-side-lunge-reach-over": {
+   "ad": "Disco Side Lunge Reach Over",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -165,
+    -160
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -12,
+    6
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "disco-cross-step-arms-t": {
+   "ad": "Disco Cross Step Arms T",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "disco-mini-squat-arms-back": {
+   "ad": "Disco Mini Squat Arms Back",
+   "yon": "sag",
+   "govde": 150,
+   "bas": 0,
+   "solKol": [
+    -70,
+    -70
+   ],
+   "sagKol": [
+    -68,
+    -68
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    88,
+    -12
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "disco-knee-up-clap-high": {
+   "ad": "Disco Knee Up Clap High",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -80,
+    -8
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "disco-frame-wide-chest": {
+   "ad": "Disco Frame Wide Chest",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "disco-standing-knee-lift-tall-arms": {
+   "ad": "Disco Standing Knee Lift Tall Arms",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    176,
+    176
+   ],
+   "solBacak": [
+    100,
+    -40
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "disco-warrior-lean-arms-forward": {
+   "ad": "Disco Warrior Lean Arms Forward",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    98,
+    98
+   ],
+   "solBacak": [
+    60,
+    0
+   ],
+   "sagBacak": [
+    -35,
+    -35
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "disco-half-lever-one-arm": {
+   "ad": "Disco Half Lever One Arm",
+   "yon": "sag",
+   "govde": 120,
+   "bas": 0,
+   "solKol": [
+    130,
+    130
+   ],
+   "sagKol": [
+    -20,
+    -20
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -60
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "disco-tree-arms-low-v": {
+   "ad": "Disco Tree Arms Low V",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "disco-side-leg-lift-arms-up": {
+   "ad": "Disco Side Leg Lift Arms Up",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    70,
+    70
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "disco-deep-lunge-arms-back-up": {
+   "ad": "Disco Deep Lunge Arms Back Up",
+   "yon": "sag",
+   "govde": 150,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -150
+   ],
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solBacak": [
+    95,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -60
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "disco-skater-balance": {
+   "ad": "Disco Skater Balance",
+   "yon": "sag",
+   "govde": 120,
+   "bas": 0,
+   "solKol": [
+    80,
+    80
+   ],
+   "sagKol": [
+    -80,
+    -80
+   ],
+   "solBacak": [
+    30,
+    -60
+   ],
+   "sagBacak": [
+    -60,
+    -90
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "disco-goddess-twist-elbows": {
+   "ad": "Disco Goddess Twist Elbows",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "disco-kneel-one-knee-arms-up": {
+   "ad": "Disco Kneel One Knee Arms Up",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    176,
+    176
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "disco-kneel-lean-back-hands-hips": {
+   "ad": "Disco Kneel Lean Back Hands Hips",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -100
+   ],
+   "sagKol": [
+    -38,
+    -98
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "disco-low-squat-hands-chest": {
+   "ad": "Disco Low Squat Hands Chest",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "disco-chair-arms-up": {
+   "ad": "Disco Chair Arms Up",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    170,
+    170
+   ],
+   "sagKol": [
+    168,
+    168
+   ],
+   "solBacak": [
+    70,
+    -10
+   ],
+   "sagBacak": [
+    68,
+    -12
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "disco-runner-lunge-hands-low": {
+   "ad": "Disco Runner Lunge Hands Low",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    20,
+    20
+   ],
+   "sagKol": [
+    18,
+    18
+   ],
+   "solBacak": [
+    100,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -60
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "disco-star-tilt-one-leg": {
+   "ad": "Disco Star Tilt One Leg",
+   "yon": "on",
+   "govde": 160,
+   "bas": 0,
+   "sagKol": [
+    -120,
+    -120
+   ],
+   "solKol": [
+    120,
+    120
+   ],
+   "sagBacak": [
+    -5,
+    -5
+   ],
+   "solBacak": [
+    50,
+    50
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "disco-kick-forward-arms-back": {
+   "ad": "Disco Kick Forward Arms Back",
+   "yon": "sag",
+   "govde": 170,
+   "bas": 0,
+   "solKol": [
+    -50,
+    -50
+   ],
+   "sagKol": [
+    -48,
+    -48
+   ],
+   "solBacak": [
+    80,
+    80
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "disco-long-lunge-arms-forward-back": {
+   "ad": "Disco Long Lunge Arms Forward Back",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    -80,
+    -80
+   ],
+   "solBacak": [
+    85,
+    0
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "disco-high-plank": {
+   "ad": "Disco High Plank",
+   "yon": "sag",
+   "govde": 100,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -85,
+    -85
+   ],
+   "sagBacak": [
+    -87,
+    -87
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "disco-down-dog": {
+   "ad": "Disco Down Dog",
+   "yon": "sag",
+   "govde": 40,
+   "bas": 0,
+   "solKol": [
+    35,
+    35
+   ],
+   "sagKol": [
+    33,
+    33
+   ],
+   "solBacak": [
+    -30,
+    -30
+   ],
+   "sagBacak": [
+    -32,
+    -32
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "disco-seated-boat-arms-up": {
+   "ad": "Disco Seated Boat Arms Up",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    176,
+    176
+   ],
+   "solBacak": [
+    130,
+    130
+   ],
+   "sagBacak": [
+    128,
+    128
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "disco-seated-fold-arms-forward": {
+   "ad": "Disco Seated Fold Arms Forward",
+   "yon": "sag",
+   "govde": 120,
+   "bas": 0,
+   "solKol": [
+    95,
+    95
+   ],
+   "sagKol": [
+    93,
+    93
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "disco-cobra-arms-straight": {
+   "ad": "Disco Cobra Arms Straight",
+   "yon": "sag",
+   "govde": 140,
+   "bas": 0,
+   "solKol": [
+    5,
+    5
+   ],
+   "sagKol": [
+    3,
+    3
+   ],
+   "solBacak": [
+    -90,
+    -90
+   ],
+   "sagBacak": [
+    -88,
+    -88
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "disco-table-top-arm-leg-reach": {
+   "ad": "Disco Table Top Arm Leg Reach",
+   "yon": "sag",
+   "govde": 95,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "disco-camel-prep-hands-back": {
+   "ad": "Disco Camel Prep Hands Back",
+   "yon": "sag",
+   "govde": 220,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -40
+   ],
+   "sagKol": [
+    -38,
+    -38
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "disco-low-lunge-arms-up-arch": {
+   "ad": "Disco Low Lunge Arms Up Arch",
+   "yon": "sag",
+   "govde": 200,
+   "bas": 0,
+   "solKol": [
+    175,
+    175
+   ],
+   "sagKol": [
+    173,
+    173
+   ],
+   "solBacak": [
+    95,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -150
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "disco-seated-one-leg-hold-up": {
+   "ad": "Disco Seated One Leg Hold Up",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    150,
+    150
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    160,
+    160
+   ],
+   "sagBacak": [
+    90,
+    90
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "disco-kneel-leg-forward-fold": {
+   "ad": "Disco Kneel Leg Forward Fold",
+   "yon": "sag",
+   "govde": 120,
+   "bas": 0,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    98,
+    98
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "disco-crescent-kneel-back-arch": {
+   "ad": "Disco Crescent Kneel Back Arch",
+   "yon": "sag",
+   "govde": 210,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -150
+   ],
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solBacak": [
+    95,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "disco-seated-twist-arm-back": {
+   "ad": "Disco Seated Twist Arm Back",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    60,
+    60
+   ],
+   "sagKol": [
+    -120,
+    -120
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "disco-kneel-hands-floor-leg-back-up": {
+   "ad": "Disco Kneel Hands Floor Leg Back Up",
+   "yon": "sag",
+   "govde": 100,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -110,
+    -160
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "disco-crouch-hands-ankles": {
+   "ad": "Disco Crouch Hands Ankles",
+   "yon": "sag",
+   "govde": 70,
+   "bas": 0,
+   "solKol": [
+    5,
+    5
+   ],
+   "sagKol": [
+    3,
+    3
+   ],
+   "solBacak": [
+    100,
+    -60
+   ],
+   "sagBacak": [
+    98,
+    -62
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "disco-bow-pull-tall": {
+   "ad": "Disco Bow Pull Tall",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    110,
+    110
+   ],
+   "sagKol": [
+    -150,
+    -170
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -100,
+    -170
+   ],
+   "tur": 4,
+   "el": true
+  },
+  "disco-arabesque-low-arms-forward": {
+   "ad": "Disco Arabesque Low Arms Forward",
+   "yon": "sag",
+   "govde": 120,
+   "bas": 0,
+   "solKol": [
+    110,
+    110
+   ],
+   "sagKol": [
+    108,
+    108
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -60
+   ],
+   "tur": 4,
+   "el": true
+  },
+  "disco-kneeling-leg-hold-behind": {
+   "ad": "Disco Kneeling Leg Hold Behind",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    -160,
+    -170
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -20,
+    -170
+   ],
+   "tur": 4,
+   "el": true
+  },
+  "disco-lunge-back-foot-hold": {
+   "ad": "Disco Lunge Back Foot Hold",
+   "yon": "sag",
+   "govde": 190,
+   "bas": 0,
+   "solKol": [
+    -160,
+    -160
+   ],
+   "sagKol": [
+    -150,
+    -160
+   ],
+   "solBacak": [
+    95,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -170
+   ],
+   "tur": 4,
+   "el": true
+  },
+  "disco-side-leg-hold-high": {
+   "ad": "Disco Side Leg Hold High",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    100,
+    100
+   ],
+   "tur": 4,
+   "el": true
+  },
+  "disco-warrior-three-arms-back": {
+   "ad": "Disco Warrior Three Arms Back",
+   "yon": "sag",
+   "govde": 92,
+   "bas": 0,
+   "solKol": [
+    -80,
+    -80
+   ],
+   "sagKol": [
+    -78,
+    -78
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 4,
+   "el": true
+  },
+  "disco-seated-boat-one-leg": {
+   "ad": "Disco Seated Boat One Leg",
+   "yon": "sag",
+   "govde": 210,
+   "bas": 0,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    98,
+    98
+   ],
+   "solBacak": [
+    140,
+    140
+   ],
+   "sagBacak": [
+    60,
+    0
+   ],
+   "tur": 4,
+   "el": true
+  },
+  "disco-front-lunge-twist-arms-wide": {
+   "ad": "Disco Front Lunge Twist Arms Wide",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    -50,
+    -50
+   ],
+   "tur": 4,
+   "el": true
+  },
+  "disco-standing-toe-grab-forward": {
+   "ad": "Disco Standing Toe Grab Forward",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    95,
+    95
+   ],
+   "sagKol": [
+    -40,
+    -40
+   ],
+   "solBacak": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 4,
+   "el": true
+  },
+  "disco-lunge-arms-up-back-heel-up": {
+   "ad": "Disco Lunge Arms Up Back Heel Up",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    170,
+    170
+   ],
+   "sagKol": [
+    168,
+    168
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -160
+   ],
+   "tur": 4,
+   "el": true
+  },
+  "disco-archer-lunge": {
+   "ad": "Disco Archer Lunge",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    -90,
+    90
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "tur": 4,
+   "el": true
+  },
+  "disco-dancer-arms-up-leg-back": {
+   "ad": "Disco Dancer Arms Up Leg Back",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    176,
+    176
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -40,
+    -150
+   ],
+   "tur": 4,
+   "el": true
+  },
+  "disco-high-kick-leg-hold": {
+   "ad": "Disco High Kick Leg Hold",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    150,
+    150
+   ],
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solBacak": [
+    130,
+    130
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 4,
+   "el": true
+  },
+  "disco-low-lunge-hands-floor-back-arm-up": {
+   "ad": "Disco Low Lunge Hands Floor Back Arm Up",
+   "yon": "sag",
+   "govde": 120,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    -150,
+    -150
+   ],
+   "solBacak": [
+    100,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -60
+   ],
+   "tur": 4,
+   "el": true
+  },
+  "funk-reach-w-curtsy": {
+   "ad": "Funk Reach W Curtsy",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "mirrorball-cross-t-wide": {
+   "ad": "Mirrorball Cross T Wide",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    110
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "roller-cross-low-lunge": {
+   "ad": "Roller Cross Low Lunge",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    110
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "strobe-t-salute-knee": {
+   "ad": "Strobe T Salute Knee",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    -100,
+    140
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "plush-swing-cactus-goddess": {
+   "ad": "Plush Swing Cactus Goddess",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -110
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "groove-swing-v-kick": {
+   "ad": "Groove Swing V Kick",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -110
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 2
+  },
+  "vinyl-v-reach-goddess": {
+   "ad": "Vinyl V Reach Goddess",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "jukebox-w-t-leg-out": {
+   "ad": "Jukebox W T Leg Out",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "jukebox-cross-hook-goddess": {
+   "ad": "Jukebox Cross Hook Goddess",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    110
+   ],
+   "solKol": [
+    -130,
+    -40
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "groove-cactus-swing-lunge": {
+   "ad": "Groove Cactus Swing Lunge",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    -150,
+    -110
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "sparkle-low-t-tree": {
+   "ad": "Sparkle Low T Tree",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 2
+  },
+  "funk-swing-flex-leg-out": {
+   "ad": "Funk Swing Flex Leg Out",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -110
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "hustle-salute-v-lunge": {
+   "ad": "Hustle Salute V Lunge",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -100,
+    140
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "funk-hip-head-leg-out": {
+   "ad": "Funk Hip Head Leg Out",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "velvet-hip-cactus-curtsy": {
+   "ad": "Velvet Hip Cactus Curtsy",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "sparkle-reach-swing-curtsy": {
+   "ad": "Sparkle Reach Swing Curtsy",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    -150,
+    -110
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "strobe-diag-flex-tree": {
+   "ad": "Strobe Diag Flex Tree",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 2
+  },
+  "mirrorball-hip-salute-wide": {
+   "ad": "Mirrorball Hip Salute Wide",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    -100,
+    140
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "fever-head-swing-kick": {
+   "ad": "Fever Head Swing Kick",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    -150,
+    -110
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 2
+  },
+  "hustle-swing-w-wide": {
+   "ad": "Hustle Swing W Wide",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -110
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "jukebox-salute-cross-goddess": {
+   "ad": "Jukebox Salute Cross Goddess",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -100,
+    140
+   ],
+   "solKol": [
+    -20,
+    110
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "funk-flex-v-lunge": {
+   "ad": "Funk Flex V Lunge",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "strobe-t-hook-kick": {
+   "ad": "Strobe T Hook Kick",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    -130,
+    -40
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 2
+  },
+  "groove-head-swing-goddess": {
+   "ad": "Groove Head Swing Goddess",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    -150,
+    -110
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "spotlight-t-low-goddess": {
+   "ad": "Spotlight T Low Goddess",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "shimmy-diag-w-goddess": {
+   "ad": "Shimmy Diag W Goddess",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "boogie-hook-head-wide": {
+   "ad": "Boogie Hook Head Wide",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -130,
+    -40
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "glitter-head-v-tree": {
+   "ad": "Glitter Head V Tree",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 2
+  },
+  "strobe-head-cross-leg-out": {
+   "ad": "Strobe Head Cross Leg Out",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    -20,
+    110
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "sequin-flex-v-tree": {
+   "ad": "Sequin Flex V Tree",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 2
+  },
+  "funk-cactus-t-knee": {
+   "ad": "Funk Cactus T Knee",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "vinyl-cross-w-goddess": {
+   "ad": "Vinyl Cross W Goddess",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    110
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "sequin-swing-hip-leg-out": {
+   "ad": "Sequin Swing Hip Leg Out",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -110
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "jukebox-cactus-hook-curtsy": {
+   "ad": "Jukebox Cactus Hook Curtsy",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    -130,
+    -40
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "hustle-cactus-t-curtsy": {
+   "ad": "Hustle Cactus T Curtsy",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "velvet-low-cactus-tree": {
+   "ad": "Velvet Low Cactus Tree",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 2
+  },
+  "plush-swing-flex-knee": {
+   "ad": "Plush Swing Flex Knee",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -110
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "spotlight-flex-hip-curtsy": {
+   "ad": "Spotlight Flex Hip Curtsy",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "jukebox-cross-hook-knee": {
+   "ad": "Jukebox Cross Hook Knee",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    110
+   ],
+   "solKol": [
+    -130,
+    -40
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "neon-hip-swing-tree": {
+   "ad": "Neon Hip Swing Tree",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    -150,
+    -110
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 2
+  },
+  "velvet-cross-v-curtsy": {
+   "ad": "Velvet Cross V Curtsy",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    110
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "fever-cross-head-goddess": {
+   "ad": "Fever Cross Head Goddess",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    110
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 1
+  },
+  "mirrorball-swing-cactus-lunge": {
+   "ad": "Mirrorball Swing Cactus Lunge",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -110
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "bassline-hip-flex-tree": {
+   "ad": "Bassline Hip Flex Tree",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 2
+  },
+  "neon-salute-cactus-wide": {
+   "ad": "Neon Salute Cactus Wide",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -100,
+    140
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "groove-low-swing-leg-out": {
+   "ad": "Groove Low Swing Leg Out",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    -150,
+    -110
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "dancefloor-diag-t-curtsy": {
+   "ad": "Dancefloor Diag T Curtsy",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "sequin-cross-w-tree": {
+   "ad": "Sequin Cross W Tree",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    110
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 2
+  },
+  "glitter-hip-flex-knee": {
+   "ad": "Glitter Hip Flex Knee",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "bassline-head-cactus-tree": {
+   "ad": "Bassline Head Cactus Tree",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 2
+  },
+  "sequin-hip-low-wide": {
+   "ad": "Sequin Hip Low Wide",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "groove-w-low-lunge": {
+   "ad": "Groove W Low Lunge",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "sparkle-flex-hook-lunge": {
+   "ad": "Sparkle Flex Hook Lunge",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    -130,
+    -40
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "tur": 1
+  },
+  "sparkle-v-salute-curtsy": {
+   "ad": "Sparkle V Salute Curtsy",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    -100,
+    140
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "bassline-flex-hook-tree": {
+   "ad": "Bassline Flex Hook Tree",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    -130,
+    -40
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 2
+  },
+  "mirrorball-reach-diag-leg-out": {
+   "ad": "Mirrorball Reach Diag Leg Out",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "shimmy-cactus-cross-wide": {
+   "ad": "Shimmy Cactus Cross Wide",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    -20,
+    110
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "glitter-t-flex-knee": {
+   "ad": "Glitter T Flex Knee",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "shimmy-head-cactus-kick": {
+   "ad": "Shimmy Head Cactus Kick",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ],
+   "tur": 2
+  },
+  "bassline-low-swing-curtsy": {
+   "ad": "Bassline Low Swing Curtsy",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    -150,
+    -110
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 1
+  },
+  "dancefloor-flow-60": {
+   "ad": "Dancefloor Flow 60",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -42
+   ],
+   "sagKol": [
+    120,
+    118
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 4
+  },
+  "sparkle-flow-61": {
+   "ad": "Sparkle Flow 61",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 0,
+   "solKol": [
+    -90,
+    -92
+   ],
+   "sagKol": [
+    -90,
+    -92
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    -110,
+    -170
+   ],
+   "tur": 4
+  },
+  "mirrorball-flow-62": {
+   "ad": "Mirrorball Flow 62",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 0,
+   "solKol": [
+    -90,
+    -92
+   ],
+   "sagKol": [
+    45,
+    43
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "velvet-flow-63": {
+   "ad": "Velvet Flow 63",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    45,
+    43
+   ],
+   "sagKol": [
+    120,
+    118
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 4
+  },
+  "sequin-flow-64": {
+   "ad": "Sequin Flow 64",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -42
+   ],
+   "sagKol": [
+    -150,
+    -152
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 4
+  },
+  "funk-flow-65": {
+   "ad": "Funk Flow 65",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    45,
+    43
+   ],
+   "sagKol": [
+    90,
+    88
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 4
+  },
+  "sparkle-flow-66": {
+   "ad": "Sparkle Flow 66",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 0,
+   "solKol": [
+    -90,
+    -92
+   ],
+   "sagKol": [
+    -150,
+    -152
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -110,
+    -170
+   ],
+   "tur": 3
+  },
+  "mirrorball-flow-67": {
+   "ad": "Mirrorball Flow 67",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    150,
+    148
+   ],
+   "sagKol": [
+    90,
+    88
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -60,
+    -150
+   ],
+   "tur": 3
+  },
+  "velvet-flow-68": {
+   "ad": "Velvet Flow 68",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    150,
+    148
+   ],
+   "sagKol": [
+    -40,
+    -42
+   ],
+   "solBacak": [
+    110,
+    -40
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 4
+  },
+  "glitter-flow-69": {
+   "ad": "Glitter Flow 69",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    150,
+    148
+   ],
+   "sagKol": [
+    -40,
+    -42
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "sagBacak": [
+    -70,
+    -70
+   ],
+   "tur": 4
+  },
+  "boogie-flow-70": {
+   "ad": "Boogie Flow 70",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    90,
+    88
+   ],
+   "sagKol": [
+    -40,
+    -42
+   ],
+   "solBacak": [
+    110,
+    -40
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "sequin-flow-71": {
+   "ad": "Sequin Flow 71",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    178,
+    176
+   ],
+   "sagKol": [
+    45,
+    43
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 4
+  },
+  "groove-flow-72": {
+   "ad": "Groove Flow 72",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    -90,
+    -92
+   ],
+   "sagKol": [
+    -150,
+    -152
+   ],
+   "solBacak": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "bassline-flow-73": {
+   "ad": "Bassline Flow 73",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -152
+   ],
+   "sagKol": [
+    -90,
+    -92
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -60,
+    -150
+   ],
+   "tur": 2
+  },
+  "jukebox-flow-74": {
+   "ad": "Jukebox Flow 74",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -42
+   ],
+   "sagKol": [
+    -40,
+    -42
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "sagBacak": [
+    -70,
+    -70
+   ],
+   "tur": 4
+  },
+  "neon-flow-75": {
+   "ad": "Neon Flow 75",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    150,
+    148
+   ],
+   "sagKol": [
+    120,
+    118
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 4
+  },
+  "boogie-flow-76": {
+   "ad": "Boogie Flow 76",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 0,
+   "solKol": [
+    -90,
+    -92
+   ],
+   "sagKol": [
+    -150,
+    -152
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ],
+   "tur": 2
+  },
+  "roller-flow-77": {
+   "ad": "Roller Flow 77",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 0,
+   "solKol": [
+    150,
+    148
+   ],
+   "sagKol": [
+    178,
+    176
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    -110,
+    -170
+   ],
+   "tur": 4
+  },
+  "strobe-flow-78": {
+   "ad": "Strobe Flow 78",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    120,
+    118
+   ],
+   "sagKol": [
+    -40,
+    -42
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -150
+   ],
+   "tur": 4
+  },
+  "shimmy-flow-79": {
+   "ad": "Shimmy Flow 79",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    45,
+    43
+   ],
+   "sagKol": [
+    -150,
+    -152
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -70,
+    -70
+   ],
+   "tur": 4
+  },
+  "mirrorball-flow-80": {
+   "ad": "Mirrorball Flow 80",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    45,
+    43
+   ],
+   "sagKol": [
+    178,
+    176
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -110,
+    -170
+   ],
+   "tur": 4
+  },
+  "fever-flow-81": {
+   "ad": "Fever Flow 81",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    178,
+    176
+   ],
+   "sagKol": [
+    150,
+    148
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ],
+   "tur": 2
+  },
+  "sparkle-flow-82": {
+   "ad": "Sparkle Flow 82",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    120,
+    118
+   ],
+   "sagKol": [
+    90,
+    88
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 4
+  },
+  "neon-flow-83": {
+   "ad": "Neon Flow 83",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    150,
+    148
+   ],
+   "sagKol": [
+    45,
+    43
+   ],
+   "solBacak": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 3
+  },
+  "jukebox-flow-84": {
+   "ad": "Jukebox Flow 84",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    90,
+    88
+   ],
+   "sagKol": [
+    178,
+    176
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -60,
+    -150
+   ],
+   "tur": 3
+  },
+  "roller-flow-85": {
+   "ad": "Roller Flow 85",
+   "yon": "sag",
+   "govde": 60,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -152
+   ],
+   "sagKol": [
+    150,
+    148
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 4
+  },
+  "bassline-flow-86": {
+   "ad": "Bassline Flow 86",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    90,
+    88
+   ],
+   "sagKol": [
+    -90,
+    -92
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "roller-flow-87": {
+   "ad": "Roller Flow 87",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    -90,
+    -92
+   ],
+   "sagKol": [
+    178,
+    176
+   ],
+   "solBacak": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ],
+   "tur": 3
+  },
+  "neon-flow-88": {
+   "ad": "Neon Flow 88",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 0,
+   "solKol": [
+    120,
+    118
+   ],
+   "sagKol": [
+    -40,
+    -42
+   ],
+   "solBacak": [
+    110,
+    -40
+   ],
+   "sagBacak": [
+    -110,
+    -170
+   ],
+   "tur": 4
+  },
+  "funk-flow-89": {
+   "ad": "Funk Flow 89",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    -90,
+    -92
+   ],
+   "sagKol": [
+    120,
+    118
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ],
+   "tur": 3
+  },
+  "hustle-flow-90": {
+   "ad": "Hustle Flow 90",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -152
+   ],
+   "sagKol": [
+    -90,
+    -92
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ],
+   "tur": 3
+  },
+  "spotlight-flow-91": {
+   "ad": "Spotlight Flow 91",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    90,
+    88
+   ],
+   "sagKol": [
+    -90,
+    -92
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "jukebox-flow-92": {
+   "ad": "Jukebox Flow 92",
+   "yon": "sag",
+   "govde": 60,
+   "bas": 0,
+   "solKol": [
+    150,
+    148
+   ],
+   "sagKol": [
+    150,
+    148
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "velvet-flow-93": {
+   "ad": "Velvet Flow 93",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -42
+   ],
+   "sagKol": [
+    120,
+    118
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -70,
+    -70
+   ],
+   "tur": 4
+  },
+  "sequin-flow-94": {
+   "ad": "Sequin Flow 94",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    90,
+    88
+   ],
+   "sagKol": [
+    -40,
+    -42
+   ],
+   "solBacak": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    -60,
+    -150
+   ],
+   "tur": 3
+  },
+  "funk-flow-95": {
+   "ad": "Funk Flow 95",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 0,
+   "solKol": [
+    120,
+    118
+   ],
+   "sagKol": [
+    -90,
+    -92
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ],
+   "tur": 2
+  },
+  "funk-flow-96": {
+   "ad": "Funk Flow 96",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    45,
+    43
+   ],
+   "sagKol": [
+    -150,
+    -152
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "sagBacak": [
+    -60,
+    -150
+   ],
+   "tur": 4
+  },
+  "bassline-flow-97": {
+   "ad": "Bassline Flow 97",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    45,
+    43
+   ],
+   "sagKol": [
+    -40,
+    -42
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "sparkle-flow-98": {
+   "ad": "Sparkle Flow 98",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -42
+   ],
+   "sagKol": [
+    -150,
+    -152
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ],
+   "tur": 2
+  },
+  "bassline-flow-99": {
+   "ad": "Bassline Flow 99",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    -90,
+    -92
+   ],
+   "sagKol": [
+    150,
+    148
+   ],
+   "solBacak": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "plush-flow-100": {
+   "ad": "Plush Flow 100",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    120,
+    118
+   ],
+   "sagKol": [
+    -90,
+    -92
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 4
+  },
+  "spotlight-flow-101": {
+   "ad": "Spotlight Flow 101",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    90,
+    88
+   ],
+   "sagKol": [
+    -150,
+    -152
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -70,
+    -70
+   ],
+   "tur": 4
+  },
+  "velvet-flow-102": {
+   "ad": "Velvet Flow 102",
+   "yon": "sag",
+   "govde": 60,
+   "bas": 0,
+   "solKol": [
+    -90,
+    -92
+   ],
+   "sagKol": [
+    -150,
+    -152
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "sagBacak": [
+    -70,
+    -70
+   ],
+   "tur": 4
+  },
+  "boogie-flow-103": {
+   "ad": "Boogie Flow 103",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -152
+   ],
+   "sagKol": [
+    178,
+    176
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "sparkle-flow-104": {
+   "ad": "Sparkle Flow 104",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -152
+   ],
+   "sagKol": [
+    -90,
+    -92
+   ],
+   "solBacak": [
+    110,
+    -40
+   ],
+   "sagBacak": [
+    -60,
+    -150
+   ],
+   "tur": 2
+  },
+  "roller-flow-105": {
+   "ad": "Roller Flow 105",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -42
+   ],
+   "sagKol": [
+    178,
+    176
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 4
+  },
+  "sequin-flow-106": {
+   "ad": "Sequin Flow 106",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -152
+   ],
+   "sagKol": [
+    -90,
+    -92
+   ],
+   "solBacak": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "boogie-flow-107": {
+   "ad": "Boogie Flow 107",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 0,
+   "solKol": [
+    178,
+    176
+   ],
+   "sagKol": [
+    120,
+    118
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -60,
+    -150
+   ],
+   "tur": 3
+  },
+  "hustle-flow-108": {
+   "ad": "Hustle Flow 108",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    45,
+    43
+   ],
+   "sagKol": [
+    120,
+    118
+   ],
+   "solBacak": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    -60,
+    -150
+   ],
+   "tur": 3
+  },
+  "funk-flow-109": {
+   "ad": "Funk Flow 109",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -42
+   ],
+   "sagKol": [
+    150,
+    148
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "strobe-flow-110": {
+   "ad": "Strobe Flow 110",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    150,
+    148
+   ],
+   "sagKol": [
+    178,
+    176
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "sparkle-flow-111": {
+   "ad": "Sparkle Flow 111",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    -90,
+    -92
+   ],
+   "sagKol": [
+    90,
+    88
+   ],
+   "solBacak": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    -60,
+    -150
+   ],
+   "tur": 3
+  },
+  "jukebox-flow-112": {
+   "ad": "Jukebox Flow 112",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 0,
+   "solKol": [
+    90,
+    88
+   ],
+   "sagKol": [
+    -40,
+    -42
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -150
+   ],
+   "tur": 2
+  },
+  "neon-flow-113": {
+   "ad": "Neon Flow 113",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -42
+   ],
+   "sagKol": [
+    -150,
+    -152
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -110,
+    -170
+   ],
+   "tur": 4
+  },
+  "dancefloor-flow-114": {
+   "ad": "Dancefloor Flow 114",
+   "yon": "sag",
+   "govde": 60,
+   "bas": 0,
+   "solKol": [
+    90,
+    88
+   ],
+   "sagKol": [
+    178,
+    176
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ],
+   "tur": 3
+  },
+  "plush-flow-115": {
+   "ad": "Plush Flow 115",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -152
+   ],
+   "sagKol": [
+    -150,
+    -152
+   ],
+   "solBacak": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    -70,
+    -70
+   ],
+   "tur": 3
+  },
+  "roller-flow-116": {
+   "ad": "Roller Flow 116",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    -90,
+    -92
+   ],
+   "sagKol": [
+    -90,
+    -92
+   ],
+   "solBacak": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    -110,
+    -170
+   ],
+   "tur": 3
+  },
+  "funk-flow-117": {
+   "ad": "Funk Flow 117",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -42
+   ],
+   "sagKol": [
+    -40,
+    -42
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "sparkle-flow-118": {
+   "ad": "Sparkle Flow 118",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    45,
+    43
+   ],
+   "sagKol": [
+    -90,
+    -92
+   ],
+   "solBacak": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    -60,
+    -150
+   ],
+   "tur": 3
+  },
+  "spotlight-flow-119": {
+   "ad": "Spotlight Flow 119",
+   "yon": "sag",
+   "govde": 60,
+   "bas": 0,
+   "solKol": [
+    178,
+    176
+   ],
+   "sagKol": [
+    -40,
+    -42
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -110,
+    -170
+   ],
+   "tur": 3
+  },
+  "groove-flow-120": {
+   "ad": "Groove Flow 120",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    45,
+    43
+   ],
+   "sagKol": [
+    45,
+    43
+   ],
+   "solBacak": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    -110,
+    -170
+   ],
+   "tur": 3
+  },
+  "vinyl-flow-121": {
+   "ad": "Vinyl Flow 121",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -42
+   ],
+   "sagKol": [
+    -90,
+    -92
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ],
+   "tur": 3
+  },
+  "spotlight-flow-122": {
+   "ad": "Spotlight Flow 122",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 0,
+   "solKol": [
+    120,
+    118
+   ],
+   "sagKol": [
+    178,
+    176
+   ],
+   "solBacak": [
+    110,
+    -40
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2
+  },
+  "fever-flow-123": {
+   "ad": "Fever Flow 123",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -42
+   ],
+   "sagKol": [
+    178,
+    176
+   ],
+   "solBacak": [
+    110,
+    -40
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 4
+  },
+  "roller-flow-124": {
+   "ad": "Roller Flow 124",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    178,
+    176
+   ],
+   "sagKol": [
+    178,
+    176
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3
+  },
+  "vinyl-flow-125": {
+   "ad": "Vinyl Flow 125",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 0,
+   "solKol": [
+    178,
+    176
+   ],
+   "sagKol": [
+    -90,
+    -92
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ],
+   "tur": 4
+  },
+  "vinyl-flow-126": {
+   "ad": "Vinyl Flow 126",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -42
+   ],
+   "sagKol": [
+    45,
+    43
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3
+  },
+  "dancefloor-flow-127": {
+   "ad": "Dancefloor Flow 127",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    -90,
+    -92
+   ],
+   "sagKol": [
+    90,
+    88
+   ],
+   "solBacak": [
+    110,
+    -40
+   ],
+   "sagBacak": [
+    -70,
+    -70
+   ],
+   "tur": 4
+  },
+  "sequin-flow-128": {
+   "ad": "Sequin Flow 128",
+   "yon": "sag",
+   "govde": 60,
+   "bas": 0,
+   "solKol": [
+    178,
+    176
+   ],
+   "sagKol": [
+    -90,
+    -92
+   ],
+   "solBacak": [
+    90,
+    -10
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 4
+  },
+  "sparkle-flow-129": {
+   "ad": "Sparkle Flow 129",
+   "yon": "sag",
+   "govde": 60,
+   "bas": 0,
+   "solKol": [
+    90,
+    88
+   ],
+   "sagKol": [
+    90,
+    88
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "sagBacak": [
+    -60,
+    -150
+   ],
+   "tur": 4
+  }
+ }
+}
