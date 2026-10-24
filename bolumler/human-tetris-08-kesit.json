@@ -1,0 +1,176 @@
+{
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-08",
+ "bpm": 132.0,
+ "toplam_olcu": 43,
+ "toplam_duvar": 4,
+ "zaman": {
+  "kart": 1.8182,
+  "say": 2.7273,
+  "buyu": 5.4545,
+  "gec": 0.9091,
+  "sure": 10.9091
+ },
+ "kartlar": [
+  {
+   "tip": "acilis",
+   "t": 0.0,
+   "sure": 5.4545
+  },
+  {
+   "tip": "yazi",
+   "metin": "WELCOME TO",
+   "alt": "THE DANCE FLOOR!",
+   "t": 5.4545,
+   "sure": 2.7273
+  },
+  {
+   "tip": "yazi",
+   "metin": "FIVE MINUTES.",
+   "alt": "ONE CHAMPION.",
+   "t": 8.1818,
+   "sure": 2.7273
+  },
+  {
+   "tip": "nasil",
+   "metin": "MATCH THE SHAPE",
+   "alt": "BEFORE THE WALL ARRIVES!",
+   "t": 10.9091,
+   "sure": 5.4545
+  },
+  {
+   "t": 16.3636,
+   "sure": 3.6364,
+   "tip": "tur",
+   "tur": 1,
+   "metin": "ROUND 1",
+   "alt": "GET GROOVING"
+  },
+  {
+   "t": 20.0,
+   "sure": 3.6364,
+   "tip": "basla"
+  },
+  {
+   "t": 34.5455,
+   "sure": 3.6364,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "ROUND 2",
+   "alt": "TURN IT UP"
+  },
+  {
+   "t": 49.0909,
+   "sure": 3.6364,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "ROUND 3",
+   "alt": "FLOOR IS YOURS"
+  },
+  {
+   "t": 63.6364,
+   "sure": 3.6364,
+   "tip": "tur",
+   "tur": 4,
+   "metin": "ROUND 4",
+   "alt": "LAST DANCE"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 23.6364,
+   "p1": "disco-back-lean-arms-open",
+   "p2": "disco-saturday-point",
+   "ovgu": "GROOVY!"
+  },
+  {
+   "no": 7,
+   "tur": 2,
+   "t0": 38.1818,
+   "p1": "disco-side-leg-lift-arms-up",
+   "p2": "disco-knee-lift-arms-back-wings",
+   "ovgu": "GROOVY!"
+  },
+  {
+   "no": 13,
+   "tur": 3,
+   "t0": 52.7273,
+   "p1": "disco-seated-one-leg-hold-up",
+   "p2": "disco-seated-twist-arm-back",
+   "ovgu": "GROOVY!"
+  },
+  {
+   "no": 18,
+   "tur": 4,
+   "t0": 67.2728,
+   "p1": "disco-side-leg-hold-high",
+   "p2": "disco-pyramid-arms-up",
+   "ovgu": "ON FIRE!"
+  }
+ ],
+ "abone": [
+  20.0,
+  30.0,
+  45.0,
+  60.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "Mirrorball Showdown.wav (Suno, kullanici, 24 Eki 2026) -> mirrorball-132.wav",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne4.html.",
+ "tema": {
+  "varlik": "/03-motor/tetris-pvp/varlik-08/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-08/",
+  "p1": "#FF3EA5",
+  "p2": "#2E9BFF",
+  "altin": "#ffd94a",
+  "camgobegi": "#5ff2ff",
+  "p1koyu": "#b0136a",
+  "p2koyu": "#0b4fb0",
+  "p1acik": "#ffd9ee",
+  "p2acik": "#d6ecff",
+  "p1parlak": "#ffb8dd",
+  "p2parlak": "#b8dcff",
+  "vsSol": [
+   "#e0287f",
+   "#3a0420"
+  ],
+  "vsSag": [
+   "#1f6fe0",
+   "#04163f"
+  ],
+  "isin": [
+   "#b04dff",
+   "#1a0640"
+  ],
+  "wrapIsin": [
+   "#ff6ac8",
+   "#2a0638"
+  ],
+  "ovguRenk": [
+   "#ffffff",
+   "#ffc2ec",
+   "#5fd0ff"
+  ],
+  "parca": [
+   "#ff7ad8",
+   "#7fe7ff",
+   "#c9a6ff"
+  ],
+  "abone": [
+   "#7dffb4",
+   "#0c8a48"
+  ],
+  "vsAlt": "HUMAN TETRIS · 1 VS 1",
+  "fener": false,
+  "kuzeyIsigi": false,
+  "disko": true,
+  "fisek": false,
+  "oklar": false,
+  "panelTur": {
+   "3": "panel2",
+   "4": "panel2"
+  }
+ }
+}

@@ -1,0 +1,175 @@
+{
+ "_not": "HUMAN TETRIS 8. video (REF-059, Glow Motion PVP 1 VS 1 #10 'Keep Up for 8 Minutes' -> kullanici karari 5 dk, 24 Eki 2026). 5 dk denemesi video 3 (TALIMATLAR §20, §24). 4 tur 5/7/4/6 = 22 duvar, duvar 24 vurus. Muzik Mirrorball Showdown (Suno, kullanici) 130->133 BPM kayiyordu -> mirrorball-132.wav (muzik-sabitle.py --hedef 132, sapma <=0,34). Metinler bizim (REF-059 kartlari birebir alinmadi). P1 pembe solda, P2 mavi sagda (kullanici).",
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-08",
+ "bpm": 132,
+ "muzik": "Mirrorball Showdown.wav (Suno, kullanici, 24 Eki 2026) -> mirrorball-132.wav",
+ "duvar": "duvar-listesi-08.json",
+ "duvar_vurus": 24,
+ "kart_vurus": {
+  "tur": 8,
+  "basla": 8,
+  "abone": 12
+ },
+ "giris_dizisi": [
+  {
+   "tip": "acilis",
+   "vurus": 12
+  },
+  {
+   "tip": "yazi",
+   "metin": "WELCOME TO",
+   "alt": "THE DANCE FLOOR!",
+   "vurus": 6
+  },
+  {
+   "tip": "yazi",
+   "metin": "FIVE MINUTES.",
+   "alt": "ONE CHAMPION.",
+   "vurus": 6
+  },
+  {
+   "tip": "nasil",
+   "metin": "MATCH THE SHAPE",
+   "alt": "BEFORE THE WALL ARRIVES!",
+   "vurus": 12
+  }
+ ],
+ "tur_kart": {
+  "1": [
+   "ROUND 1",
+   "GET GROOVING"
+  ],
+  "2": [
+   "ROUND 2",
+   "TURN IT UP"
+  ],
+  "3": [
+   "ROUND 3",
+   "FLOOR IS YOURS"
+  ],
+  "4": [
+   "ROUND 4",
+   "LAST DANCE"
+  ]
+ },
+ "gecis": {
+  "2": [
+   {
+    "tip": "yazi",
+    "metin": "SMOOTH MOVES!",
+    "vurus": 6
+   },
+   {
+    "tip": "yazi",
+    "metin": "STAY IN",
+    "alt": "THE GROOVE!",
+    "vurus": 6
+   }
+  ],
+  "3": [
+   {
+    "tip": "yazi",
+    "metin": "NOW WE'RE",
+    "alt": "DANCING!",
+    "vurus": 6
+   },
+   {
+    "tip": "yazi",
+    "metin": "DON'T MISS",
+    "alt": "A BEAT!",
+    "vurus": 6
+   }
+  ],
+  "4": [
+   {
+    "tip": "yazi",
+    "metin": "ALMOST THERE!",
+    "vurus": 6
+   },
+   {
+    "tip": "yazi",
+    "metin": "GIVE IT",
+    "alt": "EVERYTHING!",
+    "vurus": 6
+   }
+  ]
+ },
+ "kapanis": [
+  {
+   "tip": "yazi",
+   "metin": "DANCE FLOOR",
+   "alt": "CLEARED!",
+   "vurus": 6
+  },
+  {
+   "tip": "yazi",
+   "metin": "WHO WON",
+   "alt": "THE NIGHT?",
+   "vurus": 6
+  }
+ ],
+ "ovgu": [
+  "GROOVY!",
+  "NAILED IT!",
+  "SMOOTH!",
+  "DISCO STAR!",
+  "PERFECT FIT!",
+  "ON FIRE!"
+ ],
+ "sayfa": "sahne4.html",
+ "tema": {
+  "varlik": "/03-motor/tetris-pvp/varlik-08/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-08/",
+  "p1": "#FF3EA5",
+  "p2": "#2E9BFF",
+  "altin": "#ffd94a",
+  "camgobegi": "#5ff2ff",
+  "p1koyu": "#b0136a",
+  "p2koyu": "#0b4fb0",
+  "p1acik": "#ffd9ee",
+  "p2acik": "#d6ecff",
+  "p1parlak": "#ffb8dd",
+  "p2parlak": "#b8dcff",
+  "vsSol": [
+   "#e0287f",
+   "#3a0420"
+  ],
+  "vsSag": [
+   "#1f6fe0",
+   "#04163f"
+  ],
+  "isin": [
+   "#b04dff",
+   "#1a0640"
+  ],
+  "wrapIsin": [
+   "#ff6ac8",
+   "#2a0638"
+  ],
+  "ovguRenk": [
+   "#ffffff",
+   "#ffc2ec",
+   "#5fd0ff"
+  ],
+  "parca": [
+   "#ff7ad8",
+   "#7fe7ff",
+   "#c9a6ff"
+  ],
+  "abone": [
+   "#7dffb4",
+   "#0c8a48"
+  ],
+  "vsAlt": "HUMAN TETRIS · 1 VS 1",
+  "fener": false,
+  "kuzeyIsigi": false,
+  "disko": true,
+  "fisek": false,
+  "oklar": false,
+  "panelTur": {
+   "3": "panel2",
+   "4": "panel2"
+  }
+ }
+}

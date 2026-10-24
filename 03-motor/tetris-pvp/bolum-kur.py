@@ -50,7 +50,7 @@ if "giris_dizisi" in AYAR:                 # 6. video (REF-057): acilis boksorle
     dizi(AYAR["giris_dizisi"])
 else:
     kartlar.append({"t": r(t), "sure": r(KS(GIRIS)), "tip": GIRIS}); t += KS(GIRIS)
-for tur in (1, 2, 3):
+for tur in sorted({d["tur"] for d in DUVAR}):     # 8. video (REF-059): 4 tur
     if KESIT and not any(d["tur"] == tur and d["no"] in KESIT for d in DUVAR):
         continue
     if str(tur) in AYAR.get("gecis", {}) and not KESIT:   # tur kartindan once iki kiskirtici kart (REF-057)
