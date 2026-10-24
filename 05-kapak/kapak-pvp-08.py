@@ -37,7 +37,7 @@ FONT = os.path.join(KOK, "05-kapak", "fontlar", "TitanOne.ttf")
 yfont = lambda boy: ImageFont.truetype(FONT, boy)
 
 # ---------------------------------------------------------------- arka plan: videonun sahnesi
-im = Image.open(os.path.join(V, "gok.png")).convert("RGBA").resize((W, H), Image.LANCZOS)
+im = Image.open(os.path.join(V, "kapak-gok.png" if T8 and os.path.exists(os.path.join(V, "kapak-gok.png")) else "gok.png")).convert("RGBA").resize((W, H), Image.LANCZOS)
 KS = T8 and os.path.exists(os.path.join(V, "kapak-serit-p1.png"))   # 8. video: Blender'da kapaga ozel doygun seritler
 for i, ad in enumerate(("kapak-serit-p1.png", "kapak-serit-p2.png") if KS else ("serit-p1.png", "serit-p2.png")):
     s = Image.open(os.path.join(V, ad)).convert("RGBA").resize((W // 2, H), Image.LANCZOS)
