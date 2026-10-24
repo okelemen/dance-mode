@@ -146,7 +146,7 @@ def galaksi_tanecik(merkez, R, rnd):
         q = egim @ p + Vector(merkez)
         m = Matrix.Translation(q) @ Matrix.Scale(rnd.choice([0.04, 0.06, 0.08, 0.12]), 4)
         g = bmesh.ops.create_icosphere(bm, subdivisions=1, radius=1.0, matrix=m)
-        mi = rnd.choices(range(4), weights=(34, 26, 24, 16))[0]
+        mi = rnd.choices(range(4), weights=(34, 30, 30, 6) if KAPAK else (34, 26, 24, 16))[0]
         for f in {f for v in g["verts"] for f in v.link_faces}:
             f.material_index = mi
     bm.to_mesh(me); bm.free()
@@ -162,6 +162,8 @@ def gok_uzay():
     def kur(nt, tc):
         nz = nt.nodes.new("ShaderNodeTexNoise"); nz.inputs["Scale"].default_value = 2.2; nz.inputs["Detail"].default_value = 8
         nt.links.new(tc.outputs["Generated"], nz.inputs["Vector"])
+        if KAPAK:   # kapak (REF-060 kapagi: mor-mavi galaksi bulutsusu, renklilik 0,55)
+            return rampa(nt, nz.outputs["Fac"], [(0.3, "#12063a"), (0.5, "#3a148a"), (0.66, "#1d3fb0"), (0.8, "#8a2a9a")])
         return rampa(nt, nz.outputs["Fac"], [(0.35, "#020108"), (0.55, "#0b0626"), (0.72, "#24104e")])
     m, nt, em = mat_desen("uzay", kur)
     bpy.ops.mesh.primitive_plane_add(size=1, location=(0, 80, 9), rotation=(math.pi / 2, 0, 0))
@@ -241,7 +243,7 @@ def serit_uzay(oyuncu):
     tz = tuy_doygun("tuy_zemin", R, acik_m=0.18)
     tuylu(z, tz, yogun=120, boy=0.06)   # sahne 2: zemin pastele kacti -> oyuncu renginin kendisi, isilti yok
     # beyaz pelus chevron'lar, altinda oyuncu rengi neon (REF-060: beyaz, kenari parlayan V'ler)
-    tuy_chev = tuy_doygun("tuy_chev", acik(R, 0.8), acik_m=0.95, isilti=0.35)
+    tuy_chev = tuy_doygun("tuy_chev", acik(R, 0.45 if KAPAK else 0.8), acik_m=0.7 if KAPAK else 0.95, isilti=0.35)
     CHEV = []
     for yy in (2.6, 4.6, 6.6, 8.6):
         # sahne 4: dondurulmus kutular yolun kenarina kaciyordu -> kollar dogrudan uc noktalardan kalin tuylu cubuk
@@ -260,7 +262,7 @@ def serit_uzay(oyuncu):
         o = yuvarlak_kutu("tirabzan", (s * 2.45, (ys[0] + ys[-1]) / 2, 0.66), (0.22, ys[-1] - ys[0], 0.2), tuy, egim=0.09)
         tuylu(o, tuy, yogun=2400, boy=0.07)
     # KAFES KAPI (REF-060): iki yan kule + ust kiris, pastel oyuncu renginde parlak plastik, civata cikintilari
-    kafes = mat_plastik("kafes", acik(R, 0.18), 0.25)
+    kafes = mat_plastik("kafes", R if KAPAK else acik(R, 0.18), 0.6 if KAPAK else 0.25)   # kapak: renklilik referansin altinda kaldi
     civata = mat_plastik("civata", acik(R, 0.55), 0.4)
     xk = W / 2 - KK / 2
     for s in (-1, 1):
@@ -316,8 +318,8 @@ def panel_uzay(oyuncu):
     nt.links.new(at.outputs[0], m1.inputs[0])
     sn = nt.nodes.new("ShaderNodeMath"); sn.operation = "SINE"; nt.links.new(m1.outputs[0], sn.inputs[0])
     rp = nt.nodes.new("ShaderNodeValToRGB"); cr = rp.color_ramp; cr.interpolation = "CONSTANT"
-    cr.elements[0].position = 0.0; cr.elements[0].color = (*acik(R, 0.42), 1)
-    cr.elements[1].position = 0.5; cr.elements[1].color = (*acik(R, 0.85), 1)
+    cr.elements[0].position = 0.0; cr.elements[0].color = (*acik(R, 0.12 if KAPAK else 0.42), 1)
+    cr.elements[1].position = 0.5; cr.elements[1].color = (*acik(R, 0.55 if KAPAK else 0.85), 1)
     nt.links.new(sn.outputs[0], rp.inputs[0])
     # pelus doku: ince gurultuyle tel tel ton (REF-060 paneli tuylu gorunur)
     nz = nt.nodes.new("ShaderNodeTexNoise"); nz.inputs["Scale"].default_value = 90.0; nz.inputs["Detail"].default_value = 3
