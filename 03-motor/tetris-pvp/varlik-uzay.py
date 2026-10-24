@@ -23,6 +23,14 @@ exec(compile(_disko.split("# ---------------------------------------------------
 MOR = "#9b5cff"
 
 
+def tuy_doygun(ad, renk, acik_m=0.3, isilti=0.03):
+    """sahne 3: mat_tuy'un beyaz sheen'i (1,0) pelusu pastele/beyaza kaciriyordu -> sheen az ve oyuncu renginde"""
+    m = mat_tuy(ad, renk, acik_m=acik_m); b = m.node_tree.nodes["Principled BSDF"]
+    b.inputs["Sheen Weight"].default_value = 0.25; b.inputs["Sheen Tint"].default_value = (*acik(renk, 0.3), 1)
+    b.inputs["Emission Strength"].default_value = isilti
+    return m
+
+
 def mat_desen(ad, kur):
     """emisyon malzemesi; kur(nt, tc) -> renk cikisi"""
     m = bpy.data.materials.new(ad); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
@@ -52,9 +60,9 @@ def gezegen(merkez, R):
         nt.links.new(tc.outputs["Object"], dl.inputs["Vector"])
         renk = rampa(nt, dl.outputs["Fac"], [(0.0, "#0a2a6a"), (0.18, "#25e6ff"), (0.36, "#ff4fc3"), (0.52, "#8a4dff"),
                                                 (0.68, "#ffd25a"), (0.84, "#3fffd2"), (1.0, "#1a3fb0")])
-        vr = nt.nodes.new("ShaderNodeTexVoronoi"); vr.inputs["Scale"].default_value = 9.0
+        vr = nt.nodes.new("ShaderNodeTexVoronoi"); vr.inputs["Scale"].default_value = 30.0
         nt.links.new(tc.outputs["Object"], vr.inputs["Vector"])
-        bn = nt.nodes.new("ShaderNodeMath"); bn.operation = "LESS_THAN"; bn.inputs[1].default_value = 0.035
+        bn = nt.nodes.new("ShaderNodeMath"); bn.operation = "LESS_THAN"; bn.inputs[1].default_value = 0.06
         nt.links.new(vr.outputs["Distance"], bn.inputs[0])
         mx = nt.nodes.new("ShaderNodeMix"); mx.data_type = "RGBA"; mx.blend_type = "ADD"
         nt.links.new(bn.outputs[0], mx.inputs[0]); nt.links.new(renk, mx.inputs[6])
@@ -129,11 +137,11 @@ def galaksi_tanecik(merkez, R, rnd):
     renk = ["#5ff2ff", "#b06bff", "#ff6ad0", "#ffffff"]
     mats = [mat_emis("gx%d" % i, lin(hex3(c)), 5.0) for i, c in enumerate(renk)]
     me = bpy.data.meshes.new("galaksi"); bm = bmesh.new()
-    egim = Matrix.Rotation(math.radians(-16), 4, "X") @ Matrix.Rotation(math.radians(-8), 4, "Y")   # sahne 2: X 74 disk kameraya dik dondu
+    egim = Matrix.Rotation(math.radians(-9), 4, "X")   # sahne 2: X 74 disk kameraya dik dondu; sahne 3: Y egimi capraz serit yapti
     for i in range(5200):
         kol = i % 2
-        r = R * (0.22 + 0.78 * rnd.random() ** 0.8)
-        a = kol * math.pi + 2.6 * math.log(r / (R * 0.22) + 1) + rnd.gauss(0, 0.22)
+        r = R * (0.42 + 0.58 * rnd.random())                     # sahne 3: halka (gezegenin cevresi bos), kollar hafif
+        a = kol * math.pi + 1.4 * math.log(r / (R * 0.42) + 1) + rnd.gauss(0, 0.9)
         p = Vector((math.cos(a) * r + rnd.gauss(0, 0.6), math.sin(a) * r + rnd.gauss(0, 0.6), rnd.gauss(0, 0.25)))
         q = egim @ p + Vector(merkez)
         m = Matrix.Translation(q) @ Matrix.Scale(rnd.choice([0.04, 0.06, 0.08, 0.12]), 4)
@@ -223,17 +231,17 @@ def kafes_kiris(a, b, kal, mat, civata, dikey):
 def serit_uzay(oyuncu):
     sc = bos_sahne(w=960, h=1080, saydam=True)
     R = lin(hex3(RENK[oyuncu]))
-    tuy = mat_tuy("tuy", R, acik_m=0.45)
+    tuy = tuy_doygun("tuy", R, acik_m=0.35)
     neon = mat_emis("neon", acik(R, 0.45), 10.0)
     Y = 11.0; W, H = KAPI["w"], KAPI["h"]       # sahne 1: KAPI y=8 kadrajin tepesine kadar cikti; REF-060 kapisi uzakta
     KK = 0.9
     # pelus zemin: REF-060'da yol oyuncu renginde tuylu; kisa sik tuy
     bpy.ops.mesh.primitive_plane_add(size=1, location=(0, (Y + 3) / 2 - 0.5, 0))
     z = bpy.context.active_object; z.scale = (11.0, Y + 4, 1); bpy.ops.object.transform_apply(scale=True)
-    tz = mat_tuy("tuy_zemin", R, acik_m=0.18); tz.node_tree.nodes["Principled BSDF"].inputs["Emission Strength"].default_value = 0.03
+    tz = tuy_doygun("tuy_zemin", R, acik_m=0.18)
     tuylu(z, tz, yogun=120, boy=0.06)   # sahne 2: zemin pastele kacti -> oyuncu renginin kendisi, isilti yok
     # beyaz pelus chevron'lar, altinda oyuncu rengi neon (REF-060: beyaz, kenari parlayan V'ler)
-    tuy_chev = mat_tuy("tuy_chev", acik(R, 0.75), acik_m=0.9)
+    tuy_chev = tuy_doygun("tuy_chev", acik(R, 0.8), acik_m=0.95, isilti=0.35)
     CHEV = []
     for yy in (2.6, 4.6, 6.6, 8.6):
         for s in (-1, 1):
