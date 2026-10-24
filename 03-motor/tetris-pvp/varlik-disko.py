@@ -198,7 +198,7 @@ def mat_karo(R):
     br.inputs["Mortar"].default_value = (*koyu(R, 0.2), 1)
     nt.links.new(tc.outputs["Object"], br.inputs["Vector"])
     nt.links.new(br.outputs["Color"], b.inputs["Base Color"])
-    nt.links.new(br.outputs["Color"], b.inputs["Emission Color"]); b.inputs["Emission Strength"].default_value = 1.4 if KAPAK else 0.9
+    nt.links.new(br.outputs["Color"], b.inputs["Emission Color"]); b.inputs["Emission Strength"].default_value = 0.75 if KAPAK else 0.9   # kapak deneme 1: 1,4 karoyu beyaza patlatti
     b.inputs["Roughness"].default_value = 0.22; b.inputs["Metallic"].default_value = 0.1      # deneme 2: neon yansimasi zeminde uzun cizgi
     b.inputs["Coat Weight"].default_value = 0.35; b.inputs["Coat Roughness"].default_value = 0.12
     return m
@@ -210,7 +210,7 @@ def serit_disko(oyuncu):
     tuy = mat_tuy("tuy", koyu(R, 0.1) if KAPAK else R, acik_m=0.3 if KAPAK else 0.45)
     tuy_acik = mat_tuy("tuy_acik", acik(R, 0.25), acik_m=0.6)
     tuy_cerceve = mat_tuy("tuy_cerceve", R if KAPAK else acik(R, 0.18), acik_m=0.35 if KAPAK else 0.55)     # REF-059 cerceve: acik pembe/mavi, uclari beyazimsi
-    neon = mat_emis("neon", acik(R, 0.45), 10.0)
+    neon = mat_emis("neon", acik(R, 0.15) if KAPAK else acik(R, 0.45), 5.0 if KAPAK else 10.0)   # kapak: beyaz degil renkli neon
     Y = KAPI["y"]
     W, H = KAPI["w"], KAPI["h"]
     KK = 0.85                                   # pelus cerceve kalinligi (REF-059: kalin tuylu kenar)
@@ -355,7 +355,7 @@ def panel_sahne_disko(oyuncu):
     m = bpy.data.materials.new("sahne"); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
     tc = nt.nodes.new("ShaderNodeTexCoord"); sp = nt.nodes.new("ShaderNodeSeparateXYZ"); nt.links.new(tc.outputs["Generated"], sp.inputs[0])
     rp = nt.nodes.new("ShaderNodeValToRGB"); cr = rp.color_ramp
-    cr.elements[0].position = 0.0; cr.elements[0].color = (*acik(R, 0.2), 1)
+    cr.elements[0].position = 0.0; cr.elements[0].color = (*(R if KAPAK else acik(R, 0.2)), 1)
     cr.elements[1].position = 1.0; cr.elements[1].color = (*koyu(R, 0.35), 1)
     e = cr.elements.new(0.35); e.color = (*R, 1)
     nt.links.new(sp.outputs["Z"], rp.inputs[0])
@@ -390,7 +390,7 @@ def panel_sahne_disko(oyuncu):
         c3.elements[0].position = 0.0; c3.elements[0].color = (0, 0, 0, 1)
         c3.elements[1].position = 1.0; c3.elements[1].color = (0.55, 0.55, 0.55, 1)
         hn.links.new(sp2.outputs["Y"], r2.inputs[0])
-        e2 = hn.nodes.new("ShaderNodeEmission"); e2.inputs[0].default_value = (1, 1, 1, 1); e2.inputs[1].default_value = 2.2
+        e2 = hn.nodes.new("ShaderNodeEmission"); e2.inputs[0].default_value = (*(acik(R, 0.45) if KAPAK else (1, 1, 1)), 1); e2.inputs[1].default_value = 2.2
         tr = hn.nodes.new("ShaderNodeBsdfTransparent"); mx2 = hn.nodes.new("ShaderNodeMixShader")
         hn.links.new(r2.outputs[0], mx2.inputs[0]); hn.links.new(tr.outputs[0], mx2.inputs[1]); hn.links.new(e2.outputs[0], mx2.inputs[2])
         o2 = hn.nodes.new("ShaderNodeOutputMaterial"); hn.links.new(mx2.outputs[0], o2.inputs[0])
@@ -400,7 +400,7 @@ def panel_sahne_disko(oyuncu):
     for i in range(90):
         kure((rnd.uniform(-PW / 2 + 0.2, PW / 2 - 0.2), -0.16, rnd.uniform(taban - 0.1, PH / 2 - 0.2)), rnd.choice([0.012, 0.02, 0.03, 0.045]), par, sub=1)
     panel_kamera(sc)
-    yaz(sc, "panel2-%s.png" % oyuncu)
+    yaz(sc, ON + "panel2-%s.png" % oyuncu)
 
 
 # ------------------------------------------------------------------ ana akis (disko)
@@ -411,6 +411,9 @@ if YALNIZ in ("hepsi", "sahne", "gok"):
 if YALNIZ in ("hepsi", "sahne", "serit", "kapak"):
     for o_ in ("p1", "p2"):
         serit_disko(o_)
+if KAPAK:              # 24 Eki kural: kapak doygunlugu = referans -> kapi icindeki spot paneli de doygun
+    for o_ in ("p1", "p2"):
+        panel_sahne_disko(o_)
 if YALNIZ in ("hepsi", "sahne", "panel"):
     for o_ in ("p1", "p2"):
         panel_girdap_disko(o_)
