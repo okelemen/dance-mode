@@ -1,0 +1,163 @@
+{
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-09",
+ "bpm": 130.0,
+ "toplam_olcu": 41,
+ "toplam_duvar": 4,
+ "zaman": {
+  "kart": 1.8462,
+  "say": 2.7692,
+  "buyu": 5.5385,
+  "gec": 0.9231,
+  "sure": 11.0769
+ },
+ "kartlar": [
+  {
+   "tip": "acilis",
+   "t": 0.0,
+   "sure": 5.5385
+  },
+  {
+   "tip": "yazi",
+   "metin": "WELCOME TO",
+   "alt": "THE GALAXY CUP!",
+   "t": 5.5385,
+   "sure": 2.7692
+  },
+  {
+   "tip": "yazi",
+   "metin": "TWO PLAYERS.",
+   "alt": "ONE CROWN.",
+   "t": 8.3077,
+   "sure": 2.7692
+  },
+  {
+   "tip": "nasil",
+   "metin": "MATCH THE SHAPE",
+   "alt": "BEFORE THE WALL ARRIVES!",
+   "t": 11.0769,
+   "sure": 5.5385
+  },
+  {
+   "t": 16.6154,
+   "sure": 3.6923,
+   "tip": "tur",
+   "tur": 1,
+   "metin": "ROUND 1",
+   "alt": "LIFT OFF"
+  },
+  {
+   "t": 20.3077,
+   "sure": 3.6923,
+   "tip": "basla"
+  },
+  {
+   "t": 35.0769,
+   "sure": 3.6923,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "ROUND 2",
+   "alt": "ORBIT CLASH"
+  },
+  {
+   "t": 49.8461,
+   "sure": 3.6923,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "ROUND 3",
+   "alt": "FINAL STAR"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 24.0,
+   "p1": "cosmic-diagonal-line-long",
+   "p2": "cosmic-toe-tap-side-arms-up",
+   "ovgu": "STELLAR!"
+  },
+  {
+   "no": 8,
+   "tur": 2,
+   "t0": 38.7692,
+   "p1": "cosmic-half-moon-arms-wide",
+   "p2": "cosmic-triangle-reach-floor-sky",
+   "ovgu": "COSMIC!"
+  },
+  {
+   "no": 16,
+   "tur": 3,
+   "t0": 53.5384,
+   "p1": "cosmic-pigeon-upright-arms-up",
+   "p2": "cosmic-tabletop-leg-kick-back",
+   "ovgu": "SUPERNOVA!"
+  },
+  {
+   "no": 23,
+   "tur": 3,
+   "t0": 64.6153,
+   "p1": "cosmic-lizard-hands-floor",
+   "p2": "galaxy-drift-152",
+   "ovgu": "NAILED IT!"
+  }
+ ],
+ "abone": [
+  20.5,
+  45.0,
+  60.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "Stardust Crown.wav (Suno, kullanici, 24 Eki 2026) -> stardust-130-duz.wav",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne4.html.",
+ "tema": {
+  "varlik": "/03-motor/tetris-pvp/varlik-09/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-08/",
+  "p1": "#FF3EA5",
+  "p2": "#2E9BFF",
+  "altin": "#ffd94a",
+  "camgobegi": "#5ff2ff",
+  "p1koyu": "#b0136a",
+  "p2koyu": "#0b4fb0",
+  "p1acik": "#ffd9ee",
+  "p2acik": "#d6ecff",
+  "p1parlak": "#ffb8dd",
+  "p2parlak": "#b8dcff",
+  "vsSol": [
+   "#e0287f",
+   "#3a0420"
+  ],
+  "vsSag": [
+   "#1f6fe0",
+   "#04163f"
+  ],
+  "isin": [
+   "#9b5cff",
+   "#14063a"
+  ],
+  "wrapIsin": [
+   "#ff6ac8",
+   "#2a0638"
+  ],
+  "ovguRenk": [
+   "#ffffff",
+   "#ffc2ec",
+   "#5fd0ff"
+  ],
+  "parca": [
+   "#ff7ad8",
+   "#7fe7ff",
+   "#b48cff"
+  ],
+  "abone": [
+   "#7dffb4",
+   "#0c8a48"
+  ],
+  "vsAlt": "HUMAN TETRIS · 1 VS 1",
+  "fener": false,
+  "kuzeyIsigi": false,
+  "disko": true,
+  "fisek": false,
+  "oklar": false
+ }
+}

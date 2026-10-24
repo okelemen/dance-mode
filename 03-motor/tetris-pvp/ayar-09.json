@@ -1,0 +1,154 @@
+{
+ "_not": "HUMAN TETRIS 9. video (REF-060, Glow Motion 3 PLAYER BATTLE #3 'Two Losers, One Legend' -> kullanici karari 1v1, 24 Eki 2026). 5 dk denemesi video 4 (TALIMATLAR §20, §26). 3 tur 7/7/9 = 23 duvar, duvar 24 vurus. Muzik Stardust Crown (Suno, kullanici) 128,6->131,4 BPM kayiyordu -> stardust-130d.wav (muzik-sabitle.py --hedef 130 --dogrusal, govde 130,00-130,10) -> zayif kickli ilk 10 olcu ve 91-93 dususu kesildi (stardust-130-duz.wav). Metinler bizim (REF-060 kartlari birebir alinmadi). P1 pembe solda, P2 mavi sagda, mor ortak (kullanici).",
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-09",
+ "bpm": 130,
+ "muzik": "Stardust Crown.wav (Suno, kullanici, 24 Eki 2026) -> stardust-130-duz.wav",
+ "duvar": "duvar-listesi-09.json",
+ "duvar_vurus": 24,
+ "kart_vurus": {
+  "tur": 8,
+  "basla": 8,
+  "abone": 12
+ },
+ "giris_dizisi": [
+  {
+   "tip": "acilis",
+   "vurus": 12
+  },
+  {
+   "tip": "yazi",
+   "metin": "WELCOME TO",
+   "alt": "THE GALAXY CUP!",
+   "vurus": 6
+  },
+  {
+   "tip": "yazi",
+   "metin": "TWO PLAYERS.",
+   "alt": "ONE CROWN.",
+   "vurus": 6
+  },
+  {
+   "tip": "nasil",
+   "metin": "MATCH THE SHAPE",
+   "alt": "BEFORE THE WALL ARRIVES!",
+   "vurus": 12
+  }
+ ],
+ "tur_kart": {
+  "1": [
+   "ROUND 1",
+   "LIFT OFF"
+  ],
+  "2": [
+   "ROUND 2",
+   "ORBIT CLASH"
+  ],
+  "3": [
+   "ROUND 3",
+   "FINAL STAR"
+  ]
+ },
+ "gecis": {
+  "2": [
+   {
+    "tip": "yazi",
+    "metin": "STELLAR MOVES!",
+    "vurus": 6
+   },
+   {
+    "tip": "yazi",
+    "metin": "KEEP IT",
+    "alt": "SHINING!",
+    "vurus": 6
+   }
+  ],
+  "3": [
+   {
+    "tip": "yazi",
+    "metin": "OUT OF",
+    "alt": "THIS WORLD!",
+    "vurus": 6
+   },
+   {
+    "tip": "yazi",
+    "metin": "THE CROWN",
+    "alt": "IS CLOSE!",
+    "vurus": 6
+   }
+  ]
+ },
+ "kapanis": [
+  {
+   "tip": "yazi",
+   "metin": "GALAXY CUP",
+   "alt": "COMPLETE!",
+   "vurus": 6
+  },
+  {
+   "tip": "yazi",
+   "metin": "WHO WEARS",
+   "alt": "THE CROWN?",
+   "vurus": 6
+  }
+ ],
+ "ovgu": [
+  "STELLAR!",
+  "COSMIC!",
+  "PERFECT FIT!",
+  "SUPERNOVA!",
+  "NAILED IT!",
+  "STAR POWER!"
+ ],
+ "sayfa": "sahne4.html",
+ "tema": {
+  "varlik": "/03-motor/tetris-pvp/varlik-09/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-08/",
+  "p1": "#FF3EA5",
+  "p2": "#2E9BFF",
+  "altin": "#ffd94a",
+  "camgobegi": "#5ff2ff",
+  "p1koyu": "#b0136a",
+  "p2koyu": "#0b4fb0",
+  "p1acik": "#ffd9ee",
+  "p2acik": "#d6ecff",
+  "p1parlak": "#ffb8dd",
+  "p2parlak": "#b8dcff",
+  "vsSol": [
+   "#e0287f",
+   "#3a0420"
+  ],
+  "vsSag": [
+   "#1f6fe0",
+   "#04163f"
+  ],
+  "isin": [
+   "#9b5cff",
+   "#14063a"
+  ],
+  "wrapIsin": [
+   "#ff6ac8",
+   "#2a0638"
+  ],
+  "ovguRenk": [
+   "#ffffff",
+   "#ffc2ec",
+   "#5fd0ff"
+  ],
+  "parca": [
+   "#ff7ad8",
+   "#7fe7ff",
+   "#b48cff"
+  ],
+  "abone": [
+   "#7dffb4",
+   "#0c8a48"
+  ],
+  "vsAlt": "HUMAN TETRIS · 1 VS 1",
+  "fener": false,
+  "kuzeyIsigi": false,
+  "disko": true,
+  "fisek": false,
+  "oklar": false
+ }
+}

@@ -1,0 +1,375 @@
+{
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-09",
+ "bpm": 130.0,
+ "toplam_olcu": 167,
+ "toplam_duvar": 23,
+ "zaman": {
+  "kart": 1.8462,
+  "say": 2.7692,
+  "buyu": 5.5385,
+  "gec": 0.9231,
+  "sure": 11.0769
+ },
+ "kartlar": [
+  {
+   "tip": "acilis",
+   "t": 0.0,
+   "sure": 5.5385
+  },
+  {
+   "tip": "yazi",
+   "metin": "WELCOME TO",
+   "alt": "THE GALAXY CUP!",
+   "t": 5.5385,
+   "sure": 2.7692
+  },
+  {
+   "tip": "yazi",
+   "metin": "TWO PLAYERS.",
+   "alt": "ONE CROWN.",
+   "t": 8.3077,
+   "sure": 2.7692
+  },
+  {
+   "tip": "nasil",
+   "metin": "MATCH THE SHAPE",
+   "alt": "BEFORE THE WALL ARRIVES!",
+   "t": 11.0769,
+   "sure": 5.5385
+  },
+  {
+   "t": 16.6154,
+   "sure": 3.6923,
+   "tip": "tur",
+   "tur": 1,
+   "metin": "ROUND 1",
+   "alt": "LIFT OFF"
+  },
+  {
+   "t": 20.3077,
+   "sure": 3.6923,
+   "tip": "basla"
+  },
+  {
+   "tip": "yazi",
+   "metin": "STELLAR MOVES!",
+   "t": 101.5383,
+   "sure": 2.7692
+  },
+  {
+   "tip": "yazi",
+   "metin": "KEEP IT",
+   "alt": "SHINING!",
+   "t": 104.3075,
+   "sure": 2.7692
+  },
+  {
+   "t": 107.0768,
+   "sure": 3.6923,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "ROUND 2",
+   "alt": "ORBIT CLASH"
+  },
+  {
+   "tip": "yazi",
+   "metin": "OUT OF",
+   "alt": "THIS WORLD!",
+   "t": 188.3074,
+   "sure": 2.7692
+  },
+  {
+   "tip": "yazi",
+   "metin": "THE CROWN",
+   "alt": "IS CLOSE!",
+   "t": 191.0766,
+   "sure": 2.7692
+  },
+  {
+   "t": 193.8458,
+   "sure": 3.6923,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "ROUND 3",
+   "alt": "FINAL STAR"
+  },
+  {
+   "tip": "yazi",
+   "metin": "GALAXY CUP",
+   "alt": "COMPLETE!",
+   "t": 297.2302,
+   "sure": 2.7692
+  },
+  {
+   "tip": "yazi",
+   "metin": "WHO WEARS",
+   "alt": "THE CROWN?",
+   "t": 299.9995,
+   "sure": 2.7692
+  },
+  {
+   "t": 302.7687,
+   "sure": 5.5385,
+   "tip": "abone"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 24.0,
+   "p1": "cosmic-diagonal-line-long",
+   "p2": "cosmic-toe-tap-side-arms-up",
+   "ovgu": "STELLAR!"
+  },
+  {
+   "no": 2,
+   "tur": 1,
+   "t0": 35.0769,
+   "p1": "cosmic-half-moon-reach-tall",
+   "p2": "cosmic-side-lunge-arms-low-out",
+   "ovgu": "COSMIC!"
+  },
+  {
+   "no": 3,
+   "tur": 1,
+   "t0": 46.1538,
+   "p1": "cosmic-step-forward-reach-up",
+   "p2": "cosmic-wide-stance-arms-diagonal",
+   "ovgu": "PERFECT FIT!"
+  },
+  {
+   "no": 4,
+   "tur": 1,
+   "t0": 57.2307,
+   "p1": "cosmic-mountain-lean-forward-reach",
+   "p2": "cosmic-tree-hands-prayer-high",
+   "ovgu": "SUPERNOVA!"
+  },
+  {
+   "no": 5,
+   "tur": 1,
+   "t0": 68.3076,
+   "p1": "cosmic-star-reach-side-tilt",
+   "p2": "cosmic-standing-back-arch-arms-up",
+   "ovgu": "NAILED IT!"
+  },
+  {
+   "no": 6,
+   "tur": 1,
+   "t0": 79.3845,
+   "p1": "cosmic-orbit-arm-circle",
+   "p2": "cosmic-lean-side-arm-over-hip-hand",
+   "ovgu": "STAR POWER!"
+  },
+  {
+   "no": 7,
+   "tur": 1,
+   "t0": 90.4614,
+   "p1": "cosmic-crescent-moon-side-bend",
+   "p2": "cosmic-quarter-squat-arms-up",
+   "ovgu": "STELLAR!"
+  },
+  {
+   "no": 8,
+   "tur": 2,
+   "t0": 110.7691,
+   "p1": "cosmic-half-moon-arms-wide",
+   "p2": "cosmic-triangle-reach-floor-sky",
+   "ovgu": "COSMIC!"
+  },
+  {
+   "no": 9,
+   "tur": 2,
+   "t0": 121.846,
+   "p1": "cosmic-pyramid-fold-hands-floor",
+   "p2": "cosmic-reverse-warrior-lean",
+   "ovgu": "PERFECT FIT!"
+  },
+  {
+   "no": 10,
+   "tur": 2,
+   "t0": 132.9229,
+   "p1": "cosmic-wide-fold-hands-floor",
+   "p2": "cosmic-eagle-arms-knee-up",
+   "ovgu": "SUPERNOVA!"
+  },
+  {
+   "no": 11,
+   "tur": 2,
+   "t0": 143.9998,
+   "p1": "cosmic-extended-side-angle",
+   "p2": "cosmic-standing-leg-forward-hold",
+   "ovgu": "NAILED IT!"
+  },
+  {
+   "no": 12,
+   "tur": 2,
+   "t0": 155.0767,
+   "p1": "cosmic-warrior-one-arms-up",
+   "p2": "cosmic-airplane-arms-back",
+   "ovgu": "STAR POWER!"
+  },
+  {
+   "no": 13,
+   "tur": 2,
+   "t0": 166.1536,
+   "p1": "cosmic-revolved-lunge-arm-up",
+   "p2": "cosmic-side-kick-hold-arms-wide",
+   "ovgu": "STELLAR!"
+  },
+  {
+   "no": 14,
+   "tur": 2,
+   "t0": 177.2305,
+   "p1": "cosmic-dancer-reach-forward",
+   "p2": "cosmic-crescent-lunge-hands-prayer",
+   "ovgu": "COSMIC!"
+  },
+  {
+   "no": 15,
+   "tur": 3,
+   "t0": 197.5381,
+   "p1": "cosmic-seated-spinal-twist",
+   "p2": "cosmic-plank-knee-to-chest",
+   "ovgu": "PERFECT FIT!"
+  },
+  {
+   "no": 16,
+   "tur": 3,
+   "t0": 208.615,
+   "p1": "cosmic-pigeon-upright-arms-up",
+   "p2": "cosmic-tabletop-leg-kick-back",
+   "ovgu": "SUPERNOVA!"
+  },
+  {
+   "no": 17,
+   "tur": 3,
+   "t0": 219.6919,
+   "p1": "cosmic-seated-wide-arms-up",
+   "p2": "vortex-drift-129",
+   "ovgu": "NAILED IT!"
+  },
+  {
+   "no": 18,
+   "tur": 3,
+   "t0": 230.7688,
+   "p1": "cosmic-three-leg-down-dog",
+   "p2": "halo-drift-75",
+   "ovgu": "STAR POWER!"
+  },
+  {
+   "no": 19,
+   "tur": 3,
+   "t0": 241.8457,
+   "p1": "cosmic-boat-arms-forward",
+   "p2": "comet-drift-142",
+   "ovgu": "STELLAR!"
+  },
+  {
+   "no": 20,
+   "tur": 3,
+   "t0": 252.9226,
+   "p1": "cosmic-kneeling-lunge-back-reach",
+   "p2": "comet-drift-95",
+   "ovgu": "COSMIC!"
+  },
+  {
+   "no": 21,
+   "tur": 3,
+   "t0": 263.9995,
+   "p1": "cosmic-seated-leg-up-hand-shin",
+   "p2": "zenith-drift-92",
+   "ovgu": "PERFECT FIT!"
+  },
+  {
+   "no": 22,
+   "tur": 3,
+   "t0": 275.0764,
+   "p1": "cosmic-seated-forward-fold-toes",
+   "p2": "stardust-drift-124",
+   "ovgu": "SUPERNOVA!"
+  },
+  {
+   "no": 23,
+   "tur": 3,
+   "t0": 286.1533,
+   "p1": "cosmic-lizard-hands-floor",
+   "p2": "galaxy-drift-152",
+   "ovgu": "NAILED IT!"
+  }
+ ],
+ "abone": [
+  20.5,
+  45.0,
+  60.0,
+  75.0,
+  90.0,
+  111.0,
+  135.0,
+  150.0,
+  165.0,
+  180.0,
+  198.0,
+  210.0,
+  225.0,
+  240.0,
+  255.0,
+  270.0,
+  285.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "Stardust Crown.wav (Suno, kullanici, 24 Eki 2026) -> stardust-130-duz.wav",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne4.html.",
+ "tema": {
+  "varlik": "/03-motor/tetris-pvp/varlik-09/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-08/",
+  "p1": "#FF3EA5",
+  "p2": "#2E9BFF",
+  "altin": "#ffd94a",
+  "camgobegi": "#5ff2ff",
+  "p1koyu": "#b0136a",
+  "p2koyu": "#0b4fb0",
+  "p1acik": "#ffd9ee",
+  "p2acik": "#d6ecff",
+  "p1parlak": "#ffb8dd",
+  "p2parlak": "#b8dcff",
+  "vsSol": [
+   "#e0287f",
+   "#3a0420"
+  ],
+  "vsSag": [
+   "#1f6fe0",
+   "#04163f"
+  ],
+  "isin": [
+   "#9b5cff",
+   "#14063a"
+  ],
+  "wrapIsin": [
+   "#ff6ac8",
+   "#2a0638"
+  ],
+  "ovguRenk": [
+   "#ffffff",
+   "#ffc2ec",
+   "#5fd0ff"
+  ],
+  "parca": [
+   "#ff7ad8",
+   "#7fe7ff",
+   "#b48cff"
+  ],
+  "abone": [
+   "#7dffb4",
+   "#0c8a48"
+  ],
+  "vsAlt": "HUMAN TETRIS · 1 VS 1",
+  "fener": false,
+  "kuzeyIsigi": false,
+  "disko": true,
+  "fisek": false,
+  "oklar": false
+ }
+}
