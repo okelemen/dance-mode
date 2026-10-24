@@ -1,0 +1,973 @@
+{
+ "_not": "TETRIS MODE PVP 8. video (REF-059, 1v1, 5 dk; poz-sec-08.py olcumle secildi) poz tanimlari. Acilar EKRAN duzleminde (pozlar.js dili): 0 asagi, 90 ekran-sag, 180 yukari, -90 ekran-sol. Kollar [ust kol, on kol], bacaklar [uyluk, baldir]. sol*/sag* = KARAKTERIN solu/sagi; karakter kameraya donukken sol = ekran SAGI. yon: on (kameraya donuk) | sag (profil, yuzu ekran sagina). govde: kalcadan boyna aci, bas: govdeye ek aci. Mixamo govdesi (siluet-govde.fbx) bu acilarla bukulur, duz siyah maske cikar (varlik.py).",
+ "pozlar": {
+  "disco-back-lean-arms-open": {
+   "ad": "Disco Back Lean Arms Open",
+   "yon": "sag",
+   "govde": 195,
+   "bas": 0,
+   "solKol": [
+    150,
+    150
+   ],
+   "sagKol": [
+    -130,
+    -130
+   ],
+   "solBacak": [
+    10,
+    10
+   ],
+   "sagBacak": [
+    -10,
+    -10
+   ]
+  },
+  "disco-reach-forward-lunge": {
+   "ad": "Disco Reach Forward Lunge",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    120,
+    120
+   ],
+   "sagKol": [
+    118,
+    118
+   ],
+   "solBacak": [
+    75,
+    0
+   ],
+   "sagBacak": [
+    -35,
+    -35
+   ]
+  },
+  "disco-heel-kick-back-arms-swing": {
+   "ad": "Disco Heel Kick Back Arms Swing",
+   "yon": "sag",
+   "govde": 178,
+   "bas": 0,
+   "solKol": [
+    60,
+    60
+   ],
+   "sagKol": [
+    -50,
+    -50
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -5,
+    -150
+   ]
+  },
+  "disco-side-lunge-reach-over": {
+   "ad": "Disco Side Lunge Reach Over",
+   "yon": "on",
+   "govde": 195,
+   "bas": 0,
+   "sagKol": [
+    -165,
+    -160
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -12,
+    6
+   ],
+   "solBacak": [
+    45,
+    45
+   ]
+  },
+  "disco-runner-arms-swing": {
+   "ad": "Disco Runner Arms Swing",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solBacak": [
+    70,
+    -20
+   ],
+   "sagBacak": [
+    -30,
+    -60
+   ]
+  },
+  "disco-saturday-point": {
+   "ad": "Disco Saturday Point",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    12,
+    -6
+   ]
+  },
+  "disco-point-diagonal-hip-pop": {
+   "ad": "Disco Point Diagonal Hip Pop",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -12,
+    6
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "disco-hip-bump-arms-up": {
+   "ad": "Disco Hip Bump Arms Up",
+   "yon": "on",
+   "govde": 168,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -12,
+    6
+   ],
+   "solBacak": [
+    30,
+    30
+   ]
+  },
+  "disco-wide-lean-arms-over-right": {
+   "ad": "Disco Wide Lean Arms Over Right",
+   "yon": "on",
+   "govde": 158,
+   "bas": 0,
+   "sagKol": [
+    150,
+    140
+   ],
+   "solKol": [
+    148,
+    138
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ]
+  },
+  "disco-lasso-overhead": {
+   "ad": "Disco Lasso Overhead",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -60
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    12,
+    -6
+   ]
+  },
+  "disco-warrior-lean-arms-forward": {
+   "ad": "Disco Warrior Lean Arms Forward",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    98,
+    98
+   ],
+   "solBacak": [
+    60,
+    0
+   ],
+   "sagBacak": [
+    -35,
+    -35
+   ]
+  },
+  "disco-side-leg-lift-arms-up": {
+   "ad": "Disco Side Leg Lift Arms Up",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    70,
+    70
+   ]
+  },
+  "disco-deep-lunge-arms-back-up": {
+   "ad": "Disco Deep Lunge Arms Back Up",
+   "yon": "sag",
+   "govde": 150,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -150
+   ],
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solBacak": [
+    95,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -60
+   ]
+  },
+  "disco-half-lever-one-arm": {
+   "ad": "Disco Half Lever One Arm",
+   "yon": "sag",
+   "govde": 120,
+   "bas": 0,
+   "solKol": [
+    130,
+    130
+   ],
+   "sagKol": [
+    -20,
+    -20
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -60
+   ]
+  },
+  "disco-long-lunge-arms-forward-back": {
+   "ad": "Disco Long Lunge Arms Forward Back",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    -80,
+    -80
+   ],
+   "solBacak": [
+    85,
+    0
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ]
+  },
+  "disco-kick-forward-arms-back": {
+   "ad": "Disco Kick Forward Arms Back",
+   "yon": "sag",
+   "govde": 170,
+   "bas": 0,
+   "solKol": [
+    -50,
+    -50
+   ],
+   "sagKol": [
+    -48,
+    -48
+   ],
+   "solBacak": [
+    80,
+    80
+   ],
+   "sagBacak": [
+    0,
+    0
+   ]
+  },
+  "disco-runner-lunge-hands-low": {
+   "ad": "Disco Runner Lunge Hands Low",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    20,
+    20
+   ],
+   "sagKol": [
+    18,
+    18
+   ],
+   "solBacak": [
+    100,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -60
+   ]
+  },
+  "disco-star-tilt-one-leg": {
+   "ad": "Disco Star Tilt One Leg",
+   "yon": "on",
+   "govde": 160,
+   "bas": 0,
+   "sagKol": [
+    -120,
+    -120
+   ],
+   "solKol": [
+    120,
+    120
+   ],
+   "sagBacak": [
+    -5,
+    -5
+   ],
+   "solBacak": [
+    50,
+    50
+   ]
+  },
+  "disco-knee-lift-arms-back-wings": {
+   "ad": "Disco Knee Lift Arms Back Wings",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    -100,
+    -100
+   ],
+   "sagKol": [
+    -98,
+    -98
+   ],
+   "solBacak": [
+    95,
+    -20
+   ],
+   "sagBacak": [
+    0,
+    0
+   ]
+  },
+  "disco-chair-arms-up": {
+   "ad": "Disco Chair Arms Up",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    170,
+    170
+   ],
+   "sagKol": [
+    168,
+    168
+   ],
+   "solBacak": [
+    70,
+    -10
+   ],
+   "sagBacak": [
+    68,
+    -12
+   ]
+  },
+  "disco-goddess-twist-elbows": {
+   "ad": "Disco Goddess Twist Elbows",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ]
+  },
+  "disco-goddess-arms-crown": {
+   "ad": "Disco Goddess Arms Crown",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    120
+   ],
+   "solKol": [
+    150,
+    -120
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ]
+  },
+  "disco-tree-arms-low-v": {
+   "ad": "Disco Tree Arms Low V",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ]
+  },
+  "mirrorball-flow-62": {
+   "ad": "Mirrorball Flow 62",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 0,
+   "solKol": [
+    -90,
+    -92
+   ],
+   "sagKol": [
+    45,
+    43
+   ],
+   "solBacak": [
+    70,
+    0
+   ],
+   "sagBacak": [
+    0,
+    0
+   ]
+  },
+  "disco-seated-one-leg-hold-up": {
+   "ad": "Disco Seated One Leg Hold Up",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    150,
+    150
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    160,
+    160
+   ],
+   "sagBacak": [
+    90,
+    90
+   ]
+  },
+  "disco-down-dog": {
+   "ad": "Disco Down Dog",
+   "yon": "sag",
+   "govde": 40,
+   "bas": 0,
+   "solKol": [
+    35,
+    35
+   ],
+   "sagKol": [
+    33,
+    33
+   ],
+   "solBacak": [
+    -30,
+    -30
+   ],
+   "sagBacak": [
+    -32,
+    -32
+   ]
+  },
+  "disco-kneel-leg-forward-fold": {
+   "ad": "Disco Kneel Leg Forward Fold",
+   "yon": "sag",
+   "govde": 120,
+   "bas": 0,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    98,
+    98
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "disco-crescent-kneel-back-arch": {
+   "ad": "Disco Crescent Kneel Back Arch",
+   "yon": "sag",
+   "govde": 210,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -150
+   ],
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solBacak": [
+    95,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "disco-seated-twist-arm-back": {
+   "ad": "Disco Seated Twist Arm Back",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    60,
+    60
+   ],
+   "sagKol": [
+    -120,
+    -120
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    88,
+    88
+   ]
+  },
+  "disco-seated-boat-arms-up": {
+   "ad": "Disco Seated Boat Arms Up",
+   "yon": "sag",
+   "govde": 205,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    176,
+    176
+   ],
+   "solBacak": [
+    130,
+    130
+   ],
+   "sagBacak": [
+    128,
+    128
+   ]
+  },
+  "disco-kneel-hands-floor-leg-back-up": {
+   "ad": "Disco Kneel Hands Floor Leg Back Up",
+   "yon": "sag",
+   "govde": 100,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -110,
+    -160
+   ]
+  },
+  "disco-cobra-arms-straight": {
+   "ad": "Disco Cobra Arms Straight",
+   "yon": "sag",
+   "govde": 140,
+   "bas": 0,
+   "solKol": [
+    5,
+    5
+   ],
+   "sagKol": [
+    3,
+    3
+   ],
+   "solBacak": [
+    -90,
+    -90
+   ],
+   "sagBacak": [
+    -88,
+    -88
+   ]
+  },
+  "disco-standing-bow-low-reach": {
+   "ad": "Disco Standing Bow Low Reach",
+   "yon": "sag",
+   "govde": 100,
+   "bas": 0,
+   "solKol": [
+    80,
+    80
+   ],
+   "sagKol": [
+    -140,
+    -170
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -80,
+    -170
+   ]
+  },
+  "disco-side-leg-hold-high": {
+   "ad": "Disco Side Leg Hold High",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    100,
+    100
+   ]
+  },
+  "disco-bow-pull-tall": {
+   "ad": "Disco Bow Pull Tall",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    110,
+    110
+   ],
+   "sagKol": [
+    -150,
+    -170
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -100,
+    -170
+   ]
+  },
+  "disco-low-lunge-hands-floor-back-arm-up": {
+   "ad": "Disco Low Lunge Hands Floor Back Arm Up",
+   "yon": "sag",
+   "govde": 120,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    -150,
+    -150
+   ],
+   "solBacak": [
+    100,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -60
+   ]
+  },
+  "disco-arabesque-low-arms-forward": {
+   "ad": "Disco Arabesque Low Arms Forward",
+   "yon": "sag",
+   "govde": 120,
+   "bas": 0,
+   "solKol": [
+    110,
+    110
+   ],
+   "sagKol": [
+    108,
+    108
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -60
+   ]
+  },
+  "disco-dancer-arms-up-leg-back": {
+   "ad": "Disco Dancer Arms Up Leg Back",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    176,
+    176
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -40,
+    -150
+   ]
+  },
+  "disco-lunge-arms-back-clasp-fold": {
+   "ad": "Disco Lunge Arms Back Clasp Fold",
+   "yon": "sag",
+   "govde": 120,
+   "bas": 0,
+   "solKol": [
+    -130,
+    -130
+   ],
+   "sagKol": [
+    -128,
+    -128
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    -50,
+    -50
+   ]
+  },
+  "disco-pyramid-arms-up": {
+   "ad": "Disco Pyramid Arms Up",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    175,
+    175
+   ],
+   "sagKol": [
+    173,
+    173
+   ],
+   "solBacak": [
+    25,
+    25
+   ],
+   "sagBacak": [
+    -25,
+    -25
+   ]
+  },
+  "disco-high-kick-leg-hold": {
+   "ad": "Disco High Kick Leg Hold",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    150,
+    150
+   ],
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solBacak": [
+    130,
+    130
+   ],
+   "sagBacak": [
+    0,
+    0
+   ]
+  },
+  "disco-lunge-arms-up-back-heel-up": {
+   "ad": "Disco Lunge Arms Up Back Heel Up",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    170,
+    170
+   ],
+   "sagKol": [
+    168,
+    168
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -160
+   ]
+  },
+  "disco-front-lunge-twist-arms-wide": {
+   "ad": "Disco Front Lunge Twist Arms Wide",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    -50,
+    -50
+   ]
+  },
+  "disco-leg-back-hand-ankle-tall": {
+   "ad": "Disco Leg Back Hand Ankle Tall",
+   "yon": "sag",
+   "govde": 170,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    -120,
+    -160
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -30,
+    -150
+   ]
+  }
+ }
+}

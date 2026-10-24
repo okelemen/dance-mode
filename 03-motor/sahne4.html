@@ -59,6 +59,11 @@ const font = new FontFace('Titan', 'url(/05-kapak/fontlar/TitanOne.ttf)');
 document.fonts.add(await font.load());
 const [GOK, SERIT1, SERIT2, PANEL1, PANEL2] = await Promise.all(
   ['gok.png', 'serit-p1.png', 'serit-p2.png', 'panel-p1.png', 'panel-p2.png'].map(a => resim(VARLIK + a)));
+// 8. video (REF-059): duvar paneli tura göre değişir (tema.panelTur: {"3": "panel2", "4": "panel2"} -> panel2-p1/p2.png)
+const PANEL_TUR = {};
+for (const [tr, ad] of Object.entries(TEMA.panelTur || {}))
+  PANEL_TUR[tr] = await Promise.all(['p1', 'p2'].map(o => resim(VARLIK + ad + '-' + o + '.png')));
+let AKTIF_TUR = 1;
 // 6. video açılış boksörleri (boksor.py, Blender/Actions): yalnız bölümde 'acilis' kartı varsa yüklenir
 const BOKSOR = { p1: { gard: [], jab: [] }, p2: { gard: [], jab: [] } };
 if (KARTLAR.some(kk => kk.tip === 'acilis')) {
@@ -122,7 +127,7 @@ function sahneCiz(t) {
   gokHareket(t);
   cx.drawImage(SERIT1, 0, 0, W / 2, H);
   cx.drawImage(SERIT2, W / 2, 0, W / 2, H);
-  for (let i = 0; i < 2; i++) { yolOklari(t, i); ampulCiz(t, i); }
+  for (let i = 0; i < 2; i++) { if (TEMA.oklar !== false) yolOklari(t, i); ampulCiz(t, i); }
 }
 
 // ------------------------------------------------------------ GÖKTE HAREKET (kullanıcı 17 Eki: "arkada boş durmasın ... görsel şölen")
@@ -170,6 +175,27 @@ function gokHareket(t) {
     cx.fillStyle = `rgba(255,214,140,${0.9 * a})`;
     cx.beginPath(); cx.roundRect(x - s * 0.42, y - s * 0.6, s * 0.84, s * 1.1, s * 0.25); cx.fill();
   }
+  // 8. video (REF-059): disko topundan saçılan, gökte dönerek gezen ışık benekleri + topun üstünde çakan parıltı
+  if (TEMA.disko) {
+    const DR = rng(59);
+    for (let j = 0; j < 90; j++) {
+      const r0 = (0.12 + 0.55 * DR()) * W, a0 = DR() * 6.283, hz = 0.10 + 0.06 * DR(), b = 0.5 + DR();
+      const a = a0 + t * hz, x = W / 2 + Math.cos(a) * r0, y = H * 0.42 + Math.sin(a) * r0 * 0.45;
+      if (y > H * 0.62) continue;
+      const renk = [P1, P2, '#ffffff', '#c9a6ff'][j % 4], rr = (5 + 7 * b) * k;
+      const g = cx.createRadialGradient(x, y, 0, x, y, rr * 2.2);
+      g.addColorStop(0, hex(renk, 0.55)); g.addColorStop(1, hex(renk, 0));
+      cx.fillStyle = g; cx.beginPath(); cx.arc(x, y, rr * 2.2, 0, 6.283); cx.fill();
+    }
+    for (let j = 0; j < 5; j++) {
+      const u = (t * 0.9 + j * 0.37) % 1.6; if (u > 0.5) continue;
+      const r = rng(900 + j * 13 + Math.floor((t * 0.9 + j * 0.37) / 1.6)), q = Math.sin(u / 0.5 * Math.PI);
+      const x = W / 2 + (r() - 0.5) * 300 * k, y = H * 0.40 + (r() - 0.5) * 260 * k, L = (30 + 40 * r()) * k * q;
+      cx.strokeStyle = `rgba(255,255,255,${0.95 * q})`; cx.lineWidth = 3 * k;
+      cx.beginPath(); cx.moveTo(x - L, y); cx.lineTo(x + L, y); cx.moveTo(x, y - L); cx.lineTo(x, y + L); cx.stroke();
+    }
+  }
+  if (TEMA.fisek === false) { cx.restore(); return; }
   // havai fişek: her FISEK_ARALIK sn'de bir patlama, 1,8 sn yaşar
   const nf = Math.floor(t / FISEK_ARALIK);
   for (let j = nf - 1; j <= nf; j++) {
@@ -259,7 +285,7 @@ function buyukKutu(i) {
 function duvarCiz(i, kutu, maske, alfa) {
   if (alfa <= 0) return;
   const { x, y, w, h } = kutu;
-  const panel = i === 0 ? PANEL1 : PANEL2;
+  const panel = PANEL_TUR[AKTIF_TUR] ? PANEL_TUR[AKTIF_TUR][i] : (i === 0 ? PANEL1 : PANEL2);
   cx.save(); cx.beginPath(); cx.rect(i * W / 2, 0, W / 2, H); cx.clip();
   try { duvarIc(i, x, y, w, h, panel, maske, alfa); } finally { cx.restore(); }
 }
@@ -719,6 +745,7 @@ function turBul(t) {
 
 function kareKur(n) {
   const t = n / FPS;
+  AKTIF_TUR = turBul(t);
   sahneCiz(t);
   const d = DUVARLAR.find(x => t >= x.t0 && t < x.t0 + Z.sure);
   let e = null;

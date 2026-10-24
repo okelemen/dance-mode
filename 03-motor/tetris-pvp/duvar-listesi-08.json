@@ -1,0 +1,112 @@
+[
+ {
+  "tur": 1,
+  "p1": "disco-back-lean-arms-open",
+  "p2": "disco-saturday-point"
+ },
+ {
+  "tur": 1,
+  "p1": "disco-reach-forward-lunge",
+  "p2": "disco-point-diagonal-hip-pop"
+ },
+ {
+  "tur": 1,
+  "p1": "disco-heel-kick-back-arms-swing",
+  "p2": "disco-hip-bump-arms-up"
+ },
+ {
+  "tur": 1,
+  "p1": "disco-side-lunge-reach-over",
+  "p2": "disco-wide-lean-arms-over-right"
+ },
+ {
+  "tur": 1,
+  "p1": "disco-runner-arms-swing",
+  "p2": "disco-lasso-overhead"
+ },
+ {
+  "tur": 2,
+  "p1": "disco-warrior-lean-arms-forward",
+  "p2": "disco-star-tilt-one-leg"
+ },
+ {
+  "tur": 2,
+  "p1": "disco-side-leg-lift-arms-up",
+  "p2": "disco-knee-lift-arms-back-wings"
+ },
+ {
+  "tur": 2,
+  "p1": "disco-deep-lunge-arms-back-up",
+  "p2": "disco-chair-arms-up"
+ },
+ {
+  "tur": 2,
+  "p1": "disco-half-lever-one-arm",
+  "p2": "disco-goddess-twist-elbows"
+ },
+ {
+  "tur": 2,
+  "p1": "disco-long-lunge-arms-forward-back",
+  "p2": "disco-goddess-arms-crown"
+ },
+ {
+  "tur": 2,
+  "p1": "disco-kick-forward-arms-back",
+  "p2": "disco-tree-arms-low-v"
+ },
+ {
+  "tur": 2,
+  "p1": "disco-runner-lunge-hands-low",
+  "p2": "mirrorball-flow-62"
+ },
+ {
+  "tur": 3,
+  "p1": "disco-seated-one-leg-hold-up",
+  "p2": "disco-seated-twist-arm-back"
+ },
+ {
+  "tur": 3,
+  "p1": "disco-down-dog",
+  "p2": "disco-seated-boat-arms-up"
+ },
+ {
+  "tur": 3,
+  "p1": "disco-kneel-leg-forward-fold",
+  "p2": "disco-kneel-hands-floor-leg-back-up"
+ },
+ {
+  "tur": 3,
+  "p1": "disco-crescent-kneel-back-arch",
+  "p2": "disco-cobra-arms-straight"
+ },
+ {
+  "tur": 4,
+  "p1": "disco-standing-bow-low-reach",
+  "p2": "disco-lunge-arms-back-clasp-fold"
+ },
+ {
+  "tur": 4,
+  "p1": "disco-side-leg-hold-high",
+  "p2": "disco-pyramid-arms-up"
+ },
+ {
+  "tur": 4,
+  "p1": "disco-bow-pull-tall",
+  "p2": "disco-high-kick-leg-hold"
+ },
+ {
+  "tur": 4,
+  "p1": "disco-low-lunge-hands-floor-back-arm-up",
+  "p2": "disco-lunge-arms-up-back-heel-up"
+ },
+ {
+  "tur": 4,
+  "p1": "disco-arabesque-low-arms-forward",
+  "p2": "disco-front-lunge-twist-arms-wide"
+ },
+ {
+  "tur": 4,
+  "p1": "disco-dancer-arms-up-leg-back",
+  "p2": "disco-leg-back-hand-ankle-tall"
+ }
+]
