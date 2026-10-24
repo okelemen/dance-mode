@@ -19,6 +19,10 @@ Ciktilar (sahne4.html 2B'de birlestirir, kamera sabit):
 """
 
 YERLESIM.clear()
+# --yalniz kapak (24 Eki, kullanici: kapak "soluk", sonra 2B boyama "arka taraftaki estetik yapi kayboldu"): kapak arka plani
+# Blender'da DOYGUN kurulur - pelus ve karo oyuncu renginin kendisi (pastel degil), kamera biraz geride (cerceve tum gorunur)
+KAPAK = YALNIZ == "kapak"
+ON = "kapak-" if KAPAK else ""
 
 
 def mat_tuy(ad, renk, acik_m=0.45):
@@ -190,11 +194,11 @@ def mat_karo(R):
     br.inputs["Scale"].default_value = 1.0; br.inputs["Mortar Size"].default_value = 0.025
     br.inputs["Brick Width"].default_value = 0.42; br.inputs["Row Height"].default_value = 0.42
     br.inputs["Bias"].default_value = 0.0
-    br.inputs["Color1"].default_value = (*R, 1); br.inputs["Color2"].default_value = (*acik(R, 0.65), 1)
+    br.inputs["Color1"].default_value = (*R, 1); br.inputs["Color2"].default_value = (*(koyu(R, 0.35) if KAPAK else acik(R, 0.65)), 1)
     br.inputs["Mortar"].default_value = (*koyu(R, 0.2), 1)
     nt.links.new(tc.outputs["Object"], br.inputs["Vector"])
     nt.links.new(br.outputs["Color"], b.inputs["Base Color"])
-    nt.links.new(br.outputs["Color"], b.inputs["Emission Color"]); b.inputs["Emission Strength"].default_value = 0.9
+    nt.links.new(br.outputs["Color"], b.inputs["Emission Color"]); b.inputs["Emission Strength"].default_value = 1.4 if KAPAK else 0.9
     b.inputs["Roughness"].default_value = 0.22; b.inputs["Metallic"].default_value = 0.1      # deneme 2: neon yansimasi zeminde uzun cizgi
     b.inputs["Coat Weight"].default_value = 0.35; b.inputs["Coat Roughness"].default_value = 0.12
     return m
@@ -203,9 +207,9 @@ def mat_karo(R):
 def serit_disko(oyuncu):
     sc = bos_sahne(w=960, h=1080, saydam=True)
     R = lin(hex3(RENK[oyuncu]))
-    tuy = mat_tuy("tuy", R)
+    tuy = mat_tuy("tuy", koyu(R, 0.1) if KAPAK else R, acik_m=0.3 if KAPAK else 0.45)
     tuy_acik = mat_tuy("tuy_acik", acik(R, 0.25), acik_m=0.6)
-    tuy_cerceve = mat_tuy("tuy_cerceve", acik(R, 0.18), acik_m=0.55)     # REF-059 cerceve: acik pembe/mavi, uclari beyazimsi
+    tuy_cerceve = mat_tuy("tuy_cerceve", R if KAPAK else acik(R, 0.18), acik_m=0.35 if KAPAK else 0.55)     # REF-059 cerceve: acik pembe/mavi, uclari beyazimsi
     neon = mat_emis("neon", acik(R, 0.45), 10.0)
     Y = KAPI["y"]
     W, H = KAPI["w"], KAPI["h"]
@@ -265,18 +269,18 @@ def serit_disko(oyuncu):
     isik("AREA", (4, 3, 3), 260, lin(hex3("#c9a6ff")), 3, yon=(0, Y, 2))
     isik("AREA", (0, Y + 3, 6), 500, acik(R, 0.1), 5, yon=(0, Y, 1))
     rx = math.radians(90 - KAM["egim"])
-    bpy.ops.object.camera_add(location=(0, 0, KAM["z"]), rotation=(rx, 0, 0))
+    bpy.ops.object.camera_add(location=(0, -1.6 if KAPAK else 0, KAM["z"] + (0.35 if KAPAK else 0)), rotation=(rx, 0, 0))
     kam = bpy.context.active_object; sc.camera = kam
     kam.data.sensor_fit = "VERTICAL"; kam.data.sensor_height = KAM["sensor"]; kam.data.lens = KAM["lens"]
     noktalar = [Vector((-ic, Y, 0)), Vector((ic, Y, 0)), Vector((-ic, Y, H)), Vector((ic, Y, H))]
     bpy.context.view_layer.update()
     px = [world_to_camera_view(sc, kam, p) for p in noktalar]
     xs = [p.x * 960 for p in px]; ys = [(1 - p.y) * 1080 for p in px]
-    YERLESIM["aciklik_" + oyuncu] = [round(min(xs), 1), round(min(ys), 1), round(max(xs), 1), round(max(ys), 1)]
-    YERLESIM["ampul_" + oyuncu] = [[round(p.x * 960, 1), round((1 - p.y) * 1080, 1)] for p in (world_to_camera_view(sc, kam, q) for q in AMPUL)]
-    log("aciklik", oyuncu, YERLESIM["aciklik_" + oyuncu])
+    YERLESIM[ON + "aciklik_" + oyuncu] = [round(min(xs), 1), round(min(ys), 1), round(max(xs), 1), round(max(ys), 1)]
+    YERLESIM[ON + "ampul_" + oyuncu] = [[round(p.x * 960, 1), round((1 - p.y) * 1080, 1)] for p in (world_to_camera_view(sc, kam, q) for q in AMPUL)]
+    log("aciklik", oyuncu, YERLESIM[ON + "aciklik_" + oyuncu])
     log("chevron px", [[round(q.x * 960), round((1 - q.y) * 1080)] for q in (world_to_camera_view(sc, kam, c) for c in CHEV)])
-    yaz(sc, "serit-%s.png" % oyuncu)
+    yaz(sc, ON + "serit-%s.png" % oyuncu)
 
 
 # ------------------------------------------------------------------ PANEL: yildizli isin girdabi / spot isikli sahne
@@ -404,7 +408,7 @@ if YALNIZ in ("hepsi", "poz"):
     poz_maskeleri()
 if YALNIZ in ("hepsi", "sahne", "gok"):
     gok_disko()
-if YALNIZ in ("hepsi", "sahne", "serit"):
+if YALNIZ in ("hepsi", "sahne", "serit", "kapak"):
     for o_ in ("p1", "p2"):
         serit_disko(o_)
 if YALNIZ in ("hepsi", "sahne", "panel"):
