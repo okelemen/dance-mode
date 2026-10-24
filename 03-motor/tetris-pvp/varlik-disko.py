@@ -195,8 +195,8 @@ def mat_karo(R):
     nt.links.new(tc.outputs["Object"], br.inputs["Vector"])
     nt.links.new(br.outputs["Color"], b.inputs["Base Color"])
     nt.links.new(br.outputs["Color"], b.inputs["Emission Color"]); b.inputs["Emission Strength"].default_value = 0.9
-    b.inputs["Roughness"].default_value = 0.06; b.inputs["Metallic"].default_value = 0.2
-    b.inputs["Coat Weight"].default_value = 1.0; b.inputs["Coat Roughness"].default_value = 0.02
+    b.inputs["Roughness"].default_value = 0.22; b.inputs["Metallic"].default_value = 0.1      # deneme 2: neon yansimasi zeminde uzun cizgi
+    b.inputs["Coat Weight"].default_value = 0.35; b.inputs["Coat Roughness"].default_value = 0.12
     return m
 
 
@@ -214,17 +214,21 @@ def serit_disko(oyuncu):
     bpy.ops.mesh.primitive_plane_add(size=1, location=(0, (Y + 3) / 2 - 0.5, 0))
     z = bpy.context.active_object; z.scale = (11.0, Y + 4, 1); bpy.ops.object.transform_apply(scale=True)
     z.data.materials.append(mat_karo(R))
-    # pelus chevron'lar: kameraya bakan V (ucu kameraya), yol boyunca
-    for j, yy in enumerate((1.6, 4.3, 7.0)):
-        if yy > Y - 1.0:
-            continue
+    # pelus chevron'lar: kameraya bakan V (ucu kameraya), yol boyunca. Deneme 2: 1,6 m'deki kadraj altinda kaldi (kamera
+    # zemini ~3,2 m'den gorur), 4,3'teki zeminle ayni tonda kayboldu -> gorunur mesafede, daha buyuk, beyazimsi + altinda neon
+    tuy_chev = mat_tuy("tuy_chev", acik(R, 0.55), acik_m=0.8)
+    CHEV = []
+    for yy in (3.7, 5.9):
         for s in (-1, 1):
-            o = yuvarlak_kutu("chev", (s * 0.75, yy + 0.38, 0.12), (1.8, 0.42, 0.22), tuy_acik, egim=0.1)
-            o.rotation_euler = (0, 0, -s * math.radians(28))
+            o = yuvarlak_kutu("chev", (s * 0.95, yy + 0.5, 0.17), (2.3, 0.5, 0.32), tuy_chev, egim=0.13)
+            o.rotation_euler = (0, 0, -s * math.radians(26))
             bpy.context.view_layer.update(); bpy.ops.object.select_all(action="DESELECT")
             o.select_set(True); bpy.context.view_layer.objects.active = o
             bpy.ops.object.transform_apply(rotation=True)
-            tuylu(o, tuy_acik, yogun=2600, boy=0.09)
+            tuylu(o, tuy_chev, yogun=2600, boy=0.09)
+            CHEV.append(Vector((s * 0.95, yy + 0.5, 0.17)))
+        boru((-1.9, yy + 0.95, 0.03), (0, yy - 0.05, 0.03), 0.035, neon)
+        boru((0, yy - 0.05, 0.03), (1.9, yy + 0.95, 0.03), 0.035, neon)
     # pelus korkuluk: iki yanda tuylu babalar + tuylu tirabzan
     for s in (-1, 1):
         ys = [0.9 + i * 1.35 for i in range(int((Y - 1.4) / 1.35) + 1)]
@@ -271,6 +275,7 @@ def serit_disko(oyuncu):
     YERLESIM["aciklik_" + oyuncu] = [round(min(xs), 1), round(min(ys), 1), round(max(xs), 1), round(max(ys), 1)]
     YERLESIM["ampul_" + oyuncu] = [[round(p.x * 960, 1), round((1 - p.y) * 1080, 1)] for p in (world_to_camera_view(sc, kam, q) for q in AMPUL)]
     log("aciklik", oyuncu, YERLESIM["aciklik_" + oyuncu])
+    log("chevron px", [[round(q.x * 960), round((1 - q.y) * 1080)] for q in (world_to_camera_view(sc, kam, c) for c in CHEV)])
     yaz(sc, "serit-%s.png" % oyuncu)
 
 
