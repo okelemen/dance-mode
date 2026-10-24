@@ -24,7 +24,7 @@ p.add_argument("--baslik", default="TETRIS MODE")
 p.add_argument("--boy1", type=float, default=540); p.add_argument("--boy2", type=float, default=540)
 p.add_argument("--gen1", type=float, default=600); p.add_argument("--gen2", type=float, default=600)
 p.add_argument("--cikti", required=True)
-p.add_argument("--ton", type=float, default=0.75); p.add_argument("--renk", type=float, default=1.8); p.add_argument("--parlak", type=float, default=1.05)
+p.add_argument("--ton", type=float, default=0.0); p.add_argument("--renk", type=float, default=1.12); p.add_argument("--parlak", type=float, default=0.95)
 a = p.parse_args()
 TON_GUC, RENK_GUC, PARLAK = a.ton, a.renk, a.parlak
 T3 = a.tema == "03"
@@ -38,18 +38,21 @@ yfont = lambda boy: ImageFont.truetype(FONT, boy)
 
 # ---------------------------------------------------------------- arka plan: videonun sahnesi
 im = Image.open(os.path.join(V, "gok.png")).convert("RGBA").resize((W, H), Image.LANCZOS)
-for i, ad in enumerate(("serit-p1.png", "serit-p2.png")):
+KS = T8 and os.path.exists(os.path.join(V, "kapak-serit-p1.png"))   # 8. video: Blender'da kapaga ozel doygun seritler
+for i, ad in enumerate(("kapak-serit-p1.png", "kapak-serit-p2.png") if KS else ("serit-p1.png", "serit-p2.png")):
     s = Image.open(os.path.join(V, ad)).convert("RGBA").resize((W // 2, H), Image.LANCZOS)
     im.alpha_composite(s, (i * W // 2, 0))
 import json
-Y = json.load(open(os.path.join(V, "yerlesim.json"), encoding="utf-8"))
+Y = json.load(open(os.path.join(V, "kapak-yerlesim.json" if KS else "yerlesim.json"), encoding="utf-8"))
+if KS:
+    Y = {k.replace("kapak-", ""): v for k, v in Y.items()}
 for i, (ad, ac) in enumerate(((("panel2-p1.png" if T8 else "panel-p1.png"), Y["aciklik_p1"]), (("panel2-p2.png" if T8 else "panel-p2.png"), Y["aciklik_p2"]))):
     sx = (W / 2) / 960; sy = H / 1080
     x0, y0, x1, y1 = ac[0] * sx + i * W / 2, ac[1] * sy, ac[2] * sx + i * W / 2, ac[3] * sy
     pw = x1 - x0; ph = pw / (1100 / 904)
     pn = Image.open(os.path.join(V, ad)).convert("RGBA").resize((int(pw), int(ph)), Image.LANCZOS)
     if T4:   # REF-055 kapaginda girdap panel kapida net ve renkli; bizim panelin beyaz merkezi kapakta sis gibi duruyordu (deneme 2)
-        al = pn.getchannel("A").point(lambda v: int(v * 0.85))
+        al = pn.getchannel("A").point(lambda v: int(v * (0.7 if KS else 0.85)))   # 8. video: tunel isiklari kapidan sizsin
         pn = ImageEnhance.Brightness(ImageEnhance.Color(pn.convert("RGB")).enhance(1.9)).enhance(1.0 if T6 else 0.82).convert("RGBA")
         pn.putalpha(al)
     elif T3:   # REF-054 kapaginda kapi icinden isin patlamasi + arkadaki gok goruluyor: panel yari saydam
@@ -69,7 +72,7 @@ if T8:
     # deneme 1 olcumu (REF-059 / biz): doygunluk 0,66 / 0,41, beyaz 0,07 / 0,26, ayrinti 0,29 / 0,16 -> kapilar kadraji
     # doldursun diye 1,3x yakinlas (REF-059'da pelus kapilar ustten alta kadar), pastel karo zemin koyulastir + doygunlastir
     # deneme 2: 1,3x yakinlasma panel sahnesini tum kadraja yaydi, pelus cerceve + disko topu kadrajdan cikti -> 1,08
-    z_ = 1.08; zw, zh = int(W / z_), int(H / z_); x_ = (W - zw) // 2; y_ = (H - zh) // 3
+    z_ = 1.0 if KS else 1.08; zw, zh = int(W / z_), int(H / z_); x_ = (W - zw) // 2; y_ = (H - zh) // 3
     im = im.crop((x_, max(0, y_), x_ + zw, max(0, y_) + zh)).resize((W, H), Image.LANCZOS)
     # deneme 3 (kullanici 24 Eki: "renkler o kadar soluk ... canlandir ... dag kadar fark var"): pastel/beyaz karo ve panel
     # doygunluk artisini almiyor (beyazin rengi yok) -> sol yarisi sicak pembe, sag yarisi elektrik mavi ile CARPILIR
@@ -81,7 +84,7 @@ if T8:
         ImageDraw.Draw(ton).line([(x, 0), (x, H)], fill=tuple(int(c0[j] + (c1[j] - c0[j]) * u) for j in range(3)))
     rgb = im.convert("RGB")
     im = Image.blend(rgb, ImageChops.multiply(rgb, ton), TON_GUC).convert("RGBA")
-    im = ImageEnhance.Contrast(ImageEnhance.Color(im).enhance(RENK_GUC)).enhance(1.2)
+    im = ImageEnhance.Contrast(ImageEnhance.Color(im).enhance(RENK_GUC)).enhance(1.08 if KS else 1.2)
     im = ImageEnhance.Brightness(im).enhance(PARLAK)
 im = ImageEnhance.Color(im).enhance(1.0 if T8 else 1.45 if T6 else 1.4 if T4 else 1.0 if T3 else 1.35)   # 3. video: limon sarisi zaten doygun, yazi/siluet yutulmasin
 im = ImageEnhance.Brightness(im).enhance(1.0 if T8 else 1.12 if T6 else 0.92 if T4 else 0.9 if T3 else 1.12)
@@ -486,7 +489,7 @@ if yz.width > 1240:
     yz = yz.resize((1240, int(yz.height * 1240 / yz.width)), Image.LANCZOS)
 by = int(96 - yz.height / 2)
 baslik_alt = by + int(yz.getchannel("A").point(lambda v: 255 if v > 200 else 0).getbbox()[3])
-vs_kat, vs_engel = ((lambda m: vs_08(m, r=140)) if T8 else vs_06 if T6 else vs_jole if T3 else vs)((640, 455))
+vs_kat, vs_engel = ((lambda m: vs_08((m[0], m[1] + 70), r=125)) if T8 else vs_06 if T6 else vs_jole if T3 else vs)((640, 455))
 m1 = yerlestir(a.p1, a.ayna1, 310, a.boy1, a.gen1, vs_engel, -1, baslik_alt + 4)
 m2 = yerlestir(a.p2, a.ayna2, 970, a.boy2, a.gen2, vs_engel, +1, baslik_alt + 4)
 print("siluet kutulari:", m1.getbbox(), m2.getbbox(), "baslik alti", baslik_alt)
