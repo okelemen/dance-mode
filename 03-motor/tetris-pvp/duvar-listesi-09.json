@@ -1,0 +1,117 @@
+[
+ {
+  "tur": 1,
+  "p1": "cosmic-diagonal-line-long",
+  "p2": "cosmic-toe-tap-side-arms-up"
+ },
+ {
+  "tur": 1,
+  "p1": "cosmic-half-moon-reach-tall",
+  "p2": "cosmic-side-lunge-arms-low-out"
+ },
+ {
+  "tur": 1,
+  "p1": "cosmic-step-forward-reach-up",
+  "p2": "cosmic-wide-stance-arms-diagonal"
+ },
+ {
+  "tur": 1,
+  "p1": "cosmic-mountain-lean-forward-reach",
+  "p2": "cosmic-tree-hands-prayer-high"
+ },
+ {
+  "tur": 1,
+  "p1": "cosmic-star-reach-side-tilt",
+  "p2": "cosmic-standing-back-arch-arms-up"
+ },
+ {
+  "tur": 1,
+  "p1": "cosmic-orbit-arm-circle",
+  "p2": "cosmic-lean-side-arm-over-hip-hand"
+ },
+ {
+  "tur": 1,
+  "p1": "cosmic-crescent-moon-side-bend",
+  "p2": "cosmic-quarter-squat-arms-up"
+ },
+ {
+  "tur": 2,
+  "p1": "cosmic-half-moon-arms-wide",
+  "p2": "cosmic-triangle-reach-floor-sky"
+ },
+ {
+  "tur": 2,
+  "p1": "cosmic-pyramid-fold-hands-floor",
+  "p2": "cosmic-reverse-warrior-lean"
+ },
+ {
+  "tur": 2,
+  "p1": "cosmic-wide-fold-hands-floor",
+  "p2": "cosmic-eagle-arms-knee-up"
+ },
+ {
+  "tur": 2,
+  "p1": "cosmic-extended-side-angle",
+  "p2": "cosmic-standing-leg-forward-hold"
+ },
+ {
+  "tur": 2,
+  "p1": "cosmic-warrior-one-arms-up",
+  "p2": "cosmic-airplane-arms-back"
+ },
+ {
+  "tur": 2,
+  "p1": "cosmic-revolved-lunge-arm-up",
+  "p2": "cosmic-side-kick-hold-arms-wide"
+ },
+ {
+  "tur": 2,
+  "p1": "cosmic-dancer-reach-forward",
+  "p2": "cosmic-crescent-lunge-hands-prayer"
+ },
+ {
+  "tur": 3,
+  "p1": "cosmic-seated-spinal-twist",
+  "p2": "cosmic-plank-knee-to-chest"
+ },
+ {
+  "tur": 3,
+  "p1": "cosmic-pigeon-upright-arms-up",
+  "p2": "cosmic-tabletop-leg-kick-back"
+ },
+ {
+  "tur": 3,
+  "p1": "cosmic-seated-wide-arms-up",
+  "p2": "vortex-drift-129"
+ },
+ {
+  "tur": 3,
+  "p1": "cosmic-three-leg-down-dog",
+  "p2": "halo-drift-75"
+ },
+ {
+  "tur": 3,
+  "p1": "cosmic-boat-arms-forward",
+  "p2": "comet-drift-142"
+ },
+ {
+  "tur": 3,
+  "p1": "cosmic-kneeling-lunge-back-reach",
+  "p2": "comet-drift-95"
+ },
+ {
+  "tur": 3,
+  "p1": "cosmic-seated-leg-up-hand-shin",
+  "p2": "zenith-drift-92"
+ },
+ {
+  "tur": 3,
+  "p1": "cosmic-seated-forward-fold-toes",
+  "p2": "stardust-drift-124"
+ },
+ {
+  "tur": 3,
+  "p1": "cosmic-lizard-hands-floor",
+  "p2": "galaxy-drift-152"
+ }
+]
