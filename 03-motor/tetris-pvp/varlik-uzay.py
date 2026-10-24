@@ -285,7 +285,8 @@ def serit_uzay(oyuncu):
     isik("AREA", (4, 3, 3), 260, lin(hex3(MOR)), 3, yon=(0, Y, 2))
     isik("AREA", (0, Y - 2.5, 5.5), 260, acik(R, 0.3), 4, yon=(0, Y, 2))
     rx = math.radians(90 - KAM["egim"])
-    bpy.ops.object.camera_add(location=(0, -1.6 if KAPAK else 0, KAM["z"] + (0.35 if KAPAK else 0)), rotation=(rx, 0, 0))
+    # kapak deneme 1: kapi ustu basligin altinda kaldi (kontrol listesi 2: cerceve tam gorunur) -> kamera daha geride ve yuksekte
+    bpy.ops.object.camera_add(location=(0, -3.2 if KAPAK else 0, KAM["z"] + (1.1 if KAPAK else 0)), rotation=(rx, 0, 0))
     kam = bpy.context.active_object; sc.camera = kam
     kam.data.sensor_fit = "VERTICAL"; kam.data.sensor_height = KAM["sensor"]; kam.data.lens = KAM["lens"]
     noktalar = [Vector((-ic, Y, 0)), Vector((ic, Y, 0)), Vector((-ic, Y, H)), Vector((ic, Y, H))]
