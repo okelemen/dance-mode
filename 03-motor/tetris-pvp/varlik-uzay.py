@@ -244,16 +244,13 @@ def serit_uzay(oyuncu):
     tuy_chev = tuy_doygun("tuy_chev", acik(R, 0.8), acik_m=0.95, isilti=0.35)
     CHEV = []
     for yy in (2.6, 4.6, 6.6, 8.6):
+        # sahne 4: dondurulmus kutular yolun kenarina kaciyordu -> kollar dogrudan uc noktalardan kalin tuylu cubuk
         for s in (-1, 1):
-            o = yuvarlak_kutu("chev", (s * 0.95, yy + 0.5, 0.15), (2.3, 0.62, 0.26), tuy_chev, egim=0.14)
-            o.rotation_euler = (0, 0, -s * math.radians(26))
-            bpy.context.view_layer.update(); bpy.ops.object.select_all(action="DESELECT")
-            o.select_set(True); bpy.context.view_layer.objects.active = o
-            bpy.ops.object.transform_apply(rotation=True)
-            tuylu(o, tuy_chev, yogun=2400, boy=0.07)
-            CHEV.append(Vector((s * 0.95, yy + 0.5, 0.15)))
-        boru((-1.95, yy + 0.98, 0.03), (0, yy - 0.08, 0.03), 0.04, neon)
-        boru((0, yy - 0.08, 0.03), (1.95, yy + 0.98, 0.03), 0.04, neon)
+            o = boru((s * 1.95, yy + 1.15, 0.14), (0, yy + 0.2, 0.14), 0.24, tuy_chev)
+            tuylu(o, tuy_chev, yogun=2600, boy=0.07)
+            CHEV.append(Vector((s * 0.95, yy + 0.65, 0.14)))
+        boru((-1.95, yy + 0.98 - 0.12, 0.03), (0, yy - 0.12, 0.03), 0.04, neon)
+        boru((0, yy - 0.12, 0.03), (1.95, yy + 0.98 - 0.12, 0.03), 0.04, neon)
     # pelus korkuluk
     for s in (-1, 1):
         ys = [0.9 + i * 1.35 for i in range(int((Y - 1.4) / 1.35) + 1)]
