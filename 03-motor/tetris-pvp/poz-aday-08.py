@@ -91,6 +91,18 @@ el(4, profil("Dancer Arms Up Leg Back", 160, [178, 178], [176, 176], [0, 0], [-4
 el(4, profil("High Kick Leg Hold", 185, [150, 150], [-60, -60], [130, 130], [0, 0]))
 el(4, profil("Low Lunge Hands Floor Back Arm Up", 120, [0, 0], [-150, -150], [100, 0], [-60, -60]))
 
+# ---- kontak 1 duzeltmesi (24 Eki 2026): havada/dusuyor okunanlarin (secici HARIC) yerine YERE SAGLAM BASAN yedekler
+el(4, on("Side Leg Hold Low Arm Wide", "t", [60, 60], "tog", [60, 60], govde=170))
+el(4, profil("Pyramid Arms Up", 110, [175, 175], [173, 173], [25, 25], [-25, -25]))
+el(4, on("Wide Squat Sky And Floor", "up", "down", "goddess", "goddess", govde=175))
+el(4, on("Tree Arms Wide Tilt", "t", "t", "tog", "kneein", govde=168))
+el(4, profil("Lunge Arms Back Clasp Fold", 120, [-130, -130], [-128, -128], [90, 0], [-50, -50]))
+el(4, profil("Leg Back Hand Ankle Tall", 170, [178, 178], [-120, -160], [0, 0], [-30, -150]))
+el(4, profil("Lunge Side Bend Arm Over", 165, [150, 150], [-10, -10], [90, 0], [-50, -50]))
+el(4, profil("Standing Bow Low Reach", 100, [80, 80], [-140, -170], [0, 0], [-80, -170]))
+el(2, on("Goddess Arms Crown", [-150, 120], [150, -120], "goddess", "goddess"))
+el(2, profil("Knee Lift Arms Back Wings", 180, [-100, -100], [-98, -98], [95, -20], [0, 0]))
+
 # ---- HAVUZ: yedek kombinasyonlar (secici --havuz ile kullanir; once EL)
 KOL = {"V": "v", "W": "w", "Cactus": "cactus", "Reach": "up", "T": "t", "Head": "head", "Flex": "flex", "Low": "lowv",
        "Hip": "hip", "Diag": "up45", "Swing": [-150, -110], "Hook": [-130, -40], "Salute": [-100, 140], "Cross": [-20, 110]}

@@ -769,6 +769,54 @@
    "tur": 2,
    "el": true
   },
+  "disco-goddess-arms-crown": {
+   "ad": "Disco Goddess Arms Crown",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    120
+   ],
+   "solKol": [
+    150,
+    -120
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "disco-knee-lift-arms-back-wings": {
+   "ad": "Disco Knee Lift Arms Back Wings",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    -100,
+    -100
+   ],
+   "sagKol": [
+    -98,
+    -98
+   ],
+   "solBacak": [
+    95,
+    -20
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "tur": 2,
+   "el": true
+  },
   "disco-high-plank": {
    "ad": "Disco High Plank",
    "yon": "sag",
@@ -1437,6 +1485,198 @@
    "sagBacak": [
     -60,
     -60
+   ],
+   "tur": 4,
+   "el": true
+  },
+  "disco-side-leg-hold-low-arm-wide": {
+   "ad": "Disco Side Leg Hold Low Arm Wide",
+   "yon": "on",
+   "govde": 170,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    60,
+    60
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    60
+   ],
+   "tur": 4,
+   "el": true
+  },
+  "disco-pyramid-arms-up": {
+   "ad": "Disco Pyramid Arms Up",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    175,
+    175
+   ],
+   "sagKol": [
+    173,
+    173
+   ],
+   "solBacak": [
+    25,
+    25
+   ],
+   "sagBacak": [
+    -25,
+    -25
+   ],
+   "tur": 4,
+   "el": true
+  },
+  "disco-wide-squat-sky-and-floor": {
+   "ad": "Disco Wide Squat Sky And Floor",
+   "yon": "on",
+   "govde": 175,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    8,
+    5
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 4,
+   "el": true
+  },
+  "disco-tree-arms-wide-tilt": {
+   "ad": "Disco Tree Arms Wide Tilt",
+   "yon": "on",
+   "govde": 168,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 4,
+   "el": true
+  },
+  "disco-lunge-arms-back-clasp-fold": {
+   "ad": "Disco Lunge Arms Back Clasp Fold",
+   "yon": "sag",
+   "govde": 120,
+   "bas": 0,
+   "solKol": [
+    -130,
+    -130
+   ],
+   "sagKol": [
+    -128,
+    -128
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    -50,
+    -50
+   ],
+   "tur": 4,
+   "el": true
+  },
+  "disco-leg-back-hand-ankle-tall": {
+   "ad": "Disco Leg Back Hand Ankle Tall",
+   "yon": "sag",
+   "govde": 170,
+   "bas": 0,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    -120,
+    -160
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -30,
+    -150
+   ],
+   "tur": 4,
+   "el": true
+  },
+  "disco-lunge-side-bend-arm-over": {
+   "ad": "Disco Lunge Side Bend Arm Over",
+   "yon": "sag",
+   "govde": 165,
+   "bas": 0,
+   "solKol": [
+    150,
+    150
+   ],
+   "sagKol": [
+    -10,
+    -10
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    -50,
+    -50
+   ],
+   "tur": 4,
+   "el": true
+  },
+  "disco-standing-bow-low-reach": {
+   "ad": "Disco Standing Bow Low Reach",
+   "yon": "sag",
+   "govde": 100,
+   "bas": 0,
+   "solKol": [
+    80,
+    80
+   ],
+   "sagKol": [
+    -140,
+    -170
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -80,
+    -170
    ],
    "tur": 4,
    "el": true
