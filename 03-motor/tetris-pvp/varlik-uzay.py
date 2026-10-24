@@ -47,18 +47,18 @@ def gezegen(merkez, R):
     """REF-060 gezegeni: gokkusagi girdaplari (camgobegi / pembe / mor / altin) + ince isilti benekleri"""
     def kur(nt, tc):
         dl = nt.nodes.new("ShaderNodeTexWave"); dl.wave_type = "BANDS"; dl.bands_direction = "DIAGONAL"
-        dl.inputs["Scale"].default_value = 1.6; dl.inputs["Distortion"].default_value = 9.0
+        dl.inputs["Scale"].default_value = 0.16; dl.inputs["Distortion"].default_value = 5.0   # sahne 2: 1,6 / 9 ince kumlu, beyaza kacti
         dl.inputs["Detail"].default_value = 4.0; dl.inputs["Detail Scale"].default_value = 1.5
         nt.links.new(tc.outputs["Object"], dl.inputs["Vector"])
         renk = rampa(nt, dl.outputs["Fac"], [(0.0, "#0a2a6a"), (0.18, "#25e6ff"), (0.36, "#ff4fc3"), (0.52, "#8a4dff"),
                                                 (0.68, "#ffd25a"), (0.84, "#3fffd2"), (1.0, "#1a3fb0")])
-        vr = nt.nodes.new("ShaderNodeTexVoronoi"); vr.inputs["Scale"].default_value = 140.0
+        vr = nt.nodes.new("ShaderNodeTexVoronoi"); vr.inputs["Scale"].default_value = 9.0
         nt.links.new(tc.outputs["Object"], vr.inputs["Vector"])
-        bn = nt.nodes.new("ShaderNodeMath"); bn.operation = "LESS_THAN"; bn.inputs[1].default_value = 0.07
+        bn = nt.nodes.new("ShaderNodeMath"); bn.operation = "LESS_THAN"; bn.inputs[1].default_value = 0.035
         nt.links.new(vr.outputs["Distance"], bn.inputs[0])
         mx = nt.nodes.new("ShaderNodeMix"); mx.data_type = "RGBA"; mx.blend_type = "ADD"
         nt.links.new(bn.outputs[0], mx.inputs[0]); nt.links.new(renk, mx.inputs[6])
-        mx.inputs[7].default_value = (1.2, 1.2, 1.3, 1)
+        mx.inputs[7].default_value = (0.8, 0.8, 0.9, 1)
         return mx.outputs[2]
     m, nt, em = mat_desen("gezegen", kur); em.inputs[1].default_value = 0.95   # sahne 1: 2,1 beyaza kacti
     bpy.ops.mesh.primitive_uv_sphere_add(radius=R, location=merkez, segments=96, ring_count=48)
@@ -129,14 +129,14 @@ def galaksi_tanecik(merkez, R, rnd):
     renk = ["#5ff2ff", "#b06bff", "#ff6ad0", "#ffffff"]
     mats = [mat_emis("gx%d" % i, lin(hex3(c)), 5.0) for i, c in enumerate(renk)]
     me = bpy.data.meshes.new("galaksi"); bm = bmesh.new()
-    egim = Matrix.Rotation(math.radians(74), 4, "X") @ Matrix.Rotation(math.radians(-12), 4, "Y")
-    for i in range(2600):
+    egim = Matrix.Rotation(math.radians(-16), 4, "X") @ Matrix.Rotation(math.radians(-8), 4, "Y")   # sahne 2: X 74 disk kameraya dik dondu
+    for i in range(5200):
         kol = i % 2
         r = R * (0.22 + 0.78 * rnd.random() ** 0.8)
         a = kol * math.pi + 2.6 * math.log(r / (R * 0.22) + 1) + rnd.gauss(0, 0.22)
         p = Vector((math.cos(a) * r + rnd.gauss(0, 0.6), math.sin(a) * r + rnd.gauss(0, 0.6), rnd.gauss(0, 0.25)))
         q = egim @ p + Vector(merkez)
-        m = Matrix.Translation(q) @ Matrix.Scale(rnd.choice([0.05, 0.07, 0.1, 0.14]), 4)
+        m = Matrix.Translation(q) @ Matrix.Scale(rnd.choice([0.04, 0.06, 0.08, 0.12]), 4)
         g = bmesh.ops.create_icosphere(bm, subdivisions=1, radius=1.0, matrix=m)
         mi = rnd.choices(range(4), weights=(34, 26, 24, 16))[0]
         for f in {f for v in g["verts"] for f in v.link_faces}:
@@ -166,7 +166,7 @@ def gok_uzay():
         kure((x, y, z), rnd.choice([0.05, 0.07, 0.09, 0.13]), yb if rnd.random() < 0.7 else
              mat_emis("yr%d" % i, lin(hex3(rnd.choice(renkler))), 8.0), sub=1)
     # galaksi halkasi + gezegen: ekranin ortasi, kapilarin ustunden ve arasindan gorunur (REF-060)
-    galaksi_tanecik((0, 40, 13.5), 30, rnd)
+    galaksi_tanecik((0, 40, 13.0), 36, rnd)
     gezegen((0, 34, 13.8), 8.6)
     # renkli isik noktalari (REF-060: gezegen cevresinde pembe/mavi/yesil benekler)
     for i in range(110):
@@ -203,12 +203,12 @@ def kafes_kiris(a, b, kal, mat, civata, dikey):
     for s in (-1, 1):
         o = a + yan * s; e = b + yan * s
         merk = (o + e) / 2
-        boyut = (0.16, 0.2, L + 0.16) if dikey else (L + 0.16, 0.2, 0.16)
+        boyut = (0.26, 0.5, L + 0.26) if dikey else (L + 0.26, 0.5, 0.26)   # sahne 2: ince boru -> REF-060 kalin bloklu
         yuvarlak_kutu("ana", merk, boyut, mat, egim=0.03, seg=2)
         n = max(2, int(L / 0.38))
         for j in range(n + 1):
-            q = o + u * (L * j / n) + Vector((0, -0.11, 0))
-            bpy.ops.mesh.primitive_cylinder_add(radius=0.045, depth=0.05, location=q, rotation=(math.pi / 2, 0, 0), vertices=12)
+            q = o + u * (L * j / n) + Vector((0, -0.27, 0))
+            bpy.ops.mesh.primitive_cylinder_add(radius=0.07, depth=0.06, location=q, rotation=(math.pi / 2, 0, 0), vertices=12)
             bpy.context.active_object.data.materials.append(civata)
     n = max(2, int(L / (kal * 1.05)))
     for j in range(n + 1):
@@ -230,13 +230,14 @@ def serit_uzay(oyuncu):
     # pelus zemin: REF-060'da yol oyuncu renginde tuylu; kisa sik tuy
     bpy.ops.mesh.primitive_plane_add(size=1, location=(0, (Y + 3) / 2 - 0.5, 0))
     z = bpy.context.active_object; z.scale = (11.0, Y + 4, 1); bpy.ops.object.transform_apply(scale=True)
-    tuylu(z, mat_tuy("tuy_zemin", R, acik_m=0.25), yogun=120, boy=0.06)
+    tz = mat_tuy("tuy_zemin", R, acik_m=0.18); tz.node_tree.nodes["Principled BSDF"].inputs["Emission Strength"].default_value = 0.03
+    tuylu(z, tz, yogun=120, boy=0.06)   # sahne 2: zemin pastele kacti -> oyuncu renginin kendisi, isilti yok
     # beyaz pelus chevron'lar, altinda oyuncu rengi neon (REF-060: beyaz, kenari parlayan V'ler)
     tuy_chev = mat_tuy("tuy_chev", acik(R, 0.75), acik_m=0.9)
     CHEV = []
     for yy in (2.6, 4.6, 6.6, 8.6):
         for s in (-1, 1):
-            o = yuvarlak_kutu("chev", (s * 0.95, yy + 0.5, 0.15), (2.3, 0.42, 0.26), tuy_chev, egim=0.12)
+            o = yuvarlak_kutu("chev", (s * 0.95, yy + 0.5, 0.15), (2.3, 0.62, 0.26), tuy_chev, egim=0.14)
             o.rotation_euler = (0, 0, -s * math.radians(26))
             bpy.context.view_layer.update(); bpy.ops.object.select_all(action="DESELECT")
             o.select_set(True); bpy.context.view_layer.objects.active = o
@@ -254,17 +255,13 @@ def serit_uzay(oyuncu):
         o = yuvarlak_kutu("tirabzan", (s * 2.45, (ys[0] + ys[-1]) / 2, 0.66), (0.22, ys[-1] - ys[0], 0.2), tuy, egim=0.09)
         tuylu(o, tuy, yogun=2400, boy=0.07)
     # KAFES KAPI (REF-060): iki yan kule + ust kiris, pastel oyuncu renginde parlak plastik, civata cikintilari
-    kafes = mat_plastik("kafes", acik(R, 0.3), 0.3)
+    kafes = mat_plastik("kafes", acik(R, 0.18), 0.25)
     civata = mat_plastik("civata", acik(R, 0.55), 0.4)
     xk = W / 2 - KK / 2
     for s in (-1, 1):
         kafes_kiris((s * xk, Y, 0.0), (s * xk, Y, H + KK / 2), KK, kafes, civata, dikey=True)
     kafes_kiris((-xk, Y, H + KK / 2), (xk, Y, H + KK / 2), KK, kafes, civata, dikey=False)
-    # arka katman (derinlik): ayni kafes 0,6 m geride, biraz koyu
-    kafes2 = mat_plastik("kafes2", R, 0.15)
-    for s in (-1, 1):
-        kafes_kiris((s * xk, Y + 0.6, 0.0), (s * xk, Y + 0.6, H + KK / 2), KK, kafes2, kafes2, dikey=True)
-    kafes_kiris((-xk, Y + 0.6, H + KK / 2), (xk, Y + 0.6, H + KK / 2), KK, kafes2, kafes2, dikey=False)
+    # sahne 2: arka kopya katman cift cerceve gibi okundu -> tek katman, derin ana cubuklar
     ic = W / 2 - KK                              # sahne 1: ic beyaz neon cerceve REF-060'ta yok -> kaldirildi
     par = mat_emis("parilti", (1, 1, 1), 6.0)
     AMPUL = []
