@@ -22,41 +22,60 @@ YERLESIM.clear()
 
 
 def mat_tuy(ad, renk, acik_m=0.45):
-    """pelus tuy: hair kivrimlari icin Principled, tel basina rastgele acik/koyu ton (Hair Info > Random)"""
+    """pelus tuy: tel tel acik/koyu ton (Object koordinatli ince gurultu), yumusak sheen, hafif ic isilti"""
     m = bpy.data.materials.new(ad); m.use_nodes = True; nt = m.node_tree
     b = nt.nodes["Principled BSDF"]
-    hi = nt.nodes.new("ShaderNodeHairInfo")
+    tc = nt.nodes.new("ShaderNodeTexCoord")
+    nz = nt.nodes.new("ShaderNodeTexNoise"); nz.inputs["Scale"].default_value = 60.0; nz.inputs["Detail"].default_value = 2
+    nt.links.new(tc.outputs["Object"], nz.inputs["Vector"])
     rp = nt.nodes.new("ShaderNodeValToRGB"); cr = rp.color_ramp
-    cr.elements[0].position = 0.0; cr.elements[0].color = (*koyu(renk, 0.25), 1)
-    cr.elements[1].position = 1.0; cr.elements[1].color = (*acik(renk, acik_m), 1)
-    e = cr.elements.new(0.55); e.color = (*renk, 1)
-    nt.links.new(hi.outputs["Random"], rp.inputs[0])
+    cr.elements[0].position = 0.3; cr.elements[0].color = (*koyu(renk, 0.15), 1)
+    cr.elements[1].position = 0.7; cr.elements[1].color = (*acik(renk, acik_m), 1)
+    nt.links.new(nz.outputs["Fac"], rp.inputs[0])
     nt.links.new(rp.outputs[0], b.inputs["Base Color"])
-    b.inputs["Roughness"].default_value = 0.55
+    b.inputs["Roughness"].default_value = 0.6
     b.inputs["Sheen Weight"].default_value = 1.0
-    b.inputs["Emission Color"].default_value = (*acik(renk, 0.3), 1); b.inputs["Emission Strength"].default_value = 0.18
+    b.inputs["Emission Color"].default_value = (*acik(renk, 0.3), 1); b.inputs["Emission Strength"].default_value = 0.15
     return m
 
 
 def tuylu(o, mat, yogun=900, boy=0.11):
-    """objeye pelus tuy: yuzey alaniyla orantili sayida hair + basit cocuk teller"""
+    """objeye pelus tuy (Geometry Nodes): yuzeye yogun ince koniler, normale gore + rastgele egik, rastgele boy.
+    Deneme 1 (24 Eki): particle hair Actions'ta hic cizilmedi -> mesh koni (her motorda guvenilir)."""
     o.data.materials.clear(); o.data.materials.append(mat)
-    bpy.context.view_layer.objects.active = o
-    alan = sum(p.area for p in o.data.polygons) * (o.scale.x * o.scale.y * o.scale.z) ** (2 / 3)
-    ps = o.modifiers.new("tuy", "PARTICLE_SYSTEM")
-    s = ps.particle_system.settings
-    s.type = "HAIR"; s.emit_from = "FACE"; s.use_emit_random = True
-    s.count = max(300, int(alan * yogun)); s.hair_length = boy
-    s.child_type = "SIMPLE"
-    for ad_, v in (("rendered_child_count", 6), ("child_percent", 2),
-("child_radius", 0.03), ("roughness_1", 0.04), ("roughness_1_size", 0.6), ("roughness_endpoint", 0.02),
-                   ("root_radius", 1.0), ("tip_radius", 0.15), ("radius_scale", 0.012), ("normal_factor", 1.0),
-                   ("factor_random", 0.25)):
-        try:
-            setattr(s, ad_, v)
-        except Exception as e:
-            log("tuy ayari atlandi", ad_, e)
-    s.material = 1
+    ng = bpy.data.node_groups.new("tuy_" + o.name, "GeometryNodeTree")
+    ng.interface.new_socket("Geometry", in_out="INPUT", socket_type="NodeSocketGeometry")
+    ng.interface.new_socket("Geometry", in_out="OUTPUT", socket_type="NodeSocketGeometry")
+    N = ng.nodes; L = ng.links
+    gi = N.new("NodeGroupInput"); go = N.new("NodeGroupOutput")
+    dp = N.new("GeometryNodeDistributePointsOnFaces"); dp.distribute_method = "RANDOM"
+    dp.inputs["Density"].default_value = yogun
+    L.new(gi.outputs[0], dp.inputs["Mesh"])
+    kn = N.new("GeometryNodeMeshCone")
+    kn.inputs["Vertices"].default_value = 4
+    kn.inputs["Radius Top"].default_value = 0.0; kn.inputs["Radius Bottom"].default_value = boy * 0.11
+    kn.inputs["Depth"].default_value = boy
+    tr = N.new("GeometryNodeTransform"); tr.inputs["Translation"].default_value = (0, 0, boy * 0.35)
+    L.new(kn.outputs["Mesh"], tr.inputs["Geometry"])
+    io = N.new("GeometryNodeInstanceOnPoints")
+    L.new(dp.outputs["Points"], io.inputs["Points"]); L.new(tr.outputs[0], io.inputs["Instance"])
+    rr = N.new("FunctionNodeRandomValue"); rr.data_type = "FLOAT_VECTOR"
+    rr.inputs["Min"].default_value = (-0.55, -0.55, -3.14); rr.inputs["Max"].default_value = (0.55, 0.55, 3.14)
+    try:
+        rot = N.new("FunctionNodeRotateRotation"); rot.rotation_space = "LOCAL"
+        e2r = N.new("FunctionNodeEulerToRotation"); L.new(rr.outputs["Value"], e2r.inputs[0])
+        L.new(dp.outputs["Rotation"], rot.inputs["Rotation"]); L.new(e2r.outputs[0], rot.inputs[1])
+        L.new(rot.outputs[0], io.inputs["Rotation"])
+    except Exception as e:
+        log("tuy egimi atlandi", e); L.new(dp.outputs["Rotation"], io.inputs["Rotation"])
+    rs = N.new("FunctionNodeRandomValue"); rs.data_type = "FLOAT"
+    rs.inputs[2].default_value = 0.55; rs.inputs[3].default_value = 1.35
+    L.new(rs.outputs[1], io.inputs["Scale"])
+    rl = N.new("GeometryNodeRealizeInstances"); L.new(io.outputs[0], rl.inputs[0])
+    sm = N.new("GeometryNodeSetMaterial"); sm.inputs["Material"].default_value = mat; L.new(rl.outputs[0], sm.inputs["Geometry"])
+    jn = N.new("GeometryNodeJoinGeometry"); L.new(gi.outputs[0], jn.inputs[0]); L.new(sm.outputs[0], jn.inputs[0])
+    L.new(jn.outputs[0], go.inputs[0])
+    md = o.modifiers.new("tuy", "NODES"); md.node_group = ng
     return o
 
 
@@ -77,8 +96,8 @@ def disko_topu(merkez, R):
     bpy.ops.mesh.primitive_uv_sphere_add(radius=R, location=merkez, segments=56, ring_count=28)
     top = bpy.context.active_object
     mats = []
-    for ad_, renk, guc in (("ayna", None, 0), ("karo_pembe", RENK["p1"], 5.0), ("karo_mavi", RENK["p2"], 5.0),
-                           ("karo_beyaz", "#ffffff", 7.0), ("karo_mor", "#b06bff", 4.0)):
+    for ad_, renk, guc in (("ayna", None, 0), ("karo_pembe", RENK["p1"], 1.8), ("karo_mavi", RENK["p2"], 1.8),
+                           ("karo_beyaz", "#ffffff", 2.2), ("karo_mor", "#b06bff", 1.5)):
         m = bpy.data.materials.new(ad_); m.use_nodes = True; b = m.node_tree.nodes["Principled BSDF"]
         b.inputs["Metallic"].default_value = 1.0; b.inputs["Roughness"].default_value = 0.08
         b.inputs["Base Color"].default_value = (0.75, 0.78, 0.9, 1)
@@ -140,9 +159,9 @@ def gok_disko():
         kure((x, y, z), rnd.uniform(0.25, 0.9), mat_emis("bokeh%d" % i, c, rnd.uniform(2.5, 6)), sub=2)
     # disko topu: ekranin tam ortasi, kapilarin arasindan gorunur (REF-059)
     disko_topu((0, 30, 11.2), 4.4)
-    isik("POINT", (0, 22, 16), 3000, lin(hex3("#ffffff")))
-    isik("POINT", (-8, 24, 8), 2200, lin(hex3(RENK["p1"])))
-    isik("POINT", (8, 24, 8), 2200, lin(hex3(RENK["p2"])))
+    isik("POINT", (0, 18, 20), 700, lin(hex3("#ffffff")))
+    isik("POINT", (-8, 24, 8), 900, lin(hex3(RENK["p1"])))
+    isik("POINT", (8, 24, 8), 900, lin(hex3(RENK["p2"])))
     # top cevresine yansiyan isik benekleri (duvarda gezen disko noktalari)
     for i in range(160):
         ac = rnd.uniform(0, 6.283); r = rnd.uniform(7, 34)
@@ -186,6 +205,7 @@ def serit_disko(oyuncu):
     R = lin(hex3(RENK[oyuncu]))
     tuy = mat_tuy("tuy", R)
     tuy_acik = mat_tuy("tuy_acik", acik(R, 0.25), acik_m=0.6)
+    tuy_cerceve = mat_tuy("tuy_cerceve", acik(R, 0.18), acik_m=0.55)     # REF-059 cerceve: acik pembe/mavi, uclari beyazimsi
     neon = mat_emis("neon", acik(R, 0.45), 10.0)
     Y = KAPI["y"]
     W, H = KAPI["w"], KAPI["h"]
@@ -200,26 +220,26 @@ def serit_disko(oyuncu):
             continue
         for s in (-1, 1):
             o = yuvarlak_kutu("chev", (s * 0.75, yy + 0.38, 0.12), (1.8, 0.42, 0.22), tuy_acik, egim=0.1)
-            o.rotation_euler = (0, 0, s * math.radians(28))
+            o.rotation_euler = (0, 0, -s * math.radians(28))
             bpy.context.view_layer.update(); bpy.ops.object.select_all(action="DESELECT")
             o.select_set(True); bpy.context.view_layer.objects.active = o
             bpy.ops.object.transform_apply(rotation=True)
-            tuylu(o, tuy_acik, yogun=1400, boy=0.09)
+            tuylu(o, tuy_acik, yogun=2600, boy=0.09)
     # pelus korkuluk: iki yanda tuylu babalar + tuylu tirabzan
     for s in (-1, 1):
         ys = [0.9 + i * 1.35 for i in range(int((Y - 1.4) / 1.35) + 1)]
         for yy in ys:
             o = yuvarlak_kutu("baba", (s * 2.45, yy, 0.42), (0.42, 0.42, 0.84), tuy, egim=0.16)
-            tuylu(o, tuy, yogun=1300, boy=0.08)
+            tuylu(o, tuy, yogun=2400, boy=0.08)
         o = yuvarlak_kutu("tirabzan", (s * 2.45, (ys[0] + ys[-1]) / 2, 0.66), (0.22, ys[-1] - ys[0], 0.2), tuy, egim=0.09)
-        tuylu(o, tuy, yogun=1300, boy=0.07)
+        tuylu(o, tuy, yogun=2400, boy=0.07)
     # pelus kapi cercevesi: iki kalin yan + ust kiris, ic kenarda neon tup
     xk = W / 2 - KK / 2
     for s in (-1, 1):
         o = yuvarlak_kutu("yan", (s * xk, Y, (H + KK) / 2), (KK, 0.8, H + KK), tuy, egim=0.25, seg=5)
-        tuylu(o, tuy, yogun=1100, boy=0.13)
+        tuylu(o, tuy_cerceve, yogun=2200, boy=0.14)
     o = yuvarlak_kutu("ust", (0, Y, H + KK / 2), (W, 0.8, KK), tuy, egim=0.25, seg=5)
-    tuylu(o, tuy, yogun=1100, boy=0.13)
+    tuylu(o, tuy_cerceve, yogun=2200, boy=0.14)
     ic = W / 2 - KK
     for a, b in (((-ic + 0.06, Y - 0.42, 0.04), (-ic + 0.06, Y - 0.42, H - 0.06)), ((ic - 0.06, Y - 0.42, 0.04), (ic - 0.06, Y - 0.42, H - 0.06)),
                  ((-ic + 0.06, Y - 0.42, H - 0.06), (ic - 0.06, Y - 0.42, H - 0.06))):
