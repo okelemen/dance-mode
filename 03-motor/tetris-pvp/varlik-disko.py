@@ -47,8 +47,9 @@ def tuylu(o, mat, yogun=900, boy=0.11):
     s = ps.particle_system.settings
     s.type = "HAIR"; s.emit_from = "FACE"; s.use_emit_random = True
     s.count = max(300, int(alan * yogun)); s.hair_length = boy
-    s.child_type = "SIMPLE"; s.rendered_child_count = 6; s.child_nbr = 2
-    for ad_, v in (("child_radius", 0.03), ("roughness_1", 0.04), ("roughness_1_size", 0.6), ("roughness_endpoint", 0.02),
+    s.child_type = "SIMPLE"
+    for ad_, v in (("rendered_child_count", 6), ("child_percent", 2),
+("child_radius", 0.03), ("roughness_1", 0.04), ("roughness_1_size", 0.6), ("roughness_endpoint", 0.02),
                    ("root_radius", 1.0), ("tip_radius", 0.15), ("radius_scale", 0.012), ("normal_factor", 1.0),
                    ("factor_random", 0.25)):
         try:
