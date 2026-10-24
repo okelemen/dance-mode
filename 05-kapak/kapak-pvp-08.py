@@ -46,7 +46,7 @@ import json
 Y = json.load(open(os.path.join(V, "kapak-yerlesim.json" if KS else "yerlesim.json"), encoding="utf-8"))
 if KS:
     Y = {k.replace("kapak-", ""): v for k, v in Y.items()}
-for i, (ad, ac) in enumerate(((("panel2-p1.png" if T8 else "panel-p1.png"), Y["aciklik_p1"]), (("panel2-p2.png" if T8 else "panel-p2.png"), Y["aciklik_p2"]))):
+for i, (ad, ac) in enumerate(((("kapak-panel2-p1.png" if KS else "panel2-p1.png" if T8 else "panel-p1.png"), Y["aciklik_p1"]), (("kapak-panel2-p2.png" if KS else "panel2-p2.png" if T8 else "panel-p2.png"), Y["aciklik_p2"]))):
     sx = (W / 2) / 960; sy = H / 1080
     x0, y0, x1, y1 = ac[0] * sx + i * W / 2, ac[1] * sy, ac[2] * sx + i * W / 2, ac[3] * sy
     pw = x1 - x0; ph = pw / (1100 / 904)

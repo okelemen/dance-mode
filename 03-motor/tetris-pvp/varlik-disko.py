@@ -23,6 +23,7 @@ YERLESIM.clear()
 # Blender'da DOYGUN kurulur - pelus ve karo oyuncu renginin kendisi (pastel degil), kamera biraz geride (cerceve tum gorunur)
 KAPAK = YALNIZ == "kapak"
 ON = "kapak-" if KAPAK else ""
+POZ_KAPAK = float(arg("--kapak-pozlama", "-0.9"))
 
 
 def mat_tuy(ad, renk, acik_m=0.45):
@@ -180,7 +181,9 @@ def gok_disko():
     gl2 = nt2.nodes.new("CompositorNodeGlare"); gl2.glare_type = "STREAKS"; gl2.threshold = 2.5; gl2.streaks = 4; gl2.mix = -0.6
     ou = nt2.nodes.new("CompositorNodeComposite")
     nt2.links.new(rl.outputs[0], gl.inputs[0]); nt2.links.new(gl.outputs[0], gl2.inputs[0]); nt2.links.new(gl2.outputs[0], ou.inputs[0])
-    yaz(sc, "gok.png")
+    if KAPAK:
+        sc.view_settings.exposure = POZ_KAPAK
+    yaz(sc, ON + "gok.png")
 
 
 # ------------------------------------------------------------------ SERIT: ayna-karo zemin + pelus kapi
@@ -280,6 +283,8 @@ def serit_disko(oyuncu):
     YERLESIM[ON + "ampul_" + oyuncu] = [[round(p.x * 960, 1), round((1 - p.y) * 1080, 1)] for p in (world_to_camera_view(sc, kam, q) for q in AMPUL)]
     log("aciklik", oyuncu, YERLESIM[ON + "aciklik_" + oyuncu])
     log("chevron px", [[round(q.x * 960), round((1 - q.y) * 1080)] for q in (world_to_camera_view(sc, kam, c) for c in CHEV)])
+    if KAPAK:      # kapak deneme 2 olcumu: serit V 0,998 (asiri pozlama -> renk beyaza kaciyor), S 0,60 / ref 0,66
+        sc.view_settings.exposure = POZ_KAPAK
     yaz(sc, ON + "serit-%s.png" % oyuncu)
 
 
@@ -400,6 +405,8 @@ def panel_sahne_disko(oyuncu):
     for i in range(90):
         kure((rnd.uniform(-PW / 2 + 0.2, PW / 2 - 0.2), -0.16, rnd.uniform(taban - 0.1, PH / 2 - 0.2)), rnd.choice([0.012, 0.02, 0.03, 0.045]), par, sub=1)
     panel_kamera(sc)
+    if KAPAK:
+        sc.view_settings.exposure = POZ_KAPAK
     yaz(sc, ON + "panel2-%s.png" % oyuncu)
 
 
@@ -411,6 +418,8 @@ if YALNIZ in ("hepsi", "sahne", "gok"):
 if YALNIZ in ("hepsi", "sahne", "serit", "kapak"):
     for o_ in ("p1", "p2"):
         serit_disko(o_)
+if KAPAK:
+    gok_disko()
 if KAPAK:              # 24 Eki kural: kapak doygunlugu = referans -> kapi icindeki spot paneli de doygun
     for o_ in ("p1", "p2"):
         panel_sahne_disko(o_)
