@@ -23,7 +23,7 @@ YERLESIM.clear()
 # Blender'da DOYGUN kurulur - pelus ve karo oyuncu renginin kendisi (pastel degil), kamera biraz geride (cerceve tum gorunur)
 KAPAK = YALNIZ == "kapak"
 ON = "kapak-" if KAPAK else ""
-POZ_KAPAK = float(arg("--kapak-pozlama", "-0.9"))
+POZ_KAPAK = float(arg("--kapak-pozlama", "-1.4"))   # onayli (24 Eki): -1,4
 
 
 def mat_tuy(ad, renk, acik_m=0.45):

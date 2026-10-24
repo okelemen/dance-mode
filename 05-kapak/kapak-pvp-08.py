@@ -24,7 +24,7 @@ p.add_argument("--baslik", default="TETRIS MODE")
 p.add_argument("--boy1", type=float, default=540); p.add_argument("--boy2", type=float, default=540)
 p.add_argument("--gen1", type=float, default=600); p.add_argument("--gen2", type=float, default=600)
 p.add_argument("--cikti", required=True)
-p.add_argument("--ton", type=float, default=0.0); p.add_argument("--renk", type=float, default=1.12); p.add_argument("--parlak", type=float, default=0.95)
+p.add_argument("--ton", type=float, default=0.0); p.add_argument("--renk", type=float, default=1.6); p.add_argument("--parlak", type=float, default=1.05)   # onayli (24 Eki): doygunluk 0,62-0,63 / ref 0,66
 a = p.parse_args()
 TON_GUC, RENK_GUC, PARLAK = a.ton, a.renk, a.parlak
 T3 = a.tema == "03"
