@@ -90,7 +90,7 @@ def kup_kaplama(rnd):
                 a, b = ad * rnd.uniform(0.55, 0.98), ad * rnd.uniform(0.55, 0.98)
                 d = rnd.uniform(0.08, 0.9)
                 o = A + eu * u + ev * (y + ad / 2) + en * rnd.uniform(-0.05, 0.25)
-                m = 3 + rnd.randrange(3) if rnd.random() < 0.07 else rnd.randrange(3)
+                m = 3 + rnd.randrange(3) if rnd.random() < 0.025 else rnd.randrange(3)   # kesit 1: 0,07 fazla parlak
                 kutu(o, eu, ev, en, a, b, d, m)
             y += ad
     me = bpy.data.meshes.new("kupler"); me.from_pydata(v, [], f); me.update()
@@ -129,7 +129,7 @@ def uzak_sis():
     sub = nt.nodes.new("ShaderNodeVectorMath"); sub.operation = "SUBTRACT"; sub.inputs[1].default_value = (0.8, 0.8, 0)
     nt.links.new(mp.outputs[0], sub.inputs[0]); nt.links.new(sub.outputs[0], gr.inputs[0])
     em = nt.nodes.new("ShaderNodeEmission"); em.inputs[0].default_value = (*lin(hex3("#e8dcff")), 1)
-    gu = nt.nodes.new("ShaderNodeMath"); gu.operation = "MULTIPLY"; gu.inputs[1].default_value = 6.0
+    gu = nt.nodes.new("ShaderNodeMath"); gu.operation = "MULTIPLY"; gu.inputs[1].default_value = 2.2
     nt.links.new(gr.outputs["Fac"], gu.inputs[0]); nt.links.new(gu.outputs[0], em.inputs[1])
     o = nt.nodes.new("ShaderNodeOutputMaterial"); nt.links.new(em.outputs[0], o.inputs[0])
     p.data.materials.append(m)
@@ -149,7 +149,7 @@ def gok_katmani():
         isik("AREA", (-3.5, yy, T_Z + 2), 900 + yy * 20, lin(hex3(PEMBE)), 4, yon=(-T_R, yy + 4, T_Z + 3))
         isik("AREA", (3.5, yy, T_Z + 2), 900 + yy * 20, lin(hex3(CAMGOBEGI)), 4, yon=(T_R, yy + 4, T_Z + 3))
         isik("AREA", (0, yy, T_Z - 1), 700 + yy * 15, lin(hex3("#c8b4ff")), 5, yon=(0, yy + 3, T_Z + T_R))
-    isik("POINT", (0, T_Y1 - 12, T_Z), 60000, lin(hex3("#e0d0ff")))
+    isik("POINT", (0, T_Y1 - 12, T_Z), 22000, lin(hex3("#e0d0ff")))
     sc.use_nodes = True
     nt2 = sc.node_tree; nt2.nodes.clear()
     rl = nt2.nodes.new("CompositorNodeRLayers")

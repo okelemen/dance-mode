@@ -141,12 +141,12 @@ function sahneCiz(t) {
 
 // REF-061 tüneli: kameraya akan neon altıgen halkalar + küp ışıklarında pırıltı (Blender tünelinin üstünde, hareket hissi)
 const TP = rng(61);
-const TPIR = Array.from({ length: 90 }, () => ({ a: TP() * 6.283, r: 0.55 + TP() * 0.45, f: TP() * 6.28, h: 0.8 + TP() * 2 }));
+const TPIR = Array.from({ length: 35 }, () => ({ a: TP() * 6.283, r: 0.55 + TP() * 0.45, f: TP() * 6.28, h: 0.8 + TP() * 2 }));
 function tunelHareket(t) {
   const ox = W / 2, oy = H * 0.47;
   cx.save(); cx.globalCompositeOperation = 'lighter';
   for (let j = 0; j < 5; j++) {                        // akan altıgen halkalar: uzaktan (küçük) yakına (büyük)
-    const p = ((t * 0.18 + j / 5) % 1), s = 0.08 + p * p * 1.9, a = Math.min(1, p * 4) * Math.min(1, (1 - p) * 3) * 0.55;
+    const p = ((t * 0.18 + j / 5) % 1), s = 0.08 + p * p * 1.9, a = Math.min(1, p * 4) * Math.min(1, (1 - p) * 3) * 0.35;
     const R = H * 0.62 * s;
     cx.beginPath();
     for (let i = 0; i <= 6; i++) { const q = -Math.PI / 2 + i * Math.PI / 3; const x = ox + Math.cos(q) * R * 1.12, y = oy + Math.sin(q) * R; i ? cx.lineTo(x, y) : cx.moveTo(x, y); }
@@ -158,7 +158,7 @@ function tunelHareket(t) {
     const a = Math.max(0, Math.sin(t * s.h + s.f)) ** 4; if (a < 0.03) continue;
     const x = ox + Math.cos(s.a) * W * 0.5 * s.r, y = oy + Math.sin(s.a) * H * 0.55 * s.r; if (y > H * 0.62) continue;
     const r = (6 + 14 * a) * k, g = cx.createRadialGradient(x, y, 0, x, y, r * 2.5);
-    g.addColorStop(0, `rgba(240,225,255,${0.8 * a})`); g.addColorStop(1, 'rgba(180,140,255,0)');
+    g.addColorStop(0, `rgba(240,225,255,${0.45 * a})`); g.addColorStop(1, 'rgba(180,140,255,0)');
     cx.fillStyle = g; cx.beginPath(); cx.arc(x, y, r * 2.5, 0, 6.283); cx.fill();
   }
   cx.restore();
@@ -315,7 +315,7 @@ function duvarIc(i, x, y, w, h, panel, maske, alfa) {
   kc.clearRect(0, 0, W, H);
   kc.drawImage(maske, ...MK);
   kc.globalCompositeOperation = 'source-in';
-  kc.fillStyle = 'rgba(20,6,50,0.10)'; kc.fillRect(x, y, w, h);        // REF-061: oyukta tünel olduğu gibi görünür
+  kc.fillStyle = 'rgba(20,6,50,0.28)'; kc.fillRect(x, y, w, h);        // REF-061: oyukta tünel görünür (kesit 1: uzak parlama oyuğu beyaz gösteriyordu)
   kc.globalCompositeOperation = 'source-over';
   cx.save(); cx.globalAlpha = alfa; cx.drawImage(KAT, 0, 0); cx.restore();
   // 2) panel, oyuk delinmiş; gölgesi (renkli ışıltı) oyuğun kenarına taşar = parlak kenar
@@ -350,7 +350,7 @@ function kapiKutusu() {
 }
 // REF-061: duvar gelmeden kapının kirişinden asılı neon "Coming Soon" tabelası (yazı stili bizim: Titan, pembe/camgöbeği neon)
 function bosPanel(t, alfa = 1) {
-  const A = aciklik(), tw = A.w * 0.46, th = tw * 0.52, x = A.x + A.w / 2 - tw / 2, y = A.y + A.h * 0.05;
+  const A = aciklik(), tw = A.w * 0.64, th = tw * 0.5, x = A.x + A.w / 2 - tw / 2, y = A.y + A.h * 0.1;   // kesit 1: tabela küçüktü
   cx.save(); cx.globalAlpha = alfa;
   cx.strokeStyle = 'rgba(230,225,255,0.9)'; cx.lineWidth = 2 * k;                   // askı telleri
   cx.beginPath(); cx.moveTo(x + tw * 0.2, A.y); cx.lineTo(x + tw * 0.2, y); cx.moveTo(x + tw * 0.8, A.y); cx.lineTo(x + tw * 0.8, y); cx.stroke();
@@ -408,7 +408,7 @@ function sayimCiz(e) {
   const q = (e.p * 3) % 1;
   const s = 1.25 - 0.25 * ease(Math.min(1, q / 0.25));
   // REF-061: ekranı kaplayan yarı saydam, eğik dev rakam (önden geçer gibi büyür, solar)
-  cx.save(); cx.globalAlpha = 0.55 * Math.min(1, (1 - q) / 0.3) * Math.min(1, q / 0.08 + 0.2);
+  cx.save(); cx.globalAlpha = 0.32 * Math.min(1, (1 - q) / 0.3) * Math.min(1, q / 0.08 + 0.2);
   cx.translate(W / 2, H * 0.5); cx.transform(1, 0, -0.16, 1, 0, 0);
   cx.font = F(1000 * k * (0.9 + 0.35 * q)); cx.textAlign = 'center'; cx.textBaseline = 'middle';
   cx.fillStyle = 'rgba(235,235,245,0.85)'; cx.fillText(String(n), 0, 40 * k);

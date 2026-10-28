@@ -12,7 +12,7 @@
  "kart_vurus": {"basla": 8, "abone": 12},
  "giris_dizisi": [
   {"tip": "acilis", "vurus": 12},
-  {"tip": "yazi", "metin": "WELCOME BACK", "alt": "TO YOUR DAILY WARM UP!", "vurus": 8},
+  {"tip": "yazi", "metin": "WELCOME BACK", "alt": "TO YOUR DAILY WARM UP!", "px": 118, "vurus": 8},
   {"tip": "nasil", "metin": "MATCH THE SHAPE", "alt": "BEFORE THE WALL ARRIVES!", "vurus": 12}
  ],
  "ovgu_kart": {"her": 5, "vurus": 4, "metin": ["Nice and easy!", "Great balance!", "Keep it flowing!", "Looking strong!", "Smooth moves!"]},
