@@ -68,7 +68,9 @@ d = ImageDraw.Draw(im)
 # beyaz-mavimsi yuz, KOYU KONTUR YOK; renkli kisim harf GRUPLARINA gore (HU pembe, MA camgobegi, N-TET altin, RIS mor) parlayan
 # neon kabartma; kabartma perspektifli (ortanin solundaki harflerde sola-asagi, sagindakilerde saga-asagi); harfler hafif oynak.
 TFONT = os.path.join(KOK, "05-kapak", "fontlar", "TitanOne.ttf")
-GRUP = {"HUMAN TETRIS": ["#ff5fd2", "#ff5fd2", "#3fe8dc", "#3fe8dc", "#e9c06a", None, "#e9c06a", "#e9c06a", "#e9c06a", "#a57cff", "#a57cff", "#a57cff"]}
+# kullanici 28 Eki: "yazilar cok parlak, parlakligini kis" -> yuz saf beyaz degil kirli acik gri-lavanta, isilti zayif, kabartma bir ton koyu
+YUZ = "#d4d6e2"
+GRUP = {"HUMAN TETRIS": ["#d64eb0", "#d64eb0", "#34bfb6", "#34bfb6", "#c49f58", None, "#c49f58", "#c49f58", "#c49f58", "#8a68d6", "#8a68d6", "#8a68d6"]}
 ETIKET = ["#ff5fd2", "#3fe8dc", "#e9c06a", "#a57cff"]
 
 
@@ -81,7 +83,7 @@ def harf_resmi(c, boy, renk, yon, aci, font=None, derin_oran=0.09, gen=1.08):
     kal = int(boy * 0.045) if font == "fredoka" else 0   # Fredoka Bold referans etiketinden ince: ayni renkte kontur ile kalinlastir
     for t in range(derin, 0, -1):                        # renkli kabartma (perspektif yonunde)
         kd.text((ox + yon * t, oy + t), c, font=f, fill=renk, stroke_width=kal, stroke_fill=renk)
-    kd.text((ox, oy), c, font=f, fill="#f2f7ff", stroke_width=kal, stroke_fill="#f2f7ff")
+    kd.text((ox, oy), c, font=f, fill=YUZ, stroke_width=kal, stroke_fill=YUZ)
     k = k.resize((int(k.width * gen), k.height), Image.LANCZOS)          # Titan One'i referansin genisligine yaklastir
     return k.rotate(aci, resample=Image.BICUBIC, expand=True), f.getlength(c) * gen
 
@@ -117,10 +119,10 @@ def kabartma(metin, cx, cy, boy, renkler=None, oynak=False, font=None, derin_ora
 
 # yan etiketler (siluetten once)
 # yan etiketler basligla AYNI font (kullanici 28 Eki: "ayni fontlar olsun"), duz hizada, her harfe ayri renkli ince kabartma
-GOKKUSAGI = ["#ff5fd2", "#ffd84f", "#3fe8dc", "#a57cff", "#5dffb0", "#ff8a3d"]
-kabartma("X1 Player", 245, 222, 66, GOKKUSAGI, derin_oran=0.06, gen=1.04, isilti_guc=0.35)
-kabartma("Full Body", 1075, 214, 66, GOKKUSAGI, derin_oran=0.06, gen=1.04, isilti_guc=0.35)
-kabartma(a.no, 1150, 322, 72, GOKKUSAGI, derin_oran=0.06, gen=1.04, isilti_guc=0.35)
+GOKKUSAGI = ["#d64eb0", "#d4b442", "#34bfb6", "#8a68d6", "#4ec892", "#d47334"]
+kabartma("X1 Player", 245, 222, 66, GOKKUSAGI, derin_oran=0.06, gen=1.04, isilti_guc=0.12)
+kabartma("Full Body", 1075, 214, 66, GOKKUSAGI, derin_oran=0.06, gen=1.04, isilti_guc=0.12)
+kabartma(a.no, 1150, 322, 72, GOKKUSAGI, derin_oran=0.06, gen=1.04, isilti_guc=0.12)
 
 # siluet: duz simsiyah + kalin beyaz dis kontur, tam boy, tabani alt kenarda
 sb = int(a.boy); sw = int(sb * maske.width / maske.height)
@@ -133,7 +135,7 @@ im.paste((255, 255, 255, 255), (sx - 20, sy - 20), kont)
 im.paste((0, 0, 0, 255), (sx, sy), sa)
 
 # baslik en onde
-kabartma("HUMAN TETRIS", W / 2, 74, 132, derin_oran=0.065, isilti_guc=0.95)   # kullanici 28 Eki: harfler simetrik, duz hizada (oynaklik yok)
+kabartma("HUMAN TETRIS", W / 2, 74, 132, derin_oran=0.065, isilti_guc=0.4)   # kullanici 28 Eki: harfler simetrik, duz hizada (oynaklik yok)
 
 out = im.convert("RGB")
 out.save(a.cikti, quality=95)
