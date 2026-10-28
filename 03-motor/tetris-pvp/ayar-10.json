@@ -1,0 +1,37 @@
+{
+ "_not": "HUMAN TETRIS 10. video (REF-061, HumanWarmUp 'HUMAN TETRIS | Immersive Interactive Warm Up | Easy Daily Routine | Full Body | 1 Players'), kullanici 28 Eki 2026: 1 oyuncu, ~29 tur x 10 sn, SUBSCRIBE her 15 sn kalir, VS/boksor acilisi kalir (tek oyuncu: YOU vs THE WALL), koc sesi yok. Tur karti yok (REF-061 tek akis); dongu tabela -> ! uyari -> dev 3-2-1 -> duz renkli duvar. Ovgu kartlari siyah zemin + hiz cizgisi, metinler bizim. Muzik henuz yok: kesit 120 BPM yer tutucu.",
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-10",
+ "sayfa": "sahne7.html",
+ "bpm": 120,
+ "muzik": "henuz yok (Suno brief bekleniyor)",
+ "duvar": "duvar-listesi-10.json",
+ "duvar_vurus": 20,
+ "zaman_vurus": {"kart": 6, "say": 6, "buyu": 4, "gec": 2},
+ "tur_kart_yok": true,
+ "kart_vurus": {"basla": 8, "abone": 12},
+ "giris_dizisi": [
+  {"tip": "acilis", "vurus": 12},
+  {"tip": "yazi", "metin": "WELCOME BACK", "alt": "TO YOUR DAILY WARM UP!", "vurus": 8},
+  {"tip": "nasil", "metin": "MATCH THE SHAPE", "alt": "BEFORE THE WALL ARRIVES!", "vurus": 12}
+ ],
+ "ovgu_kart": {"her": 5, "vurus": 4, "metin": ["Nice and easy!", "Great balance!", "Keep it flowing!", "Looking strong!", "Smooth moves!"]},
+ "kapanis": [
+  {"tip": "yazi", "metin": "ROUTINE", "alt": "COMPLETE!", "vurus": 8}
+ ],
+ "tema": {
+  "tekOyuncu": true,
+  "varlik": "/03-motor/tetris-pvp/varlik-10-sahne/",
+  "maskeVarlik": "/03-motor/tetris-pvp/varlik-10/",
+  "maskeKlasor": "poz/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-08-boksor/",
+  "p1": "#3d8bff", "p1koyu": "#0b3a9e", "p1acik": "#d6e6ff",
+  "p2": "#ff3ea5", "p2koyu": "#a0105c", "p2acik": "#ffd6ec",
+  "vsEtiket": ["YOU", "WALL"],
+  "vsAlt": "HUMAN TETRIS · 1 PLAYER",
+  "duvarRenk": ["#22d36a", "#ff7a3a", "#5ff0f0", "#ff2fb8", "#f2e23a", "#ff4a5e", "#a45bff", "#ffa82a", "#3fe0b0", "#58b8ff"],
+  "sayac": "Mission",
+  "aboneAlt": "NEW BATTLE EVERY DAY",
+  "fener": false
+ }
+}

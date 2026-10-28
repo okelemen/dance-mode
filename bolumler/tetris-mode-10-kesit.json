@@ -1,0 +1,117 @@
+{
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-10",
+ "bpm": 120.0,
+ "toplam_olcu": 31,
+ "toplam_duvar": 4,
+ "zaman": {
+  "kart": 3.0,
+  "say": 3.0,
+  "buyu": 2.0,
+  "gec": 1.0,
+  "sure": 10.0
+ },
+ "kartlar": [
+  {
+   "tip": "acilis",
+   "t": 0.0,
+   "sure": 6.0
+  },
+  {
+   "tip": "yazi",
+   "metin": "WELCOME BACK",
+   "alt": "TO YOUR DAILY WARM UP!",
+   "t": 6.0,
+   "sure": 4.0
+  },
+  {
+   "tip": "nasil",
+   "metin": "MATCH THE SHAPE",
+   "alt": "BEFORE THE WALL ARRIVES!",
+   "t": 10.0,
+   "sure": 6.0
+  },
+  {
+   "t": 16.0,
+   "sure": 4.0,
+   "tip": "basla"
+  },
+  {
+   "t": 40.0,
+   "sure": 2.0,
+   "tip": "ovgu_kart",
+   "metin": "Nice and easy!"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 20.0,
+   "p1": "daily-lateral-reach-low-stance",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 5,
+   "tur": 1,
+   "t0": 30.0,
+   "p1": "daily-forward-swing-arms",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 14,
+   "tur": 2,
+   "t0": 42.0,
+   "p1": "daily-lunge-punch-forward",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 23,
+   "tur": 3,
+   "t0": 52.0,
+   "p1": "daily-knee-push-up",
+   "ovgu": "AMAZING!"
+  }
+ ],
+ "abone": [
+  16.0,
+  30.0,
+  45.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "henuz yok (Suno brief bekleniyor)",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne7.html.",
+ "tema": {
+  "tekOyuncu": true,
+  "varlik": "/03-motor/tetris-pvp/varlik-10-sahne/",
+  "maskeVarlik": "/03-motor/tetris-pvp/varlik-10/",
+  "maskeKlasor": "poz/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-08-boksor/",
+  "p1": "#3d8bff",
+  "p1koyu": "#0b3a9e",
+  "p1acik": "#d6e6ff",
+  "p2": "#ff3ea5",
+  "p2koyu": "#a0105c",
+  "p2acik": "#ffd6ec",
+  "vsEtiket": [
+   "YOU",
+   "WALL"
+  ],
+  "vsAlt": "HUMAN TETRIS · 1 PLAYER",
+  "duvarRenk": [
+   "#22d36a",
+   "#ff7a3a",
+   "#5ff0f0",
+   "#ff2fb8",
+   "#f2e23a",
+   "#ff4a5e",
+   "#a45bff",
+   "#ffa82a",
+   "#3fe0b0",
+   "#58b8ff"
+  ],
+  "sayac": "Mission",
+  "aboneAlt": "NEW BATTLE EVERY DAY",
+  "fener": false
+ }
+}

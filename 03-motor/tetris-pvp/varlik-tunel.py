@@ -15,9 +15,11 @@ Ciktilar (sahne7.html 2B'de birlestirir, kamera sabit):
 """
 
 YERLESIM.clear()
-KAP = {"y": 12.0, "w": 7.4, "h": 3.6, "kule": 0.42, "kiris": 0.42}      # aciklik 6,56 x 3,6
-YOL_W = 4.6
-T_R, T_Z = 8.4, 3.2            # tunel: sivri tepeli altigen, yaricap / merkez yuksekligi
+KAP = {"y": 11.0, "w": 7.4, "h": 3.6, "kule": 0.42, "kiris": 0.42}      # aciklik 6,56 x 3,6
+# sahne 1 dersi: REF-061 kamerasi yatay (hafif yukari), kapi acikligi ekranin ~%25 eni, alt kenari ~%72 boyda
+KAM = {"z": 2.6, "egim": -3.0, "lens": 18.0, "sensor": 24.0}
+YOL_W = 7.6
+T_R, T_Z = 10.5, 3.6            # tunel: sivri tepeli altigen, yaricap / merkez yuksekligi
 T_Y0, T_Y1 = -4.0, 150.0
 PEMBE, CAMGOBEGI, MOR = "#ff4fd8", "#3fe8ff", "#9b5bff"
 
@@ -34,7 +36,7 @@ def kamera(sc):
 def mat_metal(ad, renk, purluk):
     m = bpy.data.materials.new(ad); m.use_nodes = True
     b = m.node_tree.nodes["Principled BSDF"]
-    b.inputs["Base Color"].default_value = (*renk, 1); b.inputs["Metallic"].default_value = 0.85
+    b.inputs["Base Color"].default_value = (*renk, 1); b.inputs["Metallic"].default_value = 0.95
     b.inputs["Roughness"].default_value = purluk
     return m
 
@@ -76,11 +78,11 @@ def kup_kaplama(rnd):
         en = (Vector((0, 0, T_Z)) - Vector((orta.x, 0, orta.z))).normalized()
         if orta.z < 0.5:          # alt iki yuz koprunun altinda, gorunmuyor
             continue
-        hucre = 0.9
+        hucre = 0.62
         nu = int(L / hucre)
         y = T_Y0
         while y < T_Y1:
-            ad = hucre * (1 + 0.6 * (y > 40) + 1.2 * (y > 80))       # uzakta seyrek (gorunmez ayrinti icin poligon harcama)
+            ad = hucre * (1 + 0.8 * (y > 30) + 1.6 * (y > 70))       # uzakta seyrek (gorunmez ayrinti icin poligon harcama)
             for j in range(nu):
                 if rnd.random() < 0.08:
                     continue
@@ -95,7 +97,7 @@ def kup_kaplama(rnd):
     for p, m in zip(me.polygons, mi):
         p.material_index = m
     o = bpy.data.objects.new("kupler", me); bpy.context.collection.objects.link(o)
-    for ad_, c, p in (("m_lav", "#b8a8ff", 0.22), ("m_mor", "#6a48d8", 0.3), ("m_gum", "#e4dcff", 0.18)):
+    for ad_, c, p in (("m_lav", "#c4b6f2", 0.16), ("m_mor", "#7a58c8", 0.22), ("m_gum", "#e8e4f4", 0.12)):   # sahne 1: fazla mavi -> gumus/lavanta
         o.data.materials.append(mat_metal(ad_, lin(hex3(c)), p))
     for ad_, c, g in (("k_pem", "#ff8ae8", 7), ("k_cam", "#8af4ff", 7), ("k_bey", "#f4eeff", 9)):
         o.data.materials.append(mat_emis(ad_, lin(hex3(c)), g))
@@ -105,14 +107,14 @@ def kup_kaplama(rnd):
 def neon_cerceveler():
     K = altigen_koseler()
     mats = [mat_emis("neon_p", lin(hex3(PEMBE)), 12), mat_emis("neon_m", lin(hex3(MOR)), 12)]
-    y, j = 15.0, 0
+    y, j = 3.0, 0
     while y < T_Y1 - 6:
         for i in range(6):
             (x0, z0), (x1, z1) = K[i], K[(i + 1) % 6]
             if (z0 + z1) / 2 < 0.5:
                 continue
             boru((x0 * 0.97, y, T_Z + (z0 - T_Z) * 0.97), (x1 * 0.97, y, T_Z + (z1 - T_Z) * 0.97), 0.09, mats[j % 2])
-        y += 9.0; j += 1
+        y += 7.0; j += 1
 
 
 def uzak_sis():
@@ -166,9 +168,10 @@ def kopru_yol():
     yuvarlak_kutu("yol", (0, (0.3 + T_Y1) / 2, -0.2), (YOL_W, T_Y1 - 0.3, 0.4), yol, egim=0.05, seg=2)
     beyaz = mat_emis("chev", lin(hex3("#f6f2ff")), 4.0)
     hw = YOL_W / 2 - 0.55
-    for yy in (0.9, 2.3, 3.7, 5.1, 6.5, 7.9, 9.3, 10.7):
-        # tepesi gidis yonune (uzaga) bakan genis V bant (REF-061)
-        sekil("chev", [(-hw, yy), (0, yy + 0.62), (hw, yy), (hw, yy + 0.34), (0, yy + 0.96), (-hw, yy + 0.34)], beyaz, konum=(0, 0, 0.03))
+    hw = 1.5
+    for yy in (2.2, 3.5, 4.8, 6.1, 7.4, 8.7, 10.0):
+        # REF-061: tepesi kameraya bakan beyaz V bantlar (sahne 1'de ters cizilmisti)
+        sekil("chev", [(-hw, yy + 0.62), (0, yy), (hw, yy + 0.62), (hw, yy + 0.96), (0, yy + 0.34), (-hw, yy + 0.96)], beyaz, konum=(0, 0, 0.03))
     for s, c in ((-1, PEMBE), (1, CAMGOBEGI)):
         boru((s * (YOL_W / 2 - 0.08), 0.3, 0.03), (s * (YOL_W / 2 - 0.08), T_Y1, 0.03), 0.04, mat_emis("kenar%d" % s, lin(hex3(c)), 7))
 
@@ -178,21 +181,23 @@ def korkuluk():
     cam = mat_cam("kork_cam")
     for s, c in ((-1, PEMBE), (1, CAMGOBEGI)):
         x = s * (YOL_W / 2 + 0.25)
+        hk = 0.9
         neon = mat_emis("kork_neon%d" % s, lin(hex3(c)), 8)
         ys = [0.6 + i * 1.8 for i in range(int((60 - 0.6) / 1.8) + 1)]
         for yy in ys:
-            yuvarlak_kutu("dikme", (x, yy, 0.55), (0.08, 0.08, 1.1), metal, egim=0.02, seg=2)
-        yuvarlak_kutu("tirabzan", (x, (ys[0] + ys[-1]) / 2, 1.12), (0.12, ys[-1] - ys[0], 0.08), metal, egim=0.03, seg=2)
-        yuvarlak_kutu("cam", (x, (ys[0] + ys[-1]) / 2, 0.58), (0.03, ys[-1] - ys[0], 0.95), cam, egim=0.0, seg=1)
-        for zz in (0.08, 1.02):
-            boru((x, ys[0], zz), (x, ys[-1], zz), 0.035, neon)
-        # korkulukta yere yatik cift ok (REF-061 '<<' isaretleri), kameraya dogru
-        okm = mat_emis("ok%d" % s, lin(hex3(PEMBE)), 6)
-        for y0 in (2.0, 5.5):
-            for j in range(2):
-                yy = y0 + j * 0.5; x0 = s * (YOL_W / 2 + 1.3)
-                pts = [(-0.55, 0.42), (0, 0), (0.55, 0.42), (0.55, 0.66), (0, 0.24), (-0.55, 0.66)]
-                sekil("ok", [(x0 + px, yy + py) for px, py in pts], okm, konum=(0, 0, 1.15))
+            yuvarlak_kutu("dikme", (x, yy, hk / 2), (0.07, 0.07, hk), metal, egim=0.02, seg=2)
+        yuvarlak_kutu("tirabzan", (x, (ys[0] + ys[-1]) / 2, hk + 0.02), (0.1, ys[-1] - ys[0], 0.07), metal, egim=0.03, seg=2)
+        yuvarlak_kutu("cam", (x, (ys[0] + ys[-1]) / 2, hk / 2), (0.03, ys[-1] - ys[0], hk * 0.86), cam, egim=0.0, seg=1)
+        for zz in (0.06, hk - 0.06):
+            boru((x, ys[0], zz), (x, ys[-1], zz), 0.03, neon)
+        # REF-061: korkuluk camında kameraya bakan pembe '<<<' oklar (y-z duzleminde dik sekil)
+        okm = mat_emis("ok%d" % s, lin(hex3("#ff7ae6")), 5)
+        for y0 in (1.2, 4.0, 7.0):
+            for j in range(3):
+                yy = y0 + j * 0.45
+                pts = [(yy + 0.35, 0.18), (yy, 0.45), (yy + 0.35, 0.72), (yy + 0.55, 0.72), (yy + 0.2, 0.45), (yy + 0.55, 0.18)]
+                me = bpy.data.meshes.new("ok"); me.from_pydata([(x - s * 0.04, a, b) for a, b in pts], [], [list(range(6))]); me.update()
+                ob = bpy.data.objects.new("ok", me); bpy.context.collection.objects.link(ob); ob.data.materials.append(okm)
 
 
 def kapi():
@@ -216,10 +221,10 @@ def serit_katmani():
     korkuluk()
     kapi()
     # yol yansimasi: solda pembe, sagda camgobegi (REF-061), kapiya ust isik
-    isik("AREA", (-4.5, 6, 2.5), 1400, lin(hex3(PEMBE)), 6, yon=(-1, 8, 0))
-    isik("AREA", (4.5, 6, 2.5), 1400, lin(hex3(CAMGOBEGI)), 6, yon=(1, 8, 0))
-    isik("AREA", (-4.5, 20, 2.5), 1600, lin(hex3(PEMBE)), 6, yon=(-1, 24, 0))
-    isik("AREA", (4.5, 20, 2.5), 1600, lin(hex3(CAMGOBEGI)), 6, yon=(1, 24, 0))
+    isik("AREA", (-6, 6, 2.5), 1800, lin(hex3(PEMBE)), 6, yon=(-2, 8, 0))
+    isik("AREA", (6, 6, 2.5), 1800, lin(hex3(CAMGOBEGI)), 6, yon=(2, 8, 0))
+    isik("AREA", (-6, 20, 2.5), 2000, lin(hex3(PEMBE)), 6, yon=(-2, 24, 0))
+    isik("AREA", (6, 20, 2.5), 2000, lin(hex3(CAMGOBEGI)), 6, yon=(2, 24, 0))
     isik("AREA", (0, Y - 4, 7), 900, lin(hex3("#f0e8ff")), 4, yon=(0, Y, 2))
     W_, H_, KK = KAP["w"], KAP["h"], KAP["kule"]
     ic = W_ / 2 - KK

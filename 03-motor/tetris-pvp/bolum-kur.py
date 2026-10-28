@@ -21,7 +21,8 @@ V = 60 / BPM
 r = lambda x: round(x, 4)
 # duvar_vurus: 6. video (REF-057, dongu 12,0 sn olculdu) 24 vurus; eskiler 28
 DV = AYAR.get("duvar_vurus", 28)
-Z = {"kart": r(4 * V), "say": r(6 * V), "buyu": r(12 * V), "gec": r(2 * V), "sure": r(DV * V)}
+ZV = {"kart": 4, "say": 6, "buyu": 12, "gec": 2, **AYAR.get("zaman_vurus", {})}   # 10. video (REF-061): tabela+uyari 6, 3-2-1 6, buyume 4
+Z = {"kart": r(ZV["kart"] * V), "say": r(ZV["say"] * V), "buyu": r(ZV["buyu"] * V), "gec": r(ZV["gec"] * V), "sure": r(DV * V)}
 KV = AYAR.get("kart_vurus", {})   # kart suresi vurus olarak (varsayilan 8 = 2 olcu); 3. video: tam bolum 9,5-10 dk icin uzun kartlar
 KART = 8 * V
 KS = lambda tip, v=8: KV.get(tip, v) * V
@@ -55,11 +56,12 @@ for tur in sorted({d["tur"] for d in DUVAR}):     # 8. video (REF-059): 4 tur
         continue
     if str(tur) in AYAR.get("gecis", {}) and not KESIT:   # tur kartindan once iki kiskirtici kart (REF-057)
         dizi(AYAR["gecis"][str(tur)])
-    m, alt = TUR_KART[tur]
-    k = {"t": r(t), "sure": r(KS("tur")), "tip": "tur", "tur": tur, "metin": m}
-    if alt: k["alt"] = alt
-    kartlar.append(k); t += KS("tur")
-    if tur == 1:
+    if not AYAR.get("tur_kart_yok"):          # 10. video (REF-061): tur karti yok, gruplar yalniz siralama
+        m, alt = TUR_KART[tur]
+        k = {"t": r(t), "sure": r(KS("tur")), "tip": "tur", "tur": tur, "metin": m}
+        if alt: k["alt"] = alt
+        kartlar.append(k); t += KS("tur")
+    if tur == min(d["tur"] for d in DUVAR):
         kartlar.append({"t": r(t), "sure": r(KS("basla")), "tip": "basla"}); t += KS("basla")
     for d in [x for x in DUVAR if x["tur"] == tur and (not KESIT or x["no"] in KESIT)]:
         n = d["no"]
@@ -67,6 +69,10 @@ for tur in sorted({d["tur"] for d in DUVAR}):     # 8. video (REF-059): 4 tur
         duvarlar.append({"no": n, "tur": tur, "t0": r(t), **{k_: v_ for k_, v_ in d.items() if k_ not in ("tur", "no")},
                          "ovgu": OVGU[(n - 1) % len(OVGU)]})
         t += Z["sure"]
+        OK_ = AYAR.get("ovgu_kart")           # 10. video (REF-061): birkac duvarda bir siyah ovgu karti
+        if OK_ and n % OK_["her"] == 0 and n < len(DUVAR):
+            kartlar.append({"t": r(t), "sure": r(OK_["vurus"] * V), "tip": "ovgu_kart", "metin": OK_["metin"][(n // OK_["her"] - 1) % len(OK_["metin"])]})
+            t += OK_["vurus"] * V
 if not KESIT and "kapanis" in AYAR:       # 6. video: WRAP yerine kendi kapanis kartlarimiz
     dizi(AYAR["kapanis"])
     kartlar.append({"t": r(t), "sure": r(KS("abone", 12)), "tip": "abone"}); t += KS("abone", 12)
