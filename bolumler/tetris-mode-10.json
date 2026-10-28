@@ -1,69 +1,69 @@
 {
  "seri": "HUMAN TETRIS",
  "bolum": "human-tetris-10",
- "bpm": 120.0,
+ "bpm": 125.0,
  "toplam_olcu": 165,
  "toplam_duvar": 29,
  "zaman": {
-  "kart": 3.0,
-  "say": 3.0,
-  "buyu": 2.0,
-  "gec": 1.0,
-  "sure": 10.0
+  "kart": 2.88,
+  "say": 2.88,
+  "buyu": 1.92,
+  "gec": 0.96,
+  "sure": 9.6
  },
  "kartlar": [
   {
    "tip": "acilis",
    "t": 0.0,
-   "sure": 6.0
+   "sure": 5.76
   },
   {
    "tip": "yazi",
    "metin": "WELCOME BACK",
    "alt": "TO YOUR DAILY WARM UP!",
    "px": 118,
-   "t": 6.0,
-   "sure": 4.0
+   "t": 5.76,
+   "sure": 3.84
   },
   {
    "tip": "nasil",
    "metin": "MATCH THE SHAPE",
    "alt": "BEFORE THE WALL ARRIVES!",
-   "t": 10.0,
-   "sure": 6.0
+   "t": 9.6,
+   "sure": 5.76
   },
   {
-   "t": 16.0,
-   "sure": 4.0,
+   "t": 15.36,
+   "sure": 3.84,
    "tip": "basla"
   },
   {
-   "t": 70.0,
-   "sure": 2.0,
+   "t": 67.2,
+   "sure": 1.92,
    "tip": "ovgu_kart",
    "metin": "Nice and easy!"
   },
   {
-   "t": 122.0,
-   "sure": 2.0,
+   "t": 117.12,
+   "sure": 1.92,
    "tip": "ovgu_kart",
    "metin": "Great balance!"
   },
   {
-   "t": 174.0,
-   "sure": 2.0,
+   "t": 167.04,
+   "sure": 1.92,
    "tip": "ovgu_kart",
    "metin": "Keep it flowing!"
   },
   {
-   "t": 226.0,
-   "sure": 2.0,
+   "t": 216.96,
+   "sure": 1.92,
    "tip": "ovgu_kart",
    "metin": "Looking strong!"
   },
   {
-   "t": 278.0,
-   "sure": 2.0,
+   "t": 266.88,
+   "sure": 1.92,
    "tip": "ovgu_kart",
    "metin": "Smooth moves!"
   },
@@ -71,12 +71,12 @@
    "tip": "yazi",
    "metin": "ROUTINE",
    "alt": "COMPLETE!",
-   "t": 320.0,
-   "sure": 4.0
+   "t": 307.2,
+   "sure": 3.84
   },
   {
-   "t": 324.0,
-   "sure": 6.0,
+   "t": 311.04,
+   "sure": 5.76,
    "tip": "abone"
   }
  ],
@@ -84,232 +84,231 @@
   {
    "no": 1,
    "tur": 1,
-   "t0": 20.0,
+   "t0": 19.2,
    "p1": "daily-lateral-reach-low-stance",
    "ovgu": "GREAT!"
   },
   {
    "no": 2,
    "tur": 1,
-   "t0": 30.0,
+   "t0": 28.8,
    "p1": "daily-side-stretch-arm-over",
    "ovgu": "EXCELLENT!"
   },
   {
    "no": 3,
    "tur": 1,
-   "t0": 40.0,
+   "t0": 38.4,
    "p1": "daily-shoulder-roll-arms-back",
    "ovgu": "PERFECT!"
   },
   {
    "no": 4,
    "tur": 1,
-   "t0": 50.0,
+   "t0": 48.0,
    "p1": "daily-reach-up-toe-point",
    "ovgu": "AWESOME!"
   },
   {
    "no": 5,
    "tur": 1,
-   "t0": 60.0,
+   "t0": 57.6,
    "p1": "daily-forward-swing-arms",
    "ovgu": "AMAZING!"
   },
   {
    "no": 6,
    "tur": 1,
-   "t0": 72.0,
+   "t0": 69.12,
    "p1": "daily-uppercut-squat",
    "ovgu": "NICE MOVE!"
   },
   {
    "no": 7,
    "tur": 1,
-   "t0": 82.0,
+   "t0": 78.72,
    "p1": "daily-sun-salute-reach",
    "ovgu": "GREAT!"
   },
   {
    "no": 8,
    "tur": 1,
-   "t0": 92.0,
+   "t0": 88.32,
    "p1": "daily-knee-lift-arms-down-push",
    "ovgu": "EXCELLENT!"
   },
   {
    "no": 9,
    "tur": 1,
-   "t0": 102.0,
+   "t0": 97.92,
    "p1": "lift-halo-low-tap",
    "ovgu": "PERFECT!"
   },
   {
    "no": 10,
    "tur": 1,
-   "t0": 112.0,
+   "t0": 107.52,
    "p1": "flow-t-diag-wide",
    "ovgu": "AWESOME!"
   },
   {
    "no": 11,
    "tur": 2,
-   "t0": 124.0,
+   "t0": 119.04,
    "p1": "daily-front-kick-high-guard",
    "ovgu": "AMAZING!"
   },
   {
    "no": 12,
    "tur": 2,
-   "t0": 134.0,
+   "t0": 128.64,
    "p1": "daily-back-kick-lean",
    "ovgu": "NICE MOVE!"
   },
   {
    "no": 13,
    "tur": 2,
-   "t0": 144.0,
+   "t0": 138.24,
    "p1": "daily-side-kick-guard",
    "ovgu": "GREAT!"
   },
   {
    "no": 14,
    "tur": 2,
-   "t0": 154.0,
+   "t0": 147.84,
    "p1": "daily-lunge-punch-forward",
    "ovgu": "EXCELLENT!"
   },
   {
    "no": 15,
    "tur": 2,
-   "t0": 164.0,
+   "t0": 157.44,
    "p1": "daily-standing-quad-stretch-reach",
    "ovgu": "PERFECT!"
   },
   {
    "no": 16,
    "tur": 2,
-   "t0": 176.0,
+   "t0": 168.96,
    "p1": "daily-warrior-two-gaze-up-arm",
    "ovgu": "AWESOME!"
   },
   {
    "no": 17,
    "tur": 2,
-   "t0": 186.0,
+   "t0": 178.56,
    "p1": "daily-warrior-three-arms-back",
    "ovgu": "AMAZING!"
   },
   {
    "no": 18,
    "tur": 2,
-   "t0": 196.0,
+   "t0": 188.16,
    "p1": "glow-drift-118",
    "ovgu": "NICE MOVE!"
   },
   {
    "no": 19,
    "tur": 2,
-   "t0": 206.0,
+   "t0": 197.76,
    "p1": "flow-drift-121",
    "ovgu": "GREAT!"
   },
   {
    "no": 20,
    "tur": 2,
-   "t0": 216.0,
+   "t0": 207.36,
    "p1": "daily-drift-115",
    "ovgu": "EXCELLENT!"
   },
   {
    "no": 21,
    "tur": 3,
-   "t0": 228.0,
+   "t0": 218.88,
    "p1": "daily-down-dog-heels-up",
    "ovgu": "PERFECT!"
   },
   {
    "no": 22,
    "tur": 3,
-   "t0": 238.0,
+   "t0": 228.48,
    "p1": "daily-seated-side-reach",
    "ovgu": "AWESOME!"
   },
   {
    "no": 23,
    "tur": 3,
-   "t0": 248.0,
+   "t0": 238.08,
    "p1": "daily-knee-push-up",
    "ovgu": "AMAZING!"
   },
   {
    "no": 24,
    "tur": 3,
-   "t0": 258.0,
+   "t0": 247.68,
    "p1": "daily-kneeling-lunge-arms-up",
    "ovgu": "NICE MOVE!"
   },
   {
    "no": 25,
    "tur": 3,
-   "t0": 268.0,
+   "t0": 257.28,
    "p1": "daily-plank-forearms",
    "ovgu": "GREAT!"
   },
   {
    "no": 26,
    "tur": 3,
-   "t0": 280.0,
+   "t0": 268.8,
    "p1": "morning-drift-127",
    "ovgu": "EXCELLENT!"
   },
   {
    "no": 27,
    "tur": 3,
-   "t0": 290.0,
+   "t0": 278.4,
    "p1": "flow-drift-78",
    "ovgu": "PERFECT!"
   },
   {
    "no": 28,
    "tur": 3,
-   "t0": 300.0,
+   "t0": 288.0,
    "p1": "smooth-drift-88",
    "ovgu": "AWESOME!"
   },
   {
    "no": 29,
    "tur": 3,
-   "t0": 310.0,
+   "t0": 297.6,
    "p1": "morning-drift-135",
    "ovgu": "AMAZING!"
   }
  ],
  "abone": [
-  16.0,
+  15.5,
   30.0,
   45.0,
   60.0,
   75.0,
   90.0,
   105.0,
-  124.0,
+  120.0,
   135.0,
   150.0,
-  165.0,
+  169.0,
   180.0,
   195.0,
   210.0,
-  228.0,
+  225.0,
   240.0,
   255.0,
   270.0,
   285.0,
-  300.0,
-  315.0
+  300.0
  ],
  "abone_sure": 3.2,
- "muzik": "henuz yok (Suno brief bekleniyor)",
+ "muzik": "Neon Tunnel Wake-Up.wav (Suno, kullanici, 28 Eki 2026) -> neon-125d.wav (muzik-sabitle --hedef 125 --dogrusal, 123->127 kayiyordu) -> neon-125-diz.wav (muzik-diz-izgara, zayif kickli giris/araliklar cikarildi)",
  "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne7.html.",
  "tema": {
   "tekOyuncu": true,

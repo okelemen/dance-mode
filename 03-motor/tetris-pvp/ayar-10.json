@@ -1,10 +1,10 @@
 {
- "_not": "HUMAN TETRIS 10. video (REF-061, HumanWarmUp 'HUMAN TETRIS | Immersive Interactive Warm Up | Easy Daily Routine | Full Body | 1 Players'), kullanici 28 Eki 2026: 1 oyuncu, ~29 tur x 10 sn, SUBSCRIBE her 15 sn kalir, VS/boksor acilisi kalir (tek oyuncu: YOU vs THE WALL), koc sesi yok. Tur karti yok (REF-061 tek akis); dongu tabela -> ! uyari -> dev 3-2-1 -> duz renkli duvar. Ovgu kartlari siyah zemin + hiz cizgisi, metinler bizim. Muzik henuz yok: kesit 120 BPM yer tutucu.",
+ "_not": "HUMAN TETRIS 10. video (REF-061, HumanWarmUp 'HUMAN TETRIS | Immersive Interactive Warm Up | Easy Daily Routine | Full Body | 1 Players'), kullanici 28 Eki 2026: 1 oyuncu, ~29 tur x 10 sn, SUBSCRIBE her 15 sn kalir, VS/boksor acilisi kalir (tek oyuncu: YOU vs THE WALL), koc sesi yok. Tur karti yok (REF-061 tek akis); dongu tabela -> ! uyari -> dev 3-2-1 -> duz renkli duvar. Ovgu kartlari siyah zemin + hiz cizgisi, metinler bizim. Muzik: Neon Tunnel Wake-Up 125 BPM (sabitlendi); dongu 20 vurus = 9,6 sn.",
  "seri": "HUMAN TETRIS",
  "bolum": "human-tetris-10",
  "sayfa": "sahne7.html",
- "bpm": 120,
- "muzik": "henuz yok (Suno brief bekleniyor)",
+ "bpm": 125,
+ "muzik": "Neon Tunnel Wake-Up.wav (Suno, kullanici, 28 Eki 2026) -> neon-125d.wav (muzik-sabitle --hedef 125 --dogrusal, 123->127 kayiyordu) -> neon-125-diz.wav (muzik-diz-izgara, zayif kickli giris/araliklar cikarildi)",
  "duvar": "duvar-listesi-10.json",
  "duvar_vurus": 20,
  "zaman_vurus": {"kart": 6, "say": 6, "buyu": 4, "gec": 2},
