@@ -56,6 +56,11 @@ delik = Image.new("L", (pw, ph), 0); delik.paste(oy, ((pw - mw) // 2, int(ph * 0
 panel.putalpha(Image.eval(delik, lambda v: 255 - v))
 golge = Image.new("RGBA", (pw, ph), (20, 6, 50, 0)); golge.putalpha(delik.point(lambda v: int(v * 0.3)))
 im.alpha_composite(golge, (int(x0), int(y0))); im.alpha_composite(panel, (int(x0), int(y0)))
+# genel ton ayari YALNIZ arka plana (kullanici 28 Eki: "parlakligi biraz kisalim"; tum kapaga uygulaninca beyaz yazi griye donuyordu)
+if a.renk != 1.0:
+    im = ImageEnhance.Color(im).enhance(a.renk)
+if a.parlak != 1.0:
+    im = ImageEnhance.Brightness(im).enhance(a.parlak)
 
 d = ImageDraw.Draw(im)
 # baslik yazisi (kullanici 28 Eki 2026: "referans aldigin yaziyla ayni fontta mi, ayni tarzda mi?" -> yakin plan karsilastirma):
@@ -81,7 +86,7 @@ def harf_resmi(c, boy, renk, yon, aci, font=None, derin_oran=0.09, gen=1.08):
     return k.rotate(aci, resample=Image.BICUBIC, expand=True), f.getlength(c) * gen
 
 
-def kabartma(metin, cx, cy, boy, renkler=None, oynak=True, font=None, derin_oran=0.09, gen=1.08, isilti_guc=0.75):
+def kabartma(metin, cx, cy, boy, renkler=None, oynak=False, font=None, derin_oran=0.09, gen=1.08, isilti_guc=0.75):
     """REF-061 kapak yazi tarzi: beyaz harf + grup renginde parlayan neon kabartma, koyu kontur yok"""
     ARA = 1.06 if font else 0.96                        # etikette kalinlastirma konturu harfleri birlestiriyordu
     renkler = renkler or GRUP.get(metin) or [ETIKET[i % 4] for i in range(len(metin))]
@@ -111,11 +116,11 @@ def kabartma(metin, cx, cy, boy, renkler=None, oynak=True, font=None, derin_oran
 
 
 # yan etiketler (siluetten once)
-# yan etiketler REF-061'de baska yazi: daha ince yuvarlak (Fredoka kalin), her harfe ayri renkli ince kabartma, hafif isilti
+# yan etiketler basligla AYNI font (kullanici 28 Eki: "ayni fontlar olsun"), duz hizada, her harfe ayri renkli ince kabartma
 GOKKUSAGI = ["#ff5fd2", "#ffd84f", "#3fe8dc", "#a57cff", "#5dffb0", "#ff8a3d"]
-kabartma("X1 Player", 245, 222, 66, GOKKUSAGI, oynak=True, font="fredoka", derin_oran=0.06, gen=1.0, isilti_guc=0.35)
-kabartma("Full Body", 1075, 214, 66, GOKKUSAGI, oynak=True, font="fredoka", derin_oran=0.06, gen=1.0, isilti_guc=0.35)
-kabartma(a.no, 1150, 322, 72, GOKKUSAGI, oynak=True, font="fredoka", derin_oran=0.06, gen=1.0, isilti_guc=0.35)
+kabartma("X1 Player", 245, 222, 66, GOKKUSAGI, derin_oran=0.06, gen=1.04, isilti_guc=0.35)
+kabartma("Full Body", 1075, 214, 66, GOKKUSAGI, derin_oran=0.06, gen=1.04, isilti_guc=0.35)
+kabartma(a.no, 1150, 322, 72, GOKKUSAGI, derin_oran=0.06, gen=1.04, isilti_guc=0.35)
 
 # siluet: duz simsiyah + kalin beyaz dis kontur, tam boy, tabani alt kenarda
 sb = int(a.boy); sw = int(sb * maske.width / maske.height)
@@ -128,12 +133,8 @@ im.paste((255, 255, 255, 255), (sx - 20, sy - 20), kont)
 im.paste((0, 0, 0, 255), (sx, sy), sa)
 
 # baslik en onde
-kabartma("HUMAN TETRIS", W / 2, 74, 132, derin_oran=0.065, isilti_guc=0.95)
+kabartma("HUMAN TETRIS", W / 2, 74, 132, derin_oran=0.065, isilti_guc=0.95)   # kullanici 28 Eki: harfler simetrik, duz hizada (oynaklik yok)
 
 out = im.convert("RGB")
-if a.renk != 1.0:
-    out = ImageEnhance.Color(out).enhance(a.renk)
-if a.parlak != 1.0:
-    out = ImageEnhance.Brightness(out).enhance(a.parlak)
 out.save(a.cikti, quality=95)
 print("->", a.cikti)
