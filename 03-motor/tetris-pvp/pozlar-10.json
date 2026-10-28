@@ -1,0 +1,643 @@
+{
+ "_not": "TETRIS MODE PVP 10. video (REF-061, 1 oyuncu, 5 dk; poz-sec-10.py olcumle secildi) poz tanimlari. Acilar EKRAN duzleminde (pozlar.js dili): 0 asagi, 90 ekran-sag, 180 yukari, -90 ekran-sol. Kollar [ust kol, on kol], bacaklar [uyluk, baldir]. sol*/sag* = KARAKTERIN solu/sagi; karakter kameraya donukken sol = ekran SAGI. yon: on (kameraya donuk) | sag (profil, yuzu ekran sagina). govde: kalcadan boyna aci, bas: govdeye ek aci. Mixamo govdesi (siluet-govde.fbx) bu acilarla bukulur, duz siyah maske cikar (varlik.py).",
+ "pozlar": {
+  "daily-lateral-reach-low-stance": {
+   "ad": "Daily Lateral Reach Low Stance",
+   "yon": "on",
+   "govde": 165,
+   "bas": 0,
+   "sagKol": [
+    -110,
+    -110
+   ],
+   "solKol": [
+    8,
+    5
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ]
+  },
+  "daily-side-stretch-arm-over": {
+   "ad": "Daily Side Stretch Arm Over",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -165,
+    -150
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ]
+  },
+  "daily-shoulder-roll-arms-back": {
+   "ad": "Daily Shoulder Roll Arms Back",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    -60
+   ],
+   "solKol": [
+    -20,
+    -60
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "daily-reach-up-toe-point": {
+   "ad": "Daily Reach Up Toe Point",
+   "yon": "on",
+   "govde": 178,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    30
+   ]
+  },
+  "daily-forward-swing-arms": {
+   "ad": "Daily Forward Swing Arms",
+   "yon": "sag",
+   "govde": 170,
+   "bas": 0,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    -40,
+    -40
+   ],
+   "solBacak": [
+    5,
+    5
+   ],
+   "sagBacak": [
+    -5,
+    -5
+   ]
+  },
+  "daily-uppercut-squat": {
+   "ad": "Daily Uppercut Squat",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -160,
+    120
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ]
+  },
+  "daily-sun-salute-reach": {
+   "ad": "Daily Sun Salute Reach",
+   "yon": "on",
+   "govde": 186,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -12,
+    6
+   ],
+   "solBacak": [
+    12,
+    -6
+   ]
+  },
+  "daily-knee-lift-arms-down-push": {
+   "ad": "Daily Knee Lift Arms Down Push",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -80,
+    -8
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "lift-halo-low-tap": {
+   "ad": "Lift Halo Low Tap",
+   "yon": "on",
+   "govde": 160,
+   "bas": 0,
+   "sagKol": [
+    -160,
+    120
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "flow-t-diag-wide": {
+   "ad": "Flow T Diag Wide",
+   "yon": "on",
+   "govde": 200,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ]
+  },
+  "daily-front-kick-high-guard": {
+   "ad": "Daily Front Kick High Guard",
+   "yon": "sag",
+   "govde": 172,
+   "bas": 0,
+   "solKol": [
+    80,
+    150
+   ],
+   "sagKol": [
+    78,
+    148
+   ],
+   "solBacak": [
+    95,
+    95
+   ],
+   "sagBacak": [
+    0,
+    0
+   ]
+  },
+  "daily-back-kick-lean": {
+   "ad": "Daily Back Kick Lean",
+   "yon": "sag",
+   "govde": 120,
+   "bas": 0,
+   "solKol": [
+    60,
+    160
+   ],
+   "sagKol": [
+    58,
+    158
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -70,
+    -70
+   ]
+  },
+  "daily-side-kick-guard": {
+   "ad": "Daily Side Kick Guard",
+   "yon": "on",
+   "govde": 158,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    80
+   ]
+  },
+  "daily-lunge-punch-forward": {
+   "ad": "Daily Lunge Punch Forward",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    -30,
+    -150
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    45,
+    45
+   ]
+  },
+  "daily-standing-quad-stretch-reach": {
+   "ad": "Daily Standing Quad Stretch Reach",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    160,
+    160
+   ],
+   "sagKol": [
+    -150,
+    -170
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -10,
+    -170
+   ]
+  },
+  "daily-warrior-two-gaze-up-arm": {
+   "ad": "Daily Warrior Two Gaze Up Arm",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    45,
+    45
+   ]
+  },
+  "daily-warrior-three-arms-back": {
+   "ad": "Daily Warrior Three Arms Back",
+   "yon": "sag",
+   "govde": 95,
+   "bas": 0,
+   "solKol": [
+    -20,
+    -20
+   ],
+   "sagKol": [
+    -18,
+    -18
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -85,
+    -85
+   ]
+  },
+  "glow-drift-118": {
+   "ad": "Glow Drift 118",
+   "yon": "sag",
+   "govde": 125,
+   "bas": 0,
+   "solKol": [
+    178,
+    176
+   ],
+   "sagKol": [
+    60,
+    58
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -60
+   ]
+  },
+  "flow-drift-121": {
+   "ad": "Flow Drift 121",
+   "yon": "sag",
+   "govde": 150,
+   "bas": 0,
+   "solKol": [
+    155,
+    153
+   ],
+   "sagKol": [
+    155,
+    153
+   ],
+   "solBacak": [
+    60,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ]
+  },
+  "daily-drift-115": {
+   "ad": "Daily Drift 115",
+   "yon": "sag",
+   "govde": 125,
+   "bas": 0,
+   "solKol": [
+    130,
+    128
+   ],
+   "sagKol": [
+    -100,
+    -102
+   ],
+   "solBacak": [
+    60,
+    0
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ]
+  },
+  "daily-down-dog-heels-up": {
+   "ad": "Daily Down Dog Heels Up",
+   "yon": "sag",
+   "govde": 40,
+   "bas": 0,
+   "solKol": [
+    40,
+    40
+   ],
+   "sagKol": [
+    38,
+    38
+   ],
+   "solBacak": [
+    -40,
+    -40
+   ],
+   "sagBacak": [
+    -42,
+    -42
+   ]
+  },
+  "daily-seated-side-reach": {
+   "ad": "Daily Seated Side Reach",
+   "yon": "sag",
+   "govde": 195,
+   "bas": 0,
+   "solKol": [
+    -165,
+    -165
+   ],
+   "sagKol": [
+    -20,
+    -20
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    90,
+    90
+   ]
+  },
+  "daily-knee-push-up": {
+   "ad": "Daily Knee Push Up",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "daily-kneeling-lunge-arms-up": {
+   "ad": "Daily Kneeling Lunge Arms Up",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    175,
+    175
+   ],
+   "sagKol": [
+    173,
+    173
+   ],
+   "solBacak": [
+    95,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "daily-plank-forearms": {
+   "ad": "Daily Plank Forearms",
+   "yon": "sag",
+   "govde": 92,
+   "bas": 0,
+   "solKol": [
+    0,
+    90
+   ],
+   "sagKol": [
+    0,
+    90
+   ],
+   "solBacak": [
+    -86,
+    -86
+   ],
+   "sagBacak": [
+    -88,
+    -88
+   ]
+  },
+  "morning-drift-127": {
+   "ad": "Morning Drift 127",
+   "yon": "sag",
+   "govde": 125,
+   "bas": 0,
+   "solKol": [
+    20,
+    18
+   ],
+   "sagKol": [
+    -50,
+    -52
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ]
+  },
+  "flow-drift-78": {
+   "ad": "Flow Drift 78",
+   "yon": "sag",
+   "govde": 215,
+   "bas": 0,
+   "solKol": [
+    -100,
+    -102
+   ],
+   "sagKol": [
+    -150,
+    -152
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ]
+  },
+  "smooth-drift-88": {
+   "ad": "Smooth Drift 88",
+   "yon": "sag",
+   "govde": 50,
+   "bas": 0,
+   "solKol": [
+    100,
+    98
+   ],
+   "sagKol": [
+    100,
+    98
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    -60,
+    -60
+   ]
+  },
+  "morning-drift-135": {
+   "ad": "Morning Drift 135",
+   "yon": "sag",
+   "govde": 50,
+   "bas": 0,
+   "solKol": [
+    100,
+    98
+   ],
+   "sagKol": [
+    -100,
+    -102
+   ],
+   "solBacak": [
+    100,
+    -10
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  }
+ }
+}
