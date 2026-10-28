@@ -46,6 +46,11 @@ def main():
         t0 = d["t0"]
         a = t0 + Z["kart"]; b = a + Z["say"]; c = b + Z["buyu"]
         yerlestir(ef, ding(990, 0.2), t0 + 0.05, 0.5)                    # oyuncu kartlari pop
+        if B.get("tema", {}).get("tekOyuncu"):                           # 10. video (REF-061): "!" uyarisinda alarm, sahne7 nabziyla ayni 3 vurus
+            u0, ud = t0 + Z["kart"] * 0.5, Z["kart"] * 0.5
+            for i in range(3):
+                yerlestir(ef, bip(988, 0.12), u0 + ud * (1 + 4 * i) / 12 - 0.06, 0.8)
+                yerlestir(ef, bip(740, 0.12), u0 + ud * (1 + 4 * i) / 12 + 0.08, 0.8)
         yerlestir(ef, ding(), a + 0.02, 0.6)                             # poz belirdi
         for i in range(3):
             yerlestir(ef, bip([660, 784, 988][i]), a + i * Z["say"] / 3 + 0.02, 0.9)    # 3-2-1 yukselen (sahne ile ayni adim)
