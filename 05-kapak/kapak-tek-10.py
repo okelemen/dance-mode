@@ -69,8 +69,8 @@ d = ImageDraw.Draw(im)
 # neon kabartma; kabartma perspektifli (ortanin solundaki harflerde sola-asagi, sagindakilerde saga-asagi); harfler hafif oynak.
 TFONT = os.path.join(KOK, "05-kapak", "fontlar", "TitanOne.ttf")
 # kullanici 28 Eki: "yazilar cok parlak, parlakligini kis" -> yuz saf beyaz degil kirli acik gri-lavanta, isilti zayif, kabartma bir ton koyu
-YUZ = "#b9bccb"   # 2. kisma (kullanici: "biraz daha kis")
-GRUP = {"HUMAN TETRIS": ["#b8449a", "#b8449a", "#2ea39c", "#2ea39c", "#a8884c", None, "#a8884c", "#a8884c", "#a8884c", "#7559b8", "#7559b8", "#7559b8"]}
+YUZ = "#f2f7ff"   # kullanici 28 Eki: iki kismadan sonra "parlakligi ilk haline getir"
+GRUP = {"HUMAN TETRIS": ["#ff5fd2", "#ff5fd2", "#3fe8dc", "#3fe8dc", "#e9c06a", None, "#e9c06a", "#e9c06a", "#e9c06a", "#a57cff", "#a57cff", "#a57cff"]}
 ETIKET = ["#ff5fd2", "#3fe8dc", "#e9c06a", "#a57cff"]
 
 
@@ -119,8 +119,8 @@ def kabartma(metin, cx, cy, boy, renkler=None, oynak=False, font=None, derin_ora
 
 # yan etiketler (siluetten once)
 # yan etiketler basligla AYNI font (kullanici 28 Eki: "ayni fontlar olsun"), duz hizada, her harfe ayri renkli ince kabartma
-GOKKUSAGI = ["#b8449a", "#b49a3a", "#2ea39c", "#7559b8", "#43ab7d", "#b6632d"]
-kabartma("X1 Player", 245, 222, 66, GOKKUSAGI, derin_oran=0.06, gen=1.04, isilti_guc=0.06)
+GOKKUSAGI = ["#ff5fd2", "#ffd84f", "#3fe8dc", "#a57cff", "#5dffb0", "#ff8a3d"]
+kabartma("X1 Player", 245, 222, 66, GOKKUSAGI, derin_oran=0.06, gen=1.04, isilti_guc=0.35)
 kabartma("Full Body", 1075, 214, 66, GOKKUSAGI, derin_oran=0.06, gen=1.04, isilti_guc=0.12)
 kabartma(a.no, 1150, 322, 72, GOKKUSAGI, derin_oran=0.06, gen=1.04, isilti_guc=0.12)
 
@@ -135,7 +135,7 @@ im.paste((255, 255, 255, 255), (sx - 20, sy - 20), kont)
 im.paste((0, 0, 0, 255), (sx, sy), sa)
 
 # baslik en onde
-kabartma("HUMAN TETRIS", W / 2, 74, 132, derin_oran=0.065, isilti_guc=0.22)   # kullanici 28 Eki: harfler simetrik, duz hizada (oynaklik yok)
+kabartma("HUMAN TETRIS", W / 2, 74, 132, derin_oran=0.065, isilti_guc=0.95)   # kullanici 28 Eki: harfler simetrik, duz hizada (oynaklik yok)
 
 out = im.convert("RGB")
 out.save(a.cikti, quality=95)
