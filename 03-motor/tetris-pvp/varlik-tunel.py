@@ -22,6 +22,15 @@ YOL_W = 7.6
 T_R, T_Z = 10.5, 3.6            # tunel: sivri tepeli altigen, yaricap / merkez yuksekligi
 T_Y0, T_Y1 = -4.0, 150.0
 PEMBE, CAMGOBEGI, MOR = "#ff4fd8", "#3fe8ff", "#9b5bff"
+# KAPAK (REF-061 kapagi olculdu: doygunluk 0,43, renklilik 0,24, parlaklik 0,50 - videodan cok daha gri-metalik):
+# kapi kadrajin ortasinda, biraz daha yukarida (kamera hafif asagi); isiklar ve kupler soluk tonda, pozlama Actions'ta iki seviye
+KAPAK = YALNIZ == "kapak"
+POZLAMA = float(arg("--kapak-pozlama", "0"))
+KUP_RENK = (("m_lav", "#c4b6f2", 0.16), ("m_mor", "#7a58c8", 0.22), ("m_gum", "#e8e4f4", 0.12))
+if KAPAK:
+    KAM = {"z": 2.4, "egim": 3.0, "lens": 18.0, "sensor": 24.0}
+    PEMBE, CAMGOBEGI, MOR = "#d98ac8", "#7fc0cc", "#9a86d0"
+    KUP_RENK = (("m_lav", "#a8a2c2", 0.18), ("m_mor", "#5a5480", 0.24), ("m_gum", "#d4d2de", 0.14))
 
 
 def kamera(sc):
@@ -97,7 +106,7 @@ def kup_kaplama(rnd):
     for p, m in zip(me.polygons, mi):
         p.material_index = m
     o = bpy.data.objects.new("kupler", me); bpy.context.collection.objects.link(o)
-    for ad_, c, p in (("m_lav", "#c4b6f2", 0.16), ("m_mor", "#7a58c8", 0.22), ("m_gum", "#e8e4f4", 0.12)):   # sahne 1: fazla mavi -> gumus/lavanta
+    for ad_, c, p in KUP_RENK:   # sahne 1: fazla mavi -> gumus/lavanta; kapak daha gri
         o.data.materials.append(mat_metal(ad_, lin(hex3(c)), p))
     for ad_, c, g in (("k_pem", "#ff8ae8", 7), ("k_cam", "#8af4ff", 7), ("k_bey", "#f4eeff", 9)):
         o.data.materials.append(mat_emis(ad_, lin(hex3(c)), g))
@@ -138,6 +147,8 @@ def uzak_sis():
 def gok_katmani():
     rnd = random.Random(61)
     sc = bos_sahne(w=1920, h=1080, ornek=min(ORNEK, 64))
+    if KAPAK:
+        sc.view_settings.exposure = POZLAMA
     kamera(sc)
     sc.world.node_tree.nodes["Background"].inputs[0].default_value = (*lin(hex3("#140828")), 1)
     sc.world.node_tree.nodes["Background"].inputs[1].default_value = 0.3
@@ -213,6 +224,8 @@ def kapi():
 
 def serit_katmani():
     sc = bos_sahne(w=1920, h=1080, saydam=True, ornek=min(ORNEK, 64))
+    if KAPAK:
+        sc.view_settings.exposure = POZLAMA
     kam = kamera(sc)
     sc.world.node_tree.nodes["Background"].inputs[0].default_value = (*lin(hex3("#b89cff")), 1)
     sc.world.node_tree.nodes["Background"].inputs[1].default_value = 0.35
