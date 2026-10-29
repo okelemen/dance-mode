@@ -1,0 +1,279 @@
+{
+ "grup": {
+  "duo-t-arm-tree": {
+   "cerceve_m": 5.086,
+   "gen_m": 8.138,
+   "yuk_m": 3.793,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-arabesque-low-hand-link": {
+   "cerceve_m": 4.276,
+   "gen_m": 6.641,
+   "yuk_m": 3.763,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.004
+    }
+   ]
+  },
+  "duo-extended-side-angle-feet-meet": {
+   "cerceve_m": 4.314,
+   "gen_m": 5.258,
+   "yuk_m": 3.796,
+   "temas": [
+    {
+     "tip": "ayak-ayak",
+     "dz": -0.011
+    }
+   ]
+  },
+  "duo-goddess-squat-prayer": {
+   "cerceve_m": 3.797,
+   "gen_m": 4.96,
+   "yuk_m": 3.341,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-horse-stance-fist-bump": {
+   "cerceve_m": 4.108,
+   "gen_m": 5.198,
+   "yuk_m": 3.615,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.016
+    }
+   ]
+  },
+  "duo-wide-stance-palm-push": {
+   "cerceve_m": 3.945,
+   "gen_m": 5.793,
+   "yuk_m": 3.472,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": 0.036
+    }
+   ]
+  },
+  "duo-reverse-warrior-mirror": {
+   "cerceve_m": 4.88,
+   "gen_m": 5.329,
+   "yuk_m": 4.294,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-fist-bump-front-lunge": {
+   "cerceve_m": 4.251,
+   "gen_m": 4.925,
+   "yuk_m": 3.741,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.022
+    }
+   ]
+  },
+  "duo-high-side-kick-foot-meet": {
+   "cerceve_m": 4.936,
+   "gen_m": 6.384,
+   "yuk_m": 4.344,
+   "temas": [
+    {
+     "tip": "ayak-ayak",
+     "dz": -0.012
+    }
+   ]
+  },
+  "duo-standing-quad-stretch-hand-link": {
+   "cerceve_m": 4.313,
+   "gen_m": 4.377,
+   "yuk_m": 3.796,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.012
+    }
+   ]
+  },
+  "duo-warrior-three-parallel": {
+   "cerceve_m": 5.456,
+   "gen_m": 8.729,
+   "yuk_m": 2.619,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-half-moon-facing-out": {
+   "cerceve_m": 4.824,
+   "gen_m": 6.981,
+   "yuk_m": 4.245,
+   "temas": [
+    {
+     "tip": "ayak-ayak",
+     "dz": -0.011
+    }
+   ]
+  },
+  "duo-front-kick-mirror": {
+   "cerceve_m": 4.313,
+   "gen_m": 4.629,
+   "yuk_m": 3.796,
+   "temas": [
+    {
+     "tip": "ayak-ayak",
+     "dz": -0.012
+    }
+   ]
+  },
+  "duo-back-kick-hand-link": {
+   "cerceve_m": 4.448,
+   "gen_m": 7.117,
+   "yuk_m": 3.237,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.038
+    }
+   ]
+  },
+  "duo-lateral-leg-raise-inner-hands": {
+   "cerceve_m": 4.31,
+   "gen_m": 6.477,
+   "yuk_m": 3.793,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": 0.011
+    }
+   ]
+  },
+  "duo-archer-side-squat": {
+   "cerceve_m": 4.147,
+   "gen_m": 6.381,
+   "yuk_m": 3.65,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-seated-helper-standing-reach": {
+   "cerceve_m": 4.391,
+   "gen_m": 4.029,
+   "yuk_m": 3.864,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.373
+    }
+   ]
+  },
+  "duo-camel-standing-reach": {
+   "cerceve_m": 5.154,
+   "gen_m": 2.871,
+   "yuk_m": 4.536,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-kneeling-side-reach-palms-together": {
+   "cerceve_m": 4.244,
+   "gen_m": 4.591,
+   "yuk_m": 3.734,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.022
+    }
+   ]
+  },
+  "duo-kneeling-lunge-hand-link": {
+   "cerceve_m": 3.599,
+   "gen_m": 4.744,
+   "yuk_m": 3.167,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.037
+    }
+   ]
+  },
+  "duo-downward-dog-facing": {
+   "cerceve_m": 2.618,
+   "gen_m": 4.189,
+   "yuk_m": 2.238,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-seated-wide-leg-hand-pull": {
+   "cerceve_m": 2.911,
+   "gen_m": 4.657,
+   "yuk_m": 1.674,
+   "temas": [
+    {
+     "tip": "ayak-ayak",
+     "dz": -0.076
+    }
+   ]
+  },
+  "duo-deep-squat-hand-link": {
+   "cerceve_m": 3.087,
+   "gen_m": 3.488,
+   "yuk_m": 2.717,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.059
+    }
+   ]
+  },
+  "duo-sphinx-facing": {
+   "cerceve_m": 4.437,
+   "gen_m": 7.099,
+   "yuk_m": 1.845,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-hero-sit-palms-up-touch": {
+   "cerceve_m": 3.346,
+   "gen_m": 3.409,
+   "yuk_m": 2.945,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.039
+    }
+   ]
+  }
+ }
+}
