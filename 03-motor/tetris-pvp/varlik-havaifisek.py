@@ -108,13 +108,14 @@ def gok_katmani():
 
 # ------------------------------------------------------------------ SERIT katmani (kopru yol + korkuluk + kafes kapi)
 def kopru_yol():
-    yol = mat_metal("yol", lin(hex3(KIRMIZI)), 0.18, metal=0.15)
+    # sahne 1: yol pembe parliyordu (parlak yuzey pembe isiklari yansitti) -> daha mat, koyu kirmizi govde
+    yol = mat_metal("yol", lin(hex3(KIRMIZI)), 0.42, metal=0.05)
     yuvarlak_kutu("yol", (0, (0.3 + Y_SON) / 2, -0.2), (YOL_W, Y_SON - 0.3, 0.4), yol, egim=0.05, seg=2)
     beyaz = mat_emis("chev", lin(hex3("#fffaf4")), 5.0)
-    # REF-062: tepesi kapiya bakan, kameraya dogru buyuyen beyaz V bantlar (yolun orta ucte biri)
+    # REF-062: tepesi KAMERAYA bakan, kameraya dogru buyuyen beyaz V bantlar (sahne 1'de ters cizildi)
     for yy, hw, kal in ((1.15, 1.25, 0.42), (2.35, 1.1, 0.34), (3.45, 0.98, 0.28), (4.5, 0.88, 0.24), (5.5, 0.8, 0.2), (6.45, 0.72, 0.17), (7.35, 0.66, 0.14)):
         d = hw * 0.42
-        sekil("chev", [(-hw, yy), (0, yy + d), (hw, yy), (hw, yy + kal), (0, yy + d + kal), (-hw, yy + kal)], beyaz, konum=(0, 0, 0.03))
+        sekil("chev", [(-hw, yy + d), (0, yy), (hw, yy + d), (hw, yy + d + kal), (0, yy + kal), (-hw, yy + d + kal)], beyaz, konum=(0, 0, 0.03))
     for s in (-1, 1):
         boru((s * (YOL_W / 2 - 0.06), 0.3, 0.03), (s * (YOL_W / 2 - 0.06), Y_SON, 0.03), 0.05, mat_emis("kenar%d" % s, lin(hex3(PEMBE)), 6))
 
@@ -161,17 +162,18 @@ def serit_katmani():
     if KAPAK:
         sc.view_settings.exposure = POZLAMA
     kam = kamera(sc)
-    sc.world.node_tree.nodes["Background"].inputs[0].default_value = (*lin(hex3("#ffd6e4")), 1)
-    sc.world.node_tree.nodes["Background"].inputs[1].default_value = 0.25
+    # sahne 1: pembe dunya isigi kapiyi pembeye boyadi -> notr koyu dunya, kapiya beyaz isik
+    sc.world.node_tree.nodes["Background"].inputs[0].default_value = (*lin(hex3("#d8d8e4")), 1)
+    sc.world.node_tree.nodes["Background"].inputs[1].default_value = 0.12
     Y = KAP["y"]
     kopru_yol()
     korkuluk()
     kapi()
-    # yol: ustten sicak isik + yanlarda pembe (REF-062 kirmizi yolda pembe kenar parlamasi), kapiya beyaz on isik
-    isik("AREA", (0, 4, 6), 2600, lin(hex3("#ffe8ec")), 8, yon=(0, 5, 0))
-    isik("AREA", (-6, 6, 2.0), 1400, lin(hex3(PEMBE)), 6, yon=(-2, 8, 0))
-    isik("AREA", (6, 6, 2.0), 1400, lin(hex3(PEMBE)), 6, yon=(2, 8, 0))
-    isik("AREA", (0, Y - 4, 6), 900, lin(hex3("#ffffff")), 4, yon=(0, Y, 2))
+    # yol: ustten notr isik + yanlarda hafif pembe (REF-062 kirmizi yolda pembe kenar parlamasi), kapiya beyaz on isik
+    isik("AREA", (0, 4, 6), 2200, lin(hex3("#fff4f0")), 8, yon=(0, 5, 0))
+    isik("AREA", (-6, 6, 2.0), 500, lin(hex3(PEMBE)), 6, yon=(-2, 8, 0))
+    isik("AREA", (6, 6, 2.0), 500, lin(hex3(PEMBE)), 6, yon=(2, 8, 0))
+    isik("AREA", (0, Y - 3, 5), 1400, lin(hex3("#ffffff")), 5, yon=(0, Y, 2))
     W_, H_, KK = KAP["w"], KAP["h"], KAP["kule"]
     ic = W_ / 2 - KK
     bpy.context.view_layer.update()
