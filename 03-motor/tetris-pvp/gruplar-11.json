@@ -487,47 +487,47 @@
     ]
    ]
   },
-  "duo-standing-quad-stretch-shoulder-link": {
-   "ad": "Duo Standing Quad Stretch Shoulder Link",
+  "duo-standing-quad-stretch-hand-link": {
+   "ad": "Duo Standing Quad Stretch Hand Link",
    "figurler": [
     {
-     "ad": "Duo Standing Quad Stretch Shoulder Link A",
+     "ad": "Duo Standing Quad Stretch Hand Link A",
      "yon": "sag",
-     "govde": 180,
+     "govde": 175,
      "bas": 0,
      "solKol": [
-      70,
-      70
+      90,
+      90
      ],
      "sagKol": [
-      -30,
-      -30
+      -35,
+      -35
      ],
      "solBacak": [
       0,
       0
      ],
      "sagBacak": [
-      -10,
-      -170
+      -35,
+      -165
      ]
     },
     {
-     "ad": "Duo Standing Quad Stretch Shoulder Link B",
+     "ad": "Duo Standing Quad Stretch Hand Link B",
      "yon": "sol",
-     "govde": -180,
+     "govde": -175,
      "bas": 0,
      "solKol": [
-      30,
-      30
+      35,
+      35
      ],
      "sagKol": [
-      -70,
-      -70
+      -90,
+      -90
      ],
      "solBacak": [
-      10,
-      170
+      35,
+      165
      ],
      "sagBacak": [
       0,
@@ -538,7 +538,7 @@
    "temas": [
     [
      "el",
-     "omuz"
+     "el"
     ]
    ]
   },
@@ -872,15 +872,15 @@
     {
      "ad": "Duo Seated Helper Standing Reach A",
      "yon": "sag",
-     "govde": 200,
+     "govde": 180,
      "bas": 0,
      "solKol": [
-      140,
-      140
+      160,
+      160
      ],
      "sagKol": [
-      -30,
-      -30
+      -25,
+      -25
      ],
      "solBacak": [
       90,
@@ -894,19 +894,19 @@
     {
      "ad": "Duo Seated Helper Standing Reach B",
      "yon": "sol",
-     "govde": -130,
+     "govde": -150,
      "bas": 0,
      "solKol": [
-      60,
-      60
+      70,
+      70
      ],
      "sagKol": [
-      -60,
-      -60
+      -105,
+      -105
      ],
      "solBacak": [
-      60,
-      60
+      45,
+      45
      ],
      "sagBacak": [
       0,
@@ -1190,51 +1190,51 @@
     ]
    ]
   },
-  "duo-child-pose-hands-meet": {
-   "ad": "Duo Child Pose Hands Meet",
+  "duo-deep-squat-hand-link": {
+   "ad": "Duo Deep Squat Hand Link",
    "figurler": [
     {
-     "ad": "Duo Child Pose Hands Meet A",
+     "ad": "Duo Deep Squat Hand Link A",
      "yon": "sag",
-     "govde": 75,
+     "govde": 160,
      "bas": 0,
      "solKol": [
-      85,
-      85
+      90,
+      90
      ],
      "sagKol": [
-      83,
-      83
+      88,
+      88
      ],
      "solBacak": [
-      80,
-      -95
+      100,
+      -15
      ],
      "sagBacak": [
-      80,
-      -95
+      98,
+      -17
      ]
     },
     {
-     "ad": "Duo Child Pose Hands Meet B",
+     "ad": "Duo Deep Squat Hand Link B",
      "yon": "sol",
-     "govde": -75,
+     "govde": -160,
      "bas": 0,
      "solKol": [
-      -83,
-      -83
+      -88,
+      -88
      ],
      "sagKol": [
-      -85,
-      -85
+      -90,
+      -90
      ],
      "solBacak": [
-      -80,
-      95
+      -98,
+      17
      ],
      "sagBacak": [
-      -80,
-      95
+      -100,
+      15
      ]
     }
    ],
@@ -1306,12 +1306,12 @@
      "govde": 180,
      "bas": 0,
      "solKol": [
-      160,
-      160
+      135,
+      135
      ],
      "sagKol": [
-      158,
-      158
+      -150,
+      -150
      ],
      "solBacak": [
       80,
@@ -1328,12 +1328,12 @@
      "govde": -180,
      "bas": 0,
      "solKol": [
-      -158,
-      -158
+      150,
+      150
      ],
      "sagKol": [
-      -160,
-      -160
+      -135,
+      -135
      ],
      "solBacak": [
       -80,

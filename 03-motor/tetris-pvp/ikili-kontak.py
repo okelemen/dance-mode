@@ -9,12 +9,15 @@ from PIL import Image, ImageDraw, ImageFont
 ap = argparse.ArgumentParser()
 for a in ("--varlik", "--duvar", "--gruplar", "--cikti"):
     ap.add_argument(a, required=True)
+ap.add_argument("--etiket", default="", help="grup basliklari virgulle (11. video: tur yok, poz ailesi)")
 A = ap.parse_args()
 duvar = json.load(open(A.duvar, encoding="utf-8"))
 gruplar = json.load(open(A.gruplar, encoding="utf-8"))["gruplar"]
 yer = json.load(open(os.path.join(A.varlik, "yerlesim.json"), encoding="utf-8")).get("grup", {})
 ZEMIN = [((40, 240, 220), (40, 120, 255)), ((250, 240, 60), (120, 240, 60))]
 TUR = {1: "ROUND 1", 2: "ROUND 2", 3: "ROUND 3"}
+if A.etiket:
+    TUR = dict(zip((1, 2, 3), A.etiket.split(",")))
 try:
     F = ImageFont.truetype("arialbd.ttf", 20); FB = ImageFont.truetype("arialbd.ttf", 30)
 except OSError:

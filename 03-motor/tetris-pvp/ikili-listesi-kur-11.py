@@ -56,7 +56,8 @@ AYAKTA = [  # ayakta - herkes yapar
 
 TEK_AYAK = [  # tek ayak denge / tekme / hamle
     ikili("High Side Kick Foot Meet", on("", "v", "v", "tog", [100, 100]), temas=("ayak", "ayak")),                  # REF d08
-    ikili("Standing Quad Stretch Shoulder Link", profil("", 180, [70, 70], [-30, -30], [0, 0], [-10, -170]), temas=("el", "omuz")),
+    # kontak 1: el-omuz temasinda figurler ust uste bindi, arka baldir govdenin arkasinda kayboldu -> el ele, uyluk geride
+    ikili("Standing Quad Stretch Hand Link", profil("", 175, [90, 90], [-35, -35], [0, 0], [-35, -165])),
     ikili("Warrior Three Parallel", profil("", 92, [90, 90], [88, 88], [0, 0], [-90, -90]),
           profil("", 92, [90, 90], [88, 88], [0, 0], [-90, -90]), temas=0.3),                                            # REF d14
     ikili("Half Moon Facing Out", on("", [-5, -5], [180, 180], "tog", [90, 90], govde=270), temas=("ayak", "ayak")),
@@ -66,9 +67,10 @@ TEK_AYAK = [  # tek ayak denge / tekme / hamle
     ikili("Archer Side Squat",                                                                                        # REF d10, asimetrik
           profil("", 175, [90, 90], [90, -90], [62, 0], [-40, -40]),
           on("", "chest", "chest", [-75, -80], [80, 5]), temas=0.15),
+    # kontak 1: eller bulusmadi (dz 1,21), oturan geriye dusuyor gibi okundu -> oturan dik, eli yukarida; ayaktaki hafif egik, eli onde
     ikili("Seated Helper Standing Reach",                                                                             # REF d07, asimetrik
-          profil("", 200, [140, 140], [-30, -30], [90, 90], [70, -20]),
-          ayna_poz(profil("", 130, [60, 60], [-60, -60], [0, 0], [-60, -60]))),
+          profil("", 180, [160, 160], [-25, -25], [90, 90], [70, -20]),
+          ayna_poz(profil("", 150, [105, 105], [-70, -70], [0, 0], [-45, -45]))),
 ]
 
 YER = [  # diz / yer (el-diz-ayak yerde)
@@ -79,9 +81,11 @@ YER = [  # diz / yer (el-diz-ayak yerde)
     ikili("Kneeling Lunge Hand Link", profil("", 175, [95, 95], [93, 93], [75, 0], [0, -90])),
     ikili("Downward Dog Facing", profil("", 40, [25, 25], [23, 23], [-25, -25], [-27, -27]), temas=0.1),
     ikili("Seated Wide Leg Hand Pull", profil("", 130, [95, 95], [93, 93], [90, 90], [88, 88]), temas=("ayak", "ayak")),
-    ikili("Child Pose Hands Meet", profil("", 75, [85, 85], [83, 83], TOPUK, TOPUK)),
+    # kontak 1: cocuk pozu yerde yassi leke oldu, okunmadi -> karsilikli derin comelme, eller onde bulusur
+    ikili("Deep Squat Hand Link", profil("", 160, [90, 90], [88, 88], [100, -15], [98, -17])),
     ikili("Sphinx Facing", profil("", 125, [0, 90], [0, 88], [-90, -90], [-88, -88]), temas=0.1),
-    ikili("Hero Sit Palms Up Touch", profil("", 180, [160, 160], [158, 158], TOPUK, TOPUK)),
+    # kontak 1: avuclar tepede birlesince govdeler kaynasti (gen 1,43 m) -> kollar capraz yukari, govdeler ayrik
+    ikili("Hero Sit Palms Up Touch", profil("", 180, [135, 135], [-150, -150], TOPUK, TOPUK)),
 ]
 
 G, duvar = {}, []
