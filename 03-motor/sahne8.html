@@ -195,7 +195,7 @@ function fisekGece(t) {
 
 // REF-062: kapının üstünde neon çizgi oyuncu ikonları (VR gözlüklü büst) + P1 yeşil / P2 pembe yazı
 function oyuncuIkon(t) {
-  const A = aciklik(), yI = A.y - A.h * 0.62, s = A.h * 0.20, ara = A.w * 0.21;
+  const A = aciklik(), s = A.h * 0.30, yI = A.y - s * 2.0, ara = A.w * 0.21;   // önizleme 1: ikonlar REF-062'ye göre küçüktü
   [[A.x + A.w / 2 - ara, TEMA.p1, 'P1'], [A.x + A.w / 2 + ara, TEMA.p2, 'P2']].forEach(([x, renk, ad], i) => {
     const nab = 0.85 + 0.15 * Math.sin(t * 3 + i * 1.7);
     cx.save(); cx.lineJoin = 'round'; cx.lineCap = 'round';

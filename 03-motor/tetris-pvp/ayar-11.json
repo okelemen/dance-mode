@@ -1,0 +1,42 @@
+{
+ "_not": "HUMAN TETRIS 11. video (REF-062, HumanWarmUp 'HUMAN TETRIS | Immersive Interactive Warm Up | CO-OP 2 Players | THE NEXT PART | FULL'), kullanici 29 Eki 2026: CO-OP 2 oyuncu, P1 yesil / P2 pembe, ~25 duvar x 12 sn, acilis CO-OP karti (boksorler), SUBSCRIBE her 15 sn kalir, koc sesi yok. Dongu REF-062: tabela -> ! uyari -> kosede 3-2-1 -> duz renkli duvar; 25 duvar x 24 vurus 5:36 olurdu (TALIMATLAR §3 ust sinir 5:30) -> 23 vurus = 11,7 sn. Tur karti yok; pozlar karisik sirada (duvar-listesi-11-sira.json). Ovgu sahne ustunde (REF-062 'Keep it up!' gibi, metinler bizim). Kapanis REF-062 gibi tesekkur. Muzik: Fireworks Over The Bridge 120 -> 118 BPM (rubberband sabit oran).",
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-11",
+ "sayfa": "sahne8.html",
+ "bpm": 118,
+ "muzik": "Fireworks Over The Bridge.wav (Suno, kullanici, 29 Eki 2026) 120,00 BPM sabit (son 25 sn 118,4) -> fireworks-118.wav (rubberband tempo 0,98333, govde 117,96-118,04) -> izgaradan dizilir (ilk 4 olcu kicksiz)",
+ "duvar": "duvar-listesi-11-sira.json",
+ "duvar_vurus": 23,
+ "zaman_vurus": {"kart": 7, "say": 6, "buyu": 6, "gec": 2},
+ "tur_kart_yok": true,
+ "kart_vurus": {"basla": 8, "abone": 11},
+ "giris_dizisi": [
+  {"tip": "acilis", "vurus": 12},
+  {"tip": "yazi", "metin": "WELCOME BACK,", "alt": "PARTNERS!", "vurus": 6},
+  {"tip": "nasil", "metin": "SYNC UP", "alt": "FIT THE SHAPE TOGETHER!", "vurus": 8}
+ ],
+ "ovgu_kart": {"her": 5, "vurus": 4, "metin": ["Nice teamwork!", "Perfect sync!", "You two rock!", "Almost there!"]},
+ "kapanis": [
+  {"tip": "yazi", "metin": "THANK YOU", "alt": "FOR PLAYING!", "vurus": 8}
+ ],
+ "tema": {
+  "tekOyuncu": true,
+  "havaiFisek": true,
+  "sayimKose": true,
+  "ovguSahne": true,
+  "varlik": "/03-motor/tetris-pvp/varlik-11-sahne4/",
+  "maskeVarlik": "/03-motor/tetris-pvp/varlik-11-poz2/",
+  "maskeKlasor": "grup/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-08/",
+  "p1": "#3dff6a", "p1koyu": "#0c8a32", "p1acik": "#dcffe4",
+  "p2": "#ff3ea5", "p2koyu": "#a0105c", "p2acik": "#ffd6ec",
+  "vsEtiket": ["P1", "P2"], "vsHarf": ["CO-", "OP"],
+  "vsAlt": "HUMAN TETRIS · CO-OP",
+  "duvarRenk": ["#5fd6e2", "#b8f25a", "#d81b7a", "#a6ee52", "#e8235a", "#f5c84a", "#f0a040", "#2fb8e0", "#f04048", "#f2f3f6", "#ee9a3a", "#66ffff"],
+  "ovguRenk": [["#ffffff", "#ff7ae0", "#d01890"], ["#ffffff", "#7dff6a", "#18a830"], ["#ffffff", "#ffe23a", "#e08a00"]],
+  "sayac": "Mission",
+  "sayacRenk": ["#fff6c0", "#ffd23a", "#ff9a1a"],
+  "aboneAlt": "NEW BATTLE EVERY DAY",
+  "fener": false
+ }
+}

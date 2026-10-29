@@ -139,7 +139,7 @@ def korkuluk():
         yuvarlak_kutu("cam", (x, (ys[0] + ys[-1]) / 2, hk / 2), (0.03, ys[-1] - ys[0], hk * 0.86), cam, egim=0.0, seg=1)
         boru((x, ys[0], 0.05), (x, ys[-1], 0.05), 0.03, pem)
         # REF-062: korkuluk camında kameraya bakan altin cift oklar (gruplar halinde)
-        for y0 in (0.9, 3.4, 6.0, 8.8, 11.8):
+        for y0 in (0.9, 3.4, 6.0):          # sahne 3: 8,8'deki grup korkuluk bittikten sonra havada kaliyordu
             for j in range(2):
                 yy = y0 + j * 0.5
                 pts = [(yy + 0.38, 0.16), (yy, 0.46), (yy + 0.38, 0.76), (yy + 0.6, 0.76), (yy + 0.22, 0.46), (yy + 0.6, 0.16)]
