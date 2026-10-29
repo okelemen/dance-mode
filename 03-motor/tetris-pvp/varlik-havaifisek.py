@@ -19,7 +19,7 @@ YERLESIM.clear()
 KAP = {"y": 8.6, "w": 7.4, "h": 3.6, "kule": 0.42, "kiris": 0.42}      # aciklik 6,56 x 3,6
 KAM = {"z": 1.06, "egim": -3.0, "lens": 18.0, "sensor": 24.0}
 YOL_W = 7.6
-Y_SON = 120.0
+Y_SON = 9.4                     # sahne 2: kopru kapinin hemen arkasinda biter (REF-062)
 KIRMIZI, PEMBE, ALTIN = "#d0102c", "#ff6fae", "#ffc23a"
 KAPAK = YALNIZ == "kapak"
 POZLAMA = float(arg("--kapak-pozlama", "0"))
@@ -110,10 +110,13 @@ def gok_katmani():
 def kopru_yol():
     # sahne 1: yol pembe parliyordu (parlak yuzey pembe isiklari yansitti) -> daha mat, koyu kirmizi govde
     yol = mat_metal("yol", lin(hex3(KIRMIZI)), 0.42, metal=0.05)
+    # sahne 2: REF-062'de kopru KAPIDA biter (arkasi karanlik gok) ve yolun ORTASI koyu serit, kirmizi yalniz kenarlarda
     yuvarlak_kutu("yol", (0, (0.3 + Y_SON) / 2, -0.2), (YOL_W, Y_SON - 0.3, 0.4), yol, egim=0.05, seg=2)
-    beyaz = mat_emis("chev", lin(hex3("#fffaf4")), 5.0)
-    # REF-062: tepesi KAMERAYA bakan, kameraya dogru buyuyen beyaz V bantlar (sahne 1'de ters cizildi)
-    for yy, hw, kal in ((1.15, 1.25, 0.42), (2.35, 1.1, 0.34), (3.45, 0.98, 0.28), (4.5, 0.88, 0.24), (5.5, 0.8, 0.2), (6.45, 0.72, 0.17), (7.35, 0.66, 0.14)):
+    koyu = mat_metal("yol_orta", lin(hex3("#140a10")), 0.35, metal=0.0)
+    yuvarlak_kutu("orta", (0, (0.3 + Y_SON) / 2, 0.012), (3.9, Y_SON - 0.3, 0.02), koyu, egim=0.0, seg=1)
+    beyaz = mat_emis("chev", lin(hex3("#fffaf4")), 6.0)
+    # REF-062: tepesi KAMERAYA bakan, kameraya dogru buyuyen beyaz V bantlar (sahne 1'de ters cizildi; sahne 2: kucuktu)
+    for yy, hw, kal in ((0.9, 1.75, 0.6), (2.3, 1.55, 0.48), (3.55, 1.38, 0.4), (4.65, 1.24, 0.33), (5.65, 1.12, 0.28), (6.55, 1.02, 0.24), (7.35, 0.94, 0.2)):
         d = hw * 0.42
         sekil("chev", [(-hw, yy + d), (0, yy), (hw, yy + d), (hw, yy + d + kal), (0, yy + kal), (-hw, yy + d + kal)], beyaz, konum=(0, 0, 0.03))
     for s in (-1, 1):
@@ -128,7 +131,7 @@ def korkuluk():
     for s in (-1, 1):
         x = s * (YOL_W / 2 + 0.25)
         hk = 0.95
-        ys = [0.5 + i * 1.7 for i in range(int((60 - 0.5) / 1.7) + 1)]
+        ys = [0.5 + i * 1.7 for i in range(int((KAP["y"] - 0.5) / 1.7) + 1)] + [KAP["y"]]   # korkuluk da kapida biter
         for yy in ys:
             yuvarlak_kutu("dikme", (x, yy, hk / 2), (0.09, 0.09, hk), metal, egim=0.02, seg=2)
         yuvarlak_kutu("tirabzan", (x, (ys[0] + ys[-1]) / 2, hk + 0.02), (0.11, ys[-1] - ys[0], 0.08), metal, egim=0.03, seg=2)
@@ -147,8 +150,9 @@ def korkuluk():
 def kapi():
     """REF-062 beyaz kafes (truss) kapi: iki kule + ust kiris; kirisin arkasinda koyu lacivert tugla bant"""
     Y, W, H, KK, KR = KAP["y"], KAP["w"], KAP["h"], KAP["kule"], KAP["kiris"]
-    ana = mat_metal("kapi_ana", lin(hex3("#f4f4fa")), 0.2)
-    ince = mat_metal("kapi_ince", lin(hex3("#dadbe6")), 0.25)
+    # sahne 2: metal 0,95 cevredeki pembeyi yansitip kapiyi pembe gosterdi -> beyaz boyali metal
+    ana = mat_metal("kapi_ana", lin(hex3("#f4f4fa")), 0.35, metal=0.2)
+    ince = mat_metal("kapi_ince", lin(hex3("#dadbe6")), 0.4, metal=0.2)
     xk = W / 2 - KK / 2
     for s in (-1, 1):
         kafes_kule(s * xk, Y, 0.0, H + KR, KK, ana, ince)
