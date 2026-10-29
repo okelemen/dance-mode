@@ -103,7 +103,28 @@ def gok_katmani():
     sc.world.node_tree.nodes["Background"].inputs[0].default_value = (*lin(hex3("#05040c")), 1)
     sc.world.node_tree.nodes["Background"].inputs[1].default_value = 1.0
     gece_perdesi()
+    if KAPAK:
+        kapak_fisekleri()
     yaz(sc, ON_EK + "gok.png")
+
+
+def kapak_fisekleri():
+    """KAPAK: REF-062 kapaginda gokyuzu buyuk havai fisek patlamalariyla dolu (videoda motor ciziyor; kapakta 2B boyama yok -> Blender'da).
+    Her patlama: merkezden isinsal ince isikli cizgiler + uclarinda parlak nokta; uzak duzlemde (y 300)."""
+    rnd = random.Random(62)
+    renkler = ["#ff5a4a", "#ffd24a", "#ff7ad8", "#ffffff", "#ff9a3a", "#c8a0ff"]
+    for cx_, cz, R in ((-170, 120, 46), (150, 135, 52), (-60, 160, 34), (60, 95, 30), (-230, 60, 30), (235, 70, 34), (0, 205, 40)):
+        renk = rnd.choice(renkler)
+        m = mat_emis("fisek", lin(hex3(renk)), 7.0); uc = mat_emis("fisek_uc", lin(hex3("#fff6e0")), 14.0)
+        for i in range(70):
+            a = i / 70 * 2 * math.pi + rnd.uniform(-0.03, 0.03)
+            r0, r1 = R * rnd.uniform(0.25, 0.45), R * rnd.uniform(0.8, 1.05)
+            dz = -R * 0.12 * (r1 / R) ** 2                      # ucta hafif dusus
+            a0 = (cx_ + math.cos(a) * r0, 300, cz + math.sin(a) * r0)
+            a1 = (cx_ + math.cos(a) * r1, 300, cz + math.sin(a) * r1 + dz)
+            boru(a0, a1, 0.25, m)
+            bpy.ops.mesh.primitive_uv_sphere_add(radius=0.7, location=a1, segments=8, ring_count=4)
+            bpy.context.active_object.data.materials.append(uc)
 
 
 # ------------------------------------------------------------------ SERIT katmani (kopru yol + korkuluk + kafes kapi)
