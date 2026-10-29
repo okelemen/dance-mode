@@ -743,6 +743,8 @@ elif arg("--mod", "pvp") == "uzay":        # 9. video (REF-060, 1v1): yanardoner
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-uzay.py"), encoding="utf-8").read(), "varlik-uzay.py", "exec"))
 elif arg("--mod", "pvp") == "tunel":       # 10. video (REF-061 HumanWarmUp, 1 oyuncu): neon kup tuneli, kopru yol, gumus kafes kapi
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-tunel.py"), encoding="utf-8").read(), "varlik-tunel.py", "exec"))
+elif arg("--mod", "pvp") == "havaifisek":  # 11. video (REF-062 HumanWarmUp, CO-OP): havai fisekli gece, kirmizi kopru yol, beyaz kafes kapi
+    exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-havaifisek.py"), encoding="utf-8").read(), "varlik-havaifisek.py", "exec"))
 elif arg("--mod", "pvp") == "cadi":
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-cadi.py"), encoding="utf-8").read(), "varlik-cadi.py", "exec"))
 else:
