@@ -513,6 +513,11 @@ def eklemler(arm, tur):
 def hizala(solA, solM, sagA, sagM, temas):
     """sag figuru x'te kaydirir: temas = [sol figurun eklem turu, sag figurun eklem turu] ya da "yan" (silüetler deger)"""
     bpy.context.view_layer.update()
+    if isinstance(temas, (int, float)):            # 11. video (REF-062): temassiz ikili, silüetler arasi bosluk (m)
+        a1, u1 = dunya_kutusu(solM); a2, u2 = dunya_kutusu(sagM)
+        sagA.location.x += (u1.x + temas) - a2.x
+        bpy.context.view_layer.update()
+        return {"tip": "bosluk", "dz": 0.0}
     if temas == "yan":
         a1, u1 = dunya_kutusu(solM); a2, u2 = dunya_kutusu(sagM)
         sagA.location.x += (u1.x - 0.22) - a2.x      # 0,22 m bindirme: silüetler gercekten deger
