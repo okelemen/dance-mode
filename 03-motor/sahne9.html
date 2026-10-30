@@ -159,6 +159,7 @@ function yildizCiz(x, y, R, don, renk, a, kal) {
 }
 // Kapı üstünde neon seri tabelası (tabela kuralı, TALIMATLAR §4)
 function neonTabela(t) {
+  if (ABONE.some(a => t >= a && t < a + ABONE_SURE)) return;   // SUBSCRIBE aynı bölgede, üst üste binmesin
   const A = aciklik(), nab = 0.86 + 0.14 * Math.sin(t * 5);
   yazi('HUMAN TETRIS', A.x + A.w / 2, A.y - 100 * k, 62 * k, ['#ffffff', '#ffd6f0', '#ff3fb0'], '#2a0638', nab, '#ff3fb0');
 }
