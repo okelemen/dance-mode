@@ -1,0 +1,91 @@
+{
+ "_not": "HUMAN TETRIS 12. video (REF-063, HumanWarmUp 'Human Tetris 1 Player -200 kcal | Immersive Interactive Warm-Up | Easy Challenge'), kullanici 30 Eki 2026: 3_ENFNG0Avk kilitlendi. 1 oyuncu, 26 duvar x 24 vurus (10,6 sn), SUBSCRIBE her 15 sn kalir, VS/boksor acilisi kalir (YOU vs WALL), koc sesi yok, ! alarmi var. Muzik: Solo Run On Neon Steps 136 BPM sabit.",
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-12",
+ "sayfa": "sahne9.html",
+ "bpm": 136,
+ "muzik": "Solo Run On Neon Steps.wav (Suno, kullanici, 30 Eki 2026) 136,0 BPM sabit; ilk 12 olcu ve 66-69 zayif, izgaradan dizilir",
+ "duvar": "duvar-listesi-12.json",
+ "duvar_vurus": 24,
+ "zaman_vurus": {
+  "kart": 7,
+  "say": 6,
+  "buyu": 6,
+  "gec": 3
+ },
+ "tur_kart_yok": true,
+ "kart_vurus": {
+  "basla": 8,
+  "abone": 11
+ },
+ "giris_dizisi": [
+  {
+   "tip": "acilis",
+   "vurus": 12
+  },
+  {
+   "tip": "yazi",
+   "metin": "WELCOME BACK,",
+   "alt": "SOLO RUNNER!",
+   "vurus": 6
+  },
+  {
+   "tip": "nasil",
+   "metin": "MATCH THE SHAPE",
+   "alt": "BEFORE THE WALL ARRIVES!",
+   "vurus": 8
+  }
+ ],
+ "ovgu_kart": {
+  "her": 5,
+  "vurus": 4,
+  "metin": [
+   "Sharp moves!",
+   "Right on time!",
+   "Stay locked in!",
+   "Almost there!"
+  ]
+ },
+ "kapanis": [
+  {
+   "tip": "yazi",
+   "metin": "THANK YOU",
+   "alt": "FOR PLAYING!",
+   "vurus": 8
+  }
+ ],
+ "tema": {
+  "tekOyuncu": true,
+  "varlik": "/03-motor/tetris-pvp/varlik-12-sahne/",
+  "maskeVarlik": "/03-motor/tetris-pvp/varlik-12/",
+  "maskeKlasor": "poz/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-08/",
+  "p1": "#3d8bff",
+  "p1koyu": "#0b3a9e",
+  "p1acik": "#d6e6ff",
+  "p2": "#ff3ea5",
+  "p2koyu": "#a0105c",
+  "p2acik": "#ffd6ec",
+  "vsEtiket": [
+   "YOU",
+   "WALL"
+  ],
+  "vsAlt": "HUMAN TETRIS · 1 PLAYER",
+  "duvarRenk": [
+   "#ef1062",
+   "#f020a0",
+   "#e6d010",
+   "#ef1062",
+   "#ff2a8a",
+   "#d8109a",
+   "#e6d010",
+   "#f0185a"
+  ],
+  "sayac": "Mission",
+  "aboneAlt": "NEW BATTLE EVERY DAY",
+  "fener": false,
+  "neonYildiz": true,
+  "sonrakiIkon": true,
+  "okRenk": "#ff6ac4"
+ }
+}
