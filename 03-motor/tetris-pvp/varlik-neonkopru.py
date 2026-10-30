@@ -196,7 +196,9 @@ def serit_katmani():
     sc.world.node_tree.nodes["Background"].inputs[0].default_value = (*lin(hex3("#d8d8e4")), 1)
     sc.world.node_tree.nodes["Background"].inputs[1].default_value = 0.08
     Y = KAP["y"]
-    neon_zemin(); neon_sehir(); kopru_yol(); korkuluk(); kapi(); sahne_kuleleri(); kapi_susu(); yol_ledleri()
+    if not KAPAK:                                          # REF-063 kapaginda sehir/kule yok (md. 22): kapak referansin sahnesi
+        neon_zemin(); neon_sehir(); sahne_kuleleri()
+    kopru_yol(); korkuluk(); kapi(); kapi_susu(); yol_ledleri()
     isik("AREA", (0, 4, 6), 120, lin(hex3("#ff9ad8")), 8, yon=(0, 5, 0))
     isik("AREA", (0, Y - 3, 5), 700, lin(hex3("#ffffff")), 5, yon=(0, Y, 2))
     W_, H_, KK = KAP["w"], KAP["h"], KAP["kule"]
