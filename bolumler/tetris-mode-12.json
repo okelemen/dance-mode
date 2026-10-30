@@ -1,0 +1,324 @@
+{
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-12",
+ "bpm": 136.0,
+ "toplam_olcu": 175,
+ "toplam_duvar": 26,
+ "zaman": {
+  "kart": 3.0882,
+  "say": 2.6471,
+  "buyu": 2.6471,
+  "gec": 1.3235,
+  "sure": 10.5882
+ },
+ "kartlar": [
+  {
+   "tip": "acilis",
+   "t": 0.0,
+   "sure": 5.2941
+  },
+  {
+   "tip": "yazi",
+   "metin": "WELCOME BACK,",
+   "alt": "SOLO RUNNER!",
+   "t": 5.2941,
+   "sure": 2.6471
+  },
+  {
+   "tip": "nasil",
+   "metin": "MATCH THE SHAPE",
+   "alt": "BEFORE THE WALL ARRIVES!",
+   "t": 7.9412,
+   "sure": 4.4118
+  },
+  {
+   "t": 12.3529,
+   "sure": 3.5294,
+   "tip": "basla"
+  },
+  {
+   "t": 68.8234,
+   "sure": 1.7647,
+   "tip": "ovgu_kart",
+   "metin": "Sharp moves!"
+  },
+  {
+   "t": 123.5291,
+   "sure": 1.7647,
+   "tip": "ovgu_kart",
+   "metin": "Right on time!"
+  },
+  {
+   "t": 178.2348,
+   "sure": 1.7647,
+   "tip": "ovgu_kart",
+   "metin": "Stay locked in!"
+  },
+  {
+   "t": 232.9405,
+   "sure": 1.7647,
+   "tip": "ovgu_kart",
+   "metin": "Almost there!"
+  },
+  {
+   "t": 287.6462,
+   "sure": 1.7647,
+   "tip": "ovgu_kart",
+   "metin": "Sharp moves!"
+  },
+  {
+   "tip": "yazi",
+   "metin": "THANK YOU",
+   "alt": "FOR PLAYING!",
+   "t": 299.9991,
+   "sure": 3.5294
+  },
+  {
+   "t": 303.5285,
+   "sure": 5.2941,
+   "tip": "abone"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 15.8824,
+   "p1": "solo-forward-fold-half-reach",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 2,
+   "tur": 1,
+   "t0": 26.4706,
+   "p1": "solo-diagonal-line-stretch",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 3,
+   "tur": 1,
+   "t0": 37.0588,
+   "p1": "solo-halo-side-tap",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 4,
+   "tur": 1,
+   "t0": 47.647,
+   "p1": "solo-comet-arm-tip-toe",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 5,
+   "tur": 1,
+   "t0": 58.2352,
+   "p1": "solo-low-arms-wide-tap",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 6,
+   "tur": 1,
+   "t0": 70.5881,
+   "p1": "solo-neon-side-bend-over",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 7,
+   "tur": 1,
+   "t0": 81.1763,
+   "p1": "solo-goal-post-lean",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 8,
+   "tur": 1,
+   "t0": 91.7645,
+   "p1": "solo-star-tilt",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 9,
+   "tur": 1,
+   "t0": 102.3527,
+   "p1": "solo-flex-goddess",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 10,
+   "tur": 1,
+   "t0": 112.9409,
+   "p1": "neon-t-comet-leg-out",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 11,
+   "tur": 2,
+   "t0": 125.2938,
+   "p1": "solo-skater-reach",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 12,
+   "tur": 2,
+   "t0": 135.882,
+   "p1": "solo-high-side-kick-t",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 13,
+   "tur": 2,
+   "t0": 146.4702,
+   "p1": "solo-back-leg-lift-reach",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 14,
+   "tur": 2,
+   "t0": 157.0584,
+   "p1": "solo-side-bend-lunge-arm-over",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 15,
+   "tur": 2,
+   "t0": 167.6466,
+   "p1": "solo-airplane-arms-wide",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 16,
+   "tur": 2,
+   "t0": 179.9995,
+   "p1": "solo-runner-lunge-arm-up",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 17,
+   "tur": 2,
+   "t0": 190.5877,
+   "p1": "solo-low-side-kick-arms-up",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 18,
+   "tur": 2,
+   "t0": 201.1759,
+   "p1": "solo-lunge-flex-double",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 19,
+   "tur": 2,
+   "t0": 211.7641,
+   "p1": "solo-front-kick-low-arms-back",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 20,
+   "tur": 2,
+   "t0": 222.3523,
+   "p1": "solo-pyramid-reach",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 21,
+   "tur": 3,
+   "t0": 234.7052,
+   "p1": "solo-spider-lunge-arm-up",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 22,
+   "tur": 3,
+   "t0": 245.2934,
+   "p1": "solo-three-leg-plank",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 23,
+   "tur": 3,
+   "t0": 255.8816,
+   "p1": "solo-half-kneel-forward-reach",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 24,
+   "tur": 3,
+   "t0": 266.4698,
+   "p1": "solo-hands-feet-pike-low",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 25,
+   "tur": 3,
+   "t0": 277.058,
+   "p1": "solo-kneeling-side-lean",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 26,
+   "tur": 3,
+   "t0": 289.4109,
+   "p1": "solo-wide-plank-arm-forward",
+   "ovgu": "EXCELLENT!"
+  }
+ ],
+ "abone": [
+  15.0,
+  30.0,
+  45.0,
+  60.0,
+  75.0,
+  90.0,
+  105.0,
+  120.0,
+  135.0,
+  150.0,
+  165.0,
+  180.0,
+  195.0,
+  210.0,
+  225.0,
+  240.0,
+  255.0,
+  270.0,
+  289.5
+ ],
+ "abone_sure": 3.2,
+ "muzik": "Solo Run On Neon Steps.wav (Suno, kullanici, 30 Eki 2026) 136,0 BPM sabit; ilk 12 olcu ve 66-69 zayif, izgaradan dizilir",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne9.html.",
+ "tema": {
+  "tekOyuncu": true,
+  "varlik": "/03-motor/tetris-pvp/varlik-12-sahne3/",
+  "maskeVarlik": "/03-motor/tetris-pvp/varlik-12/",
+  "maskeKlasor": "poz/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-08/",
+  "p1": "#3d8bff",
+  "p1koyu": "#0b3a9e",
+  "p1acik": "#d6e6ff",
+  "p2": "#ff3ea5",
+  "p2koyu": "#a0105c",
+  "p2acik": "#ffd6ec",
+  "vsEtiket": [
+   "YOU",
+   "WALL"
+  ],
+  "vsAlt": "HUMAN TETRIS · 1 PLAYER",
+  "duvarRenk": [
+   "#ef1062",
+   "#f020a0",
+   "#e6d010",
+   "#ef1062",
+   "#ff2a8a",
+   "#d8109a",
+   "#e6d010",
+   "#f0185a"
+  ],
+  "sayac": "Mission",
+  "aboneAlt": "NEW BATTLE EVERY DAY",
+  "fener": false,
+  "neonYildiz": true,
+  "sonrakiIkon": true,
+  "okRenk": "#ff6ac4"
+ }
+}

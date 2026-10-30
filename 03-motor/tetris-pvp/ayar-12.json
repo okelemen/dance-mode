@@ -16,7 +16,7 @@
  "tur_kart_yok": true,
  "kart_vurus": {
   "basla": 8,
-  "abone": 11
+  "abone": 12
  },
  "giris_dizisi": [
   {
@@ -33,7 +33,7 @@
    "tip": "nasil",
    "metin": "MATCH THE SHAPE",
    "alt": "BEFORE THE WALL ARRIVES!",
-   "vurus": 8
+   "vurus": 10
   }
  ],
  "ovgu_kart": {

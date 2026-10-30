@@ -1,0 +1,97 @@
+{
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-12",
+ "bpm": 136.0,
+ "toplam_olcu": 21,
+ "toplam_duvar": 2,
+ "zaman": {
+  "kart": 3.0882,
+  "say": 2.6471,
+  "buyu": 2.6471,
+  "gec": 1.3235,
+  "sure": 10.5882
+ },
+ "kartlar": [
+  {
+   "tip": "acilis",
+   "t": 0.0,
+   "sure": 5.2941
+  },
+  {
+   "tip": "yazi",
+   "metin": "WELCOME BACK,",
+   "alt": "SOLO RUNNER!",
+   "t": 5.2941,
+   "sure": 2.6471
+  },
+  {
+   "tip": "nasil",
+   "metin": "MATCH THE SHAPE",
+   "alt": "BEFORE THE WALL ARRIVES!",
+   "t": 7.9412,
+   "sure": 4.4118
+  },
+  {
+   "t": 12.3529,
+   "sure": 3.5294,
+   "tip": "basla"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 15.8824,
+   "p1": "solo-forward-fold-half-reach",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 8,
+   "tur": 1,
+   "t0": 26.4706,
+   "p1": "solo-star-tilt",
+   "ovgu": "EXCELLENT!"
+  }
+ ],
+ "abone": [
+  15.0,
+  30.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "Solo Run On Neon Steps.wav (Suno, kullanici, 30 Eki 2026) 136,0 BPM sabit; ilk 12 olcu ve 66-69 zayif, izgaradan dizilir",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne9.html.",
+ "tema": {
+  "tekOyuncu": true,
+  "varlik": "/03-motor/tetris-pvp/varlik-12-sahne3/",
+  "maskeVarlik": "/03-motor/tetris-pvp/varlik-12/",
+  "maskeKlasor": "poz/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-08/",
+  "p1": "#3d8bff",
+  "p1koyu": "#0b3a9e",
+  "p1acik": "#d6e6ff",
+  "p2": "#ff3ea5",
+  "p2koyu": "#a0105c",
+  "p2acik": "#ffd6ec",
+  "vsEtiket": [
+   "YOU",
+   "WALL"
+  ],
+  "vsAlt": "HUMAN TETRIS · 1 PLAYER",
+  "duvarRenk": [
+   "#ef1062",
+   "#f020a0",
+   "#e6d010",
+   "#ef1062",
+   "#ff2a8a",
+   "#d8109a",
+   "#e6d010",
+   "#f0185a"
+  ],
+  "sayac": "Mission",
+  "aboneAlt": "NEW BATTLE EVERY DAY",
+  "fener": false,
+  "neonYildiz": true,
+  "sonrakiIkon": true,
+  "okRenk": "#ff6ac4"
+ }
+}
