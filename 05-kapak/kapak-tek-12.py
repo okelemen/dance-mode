@@ -9,7 +9,7 @@ Referanstaki "-200 kcal" YOK (kullanici 30 Eki 2026: dogrulanamayan sayi yazilma
 Cizim sirasi: arka plan -> kapidaki duvar -> yan etiket/rozet -> siluet -> baslik.
 """
 import argparse, json, math, os
-from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageEnhance
+from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont, ImageEnhance
 
 KOK = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 TP = os.path.join(KOK, "03-motor", "tetris-pvp")
@@ -19,6 +19,7 @@ p.add_argument("--arka", default="varlik-12-kapak-0")
 p.add_argument("--boy", type=float, default=520); p.add_argument("--x", type=float, default=0.45)
 p.add_argument("--duvar", default="#fff200")
 p.add_argument("--renk", type=float, default=1.0); p.add_argument("--parlak", type=float, default=1.0)   # yalniz hafif genel ayar
+p.add_argument("--parilti", type=float, default=0.9)
 p.add_argument("--cikti", required=True)
 a = p.parse_args()
 W, H = 1280, 720
@@ -34,6 +35,10 @@ maske = Image.open(os.path.join(TP, "varlik-12", "poz", a.poz + ".png")).convert
 if a.ayna:
     maske = maske.transpose(Image.FLIP_LEFT_RIGHT)
 ma = maske.getchannel("A")
+
+# neon parlamasi (Blender kapakta glare yok): yalniz parlak neon piksellerden, yapi silinmez
+par = im.convert("RGB").point(lambda v: 0 if v < 150 else v).filter(ImageFilter.GaussianBlur(16))
+im = ImageChops.add(im.convert("RGB"), par.point(lambda v: int(v * a.parilti))).convert("RGBA")
 
 # kapidaki duvar: aciklik kadar sari panel, ortasinda ayni pozun oyugu (REF-063)
 pw, ph = int(x1 - x0), int(y1 - y0)
@@ -70,7 +75,7 @@ def harf(c, boy, renk, yon, derin_oran=0.085):
     yuz = Image.new("L", (w, h), 0); ImageDraw.Draw(yuz).text((ox, oy), c, font=f, fill=255)
     gr = Image.new("RGBA", (w, h))
     px = gr.load()
-    ust, alt = ton(renk, 1.1), ton(renk, 0.88)   # 1. taslak: yuz soluk (ton 1,32) -> doygun
+    ust, alt = ton(renk, 1.05), ton(renk, 0.8)   # 1. taslak: yuz soluk (ton 1,32) -> doygun
     b0, b1 = oy + bx[1], oy + bx[3]
     for y in range(h):
         q = max(0.0, min(1.0, (y - b0) / max(1, b1 - b0)))
@@ -117,7 +122,7 @@ def rozet(cx, cy, r):
 
 
 # etiket + rozet (siluetten once)
-yazi("1 Player", 1122, 180, 62, ["#35a8ff"], ara=1.0, isilti=0.75, derin_oran=0.07)
+yazi("1 Player", 1115, 182, 70, ["#35a8ff"], ara=1.0, isilti=0.75, derin_oran=0.07)
 rozet(186, 530, 92)
 
 # siluet: duz simsiyah + kalin beyaz dis kontur, tabani alt kenarda
