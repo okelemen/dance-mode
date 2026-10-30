@@ -13,11 +13,14 @@ Y_SON = 9.4
 PEMBE, MOR = "#ff3fb0", "#8a3cff"
 KAPAK = YALNIZ == "kapak"
 POZLAMA = float(arg("--kapak-pozlama", "0"))
+if KAPAK:                                                  # REF-063 kapak kompozisyonu: ufuk %46, kapi saga kacik ve daha uzak
+    KAM.update(z=1.35, egim=3.0, x=-1.5)
+    KAP["y"] = 10.4; Y_SON = 11.2
 
 
 def kamera(sc):
     rx = math.radians(90 - KAM["egim"])
-    bpy.ops.object.camera_add(location=(0, 0, KAM["z"]), rotation=(rx, 0, 0))
+    bpy.ops.object.camera_add(location=(KAM.get("x", 0), 0, KAM["z"]), rotation=(rx, 0, 0))
     kam = bpy.context.active_object; sc.camera = kam
     kam.data.sensor_fit = "VERTICAL"; kam.data.sensor_height = KAM["sensor"]; kam.data.lens = KAM["lens"]
     kam.data.clip_end = 900
@@ -42,9 +45,9 @@ def sekil(ad, noktalar, mat, konum=(0, 0, 0)):
 
 def kapak_lazer():
     """KAPAK: REF-063 kapaginda gokte pembe lazer cizgileri (videoda motor ciziyor; kapakta 2B boyama yok -> Blender'da)"""
-    m = mat_emis("lazer", lin(hex3("#ff3fb0")), 9.0)
+    m = mat_emis("lazer", lin(hex3("#ff6ac4")), 14.0)
     for a, b in (((-260, 300, 40), (-40, 300, 215)), ((-40, 300, 215), (70, 300, 80)), ((70, 300, 80), (280, 300, 190)), ((-180, 300, 150), (120, 300, 230))):
-        boru(a, b, 0.9, m)
+        boru(a, b, 1.5, m)
 
 
 def gok_katmani():
@@ -56,11 +59,18 @@ def gok_katmani():
     sc.world.node_tree.nodes["Background"].inputs[1].default_value = 1.0
     if KAPAK:
         kapak_lazer()
+        nt = sc.world.node_tree                            # gok ufukta sicak pembe, tepede koyu mor (referans siyah orani 0,11)
+        tc = nt.nodes.new("ShaderNodeTexCoord"); ay = nt.nodes.new("ShaderNodeSeparateXYZ"); ra = nt.nodes.new("ShaderNodeValToRGB")
+        nt.links.new(tc.outputs["Generated"], ay.inputs[0]); nt.links.new(ay.outputs["Z"], ra.inputs[0])
+        cr = ra.color_ramp; cr.elements[0].position = 0.0; cr.elements[0].color = (*lin(hex3("#e0206e")), 1)
+        cr.elements[1].position = 0.55; cr.elements[1].color = (*lin(hex3("#2a0628")), 1)
+        e = cr.elements.new(0.2); e.color = (*lin(hex3("#7a1250")), 1)
+        nt.links.new(ra.outputs["Color"], nt.nodes["Background"].inputs[0])
     yaz(sc, ON_EK + "gok.png")
 
 
 def kopru_yol():
-    yol = mat_metal("yol", lin(hex3("#0d0414")), 0.55, metal=0.0)
+    yol = mat_emis("yol", lin(hex3("#4a0c4c")), 1.0) if KAPAK else mat_metal("yol", lin(hex3("#0d0414")), 0.55, metal=0.0)
     yuvarlak_kutu("yol", (0, (0.3 + Y_SON) / 2, -0.2), (YOL_W, Y_SON - 0.3, 0.4), yol, egim=0.05, seg=2)
     pembe = mat_emis("chev", lin(hex3("#ff2fa8")), 1.7)
     for yy, hw, kal in ((0.9, 1.75, 0.6), (2.3, 1.55, 0.48), (3.55, 1.38, 0.4), (4.65, 1.24, 0.33), (5.65, 1.12, 0.28), (6.55, 1.02, 0.24), (7.35, 0.94, 0.2)):
