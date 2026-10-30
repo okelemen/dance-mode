@@ -529,22 +529,22 @@
     -32
    ]
   },
-  "solo-kneeling-side-lean": {
-   "ad": "Solo Kneeling Side Lean",
+  "solo-half-kneel-twist-back": {
+   "ad": "Solo Half Kneel Twist Back",
    "yon": "sag",
-   "govde": 195,
+   "govde": 175,
    "bas": 0,
    "solKol": [
-    175,
-    175
+    -50,
+    -50
    ],
    "sagKol": [
-    -30,
-    -30
+    95,
+    95
    ],
    "solBacak": [
-    0,
-    -90
+    95,
+    0
    ],
    "sagBacak": [
     0,

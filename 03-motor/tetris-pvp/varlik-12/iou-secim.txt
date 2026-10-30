@@ -18,10 +18,10 @@ T1 solo-comet-arm-tip-toe                             eski 0.61 (varlik/poz/side
 T3 solo-half-kneel-forward-reach                      eski 0.64 (varlik-03/poz/low-lunge-arms-forward.png) ic 0.42 EL
 T1 solo-low-arms-wide-tap                             eski 0.64 (varlik-05/poz/spell-hook-head-hop.png) ic 0.42 EL
 T3 solo-hands-feet-pike-low                           eski 0.64 (varlik-03/poz/dolphin.png) ic 0.26 EL
+T3 solo-half-kneel-twist-back                         eski 0.67 (varlik-04/poz/kneeling-lunge-hands-on-knee.png) ic 0.63 EL
 T1 solo-neon-side-bend-over                           eski 0.67 (varlik-10/poz/flow-t-diag-wide.png) ic 0.40 EL
 T1 solo-goal-post-lean                                eski 0.70 (varlik/poz/wide-cactus.png) ic 0.53 EL
 T1 solo-star-tilt                                     eski 0.75 (varlik/poz/hands-on-head.png) ic 0.50 EL
-T3 solo-kneeling-side-lean                            eski 0.76 (varlik-04/poz/kneeling-arms-up-back.png) ic 0.44 EL
 T3 solo-wide-plank-arm-forward                        eski 0.76 (varlik-05/poz/tombstone-high-plank-forward-floor.png) ic 0.31 EL
 T1 solo-flex-goddess                                  eski 0.77 (varlik-08/poz/disco-goddess-twist-elbows.png) ic 0.52 EL
 T1 neon-t-comet-leg-out                               eski 0.47 (varlik-05/poz/broom-t-salute-curtsy-lean-l.png) ic 0.43 HAVUZ

@@ -15,7 +15,8 @@ YASAK = ("Standing Split", "Bridge", "Headstand", "Handstand")
 # kontak 1 (28 Eki 2026): siluette havada / dusuyor / ziplama gibi okunanlar
 # kontak 1 (30 Eki 2026): siluette havada / dusuyor / bas asagi okunanlar
 HARIC = {"solo-seated-knees-up-arms-forward", "solo-reverse-tabletop-lift", "solo-seated-arms-back-legs-long", "solo-tall-sit-heels-arm-up",
-         "solo-seated-wide-lean-reach", "solo-lean-back-arms-up"}
+         "solo-seated-wide-lean-reach", "solo-lean-back-arms-up",
+         "solo-kneeling-side-lean"}  # 30 Eki 2026 kullanici: havada zipliyor gibi okundu
 # grup 3 havuzundan yalniz el + ayak / diz yere acikca basanlar (yer-adaylari.jpg gozle secimi)
 IZIN3 = set()
 ap.add_argument("--havuz", action="store_true", help="elle tasarlananlar yetmezse rastgele havuzu da kullan")
@@ -64,7 +65,7 @@ for sira, deg, ad, p, tur, yol, m, en in sorted(olcu, key=lambda x: (x[0], x[1])
     if len(secilen[tur]) >= DUVAR_SAYI[tur] or deg >= A.esik_eski:
         continue
     ic = max([iou(m, q[1]) for q in tum] or [0])
-    if ic >= A.esik_ic:
+    if ic >= A.esik_ic and ad != "solo-half-kneel-twist-back":  # 30 Eki 2026: 25. duvar elle secildi (kollari ters, yere net basiyor)
         continue
     secilen[tur].append((ad, p, yol)); tum.append((ad, m))
     rapor.append(f"T{tur} {ad:50s} eski {deg:.2f} ({en}) ic {ic:.2f} {'EL' if sira == 0 else 'HAVUZ'}")

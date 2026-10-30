@@ -2,8 +2,8 @@
  "seri": "HUMAN TETRIS",
  "bolum": "human-tetris-12",
  "bpm": 136.0,
- "toplam_olcu": 21,
- "toplam_duvar": 2,
+ "toplam_olcu": 34,
+ "toplam_duvar": 4,
  "zaman": {
   "kart": 3.0882,
   "say": 2.6471,
@@ -35,6 +35,12 @@
    "t": 12.3529,
    "sure": 3.5294,
    "tip": "basla"
+  },
+  {
+   "t": 58.2352,
+   "sure": 1.7647,
+   "tip": "ovgu_kart",
+   "metin": "Sharp moves!"
   }
  ],
  "duvarlar": [
@@ -51,11 +57,26 @@
    "t0": 26.4706,
    "p1": "solo-star-tilt",
    "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 14,
+   "tur": 2,
+   "t0": 37.0588,
+   "p1": "solo-side-bend-lunge-arm-over",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 25,
+   "tur": 3,
+   "t0": 47.647,
+   "p1": "solo-half-kneel-twist-back",
+   "ovgu": "GREAT!"
   }
  ],
  "abone": [
   15.0,
-  30.0
+  30.0,
+  45.0
  ],
  "abone_sure": 3.2,
  "muzik": "Solo Run On Neon Steps.wav (Suno, kullanici, 30 Eki 2026) 136,0 BPM sabit; ilk 12 olcu ve 66-69 zayif, izgaradan dizilir",
