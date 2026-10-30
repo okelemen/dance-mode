@@ -9,11 +9,13 @@ ap.add_argument("--esik-ic", type=float, default=0.55)   # kontak 2: 0,75 dort b
 
 BURA = os.path.dirname(os.path.abspath(__file__))
 N = 128
-DUVAR_SAYI = {1: 9, 2: 9, 3: 8}
+DUVAR_SAYI = {1: 10, 2: 10, 3: 6}
 # siluette bas asagi / tam kopru gibi okunan tabanlar (5. video kontak dersi, TALIMATLAR §4 guvenlik)
 YASAK = ("Standing Split", "Bridge", "Headstand", "Handstand")
 # kontak 1 (28 Eki 2026): siluette havada / dusuyor / ziplama gibi okunanlar
-HARIC = set()
+# kontak 1 (30 Eki 2026): siluette havada / dusuyor / bas asagi okunanlar
+HARIC = {"solo-seated-knees-up-arms-forward", "solo-reverse-tabletop-lift", "solo-seated-arms-back-legs-long", "solo-tall-sit-heels-arm-up",
+         "solo-seated-wide-lean-reach", "solo-lean-back-arms-up"}
 # grup 3 havuzundan yalniz el + ayak / diz yere acikca basanlar (yer-adaylari.jpg gozle secimi)
 IZIN3 = set()
 ap.add_argument("--havuz", action="store_true", help="elle tasarlananlar yetmezse rastgele havuzu da kullan")

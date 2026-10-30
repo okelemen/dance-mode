@@ -59,21 +59,21 @@ def gok_katmani():
 
 
 def kopru_yol():
-    yol = mat_metal("yol", lin(hex3("#1a0a24")), 0.3, metal=0.1)
+    yol = mat_metal("yol", lin(hex3("#0d0414")), 0.55, metal=0.0)
     yuvarlak_kutu("yol", (0, (0.3 + Y_SON) / 2, -0.2), (YOL_W, Y_SON - 0.3, 0.4), yol, egim=0.05, seg=2)
-    pembe = mat_emis("chev", lin(hex3("#ff6ac4")), 5.0)
+    pembe = mat_emis("chev", lin(hex3("#ff2fa8")), 1.7)
     for yy, hw, kal in ((0.9, 1.75, 0.6), (2.3, 1.55, 0.48), (3.55, 1.38, 0.4), (4.65, 1.24, 0.33), (5.65, 1.12, 0.28), (6.55, 1.02, 0.24), (7.35, 0.94, 0.2)):
         d = hw * 0.42
         sekil("chev", [(-hw, yy + d), (0, yy), (hw, yy + d), (hw, yy + d + kal), (0, yy + kal), (-hw, yy + d + kal)], pembe, konum=(0, 0, 0.03))
     for s in (-1, 1):
-        boru((s * (YOL_W / 2 - 0.06), 0.3, 0.03), (s * (YOL_W / 2 - 0.06), Y_SON, 0.03), 0.06, mat_emis("kenar%d" % s, lin(hex3(PEMBE)), 8))
+        boru((s * (YOL_W / 2 - 0.06), 0.3, 0.03), (s * (YOL_W / 2 - 0.06), Y_SON, 0.03), 0.06, mat_emis("kenar%d" % s, lin(hex3(PEMBE)), 3))
 
 
 def korkuluk():
     metal = mat_metal("kork_metal", lin(hex3("#3a1a4a")), 0.3, metal=0.5)
-    okm = mat_emis("ok", lin(hex3("#ff7ad0")), 6)
-    pem = mat_emis("kork_neon", lin(hex3(PEMBE)), 7)
-    mor = mat_emis("kork_led", lin(hex3(MOR)), 8)
+    okm = mat_emis("ok", lin(hex3("#ff3fb8")), 1.8)
+    pem = mat_emis("kork_neon", lin(hex3(PEMBE)), 2.6)
+    mor = mat_emis("kork_led", lin(hex3(MOR)), 3.5)
     for s in (-1, 1):
         x = s * (YOL_W / 2 + 0.25)
         hk = 0.95
@@ -112,8 +112,8 @@ def serit_katmani():
     sc.world.node_tree.nodes["Background"].inputs[1].default_value = 0.08
     Y = KAP["y"]
     kopru_yol(); korkuluk(); kapi()
-    isik("AREA", (0, 4, 6), 500, lin(hex3("#ff9ad8")), 8, yon=(0, 5, 0))
-    isik("AREA", (0, Y - 3, 5), 1200, lin(hex3("#ffffff")), 5, yon=(0, Y, 2))
+    isik("AREA", (0, 4, 6), 120, lin(hex3("#ff9ad8")), 8, yon=(0, 5, 0))
+    isik("AREA", (0, Y - 3, 5), 700, lin(hex3("#ffffff")), 5, yon=(0, Y, 2))
     W_, H_, KK = KAP["w"], KAP["h"], KAP["kule"]
     ic = W_ / 2 - KK
     bpy.context.view_layer.update()
