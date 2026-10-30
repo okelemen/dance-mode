@@ -4,6 +4,7 @@ REF-063'te ne varsa (md. 22): kapkara gece, koyu mor yol, parlak pembe chevron b
 korkulukta pembe cift oklar, gri metal kafes kapi. Lazer yildizlar, isik toplari, "Coming Soon", "!" ve duvarlar motorda (sahne9.html).
 """
 
+import random
 YERLESIM.clear()
 KAP = {"y": 8.6, "w": 7.4, "h": 3.6, "kule": 0.42, "kiris": 0.42}
 KAM = {"z": 1.06, "egim": -3.0, "lens": 18.0, "sensor": 24.0}
@@ -103,6 +104,90 @@ def kapi():
     kafes_kiris(-xk, xk, Y, H_ + KR / 2, KR, ana, ince)
 
 
+
+# ------------------------------------------------------------------ DOLGU (kullanici 30 Eki 2026: "cok bos duruyor, konseptine gore doldur")
+# Neon konseptinden: ufukta neon sehir, kopru altinda isikli izgara, yanlarda sahne kuleleri + spot + ok panelleri, kapida neon + ampul.
+RND = random.Random(63)
+NEON = ("#ff3fb0", "#19e0d0", "#8a3cff", "#ff8a2a")
+
+
+def neon_sehir():
+    govde = mat_metal("kule", lin(hex3("#1a0a30")), 0.5, metal=0.2)
+    pencere = {r: mat_emis("pen" + r, lin(hex3(r)), 2.4) for r in NEON}
+    for s in (-1, 1):
+        for i in range(16):
+            x = s * (8.5 + i * 3.3 + RND.uniform(-0.8, 0.8)); y = RND.uniform(22, 70)
+            w, h = RND.uniform(2.2, 4.2), RND.uniform(5, 13) + i * 1.3
+            yuvarlak_kutu("kule", (x, y, h / 2 - 2), (w, 2.5, h), govde, egim=0.01, seg=1)
+            renk = pencere[RND.choice(NEON)]
+            for dx in (-w / 2, w / 2):
+                boru((x + dx, y - 1.3, -2), (x + dx, y - 1.3, h - 2), 0.05, renk)
+            boru((x - w / 2, y - 1.3, h - 2), (x + w / 2, y - 1.3, h - 2), 0.05, renk)
+            for j in range(int(h / 1.4)):                  # yatay pencere bantlari
+                if RND.random() < 0.72:
+                    zz = -1 + j * 1.4
+                    a0 = x - w * 0.38; boru((a0, y - 1.3, zz), (a0 + w * RND.uniform(0.35, 0.76), y - 1.3, zz), 0.045, renk)
+
+
+def neon_zemin():
+    """kopru altinda, kenarlardan ufka uzanan isikli izgara"""
+    mor = mat_emis("izgara", lin(hex3("#a03cff")), 2.2)
+    for i in range(4, 28):
+        for s in (-1, 1):
+            x = s * i * 2.0
+            boru((x, 1.0, -2.6), (x, 90, -2.6), 0.035, mor)
+    for j in range(24):
+        y = 2 + j ** 1.5 * 0.75
+        for s in (-1, 1):
+            boru((s * 8.0, y, -2.6), (s * 56, y, -2.6), 0.035, mor)
+
+
+def sahne_kuleleri():
+    ana = mat_metal("yk_ana", lin(hex3("#7e7e88")), 0.35, metal=0.6)
+    ince = mat_metal("yk_ince", lin(hex3("#60606a")), 0.4, metal=0.6)
+    spot = {r: mat_emis("spot" + r, lin(hex3(r)), 7) for r in NEON}
+    pano = mat_metal("pano", lin(hex3("#12061e")), 0.5, metal=0.1)
+    okm = mat_emis("pano_ok", lin(hex3("#ff3fb0")), 2.6)
+    for s in (-1, 1):
+        for x, y, h in ((6.6, 8.6, 5.2), (8.3, 6.4, 6.6)):
+            kafes_kule(s * x, y, -0.2, h, 0.34, ana, ince)
+            for j in range(4):                              # kule tepesinde spot sirasi
+                r_ = spot[NEON[(j + (y > 7)) % 4]]
+                bpy.ops.mesh.primitive_uv_sphere_add(radius=0.13, location=(s * x, y - 0.2, h - 0.3 - j * 0.6), segments=12, ring_count=8)
+                bpy.context.active_object.data.materials.append(r_)
+        # kapi yaninda ok panosu
+        yuvarlak_kutu("pano", (s * 5.15, 8.7, 1.75), (1.3, 0.08, 3.1), pano, egim=0.01, seg=1)
+        for j in range(4):
+            z = 0.7 + j * 0.7
+            boru((s * 4.75, 8.62, z), (s * 5.15, 8.62, z + 0.36), 0.04, okm)
+            boru((s * 5.55, 8.62, z), (s * 5.15, 8.62, z + 0.36), 0.04, okm)
+
+
+def kapi_susu():
+    """kapi acikligini saran cift neon + ust kiris altinda ampul dizisi (TALIMATLAR §4: zengin kapi)"""
+    Y, W_, H_, KK = KAP["y"], KAP["w"], KAP["h"], KAP["kule"]
+    ic = W_ / 2 - KK
+    pem, cam = mat_emis("kap_pem", lin(hex3("#ff3fb0")), 4), mat_emis("kap_cam", lin(hex3("#19e0d0")), 3.2)
+    for m, p in ((pem, 0.02), (cam, 0.12)):
+        for a, b in (((-ic + p, Y - 0.25, 0.05), (-ic + p, Y - 0.25, H_ - p)), ((ic - p, Y - 0.25, 0.05), (ic - p, Y - 0.25, H_ - p)), ((-ic + p, Y - 0.25, H_ - p), (ic - p, Y - 0.25, H_ - p))):
+            boru(a, b, 0.028, m)
+
+
+def yol_ledleri():
+    pem = mat_emis("yol_led", lin(hex3("#ff3fb0")), 3)
+    cam = mat_emis("yol_cam", lin(hex3("#19e0d0")), 2.4)
+    for s in (-1, 1):
+        for j in range(16):
+            y = 0.8 + j * 0.5
+            boru((s * 2.75, y, 0.02), (s * 2.75, y + 0.26, 0.02), 0.022, cam if j % 2 else pem)
+    tepe = mat_emis("tepe", lin(hex3("#ffd0f0")), 5)
+    for s in (-1, 1):
+        x = s * (YOL_W / 2 + 0.25)
+        for j in range(6):
+            bpy.ops.mesh.primitive_uv_sphere_add(radius=0.085, location=(x, 0.5 + j * 1.7, 1.08), segments=12, ring_count=8)
+            bpy.context.active_object.data.materials.append(tepe)
+
+
 def serit_katmani():
     sc = bos_sahne(w=1920, h=1080, saydam=True, ornek=min(ORNEK, 64))
     if KAPAK:
@@ -111,7 +196,7 @@ def serit_katmani():
     sc.world.node_tree.nodes["Background"].inputs[0].default_value = (*lin(hex3("#d8d8e4")), 1)
     sc.world.node_tree.nodes["Background"].inputs[1].default_value = 0.08
     Y = KAP["y"]
-    kopru_yol(); korkuluk(); kapi()
+    neon_zemin(); neon_sehir(); kopru_yol(); korkuluk(); kapi(); sahne_kuleleri(); kapi_susu(); yol_ledleri()
     isik("AREA", (0, 4, 6), 120, lin(hex3("#ff9ad8")), 8, yon=(0, 5, 0))
     isik("AREA", (0, Y - 3, 5), 700, lin(hex3("#ffffff")), 5, yon=(0, Y, 2))
     W_, H_, KK = KAP["w"], KAP["h"], KAP["kule"]
@@ -120,6 +205,10 @@ def serit_katmani():
     px = [world_to_camera_view(sc, kam, Vector(p)) for p in ((-ic, Y, 0), (ic, Y, 0), (-ic, Y, H_), (ic, Y, H_))]
     xs = [p.x * 1920 for p in px]; ys = [(1 - p.y) * 1080 for p in px]
     YERLESIM[ON_EK + "aciklik_p1"] = [round(min(xs), 1), round(min(ys), 1), round(max(xs), 1), round(max(ys), 1)]
+    YERLESIM[ON_EK + "ampul_p1"] = []
+    for i in range(23):                                    # ust kiris onunde ampul dizisi; motor (ampulCiz) yakip sondurur
+        q = world_to_camera_view(sc, kam, Vector((-ic + i * 2 * ic / 22, Y - 0.3, H_ + 0.08)))
+        YERLESIM[ON_EK + "ampul_p1"].append([round(q.x * 1920, 1), round((1 - q.y) * 1080, 1)])
     YERLESIM["yol"] = {"y_kapi": Y, "genislik": YOL_W, "kam": KAM, "serit_w": 1920}
     yaz(sc, ON_EK + "serit.png")
 

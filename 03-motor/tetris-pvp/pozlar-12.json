@@ -1,0 +1,577 @@
+{
+ "_not": "TETRIS MODE PVP 12. video (REF-063, 1 oyuncu, 5 dk; poz-sec-12.py olcumle secildi) poz tanimlari. Acilar EKRAN duzleminde (pozlar.js dili): 0 asagi, 90 ekran-sag, 180 yukari, -90 ekran-sol. Kollar [ust kol, on kol], bacaklar [uyluk, baldir]. sol*/sag* = KARAKTERIN solu/sagi; karakter kameraya donukken sol = ekran SAGI. yon: on (kameraya donuk) | sag (profil, yuzu ekran sagina). govde: kalcadan boyna aci, bas: govdeye ek aci. Mixamo govdesi (siluet-govde.fbx) bu acilarla bukulur, duz siyah maske cikar (varlik.py).",
+ "pozlar": {
+  "solo-forward-fold-half-reach": {
+   "ad": "Solo Forward Fold Half Reach",
+   "yon": "sag",
+   "govde": 118,
+   "bas": 0,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    98,
+    98
+   ],
+   "solBacak": [
+    8,
+    8
+   ],
+   "sagBacak": [
+    -8,
+    -8
+   ]
+  },
+  "solo-diagonal-line-stretch": {
+   "ad": "Solo Diagonal Line Stretch",
+   "yon": "on",
+   "govde": 194,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "solo-halo-side-tap": {
+   "ad": "Solo Halo Side Tap",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -160,
+    120
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "solo-comet-arm-tip-toe": {
+   "ad": "Solo Comet Arm Tip Toe",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -115,
+    -165
+   ],
+   "solKol": [
+    -70,
+    -20
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    30,
+    30
+   ]
+  },
+  "solo-low-arms-wide-tap": {
+   "ad": "Solo Low Arms Wide Tap",
+   "yon": "on",
+   "govde": 184,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "solo-neon-side-bend-over": {
+   "ad": "Solo Neon Side Bend Over",
+   "yon": "on",
+   "govde": 205,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -135
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ]
+  },
+  "solo-goal-post-lean": {
+   "ad": "Solo Goal Post Lean",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ]
+  },
+  "solo-star-tilt": {
+   "ad": "Solo Star Tilt",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ]
+  },
+  "solo-flex-goddess": {
+   "ad": "Solo Flex Goddess",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ]
+  },
+  "neon-t-comet-leg-out": {
+   "ad": "Neon T Comet Leg Out",
+   "yon": "on",
+   "govde": 192,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    -110,
+    -170
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "solo-skater-reach": {
+   "ad": "Solo Skater Reach",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    130,
+    130
+   ],
+   "sagKol": [
+    -40,
+    -40
+   ],
+   "solBacak": [
+    60,
+    -20
+   ],
+   "sagBacak": [
+    -50,
+    -80
+   ]
+  },
+  "solo-high-side-kick-t": {
+   "ad": "Solo High Side Kick T",
+   "yon": "on",
+   "govde": 150,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    100,
+    100
+   ]
+  },
+  "solo-back-leg-lift-reach": {
+   "ad": "Solo Back Leg Lift Reach",
+   "yon": "sag",
+   "govde": 140,
+   "bas": 0,
+   "solKol": [
+    150,
+    150
+   ],
+   "sagKol": [
+    150,
+    150
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ]
+  },
+  "solo-side-bend-lunge-arm-over": {
+   "ad": "Solo Side Bend Lunge Arm Over",
+   "yon": "on",
+   "govde": 205,
+   "bas": 0,
+   "sagKol": [
+    -145,
+    -130
+   ],
+   "solKol": [
+    -60,
+    -60
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    45,
+    45
+   ]
+  },
+  "solo-airplane-arms-wide": {
+   "ad": "Solo Airplane Arms Wide",
+   "yon": "sag",
+   "govde": 100,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -75,
+    -75
+   ]
+  },
+  "solo-runner-lunge-arm-up": {
+   "ad": "Solo Runner Lunge Arm Up",
+   "yon": "sag",
+   "govde": 150,
+   "bas": 0,
+   "solKol": [
+    170,
+    170
+   ],
+   "sagKol": [
+    40,
+    40
+   ],
+   "solBacak": [
+    100,
+    -5
+   ],
+   "sagBacak": [
+    -55,
+    -55
+   ]
+  },
+  "solo-low-side-kick-arms-up": {
+   "ad": "Solo Low Side Kick Arms Up",
+   "yon": "on",
+   "govde": 170,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    55,
+    55
+   ]
+  },
+  "solo-lunge-flex-double": {
+   "ad": "Solo Lunge Flex Double",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    45,
+    45
+   ]
+  },
+  "solo-front-kick-low-arms-back": {
+   "ad": "Solo Front Kick Low Arms Back",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -40
+   ],
+   "sagKol": [
+    -38,
+    -38
+   ],
+   "solBacak": [
+    65,
+    65
+   ],
+   "sagBacak": [
+    0,
+    0
+   ]
+  },
+  "solo-pyramid-reach": {
+   "ad": "Solo Pyramid Reach",
+   "yon": "sag",
+   "govde": 105,
+   "bas": 0,
+   "solKol": [
+    160,
+    160
+   ],
+   "sagKol": [
+    158,
+    158
+   ],
+   "solBacak": [
+    25,
+    25
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ]
+  },
+  "solo-spider-lunge-arm-up": {
+   "ad": "Solo Spider Lunge Arm Up",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    150,
+    150
+   ],
+   "solBacak": [
+    110,
+    -80
+   ],
+   "sagBacak": [
+    -70,
+    -70
+   ]
+  },
+  "solo-three-leg-plank": {
+   "ad": "Solo Three Leg Plank",
+   "yon": "sag",
+   "govde": 92,
+   "bas": 0,
+   "solKol": [
+    0,
+    0
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -86,
+    -86
+   ],
+   "sagBacak": [
+    -65,
+    -65
+   ]
+  },
+  "solo-half-kneel-forward-reach": {
+   "ad": "Solo Half Kneel Forward Reach",
+   "yon": "sag",
+   "govde": 170,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    88,
+    88
+   ],
+   "solBacak": [
+    95,
+    0
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "solo-hands-feet-pike-low": {
+   "ad": "Solo Hands Feet Pike Low",
+   "yon": "sag",
+   "govde": 45,
+   "bas": 0,
+   "solKol": [
+    50,
+    50
+   ],
+   "sagKol": [
+    48,
+    48
+   ],
+   "solBacak": [
+    -30,
+    -30
+   ],
+   "sagBacak": [
+    -32,
+    -32
+   ]
+  },
+  "solo-kneeling-side-lean": {
+   "ad": "Solo Kneeling Side Lean",
+   "yon": "sag",
+   "govde": 195,
+   "bas": 0,
+   "solKol": [
+    175,
+    175
+   ],
+   "sagKol": [
+    -30,
+    -30
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "solo-wide-plank-arm-forward": {
+   "ad": "Solo Wide Plank Arm Forward",
+   "yon": "sag",
+   "govde": 95,
+   "bas": 0,
+   "solKol": [
+    85,
+    85
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -82,
+    -82
+   ],
+   "sagBacak": [
+    -88,
+    -88
+   ]
+  }
+ }
+}

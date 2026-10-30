@@ -132,7 +132,7 @@ const PAR = rng(53);
 const PARILTI = Array.from({ length: 70 }, () => ({ x: PAR(), y: PAR() * 0.5, f: PAR() * 6.28, h: 0.6 + PAR() * 1.8, b: 0.8 + PAR() * 1.8 }));
 function sahneCiz(t) {
   cx.drawImage(GOK, 0, 0, W, H);
-  if (TEMA.neonYildiz) { yildizGece(t); cx.drawImage(SERIT, 0, 0, W, H); yolOklari(t); return; }
+  if (TEMA.neonYildiz) { yildizGece(t); cx.drawImage(SERIT, 0, 0, W, H); yolOklari(t); ampulCiz(t); neonTabela(t); return; }
   if (TEMA.havaiFisek) { fisekGece(t); cx.drawImage(SERIT, 0, 0, W, H); yolOklari(t); oyuncuIkon(t); return; }
   if (TEMA.tekOyuncu) { tunelHareket(t); cx.drawImage(SERIT, 0, 0, W, H); yolOklari(t); return; }
   cx.save(); cx.globalCompositeOperation = 'lighter';
@@ -157,6 +157,11 @@ function yildizCiz(x, y, R, don, renk, a, kal) {
   for (let i = 0; i <= 10; i++) { const q = don + i * Math.PI / 5, r = i % 2 ? R * 0.42 : R; const px = x + Math.cos(q) * r, py = y + Math.sin(q) * r; i ? cx.lineTo(px, py) : cx.moveTo(px, py); }
   cx.strokeStyle = hex(renk, a); cx.lineWidth = kal; cx.shadowColor = renk; cx.shadowBlur = 26 * k; cx.stroke();
 }
+// Kapı üstünde neon seri tabelası (tabela kuralı, TALIMATLAR §4)
+function neonTabela(t) {
+  const A = aciklik(), nab = 0.86 + 0.14 * Math.sin(t * 5);
+  yazi('HUMAN TETRIS', A.x + A.w / 2, A.y - 100 * k, 62 * k, ['#ffffff', '#ffd6f0', '#ff3fb0'], '#2a0638', nab, '#ff3fb0');
+}
 function yildizGece(t) {
   const n = Math.floor(t / 3.5), q = t / 3.5 - n, ren = YILDIZ_RENK[n % YILDIZ_RENK.length], ren2 = YILDIZ_RENK[(n + 2) % YILDIZ_RENK.length];
   const r = rng(9000 + n * 17), gir = Math.min(1, q / 0.12), cik = Math.min(1, (1 - q) / 0.12);
@@ -164,6 +169,18 @@ function yildizGece(t) {
   const g = cx.createRadialGradient(W / 2, H * 0.3, 0, W / 2, H * 0.3, W * 0.62);
   g.addColorStop(0, hex(ren, 0.32 * gir * cik)); g.addColorStop(1, hex(ren, 0));
   cx.fillStyle = g; cx.fillRect(0, 0, W, H);
+  for (let i = 0; i < 90; i++) {                        // gök tozu: ekranın üstü boş kalmaz
+    const r3 = rng(1500 + i * 53), x = W * r3(), y = H * 0.62 * r3(), f = r3() * 6.28, h = 1 + r3() * 3, a = 0.25 + 0.75 * Math.max(0, Math.sin(t * h + f));
+    cx.fillStyle = hex(i % 4 ? '#ffffff' : ren, a); cx.beginPath(); cx.arc(x, y, (1 + r3() * 2.2) * k, 0, 6.283); cx.fill();
+  }
+  for (let i = 0; i < 8; i++) {                         // sahne kulelerinden göğe tarayan spot huzmeleri
+    const s = i < 4 ? -1 : 1, x0 = W / 2 + s * W * (0.20 + (i % 4) * 0.09), y0 = H * 0.50, ac = s * 0.28 + Math.sin(t * (0.5 + i * 0.07) + i * 1.9) * 0.42;
+    const L = H * 0.95, ux = Math.sin(ac), uy = -Math.cos(ac), gen = 46 * k, rk = YILDIZ_RENK[(n + i) % YILDIZ_RENK.length];
+    const gb = cx.createLinearGradient(x0, y0, x0 + ux * L, y0 + uy * L);
+    gb.addColorStop(0, hex(rk, 0.42)); gb.addColorStop(1, hex(rk, 0));
+    cx.fillStyle = gb; cx.beginPath(); cx.moveTo(x0, y0); cx.lineTo(x0 + ux * L - uy * gen, y0 + uy * L + ux * gen); cx.lineTo(x0 + ux * L + uy * gen, y0 + uy * L - ux * gen); cx.closePath(); cx.fill();
+  }
+  yildizCiz(W * (0.12 + 0.76 * r()), H * 0.14, H * 0.2, r() * 6.28 + t * 0.3, ren2, 0.7 * gir * cik, 3 * k);
   yildizCiz(W * (0.25 + 0.5 * r()), H * (0.18 + 0.18 * r()), H * (0.42 + q * 0.2), r() * 6.28 + t * 0.12, ren, 0.95 * gir * cik, 7 * k);
   yildizCiz(W * (0.5 + (r() - 0.5) * 0.3), H * 0.32, H * (0.14 + q * 0.1), r() * 6.28 - t * 0.5, ren2, 0.85 * gir * cik, 4 * k);
   cx.shadowBlur = 0;

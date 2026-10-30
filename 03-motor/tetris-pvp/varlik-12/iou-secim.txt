@@ -1,0 +1,27 @@
+esik eski 0.78 / ic 0.55, eski maske 576
+T2 solo-skater-reach                                  eski 0.43 (varlik-06/poz/aurora-extended-side-angle-bind.png) ic 0.00 EL
+T2 solo-high-side-kick-t                              eski 0.45 (varlik-09/poz/cosmic-side-kick-hold-arms-wide.png) ic 0.25 EL
+T1 solo-forward-fold-half-reach                       eski 0.45 (varlik/poz/flat-back.png) ic 0.12 EL
+T2 solo-back-leg-lift-reach                           eski 0.51 (varlik/poz/kneeling-lunge-reach-back.png) ic 0.32 EL
+T2 solo-side-bend-lunge-arm-over                      eski 0.53 (varlik-08/poz/disco-goddess-twist-elbows.png) ic 0.36 EL
+T2 solo-airplane-arms-wide                            eski 0.54 (varlik-05/poz/lantern-warrior-three-arms-up.png) ic 0.23 EL
+T2 solo-runner-lunge-arm-up                           eski 0.54 (varlik-08/poz/disco-deep-lunge-arms-back-up.png) ic 0.30 EL
+T2 solo-low-side-kick-arms-up                         eski 0.56 (varlik-04/poz/side-leg-lift-arms-up.png) ic 0.39 EL
+T3 solo-spider-lunge-arm-up                           eski 0.59 (varlik-03/poz/forearm-side-plank.png) ic 0.32 EL
+T2 solo-lunge-flex-double                             eski 0.59 (varlik-09/poz/cosmic-side-lunge-arms-low-out.png) ic 0.38 EL
+T3 solo-three-leg-plank                               eski 0.59 (varlik-04/poz/plank-knee-to-elbow.png) ic 0.45 EL
+T1 solo-diagonal-line-stretch                         eski 0.60 (varlik-04/poz/elbow-to-knee.png) ic 0.42 EL
+T2 solo-front-kick-low-arms-back                      eski 0.60 (varlik-08/poz/disco-kick-forward-arms-back.png) ic 0.41 EL
+T2 solo-pyramid-reach                                 eski 0.60 (varlik-03/poz/revolved-triangle.png) ic 0.44 EL
+T1 solo-halo-side-tap                                 eski 0.61 (varlik-06/poz/aurora-tree-arms-crown.png) ic 0.42 EL
+T1 solo-comet-arm-tip-toe                             eski 0.61 (varlik/poz/side-tap-t.png) ic 0.41 EL
+T3 solo-half-kneel-forward-reach                      eski 0.64 (varlik-03/poz/low-lunge-arms-forward.png) ic 0.42 EL
+T1 solo-low-arms-wide-tap                             eski 0.64 (varlik-05/poz/spell-hook-head-hop.png) ic 0.42 EL
+T3 solo-hands-feet-pike-low                           eski 0.64 (varlik-03/poz/dolphin.png) ic 0.26 EL
+T1 solo-neon-side-bend-over                           eski 0.67 (varlik-10/poz/flow-t-diag-wide.png) ic 0.40 EL
+T1 solo-goal-post-lean                                eski 0.70 (varlik/poz/wide-cactus.png) ic 0.53 EL
+T1 solo-star-tilt                                     eski 0.75 (varlik/poz/hands-on-head.png) ic 0.50 EL
+T3 solo-kneeling-side-lean                            eski 0.76 (varlik-04/poz/kneeling-arms-up-back.png) ic 0.44 EL
+T3 solo-wide-plank-arm-forward                        eski 0.76 (varlik-05/poz/tombstone-high-plank-forward-floor.png) ic 0.31 EL
+T1 solo-flex-goddess                                  eski 0.77 (varlik-08/poz/disco-goddess-twist-elbows.png) ic 0.52 EL
+T1 neon-t-comet-leg-out                               eski 0.47 (varlik-05/poz/broom-t-salute-curtsy-lean-l.png) ic 0.43 HAVUZ
