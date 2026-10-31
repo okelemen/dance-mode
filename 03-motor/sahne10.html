@@ -264,7 +264,12 @@ function oyuncuIkon(t) {
   [[A.x + A.w / 2 - ara, TEMA.p1, 'P1'], [A.x + A.w / 2 + ara, TEMA.p2, 'P2']].forEach(([x, renk, ad], i) => {
     const nab = 0.85 + 0.15 * Math.sin(t * 3 + i * 1.7);
     cx.save(); cx.lineJoin = 'round'; cx.lineCap = 'round';
-    cx.shadowColor = renk; cx.shadowBlur = 22 * k; cx.lineWidth = 4.5 * k;
+    if (TEMA.isikTunel) {                                  // kesit 2: parlak tünelde ikon soluk kaldı -> arkasına koyu hale, çizgi kalın
+      const h = cx.createRadialGradient(x, yI + s * 0.2, s * 0.2, x, yI + s * 0.2, s * 1.35);
+      h.addColorStop(0, 'rgba(8,4,24,0.72)'); h.addColorStop(0.7, 'rgba(8,4,24,0.5)'); h.addColorStop(1, 'rgba(8,4,24,0)');
+      cx.fillStyle = h; cx.beginPath(); cx.arc(x, yI + s * 0.2, s * 1.35, 0, 6.283); cx.fill();
+    }
+    cx.shadowColor = renk; cx.shadowBlur = 22 * k; cx.lineWidth = (TEMA.isikTunel ? 6.5 : 4.5) * k;
     const g = cx.createLinearGradient(x - s, yI - s, x + s, yI + s);
     g.addColorStop(0, hex('#7fe7ff', nab)); g.addColorStop(1, hex('#ff7ae6', nab));
     cx.strokeStyle = g;
