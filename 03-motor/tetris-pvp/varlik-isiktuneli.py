@@ -7,7 +7,7 @@ P1/P2 ikonlari, "Coming Soon", "!", duvarlar ve tunelin renk degisimi motorda (s
 
 import random
 YERLESIM.clear()
-KAP = {"y": 8.6, "w": 7.4, "h": 3.6, "kule": 0.42, "kiris": 0.42}
+KAP = {"y": 8.6, "w": 7.2, "h": 3.6, "kule": 0.26, "kiris": 0.26}    # sahne 1: kafes REF-064'e gore fazla kalindi
 KAM = {"z": 1.5, "egim": 0.0, "lens": 18.0, "sensor": 24.0}
 YOL_W = 7.6
 Y_SON = 9.4
@@ -48,7 +48,18 @@ def sekil(ad, noktalar, mat, konum=(0, 0, 0)):
 # ------------------------------------------------------------------ GOK katmani = tunelin kendisi
 def tunel_duvar():
     """yan duvar, tavan ve taban: sicak koyu metal, neonlari yansitir"""
-    m = mat_metal("t_duvar", lin(hex3("#3a2410")), 0.28, metal=0.9)
+    m = bpy.data.materials.new("t_duvar"); m.use_nodes = True      # sahne 1: duvar karanlikti -> REF-064 gibi kendinden parlayan, derinlige uzanan sicak isik cizgileri
+    nt = m.node_tree; nt.nodes.clear()
+    tc = nt.nodes.new("ShaderNodeTexCoord"); mp = nt.nodes.new("ShaderNodeMapping"); mp.inputs["Scale"].default_value = (0.5, 0.012, 0.5)
+    no = nt.nodes.new("ShaderNodeTexNoise"); no.inputs["Scale"].default_value = 1.0; no.inputs["Detail"].default_value = 4
+    rm = nt.nodes.new("ShaderNodeValToRGB"); cr = rm.color_ramp
+    cr.elements[0].position = 0.32; cr.elements[0].color = (*lin(hex3("#3a1c08")), 1)
+    cr.elements[1].position = 0.72; cr.elements[1].color = (*lin(hex3("#e87a18")), 1)
+    e = cr.elements.new(0.52); e.color = (*lin(hex3("#a02a30")), 1)
+    em = nt.nodes.new("ShaderNodeEmission"); em.inputs[1].default_value = 0.9
+    ou = nt.nodes.new("ShaderNodeOutputMaterial")
+    nt.links.new(tc.outputs["Object"], mp.inputs[0]); nt.links.new(mp.outputs[0], no.inputs[0]); nt.links.new(no.outputs["Fac"], rm.inputs[0])
+    nt.links.new(rm.outputs[0], em.inputs[0]); nt.links.new(em.outputs[0], ou.inputs[0])
     y0, y1 = -2.0, T_Y1
     for ad, p in (("sol", (-T_W, 0, -3)), ("sag", (T_W, 0, -3))):
         yuvarlak_kutu("t_" + ad, (p[0] + (-0.5 if p[0] < 0 else 0.5), (y0 + y1) / 2, T_H / 2), (1.0, y1 - y0, T_H + 8), m, egim=0.0, seg=1)
@@ -113,8 +124,8 @@ def kopru_yol():
     b.inputs["Roughness"].default_value = 0.42; b.inputs["Metallic"].default_value = 0.0
     no = nt.nodes.new("ShaderNodeTexNoise"); no.inputs["Scale"].default_value = 90; no.inputs["Detail"].default_value = 8
     rm = nt.nodes.new("ShaderNodeValToRGB")                # asfalt: koyu gri + kahve benek
-    rm.color_ramp.elements[0].position = 0.4; rm.color_ramp.elements[0].color = (*lin(hex3("#14110f")), 1)
-    rm.color_ramp.elements[1].position = 0.68; rm.color_ramp.elements[1].color = (*lin(hex3("#4e3a2b")), 1)
+    rm.color_ramp.elements[0].position = 0.42; rm.color_ramp.elements[0].color = (*lin(hex3("#0c0b0b")), 1)   # sahne 1: yol fazla acik kahveydi
+    rm.color_ramp.elements[1].position = 0.72; rm.color_ramp.elements[1].color = (*lin(hex3("#2a2019")), 1)
     nt.links.new(no.outputs["Fac"], rm.inputs[0]); nt.links.new(rm.outputs[0], b.inputs["Base Color"])
     yuvarlak_kutu("yol", (0, (0.3 + Y_SON) / 2, -0.2), (YOL_W, Y_SON - 0.3, 0.4), yol, egim=0.03, seg=2)
     cam = mat_emis("chev", lin(hex3(CAMGOBEGI)), 1.9)
@@ -144,8 +155,8 @@ def korkuluk():
 
 def kapi():
     Y, W_, H_, KK, KR = KAP["y"], KAP["w"], KAP["h"], KAP["kule"], KAP["kiris"]
-    ana = mat_emis("kapi_ana", lin(hex3("#ffffff")), 1.4)
-    ince = mat_emis("kapi_ince", lin(hex3("#f4f4f8")), 1.1)
+    ana = mat_emis("kapi_ana", lin(hex3("#ffffff")), 0.95)
+    ince = mat_emis("kapi_ince", lin(hex3("#e8e8ee")), 0.8)
     xk = W_ / 2 - KK / 2
     for s in (-1, 1):
         kafes_kule(s * xk, Y, 0.0, H_ + KR, KK, ana, ince)

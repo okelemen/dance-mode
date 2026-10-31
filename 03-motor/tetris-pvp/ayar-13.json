@@ -1,0 +1,105 @@
+{
+ "_not": "HUMAN TETRIS 13. video (REF-064, HumanWarmUp 'Human Tetris x 2 Player Co-op New Version'), kullanici 31 Eki 2026: CO-OP 2 oyuncu, P1 yesil / P2 pembe, ~25 duvar, acilis CO-OP karti, SUBSCRIBE her 15 sn, koc sesi yok (11. video gibi; REF sesi dinlenmedi). Muzik: Two Through The Light Tunnel (1:44), kesit icin sabitlendi; tam render icin uzun hali bekleniyor.",
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-13",
+ "sayfa": "sahne10.html",
+ "bpm": 129,
+ "muzik": "Two Through The Light Tunnel.wav (Suno, kullanici, 31 Eki 2026) ~129 BPM kayan -> sabitlendi",
+ "duvar": "duvar-listesi-13-sira.json",
+ "duvar_vurus": 24,
+ "zaman_vurus": {
+  "kart": 7,
+  "say": 6,
+  "buyu": 6,
+  "gec": 3
+ },
+ "tur_kart_yok": true,
+ "kart_vurus": {
+  "basla": 8,
+  "abone": 11
+ },
+ "giris_dizisi": [
+  {
+   "tip": "acilis",
+   "vurus": 12
+  },
+  {
+   "tip": "yazi",
+   "metin": "WELCOME BACK,",
+   "alt": "PARTNERS!",
+   "vurus": 6
+  },
+  {
+   "tip": "nasil",
+   "metin": "SYNC UP",
+   "alt": "FIT THE SHAPE TOGETHER!",
+   "vurus": 8
+  }
+ ],
+ "ovgu_kart": {
+  "her": 5,
+  "vurus": 4,
+  "metin": [
+   "Keep moving!",
+   "In perfect sync!",
+   "What a team!",
+   "Final walls!"
+  ]
+ },
+ "kapanis": [
+  {
+   "tip": "yazi",
+   "metin": "THANK YOU",
+   "alt": "FOR PLAYING!",
+   "vurus": 8
+  }
+ ],
+ "tema": {
+  "tekOyuncu": true,
+  "sayimKose": true,
+  "varlik": "/03-motor/tetris-pvp/varlik-13-sahne2/",
+  "maskeVarlik": "/03-motor/tetris-pvp/varlik-13-poz2/",
+  "maskeKlasor": "grup/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-08/",
+  "p1": "#3dff6a",
+  "p1koyu": "#0c8a32",
+  "p1acik": "#dcffe4",
+  "p2": "#ff3ea5",
+  "p2koyu": "#a0105c",
+  "p2acik": "#ffd6ec",
+  "vsEtiket": [
+   "P1",
+   "P2"
+  ],
+  "vsHarf": [
+   "CO-",
+   "OP"
+  ],
+  "vsAlt": "HUMAN TETRIS · CO-OP",
+  "duvarRenk": [
+   "#2a7fc0",
+   "#66ffee",
+   "#e0408a",
+   "#f0c050",
+   "#e83a3a",
+   "#6a60e0",
+   "#b8f04a",
+   "#66ffcc",
+   "#4fc8d8",
+   "#f09a3a",
+   "#d850e0",
+   "#f5f05a"
+  ],
+  "sayac": "Mission",
+  "sayacRenk": [
+   "#ffffff",
+   "#fff6d8",
+   "#ffe9a8"
+  ],
+  "aboneAlt": "NEW BATTLE EVERY DAY",
+  "fener": false,
+  "isikTunel": true,
+  "ovguTam": true,
+  "okRenk": "#62f5e4"
+ }
+}
