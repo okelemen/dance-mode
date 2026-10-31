@@ -39,7 +39,7 @@ KNEEL = [0, -90]                 # profilde diz cokme
 AYAKTA = [  # ayakta - herkes yapar
     ikili("Hands Behind Head Wide Stance", on("", "head", "head", "wide", "wide"), on("", "head", "head", "wide", "wide"), temas=0.35),  # REF t32
     ikili("Peak Lean Palms Overhead", profil("", 158, [150, 150], [148, 148], [12, 12], [-22, -22])),                 # REF t78
-    ikili("Cactus Arms Goddess", on("", "cactus", "cactus", "goddess", "goddess"), on("", "cactus", "cactus", "goddess", "goddess"), temas=0.3),
+    ikili("Stride High Hand Link", profil("", 175, [125, 125], [-60, -60], [30, 30], [-30, -30])),   # Cactus Goddess IoU 0,79 (11. video Goddess) -> degisti
     ikili("Side Bend Arc Outer Arm Up", on("", [-155, -155], [60, 60], "tog", "straight", govde=165)),
     ikili("High Lunge Palm Press", profil("", 165, [145, 145], [-40, -40], [62, 0], [-42, -42])),
     ikili("Forward Fold Hand Link", profil("", 100, [90, 90], [88, 88], [0, 0], [-8, -8])),
@@ -64,12 +64,12 @@ YER = [  # diz / yer (el-diz-ayak yerde)
     ikili("Back To Back Squat", ayna_poz(profil("", 150, [90, 90], [88, 88], [100, -15], [98, -17])),
           profil("", 150, [90, 90], [88, 88], [100, -15], [98, -17]), temas=0.05),                                     # REF t112
     ikili("Kneeling Arm Wrestle", profil("", 185, [70, 100], [-20, -20], KNEEL, KNEEL)),                               # REF t185
-    ikili("Seated Recline Bent Reach",                                                                                 # REF t104, asimetrik
-          profil("", 205, [110, 110], [-140, -140], [90, 90], [70, -20]),
-          ayna_poz(profil("", 130, [110, 110], [-70, -70], [30, -30], [-30, -30]))),
+    ikili("Kneel Stand High Five", profil("", 180, [135, 135], [-30, -30], KNEEL, KNEEL),   # kontak 1: oturan dusuyor gibi okundu
+          ayna_poz(profil("", 165, [100, 100], [-30, -30], [20, -10], [-20, -20]))),
     ikili("Low Lunge Palms High", profil("", 185, [160, 160], [150, 150], [80, 0], [0, -90])),
-    ikili("Boat Pose Feet Meet", profil("", 210, [90, 90], [88, 88], [50, 50], [48, 48]), temas=("ayak", "ayak")),
-    ikili("Kneeling Chest Open", profil("", 200, [-50, -50], [-48, -48], KNEEL, KNEEL), temas=0.15),
+    ikili("Seated Knees Bent Feet Meet", profil("", 195, [-25, -25], [-23, -23], [125, 50], [123, 48]), temas=("ayak", "ayak")),   # kontak 1: tekne pozu havada okundu
+    ikili("Kneeling Back To Back Arms High", ayna_poz(profil("", 180, [150, 150], [148, 148], KNEEL, KNEEL)),   # kontak 1: geriye dusuyor gibi okundu
+          profil("", 180, [150, 150], [148, 148], KNEEL, KNEEL), temas=0.1),
     ikili("Plank Facing", profil("", 75, [0, 0], [2, 2], [-75, -75], [-73, -73]), temas=0.1),
     ikili("Garland Squat Side By Side", on("", "chest", "chest", [-80, 10], [80, -10]),
           on("", "chest", "chest", [-80, 10], [80, -10]), temas=0.15),

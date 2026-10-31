@@ -108,56 +108,59 @@
     ]
    ]
   },
-  "duo-cactus-arms-goddess": {
-   "ad": "Duo Cactus Arms Goddess",
+  "duo-stride-high-hand-link": {
+   "ad": "Duo Stride High Hand Link",
    "figurler": [
     {
-     "ad": "Duo Cactus Arms Goddess A",
-     "yon": "on",
-     "govde": 180,
+     "ad": "Duo Stride High Hand Link A",
+     "yon": "sag",
+     "govde": 175,
      "bas": 0,
-     "sagKol": [
-      -90,
-      180
-     ],
      "solKol": [
-      90,
-      -180
+      125,
+      125
      ],
-     "sagBacak": [
-      -62,
-      -4
+     "sagKol": [
+      -60,
+      -60
      ],
      "solBacak": [
-      62,
-      4
+      30,
+      30
+     ],
+     "sagBacak": [
+      -30,
+      -30
      ]
     },
     {
-     "ad": "Duo Cactus Arms Goddess B",
-     "yon": "on",
-     "govde": 180,
+     "ad": "Duo Stride High Hand Link B",
+     "yon": "sol",
+     "govde": -175,
      "bas": 0,
-     "sagKol": [
-      -90,
-      180
-     ],
      "solKol": [
-      90,
-      -180
+      60,
+      60
      ],
-     "sagBacak": [
-      -62,
-      -4
+     "sagKol": [
+      -125,
+      -125
      ],
      "solBacak": [
-      62,
-      4
+      30,
+      30
+     ],
+     "sagBacak": [
+      -30,
+      -30
      ]
     }
    ],
    "temas": [
-    0.3
+    [
+     "el",
+     "el"
+    ]
    ]
   },
   "duo-side-bend-arc-outer-arm-up": {
@@ -1028,51 +1031,51 @@
     ]
    ]
   },
-  "duo-seated-recline-bent-reach": {
-   "ad": "Duo Seated Recline Bent Reach",
+  "duo-kneel-stand-high-five": {
+   "ad": "Duo Kneel Stand High Five",
    "figurler": [
     {
-     "ad": "Duo Seated Recline Bent Reach A",
+     "ad": "Duo Kneel Stand High Five A",
      "yon": "sag",
-     "govde": 205,
+     "govde": 180,
      "bas": 0,
      "solKol": [
-      110,
-      110
+      135,
+      135
      ],
      "sagKol": [
-      -140,
-      -140
+      -30,
+      -30
      ],
      "solBacak": [
-      90,
-      90
+      0,
+      -90
      ],
      "sagBacak": [
-      70,
-      -20
+      0,
+      -90
      ]
     },
     {
-     "ad": "Duo Seated Recline Bent Reach B",
+     "ad": "Duo Kneel Stand High Five B",
      "yon": "sol",
-     "govde": -130,
+     "govde": -165,
      "bas": 0,
      "solKol": [
-      70,
-      70
-     ],
-     "sagKol": [
-      -110,
-      -110
-     ],
-     "solBacak": [
       30,
       30
      ],
+     "sagKol": [
+      -100,
+      -100
+     ],
+     "solBacak": [
+      20,
+      20
+     ],
      "sagBacak": [
-      -30,
-      30
+      -20,
+      10
      ]
     }
    ],
@@ -1138,50 +1141,50 @@
     ]
    ]
   },
-  "duo-boat-pose-feet-meet": {
-   "ad": "Duo Boat Pose Feet Meet",
+  "duo-seated-knees-bent-feet-meet": {
+   "ad": "Duo Seated Knees Bent Feet Meet",
    "figurler": [
     {
-     "ad": "Duo Boat Pose Feet Meet A",
+     "ad": "Duo Seated Knees Bent Feet Meet A",
      "yon": "sag",
-     "govde": 210,
+     "govde": 195,
      "bas": 0,
      "solKol": [
-      90,
-      90
+      -25,
+      -25
      ],
      "sagKol": [
-      88,
-      88
+      -23,
+      -23
      ],
      "solBacak": [
-      50,
+      125,
       50
      ],
      "sagBacak": [
-      48,
+      123,
       48
      ]
     },
     {
-     "ad": "Duo Boat Pose Feet Meet B",
+     "ad": "Duo Seated Knees Bent Feet Meet B",
      "yon": "sol",
-     "govde": -210,
+     "govde": -195,
      "bas": 0,
      "solKol": [
-      -88,
-      -88
+      23,
+      23
      ],
      "sagKol": [
-      -90,
-      -90
+      25,
+      25
      ],
      "solBacak": [
-      -48,
+      -123,
       -48
      ],
      "sagBacak": [
-      -50,
+      -125,
       -50
      ]
     }
@@ -1193,56 +1196,56 @@
     ]
    ]
   },
-  "duo-kneeling-chest-open": {
-   "ad": "Duo Kneeling Chest Open",
+  "duo-kneeling-back-to-back-arms-high": {
+   "ad": "Duo Kneeling Back To Back Arms High",
    "figurler": [
     {
-     "ad": "Duo Kneeling Chest Open A",
-     "yon": "sag",
-     "govde": 200,
+     "ad": "Duo Kneeling Back To Back Arms High A",
+     "yon": "sol",
+     "govde": -180,
      "bas": 0,
      "solKol": [
-      -50,
-      -50
+      -148,
+      -148
      ],
      "sagKol": [
-      -48,
-      -48
+      -150,
+      -150
      ],
      "solBacak": [
       0,
-      -90
+      90
      ],
      "sagBacak": [
       0,
-      -90
+      90
      ]
     },
     {
-     "ad": "Duo Kneeling Chest Open B",
-     "yon": "sol",
-     "govde": -200,
+     "ad": "Duo Kneeling Back To Back Arms High B",
+     "yon": "sag",
+     "govde": 180,
      "bas": 0,
      "solKol": [
-      48,
-      48
+      150,
+      150
      ],
      "sagKol": [
-      50,
-      50
+      148,
+      148
      ],
      "solBacak": [
       0,
-      90
+      -90
      ],
      "sagBacak": [
       0,
-      90
+      -90
      ]
     }
    ],
    "temas": [
-    0.15
+    0.1
    ]
   },
   "duo-plank-facing": {
