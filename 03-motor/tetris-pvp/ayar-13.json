@@ -16,7 +16,7 @@
  "tur_kart_yok": true,
  "kart_vurus": {
   "basla": 8,
-  "abone": 11
+  "abone": 12
  },
  "giris_dizisi": [
   {
@@ -33,7 +33,7 @@
    "tip": "nasil",
    "metin": "SYNC UP",
    "alt": "FIT THE SHAPE TOGETHER!",
-   "vurus": 8
+   "vurus": 10
   }
  ],
  "ovgu_kart": {
@@ -57,7 +57,7 @@
  "tema": {
   "tekOyuncu": true,
   "sayimKose": true,
-  "varlik": "/03-motor/tetris-pvp/varlik-13-sahne2/",
+  "varlik": "/03-motor/tetris-pvp/varlik-13-sahne3/",
   "maskeVarlik": "/03-motor/tetris-pvp/varlik-13-poz2/",
   "maskeKlasor": "grup/",
   "boksorVarlik": "/03-motor/tetris-pvp/varlik-08/",
