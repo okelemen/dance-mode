@@ -7,7 +7,7 @@ P1/P2 ikonlari, "Coming Soon", "!", duvarlar ve tunelin renk degisimi motorda (s
 
 import random
 YERLESIM.clear()
-KAP = {"y": 8.6, "w": 7.2, "h": 3.6, "kule": 0.26, "kiris": 0.26}    # sahne 1: kafes REF-064'e gore fazla kalindi
+KAP = {"y": 8.6, "w": 7.2, "h": 3.6, "kule": 0.36, "kiris": 0.36}    # sahne 1: kafes REF-064'e gore fazla kalindi
 KAM = {"z": 1.5, "egim": 0.0, "lens": 18.0, "sensor": 24.0}
 YOL_W = 7.6
 Y_SON = 9.4
