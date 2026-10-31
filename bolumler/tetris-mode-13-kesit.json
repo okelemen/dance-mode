@@ -2,7 +2,7 @@
  "seri": "HUMAN TETRIS",
  "bolum": "human-tetris-13",
  "bpm": 129.0,
- "toplam_olcu": 33,
+ "toplam_olcu": 34,
  "toplam_duvar": 4,
  "zaman": {
   "kart": 3.2558,
@@ -35,6 +35,12 @@
    "t": 13.0233,
    "sure": 3.7209,
    "tip": "basla"
+  },
+  {
+   "t": 39.0698,
+   "sure": 1.8605,
+   "tip": "ovgu_kart",
+   "metin": "Keep moving!"
   }
  ],
  "duvarlar": [
@@ -46,23 +52,23 @@
    "ovgu": "GREAT!"
   },
   {
-   "no": 8,
+   "no": 5,
    "tur": 1,
    "t0": 27.907,
-   "grup": "duo-stride-high-hand-link",
-   "ovgu": "EXCELLENT!"
+   "grup": "duo-side-lunge-low-hand-link",
+   "ovgu": "AMAZING!"
   },
   {
    "no": 14,
    "tur": 1,
-   "t0": 39.0698,
+   "t0": 40.9303,
    "grup": "duo-low-lunge-palms-high",
    "ovgu": "EXCELLENT!"
   },
   {
    "no": 25,
    "tur": 1,
-   "t0": 50.2326,
+   "t0": 52.0931,
    "grup": "duo-dancer-pose-hand-link",
    "ovgu": "GREAT!"
   }
@@ -70,7 +76,8 @@
  "abone": [
   15.0,
   30.0,
-  45.0
+  45.0,
+  60.0
  ],
  "abone_sure": 3.2,
  "muzik": "Two Through The Light Tunnel.wav (Suno, kullanici, 31 Eki 2026) ~129 BPM kayan -> sabitlendi",

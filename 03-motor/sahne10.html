@@ -136,19 +136,19 @@ const TUNEL_TON = [0, 70, -35, 300, 130, -60];
 function isikTunel(t) {
   const f = t / 3.5, n = Math.floor(f), q = ease(kisit((f - n) / 0.35, 0, 1));
   const ton = lerp(TUNEL_TON[n % TUNEL_TON.length], TUNEL_TON[(n + 1) % TUNEL_TON.length], q);
-  cx.save(); cx.filter = `hue-rotate(${ton}deg) saturate(1.15)`;
+  cx.save(); cx.filter = `hue-rotate(${ton}deg) saturate(1.3) brightness(0.82)`;
   cx.drawImage(GOK, 0, 0, W, H);
   cx.globalCompositeOperation = 'lighter';
   for (const faz of [0, 0.5]) {
     const u = (t * 0.45 + faz) % 1, s = 1 + 0.32 * u;
-    cx.globalAlpha = 0.34 * Math.sin(u * Math.PI);
+    cx.globalAlpha = 0.10 * Math.sin(u * Math.PI);                  // kesit 1: 0,34 tüneli soluk pastele yaktı, REF-064 doygun
     cx.drawImage(GOK, W / 2 - W * s / 2, H * 0.42 - H * 0.42 * s, W * s, H * s);
   }
   cx.restore();
 }
 function sahneCiz(t) {
   cx.drawImage(GOK, 0, 0, W, H);
-  if (TEMA.isikTunel) { isikTunel(t); cx.drawImage(SERIT, 0, 0, W, H); yolOklari(t); oyuncuIkon(t); return; }
+  if (TEMA.isikTunel) { isikTunel(t); cx.drawImage(SERIT, 0, 0, W, H); yolOklari(t); if (!ABONE.some(a => t >= a && t < a + ABONE_SURE)) oyuncuIkon(t); return; }   // SUBSCRIBE ikonların üstüne binmesin
   if (TEMA.neonYildiz) { yildizGece(t); cx.drawImage(SERIT, 0, 0, W, H); yolOklari(t); ampulCiz(t); neonTabela(t); return; }
   if (TEMA.havaiFisek) { fisekGece(t); cx.drawImage(SERIT, 0, 0, W, H); yolOklari(t); oyuncuIkon(t); return; }
   if (TEMA.tekOyuncu) { tunelHareket(t); cx.drawImage(SERIT, 0, 0, W, H); yolOklari(t); return; }
