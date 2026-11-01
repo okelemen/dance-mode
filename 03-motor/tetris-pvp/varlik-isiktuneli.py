@@ -18,6 +18,8 @@ RENKLER = ("#ffe21a", "#ff2f9a", "#3dff6a", "#ff7a1a", "#ffffff", "#c04dff")
 KAPAK = YALNIZ == "kapak"
 POZLAMA = float(arg("--kapak-pozlama", "0"))
 RND = random.Random(64)
+if KAPAK:
+    KAM["lens"] = 25.0       # REF-064 kapagi: kapi 610x360 px (1280x720), tunel yok, yildizli gok, kahve asfalt
 
 
 def kamera(sc):
@@ -97,11 +99,32 @@ def cerceveler(rnd):
             boru(a, b, 0.07, mat_emis("kir", lin(hex3("#ffd21a" if i % 3 else "#ff3a2a")), 10))
 
 
+def yildizli_gok(sc):
+    """REF-064 kapagi: siyah uzay, yogun beyaz yildiz tozu, hafif lacivert bulut"""
+    nt = sc.world.node_tree
+    tc = nt.nodes.new("ShaderNodeTexCoord")
+    vo = nt.nodes.new("ShaderNodeTexVoronoi"); vo.inputs["Scale"].default_value = 170
+    rv = nt.nodes.new("ShaderNodeValToRGB"); rv.color_ramp.elements[0].position = 0.03; rv.color_ramp.elements[0].color = (1.6, 1.6, 1.8, 1)
+    rv.color_ramp.elements[1].position = 0.12; rv.color_ramp.elements[1].color = (0, 0, 0, 1)
+    no = nt.nodes.new("ShaderNodeTexNoise"); no.inputs["Scale"].default_value = 4; no.inputs["Detail"].default_value = 6
+    rn = nt.nodes.new("ShaderNodeValToRGB"); rn.color_ramp.elements[0].position = 0.42; rn.color_ramp.elements[0].color = (*lin(hex3("#05060a")), 1)
+    rn.color_ramp.elements[1].position = 0.72; rn.color_ramp.elements[1].color = (*lin(hex3("#1c2238")), 1)
+    mx = nt.nodes.new("ShaderNodeMixRGB"); mx.blend_type = "ADD"; mx.inputs[0].default_value = 1.0
+    nt.links.new(tc.outputs["Generated"], vo.inputs["Vector"]); nt.links.new(vo.outputs["Distance"], rv.inputs[0])
+    nt.links.new(tc.outputs["Generated"], no.inputs["Vector"]); nt.links.new(no.outputs["Fac"], rn.inputs[0])
+    nt.links.new(rn.outputs[0], mx.inputs[1]); nt.links.new(rv.outputs[0], mx.inputs[2])
+    b = nt.nodes["Background"]; b.inputs[1].default_value = 1.0
+    nt.links.new(mx.outputs[0], b.inputs[0])
+
+
 def gok_katmani():
     rnd = random.Random(64)
     sc = bos_sahne(w=1920, h=1080, ornek=min(ORNEK, 48))
     if KAPAK:
         sc.view_settings.exposure = POZLAMA
+        kamera(sc); yildizli_gok(sc)
+        yaz(sc, ON_EK + "gok.png")
+        return
     kamera(sc)
     sc.world.node_tree.nodes["Background"].inputs[0].default_value = (*lin(hex3("#2a1408")), 1)
     sc.world.node_tree.nodes["Background"].inputs[1].default_value = 0.6
@@ -124,8 +147,8 @@ def kopru_yol():
     b.inputs["Roughness"].default_value = 0.42; b.inputs["Metallic"].default_value = 0.0
     no = nt.nodes.new("ShaderNodeTexNoise"); no.inputs["Scale"].default_value = 90; no.inputs["Detail"].default_value = 8
     rm = nt.nodes.new("ShaderNodeValToRGB")                # asfalt: koyu gri + kahve benek
-    rm.color_ramp.elements[0].position = 0.42; rm.color_ramp.elements[0].color = (*lin(hex3("#0c0b0b")), 1)   # sahne 1: yol fazla acik kahveydi
-    rm.color_ramp.elements[1].position = 0.72; rm.color_ramp.elements[1].color = (*lin(hex3("#2a2019")), 1)
+    rm.color_ramp.elements[0].position = 0.42; rm.color_ramp.elements[0].color = (*lin(hex3("#2a1a12" if KAPAK else "#0c0b0b")), 1)   # sahne 1: yol fazla acik kahveydi (kapakta REF kahve)
+    rm.color_ramp.elements[1].position = 0.72; rm.color_ramp.elements[1].color = (*lin(hex3("#a0623a" if KAPAK else "#2a2019")), 1)
     nt.links.new(no.outputs["Fac"], rm.inputs[0]); nt.links.new(rm.outputs[0], b.inputs["Base Color"])
     yuvarlak_kutu("yol", (0, (0.3 + Y_SON) / 2, -0.2), (YOL_W, Y_SON - 0.3, 0.4), yol, egim=0.03, seg=2)
     cam = mat_emis("chev", lin(hex3(CAMGOBEGI)), 1.9)
