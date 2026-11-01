@@ -19,7 +19,7 @@ p.add_argument("--arka", default="varlik-14-kapak-0")
 p.add_argument("--boy-sol", type=float, default=400); p.add_argument("--boy-sag", type=float, default=500)
 p.add_argument("--x-sol", type=float, default=0.22); p.add_argument("--x-sag", type=float, default=0.80)
 p.add_argument("--renk", type=float, default=1.0); p.add_argument("--parlak", type=float, default=1.0)   # yalniz hafif genel ayar
-p.add_argument("--parilti", type=float, default=0.3)
+p.add_argument("--parilti", type=float, default=0.12)
 p.add_argument("--cikti", required=True)
 a = p.parse_args()
 W, H = 1280, 720
@@ -72,14 +72,14 @@ def harf(c, boy, renk, yon, derin_oran=0.085):
     bx = f.getbbox(c); w, h = bx[2] - bx[0] + boy, bx[3] - bx[1] + boy
     ox, oy = boy // 2 - bx[0], boy // 2 - bx[1]
     k = Image.new("RGBA", (w, h), (0, 0, 0, 0)); kd = ImageDraw.Draw(k)
-    derin = max(3, int(boy * derin_oran)); kon = max(2, int(boy * 0.035))
+    derin = max(3, int(boy * derin_oran)); kon = max(2, int(boy * 0.012))
     for t in range(derin, 0, -1):
         kd.text((ox + yon * t, oy + t), c, font=f, fill=renk, stroke_width=kon, stroke_fill=renk)
     kd.text((ox, oy), c, font=f, fill="#ffffff", stroke_width=kon, stroke_fill="#ffffff")
     yuz = Image.new("L", (w, h), 0); ImageDraw.Draw(yuz).text((ox, oy), c, font=f, fill=255)
     gr = Image.new("RGBA", (w, h))
     px = gr.load()
-    ust, alt = (255, 255, 255), (232, 236, 244)
+    ust, alt = (255, 255, 255), (250, 250, 255)
     b0, b1 = oy + bx[1], oy + bx[3]
     for y in range(h):
         q = max(0.0, min(1.0, (y - b0) / max(1, b1 - b0)))
@@ -175,7 +175,7 @@ siluet(M_SOL, a.boy_sol, a.x_sol); siluet(M_SAG, a.boy_sag, a.x_sag)
 vs_cubuk(W // 2, 199)
 
 # baslik en onde
-yazi("HUMAN TETRIS", W / 2, 84, 122, RENK, ara=1.12, derin_oran=0.06)
+yazi("HUMAN TETRIS", W / 2, 84, 122, RENK, ara=1.12, isilti=1.15, derin_oran=0.075)
 
 im.convert("RGB").save(a.cikti, quality=95)
 print("->", a.cikti)
