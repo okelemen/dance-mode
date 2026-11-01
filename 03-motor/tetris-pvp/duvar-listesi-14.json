@@ -1,0 +1,127 @@
+[
+ {
+  "tur": 1,
+  "p1": "duel-deep-bow-stride",
+  "p2": "duel-sword-arm-open-stance"
+ },
+ {
+  "tur": 1,
+  "p1": "duel-stride-back-arm-sky",
+  "p2": "duel-chest-lift-arms-back"
+ },
+ {
+  "tur": 1,
+  "p1": "duel-reach-over-plie",
+  "p2": "duel-long-stride-arms-forward"
+ },
+ {
+  "tur": 1,
+  "p1": "duel-half-bow-forward",
+  "p2": "duel-triangle-sky-reach"
+ },
+ {
+  "tur": 1,
+  "p1": "duel-tilted-y-tiptoe",
+  "p2": "duel-soft-knee-wing-beat"
+ },
+ {
+  "tur": 1,
+  "p1": "duel-propeller-arms-tap",
+  "p2": "duel-trophy-lift-horse"
+ },
+ {
+  "tur": 1,
+  "p1": "duel-victory-fist-wide",
+  "p2": "duel-side-tap-low-scoop"
+ },
+ {
+  "tur": 1,
+  "p1": "duel-bow-pull-stance",
+  "p2": "chevron-cactus-diag-leg-out"
+ },
+ {
+  "tur": 1,
+  "p1": "amber-cactus-t-leg-out",
+  "p2": "duel-wave-t-wide"
+ },
+ {
+  "tur": 1,
+  "p1": "crown-diag-comet-tap",
+  "p2": "rival-diag-wave-leg-out"
+ },
+ {
+  "tur": 2,
+  "p1": "duel-attitude-back-knee",
+  "p2": "duel-arabesque-arm-high"
+ },
+ {
+  "tur": 2,
+  "p1": "duel-front-kick-reach-toes",
+  "p2": "duel-skater-leg-behind-reach"
+ },
+ {
+  "tur": 2,
+  "p1": "duel-lunge-crown-hands",
+  "p2": "duel-side-lunge-hands-ground"
+ },
+ {
+  "tur": 2,
+  "p1": "duel-side-kick-blade-arms",
+  "p2": "duel-arabesque-long-line"
+ },
+ {
+  "tur": 2,
+  "p1": "duel-scale-forward-palms",
+  "p2": "duel-wide-side-bend-hook"
+ },
+ {
+  "tur": 2,
+  "p1": "duel-low-kick-guard-fists",
+  "p2": "duel-knee-lift-twin-flex"
+ },
+ {
+  "tur": 2,
+  "p1": "duel-tree-open-wing",
+  "p2": "duel-curtsy-crown"
+ },
+ {
+  "tur": 2,
+  "p1": "duel-stork-knee-fist-pump",
+  "p2": "duel-knee-lift-arms-crown"
+ },
+ {
+  "tur": 2,
+  "p1": "duel-tall-kick-sky-arm",
+  "p2": "duel-tree-sky-palms"
+ },
+ {
+  "tur": 3,
+  "p1": "duel-wide-kneel-goal-post",
+  "p2": "duel-half-kneel-bow"
+ },
+ {
+  "tur": 3,
+  "p1": "duel-kneel-t-wings",
+  "p2": "duel-kneel-side-bend-arc"
+ },
+ {
+  "tur": 3,
+  "p1": "duel-kneel-hands-behind-head",
+  "p2": "duel-camel-reach-heels"
+ },
+ {
+  "tur": 3,
+  "p1": "duel-kneel-star-arms",
+  "p2": "duel-kneel-crown-hands"
+ },
+ {
+  "tur": 3,
+  "p1": "duel-kneel-low-v-open",
+  "p2": "duel-kneel-bow-forward"
+ },
+ {
+  "tur": 3,
+  "p1": "duel-seated-fold-reach-toes",
+  "p2": "duel-kneel-sword-arm"
+ }
+]

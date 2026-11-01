@@ -1,0 +1,1105 @@
+{
+ "_not": "TETRIS MODE PVP 14. video (REF-065, 1v1, 5 dk; poz-sec-12.py olcumle secildi) poz tanimlari. Acilar EKRAN duzleminde (pozlar.js dili): 0 asagi, 90 ekran-sag, 180 yukari, -90 ekran-sol. Kollar [ust kol, on kol], bacaklar [uyluk, baldir]. sol*/sag* = KARAKTERIN solu/sagi; karakter kameraya donukken sol = ekran SAGI. yon: on (kameraya donuk) | sag (profil, yuzu ekran sagina). govde: kalcadan boyna aci, bas: govdeye ek aci. Mixamo govdesi (siluet-govde.fbx) bu acilarla bukulur, duz siyah maske cikar (varlik.py).",
+ "pozlar": {
+  "duel-deep-bow-stride": {
+   "ad": "Duel Deep Bow Stride",
+   "yon": "sag",
+   "govde": 115,
+   "bas": 0,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    98,
+    98
+   ],
+   "solBacak": [
+    25,
+    25
+   ],
+   "sagBacak": [
+    -25,
+    -25
+   ]
+  },
+  "duel-sword-arm-open-stance": {
+   "ad": "Duel Sword Arm Open Stance",
+   "yon": "on",
+   "govde": 176,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ]
+  },
+  "duel-stride-back-arm-sky": {
+   "ad": "Duel Stride Back Arm Sky",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    170,
+    170
+   ],
+   "sagKol": [
+    -50,
+    -50
+   ],
+   "solBacak": [
+    28,
+    28
+   ],
+   "sagBacak": [
+    -32,
+    -32
+   ]
+  },
+  "duel-chest-lift-arms-back": {
+   "ad": "Duel Chest Lift Arms Back",
+   "yon": "sag",
+   "govde": 192,
+   "bas": 0,
+   "solKol": [
+    -45,
+    -45
+   ],
+   "sagKol": [
+    -42,
+    -42
+   ],
+   "solBacak": [
+    6,
+    6
+   ],
+   "sagBacak": [
+    -6,
+    -6
+   ]
+  },
+  "duel-reach-over-plie": {
+   "ad": "Duel Reach Over Plie",
+   "yon": "on",
+   "govde": 204,
+   "bas": 0,
+   "sagKol": [
+    -140,
+    -125
+   ],
+   "solKol": [
+    -30,
+    40
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ]
+  },
+  "duel-long-stride-arms-forward": {
+   "ad": "Duel Long Stride Arms Forward",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    88,
+    88
+   ],
+   "solBacak": [
+    30,
+    30
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ]
+  },
+  "duel-half-bow-forward": {
+   "ad": "Duel Half Bow Forward",
+   "yon": "sag",
+   "govde": 125,
+   "bas": 0,
+   "solKol": [
+    110,
+    110
+   ],
+   "sagKol": [
+    -40,
+    -40
+   ],
+   "solBacak": [
+    6,
+    6
+   ],
+   "sagBacak": [
+    -6,
+    -6
+   ]
+  },
+  "duel-triangle-sky-reach": {
+   "ad": "Duel Triangle Sky Reach",
+   "yon": "on",
+   "govde": 232,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    8,
+    5
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ]
+  },
+  "duel-tilted-y-tiptoe": {
+   "ad": "Duel Tilted Y Tiptoe",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "duel-soft-knee-wing-beat": {
+   "ad": "Duel Soft Knee Wing Beat",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -70,
+    -130
+   ],
+   "solKol": [
+    -70,
+    -130
+   ],
+   "sagBacak": [
+    -12,
+    6
+   ],
+   "solBacak": [
+    12,
+    -6
+   ]
+  },
+  "duel-propeller-arms-tap": {
+   "ad": "Duel Propeller Arms Tap",
+   "yon": "on",
+   "govde": 176,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "duel-trophy-lift-horse": {
+   "ad": "Duel Trophy Lift Horse",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -165
+   ],
+   "solKol": [
+    -150,
+    -165
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ]
+  },
+  "duel-victory-fist-wide": {
+   "ad": "Duel Victory Fist Wide",
+   "yon": "on",
+   "govde": 186,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ]
+  },
+  "duel-side-tap-low-scoop": {
+   "ad": "Duel Side Tap Low Scoop",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    40
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "duel-bow-pull-stance": {
+   "ad": "Duel Bow Pull Stance",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    -90,
+    170
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ]
+  },
+  "chevron-cactus-diag-leg-out": {
+   "ad": "Chevron Cactus Diag Leg Out",
+   "yon": "on",
+   "govde": 200,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "amber-cactus-t-leg-out": {
+   "ad": "Amber Cactus T Leg Out",
+   "yon": "on",
+   "govde": 200,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "duel-wave-t-wide": {
+   "ad": "Duel Wave T Wide",
+   "yon": "on",
+   "govde": 200,
+   "bas": 0,
+   "sagKol": [
+    -70,
+    -130
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ]
+  },
+  "crown-diag-comet-tap": {
+   "ad": "Crown Diag Comet Tap",
+   "yon": "on",
+   "govde": 168,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    -110,
+    -170
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "rival-diag-wave-leg-out": {
+   "ad": "Rival Diag Wave Leg Out",
+   "yon": "on",
+   "govde": 192,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    -70,
+    -130
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "duel-attitude-back-knee": {
+   "ad": "Duel Attitude Back Knee",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    165,
+    150
+   ],
+   "sagKol": [
+    -70,
+    -70
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -40,
+    -95
+   ]
+  },
+  "duel-arabesque-arm-high": {
+   "ad": "Duel Arabesque Arm High",
+   "yon": "sag",
+   "govde": 140,
+   "bas": 0,
+   "solKol": [
+    160,
+    160
+   ],
+   "sagKol": [
+    150,
+    150
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -55,
+    -55
+   ]
+  },
+  "duel-front-kick-reach-toes": {
+   "ad": "Duel Front Kick Reach Toes",
+   "yon": "sag",
+   "govde": 170,
+   "bas": 0,
+   "solKol": [
+    80,
+    80
+   ],
+   "sagKol": [
+    78,
+    78
+   ],
+   "solBacak": [
+    70,
+    70
+   ],
+   "sagBacak": [
+    0,
+    0
+   ]
+  },
+  "duel-skater-leg-behind-reach": {
+   "ad": "Duel Skater Leg Behind Reach",
+   "yon": "on",
+   "govde": 186,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "duel-lunge-crown-hands": {
+   "ad": "Duel Lunge Crown Hands",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    150
+   ],
+   "solKol": [
+    -150,
+    150
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    45,
+    45
+   ]
+  },
+  "duel-side-lunge-hands-ground": {
+   "ad": "Duel Side Lunge Hands Ground",
+   "yon": "on",
+   "govde": 168,
+   "bas": 0,
+   "sagKol": [
+    -5,
+    -5
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    45,
+    45
+   ]
+  },
+  "duel-side-kick-blade-arms": {
+   "ad": "Duel Side Kick Blade Arms",
+   "yon": "on",
+   "govde": 158,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    85,
+    85
+   ]
+  },
+  "duel-arabesque-long-line": {
+   "ad": "Duel Arabesque Long Line",
+   "yon": "sag",
+   "govde": 125,
+   "bas": 0,
+   "solKol": [
+    120,
+    120
+   ],
+   "sagKol": [
+    -40,
+    -40
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -70,
+    -70
+   ]
+  },
+  "duel-scale-forward-palms": {
+   "ad": "Duel Scale Forward Palms",
+   "yon": "sag",
+   "govde": 95,
+   "bas": 0,
+   "solKol": [
+    85,
+    85
+   ],
+   "sagKol": [
+    83,
+    83
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -80,
+    -80
+   ]
+  },
+  "duel-wide-side-bend-hook": {
+   "ad": "Duel Wide Side Bend Hook",
+   "yon": "on",
+   "govde": 216,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -120
+   ],
+   "solKol": [
+    -30,
+    120
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    45,
+    45
+   ]
+  },
+  "duel-low-kick-guard-fists": {
+   "ad": "Duel Low Kick Guard Fists",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -40,
+    130
+   ],
+   "solKol": [
+    -40,
+    130
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    50,
+    50
+   ]
+  },
+  "duel-knee-lift-twin-flex": {
+   "ad": "Duel Knee Lift Twin Flex",
+   "yon": "on",
+   "govde": 176,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ]
+  },
+  "duel-tree-open-wing": {
+   "ad": "Duel Tree Open Wing",
+   "yon": "on",
+   "govde": 174,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ]
+  },
+  "duel-curtsy-crown": {
+   "ad": "Duel Curtsy Crown",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    150
+   ],
+   "solKol": [
+    -150,
+    150
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "duel-stork-knee-fist-pump": {
+   "ad": "Duel Stork Knee Fist Pump",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -160,
+    -170
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ]
+  },
+  "duel-knee-lift-arms-crown": {
+   "ad": "Duel Knee Lift Arms Crown",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    170,
+    150
+   ],
+   "sagKol": [
+    168,
+    148
+   ],
+   "solBacak": [
+    85,
+    -80
+   ],
+   "sagBacak": [
+    0,
+    0
+   ]
+  },
+  "duel-tall-kick-sky-arm": {
+   "ad": "Duel Tall Kick Sky Arm",
+   "yon": "on",
+   "govde": 160,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    70,
+    70
+   ]
+  },
+  "duel-tree-sky-palms": {
+   "ad": "Duel Tree Sky Palms",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ]
+  },
+  "duel-wide-kneel-goal-post": {
+   "ad": "Duel Wide Kneel Goal Post",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -25,
+    -90
+   ],
+   "solBacak": [
+    -25,
+    -90
+   ]
+  },
+  "duel-half-kneel-bow": {
+   "ad": "Duel Half Kneel Bow",
+   "yon": "sag",
+   "govde": 140,
+   "bas": 0,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    98,
+    98
+   ],
+   "solBacak": [
+    92,
+    -2
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "duel-kneel-t-wings": {
+   "ad": "Duel Kneel T Wings",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -15,
+    -90
+   ],
+   "solBacak": [
+    -15,
+    -90
+   ]
+  },
+  "duel-kneel-side-bend-arc": {
+   "ad": "Duel Kneel Side Bend Arc",
+   "yon": "on",
+   "govde": 204,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -135
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -15,
+    -90
+   ],
+   "solBacak": [
+    -15,
+    -90
+   ]
+  },
+  "duel-kneel-hands-behind-head": {
+   "ad": "Duel Kneel Hands Behind Head",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -22,
+    -90
+   ],
+   "solBacak": [
+    -22,
+    -90
+   ]
+  },
+  "duel-camel-reach-heels": {
+   "ad": "Duel Camel Reach Heels",
+   "yon": "sag",
+   "govde": 215,
+   "bas": 0,
+   "solKol": [
+    -120,
+    -120
+   ],
+   "sagKol": [
+    -118,
+    -118
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "duel-kneel-star-arms": {
+   "ad": "Duel Kneel Star Arms",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -20,
+    -90
+   ],
+   "solBacak": [
+    -20,
+    -90
+   ]
+  },
+  "duel-kneel-crown-hands": {
+   "ad": "Duel Kneel Crown Hands",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    150
+   ],
+   "solKol": [
+    -150,
+    150
+   ],
+   "sagBacak": [
+    -12,
+    -90
+   ],
+   "solBacak": [
+    -12,
+    -90
+   ]
+  },
+  "duel-kneel-low-v-open": {
+   "ad": "Duel Kneel Low V Open",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -28,
+    -90
+   ],
+   "solBacak": [
+    -28,
+    -90
+   ]
+  },
+  "duel-kneel-bow-forward": {
+   "ad": "Duel Kneel Bow Forward",
+   "yon": "sag",
+   "govde": 125,
+   "bas": 0,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    98,
+    98
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "duel-seated-fold-reach-toes": {
+   "ad": "Duel Seated Fold Reach Toes",
+   "yon": "sag",
+   "govde": 130,
+   "bas": 0,
+   "solKol": [
+    95,
+    95
+   ],
+   "sagKol": [
+    93,
+    93
+   ],
+   "solBacak": [
+    85,
+    85
+   ],
+   "sagBacak": [
+    83,
+    83
+   ]
+  },
+  "duel-kneel-sword-arm": {
+   "ad": "Duel Kneel Sword Arm",
+   "yon": "on",
+   "govde": 176,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -22,
+    -90
+   ],
+   "solBacak": [
+    -22,
+    -90
+   ]
+  }
+ }
+}

@@ -1,0 +1,150 @@
+{
+ "_not": "HUMAN TETRIS 14. video (REF-065 HumanWarmUp, HUMAN TETRIS DUEL). 1v1, 25 duvar x 24 vurus, tur karti yok (referansta yok). Muzik Golden Bridge Duel (Suno, kullanici) 128->132,4 BPM kayiyordu -> golden-bridge-130.wav (muzik-sabitle.py --hedef 130). Metinler bizim. P1 kirmizi solda, P2 mavi sagda.",
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-14",
+ "bpm": 130,
+ "muzik": "Golden Bridge Duel.wav (Suno, kullanici, 1 Kas 2026) -> golden-bridge-130.wav",
+ "duvar": "duvar-listesi-14.json",
+ "duvar_vurus": 24,
+ "kart_vurus": {
+  "tur": 8,
+  "basla": 8,
+  "abone": 12
+ },
+ "giris_dizisi": [
+  {
+   "tip": "acilis",
+   "vurus": 12
+  },
+  {
+   "tip": "yazi",
+   "metin": "WELCOME TO",
+   "alt": "THE GOLDEN BRIDGE!",
+   "vurus": 6
+  },
+  {
+   "tip": "yazi",
+   "metin": "TWO RIVALS.",
+   "alt": "ONE CHAMPION.",
+   "vurus": 6
+  },
+  {
+   "tip": "nasil",
+   "metin": "COPY YOUR SHAPE",
+   "alt": "BEFORE THE WALL ARRIVES!",
+   "vurus": 12
+  }
+ ],
+ "kapanis": [
+  {
+   "tip": "yazi",
+   "metin": "DUEL",
+   "alt": "COMPLETE!",
+   "vurus": 6
+  },
+  {
+   "tip": "yazi",
+   "metin": "WHO RULES",
+   "alt": "THE BRIDGE?",
+   "vurus": 6
+  }
+ ],
+ "ovgu": [
+  "Sharp!",
+  "Too easy!",
+  "Rival rattled!",
+  "Clean fit!",
+  "You're on fire!",
+  "Golden move!"
+ ],
+ "sayfa": "sahne11.html",
+ "tema": {
+  "varlik": "/03-motor/tetris-pvp/varlik-14/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-14-boksor/",
+  "p1": "#E8112D",
+  "p2": "#1450E0",
+  "altin": "#ffd94a",
+  "camgobegi": "#5ff2ff",
+  "p1koyu": "#8a0416",
+  "p2koyu": "#07237a",
+  "p1acik": "#ffd6da",
+  "p2acik": "#d6e2ff",
+  "p1parlak": "#ffb0b8",
+  "p2parlak": "#b0c6ff",
+  "vsSol": [
+   "#d40f28",
+   "#3a0208"
+  ],
+  "vsSag": [
+   "#1450e0",
+   "#04103f"
+  ],
+  "isin": [
+   "#d8882c",
+   "#2a0c04"
+  ],
+  "wrapIsin": [
+   "#ffb040",
+   "#3a1204"
+  ],
+  "ovguRenk": [
+   "#ffffff",
+   "#fff4c0",
+   "#ffc040"
+  ],
+  "parca": [
+   "#ffc040",
+   "#ff5ad8",
+   "#7ad8ff"
+  ],
+  "abone": [
+   "#7dffb4",
+   "#0c8a48"
+  ],
+  "vsAlt": "HUMAN TETRIS · 1 VS 1",
+  "fener": false,
+  "kuzeyIsigi": false,
+  "disko": false,
+  "fisek": false,
+  "oklar": true,
+  "aboneAlt": "NEW BATTLE EVERY DAY",
+  "duvarToplam": 25,
+  "duvarCift": [
+   [
+    "#1f62f0",
+    "#f03808"
+   ],
+   [
+    "#3ef02a",
+    "#18f0f8"
+   ],
+   [
+    "#3ef02a",
+    "#18a0f8"
+   ],
+   [
+    "#f05a10",
+    "#900ea0"
+   ],
+   [
+    "#25d0e0",
+    "#f04038"
+   ],
+   [
+    "#e0108c",
+    "#f0c020"
+   ],
+   [
+    "#7a20e8",
+    "#18d870"
+   ]
+  ]
+ },
+ "tur_kart_yok": true,
+ "zaman_vurus": {
+  "kart": 7,
+  "say": 6,
+  "buyu": 6,
+  "gec": 3
+ }
+}

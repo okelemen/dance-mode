@@ -1,0 +1,374 @@
+{
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-14",
+ "bpm": 130.0,
+ "toplam_olcu": 167,
+ "toplam_duvar": 25,
+ "zaman": {
+  "kart": 3.2308,
+  "say": 2.7692,
+  "buyu": 2.7692,
+  "gec": 1.3846,
+  "sure": 11.0769
+ },
+ "kartlar": [
+  {
+   "tip": "acilis",
+   "t": 0.0,
+   "sure": 5.5385
+  },
+  {
+   "tip": "yazi",
+   "metin": "WELCOME TO",
+   "alt": "THE GOLDEN BRIDGE!",
+   "t": 5.5385,
+   "sure": 2.7692
+  },
+  {
+   "tip": "yazi",
+   "metin": "TWO RIVALS.",
+   "alt": "ONE CHAMPION.",
+   "t": 8.3077,
+   "sure": 2.7692
+  },
+  {
+   "tip": "nasil",
+   "metin": "COPY YOUR SHAPE",
+   "alt": "BEFORE THE WALL ARRIVES!",
+   "t": 11.0769,
+   "sure": 5.5385
+  },
+  {
+   "t": 16.6154,
+   "sure": 3.6923,
+   "tip": "basla"
+  },
+  {
+   "tip": "yazi",
+   "metin": "DUEL",
+   "alt": "COMPLETE!",
+   "t": 297.2302,
+   "sure": 2.7692
+  },
+  {
+   "tip": "yazi",
+   "metin": "WHO RULES",
+   "alt": "THE BRIDGE?",
+   "t": 299.9994,
+   "sure": 2.7692
+  },
+  {
+   "t": 302.7687,
+   "sure": 5.5385,
+   "tip": "abone"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 20.3077,
+   "p1": "duel-deep-bow-stride",
+   "p2": "duel-sword-arm-open-stance",
+   "ovgu": "Sharp!"
+  },
+  {
+   "no": 2,
+   "tur": 1,
+   "t0": 31.3846,
+   "p1": "duel-stride-back-arm-sky",
+   "p2": "duel-chest-lift-arms-back",
+   "ovgu": "Too easy!"
+  },
+  {
+   "no": 3,
+   "tur": 1,
+   "t0": 42.4615,
+   "p1": "duel-reach-over-plie",
+   "p2": "duel-long-stride-arms-forward",
+   "ovgu": "Rival rattled!"
+  },
+  {
+   "no": 4,
+   "tur": 1,
+   "t0": 53.5384,
+   "p1": "duel-half-bow-forward",
+   "p2": "duel-triangle-sky-reach",
+   "ovgu": "Clean fit!"
+  },
+  {
+   "no": 5,
+   "tur": 1,
+   "t0": 64.6153,
+   "p1": "duel-tilted-y-tiptoe",
+   "p2": "duel-soft-knee-wing-beat",
+   "ovgu": "You're on fire!"
+  },
+  {
+   "no": 6,
+   "tur": 1,
+   "t0": 75.6922,
+   "p1": "duel-propeller-arms-tap",
+   "p2": "duel-trophy-lift-horse",
+   "ovgu": "Golden move!"
+  },
+  {
+   "no": 7,
+   "tur": 1,
+   "t0": 86.7691,
+   "p1": "duel-victory-fist-wide",
+   "p2": "duel-side-tap-low-scoop",
+   "ovgu": "Sharp!"
+  },
+  {
+   "no": 8,
+   "tur": 1,
+   "t0": 97.846,
+   "p1": "duel-bow-pull-stance",
+   "p2": "chevron-cactus-diag-leg-out",
+   "ovgu": "Too easy!"
+  },
+  {
+   "no": 9,
+   "tur": 1,
+   "t0": 108.9229,
+   "p1": "amber-cactus-t-leg-out",
+   "p2": "duel-wave-t-wide",
+   "ovgu": "Rival rattled!"
+  },
+  {
+   "no": 10,
+   "tur": 1,
+   "t0": 119.9998,
+   "p1": "crown-diag-comet-tap",
+   "p2": "rival-diag-wave-leg-out",
+   "ovgu": "Clean fit!"
+  },
+  {
+   "no": 11,
+   "tur": 2,
+   "t0": 131.0767,
+   "p1": "duel-attitude-back-knee",
+   "p2": "duel-arabesque-arm-high",
+   "ovgu": "You're on fire!"
+  },
+  {
+   "no": 12,
+   "tur": 2,
+   "t0": 142.1536,
+   "p1": "duel-front-kick-reach-toes",
+   "p2": "duel-skater-leg-behind-reach",
+   "ovgu": "Golden move!"
+  },
+  {
+   "no": 13,
+   "tur": 2,
+   "t0": 153.2305,
+   "p1": "duel-lunge-crown-hands",
+   "p2": "duel-side-lunge-hands-ground",
+   "ovgu": "Sharp!"
+  },
+  {
+   "no": 14,
+   "tur": 2,
+   "t0": 164.3074,
+   "p1": "duel-side-kick-blade-arms",
+   "p2": "duel-arabesque-long-line",
+   "ovgu": "Too easy!"
+  },
+  {
+   "no": 15,
+   "tur": 2,
+   "t0": 175.3843,
+   "p1": "duel-scale-forward-palms",
+   "p2": "duel-wide-side-bend-hook",
+   "ovgu": "Rival rattled!"
+  },
+  {
+   "no": 16,
+   "tur": 2,
+   "t0": 186.4612,
+   "p1": "duel-low-kick-guard-fists",
+   "p2": "duel-knee-lift-twin-flex",
+   "ovgu": "Clean fit!"
+  },
+  {
+   "no": 17,
+   "tur": 2,
+   "t0": 197.5381,
+   "p1": "duel-tree-open-wing",
+   "p2": "duel-curtsy-crown",
+   "ovgu": "You're on fire!"
+  },
+  {
+   "no": 18,
+   "tur": 2,
+   "t0": 208.615,
+   "p1": "duel-stork-knee-fist-pump",
+   "p2": "duel-knee-lift-arms-crown",
+   "ovgu": "Golden move!"
+  },
+  {
+   "no": 19,
+   "tur": 2,
+   "t0": 219.6919,
+   "p1": "duel-tall-kick-sky-arm",
+   "p2": "duel-tree-sky-palms",
+   "ovgu": "Sharp!"
+  },
+  {
+   "no": 20,
+   "tur": 3,
+   "t0": 230.7688,
+   "p1": "duel-wide-kneel-goal-post",
+   "p2": "duel-half-kneel-bow",
+   "ovgu": "Too easy!"
+  },
+  {
+   "no": 21,
+   "tur": 3,
+   "t0": 241.8457,
+   "p1": "duel-kneel-t-wings",
+   "p2": "duel-kneel-side-bend-arc",
+   "ovgu": "Rival rattled!"
+  },
+  {
+   "no": 22,
+   "tur": 3,
+   "t0": 252.9226,
+   "p1": "duel-kneel-hands-behind-head",
+   "p2": "duel-camel-reach-heels",
+   "ovgu": "Clean fit!"
+  },
+  {
+   "no": 23,
+   "tur": 3,
+   "t0": 263.9995,
+   "p1": "duel-kneel-star-arms",
+   "p2": "duel-kneel-crown-hands",
+   "ovgu": "You're on fire!"
+  },
+  {
+   "no": 24,
+   "tur": 3,
+   "t0": 275.0764,
+   "p1": "duel-kneel-low-v-open",
+   "p2": "duel-kneel-bow-forward",
+   "ovgu": "Golden move!"
+  },
+  {
+   "no": 25,
+   "tur": 3,
+   "t0": 286.1533,
+   "p1": "duel-seated-fold-reach-toes",
+   "p2": "duel-kneel-sword-arm",
+   "ovgu": "Sharp!"
+  }
+ ],
+ "abone": [
+  17.0,
+  30.0,
+  45.0,
+  60.0,
+  75.0,
+  90.0,
+  105.0,
+  120.0,
+  135.0,
+  150.0,
+  165.0,
+  180.0,
+  195.0,
+  210.0,
+  225.0,
+  240.0,
+  255.0,
+  270.0,
+  285.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "Golden Bridge Duel.wav (Suno, kullanici, 1 Kas 2026) -> golden-bridge-130.wav",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne11.html.",
+ "tema": {
+  "varlik": "/03-motor/tetris-pvp/varlik-14/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-14-boksor/",
+  "p1": "#E8112D",
+  "p2": "#1450E0",
+  "altin": "#ffd94a",
+  "camgobegi": "#5ff2ff",
+  "p1koyu": "#8a0416",
+  "p2koyu": "#07237a",
+  "p1acik": "#ffd6da",
+  "p2acik": "#d6e2ff",
+  "p1parlak": "#ffb0b8",
+  "p2parlak": "#b0c6ff",
+  "vsSol": [
+   "#d40f28",
+   "#3a0208"
+  ],
+  "vsSag": [
+   "#1450e0",
+   "#04103f"
+  ],
+  "isin": [
+   "#d8882c",
+   "#2a0c04"
+  ],
+  "wrapIsin": [
+   "#ffb040",
+   "#3a1204"
+  ],
+  "ovguRenk": [
+   "#ffffff",
+   "#fff4c0",
+   "#ffc040"
+  ],
+  "parca": [
+   "#ffc040",
+   "#ff5ad8",
+   "#7ad8ff"
+  ],
+  "abone": [
+   "#7dffb4",
+   "#0c8a48"
+  ],
+  "vsAlt": "HUMAN TETRIS · 1 VS 1",
+  "fener": false,
+  "kuzeyIsigi": false,
+  "disko": false,
+  "fisek": false,
+  "oklar": true,
+  "aboneAlt": "NEW BATTLE EVERY DAY",
+  "duvarToplam": 25,
+  "duvarCift": [
+   [
+    "#1f62f0",
+    "#f03808"
+   ],
+   [
+    "#3ef02a",
+    "#18f0f8"
+   ],
+   [
+    "#3ef02a",
+    "#18a0f8"
+   ],
+   [
+    "#f05a10",
+    "#900ea0"
+   ],
+   [
+    "#25d0e0",
+    "#f04038"
+   ],
+   [
+    "#e0108c",
+    "#f0c020"
+   ],
+   [
+    "#7a20e8",
+    "#18d870"
+   ]
+  ]
+ }
+}
