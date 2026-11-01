@@ -14,7 +14,9 @@ DUVAR_SAYI = {1: 10, 2: 9, 3: 6}   # duvar; poz iki kati
 YASAK = ("Standing Split", "Bridge", "Headstand", "Handstand")
 # kontak 1 (28 Eki 2026): siluette havada / dusuyor / ziplama gibi okunanlar
 # kontak 1 (30 Eki 2026): siluette havada / dusuyor / bas asagi okunanlar
-HARIC = set()
+# kontak 1 (1 Kas 2026): havada / siciyor gibi ya da eli yere degmeden asili okunanlar
+HARIC = {"duel-deep-lunge-palms-forward", "duel-lunge-twist-arm-back", "duel-warrior-arms-spread", "duel-warrior-two-hands-sky", "duel-low-lunge-back-knee",
+         "duel-squat-palms-floor", "duel-crouch-arms-forward", "duel-tabletop-leg-back", "duel-bird-dog-long"}
 # grup 3 havuzundan yalniz el + ayak / diz yere acikca basanlar (yer-adaylari.jpg gozle secimi)
 IZIN3 = set()
 ap.add_argument("--havuz", action="store_true", help="elle tasarlananlar yetmezse rastgele havuzu da kullan")

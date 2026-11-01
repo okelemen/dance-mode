@@ -119,12 +119,10 @@ def gok_katmani(ad, zemin_alt, zemin_ust, isin):
         for j in range(6):                                 # ucgenin altinda su gibi parlayan yansima bantlari
             z = 340 + j * 14; g_ = 150 + j * 28
             boru((cx_ - g_, 0, z), (cx_ + g_, 0, z), 10.0 - j, sisler[j % 4])
-        for r_, m_ in zip((230, 170, 115, 70), sisler):    # ucgenin arkasinda buyuk yumusak isik
-            kure((cx_, 150, 500), r_, m_, sub=3)
         for j in range(9):                                 # ufukta yansiyan neon bantlar (referansta ucgenin parlak yansimasi)
             x = cx_ - 240 + j * 60
             boru((x, 0, 395 - j % 3 * 14), (x + 34, 0, 395 - j % 3 * 14), 2.6, beyaz if j % 2 else ic2)
-    for z, r_, m_ in ((405, 58, sisler[1]), (400, 38, sisler[2]), (395, 20, sisler[3])):   # ufuk boyunca sis bandi
+    for z, r_, m_ in ((405, 70, sisler[0]), (400, 46, sisler[0]), (395, 26, sisler[1])):   # ufuk boyunca sis bandi
         boru((-980, 120, z), (980, 120, z), r_, m_)
     for _ in range(90):                                    # isik tozu
         x, z = rnd.uniform(-960, 960), rnd.uniform(420, 1080)
@@ -157,11 +155,11 @@ def zemin():
         boru((-YOL_YARI, yy, 0.006), (YOL_YARI, yy, 0.006), 0.01, derz)
     ic = mat_emis("chev_ic", lin(hex3("#ffb040")), 2.2)
     kenar = mat_emis("chev_k", lin(hex3("#ffe08a")), 5.0)
-    hale = [mat_kat("hale%d" % i, lin(hex3("#ff8a1c")), g) for i, g in enumerate((0.07, 0.12, 0.2))]
+    hale = [mat_kat("hale%d" % i, lin(hex3("#ff8a1c")), g) for i, g in enumerate((0.05, 0.1))]
     for yy, hw, d, kal in ((1.75, 1.0, 0.72, 0.3), (3.05, 0.86, 0.72, 0.28), (4.2, 0.84, 0.68, 0.26), (5.5, 0.84, 0.62, 0.24), (6.5, 0.84, 0.56, 0.22), (7.3, 0.84, 0.5, 0.2), (8.05, 0.84, 0.3, 0.16)):
         kose = [(-hw, yy + d), (0, yy), (hw, yy + d), (hw, yy + d + kal), (0, yy + kal), (-hw, yy + d + kal)]
         sekil("chev", kose, ic, z=0.01)
-        for g_, m_ in ((0.34, hale[0]), (0.2, hale[1]), (0.1, hale[2])):   # zemine dusen turuncu hale
+        for g_, m_ in ((0.16, hale[0]), (0.09, hale[1])):   # zemine dusen turuncu hale
             for i in range(5):
                 boru((*kose[[0, 1, 2, 3, 4][i]], 0.004), (*kose[[1, 2, 3, 4, 5][i]], 0.004), g_, m_)
         for i in range(6):

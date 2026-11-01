@@ -93,6 +93,19 @@ el(3, on("Wide Kneel Goal Post", "cactus", "cactus", [-25, -90], [-25, -90]))
 el(3, on("Kneel Side Bend Arc", [-150, -135], "hip", [-15, -90], [-15, -90], govde=204))
 el(3, on("Kneel Star Arms", "v", "v", [-20, -90], [-20, -90]))
 
+# kontak 1 (1 Kas 2026): grup 3 eledikten sonra yetmedi -> diz yere net basan yeni adaylar
+el(3, on("Kneel T Wings", "t", "t", [-15, -90], [-15, -90]))
+el(3, on("Kneel Hands Behind Head", "head", "head", [-22, -90], [-22, -90]))
+el(3, on("Kneel Twin Flex", "flex", "flex", [-18, -90], [-18, -90]))
+el(3, on("Kneel Diagonal Bolt", "up45", "lowv", [-20, -90], [-20, -90], govde=188))
+el(3, on("Kneel Crown Hands", [-150, 150], [-150, 150], [-12, -90], [-12, -90]))
+el(3, on("Kneel Sword Arm", "up", "t", [-22, -90], [-22, -90], govde=176))
+el(3, on("Kneel Low V Open", "lowv", "lowv", [-28, -90], [-28, -90]))
+el(3, profil("Half Kneel Bow", 140, [100, 100], [98, 98], [92, -2], [0, -90]))
+el(3, profil("Half Kneel Arms Back", 190, [-40, -40], [-38, -38], [92, -2], [0, -90]))
+el(3, profil("Kneel Arms Forward", 180, [90, 90], [88, 88], [0, -90], [0, -90]))
+el(3, profil("Kneel Lean Back Open", 200, [150, 150], [-40, -40], [0, -90], [0, -90]))
+
 KOL = {"V": "v", "W": "w", "Cactus": "cactus", "Reach": "up", "T": "t", "Head": "head", "Flex": "flex", "Low": "lowv",
        "Hip": "hip", "Diag": "up45", "Halo": [-160, 120], "Comet": [-110, -170], "Wave": [-70, -130], "Hug": [-40, 100]}
 BAC = {"Wide": ("wide", "wide"), "Horse": ("horse", "horse"), "Knee": ("tog", "kneeup"), "Tree": ("tog", "kneein"),
