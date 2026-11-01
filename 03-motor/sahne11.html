@@ -118,7 +118,7 @@ const PARILTI = Array.from({ length: 70 }, () => ({ x: PAR(), y: PAR() * 0.5, f:
 const HUZME = ['#ff5ad8', '#7ad8ff', '#ffffff', '#c86aff'];
 function altinGok(t) {
   cx.drawImage(GOK, 0, 0, W, H);
-  const f = (t % 88) / 88, kirmizi = f < 0.12 ? 1 : f < 0.2 ? 1 - ease((f - 0.12) / 0.08) : f > 0.9 ? ease((f - 0.9) / 0.1) : 0;
+  const f = ((t + 72) % 88) / 88, kirmizi = f < 0.12 ? 1 : f < 0.2 ? 1 - ease((f - 0.12) / 0.08) : f > 0.9 ? ease((f - 0.9) / 0.1) : 0;
   if (kirmizi > 0) { cx.save(); cx.globalAlpha = kirmizi; cx.drawImage(GOK2, 0, 0, W, H); cx.restore(); }
   const vurusF = (t * BPM / 60) % 1, nab = Math.pow(1 - vurusF, 3);
   cx.save(); cx.globalCompositeOperation = 'lighter';
@@ -278,9 +278,9 @@ function yolOklari(t, i) {
     const z = 0.04, w = 0.95, d = 0.42, kal = 0.28;
     const pts = [[-w, y + d], [0, y], [w, y + d], [w, y + d + kal], [0, y + kal], [-w, y + d + kal]].map(q => izdus(i, q[0], q[1], z));
     cx.beginPath(); pts.forEach((q, n) => n ? cx.lineTo(q[0], q[1]) : cx.moveTo(q[0], q[1])); cx.closePath();
-    cx.shadowColor = '#ffffff'; cx.shadowBlur = 18 * k;
-    cx.fillStyle = `rgba(255,255,240,${0.85 * a})`; cx.fill();
-    cx.shadowBlur = 0; cx.lineWidth = 3 * k; cx.strokeStyle = hex(RENK[i], 0.9 * a); cx.stroke();
+    cx.shadowColor = '#ffb040'; cx.shadowBlur = 12 * k;
+    cx.fillStyle = `rgba(255,236,170,${0.3 * a})`; cx.fill();
+    cx.shadowBlur = 0;
   }
   cx.restore();
 }
@@ -478,7 +478,7 @@ function ovguCiz(d, e) {
 // ------------------------------------------------------------ HUD (üst bant)
 // REF-065: ustte kirmizi-mavi VS cubugu, sol altta altin sayac
 function hudCiz(t) {
-  const x0 = W / 2 - 236 * k, w = 472 * k, y = 66 * k, h = 66 * k;
+  const x0 = W / 2 - 220 * k, w = 440 * k, y = 34 * k, h = 58 * k;   // kesit 1: SUBSCRIBE cubuga biniyordu
   cx.save();
   for (let i = 0; i < 2; i++) {
     const gg = cx.createLinearGradient(0, y, 0, y + h); gg.addColorStop(0, RENK[i]); gg.addColorStop(1, i === 0 ? TEMA.p1koyu : TEMA.p2koyu);
