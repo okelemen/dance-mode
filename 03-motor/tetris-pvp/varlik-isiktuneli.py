@@ -104,8 +104,8 @@ def yildizli_gok(sc):
     nt = sc.world.node_tree
     tc = nt.nodes.new("ShaderNodeTexCoord")
     vo = nt.nodes.new("ShaderNodeTexVoronoi"); vo.inputs["Scale"].default_value = 170
-    rv = nt.nodes.new("ShaderNodeValToRGB"); rv.color_ramp.elements[0].position = 0.03; rv.color_ramp.elements[0].color = (1.6, 1.6, 1.8, 1)
-    rv.color_ramp.elements[1].position = 0.12; rv.color_ramp.elements[1].color = (0, 0, 0, 1)
+    rv = nt.nodes.new("ShaderNodeValToRGB"); rv.color_ramp.elements[0].position = 0.03; rv.color_ramp.elements[0].color = (4.0, 4.0, 4.4, 1)
+    rv.color_ramp.elements[1].position = 0.16; rv.color_ramp.elements[1].color = (0, 0, 0, 1)
     no = nt.nodes.new("ShaderNodeTexNoise"); no.inputs["Scale"].default_value = 4; no.inputs["Detail"].default_value = 6
     rn = nt.nodes.new("ShaderNodeValToRGB"); rn.color_ramp.elements[0].position = 0.42; rn.color_ramp.elements[0].color = (*lin(hex3("#05060a")), 1)
     rn.color_ramp.elements[1].position = 0.72; rn.color_ramp.elements[1].color = (*lin(hex3("#1c2238")), 1)
@@ -147,12 +147,14 @@ def kopru_yol():
     b.inputs["Roughness"].default_value = 0.42; b.inputs["Metallic"].default_value = 0.0
     no = nt.nodes.new("ShaderNodeTexNoise"); no.inputs["Scale"].default_value = 90; no.inputs["Detail"].default_value = 8
     rm = nt.nodes.new("ShaderNodeValToRGB")                # asfalt: koyu gri + kahve benek
-    rm.color_ramp.elements[0].position = 0.42; rm.color_ramp.elements[0].color = (*lin(hex3("#2a1a12" if KAPAK else "#0c0b0b")), 1)   # sahne 1: yol fazla acik kahveydi (kapakta REF kahve)
-    rm.color_ramp.elements[1].position = 0.72; rm.color_ramp.elements[1].color = (*lin(hex3("#a0623a" if KAPAK else "#2a2019")), 1)
+    rm.color_ramp.elements[0].position = 0.42; rm.color_ramp.elements[0].color = (*lin(hex3("#170e09" if KAPAK else "#0c0b0b")), 1)   # sahne 1: yol fazla acik kahveydi (kapakta REF kahve)
+    rm.color_ramp.elements[1].position = 0.72; rm.color_ramp.elements[1].color = (*lin(hex3("#6e4428" if KAPAK else "#2a2019")), 1)
     nt.links.new(no.outputs["Fac"], rm.inputs[0]); nt.links.new(rm.outputs[0], b.inputs["Base Color"])
     yuvarlak_kutu("yol", (0, (0.3 + Y_SON) / 2, -0.2), (YOL_W, Y_SON - 0.3, 0.4), yol, egim=0.03, seg=2)
     cam = mat_emis("chev", lin(hex3(CAMGOBEGI)), 1.9)
     for yy, hw, kal in ((0.9, 2.0, 0.62), (2.3, 1.78, 0.5), (3.55, 1.58, 0.42), (4.65, 1.42, 0.35), (5.65, 1.28, 0.28), (6.55, 1.16, 0.24), (7.35, 1.06, 0.2)):
+        if KAPAK:                                          # REF-064 kapagi: chevronlar genis ve kalin
+            hw, kal = hw * 1.25, kal * 1.7
         d = hw * 0.2                                       # REF-064: genis, basik V
         sekil("chev", [(-hw, yy + d), (0, yy), (hw, yy + d), (hw, yy + d + kal), (0, yy + kal), (-hw, yy + d + kal)], cam, konum=(0, 0, 0.03))
     kaldirim = mat_metal("kaldirim", lin(hex3("#6a4426")), 0.4, metal=0.3)
