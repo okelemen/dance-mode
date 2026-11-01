@@ -23,6 +23,10 @@ POZLAMA = float(arg("--kapak-pozlama", "0"))
 ON_EK = "kapak-" if KAPAK else ""
 if KAPAK:   # REF-065 kapagi (1280x720): kapi 260x235 px, tepesi y~205, tabani y~440
     KAM["lens"] = 15.7; KAM["egim"] = 1.9
+    _mat_emis = mat_emis
+
+    def mat_emis(ad, renk, guc):   # kapak 1. taslak: neon beyaza kacti (doygunluk 0,50 / ref 0,66); guclu isik kisilir, renk kalir
+        return _mat_emis(ad, renk, guc * 0.42 if guc > 1.5 else guc)
 
 
 def kamera(sc):
@@ -105,7 +109,7 @@ def gok_katmani(ad, zemin_alt, zemin_ust, isin):
     p = bpy.context.active_object; p.scale = (2000, 1100, 1); bpy.ops.object.transform_apply(scale=True)
     p.data.materials.append(zem)
     kenar, ic1, ic2, kesik = [mat_emis("n%d" % i, lin(hex3(c)), g) for i, (c, g) in enumerate(zip(isin, (5.5, 5.0, 5.0, 4.0)))]
-    beyaz = mat_emis("beyaz", lin(hex3("#fff4ff")), 7.0)
+    beyaz = mat_emis("beyaz", lin(hex3("#ff6ad0" if KAPAK else "#fff4ff")), 7.0)
     sc.cycles.transparent_max_bounces = 64
     sisler = [mat_kat("sis%d" % i, lin(hex3(isin[0])), g) for i, g in enumerate((0.05, 0.08, 0.12, 0.2))]
     rnd = random.Random(65)
@@ -165,8 +169,8 @@ def zemin():
     mr_ = n_.nodes.new("ShaderNodeMapRange"); mr_.inputs["From Min"].default_value = 1.0; mr_.inputs["From Max"].default_value = 8.6
     n_.links.new(sp_.outputs["Y"], mr_.inputs["Value"])
     rp_ = n_.nodes.new("ShaderNodeValToRGB"); cr_ = rp_.color_ramp; n_.links.new(mr_.outputs[0], rp_.inputs[0])
-    cr_.elements[0].position = 0.0; cr_.elements[0].color = (*lin(hex3("#e08a34")), 1)
-    cr_.elements[1].position = 1.0; cr_.elements[1].color = (*lin(hex3("#5a2c0c")), 1)
+    cr_.elements[0].position = 0.0; cr_.elements[0].color = (*lin(hex3("#d87c08" if KAPAK else "#e08a34")), 1)
+    cr_.elements[1].position = 1.0; cr_.elements[1].color = (*lin(hex3("#4a1e02" if KAPAK else "#5a2c0c")), 1)
     em_ = n_.nodes.new("ShaderNodeEmission"); n_.links.new(rp_.outputs[0], em_.inputs[0])
     o_ = n_.nodes.new("ShaderNodeOutputMaterial"); n_.links.new(em_.outputs[0], o_.inputs[0])
     sekil("zemin", [(-YOL_YARI, 4.0), (YOL_YARI, 4.0), (YOL_YARI, KAP["y"]), (-YOL_YARI, KAP["y"])], bakir)
@@ -176,8 +180,8 @@ def zemin():
         boru((x, y0, 0.006), (x * (0.8 if y1 < 5 else 1), y1, 0.006), 0.012, derz)
     for yy in (2.2, 3.6, 5.2, 6.8):
         boru((-YOL_YARI, yy, 0.006), (YOL_YARI, yy, 0.006), 0.01, derz)
-    ic = mat_emis("chev_ic", lin(hex3("#ffb040")), 2.2)
-    kenar = mat_emis("chev_k", lin(hex3("#ffe08a")), 5.0)
+    ic = mat_emis("chev_ic", lin(hex3("#ff9a08" if KAPAK else "#ffb040")), 2.2)
+    kenar = mat_emis("chev_k", lin(hex3("#ffc21a" if KAPAK else "#ffe08a")), 5.0)
     hale = [mat_kat("hale%d" % i, lin(hex3("#ff8a1c")), g) for i, g in enumerate((0.05, 0.1))]
     for yy, hw, d, kal in ((1.75, 1.0, 0.72, 0.3), (3.05, 0.86, 0.72, 0.28), (4.2, 0.84, 0.68, 0.26), (5.5, 0.84, 0.62, 0.24), (6.5, 0.84, 0.56, 0.22), (7.3, 0.84, 0.5, 0.2), (8.05, 0.84, 0.3, 0.16)):
         kose = [(-hw, yy + d), (0, yy), (hw, yy + d), (hw, yy + d + kal), (0, yy + kal), (-hw, yy + d + kal)]
