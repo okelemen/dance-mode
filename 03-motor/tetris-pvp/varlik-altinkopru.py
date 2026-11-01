@@ -45,6 +45,16 @@ def sekil(ad, noktalar, mat, z=0.0):
     return o
 
 
+def mat_kat(ad, renk, guc):
+    """eklemeli (additive) isik: duz bant yerine sisli hale, altindaki rengi ortmez"""
+    m = bpy.data.materials.new(ad); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+    em = nt.nodes.new("ShaderNodeEmission"); em.inputs[0].default_value = (*renk, 1); em.inputs[1].default_value = guc
+    tr = nt.nodes.new("ShaderNodeBsdfTransparent"); ad_ = nt.nodes.new("ShaderNodeAddShader")
+    nt.links.new(em.outputs[0], ad_.inputs[0]); nt.links.new(tr.outputs[0], ad_.inputs[1])
+    o = nt.nodes.new("ShaderNodeOutputMaterial"); nt.links.new(ad_.outputs[0], o.inputs[0])
+    return m
+
+
 def parlat(sc, esik=1.0, boy=8):
     """REF-065 neonu hale ile yanar: duz cizgi ilk denemede cansiz kaldi -> Blender compositor fog glow"""
     sc.use_nodes = True; sc.render.use_compositing = True; nt = sc.node_tree; nt.nodes.clear()
@@ -77,7 +87,7 @@ def gok_katmani(ad, zemin_alt, zemin_ust, isin):
     n2.links.new(tc.outputs["Object"], sp.inputs[0])
     nz = n2.nodes.new("ShaderNodeTexNoise"); nz.inputs["Scale"].default_value = 0.006; nz.inputs["Detail"].default_value = 6
     n2.links.new(tc.outputs["Object"], nz.inputs["Vector"])
-    nm = n2.nodes.new("ShaderNodeMapRange"); nm.inputs["From Min"].default_value = 0.3; nm.inputs["From Max"].default_value = 0.7; nm.inputs["To Min"].default_value = 0.65; nm.inputs["To Max"].default_value = 1.5
+    nm = n2.nodes.new("ShaderNodeMapRange"); nm.inputs["From Min"].default_value = 0.3; nm.inputs["From Max"].default_value = 0.7; nm.inputs["To Min"].default_value = 0.35; nm.inputs["To Max"].default_value = 1.9
     n2.links.new(nz.outputs["Fac"], nm.inputs["Value"])
     mr = n2.nodes.new("ShaderNodeMapRange"); mr.inputs["From Min"].default_value = -540; mr.inputs["From Max"].default_value = 540
     n2.links.new(sp.outputs["Z"], mr.inputs["Value"]); n2.links.new(mr.outputs[0], rp.inputs[0])
@@ -91,12 +101,14 @@ def gok_katmani(ad, zemin_alt, zemin_ust, isin):
     p.data.materials.append(zem)
     kenar, ic1, ic2, kesik = [mat_emis("n%d" % i, lin(hex3(c)), g) for i, (c, g) in enumerate(zip(isin, (5.5, 5.0, 5.0, 4.0)))]
     beyaz = mat_emis("beyaz", lin(hex3("#fff4ff")), 7.0)
-    sis = mat_emis("sis", lin(hex3(isin[0])), 0.7)
+    sc.cycles.transparent_max_bounces = 64
+    sisler = [mat_kat("sis%d" % i, lin(hex3(isin[0])), g) for i, g in enumerate((0.05, 0.08, 0.12, 0.2))]
     rnd = random.Random(65)
     for cx_ in (-480, 480):                                # her oyuncunun arkasinda ic ice neon ucgen ve dev kollar
         for s in (-1, 1):
             gok_cizgi((cx_ + s * 480, 420), (cx_ + s * 40, 1110), 9.0, kenar)
-            gok_cizgi((cx_ + s * 475, 420), (cx_ + s * 36, 1110), 22.0, sis)
+            for r_, m_ in zip((48, 32, 21, 13), sisler):   # kolun cevresinde kademeli sis
+                gok_cizgi((cx_ + s * 480, 420), (cx_ + s * 40, 1110), r_, m_)
             gok_cizgi((cx_ + s * 330, 470), (cx_ + s * 20, 1040), 4.0, beyaz)
             for j in range(7):                             # kesik cizgili ikinci kol
                 q0 = 0.08 + j * 0.13; q1 = q0 + 0.07
@@ -106,10 +118,14 @@ def gok_katmani(ad, zemin_alt, zemin_ust, isin):
         ucgen(cx_, 405, 650, 105, 3.4, ic1)
         for j in range(6):                                 # ucgenin altinda su gibi parlayan yansima bantlari
             z = 340 + j * 14; g_ = 150 + j * 28
-            boru((cx_ - g_, 0, z), (cx_ + g_, 0, z), 7.0 - j * 0.6, sis)
+            boru((cx_ - g_, 0, z), (cx_ + g_, 0, z), 10.0 - j, sisler[j % 4])
+        for r_, m_ in zip((230, 170, 115, 70), sisler):    # ucgenin arkasinda buyuk yumusak isik
+            kure((cx_, 150, 500), r_, m_, sub=3)
         for j in range(9):                                 # ufukta yansiyan neon bantlar (referansta ucgenin parlak yansimasi)
             x = cx_ - 240 + j * 60
             boru((x, 0, 395 - j % 3 * 14), (x + 34, 0, 395 - j % 3 * 14), 2.6, beyaz if j % 2 else ic2)
+    for z, r_, m_ in ((405, 58, sisler[1]), (400, 38, sisler[2]), (395, 20, sisler[3])):   # ufuk boyunca sis bandi
+        boru((-980, 120, z), (980, 120, z), r_, m_)
     for _ in range(90):                                    # isik tozu
         x, z = rnd.uniform(-960, 960), rnd.uniform(420, 1080)
         kure((x, 0, z), rnd.choice((1.2, 1.8, 2.6, 4.0)), beyaz, sub=1)
@@ -141,9 +157,13 @@ def zemin():
         boru((-YOL_YARI, yy, 0.006), (YOL_YARI, yy, 0.006), 0.01, derz)
     ic = mat_emis("chev_ic", lin(hex3("#ffb040")), 2.2)
     kenar = mat_emis("chev_k", lin(hex3("#ffe08a")), 5.0)
+    hale = [mat_kat("hale%d" % i, lin(hex3("#ff8a1c")), g) for i, g in enumerate((0.07, 0.12, 0.2))]
     for yy, hw, d, kal in ((1.75, 1.0, 0.72, 0.3), (3.05, 0.86, 0.72, 0.28), (4.2, 0.84, 0.68, 0.26), (5.5, 0.84, 0.62, 0.24), (6.5, 0.84, 0.56, 0.22), (7.3, 0.84, 0.5, 0.2), (8.05, 0.84, 0.3, 0.16)):
         kose = [(-hw, yy + d), (0, yy), (hw, yy + d), (hw, yy + d + kal), (0, yy + kal), (-hw, yy + d + kal)]
         sekil("chev", kose, ic, z=0.01)
+        for g_, m_ in ((0.34, hale[0]), (0.2, hale[1]), (0.1, hale[2])):   # zemine dusen turuncu hale
+            for i in range(5):
+                boru((*kose[[0, 1, 2, 3, 4][i]], 0.004), (*kose[[1, 2, 3, 4, 5][i]], 0.004), g_, m_)
         for i in range(6):
             boru((*kose[i], 0.015), (*kose[(i + 1) % 6], 0.015), 0.018, kenar)
 
@@ -152,7 +172,7 @@ def korkuluk():
     altin = mat_emis("kork", lin(hex3("#d8842c")), 1.3)
     neon = mat_emis("kork_n", lin(hex3("#ffb04a")), 5.0)
     led = mat_emis("led", lin(hex3("#ffd070")), 7.0)
-    serit_m = mat_emis("kork_s", lin(hex3("#ff9a2a")), 3.0)
+    serit_m = mat_emis("kork_s", lin(hex3("#ff8a24")), 1.5)
     for s in (-1, 1):
         x = s * YOL_YARI
         y0, y1 = 3.2, KAP["y"]
@@ -181,6 +201,7 @@ def kapi():
 
 def serit_katmani(oyuncu):
     sc = bos_sahne(w=960, h=1080, saydam=True, ornek=min(ORNEK, 64))
+    sc.cycles.transparent_max_bounces = 32
     kam = kamera(sc)
     sc.world.node_tree.nodes["Background"].inputs[0].default_value = (*lin(hex3("#e8dcff")), 1)
     sc.world.node_tree.nodes["Background"].inputs[1].default_value = 0.3
