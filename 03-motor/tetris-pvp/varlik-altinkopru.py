@@ -18,6 +18,11 @@ KAP = {"y": 8.6, "w": 4.72, "h": 3.95, "kule": 0.42}
 KAM = {"z": 1.75, "egim": -2.1, "lens": 18.0, "sensor": 24.0}
 YOL_YARI = 2.36
 KORK_Z = 1.42
+KAPAK = YALNIZ == "kapak"
+POZLAMA = float(arg("--kapak-pozlama", "0"))
+ON_EK = "kapak-" if KAPAK else ""
+if KAPAK:   # REF-065 kapagi (1280x720): kapi 260x235 px, tepesi y~205, tabani y~440
+    KAM["lens"] = 15.7; KAM["egim"] = 1.9
 
 
 def kamera(sc):
@@ -127,8 +132,26 @@ def gok_katmani(ad, zemin_alt, zemin_ust, isin):
     for _ in range(90):                                    # isik tozu
         x, z = rnd.uniform(-960, 960), rnd.uniform(420, 1080)
         kure((x, 0, z), rnd.choice((1.2, 1.8, 2.6, 4.0)), beyaz, sub=1)
+    if KAPAK:
+        palmiye()
+        sc.view_settings.exposure = POZLAMA
     parlat(sc, esik=1.0, boy=9)
     yaz(sc, ad)
+
+
+def palmiye():
+    """REF-065 kapagi: kenarlarda koyu palmiye siluetleri (videoda yok)"""
+    koyu = mat_emis("palm", lin(hex3("#1c0610")), 1.0)
+    for x, boy in ((-880, 760), (-720, 660), (880, 760), (720, 660)):
+        gok_cizgi((x, 380), (x + 18, boy), 7.0, koyu)
+        for i in range(9):
+            t = i / 9 * 2 * math.pi; ux, uz = math.cos(t), abs(math.sin(t)) * 0.45
+            onc = (x + 18, boy)
+            for j in range(1, 7):                          # sarkan yaprak
+                q = j / 6
+                son = (x + 18 + ux * 130 * q, boy + uz * 110 * q - 95 * q * q)
+                gok_cizgi(onc, son, 7.5 - j, koyu)
+                onc = son
 
 
 def lerp_(a, b, q):
@@ -218,8 +241,10 @@ def serit_katmani(oyuncu):
         YERLESIM["ampul_" + oyuncu].append([round(q.x * 960, 1), round((1 - q.y) * 1080, 1)])
     YERLESIM["yol"] = {"y_kapi": Y, "genislik": YOL_YARI * 2, "kam": KAM, "serit_w": 960}
     log("aciklik", oyuncu, YERLESIM["aciklik_" + oyuncu])
+    if KAPAK:
+        sc.view_settings.exposure = POZLAMA
     parlat(sc, esik=1.0, boy=8)
-    yaz(sc, "serit-%s.png" % oyuncu)
+    yaz(sc, ON_EK + "serit-%s.png" % oyuncu)
 
 
 def panel(oyuncu):
@@ -233,6 +258,9 @@ def panel(oyuncu):
     yaz(sc, "panel-%s.png" % oyuncu)
 
 
+if KAPAK:
+    gok_katmani("kapak-gok.png", "#7a1430", "#2a0612", ("#ffc040", "#ff40a0", "#ffe060", "#ffd060"))
+    serit_katmani("p1")
 if YALNIZ in ("hepsi", "poz"):
     poz_maskeleri()
 if YALNIZ in ("hepsi", "sahne"):
