@@ -105,10 +105,7 @@
     }
    ],
    "temas": [
-    [
-     "el",
-     "ayak"
-    ]
+    0.2
    ]
   },
   "duo-warrior-two-fingertip-line": {
@@ -380,51 +377,51 @@
     0.05
    ]
   },
-  "duo-deep-goddess-goal-post": {
-   "ad": "Duo Deep Goddess Goal Post",
+  "duo-wide-horse-v-arms": {
+   "ad": "Duo Wide Horse V Arms",
    "figurler": [
     {
-     "ad": "Duo Deep Goddess Goal Post A",
+     "ad": "Duo Wide Horse V Arms A",
      "yon": "on",
      "govde": 180,
      "bas": 0,
      "sagKol": [
-      -90,
-      180
+      -148,
+      -148
      ],
      "solKol": [
-      90,
-      -180
+      148,
+      148
      ],
      "sagBacak": [
-      -62,
-      -4
+      -38,
+      4
      ],
      "solBacak": [
-      62,
-      4
+      38,
+      -4
      ]
     },
     {
-     "ad": "Duo Deep Goddess Goal Post B",
+     "ad": "Duo Wide Horse V Arms B",
      "yon": "on",
      "govde": -180,
      "bas": 0,
      "solKol": [
-      90,
-      -180
+      148,
+      148
      ],
      "sagKol": [
-      -90,
-      180
+      -148,
+      -148
      ],
      "solBacak": [
-      62,
-      4
+      38,
+      -4
      ],
      "sagBacak": [
-      -62,
-      -4
+      -38,
+      4
      ]
     }
    ],
@@ -594,51 +591,51 @@
     0.25
    ]
   },
-  "duo-knee-lift-overhead-link": {
-   "ad": "Duo Knee Lift Overhead Link",
+  "duo-inner-knee-open-link": {
+   "ad": "Duo Inner Knee Open Link",
    "figurler": [
     {
-     "ad": "Duo Knee Lift Overhead Link A",
+     "ad": "Duo Inner Knee Open Link A",
      "yon": "on",
      "govde": 180,
      "bas": 0,
      "sagKol": [
-      -170,
-      -170
+      -120,
+      -120
      ],
      "solKol": [
-      165,
-      120
+      100,
+      100
      ],
      "sagBacak": [
       -3,
       -1
      ],
      "solBacak": [
-      80,
-      8
+      60,
+      -40
      ]
     },
     {
-     "ad": "Duo Knee Lift Overhead Link B",
+     "ad": "Duo Inner Knee Open Link B",
      "yon": "on",
      "govde": -180,
      "bas": 0,
      "solKol": [
-      170,
-      170
+      120,
+      120
      ],
      "sagKol": [
-      -165,
-      -120
+      -100,
+      -100
      ],
      "solBacak": [
       3,
       1
      ],
      "sagBacak": [
-      -80,
-      -8
+      -60,
+      40
      ]
     }
    ],
@@ -1095,7 +1092,7 @@
      "govde": 175,
      "bas": 0,
      "solKol": [
-      165,
+      130,
       100
      ],
      "sagKol": [
@@ -1121,7 +1118,7 @@
       30
      ],
      "sagKol": [
-      -165,
+      -130,
       -100
      ],
      "solBacak": [
@@ -1162,8 +1159,8 @@
       0
      ],
      "sagBacak": [
-      -40,
-      -100
+      0,
+      -90
      ]
     },
     {
@@ -1180,8 +1177,8 @@
       -60
      ],
      "solBacak": [
-      40,
-      100
+      0,
+      90
      ],
      "sagBacak": [
       -85,

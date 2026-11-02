@@ -28,9 +28,9 @@ def kamera(sc):
 def mat_buz():
     m = bpy.data.materials.new("buz"); m.use_nodes = True
     b = m.node_tree.nodes["Principled BSDF"]
-    b.inputs["Base Color"].default_value = (*lin(hex3("#7fa6d8")), 1); b.inputs["Roughness"].default_value = 0.22
+    b.inputs["Base Color"].default_value = (*lin(hex3("#4a6ea8")), 1); b.inputs["Roughness"].default_value = 0.22
     b.inputs["Metallic"].default_value = 0.15
-    b.inputs["Emission Color"].default_value = (*lin(hex3("#6f9ad6")), 1); b.inputs["Emission Strength"].default_value = 0.42
+    b.inputs["Emission Color"].default_value = (*lin(hex3("#4a78b8")), 1); b.inputs["Emission Strength"].default_value = 0.22   # sahne 1: guverte chevronlari yutuyordu
     return m
 
 
@@ -50,8 +50,8 @@ def tunel():
         yuvarlak_kutu("t_yan", (s * (T_W + 0.5), (y0 + y1) / 2, T_H / 2), (1.0, y1 - y0, T_H + 8), koyu, egim=0.0, seg=1)
     yuvarlak_kutu("t_tavan", (0, (y0 + y1) / 2, T_H + 0.5), (2 * T_W + 2, y1 - y0, 1.0), koyu, egim=0.0, seg=1)
     yuvarlak_kutu("t_taban", (0, (y0 + y1) / 2, T_Z0 - 0.5), (2 * T_W + 2, y1 - y0, 1.0), koyu, egim=0.0, seg=1)
-    yuvarlak_kutu("t_son", (0, y1, T_H / 2), (2 * T_W + 2, 1.0, T_H + 8), mat_emis("t_son", lin(hex3("#2fc4d8")), 3.2), egim=0.0, seg=1)
-    izg = mat_emis("izgara", lin(hex3(IZGARA)), 3.0)
+    yuvarlak_kutu("t_son", (0, y1, T_H / 2), (2 * T_W + 2, 1.0, T_H + 8), mat_emis("t_son", lin(hex3("#1f9fb8")), 1.3), egim=0.0, seg=1)
+    izg = mat_emis("izgara", lin(hex3(IZGARA)), 1.1)   # sahne 1: izgara REF-066 gore fazla parlak ve kalindi
     y = 6.0
     while y < T_Y1:                                        # enine halkalar
         for a, b in (((-T_W, y, T_Z0), (-T_W, y, T_H)), ((-T_W, y, T_H), (T_W, y, T_H)), ((T_W, y, T_H), (T_W, y, T_Z0))):
@@ -75,7 +75,7 @@ def gok_katmani():
     sc.use_nodes = True
     nt2 = sc.node_tree; nt2.nodes.clear()
     rl = nt2.nodes.new("CompositorNodeRLayers")
-    gl = nt2.nodes.new("CompositorNodeGlare"); gl.glare_type = "FOG_GLOW"; gl.threshold = 0.8; gl.size = 8; gl.mix = 0.0
+    gl = nt2.nodes.new("CompositorNodeGlare"); gl.glare_type = "FOG_GLOW"; gl.threshold = 0.8; gl.size = 8; gl.mix = 0.25
     ou = nt2.nodes.new("CompositorNodeComposite")
     nt2.links.new(rl.outputs[0], gl.inputs[0]); nt2.links.new(gl.outputs[0], ou.inputs[0])
     yaz(sc, ON_EK + "gok.png")
@@ -84,7 +84,7 @@ def gok_katmani():
 # ------------------------------------------------------------------ SERIT katmani
 def kopru_yol():
     yuvarlak_kutu("yol", (0, (0.3 + Y_SON) / 2, -0.2), (YOL_W + 1.4, Y_SON - 0.3, 0.4), mat_buz(), egim=0.03, seg=2)
-    bey = mat_emis("chev", lin(hex3("#e8fbff")), 2.0)
+    bey = mat_emis("chev", lin(hex3("#d8f6ff")), 1.25)
     for yy, hw, kal in ((0.9, 2.5, 1.05), (2.45, 2.22, 0.85), (3.85, 1.98, 0.71), (5.05, 1.78, 0.6), (6.1, 1.6, 0.48), (7.05, 1.45, 0.4), (7.85, 1.33, 0.34)):
         d = hw * 0.28                                      # REF-066: genis, kalin beyaz V
         sekil("chev", [(-hw, yy + d), (0, yy), (hw, yy + d), (hw, yy + d + kal), (0, yy + kal), (-hw, yy + d + kal)], bey, konum=(0, 0, 0.03))
