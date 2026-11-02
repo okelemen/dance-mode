@@ -1,0 +1,1362 @@
+{
+ "_not": "15. video (REF-066) CO-OP ikili pozlar. Figurler soldan saga; temas [sol eklem, sag eklem], 'yan' ya da bosluk (m).",
+ "gruplar": {
+  "duo-heart-arch-hands-on-hips": {
+   "ad": "Duo Heart Arch Hands On Hips",
+   "figurler": [
+    {
+     "ad": "Duo Heart Arch Hands On Hips A",
+     "yon": "on",
+     "govde": 165,
+     "bas": 0,
+     "sagKol": [
+      -45,
+      20
+     ],
+     "solKol": [
+      170,
+      110
+     ],
+     "sagBacak": [
+      -45,
+      -45
+     ],
+     "solBacak": [
+      45,
+      45
+     ]
+    },
+    {
+     "ad": "Duo Heart Arch Hands On Hips B",
+     "yon": "on",
+     "govde": -165,
+     "bas": 0,
+     "solKol": [
+      45,
+      -20
+     ],
+     "sagKol": [
+      -170,
+      -110
+     ],
+     "solBacak": [
+      45,
+      45
+     ],
+     "sagBacak": [
+      -45,
+      -45
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-arc-bend-and-side-kick": {
+   "ad": "Duo Arc Bend And Side Kick",
+   "figurler": [
+    {
+     "ad": "Duo Arc Bend And Side Kick A",
+     "yon": "on",
+     "govde": 160,
+     "bas": 0,
+     "sagKol": [
+      -35,
+      -35
+     ],
+     "solKol": [
+      165,
+      120
+     ],
+     "sagBacak": [
+      -22,
+      -22
+     ],
+     "solBacak": [
+      22,
+      22
+     ]
+    },
+    {
+     "ad": "Duo Arc Bend And Side Kick B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solKol": [
+      174,
+      176
+     ],
+     "sagBacak": [
+      -70,
+      -70
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "ayak"
+    ]
+   ]
+  },
+  "duo-warrior-two-fingertip-line": {
+   "ad": "Duo Warrior Two Fingertip Line",
+   "figurler": [
+    {
+     "ad": "Duo Warrior Two Fingertip Line A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solKol": [
+      90,
+      90
+     ],
+     "sagBacak": [
+      -45,
+      -45
+     ],
+     "solBacak": [
+      62,
+      2
+     ]
+    },
+    {
+     "ad": "Duo Warrior Two Fingertip Line B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      90,
+      90
+     ],
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solBacak": [
+      45,
+      45
+     ],
+     "sagBacak": [
+      -62,
+      -2
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-reverse-warrior-low-link": {
+   "ad": "Duo Reverse Warrior Low Link",
+   "figurler": [
+    {
+     "ad": "Duo Reverse Warrior Low Link A",
+     "yon": "on",
+     "govde": 190,
+     "bas": 0,
+     "sagKol": [
+      -122,
+      -122
+     ],
+     "solKol": [
+      35,
+      35
+     ],
+     "sagBacak": [
+      -45,
+      -45
+     ],
+     "solBacak": [
+      62,
+      2
+     ]
+    },
+    {
+     "ad": "Duo Reverse Warrior Low Link B",
+     "yon": "on",
+     "govde": -190,
+     "bas": 0,
+     "solKol": [
+      122,
+      122
+     ],
+     "sagKol": [
+      -35,
+      -35
+     ],
+     "solBacak": [
+      45,
+      45
+     ],
+     "sagBacak": [
+      -62,
+      -2
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-bow-forward-hands-clasp": {
+   "ad": "Duo Bow Forward Hands Clasp",
+   "figurler": [
+    {
+     "ad": "Duo Bow Forward Hands Clasp A",
+     "yon": "sag",
+     "govde": 120,
+     "bas": 0,
+     "solKol": [
+      60,
+      60
+     ],
+     "sagKol": [
+      58,
+      58
+     ],
+     "solBacak": [
+      15,
+      15
+     ],
+     "sagBacak": [
+      -15,
+      -15
+     ]
+    },
+    {
+     "ad": "Duo Bow Forward Hands Clasp B",
+     "yon": "sol",
+     "govde": -120,
+     "bas": 0,
+     "solKol": [
+      -58,
+      -58
+     ],
+     "sagKol": [
+      -60,
+      -60
+     ],
+     "solBacak": [
+      15,
+      15
+     ],
+     "sagBacak": [
+      -15,
+      -15
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-pike-v-and-knee-drive": {
+   "ad": "Duo Pike V And Knee Drive",
+   "figurler": [
+    {
+     "ad": "Duo Pike V And Knee Drive A",
+     "yon": "sag",
+     "govde": 45,
+     "bas": 0,
+     "solKol": [
+      40,
+      40
+     ],
+     "sagKol": [
+      38,
+      38
+     ],
+     "solBacak": [
+      -30,
+      -30
+     ],
+     "sagBacak": [
+      -28,
+      -28
+     ]
+    },
+    {
+     "ad": "Duo Pike V And Knee Drive B",
+     "yon": "sol",
+     "govde": -178,
+     "bas": 0,
+     "solKol": [
+      40,
+      -100
+     ],
+     "sagKol": [
+      -100,
+      -30
+     ],
+     "solBacak": [
+      5,
+      5
+     ],
+     "sagBacak": [
+      -85,
+      5
+     ]
+    }
+   ],
+   "temas": [
+    0.3
+   ]
+  },
+  "duo-guard-step-punch-link": {
+   "ad": "Duo Guard Step Punch Link",
+   "figurler": [
+    {
+     "ad": "Duo Guard Step Punch Link A",
+     "yon": "sag",
+     "govde": 178,
+     "bas": 0,
+     "solKol": [
+      90,
+      90
+     ],
+     "sagKol": [
+      -40,
+      100
+     ],
+     "solBacak": [
+      30,
+      -5
+     ],
+     "sagBacak": [
+      -25,
+      -25
+     ]
+    },
+    {
+     "ad": "Duo Guard Step Punch Link B",
+     "yon": "sol",
+     "govde": -172,
+     "bas": 0,
+     "solKol": [
+      40,
+      -100
+     ],
+     "sagKol": [
+      -120,
+      -40
+     ],
+     "solBacak": [
+      5,
+      5
+     ],
+     "sagBacak": [
+      -80,
+      10
+     ]
+    }
+   ],
+   "temas": [
+    0.05
+   ]
+  },
+  "duo-deep-goddess-goal-post": {
+   "ad": "Duo Deep Goddess Goal Post",
+   "figurler": [
+    {
+     "ad": "Duo Deep Goddess Goal Post A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -90,
+      180
+     ],
+     "solKol": [
+      90,
+      -180
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ],
+     "solBacak": [
+      62,
+      4
+     ]
+    },
+    {
+     "ad": "Duo Deep Goddess Goal Post B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      90,
+      -180
+     ],
+     "sagKol": [
+      -90,
+      180
+     ],
+     "solBacak": [
+      62,
+      4
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ]
+    }
+   ],
+   "temas": [
+    0.3
+   ]
+  },
+  "duo-wide-side-stretch-low-link": {
+   "ad": "Duo Wide Side Stretch Low Link",
+   "figurler": [
+    {
+     "ad": "Duo Wide Side Stretch Low Link A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solKol": [
+      45,
+      45
+     ],
+     "sagBacak": [
+      -22,
+      -22
+     ],
+     "solBacak": [
+      62,
+      2
+     ]
+    },
+    {
+     "ad": "Duo Wide Side Stretch Low Link B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      174,
+      176
+     ],
+     "sagKol": [
+      -45,
+      -45
+     ],
+     "solBacak": [
+      22,
+      22
+     ],
+     "sagBacak": [
+      -62,
+      -2
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-side-angle-kick-hand-link": {
+   "ad": "Duo Side Angle Kick Hand Link",
+   "figurler": [
+    {
+     "ad": "Duo Side Angle Kick Hand Link A",
+     "yon": "on",
+     "govde": 195,
+     "bas": 0,
+     "sagKol": [
+      -122,
+      -122
+     ],
+     "solKol": [
+      80,
+      80
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      60,
+      60
+     ]
+    },
+    {
+     "ad": "Duo Side Angle Kick Hand Link B",
+     "yon": "on",
+     "govde": -195,
+     "bas": 0,
+     "solKol": [
+      122,
+      122
+     ],
+     "sagKol": [
+      -80,
+      -80
+     ],
+     "solBacak": [
+      3,
+      1
+     ],
+     "sagBacak": [
+      -60,
+      -60
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-crescent-tiptoe-arms-high": {
+   "ad": "Duo Crescent Tiptoe Arms High",
+   "figurler": [
+    {
+     "ad": "Duo Crescent Tiptoe Arms High A",
+     "yon": "on",
+     "govde": 170,
+     "bas": 0,
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solKol": [
+      174,
+      176
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      25,
+      25
+     ]
+    },
+    {
+     "ad": "Duo Crescent Tiptoe Arms High B",
+     "yon": "on",
+     "govde": -170,
+     "bas": 0,
+     "solKol": [
+      174,
+      176
+     ],
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solBacak": [
+      3,
+      1
+     ],
+     "sagBacak": [
+      -25,
+      -25
+     ]
+    }
+   ],
+   "temas": [
+    0.25
+   ]
+  },
+  "duo-knee-lift-overhead-link": {
+   "ad": "Duo Knee Lift Overhead Link",
+   "figurler": [
+    {
+     "ad": "Duo Knee Lift Overhead Link A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -170,
+      -170
+     ],
+     "solKol": [
+      165,
+      120
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      80,
+      8
+     ]
+    },
+    {
+     "ad": "Duo Knee Lift Overhead Link B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      170,
+      170
+     ],
+     "sagKol": [
+      -165,
+      -120
+     ],
+     "solBacak": [
+      3,
+      1
+     ],
+     "sagBacak": [
+      -80,
+      -8
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-stork-side-reach": {
+   "ad": "Duo Stork Side Reach",
+   "figurler": [
+    {
+     "ad": "Duo Stork Side Reach A",
+     "yon": "sag",
+     "govde": 160,
+     "bas": 0,
+     "solKol": [
+      70,
+      70
+     ],
+     "sagKol": [
+      -60,
+      -60
+     ],
+     "solBacak": [
+      90,
+      0
+     ],
+     "sagBacak": [
+      -5,
+      -5
+     ]
+    },
+    {
+     "ad": "Duo Stork Side Reach B",
+     "yon": "sol",
+     "govde": -160,
+     "bas": 0,
+     "solKol": [
+      60,
+      60
+     ],
+     "sagKol": [
+      -70,
+      -70
+     ],
+     "solBacak": [
+      5,
+      5
+     ],
+     "sagBacak": [
+      -90,
+      0
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-back-kick-front-reach": {
+   "ad": "Duo Back Kick Front Reach",
+   "figurler": [
+    {
+     "ad": "Duo Back Kick Front Reach A",
+     "yon": "sag",
+     "govde": 110,
+     "bas": 0,
+     "solKol": [
+      100,
+      100
+     ],
+     "sagKol": [
+      -20,
+      -20
+     ],
+     "solBacak": [
+      0,
+      0
+     ],
+     "sagBacak": [
+      -70,
+      -70
+     ]
+    },
+    {
+     "ad": "Duo Back Kick Front Reach B",
+     "yon": "sol",
+     "govde": -110,
+     "bas": 0,
+     "solKol": [
+      20,
+      20
+     ],
+     "sagKol": [
+      -100,
+      -100
+     ],
+     "solBacak": [
+      70,
+      70
+     ],
+     "sagBacak": [
+      0,
+      0
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-hip-hinge-foot-back-link": {
+   "ad": "Duo Hip Hinge Foot Back Link",
+   "figurler": [
+    {
+     "ad": "Duo Hip Hinge Foot Back Link A",
+     "yon": "sag",
+     "govde": 125,
+     "bas": 0,
+     "solKol": [
+      80,
+      80
+     ],
+     "sagKol": [
+      -30,
+      -30
+     ],
+     "solBacak": [
+      5,
+      5
+     ],
+     "sagBacak": [
+      -45,
+      -45
+     ]
+    },
+    {
+     "ad": "Duo Hip Hinge Foot Back Link B",
+     "yon": "sol",
+     "govde": -125,
+     "bas": 0,
+     "solKol": [
+      30,
+      30
+     ],
+     "sagKol": [
+      -80,
+      -80
+     ],
+     "solBacak": [
+      45,
+      45
+     ],
+     "sagBacak": [
+      -5,
+      -5
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-heel-lift-side-arch": {
+   "ad": "Duo Heel Lift Side Arch",
+   "figurler": [
+    {
+     "ad": "Duo Heel Lift Side Arch A",
+     "yon": "on",
+     "govde": 170,
+     "bas": 0,
+     "sagKol": [
+      -148,
+      -148
+     ],
+     "solKol": [
+      170,
+      100
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      45,
+      45
+     ]
+    },
+    {
+     "ad": "Duo Heel Lift Side Arch B",
+     "yon": "on",
+     "govde": -170,
+     "bas": 0,
+     "solKol": [
+      148,
+      148
+     ],
+     "sagKol": [
+      -170,
+      -100
+     ],
+     "solBacak": [
+      3,
+      1
+     ],
+     "sagBacak": [
+      -45,
+      -45
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-outer-leg-swing-t-tilt": {
+   "ad": "Duo Outer Leg Swing T Tilt",
+   "figurler": [
+    {
+     "ad": "Duo Outer Leg Swing T Tilt A",
+     "yon": "on",
+     "govde": 165,
+     "bas": 0,
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solKol": [
+      90,
+      90
+     ],
+     "sagBacak": [
+      -55,
+      -55
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Duo Outer Leg Swing T Tilt B",
+     "yon": "on",
+     "govde": -165,
+     "bas": 0,
+     "solKol": [
+      90,
+      90
+     ],
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solBacak": [
+      55,
+      55
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    0.3
+   ]
+  },
+  "duo-wide-lunge-hand-down-arm-up": {
+   "ad": "Duo Wide Lunge Hand Down Arm Up",
+   "figurler": [
+    {
+     "ad": "Duo Wide Lunge Hand Down Arm Up A",
+     "yon": "on",
+     "govde": 150,
+     "bas": 0,
+     "sagKol": [
+      -172,
+      -172
+     ],
+     "solKol": [
+      10,
+      10
+     ],
+     "sagBacak": [
+      -50,
+      -50
+     ],
+     "solBacak": [
+      50,
+      50
+     ]
+    },
+    {
+     "ad": "Duo Wide Lunge Hand Down Arm Up B",
+     "yon": "on",
+     "govde": -150,
+     "bas": 0,
+     "solKol": [
+      172,
+      172
+     ],
+     "sagKol": [
+      -10,
+      -10
+     ],
+     "solBacak": [
+      50,
+      50
+     ],
+     "sagBacak": [
+      -50,
+      -50
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "ayak",
+     "ayak"
+    ]
+   ]
+  },
+  "duo-seated-lean-back-feet-meet": {
+   "ad": "Duo Seated Lean Back Feet Meet",
+   "figurler": [
+    {
+     "ad": "Duo Seated Lean Back Feet Meet A",
+     "yon": "sag",
+     "govde": 215,
+     "bas": 0,
+     "solKol": [
+      -30,
+      -30
+     ],
+     "sagKol": [
+      -28,
+      -28
+     ],
+     "solBacak": [
+      85,
+      85
+     ],
+     "sagBacak": [
+      83,
+      83
+     ]
+    },
+    {
+     "ad": "Duo Seated Lean Back Feet Meet B",
+     "yon": "sol",
+     "govde": -215,
+     "bas": 0,
+     "solKol": [
+      28,
+      28
+     ],
+     "sagKol": [
+      30,
+      30
+     ],
+     "solBacak": [
+      -83,
+      -83
+     ],
+     "sagBacak": [
+      -85,
+      -85
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "ayak",
+     "ayak"
+    ]
+   ]
+  },
+  "duo-low-plank-reach-hand-link": {
+   "ad": "Duo Low Plank Reach Hand Link",
+   "figurler": [
+    {
+     "ad": "Duo Low Plank Reach Hand Link A",
+     "yon": "sag",
+     "govde": 80,
+     "bas": 0,
+     "solKol": [
+      85,
+      85
+     ],
+     "sagKol": [
+      0,
+      0
+     ],
+     "solBacak": [
+      -80,
+      -80
+     ],
+     "sagBacak": [
+      -78,
+      -78
+     ]
+    },
+    {
+     "ad": "Duo Low Plank Reach Hand Link B",
+     "yon": "sol",
+     "govde": -80,
+     "bas": 0,
+     "solKol": [
+      0,
+      0
+     ],
+     "sagKol": [
+      -85,
+      -85
+     ],
+     "solBacak": [
+      78,
+      78
+     ],
+     "sagBacak": [
+      80,
+      80
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-kneeling-side-stretch-link": {
+   "ad": "Duo Kneeling Side Stretch Link",
+   "figurler": [
+    {
+     "ad": "Duo Kneeling Side Stretch Link A",
+     "yon": "sag",
+     "govde": 175,
+     "bas": 0,
+     "solKol": [
+      165,
+      100
+     ],
+     "sagKol": [
+      -30,
+      -30
+     ],
+     "solBacak": [
+      0,
+      -90
+     ],
+     "sagBacak": [
+      0,
+      -90
+     ]
+    },
+    {
+     "ad": "Duo Kneeling Side Stretch Link B",
+     "yon": "sol",
+     "govde": -175,
+     "bas": 0,
+     "solKol": [
+      30,
+      30
+     ],
+     "sagKol": [
+      -165,
+      -100
+     ],
+     "solBacak": [
+      0,
+      90
+     ],
+     "sagBacak": [
+      0,
+      90
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-half-kneel-forward-reach": {
+   "ad": "Duo Half Kneel Forward Reach",
+   "figurler": [
+    {
+     "ad": "Duo Half Kneel Forward Reach A",
+     "yon": "sag",
+     "govde": 180,
+     "bas": 0,
+     "solKol": [
+      60,
+      60
+     ],
+     "sagKol": [
+      -60,
+      -60
+     ],
+     "solBacak": [
+      85,
+      0
+     ],
+     "sagBacak": [
+      -40,
+      -100
+     ]
+    },
+    {
+     "ad": "Duo Half Kneel Forward Reach B",
+     "yon": "sol",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      60,
+      60
+     ],
+     "sagKol": [
+      -60,
+      -60
+     ],
+     "solBacak": [
+      40,
+      100
+     ],
+     "sagBacak": [
+      -85,
+      0
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-deep-side-lunge-arch-link": {
+   "ad": "Duo Deep Side Lunge Arch Link",
+   "figurler": [
+    {
+     "ad": "Duo Deep Side Lunge Arch Link A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -170,
+      -170
+     ],
+     "solKol": [
+      150,
+      90
+     ],
+     "sagBacak": [
+      -75,
+      -75
+     ],
+     "solBacak": [
+      72,
+      -5
+     ]
+    },
+    {
+     "ad": "Duo Deep Side Lunge Arch Link B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      170,
+      170
+     ],
+     "sagKol": [
+      -150,
+      -90
+     ],
+     "solBacak": [
+      75,
+      75
+     ],
+     "sagBacak": [
+      -72,
+      5
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-long-side-lunge-low-link": {
+   "ad": "Duo Long Side Lunge Low Link",
+   "figurler": [
+    {
+     "ad": "Duo Long Side Lunge Low Link A",
+     "yon": "on",
+     "govde": 150,
+     "bas": 0,
+     "sagKol": [
+      -60,
+      -60
+     ],
+     "solKol": [
+      75,
+      75
+     ],
+     "sagBacak": [
+      -75,
+      -75
+     ],
+     "solBacak": [
+      55,
+      0
+     ]
+    },
+    {
+     "ad": "Duo Long Side Lunge Low Link B",
+     "yon": "on",
+     "govde": -150,
+     "bas": 0,
+     "solKol": [
+      60,
+      60
+     ],
+     "sagKol": [
+      -75,
+      -75
+     ],
+     "solBacak": [
+      75,
+      75
+     ],
+     "sagBacak": [
+      -55,
+      0
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ]
+  },
+  "duo-low-squat-w-arms": {
+   "ad": "Duo Low Squat W Arms",
+   "figurler": [
+    {
+     "ad": "Duo Low Squat W Arms A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -55,
+      -160
+     ],
+     "solKol": [
+      55,
+      160
+     ],
+     "sagBacak": [
+      -80,
+      10
+     ],
+     "solBacak": [
+      80,
+      -10
+     ]
+    },
+    {
+     "ad": "Duo Low Squat W Arms B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      55,
+      160
+     ],
+     "sagKol": [
+      -55,
+      -160
+     ],
+     "solBacak": [
+      80,
+      -10
+     ],
+     "sagBacak": [
+      -80,
+      10
+     ]
+    }
+   ],
+   "temas": [
+    0.2
+   ]
+  }
+ }
+}
