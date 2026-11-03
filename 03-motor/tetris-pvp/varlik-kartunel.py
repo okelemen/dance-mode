@@ -14,6 +14,8 @@ T_Y1 = 120.0
 IZGARA = "#2fd8e8"
 KAPAK = YALNIZ == "kapak"
 POZLAMA = float(arg("--kapak-pozlama", "0"))
+if KAPAK:
+    KAM["lens"] = 14.0       # REF-066 kapagi: kapi genisligin ~%27'si (videoda %36), kopru ve izgara daha genis gorunur
 
 
 def kamera(sc):
