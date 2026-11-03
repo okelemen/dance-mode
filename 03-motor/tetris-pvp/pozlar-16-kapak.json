@@ -1,0 +1,9 @@
+{
+ "_not": "HUMAN TETRIS 16 (REF-067, 1v1) KAPAK pozlari - video 16'nin 42 pozluk listesine girer (poz listesi kesit adiminda). Aci dili pozlar-14.json ile ayni: 0 asagi, 90 ekran-sag, 180 yukari, -90 ekran-sol; sol*/sag* = karakterin solu/sagi (kameraya donukken sol = ekran SAGI). Kapak kurali: tam kameraya donuk, estetik uzun pozlar.",
+ "pozlar": {
+  "petal-sky-point": {"ad": "Petal Sky Point", "yon": "on", "govde": 174, "bas": 0, "sagKol": [-138, -146], "solKol": [148, -95], "sagBacak": [-8, -8], "solBacak": [24, 24]},
+  "petal-hip-side-kick": {"ad": "Petal Hip Side Kick", "yon": "on", "govde": 182, "bas": 0, "sagKol": [-35, 40], "solKol": [148, 152], "sagBacak": [-4, -4], "solBacak": [62, 18]},
+  "lantern-lunge-v-reach": {"ad": "Lantern Lunge V Reach", "yon": "on", "govde": 172, "bas": 0, "sagKol": [-122, -122], "solKol": [124, 124], "sagBacak": [-42, -6], "solBacak": [36, 36]},
+  "blossom-wide-star": {"ad": "Blossom Wide Star", "yon": "on", "govde": 180, "bas": 0, "sagKol": [-146, -146], "solKol": [146, 146], "sagBacak": [-27, -27], "solBacak": [27, 27]}
+ }
+}
