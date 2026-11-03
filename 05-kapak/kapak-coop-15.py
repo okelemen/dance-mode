@@ -115,7 +115,7 @@ def egik(metin, cx, cy, boy, renkler, aci):
     """REF-066 yan etiketi: hafif yukari egik, beyaz yuz, pembe-turuncu golge"""
     global im
     ana = im; im = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    yazi(metin, cx, cy, boy, renkler, ara=1.0, isilti=0.7, derin_oran=0.06)
+    yazi(metin, cx, cy, boy, renkler, ara=1.07, isilti=0.7, derin_oran=0.05)   # kapak 2: "Players" harfleri yapisik okundu
     e = im.rotate(aci, center=(cx, cy), resample=Image.BICUBIC); im = ana; im.alpha_composite(e)
 
 
