@@ -17,7 +17,8 @@ YASAK = ("Standing Split", "Bridge", "Headstand", "Handstand", " Split", "Dancer
 # kontak 1 (30 Eki 2026): siluette havada / dusuyor / bas asagi okunanlar
 # kontak 1 (1 Kas 2026): havada / siciyor gibi ya da eli yere degmeden asili okunanlar
 # kontak 1 (3 Kas 2026): siluette havada / ziplar / duser gibi okunanlar
-HARIC = set()   # kontak 1 sonrasi doldurulur
+# aday kontagi (3 Kas 2026, el-kontak.jpg): siluette havada / ziplar / duser / bos oturur gibi okunanlar
+HARIC = {"nebula-half-moon-stand-left", "nebula-low-squat-prayer", "nebula-warrior-one-sky", "nebula-lunge-arms-back-wings", "nebula-pyramid-reach-down", "nebula-chair-arms-forward", "nebula-cobra-low", "nebula-pigeon-rise", "nebula-camel-hands-back", "nebula-table-top-leg-back", "nebula-bird-dog-reach", "nebula-kneeling-side-arch", "nebula-kneel-gate-reach", "nebula-kneel-arms-v-tall", "nebula-wide-seat-arms-up", "nebula-frog-hands-down"}
 # grup 3 havuzundan yalniz el + ayak / diz yere acikca basanlar (yer-adaylari.jpg gozle secimi)
 IZIN3 = set()
 ap.add_argument("--havuz", action="store_true", help="elle tasarlananlar yetmezse rastgele havuzu da kullan")
@@ -71,7 +72,7 @@ for sira, deg, ad, p, tur, yol, m, en in sorted(olcu, key=lambda x: (x[0], x[1])
     secilen[tur].append((ad, p, yol)); tum.append((ad, m))
     rapor.append(f"T{tur} {ad:50s} eski {deg:.2f} ({en}) ic {ic:.2f} {'KAPAK' if sira < 0 else 'EL' if sira == 0 else 'HAVUZ'}")
 print({t: len(v) for t, v in secilen.items()}, "eksik maske:", len(eksik))
-assert all(len(secilen[t]) == DUVAR_SAYI[t] for t in secilen), "yeterli farkli poz yok - aday havuzunu buyut"
+print(chr(10).join(rapor)); assert all(len(secilen[t]) == DUVAR_SAYI[t] for t in secilen), "yeterli farkli poz yok - aday havuzunu buyut"
 
 pozlar, duvarlar = {}, []
 hedef = os.path.join(BURA, "varlik-17", "poz"); os.makedirs(hedef, exist_ok=True)

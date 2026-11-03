@@ -17,13 +17,13 @@ POZLAMA = float(arg("--kapak-pozlama", "0"))
 # video (sahne 1 dersi, REF-068 karesiyle yan yana): kapi genisligin ~%32'si (x %34-66, y %34-65), ufuk ~%60, kapi tabani ufkun hemen altinda.
 # Ufuk kamerayi egerek degil lens kaydirmayla asagi alinir (shift_y): izgaranin boyuna cizgileri referanstaki gibi ufukta tek noktada birlesir.
 KAP = {"y": 9.5, "w": 7.2, "h": 3.9, "kule": 0.42, "kiris": 0.42, "x": 0.0}
-KAM = {"x": 0.0, "z": 0.65, "egim": 0.0, "lens": 18.0, "sensor": 24.0, "kaydir": 0.056}
+KAM = {"x": 0.0, "z": 0.9, "egim": 0.0, "lens": 18.0, "sensor": 24.0, "kaydir": 0.056}   # sahne 2: z 0,65 yakin izgarayi kalinlastiriyordu
 if KAPAK:
     # REF-068 kapagi: kapi x %40-78, ust %33, alt %68 -> yakin ve saga kacik, ufuk ~%62
     KAP.update({"y": 7.5, "x": 2.4})
-    KAM.update({"z": 0.55, "kaydir": 0.07})
+    KAM.update({"z": 0.8, "kaydir": 0.07})
 IZ_YAKIN = "#22c8c0"    # ufka yakin enine cizgiler camgobegi
-IZ_UZUN = "#4b3cf0"     # boyuna cizgiler mavi-mor
+IZ_UZUN = "#3a2ee8"     # boyuna cizgiler mavi-mor
 ZEMIN = "#05061c"
 
 
@@ -76,11 +76,11 @@ def mix_renk(nt, fak, a, b, tip="MIX"):
 # ------------------------------------------------------------------ GOK katmani = bulutsu + yildiz + izgara zemin
 def bulutsu_gok():
     """REF-068 gogu: lacivert taban, iki katman gurultu -> mor/mavi bulutsu kollari, camgobegi ve pembe parlamalar, yildiz tozu"""
-    bpy.ops.mesh.primitive_plane_add(size=1, location=(0, 300, 60), rotation=(math.pi / 2, 0, 0))
-    p = bpy.context.active_object; p.scale = (1100, 260, 1)
+    bpy.ops.mesh.primitive_plane_add(size=1, location=(0, 300, 140), rotation=(math.pi / 2, 0, 0))
+    p = bpy.context.active_object; p.scale = (1100, 340, 1)   # sahne 2: ustte siyah bant kaliyordu (lens kaydirma)
     m = bpy.data.materials.new("bulutsu"); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
     tc = nt.nodes.new("ShaderNodeTexCoord")
-    map_ = nt.nodes.new("ShaderNodeMapping"); map_.inputs["Scale"].default_value = (4.2, 1.0, 1.0)   # duzlem 1100x260: gurultuyu yuvarlak tut
+    map_ = nt.nodes.new("ShaderNodeMapping"); map_.inputs["Scale"].default_value = (3.2, 1.0, 1.0)   # duzlem 1100x260: gurultuyu yuvarlak tut
     nt.links.new(tc.outputs["Generated"], map_.inputs[0])
     n1 = nt.nodes.new("ShaderNodeTexNoise"); n1.inputs["Scale"].default_value = 2.2; n1.inputs["Detail"].default_value = 9
     n1.inputs["Roughness"].default_value = 0.62; n1.inputs["Distortion"].default_value = 0.6
@@ -89,19 +89,19 @@ def bulutsu_gok():
     n2.inputs["Roughness"].default_value = 0.55
     nt.links.new(map_.outputs[0], n2.inputs["Vector"])
     # sahne 1: gok bastan basa bulut gibiydi; REF-068'de taban koyu lacivert, bulutsu yer yer, yildiz cok
-    renk = ramp(nt, n1.outputs["Fac"], [(0.38, "#03041a"), (0.50, "#0e1450"), (0.58, "#2a2a92"), (0.66, "#6a34c8"),
-                                         (0.74, "#b050e0"), (0.80, "#ff7ad8")])
-    vurgu = ramp(nt, n2.outputs["Fac"], [(0.55, "#000000"), (0.68, "#14508a"), (0.80, "#3fb8ff")])   # mavi-camgobegi parlamalar
-    karisim = mix_renk(nt, 0.35, renk.outputs[0], vurgu.outputs[0], "SCREEN")
+    renk = ramp(nt, n1.outputs["Fac"], [(0.34, "#060828"), (0.46, "#14207a"), (0.55, "#3236c0"), (0.63, "#7a3ee0"),
+                                         (0.71, "#c45cf0"), (0.78, "#ff8ae0")]   # sahne 2: gok referanstan koyu ve camurluydu)
+    vurgu = ramp(nt, n2.outputs["Fac"], [(0.52, "#000000"), (0.64, "#1a62c8"), (0.78, "#52c8ff")])   # mavi-camgobegi parlamalar
+    karisim = mix_renk(nt, 0.5, renk.outputs[0], vurgu.outputs[0], "SCREEN")
     # yildiz tozu: kucuk voronoi noktalari, iki olcek
     yildiz = None
-    for olc, esik in ((300.0, 0.045), (110.0, 0.035), (40.0, 0.025)):
+    for olc, esik in ((320.0, 0.06), (120.0, 0.05), (45.0, 0.035)):
         v = nt.nodes.new("ShaderNodeTexVoronoi"); v.inputs["Scale"].default_value = olc; v.inputs["Randomness"].default_value = 1.0
         nt.links.new(map_.outputs[0], v.inputs["Vector"])
         nokta = math_(nt, "LESS_THAN", v.outputs["Distance"], esik)
         yildiz = nokta if yildiz is None else math_(nt, "MAXIMUM", yildiz, nokta)
     son = mix_renk(nt, yildiz, karisim, "#ffffff")
-    em = nt.nodes.new("ShaderNodeEmission"); em.inputs[1].default_value = 1.0; nt.links.new(son, em.inputs[0])
+    em = nt.nodes.new("ShaderNodeEmission"); em.inputs[1].default_value = 1.35; nt.links.new(son, em.inputs[0])
     o = nt.nodes.new("ShaderNodeOutputMaterial"); nt.links.new(em.outputs[0], o.inputs[0])
     p.data.materials.append(m)
 
@@ -114,9 +114,9 @@ def izgara_zemin():
     tc = nt.nodes.new("ShaderNodeTexCoord")
     sep = nt.nodes.new("ShaderNodeSeparateXYZ"); nt.links.new(tc.outputs["Object"], sep.inputs[0])
     hat = {}
-    for eks, olc in (("X", 900), ("Y", 300)):
-        d = math_(nt, "ABSOLUTE", math_(nt, "SUBTRACT", math_(nt, "FRACT", math_(nt, "MULTIPLY", sep.outputs[eks], olc / 2.4)), 0.5))
-        hat[eks] = math_(nt, "GREATER_THAN", d, 0.468)   # sahne 1: cizgiler kalin
+    for eks, olc in (("X", 900), ("Y", 300)):   # sahne 2: 1,6 m hucre, cizgi hucrenin ~%3'u
+        d = math_(nt, "ABSOLUTE", math_(nt, "SUBTRACT", math_(nt, "FRACT", math_(nt, "MULTIPLY", sep.outputs[eks], olc / 1.6)), 0.5))
+        hat[eks] = math_(nt, "GREATER_THAN", d, 0.484)   # sahne 1-2: cizgiler kalin
     r = mix_renk(nt, hat["Y"], ZEMIN, IZ_YAKIN)          # enine (sabit Y) cizgiler
     r = mix_renk(nt, hat["X"], r, IZ_UZUN)               # boyuna (sabit X) cizgiler
     em = nt.nodes.new("ShaderNodeEmission"); nt.links.new(r, em.inputs[0])
