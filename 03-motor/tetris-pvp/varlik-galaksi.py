@@ -90,7 +90,7 @@ def bulutsu_gok():
     nt.links.new(map_.outputs[0], n2.inputs["Vector"])
     # sahne 1: gok bastan basa bulut gibiydi; REF-068'de taban koyu lacivert, bulutsu yer yer, yildiz cok
     renk = ramp(nt, n1.outputs["Fac"], [(0.34, "#060828"), (0.46, "#14207a"), (0.55, "#3236c0"), (0.63, "#7a3ee0"),
-                                         (0.71, "#c45cf0"), (0.78, "#ff8ae0")]   # sahne 2: gok referanstan koyu ve camurluydu)
+                                         (0.71, "#c45cf0"), (0.78, "#ff8ae0")])   # sahne 2: gok referanstan koyu ve camurluydu
     vurgu = ramp(nt, n2.outputs["Fac"], [(0.52, "#000000"), (0.64, "#1a62c8"), (0.78, "#52c8ff")])   # mavi-camgobegi parlamalar
     karisim = mix_renk(nt, 0.5, renk.outputs[0], vurgu.outputs[0], "SCREEN")
     # yildiz tozu: kucuk voronoi noktalari, iki olcek
