@@ -1,0 +1,160 @@
+{
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-16",
+ "bpm": 133.0,
+ "toplam_olcu": 38,
+ "toplam_duvar": 3,
+ "zaman": {
+  "kart": 3.609,
+  "say": 2.7068,
+  "buyu": 3.1579,
+  "gec": 1.3534,
+  "sure": 12.6316
+ },
+ "kartlar": [
+  {
+   "tip": "acilis",
+   "t": 0.0,
+   "sure": 5.4135
+  },
+  {
+   "tip": "yazi",
+   "metin": "BLUE VS PINK!",
+   "t": 5.4135,
+   "sure": 2.7068
+  },
+  {
+   "tip": "yazi",
+   "metin": "WELCOME TO",
+   "alt": "SAKURA BRIDGE!",
+   "t": 8.1203,
+   "sure": 2.7068
+  },
+  {
+   "tip": "nasil",
+   "metin": "COPY YOUR SHAPE",
+   "alt": "BEFORE THE CARD REACHES YOU!",
+   "t": 10.8271,
+   "sure": 5.4135
+  },
+  {
+   "tip": "yazi",
+   "metin": "READY,",
+   "alt": "PLAYERS?",
+   "t": 16.2406,
+   "sure": 3.609
+  },
+  {
+   "t": 19.8496,
+   "sure": 3.609,
+   "tip": "basla"
+  },
+  {
+   "t": 36.0902,
+   "sure": 3.609,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "ROUND 2",
+   "alt": "MEDIUM"
+  },
+  {
+   "t": 52.3309,
+   "sure": 3.609,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "ROUND 3",
+   "alt": "HARD"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 23.4586,
+   "p1": "petal-sky-point",
+   "p2": "blossom-wide-star",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 8,
+   "tur": 2,
+   "t0": 39.6993,
+   "p1": "lantern-lunge-v-reach",
+   "p2": "petal-hip-side-kick",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 15,
+   "tur": 3,
+   "t0": 55.9399,
+   "p1": "sakura-star-balance-one-leg",
+   "p2": "sakura-one-leg-side-balance-v",
+   "ovgu": "PERFECT!"
+  }
+ ],
+ "abone": [
+  23.5,
+  45.0,
+  60.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "Petal Bridge Showdown.wav (Suno, kullanici, 3 Kas 2026) -> petal-bridge-133.wav",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne13.html.",
+ "tema": {
+  "varlik": "/03-motor/tetris-pvp/varlik-16/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-08/",
+  "p1": "#18B8FF",
+  "p2": "#FF32C8",
+  "altin": "#ffd94a",
+  "camgobegi": "#9cf0ff",
+  "p1koyu": "#0a4fc8",
+  "p2koyu": "#b0108c",
+  "p1acik": "#d6f6ff",
+  "p2acik": "#ffd6f2",
+  "p1parlak": "#9cf0ff",
+  "p2parlak": "#ffb4ec",
+  "girdap": [
+   "#5ac8ff",
+   "#ff7ad0"
+  ],
+  "izgara": [
+   "#3a1a9a",
+   "#c02ab0"
+  ],
+  "acilisZemin": [
+   "#7a3ae0",
+   "#2a0a6a"
+  ],
+  "acilisYazi": [
+   "#ffffff",
+   "#ffd6f2",
+   "#ff7ad0",
+   "#c02aa8"
+  ],
+  "acilisKontur": "#3a0a5a",
+  "acilisIsilti": "#ff7ad0",
+  "isin": [
+   "#7a3ae0",
+   "#2a0a6a"
+  ],
+  "abone": [
+   "#7dffb4",
+   "#0c8a48"
+  ],
+  "parca": [
+   "#ffd94a",
+   "#ff7ad0",
+   "#9cf0ff"
+  ],
+  "ovguRenk": [
+   "#ffffff",
+   "#ffe6f8",
+   "#ff9ae0"
+  ],
+  "oklar": true,
+  "aboneAlt": "NEW BATTLE EVERY DAY",
+  "duvarToplam": 21,
+  "boksorTers": true,
+  "baslaTam": true
+ }
+}

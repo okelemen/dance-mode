@@ -1,0 +1,167 @@
+{
+ "_not": "HUMAN TETRIS 16. video (REF-067 TetrisBounce, HUMAN TETRIS PVP BATTLE #08). 1v1, P1 MAVI solda / P2 PEMBE sagda (referans). 3 tur x 7 duvar (ROUND 1 EASY / 2 MEDIUM / 3 HARD), duvar 28 vurus (~12,6 sn; REF-067 dongusu ~12 sn). ROUND 1 karti yok (referansta GO'dan sonra dogrudan oyun). Turlar arasi iki tezahurat karti (referansta OH! NICE! / KEEP THE MOMENTUM!). Muzik Petal Bridge Showdown (Suno, kullanici) 132,3->133,0 kayiyordu -> petal-bridge-133.wav (muzik-sabitle.py --hedef 133); 0-4, 39-42, 65, 76-78. olculer (zayif giris / davulsuz) muzik-izgara-16.py ile atlanir. Metinler bizim.",
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-16",
+ "bpm": 133,
+ "muzik": "Petal Bridge Showdown.wav (Suno, kullanici, 3 Kas 2026) -> petal-bridge-133.wav",
+ "duvar": "duvar-listesi-16.json",
+ "duvar_vurus": 28,
+ "zaman_vurus": {
+  "kart": 8,
+  "say": 6,
+  "buyu": 7,
+  "gec": 3
+ },
+ "kart_vurus": {
+  "tur": 8,
+  "basla": 8,
+  "abone": 12
+ },
+ "tur_kart": {
+  "1": [
+   "ROUND 1",
+   "EASY"
+  ],
+  "2": [
+   "ROUND 2",
+   "MEDIUM"
+  ],
+  "3": [
+   "ROUND 3",
+   "HARD"
+  ]
+ },
+ "tur_kart_atla": [
+  1
+ ],
+ "giris_dizisi": [
+  {
+   "tip": "acilis",
+   "vurus": 12
+  },
+  {
+   "tip": "yazi",
+   "metin": "BLUE VS PINK!",
+   "vurus": 6
+  },
+  {
+   "tip": "yazi",
+   "metin": "WELCOME TO",
+   "alt": "SAKURA BRIDGE!",
+   "vurus": 6
+  },
+  {
+   "tip": "nasil",
+   "metin": "COPY YOUR SHAPE",
+   "alt": "BEFORE THE CARD REACHES YOU!",
+   "vurus": 12
+  },
+  {
+   "tip": "yazi",
+   "metin": "READY,",
+   "alt": "PLAYERS?",
+   "vurus": 8
+  }
+ ],
+ "gecis": {
+  "2": [
+   {
+    "tip": "yazi",
+    "metin": "SO SMOOTH!",
+    "vurus": 4
+   },
+   {
+    "tip": "yazi",
+    "metin": "DON'T STOP",
+    "alt": "NOW!",
+    "vurus": 4
+   }
+  ],
+  "3": [
+   {
+    "tip": "yazi",
+    "metin": "WOW!",
+    "alt": "WHAT A MOVE!",
+    "vurus": 4
+   },
+   {
+    "tip": "yazi",
+    "metin": "LAST ROUND,",
+    "alt": "GIVE IT ALL!",
+    "vurus": 4
+   }
+  ]
+ },
+ "kapanis": [
+  {
+   "tip": "yazi",
+   "metin": "BRIDGE",
+   "alt": "CLEARED!",
+   "vurus": 6
+  },
+  {
+   "tip": "yazi",
+   "metin": "BLUE OR PINK?",
+   "alt": "WHO WON?",
+   "vurus": 6
+  }
+ ],
+ "sayfa": "sahne13.html",
+ "tema": {
+  "varlik": "/03-motor/tetris-pvp/varlik-16/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-08/",
+  "p1": "#18B8FF",
+  "p2": "#FF32C8",
+  "altin": "#ffd94a",
+  "camgobegi": "#9cf0ff",
+  "p1koyu": "#0a4fc8",
+  "p2koyu": "#b0108c",
+  "p1acik": "#d6f6ff",
+  "p2acik": "#ffd6f2",
+  "p1parlak": "#9cf0ff",
+  "p2parlak": "#ffb4ec",
+  "girdap": [
+   "#5ac8ff",
+   "#ff7ad0"
+  ],
+  "izgara": [
+   "#3a1a9a",
+   "#c02ab0"
+  ],
+  "acilisZemin": [
+   "#7a3ae0",
+   "#2a0a6a"
+  ],
+  "acilisYazi": [
+   "#ffffff",
+   "#ffd6f2",
+   "#ff7ad0",
+   "#c02aa8"
+  ],
+  "acilisKontur": "#3a0a5a",
+  "acilisIsilti": "#ff7ad0",
+  "isin": [
+   "#7a3ae0",
+   "#2a0a6a"
+  ],
+  "abone": [
+   "#7dffb4",
+   "#0c8a48"
+  ],
+  "parca": [
+   "#ffd94a",
+   "#ff7ad0",
+   "#9cf0ff"
+  ],
+  "ovguRenk": [
+   "#ffffff",
+   "#ffe6f8",
+   "#ff9ae0"
+  ],
+  "oklar": true,
+  "aboneAlt": "NEW BATTLE EVERY DAY",
+  "duvarToplam": 21,
+  "boksorTers": true,
+  "baslaTam": true
+ }
+}

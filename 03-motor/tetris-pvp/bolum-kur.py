@@ -56,7 +56,7 @@ for tur in sorted({d["tur"] for d in DUVAR}):     # 8. video (REF-059): 4 tur
         continue
     if str(tur) in AYAR.get("gecis", {}) and not KESIT:   # tur kartindan once iki kiskirtici kart (REF-057)
         dizi(AYAR["gecis"][str(tur)])
-    if not AYAR.get("tur_kart_yok"):          # 10. video (REF-061): tur karti yok, gruplar yalniz siralama
+    if not AYAR.get("tur_kart_yok") and tur not in AYAR.get("tur_kart_atla", []):   # 16. video (REF-067): ROUND 1 karti yok
         m, alt = TUR_KART[tur]
         k = {"t": r(t), "sure": r(KS("tur")), "tip": "tur", "tur": tur, "metin": m}
         if alt: k["alt"] = alt
@@ -83,6 +83,8 @@ toplam_olcu = round(t / (4 * V))
 assert abs(toplam_olcu * 4 * V - t) < 0.01, (t, toplam_olcu)
 
 TAM = {"vs", "giris", "tur", "ovgu_kart", "wrap", "abone", "acilis", "yazi", "nasil"}; AS = 3.2
+if AYAR.get("tema", {}).get("baslaTam"):   # 16. video (REF-067): 3-2-1-GO tam ekran kart, SUBSCRIBE ona da binmez
+    TAM.add("basla")
 def bos(x):
     return not any(k["tip"] in TAM and x < k["t"] + k["sure"] and x + AS > k["t"] for k in kartlar)
 abone, x = [], 15.0

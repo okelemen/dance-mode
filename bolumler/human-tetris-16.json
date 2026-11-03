@@ -1,0 +1,365 @@
+{
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-16",
+ "bpm": 133.0,
+ "toplam_olcu": 174,
+ "toplam_duvar": 21,
+ "zaman": {
+  "kart": 3.609,
+  "say": 2.7068,
+  "buyu": 3.1579,
+  "gec": 1.3534,
+  "sure": 12.6316
+ },
+ "kartlar": [
+  {
+   "tip": "acilis",
+   "t": 0.0,
+   "sure": 5.4135
+  },
+  {
+   "tip": "yazi",
+   "metin": "BLUE VS PINK!",
+   "t": 5.4135,
+   "sure": 2.7068
+  },
+  {
+   "tip": "yazi",
+   "metin": "WELCOME TO",
+   "alt": "SAKURA BRIDGE!",
+   "t": 8.1203,
+   "sure": 2.7068
+  },
+  {
+   "tip": "nasil",
+   "metin": "COPY YOUR SHAPE",
+   "alt": "BEFORE THE CARD REACHES YOU!",
+   "t": 10.8271,
+   "sure": 5.4135
+  },
+  {
+   "tip": "yazi",
+   "metin": "READY,",
+   "alt": "PLAYERS?",
+   "t": 16.2406,
+   "sure": 3.609
+  },
+  {
+   "t": 19.8496,
+   "sure": 3.609,
+   "tip": "basla"
+  },
+  {
+   "tip": "yazi",
+   "metin": "SO SMOOTH!",
+   "t": 111.8798,
+   "sure": 1.8045
+  },
+  {
+   "tip": "yazi",
+   "metin": "DON'T STOP",
+   "alt": "NOW!",
+   "t": 113.6844,
+   "sure": 1.8045
+  },
+  {
+   "t": 115.4889,
+   "sure": 3.609,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "ROUND 2",
+   "alt": "MEDIUM"
+  },
+  {
+   "tip": "yazi",
+   "metin": "WOW!",
+   "alt": "WHAT A MOVE!",
+   "t": 207.5191,
+   "sure": 1.8045
+  },
+  {
+   "tip": "yazi",
+   "metin": "LAST ROUND,",
+   "alt": "GIVE IT ALL!",
+   "t": 209.3236,
+   "sure": 1.8045
+  },
+  {
+   "t": 211.1281,
+   "sure": 3.609,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "ROUND 3",
+   "alt": "HARD"
+  },
+  {
+   "tip": "yazi",
+   "metin": "BRIDGE",
+   "alt": "CLEARED!",
+   "t": 303.1583,
+   "sure": 2.7068
+  },
+  {
+   "tip": "yazi",
+   "metin": "BLUE OR PINK?",
+   "alt": "WHO WON?",
+   "t": 305.8651,
+   "sure": 2.7068
+  },
+  {
+   "t": 308.5719,
+   "sure": 5.4135,
+   "tip": "abone"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 23.4586,
+   "p1": "petal-sky-point",
+   "p2": "blossom-wide-star",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 2,
+   "tur": 1,
+   "t0": 36.0902,
+   "p1": "sakura-bow-hello-forward",
+   "p2": "sakura-stride-arms-swing",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 3,
+   "tur": 1,
+   "t0": 48.7218,
+   "p1": "sakura-half-w-half-down",
+   "p2": "sakura-pointing-forward-low",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 4,
+   "tur": 1,
+   "t0": 61.3534,
+   "p1": "sakura-side-reach-hip-lean",
+   "p2": "sakura-lean-left-arch",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 5,
+   "tur": 1,
+   "t0": 73.985,
+   "p1": "sakura-sky-clap-narrow",
+   "p2": "sakura-muscle-pose-horse",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 6,
+   "tur": 1,
+   "t0": 86.6166,
+   "p1": "bloom-low-cactus-horse",
+   "p2": "branch-flex-reach-wide",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 7,
+   "tur": 1,
+   "t0": 99.2482,
+   "p1": "glow-reach-hip-leg-out",
+   "p2": "spring-t-w-wide",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 8,
+   "tur": 2,
+   "t0": 119.0979,
+   "p1": "lantern-lunge-v-reach",
+   "p2": "petal-hip-side-kick",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 9,
+   "tur": 2,
+   "t0": 131.7295,
+   "p1": "sakura-arabesque-low-wings",
+   "p2": "sakura-high-knee-run-arms",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 10,
+   "tur": 2,
+   "t0": 144.3611,
+   "p1": "sakura-skater-reach-down",
+   "p2": "sakura-side-kick-hip-hand",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 11,
+   "tur": 2,
+   "t0": 156.9927,
+   "p1": "sakura-side-lunge-sky-reach",
+   "p2": "sakura-low-kick-arms-wide",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 12,
+   "tur": 2,
+   "t0": 169.6243,
+   "p1": "sakura-knee-up-hands-clap",
+   "p2": "sakura-low-squat-cactus",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 13,
+   "tur": 2,
+   "t0": 182.2559,
+   "p1": "sakura-flamingo-wings",
+   "p2": "ribbon-t-reach-kick",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 14,
+   "tur": 2,
+   "t0": 194.8875,
+   "p1": "blossom-reach-v-kick",
+   "p2": "twilight-hip-comet-knee",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 15,
+   "tur": 3,
+   "t0": 214.7371,
+   "p1": "sakura-star-balance-one-leg",
+   "p2": "sakura-one-leg-side-balance-v",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 16,
+   "tur": 3,
+   "t0": 227.3687,
+   "p1": "sakura-child-pose-long",
+   "p2": "sakura-frog-squat-hands-floor",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 17,
+   "tur": 3,
+   "t0": 240.0003,
+   "p1": "sakura-seated-lean-back-palms",
+   "p2": "sakura-curtsy-halo-arms",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 18,
+   "tur": 3,
+   "t0": 252.6319,
+   "p1": "sakura-kneel-lean-side-wave",
+   "p2": "sakura-side-lunge-low-diagonal",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 19,
+   "tur": 3,
+   "t0": 265.2635,
+   "p1": "sakura-seated-twist-arms-open",
+   "p2": "sakura-kneel-robot-arms",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 20,
+   "tur": 3,
+   "t0": 277.8951,
+   "p1": "sakura-side-kick-high-twin-reach",
+   "p2": "sakura-goddess-twist-diagonal",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 21,
+   "tur": 3,
+   "t0": 290.5267,
+   "p1": "sakura-kneel-hips-hands",
+   "p2": "sakura-seated-arms-sky",
+   "ovgu": "PERFECT!"
+  }
+ ],
+ "abone": [
+  23.5,
+  45.0,
+  60.0,
+  75.0,
+  90.0,
+  105.0,
+  120.0,
+  135.0,
+  150.0,
+  165.0,
+  180.0,
+  195.0,
+  215.0,
+  225.0,
+  240.0,
+  255.0,
+  270.0,
+  285.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "Petal Bridge Showdown.wav (Suno, kullanici, 3 Kas 2026) -> petal-bridge-133.wav",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne13.html.",
+ "tema": {
+  "varlik": "/03-motor/tetris-pvp/varlik-16/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-08/",
+  "p1": "#18B8FF",
+  "p2": "#FF32C8",
+  "altin": "#ffd94a",
+  "camgobegi": "#9cf0ff",
+  "p1koyu": "#0a4fc8",
+  "p2koyu": "#b0108c",
+  "p1acik": "#d6f6ff",
+  "p2acik": "#ffd6f2",
+  "p1parlak": "#9cf0ff",
+  "p2parlak": "#ffb4ec",
+  "girdap": [
+   "#5ac8ff",
+   "#ff7ad0"
+  ],
+  "izgara": [
+   "#3a1a9a",
+   "#c02ab0"
+  ],
+  "acilisZemin": [
+   "#7a3ae0",
+   "#2a0a6a"
+  ],
+  "acilisYazi": [
+   "#ffffff",
+   "#ffd6f2",
+   "#ff7ad0",
+   "#c02aa8"
+  ],
+  "acilisKontur": "#3a0a5a",
+  "acilisIsilti": "#ff7ad0",
+  "isin": [
+   "#7a3ae0",
+   "#2a0a6a"
+  ],
+  "abone": [
+   "#7dffb4",
+   "#0c8a48"
+  ],
+  "parca": [
+   "#ffd94a",
+   "#ff7ad0",
+   "#9cf0ff"
+  ],
+  "ovguRenk": [
+   "#ffffff",
+   "#ffe6f8",
+   "#ff9ae0"
+  ],
+  "oklar": true,
+  "aboneAlt": "NEW BATTLE EVERY DAY",
+  "duvarToplam": 21,
+  "boksorTers": true,
+  "baslaTam": true
+ }
+}
