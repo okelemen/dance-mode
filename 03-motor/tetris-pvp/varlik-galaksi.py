@@ -184,6 +184,8 @@ def serit_katmani():
 
 
 ON_EK = ""
+if YALNIZ in ("hepsi", "poz"):
+    poz_maskeleri()
 if YALNIZ == "kapak":
     ON_EK = "kapak-"
     gok_katmani(); serit_katmani()

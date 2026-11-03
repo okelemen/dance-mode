@@ -1,0 +1,3467 @@
+{
+ "_not": "TETRIS MODE PVP 17. video ADAY (REF-068) poz tanimlari. Acilar EKRAN duzleminde (pozlar.js dili): 0 asagi, 90 ekran-sag, 180 yukari, -90 ekran-sol. Kollar [ust kol, on kol], bacaklar [uyluk, baldir]. sol*/sag* = KARAKTERIN solu/sagi; karakter kameraya donukken sol = ekran SAGI. yon: on (kameraya donuk) | sag (profil, yuzu ekran sagina). govde: kalcadan boyna aci, bas: govdeye ek aci. Mixamo govdesi (siluet-govde.fbx) bu acilarla bukulur, duz siyah maske cikar (varlik.py).",
+ "pozlar": {
+  "nebula-tree-hands-sky": {
+   "ad": "Nebula Tree Hands Sky",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "nebula-tree-hands-chest": {
+   "ad": "Nebula Tree Hands Chest",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "nebula-mountain-arms-v": {
+   "ad": "Nebula Mountain Arms V",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "nebula-crescent-lean-left": {
+   "ad": "Nebula Crescent Lean Left",
+   "yon": "on",
+   "govde": 160,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "nebula-crescent-lean-right": {
+   "ad": "Nebula Crescent Lean Right",
+   "yon": "on",
+   "govde": 200,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "nebula-wide-stand-arms-low-v": {
+   "ad": "Nebula Wide Stand Arms Low V",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "nebula-wide-stand-cactus": {
+   "ad": "Nebula Wide Stand Cactus",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "nebula-star-arms-diagonal": {
+   "ad": "Nebula Star Arms Diagonal",
+   "yon": "on",
+   "govde": 184,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "nebula-side-bend-arm-over-wide": {
+   "ad": "Nebula Side Bend Arm Over Wide",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    -125
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "nebula-hands-behind-head-wide": {
+   "ad": "Nebula Hands Behind Head Wide",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "nebula-toe-tap-side-reach": {
+   "ad": "Nebula Toe Tap Side Reach",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -120,
+    -130
+   ],
+   "solKol": [
+    8,
+    5
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "nebula-eagle-arms-tall": {
+   "ad": "Nebula Eagle Arms Tall",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -60,
+    120
+   ],
+   "solKol": [
+    -60,
+    120
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "nebula-goal-post-arms-tall": {
+   "ad": "Nebula Goal Post Arms Tall",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -178
+   ],
+   "solKol": [
+    -90,
+    -178
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "nebula-one-arm-sky-one-hip": {
+   "ad": "Nebula One Arm Sky One Hip",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "nebula-half-moon-stand-left": {
+   "ad": "Nebula Half Moon Stand Left",
+   "yon": "on",
+   "govde": 150,
+   "bas": 0,
+   "sagKol": [
+    -170,
+    -150
+   ],
+   "solKol": [
+    -170,
+    -150
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "nebula-forward-fold-half": {
+   "ad": "Nebula Forward Fold Half",
+   "yon": "sag",
+   "govde": 120,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    88,
+    88
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -2,
+    -2
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "nebula-standing-reach-back": {
+   "ad": "Nebula Standing Reach Back",
+   "yon": "sag",
+   "govde": 195,
+   "bas": 0,
+   "solKol": [
+    175,
+    175
+   ],
+   "sagKol": [
+    173,
+    173
+   ],
+   "solBacak": [
+    2,
+    2
+   ],
+   "sagBacak": [
+    -2,
+    -2
+   ],
+   "tur": 1,
+   "el": true
+  },
+  "nebula-warrior-two-wide": {
+   "ad": "Nebula Warrior Two Wide",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "nebula-reverse-warrior-reach": {
+   "ad": "Nebula Reverse Warrior Reach",
+   "yon": "on",
+   "govde": 200,
+   "bas": 0,
+   "sagKol": [
+    -160,
+    -140
+   ],
+   "solKol": [
+    -20,
+    10
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "nebula-goddess-cactus-low": {
+   "ad": "Nebula Goddess Cactus Low",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "nebula-goddess-prayer": {
+   "ad": "Nebula Goddess Prayer",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "nebula-side-lunge-prayer": {
+   "ad": "Nebula Side Lunge Prayer",
+   "yon": "on",
+   "govde": 176,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "nebula-standing-split-side": {
+   "ad": "Nebula Standing Split Side",
+   "yon": "on",
+   "govde": 150,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    8,
+    5
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    75,
+    75
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "nebula-knee-up-arms-sky": {
+   "ad": "Nebula Knee Up Arms Sky",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "nebula-knee-up-eagle-arms": {
+   "ad": "Nebula Knee Up Eagle Arms",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -60,
+    120
+   ],
+   "solKol": [
+    -60,
+    120
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "nebula-curtsy-arms-v": {
+   "ad": "Nebula Curtsy Arms V",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "nebula-chair-twist-arms": {
+   "ad": "Nebula Chair Twist Arms",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -12,
+    6
+   ],
+   "solBacak": [
+    12,
+    -6
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "nebula-low-squat-prayer": {
+   "ad": "Nebula Low Squat Prayer",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    -78,
+    22
+   ],
+   "solBacak": [
+    -78,
+    22
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "nebula-warrior-one-sky": {
+   "ad": "Nebula Warrior One Sky",
+   "yon": "sag",
+   "govde": 178,
+   "bas": 0,
+   "solKol": [
+    172,
+    172
+   ],
+   "sagKol": [
+    170,
+    170
+   ],
+   "solBacak": [
+    70,
+    -70
+   ],
+   "sagBacak": [
+    -40,
+    -40
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "nebula-warrior-three-low": {
+   "ad": "Nebula Warrior Three Low",
+   "yon": "sag",
+   "govde": 102,
+   "bas": 0,
+   "solKol": [
+    80,
+    80
+   ],
+   "sagKol": [
+    78,
+    78
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -70,
+    -70
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "nebula-airplane-wings": {
+   "ad": "Nebula Airplane Wings",
+   "yon": "sag",
+   "govde": 108,
+   "bas": 0,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    -100,
+    -100
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -75,
+    -75
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "nebula-lunge-arms-back-wings": {
+   "ad": "Nebula Lunge Arms Back Wings",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    -40,
+    -40
+   ],
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solBacak": [
+    72,
+    -72
+   ],
+   "sagBacak": [
+    -42,
+    -42
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "nebula-pyramid-reach-down": {
+   "ad": "Nebula Pyramid Reach Down",
+   "yon": "sag",
+   "govde": 110,
+   "bas": 0,
+   "solKol": [
+    30,
+    30
+   ],
+   "sagKol": [
+    28,
+    28
+   ],
+   "solBacak": [
+    25,
+    25
+   ],
+   "sagBacak": [
+    -25,
+    -25
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "nebula-chair-arms-forward": {
+   "ad": "Nebula Chair Arms Forward",
+   "yon": "sag",
+   "govde": 160,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    88,
+    88
+   ],
+   "solBacak": [
+    75,
+    -55
+   ],
+   "sagBacak": [
+    73,
+    -57
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "nebula-standing-knee-hug": {
+   "ad": "Nebula Standing Knee Hug",
+   "yon": "sag",
+   "govde": 178,
+   "bas": 0,
+   "solKol": [
+    40,
+    120
+   ],
+   "sagKol": [
+    38,
+    120
+   ],
+   "solBacak": [
+    85,
+    -85
+   ],
+   "sagBacak": [
+    -2,
+    -2
+   ],
+   "tur": 2,
+   "el": true
+  },
+  "nebula-cobra-low": {
+   "ad": "Nebula Cobra Low",
+   "yon": "sag",
+   "govde": 245,
+   "bas": 0,
+   "solKol": [
+    -30,
+    -30
+   ],
+   "sagKol": [
+    -28,
+    -28
+   ],
+   "solBacak": [
+    -88,
+    -90
+   ],
+   "sagBacak": [
+    -88,
+    -90
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "nebula-low-lunge-sky": {
+   "ad": "Nebula Low Lunge Sky",
+   "yon": "sag",
+   "govde": 175,
+   "bas": 0,
+   "solKol": [
+    170,
+    170
+   ],
+   "sagKol": [
+    168,
+    168
+   ],
+   "solBacak": [
+    88,
+    -5
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "nebula-low-lunge-twist-open": {
+   "ad": "Nebula Low Lunge Twist Open",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    130,
+    130
+   ],
+   "sagKol": [
+    -110,
+    -110
+   ],
+   "solBacak": [
+    88,
+    -5
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "nebula-pigeon-rise": {
+   "ad": "Nebula Pigeon Rise",
+   "yon": "sag",
+   "govde": 195,
+   "bas": 0,
+   "solKol": [
+    175,
+    175
+   ],
+   "sagKol": [
+    173,
+    173
+   ],
+   "solBacak": [
+    60,
+    -150
+   ],
+   "sagBacak": [
+    -88,
+    -90
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "nebula-camel-hands-back": {
+   "ad": "Nebula Camel Hands Back",
+   "yon": "sag",
+   "govde": 210,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -150
+   ],
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "nebula-seated-forward-reach": {
+   "ad": "Nebula Seated Forward Reach",
+   "yon": "sag",
+   "govde": 120,
+   "bas": 0,
+   "solKol": [
+    85,
+    85
+   ],
+   "sagKol": [
+    83,
+    83
+   ],
+   "solBacak": [
+    88,
+    88
+   ],
+   "sagBacak": [
+    86,
+    86
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "nebula-seated-boat-arms": {
+   "ad": "Nebula Seated Boat Arms",
+   "yon": "sag",
+   "govde": 210,
+   "bas": 0,
+   "solKol": [
+    95,
+    95
+   ],
+   "sagKol": [
+    93,
+    93
+   ],
+   "solBacak": [
+    130,
+    130
+   ],
+   "sagBacak": [
+    128,
+    128
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "nebula-table-top-leg-back": {
+   "ad": "Nebula Table Top Leg Back",
+   "yon": "sag",
+   "govde": 92,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -85,
+    -88
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "nebula-bird-dog-reach": {
+   "ad": "Nebula Bird Dog Reach",
+   "yon": "sag",
+   "govde": 92,
+   "bas": 0,
+   "solKol": [
+    90,
+    90
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -88,
+    -90
+   ],
+   "sagBacak": [
+    -90,
+    -90
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "nebula-kneeling-side-arch": {
+   "ad": "Nebula Kneeling Side Arch",
+   "yon": "sag",
+   "govde": 200,
+   "bas": 0,
+   "solKol": [
+    -160,
+    -160
+   ],
+   "sagKol": [
+    20,
+    20
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "nebula-lotus-prayer-sit": {
+   "ad": "Nebula Lotus Prayer Sit",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    -80,
+    120
+   ],
+   "solBacak": [
+    -80,
+    120
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "nebula-lotus-arms-sky": {
+   "ad": "Nebula Lotus Arms Sky",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -80,
+    120
+   ],
+   "solBacak": [
+    -80,
+    120
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "nebula-butterfly-sit-wings": {
+   "ad": "Nebula Butterfly Sit Wings",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -75,
+    135
+   ],
+   "solBacak": [
+    -75,
+    135
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "nebula-kneel-gate-reach": {
+   "ad": "Nebula Kneel Gate Reach",
+   "yon": "on",
+   "govde": 214,
+   "bas": 0,
+   "sagKol": [
+    -155,
+    -130
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -20,
+    -90
+   ],
+   "solBacak": [
+    48,
+    48
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "nebula-kneel-arms-v-tall": {
+   "ad": "Nebula Kneel Arms V Tall",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -22,
+    -90
+   ],
+   "solBacak": [
+    -22,
+    -90
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "nebula-wide-seat-arms-up": {
+   "ad": "Nebula Wide Seat Arms Up",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -70,
+    -70
+   ],
+   "solBacak": [
+    -70,
+    -70
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "nebula-frog-hands-down": {
+   "ad": "Nebula Frog Hands Down",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -10,
+    -4
+   ],
+   "solKol": [
+    -10,
+    -4
+   ],
+   "sagBacak": [
+    -82,
+    26
+   ],
+   "solBacak": [
+    -82,
+    26
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "nebula-dancer-side-reach": {
+   "ad": "Nebula Dancer Side Reach",
+   "yon": "on",
+   "govde": 160,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    8,
+    5
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    140
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "nebula-standing-split-wide-arms": {
+   "ad": "Nebula Standing Split Wide Arms",
+   "yon": "on",
+   "govde": 146,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    88,
+    88
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "nebula-tree-arms-wide-low": {
+   "ad": "Nebula Tree Arms Wide Low",
+   "yon": "on",
+   "govde": 176,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "nebula-side-lunge-deep-twist": {
+   "ad": "Nebula Side Lunge Deep Twist",
+   "yon": "on",
+   "govde": 166,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "nebula-dancer-long-reach": {
+   "ad": "Nebula Dancer Long Reach",
+   "yon": "sag",
+   "govde": 145,
+   "bas": 0,
+   "solKol": [
+    150,
+    150
+   ],
+   "sagKol": [
+    -40,
+    -120
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -60,
+    -130
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "nebula-half-moon-side-hand": {
+   "ad": "Nebula Half Moon Side Hand",
+   "yon": "sag",
+   "govde": 100,
+   "bas": 0,
+   "solKol": [
+    -170,
+    -170
+   ],
+   "sagKol": [
+    10,
+    10
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -88,
+    -88
+   ],
+   "tur": 3,
+   "el": true
+  },
+  "comet-chest-hip-split": {
+   "ad": "Comet Chest Hip Split",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    72,
+    72
+   ],
+   "tur": 3
+  },
+  "stellar-halo-reach-tap": {
+   "ad": "Stellar Halo Reach Tap",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -160,
+    120
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "meteor-chest-eagle-lunge": {
+   "ad": "Meteor Chest Eagle Lunge",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    -60,
+    120
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "tur": 2
+  },
+  "comet-head-cactus-split": {
+   "ad": "Comet Head Cactus Split",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    72,
+    72
+   ],
+   "tur": 3
+  },
+  "comet-diag-chest-curtsy": {
+   "ad": "Comet Diag Chest Curtsy",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "grid-v-w-goddess": {
+   "ad": "Grid V W Goddess",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 2
+  },
+  "meteor-v-diag-tap": {
+   "ad": "Meteor V Diag Tap",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "solar-low-diag-goddess": {
+   "ad": "Solar Low Diag Goddess",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 2
+  },
+  "vapor-halo-eagle-goddess": {
+   "ad": "Vapor Halo Eagle Goddess",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -160,
+    120
+   ],
+   "solKol": [
+    -60,
+    120
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 2
+  },
+  "nebula-head-cactus-horse": {
+   "ad": "Nebula Head Cactus Horse",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "star-low-goal-tree": {
+   "ad": "Star Low Goal Tree",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    -90,
+    -178
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 3
+  },
+  "retro-low-w-tree": {
+   "ad": "Retro Low W Tree",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 3
+  },
+  "galaxy-eagle-goal-wide": {
+   "ad": "Galaxy Eagle Goal Wide",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -60,
+    120
+   ],
+   "solKol": [
+    -90,
+    -178
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "star-low-cactus-knee": {
+   "ad": "Star Low Cactus Knee",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "vapor-chest-head-tree": {
+   "ad": "Vapor Chest Head Tree",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 3
+  },
+  "meteor-reach-hip-tap": {
+   "ad": "Meteor Reach Hip Tap",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "nebula-low-eagle-tree": {
+   "ad": "Nebula Low Eagle Tree",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    -60,
+    120
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 3
+  },
+  "meteor-eagle-diag-horse": {
+   "ad": "Meteor Eagle Diag Horse",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -60,
+    120
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "pulse-halo-t-knee": {
+   "ad": "Pulse Halo T Knee",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -160,
+    120
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "comet-t-eagle-horse": {
+   "ad": "Comet T Eagle Horse",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    -60,
+    120
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "pulse-halo-t-goddess": {
+   "ad": "Pulse Halo T Goddess",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -160,
+    120
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 2
+  },
+  "retro-t-cactus-curtsy": {
+   "ad": "Retro T Cactus Curtsy",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "comet-goal-head-lunge": {
+   "ad": "Comet Goal Head Lunge",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -178
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "tur": 2
+  },
+  "star-eagle-low-lunge": {
+   "ad": "Star Eagle Low Lunge",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -60,
+    120
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "tur": 2
+  },
+  "laser-reach-chest-tap": {
+   "ad": "Laser Reach Chest Tap",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "vapor-halo-low-curtsy": {
+   "ad": "Vapor Halo Low Curtsy",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -160,
+    120
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "meteor-low-eagle-horse": {
+   "ad": "Meteor Low Eagle Horse",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    -60,
+    120
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "cosmic-goal-hip-wide": {
+   "ad": "Cosmic Goal Hip Wide",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -178
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "nova-t-halo-lunge": {
+   "ad": "Nova T Halo Lunge",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    -160,
+    120
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "tur": 2
+  },
+  "prism-reach-v-curtsy": {
+   "ad": "Prism Reach V Curtsy",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "astro-cactus-reach-tree": {
+   "ad": "Astro Cactus Reach Tree",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 3
+  },
+  "comet-goal-low-horse": {
+   "ad": "Comet Goal Low Horse",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -178
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "comet-halo-t-curtsy": {
+   "ad": "Comet Halo T Curtsy",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -160,
+    120
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "neon-head-chest-horse": {
+   "ad": "Neon Head Chest Horse",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "comet-cactus-t-tap": {
+   "ad": "Comet Cactus T Tap",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "laser-head-hip-wide": {
+   "ad": "Laser Head Hip Wide",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "comet-head-hip-goddess": {
+   "ad": "Comet Head Hip Goddess",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 2
+  },
+  "stellar-halo-head-tree": {
+   "ad": "Stellar Halo Head Tree",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -160,
+    120
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 3
+  },
+  "astro-cactus-low-lunge": {
+   "ad": "Astro Cactus Low Lunge",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "tur": 2
+  },
+  "neon-v-goal-lunge": {
+   "ad": "Neon V Goal Lunge",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    -90,
+    -178
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "tur": 2
+  },
+  "nova-diag-eagle-knee": {
+   "ad": "Nova Diag Eagle Knee",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    -60,
+    120
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "prism-goal-diag-knee": {
+   "ad": "Prism Goal Diag Knee",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -178
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "cosmic-reach-eagle-wide": {
+   "ad": "Cosmic Reach Eagle Wide",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    -60,
+    120
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "lunar-v-eagle-knee": {
+   "ad": "Lunar V Eagle Knee",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    -60,
+    120
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "comet-hip-chest-tree": {
+   "ad": "Comet Hip Chest Tree",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 3
+  },
+  "nebula-chest-w-tap": {
+   "ad": "Nebula Chest W Tap",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "grid-head-hip-split": {
+   "ad": "Grid Head Hip Split",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    72,
+    72
+   ],
+   "tur": 3
+  },
+  "grid-eagle-v-curtsy": {
+   "ad": "Grid Eagle V Curtsy",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -60,
+    120
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "laser-goal-chest-tree": {
+   "ad": "Laser Goal Chest Tree",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -178
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 3
+  },
+  "laser-w-hip-horse": {
+   "ad": "Laser W Hip Horse",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "synth-cactus-head-goddess": {
+   "ad": "Synth Cactus Head Goddess",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 2
+  },
+  "star-low-goal-knee": {
+   "ad": "Star Low Goal Knee",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    -90,
+    -178
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "meteor-chest-halo-horse": {
+   "ad": "Meteor Chest Halo Horse",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    -160,
+    120
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "orbit-chest-eagle-knee": {
+   "ad": "Orbit Chest Eagle Knee",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    -60,
+    120
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "solar-diag-t-tree": {
+   "ad": "Solar Diag T Tree",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 3
+  },
+  "synth-hip-low-horse": {
+   "ad": "Synth Hip Low Horse",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "star-head-hip-goddess": {
+   "ad": "Star Head Hip Goddess",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 2
+  },
+  "cosmic-w-t-curtsy": {
+   "ad": "Cosmic W T Curtsy",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "grid-goal-reach-curtsy": {
+   "ad": "Grid Goal Reach Curtsy",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -178
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "star-eagle-halo-goddess": {
+   "ad": "Star Eagle Halo Goddess",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -60,
+    120
+   ],
+   "solKol": [
+    -160,
+    120
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 2
+  },
+  "solar-goal-halo-horse": {
+   "ad": "Solar Goal Halo Horse",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -178
+   ],
+   "solKol": [
+    -160,
+    120
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "astro-low-diag-horse": {
+   "ad": "Astro Low Diag Horse",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "retro-w-hip-horse": {
+   "ad": "Retro W Hip Horse",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "comet-diag-eagle-tree": {
+   "ad": "Comet Diag Eagle Tree",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    -60,
+    120
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 3
+  },
+  "neon-v-chest-horse": {
+   "ad": "Neon V Chest Horse",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "cosmic-diag-cactus-curtsy": {
+   "ad": "Cosmic Diag Cactus Curtsy",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "stellar-w-chest-horse": {
+   "ad": "Stellar W Chest Horse",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ],
+   "tur": 1
+  },
+  "solar-hip-diag-split": {
+   "ad": "Solar Hip Diag Split",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    72,
+    72
+   ],
+   "tur": 3
+  },
+  "lunar-hip-eagle-wide": {
+   "ad": "Lunar Hip Eagle Wide",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    -60,
+    120
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "star-w-goal-wide": {
+   "ad": "Star W Goal Wide",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    -90,
+    -178
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "prism-cactus-goal-curtsy": {
+   "ad": "Prism Cactus Goal Curtsy",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    -90,
+    -178
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "galaxy-low-halo-lunge": {
+   "ad": "Galaxy Low Halo Lunge",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    -160,
+    120
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "tur": 2
+  },
+  "stellar-v-t-split": {
+   "ad": "Stellar V T Split",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    72,
+    72
+   ],
+   "tur": 3
+  },
+  "cosmic-goal-cactus-curtsy": {
+   "ad": "Cosmic Goal Cactus Curtsy",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -178
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "neon-t-v-wide": {
+   "ad": "Neon T V Wide",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "orbit-v-head-goddess": {
+   "ad": "Orbit V Head Goddess",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 2
+  },
+  "pulse-head-diag-knee": {
+   "ad": "Pulse Head Diag Knee",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "cosmic-v-halo-knee": {
+   "ad": "Cosmic V Halo Knee",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    -160,
+    120
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "neon-cactus-chest-curtsy": {
+   "ad": "Neon Cactus Chest Curtsy",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    22,
+    -95
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 2
+  },
+  "grid-diag-v-lunge": {
+   "ad": "Grid Diag V Lunge",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "tur": 2
+  },
+  "meteor-head-low-wide": {
+   "ad": "Meteor Head Low Wide",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "orbit-low-hip-goddess": {
+   "ad": "Orbit Low Hip Goddess",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 2
+  },
+  "solar-head-t-tree": {
+   "ad": "Solar Head T Tree",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -128,
+    62
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 3
+  },
+  "solar-cactus-reach-wide": {
+   "ad": "Solar Cactus Reach Wide",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "star-chest-hip-tap": {
+   "ad": "Star Chest Hip Tap",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -22,
+    95
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "solBacak": [
+    3,
+    1
+   ],
+   "tur": 1
+  },
+  "nova-halo-low-lunge": {
+   "ad": "Nova Halo Low Lunge",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -160,
+    120
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -62,
+    -2
+   ],
+   "solBacak": [
+    45,
+    45
+   ],
+   "tur": 2
+  },
+  "meteor-eagle-reach-goddess": {
+   "ad": "Meteor Eagle Reach Goddess",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -60,
+    120
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ],
+   "tur": 2
+  },
+  "orbit-hip-t-wide": {
+   "ad": "Orbit Hip T Wide",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ],
+   "tur": 1
+  },
+  "neon-w-halo-knee": {
+   "ad": "Neon W Halo Knee",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    -160,
+    120
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ],
+   "tur": 2
+  },
+  "grid-t-head-tree": {
+   "ad": "Grid T Head Tree",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    128,
+    -62
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    -40
+   ],
+   "tur": 3
+  }
+ }
+}
