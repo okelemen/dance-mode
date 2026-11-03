@@ -1,10 +1,10 @@
 {
- "_not": "HUMAN TETRIS 15. video (REF-066, HumanWarmUp 'Human Tetris x 2 Player Co-op Viral Interactive Warm Up Game'), kullanici 2-3 Kas 2026: CO-OP 2 oyuncu, P1 turkuaz / P2 turuncu, 25 duvar, acilis CO-OP karti, SUBSCRIBE her 15 sn, koc sesi yok (10-14 gibi; REF sesi dinlenmedi). Muzik henuz yok: 124 BPM gecici (Suno brief'i 124 isteyecek), muzik gelince olculup guncellenir.",
+ "_not": "HUMAN TETRIS 15. video (REF-066, HumanWarmUp 'Human Tetris x 2 Player Co-op Viral Interactive Warm Up Game'), kullanici 2-3 Kas 2026: CO-OP 2 oyuncu, P1 turkuaz / P2 turuncu, 25 duvar, acilis CO-OP karti, SUBSCRIBE her 15 sn, koc sesi yok (10-14 gibi; REF sesi dinlenmedi). Muzik Linked Through The Ice Grid (Suno, kullanici, 3 Kas 2026): brief 123 istedi, parca 126,9 -> 130,6 kayiyordu -> ice-grid-1285.wav (muzik-sabitle.py --hedef 128.5, sapma <= 0,30). Kesit 1 gecici 124 ile alindi.",
  "seri": "HUMAN TETRIS",
  "bolum": "human-tetris-15",
  "sayfa": "sahne12.html",
- "bpm": 124,
- "muzik": "henuz yok (Suno brief 15)",
+ "bpm": 128.5,
+ "muzik": "Linked Through The Ice Grid.wav (Suno, kullanici, 3 Kas 2026) -> ice-grid-1285.wav",
  "duvar": "duvar-listesi-15.json",
  "duvar_vurus": 24,
  "zaman_vurus": {
@@ -60,7 +60,7 @@
   "varlik": "/03-motor/tetris-pvp/varlik-15-sahne2/",
   "maskeVarlik": "/03-motor/tetris-pvp/varlik-15-poz2/",
   "maskeKlasor": "grup/",
-  "boksorVarlik": "/03-motor/tetris-pvp/varlik-08/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-15-boksor/",
   "p1": "#22e8e0",
   "p1koyu": "#0a7a78",
   "p1acik": "#d6fffd",
