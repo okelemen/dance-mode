@@ -93,6 +93,20 @@ el(3, on("Frog Squat Arms Up", "v", "v", [-82, 24], [-82, 24]))
 el(3, on("Kneel Arm Arc Over", [-160, 120], [-30, 40], [-16, -90], [-16, -90], govde=196))
 el(3, profil("Half Kneel Hands Hips Tall", 180, [-40, 30], [-38, 30], [92, -2], [0, -90]))
 el(3, profil("Kneel Sit Heels Arms Forward", 175, [90, 90], [88, 88], [-60, 60], [-62, 58]))
+# kontak 1 (3 Kas 2026): profilden bukuk bacakli yer pozlari siluette havada/ziplar gibi okundu (11 poz elendi) ->
+# ROUND 3 HARD = net okunan yer pozlari + kameraya donuk zor denge / derin durus (ayaklar yerde acik)
+el(3, on("One Leg Side Balance V", "v", "v", "tog", [70, 70], govde=164))
+el(3, on("Goddess Twist Diagonal", "up45", "lowv", "goddess", "goddess", govde=188))
+el(3, on("Tree Arms Open T", "t", "t", "tog", "kneein", govde=180))
+el(3, on("Side Kick High Twin Reach", "up", "up", "tog", [82, 82], govde=158))
+el(3, on("Deep Side Lunge Arm Over", [-150, -120], "hip", "lunge", "straight", govde=212))
+el(3, on("Horse Stance Chest Punch", "chest", "t", "horse", "horse", govde=180))
+el(3, on("Knee Up V Arms Tall", "v", "v", "tog", "kneeup"))
+el(3, on("Curtsy Halo Arms", [-160, 120], [-160, 120], "curtsy", "tog"))
+el(3, profil("Warrior Three Arms Forward", 98, [88, 88], [86, 86], [0, 0], [-82, -82]))
+el(3, profil("Dancer Pose Reach", 150, [150, 150], [-40, -120], [0, 0], [-55, -125]))
+el(3, on("Wide Squat Hands Knees", [-25, 15], [-25, 15], "goddess", "goddess", govde=176))
+el(3, on("Side Lunge Low Diagonal", "lowv", "up45", "straight", "lunge", govde=170))
 
 KAPAK = json.load(open(os.path.join(BURA, "pozlar-16-kapak.json"), encoding="utf-8"))["pozlar"]
 KAPAK_TUR = {"petal-sky-point": 1, "blossom-wide-star": 1, "petal-hip-side-kick": 2, "lantern-lunge-v-reach": 2}
