@@ -1,0 +1,352 @@
+{
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-17",
+ "bpm": 138.0,
+ "toplam_olcu": 169,
+ "toplam_duvar": 24,
+ "zaman": {
+  "kart": 2.1739,
+  "say": 3.0435,
+  "buyu": 3.4783,
+  "gec": 1.3043,
+  "sure": 10.4348
+ },
+ "kartlar": [
+  {
+   "tip": "yazi",
+   "metin": "HUMAN TETRIS",
+   "alt": "SOLO RUN",
+   "t": 0.0,
+   "sure": 3.4783
+  },
+  {
+   "tip": "nasil",
+   "metin": "COPY THE SHAPE",
+   "alt": "BEFORE THE WALL FLIES THROUGH YOU!",
+   "t": 3.4783,
+   "sure": 5.2174
+  },
+  {
+   "tip": "basla",
+   "t": 8.6957,
+   "sure": 3.4783
+  },
+  {
+   "tip": "tur",
+   "tur": 1,
+   "metin": "EASY",
+   "t": 12.1739,
+   "sure": 3.4783
+  },
+  {
+   "t": 15.6522,
+   "sure": 0.0,
+   "tip": "basla"
+  },
+  {
+   "t": 46.9566,
+   "sure": 1.7391,
+   "tip": "ovgu_kart",
+   "metin": "NAILED IT!"
+  },
+  {
+   "t": 80.0001,
+   "sure": 1.7391,
+   "tip": "ovgu_kart",
+   "metin": "SO SMOOTH!"
+  },
+  {
+   "t": 102.6088,
+   "sure": 3.4783,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "NORMAL"
+  },
+  {
+   "t": 116.5219,
+   "sure": 1.7391,
+   "tip": "ovgu_kart",
+   "metin": "STAR|POWER!"
+  },
+  {
+   "t": 149.5654,
+   "sure": 1.7391,
+   "tip": "ovgu_kart",
+   "metin": "ON FIRE!"
+  },
+  {
+   "t": 182.609,
+   "sure": 1.7391,
+   "tip": "ovgu_kart",
+   "metin": "COSMIC!"
+  },
+  {
+   "t": 194.7829,
+   "sure": 3.4783,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "HARD"
+  },
+  {
+   "t": 219.1307,
+   "sure": 1.7391,
+   "tip": "ovgu_kart",
+   "metin": "LEGEND|MOVE!"
+  },
+  {
+   "t": 252.1743,
+   "sure": 1.7391,
+   "tip": "ovgu_kart",
+   "metin": "UNSTOPPABLE!"
+  },
+  {
+   "tip": "yazi",
+   "metin": "ALL 24 WALLS",
+   "alt": "CLEARED!",
+   "t": 285.2178,
+   "sure": 3.4783
+  },
+  {
+   "t": 288.6961,
+   "sure": 5.2174,
+   "tip": "abone"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 15.6522,
+   "p1": "nebula-goal-post-arms-tall",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 2,
+   "tur": 1,
+   "t0": 26.087,
+   "p1": "nebula-crescent-lean-right",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 3,
+   "tur": 1,
+   "t0": 36.5218,
+   "p1": "nebula-eagle-arms-tall",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 4,
+   "tur": 1,
+   "t0": 48.6957,
+   "p1": "nebula-standing-reach-back",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 5,
+   "tur": 1,
+   "t0": 59.1305,
+   "p1": "nebula-toe-tap-side-reach",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 6,
+   "tur": 1,
+   "t0": 69.5653,
+   "p1": "nebula-side-bend-arm-over-wide",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 7,
+   "tur": 1,
+   "t0": 81.7392,
+   "p1": "nebula-star-arms-diagonal",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 8,
+   "tur": 1,
+   "t0": 92.174,
+   "p1": "nebula-forward-fold-half",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 9,
+   "tur": 2,
+   "t0": 106.0871,
+   "p1": "nebula-chair-twist-arms",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 10,
+   "tur": 2,
+   "t0": 118.261,
+   "p1": "comet-halo-t-curtsy",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 11,
+   "tur": 2,
+   "t0": 128.6958,
+   "p1": "nebula-side-lunge-prayer",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 12,
+   "tur": 2,
+   "t0": 139.1306,
+   "p1": "pulse-halo-t-goddess",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 13,
+   "tur": 2,
+   "t0": 151.3046,
+   "p1": "nebula-reverse-warrior-reach",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 14,
+   "tur": 2,
+   "t0": 161.7394,
+   "p1": "nebula-side-lunge-deep-twist",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 15,
+   "tur": 2,
+   "t0": 172.1742,
+   "p1": "nebula-knee-up-eagle-arms",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 16,
+   "tur": 2,
+   "t0": 184.3481,
+   "p1": "nebula-standing-knee-hug",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 17,
+   "tur": 3,
+   "t0": 198.2611,
+   "p1": "nebula-lotus-prayer-sit",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 18,
+   "tur": 3,
+   "t0": 208.6959,
+   "p1": "nebula-butterfly-sit-wings",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 19,
+   "tur": 3,
+   "t0": 220.8699,
+   "p1": "nebula-lotus-arms-sky",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 20,
+   "tur": 3,
+   "t0": 231.3047,
+   "p1": "nebula-low-lunge-sky",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 21,
+   "tur": 3,
+   "t0": 241.7395,
+   "p1": "nebula-low-lunge-twist-open",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 22,
+   "tur": 3,
+   "t0": 253.9134,
+   "p1": "nebula-seated-boat-arms",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 23,
+   "tur": 3,
+   "t0": 264.3482,
+   "p1": "nebula-half-moon-side-hand",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 24,
+   "tur": 3,
+   "t0": 274.783,
+   "p1": "nebula-airplane-wings",
+   "ovgu": "NICE MOVE!"
+  }
+ ],
+ "abone": [
+  16.0,
+  30.0,
+  49.0,
+  60.0,
+  75.0,
+  90.0,
+  106.5,
+  120.0,
+  135.0,
+  151.5,
+  165.0,
+  184.5,
+  198.5,
+  210.0,
+  225.0,
+  240.0,
+  255.0,
+  270.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "Nebula Grid Solo.wav (Suno, kullanici, 3 Kas 2026) -> nebula-grid-138.wav",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne14.html.",
+ "tema": {
+  "galaksi": true,
+  "tekOyuncu": true,
+  "baslaTam": true,
+  "varlik": "/03-motor/tetris-pvp/varlik-17/",
+  "maskeVarlik": "/03-motor/tetris-pvp/varlik-17/",
+  "maskeKlasor": "poz/",
+  "p1": "#ff5ad8",
+  "p1koyu": "#a0108a",
+  "p1acik": "#ffd6f2",
+  "p2": "#3fe8ff",
+  "p2koyu": "#0a6ab8",
+  "p2acik": "#d6f8ff",
+  "altin": "#ffe23a",
+  "camgobegi": "#3fe8ff",
+  "duvarDegrade": [
+   "#ff7ae6",
+   "#ffb0c8",
+   "#ffe86a"
+  ],
+  "acilisZemin": [
+   "#3a2ab8",
+   "#0a0628"
+  ],
+  "acilisYazi": [
+   "#ffffff",
+   "#fff4fb",
+   "#ffd6f2"
+  ],
+  "acilisKontur": "#ff3fae",
+  "acilisIsilti": "#ff7ad8",
+  "isin": [
+   "#3a2ab8",
+   "#0a0628"
+  ],
+  "abone": [
+   "#7dffb4",
+   "#0c8a48"
+  ],
+  "sayac": "MISSIONS",
+  "okRenk": "#3fe8ff",
+  "aboneAlt": "NEW BATTLE EVERY DAY",
+  "fener": false
+ }
+}

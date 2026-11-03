@@ -1,0 +1,42 @@
+{
+ "_not": "HUMAN TETRIS 17. video (REF-068 TetrisBounce, HUMAN TETRIS SOLO #01). SOLO, 3 level x 8 duvar (EASY / NORMAL / HARD; referansta 3 x 6), duvar 24 vurus (10,4 sn; REF-068 dongusu ~11 sn). Acilis referans sirasiyla: logo karti -> HOW TO PLAY -> THREE/TWO/ONE/GO -> LEVEL secimi (VS/boksor yok, kullanici karari). Her levelin basinda LEVEL ekrani, her 3 duvarda bir hiz cizgili ovgu. Muzik Nebula Grid Solo (Suno, kullanici) 138,0->138,3 -> nebula-grid-138.wav (muzik-sabitle.py --hedef 138); 0-18 sn zayif giris, 110-122 ve 155-158 sn dusus ızgarada atlanir. Metinler bizim.",
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-17",
+ "sayfa": "sahne14.html",
+ "bpm": 138,
+ "muzik": "Nebula Grid Solo.wav (Suno, kullanici, 3 Kas 2026) -> nebula-grid-138.wav",
+ "duvar": "duvar-listesi-17.json",
+ "duvar_vurus": 24,
+ "zaman_vurus": {"kart": 5, "say": 7, "buyu": 8, "gec": 3},
+ "kart_vurus": {"tur": 8, "basla": 0, "abone": 12},
+ "tur_kart": {"1": ["EASY", null], "2": ["NORMAL", null], "3": ["HARD", null]},
+ "tur_kart_atla": [1],
+ "giris_dizisi": [
+  {"tip": "yazi", "metin": "HUMAN TETRIS", "alt": "SOLO RUN", "vurus": 8},
+  {"tip": "nasil", "metin": "COPY THE SHAPE", "alt": "BEFORE THE WALL FLIES THROUGH YOU!", "vurus": 12},
+  {"tip": "basla", "vurus": 8},
+  {"tip": "tur", "tur": 1, "metin": "EASY", "vurus": 8}
+ ],
+ "ovgu_kart": {"her": 3, "vurus": 4, "metin": ["NAILED IT!", "SO SMOOTH!", "STAR|POWER!", "ON FIRE!", "COSMIC!", "LEGEND|MOVE!", "UNSTOPPABLE!"]},
+ "kapanis": [
+  {"tip": "yazi", "metin": "ALL 24 WALLS", "alt": "CLEARED!", "vurus": 8}
+ ],
+ "tema": {
+  "galaksi": true,
+  "tekOyuncu": true,
+  "baslaTam": true,
+  "varlik": "/03-motor/tetris-pvp/varlik-17/",
+  "maskeVarlik": "/03-motor/tetris-pvp/varlik-17/",
+  "maskeKlasor": "poz/",
+  "p1": "#ff5ad8", "p1koyu": "#a0108a", "p1acik": "#ffd6f2",
+  "p2": "#3fe8ff", "p2koyu": "#0a6ab8", "p2acik": "#d6f8ff",
+  "altin": "#ffe23a", "camgobegi": "#3fe8ff",
+  "duvarDegrade": ["#ff7ae6", "#ffb0c8", "#ffe86a"],
+  "acilisZemin": ["#3a2ab8", "#0a0628"], "acilisYazi": ["#ffffff", "#fff4fb", "#ffd6f2"], "acilisKontur": "#ff3fae", "acilisIsilti": "#ff7ad8",
+  "isin": ["#3a2ab8", "#0a0628"], "abone": ["#7dffb4", "#0c8a48"],
+  "sayac": "MISSIONS",
+  "okRenk": "#3fe8ff",
+  "aboneAlt": "NEW BATTLE EVERY DAY",
+  "fener": false
+ }
+}

@@ -1,0 +1,150 @@
+{
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-17",
+ "bpm": 138.0,
+ "toplam_olcu": 38,
+ "toplam_duvar": 4,
+ "zaman": {
+  "kart": 2.1739,
+  "say": 3.0435,
+  "buyu": 3.4783,
+  "gec": 1.3043,
+  "sure": 10.4348
+ },
+ "kartlar": [
+  {
+   "tip": "yazi",
+   "metin": "HUMAN TETRIS",
+   "alt": "SOLO RUN",
+   "t": 0.0,
+   "sure": 3.4783
+  },
+  {
+   "tip": "nasil",
+   "metin": "COPY THE SHAPE",
+   "alt": "BEFORE THE WALL FLIES THROUGH YOU!",
+   "t": 3.4783,
+   "sure": 5.2174
+  },
+  {
+   "tip": "basla",
+   "t": 8.6957,
+   "sure": 3.4783
+  },
+  {
+   "tip": "tur",
+   "tur": 1,
+   "metin": "EASY",
+   "t": 12.1739,
+   "sure": 3.4783
+  },
+  {
+   "t": 15.6522,
+   "sure": 0.0,
+   "tip": "basla"
+  },
+  {
+   "t": 26.087,
+   "sure": 3.4783,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "NORMAL"
+  },
+  {
+   "t": 40.0,
+   "sure": 1.7391,
+   "tip": "ovgu_kart",
+   "metin": "STAR|POWER!"
+  },
+  {
+   "t": 41.7392,
+   "sure": 3.4783,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "HARD"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 15.6522,
+   "p1": "nebula-goal-post-arms-tall",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 9,
+   "tur": 2,
+   "t0": 29.5652,
+   "p1": "nebula-chair-twist-arms",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 17,
+   "tur": 3,
+   "t0": 45.2174,
+   "p1": "nebula-lotus-prayer-sit",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 22,
+   "tur": 3,
+   "t0": 55.6522,
+   "p1": "nebula-seated-boat-arms",
+   "ovgu": "AWESOME!"
+  }
+ ],
+ "abone": [
+  16.0,
+  30.0,
+  45.5,
+  60.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "Nebula Grid Solo.wav (Suno, kullanici, 3 Kas 2026) -> nebula-grid-138.wav",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne14.html.",
+ "tema": {
+  "galaksi": true,
+  "tekOyuncu": true,
+  "baslaTam": true,
+  "varlik": "/03-motor/tetris-pvp/varlik-17/",
+  "maskeVarlik": "/03-motor/tetris-pvp/varlik-17/",
+  "maskeKlasor": "poz/",
+  "p1": "#ff5ad8",
+  "p1koyu": "#a0108a",
+  "p1acik": "#ffd6f2",
+  "p2": "#3fe8ff",
+  "p2koyu": "#0a6ab8",
+  "p2acik": "#d6f8ff",
+  "altin": "#ffe23a",
+  "camgobegi": "#3fe8ff",
+  "duvarDegrade": [
+   "#ff7ae6",
+   "#ffb0c8",
+   "#ffe86a"
+  ],
+  "acilisZemin": [
+   "#3a2ab8",
+   "#0a0628"
+  ],
+  "acilisYazi": [
+   "#ffffff",
+   "#fff4fb",
+   "#ffd6f2"
+  ],
+  "acilisKontur": "#ff3fae",
+  "acilisIsilti": "#ff7ad8",
+  "isin": [
+   "#3a2ab8",
+   "#0a0628"
+  ],
+  "abone": [
+   "#7dffb4",
+   "#0c8a48"
+  ],
+  "sayac": "MISSIONS",
+  "okRenk": "#3fe8ff",
+  "aboneAlt": "NEW BATTLE EVERY DAY",
+  "fener": false
+ }
+}
