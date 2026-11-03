@@ -60,7 +60,7 @@ def girdap_kart(w, h, renk):
     return k
 
 
-for i, (o, renk) in enumerate((("p1", "#a8e8ff"), ("p2", "#ffbfe8"))):
+for i, (o, renk) in enumerate((("p1", "#5ac8ff"), ("p2", "#ff7ad0"))):   # 2. taslak: acik girdap doygunlugu dusuruyordu
     x0, y0, x1, y1 = [v * s for v in yer["aciklik_" + o]]
     kw, kh = int((x1 - x0) * 0.86), int((y1 - y0) * 0.9)
     im.alpha_composite(girdap_kart(kw, kh, renk), (int(i * W // 2 + (x0 + x1) / 2 - kw / 2), int(y1 - kh - (y1 - y0) * 0.03)))

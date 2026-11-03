@@ -119,7 +119,9 @@ def gok_katmani(ad):
     for i in range(40):
         kure((rnd.uniform(-960, 960), 250, rnd.uniform(330, 420)), rnd.choice((2.5, 3.5)), fener, sub=1)
     # SAKURA TACI: ustte tam bant + yanlarda asagi sarkan kumeler; 3 pembe ton + mor golge
-    tonlar = [mat_emis("sk%d" % i, lin(hex3(c)), g) for i, (c, g) in enumerate((("#ff9ae0", 1.2), ("#ff5ac8", 1.15), ("#e82aa8", 1.05), ("#9a2ad8", 1.0)))]
+    # kapak 2. taslak: doygunluk 0,547 / ref 0,621 -> kapakta pastel ton yerine doygun pembe (videoda pastel kalir)
+    tc_ = (("#ff6ad8", 1.2), ("#ff2ab4", 1.15), ("#d8109c", 1.05), ("#8a1ad8", 1.0)) if KAPAK else (("#ff9ae0", 1.2), ("#ff5ac8", 1.15), ("#e82aa8", 1.05), ("#9a2ad8", 1.0))
+    tonlar = [mat_emis("sk%d" % i, lin(hex3(c)), g) for i, (c, g) in enumerate(tc_)]
     dal = mat_emis("dal", lin(hex3("#2a0e3a")), 1.0)
     for sx in (-1, 1):                                     # dallar: kenardan ortaya
         boru((sx * 1000, 100, 760), (sx * 520, 100, 980), 16, dal)
@@ -226,7 +228,7 @@ def korkuluk(R):
 
 def kapi(R):
     Y, W_, H_, K = KAP["y"], KAP["w"], KAP["h"], KAP["kalin"]
-    cerceve = mat_dikey("cerceve", R["ana"], R["acik"], 0.0, H_ + K, 1.6)
+    cerceve = mat_dikey("cerceve", R["koyu"] if KAPAK else R["ana"], R["ana"] if KAPAK else R["acik"], 0.0, H_ + K, 1.6)   # kapakta beyaza kacmasin
     ic = mat_emis("kafes", lin(hex3(R["acik"])), 2.2)
     xk = W_ / 2 - K / 2
     for s in (-1, 1):
