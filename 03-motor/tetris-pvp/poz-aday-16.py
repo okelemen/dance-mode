@@ -82,6 +82,17 @@ el(3, on("Kneel Lean Side Wave", [-150, 170], "hip", [-15, -90], [-15, -90], gov
 el(3, on("Deep Squat Elbows Knees", [-30, 160], [-30, 160], [-80, 20], [-80, 20]))
 el(3, on("Star Balance One Leg", "v", "v", "tog", [-60, -60], govde=172))
 el(3, on("Side Plank Sky Hand", "up", "down", "straight", "straight", govde=118))
+# 1. secim: tur 3'te 10 kaldi (diz pozlari eski videolarla 0,79-0,94) -> farkli bacak sekilli yer pozlari
+el(3, profil("Seated Lean Back Palms", 222, [-150, -150], [-148, -148], [88, 88], [86, 86]))
+el(3, profil("Seated One Knee Reach", 150, [100, 100], [98, 98], [88, 88], [40, -95]))
+el(3, profil("Seated Twist Arms Open", 182, [120, 120], [-120, -120], [88, 88], [86, 86]))
+el(3, on("Gate Pose Over Reach", [-150, -128], "hip", [-20, -90], [45, 45], govde=212))
+el(3, on("Gate Pose Low Hand", "t", [-10, -5], [-20, -90], [48, 48], govde=168))
+el(3, on("Frog Squat Hands Floor", [-8, -4], [-8, -4], [-82, 24], [-82, 24]))
+el(3, on("Frog Squat Arms Up", "v", "v", [-82, 24], [-82, 24]))
+el(3, on("Kneel Arm Arc Over", [-160, 120], [-30, 40], [-16, -90], [-16, -90], govde=196))
+el(3, profil("Half Kneel Hands Hips Tall", 180, [-40, 30], [-38, 30], [92, -2], [0, -90]))
+el(3, profil("Kneel Sit Heels Arms Forward", 175, [90, 90], [88, 88], [-60, 60], [-62, 58]))
 
 KAPAK = json.load(open(os.path.join(BURA, "pozlar-16-kapak.json"), encoding="utf-8"))["pozlar"]
 KAPAK_TUR = {"petal-sky-point": 1, "blossom-wide-star": 1, "petal-hip-side-kick": 2, "lantern-lunge-v-reach": 2}
