@@ -30,7 +30,7 @@ def kamera(sc):
 def mat_buz():
     m = bpy.data.materials.new("buz"); m.use_nodes = True
     b = m.node_tree.nodes["Principled BSDF"]
-    b.inputs["Base Color"].default_value = (*lin(hex3("#4a6ea8")), 1); b.inputs["Roughness"].default_value = 0.22
+    b.inputs["Base Color"].default_value = (*lin(hex3("#3a78c0" if KAPAK else "#4a6ea8")), 1); b.inputs["Roughness"].default_value = 0.22
     b.inputs["Metallic"].default_value = 0.15
     b.inputs["Emission Color"].default_value = (*lin(hex3("#4a78b8")), 1); b.inputs["Emission Strength"].default_value = 0.22   # sahne 1: guverte chevronlari yutuyordu
     return m
@@ -46,7 +46,7 @@ def sekil(ad, noktalar, mat, konum=(0, 0, 0)):
 
 # ------------------------------------------------------------------ GOK katmani = izgara tunel
 def tunel():
-    koyu = mat_emis("t_koyu", lin(hex3("#0a2450")), 0.75)
+    koyu = mat_emis("t_koyu", lin(hex3("#1f5a96" if KAPAK else "#0a2450")), 0.9 if KAPAK else 0.75)   # kapak 1: renklilik 0,23 (ref 0,30), REF kapaginda tunel orta mavi
     y0, y1 = -2.0, T_Y1
     for s in (-1, 1):
         yuvarlak_kutu("t_yan", (s * (T_W + 0.5), (y0 + y1) / 2, T_H / 2), (1.0, y1 - y0, T_H + 8), koyu, egim=0.0, seg=1)
@@ -86,7 +86,7 @@ def gok_katmani():
 # ------------------------------------------------------------------ SERIT katmani
 def kopru_yol():
     yuvarlak_kutu("yol", (0, (0.3 + Y_SON) / 2, -0.2), (YOL_W + 1.4, Y_SON - 0.3, 0.4), mat_buz(), egim=0.03, seg=2)
-    bey = mat_emis("chev", lin(hex3("#d8f6ff")), 1.25)
+    bey = mat_emis("chev", lin(hex3("#d8f6ff")), 0.8 if KAPAK else 1.25)   # kapak 1: beyaz oran 0,30 (ref 0,14)
     for yy, hw, kal in ((0.9, 2.5, 1.05), (2.45, 2.22, 0.85), (3.85, 1.98, 0.71), (5.05, 1.78, 0.6), (6.1, 1.6, 0.48), (7.05, 1.45, 0.4), (7.85, 1.33, 0.34)):
         d = hw * 0.28                                      # REF-066: genis, kalin beyaz V
         sekil("chev", [(-hw, yy + d), (0, yy), (hw, yy + d), (hw, yy + d + kal), (0, yy + kal), (-hw, yy + d + kal)], bey, konum=(0, 0, 0.03))
