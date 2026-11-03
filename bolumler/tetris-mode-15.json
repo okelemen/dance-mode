@@ -1,0 +1,328 @@
+{
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-15",
+ "bpm": 124.0,
+ "toplam_olcu": 168,
+ "toplam_duvar": 25,
+ "zaman": {
+  "kart": 3.3871,
+  "say": 2.9032,
+  "buyu": 2.9032,
+  "gec": 1.4516,
+  "sure": 11.6129
+ },
+ "kartlar": [
+  {
+   "tip": "acilis",
+   "t": 0.0,
+   "sure": 5.8065
+  },
+  {
+   "tip": "yazi",
+   "metin": "TWO PLAYERS,",
+   "alt": "ONE SHAPE!",
+   "t": 5.8065,
+   "sure": 2.9032
+  },
+  {
+   "tip": "nasil",
+   "metin": "LINK UP",
+   "alt": "MATCH THE HOLE AS A TEAM!",
+   "t": 8.7097,
+   "sure": 4.8387
+  },
+  {
+   "t": 13.5484,
+   "sure": 3.871,
+   "tip": "basla"
+  },
+  {
+   "t": 75.4839,
+   "sure": 1.9355,
+   "tip": "ovgu_kart",
+   "metin": "Keep it linked!"
+  },
+  {
+   "t": 135.4838,
+   "sure": 1.9355,
+   "tip": "ovgu_kart",
+   "metin": "Smooth duo!"
+  },
+  {
+   "t": 195.4838,
+   "sure": 1.9355,
+   "tip": "ovgu_kart",
+   "metin": "Hold that shape!"
+  },
+  {
+   "t": 255.4838,
+   "sure": 1.9355,
+   "tip": "ovgu_kart",
+   "metin": "Last stretch!"
+  },
+  {
+   "tip": "yazi",
+   "metin": "THANK YOU",
+   "alt": "FOR PLAYING!",
+   "t": 315.4838,
+   "sure": 3.871
+  },
+  {
+   "t": 319.3548,
+   "sure": 5.8065,
+   "tip": "abone"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 17.4194,
+   "grup": "duo-heart-arch-hands-on-hips",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 2,
+   "tur": 1,
+   "t0": 29.0323,
+   "grup": "duo-arc-bend-and-side-kick",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 3,
+   "tur": 1,
+   "t0": 40.6452,
+   "grup": "duo-warrior-two-fingertip-line",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 4,
+   "tur": 1,
+   "t0": 52.2581,
+   "grup": "duo-reverse-warrior-low-link",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 5,
+   "tur": 1,
+   "t0": 63.871,
+   "grup": "duo-bow-forward-hands-clasp",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 6,
+   "tur": 1,
+   "t0": 77.4193,
+   "grup": "duo-pike-v-and-knee-drive",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 7,
+   "tur": 1,
+   "t0": 89.0322,
+   "grup": "duo-guard-step-punch-link",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 8,
+   "tur": 1,
+   "t0": 100.6451,
+   "grup": "duo-wide-horse-v-arms",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 9,
+   "tur": 1,
+   "t0": 112.258,
+   "grup": "duo-wide-side-stretch-low-link",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 10,
+   "tur": 2,
+   "t0": 123.8709,
+   "grup": "duo-side-angle-kick-hand-link",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 11,
+   "tur": 2,
+   "t0": 137.4193,
+   "grup": "duo-crescent-tiptoe-arms-high",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 12,
+   "tur": 2,
+   "t0": 149.0322,
+   "grup": "duo-inner-knee-open-link",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 13,
+   "tur": 2,
+   "t0": 160.6451,
+   "grup": "duo-stork-side-reach",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 14,
+   "tur": 2,
+   "t0": 172.258,
+   "grup": "duo-back-kick-front-reach",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 15,
+   "tur": 2,
+   "t0": 183.8709,
+   "grup": "duo-hip-hinge-foot-back-link",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 16,
+   "tur": 2,
+   "t0": 197.4193,
+   "grup": "duo-heel-lift-side-arch",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 17,
+   "tur": 2,
+   "t0": 209.0322,
+   "grup": "duo-outer-leg-swing-t-tilt",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 18,
+   "tur": 3,
+   "t0": 220.6451,
+   "grup": "duo-wide-lunge-hand-down-arm-up",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 19,
+   "tur": 3,
+   "t0": 232.258,
+   "grup": "duo-seated-lean-back-feet-meet",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 20,
+   "tur": 3,
+   "t0": 243.8709,
+   "grup": "duo-low-plank-reach-hand-link",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 21,
+   "tur": 3,
+   "t0": 257.4193,
+   "grup": "duo-kneeling-side-stretch-link",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 22,
+   "tur": 3,
+   "t0": 269.0322,
+   "grup": "duo-half-kneel-forward-reach",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 23,
+   "tur": 3,
+   "t0": 280.6451,
+   "grup": "duo-deep-side-lunge-arch-link",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 24,
+   "tur": 3,
+   "t0": 292.258,
+   "grup": "duo-long-side-lunge-low-link",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 25,
+   "tur": 3,
+   "t0": 303.8709,
+   "grup": "duo-low-squat-w-arms",
+   "ovgu": "GREAT!"
+  }
+ ],
+ "abone": [
+  15.0,
+  30.0,
+  45.0,
+  60.0,
+  77.5,
+  90.0,
+  105.0,
+  120.0,
+  137.5,
+  150.0,
+  165.0,
+  180.0,
+  197.5,
+  210.0,
+  225.0,
+  240.0,
+  257.5,
+  270.0,
+  285.0,
+  300.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "henuz yok (Suno brief 15)",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne12.html.",
+ "tema": {
+  "tekOyuncu": true,
+  "sayimKose": true,
+  "varlik": "/03-motor/tetris-pvp/varlik-15-sahne2/",
+  "maskeVarlik": "/03-motor/tetris-pvp/varlik-15-poz2/",
+  "maskeKlasor": "grup/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-08/",
+  "p1": "#22e8e0",
+  "p1koyu": "#0a7a78",
+  "p1acik": "#d6fffd",
+  "p2": "#ff8a1f",
+  "p2koyu": "#a04a00",
+  "p2acik": "#ffe6cc",
+  "vsEtiket": [
+   "P1",
+   "P2"
+  ],
+  "vsHarf": [
+   "CO-",
+   "OP"
+  ],
+  "vsAlt": "HUMAN TETRIS · CO-OP",
+  "duvarRenk": [
+   "#45dfee",
+   "#5cf542",
+   "#e87a3a",
+   "#f080c0",
+   "#9030f0",
+   "#eef040",
+   "#2a40f0",
+   "#e010e8",
+   "#f5a818",
+   "#3cf0d0",
+   "#ff5a5a",
+   "#b8f04a"
+  ],
+  "sayac": "Mission",
+  "sayacRenk": [
+   "#ffffff",
+   "#f4fbff",
+   "#fff3b0"
+  ],
+  "aboneAlt": "NEW BATTLE EVERY DAY",
+  "fener": false,
+  "izgaraTunel": true,
+  "ovguTam": true,
+  "ovguTamRenk": "#e8d020",
+  "ovguTamKontur": "#6a4a00",
+  "okRenk": "#dff8ff"
+ }
+}

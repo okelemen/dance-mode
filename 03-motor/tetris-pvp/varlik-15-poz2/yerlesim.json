@@ -1,0 +1,279 @@
+{
+ "grup": {
+  "duo-heart-arch-hands-on-hips": {
+   "cerceve_m": 3.71,
+   "gen_m": 5.889,
+   "yuk_m": 3.265,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.024
+    }
+   ]
+  },
+  "duo-arc-bend-and-side-kick": {
+   "cerceve_m": 5.194,
+   "gen_m": 5.53,
+   "yuk_m": 4.57,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-warrior-two-fingertip-line": {
+   "cerceve_m": 4.524,
+   "gen_m": 7.239,
+   "yuk_m": 3.343,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.009
+    }
+   ]
+  },
+  "duo-reverse-warrior-low-link": {
+   "cerceve_m": 3.785,
+   "gen_m": 5.631,
+   "yuk_m": 3.33,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": 0.019
+    }
+   ]
+  },
+  "duo-bow-forward-hands-clasp": {
+   "cerceve_m": 3.581,
+   "gen_m": 4.416,
+   "yuk_m": 3.151,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.035
+    }
+   ]
+  },
+  "duo-pike-v-and-knee-drive": {
+   "cerceve_m": 4.295,
+   "gen_m": 4.538,
+   "yuk_m": 3.78,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-guard-step-punch-link": {
+   "cerceve_m": 4.289,
+   "gen_m": 3.96,
+   "yuk_m": 3.774,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-wide-horse-v-arms": {
+   "cerceve_m": 4.734,
+   "gen_m": 5.223,
+   "yuk_m": 4.166,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-wide-side-stretch-low-link": {
+   "cerceve_m": 5.056,
+   "gen_m": 4.562,
+   "yuk_m": 4.449,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": 0.003
+    }
+   ]
+  },
+  "duo-side-angle-kick-hand-link": {
+   "cerceve_m": 4.262,
+   "gen_m": 6.672,
+   "yuk_m": 3.751,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.014
+    }
+   ]
+  },
+  "duo-crescent-tiptoe-arms-high": {
+   "cerceve_m": 5.257,
+   "gen_m": 3.431,
+   "yuk_m": 4.626,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-inner-knee-open-link": {
+   "cerceve_m": 4.312,
+   "gen_m": 6.781,
+   "yuk_m": 3.795,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.028
+    }
+   ]
+  },
+  "duo-stork-side-reach": {
+   "cerceve_m": 4.23,
+   "gen_m": 5.106,
+   "yuk_m": 3.723,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.018
+    }
+   ]
+  },
+  "duo-back-kick-front-reach": {
+   "cerceve_m": 4.633,
+   "gen_m": 7.412,
+   "yuk_m": 3.01,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.029
+    }
+   ]
+  },
+  "duo-hip-hinge-foot-back-link": {
+   "cerceve_m": 4.018,
+   "gen_m": 6.428,
+   "yuk_m": 3.286,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.018
+    }
+   ]
+  },
+  "duo-heel-lift-side-arch": {
+   "cerceve_m": 4.994,
+   "gen_m": 4.845,
+   "yuk_m": 4.395,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.023
+    }
+   ]
+  },
+  "duo-outer-leg-swing-t-tilt": {
+   "cerceve_m": 5.101,
+   "gen_m": 8.162,
+   "yuk_m": 3.751,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-wide-lunge-hand-down-arm-up": {
+   "cerceve_m": 4.575,
+   "gen_m": 6.555,
+   "yuk_m": 4.026,
+   "temas": [
+    {
+     "tip": "ayak-ayak",
+     "dz": -0.003
+    }
+   ]
+  },
+  "duo-seated-lean-back-feet-meet": {
+   "cerceve_m": 4.111,
+   "gen_m": 6.577,
+   "yuk_m": 2.09,
+   "temas": [
+    {
+     "tip": "ayak-ayak",
+     "dz": -0.037
+    }
+   ]
+  },
+  "duo-low-plank-reach-hand-link": {
+   "cerceve_m": 4.812,
+   "gen_m": 7.699,
+   "yuk_m": 1.824,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.018
+    }
+   ]
+  },
+  "duo-kneeling-side-stretch-link": {
+   "cerceve_m": 3.566,
+   "gen_m": 4.472,
+   "yuk_m": 3.138,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.02
+    }
+   ]
+  },
+  "duo-half-kneel-forward-reach": {
+   "cerceve_m": 3.564,
+   "gen_m": 4.914,
+   "yuk_m": 3.137,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": 0.001
+    }
+   ]
+  },
+  "duo-deep-side-lunge-arch-link": {
+   "cerceve_m": 4.515,
+   "gen_m": 6.953,
+   "yuk_m": 3.973,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.0
+    }
+   ]
+  },
+  "duo-long-side-lunge-low-link": {
+   "cerceve_m": 5.014,
+   "gen_m": 8.023,
+   "yuk_m": 3.256,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.002
+    }
+   ]
+  },
+  "duo-low-squat-w-arms": {
+   "cerceve_m": 3.503,
+   "gen_m": 5.202,
+   "yuk_m": 3.083,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  }
+ }
+}

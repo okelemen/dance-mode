@@ -1,0 +1,135 @@
+{
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-15",
+ "bpm": 124.0,
+ "toplam_olcu": 34,
+ "toplam_duvar": 4,
+ "zaman": {
+  "kart": 3.3871,
+  "say": 2.9032,
+  "buyu": 2.9032,
+  "gec": 1.4516,
+  "sure": 11.6129
+ },
+ "kartlar": [
+  {
+   "tip": "acilis",
+   "t": 0.0,
+   "sure": 5.8065
+  },
+  {
+   "tip": "yazi",
+   "metin": "TWO PLAYERS,",
+   "alt": "ONE SHAPE!",
+   "t": 5.8065,
+   "sure": 2.9032
+  },
+  {
+   "tip": "nasil",
+   "metin": "LINK UP",
+   "alt": "MATCH THE HOLE AS A TEAM!",
+   "t": 8.7097,
+   "sure": 4.8387
+  },
+  {
+   "t": 13.5484,
+   "sure": 3.871,
+   "tip": "basla"
+  },
+  {
+   "t": 52.2581,
+   "sure": 1.9355,
+   "tip": "ovgu_kart",
+   "metin": "Smooth duo!"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 17.4194,
+   "grup": "duo-heart-arch-hands-on-hips",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 6,
+   "tur": 1,
+   "t0": 29.0323,
+   "grup": "duo-pike-v-and-knee-drive",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 10,
+   "tur": 2,
+   "t0": 40.6452,
+   "grup": "duo-side-angle-kick-hand-link",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 19,
+   "tur": 3,
+   "t0": 54.1935,
+   "grup": "duo-seated-lean-back-feet-meet",
+   "ovgu": "GREAT!"
+  }
+ ],
+ "abone": [
+  15.0,
+  30.0,
+  45.0,
+  60.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "henuz yok (Suno brief 15)",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne12.html.",
+ "tema": {
+  "tekOyuncu": true,
+  "sayimKose": true,
+  "varlik": "/03-motor/tetris-pvp/varlik-15-sahne2/",
+  "maskeVarlik": "/03-motor/tetris-pvp/varlik-15-poz2/",
+  "maskeKlasor": "grup/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-08/",
+  "p1": "#22e8e0",
+  "p1koyu": "#0a7a78",
+  "p1acik": "#d6fffd",
+  "p2": "#ff8a1f",
+  "p2koyu": "#a04a00",
+  "p2acik": "#ffe6cc",
+  "vsEtiket": [
+   "P1",
+   "P2"
+  ],
+  "vsHarf": [
+   "CO-",
+   "OP"
+  ],
+  "vsAlt": "HUMAN TETRIS · CO-OP",
+  "duvarRenk": [
+   "#45dfee",
+   "#5cf542",
+   "#e87a3a",
+   "#f080c0",
+   "#9030f0",
+   "#eef040",
+   "#2a40f0",
+   "#e010e8",
+   "#f5a818",
+   "#3cf0d0",
+   "#ff5a5a",
+   "#b8f04a"
+  ],
+  "sayac": "Mission",
+  "sayacRenk": [
+   "#ffffff",
+   "#f4fbff",
+   "#fff3b0"
+  ],
+  "aboneAlt": "NEW BATTLE EVERY DAY",
+  "fener": false,
+  "izgaraTunel": true,
+  "ovguTam": true,
+  "ovguTamRenk": "#e8d020",
+  "ovguTamKontur": "#6a4a00",
+  "okRenk": "#dff8ff"
+ }
+}
