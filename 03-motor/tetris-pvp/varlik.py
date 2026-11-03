@@ -753,6 +753,8 @@ elif arg("--mod", "pvp") == "altinkopru":  # 14. video (REF-065 HumanWarmUp, 1v1
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-altinkopru.py"), encoding="utf-8").read(), "varlik-altinkopru.py", "exec"))
 elif arg("--mod", "pvp") == "kartunel":    # 15. video (REF-066 HumanWarmUp, CO-OP): mavi izgara tunel, buz kopru, beyaz chevron + kafes kapi
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-kartunel.py"), encoding="utf-8").read(), "varlik-kartunel.py", "exec"))
+elif arg("--mod", "pvp") == "sakura":      # 16. video (REF-067 TetrisBounce, 1v1): sakura koprusu, mavi/pembe serit, toon kontur
+    exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-sakura.py"), encoding="utf-8").read(), "varlik-sakura.py", "exec"))
 elif arg("--mod", "pvp") == "cadi":
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-cadi.py"), encoding="utf-8").read(), "varlik-cadi.py", "exec"))
 else:
