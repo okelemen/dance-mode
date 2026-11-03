@@ -56,6 +56,7 @@
  ],
  "tema": {
   "tekOyuncu": true,
+  "acilisIkili": true,
   "sayimKose": true,
   "varlik": "/03-motor/tetris-pvp/varlik-15-sahne2/",
   "maskeVarlik": "/03-motor/tetris-pvp/varlik-15-poz2/",

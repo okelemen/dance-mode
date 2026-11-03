@@ -277,6 +277,7 @@
  "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne12.html.",
  "tema": {
   "tekOyuncu": true,
+  "acilisIkili": true,
   "sayimKose": true,
   "varlik": "/03-motor/tetris-pvp/varlik-15-sahne2/",
   "maskeVarlik": "/03-motor/tetris-pvp/varlik-15-poz2/",
