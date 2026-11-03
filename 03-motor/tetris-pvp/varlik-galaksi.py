@@ -14,16 +14,17 @@ Kapak (--yalniz kapak): ayni katmanlar "kapak-" on ekiyle; REF-068 kapaginda kap
 YERLESIM.clear()
 KAPAK = YALNIZ == "kapak"
 POZLAMA = float(arg("--kapak-pozlama", "0"))
-# video: kapi genisligin ~%16'si, ufuk ~%54, kapi tabani ufkun biraz altinda (REF-068 kontak kareleri)
-KAP = {"y": 19.0, "w": 7.2, "h": 4.0, "kule": 0.42, "kiris": 0.42, "x": 0.0}
-KAM = {"x": 0.0, "z": 2.0, "egim": -2.0, "lens": 18.0, "sensor": 24.0}
+# video (sahne 1 dersi, REF-068 karesiyle yan yana): kapi genisligin ~%32'si (x %34-66, y %34-65), ufuk ~%60, kapi tabani ufkun hemen altinda.
+# Ufuk kamerayi egerek degil lens kaydirmayla asagi alinir (shift_y): izgaranin boyuna cizgileri referanstaki gibi ufukta tek noktada birlesir.
+KAP = {"y": 9.5, "w": 7.2, "h": 3.9, "kule": 0.42, "kiris": 0.42, "x": 0.0}
+KAM = {"x": 0.0, "z": 0.65, "egim": 0.0, "lens": 18.0, "sensor": 24.0, "kaydir": 0.056}
 if KAPAK:
     # REF-068 kapagi: kapi x %40-78, ust %33, alt %68 -> yakin ve saga kacik, ufuk ~%62
-    KAP.update({"y": 9.5, "x": 2.6})
-    KAM.update({"z": 1.7, "egim": -6.0})
-IZ_YAKIN = "#2fe6d8"    # ufka yakin enine cizgiler camgobegi
-IZ_UZUN = "#3a5cff"     # boyuna cizgiler mavi-mor
-ZEMIN = "#070a26"
+    KAP.update({"y": 7.5, "x": 2.4})
+    KAM.update({"z": 0.55, "kaydir": 0.07})
+IZ_YAKIN = "#22c8c0"    # ufka yakin enine cizgiler camgobegi
+IZ_UZUN = "#4b3cf0"     # boyuna cizgiler mavi-mor
+ZEMIN = "#05061c"
 
 
 def kamera(sc):
@@ -32,6 +33,7 @@ def kamera(sc):
     kam = bpy.context.active_object; sc.camera = kam
     kam.data.sensor_fit = "VERTICAL"; kam.data.sensor_height = KAM["sensor"]; kam.data.lens = KAM["lens"]
     kam.data.clip_end = 900
+    kam.data.shift_y = KAM.get("kaydir", 0.0)
     return kam
 
 
@@ -86,13 +88,14 @@ def bulutsu_gok():
     n2 = nt.nodes.new("ShaderNodeTexNoise"); n2.inputs["Scale"].default_value = 5.5; n2.inputs["Detail"].default_value = 6
     n2.inputs["Roughness"].default_value = 0.55
     nt.links.new(map_.outputs[0], n2.inputs["Vector"])
-    renk = ramp(nt, n1.outputs["Fac"], [(0.30, "#05061a"), (0.44, "#141a5a"), (0.52, "#3a2a9a"), (0.60, "#7a3ad0"),
-                                         (0.68, "#c45ae0"), (0.76, "#ff7ad8")])
-    vurgu = ramp(nt, n2.outputs["Fac"], [(0.45, "#000000"), (0.62, "#1a7ab8"), (0.75, "#3fe6ff")])   # camgobegi parlamalar
-    karisim = mix_renk(nt, 0.55, renk.outputs[0], vurgu.outputs[0], "SCREEN")
+    # sahne 1: gok bastan basa bulut gibiydi; REF-068'de taban koyu lacivert, bulutsu yer yer, yildiz cok
+    renk = ramp(nt, n1.outputs["Fac"], [(0.38, "#03041a"), (0.50, "#0e1450"), (0.58, "#2a2a92"), (0.66, "#6a34c8"),
+                                         (0.74, "#b050e0"), (0.80, "#ff7ad8")])
+    vurgu = ramp(nt, n2.outputs["Fac"], [(0.55, "#000000"), (0.68, "#14508a"), (0.80, "#3fb8ff")])   # mavi-camgobegi parlamalar
+    karisim = mix_renk(nt, 0.35, renk.outputs[0], vurgu.outputs[0], "SCREEN")
     # yildiz tozu: kucuk voronoi noktalari, iki olcek
     yildiz = None
-    for olc, esik in ((260.0, 0.035), (90.0, 0.03)):
+    for olc, esik in ((300.0, 0.045), (110.0, 0.035), (40.0, 0.025)):
         v = nt.nodes.new("ShaderNodeTexVoronoi"); v.inputs["Scale"].default_value = olc; v.inputs["Randomness"].default_value = 1.0
         nt.links.new(map_.outputs[0], v.inputs["Vector"])
         nokta = math_(nt, "LESS_THAN", v.outputs["Distance"], esik)
@@ -113,12 +116,12 @@ def izgara_zemin():
     hat = {}
     for eks, olc in (("X", 900), ("Y", 300)):
         d = math_(nt, "ABSOLUTE", math_(nt, "SUBTRACT", math_(nt, "FRACT", math_(nt, "MULTIPLY", sep.outputs[eks], olc / 2.4)), 0.5))
-        hat[eks] = math_(nt, "GREATER_THAN", d, 0.455)
+        hat[eks] = math_(nt, "GREATER_THAN", d, 0.468)   # sahne 1: cizgiler kalin
     r = mix_renk(nt, hat["Y"], ZEMIN, IZ_YAKIN)          # enine (sabit Y) cizgiler
     r = mix_renk(nt, hat["X"], r, IZ_UZUN)               # boyuna (sabit X) cizgiler
     em = nt.nodes.new("ShaderNodeEmission"); nt.links.new(r, em.inputs[0])
     h = math_(nt, "MAXIMUM", hat["X"], hat["Y"])
-    nt.links.new(math_(nt, "MULTIPLY_ADD", h, 3.4, 0.5), em.inputs[1])
+    nt.links.new(math_(nt, "MULTIPLY_ADD", h, 2.6, 0.35), em.inputs[1])
     o = nt.nodes.new("ShaderNodeOutputMaterial"); nt.links.new(em.outputs[0], o.inputs[0])
     p.data.materials.append(m)
     # ufuk parlamasi: uzakta ince camgobegi-pembe serit
