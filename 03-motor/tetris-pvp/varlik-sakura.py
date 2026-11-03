@@ -26,8 +26,8 @@ if KAPAK:   # REF-067 kapagi: kapi buyuk, tepesi ustten ~%20, tabani ~%78
     KAM["lens"] = 15.0; KAM["egim"] = 2.6; KAM["z"] = 1.5
 CIZGI = (0.10, 0.03, 0.22)        # kontur rengi: koyu mor (referansin cizgisi siyah degil, koyu mor)
 SERIT = {
-    "p1": {"ana": "#18b8ff", "acik": "#9cf0ff", "koyu": "#0a4fc8", "zemin": "#0a6ad8", "zemin_u": "#3a2a9a"},
-    "p2": {"ana": "#ff32c8", "acik": "#ffb4ec", "koyu": "#b0108c", "zemin": "#d0109c", "zemin_u": "#5a1a8a"},
+    "p1": {"ana": "#18b8ff", "acik": "#9cf0ff", "koyu": "#0a4fc8", "zemin": "#1a86ff", "zemin_u": "#3a2a9a"},
+    "p2": {"ana": "#ff32c8", "acik": "#ffb4ec", "koyu": "#b0108c", "zemin": "#f01ab0", "zemin_u": "#5a1a8a"},
 }
 
 
@@ -94,14 +94,13 @@ def gok_katmani(ad):
     toon(sc, 2.0)
     # aksam gogu: ustte koyu mor, ortada pembe-kirmizi, ufukta turuncu (REF-067 sol kenari)
     zem = bpy.data.materials.new("gok"); zem.use_nodes = True; nt = zem.node_tree; nt.nodes.clear()
-    tc = nt.nodes.new("ShaderNodeTexCoord"); sp = nt.nodes.new("ShaderNodeSeparateXYZ"); nt.links.new(tc.outputs["Object"], sp.inputs[0])
-    mr = nt.nodes.new("ShaderNodeMapRange"); mr.inputs["From Min"].default_value = -540; mr.inputs["From Max"].default_value = 540
-    nt.links.new(sp.outputs["Z"], mr.inputs["Value"])
-    rp = nt.nodes.new("ShaderNodeValToRGB"); cr = rp.color_ramp; nt.links.new(mr.outputs[0], rp.inputs[0])
-    cr.elements[0].position = 0.30; cr.elements[0].color = (*lin(hex3("#ff8a3a")), 1)
-    cr.elements[1].position = 0.92; cr.elements[1].color = (*lin(hex3("#3a1a8a")), 1)
-    e = cr.elements.new(0.50); e.color = (*lin(hex3("#ff3a78")), 1)
-    e = cr.elements.new(0.70); e.color = (*lin(hex3("#a02aa8")), 1)
+    # 1. deneme: duzlem X'te 90 derece donuk, "Object Z" hep 0 -> gok tek renk koyu kaldi; Generated Y duzlemin dikeyi
+    tc = nt.nodes.new("ShaderNodeTexCoord"); sp = nt.nodes.new("ShaderNodeSeparateXYZ"); nt.links.new(tc.outputs["Generated"], sp.inputs[0])
+    rp = nt.nodes.new("ShaderNodeValToRGB"); cr = rp.color_ramp; nt.links.new(sp.outputs["Y"], rp.inputs[0])
+    cr.elements[0].position = 0.36; cr.elements[0].color = (*lin(hex3("#ffa040")), 1)
+    cr.elements[1].position = 0.95; cr.elements[1].color = (*lin(hex3("#5a2ad0")), 1)
+    e = cr.elements.new(0.50); e.color = (*lin(hex3("#ff4a8a")), 1)
+    e = cr.elements.new(0.72); e.color = (*lin(hex3("#c03ad8")), 1)
     em = nt.nodes.new("ShaderNodeEmission"); nt.links.new(rp.outputs[0], em.inputs[0])
     o = nt.nodes.new("ShaderNodeOutputMaterial"); nt.links.new(em.outputs[0], o.inputs[0])
     bpy.ops.mesh.primitive_plane_add(size=1, location=(0, 600, 540), rotation=(math.radians(90), 0, 0))
@@ -120,7 +119,7 @@ def gok_katmani(ad):
     for i in range(40):
         kure((rnd.uniform(-960, 960), 250, rnd.uniform(330, 420)), rnd.choice((2.5, 3.5)), fener, sub=1)
     # SAKURA TACI: ustte tam bant + yanlarda asagi sarkan kumeler; 3 pembe ton + mor golge
-    tonlar = [mat_emis("sk%d" % i, lin(hex3(c)), g) for i, (c, g) in enumerate((("#ffb8e8", 1.25), ("#ff7ad0", 1.15), ("#e04ab8", 1.05), ("#9a3ac8", 1.0)))]
+    tonlar = [mat_emis("sk%d" % i, lin(hex3(c)), g) for i, (c, g) in enumerate((("#ff9ae0", 1.2), ("#ff5ac8", 1.15), ("#e82aa8", 1.05), ("#9a2ad8", 1.0)))]
     dal = mat_emis("dal", lin(hex3("#2a0e3a")), 1.0)
     for sx in (-1, 1):                                     # dallar: kenardan ortaya
         boru((sx * 1000, 100, 760), (sx * 520, 100, 980), 16, dal)
@@ -130,8 +129,8 @@ def gok_katmani(ad):
     while n < 520:
         x = rnd.uniform(-1000, 1000)
         kenar = abs(x) > 560
-        z = rnd.uniform(470 if kenar else 830, 1120)
-        if not kenar and z < 900 and rnd.random() < 0.6:
+        z = rnd.uniform(470 if kenar else 760, 1120)
+        if not kenar and z < 860 and rnd.random() < 0.45:
             continue
         y = rnd.uniform(-40, 80)
         r = rnd.uniform(26, 62)
@@ -141,6 +140,7 @@ def gok_katmani(ad):
     for _ in range(46):                                    # tacin onunde tek tek cicekler
         x = rnd.uniform(-960, 960); z = rnd.uniform(820, 1060) if abs(x) < 560 else rnd.uniform(520, 1060)
         cicek(x, -80, z, rnd.uniform(14, 22), ic, orta, ekse="Y")
+    fener_dizisi(rnd)
     yaprak = mat_emis("yaprak", lin(hex3("#ffc8ee")), 1.3)
     for _ in range(110):                                   # ucusan yapraklar (her yukseklikte)
         k = kure((rnd.uniform(-960, 960), -100, rnd.uniform(120, 1000)), rnd.uniform(4, 8), yaprak, sub=1)
@@ -149,6 +149,22 @@ def gok_katmani(ad):
         sc.view_settings.exposure = POZLAMA
     parlat(sc, esik=1.2, boy=8, mix=0.08)
     yaz(sc, ad)
+
+
+def fener_dizisi(rnd):
+    """1. denemede iki kapi arasi gok bos kaldi (kapak doygunlugu 0,55 / ref 0,62): ortadan sarkan iki sira kagit fener"""
+    ip = mat_emis("ip", lin(hex3("#3a0e4a")), 1.0)
+    renk = [mat_emis("kf%d" % i, lin(hex3(c)), 2.6) for i, c in enumerate(("#ffb03a", "#ff5a9a", "#ffe06a", "#ff7ad8"))]
+    for z0, sark, n in ((800, 120, 15), (690, 90, 13)):
+        onc = None
+        for i in range(n + 1):
+            q = i / n; x = -960 + q * 1920; z = z0 - sark * 4 * q * (1 - q)
+            if onc:
+                boru((onc[0], -60, onc[1]), (x, -60, z), 2.2, ip)
+            onc = (x, z)
+            if 0 < i < n:
+                k = kure((x, -70, z - 26), 22, renk[i % 4], sub=2); k.scale = (0.85, 0.85, 1.15)
+                yuvarlak_kutu("fc", (x, -70, z - 2), (16, 16, 6), ip, egim=2, seg=2)
 
 
 # ------------------------------------------------------------------ SERIT: her oyuncunun kendi renginde
@@ -216,8 +232,6 @@ def kapi(R):
     for s in (-1, 1):
         yuvarlak_kutu("kule", (s * xk, Y, (H_ + K) / 2), (K, K, H_ + K), cerceve, egim=0.12, seg=3)
         kafes_kule(s * (xk + 0.42), Y + 0.05, 0.0, H_ * 0.8, 0.3, ic, ic)
-        bpy.ops.mesh.primitive_torus_add(major_radius=0.32, minor_radius=0.07, location=(s * (xk - 0.1), Y - 0.3, H_ + K + 0.3), rotation=(math.radians(90), 0, 0))
-        bpy.context.active_object.data.materials.append(ic)     # tepe kosesinde kivrim susu
     yuvarlak_kutu("kiris", (0, Y, H_ + K / 2), (W_, K, K), cerceve, egim=0.12, seg=3)
     kafes_kiris(-xk, xk, Y + 0.05, H_ + K + 0.3, 0.3, ic, ic)
 
