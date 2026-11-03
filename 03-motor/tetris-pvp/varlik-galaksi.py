@@ -20,11 +20,12 @@ KAP = {"y": 9.5, "w": 7.2, "h": 3.9, "kule": 0.42, "kiris": 0.42, "x": 0.0}
 KAM = {"x": 0.0, "z": 0.9, "egim": 0.0, "lens": 18.0, "sensor": 24.0, "kaydir": 0.056}   # sahne 2: z 0,65 yakin izgarayi kalinlastiriyordu
 if KAPAK:
     # REF-068 kapagi: kapi x %40-78, ust %33, alt %68 -> yakin ve saga kacik, ufuk ~%62
-    KAP.update({"y": 7.5, "x": 2.4})
-    KAM.update({"z": 0.8, "kaydir": 0.07})
+    # kapak 1: kapi genisligin %47'si (ref %38), ufuk %55 (ref %62), zemin fazla siyah (siyah oran 0,21, ref 0,085)
+    KAP.update({"y": 9.3, "x": 2.7})
+    KAM.update({"z": 0.8, "kaydir": 0.10})
 IZ_YAKIN = "#22c8c0"    # ufka yakin enine cizgiler camgobegi
 IZ_UZUN = "#3a2ee8"     # boyuna cizgiler mavi-mor
-ZEMIN = "#05061c"
+ZEMIN = "#16124a" if KAPAK else "#05061c"
 
 
 def kamera(sc):

@@ -1,0 +1,25 @@
+esik eski 0.78 / ic 0.55, eski maske 694
+T3 nebula-lotus-arms-sky                              eski 0.53 (varlik-16/poz/sakura-kneel-lean-side-wave.png) ic 0.00 EL
+T3 nebula-butterfly-sit-wings                         eski 0.56 (varlik-04/poz/seated-straddle-arms-t.png) ic 0.35 EL
+T3 nebula-side-lunge-deep-twist                       eski 0.57 (varlik-08/poz/disco-goddess-twist-elbows.png) ic 0.24 EL
+T3 nebula-low-lunge-twist-open                        eski 0.58 (varlik-03/poz/kneeling-arm-sweep.png) ic 0.36 EL
+T1 nebula-forward-fold-half                           eski 0.60 (varlik-12/poz/solo-forward-fold-half-reach.png) ic 0.17 EL
+T2 nebula-reverse-warrior-reach                       eski 0.61 (varlik-10/poz/daily-warrior-two-gaze-up-arm.png) ic 0.48 EL
+T2 nebula-standing-knee-hug                           eski 0.61 (varlik-05/poz/moonlight-knee-raise-arms-down.png) ic 0.30 EL
+T1 nebula-standing-reach-back                         eski 0.62 (varlik-09/poz/cosmic-standing-back-arch-arms-up.png) ic 0.28 EL
+T3 nebula-lotus-prayer-sit                            eski 0.62 (varlik-16/poz/sakura-kneel-hips-hands.png) ic 0.50 EL
+T2 nebula-airplane-wings                              eski 0.63 (varlik-12/poz/solo-airplane-arms-wide.png) ic 0.30 EL
+T3 nebula-seated-boat-arms                            eski 0.63 (varlik-08/poz/disco-seated-boat-arms-up.png) ic 0.31 EL
+T1 nebula-toe-tap-side-reach                          eski 0.63 (varlik-14/poz/rival-diag-wave-leg-out.png) ic 0.34 EL
+T3 nebula-half-moon-side-hand                         eski 0.64 (varlik-05/poz/wizard-warrior-prayer-up.png) ic 0.28 EL
+T1 nebula-goal-post-arms-tall                         eski 0.64 (varlik-05/poz/werewolf-v-t-stand.png) ic 0.52 EL
+T3 nebula-low-lunge-sky                               eski 0.65 (varlik/poz/kneeling-lunge-arms-up.png) ic 0.40 EL
+T1 nebula-crescent-lean-right                         eski 0.65 (varlik-14/poz/duel-tilted-y-tiptoe.png) ic 0.46 EL
+T2 nebula-chair-twist-arms                            eski 0.67 (varlik-05/poz/zombie-diagonal-side-tap.png) ic 0.55 EL
+T2 nebula-knee-up-eagle-arms                          eski 0.70 (varlik-03/poz/standing-figure-four.png) ic 0.43 EL
+T1 nebula-star-arms-diagonal                          eski 0.72 (varlik-16/poz/sakura-side-lunge-low-diagonal.png) ic 0.52 EL
+T2 nebula-side-lunge-prayer                           eski 0.72 (varlik-09/poz/cosmic-side-lunge-arms-low-out.png) ic 0.50 EL
+T1 nebula-eagle-arms-tall                             eski 0.76 (varlik-03/poz/cow-face-arms.png) ic 0.48 EL
+T1 nebula-side-bend-arm-over-wide                     eski 0.77 (varlik-16/poz/sakura-side-reach-hip-lean.png) ic 0.52 EL
+T2 pulse-halo-t-goddess                               eski 0.52 (varlik-04/poz/skandasana-prayer.png) ic 0.49 HAVUZ
+T2 comet-halo-t-curtsy                                eski 0.54 (varlik-16/poz/sakura-skater-reach-down.png) ic 0.41 HAVUZ
