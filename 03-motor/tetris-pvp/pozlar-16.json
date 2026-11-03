@@ -1,0 +1,929 @@
+{
+ "_not": "TETRIS MODE PVP 16. video (REF-067, 1v1, 3 tur; poz-sec-16.py olcumle secildi) poz tanimlari. Acilar EKRAN duzleminde (pozlar.js dili): 0 asagi, 90 ekran-sag, 180 yukari, -90 ekran-sol. Kollar [ust kol, on kol], bacaklar [uyluk, baldir]. sol*/sag* = KARAKTERIN solu/sagi; karakter kameraya donukken sol = ekran SAGI. yon: on (kameraya donuk) | sag (profil, yuzu ekran sagina). govde: kalcadan boyna aci, bas: govdeye ek aci. Mixamo govdesi (siluet-govde.fbx) bu acilarla bukulur, duz siyah maske cikar (varlik.py).",
+ "pozlar": {
+  "petal-sky-point": {
+   "ad": "Petal Sky Point",
+   "yon": "on",
+   "govde": 174,
+   "bas": 0,
+   "sagKol": [
+    -138,
+    -146
+   ],
+   "solKol": [
+    148,
+    -95
+   ],
+   "sagBacak": [
+    -8,
+    -8
+   ],
+   "solBacak": [
+    24,
+    24
+   ]
+  },
+  "blossom-wide-star": {
+   "ad": "Blossom Wide Star",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -146,
+    -146
+   ],
+   "solKol": [
+    146,
+    146
+   ],
+   "sagBacak": [
+    -27,
+    -27
+   ],
+   "solBacak": [
+    27,
+    27
+   ]
+  },
+  "sakura-bow-hello-forward": {
+   "ad": "Sakura Bow Hello Forward",
+   "yon": "sag",
+   "govde": 140,
+   "bas": 0,
+   "solKol": [
+    60,
+    60
+   ],
+   "sagKol": [
+    -10,
+    -10
+   ],
+   "solBacak": [
+    4,
+    4
+   ],
+   "sagBacak": [
+    -4,
+    -4
+   ]
+  },
+  "sakura-stride-arms-swing": {
+   "ad": "Sakura Stride Arms Swing",
+   "yon": "sag",
+   "govde": 182,
+   "bas": 0,
+   "solKol": [
+    60,
+    60
+   ],
+   "sagKol": [
+    -60,
+    -60
+   ],
+   "solBacak": [
+    24,
+    24
+   ],
+   "sagBacak": [
+    -24,
+    -24
+   ]
+  },
+  "sakura-half-w-half-down": {
+   "ad": "Sakura Half W Half Down",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -55,
+    -160
+   ],
+   "solKol": [
+    8,
+    5
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ]
+  },
+  "sakura-pointing-forward-low": {
+   "ad": "Sakura Pointing Forward Low",
+   "yon": "on",
+   "govde": 176,
+   "bas": 0,
+   "sagKol": [
+    -70,
+    -70
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -30,
+    -30
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "sakura-side-reach-hip-lean": {
+   "ad": "Sakura Side Reach Hip Lean",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -125,
+    -135
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ]
+  },
+  "sakura-lean-left-arch": {
+   "ad": "Sakura Lean Left Arch",
+   "yon": "on",
+   "govde": 158,
+   "bas": 0,
+   "sagKol": [
+    -165,
+    -150
+   ],
+   "solKol": [
+    -165,
+    -150
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ]
+  },
+  "sakura-sky-clap-narrow": {
+   "ad": "Sakura Sky Clap Narrow",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -172,
+    -178
+   ],
+   "solKol": [
+    -172,
+    -178
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "sakura-muscle-pose-horse": {
+   "ad": "Sakura Muscle Pose Horse",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    95,
+    -150
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ]
+  },
+  "bloom-low-cactus-horse": {
+   "ad": "Bloom Low Cactus Horse",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -38,
+    4
+   ],
+   "solBacak": [
+    38,
+    -4
+   ]
+  },
+  "branch-flex-reach-wide": {
+   "ad": "Branch Flex Reach Wide",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -95,
+    150
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ]
+  },
+  "glow-reach-hip-leg-out": {
+   "ad": "Glow Reach Hip Leg Out",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "spring-t-w-wide": {
+   "ad": "Spring T W Wide",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    55,
+    160
+   ],
+   "sagBacak": [
+    -22,
+    -22
+   ],
+   "solBacak": [
+    22,
+    22
+   ]
+  },
+  "lantern-lunge-v-reach": {
+   "ad": "Lantern Lunge V Reach",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    124,
+    124
+   ],
+   "sagBacak": [
+    -42,
+    -6
+   ],
+   "solBacak": [
+    36,
+    36
+   ]
+  },
+  "petal-hip-side-kick": {
+   "ad": "Petal Hip Side Kick",
+   "yon": "on",
+   "govde": 182,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    40
+   ],
+   "solKol": [
+    148,
+    152
+   ],
+   "sagBacak": [
+    -4,
+    -4
+   ],
+   "solBacak": [
+    62,
+    18
+   ]
+  },
+  "sakura-arabesque-low-wings": {
+   "ad": "Sakura Arabesque Low Wings",
+   "yon": "sag",
+   "govde": 120,
+   "bas": 0,
+   "solKol": [
+    80,
+    80
+   ],
+   "sagKol": [
+    -80,
+    -80
+   ],
+   "solBacak": [
+    0,
+    0
+   ],
+   "sagBacak": [
+    -50,
+    -50
+   ]
+  },
+  "sakura-high-knee-run-arms": {
+   "ad": "Sakura High Knee Run Arms",
+   "yon": "sag",
+   "govde": 185,
+   "bas": 0,
+   "solKol": [
+    80,
+    140
+   ],
+   "sagKol": [
+    -50,
+    -50
+   ],
+   "solBacak": [
+    90,
+    0
+   ],
+   "sagBacak": [
+    -8,
+    -8
+   ]
+  },
+  "sakura-skater-reach-down": {
+   "ad": "Sakura Skater Reach Down",
+   "yon": "on",
+   "govde": 170,
+   "bas": 0,
+   "sagKol": [
+    -20,
+    -10
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "sakura-side-kick-hip-hand": {
+   "ad": "Sakura Side Kick Hip Hand",
+   "yon": "on",
+   "govde": 162,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    70,
+    70
+   ]
+  },
+  "sakura-side-lunge-sky-reach": {
+   "ad": "Sakura Side Lunge Sky Reach",
+   "yon": "on",
+   "govde": 190,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    62,
+    2
+   ]
+  },
+  "sakura-low-kick-arms-wide": {
+   "ad": "Sakura Low Kick Arms Wide",
+   "yon": "on",
+   "govde": 174,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    40,
+    40
+   ]
+  },
+  "sakura-knee-up-hands-clap": {
+   "ad": "Sakura Knee Up Hands Clap",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -30,
+    110
+   ],
+   "solKol": [
+    -30,
+    110
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ]
+  },
+  "sakura-low-squat-cactus": {
+   "ad": "Sakura Low Squat Cactus",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    180
+   ],
+   "solKol": [
+    90,
+    -180
+   ],
+   "sagBacak": [
+    -70,
+    10
+   ],
+   "solBacak": [
+    -70,
+    10
+   ]
+  },
+  "sakura-flamingo-wings": {
+   "ad": "Sakura Flamingo Wings",
+   "yon": "on",
+   "govde": 178,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    -80,
+    60
+   ]
+  },
+  "ribbon-t-reach-kick": {
+   "ad": "Ribbon T Reach Kick",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -90
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    60
+   ]
+  },
+  "blossom-reach-v-kick": {
+   "ad": "Blossom Reach V Kick",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    60,
+    60
+   ]
+  },
+  "twilight-hip-comet-knee": {
+   "ad": "Twilight Hip Comet Knee",
+   "yon": "on",
+   "govde": 196,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    -110,
+    -170
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    80,
+    8
+   ]
+  },
+  "sakura-star-balance-one-leg": {
+   "ad": "Sakura Star Balance One Leg",
+   "yon": "on",
+   "govde": 172,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    -60,
+    -60
+   ]
+  },
+  "sakura-one-leg-side-balance-v": {
+   "ad": "Sakura One Leg Side Balance V",
+   "yon": "on",
+   "govde": 164,
+   "bas": 0,
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solKol": [
+    148,
+    148
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    70,
+    70
+   ]
+  },
+  "sakura-child-pose-long": {
+   "ad": "Sakura Child Pose Long",
+   "yon": "sag",
+   "govde": 70,
+   "bas": 0,
+   "solKol": [
+    60,
+    60
+   ],
+   "sagKol": [
+    58,
+    58
+   ],
+   "solBacak": [
+    0,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "sakura-frog-squat-hands-floor": {
+   "ad": "Sakura Frog Squat Hands Floor",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -8,
+    -4
+   ],
+   "solKol": [
+    -8,
+    -4
+   ],
+   "sagBacak": [
+    -82,
+    24
+   ],
+   "solBacak": [
+    -82,
+    24
+   ]
+  },
+  "sakura-seated-lean-back-palms": {
+   "ad": "Sakura Seated Lean Back Palms",
+   "yon": "sag",
+   "govde": 222,
+   "bas": 0,
+   "solKol": [
+    -150,
+    -150
+   ],
+   "sagKol": [
+    -148,
+    -148
+   ],
+   "solBacak": [
+    88,
+    88
+   ],
+   "sagBacak": [
+    86,
+    86
+   ]
+  },
+  "sakura-curtsy-halo-arms": {
+   "ad": "Sakura Curtsy Halo Arms",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -160,
+    120
+   ],
+   "solKol": [
+    -160,
+    120
+   ],
+   "sagBacak": [
+    18,
+    -12
+   ],
+   "solBacak": [
+    3,
+    1
+   ]
+  },
+  "sakura-kneel-lean-side-wave": {
+   "ad": "Sakura Kneel Lean Side Wave",
+   "yon": "on",
+   "govde": 200,
+   "bas": 0,
+   "sagKol": [
+    -150,
+    170
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -15,
+    -90
+   ],
+   "solBacak": [
+    -15,
+    -90
+   ]
+  },
+  "sakura-side-lunge-low-diagonal": {
+   "ad": "Sakura Side Lunge Low Diagonal",
+   "yon": "on",
+   "govde": 170,
+   "bas": 0,
+   "sagKol": [
+    -35,
+    -35
+   ],
+   "solKol": [
+    122,
+    122
+   ],
+   "sagBacak": [
+    -45,
+    -45
+   ],
+   "solBacak": [
+    62,
+    2
+   ]
+  },
+  "sakura-seated-twist-arms-open": {
+   "ad": "Sakura Seated Twist Arms Open",
+   "yon": "sag",
+   "govde": 182,
+   "bas": 0,
+   "solKol": [
+    120,
+    120
+   ],
+   "sagKol": [
+    -120,
+    -120
+   ],
+   "solBacak": [
+    88,
+    88
+   ],
+   "sagBacak": [
+    86,
+    86
+   ]
+  },
+  "sakura-kneel-robot-arms": {
+   "ad": "Sakura Kneel Robot Arms",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -90,
+    -180
+   ],
+   "solKol": [
+    -90,
+    0
+   ],
+   "sagBacak": [
+    -20,
+    -90
+   ],
+   "solBacak": [
+    -20,
+    -90
+   ]
+  },
+  "sakura-side-kick-high-twin-reach": {
+   "ad": "Sakura Side Kick High Twin Reach",
+   "yon": "on",
+   "govde": 158,
+   "bas": 0,
+   "sagKol": [
+    -174,
+    -176
+   ],
+   "solKol": [
+    174,
+    176
+   ],
+   "sagBacak": [
+    -3,
+    -1
+   ],
+   "solBacak": [
+    82,
+    82
+   ]
+  },
+  "sakura-goddess-twist-diagonal": {
+   "ad": "Sakura Goddess Twist Diagonal",
+   "yon": "on",
+   "govde": 188,
+   "bas": 0,
+   "sagKol": [
+    -122,
+    -122
+   ],
+   "solKol": [
+    35,
+    35
+   ],
+   "sagBacak": [
+    -62,
+    -4
+   ],
+   "solBacak": [
+    62,
+    4
+   ]
+  },
+  "sakura-kneel-hips-hands": {
+   "ad": "Sakura Kneel Hips Hands",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "sagKol": [
+    -45,
+    20
+   ],
+   "solKol": [
+    45,
+    -20
+   ],
+   "sagBacak": [
+    -18,
+    -90
+   ],
+   "solBacak": [
+    -18,
+    -90
+   ]
+  },
+  "sakura-seated-arms-sky": {
+   "ad": "Sakura Seated Arms Sky",
+   "yon": "sag",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    170,
+    170
+   ],
+   "sagKol": [
+    168,
+    168
+   ],
+   "solBacak": [
+    88,
+    88
+   ],
+   "sagBacak": [
+    86,
+    86
+   ]
+  }
+ }
+}

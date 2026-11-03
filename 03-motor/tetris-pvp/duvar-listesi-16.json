@@ -1,0 +1,107 @@
+[
+ {
+  "tur": 1,
+  "p1": "petal-sky-point",
+  "p2": "blossom-wide-star"
+ },
+ {
+  "tur": 1,
+  "p1": "sakura-bow-hello-forward",
+  "p2": "sakura-stride-arms-swing"
+ },
+ {
+  "tur": 1,
+  "p1": "sakura-half-w-half-down",
+  "p2": "sakura-pointing-forward-low"
+ },
+ {
+  "tur": 1,
+  "p1": "sakura-side-reach-hip-lean",
+  "p2": "sakura-lean-left-arch"
+ },
+ {
+  "tur": 1,
+  "p1": "sakura-sky-clap-narrow",
+  "p2": "sakura-muscle-pose-horse"
+ },
+ {
+  "tur": 1,
+  "p1": "bloom-low-cactus-horse",
+  "p2": "branch-flex-reach-wide"
+ },
+ {
+  "tur": 1,
+  "p1": "glow-reach-hip-leg-out",
+  "p2": "spring-t-w-wide"
+ },
+ {
+  "tur": 2,
+  "p1": "lantern-lunge-v-reach",
+  "p2": "petal-hip-side-kick"
+ },
+ {
+  "tur": 2,
+  "p1": "sakura-arabesque-low-wings",
+  "p2": "sakura-high-knee-run-arms"
+ },
+ {
+  "tur": 2,
+  "p1": "sakura-skater-reach-down",
+  "p2": "sakura-side-kick-hip-hand"
+ },
+ {
+  "tur": 2,
+  "p1": "sakura-side-lunge-sky-reach",
+  "p2": "sakura-low-kick-arms-wide"
+ },
+ {
+  "tur": 2,
+  "p1": "sakura-knee-up-hands-clap",
+  "p2": "sakura-low-squat-cactus"
+ },
+ {
+  "tur": 2,
+  "p1": "sakura-flamingo-wings",
+  "p2": "ribbon-t-reach-kick"
+ },
+ {
+  "tur": 2,
+  "p1": "blossom-reach-v-kick",
+  "p2": "twilight-hip-comet-knee"
+ },
+ {
+  "tur": 3,
+  "p1": "sakura-star-balance-one-leg",
+  "p2": "sakura-one-leg-side-balance-v"
+ },
+ {
+  "tur": 3,
+  "p1": "sakura-child-pose-long",
+  "p2": "sakura-frog-squat-hands-floor"
+ },
+ {
+  "tur": 3,
+  "p1": "sakura-seated-lean-back-palms",
+  "p2": "sakura-curtsy-halo-arms"
+ },
+ {
+  "tur": 3,
+  "p1": "sakura-kneel-lean-side-wave",
+  "p2": "sakura-side-lunge-low-diagonal"
+ },
+ {
+  "tur": 3,
+  "p1": "sakura-seated-twist-arms-open",
+  "p2": "sakura-kneel-robot-arms"
+ },
+ {
+  "tur": 3,
+  "p1": "sakura-side-kick-high-twin-reach",
+  "p2": "sakura-goddess-twist-diagonal"
+ },
+ {
+  "tur": 3,
+  "p1": "sakura-kneel-hips-hands",
+  "p2": "sakura-seated-arms-sky"
+ }
+]
