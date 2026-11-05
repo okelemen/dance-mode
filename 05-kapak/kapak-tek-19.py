@@ -120,6 +120,9 @@ def baloncuk(metin, cx, cy, boy, renkler, kontur="#4a1f86", hedef=None):
     return K.width
 
 
+ETIKET = Image.new("L", (W, H), 0)   # etiket + baslik + rozet alani: siluet buraya degmez (kapak 1: kol "1 PLAYER"a biniyordu)
+
+
 def etiket(metin, cx, cy, boy, aci):
     """REF-070 yan etiketi: beyaz kalin yazi, koyu mor kontur + mor isilti (REF-069'daki kivilcim yok)"""
     S = 2; f = font(boy * S)
@@ -131,6 +134,7 @@ def etiket(metin, cx, cy, boy, aci):
     g = Image.new("RGBA", k.size, "#c86aff"); g.putalpha(k.getchannel("A").filter(ImageFilter.GaussianBlur(boy * 0.16)))
     for q in (g, k):
         im.alpha_composite(q, (int(cx - k.width / 2), int(cy - k.height / 2)))
+    ETIKET.paste(255, (int(cx - k.width / 2), int(cy - k.height / 2)), k.getchannel("A").point(lambda v: 255 if v > 40 else 0))
 
 
 def yeni(cx, cy, r):
@@ -158,8 +162,8 @@ def yeni(cx, cy, r):
         im.alpha_composite(q, (int(cx - k.width / 2), int(cy - k.height / 2)))
 
 
-etiket("EASY", 150, 300, 78, 18)
-etiket("1 PLAYER", 1110, 330, 70, -16)
+etiket("EASY", 140, 262, 74, 18)   # kapak 2: siluet etiketten kacarken kuculuyordu -> etiketler yukari
+etiket("1 PLAYER", 1125, 285, 66, -16)
 
 # siluet: duz simsiyah + kalin beyaz dis kontur; yatay poz genislikten, dik poz yukseklikten olculenir; basliga degmez
 ust_sinir = 180
@@ -169,8 +173,14 @@ if oran >= 1.2:
 else:
     sb = int(a.boy); sw = int(sb * oran)
 sb = min(sb, H - 12 - ust_sinir); sw = int(sb * oran)
-sa = ma.resize((sw, sb), Image.LANCZOS)
-sx, sy = int(max(10, min(W - sw - 10, W * a.x - sw / 2))), H - sb - 12
+ImageDraw.Draw(ETIKET).rectangle((1135 - 120, 600 - 95, 1135 + 120, 600 + 95), fill=255)   # NEW rozeti
+while True:
+    sa = ma.resize((sw, sb), Image.LANCZOS)
+    sx, sy = int(max(10, min(W - sw - 10, W * a.x - sw / 2))), H - sb - 12
+    gen = sa.filter(ImageFilter.MaxFilter(21))
+    if not np.any((np.asarray(gen) > 40) & (np.asarray(ETIKET.crop((sx, sy, sx + sw, sy + sb))) > 0)) or sw < W * 0.4:
+        break
+    sw, sb = int(sw * 0.96), int(sb * 0.96)
 kont = Image.new("L", (sw + 60, sb + 60), 0); kont.paste(sa, (30, 30))
 im.paste((255, 255, 255, 255), (sx - 30, sy - 30), kont.filter(ImageFilter.MaxFilter(17)))
 im.paste((0, 0, 0, 255), (sx, sy), sa)
@@ -179,8 +189,8 @@ print(a.cikti, "siluet kutu", sx, sy, sx + sw, sy + sb, "kapi", int(x0), int(y0)
 yeni(1135, 600, 92)
 
 # baslik en onde: HUMAN camgobegi->pembe, TETRIS pembe->sari->camgobegi (REF-070 harf renkleri)
-baloncuk("HUMAN", 345, 90, 150, ["#8af0ff", "#5ac8ff", "#c88aff", "#ff6ad0"], hedef=560)
-baloncuk("TETRIS", 935, 90, 150, ["#ff6ac8", "#ff9ab0", "#ffe24a", "#9ae86a", "#5ad8ff"], hedef=560)
+baloncuk("HUMAN", 335, 92, 190, ["#3ae0ff", "#2a9cff", "#a05aff", "#ff3ac0"], hedef=610)   # kapak 3: baslik referanstan kucuktu (ref harf ~120 px) -> 190 / 610 px; kapak 1: pastel harfler renkliligi dusuruyordu
+baloncuk("TETRIS", 945, 92, 190, ["#ff3ab8", "#ff6a90", "#ffd21a", "#6ae83a", "#2ad0ff"], hedef=610)
 
 im.convert("RGB").save(a.cikti, quality=95)
 print("->", a.cikti)
