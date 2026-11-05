@@ -482,6 +482,52 @@
    "yuvarlakKafa": true,
    "sadeGovde": true,
    "kafaOran": 0.78
+  },
+  "easy-bird-dog-ref-yk": {
+   "ad": "Easy Bird Dog Ref",
+   "yon": "sag",
+   "govde": 104,
+   "bas": 24,
+   "solKol": [
+    94,
+    94
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -84,
+    -84
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "yuvarlakKafa": true
+  },
+  "easy-bird-dog-ref2-yk": {
+   "ad": "Easy Bird Dog Ref 2",
+   "yon": "sag",
+   "govde": 100,
+   "bas": 26,
+   "solKol": [
+    96,
+    96
+   ],
+   "sagKol": [
+    2,
+    2
+   ],
+   "solBacak": [
+    -80,
+    -80
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "yuvarlakKafa": true
   }
  }
 }

@@ -24,6 +24,9 @@ p.add_argument("--gen", type=float, default=0.70, help="siluet genisligi (kadraj
 p.add_argument("--boy", type=float, default=470, help="siluet yuksekligi (px), dik pozda")
 p.add_argument("--x", type=float, default=0.5)
 p.add_argument("--kontur", type=int, default=17, help="beyaz kontur MaxFilter boyu (tek sayi); piktogramda 27")
+p.add_argument("--yumusat", type=float, default=0, help="maske kenar yumusatma (px, 900x740 maskede); giysi kirisigi/parmak araligi kaybolur")
+p.add_argument("--kafa-olcek", type=float, default=1.0, help="yuvarlak kafa buyutme (yerlesim.json kafa_px'e gore)")
+p.add_argument("--kafa-bosluk", type=float, default=0.0, help="kafa ile govde arasi beyaz bosluk (px, kapakta)")
 p.add_argument("--renk", type=float, default=1.0); p.add_argument("--parlak", type=float, default=1.0)   # yalniz hafif genel ayar
 p.add_argument("--cikti", required=True)
 a = p.parse_args()
@@ -53,9 +56,26 @@ ac = Y["kapak-aciklik_p1"]; s = W / 1920
 x0, y0, x1, y1 = ac[0] * s, ac[1] * s, ac[2] * s, ac[3] * s
 
 maske = Image.open(os.path.join(klasor(a.poz_klasor), "poz", a.poz + ".png")).convert("RGBA")
+if a.yumusat > 0:
+    # kapak 7 (kullanici: referans silueti puruzsuz): kiyafet kirisigi, sort pacasi, parmak araliklari yumusatilir (2x olcekte kapat + bulanik + esik)
+    al = maske.getchannel("A").resize((maske.width * 2, maske.height * 2), Image.LANCZOS)
+    k_ = int(a.yumusat * 2) | 1
+    al = al.filter(ImageFilter.MaxFilter(k_)).filter(ImageFilter.MinFilter(k_)).filter(ImageFilter.GaussianBlur(a.yumusat * 2)).point(lambda v: 255 if v > 128 else 0)
+    al = al.filter(ImageFilter.GaussianBlur(1.2)).resize(maske.size, Image.LANCZOS)
+    maske = Image.new("RGBA", maske.size, (0, 0, 0, 0)); maske.putalpha(al)
+KAFA = None
+try:
+    KAFA = json.load(open(os.path.join(klasor(a.poz_klasor), "yerlesim.json"), encoding="utf-8"))["poz"][a.poz].get("kafa_px")
+except (OSError, KeyError):
+    pass
 if a.ayna:
     maske = maske.transpose(Image.FLIP_LEFT_RIGHT)
-maske = maske.crop(maske.getchannel("A").getbbox())
+    if KAFA:
+        KAFA = [maske.width - KAFA[0], KAFA[1], KAFA[2]]
+bbox = maske.getchannel("A").getbbox()
+maske = maske.crop(bbox)
+if KAFA:
+    KAFA = [KAFA[0] - bbox[0], KAFA[1] - bbox[1], KAFA[2]]
 ma = maske.getchannel("A")
 
 
@@ -187,6 +207,12 @@ while True:
 kont = Image.new("L", (sw + 60, sb + 60), 0); kont.paste(sa, (30, 30))
 im.paste((255, 255, 255, 255), (sx - 30, sy - 30), kont.filter(ImageFilter.MaxFilter(a.kontur)))
 im.paste((0, 0, 0, 255), (sx, sy), sa)
+if KAFA and (a.kafa_olcek != 1.0 or a.kafa_bosluk > 0):
+    # REF-070: buyuk tam daire kafa, govdeden ince beyaz boslukla ayri
+    olc = sw / maske.width; kx, ky, kr = sx + KAFA[0] * olc, sy + KAFA[1] * olc, KAFA[2] * olc * a.kafa_olcek
+    dk = ImageDraw.Draw(im); b_ = a.kafa_bosluk
+    dk.ellipse((kx - kr - b_, ky - kr - b_, kx + kr + b_, ky + kr + b_), fill="#ffffff")
+    dk.ellipse((kx - kr, ky - kr, kx + kr, ky + kr), fill="#000000")
 print(a.cikti, "siluet kutu", sx, sy, sx + sw, sy + sb, "kapi", int(x0), int(y0), int(x1), int(y1))
 print("siluet olcu (maskeden): yukseklik %%%.1f  alan %%%.1f" % (sb / H * 100, (np.asarray(sa) > 127).sum() / (W * H) * 100))   # kapak-siluet-olc kart beyazini konturla karistirabiliyor
 
