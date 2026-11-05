@@ -179,7 +179,7 @@ def gok_katmani():
 def zemin():
     """sahne 1: zemin mat acik mor + simgeler dev kaliyordu -> koyu parlak mavi (sol mavi, sag morumsu yansima), simgeler kucuk, kapiya kadar dagilir"""
     for sx, renk in ((-1, "#121a9a"), (1, "#3a128a")):
-        yuvarlak_kutu("zemin", (sx * (KORK_X + 0.2) / 2, KAP["y"] - 1, -0.15), (KORK_X + 0.2, KAP["y"] + 8, 0.3), mat_parlak("zemin%d" % sx, renk, emis=0.18, purluk=0.04), egim=0.0, seg=1)
+        yuvarlak_kutu("zemin", (sx * (KORK_X + 0.2) / 2, KAP["y"] - 1, -0.15), (KORK_X + 0.2, KAP["y"] + 8, 0.3), mat_parlak("zemin%d" % sx, renk, emis=0.18, purluk=0.14)   # sahne 3: ayna zeminde kapi ayaklari etek gibi yansiyordu, egim=0.0, seg=1)
     kenar = mat_emis("zemin_kenar", lin(hex3(CAMG)), 3.0)
     for s_ in (-1, 1):
         boru((s_ * (KORK_X - 0.15), -3, 0.02), (s_ * (KORK_X - 0.15), KAP["y"] + 3, 0.02), 0.04, kenar)
