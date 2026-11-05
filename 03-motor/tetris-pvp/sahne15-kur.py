@@ -49,5 +49,8 @@ r1("    cx.restore();\n  }\n}\n\nwindow.kareKur = kareKur;",
 # CO-OP acilis: P2 boksoru duvara donmesin (sahne12'deki 15. video dersi)
 r1("      if (TEMA.tekOyuncu && i === 1) duvarMini(", "      if (TEMA.tekOyuncu && !TEMA.acilisIkili && i === 1) duvarMini(")
 r1("    if (TEMA.tekOyuncu && o === 'p2') duvarMini(", "    if (TEMA.tekOyuncu && !TEMA.acilisIkili && o === 'p2') duvarMini(")
+# kesit 1 mantik kontrolu: PLAYER 1 / PLAYER 2 kendi renginde ama kendi renkli bandinda beyaz konturla okunmuyordu -> koyu kontur
+r1("  yazi(m, 0, 0, px, ['#ffffff', renk, renk], '#ffffff', a, renk);",
+   "  yazi(m, 0, 0, px, TEMA.yildiz ? [renk, renk, renk] : ['#ffffff', renk, renk], TEMA.yildiz ? '#1a0630' : '#ffffff', a, renk);")
 open(os.path.join(M, "sahne15.html"), "w", encoding="utf-8").write(s)
 print("sahne15.html", len(s.splitlines()), "satir")

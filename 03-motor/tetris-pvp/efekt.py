@@ -64,6 +64,9 @@ def main():
         yerlestir(ef, tik(), ta + 1.3, 0.9)
         yerlestir(ef, ding(1760, 0.5), ta + 1.35, 0.5)
         yerlestir(ef, piril(0.5), ta + 1.4, 0.35)
+        if B.get("tema", {}).get("yildiz"):   # 18. video: LIKE / COMMENT / SHARE dokunuslari (sahne15 begenSatiri, Masaustu md. 27)
+            for i in range(3):
+                yerlestir(ef, ding([1175, 1319, 1568][i], 0.15), ta + 1.75 + i * 0.32, 0.4)
     ef = ef[: int(sure * SR)]
     ef = ef / (np.max(np.abs(ef)) + 1e-9)
     eg = float(sys.argv[sys.argv.index("--efekt-kazanc") + 1]) if "--efekt-kazanc" in sys.argv else 0.5
