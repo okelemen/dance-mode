@@ -43,7 +43,10 @@ r1("  if (TEMA.galaksi) { galaksiHud(t); return; }", "  if (TEMA.yildiz) { yildi
 r1("  if (TEMA.galaksi && kart.tip === 'tur') levelKart(kart, u, t);",
    "  if (TEMA.yildiz && ['yazi', 'nasil', 'tur', 'basla', 'abone'].includes(kart.tip)) yildizKart(kart, u, t);\n"
    "  else if (TEMA.galaksi && kart.tip === 'tur') levelKart(kart, u, t);")
-r1("  maskotCiz(W * 0.075, H * 0.86 - zip, 1.05, t);", "  (TEMA.yildiz ? maskotYildiz : maskotCiz)(W * 0.075, H * 0.86 - zip, 1.05, t);")
+r1("  maskotCiz(W * 0.075, H * 0.86 - zip, 1.05, t);",
+   "  // kesit 1: acilis kartinda sol alttaki maskot PLAYER 1 yazisina biniyordu -> o kartta sol ust kosede\n"
+   "  const ust = TEMA.yildiz && KARTLAR.some(kk => kk.tip === 'acilis' && t >= kk.t && t < kk.t + kk.sure);\n"
+   "  (TEMA.yildiz ? maskotYildiz : maskotCiz)(W * 0.075, (ust ? H * 0.15 : H * 0.86) - zip, 1.05, t);")
 r1("    cx.restore();\n  }\n}\n\nwindow.kareKur = kareKur;",
    "    cx.restore();\n  }\n  if (TEMA.yildiz) begenSatiri(W / 2, yM + 96 * k, cik, u, t);   // Masaustu md. 27\n}\n\nwindow.kareKur = kareKur;")
 # CO-OP acilis: P2 boksoru duvara donmesin (sahne12'deki 15. video dersi)

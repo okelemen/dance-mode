@@ -322,7 +322,9 @@ function maskotCiz(x, y, s, t, alfa = 1) {
 // maskot video boyunca: sol altta izgaranin ustunde vurusa ziplar (TALIMATLAR §4 maskot kurali); tam ekran kartlarda da ayni kosede
 function maskotKose(t) {
   const v = (t * BPM / 60) % 1, zip = Math.abs(Math.sin(v * Math.PI)) * 16 * k;
-  (TEMA.yildiz ? maskotYildiz : maskotCiz)(W * 0.075, H * 0.86 - zip, 1.05, t);
+  // kesit 1: acilis kartinda sol alttaki maskot PLAYER 1 yazisina biniyordu -> o kartta sol ust kosede
+  const ust = TEMA.yildiz && KARTLAR.some(kk => kk.tip === 'acilis' && t >= kk.t && t < kk.t + kk.sure);
+  (TEMA.yildiz ? maskotYildiz : maskotCiz)(W * 0.075, (ust ? H * 0.15 : H * 0.86) - zip, 1.05, t);
 }
 
 // ------------------------------------------------------------ REF-069 YARDIMCILARI (motor 15, neon yildiz sahnesi, CO-OP cift)
