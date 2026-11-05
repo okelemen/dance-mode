@@ -716,7 +716,19 @@ def poz_maskeleri():
             else:
                 ayak = (ileri * 0.9 + baldir * 0.35).normalized()
             yonelt(arm, kemik(arm, taraf + "Foot"), ayak)
-        alt, ust = dunya_kutusu(mesler)
+        # 19. video kapak (5 Kas 2026, kullanici: "normal insan vucudu gibi siyah siluet, kafasi yuvarlak"): Mixamo kafasi gizlenir,
+        # boyun ucunda kafa kemigi yonunde siyah kure kafa konur (REF-070 kapagindaki yuvarlak kafa)
+        kafa_obj = None
+        if P.get("yuvarlakKafa"):
+            hb = kemik(arm, "Head")
+            bpy.context.view_layer.update()
+            h0 = arm.matrix_world @ hb.head; h1 = arm.matrix_world @ hb.tail
+            hb.scale = (0.01, 0.01, 0.01)
+            bpy.context.view_layer.update()
+            r_k = P.get("kafaR", 0.12)
+            kafa_obj = kure(tuple(h0 + (h1 - h0).normalized() * r_k * 0.9), r_k, siyah, sub=4)
+            bpy.context.view_layer.update()
+        alt, ust = dunya_kutusu(mesler + ([kafa_obj] if kafa_obj else []))
         gen, yuk = ust.x - alt.x, ust.z - alt.z
         olc = 2.55                                   # cerceve yuksekligi (m): ayakta figur ~%72
         if yuk > olc * 0.92:
@@ -729,6 +741,8 @@ def poz_maskeleri():
         YERLESIM.setdefault("poz", {})[ad] = {"cerceve_m": round(olc, 3), "gen_m": round(gen, 3), "yuk_m": round(yuk, 3)}
         log("poz", ad, "gen", round(gen, 2), "yuk", round(yuk, 2), "cerceve", round(olc, 2))
         yaz(sc, "poz/%s.png" % ad)
+        if kafa_obj:
+            bpy.data.objects.remove(kafa_obj, do_unlink=True)
 
 
 # ------------------------------------------------------------------ ana akis
