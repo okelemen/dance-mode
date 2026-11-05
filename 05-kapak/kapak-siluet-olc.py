@@ -14,7 +14,9 @@ def olc(yol):
     a = np.asarray(Image.open(yol).convert("RGB").resize((1280, 720))).astype(int)
     # siluetler beyaz konturlu: koyu gece gogu siluetle birlesmesin diye yalniz beyaz konturun ICINDEKI koyu piksel sayilir
     beyaz = ndimage.binary_dilation(a.min(2) > 215, iterations=2)
-    m = (a.max(2) < 60) & ndimage.binary_fill_holes(beyaz) & ~beyaz
+    # 19. kapak: ayak alt kenara basinca kontur altta acik kaliyordu -> alt kenar kontur sayilir
+    kapali = beyaz.copy(); kapali[-3:, :] = True
+    m = (a.max(2) < 60) & ndimage.binary_fill_holes(kapali) & ~beyaz
     lab, n = ndimage.label(m)
     if n == 0:
         return None

@@ -164,10 +164,10 @@ def yeni(cx, cy, r):
 
 
 etiket("EASY", 140, 262, 74, 18)   # kapak 2: siluet etiketten kacarken kuculuyordu -> etiketler yukari
-etiket("1 PLAYER", 1125, 285, 66, -16)
+etiket("1 PLAYER", 1150, 250, 58, -16)   # kapak 6: savasci 3 kolu etikete yaklasiyordu
 
 # siluet: duz simsiyah + kalin beyaz dis kontur; yatay poz genislikten, dik poz yukseklikten olculenir; basliga degmez
-ust_sinir = 180
+ust_sinir = 162   # kapak 6: dik siluet (savasci 3) baslik altinda %73 boyda kaliyordu (alan %8,1 < ref %8,3)
 oran = maske.width / maske.height
 if oran >= 1.2:
     sw = int(W * a.gen); sb = int(sw / oran)
@@ -179,13 +179,16 @@ while True:
     sa = ma.resize((sw, sb), Image.LANCZOS)
     sx, sy = int(max(10, min(W - sw - 10, W * a.x - sw / 2))), H - sb - 12
     gen = sa.filter(ImageFilter.MaxFilter(21))
-    if not np.any((np.asarray(gen) > 40) & (np.asarray(ETIKET.crop((sx, sy, sx + sw, sy + sb))) > 0)) or sw < W * 0.4:
+    cak = (np.asarray(gen) > 40) & (np.asarray(ETIKET.crop((sx, sy, sx + sw, sy + sb))) > 0)
+    if not np.any(cak) or sw < W * 0.4:
         break
+    yy_, xx_ = np.nonzero(cak); print("  cakisma", sw, "x", sx + int(xx_.mean()), "y", sy + int(yy_.mean()))
     sw, sb = int(sw * 0.96), int(sb * 0.96)
 kont = Image.new("L", (sw + 60, sb + 60), 0); kont.paste(sa, (30, 30))
 im.paste((255, 255, 255, 255), (sx - 30, sy - 30), kont.filter(ImageFilter.MaxFilter(a.kontur)))
 im.paste((0, 0, 0, 255), (sx, sy), sa)
 print(a.cikti, "siluet kutu", sx, sy, sx + sw, sy + sb, "kapi", int(x0), int(y0), int(x1), int(y1))
+print("siluet olcu (maskeden): yukseklik %%%.1f  alan %%%.1f" % (sb / H * 100, (np.asarray(sa) > 127).sum() / (W * H) * 100))   # kapak-siluet-olc kart beyazini konturla karistirabiliyor
 
 yeni(1135, 600, 92)
 
