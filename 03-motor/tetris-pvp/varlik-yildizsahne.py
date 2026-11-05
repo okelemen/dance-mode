@@ -23,13 +23,13 @@ ON_EK = "kapak-" if KAPAK else ""
 # REF-069 karesi (1280x720): kapi x %35-65, ust %32, alt %62; ufuk (korkuluk ucu) ~%55; katlar kapidan kameraya iner, en yakin kat alt kenari tasar.
 KAP = {"y": 11.0, "x": 0.0, "w": 5.6, "h": 3.4, "z": 1.05, "kalin": 0.42}
 KATLAR = [  # (on uc y, arka y, yari genislik, ust z) - kapidan kameraya
-    (8.6, 11.6, 3.0, 1.05),
-    (6.0, 8.6, 3.9, 0.70),
-    (3.2, 6.0, 4.8, 0.35),
-    (-0.5, 3.2, 5.8, 0.0),
+    (8.6, 11.6, 3.6, 1.05),
+    (6.0, 8.6, 4.6, 0.70),
+    (3.2, 6.0, 5.6, 0.35),
+    (-0.5, 3.2, 6.3, 0.0),
 ]
 KORK_X = 6.3          # korkuluk cizgisi
-KAM = {"x": 0.0, "y": -2.6, "z": 3.3, "egim": 11.0, "lens": 17.0, "sensor": 24.0, "kaydir": 0.0}
+KAM = {"x": 0.0, "y": 0.6, "z": 3.1, "egim": 10.0, "lens": 17.0, "sensor": 24.0, "kaydir": 0.0}   # sahne 1: y -2,6 kapi x %41-58 (ref %35-65)
 if KAPAK:   # REF-069 kapagi: kapi x %38-73 (saga kacik), ust %28, alt %65; sol ve sag on planda dev yildizli direk
     KAM.update({"x": -1.9, "y": 3.4, "z": 2.6, "egim": 6.0, "lens": 16.0})   # kapak 1: x -1,3 / y 1,2 kapi x %44-66
 MAVI, MAVI_K, PEMBE, CAMG, SARI = "#2f6cff", "#1a2fb8", "#ff3fd0", "#3fe8ff", "#ffd83a"
@@ -176,6 +176,8 @@ def katlar():
     cam = mat_emis("kat_neon_c", lin(hex3("#7ef6ff")), 3.6)
     yz = [mat_emis("kat_yz%d" % i, lin(hex3(c)), 2.8) for i, c in enumerate((SARI, "#ff5ad8", "#4ae8ff"))]
     rnd = random.Random(18)
+    # sahne 1: katlarin yanlarindan gok gorunuyordu -> korkuluklar arasi koyu mavi parlak zemin
+    cokgen("zemin", [(-KORK_X - 1, -3), (KORK_X + 1, -3), (KORK_X + 1, 13), (-KORK_X - 1, 13)], -0.7, -0.02, mat_parlak("zemin", "#1a1e8a", emis=0.4, purluk=0.06))
     for i, (y0, y1, w, z) in enumerate(KATLAR):
         d = w * 0.22
         pts = [(-w, y0 + d), (0, y0), (w, y0 + d), (w, y1), (-w, y1)]

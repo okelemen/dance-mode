@@ -38,6 +38,10 @@ EASY = [  # ayakta, ayna
     ikili("Inner Knee Lift Arms Up", on("", "up", "up", "tog", "kneeup"), temas=0.3),
     ikili("Outer Tree Joined Palms", on("", [-150, -150], [160, 165], [-85, -20], "tog")),
     ikili("Star Outer Low Link", on("", "up45", [30, 30], "wide", "wide")),
+    # kontak 1 elemesinden sonra (6 ve 7 havada oturuyor gibi okundu)
+    sirt("Back To Back Arms T", profil("", 178, [90, 90], [-90, -90], [0, 0], [-4, -4])),
+    ikili("Twin Wide V Low Link", on("", "v", [20, 15], "wide", "wide")),
+    ikili("Side Bend Toward Arch", on("", [-150, -120], "down", "tog", "sidetap", govde=160), temas=0.1),
 ]
 
 MEDIUM = [  # temasli / farkli figurler
@@ -49,6 +53,7 @@ MEDIUM = [  # temasli / farkli figurler
     ikili("Frame Arms Cactus Link", on("", "cactus", "t", "wide", "tog")),
     sirt("Back To Back Side Lunge", profil("", 178, [176, 180], [-20, -20], [62, 0], [-40, -40])),
     ikili("Crossed Reach Wide V", on("", "v", [140, 140], "wide", "goddess")),
+    ikili("Outer Side Lunge Inner Palms Up", on("", [-30, -30], [160, 165], [-70, -5], "tog")),   # kontak 1 sonrasi
 ]
 
 HARD = [  # biri yerde (diz / plank / oturus), oburu ayakta
@@ -67,6 +72,10 @@ HARD = [  # biri yerde (diz / plank / oturus), oburu ayakta
     ikili("Kneel T And Warrior Two", profil("", 178, [90, 90], [-90, -90], KNEEL, KNEEL), on("", "t", "t", "straight", "lunge"), temas=0.1),
     ikili("Wide Lunge Down And Tree", on("", [-172, -172], [10, 10], [-50, -50], [50, 50], govde=150),
           on("", [160, 165], [-150, -150], "tog", [85, 20]), temas=0.15),
+    # kontak 1 sonrasi (19 ve 21 havada okundu)
+    karsi("Half Kneel Facing Arch", profil("", 175, [150, 150], [-20, -20], [85, 0], KNEEL)),
+    ikili("Kneel Arms Up And Standing Bow", profil("", 178, [175, 178], [170, 175], KNEEL, KNEEL),
+          ayna_poz(profil("", 120, [60, 60], [58, 58], [15, 15], [-15, -15])), temas=0.2),
 ]
 
 G = {}
