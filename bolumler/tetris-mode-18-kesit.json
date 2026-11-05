@@ -1,0 +1,152 @@
+{
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-18",
+ "bpm": 150.0,
+ "toplam_olcu": 39,
+ "toplam_duvar": 3,
+ "zaman": {
+  "kart": 2.0,
+  "say": 3.2,
+  "buyu": 4.8,
+  "gec": 1.2,
+  "sure": 11.2
+ },
+ "kartlar": [
+  {
+   "tip": "acilis",
+   "t": 0.0,
+   "sure": 4.8
+  },
+  {
+   "tip": "yazi",
+   "metin": "2 PLAYERS,",
+   "alt": "ONE SHAPE!",
+   "t": 4.8,
+   "sure": 3.2
+  },
+  {
+   "tip": "nasil",
+   "metin": "BUILD THE SHAPE TOGETHER",
+   "alt": "HOLD IT UNTIL THE WALL FLIES THROUGH YOU!",
+   "t": 8.0,
+   "sure": 4.8
+  },
+  {
+   "tip": "yazi",
+   "metin": "READY,",
+   "alt": "YOU TWO?",
+   "t": 12.8,
+   "sure": 3.2
+  },
+  {
+   "t": 16.0,
+   "sure": 3.2,
+   "tip": "tur",
+   "tur": 1,
+   "metin": "EASY"
+  },
+  {
+   "t": 19.2,
+   "sure": 3.2,
+   "tip": "basla"
+  },
+  {
+   "t": 33.6,
+   "sure": 3.2,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "MEDIUM"
+  },
+  {
+   "t": 48.0,
+   "sure": 3.2,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "HARD"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 22.4,
+   "grup": "duo-back-to-back-peace-up",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 9,
+   "tur": 2,
+   "t0": 36.8,
+   "grup": "duo-shoulder-hug-hip-hand",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 17,
+   "tur": 3,
+   "t0": 51.2,
+   "grup": "duo-half-kneel-offer-hand",
+   "ovgu": "AMAZING!"
+  }
+ ],
+ "abone": [
+  22.5,
+  51.5
+ ],
+ "abone_sure": 3.2,
+ "muzik": "Starstep Hold Together.wav (Suno, kullanici, 5 Kas 2026), 150 BPM sabit",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne15.html.",
+ "tema": {
+  "galaksi": true,
+  "yildiz": true,
+  "tekOyuncu": true,
+  "acilisIkili": true,
+  "baslaTam": true,
+  "varlik": "/03-motor/tetris-pvp/varlik-18/",
+  "maskeVarlik": "/03-motor/tetris-pvp/varlik-18/",
+  "maskeKlasor": "grup/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-18-boksor/",
+  "p1": "#A64DFF",
+  "p1koyu": "#5a1aa8",
+  "p1acik": "#e6ccff",
+  "p2": "#F5E03D",
+  "p2koyu": "#a08800",
+  "p2acik": "#fff8c4",
+  "altin": "#ffe23a",
+  "camgobegi": "#3fe8ff",
+  "vsHarf": [
+   "CO",
+   "OP"
+  ],
+  "vsEtiket": [
+   "PLAYER 1",
+   "PLAYER 2"
+  ],
+  "vsAlt": "TWO PLAYERS, ONE WALL",
+  "levelAd": {
+   "1": "EASY",
+   "2": "MEDIUM",
+   "3": "HARD"
+  },
+  "acilisZemin": [
+   "#3a2ab8",
+   "#0a0628"
+  ],
+  "acilisYazi": [
+   "#ffffff",
+   "#fff4fb",
+   "#ffd6f2"
+  ],
+  "acilisKontur": "#ff3fae",
+  "acilisIsilti": "#ff7ad8",
+  "isin": [
+   "#3a2ab8",
+   "#0a0628"
+  ],
+  "abone": [
+   "#7dffb4",
+   "#0c8a48"
+  ],
+  "aboneAlt": "NEW BATTLE EVERY DAY",
+  "fener": false
+ }
+}

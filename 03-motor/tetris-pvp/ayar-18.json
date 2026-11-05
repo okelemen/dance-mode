@@ -1,0 +1,155 @@
+{
+ "_not": "HUMAN TETRIS 18. video (REF-069 TetrisBounce 'HUMAN TETRIS 2 PLAYER | Can This Couple Hold On? #14'). Kullanici 5 Kas 2026: 2 oyuncu cift CO-OP, P1 mor / P2 sari, kaldirma yok (B), 3 level x 8 duvar (referansla ayni). Duvar 28 vurus = 7 olcu = 11,2 sn (REF-069 dongusu ~11-12,5 sn). Acilis CO-OP boksor karti (seri) -> 2 PLAYERS -> HOW TO PLAY -> READY -> LEVEL 1 -> 3-2-1-GO; level arasi iki kendi kartimiz; kapanis + SUBSCRIBE (LIKE/COMMENT/SHARE ile, Masaustu md. 27). Muzik Starstep Hold Together (Suno, kullanici) 150,04 BPM sabit (brief 148) -> germe yok; 0-8 sn ve olcu 63 atlanir. Metinler bizim.",
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-18",
+ "sayfa": "sahne15.html",
+ "bpm": 150,
+ "muzik": "Starstep Hold Together.wav (Suno, kullanici, 5 Kas 2026), 150 BPM sabit",
+ "duvar": "duvar-listesi-18.json",
+ "duvar_vurus": 28,
+ "zaman_vurus": {
+  "kart": 5,
+  "say": 8,
+  "buyu": 12,
+  "gec": 3
+ },
+ "kart_vurus": {
+  "tur": 8,
+  "basla": 8,
+  "abone": 12
+ },
+ "tur_kart": {
+  "1": [
+   "EASY",
+   null
+  ],
+  "2": [
+   "MEDIUM",
+   null
+  ],
+  "3": [
+   "HARD",
+   null
+  ]
+ },
+ "giris_dizisi": [
+  {
+   "tip": "acilis",
+   "vurus": 12
+  },
+  {
+   "tip": "yazi",
+   "metin": "2 PLAYERS,",
+   "alt": "ONE SHAPE!",
+   "vurus": 8
+  },
+  {
+   "tip": "nasil",
+   "metin": "BUILD THE SHAPE TOGETHER",
+   "alt": "HOLD IT UNTIL THE WALL FLIES THROUGH YOU!",
+   "vurus": 12
+  },
+  {
+   "tip": "yazi",
+   "metin": "READY,",
+   "alt": "YOU TWO?",
+   "vurus": 8
+  }
+ ],
+ "gecis": {
+  "2": [
+   {
+    "tip": "yazi",
+    "metin": "TEAMWORK!",
+    "vurus": 4
+   },
+   {
+    "tip": "yazi",
+    "metin": "STILL",
+    "alt": "SIDE BY SIDE!",
+    "vurus": 4
+   }
+  ],
+  "3": [
+   {
+    "tip": "yazi",
+    "metin": "WHAT A PAIR!",
+    "vurus": 4
+   },
+   {
+    "tip": "yazi",
+    "metin": "LAST STAGE,",
+    "alt": "HOLD ON!",
+    "vurus": 4
+   }
+  ]
+ },
+ "kapanis": [
+  {
+   "tip": "yazi",
+   "metin": "ALL 24 WALLS",
+   "alt": "CLEARED TOGETHER!",
+   "vurus": 8
+  },
+  {
+   "tip": "yazi",
+   "metin": "BEST TEAM",
+   "alt": "EVER!",
+   "vurus": 4
+  }
+ ],
+ "tema": {
+  "galaksi": true,
+  "yildiz": true,
+  "tekOyuncu": true,
+  "acilisIkili": true,
+  "baslaTam": true,
+  "varlik": "/03-motor/tetris-pvp/varlik-18/",
+  "maskeVarlik": "/03-motor/tetris-pvp/varlik-18/",
+  "maskeKlasor": "grup/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-18-boksor/",
+  "p1": "#A64DFF",
+  "p1koyu": "#5a1aa8",
+  "p1acik": "#e6ccff",
+  "p2": "#F5E03D",
+  "p2koyu": "#a08800",
+  "p2acik": "#fff8c4",
+  "altin": "#ffe23a",
+  "camgobegi": "#3fe8ff",
+  "vsHarf": [
+   "CO",
+   "OP"
+  ],
+  "vsEtiket": [
+   "PLAYER 1",
+   "PLAYER 2"
+  ],
+  "vsAlt": "TWO PLAYERS, ONE WALL",
+  "levelAd": {
+   "1": "EASY",
+   "2": "MEDIUM",
+   "3": "HARD"
+  },
+  "acilisZemin": [
+   "#3a2ab8",
+   "#0a0628"
+  ],
+  "acilisYazi": [
+   "#ffffff",
+   "#fff4fb",
+   "#ffd6f2"
+  ],
+  "acilisKontur": "#ff3fae",
+  "acilisIsilti": "#ff7ad8",
+  "isin": [
+   "#3a2ab8",
+   "#0a0628"
+  ],
+  "abone": [
+   "#7dffb4",
+   "#0c8a48"
+  ],
+  "aboneAlt": "NEW BATTLE EVERY DAY",
+  "fener": false
+ }
+}

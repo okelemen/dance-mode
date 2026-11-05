@@ -1,0 +1,361 @@
+{
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-18",
+ "bpm": 150.0,
+ "toplam_olcu": 196,
+ "toplam_duvar": 24,
+ "zaman": {
+  "kart": 2.0,
+  "say": 3.2,
+  "buyu": 4.8,
+  "gec": 1.2,
+  "sure": 11.2
+ },
+ "kartlar": [
+  {
+   "tip": "acilis",
+   "t": 0.0,
+   "sure": 4.8
+  },
+  {
+   "tip": "yazi",
+   "metin": "2 PLAYERS,",
+   "alt": "ONE SHAPE!",
+   "t": 4.8,
+   "sure": 3.2
+  },
+  {
+   "tip": "nasil",
+   "metin": "BUILD THE SHAPE TOGETHER",
+   "alt": "HOLD IT UNTIL THE WALL FLIES THROUGH YOU!",
+   "t": 8.0,
+   "sure": 4.8
+  },
+  {
+   "tip": "yazi",
+   "metin": "READY,",
+   "alt": "YOU TWO?",
+   "t": 12.8,
+   "sure": 3.2
+  },
+  {
+   "t": 16.0,
+   "sure": 3.2,
+   "tip": "tur",
+   "tur": 1,
+   "metin": "EASY"
+  },
+  {
+   "t": 19.2,
+   "sure": 3.2,
+   "tip": "basla"
+  },
+  {
+   "tip": "yazi",
+   "metin": "TEAMWORK!",
+   "t": 112.0,
+   "sure": 1.6
+  },
+  {
+   "tip": "yazi",
+   "metin": "STILL",
+   "alt": "SIDE BY SIDE!",
+   "t": 113.6,
+   "sure": 1.6
+  },
+  {
+   "t": 115.2,
+   "sure": 3.2,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "MEDIUM"
+  },
+  {
+   "tip": "yazi",
+   "metin": "WHAT A PAIR!",
+   "t": 208.0,
+   "sure": 1.6
+  },
+  {
+   "tip": "yazi",
+   "metin": "LAST STAGE,",
+   "alt": "HOLD ON!",
+   "t": 209.6,
+   "sure": 1.6
+  },
+  {
+   "t": 211.2,
+   "sure": 3.2,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "HARD"
+  },
+  {
+   "tip": "yazi",
+   "metin": "ALL 24 WALLS",
+   "alt": "CLEARED TOGETHER!",
+   "t": 304.0,
+   "sure": 3.2
+  },
+  {
+   "tip": "yazi",
+   "metin": "BEST TEAM",
+   "alt": "EVER!",
+   "t": 307.2,
+   "sure": 1.6
+  },
+  {
+   "t": 308.8,
+   "sure": 4.8,
+   "tip": "abone"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 22.4,
+   "grup": "duo-back-to-back-peace-up",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 2,
+   "tur": 1,
+   "t0": 33.6,
+   "grup": "duo-outer-arm-up-hand-link",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 3,
+   "tur": 1,
+   "t0": 44.8,
+   "grup": "duo-back-to-back-arms-t",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 4,
+   "tur": 1,
+   "t0": 56.0,
+   "grup": "duo-twin-wide-v-low-link",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 5,
+   "tur": 1,
+   "t0": 67.2,
+   "grup": "duo-butterfly-lean-out",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 6,
+   "tur": 1,
+   "t0": 78.4,
+   "grup": "duo-star-outer-low-link",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 7,
+   "tur": 1,
+   "t0": 89.6,
+   "grup": "duo-side-bend-toward-arch",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 8,
+   "tur": 1,
+   "t0": 100.8,
+   "grup": "duo-roof-hands-wide-stance",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 9,
+   "tur": 2,
+   "t0": 118.4,
+   "grup": "duo-shoulder-hug-hip-hand",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 10,
+   "tur": 2,
+   "t0": 129.6,
+   "grup": "duo-frame-arms-cactus-link",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 11,
+   "tur": 2,
+   "t0": 140.8,
+   "grup": "duo-crossed-reach-wide-v",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 12,
+   "tur": 2,
+   "t0": 152.0,
+   "grup": "duo-bow-and-cheer",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 13,
+   "tur": 2,
+   "t0": 163.2,
+   "grup": "duo-facing-lunge-high-five",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 14,
+   "tur": 2,
+   "t0": 174.4,
+   "grup": "duo-outer-side-lunge-inner-palms-up",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 15,
+   "tur": 2,
+   "t0": 185.6,
+   "grup": "duo-heart-lunge-outer-t",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 16,
+   "tur": 2,
+   "t0": 196.8,
+   "grup": "duo-back-to-back-side-lunge",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 17,
+   "tur": 3,
+   "t0": 214.4,
+   "grup": "duo-half-kneel-offer-hand",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 18,
+   "tur": 3,
+   "t0": 225.6,
+   "grup": "duo-half-kneel-crown-and-star",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 19,
+   "tur": 3,
+   "t0": 236.8,
+   "grup": "duo-kneel-stretch-and-side-bend",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 20,
+   "tur": 3,
+   "t0": 248.0,
+   "grup": "duo-kneel-arms-up-and-standing-bow",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 21,
+   "tur": 3,
+   "t0": 259.2,
+   "grup": "duo-half-kneel-facing-arch",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 22,
+   "tur": 3,
+   "t0": 270.4,
+   "grup": "duo-back-to-back-half-kneel-arms-up",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 23,
+   "tur": 3,
+   "t0": 281.6,
+   "grup": "duo-side-lunge-and-kneel-t",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 24,
+   "tur": 3,
+   "t0": 292.8,
+   "grup": "duo-wide-lunge-down-and-tree",
+   "ovgu": "NICE MOVE!"
+  }
+ ],
+ "abone": [
+  22.5,
+  45.0,
+  60.0,
+  75.0,
+  90.0,
+  105.0,
+  120.0,
+  135.0,
+  150.0,
+  165.0,
+  180.0,
+  195.0,
+  214.5,
+  225.0,
+  240.0,
+  255.0,
+  270.0,
+  285.0,
+  300.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "Starstep Hold Together.wav (Suno, kullanici, 5 Kas 2026), 150 BPM sabit",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne15.html.",
+ "tema": {
+  "galaksi": true,
+  "yildiz": true,
+  "tekOyuncu": true,
+  "acilisIkili": true,
+  "baslaTam": true,
+  "varlik": "/03-motor/tetris-pvp/varlik-18/",
+  "maskeVarlik": "/03-motor/tetris-pvp/varlik-18/",
+  "maskeKlasor": "grup/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-18-boksor/",
+  "p1": "#A64DFF",
+  "p1koyu": "#5a1aa8",
+  "p1acik": "#e6ccff",
+  "p2": "#F5E03D",
+  "p2koyu": "#a08800",
+  "p2acik": "#fff8c4",
+  "altin": "#ffe23a",
+  "camgobegi": "#3fe8ff",
+  "vsHarf": [
+   "CO",
+   "OP"
+  ],
+  "vsEtiket": [
+   "PLAYER 1",
+   "PLAYER 2"
+  ],
+  "vsAlt": "TWO PLAYERS, ONE WALL",
+  "levelAd": {
+   "1": "EASY",
+   "2": "MEDIUM",
+   "3": "HARD"
+  },
+  "acilisZemin": [
+   "#3a2ab8",
+   "#0a0628"
+  ],
+  "acilisYazi": [
+   "#ffffff",
+   "#fff4fb",
+   "#ffd6f2"
+  ],
+  "acilisKontur": "#ff3fae",
+  "acilisIsilti": "#ff7ad8",
+  "isin": [
+   "#3a2ab8",
+   "#0a0628"
+  ],
+  "abone": [
+   "#7dffb4",
+   "#0c8a48"
+  ],
+  "aboneAlt": "NEW BATTLE EVERY DAY",
+  "fener": false
+ }
+}

@@ -1,0 +1,376 @@
+{
+ "aciklik_p1": [
+  746.0,
+  300.3,
+  1174.0,
+  555.4
+ ],
+ "yol": {
+  "y_kapi": 11.0,
+  "x_kapi": 0.0,
+  "kam": {
+   "x": 0.0,
+   "y": 0.6,
+   "z": 3.1,
+   "egim": 10.0,
+   "lens": 17.0,
+   "sensor": 24.0,
+   "kaydir": 0.0
+  },
+  "serit_w": 1920
+ },
+ "grup": {
+  "duo-back-to-back-peace-up": {
+   "cerceve_m": 5.161,
+   "gen_m": 2.073,
+   "yuk_m": 4.542,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-outer-arm-up-hand-link": {
+   "cerceve_m": 5.194,
+   "gen_m": 2.465,
+   "yuk_m": 4.57,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": 0.009
+    }
+   ]
+  },
+  "duo-butterfly-lean-out": {
+   "cerceve_m": 4.231,
+   "gen_m": 6.747,
+   "yuk_m": 3.723,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": 0.009
+    }
+   ]
+  },
+  "duo-roof-hands-wide-stance": {
+   "cerceve_m": 4.827,
+   "gen_m": 4.623,
+   "yuk_m": 4.248,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.044
+    }
+   ]
+  },
+  "duo-shoulder-hug-hip-hand": {
+   "cerceve_m": 4.302,
+   "gen_m": 5.536,
+   "yuk_m": 3.786,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-inner-knee-lift-arms-up": {
+   "cerceve_m": 5.2,
+   "gen_m": 4.154,
+   "yuk_m": 4.576,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-outer-tree-joined-palms": {
+   "cerceve_m": 5.123,
+   "gen_m": 4.484,
+   "yuk_m": 4.508,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.041
+    }
+   ]
+  },
+  "duo-star-outer-low-link": {
+   "cerceve_m": 4.23,
+   "gen_m": 5.464,
+   "yuk_m": 3.723,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": 0.011
+    }
+   ]
+  },
+  "duo-back-to-back-arms-t": {
+   "cerceve_m": 4.314,
+   "gen_m": 6.224,
+   "yuk_m": 3.796,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-twin-wide-v-low-link": {
+   "cerceve_m": 4.795,
+   "gen_m": 3.969,
+   "yuk_m": 4.22,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": 0.014
+    }
+   ]
+  },
+  "duo-side-bend-toward-arch": {
+   "cerceve_m": 4.642,
+   "gen_m": 5.073,
+   "yuk_m": 4.085,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-heart-lunge-outer-t": {
+   "cerceve_m": 4.28,
+   "gen_m": 6.599,
+   "yuk_m": 3.766,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.016
+    }
+   ]
+  },
+  "duo-back-to-back-wall-sit": {
+   "cerceve_m": 3.432,
+   "gen_m": 3.557,
+   "yuk_m": 3.02,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-warrior-three-fingertips": {
+   "cerceve_m": 4.864,
+   "gen_m": 7.782,
+   "yuk_m": 2.69,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.027
+    }
+   ]
+  },
+  "duo-facing-lunge-high-five": {
+   "cerceve_m": 4.806,
+   "gen_m": 3.792,
+   "yuk_m": 4.229,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.048
+    }
+   ]
+  },
+  "duo-bow-and-cheer": {
+   "cerceve_m": 5.2,
+   "gen_m": 3.235,
+   "yuk_m": 4.576,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-frame-arms-cactus-link": {
+   "cerceve_m": 4.579,
+   "gen_m": 5.512,
+   "yuk_m": 4.03,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.011
+    }
+   ]
+  },
+  "duo-back-to-back-side-lunge": {
+   "cerceve_m": 5.042,
+   "gen_m": 5.179,
+   "yuk_m": 4.437,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-crossed-reach-wide-v": {
+   "cerceve_m": 4.792,
+   "gen_m": 4.877,
+   "yuk_m": 4.217,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.044
+    }
+   ]
+  },
+  "duo-outer-side-lunge-inner-palms-up": {
+   "cerceve_m": 5.123,
+   "gen_m": 3.938,
+   "yuk_m": 4.508,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.041
+    }
+   ]
+  },
+  "duo-half-kneel-crown-and-star": {
+   "cerceve_m": 4.795,
+   "gen_m": 5.046,
+   "yuk_m": 4.22,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-plank-and-standing-star": {
+   "cerceve_m": 4.824,
+   "gen_m": 7.719,
+   "yuk_m": 3.723,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-seated-lean-and-bow-link": {
+   "cerceve_m": 3.581,
+   "gen_m": 3.536,
+   "yuk_m": 3.151,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": 1.724
+    }
+   ]
+  },
+  "duo-kneel-stretch-and-side-bend": {
+   "cerceve_m": 4.723,
+   "gen_m": 4.812,
+   "yuk_m": 4.156,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-low-squat-and-tall-reach": {
+   "cerceve_m": 5.2,
+   "gen_m": 3.936,
+   "yuk_m": 4.576,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-side-lunge-and-kneel-t": {
+   "cerceve_m": 4.443,
+   "gen_m": 6.989,
+   "yuk_m": 3.91,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-half-kneel-offer-hand": {
+   "cerceve_m": 4.294,
+   "gen_m": 3.424,
+   "yuk_m": 3.779,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": 0.101
+    }
+   ]
+  },
+  "duo-back-to-back-half-kneel-arms-up": {
+   "cerceve_m": 4.455,
+   "gen_m": 4.939,
+   "yuk_m": 3.92,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-kneel-t-and-warrior-two": {
+   "cerceve_m": 4.431,
+   "gen_m": 7.09,
+   "yuk_m": 3.336,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-wide-lunge-down-and-tree": {
+   "cerceve_m": 5.068,
+   "gen_m": 5.558,
+   "yuk_m": 4.46,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  },
+  "duo-half-kneel-facing-arch": {
+   "cerceve_m": 4.223,
+   "gen_m": 3.433,
+   "yuk_m": 3.716,
+   "temas": [
+    {
+     "tip": "el-el",
+     "dz": -0.043
+    }
+   ]
+  },
+  "duo-kneel-arms-up-and-standing-bow": {
+   "cerceve_m": 4.459,
+   "gen_m": 4.1,
+   "yuk_m": 3.924,
+   "temas": [
+    {
+     "tip": "bosluk",
+     "dz": 0.0
+    }
+   ]
+  }
+ }
+}
