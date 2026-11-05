@@ -359,6 +359,54 @@
    ],
    "yuvarlakKafa": true,
    "kafaOran": 0.7
+  },
+  "easy-warrior-three-yk2": {
+   "ad": "Easy Warrior Three Round Head 2",
+   "yon": "sag",
+   "govde": 94,
+   "bas": 30,
+   "solKol": [
+    96,
+    96
+   ],
+   "sagKol": [
+    92,
+    92
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -88,
+    -88
+   ],
+   "yuvarlakKafa": true,
+   "kafaOran": 0.7
+  },
+  "easy-warrior-three-up-yk": {
+   "ad": "Easy Warrior Three Arms Up Round Head",
+   "yon": "sag",
+   "govde": 96,
+   "bas": 30,
+   "solKol": [
+    116,
+    116
+   ],
+   "sagKol": [
+    110,
+    110
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -92,
+    -92
+   ],
+   "yuvarlakKafa": true,
+   "kafaOran": 0.7
   }
  }
 }
