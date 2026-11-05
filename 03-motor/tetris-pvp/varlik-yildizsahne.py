@@ -31,7 +31,7 @@ KATLAR = [  # (on uc y, arka y, yari genislik, ust z) - kapidan kameraya
 KORK_X = 6.3          # korkuluk cizgisi
 KAM = {"x": 0.0, "y": -2.6, "z": 3.3, "egim": 11.0, "lens": 17.0, "sensor": 24.0, "kaydir": 0.0}
 if KAPAK:   # REF-069 kapagi: kapi x %38-73 (saga kacik), ust %28, alt %65; sol ve sag on planda dev yildizli direk
-    KAM.update({"x": -1.3, "y": 1.2, "z": 2.9, "egim": 8.0, "lens": 16.0})
+    KAM.update({"x": -1.9, "y": 3.4, "z": 2.6, "egim": 6.0, "lens": 16.0})   # kapak 1: x -1,3 / y 1,2 kapi x %44-66
 MAVI, MAVI_K, PEMBE, CAMG, SARI = "#2f6cff", "#1a2fb8", "#ff3fd0", "#3fe8ff", "#ffd83a"
 
 
@@ -100,15 +100,16 @@ def cokgen(ad, noktalar, z0, z1, mat):
 # ------------------------------------------------------------------ GOK: ortografik; x -960..960, z 0..1080
 def sarmal(cx, cz, r0, tur, kalin, mat, ic_mat, yon=1, y=0):
     """camgobegi sarmal bulut: arsimet sarmali boyunca kalin boru + ince acik ic cizgi (REF-069 piksel bulutlari)"""
-    n = int(tur * 28); onc = None
-    for i in range(n + 1):
-        t = i / n * tur * 2 * math.pi
-        rr = r0 * (1 - i / n * 0.82)
-        p = (cx + yon * math.cos(t) * rr, y, cz + math.sin(t) * rr)
-        if onc:
-            boru((onc[0], y, onc[2]), p, kalin * (1 - i / n * 0.5), mat)
-            boru((onc[0], y - 4, onc[2]), (p[0], y - 4, p[2]), kalin * 0.28 * (1 - i / n * 0.5), ic_mat)
-        onc = p
+    # kapak 1: kisa boru parcalari donuslerde disli gibi okunuyordu -> tek egri (bevel), yaricap uca dogru incelir
+    n = int(tur * 60)
+    for dy, olc, m in ((0, 1.0, mat), (-4, 0.3, ic_mat)):
+        cu = bpy.data.curves.new("sarmal", "CURVE"); cu.dimensions = "3D"; cu.bevel_depth = kalin * olc; cu.bevel_resolution = 4
+        sp = cu.splines.new("POLY"); sp.points.add(n)
+        for i in range(n + 1):
+            t = i / n * tur * 2 * math.pi; rr = r0 * (1 - i / n * 0.82)
+            sp.points[i].co = (cx + yon * math.cos(t) * rr, y + dy, cz + math.sin(t) * rr, 1)
+            sp.points[i].radius = 1 - i / n * 0.5
+        o = bpy.data.objects.new("sarmal", cu); bpy.context.collection.objects.link(o); o.data.materials.append(m)
 
 
 def gok_katmani():
@@ -155,16 +156,12 @@ def gok_katmani():
             boru((onc[0], 0, onc[1]), (x, 0, z), 9 * (0.5 + math.sin(q * math.pi)), hilal)
         onc = (x, z)
     # ufuk: lila-pembe kabarik bulut kumesi (korkuluklarin arkasi bos kalmasin)
-    lila = [mat_emis("lila%d" % i, lin(hex3(c)), g) for i, (c, g) in enumerate((("#f0d8ff", 1.5), ("#d8a8ff", 1.3), ("#ff9ae8", 1.3)))]
+    lila = [mat_emis("lila%d" % i, lin(hex3(c)), g) for i, (c, g) in enumerate((("#d8b0ff", 1.1), ("#b880ff", 1.0), ("#ff80dc", 1.0)))]
     for i in range(34):
         x = -1000 + i * 60 + rnd.uniform(-20, 20)
         k = kure((x, rnd.uniform(100, 160), rnd.uniform(330, 470)), rnd.uniform(70, 130), rnd.choice(lila), sub=2); k.scale = (1.3, 0.3, 0.8)
     # ufukta isik huzmeleri (REF-069 kapinin iki yanindaki beyaz-mor parlama)
-    huzme = mat_emis("huzme", lin(hex3("#e8d0ff")), 1.8)
-    for s in (-1, 1):
-        for j in range(5):
-            x = s * (240 + j * 110)
-            b = yuvarlak_kutu("huzme", (x, 60, 470), (36, 1, 180), huzme, egim=0.0, seg=1); b.rotation_euler = (0, s * math.radians(14 + j * 4), 0)
+    # kapak 1: beyaz huzmeler sol altta cubuk gibi kaliyordu -> kaldirildi
     if KAPAK:
         sc.view_settings.exposure = POZLAMA
     parlat(sc, esik=1.2, boy=8, mix=0.12)
@@ -226,6 +223,9 @@ def korkuluk():
                 for q in (-0.25, 0.25):
                     yd = yildiz("pano_yz", (x - s * 0.13, ym + q * L, 0.62), 0.24, pano_yz, kalin=0.05)
                     yd.rotation_euler = (math.pi / 2, 0, -s * math.pi / 2)
+        taban = mat_parlak("taban", "#1a2aa8", emis=0.5)
+        yuvarlak_kutu("taban", (x + s * 0.6, (ys[0] + ys[-1]) / 2, -0.9), (2.0, ys[-1] - ys[0] + 0.6, 2.0), taban, egim=0.1, seg=2)
+        boru((x - s * 0.4, ys[0], 0.08), (x - s * 0.4, ys[-1], 0.08), 0.06, bc)
         boru((x, ys[0], 1.55), (x, ys[-1], 1.55), 0.1, bp)
         boru((x, ys[0], 1.25), (x, ys[-1], 1.25), 0.08, bc)
 
