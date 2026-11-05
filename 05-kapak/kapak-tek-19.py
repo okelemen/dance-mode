@@ -23,6 +23,7 @@ p.add_argument("--arka", default="varlik-19-kapak-1"); p.add_argument("--poz-kla
 p.add_argument("--gen", type=float, default=0.70, help="siluet genisligi (kadraj orani), yatay pozda")
 p.add_argument("--boy", type=float, default=470, help="siluet yuksekligi (px), dik pozda")
 p.add_argument("--x", type=float, default=0.5)
+p.add_argument("--kontur", type=int, default=17, help="beyaz kontur MaxFilter boyu (tek sayi); piktogramda 27")
 p.add_argument("--renk", type=float, default=1.0); p.add_argument("--parlak", type=float, default=1.0)   # yalniz hafif genel ayar
 p.add_argument("--cikti", required=True)
 a = p.parse_args()
@@ -182,7 +183,7 @@ while True:
         break
     sw, sb = int(sw * 0.96), int(sb * 0.96)
 kont = Image.new("L", (sw + 60, sb + 60), 0); kont.paste(sa, (30, 30))
-im.paste((255, 255, 255, 255), (sx - 30, sy - 30), kont.filter(ImageFilter.MaxFilter(17)))
+im.paste((255, 255, 255, 255), (sx - 30, sy - 30), kont.filter(ImageFilter.MaxFilter(a.kontur)))
 im.paste((0, 0, 0, 255), (sx, sy), sa)
 print(a.cikti, "siluet kutu", sx, sy, sx + sw, sy + sb, "kapi", int(x0), int(y0), int(x1), int(y1))
 
