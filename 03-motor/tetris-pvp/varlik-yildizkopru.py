@@ -181,7 +181,7 @@ def gok_katmani():
         yuvarlak_kutu("sim", (x + rnd.gauss(0, 10), 90, z), (b, 1, b), rnd.choice(sim), egim=0.0, seg=1)
     if KAPAK:
         sc.view_settings.exposure = POZLAMA
-    parlat(sc, esik=0.8 if KAPAK else 1.2, boy=9 if KAPAK else 8, mix=0.3 if KAPAK else 0.12)   # kapak 5: neon isiltisi
+    parlat(sc, esik=1.0 if KAPAK else 1.2, boy=8, mix=0.16 if KAPAK else 0.12)   # kapak 5: neon isiltisi; mix 0,3 sahneyi beyaz sise bogdu (doygunluk 0,45)
     yaz(sc, ON_EK + "gok.png")
 
 
@@ -301,7 +301,7 @@ def serit_katmani():
     log("aciklik", YERLESIM[ON_EK + "aciklik_p1"])
     if KAPAK:
         sc.view_settings.exposure = POZLAMA
-    parlat(sc, esik=0.9 if KAPAK else 1.3, boy=9 if KAPAK else 7, mix=0.32 if KAPAK else 0.1, saydam=True)   # kapak 5: neon isiltisi
+    parlat(sc, esik=1.1 if KAPAK else 1.3, boy=8 if KAPAK else 7, mix=0.17 if KAPAK else 0.1, saydam=True)   # kapak 5: neon isiltisi (0,32 fazla)
     yaz(sc, ON_EK + "serit.png")
 
 
