@@ -31,7 +31,7 @@ KATLAR = [  # (on uc y, arka y, yari genislik, ust z) - kapidan kameraya
 KORK_X = 6.3          # korkuluk cizgisi
 KAM = {"x": 0.0, "y": 0.6, "z": 3.1, "egim": 10.0, "lens": 17.0, "sensor": 24.0, "kaydir": 0.0}   # sahne 1: y -2,6 kapi x %41-58 (ref %35-65)
 if KAPAK:   # REF-069 kapagi: kapi x %38-73 (saga kacik), ust %28, alt %65; sol ve sag on planda dev yildizli direk
-    KAM.update({"x": -1.9, "y": 3.4, "z": 2.6, "egim": 6.0, "lens": 16.0})   # kapak 1: x -1,3 / y 1,2 kapi x %44-66
+    KAM.update({"x": -1.7, "y": 2.3, "z": 2.8, "egim": 7.0, "lens": 16.0})   # kapak 1: x -1,3 / y 1,2 kapi x %44-66; kapak 2: y 3,4 kapi ust %17 (ref %28)
 MAVI, MAVI_K, PEMBE, CAMG, SARI = "#2f6cff", "#1a2fb8", "#ff3fd0", "#3fe8ff", "#ffd83a"
 
 
