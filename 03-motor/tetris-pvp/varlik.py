@@ -725,8 +725,10 @@ def poz_maskeleri():
             h0 = arm.matrix_world @ hb.head; h1 = arm.matrix_world @ hb.tail
             hb.scale = (0.01, 0.01, 0.01)
             bpy.context.view_layer.update()
-            r_k = P.get("kafaR", 0.12)
-            kafa_obj = kure(tuple(h0 + (h1 - h0).normalized() * r_k * 0.9), r_k, siyah, sub=4)
+            # ilk deneme r 0,12 sabitti, govde olcegi ~2x oldugundan kafa nokta gibi kaldi -> kafa kemigi boyundan
+            L_k = (h1 - h0).length; r_k = L_k * P.get("kafaOran", 0.62)
+            kafa_obj = kure(tuple(h0 + (h1 - h0).normalized() * r_k * 0.95), r_k, siyah, sub=4)
+            log("kafa", ad, "kemik", round(L_k, 3), "r", round(r_k, 3))
             bpy.context.view_layer.update()
         alt, ust = dunya_kutusu(mesler + ([kafa_obj] if kafa_obj else []))
         gen, yuk = ust.x - alt.x, ust.z - alt.z
