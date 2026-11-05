@@ -132,6 +132,50 @@
     0,
     -90
    ]
+  },
+  "easy-bird-dog-up": {
+   "ad": "Easy Bird Dog Up",
+   "yon": "sag",
+   "govde": 108,
+   "bas": 4,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -100,
+    -100
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "easy-bird-dog-up2": {
+   "ad": "Easy Bird Dog Up 2",
+   "yon": "sag",
+   "govde": 114,
+   "bas": 2,
+   "solKol": [
+    104,
+    104
+   ],
+   "sagKol": [
+    4,
+    4
+   ],
+   "solBacak": [
+    -104,
+    -104
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
   }
  }
 }
