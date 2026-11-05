@@ -24,6 +24,7 @@ p.add_argument("--gen", type=float, default=0.70, help="siluet genisligi (kadraj
 p.add_argument("--boy", type=float, default=470, help="siluet yuksekligi (px), dik pozda")
 p.add_argument("--x", type=float, default=0.5)
 p.add_argument("--kontur", type=int, default=17, help="beyaz kontur MaxFilter boyu (tek sayi); piktogramda 27")
+p.add_argument("--incelt", type=float, default=0, help="kiyafet bollugunu almak icin maske inceltme (px, 900x740 maskede)")
 p.add_argument("--yumusat", type=float, default=0, help="maske kenar yumusatma (px, 900x740 maskede); giysi kirisigi/parmak araligi kaybolur")
 p.add_argument("--kafa-olcek", type=float, default=1.0, help="yuvarlak kafa buyutme (yerlesim.json kafa_px'e gore)")
 p.add_argument("--kafa-bosluk", type=float, default=0.0, help="kafa ile govde arasi beyaz bosluk (px, kapakta)")
@@ -60,7 +61,10 @@ if a.yumusat > 0:
     # kapak 7 (kullanici: referans silueti puruzsuz): kiyafet kirisigi, sort pacasi, parmak araliklari yumusatilir (2x olcekte kapat + bulanik + esik)
     al = maske.getchannel("A").resize((maske.width * 2, maske.height * 2), Image.LANCZOS)
     k_ = int(a.yumusat * 2) | 1
-    al = al.filter(ImageFilter.MaxFilter(k_)).filter(ImageFilter.MinFilter(k_)).filter(ImageFilter.GaussianBlur(a.yumusat * 2)).point(lambda v: 255 if v > 128 else 0)
+    al = al.filter(ImageFilter.MaxFilter(k_)).filter(ImageFilter.MinFilter(k_))
+    if a.incelt > 0:   # kapak 9 (kullanici: "siluet hala cok kaba"): bol sort/tisort kalinligi alinir, oranlar gercek govdeden kalir
+        al = al.filter(ImageFilter.MinFilter(int(a.incelt * 2) * 2 + 1))
+    al = al.filter(ImageFilter.GaussianBlur(a.yumusat * 2)).point(lambda v: 255 if v > 128 else 0)
     al = al.filter(ImageFilter.GaussianBlur(1.2)).resize(maske.size, Image.LANCZOS)
     maske = Image.new("RGBA", maske.size, (0, 0, 0, 0)); maske.putalpha(al)
 KAFA = None
