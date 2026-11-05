@@ -32,6 +32,14 @@ KORK_X = 6.3          # korkuluk cizgisi
 KAM = {"x": 0.0, "y": 0.6, "z": 3.1, "egim": 10.0, "lens": 17.0, "sensor": 24.0, "kaydir": 0.0}   # sahne 1: y -2,6 kapi x %41-58 (ref %35-65)
 if KAPAK:   # REF-069 kapagi: kapi x %38-73 (saga kacik), ust %28, alt %65; sol ve sag on planda dev yildizli direk
     KAM.update({"x": -1.7, "y": 2.3, "z": 2.8, "egim": 7.0, "lens": 16.0})   # kapak 1: x -1,3 / y 1,2 kapi x %44-66; kapak 2: y 3,4 kapi ust %17 (ref %28)
+_mat_emis = mat_emis
+
+
+def mat_emis(ad, renk, guc):
+    """kapak 4: neon cekirdekleri beyaza patliyor, doygunluk 0,593 / ref 0,668 -> kapakta isilti gucu %70"""
+    return _mat_emis(ad, renk, guc * (0.7 if KAPAK else 1.0))
+
+
 MAVI, MAVI_K, PEMBE, CAMG, SARI = "#2f6cff", "#1a2fb8", "#ff3fd0", "#3fe8ff", "#ffd83a"
 
 
@@ -263,7 +271,7 @@ def serit_katmani():
     sc.world.node_tree.nodes["Background"].inputs[0].default_value = (*lin(hex3("#6a4adf")), 1)   # mor gok yansir
     sc.world.node_tree.nodes["Background"].inputs[1].default_value = 0.9
     katlar(); korkuluk(); kapi()
-    isik("AREA", (0, -3, 7), 900, lin(hex3("#f0e8ff")), 10, yon=(0, 6, 0))
+    isik("AREA", (0, -3, 7), 500 if KAPAK else 900, lin(hex3("#c8a8ff" if KAPAK else "#f0e8ff")), 10, yon=(0, 6, 0))   # kapak 4: beyaz isik zeminde soluk yansima
     isik("AREA", (0, KAP["y"] + 3, 4), 400, lin(hex3("#ff7ae8")), 8, yon=(0, 4, 0))
     Y, X, W_, H_, Z = KAP["y"], KAP["x"], KAP["w"], KAP["h"], KAP["z"]
     bpy.context.view_layer.update()

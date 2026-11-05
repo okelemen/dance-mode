@@ -57,11 +57,11 @@ ma = maske.getchannel("A")
 # kapidaki duvar: REF-069 sari damali kart, ortasinda ayni pozun SIYAH silueti (referansta kart dolu, siluet siyah)
 pw, ph = int(x1 - x0), int(y1 - y0)
 kare = max(8, pw // 12)
-kart = Image.new("RGBA", (pw, ph), "#ffe04a"); kd = ImageDraw.Draw(kart)
+kart = Image.new("RGBA", (pw, ph), "#ffcc1a"); kd = ImageDraw.Draw(kart)   # taslak 2: krem dama doygunlugu dusuruyordu (ref sari-turuncu)
 for j in range(0, ph, kare):
     for i in range(0, pw, kare):
         if (i // kare + j // kare) % 2:
-            kd.rectangle((i, j, i + kare - 1, j + kare - 1), fill="#fff6c8")
+            kd.rectangle((i, j, i + kare - 1, j + kare - 1), fill="#ffec6a")
 mh = int(ph * 0.82); mw = int(mh * maske.width / maske.height)
 if mw > pw * 0.82:
     mw = int(pw * 0.82); mh = int(mw * maske.height / maske.width)
@@ -166,8 +166,8 @@ print(a.cikti, "siluet kutu", sx, sy, sx + sw, sy + sb, "kapi", int(x0), int(y0)
 kalp(1180, 640, 62)
 
 # baslik en onde: HUMAN camgobegi->mavi->pembe, TETRIS pembe->sari->camgobegi (REF-069 harf renkleri)
-baloncuk("HUMAN", 345, 88, 150, ["#9ef4ff", "#5ab8ff", "#8a8cff", "#ff7ad8"], hedef=560)
-baloncuk("TETRIS", 935, 88, 150, ["#ff6ad0", "#ff9ab0", "#ffe24a", "#b8f06a", "#7ae8ff"], hedef=560)
+baloncuk("HUMAN", 345, 88, 150, ["#5ae8ff", "#3a9cff", "#8a6cff", "#ff4ac8"], hedef=560)
+baloncuk("TETRIS", 935, 88, 150, ["#ff4ab8", "#ff7a9a", "#ffd21a", "#8ae84a", "#3ad8ff"], hedef=560)
 
 im.convert("RGB").save(a.cikti, quality=95)
 print("->", a.cikti)
