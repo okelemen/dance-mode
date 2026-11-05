@@ -718,6 +718,10 @@ def poz_maskeleri():
             yonelt(arm, kemik(arm, taraf + "Foot"), ayak)
         # 19. video kapak (5 Kas 2026, kullanici: "normal insan vucudu gibi siyah siluet, kafasi yuvarlak"): Mixamo kafasi gizlenir,
         # boyun ucunda kafa kemigi yonunde siyah kure kafa konur (REF-070 kapagindaki yuvarlak kafa)
+        # 19. kapak (kullanici: referans silueti puruzsuz, bizimki kiyafet/ayakkabi kirisikli): sadeGovde -> yalniz ciplak manken govdesi
+        for m in mesler:
+            m.hide_render = bool(P.get("sadeGovde")) and m.name != "Body"
+        gorunur = [m for m in mesler if not m.hide_render]
         kafa_obj = None
         if P.get("yuvarlakKafa"):
             hb = kemik(arm, "Head")
@@ -730,7 +734,7 @@ def poz_maskeleri():
             kafa_obj = kure(tuple(h0 + (h1 - h0).normalized() * r_k * 0.95), r_k, siyah, sub=4)
             log("kafa", ad, "kemik", round(L_k, 3), "r", round(r_k, 3))
             bpy.context.view_layer.update()
-        alt, ust = dunya_kutusu(mesler + ([kafa_obj] if kafa_obj else []))
+        alt, ust = dunya_kutusu(gorunur + ([kafa_obj] if kafa_obj else []))
         gen, yuk = ust.x - alt.x, ust.z - alt.z
         olc = 2.55                                   # cerceve yuksekligi (m): ayakta figur ~%72
         if yuk > olc * 0.92:
@@ -741,6 +745,9 @@ def poz_maskeleri():
         kam.location = ((alt.x + ust.x) / 2, -12, alt.z - olc * 0.04 + olc / 2)
         bpy.context.view_layer.update()
         YERLESIM.setdefault("poz", {})[ad] = {"cerceve_m": round(olc, 3), "gen_m": round(gen, 3), "yuk_m": round(yuk, 3)}
+        if kafa_obj:   # kapakta kafa gövdeden beyaz boslukla ayrilsin diye kafa merkezi + yaricap (900x740 piksel)
+            kv = world_to_camera_view(sc, kam, kafa_obj.location)
+            YERLESIM["poz"][ad]["kafa_px"] = [round(kv.x * 900, 1), round((1 - kv.y) * 740, 1), round(r_k / (olc * ASPECT) * 900, 1)]
         log("poz", ad, "gen", round(gen, 2), "yuk", round(yuk, 2), "cerceve", round(olc, 2))
         yaz(sc, "poz/%s.png" % ad)
         if kafa_obj:

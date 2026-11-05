@@ -407,6 +407,81 @@
    ],
    "yuvarlakKafa": true,
    "kafaOran": 0.7
+  },
+  "easy-warrior-three2-sade": {
+   "ad": "Easy Warrior Three Round Head 2",
+   "yon": "sag",
+   "govde": 94,
+   "bas": 30,
+   "solKol": [
+    96,
+    96
+   ],
+   "sagKol": [
+    92,
+    92
+   ],
+   "sagBacak": [
+    0,
+    0
+   ],
+   "solBacak": [
+    -88,
+    -88
+   ],
+   "yuvarlakKafa": true,
+   "kafaOran": 0.78,
+   "sadeGovde": true
+  },
+  "easy-bird-dog-low3-sade": {
+   "ad": "Easy Bird Dog Low 3 Round Head",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 22,
+   "solKol": [
+    92,
+    92
+   ],
+   "sagKol": [
+    -18,
+    20
+   ],
+   "solBacak": [
+    -90,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "yuvarlakKafa": true,
+   "sadeGovde": true,
+   "kafaOran": 0.78
+  },
+  "easy-bird-dog-low2-sade": {
+   "ad": "Easy Bird Dog Low 2 Round Head",
+   "yon": "sag",
+   "govde": 96,
+   "bas": 14,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    -8,
+    10
+   ],
+   "solBacak": [
+    -98,
+    -98
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ],
+   "yuvarlakKafa": true,
+   "sadeGovde": true,
+   "kafaOran": 0.78
   }
  }
 }
