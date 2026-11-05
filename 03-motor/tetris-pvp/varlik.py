@@ -666,7 +666,8 @@ def poz_maskeleri():
     sc.cycles.use_denoising = False
     sc.view_settings.view_transform = "Standard"
     once = set(bpy.data.objects)
-    bpy.ops.import_scene.fbx(filepath=os.path.join(KOK, "02-hareketler/siluet-govde.fbx"), automatic_bone_orientation=False)
+    # 19. kapak (kullanici: "siluet hala cok kaba"): giysili manken yerine --govde-fbx ile X Bot (giysisiz, puruzsuz) secilebilir
+    bpy.ops.import_scene.fbx(filepath=os.path.join(KOK, arg("--govde-fbx", "02-hareketler/siluet-govde.fbx")), automatic_bone_orientation=False)
     yeni = [o for o in bpy.data.objects if o not in once]
     arm = [o for o in yeni if o.type == "ARMATURE"][0]
     mesler = [o for o in yeni if o.type == "MESH"]
