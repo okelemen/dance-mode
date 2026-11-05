@@ -1,7 +1,7 @@
 {"_not": "HUMAN TETRIS 19 (REF-070 SOLO Easy) kapak adaylari. REF-070 kapaginda dev bird-dog (dort ayak, bir kol ileri, karsi bacak geri). Acilar pozlar-17.json dilinde (0 asagi, 90 ekran-sag, 180 yukari). yon sag = profil, yuz ekran sagina; geri = ekran-sol (-90).",
  "pozlar": {
-  "easy-bird-dog": {"ad": "Easy Bird Dog", "yon": "sag", "govde": 82, "bas": 4, "solKol": [92, 92], "sagKol": [2, 2], "solBacak": [-92, -92], "sagBacak": [0, -90]},
-  "easy-bird-dog-high": {"ad": "Easy Bird Dog High", "yon": "sag", "govde": 78, "bas": 6, "solKol": [105, 105], "sagKol": [4, 4], "solBacak": [-100, -100], "sagBacak": [0, -90]},
+  "easy-bird-dog": {"ad": "Easy Bird Dog", "yon": "sag", "govde": 96, "bas": 8, "solKol": [98, 98], "sagKol": [2, 2], "solBacak": [-92, -92], "sagBacak": [0, -90]},
+  "easy-bird-dog-high": {"ad": "Easy Bird Dog High", "yon": "sag", "govde": 100, "bas": 10, "solKol": [108, 108], "sagKol": [4, 4], "solBacak": [-100, -100], "sagBacak": [0, -90]},
   "easy-warrior-two": {"ad": "Easy Warrior Two", "yon": "on", "govde": 180, "bas": 0, "solKol": [92, 92], "sagKol": [-92, -92], "sagBacak": [-68, -2], "solBacak": [48, 48]},
   "easy-tree-arms-up": {"ad": "Easy Tree Arms Up", "yon": "on", "govde": 180, "bas": 0, "solKol": [168, 176], "sagKol": [-168, -176], "solBacak": [2, 0], "sagBacak": [-55, 55]},
   "easy-low-lunge-sky": {"ad": "Easy Low Lunge Sky", "yon": "sag", "govde": 175, "bas": 0, "solKol": [170, 170], "sagKol": [168, 168], "solBacak": [88, -5], "sagBacak": [0, -90]}

@@ -22,11 +22,11 @@ KAPAK = YALNIZ == "kapak"
 POZLAMA = float(arg("--kapak-pozlama", "0"))
 ON_EK = "kapak-" if KAPAK else ""
 # REF-070 karesi (1280x720): kapi x %35-65, ust %34, alt %66; korkuluk ucu (ufuk) ~%57; zemin kameraya kadar, korkuluklar kadraj kenarindan tasar.
-KAP = {"y": 12.0, "x": 0.0, "w": 5.2, "h": 3.4, "kule": 0.55, "kiris": 0.6}
-KORK_X = 4.6
+KAP = {"y": 5.8, "x": 0.0, "w": 4.2, "h": 2.7, "kule": 0.5, "kiris": 0.55}   # sahne 1: y 12 kapi x %43-57 (ref %35-65) -> yaklastirildi
+KORK_X = 3.6
 KAM = {"x": 0.0, "y": -1.0, "z": 2.2, "egim": 6.0, "lens": 15.0, "sensor": 24.0, "kaydir": 0.0}
 if KAPAK:   # REF-070 kapagi: kapi x %35-65 ust %26, alt %62; sag ve solda korkuluk on planda buyuk
-    KAM.update({"x": 0.0, "y": 1.0, "z": 1.9, "egim": 4.0, "lens": 14.0})
+    KAM.update({"x": 0.0, "y": -0.6, "z": 1.8, "egim": 3.0, "lens": 15.0})
 _mat_emis = mat_emis
 
 
@@ -113,9 +113,11 @@ def gok_katmani():
     zem = bpy.data.materials.new("gok"); zem.use_nodes = True; nt = zem.node_tree; nt.nodes.clear()
     tc = nt.nodes.new("ShaderNodeTexCoord"); sp = nt.nodes.new("ShaderNodeSeparateXYZ"); nt.links.new(tc.outputs["Generated"], sp.inputs[0])
     rp = nt.nodes.new("ShaderNodeValToRGB"); cr = rp.color_ramp; nt.links.new(sp.outputs["Y"], rp.inputs[0])
-    cr.elements[0].position = 0.40; cr.elements[0].color = (*lin(hex3("#ff5ac8")), 1)       # ufukta pembe
-    cr.elements[1].position = 0.92; cr.elements[1].color = (*lin(hex3("#0e0c52")), 1)       # tepede koyu lacivert
-    e = cr.elements.new(0.58); e.color = (*lin(hex3("#5a2ac0")), 1)                         # ortada mor
+    # sahne 1: gok her yerde pembe-mor kaldi (ref tepede koyu lacivert) -> lacivert yukari genisletildi
+    cr.elements[0].position = 0.42; cr.elements[0].color = (*lin(hex3("#ff5ac8")), 1)       # ufukta pembe
+    cr.elements[1].position = 1.0; cr.elements[1].color = (*lin(hex3("#08063a")), 1)        # tepede koyu lacivert
+    e = cr.elements.new(0.54); e.color = (*lin(hex3("#6a2ac8")), 1)                         # ufuk ustu mor
+    e = cr.elements.new(0.68); e.color = (*lin(hex3("#1a1470")), 1)                         # ortada lacivert
     em = nt.nodes.new("ShaderNodeEmission"); nt.links.new(rp.outputs[0], em.inputs[0])
     o = nt.nodes.new("ShaderNodeOutputMaterial"); nt.links.new(em.outputs[0], o.inputs[0])
     bpy.ops.mesh.primitive_plane_add(size=1, location=(0, 600, 540), rotation=(math.radians(90), 0, 0))
@@ -140,8 +142,8 @@ def gok_katmani():
             yuvarlak_kutu("tepe", (x + w / 2, 200 - 20 * k, (h + 300) / 2), (w, 1, h - 300), m, egim=0.0, seg=1)
             x += w
     # piksel ay: kapinin solunda arkada, sari ust - turuncu alt
-    piksel_disk(-300, 600, 175, 22, mat_emis("ay", lin(hex3("#ffd23a")), 3.0), 240)
-    piksel_disk(-300, 560, 150, 22, mat_emis("ay_alt", lin(hex3("#ff9a2a")), 2.6), 230)
+    piksel_disk(-420, 600, 170, 22, mat_emis("ay", lin(hex3("#ffd23a")), 3.0), 240)
+    piksel_disk(-420, 560, 145, 22, mat_emis("ay_alt", lin(hex3("#ff9a2a")), 2.6), 230)
     # piksel bulutlar: lila / pembe, ust yarida
     bul = [mat_emis("bul%d" % i, lin(hex3(c)), g) for i, (c, g) in enumerate((("#8a5ae8", 1.2), ("#d070f0", 1.2), ("#ff7ad8", 1.1)))]
     for cx, cz, w in ((-560, 860, 220), (-760, 690, 160), (640, 800, 200), (860, 660, 140), (150, 930, 120), (-120, 760, 90)):
@@ -153,7 +155,7 @@ def gok_katmani():
     for s in (-1, 1):
         x = 330
         while x < 1000:
-            w = rnd.choice((90, 110, 130, 160)); h = rnd.uniform(420, 700) if x < 700 else rnd.uniform(520, 820)
+            w = rnd.choice((90, 110, 130, 160)); h = rnd.uniform(380, 560) if x < 700 else rnd.uniform(460, 680)   # sahne 1: binalar ufku kapatiyordu
             cx = s * (x + w / 2)
             yuvarlak_kutu("bina", (cx, 120, h / 2), (w, 1, h), rnd.choice(bina), egim=0.0, seg=1)
             for zz in range(60, int(h) - 40, 34):
@@ -172,31 +174,32 @@ def gok_katmani():
 
 # ------------------------------------------------------------------ SERIT: kopru zemini + neon cizimler + korkuluk + kapi (perspektif, saydam)
 def zemin():
-    cokgen_kutu = mat_parlak("zemin", "#1a2ab0", emis=0.35, purluk=0.05)
-    yuvarlak_kutu("zemin", (0, 14, -0.15), (2 * KORK_X + 0.4, 34, 0.3), cokgen_kutu, egim=0.02, seg=1)
+    """sahne 1: zemin mat acik mor + simgeler dev kaliyordu -> koyu parlak mavi (sol mavi, sag morumsu yansima), simgeler kucuk, kapiya kadar dagilir"""
+    for sx, renk in ((-1, "#121a9a"), (1, "#3a128a")):
+        yuvarlak_kutu("zemin", (sx * (KORK_X + 0.2) / 2, KAP["y"] - 1, -0.15), (KORK_X + 0.2, KAP["y"] + 8, 0.3), mat_parlak("zemin%d" % sx, renk, emis=0.18, purluk=0.04), egim=0.0, seg=1)
     kenar = mat_emis("zemin_kenar", lin(hex3(CAMG)), 3.0)
-    for s in (-1, 1):
-        boru((s * (KORK_X - 0.2), -3, 0.02), (s * (KORK_X - 0.2), 30, 0.02), 0.05, kenar)
-    boru((0, -3, 0.005), (0, KAP["y"], 0.005), 0.025, mat_emis("orta", lin(hex3("#c8f8ff")), 1.6))
+    for s_ in (-1, 1):
+        boru((s_ * (KORK_X - 0.15), -3, 0.02), (s_ * (KORK_X - 0.15), KAP["y"] + 3, 0.02), 0.04, kenar)
+    boru((0, -3, 0.005), (0, KAP["y"], 0.005), 0.02, mat_emis("orta", lin(hex3("#c8f8ff")), 1.4))
     pem = mat_emis("z_pem", lin(hex3(PEMBE)), 4.0); cam = mat_emis("z_cam", lin(hex3(CAMG)), 3.6); sar = mat_emis("z_sar", lin(hex3(SARI)), 3.6)
     z = 0.02
-    # gulen pembe yildiz (on sol), camgobegi pati (on sag), camgobegi bulut (orta sag), pembe kucuk yildiz (orta sol)
-    for (cx, cy, r, m) in ((-1.6, 1.6, 0.9, pem), (-1.3, 6.6, 0.55, pem)):
-        cizgi([(x, y, z) for x, y in yildiz_nok(cx, cy, r, ic=0.5)], 0.045, m)
-        cizgi([(x, y, z) for x, y in daire_nok(cx, cy - r * 0.12, r * 0.22, n=12, a0=math.pi, a1=2 * math.pi)], 0.03, m, kapali=False)
-    cizgi([(x, y, z) for x, y in daire_nok(1.7, 1.5, 0.55, 0.42)], 0.045, cam)
-    for dx, dy in ((-0.62, 0.55), (-0.22, 0.78), (0.22, 0.78), (0.62, 0.55)):
-        cizgi([(x, y, z) for x, y in daire_nok(1.7 + dx, 1.5 + dy, 0.17)], 0.04, cam)
-    bulut = daire_nok(1.6, 6.5, 0.5, 0.32, n=10, a0=0, a1=math.pi) + daire_nok(0.9, 6.5, 0.4, 0.28, n=8, a0=0.2, a1=math.pi) + [(0.5, 6.45), (2.1, 6.45)]
-    cizgi([(x, y, z) for x, y in bulut], 0.04, cam)
-    # sari cift chevron (orta) + pembe/camgobegi uzun cubuklar (V dizilim, kapiya bakar)
+    # gulen pembe yildiz (on sol) + kucuk pembe yildiz (kapi onu sol), camgobegi pati (on sag), camgobegi bulut (kapi onu sag)
+    for (cx, cy, r, m) in ((-1.1, 1.2, 0.42, pem), (-0.9, 4.2, 0.28, pem)):
+        cizgi([(x, y, z) for x, y in yildiz_nok(cx, cy, r, ic=0.5)], 0.03, m)
+        cizgi([(x, y, z) for x, y in daire_nok(cx, cy - r * 0.12, r * 0.22, n=12, a0=math.pi, a1=2 * math.pi)], 0.02, m, kapali=False)
+    cizgi([(x, y, z) for x, y in daire_nok(1.15, 1.0, 0.3, 0.22)], 0.03, cam)
+    for dx, dy in ((-0.34, 0.3), (-0.12, 0.42), (0.12, 0.42), (0.34, 0.3)):
+        cizgi([(x, y, z) for x, y in daire_nok(1.15 + dx, 1.0 + dy, 0.09)], 0.025, cam)
+    bulut = daire_nok(1.05, 4.2, 0.32, 0.2, n=10, a0=0, a1=math.pi) + daire_nok(0.6, 4.2, 0.24, 0.17, n=8, a0=0.2, a1=math.pi) + [(0.36, 4.17), (1.37, 4.17)]
+    cizgi([(x, y, z) for x, y in bulut], 0.03, cam)
+    # sari cift chevron (orta) + pembe/camgobegi cubuklar (V, kapiya bakar)
     for k in range(2):
-        yy = 4.2 + k * 0.35
-        cizgi([(-0.55, yy, z), (0, yy + 0.4, z), (0.55, yy, z)], 0.05, sar, kapali=False)
-    for s, m in ((-1, pem), (1, cam)):
-        for (y0, L) in ((3.0, 2.6), (8.2, 1.8)):
-            a = (s * 0.3, y0); b = (s * (0.3 + L), y0 - 0.45)
-            cizgi([(a[0], a[1], z), (b[0], b[1], z), (b[0], b[1] - 0.35, z), (a[0], a[1] - 0.35, z)], 0.04, m)
+        yy = 3.0 + k * 0.22
+        cizgi([(-0.35, yy, z), (0, yy + 0.25, z), (0.35, yy, z)], 0.035, sar, kapali=False)
+    for s_, m in ((-1, pem), (1, cam)):
+        for (y0, L) in ((2.2, 1.4), (5.0, 1.0)):
+            a = (s_ * 0.2, y0); b = (s_ * (0.2 + L), y0 - 0.3)
+            cizgi([(a[0], a[1], z), (b[0], b[1], z), (b[0], b[1] - 0.22, z), (a[0], a[1] - 0.22, z)], 0.028, m)
 
 
 def korkuluk():
@@ -206,25 +209,25 @@ def korkuluk():
     bp = mat_emis("boru_p", lin(hex3(PEMBE)), 3.2)
     for s in (-1, 1):
         x = s * KORK_X
-        ys = [-1.0, 1.6, 4.2, 6.8, 9.4, 12.0, 15.0, 18.0, 22.0, 26.0]
+        ys = [-1.4, 0.6, 2.6, 4.6, 6.6, 8.6]   # sahne 1: kopru kapidan cok oteye uzaniyordu
         for j, yy in enumerate(ys):
-            h = 1.5
+            h = 1.2
             yuvarlak_kutu("direk", (x, yy, h / 2), (0.62, 0.62, h), direk, egim=0.12, seg=3)
             yuvarlak_kutu("direk_kapak", (x, yy, h + 0.06), (0.7, 0.7, 0.12), yuz, egim=0.04, seg=2)
             # ic yuzde simge: gulen yuz / kedi / ay (sirayla)
-            fx = x - s * 0.32; m = simge[j % 3]; zc = h * 0.55
+            fy = yy - 0.33; m = simge[j % 3]; zc = h * 0.5   # sahne 1: ic yuzdeki simge zeminde cizgi gibi okunuyordu -> kameraya bakan on yuz
             if j % 3 == 0:
-                cizgi([(fx, yy + math.cos(t) * 0.2, zc + math.sin(t) * 0.2) for t in [i / 20 * 2 * math.pi for i in range(21)]], 0.025, m)
-                cizgi([(fx, yy + math.cos(t) * 0.11, zc + math.sin(t) * 0.11) for t in [math.pi * (1.15 + i / 10 * 0.7) for i in range(11)]], 0.02, m, kapali=False)
+                cizgi([(x + math.cos(t) * 0.2, fy, zc + math.sin(t) * 0.2) for t in [i / 20 * 2 * math.pi for i in range(21)]], 0.025, m)
+                cizgi([(x + math.cos(t) * 0.11, fy, zc + math.sin(t) * 0.11) for t in [math.pi * (1.15 + i / 10 * 0.7) for i in range(11)]], 0.02, m, kapali=False)
             elif j % 3 == 1:
-                cizgi([(fx, yy + math.cos(t) * 0.19, zc + math.sin(t) * 0.17) for t in [i / 20 * 2 * math.pi for i in range(21)]], 0.025, m)
+                cizgi([(x + math.cos(t) * 0.19, fy, zc + math.sin(t) * 0.17) for t in [i / 20 * 2 * math.pi for i in range(21)]], 0.025, m)
                 for e in (-1, 1):
-                    cizgi([(fx, yy + e * 0.17, zc + 0.08), (fx, yy + e * 0.14, zc + 0.3), (fx, yy + e * 0.04, zc + 0.16)], 0.022, m, kapali=False)
+                    cizgi([(x + e * 0.17, fy, zc + 0.08), (x + e * 0.14, fy, zc + 0.3), (x + e * 0.04, fy, zc + 0.16)], 0.022, m, kapali=False)
             else:
-                cizgi([(fx, yy + math.cos(t) * 0.2, zc + math.sin(t) * 0.2) for t in [math.pi * (0.3 + i / 16 * 1.4) for i in range(17)]]
-                      + [(fx, yy + math.cos(t) * 0.12 + 0.07, zc + math.sin(t) * 0.14) for t in [math.pi * (1.7 - i / 16 * 1.4) for i in range(17)]], 0.022, m)
+                cizgi([(x + math.cos(t) * 0.2, fy, zc + math.sin(t) * 0.2) for t in [math.pi * (0.3 + i / 16 * 1.4) for i in range(17)]]
+                      + [(x + math.cos(t) * 0.12 + 0.07, fy, zc + math.sin(t) * 0.14) for t in [math.pi * (1.7 - i / 16 * 1.4) for i in range(17)]], 0.022, m)
             if j < len(ys) - 1:
-                for zz in (0.75, 1.25):
+                for zz in (0.6, 1.0):
                     boru((x, yy + 0.32, zz), (x, ys[j + 1] - 0.32, zz), 0.1, bp)
 
 
