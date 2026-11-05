@@ -32,7 +32,8 @@ _mat_emis = mat_emis
 
 def mat_emis(ad, renk, guc):
     """18. video kapak dersi: kapakta neon cekirdekleri beyaza patlamasin -> isilti gucu %70"""
-    return _mat_emis(ad, renk, guc * (0.7 if KAPAK else 1.0))
+    # kapak 5 (kullanici: "referans gibi estetik"): REF-070 kapaginda her neon cevresine isik sacar -> 0,7 kisma kaldirildi, isilti parlat() ile
+    return _mat_emis(ad, renk, guc)
 
 
 PEMBE, CAMG, SARI, MOR = "#ff3fd0", "#3fe8ff", "#ffd83a", "#b070ff"
@@ -145,6 +146,9 @@ def gok_katmani():
             yuvarlak_kutu("tepe", (x + w / 2, 200 - 20 * k, (h + 300) / 2), (w, 1, h - 300), m, egim=0.0, seg=1)
             x += w
     # piksel ay: kapinin solunda arkada, sari ust - turuncu alt
+    # ay halesi: REF-070 ayin cevresinde turuncu-pembe genis isilti (kapak 5)
+    for r_, c_, g_ in ((330, "#ff6ac0", 0.55), (250, "#ff9a5a", 0.8)):
+        h_ = kure((-420, 300, 580), r_, mat_emis("hale%d" % r_, lin(hex3(c_)), g_), sub=3); h_.scale = (1, 0.05, 1)
     piksel_disk(-420, 600, 170, 22, mat_emis("ay", lin(hex3("#ffd23a")), 3.0), 240)
     piksel_disk(-420, 560, 145, 22, mat_emis("ay_alt", lin(hex3("#ff9a2a")), 2.6), 230)
     # piksel bulutlar: lila / pembe, ust yarida
@@ -169,17 +173,24 @@ def gok_katmani():
                 yuvarlak_kutu("anten", (cx, 115, h + 40), (6, 1, 80), bina[0], egim=0.0, seg=1)
                 kure((cx, 100, h + 86), 12, rnd.choice(anten), sub=2)
             x += w + rnd.uniform(-8, 10)
+    # sim izi: sol ustten kapiya inen altin-pembe pirilti tozu (REF-070 kapak ve video)
+    sim = [mat_emis("sim%d" % i, lin(hex3(c)), 5.0) for i, c in enumerate(("#fff2a0", "#ffd23a", "#ffffff", "#ff9ae0"))]
+    for _ in range(260):
+        q = rnd.random(); x = -760 + q * 640; z = 900 - 200 * q - 60 * math.sin(q * math.pi) + rnd.gauss(0, 26 * (1 - q * 0.5))
+        b = rnd.choice((3, 4, 5, 7)) * (1.3 - q * 0.6)
+        yuvarlak_kutu("sim", (x + rnd.gauss(0, 10), 90, z), (b, 1, b), rnd.choice(sim), egim=0.0, seg=1)
     if KAPAK:
         sc.view_settings.exposure = POZLAMA
-    parlat(sc, esik=1.2, boy=8, mix=0.12)
+    parlat(sc, esik=0.8 if KAPAK else 1.2, boy=9 if KAPAK else 8, mix=0.3 if KAPAK else 0.12)   # kapak 5: neon isiltisi
     yaz(sc, ON_EK + "gok.png")
 
 
 # ------------------------------------------------------------------ SERIT: kopru zemini + neon cizimler + korkuluk + kapi (perspektif, saydam)
 def zemin():
     """sahne 1: zemin mat acik mor + simgeler dev kaliyordu -> koyu parlak mavi (sol mavi, sag morumsu yansima), simgeler kucuk, kapiya kadar dagilir"""
-    for sx, renk in ((-1, "#121a9a"), (1, "#3a128a")):
-        yuvarlak_kutu("zemin", (sx * (KORK_X + 0.2) / 2, KAP["y"] - 1, -0.15), (KORK_X + 0.2, KAP["y"] + 8, 0.3), mat_parlak("zemin%d" % sx, renk, emis=0.18, purluk=0.14), egim=0.0, seg=1)   # sahne 3: ayna zeminde kapi ayaklari etek gibi yansiyordu -> purluk 0,14
+    # kapak 5: referans kapakta zemin parlak mavi-pembe yansimali
+    for sx, renk in (((-1, "#2a3ae8"), (1, "#8a2ad8")) if KAPAK else ((-1, "#121a9a"), (1, "#3a128a"))):
+        yuvarlak_kutu("zemin", (sx * (KORK_X + 0.2) / 2, KAP["y"] - 1, -0.15), (KORK_X + 0.2, KAP["y"] + 8, 0.3), mat_parlak("zemin%d" % sx, renk, emis=0.45 if KAPAK else 0.18, purluk=0.14), egim=0.0, seg=1)   # sahne 3: ayna zeminde kapi ayaklari etek gibi yansiyordu -> purluk 0,14
     kenar = mat_emis("zemin_kenar", lin(hex3(CAMG)), 3.0)
     for s_ in (-1, 1):
         boru((s_ * (KORK_X - 0.15), -3, 0.02), (s_ * (KORK_X - 0.15), KAP["y"] + 3, 0.02), 0.04, kenar)
@@ -206,10 +217,10 @@ def zemin():
 
 
 def korkuluk():
-    direk = mat_parlak("direk", "#4ae0ff", emis=0.9, purluk=0.1)
+    direk = mat_parlak("direk", "#4ae0ff", emis=1.6 if KAPAK else 0.9, purluk=0.1)   # kapak 5: mat blok gibiydi
     yuz = mat_parlak("direk_yuz", "#c8f8ff", emis=1.0, purluk=0.1)
     simge = [mat_emis("simge%d" % i, lin(hex3(c)), 3.2) for i, c in enumerate((SARI, PEMBE, "#ff9a2a"))]
-    bp = mat_emis("boru_p", lin(hex3(PEMBE)), 3.2)
+    bp = mat_emis("boru_p", lin(hex3(PEMBE)), 4.6 if KAPAK else 3.2)
     for s in (-1, 1):
         x = s * KORK_X
         ys = [-1.4, 0.6, 2.6, 4.6, 6.6, 8.6]   # sahne 1: kopru kapidan cok oteye uzaniyordu
@@ -236,8 +247,8 @@ def korkuluk():
 
 def kapi():
     Y, X, W_, H_, KK, KR = KAP["y"], KAP["x"], KAP["w"], KAP["h"], KAP["kule"], KAP["kiris"]
-    ana = mat_parlak("kapi_ana", "#5ae8ff", emis=1.0, purluk=0.1)
-    ince = mat_emis("kapi_ince", lin(hex3("#ff7ae0")), 2.6)
+    ana = mat_parlak("kapi_ana", "#5ae8ff", emis=1.8 if KAPAK else 1.0, purluk=0.1)
+    ince = mat_emis("kapi_ince", lin(hex3("#ff7ae0")), 3.6 if KAPAK else 2.6)
     xk = W_ / 2 + KK / 2
     for s in (-1, 1):
         kafes_kule(X + s * xk, Y, 0.0, H_ + KR, KK, ana, ince)
@@ -290,7 +301,7 @@ def serit_katmani():
     log("aciklik", YERLESIM[ON_EK + "aciklik_p1"])
     if KAPAK:
         sc.view_settings.exposure = POZLAMA
-    parlat(sc, esik=1.3, boy=7, mix=0.1, saydam=True)
+    parlat(sc, esik=0.9 if KAPAK else 1.3, boy=9 if KAPAK else 7, mix=0.32 if KAPAK else 0.1, saydam=True)   # kapak 5: neon isiltisi
     yaz(sc, ON_EK + "serit.png")
 
 
