@@ -22,11 +22,11 @@ KAPAK = YALNIZ == "kapak"
 POZLAMA = float(arg("--kapak-pozlama", "0"))
 ON_EK = "kapak-" if KAPAK else ""
 # REF-070 karesi (1280x720): kapi x %35-65, ust %34, alt %66; korkuluk ucu (ufuk) ~%57; zemin kameraya kadar, korkuluklar kadraj kenarindan tasar.
-KAP = {"y": 5.8, "x": 0.0, "w": 4.2, "h": 2.7, "kule": 0.5, "kiris": 0.55}   # sahne 1: y 12 kapi x %43-57 (ref %35-65) -> yaklastirildi
+KAP = {"y": 5.8, "x": 0.0, "w": 4.8, "h": 3.1, "kule": 0.66, "kiris": 0.72}   # sahne 2: kapi x %39-61 ince -> buyuk, kalin truss   # sahne 1: y 12 kapi x %43-57 (ref %35-65) -> yaklastirildi
 KORK_X = 3.6
 KAM = {"x": 0.0, "y": -1.0, "z": 2.2, "egim": 6.0, "lens": 15.0, "sensor": 24.0, "kaydir": 0.0}
 if KAPAK:   # REF-070 kapagi: kapi x %35-65 ust %26, alt %62; sag ve solda korkuluk on planda buyuk
-    KAM.update({"x": 0.0, "y": -0.6, "z": 1.8, "egim": 3.0, "lens": 15.0})
+    KAM.update({"x": 0.0, "y": 0.4, "z": 1.7, "egim": 2.0, "lens": 15.0})   # kapak 2: kapi ust %38 (ref %27)
 _mat_emis = mat_emis
 
 
@@ -111,13 +111,16 @@ def gok_katmani():
     kam = bpy.context.active_object; sc.camera = kam
     kam.data.type = "ORTHO"; kam.data.ortho_scale = 1920; kam.data.clip_end = 3000
     zem = bpy.data.materials.new("gok"); zem.use_nodes = True; nt = zem.node_tree; nt.nodes.clear()
-    tc = nt.nodes.new("ShaderNodeTexCoord"); sp = nt.nodes.new("ShaderNodeSeparateXYZ"); nt.links.new(tc.outputs["Generated"], sp.inputs[0])
-    rp = nt.nodes.new("ShaderNodeValToRGB"); cr = rp.color_ramp; nt.links.new(sp.outputs["Y"], rp.inputs[0])
+    # sahne 2: Generated Y duz duzlemde sabit 0,5 cikiyordu (gok tek renk mor) -> dunya yuksekligi z 0..1080 -> 0..1
+    gm = nt.nodes.new("ShaderNodeNewGeometry"); sp = nt.nodes.new("ShaderNodeSeparateXYZ"); nt.links.new(gm.outputs["Position"], sp.inputs[0])
+    mr = nt.nodes.new("ShaderNodeMapRange"); mr.inputs["From Min"].default_value = 0.0; mr.inputs["From Max"].default_value = 1080.0
+    nt.links.new(sp.outputs["Z"], mr.inputs["Value"])
+    rp = nt.nodes.new("ShaderNodeValToRGB"); cr = rp.color_ramp; nt.links.new(mr.outputs["Result"], rp.inputs[0])
     # sahne 1: gok her yerde pembe-mor kaldi (ref tepede koyu lacivert) -> lacivert yukari genisletildi
-    cr.elements[0].position = 0.42; cr.elements[0].color = (*lin(hex3("#ff5ac8")), 1)       # ufukta pembe
-    cr.elements[1].position = 1.0; cr.elements[1].color = (*lin(hex3("#08063a")), 1)        # tepede koyu lacivert
-    e = cr.elements.new(0.54); e.color = (*lin(hex3("#6a2ac8")), 1)                         # ufuk ustu mor
-    e = cr.elements.new(0.68); e.color = (*lin(hex3("#1a1470")), 1)                         # ortada lacivert
+    cr.elements[0].position = 0.42; cr.elements[0].color = (*lin(hex3("#ff5ac8")), 1)       # ufukta pembe (REF-070 kapi arkasi isilti)
+    cr.elements[1].position = 0.92; cr.elements[1].color = (*lin(hex3("#0a0848")), 1)       # tepede koyu lacivert
+    e = cr.elements.new(0.52); e.color = (*lin(hex3("#7a2ad0")), 1)                         # ufuk ustu mor
+    e = cr.elements.new(0.66); e.color = (*lin(hex3("#241a8a")), 1)                         # ortada lacivert
     em = nt.nodes.new("ShaderNodeEmission"); nt.links.new(rp.outputs[0], em.inputs[0])
     o = nt.nodes.new("ShaderNodeOutputMaterial"); nt.links.new(em.outputs[0], o.inputs[0])
     bpy.ops.mesh.primitive_plane_add(size=1, location=(0, 600, 540), rotation=(math.radians(90), 0, 0))
@@ -184,12 +187,12 @@ def zemin():
     pem = mat_emis("z_pem", lin(hex3(PEMBE)), 4.0); cam = mat_emis("z_cam", lin(hex3(CAMG)), 3.6); sar = mat_emis("z_sar", lin(hex3(SARI)), 3.6)
     z = 0.02
     # gulen pembe yildiz (on sol) + kucuk pembe yildiz (kapi onu sol), camgobegi pati (on sag), camgobegi bulut (kapi onu sag)
-    for (cx, cy, r, m) in ((-1.1, 1.2, 0.42, pem), (-0.9, 4.2, 0.28, pem)):
+    for (cx, cy, r, m) in ((-1.1, 1.7, 0.42, pem), (-0.9, 4.2, 0.28, pem)):
         cizgi([(x, y, z) for x, y in yildiz_nok(cx, cy, r, ic=0.5)], 0.03, m)
         cizgi([(x, y, z) for x, y in daire_nok(cx, cy - r * 0.12, r * 0.22, n=12, a0=math.pi, a1=2 * math.pi)], 0.02, m, kapali=False)
-    cizgi([(x, y, z) for x, y in daire_nok(1.15, 1.0, 0.3, 0.22)], 0.03, cam)
+    cizgi([(x, y, z) for x, y in daire_nok(1.15, 1.6, 0.3, 0.22)], 0.03, cam)
     for dx, dy in ((-0.34, 0.3), (-0.12, 0.42), (0.12, 0.42), (0.34, 0.3)):
-        cizgi([(x, y, z) for x, y in daire_nok(1.15 + dx, 1.0 + dy, 0.09)], 0.025, cam)
+        cizgi([(x, y, z) for x, y in daire_nok(1.15 + dx, 1.6 + dy, 0.09)], 0.025, cam)
     bulut = daire_nok(1.05, 4.2, 0.32, 0.2, n=10, a0=0, a1=math.pi) + daire_nok(0.6, 4.2, 0.24, 0.17, n=8, a0=0.2, a1=math.pi) + [(0.36, 4.17), (1.37, 4.17)]
     cizgi([(x, y, z) for x, y in bulut], 0.03, cam)
     # sari cift chevron (orta) + pembe/camgobegi cubuklar (V, kapiya bakar)
@@ -212,10 +215,10 @@ def korkuluk():
         ys = [-1.4, 0.6, 2.6, 4.6, 6.6, 8.6]   # sahne 1: kopru kapidan cok oteye uzaniyordu
         for j, yy in enumerate(ys):
             h = 1.2
-            yuvarlak_kutu("direk", (x, yy, h / 2), (0.62, 0.62, h), direk, egim=0.12, seg=3)
-            yuvarlak_kutu("direk_kapak", (x, yy, h + 0.06), (0.7, 0.7, 0.12), yuz, egim=0.04, seg=2)
+            yuvarlak_kutu("direk", (x, yy, h / 2), (0.5, 0.5, h), direk, egim=0.06, seg=2)
+            yuvarlak_kutu("direk_kapak", (x, yy, h + 0.05), (0.56, 0.56, 0.1), yuz, egim=0.03, seg=2)
             # ic yuzde simge: gulen yuz / kedi / ay (sirayla)
-            fy = yy - 0.33; m = simge[j % 3]; zc = h * 0.5   # sahne 1: ic yuzdeki simge zeminde cizgi gibi okunuyordu -> kameraya bakan on yuz
+            fy = yy - 0.27; m = simge[j % 3]; zc = h * 0.5   # sahne 1: ic yuzdeki simge zeminde cizgi gibi okunuyordu -> kameraya bakan on yuz
             if j % 3 == 0:
                 cizgi([(x + math.cos(t) * 0.2, fy, zc + math.sin(t) * 0.2) for t in [i / 20 * 2 * math.pi for i in range(21)]], 0.025, m)
                 cizgi([(x + math.cos(t) * 0.11, fy, zc + math.sin(t) * 0.11) for t in [math.pi * (1.15 + i / 10 * 0.7) for i in range(11)]], 0.02, m, kapali=False)
@@ -228,7 +231,7 @@ def korkuluk():
                       + [(x + math.cos(t) * 0.12 + 0.07, fy, zc + math.sin(t) * 0.14) for t in [math.pi * (1.7 - i / 16 * 1.4) for i in range(17)]], 0.022, m)
             if j < len(ys) - 1:
                 for zz in (0.6, 1.0):
-                    boru((x, yy + 0.32, zz), (x, ys[j + 1] - 0.32, zz), 0.1, bp)
+                    boru((x, yy + 0.26, zz), (x, ys[j + 1] - 0.26, zz), 0.07, bp)
 
 
 def kapi():
@@ -273,11 +276,11 @@ def serit_katmani():
     sc = bos_sahne(w=1920, h=1080, saydam=True, ornek=min(ORNEK, 48))
     sc.cycles.transparent_max_bounces = 16
     kam = kamera(sc)
-    sc.world.node_tree.nodes["Background"].inputs[0].default_value = (*lin(hex3("#a050e8")), 1)   # mor-pembe gok parlak zeminde yansir
-    sc.world.node_tree.nodes["Background"].inputs[1].default_value = 0.9
+    sc.world.node_tree.nodes["Background"].inputs[0].default_value = (*lin(hex3("#4a3ae0")), 1)   # sahne 2: zemin pembe-lila parliyordu (ref koyu mavi) -> mavi-mor gok, kisik
+    sc.world.node_tree.nodes["Background"].inputs[1].default_value = 0.55
     zemin(); korkuluk(); kapi()
     isik("AREA", (0, -2, 6), 500 if KAPAK else 800, lin(hex3("#c8a8ff" if KAPAK else "#f0e8ff")), 10, yon=(0, 6, 0))
-    isik("AREA", (0, KAP["y"] + 3, 3), 500, lin(hex3("#ff7ae8")), 8, yon=(0, -4, 0))
+    isik("AREA", (0, KAP["y"] + 3, 3), 160, lin(hex3("#ff7ae8")), 8, yon=(0, -4, 0))
     Y, X, W_, H_ = KAP["y"], KAP["x"], KAP["w"], KAP["h"]
     bpy.context.view_layer.update()
     px = [world_to_camera_view(sc, kam, Vector(p)) for p in ((X - W_ / 2, Y, 0), (X + W_ / 2, Y, 0), (X - W_ / 2, Y, H_), (X + W_ / 2, Y, H_))]
