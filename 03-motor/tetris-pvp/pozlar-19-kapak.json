@@ -528,6 +528,98 @@
     -90
    ],
    "yuvarlakKafa": true
+  },
+  "easy-half-moon-yk": {
+   "ad": "Easy Half Moon Round Head",
+   "yon": "on",
+   "govde": -86,
+   "bas": -4,
+   "solKol": [
+    178,
+    178
+   ],
+   "sagKol": [
+    -2,
+    -2
+   ],
+   "solBacak": [
+    90,
+    90
+   ],
+   "sagBacak": [
+    -6,
+    -6
+   ],
+   "yuvarlakKafa": true
+  },
+  "easy-half-moon2-yk": {
+   "ad": "Easy Half Moon 2 Round Head",
+   "yon": "on",
+   "govde": -80,
+   "bas": -6,
+   "solKol": [
+    165,
+    165
+   ],
+   "sagKol": [
+    -8,
+    -8
+   ],
+   "solBacak": [
+    100,
+    100
+   ],
+   "sagBacak": [
+    -8,
+    -8
+   ],
+   "yuvarlakKafa": true
+  },
+  "easy-warrior-two-yk": {
+   "ad": "Easy Warrior Two Round Head",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    92,
+    92
+   ],
+   "sagKol": [
+    -92,
+    -92
+   ],
+   "sagBacak": [
+    -68,
+    -2
+   ],
+   "solBacak": [
+    48,
+    48
+   ],
+   "yuvarlakKafa": true
+  },
+  "easy-star-yk": {
+   "ad": "Easy Star Round Head",
+   "yon": "on",
+   "govde": 180,
+   "bas": 0,
+   "solKol": [
+    128,
+    128
+   ],
+   "sagKol": [
+    -128,
+    -128
+   ],
+   "solBacak": [
+    28,
+    28
+   ],
+   "sagBacak": [
+    -28,
+    -28
+   ],
+   "yuvarlakKafa": true
   }
  }
 }
