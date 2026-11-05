@@ -176,6 +176,72 @@
     0,
     -90
    ]
+  },
+  "easy-bird-dog-low": {
+   "ad": "Easy Bird Dog Low",
+   "yon": "sag",
+   "govde": 92,
+   "bas": 18,
+   "solKol": [
+    96,
+    96
+   ],
+   "sagKol": [
+    -12,
+    14
+   ],
+   "solBacak": [
+    -92,
+    -92
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "easy-bird-dog-low2": {
+   "ad": "Easy Bird Dog Low 2",
+   "yon": "sag",
+   "govde": 96,
+   "bas": 14,
+   "solKol": [
+    100,
+    100
+   ],
+   "sagKol": [
+    -8,
+    10
+   ],
+   "solBacak": [
+    -98,
+    -98
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
+  },
+  "easy-bird-dog-low3": {
+   "ad": "Easy Bird Dog Low 3",
+   "yon": "sag",
+   "govde": 90,
+   "bas": 22,
+   "solKol": [
+    92,
+    92
+   ],
+   "sagKol": [
+    -18,
+    20
+   ],
+   "solBacak": [
+    -90,
+    -90
+   ],
+   "sagBacak": [
+    0,
+    -90
+   ]
   }
  }
 }
