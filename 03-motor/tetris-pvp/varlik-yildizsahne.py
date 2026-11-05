@@ -156,7 +156,7 @@ def gok_katmani():
             boru((onc[0], 0, onc[1]), (x, 0, z), 9 * (0.5 + math.sin(q * math.pi)), hilal)
         onc = (x, z)
     # ufuk: lila-pembe kabarik bulut kumesi (korkuluklarin arkasi bos kalmasin)
-    lila = [mat_emis("lila%d" % i, lin(hex3(c)), g) for i, (c, g) in enumerate((("#d8b0ff", 1.1), ("#b880ff", 1.0), ("#ff80dc", 1.0)))]
+    lila = [mat_emis("lila%d" % i, lin(hex3(c)), g) for i, (c, g) in enumerate((("#b070ff", 1.0), ("#9a50ff", 0.95), ("#ff50d0", 0.95)) if KAPAK else (("#d8b0ff", 1.1), ("#b880ff", 1.0), ("#ff80dc", 1.0))   # kapak 3: doygunluk 0,533 / ref 0,668, ufuk bulutlari pastel)]
     for i in range(34):
         x = -1000 + i * 60 + rnd.uniform(-20, 20)
         k = kure((x, rnd.uniform(100, 160), rnd.uniform(330, 470)), rnd.uniform(70, 130), rnd.choice(lila), sub=2); k.scale = (1.3, 0.3, 0.8)

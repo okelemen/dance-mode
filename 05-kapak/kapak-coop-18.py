@@ -19,7 +19,7 @@ TP = os.path.join(KOK, "03-motor", "tetris-pvp")
 p = argparse.ArgumentParser()
 p.add_argument("--poz", required=True); p.add_argument("--ayna", action="store_true")
 p.add_argument("--arka", default="varlik-18-kapak-03"); p.add_argument("--grup", default="varlik-18-poz")
-p.add_argument("--boy", type=float, default=560); p.add_argument("--x", type=float, default=0.40)
+p.add_argument("--boy", type=float, default=520); p.add_argument("--x", type=float, default=0.47)
 p.add_argument("--renk", type=float, default=1.0); p.add_argument("--parlak", type=float, default=1.0)   # yalniz hafif genel ayar
 p.add_argument("--cikti", required=True)
 a = p.parse_args()
@@ -87,7 +87,7 @@ def baloncuk(metin, cx, cy, boy, renkler, kontur="#4a1f86", hedef=None):
         rgb[..., ch] = np.interp(xs, pos, [c[ch] for c in cs])
     yy = np.linspace(0, 1, h)[:, None]
     rgb = rgb * (0.9 + 0.25 * (1 - yy))[..., None].clip(0, 1.15)
-    dol = Image.fromarray(np.clip(rgb, 0, 255).astype(np.uint8), "RGB").convert("RGBA")
+    dol = Image.fromarray(np.clip(rgb, 0, 255).astype(np.uint8)).convert("RGBA")
     K = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     K.paste(Image.new("RGBA", (w, h), (40, 10, 80, 160)), (int(boy * S * 0.03), int(boy * S * 0.05)), dis)
     K.paste(Image.new("RGBA", (w, h), kontur), (0, 0), dis)
@@ -148,7 +148,7 @@ def kalp(cx, cy, r):
         im.alpha_composite(q, (int(cx - k.width / 2), int(cy - k.height / 2)))
 
 
-etiket("COUPLE", 205, 300, 74, 10)
+etiket("COUPLE", 165, 330, 64, 10)   # taslak 1: siluet etikete degiyordu
 etiket("WARM UP", 1100, 290, 66, -10)
 
 # siluet: duz simsiyah + kalin beyaz dis kontur, tabani alt kenarda, basliga degmez
