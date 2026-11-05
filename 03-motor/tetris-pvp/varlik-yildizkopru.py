@@ -32,8 +32,8 @@ _mat_emis = mat_emis
 
 def mat_emis(ad, renk, guc):
     """18. video kapak dersi: kapakta neon cekirdekleri beyaza patlamasin -> isilti gucu %70"""
-    # kapak 5 (kullanici: "referans gibi estetik"): REF-070 kapaginda her neon cevresine isik sacar -> 0,7 kisma kaldirildi, isilti parlat() ile
-    return _mat_emis(ad, renk, guc)
+    # kapak 5: kisma kaldirilinca neon cekirdekleri beyaza patladi (doygunluk 0,43) -> 0,7 geri; isilti parlat() ile
+    return _mat_emis(ad, renk, guc * (0.7 if KAPAK else 1.0))
 
 
 PEMBE, CAMG, SARI, MOR = "#ff3fd0", "#3fe8ff", "#ffd83a", "#b070ff"
@@ -217,7 +217,7 @@ def zemin():
 
 
 def korkuluk():
-    direk = mat_parlak("direk", "#4ae0ff", emis=1.6 if KAPAK else 0.9, purluk=0.1)   # kapak 5: mat blok gibiydi
+    direk = mat_parlak("direk", "#2ad0ff", emis=1.1 if KAPAK else 0.9, purluk=0.1)   # kapak 5: mat blok gibiydi
     yuz = mat_parlak("direk_yuz", "#c8f8ff", emis=1.0, purluk=0.1)
     simge = [mat_emis("simge%d" % i, lin(hex3(c)), 3.2) for i, c in enumerate((SARI, PEMBE, "#ff9a2a"))]
     bp = mat_emis("boru_p", lin(hex3(PEMBE)), 4.6 if KAPAK else 3.2)
@@ -247,7 +247,7 @@ def korkuluk():
 
 def kapi():
     Y, X, W_, H_, KK, KR = KAP["y"], KAP["x"], KAP["w"], KAP["h"], KAP["kule"], KAP["kiris"]
-    ana = mat_parlak("kapi_ana", "#5ae8ff", emis=1.8 if KAPAK else 1.0, purluk=0.1)
+    ana = mat_parlak("kapi_ana", "#3ad8ff", emis=1.2 if KAPAK else 1.0, purluk=0.1)
     ince = mat_emis("kapi_ince", lin(hex3("#ff7ae0")), 3.6 if KAPAK else 2.6)
     xk = W_ / 2 + KK / 2
     for s in (-1, 1):

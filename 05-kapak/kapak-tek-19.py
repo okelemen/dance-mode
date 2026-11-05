@@ -111,12 +111,20 @@ def baloncuk(metin, cx, cy, boy, renkler, kontur="#4a1f86", hedef=None):
     K.paste(Image.new("RGBA", (w, h), kontur), (0, 0), dis)
     K.paste(Image.new("RGBA", (w, h), "#ffffff"), (0, 0), ic)
     K.paste(dol, (0, 0), m)
-    yans = Image.new("L", (w, h), 0); ImageDraw.Draw(yans).rectangle((0, pad + int(th * 0.06), w, pad + int(th * 0.38)), fill=120)
+    # kapak 5 (kullanici: "referans gibi estetik"): REF-070 harfleri jole gibi - icte sim pirilti, guclu ust parlama, disa yumusak isilti
+    rs = np.random.default_rng(len(metin)); sim = Image.new("L", (w, h), 0); sd = ImageDraw.Draw(sim)
+    for _ in range(int(w * h / 260)):
+        px, py = rs.uniform(0, w), rs.uniform(0, h); rr = rs.choice((1.5, 2, 3)) * S / 2
+        sd.ellipse((px - rr, py - rr, px + rr, py + rr), fill=int(rs.uniform(120, 230)))
+    K.paste(Image.new("RGBA", (w, h), "#ffffff"), (0, 0), ImageChops.multiply(sim, m))
+    yans = Image.new("L", (w, h), 0); ImageDraw.Draw(yans).rectangle((0, pad + int(th * 0.06), w, pad + int(th * 0.38)), fill=165)
     yans = ImageChops.multiply(yans, m.filter(ImageFilter.MinFilter(int(boy * S * 0.05) | 1))).filter(ImageFilter.GaussianBlur(boy * S * 0.012))
     K.paste(Image.new("RGBA", (w, h), "#ffffff"), (0, 0), yans)
     K = K.resize((w // S, h // S), Image.LANCZOS)
     if hedef and K.width > hedef:
         K = K.resize((hedef, int(K.height * hedef / K.width)), Image.LANCZOS)
+    gl = Image.new("RGBA", K.size, "#e0b8ff"); gl.putalpha(K.getchannel("A").filter(ImageFilter.GaussianBlur(boy * 0.12)).point(lambda v: int(v * 0.8)))
+    im.alpha_composite(gl, (int(cx - K.width / 2), int(cy - K.height / 2)))
     im.alpha_composite(K, (int(cx - K.width / 2), int(cy - K.height / 2)))
     return K.width
 
@@ -163,6 +171,15 @@ def yeni(cx, cy, r):
         im.alpha_composite(q, (int(cx - k.width / 2), int(cy - k.height / 2)))
 
 
+def pirilti(cx, cy, r, renk="#ffffff"):
+    """dort koseli parlak yildiz (REF-070 etiket ve rozet cevresindeki kivilcimlar)"""
+    k = Image.new("RGBA", (int(r * 4), int(r * 4)), (0, 0, 0, 0)); d = ImageDraw.Draw(k); o = r * 2
+    d.polygon([(o, o - 2 * r), (o + r * 0.28, o - r * 0.28), (o + 2 * r, o), (o + r * 0.28, o + r * 0.28), (o, o + 2 * r), (o - r * 0.28, o + r * 0.28), (o - 2 * r, o), (o - r * 0.28, o - r * 0.28)], fill=renk)
+    g = Image.new("RGBA", k.size, renk); g.putalpha(k.getchannel("A").filter(ImageFilter.GaussianBlur(r * 0.5)))
+    for q in (g, k):
+        im.alpha_composite(q, (int(cx - o), int(cy - o)))
+
+
 etiket("EASY", 140, 262, 74, 18)   # kapak 2: siluet etiketten kacarken kuculuyordu -> etiketler yukari
 etiket("1 PLAYER", 1125, 285, 66, -16)
 
@@ -188,6 +205,8 @@ im.paste((0, 0, 0, 255), (sx, sy), sa)
 print(a.cikti, "siluet kutu", sx, sy, sx + sw, sy + sb, "kapi", int(x0), int(y0), int(x1), int(y1))
 
 yeni(1135, 600, 92)
+for (px, py, r, c) in ((248, 205, 13, "#ffffff"), (60, 330, 9, "#fff2a0"), (1235, 228, 12, "#ffffff"), (1010, 250, 8, "#ffd8ff"), (1030, 520, 11, "#fff2a0"), (1250, 520, 9, "#ffffff"), (1240, 690, 8, "#ffffff")):
+    pirilti(px, py, r, c)
 
 # baslik en onde: HUMAN camgobegi->pembe, TETRIS pembe->sari->camgobegi (REF-070 harf renkleri)
 baloncuk("HUMAN", 335, 92, 190, ["#3ae0ff", "#2a9cff", "#a05aff", "#ff3ac0"], hedef=610)   # kapak 3: baslik referanstan kucuktu (ref harf ~120 px) -> 190 / 610 px; kapak 1: pastel harfler renkliligi dusuruyordu
