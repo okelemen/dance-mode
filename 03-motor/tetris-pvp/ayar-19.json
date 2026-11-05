@@ -1,0 +1,129 @@
+{
+ "_not": "HUMAN TETRIS 19. video (REF-070 TetrisBounce 'HUMAN TETRIS SOLO Easy Beginner Mode Unlocked #07'). SOLO, 3 level x 6 duvar (referansla ayni: MISSIONS n/6; EASY / MEDIUM / TIME TO GO ALL OUT). Duvar 32 vurus = 8 olcu = 12,6 sn (REF-070 dongusu ~13 sn). Siluetler Openclipart kamu mali yoga cizimleri (REF-071, Masaustu md. 21 5c), kolaydan zora. Kullanici 5 Kas: kesit yok, dogrudan tam render. Muzik Neon Bridge Easy Flow (Suno, kullanici) 151,79 BPM, 56 sn (6-50 sn blogu dongulenir, kullanici 'Bununla devam et'). Metinler bizim.",
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-19",
+ "sayfa": "sahne16.html",
+ "bpm": 151.79,
+ "muzik": "Neon Bridge Easy Flow.wav (Suno, kullanici, 5 Kas 2026), 151,79 BPM",
+ "duvar": "duvar-listesi-19.json",
+ "duvar_vurus": 32,
+ "zaman_vurus": {
+  "kart": 6,
+  "say": 8,
+  "buyu": 14,
+  "gec": 4
+ },
+ "kart_vurus": {
+  "tur": 8,
+  "basla": 8,
+  "abone": 12
+ },
+ "tur_kart": {
+  "1": [
+   "EASY",
+   null
+  ],
+  "2": [
+   "MEDIUM",
+   null
+  ],
+  "3": [
+   "ALL OUT",
+   null
+  ]
+ },
+ "giris_dizisi": [
+  {
+   "tip": "yazi",
+   "metin": "HUMAN TETRIS",
+   "alt": "SOLO EASY MODE",
+   "vurus": 8
+  },
+  {
+   "tip": "nasil",
+   "metin": "COPY THE SHAPE",
+   "alt": "HOLD IT UNTIL THE WALL FLIES THROUGH YOU!",
+   "vurus": 12
+  },
+  {
+   "tip": "yazi",
+   "metin": "READY?",
+   "vurus": 4
+  }
+ ],
+ "gecis": {
+  "2": [
+   {
+    "tip": "yazi",
+    "metin": "NICE FLOW!",
+    "vurus": 4
+   }
+  ],
+  "3": [
+   {
+    "tip": "yazi",
+    "metin": "TIME TO GO",
+    "alt": "ALL OUT!",
+    "vurus": 8
+   }
+  ]
+ },
+ "kapanis": [
+  {
+   "tip": "yazi",
+   "metin": "ALL 18 WALLS",
+   "alt": "CLEARED!",
+   "vurus": 8
+  },
+  {
+   "tip": "yazi",
+   "metin": "SEE YOU",
+   "alt": "TOMORROW!",
+   "vurus": 4
+  }
+ ],
+ "tema": {
+  "galaksi": true,
+  "yildiz": true,
+  "tekOyuncu": true,
+  "baslaTam": true,
+  "varlik": "/03-motor/tetris-pvp/varlik-19/",
+  "maskeVarlik": "/03-motor/tetris-pvp/varlik-19/",
+  "maskeKlasor": "poz/",
+  "p1": "#FF4AD0",
+  "p1koyu": "#a0108a",
+  "p1acik": "#ffd6f2",
+  "p2": "#3FE8FF",
+  "p2koyu": "#0a6ab8",
+  "p2acik": "#d6f8ff",
+  "altin": "#ffe23a",
+  "camgobegi": "#3fe8ff",
+  "levelAd": {
+   "1": "EASY",
+   "2": "MEDIUM",
+   "3": "ALL OUT"
+  },
+  "acilisZemin": [
+   "#3a2ab8",
+   "#0a0628"
+  ],
+  "acilisYazi": [
+   "#ffffff",
+   "#fff4fb",
+   "#ffd6f2"
+  ],
+  "acilisKontur": "#ff3fae",
+  "acilisIsilti": "#ff7ad8",
+  "isin": [
+   "#3a2ab8",
+   "#0a0628"
+  ],
+  "abone": [
+   "#7dffb4",
+   "#0c8a48"
+  ],
+  "aboneAlt": "NEW CHALLENGE EVERY DAY",
+  "fener": false,
+  "kopru": true
+ }
+}

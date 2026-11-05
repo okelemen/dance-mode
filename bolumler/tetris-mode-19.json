@@ -1,0 +1,304 @@
+{
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-19",
+ "bpm": 151.79,
+ "toplam_olcu": 167,
+ "toplam_duvar": 18,
+ "zaman": {
+  "kart": 2.3717,
+  "say": 3.1623,
+  "buyu": 5.534,
+  "gec": 1.5811,
+  "sure": 12.6491
+ },
+ "kartlar": [
+  {
+   "tip": "yazi",
+   "metin": "HUMAN TETRIS",
+   "alt": "SOLO EASY MODE",
+   "t": 0.0,
+   "sure": 3.1623
+  },
+  {
+   "tip": "nasil",
+   "metin": "COPY THE SHAPE",
+   "alt": "HOLD IT UNTIL THE WALL FLIES THROUGH YOU!",
+   "t": 3.1623,
+   "sure": 4.7434
+  },
+  {
+   "tip": "yazi",
+   "metin": "READY?",
+   "t": 7.9057,
+   "sure": 1.5811
+  },
+  {
+   "t": 9.4868,
+   "sure": 3.1623,
+   "tip": "tur",
+   "tur": 1,
+   "metin": "EASY"
+  },
+  {
+   "t": 12.6491,
+   "sure": 3.1623,
+   "tip": "basla"
+  },
+  {
+   "tip": "yazi",
+   "metin": "NICE FLOW!",
+   "t": 91.7059,
+   "sure": 1.5811
+  },
+  {
+   "t": 93.2871,
+   "sure": 3.1623,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "MEDIUM"
+  },
+  {
+   "tip": "yazi",
+   "metin": "TIME TO GO",
+   "alt": "ALL OUT!",
+   "t": 172.3439,
+   "sure": 3.1623
+  },
+  {
+   "t": 175.5062,
+   "sure": 3.1623,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "ALL OUT"
+  },
+  {
+   "tip": "yazi",
+   "metin": "ALL 18 WALLS",
+   "alt": "CLEARED!",
+   "t": 254.563,
+   "sure": 3.1623
+  },
+  {
+   "tip": "yazi",
+   "metin": "SEE YOU",
+   "alt": "TOMORROW!",
+   "t": 257.7253,
+   "sure": 1.5811
+  },
+  {
+   "t": 259.3064,
+   "sure": 4.7434,
+   "tip": "abone"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 15.8113,
+   "grup": "oc-268288",
+   "ad": "lotus, eller dizde",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 2,
+   "tur": 1,
+   "t0": 28.4604,
+   "grup": "oc-268291",
+   "ad": "bagdas, eller tepede birlesik",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 3,
+   "tur": 1,
+   "t0": 41.1095,
+   "grup": "oc-271374",
+   "ad": "agac, eller tepede",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 4,
+   "tur": 1,
+   "t0": 53.7586,
+   "grup": "oc-285132",
+   "ad": "kobra",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 5,
+   "tur": 1,
+   "t0": 66.4077,
+   "grup": "oc-274664",
+   "ad": "bagdas, namaste",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 6,
+   "tur": 1,
+   "t0": 79.0568,
+   "grup": "oc-259634",
+   "ad": "alcak hamle, kol yukari",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 7,
+   "tur": 2,
+   "t0": 96.4493,
+   "grup": "oc-302291",
+   "ad": "ucgen",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 8,
+   "tur": 2,
+   "t0": 109.0984,
+   "grup": "oc-291176",
+   "ad": "yan hamle, kol uzanir",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 9,
+   "tur": 2,
+   "t0": 121.7475,
+   "grup": "oc-285133",
+   "ad": "diz ustu, kol yukari",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 10,
+   "tur": 2,
+   "t0": 134.3966,
+   "grup": "oc-281291",
+   "ad": "ayakta, bacak yana tutulur",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 11,
+   "tur": 2,
+   "t0": 147.0457,
+   "grup": "oc-298877",
+   "ad": "yerde spagat",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 12,
+   "tur": 2,
+   "t0": 159.6948,
+   "grup": "oc-274663",
+   "ad": "ayakta, bacak one yukari",
+   "ovgu": "NICE MOVE!"
+  },
+  {
+   "no": 13,
+   "tur": 3,
+   "t0": 178.6684,
+   "grup": "oc-275978",
+   "ad": "dans pozu",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 14,
+   "tur": 3,
+   "t0": 191.3175,
+   "grup": "oc-262181",
+   "ad": "dans pozu, kol one",
+   "ovgu": "EXCELLENT!"
+  },
+  {
+   "no": 15,
+   "tur": 3,
+   "t0": 203.9666,
+   "grup": "oc-297664",
+   "ad": "ayakta, bacak tepeye tutulur",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 16,
+   "tur": 3,
+   "t0": 216.6157,
+   "grup": "oc-281290",
+   "ad": "ayakta, bacak yana yuksek",
+   "ovgu": "AWESOME!"
+  },
+  {
+   "no": 17,
+   "tur": 3,
+   "t0": 229.2648,
+   "grup": "oc-266208",
+   "ad": "kral guvercin",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 18,
+   "tur": 3,
+   "t0": 241.9139,
+   "grup": "oc-267350",
+   "ad": "tekerlek",
+   "ovgu": "NICE MOVE!"
+  }
+ ],
+ "abone": [
+  16.0,
+  30.0,
+  45.0,
+  60.0,
+  75.0,
+  96.5,
+  120.0,
+  135.0,
+  150.0,
+  165.0,
+  180.0,
+  195.0,
+  210.0,
+  225.0,
+  240.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "Neon Bridge Easy Flow.wav (Suno, kullanici, 5 Kas 2026), 151,79 BPM",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne16.html.",
+ "tema": {
+  "galaksi": true,
+  "yildiz": true,
+  "tekOyuncu": true,
+  "baslaTam": true,
+  "varlik": "/03-motor/tetris-pvp/varlik-19/",
+  "maskeVarlik": "/03-motor/tetris-pvp/varlik-19/",
+  "maskeKlasor": "poz/",
+  "p1": "#FF4AD0",
+  "p1koyu": "#a0108a",
+  "p1acik": "#ffd6f2",
+  "p2": "#3FE8FF",
+  "p2koyu": "#0a6ab8",
+  "p2acik": "#d6f8ff",
+  "altin": "#ffe23a",
+  "camgobegi": "#3fe8ff",
+  "levelAd": {
+   "1": "EASY",
+   "2": "MEDIUM",
+   "3": "ALL OUT"
+  },
+  "acilisZemin": [
+   "#3a2ab8",
+   "#0a0628"
+  ],
+  "acilisYazi": [
+   "#ffffff",
+   "#fff4fb",
+   "#ffd6f2"
+  ],
+  "acilisKontur": "#ff3fae",
+  "acilisIsilti": "#ff7ad8",
+  "isin": [
+   "#3a2ab8",
+   "#0a0628"
+  ],
+  "abone": [
+   "#7dffb4",
+   "#0c8a48"
+  ],
+  "aboneAlt": "NEW CHALLENGE EVERY DAY",
+  "fener": false,
+  "kopru": true
+ }
+}
