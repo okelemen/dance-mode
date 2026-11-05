@@ -757,6 +757,8 @@ elif arg("--mod", "pvp") == "sakura":      # 16. video (REF-067 TetrisBounce, 1v
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-sakura.py"), encoding="utf-8").read(), "varlik-sakura.py", "exec"))
 elif arg("--mod", "pvp") == "galaksi":     # 17. video (REF-068 TetrisBounce, SOLO): bulutsu gok, neon izgara zemin, gumus truss kapi
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-galaksi.py"), encoding="utf-8").read(), "varlik-galaksi.py", "exec"))
+elif arg("--mod", "pvp") == "yildizsahne":  # 18. video (REF-069 TetrisBounce, CO-OP cift): neon yildiz sahnesi, basamakli katlar, yildizli korkuluk
+    exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-yildizsahne.py"), encoding="utf-8").read(), "varlik-yildizsahne.py", "exec"))
 elif arg("--mod", "pvp") == "cadi":
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-cadi.py"), encoding="utf-8").read(), "varlik-cadi.py", "exec"))
 else:

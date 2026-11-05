@@ -17,7 +17,7 @@ TP = os.path.join(KOK, "03-motor", "tetris-pvp")
 p = argparse.ArgumentParser()
 p.add_argument("--poz", required=True); p.add_argument("--ayna", action="store_true")
 p.add_argument("--arka", default="varlik-17-kapak-0")
-p.add_argument("--boy", type=float, default=560); p.add_argument("--x", type=float, default=0.44)
+p.add_argument("--boy", type=float, default=600); p.add_argument("--x", type=float, default=0.44)
 p.add_argument("--renk", type=float, default=1.0); p.add_argument("--parlak", type=float, default=1.0)   # yalniz hafif genel ayar
 p.add_argument("--parilti", type=float, default=0.6)
 p.add_argument("--etiket", default="24 WALLS")
@@ -97,9 +97,9 @@ def oyun_kolu(cx, cy, w):
         im.alpha_composite(q, (int(cx - k.width / 2), int(cy - k.height / 2)))
 
 
-egik_yazi(a.etiket, 205, 345, 62, 12)
-egik_yazi("SOLO", 1135, 365, 74, -8)
-oyun_kolu(205, 560, 220)
+egik_yazi(a.etiket, 215, 340, 70, 12)
+egik_yazi("SOLO", 1135, 365, 84, -8)
+oyun_kolu(200, 575, 270)   # kapak 1: referanstan kucuktu
 
 # siluet: duz simsiyah + kalin beyaz dis kontur + beyaz hale (REF-068), tabani alt kenarda
 sb = int(a.boy); sw = int(sb * maske.width / maske.height)
@@ -109,18 +109,19 @@ sa = ma.resize((sw, sb), Image.LANCZOS)
 sx, sy = int(W * a.x - sw / 2), H - sb - 10
 kont = Image.new("L", (sw + 60, sb + 60), 0); kont.paste(sa, (30, 30))
 hale = kont.filter(ImageFilter.MaxFilter(25)).filter(ImageFilter.GaussianBlur(14))
-im.paste((255, 255, 255, 255), (sx - 30, sy - 30), hale.point(lambda v: int(v * 0.85)))
+im.paste((255, 255, 255, 255), (sx - 30, sy - 30), hale.point(lambda v: min(255, int(v * 1.1))))
 im.paste((255, 255, 255, 255), (sx - 30, sy - 30), kont.filter(ImageFilter.MaxFilter(15)))
 im.paste((0, 0, 0, 255), (sx, sy), sa)
 
 # baslik en onde: beyaz kalin, arkasinda saga-asagi kayan pembe katman kopyalari + pembe isilti
-f = font(150)
+# kapak 1: baslik referanstan kucuk (genisligin %86'si, ref ~%95), katmanlar zayif, beyaz oran 0,10 (ref 0,20)
+f = font(168)   # kapak 2: H ve S kenara degiyordu
 bas = Image.new("RGBA", (W, 260), (0, 0, 0, 0))
-for i, (dx, dy, rk, al) in enumerate(((26, 18, "#ff9ab8", 120), (18, 12, "#ff6fa8", 170), (10, 6, "#ff4f9a", 220))):
+for i, (dx, dy, rk, al) in enumerate(((-34, 22, "#ffb0c8", 140), (-24, 14, "#ff86b4", 190), (-12, 7, "#ff5aa0", 240))):
     k = Image.new("RGBA", bas.size, (0, 0, 0, 0)); ImageDraw.Draw(k).text((W / 2 + dx, 120 + dy), "HUMAN TETRIS", font=f, fill=rk, anchor="mm")
     k.putalpha(k.getchannel("A").point(lambda v: v * al // 255)); bas.alpha_composite(k)
 ust = Image.new("RGBA", bas.size, (0, 0, 0, 0)); ImageDraw.Draw(ust).text((W / 2, 120), "HUMAN TETRIS", font=f, fill="#ffffff", anchor="mm")
-isk = Image.new("RGBA", bas.size, "#ff3fbf"); isk.putalpha(bas.getchannel("A").filter(ImageFilter.GaussianBlur(18)))
+isk = Image.new("RGBA", bas.size, "#ff3fbf"); isk.putalpha(bas.getchannel("A").filter(ImageFilter.GaussianBlur(22)).point(lambda v: min(255, int(v * 1.5))))
 for q in (isk, bas, ust):
     im.alpha_composite(q, (0, -30))
 
