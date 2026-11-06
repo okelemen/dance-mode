@@ -1,0 +1,280 @@
+{
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-20",
+ "bpm": 149.6,
+ "toplam_olcu": 183,
+ "toplam_duvar": 12,
+ "zaman": {
+  "kart": 1.6043,
+  "say": 8.0214,
+  "buyu": 4.8128,
+  "gec": 6.4171,
+  "sure": 20.8556
+ },
+ "kartlar": [
+  {
+   "tip": "yazi",
+   "metin": "3 PLAYERS",
+   "alt": "WHO STRIKES BEST?",
+   "t": 0.0,
+   "sure": 3.2086
+  },
+  {
+   "tip": "nasil",
+   "t": 3.2086,
+   "sure": 6.4171
+  },
+  {
+   "tip": "yazi",
+   "metin": "READY?",
+   "t": 9.6257,
+   "sure": 1.6043
+  },
+  {
+   "t": 11.2299,
+   "sure": 3.2086,
+   "tip": "tur",
+   "tur": 1,
+   "metin": "ROUND 1"
+  },
+  {
+   "t": 14.4385,
+   "sure": 3.2086,
+   "tip": "basla"
+  },
+  {
+   "tip": "yazi",
+   "metin": "HOLD YOUR POSE!",
+   "t": 80.2139,
+   "sure": 1.6043
+  },
+  {
+   "t": 81.8181,
+   "sure": 3.2086,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "ROUND 2",
+   "alt": "MEDIUM"
+  },
+  {
+   "tip": "yazi",
+   "metin": "TURN IT UP!",
+   "t": 147.5935,
+   "sure": 1.6043
+  },
+  {
+   "t": 149.1978,
+   "sure": 3.2086,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "ROUND 3",
+   "alt": "HARD"
+  },
+  {
+   "tip": "yazi",
+   "metin": "LAST WALLS!",
+   "alt": "GIVE IT EVERYTHING!",
+   "t": 214.9731,
+   "sure": 1.6043
+  },
+  {
+   "t": 216.5774,
+   "sure": 3.2086,
+   "tip": "tur",
+   "tur": 4,
+   "metin": "ROUND 4",
+   "alt": "FINAL"
+  },
+  {
+   "tip": "yazi",
+   "metin": "ALL 12 WALLS",
+   "alt": "CLEARED!",
+   "t": 282.3528,
+   "sure": 3.2086
+  },
+  {
+   "tip": "yazi",
+   "metin": "WHO WON?",
+   "alt": "TELL US IN THE COMMENTS!",
+   "t": 285.5613,
+   "sure": 3.2086
+  },
+  {
+   "t": 288.7699,
+   "sure": 4.8128,
+   "tip": "abone"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 17.6471,
+   "duvar": 1,
+   "p1": "oc-255536",
+   "p2": "sv-1043462",
+   "p3": "oc-340781",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 2,
+   "tur": 1,
+   "t0": 38.5027,
+   "duvar": 2,
+   "p1": "oc-241259",
+   "p2": "oc-320699",
+   "p3": "sv-1226176",
+   "ovgu": "NICE POSE!"
+  },
+  {
+   "no": 3,
+   "tur": 1,
+   "t0": 59.3583,
+   "duvar": 3,
+   "p1": "oc-241477",
+   "p2": "sv-1055879",
+   "p3": "oc-336199",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 4,
+   "tur": 2,
+   "t0": 85.0267,
+   "duvar": 4,
+   "p1": "oc-268290",
+   "p2": "oc-267319",
+   "p3": "oc-273072",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 5,
+   "tur": 2,
+   "t0": 105.8823,
+   "duvar": 5,
+   "p1": "oc-333846",
+   "p2": "oc-267339",
+   "p3": "oc-266209",
+   "ovgu": "SO STYLISH!"
+  },
+  {
+   "no": 6,
+   "tur": 2,
+   "t0": 126.7379,
+   "duvar": 6,
+   "p1": "oc-245082",
+   "p2": "oc-271554",
+   "p3": "oc-268289",
+   "ovgu": "STRONG!"
+  },
+  {
+   "no": 7,
+   "tur": 3,
+   "t0": 152.4063,
+   "duvar": 7,
+   "p1": "oc-163069",
+   "p2": "oc-277856",
+   "p3": "sv-1824819",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 8,
+   "tur": 3,
+   "t0": 173.2619,
+   "duvar": 8,
+   "p1": "oc-222008",
+   "p2": "sv-1132025",
+   "p3": "oc-313361",
+   "ovgu": "NICE POSE!"
+  },
+  {
+   "no": 9,
+   "tur": 3,
+   "t0": 194.1175,
+   "duvar": 9,
+   "p1": "oc-269945",
+   "p2": "oc-331560",
+   "p3": "sv-1074932",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 10,
+   "tur": 4,
+   "t0": 219.786,
+   "duvar": 10,
+   "p1": "oc-245206",
+   "p2": "oc-268843",
+   "p3": "oc-256952",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 11,
+   "tur": 4,
+   "t0": 240.6416,
+   "duvar": 11,
+   "p1": "oc-259886",
+   "p2": "oc-273074",
+   "p3": "oc-271558",
+   "ovgu": "SO STYLISH!"
+  },
+  {
+   "no": 12,
+   "tur": 4,
+   "t0": 261.4972,
+   "duvar": 12,
+   "p1": "oc-314205",
+   "p2": "oc-255374",
+   "p3": "oc-271375",
+   "ovgu": "STRONG!"
+  }
+ ],
+ "abone": [
+  18.0,
+  30.0,
+  45.0,
+  60.0,
+  75.0,
+  90.0,
+  105.0,
+  120.0,
+  135.0,
+  152.5,
+  165.0,
+  180.0,
+  195.0,
+  210.0,
+  225.0,
+  240.0,
+  255.0,
+  270.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "Three Lane Pose Off.wav (Suno, kullanici, 6 Kas 2026), 149,60 BPM",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne17.html.",
+ "tema": {
+  "yildiz": true,
+  "baslaTam": true,
+  "varlik": "/03-motor/tetris-pvp/varlik-20/",
+  "maskeVarlik": "/03-motor/tetris-pvp/varlik-20/",
+  "maskeKlasor": "poz/",
+  "renk": [
+   "#ff3fbf",
+   "#1fa8ff",
+   "#ffbf00"
+  ],
+  "acik": [
+   "#ffd0f0",
+   "#cdeeff",
+   "#fff2b8"
+  ],
+  "koyu": [
+   "#a0106e",
+   "#0a5ab0",
+   "#8a5600"
+  ],
+  "abone": [
+   "#7dffb4",
+   "#0c8a48"
+  ],
+  "aboneAlt": "NEW BATTLE EVERY DAY"
+ }
+}

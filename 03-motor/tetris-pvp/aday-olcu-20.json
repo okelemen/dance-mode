@@ -1,0 +1,242 @@
+{
+ "oc-163069": {
+  "eski": "varlik-08/poz/disco-wide-lean-arms-over-right.png",
+  "eski_iou": 0.499,
+  "ic": "oc-245082",
+  "ic_iou": 0.439
+ },
+ "oc-222008": {
+  "eski": "varlik-12/poz/solo-pyramid-reach.png",
+  "eski_iou": 0.49,
+  "ic": "oc-163069",
+  "ic_iou": 0.387
+ },
+ "oc-241259": {
+  "eski": "varlik-16/poz/sakura-curtsy-halo-arms.png",
+  "eski_iou": 0.523,
+  "ic": "oc-268325",
+  "ic_iou": 0.618
+ },
+ "oc-241477": {
+  "eski": "varlik-14/poz/duel-chest-lift-arms-back.png",
+  "eski_iou": 0.489,
+  "ic": "oc-340781",
+  "ic_iou": 0.509
+ },
+ "oc-245082": {
+  "eski": "varlik-03/poz/standing-figure-four.png",
+  "eski_iou": 0.606,
+  "ic": "oc-267339",
+  "ic_iou": 0.595
+ },
+ "oc-245206": {
+  "eski": "varlik-05/poz/raven-stork-hands-hips.png",
+  "eski_iou": 0.472,
+  "ic": "oc-259886",
+  "ic_iou": 0.481
+ },
+ "oc-255374": {
+  "eski": "varlik-04/poz/side-leg-lift-arms-up.png",
+  "eski_iou": 0.473,
+  "ic": "sv-1132027",
+  "ic_iou": 0.947
+ },
+ "oc-255536": {
+  "eski": "varlik-03/poz/cow-face-arms.png",
+  "eski_iou": 0.612,
+  "ic": "oc-333845",
+  "ic_iou": 0.473
+ },
+ "oc-256952": {
+  "eski": "20-kapak/309217",
+  "eski_iou": 0.423,
+  "ic": "oc-245082",
+  "ic_iou": 0.38
+ },
+ "oc-259886": {
+  "eski": "varlik-05/poz/spell-hook-head-hop.png",
+  "eski_iou": 0.446,
+  "ic": "oc-245206",
+  "ic_iou": 0.481
+ },
+ "oc-266209": {
+  "eski": "19-oc/268288-2000.png",
+  "eski_iou": 0.727,
+  "ic": "oc-268289",
+  "ic_iou": 0.476
+ },
+ "oc-267319": {
+  "eski": "varlik-17/poz/nebula-goal-post-arms-tall.png",
+  "eski_iou": 0.486,
+  "ic": "oc-268325",
+  "ic_iou": 0.461
+ },
+ "oc-267339": {
+  "eski": "varlik-04/poz/stork-arms-up.png",
+  "eski_iou": 0.581,
+  "ic": "oc-245082",
+  "ic_iou": 0.595
+ },
+ "oc-268289": {
+  "eski": "varlik-03/poz/open-wide-boat.png",
+  "eski_iou": 0.558,
+  "ic": "oc-266209",
+  "ic_iou": 0.476
+ },
+ "oc-268290": {
+  "eski": "19-oc/271374-2000.png",
+  "eski_iou": 0.734,
+  "ic": "oc-333845",
+  "ic_iou": 0.602
+ },
+ "oc-268325": {
+  "eski": "varlik-16/poz/sakura-curtsy-halo-arms.png",
+  "eski_iou": 0.53,
+  "ic": "oc-241259",
+  "ic_iou": 0.618
+ },
+ "oc-268843": {
+  "eski": "varlik-04/poz/side-plank-leg-lift.png",
+  "eski_iou": 0.525,
+  "ic": "oc-313361",
+  "ic_iou": 0.266
+ },
+ "oc-269945": {
+  "eski": "varlik-09/poz/stardust-drift-124.png",
+  "eski_iou": 0.455,
+  "ic": "oc-266209",
+  "ic_iou": 0.336
+ },
+ "oc-271375": {
+  "eski": "19-oc/281290-2000.png",
+  "eski_iou": 0.455,
+  "ic": "oc-336199",
+  "ic_iou": 0.408
+ },
+ "oc-271554": {
+  "eski": "varlik-17/poz/nebula-standing-reach-back.png",
+  "eski_iou": 0.551,
+  "ic": "sv-1280880",
+  "ic_iou": 0.558
+ },
+ "oc-271558": {
+  "eski": "19-oc/274663-2000.png",
+  "eski_iou": 0.416,
+  "ic": "oc-273074",
+  "ic_iou": 0.363
+ },
+ "oc-273072": {
+  "eski": "varlik-04/poz/side-bend-leg-out.png",
+  "eski_iou": 0.502,
+  "ic": "sv-1055879",
+  "ic_iou": 0.387
+ },
+ "oc-273074": {
+  "eski": "varlik-06/poz/aurora-mountain-lean-arms-back.png",
+  "eski_iou": 0.476,
+  "ic": "sv-1043462",
+  "ic_iou": 0.413
+ },
+ "oc-277856": {
+  "eski": "varlik-09/poz/cosmic-mountain-lean-forward-reach.png",
+  "eski_iou": 0.421,
+  "ic": "oc-340781",
+  "ic_iou": 0.439
+ },
+ "oc-313361": {
+  "eski": "varlik-03/poz/forearm-side-plank.png",
+  "eski_iou": 0.438,
+  "ic": "oc-268843",
+  "ic_iou": 0.266
+ },
+ "oc-314205": {
+  "eski": "19-oc/297664-2000.png",
+  "eski_iou": 0.618,
+  "ic": "oc-267339",
+  "ic_iou": 0.349
+ },
+ "oc-320699": {
+  "eski": "varlik-05/poz/spell-kneel-up-cactus.png",
+  "eski_iou": 0.507,
+  "ic": "sv-1055879",
+  "ic_iou": 0.447
+ },
+ "oc-331560": {
+  "eski": "varlik-03/poz/wild-thing-lite.png",
+  "eski_iou": 0.352,
+  "ic": "sv-1132025",
+  "ic_iou": 0.373
+ },
+ "oc-333845": {
+  "eski": "19-oc/271374-2000.png",
+  "eski_iou": 0.563,
+  "ic": "oc-268290",
+  "ic_iou": 0.602
+ },
+ "oc-333846": {
+  "eski": "varlik-14/poz/duel-tree-sky-palms.png",
+  "eski_iou": 0.527,
+  "ic": "oc-268290",
+  "ic_iou": 0.541
+ },
+ "oc-336199": {
+  "eski": "varlik/poz/curtsy-cactus.png",
+  "eski_iou": 0.596,
+  "ic": "sv-1280880",
+  "ic_iou": 0.549
+ },
+ "oc-340781": {
+  "eski": "varlik-03/poz/standing-backbend.png",
+  "eski_iou": 0.537,
+  "ic": "oc-241477",
+  "ic_iou": 0.509
+ },
+ "sv-1043462": {
+  "eski": "varlik-16/poz/sakura-curtsy-halo-arms.png",
+  "eski_iou": 0.57,
+  "ic": "sv-1055879",
+  "ic_iou": 0.531
+ },
+ "sv-1055879": {
+  "eski": "varlik-17/poz/nebula-goal-post-arms-tall.png",
+  "eski_iou": 0.619,
+  "ic": "sv-1043462",
+  "ic_iou": 0.531
+ },
+ "sv-1074932": {
+  "eski": "varlik-16/poz/sakura-half-w-half-down.png",
+  "eski_iou": 0.472,
+  "ic": "oc-255536",
+  "ic_iou": 0.401
+ },
+ "sv-1132025": {
+  "eski": "varlik-09/poz/cosmic-dancer-reach-forward.png",
+  "eski_iou": 0.392,
+  "ic": "oc-331560",
+  "ic_iou": 0.373
+ },
+ "sv-1132027": {
+  "eski": "varlik-04/poz/side-leg-lift-arms-up.png",
+  "eski_iou": 0.474,
+  "ic": "oc-255374",
+  "ic_iou": 0.947
+ },
+ "sv-1226176": {
+  "eski": "varlik-03/poz/cow-face-arms.png",
+  "eski_iou": 0.543,
+  "ic": "sv-1280880",
+  "ic_iou": 0.565
+ },
+ "sv-1280880": {
+  "eski": "20-kapak/230147",
+  "eski_iou": 0.729,
+  "ic": "sv-1226176",
+  "ic_iou": 0.565
+ },
+ "sv-1824819": {
+  "eski": "varlik-16/poz/sakura-low-squat-cactus.png",
+  "eski_iou": 0.459,
+  "ic": "sv-1043462",
+  "ic_iou": 0.426
+ }
+}

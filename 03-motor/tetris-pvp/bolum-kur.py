@@ -85,7 +85,11 @@ assert abs(toplam_olcu * 4 * V - t) < 0.01, (t, toplam_olcu)
 TAM = {"vs", "giris", "tur", "ovgu_kart", "wrap", "abone", "acilis", "yazi", "nasil"}; AS = 3.2
 if AYAR.get("tema", {}).get("baslaTam"):   # 16. video (REF-067): 3-2-1-GO tam ekran kart, SUBSCRIBE ona da binmez
     TAM.add("basla")
+# 20. video (REF-072): duvarin tam ekran acilis evresinde (kart+say+buyu .. sure) motor 17 SUBSCRIBE cizmez -> ses de oraya dusmesin
+TAM_EVRE = Z["kart"] + Z["say"] + Z["buyu"] if AYAR.get("abone_acilis_kacin") else None
 def bos(x):
+    if TAM_EVRE is not None and any(x < d["t0"] + Z["sure"] and x + AS > d["t0"] + TAM_EVRE for d in duvarlar):
+        return False
     return not any(k["tip"] in TAM and x < k["t"] + k["sure"] and x + AS > k["t"] for k in kartlar)
 abone, x = [], 15.0
 while x + AS < t:

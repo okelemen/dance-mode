@@ -1,0 +1,129 @@
+{
+ "_not": "HUMAN TETRIS 20. video (REF-072 TetrisBounce 'HUMAN TETRIS 3 PLAYER BATTLE Strike A Pose #13'). 3 oyuncu 1v1v1 (P1 pembe sol / P2 mavi orta / P3 sari sag), 4 tur x 3 duvar = 12 duvar / 36 poz (kullanici 6 Kas 'Evet, 12 duvar'). Duvar 52 vurus = 13 olcu = 20,9 sn (REF-072 dongusu ~20 sn): kart 4, 3-2-1 20, yaklasma + PLAYER plakasi 12, tam ekran acilis 16. Siluetler Openclipart kamu mali + svgsilh CC0 (REF-074), giysisiz, kendi kafasi. Kesit yok (kullanici 6 Kas), dogrudan tam render. Muzik Three Lane Pose Off (Suno, kullanici) 149,60 BPM, 41 sn, donguleniyor. Metinler bizim.",
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-20",
+ "sayfa": "sahne17.html",
+ "bpm": 149.6,
+ "muzik": "Three Lane Pose Off.wav (Suno, kullanici, 6 Kas 2026), 149,60 BPM",
+ "duvar": "duvar-listesi-20.json",
+ "duvar_vurus": 52,
+ "zaman_vurus": {
+  "kart": 4,
+  "say": 20,
+  "buyu": 12,
+  "gec": 16
+ },
+ "kart_vurus": {
+  "tur": 8,
+  "basla": 8,
+  "abone": 12
+ },
+ "tur_kart": {
+  "1": [
+   "ROUND 1",
+   null
+  ],
+  "2": [
+   "ROUND 2",
+   "MEDIUM"
+  ],
+  "3": [
+   "ROUND 3",
+   "HARD"
+  ],
+  "4": [
+   "ROUND 4",
+   "FINAL"
+  ]
+ },
+ "giris_dizisi": [
+  {
+   "tip": "yazi",
+   "metin": "3 PLAYERS",
+   "alt": "WHO STRIKES BEST?",
+   "vurus": 8
+  },
+  {
+   "tip": "nasil",
+   "vurus": 16
+  },
+  {
+   "tip": "yazi",
+   "metin": "READY?",
+   "vurus": 4
+  }
+ ],
+ "gecis": {
+  "2": [
+   {
+    "tip": "yazi",
+    "metin": "HOLD YOUR POSE!",
+    "vurus": 4
+   }
+  ],
+  "3": [
+   {
+    "tip": "yazi",
+    "metin": "TURN IT UP!",
+    "vurus": 4
+   }
+  ],
+  "4": [
+   {
+    "tip": "yazi",
+    "metin": "LAST WALLS!",
+    "alt": "GIVE IT EVERYTHING!",
+    "vurus": 4
+   }
+  ]
+ },
+ "kapanis": [
+  {
+   "tip": "yazi",
+   "metin": "ALL 12 WALLS",
+   "alt": "CLEARED!",
+   "vurus": 8
+  },
+  {
+   "tip": "yazi",
+   "metin": "WHO WON?",
+   "alt": "TELL US IN THE COMMENTS!",
+   "vurus": 8
+  }
+ ],
+ "ovgu": [
+  "PERFECT!",
+  "NICE POSE!",
+  "GREAT!",
+  "AMAZING!",
+  "SO STYLISH!",
+  "STRONG!"
+ ],
+ "tema": {
+  "yildiz": true,
+  "baslaTam": true,
+  "varlik": "/03-motor/tetris-pvp/varlik-20/",
+  "maskeVarlik": "/03-motor/tetris-pvp/varlik-20/",
+  "maskeKlasor": "poz/",
+  "renk": [
+   "#ff3fbf",
+   "#1fa8ff",
+   "#ffbf00"
+  ],
+  "acik": [
+   "#ffd0f0",
+   "#cdeeff",
+   "#fff2b8"
+  ],
+  "koyu": [
+   "#a0106e",
+   "#0a5ab0",
+   "#8a5600"
+  ],
+  "abone": [
+   "#7dffb4",
+   "#0c8a48"
+  ],
+  "aboneAlt": "NEW BATTLE EVERY DAY"
+ }
+}
