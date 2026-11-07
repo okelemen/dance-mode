@@ -1,5 +1,5 @@
 {
- "_not": "HUMAN TETRIS 21. video (REF-075 TetrisBounce 'HUMAN TETRIS PVP BATTLE Who Bends First Loses #05'). 1v1, P1 MAVI sol / P2 PEMBE sag (referans), 3 tur x 6 duvar = 18 duvar / 36 poz (EASY / NORMAL / HARD; referans 17 duvar 6/6/5, ~9 sn). Duvar 28 vurus = 7 olcu = 13,8 sn: kart+kepenk 4, 3-2-1 12, buyume 4, tam ekran ikiye bolunmus panel 8. Siluetler ilk videolarin maskelerinden harmanlama (kullanici 7 Kas 2026: 'oncekilerden harmanla'), duvar-listesi-21.json. Acilis VS boksorleri varlik-06-boksor3 (p1 mavi / p2 pembe). Muzik Twin Runway Bend Duel (Suno, kullanici) 122,15 -> 122 BPM sabit. Kesit yok, dogrudan tam render. Metinler bizim.",
+ "_not": "HUMAN TETRIS 21. video (REF-075 TetrisBounce 'HUMAN TETRIS PVP BATTLE Who Bends First Loses #05'). 1v1, P1 MAVI sol / P2 PEMBE sag (referans), 3 tur x 6 duvar = 18 duvar / 36 poz (EASY / NORMAL / HARD; referans 17 duvar 6/6/5, ~9 sn). Duvar 28 vurus = 7 olcu = 13,8 sn: kart+kepenk 4, 3-2-1 12, buyume 4, tam ekran ikiye bolunmus panel 8. Siluetler ilk videolarin maskelerinden harmanlama (kullanici 7 Kas 2026: 'oncekilerden harmanla'), duvar-listesi-21.json. Acilis VS boksorleri varlik-06 (= varlik-06-boksor3, depoda olan) (p1 mavi / p2 pembe). Muzik Twin Runway Bend Duel (Suno, kullanici) 122,15 -> 122 BPM sabit. Kesit yok, dogrudan tam render. Metinler bizim.",
  "seri": "HUMAN TETRIS",
  "bolum": "human-tetris-21",
  "sayfa": "sahne18.html",
@@ -25,7 +25,7 @@
   "baslaTam": true,
   "varlik": "/03-motor/tetris-pvp/varlik-21/",
   "maskeKlasor": "poz/",
-  "boksorVarlik": "/03-motor/tetris-pvp/varlik-06-boksor3/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-06/",
   "renk": ["#1ad2ff", "#ff2ad2"],
   "acik": ["#d6f6ff", "#ffd6f4"],
   "koyu": ["#0a5ad8", "#b0108c"],
