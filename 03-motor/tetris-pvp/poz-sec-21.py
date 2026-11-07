@@ -1,0 +1,78 @@
+"""HUMAN TETRIS 21. video (REF-075, 1v1 PVP, 3 tur x 6 duvar = 18 duvar / 36 poz): ilk videolarin maskelerinden harmanlar.
+Kullanici 7 Kas 2026: "uygun silüet bulamadıysan öncekilerden harmanla ... ilk Tetris videolarından bulup onları yapabilirsin"
+(yeni CC0 kaynak tukendi: Openclipart yeni aday ~3, svgsilh / publicdomainvectors 403, Wikimedia 429).
+Havuz: ilk videolar (varlik = POSE WALL/TETRIS 1-2, varlik-03, varlik-04, varlik-05) tek kisilik maskeler.
+Elenen: son videolarla (16, 17, 19, 20 + 20/21 kapak siluetleri) IoU >= 0,78 olanlar; havuz icinde IoU >= 0,70 ikizler (ilk gelen kalir);
+adi havada / ters / ziplama okunanlar. Siralama: maske yuksekligi (ayakta -> yere yakin) -> EASY / NORMAL / HARD.
+Cikti: aday-olcu-21.json (her adayin olcusu), konsola tablo."""
+import glob, json, os, re
+import numpy as np
+from PIL import Image
+
+BURA = os.path.dirname(os.path.abspath(__file__))
+REF = r"C:\Users\eleme\OneDrive\Masaüstü\REFERANSLAR"
+N = 128
+ESIK_YAKIN, ESIK_IC = 0.78, 0.70
+HAVUZ = ("varlik/poz", "varlik-03/poz", "varlik-04/poz", "varlik-05/poz")
+YAKIN = ("varlik-16/poz", "varlik-17/poz", "varlik-19/poz", "varlik-20/poz")
+YASAK = re.compile(r"jump|hop|leap|head-?stand|hand-?stand|cartwheel|wheel|flip|invert|upside|fly|air|dive|fall", re.I)
+
+
+def maske(yol):
+    im = np.array(Image.open(yol).convert("RGBA"))
+    a = im[:, :, 3] > 40
+    if a.mean() > 0.97:
+        a = im[:, :, :3].mean(2) < 100
+    ys, xs = np.nonzero(a)
+    a = a[ys.min():ys.max() + 1, xs.min():xs.max() + 1]
+    h, w = a.shape; s = max(h, w)
+    kare = np.zeros((s, s), bool); kare[s - h:, (s - w) // 2:(s - w) // 2 + w] = a
+    return np.array(Image.fromarray(kare.astype(np.uint8) * 255).resize((N, N), Image.BILINEAR)) > 127
+
+
+def iou(a, b):
+    return max((a & b).sum() / max(1, (a | b).sum()), (a & b[:, ::-1]).sum() / max(1, (a | b[:, ::-1]).sum()))
+
+
+def boy(yol):
+    """maske kutusunun cerceveye gore yuksekligi ve genisligi (900x740 cerceve; ayakta ~0,92)"""
+    al = Image.open(yol).getchannel("A"); x0, y0, x1, y1 = al.getbbox()
+    return (y1 - y0) / al.height, (x1 - x0) / al.width
+
+
+yakin = {}
+for d in YAKIN:
+    for f in glob.glob(os.path.join(BURA, d, "*.png")):
+        yakin[d + "/" + os.path.basename(f)] = maske(f)
+for k in ("273073", "277859", "230147", "272052", "309217", "268844"):          # 20. kapak
+    yakin["20-kapak/" + k] = maske(os.path.join(REF, "OC-dans-siluet", k + "-2000.png"))
+for k in ("269945", "313361"):                                                  # 21. kapak A
+    yakin["21-kapak/" + k] = maske(os.path.join(REF, "OC-dans-siluet", "buyuk", k + ".png"))
+for k in ("291176", "259634"):                                                  # 21. kapak B
+    yakin["21-kapak/" + k] = maske(os.path.join(REF, "OC-yoga-siluet", k + "-2000.png"))
+n_yakin = sum(len(glob.glob(os.path.join(BURA, d, "*.png"))) for d in YAKIN)
+assert n_yakin > 100 and len(yakin) == n_yakin + 10, (len(yakin), n_yakin)       # bos sayim = kirik komut
+
+dosyalar = [f for d in HAVUZ for f in sorted(glob.glob(os.path.join(BURA, d, "*.png")))]
+assert len(dosyalar) > 380, len(dosyalar)
+secilen, olcu, elenen = [], {}, {"yasak": 0, "yakin": 0, "ikiz": 0}
+for f in dosyalar:
+    ad = os.path.relpath(f, BURA).replace("\\", "/")
+    if YASAK.search(os.path.basename(f)):
+        elenen["yasak"] += 1; continue
+    m = maske(f)
+    en, deg = max(((e, iou(m, v)) for e, v in yakin.items()), key=lambda x: x[1])
+    if deg >= ESIK_YAKIN:
+        elenen["yakin"] += 1; continue
+    ikiz = [(s, iou(m, olcu[s]["_m"])) for s in secilen]
+    if ikiz and max(ikiz, key=lambda x: x[1])[1] >= ESIK_IC:
+        elenen["ikiz"] += 1; continue
+    h, w = boy(f)
+    olcu[ad] = {"_m": m, "yakin": en, "yakin_iou": round(float(deg), 3), "boy": round(h, 3), "gen": round(w, 3)}
+    secilen.append(ad)
+print("havuz", len(dosyalar), "elenen", elenen, "kalan", len(secilen))
+cikti = {k: {kk: vv for kk, vv in v.items() if kk != "_m"} for k, v in olcu.items()}
+json.dump(cikti, open(os.path.join(BURA, "aday-olcu-21.json"), "w", encoding="utf-8"), indent=1)
+for k in sorted(cikti, key=lambda k: -cikti[k]["boy"]):
+    v = cikti[k]
+    print("%-48s boy %.2f gen %.2f  yakin %.2f %s" % (k, v["boy"], v["gen"], v["yakin_iou"], v["yakin"][-30:]))

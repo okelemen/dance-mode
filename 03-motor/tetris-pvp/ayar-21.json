@@ -1,0 +1,36 @@
+{
+ "_not": "HUMAN TETRIS 21. video (REF-075 TetrisBounce 'HUMAN TETRIS PVP BATTLE Who Bends First Loses #05'). 1v1, P1 MAVI sol / P2 PEMBE sag (referans), 3 tur x 6 duvar = 18 duvar / 36 poz (EASY / NORMAL / HARD; referans 17 duvar 6/6/5, ~9 sn). Duvar 28 vurus = 7 olcu = 13,8 sn: kart+kepenk 4, 3-2-1 12, buyume 4, tam ekran ikiye bolunmus panel 8. Siluetler ilk videolarin maskelerinden harmanlama (kullanici 7 Kas 2026: 'oncekilerden harmanla'), duvar-listesi-21.json. Acilis VS boksorleri varlik-06-boksor3 (p1 mavi / p2 pembe). Muzik Twin Runway Bend Duel (Suno, kullanici) 122,15 -> 122 BPM sabit. Kesit yok, dogrudan tam render. Metinler bizim.",
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-21",
+ "sayfa": "sahne18.html",
+ "bpm": 122,
+ "muzik": "Twin Runway Bend Duel.wav (Suno, kullanici, 7 Kas 2026) -> twin-122.wav",
+ "duvar": "duvar-listesi-21.json",
+ "duvar_vurus": 28,
+ "zaman_vurus": {"kart": 4, "say": 12, "buyu": 4, "gec": 8},
+ "kart_vurus": {"tur": 8, "basla": 8, "abone": 12},
+ "tur_kart": {"1": ["01", "EASY"], "2": ["02", "NORMAL"], "3": ["03", "HARD"]},
+ "tur_kart_atla": [1],
+ "giris_dizisi": [
+  {"tip": "acilis", "vurus": 12},
+  {"tip": "yazi", "metin": "BLUE VS PINK!", "parca": [["BLUE", 0], [" VS ", null], ["PINK", 1], ["!", null]], "alt": "WHO BENDS FIRST?", "vurus": 8},
+  {"tip": "nasil", "vurus": 16}
+ ],
+ "kapanis": [
+  {"tip": "yazi", "metin": "ALL 18 WALLS", "alt": "CLEARED!", "vurus": 8},
+  {"tip": "yazi", "metin": "BLUE OR PINK?", "parca": [["BLUE", 0], [" OR ", null], ["PINK", 1], ["?", null]], "alt": "WHO BENT BETTER? COMMENT!", "vurus": 8}
+ ],
+ "ovgu": ["PERFECT!", "NICE BEND!", "GREAT!", "AMAZING!", "SO FLEXIBLE!", "STRONG!"],
+ "tema": {
+  "baslaTam": true,
+  "varlik": "/03-motor/tetris-pvp/varlik-21/",
+  "maskeKlasor": "poz/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-06-boksor3/",
+  "renk": ["#1ad2ff", "#ff2ad2"],
+  "acik": ["#d6f6ff", "#ffd6f4"],
+  "koyu": ["#0a5ad8", "#b0108c"],
+  "turAd": {"1": "EASY", "2": "NORMAL", "3": "HARD"},
+  "abone": ["#7dffb4", "#0c8a48"],
+  "aboneAlt": "NEW BATTLE EVERY DAY"
+ }
+}

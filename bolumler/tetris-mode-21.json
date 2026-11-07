@@ -1,0 +1,305 @@
+{
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-21",
+ "bpm": 122.0,
+ "toplam_olcu": 148,
+ "toplam_duvar": 18,
+ "zaman": {
+  "kart": 1.9672,
+  "say": 5.9016,
+  "buyu": 1.9672,
+  "gec": 3.9344,
+  "sure": 13.7705
+ },
+ "kartlar": [
+  {
+   "tip": "acilis",
+   "t": 0.0,
+   "sure": 5.9016
+  },
+  {
+   "tip": "yazi",
+   "metin": "BLUE VS PINK!",
+   "parca": [
+    [
+     "BLUE",
+     0
+    ],
+    [
+     " VS ",
+     null
+    ],
+    [
+     "PINK",
+     1
+    ],
+    [
+     "!",
+     null
+    ]
+   ],
+   "alt": "WHO BENDS FIRST?",
+   "t": 5.9016,
+   "sure": 3.9344
+  },
+  {
+   "tip": "nasil",
+   "t": 9.8361,
+   "sure": 7.8689
+  },
+  {
+   "t": 17.7049,
+   "sure": 3.9344,
+   "tip": "basla"
+  },
+  {
+   "t": 104.2623,
+   "sure": 3.9344,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "02",
+   "alt": "NORMAL"
+  },
+  {
+   "t": 190.8198,
+   "sure": 3.9344,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "03",
+   "alt": "HARD"
+  },
+  {
+   "tip": "yazi",
+   "metin": "ALL 18 WALLS",
+   "alt": "CLEARED!",
+   "t": 277.3772,
+   "sure": 3.9344
+  },
+  {
+   "tip": "yazi",
+   "metin": "BLUE OR PINK?",
+   "parca": [
+    [
+     "BLUE",
+     0
+    ],
+    [
+     " OR ",
+     null
+    ],
+    [
+     "PINK",
+     1
+    ],
+    [
+     "?",
+     null
+    ]
+   ],
+   "alt": "WHO BENT BETTER? COMMENT!",
+   "t": 281.3116,
+   "sure": 3.9344
+  },
+  {
+   "t": 285.246,
+   "sure": 5.9016,
+   "tip": "abone"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 21.6393,
+   "p1": "starfish-lean",
+   "p2": "big-v",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 2,
+   "tur": 1,
+   "t0": 35.4098,
+   "p1": "cactus",
+   "p2": "revolved-triangle",
+   "ovgu": "NICE BEND!"
+  },
+  {
+   "no": 3,
+   "tur": 1,
+   "t0": 49.1803,
+   "p1": "half-lift-hands-shins",
+   "p2": "sidebend",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 4,
+   "tur": 1,
+   "t0": 62.9508,
+   "p1": "cauldron-kneel-hands-head",
+   "p2": "tiptoe-squat",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 5,
+   "tur": 1,
+   "t0": 76.7213,
+   "p1": "goddess-v",
+   "p2": "reach-and-tap",
+   "ovgu": "SO FLEXIBLE!"
+  },
+  {
+   "no": 6,
+   "tur": 1,
+   "t0": 90.4918,
+   "p1": "skeleton-split-stance-hands-hips",
+   "p2": "standing-backbend",
+   "ovgu": "STRONG!"
+  },
+  {
+   "no": 7,
+   "tur": 2,
+   "t0": 108.1968,
+   "p1": "arabesque-reach",
+   "p2": "crane-stand",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 8,
+   "tur": 2,
+   "t0": 121.9673,
+   "p1": "eagle-pose",
+   "p2": "front-kick-hold",
+   "ovgu": "NICE BEND!"
+  },
+  {
+   "no": 9,
+   "tur": 2,
+   "t0": 135.7378,
+   "p1": "toe-touch-kick",
+   "p2": "cobweb-dancer-lite",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 10,
+   "tur": 2,
+   "t0": 149.5083,
+   "p1": "graveyard-stork-diagonal-reach",
+   "p2": "vampire-v-tree",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 11,
+   "tur": 2,
+   "t0": 163.2788,
+   "p1": "witch-kick-back-hip-prayer",
+   "p2": "kneeling-backbend-hands-heels",
+   "ovgu": "SO FLEXIBLE!"
+  },
+  {
+   "no": 12,
+   "tur": 2,
+   "t0": 177.0493,
+   "p1": "goblin-kneel-lunge-arms-up",
+   "p2": "heel-sit-clasp-behind",
+   "ovgu": "STRONG!"
+  },
+  {
+   "no": 13,
+   "tur": 3,
+   "t0": 194.7542,
+   "p1": "front-split-prep",
+   "p2": "lizard-twist",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 14,
+   "tur": 3,
+   "t0": 208.5247,
+   "p1": "seated-straddle-reach-up",
+   "p2": "side-plank-tree",
+   "ovgu": "NICE BEND!"
+  },
+  {
+   "no": 15,
+   "tur": 3,
+   "t0": 222.2952,
+   "p1": "tortoise-prep",
+   "p2": "haunted-seated-straddle-lean",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 16,
+   "tur": 3,
+   "t0": 236.0657,
+   "p1": "deep-lunge-arms-forward-low",
+   "p2": "full-bow",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 17,
+   "tur": 3,
+   "t0": 249.8362,
+   "p1": "side-lunge-fold-hands-floor",
+   "p2": "seated-forward-reach",
+   "ovgu": "SO FLEXIBLE!"
+  },
+  {
+   "no": 18,
+   "tur": 3,
+   "t0": 263.6067,
+   "p1": "prone-snow-angel",
+   "p2": "cobweb-plank-leg-lift",
+   "ovgu": "STRONG!"
+  }
+ ],
+ "abone": [
+  22.0,
+  45.0,
+  60.0,
+  75.0,
+  90.0,
+  108.5,
+  120.0,
+  135.0,
+  150.0,
+  165.0,
+  180.0,
+  195.0,
+  210.0,
+  225.0,
+  240.0,
+  255.0,
+  270.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "Twin Runway Bend Duel.wav (Suno, kullanici, 7 Kas 2026) -> twin-122.wav",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne18.html.",
+ "tema": {
+  "baslaTam": true,
+  "varlik": "/03-motor/tetris-pvp/varlik-21/",
+  "maskeKlasor": "poz/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-06-boksor3/",
+  "renk": [
+   "#1ad2ff",
+   "#ff2ad2"
+  ],
+  "acik": [
+   "#d6f6ff",
+   "#ffd6f4"
+  ],
+  "koyu": [
+   "#0a5ad8",
+   "#b0108c"
+  ],
+  "turAd": {
+   "1": "EASY",
+   "2": "NORMAL",
+   "3": "HARD"
+  },
+  "abone": [
+   "#7dffb4",
+   "#0c8a48"
+  ],
+  "aboneAlt": "NEW BATTLE EVERY DAY"
+ }
+}
