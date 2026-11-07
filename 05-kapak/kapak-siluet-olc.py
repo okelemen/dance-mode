@@ -16,6 +16,8 @@ def olc(yol):
     beyaz = ndimage.binary_dilation(a.min(2) > 215, iterations=2)
     # 19. kapak: ayak alt kenara basinca kontur altta acik kaliyordu -> alt kenar kontur sayilir
     kapali = beyaz.copy(); kapali[-3:, :] = True
+    # 21. kapak: genis poz yan kenara degince kontur orada acik kaliyordu -> yan kenarlar da kontur sayilir
+    kapali[:, :3] = True; kapali[:, -3:] = True
     m = (a.max(2) < 60) & ndimage.binary_fill_holes(kapali) & ~beyaz
     lab, n = ndimage.label(m)
     if n == 0:
