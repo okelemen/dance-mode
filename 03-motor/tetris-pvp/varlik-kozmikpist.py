@@ -112,8 +112,8 @@ def mat_dev_gezegen():
     nt.links.new(tc.outputs["Generated"], wv.inputs["Vector"])
     rp = nt.nodes.new("ShaderNodeValToRGB"); cr = rp.color_ramp; nt.links.new(wv.outputs["Fac"], rp.inputs[0])
     cr.elements[0].position = 0.0; cr.elements[0].color = (*lin(hex3("#1a3ad8")), 1)
-    cr.elements[1].position = 1.0; cr.elements[1].color = (*lin(hex3("#e8f0ff")), 1)
-    for pos, c in ((0.3, "#3a8cff"), (0.5, "#ff4ac8"), (0.68, "#8a5aff"), (0.85, "#ff9ae8")):
+    cr.elements[1].position = 1.0; cr.elements[1].color = (*lin(hex3("#c8d8ff")), 1)   # kapak 1: beyaz mermer gibi -> mavi agirlikli
+    for pos, c in ((0.35, "#2a6aff"), (0.55, "#ff3ab8"), (0.7, "#6a4aff"), (0.88, "#ff8ae0")):
         e = cr.elements.new(pos); e.color = (*lin(hex3(c)), 1)
     lw = nt.nodes.new("ShaderNodeLayerWeight"); lw.inputs["Blend"].default_value = 0.5
     gm = nt.nodes.new("ShaderNodeMapRange"); gm.inputs["To Min"].default_value = 1.1; gm.inputs["To Max"].default_value = 2.6
