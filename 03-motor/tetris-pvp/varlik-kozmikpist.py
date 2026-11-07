@@ -164,7 +164,7 @@ def gok_katmani(ad):
     bpy.ops.mesh.primitive_uv_sphere_add(radius=360, location=(40, 300, 760), segments=96, ring_count=48)
     g = bpy.context.active_object; bpy.ops.object.shade_smooth(); g.rotation_euler = (math.radians(20), math.radians(-30), math.radians(15))
     g.data.materials.append(mat_dev_gezegen())
-    bpy.ops.mesh.primitive_uv_sphere_add(radius=392, location=(40, 320, 760), segments=96, ring_count=48)
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=392, location=(40, 760, 760), segments=96, ring_count=48)   # 1. deneme: hale (y 320) planeti tamamen ortuyordu
     h_ = bpy.context.active_object; bpy.ops.object.shade_smooth(); h_.data.materials.append(mat_emis("hale", lin(hex3("#5a8aff")), 0.35))
     # isik izleri: gezegenin onunden sola-asagi egik gecen pembe ve mavi cizgiler
     izler = [mat_emis("iz%d" % i, lin(hex3(c)), e) for i, (c, e) in enumerate((("#ff5ad8", 5.0), ("#7ad8ff", 5.0), ("#ffffff", 6.0), ("#ff2a9a", 4.0)))]
@@ -204,37 +204,35 @@ def zemin(R):
     """parlak cam karo zemin: yakinda acik, kapiya dogru koyu; karo derzleri parlak cizgi"""
     yol = mat_dikey("yol", R["zemin"], R["zemin_u"], -0.6, KAP["y"] + 2, 1.15, eksen="Y")
     _sekil("zemin", [(-YOL_YARI - 3, -0.6), (YOL_YARI + 3, -0.6), (YOL_YARI + 3, KAP["y"] + 6), (-YOL_YARI - 3, KAP["y"] + 6)], yol)
-    derz = mat_emis("derz", lin(hex3(R["acik"])), 2.0)
+    derz = mat_emis("derz", lin(hex3(R["acik"])), 1.2)
     x = -YOL_YARI
     while x <= YOL_YARI + 0.01:
-        boru((x, -0.6, 0.004), (x, KAP["y"] + 2, 0.004), 0.012, derz); x += YOL_YARI / 2
+        boru((x, -0.6, 0.004), (x, KAP["y"] + 2, 0.004), 0.007, derz); x += YOL_YARI / 2
     yy = -0.4
     while yy < KAP["y"] + 2:
-        boru((-YOL_YARI, yy, 0.004), (YOL_YARI, yy, 0.004), 0.012, derz); yy += 1.3
+        boru((-YOL_YARI, yy, 0.004), (YOL_YARI, yy, 0.004), 0.007, derz); yy += 1.3
     # yansima lekesi: yakinda zeminde parlak beyazimsi bant (REF-075 cam zemin parlamasi)
     k = kure((0, 0.8, -0.02), 1.6, mat_emis("parlama", lin(hex3(R["acik"])), 0.8), sub=3); k.scale = (1.6, 1.0, 0.02)
 
 
-def chevron(R, y, gen, kol):
-    """REF-075 cam chevron cubugu: apeksi kapiya bakan "^"; yari saydam kristal govde + ust kenarlarda neon cizgi"""
-    gov = mat_kristal("chev", R["acik"], 1.1, 0.5)
-    kenar = mat_emis("chev_k", lin(hex3("#ffffff")), 3.4)
-    aci = math.atan2(kol, gen)
+def chevron(R, y, gen, kol, kal=0.36):
+    """REF-075 cam chevron cubugu: apeksi kapiya bakan tek parca "^" prizma; kristal govde + ust kenarlarda neon cizgi
+    (1. deneme: iki doner kutu kol dagildi, kenara kaydi -> tek cokgen + solidify)"""
+    gov = mat_kristal("chev", R["ana"], 1.0, 0.25)
+    kenar = mat_emis("chev_k", lin(hex3(R["acik"])), 3.0)
+    nok = [(-gen, y - kol), (0, y), (gen, y - kol), (gen, y - kol - kal), (0, y - kal), (-gen, y - kol - kal)]
+    o = _sekil("chev", nok, gov, z=0.02)
+    so = o.modifiers.new("kal", "SOLIDIFY"); so.thickness = 0.16; so.offset = 1.0
     for s in (-1, 1):
-        cx, cy = s * gen / 2, y - kol / 2
-        L = math.hypot(gen, kol)
-        o = yuvarlak_kutu("chev", (cx, cy, 0.09), (L, 0.34, 0.16), gov, egim=0.04, seg=2)
-        o.rotation_euler = (0, 0, -s * aci)
-        a = (0, y, 0.18); b = (s * gen, y - kol, 0.18)
-        boru(a, b, 0.018, kenar)
-        boru((a[0], a[1] - 0.17, 0.02), (b[0], b[1] - 0.17, 0.02), 0.014, kenar)
+        boru((0, y, 0.19), (s * gen, y - kol, 0.19), 0.02, kenar)
+        boru((0, y - kal, 0.19), (s * gen, y - kol - kal, 0.19), 0.014, kenar)
 
 
 def korkuluk(R):
     """kristal babali cam korkuluk: kalin dikmeler + aralarda tombul babalar + ustte cam kupeste"""
-    dikme = mat_kristal("dikme", R["acik"], 1.4, 0.4)
-    baba = mat_kristal("baba", R["acik"], 1.2, 0.5)
-    kus = mat_emis("kus", lin(hex3(R["acik"])), 2.6)
+    dikme = mat_kristal("dikme", R["ana"], 0.9, 0.4)
+    baba = mat_kristal("baba", R["ana"], 0.8, 0.5)
+    kus = mat_emis("kus", lin(hex3(R["acik"])), 1.8)
     for s in (-1, 1):
         x = s * YOL_YARI
         y0, y1 = -0.6, KAP["y"] + 4.0
@@ -257,7 +255,7 @@ def korkuluk(R):
 def kapi(R):
     """cift cerceve: icte kalin neon cerceve (kart acikligi), dista ustu iki sira kare izgarali neon kafes"""
     Y, W_, H_, K, KF = KAP["y"], KAP["w"], KAP["h"], KAP["kalin"], KAP["kafes"]
-    neon = mat_dikey("cerceve", R["ana"], R["acik"], 0.0, H_ + 1.6, 2.4)
+    neon = mat_dikey("cerceve", R["koyu"], R["ana"], 0.0, H_ + 1.6, 1.5)   # 1. deneme: acik ton 2,4 beyaza patladi
     ince = mat_emis("kafes", lin(hex3(R["ana"])), 2.8)
     xk = W_ / 2 + K / 2
     for s in (-1, 1):                                      # ic cerceve: iki kalin direk + ust kiris
