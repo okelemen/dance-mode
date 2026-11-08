@@ -258,7 +258,7 @@ def korkuluk(R):
             kure((x, yy, 1.16), 0.14, dug_m, sub=2)
             if j < n:
                 L = (y1 - y0) / n
-                yay(x, yy + L / 2, 0.62, 0.75, yay_m, dug_m)
+                yay(x, yy + L / 2, 0.62, 0.55, yay_m, dug_m)
         boru((x, y0, 1.0), (x, y1, 1.0), 0.07, kus)
         boru((x, y0, 0.1), (x, y1, 0.1), 0.05, kus)
 
