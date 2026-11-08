@@ -1,0 +1,155 @@
+{
+ "_not": "HUMAN TETRIS 22. video (REF-077 TetrisBounce 'x3 player 8 Minutes of Pure Chaos #09', bizde 1v1). P1 MAVI sol / P2 PEMBE sag, 4 tur x 5 duvar = 20 duvar / 40 poz (ROUND 1 / ROUND 2 / ROUND 3 / FINAL ROUND). Duvar 28 vurus = 7 olcu = 12,3 sn (136 BPM). Sahne neon lunapark (varlik-lunapark.py), siluetler ilk videolarin maskelerinden (poz-sec-22.py), duvar-listesi-22.json. Acilis VS boksorleri varlik-06. Muzik Funfair Neon Showdown (Suno, kullanici) 136,19 -> 136 BPM. Kesit yok, dogrudan tam render. Metinler bizim.",
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-22",
+ "sayfa": "sahne19.html",
+ "bpm": 136,
+ "muzik": "Funfair Neon Showdown.wav (Suno, kullanici, 8 Kas 2026) -> funfair-136.wav",
+ "duvar": "duvar-listesi-22.json",
+ "duvar_vurus": 28,
+ "zaman_vurus": {
+  "kart": 4,
+  "say": 12,
+  "buyu": 4,
+  "gec": 8
+ },
+ "kart_vurus": {
+  "tur": 8,
+  "basla": 8,
+  "abone": 12
+ },
+ "tur_kart": {
+  "1": [
+   "01",
+   "ROUND 1"
+  ],
+  "2": [
+   "02",
+   "ROUND 2"
+  ],
+  "3": [
+   "03",
+   "ROUND 3"
+  ],
+  "4": [
+   "04",
+   "FINAL ROUND"
+  ]
+ },
+ "tur_kart_atla": [
+  1
+ ],
+ "giris_dizisi": [
+  {
+   "tip": "acilis",
+   "vurus": 12
+  },
+  {
+   "tip": "yazi",
+   "metin": "BLUE VS PINK!",
+   "parca": [
+    [
+     "BLUE",
+     0
+    ],
+    [
+     " VS ",
+     null
+    ],
+    [
+     "PINK",
+     1
+    ],
+    [
+     "!",
+     null
+    ]
+   ],
+   "alt": "WHO HOLDS THE POSE?",
+   "vurus": 8
+  },
+  {
+   "tip": "nasil",
+   "vurus": 16
+  }
+ ],
+ "kapanis": [
+  {
+   "tip": "yazi",
+   "metin": "ALL 20 WALLS",
+   "alt": "CLEARED!",
+   "vurus": 8
+  },
+  {
+   "tip": "yazi",
+   "metin": "BLUE OR PINK?",
+   "parca": [
+    [
+     "BLUE",
+     0
+    ],
+    [
+     " OR ",
+     null
+    ],
+    [
+     "PINK",
+     1
+    ],
+    [
+     "?",
+     null
+    ]
+   ],
+   "alt": "WHO HELD BETTER? COMMENT!",
+   "vurus": 8
+  }
+ ],
+ "ovgu": [
+  "PERFECT!",
+  "GREAT!",
+  "NICE HOLD!",
+  "AMAZING!",
+  "STRONG!",
+  "ON FIRE!"
+ ],
+ "tema": {
+  "baslaTam": true,
+  "varlik": "/03-motor/tetris-pvp/varlik-22/",
+  "maskeKlasor": "poz/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-06/",
+  "renk": [
+   "#1ab4ff",
+   "#ff4fc8"
+  ],
+  "acik": [
+   "#d6f2ff",
+   "#ffd6f4"
+  ],
+  "koyu": [
+   "#0a50e0",
+   "#b0108c"
+  ],
+  "turAd": {
+   "1": "ROUND 1",
+   "2": "ROUND 2",
+   "3": "ROUND 3",
+   "4": "FINAL ROUND"
+  },
+  "abone": [
+   "#7dffb4",
+   "#0c8a48"
+  ],
+  "aboneAlt": "NEW BATTLE EVERY DAY"
+ },
+ "gecis": {
+  "3": [
+   {
+    "tip": "yazi",
+    "metin": "HALFWAY THERE!",
+    "alt": "KEEP THE GLOW UP!",
+    "vurus": 8
+   }
+  ]
+ }
+}

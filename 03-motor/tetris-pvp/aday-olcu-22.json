@@ -1,0 +1,1928 @@
+{
+ "varlik/poz/balance-t-knee.png": {
+  "yakin": "varlik-21/poz/cactus.png",
+  "yakin_iou": 0.526,
+  "boy": 0.923,
+  "gen": 0.779
+ },
+ "varlik/poz/banana-reach.png": {
+  "yakin": "varlik-20/poz/oc-273072.png",
+  "yakin_iou": 0.463,
+  "boy": 0.923,
+  "gen": 0.356
+ },
+ "varlik/poz/camel.png": {
+  "yakin": "varlik-21/poz/sidebend.png",
+  "yakin_iou": 0.453,
+  "boy": 0.922,
+  "gen": 0.378
+ },
+ "varlik/poz/cobra.png": {
+  "yakin": "varlik-21/poz/lizard-twist.png",
+  "yakin_iou": 0.45,
+  "boy": 0.745,
+  "gen": 0.922
+ },
+ "varlik/poz/crescent-lunge.png": {
+  "yakin": "varlik-21/poz/skeleton-split-stance-hands-hips.png",
+  "yakin_iou": 0.47,
+  "boy": 0.922,
+  "gen": 0.596
+ },
+ "varlik/poz/curtsy-cactus.png": {
+  "yakin": "varlik-21/poz/cactus.png",
+  "yakin_iou": 0.746,
+  "boy": 0.922,
+  "gen": 0.411
+ },
+ "varlik/poz/curtsy-reach.png": {
+  "yakin": "varlik-17/poz/nebula-crescent-lean-right.png",
+  "yakin_iou": 0.57,
+  "boy": 0.922,
+  "gen": 0.216
+ },
+ "varlik/poz/deep-lunge-hands-down.png": {
+  "yakin": "varlik-21/poz/deep-lunge-arms-forward-low.png",
+  "yakin_iou": 0.478,
+  "boy": 0.736,
+  "gen": 0.922
+ },
+ "varlik/poz/diagonal-line.png": {
+  "yakin": "varlik-17/poz/nebula-eagle-arms-tall.png",
+  "yakin_iou": 0.539,
+  "boy": 0.922,
+  "gen": 0.673
+ },
+ "varlik/poz/elbows-back-stretch.png": {
+  "yakin": "varlik-17/poz/nebula-eagle-arms-tall.png",
+  "yakin_iou": 0.726,
+  "boy": 0.922,
+  "gen": 0.284
+ },
+ "varlik/poz/elbows-down-knee-lift.png": {
+  "yakin": "varlik-17/poz/nebula-eagle-arms-tall.png",
+  "yakin_iou": 0.568,
+  "boy": 0.923,
+  "gen": 0.496
+ },
+ "varlik/poz/extended-side-angle.png": {
+  "yakin": "varlik-17/poz/nebula-reverse-warrior-reach.png",
+  "yakin_iou": 0.517,
+  "boy": 0.922,
+  "gen": 0.558
+ },
+ "varlik/poz/flat-back.png": {
+  "yakin": "varlik-21/poz/half-lift-hands-shins.png",
+  "yakin_iou": 0.487,
+  "boy": 0.923,
+  "gen": 0.509
+ },
+ "varlik/poz/flexed-arms-wide.png": {
+  "yakin": "varlik-17/poz/nebula-star-arms-diagonal.png",
+  "yakin_iou": 0.647,
+  "boy": 0.922,
+  "gen": 0.711
+ },
+ "varlik/poz/front-leg-reach.png": {
+  "yakin": "varlik-21/poz/reach-and-tap.png",
+  "yakin_iou": 0.469,
+  "boy": 0.922,
+  "gen": 0.362
+ },
+ "varlik/poz/garland-squat.png": {
+  "yakin": "varlik-17/poz/nebula-lotus-prayer-sit.png",
+  "yakin_iou": 0.478,
+  "boy": 0.923,
+  "gen": 0.479
+ },
+ "varlik/poz/gate-pose.png": {
+  "yakin": "varlik-17/poz/nebula-toe-tap-side-reach.png",
+  "yakin_iou": 0.439,
+  "boy": 0.922,
+  "gen": 0.489
+ },
+ "varlik/poz/goddess-hands-on-head.png": {
+  "yakin": "varlik-17/poz/nebula-side-lunge-deep-twist.png",
+  "yakin_iou": 0.563,
+  "boy": 0.923,
+  "gen": 0.529
+ },
+ "varlik/poz/goddess-side-bend.png": {
+  "yakin": "varlik-21/poz/goddess-v.png",
+  "yakin_iou": 0.612,
+  "boy": 0.923,
+  "gen": 0.464
+ },
+ "varlik/poz/goddess-squat.png": {
+  "yakin": "varlik-21/poz/goddess-v.png",
+  "yakin_iou": 0.535,
+  "boy": 0.923,
+  "gen": 0.496
+ },
+ "varlik/poz/half-kneel-cactus.png": {
+  "yakin": "varlik-21/poz/cauldron-kneel-hands-head.png",
+  "yakin_iou": 0.494,
+  "boy": 0.923,
+  "gen": 0.496
+ },
+ "varlik/poz/half-kneel-lean.png": {
+  "yakin": "varlik-21/poz/sidebend.png",
+  "yakin_iou": 0.528,
+  "boy": 0.922,
+  "gen": 0.329
+ },
+ "varlik/poz/half-kneel-v.png": {
+  "yakin": "varlik-21/poz/goddess-v.png",
+  "yakin_iou": 0.642,
+  "boy": 0.922,
+  "gen": 0.496
+ },
+ "varlik/poz/half-kneel-w.png": {
+  "yakin": "varlik-21/poz/cauldron-kneel-hands-head.png",
+  "yakin_iou": 0.562,
+  "boy": 0.922,
+  "gen": 0.589
+ },
+ "varlik/poz/hands-on-head.png": {
+  "yakin": "varlik-17/poz/nebula-eagle-arms-tall.png",
+  "yakin_iou": 0.503,
+  "boy": 0.923,
+  "gen": 0.41
+ },
+ "varlik/poz/hero-seat-arms-up.png": {
+  "yakin": "varlik-17/poz/nebula-goal-post-arms-tall.png",
+  "yakin_iou": 0.477,
+  "boy": 0.922,
+  "gen": 0.302
+ },
+ "varlik/poz/hero-seat-lean-back.png": {
+  "yakin": "varlik-20/poz/oc-266209.png",
+  "yakin_iou": 0.457,
+  "boy": 0.88,
+  "gen": 0.593
+ },
+ "varlik/poz/high-plank.png": {
+  "yakin": "varlik-21/poz/cobweb-plank-leg-lift.png",
+  "yakin_iou": 0.438,
+  "boy": 0.651,
+  "gen": 0.922
+ },
+ "varlik/poz/hip-shift-reach.png": {
+  "yakin": "20-kapak/230147",
+  "yakin_iou": 0.601,
+  "boy": 0.922,
+  "gen": 0.253
+ },
+ "varlik/poz/horse-stance.png": {
+  "yakin": "varlik-17/poz/nebula-star-arms-diagonal.png",
+  "yakin_iou": 0.494,
+  "boy": 0.922,
+  "gen": 0.389
+ },
+ "varlik/poz/kick-back-reach.png": {
+  "yakin": "varlik-21/poz/cobweb-dancer-lite.png",
+  "yakin_iou": 0.399,
+  "boy": 0.922,
+  "gen": 0.813
+ },
+ "varlik/poz/knee-in-twist.png": {
+  "yakin": "varlik-17/poz/nebula-eagle-arms-tall.png",
+  "yakin_iou": 0.609,
+  "boy": 0.923,
+  "gen": 0.387
+ },
+ "varlik/poz/knee-lift-cactus.png": {
+  "yakin": "varlik-17/poz/nebula-knee-up-eagle-arms.png",
+  "yakin_iou": 0.55,
+  "boy": 0.922,
+  "gen": 0.449
+ },
+ "varlik/poz/knee-lift-v.png": {
+  "yakin": "varlik-21/poz/big-v.png",
+  "yakin_iou": 0.676,
+  "boy": 0.922,
+  "gen": 0.442
+ },
+ "varlik/poz/knee-up-diagonal.png": {
+  "yakin": "varlik-17/poz/nebula-eagle-arms-tall.png",
+  "yakin_iou": 0.519,
+  "boy": 0.922,
+  "gen": 0.671
+ },
+ "varlik/poz/kneel-torch-up.png": {
+  "yakin": "varlik-21/poz/goblin-kneel-lunge-arms-up.png",
+  "yakin_iou": 0.662,
+  "boy": 0.922,
+  "gen": 0.55
+ },
+ "varlik/poz/kneeling-camel-reach.png": {
+  "yakin": "varlik-20/poz/oc-255536.png",
+  "yakin_iou": 0.405,
+  "boy": 0.922,
+  "gen": 0.292
+ },
+ "varlik/poz/kneeling-lean-back.png": {
+  "yakin": "varlik-21/poz/kneeling-backbend-hands-heels.png",
+  "yakin_iou": 0.467,
+  "boy": 0.922,
+  "gen": 0.509
+ },
+ "varlik/poz/kneeling-lunge-arms-up.png": {
+  "yakin": "varlik-17/poz/nebula-low-lunge-sky.png",
+  "yakin_iou": 0.646,
+  "boy": 0.922,
+  "gen": 0.527
+ },
+ "varlik/poz/kneeling-lunge-reach-back.png": {
+  "yakin": "varlik-21/poz/goblin-kneel-lunge-arms-up.png",
+  "yakin_iou": 0.458,
+  "boy": 0.922,
+  "gen": 0.547
+ },
+ "varlik/poz/kneeling-reach.png": {
+  "yakin": "varlik-17/poz/nebula-standing-knee-hug.png",
+  "yakin_iou": 0.467,
+  "boy": 0.922,
+  "gen": 0.284
+ },
+ "varlik/poz/kneeling-side-arm.png": {
+  "yakin": "varlik-21/poz/cauldron-kneel-hands-head.png",
+  "yakin_iou": 0.531,
+  "boy": 0.923,
+  "gen": 0.749
+ },
+ "varlik/poz/lean-left-reach.png": {
+  "yakin": "varlik-20/poz/oc-245082.png",
+  "yakin_iou": 0.492,
+  "boy": 0.922,
+  "gen": 0.407
+ },
+ "varlik/poz/low-lunge-twist-back.png": {
+  "yakin": "varlik-17/poz/nebula-reverse-warrior-reach.png",
+  "yakin_iou": 0.475,
+  "boy": 0.923,
+  "gen": 0.847
+ },
+ "varlik/poz/low-v-curtsy.png": {
+  "yakin": "varlik-17/poz/nebula-eagle-arms-tall.png",
+  "yakin_iou": 0.624,
+  "boy": 0.922,
+  "gen": 0.52
+ },
+ "varlik/poz/lunge-arms-back.png": {
+  "yakin": "varlik-17/poz/nebula-reverse-warrior-reach.png",
+  "yakin_iou": 0.406,
+  "boy": 0.922,
+  "gen": 0.5
+ },
+ "varlik/poz/lunge-prayer-twist.png": {
+  "yakin": "varlik-17/poz/nebula-reverse-warrior-reach.png",
+  "yakin_iou": 0.475,
+  "boy": 0.923,
+  "gen": 0.553
+ },
+ "varlik/poz/one-arm-up-knee-lift.png": {
+  "yakin": "varlik-20/poz/oc-245082.png",
+  "yakin_iou": 0.469,
+  "boy": 0.922,
+  "gen": 0.324
+ },
+ "varlik/poz/plank-arm-reach.png": {
+  "yakin": "varlik-21/poz/cobweb-plank-leg-lift.png",
+  "yakin_iou": 0.312,
+  "boy": 0.527,
+  "gen": 0.922
+ },
+ "varlik/poz/plank-knee-drive.png": {
+  "yakin": "varlik-21/poz/cobweb-plank-leg-lift.png",
+  "yakin_iou": 0.3,
+  "boy": 0.723,
+  "gen": 0.922
+ },
+ "varlik/poz/puppy-stretch.png": {
+  "yakin": "varlik-21/poz/full-bow.png",
+  "yakin_iou": 0.368,
+  "boy": 0.611,
+  "gen": 0.922
+ },
+ "varlik/poz/quad-stretch-reach.png": {
+  "yakin": "varlik-21/poz/cobweb-dancer-lite.png",
+  "yakin_iou": 0.576,
+  "boy": 0.922,
+  "gen": 0.333
+ },
+ "varlik/poz/reverse-warrior.png": {
+  "yakin": "varlik-19/poz/oc-302291.png",
+  "yakin_iou": 0.395,
+  "boy": 0.923,
+  "gen": 0.46
+ },
+ "varlik/poz/runner-lunge-low.png": {
+  "yakin": "varlik-21/poz/lizard-twist.png",
+  "yakin_iou": 0.41,
+  "boy": 0.878,
+  "gen": 0.922
+ },
+ "varlik/poz/seated-knees-up.png": {
+  "yakin": "varlik-21/poz/tiptoe-squat.png",
+  "yakin_iou": 0.491,
+  "boy": 0.923,
+  "gen": 0.498
+ },
+ "varlik/poz/seated-leg-lift.png": {
+  "yakin": "varlik-21/poz/prone-snow-angel.png",
+  "yakin_iou": 0.399,
+  "boy": 0.88,
+  "gen": 0.922
+ },
+ "varlik/poz/seated-reach-back.png": {
+  "yakin": "varlik-19/poz/oc-285132.png",
+  "yakin_iou": 0.368,
+  "boy": 0.827,
+  "gen": 0.922
+ },
+ "varlik/poz/seated-staff.png": {
+  "yakin": "varlik-20/poz/oc-268843.png",
+  "yakin_iou": 0.299,
+  "boy": 0.922,
+  "gen": 0.816
+ },
+ "varlik/poz/seated-twist-arms.png": {
+  "yakin": "varlik-21/poz/haunted-seated-straddle-lean.png",
+  "yakin_iou": 0.381,
+  "boy": 0.722,
+  "gen": 0.922
+ },
+ "varlik/poz/seated-wide-arms.png": {
+  "yakin": "varlik-17/poz/nebula-lotus-arms-sky.png",
+  "yakin_iou": 0.398,
+  "boy": 0.741,
+  "gen": 0.922
+ },
+ "varlik/poz/side-lean-squat.png": {
+  "yakin": "varlik-21/poz/goddess-v.png",
+  "yakin_iou": 0.534,
+  "boy": 0.923,
+  "gen": 0.524
+ },
+ "varlik/poz/single-leg-reach-forward.png": {
+  "yakin": "varlik-21/poz/cobweb-dancer-lite.png",
+  "yakin_iou": 0.439,
+  "boy": 0.922,
+  "gen": 0.738
+ },
+ "varlik/poz/sphinx-lift.png": {
+  "yakin": "varlik-21/poz/prone-snow-angel.png",
+  "yakin_iou": 0.496,
+  "boy": 0.449,
+  "gen": 0.922
+ },
+ "varlik/poz/split-stance-fold.png": {
+  "yakin": "varlik-21/poz/side-lunge-fold-hands-floor.png",
+  "yakin_iou": 0.413,
+  "boy": 0.908,
+  "gen": 0.766
+ },
+ "varlik/poz/standing-knee-hold.png": {
+  "yakin": "varlik-17/poz/nebula-standing-knee-hug.png",
+  "yakin_iou": 0.578,
+  "boy": 0.922,
+  "gen": 0.403
+ },
+ "varlik/poz/standing-split-low.png": {
+  "yakin": "varlik-19/poz/oc-274663.png",
+  "yakin_iou": 0.385,
+  "boy": 0.922,
+  "gen": 0.633
+ },
+ "varlik/poz/star.png": {
+  "yakin": "varlik-21/poz/cauldron-kneel-hands-head.png",
+  "yakin_iou": 0.484,
+  "boy": 0.922,
+  "gen": 0.62
+ },
+ "varlik/poz/tabletop-leg-lift.png": {
+  "yakin": "varlik-21/poz/cobweb-plank-leg-lift.png",
+  "yakin_iou": 0.407,
+  "boy": 0.63,
+  "gen": 0.922
+ },
+ "varlik/poz/tabletop-reach.png": {
+  "yakin": "varlik-21/poz/haunted-seated-straddle-lean.png",
+  "yakin_iou": 0.319,
+  "boy": 0.641,
+  "gen": 0.922
+ },
+ "varlik/poz/tree.png": {
+  "yakin": "varlik-21/poz/vampire-v-tree.png",
+  "yakin_iou": 0.573,
+  "boy": 0.922,
+  "gen": 0.324
+ },
+ "varlik/poz/triangle.png": {
+  "yakin": "varlik-19/poz/oc-302291.png",
+  "yakin_iou": 0.515,
+  "boy": 0.922,
+  "gen": 0.522
+ },
+ "varlik/poz/w-arms.png": {
+  "yakin": "varlik-17/poz/nebula-eagle-arms-tall.png",
+  "yakin_iou": 0.64,
+  "boy": 0.922,
+  "gen": 0.502
+ },
+ "varlik/poz/warrior-one.png": {
+  "yakin": "varlik-17/poz/nebula-low-lunge-sky.png",
+  "yakin_iou": 0.474,
+  "boy": 0.922,
+  "gen": 0.444
+ },
+ "varlik/poz/warrior2.png": {
+  "yakin": "varlik-21/poz/goddess-v.png",
+  "yakin_iou": 0.618,
+  "boy": 0.924,
+  "gen": 0.882
+ },
+ "varlik/poz/wide-side-reach.png": {
+  "yakin": "20-kapak/268844",
+  "yakin_iou": 0.464,
+  "boy": 0.922,
+  "gen": 0.393
+ },
+ "varlik-03/poz/bear-hold.png": {
+  "yakin": "varlik-17/poz/nebula-star-arms-diagonal.png",
+  "yakin_iou": 0.416,
+  "boy": 0.878,
+  "gen": 0.762
+ },
+ "varlik-03/poz/bound-lunge.png": {
+  "yakin": "varlik-17/poz/nebula-side-lunge-prayer.png",
+  "yakin_iou": 0.45,
+  "boy": 0.923,
+  "gen": 0.591
+ },
+ "varlik-03/poz/bound-side-angle.png": {
+  "yakin": "varlik-17/poz/nebula-side-lunge-prayer.png",
+  "yakin_iou": 0.416,
+  "boy": 0.922,
+  "gen": 0.784
+ },
+ "varlik-03/poz/cat-back.png": {
+  "yakin": "varlik-17/poz/nebula-lotus-prayer-sit.png",
+  "yakin_iou": 0.405,
+  "boy": 0.785,
+  "gen": 0.79
+ },
+ "varlik-03/poz/childs-pose.png": {
+  "yakin": "varlik-17/poz/nebula-seated-boat-arms.png",
+  "yakin_iou": 0.384,
+  "boy": 0.495,
+  "gen": 0.829
+ },
+ "varlik-03/poz/clasp-fold.png": {
+  "yakin": "varlik-17/poz/nebula-goal-post-arms-tall.png",
+  "yakin_iou": 0.519,
+  "boy": 0.922,
+  "gen": 0.351
+ },
+ "varlik-03/poz/compass-prep.png": {
+  "yakin": "22-kapak/266208",
+  "yakin_iou": 0.446,
+  "boy": 0.922,
+  "gen": 0.68
+ },
+ "varlik-03/poz/cow-lift.png": {
+  "yakin": "varlik-19/poz/oc-266208.png",
+  "yakin_iou": 0.399,
+  "boy": 0.869,
+  "gen": 0.74
+ },
+ "varlik-03/poz/cross-leg-fold.png": {
+  "yakin": "varlik-21/poz/seated-forward-reach.png",
+  "yakin_iou": 0.304,
+  "boy": 0.603,
+  "gen": 0.804
+ },
+ "varlik-03/poz/dolphin.png": {
+  "yakin": "21-kapak/269945",
+  "yakin_iou": 0.373,
+  "boy": 0.893,
+  "gen": 0.921
+ },
+ "varlik-03/poz/down-dog-split.png": {
+  "yakin": "varlik-17/poz/nebula-reverse-warrior-reach.png",
+  "yakin_iou": 0.399,
+  "boy": 0.922,
+  "gen": 0.547
+ },
+ "varlik-03/poz/easy-seat-prayer-up.png": {
+  "yakin": "varlik-19/poz/oc-268291.png",
+  "yakin_iou": 0.638,
+  "boy": 0.922,
+  "gen": 0.518
+ },
+ "varlik-03/poz/fire-log-seat.png": {
+  "yakin": "varlik-19/poz/oc-274664.png",
+  "yakin_iou": 0.584,
+  "boy": 0.847,
+  "gen": 0.79
+ },
+ "varlik-03/poz/fish-pose.png": {
+  "yakin": "varlik-19/poz/oc-285132.png",
+  "yakin_iou": 0.383,
+  "boy": 0.345,
+  "gen": 0.922
+ },
+ "varlik-03/poz/floor-swimmer.png": {
+  "yakin": "varlik-21/poz/prone-snow-angel.png",
+  "yakin_iou": 0.436,
+  "boy": 0.339,
+  "gen": 0.922
+ },
+ "varlik-03/poz/forearm-plank.png": {
+  "yakin": "varlik-21/poz/prone-snow-angel.png",
+  "yakin_iou": 0.579,
+  "boy": 0.415,
+  "gen": 0.922
+ },
+ "varlik-03/poz/forearm-side-plank.png": {
+  "yakin": "varlik-21/poz/lizard-twist.png",
+  "yakin_iou": 0.537,
+  "boy": 0.682,
+  "gen": 0.922
+ },
+ "varlik-03/poz/gate-lift.png": {
+  "yakin": "varlik-21/poz/side-plank-tree.png",
+  "yakin_iou": 0.326,
+  "boy": 0.922,
+  "gen": 0.616
+ },
+ "varlik-03/poz/half-bow.png": {
+  "yakin": "varlik-21/poz/prone-snow-angel.png",
+  "yakin_iou": 0.367,
+  "boy": 0.435,
+  "gen": 0.922
+ },
+ "varlik-03/poz/half-split.png": {
+  "yakin": "varlik-21/poz/revolved-triangle.png",
+  "yakin_iou": 0.385,
+  "boy": 0.764,
+  "gen": 0.922
+ },
+ "varlik-03/poz/hand-to-toe-side.png": {
+  "yakin": "varlik-17/poz/nebula-eagle-arms-tall.png",
+  "yakin_iou": 0.506,
+  "boy": 0.922,
+  "gen": 0.809
+ },
+ "varlik-03/poz/happy-baby.png": {
+  "yakin": "22-kapak/266208",
+  "yakin_iou": 0.531,
+  "boy": 0.834,
+  "gen": 0.587
+ },
+ "varlik-03/poz/head-to-knee.png": {
+  "yakin": "varlik-21/poz/seated-forward-reach.png",
+  "yakin_iou": 0.435,
+  "boy": 0.507,
+  "gen": 0.814
+ },
+ "varlik-03/poz/heel-sit-reach-forward.png": {
+  "yakin": "varlik-21/poz/half-lift-hands-shins.png",
+  "yakin_iou": 0.366,
+  "boy": 0.896,
+  "gen": 0.594
+ },
+ "varlik-03/poz/heron-seat.png": {
+  "yakin": "varlik-17/poz/nebula-lotus-arms-sky.png",
+  "yakin_iou": 0.462,
+  "boy": 0.922,
+  "gen": 0.447
+ },
+ "varlik-03/poz/hollow-hold.png": {
+  "yakin": "varlik-19/poz/oc-285132.png",
+  "yakin_iou": 0.297,
+  "boy": 0.33,
+  "gen": 0.922
+ },
+ "varlik-03/poz/humble-pigeon.png": {
+  "yakin": "varlik-21/poz/front-split-prep.png",
+  "yakin_iou": 0.347,
+  "boy": 0.259,
+  "gen": 0.922
+ },
+ "varlik-03/poz/humble-warrior.png": {
+  "yakin": "varlik-17/poz/nebula-side-lunge-prayer.png",
+  "yakin_iou": 0.38,
+  "boy": 0.923,
+  "gen": 0.676
+ },
+ "varlik-03/poz/hurdler-stretch.png": {
+  "yakin": "varlik-20/poz/oc-268289.png",
+  "yakin_iou": 0.4,
+  "boy": 0.608,
+  "gen": 0.922
+ },
+ "varlik-03/poz/king-pigeon-reach.png": {
+  "yakin": "22-kapak/274664",
+  "yakin_iou": 0.494,
+  "boy": 0.922,
+  "gen": 0.556
+ },
+ "varlik-03/poz/knee-to-nose.png": {
+  "yakin": "varlik-17/poz/nebula-lotus-prayer-sit.png",
+  "yakin_iou": 0.434,
+  "boy": 0.797,
+  "gen": 0.837
+ },
+ "varlik-03/poz/kneeling-arm-sweep.png": {
+  "yakin": "varlik-17/poz/nebula-low-lunge-twist-open.png",
+  "yakin_iou": 0.583,
+  "boy": 0.923,
+  "gen": 0.573
+ },
+ "varlik-03/poz/kneeling-quad-hold.png": {
+  "yakin": "varlik-20/poz/sv-1824819.png",
+  "yakin_iou": 0.386,
+  "boy": 0.922,
+  "gen": 0.449
+ },
+ "varlik-03/poz/kneeling-side-plank.png": {
+  "yakin": "varlik-21/poz/side-plank-tree.png",
+  "yakin_iou": 0.449,
+  "boy": 0.922,
+  "gen": 0.613
+ },
+ "varlik-03/poz/l-sit-prep.png": {
+  "yakin": "varlik-17/poz/nebula-seated-boat-arms.png",
+  "yakin_iou": 0.319,
+  "boy": 0.922,
+  "gen": 0.838
+ },
+ "varlik-03/poz/legs-up.png": {
+  "yakin": "varlik-19/poz/oc-266208.png",
+  "yakin_iou": 0.42,
+  "boy": 0.836,
+  "gen": 0.763
+ },
+ "varlik-03/poz/lizard-lunge.png": {
+  "yakin": "varlik-21/poz/lizard-twist.png",
+  "yakin_iou": 0.498,
+  "boy": 0.52,
+  "gen": 0.921
+ },
+ "varlik-03/poz/locust.png": {
+  "yakin": "varlik-21/poz/prone-snow-angel.png",
+  "yakin_iou": 0.435,
+  "boy": 0.395,
+  "gen": 0.922
+ },
+ "varlik-03/poz/low-boat.png": {
+  "yakin": "varlik-21/poz/prone-snow-angel.png",
+  "yakin_iou": 0.37,
+  "boy": 0.628,
+  "gen": 0.922
+ },
+ "varlik-03/poz/low-lunge-arms-forward.png": {
+  "yakin": "varlik-21/poz/cauldron-kneel-hands-head.png",
+  "yakin_iou": 0.427,
+  "boy": 0.922,
+  "gen": 0.688
+ },
+ "varlik-03/poz/mermaid-pigeon.png": {
+  "yakin": "22-kapak/274664",
+  "yakin_iou": 0.509,
+  "boy": 0.923,
+  "gen": 0.593
+ },
+ "varlik-03/poz/mermaid-seat.png": {
+  "yakin": "varlik-17/poz/nebula-lotus-prayer-sit.png",
+  "yakin_iou": 0.468,
+  "boy": 0.922,
+  "gen": 0.816
+ },
+ "varlik-03/poz/open-wide-boat.png": {
+  "yakin": "varlik-20/poz/oc-268289.png",
+  "yakin_iou": 0.561,
+  "boy": 0.922,
+  "gen": 0.882
+ },
+ "varlik-03/poz/pigeon-upright.png": {
+  "yakin": "varlik-21/poz/prone-snow-angel.png",
+  "yakin_iou": 0.36,
+  "boy": 0.922,
+  "gen": 0.919
+ },
+ "varlik-03/poz/plank-leg-lift.png": {
+  "yakin": "varlik-21/poz/cobweb-plank-leg-lift.png",
+  "yakin_iou": 0.697,
+  "boy": 0.62,
+  "gen": 0.922
+ },
+ "varlik-03/poz/pyramid-fold.png": {
+  "yakin": "varlik-21/poz/skeleton-split-stance-hands-hips.png",
+  "yakin_iou": 0.547,
+  "boy": 0.922,
+  "gen": 0.504
+ },
+ "varlik-03/poz/reverse-plank.png": {
+  "yakin": "varlik-21/poz/lizard-twist.png",
+  "yakin_iou": 0.449,
+  "boy": 0.608,
+  "gen": 0.922
+ },
+ "varlik-03/poz/reverse-prayer-fold.png": {
+  "yakin": "varlik-17/poz/comet-halo-t-curtsy.png",
+  "yakin_iou": 0.434,
+  "boy": 0.922,
+  "gen": 0.622
+ },
+ "varlik-03/poz/reverse-tabletop.png": {
+  "yakin": "varlik-19/poz/oc-291176.png",
+  "yakin_iou": 0.308,
+  "boy": 0.758,
+  "gen": 0.922
+ },
+ "varlik-03/poz/revolved-side-angle.png": {
+  "yakin": "varlik-19/poz/oc-302291.png",
+  "yakin_iou": 0.45,
+  "boy": 0.922,
+  "gen": 0.586
+ },
+ "varlik-03/poz/sage-twist.png": {
+  "yakin": "varlik-17/poz/nebula-lotus-prayer-sit.png",
+  "yakin_iou": 0.432,
+  "boy": 0.922,
+  "gen": 0.851
+ },
+ "varlik-03/poz/seated-leg-cradle.png": {
+  "yakin": "varlik-17/poz/nebula-lotus-prayer-sit.png",
+  "yakin_iou": 0.465,
+  "boy": 0.892,
+  "gen": 0.518
+ },
+ "varlik-03/poz/seated-side-stretch.png": {
+  "yakin": "varlik-20/poz/oc-266209.png",
+  "yakin_iou": 0.588,
+  "boy": 0.922,
+  "gen": 0.591
+ },
+ "varlik-03/poz/side-lying-leg-lift.png": {
+  "yakin": "varlik-21/poz/cobweb-plank-leg-lift.png",
+  "yakin_iou": 0.404,
+  "boy": 0.72,
+  "gen": 0.922
+ },
+ "varlik-03/poz/side-lying-quad-hold.png": {
+  "yakin": "varlik-21/poz/seated-forward-reach.png",
+  "yakin_iou": 0.399,
+  "boy": 0.384,
+  "gen": 0.922
+ },
+ "varlik-03/poz/side-split-prep.png": {
+  "yakin": "varlik-17/poz/nebula-butterfly-sit-wings.png",
+  "yakin_iou": 0.498,
+  "boy": 0.627,
+  "gen": 0.922
+ },
+ "varlik-03/poz/single-leg-bridge.png": {
+  "yakin": "21-kapak/291176",
+  "yakin_iou": 0.416,
+  "boy": 0.922,
+  "gen": 0.784
+ },
+ "varlik-03/poz/standing-figure-four.png": {
+  "yakin": "varlik-17/poz/nebula-knee-up-eagle-arms.png",
+  "yakin_iou": 0.703,
+  "boy": 0.922,
+  "gen": 0.349
+ },
+ "varlik-03/poz/stork-fold.png": {
+  "yakin": "varlik-20/poz/oc-245082.png",
+  "yakin_iou": 0.416,
+  "boy": 0.914,
+  "gen": 0.922
+ },
+ "varlik-03/poz/sunrise-arch.png": {
+  "yakin": "varlik-17/poz/nebula-standing-reach-back.png",
+  "yakin_iou": 0.579,
+  "boy": 0.922,
+  "gen": 0.248
+ },
+ "varlik-03/poz/supine-twist.png": {
+  "yakin": "varlik-19/poz/oc-285132.png",
+  "yakin_iou": 0.292,
+  "boy": 0.266,
+  "gen": 0.922
+ },
+ "varlik-03/poz/tabletop-twist-reach.png": {
+  "yakin": "varlik-17/poz/nebula-lotus-prayer-sit.png",
+  "yakin_iou": 0.398,
+  "boy": 0.922,
+  "gen": 0.612
+ },
+ "varlik-03/poz/thread-the-needle.png": {
+  "yakin": "varlik-17/poz/nebula-lotus-prayer-sit.png",
+  "yakin_iou": 0.363,
+  "boy": 0.922,
+  "gen": 0.649
+ },
+ "varlik-03/poz/tiger-pose.png": {
+  "yakin": "varlik-17/poz/nebula-lotus-prayer-sit.png",
+  "yakin_iou": 0.371,
+  "boy": 0.922,
+  "gen": 0.837
+ },
+ "varlik-03/poz/tiptoe-prayer.png": {
+  "yakin": "varlik-21/poz/big-v.png",
+  "yakin_iou": 0.737,
+  "boy": 0.922,
+  "gen": 0.233
+ },
+ "varlik-03/poz/toe-stand-prep.png": {
+  "yakin": "varlik-20/poz/oc-313361.png",
+  "yakin_iou": 0.419,
+  "boy": 0.922,
+  "gen": 0.711
+ },
+ "varlik-03/poz/toe-touch-twist.png": {
+  "yakin": "varlik-20/poz/oc-266209.png",
+  "yakin_iou": 0.44,
+  "boy": 0.922,
+  "gen": 0.587
+ },
+ "varlik-03/poz/wide-angle-fold.png": {
+  "yakin": "varlik-21/poz/seated-straddle-reach-up.png",
+  "yakin_iou": 0.728,
+  "boy": 0.543,
+  "gen": 0.922
+ },
+ "varlik-03/poz/wide-angle-side-bend.png": {
+  "yakin": "varlik-21/poz/seated-straddle-reach-up.png",
+  "yakin_iou": 0.626,
+  "boy": 0.697,
+  "gen": 0.922
+ },
+ "varlik-03/poz/wide-leg-fold.png": {
+  "yakin": "varlik-19/poz/oc-266208.png",
+  "yakin_iou": 0.397,
+  "boy": 0.909,
+  "gen": 0.787
+ },
+ "varlik-03/poz/wide-leg-twist.png": {
+  "yakin": "varlik-20/poz/oc-266209.png",
+  "yakin_iou": 0.43,
+  "boy": 0.922,
+  "gen": 0.621
+ },
+ "varlik-03/poz/wide-squat-twist.png": {
+  "yakin": "varlik-21/poz/goddess-v.png",
+  "yakin_iou": 0.673,
+  "boy": 0.923,
+  "gen": 0.447
+ },
+ "varlik-03/poz/wild-thing-lite.png": {
+  "yakin": "varlik-17/poz/nebula-crescent-lean-right.png",
+  "yakin_iou": 0.424,
+  "boy": 0.923,
+  "gen": 0.906
+ },
+ "varlik-04/poz/bicycle-hold.png": {
+  "yakin": "varlik-19/poz/oc-298877.png",
+  "yakin_iou": 0.387,
+  "boy": 0.354,
+  "gen": 0.922
+ },
+ "varlik-04/poz/boat-twist-arms.png": {
+  "yakin": "varlik-21/poz/prone-snow-angel.png",
+  "yakin_iou": 0.371,
+  "boy": 0.524,
+  "gen": 0.922
+ },
+ "varlik-04/poz/child-arms-back.png": {
+  "yakin": "varlik-21/poz/haunted-seated-straddle-lean.png",
+  "yakin_iou": 0.43,
+  "boy": 0.322,
+  "gen": 0.742
+ },
+ "varlik-04/poz/cossack-reach.png": {
+  "yakin": "varlik-17/poz/nebula-reverse-warrior-reach.png",
+  "yakin_iou": 0.42,
+  "boy": 0.886,
+  "gen": 0.922
+ },
+ "varlik-04/poz/crab-kick.png": {
+  "yakin": "varlik-17/poz/nebula-reverse-warrior-reach.png",
+  "yakin_iou": 0.304,
+  "boy": 0.922,
+  "gen": 0.687
+ },
+ "varlik-04/poz/crescent-prayer.png": {
+  "yakin": "varlik-17/poz/nebula-star-arms-diagonal.png",
+  "yakin_iou": 0.434,
+  "boy": 0.923,
+  "gen": 0.571
+ },
+ "varlik-04/poz/dead-bug.png": {
+  "yakin": "varlik-21/poz/prone-snow-angel.png",
+  "yakin_iou": 0.41,
+  "boy": 0.765,
+  "gen": 0.922
+ },
+ "varlik-04/poz/elbow-to-knee.png": {
+  "yakin": "varlik-17/poz/nebula-chair-twist-arms.png",
+  "yakin_iou": 0.577,
+  "boy": 0.922,
+  "gen": 0.309
+ },
+ "varlik-04/poz/forearm-plank-leg-up.png": {
+  "yakin": "varlik-21/poz/prone-snow-angel.png",
+  "yakin_iou": 0.44,
+  "boy": 0.578,
+  "gen": 0.922
+ },
+ "varlik-04/poz/glute-bridge-arms-up.png": {
+  "yakin": "varlik-20/poz/oc-163069.png",
+  "yakin_iou": 0.341,
+  "boy": 0.923,
+  "gen": 0.644
+ },
+ "varlik-04/poz/half-kneel-arms-back-lift.png": {
+  "yakin": "varlik-21/poz/goblin-kneel-lunge-arms-up.png",
+  "yakin_iou": 0.58,
+  "boy": 0.922,
+  "gen": 0.537
+ },
+ "varlik-04/poz/hands-down-lunge-knee-up.png": {
+  "yakin": "varlik-21/poz/side-lunge-fold-hands-floor.png",
+  "yakin_iou": 0.377,
+  "boy": 0.82,
+  "gen": 0.922
+ },
+ "varlik-04/poz/inchworm-walk-out.png": {
+  "yakin": "varlik-21/poz/deep-lunge-arms-forward-low.png",
+  "yakin_iou": 0.493,
+  "boy": 0.811,
+  "gen": 0.922
+ },
+ "varlik-04/poz/knee-plank-feet-up.png": {
+  "yakin": "varlik-21/poz/side-plank-tree.png",
+  "yakin_iou": 0.456,
+  "boy": 0.77,
+  "gen": 0.922
+ },
+ "varlik-04/poz/knee-raise-arms-up.png": {
+  "yakin": "varlik-17/poz/nebula-standing-knee-hug.png",
+  "yakin_iou": 0.499,
+  "boy": 0.922,
+  "gen": 0.282
+ },
+ "varlik-04/poz/kneel-one-leg-forward-arms-up.png": {
+  "yakin": "varlik-17/poz/nebula-standing-knee-hug.png",
+  "yakin_iou": 0.4,
+  "boy": 0.922,
+  "gen": 0.624
+ },
+ "varlik-04/poz/kneeling-arch-one-arm.png": {
+  "yakin": "varlik-20/poz/oc-273072.png",
+  "yakin_iou": 0.388,
+  "boy": 0.922,
+  "gen": 0.38
+ },
+ "varlik-04/poz/kneeling-arm-swing-back.png": {
+  "yakin": "varlik-20/poz/oc-267339.png",
+  "yakin_iou": 0.451,
+  "boy": 0.922,
+  "gen": 0.453
+ },
+ "varlik-04/poz/kneeling-arms-up-back.png": {
+  "yakin": "varlik-20/poz/oc-340781.png",
+  "yakin_iou": 0.412,
+  "boy": 0.922,
+  "gen": 0.287
+ },
+ "varlik-04/poz/kneeling-clasp-behind-lift.png": {
+  "yakin": "varlik-20/poz/oc-320699.png",
+  "yakin_iou": 0.436,
+  "boy": 0.923,
+  "gen": 0.353
+ },
+ "varlik-04/poz/kneeling-diagonal-reach.png": {
+  "yakin": "varlik-17/poz/nebula-standing-reach-back.png",
+  "yakin_iou": 0.477,
+  "boy": 0.922,
+  "gen": 0.507
+ },
+ "varlik-04/poz/kneeling-hands-on-hips.png": {
+  "yakin": "varlik-17/poz/nebula-goal-post-arms-tall.png",
+  "yakin_iou": 0.478,
+  "boy": 0.922,
+  "gen": 0.382
+ },
+ "varlik-04/poz/kneeling-lunge-hands-on-knee.png": {
+  "yakin": "20-kapak/230147",
+  "yakin_iou": 0.456,
+  "boy": 0.923,
+  "gen": 0.602
+ },
+ "varlik-04/poz/kneeling-lunge-quad-pull.png": {
+  "yakin": "varlik-21/poz/goblin-kneel-lunge-arms-up.png",
+  "yakin_iou": 0.492,
+  "boy": 0.922,
+  "gen": 0.46
+ },
+ "varlik-04/poz/lateral-lunge-reach-across.png": {
+  "yakin": "varlik-17/poz/nebula-side-lunge-prayer.png",
+  "yakin_iou": 0.552,
+  "boy": 0.922,
+  "gen": 0.711
+ },
+ "varlik-04/poz/lotus-arms-wide.png": {
+  "yakin": "varlik-20/poz/oc-268289.png",
+  "yakin_iou": 0.465,
+  "boy": 0.695,
+  "gen": 0.922
+ },
+ "varlik-04/poz/lotus-prayer.png": {
+  "yakin": "varlik-20/poz/oc-266209.png",
+  "yakin_iou": 0.721,
+  "boy": 0.923,
+  "gen": 0.673
+ },
+ "varlik-04/poz/low-lunge-arms-wide-back.png": {
+  "yakin": "varlik-17/poz/nebula-low-lunge-twist-open.png",
+  "yakin_iou": 0.55,
+  "boy": 0.922,
+  "gen": 0.676
+ },
+ "varlik-04/poz/low-lunge-hands-on-back-knee.png": {
+  "yakin": "varlik-20/poz/oc-245082.png",
+  "yakin_iou": 0.473,
+  "boy": 0.922,
+  "gen": 0.571
+ },
+ "varlik-04/poz/low-squat-prayer-twist.png": {
+  "yakin": "varlik-21/poz/half-lift-hands-shins.png",
+  "yakin_iou": 0.454,
+  "boy": 0.922,
+  "gen": 0.551
+ },
+ "varlik-04/poz/lunge-backbend-arms-up.png": {
+  "yakin": "varlik-21/poz/starfish-lean.png",
+  "yakin_iou": 0.385,
+  "boy": 0.923,
+  "gen": 0.584
+ },
+ "varlik-04/poz/lunge-victory-reach.png": {
+  "yakin": "varlik-21/poz/skeleton-split-stance-hands-hips.png",
+  "yakin_iou": 0.381,
+  "boy": 0.923,
+  "gen": 0.484
+ },
+ "varlik-04/poz/lying-leg-hug.png": {
+  "yakin": "varlik-21/poz/prone-snow-angel.png",
+  "yakin_iou": 0.31,
+  "boy": 0.339,
+  "gen": 0.922
+ },
+ "varlik-04/poz/lying-reach-up.png": {
+  "yakin": "varlik-19/poz/oc-266208.png",
+  "yakin_iou": 0.417,
+  "boy": 0.836,
+  "gen": 0.657
+ },
+ "varlik-04/poz/one-leg-hug-knee-side.png": {
+  "yakin": "varlik-17/poz/nebula-toe-tap-side-reach.png",
+  "yakin_iou": 0.551,
+  "boy": 0.922,
+  "gen": 0.524
+ },
+ "varlik-04/poz/pistol-squat-prep.png": {
+  "yakin": "varlik-21/poz/tiptoe-squat.png",
+  "yakin_iou": 0.415,
+  "boy": 0.922,
+  "gen": 0.658
+ },
+ "varlik-04/poz/plank-shoulder-tap.png": {
+  "yakin": "varlik-21/poz/cobweb-plank-leg-lift.png",
+  "yakin_iou": 0.613,
+  "boy": 0.682,
+  "gen": 0.922
+ },
+ "varlik-04/poz/prone-arms-forward-lift.png": {
+  "yakin": "varlik-21/poz/prone-snow-angel.png",
+  "yakin_iou": 0.503,
+  "boy": 0.374,
+  "gen": 0.922
+ },
+ "varlik-04/poz/reverse-lunge-reach-up.png": {
+  "yakin": "varlik-17/poz/nebula-low-lunge-sky.png",
+  "yakin_iou": 0.51,
+  "boy": 0.922,
+  "gen": 0.49
+ },
+ "varlik-04/poz/scissor-legs.png": {
+  "yakin": "varlik-21/poz/front-split-prep.png",
+  "yakin_iou": 0.364,
+  "boy": 0.668,
+  "gen": 0.922
+ },
+ "varlik-04/poz/seated-arms-up-twist-lean.png": {
+  "yakin": "varlik-17/poz/nebula-lotus-arms-sky.png",
+  "yakin_iou": 0.505,
+  "boy": 0.922,
+  "gen": 0.698
+ },
+ "varlik-04/poz/seated-forward-fold-arms-long.png": {
+  "yakin": "varlik-21/poz/seated-forward-reach.png",
+  "yakin_iou": 0.676,
+  "boy": 0.627,
+  "gen": 0.806
+ },
+ "varlik-04/poz/seated-lean-back-arms-forward.png": {
+  "yakin": "varlik-17/poz/nebula-seated-boat-arms.png",
+  "yakin_iou": 0.545,
+  "boy": 0.765,
+  "gen": 0.922
+ },
+ "varlik-04/poz/seated-lean-back-leg-up.png": {
+  "yakin": "varlik-20/poz/oc-268843.png",
+  "yakin_iou": 0.392,
+  "boy": 0.678,
+  "gen": 0.922
+ },
+ "varlik-04/poz/seated-leg-hold-up.png": {
+  "yakin": "varlik-19/poz/oc-285133.png",
+  "yakin_iou": 0.446,
+  "boy": 0.808,
+  "gen": 0.85
+ },
+ "varlik-04/poz/seated-leg-lift-arms-up.png": {
+  "yakin": "22-kapak/285133",
+  "yakin_iou": 0.477,
+  "boy": 0.923,
+  "gen": 0.737
+ },
+ "varlik-04/poz/seated-leg-raise-hold.png": {
+  "yakin": "varlik-21/poz/prone-snow-angel.png",
+  "yakin_iou": 0.413,
+  "boy": 0.874,
+  "gen": 0.922
+ },
+ "varlik-04/poz/seated-splits-lean.png": {
+  "yakin": "varlik-21/poz/haunted-seated-straddle-lean.png",
+  "yakin_iou": 0.465,
+  "boy": 0.824,
+  "gen": 0.922
+ },
+ "varlik-04/poz/seated-straddle-arms-t.png": {
+  "yakin": "varlik-17/poz/nebula-butterfly-sit-wings.png",
+  "yakin_iou": 0.565,
+  "boy": 0.604,
+  "gen": 0.922
+ },
+ "varlik-04/poz/seated-toe-point-arms-forward.png": {
+  "yakin": "varlik-21/poz/prone-snow-angel.png",
+  "yakin_iou": 0.32,
+  "boy": 0.922,
+  "gen": 0.776
+ },
+ "varlik-04/poz/seated-wide-twist-reach.png": {
+  "yakin": "varlik-21/poz/seated-straddle-reach-up.png",
+  "yakin_iou": 0.561,
+  "boy": 0.778,
+  "gen": 0.922
+ },
+ "varlik-04/poz/side-bend-leg-out.png": {
+  "yakin": "varlik-20/poz/oc-273072.png",
+  "yakin_iou": 0.498,
+  "boy": 0.922,
+  "gen": 0.318
+ },
+ "varlik-04/poz/side-leg-lift-arms-up.png": {
+  "yakin": "varlik-20/poz/oc-255374.png",
+  "yakin_iou": 0.477,
+  "boy": 0.922,
+  "gen": 0.353
+ },
+ "varlik-04/poz/side-lunge-arms-up.png": {
+  "yakin": "varlik-21/poz/starfish-lean.png",
+  "yakin_iou": 0.405,
+  "boy": 0.923,
+  "gen": 0.576
+ },
+ "varlik-04/poz/side-lunge-hands-prayer-deep.png": {
+  "yakin": "varlik-21/poz/skeleton-split-stance-hands-hips.png",
+  "yakin_iou": 0.457,
+  "boy": 0.923,
+  "gen": 0.507
+ },
+ "varlik-04/poz/side-plank-leg-lift.png": {
+  "yakin": "varlik-21/poz/side-plank-tree.png",
+  "yakin_iou": 0.529,
+  "boy": 0.862,
+  "gen": 0.922
+ },
+ "varlik-04/poz/skandasana-prayer.png": {
+  "yakin": "varlik-17/poz/nebula-side-lunge-prayer.png",
+  "yakin_iou": 0.692,
+  "boy": 0.922,
+  "gen": 0.718
+ },
+ "varlik-04/poz/splits-prep-arms-wide.png": {
+  "yakin": "varlik-21/poz/front-split-prep.png",
+  "yakin_iou": 0.765,
+  "boy": 0.711,
+  "gen": 0.922
+ },
+ "varlik-04/poz/squat-hands-behind-head.png": {
+  "yakin": "varlik-21/poz/eagle-pose.png",
+  "yakin_iou": 0.499,
+  "boy": 0.923,
+  "gen": 0.326
+ },
+ "varlik-04/poz/staff-arms-up.png": {
+  "yakin": "22-kapak/285133",
+  "yakin_iou": 0.58,
+  "boy": 0.922,
+  "gen": 0.667
+ },
+ "varlik-04/poz/standing-arms-forward-tiptoe-lean.png": {
+  "yakin": "varlik-17/poz/nebula-toe-tap-side-reach.png",
+  "yakin_iou": 0.418,
+  "boy": 0.922,
+  "gen": 0.48
+ },
+ "varlik-04/poz/standing-bow-pull.png": {
+  "yakin": "varlik-19/poz/oc-262181.png",
+  "yakin_iou": 0.441,
+  "boy": 0.922,
+  "gen": 0.613
+ },
+ "varlik-04/poz/standing-clasp-behind-lift.png": {
+  "yakin": "varlik-21/poz/cobweb-dancer-lite.png",
+  "yakin_iou": 0.539,
+  "boy": 0.922,
+  "gen": 0.282
+ },
+ "varlik-04/poz/standing-leg-back-arms-up.png": {
+  "yakin": "varlik-21/poz/graveyard-stork-diagonal-reach.png",
+  "yakin_iou": 0.461,
+  "boy": 0.922,
+  "gen": 0.287
+ },
+ "varlik-04/poz/standing-split-hands-floor.png": {
+  "yakin": "varlik-17/poz/nebula-crescent-lean-right.png",
+  "yakin_iou": 0.488,
+  "boy": 0.922,
+  "gen": 0.316
+ },
+ "varlik-04/poz/stork-arms-up.png": {
+  "yakin": "varlik-20/poz/oc-267339.png",
+  "yakin_iou": 0.578,
+  "boy": 0.922,
+  "gen": 0.202
+ },
+ "varlik-04/poz/tabletop-knee-tuck.png": {
+  "yakin": "varlik-21/poz/half-lift-hands-shins.png",
+  "yakin_iou": 0.426,
+  "boy": 0.869,
+  "gen": 0.829
+ },
+ "varlik-04/poz/v-sit-hands-floor.png": {
+  "yakin": "varlik-20/poz/oc-266209.png",
+  "yakin_iou": 0.472,
+  "boy": 0.892,
+  "gen": 0.871
+ },
+ "varlik-04/poz/warrior-lunge-arms-back.png": {
+  "yakin": "varlik-19/poz/oc-267350.png",
+  "yakin_iou": 0.395,
+  "boy": 0.922,
+  "gen": 0.596
+ },
+ "varlik-04/poz/warrior-three-hands-prayer.png": {
+  "yakin": "varlik-20/poz/oc-256952.png",
+  "yakin_iou": 0.364,
+  "boy": 0.922,
+  "gen": 0.896
+ },
+ "varlik-04/poz/wide-squat-arms-up.png": {
+  "yakin": "varlik-21/poz/goddess-v.png",
+  "yakin_iou": 0.595,
+  "boy": 0.923,
+  "gen": 0.429
+ },
+ "varlik-04/poz/wide-stance-punch-up.png": {
+  "yakin": "varlik-20/poz/oc-255536.png",
+  "yakin_iou": 0.533,
+  "boy": 0.922,
+  "gen": 0.342
+ },
+ "varlik-04/poz/wide-stance-toe-reach.png": {
+  "yakin": "varlik-21/poz/kneeling-backbend-hands-heels.png",
+  "yakin_iou": 0.419,
+  "boy": 0.922,
+  "gen": 0.648
+ },
+ "varlik-05/poz/banshee-deep-goddess-v.png": {
+  "yakin": "varlik-21/poz/goddess-v.png",
+  "yakin_iou": 0.704,
+  "boy": 0.922,
+  "gen": 0.5
+ },
+ "varlik-05/poz/banshee-head-t-leg-out-lean-r.png": {
+  "yakin": "varlik-17/poz/nebula-chair-twist-arms.png",
+  "yakin_iou": 0.473,
+  "boy": 0.922,
+  "gen": 0.753
+ },
+ "varlik-05/poz/banshee-split-stance-forward-down.png": {
+  "yakin": "varlik-17/poz/nebula-side-bend-arm-over-wide.png",
+  "yakin_iou": 0.521,
+  "boy": 0.922,
+  "gen": 0.553
+ },
+ "varlik-05/poz/bat-heel-sit-bent-up-back.png": {
+  "yakin": "varlik-19/poz/oc-268288.png",
+  "yakin_iou": 0.399,
+  "boy": 0.922,
+  "gen": 0.707
+ },
+ "varlik-05/poz/bat-hook-t-leg-out-lean-r.png": {
+  "yakin": "varlik-17/poz/nebula-goal-post-arms-tall.png",
+  "yakin_iou": 0.445,
+  "boy": 0.922,
+  "gen": 0.789
+ },
+ "varlik-05/poz/bat-kneel-prayer.png": {
+  "yakin": "varlik-20/poz/oc-245082.png",
+  "yakin_iou": 0.506,
+  "boy": 0.922,
+  "gen": 0.416
+ },
+ "varlik-05/poz/bat-t-salute-leg-out.png": {
+  "yakin": "varlik-17/poz/comet-halo-t-curtsy.png",
+  "yakin_iou": 0.447,
+  "boy": 0.922,
+  "gen": 0.571
+ },
+ "varlik-05/poz/black-cat-flex-reach-horse.png": {
+  "yakin": "varlik-20/poz/oc-255536.png",
+  "yakin_iou": 0.461,
+  "boy": 0.922,
+  "gen": 0.338
+ },
+ "varlik-05/poz/black-cat-low-lunge-prayer-low-forward.png": {
+  "yakin": "varlik-17/poz/nebula-reverse-warrior-reach.png",
+  "yakin_iou": 0.435,
+  "boy": 0.922,
+  "gen": 0.678
+ },
+ "varlik-05/poz/black-cat-split-stance-archer.png": {
+  "yakin": "varlik-20/poz/oc-255536.png",
+  "yakin_iou": 0.467,
+  "boy": 0.922,
+  "gen": 0.467
+ },
+ "varlik-05/poz/broom-cactus-tree.png": {
+  "yakin": "varlik-21/poz/cactus.png",
+  "yakin_iou": 0.511,
+  "boy": 0.922,
+  "gen": 0.427
+ },
+ "varlik-05/poz/broom-kneel-one-up.png": {
+  "yakin": "varlik-21/poz/cauldron-kneel-hands-head.png",
+  "yakin_iou": 0.554,
+  "boy": 0.922,
+  "gen": 0.296
+ },
+ "varlik-05/poz/broom-low-squat-t-v.png": {
+  "yakin": "varlik-17/poz/nebula-reverse-warrior-reach.png",
+  "yakin_iou": 0.408,
+  "boy": 0.922,
+  "gen": 0.648
+ },
+ "varlik-05/poz/broom-side-lunge-cactus.png": {
+  "yakin": "varlik-21/poz/cactus.png",
+  "yakin_iou": 0.574,
+  "boy": 0.923,
+  "gen": 0.439
+ },
+ "varlik-05/poz/broom-side-sit-up45-w.png": {
+  "yakin": "varlik-19/poz/oc-268288.png",
+  "yakin_iou": 0.468,
+  "boy": 0.922,
+  "gen": 0.856
+ },
+ "varlik-05/poz/broom-stork-arms-back.png": {
+  "yakin": "varlik-20/poz/oc-245082.png",
+  "yakin_iou": 0.479,
+  "boy": 0.922,
+  "gen": 0.468
+ },
+ "varlik-05/poz/broom-t-salute-curtsy-lean-l.png": {
+  "yakin": "varlik-21/poz/half-lift-hands-shins.png",
+  "yakin_iou": 0.416,
+  "boy": 0.922,
+  "gen": 0.544
+ },
+ "varlik-05/poz/broom-v-t-curtsy.png": {
+  "yakin": "varlik-20/poz/sv-1055879.png",
+  "yakin_iou": 0.52,
+  "boy": 0.922,
+  "gen": 0.564
+ },
+ "varlik-05/poz/broom-w-knee-up.png": {
+  "yakin": "varlik-17/poz/nebula-eagle-arms-tall.png",
+  "yakin_iou": 0.519,
+  "boy": 0.922,
+  "gen": 0.54
+ },
+ "varlik-05/poz/candle-half-kneel-side-up45-head.png": {
+  "yakin": "varlik-17/poz/nebula-chair-twist-arms.png",
+  "yakin_iou": 0.524,
+  "boy": 0.922,
+  "gen": 0.616
+ },
+ "varlik-05/poz/candle-high-plank-diag-floor.png": {
+  "yakin": "varlik-21/poz/lizard-twist.png",
+  "yakin_iou": 0.39,
+  "boy": 0.804,
+  "gen": 0.921
+ },
+ "varlik-05/poz/cauldron-half-kneel-side-v-t.png": {
+  "yakin": "varlik-21/poz/reach-and-tap.png",
+  "yakin_iou": 0.456,
+  "boy": 0.923,
+  "gen": 0.607
+ },
+ "varlik-05/poz/cauldron-side-lunge-v.png": {
+  "yakin": "varlik-21/poz/big-v.png",
+  "yakin_iou": 0.588,
+  "boy": 0.922,
+  "gen": 0.434
+ },
+ "varlik-05/poz/cauldron-w-reach-knee-up.png": {
+  "yakin": "varlik-21/poz/big-v.png",
+  "yakin_iou": 0.488,
+  "boy": 0.922,
+  "gen": 0.422
+ },
+ "varlik-05/poz/cobweb-diag-point-knee-lean-l.png": {
+  "yakin": "varlik-17/poz/nebula-chair-twist-arms.png",
+  "yakin_iou": 0.44,
+  "boy": 0.922,
+  "gen": 0.698
+ },
+ "varlik-05/poz/coffin-cobra-wide-wide.png": {
+  "yakin": "varlik-21/poz/prone-snow-angel.png",
+  "yakin_iou": 0.483,
+  "boy": 0.697,
+  "gen": 0.922
+ },
+ "varlik-05/poz/coffin-low-squat-prayer.png": {
+  "yakin": "varlik-17/poz/nebula-side-lunge-deep-twist.png",
+  "yakin_iou": 0.515,
+  "boy": 0.923,
+  "gen": 0.549
+ },
+ "varlik-05/poz/coffin-tabletop.png": {
+  "yakin": "varlik-17/poz/nebula-lotus-prayer-sit.png",
+  "yakin_iou": 0.413,
+  "boy": 0.757,
+  "gen": 0.836
+ },
+ "varlik-05/poz/crypt-side-sit-flex-up45.png": {
+  "yakin": "varlik-20/poz/oc-266209.png",
+  "yakin_iou": 0.423,
+  "boy": 0.922,
+  "gen": 0.807
+ },
+ "varlik-05/poz/fog-warrior-high-back-hip.png": {
+  "yakin": "varlik-17/poz/nebula-half-moon-side-hand.png",
+  "yakin_iou": 0.581,
+  "boy": 0.922,
+  "gen": 0.658
+ },
+ "varlik-05/poz/ghost-v-t-leg-out.png": {
+  "yakin": "varlik-20/poz/sv-1043462.png",
+  "yakin_iou": 0.463,
+  "boy": 0.922,
+  "gen": 0.629
+ },
+ "varlik-05/poz/ghost-w-reach-curtsy.png": {
+  "yakin": "varlik-20/poz/oc-267339.png",
+  "yakin_iou": 0.514,
+  "boy": 0.922,
+  "gen": 0.318
+ },
+ "varlik-05/poz/ghoul-head-t-knee-up.png": {
+  "yakin": "varlik-17/poz/nebula-toe-tap-side-reach.png",
+  "yakin_iou": 0.473,
+  "boy": 0.922,
+  "gen": 0.564
+ },
+ "varlik-05/poz/ghoul-kick-back-back-down.png": {
+  "yakin": "varlik-17/poz/comet-halo-t-curtsy.png",
+  "yakin_iou": 0.455,
+  "boy": 0.922,
+  "gen": 0.448
+ },
+ "varlik-05/poz/ghoul-kneel-diagonal-reach.png": {
+  "yakin": "20-kapak/230147",
+  "yakin_iou": 0.524,
+  "boy": 0.922,
+  "gen": 0.478
+ },
+ "varlik-05/poz/goblin-diag-hip-tap-lean-l.png": {
+  "yakin": "varlik-20/poz/oc-241259.png",
+  "yakin_iou": 0.466,
+  "boy": 0.922,
+  "gen": 0.66
+ },
+ "varlik-05/poz/goblin-flex-tree.png": {
+  "yakin": "varlik-21/poz/cactus.png",
+  "yakin_iou": 0.591,
+  "boy": 0.922,
+  "gen": 0.403
+ },
+ "varlik-05/poz/goblin-kneel-arms-forward.png": {
+  "yakin": "varlik-17/poz/nebula-goal-post-arms-tall.png",
+  "yakin_iou": 0.493,
+  "boy": 0.923,
+  "gen": 0.629
+ },
+ "varlik-05/poz/goblin-kneel-cactus.png": {
+  "yakin": "varlik-21/poz/cauldron-kneel-hands-head.png",
+  "yakin_iou": 0.637,
+  "boy": 0.922,
+  "gen": 0.489
+ },
+ "varlik-05/poz/goblin-t-v-horse.png": {
+  "yakin": "varlik-17/poz/nebula-side-bend-arm-over-wide.png",
+  "yakin_iou": 0.481,
+  "boy": 0.922,
+  "gen": 0.578
+ },
+ "varlik-05/poz/graveyard-bird-dog.png": {
+  "yakin": "varlik-21/poz/cobweb-plank-leg-lift.png",
+  "yakin_iou": 0.341,
+  "boy": 0.526,
+  "gen": 0.922
+ },
+ "varlik-05/poz/graveyard-chest-reach-side-tap.png": {
+  "yakin": "varlik-20/poz/oc-255536.png",
+  "yakin_iou": 0.483,
+  "boy": 0.922,
+  "gen": 0.313
+ },
+ "varlik-05/poz/graveyard-seated-knees-up-diag-forward.png": {
+  "yakin": "varlik-17/poz/nebula-toe-tap-side-reach.png",
+  "yakin_iou": 0.436,
+  "boy": 0.922,
+  "gen": 0.544
+ },
+ "varlik-05/poz/haunted-chest-point-curtsy-lean-r.png": {
+  "yakin": "varlik-17/poz/nebula-toe-tap-side-reach.png",
+  "yakin_iou": 0.473,
+  "boy": 0.922,
+  "gen": 0.504
+ },
+ "varlik-05/poz/haunted-deep-goddess-t.png": {
+  "yakin": "varlik-21/poz/goddess-v.png",
+  "yakin_iou": 0.489,
+  "boy": 0.916,
+  "gen": 0.922
+ },
+ "varlik-05/poz/haunted-seated-knees-up-hug-forward.png": {
+  "yakin": "varlik-17/poz/nebula-lotus-prayer-sit.png",
+  "yakin_iou": 0.463,
+  "boy": 0.915,
+  "gen": 0.623
+ },
+ "varlik-05/poz/haunted-seated-staff-hands-back.png": {
+  "yakin": "varlik-19/poz/oc-285132.png",
+  "yakin_iou": 0.399,
+  "boy": 0.865,
+  "gen": 0.889
+ },
+ "varlik-05/poz/haunted-warrior-hip-low-forward.png": {
+  "yakin": "varlik-17/poz/nebula-half-moon-side-hand.png",
+  "yakin_iou": 0.373,
+  "boy": 0.731,
+  "gen": 0.922
+ },
+ "varlik-05/poz/lantern-knee-raise-diagonal-reach.png": {
+  "yakin": "varlik-17/poz/nebula-standing-knee-hug.png",
+  "yakin_iou": 0.556,
+  "boy": 0.922,
+  "gen": 0.313
+ },
+ "varlik-05/poz/lantern-w-reach-side-tap.png": {
+  "yakin": "varlik-21/poz/big-v.png",
+  "yakin_iou": 0.5,
+  "boy": 0.922,
+  "gen": 0.411
+ },
+ "varlik-05/poz/lantern-warrior-three-arms-up.png": {
+  "yakin": "varlik-17/poz/nebula-airplane-wings.png",
+  "yakin_iou": 0.414,
+  "boy": 0.716,
+  "gen": 0.922
+ },
+ "varlik-05/poz/moonlight-frog-hands-floor.png": {
+  "yakin": "varlik-17/poz/nebula-side-lunge-deep-twist.png",
+  "yakin_iou": 0.446,
+  "boy": 0.922,
+  "gen": 0.58
+ },
+ "varlik-05/poz/moonlight-knee-raise-arms-down.png": {
+  "yakin": "varlik-17/poz/nebula-standing-knee-hug.png",
+  "yakin_iou": 0.609,
+  "boy": 0.922,
+  "gen": 0.34
+ },
+ "varlik-05/poz/mummy-cobra-wide-forward.png": {
+  "yakin": "varlik-21/poz/prone-snow-angel.png",
+  "yakin_iou": 0.426,
+  "boy": 0.545,
+  "gen": 0.922
+ },
+ "varlik-05/poz/mummy-heel-sit-arms-back.png": {
+  "yakin": "varlik-17/poz/nebula-lotus-prayer-sit.png",
+  "yakin_iou": 0.434,
+  "boy": 0.909,
+  "gen": 0.737
+ },
+ "varlik-05/poz/mummy-seated-knees-up-floor-up.png": {
+  "yakin": "varlik-20/poz/oc-333846.png",
+  "yakin_iou": 0.5,
+  "boy": 0.922,
+  "gen": 0.326
+ },
+ "varlik-05/poz/mummy-side-kneel-reach.png": {
+  "yakin": "varlik-21/poz/reach-and-tap.png",
+  "yakin_iou": 0.432,
+  "boy": 0.922,
+  "gen": 0.371
+ },
+ "varlik-05/poz/owl-half-cactus-stand.png": {
+  "yakin": "varlik-17/poz/comet-halo-t-curtsy.png",
+  "yakin_iou": 0.508,
+  "boy": 0.922,
+  "gen": 0.571
+ },
+ "varlik-05/poz/owl-t-cactus-horse.png": {
+  "yakin": "varlik-17/poz/nebula-side-bend-arm-over-wide.png",
+  "yakin_iou": 0.458,
+  "boy": 0.922,
+  "gen": 0.592
+ },
+ "varlik-05/poz/phantom-cross-legged-cactus.png": {
+  "yakin": "varlik-20/poz/oc-266209.png",
+  "yakin_iou": 0.599,
+  "boy": 0.922,
+  "gen": 0.622
+ },
+ "varlik-05/poz/phantom-diagonal-curtsy.png": {
+  "yakin": "varlik-17/poz/nebula-chair-twist-arms.png",
+  "yakin_iou": 0.613,
+  "boy": 0.922,
+  "gen": 0.6
+ },
+ "varlik-05/poz/phantom-hook-t-horse-lean-r.png": {
+  "yakin": "varlik-17/poz/nebula-side-lunge-prayer.png",
+  "yakin_iou": 0.478,
+  "boy": 0.923,
+  "gen": 0.726
+ },
+ "varlik-05/poz/phantom-lunge-arms-forward.png": {
+  "yakin": "varlik-17/poz/nebula-side-lunge-deep-twist.png",
+  "yakin_iou": 0.433,
+  "boy": 0.922,
+  "gen": 0.601
+ },
+ "varlik-05/poz/potion-half-kneel-side-w-t.png": {
+  "yakin": "varlik-17/poz/nebula-side-lunge-prayer.png",
+  "yakin_iou": 0.433,
+  "boy": 0.922,
+  "gen": 0.728
+ },
+ "varlik-05/poz/potion-side-lunge-w.png": {
+  "yakin": "varlik-17/poz/nebula-eagle-arms-tall.png",
+  "yakin_iou": 0.547,
+  "boy": 0.922,
+  "gen": 0.502
+ },
+ "varlik-05/poz/pumpkin-kneel-up45-hip.png": {
+  "yakin": "varlik-17/poz/nebula-toe-tap-side-reach.png",
+  "yakin_iou": 0.476,
+  "boy": 0.922,
+  "gen": 0.618
+ },
+ "varlik-05/poz/raven-half-kneel-side-cactus-up45.png": {
+  "yakin": "varlik-17/poz/pulse-halo-t-goddess.png",
+  "yakin_iou": 0.477,
+  "boy": 0.922,
+  "gen": 0.584
+ },
+ "varlik-05/poz/raven-low-squat-w-t.png": {
+  "yakin": "varlik-17/poz/nebula-side-lunge-prayer.png",
+  "yakin_iou": 0.5,
+  "boy": 0.922,
+  "gen": 0.778
+ },
+ "varlik-05/poz/raven-one-up-stand.png": {
+  "yakin": "varlik-17/poz/nebula-eagle-arms-tall.png",
+  "yakin_iou": 0.55,
+  "boy": 0.922,
+  "gen": 0.251
+ },
+ "varlik-05/poz/raven-stork-hands-hips.png": {
+  "yakin": "varlik-20/poz/oc-245082.png",
+  "yakin_iou": 0.539,
+  "boy": 0.923,
+  "gen": 0.274
+ },
+ "varlik-05/poz/scarecrow-diag-hip-tree-lean-r.png": {
+  "yakin": "varlik-17/poz/nebula-chair-twist-arms.png",
+  "yakin_iou": 0.502,
+  "boy": 0.922,
+  "gen": 0.502
+ },
+ "varlik-05/poz/shadow-low-lunge-back-back.png": {
+  "yakin": "varlik-17/poz/nebula-side-lunge-prayer.png",
+  "yakin_iou": 0.399,
+  "boy": 0.922,
+  "gen": 0.691
+ },
+ "varlik-05/poz/shadow-low-lunge-low-forward-high-back.png": {
+  "yakin": "varlik-17/poz/nebula-side-lunge-prayer.png",
+  "yakin_iou": 0.424,
+  "boy": 0.922,
+  "gen": 0.576
+ },
+ "varlik-05/poz/skeleton-head-t-side-tap.png": {
+  "yakin": "varlik-17/poz/nebula-chair-twist-arms.png",
+  "yakin_iou": 0.476,
+  "boy": 0.922,
+  "gen": 0.566
+ },
+ "varlik-05/poz/skeleton-superman-lite.png": {
+  "yakin": "varlik-21/poz/prone-snow-angel.png",
+  "yakin_iou": 0.357,
+  "boy": 0.33,
+  "gen": 0.922
+ },
+ "varlik-05/poz/spell-kneel-up-cactus.png": {
+  "yakin": "varlik-20/poz/oc-320699.png",
+  "yakin_iou": 0.51,
+  "boy": 0.922,
+  "gen": 0.338
+ },
+ "varlik-05/poz/spell-stork-prayer.png": {
+  "yakin": "varlik-21/poz/graveyard-stork-diagonal-reach.png",
+  "yakin_iou": 0.571,
+  "boy": 0.923,
+  "gen": 0.242
+ },
+ "varlik-05/poz/spider-half-cactus-wide.png": {
+  "yakin": "varlik-17/poz/nebula-side-bend-arm-over-wide.png",
+  "yakin_iou": 0.515,
+  "boy": 0.922,
+  "gen": 0.602
+ },
+ "varlik-05/poz/spider-hip-t-half-goddess-lean-l.png": {
+  "yakin": "varlik-17/poz/nebula-chair-twist-arms.png",
+  "yakin_iou": 0.431,
+  "boy": 0.922,
+  "gen": 0.577
+ },
+ "varlik-05/poz/spider-kneel-v.png": {
+  "yakin": "varlik-21/poz/cauldron-kneel-hands-head.png",
+  "yakin_iou": 0.637,
+  "boy": 0.922,
+  "gen": 0.507
+ },
+ "varlik-05/poz/tombstone-elbows-down-leg-out.png": {
+  "yakin": "varlik-17/poz/nebula-knee-up-eagle-arms.png",
+  "yakin_iou": 0.591,
+  "boy": 0.923,
+  "gen": 0.559
+ },
+ "varlik-05/poz/tombstone-half-kneel-side-hip-up45.png": {
+  "yakin": "varlik-17/poz/nebula-chair-twist-arms.png",
+  "yakin_iou": 0.463,
+  "boy": 0.922,
+  "gen": 0.567
+ },
+ "varlik-05/poz/tombstone-high-plank-forward-floor.png": {
+  "yakin": "varlik-21/poz/lizard-twist.png",
+  "yakin_iou": 0.35,
+  "boy": 0.504,
+  "gen": 0.922
+ },
+ "varlik-05/poz/tombstone-lying-arms-up.png": {
+  "yakin": "varlik-19/poz/oc-285132.png",
+  "yakin_iou": 0.453,
+  "boy": 0.636,
+  "gen": 0.922
+ },
+ "varlik-05/poz/tombstone-side-lunge-reach.png": {
+  "yakin": "varlik-21/poz/vampire-v-tree.png",
+  "yakin_iou": 0.527,
+  "boy": 0.923,
+  "gen": 0.314
+ },
+ "varlik-05/poz/vampire-flex-reach-knee-up.png": {
+  "yakin": "varlik-21/poz/vampire-v-tree.png",
+  "yakin_iou": 0.565,
+  "boy": 0.923,
+  "gen": 0.364
+ },
+ "varlik-05/poz/vampire-kneel-lunge-archer.png": {
+  "yakin": "varlik-17/poz/nebula-low-lunge-sky.png",
+  "yakin_iou": 0.509,
+  "boy": 0.922,
+  "gen": 0.564
+ },
+ "varlik-05/poz/vampire-skater-swing-hip.png": {
+  "yakin": "varlik-17/poz/nebula-chair-twist-arms.png",
+  "yakin_iou": 0.481,
+  "boy": 0.922,
+  "gen": 0.522
+ },
+ "varlik-05/poz/vampire-warrior-forward-up.png": {
+  "yakin": "varlik-17/poz/nebula-airplane-wings.png",
+  "yakin_iou": 0.392,
+  "boy": 0.923,
+  "gen": 0.844
+ },
+ "varlik-05/poz/werewolf-head-t-horse.png": {
+  "yakin": "varlik-17/poz/nebula-toe-tap-side-reach.png",
+  "yakin_iou": 0.474,
+  "boy": 0.922,
+  "gen": 0.606
+ },
+ "varlik-05/poz/werewolf-hip-hook-horse.png": {
+  "yakin": "varlik-17/poz/nebula-side-lunge-prayer.png",
+  "yakin_iou": 0.482,
+  "boy": 0.922,
+  "gen": 0.502
+ },
+ "varlik-05/poz/werewolf-knee-plank-diag-floor.png": {
+  "yakin": "varlik-21/poz/side-plank-tree.png",
+  "yakin_iou": 0.41,
+  "boy": 0.9,
+  "gen": 0.922
+ },
+ "varlik-05/poz/werewolf-knee-raise-arms-back.png": {
+  "yakin": "varlik-21/poz/crane-stand.png",
+  "yakin_iou": 0.558,
+  "boy": 0.923,
+  "gen": 0.564
+ },
+ "varlik-05/poz/werewolf-split-stance-diagonal-reach.png": {
+  "yakin": "varlik-21/poz/skeleton-split-stance-hands-hips.png",
+  "yakin_iou": 0.588,
+  "boy": 0.922,
+  "gen": 0.422
+ },
+ "varlik-05/poz/witch-cactus-leg-out.png": {
+  "yakin": "varlik-17/poz/nebula-goal-post-arms-tall.png",
+  "yakin_iou": 0.537,
+  "boy": 0.922,
+  "gen": 0.504
+ },
+ "varlik-05/poz/wizard-head-low-kick-lean-l.png": {
+  "yakin": "varlik-21/poz/witch-kick-back-hip-prayer.png",
+  "yakin_iou": 0.488,
+  "boy": 0.922,
+  "gen": 0.578
+ },
+ "varlik-05/poz/wizard-t-low-curtsy-lean-l.png": {
+  "yakin": "varlik-17/poz/nebula-toe-tap-side-reach.png",
+  "yakin_iou": 0.465,
+  "boy": 0.923,
+  "gen": 0.658
+ },
+ "varlik-05/poz/wizard-warrior-prayer-up.png": {
+  "yakin": "varlik-17/poz/nebula-half-moon-side-hand.png",
+  "yakin_iou": 0.638,
+  "boy": 0.922,
+  "gen": 0.662
+ },
+ "varlik-05/poz/wizard-warrior-three-diag-diag.png": {
+  "yakin": "varlik-20/poz/oc-245206.png",
+  "yakin_iou": 0.367,
+  "boy": 0.922,
+  "gen": 0.811
+ },
+ "varlik-05/poz/zombie-diagonal-side-tap.png": {
+  "yakin": "varlik-17/poz/nebula-chair-twist-arms.png",
+  "yakin_iou": 0.673,
+  "boy": 0.922,
+  "gen": 0.596
+ }
+}

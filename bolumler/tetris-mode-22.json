@@ -1,0 +1,338 @@
+{
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-22",
+ "bpm": 136.0,
+ "toplam_olcu": 166,
+ "toplam_duvar": 20,
+ "zaman": {
+  "kart": 1.7647,
+  "say": 5.2941,
+  "buyu": 1.7647,
+  "gec": 3.5294,
+  "sure": 12.3529
+ },
+ "kartlar": [
+  {
+   "tip": "acilis",
+   "t": 0.0,
+   "sure": 5.2941
+  },
+  {
+   "tip": "yazi",
+   "metin": "BLUE VS PINK!",
+   "parca": [
+    [
+     "BLUE",
+     0
+    ],
+    [
+     " VS ",
+     null
+    ],
+    [
+     "PINK",
+     1
+    ],
+    [
+     "!",
+     null
+    ]
+   ],
+   "alt": "WHO HOLDS THE POSE?",
+   "t": 5.2941,
+   "sure": 3.5294
+  },
+  {
+   "tip": "nasil",
+   "t": 8.8235,
+   "sure": 7.0588
+  },
+  {
+   "t": 15.8824,
+   "sure": 3.5294,
+   "tip": "basla"
+  },
+  {
+   "t": 81.1763,
+   "sure": 3.5294,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "02",
+   "alt": "ROUND 2"
+  },
+  {
+   "tip": "yazi",
+   "metin": "HALFWAY THERE!",
+   "alt": "KEEP THE GLOW UP!",
+   "t": 146.4702,
+   "sure": 3.5294
+  },
+  {
+   "t": 149.9996,
+   "sure": 3.5294,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "03",
+   "alt": "ROUND 3"
+  },
+  {
+   "t": 215.2935,
+   "sure": 3.5294,
+   "tip": "tur",
+   "tur": 4,
+   "metin": "04",
+   "alt": "FINAL ROUND"
+  },
+  {
+   "tip": "yazi",
+   "metin": "ALL 20 WALLS",
+   "alt": "CLEARED!",
+   "t": 280.5874,
+   "sure": 3.5294
+  },
+  {
+   "tip": "yazi",
+   "metin": "BLUE OR PINK?",
+   "parca": [
+    [
+     "BLUE",
+     0
+    ],
+    [
+     " OR ",
+     null
+    ],
+    [
+     "PINK",
+     1
+    ],
+    [
+     "?",
+     null
+    ]
+   ],
+   "alt": "WHO HELD BETTER? COMMENT!",
+   "t": 284.1168,
+   "sure": 3.5294
+  },
+  {
+   "t": 287.6462,
+   "sure": 5.2941,
+   "tip": "abone"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 19.4118,
+   "p1": "stork-arms-up",
+   "p2": "knee-raise-arms-up",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 2,
+   "tur": 1,
+   "t0": 31.7647,
+   "p1": "banana-reach",
+   "p2": "warrior-one",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 3,
+   "tur": 1,
+   "t0": 44.1176,
+   "p1": "spider-hip-t-half-goddess-lean-l",
+   "p2": "gate-lift",
+   "ovgu": "NICE HOLD!"
+  },
+  {
+   "no": 4,
+   "tur": 1,
+   "t0": 56.4705,
+   "p1": "thread-the-needle",
+   "p2": "wizard-t-low-curtsy-lean-l",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 5,
+   "tur": 1,
+   "t0": 68.8234,
+   "p1": "staff-arms-up",
+   "p2": "humble-warrior",
+   "ovgu": "STRONG!"
+  },
+  {
+   "no": 6,
+   "tur": 2,
+   "t0": 84.7057,
+   "p1": "heel-sit-reach-forward",
+   "p2": "single-leg-reach-forward",
+   "ovgu": "ON FIRE!"
+  },
+  {
+   "no": 7,
+   "tur": 2,
+   "t0": 97.0586,
+   "p1": "kneeling-arch-one-arm",
+   "p2": "wizard-warrior-three-diag-diag",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 8,
+   "tur": 2,
+   "t0": 109.4115,
+   "p1": "kneeling-quad-hold",
+   "p2": "l-sit-prep",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 9,
+   "tur": 2,
+   "t0": 121.7644,
+   "p1": "vampire-warrior-forward-up",
+   "p2": "open-wide-boat",
+   "ovgu": "NICE HOLD!"
+  },
+  {
+   "no": 10,
+   "tur": 2,
+   "t0": 134.1173,
+   "p1": "wild-thing-lite",
+   "p2": "kneeling-lunge-reach-back",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 11,
+   "tur": 3,
+   "t0": 153.529,
+   "p1": "lunge-prayer-twist",
+   "p2": "half-kneel-w",
+   "ovgu": "STRONG!"
+  },
+  {
+   "no": 12,
+   "tur": 3,
+   "t0": 165.8819,
+   "p1": "dolphin",
+   "p2": "cossack-reach",
+   "ovgu": "ON FIRE!"
+  },
+  {
+   "no": 13,
+   "tur": 3,
+   "t0": 178.2348,
+   "p1": "seated-arms-up-twist-lean",
+   "p2": "single-leg-bridge",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 14,
+   "tur": 3,
+   "t0": 190.5877,
+   "p1": "split-stance-fold",
+   "p2": "werewolf-knee-plank-diag-floor",
+   "ovgu": "GREAT!"
+  },
+  {
+   "no": 15,
+   "tur": 3,
+   "t0": 202.9406,
+   "p1": "seated-lean-back-arms-forward",
+   "p2": "reverse-tabletop",
+   "ovgu": "NICE HOLD!"
+  },
+  {
+   "no": 16,
+   "tur": 4,
+   "t0": 218.8229,
+   "p1": "seated-wide-arms",
+   "p2": "seated-splits-lean",
+   "ovgu": "AMAZING!"
+  },
+  {
+   "no": 17,
+   "tur": 4,
+   "t0": 231.1758,
+   "p1": "low-boat",
+   "p2": "puppy-stretch",
+   "ovgu": "STRONG!"
+  },
+  {
+   "no": 18,
+   "tur": 4,
+   "t0": 243.5287,
+   "p1": "high-plank",
+   "p2": "wide-angle-fold",
+   "ovgu": "ON FIRE!"
+  },
+  {
+   "no": 19,
+   "tur": 4,
+   "t0": 255.8816,
+   "p1": "reverse-plank",
+   "p2": "plank-arm-reach",
+   "ovgu": "PERFECT!"
+  },
+  {
+   "no": 20,
+   "tur": 4,
+   "t0": 268.2345,
+   "p1": "prone-arms-forward-lift",
+   "p2": "hollow-hold",
+   "ovgu": "GREAT!"
+  }
+ ],
+ "abone": [
+  19.5,
+  30.0,
+  45.0,
+  60.0,
+  75.0,
+  90.0,
+  105.0,
+  120.0,
+  135.0,
+  154.0,
+  165.0,
+  180.0,
+  195.0,
+  210.0,
+  225.0,
+  240.0,
+  255.0,
+  270.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "Funfair Neon Showdown.wav (Suno, kullanici, 8 Kas 2026) -> funfair-136.wav",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur.py. Motor 03-motor/sahne19.html.",
+ "tema": {
+  "baslaTam": true,
+  "varlik": "/03-motor/tetris-pvp/varlik-22/",
+  "maskeKlasor": "poz/",
+  "boksorVarlik": "/03-motor/tetris-pvp/varlik-06/",
+  "renk": [
+   "#1ab4ff",
+   "#ff4fc8"
+  ],
+  "acik": [
+   "#d6f2ff",
+   "#ffd6f4"
+  ],
+  "koyu": [
+   "#0a50e0",
+   "#b0108c"
+  ],
+  "turAd": {
+   "1": "ROUND 1",
+   "2": "ROUND 2",
+   "3": "ROUND 3",
+   "4": "FINAL ROUND"
+  },
+  "abone": [
+   "#7dffb4",
+   "#0c8a48"
+  ],
+  "aboneAlt": "NEW BATTLE EVERY DAY"
+ }
+}

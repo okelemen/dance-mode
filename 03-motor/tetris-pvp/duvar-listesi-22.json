@@ -1,0 +1,102 @@
+[
+ {
+  "tur": 1,
+  "p1": "stork-arms-up",
+  "p2": "knee-raise-arms-up"
+ },
+ {
+  "tur": 1,
+  "p1": "banana-reach",
+  "p2": "warrior-one"
+ },
+ {
+  "tur": 1,
+  "p1": "spider-hip-t-half-goddess-lean-l",
+  "p2": "gate-lift"
+ },
+ {
+  "tur": 1,
+  "p1": "thread-the-needle",
+  "p2": "wizard-t-low-curtsy-lean-l"
+ },
+ {
+  "tur": 1,
+  "p1": "staff-arms-up",
+  "p2": "humble-warrior"
+ },
+ {
+  "tur": 2,
+  "p1": "heel-sit-reach-forward",
+  "p2": "single-leg-reach-forward"
+ },
+ {
+  "tur": 2,
+  "p1": "kneeling-arch-one-arm",
+  "p2": "wizard-warrior-three-diag-diag"
+ },
+ {
+  "tur": 2,
+  "p1": "kneeling-quad-hold",
+  "p2": "l-sit-prep"
+ },
+ {
+  "tur": 2,
+  "p1": "vampire-warrior-forward-up",
+  "p2": "open-wide-boat"
+ },
+ {
+  "tur": 2,
+  "p1": "wild-thing-lite",
+  "p2": "kneeling-lunge-reach-back"
+ },
+ {
+  "tur": 3,
+  "p1": "lunge-prayer-twist",
+  "p2": "half-kneel-w"
+ },
+ {
+  "tur": 3,
+  "p1": "dolphin",
+  "p2": "cossack-reach"
+ },
+ {
+  "tur": 3,
+  "p1": "seated-arms-up-twist-lean",
+  "p2": "single-leg-bridge"
+ },
+ {
+  "tur": 3,
+  "p1": "split-stance-fold",
+  "p2": "werewolf-knee-plank-diag-floor"
+ },
+ {
+  "tur": 3,
+  "p1": "seated-lean-back-arms-forward",
+  "p2": "reverse-tabletop"
+ },
+ {
+  "tur": 4,
+  "p1": "seated-wide-arms",
+  "p2": "seated-splits-lean"
+ },
+ {
+  "tur": 4,
+  "p1": "low-boat",
+  "p2": "puppy-stretch"
+ },
+ {
+  "tur": 4,
+  "p1": "high-plank",
+  "p2": "wide-angle-fold"
+ },
+ {
+  "tur": 4,
+  "p1": "reverse-plank",
+  "p2": "plank-arm-reach"
+ },
+ {
+  "tur": 4,
+  "p1": "prone-arms-forward-lift",
+  "p2": "hollow-hold"
+ }
+]
