@@ -1,0 +1,614 @@
+[
+ {
+  "ad": "duo-bird-dog-hand-touch",
+  "video": "07",
+  "boy": 0.394,
+  "gen": 0.9
+ },
+ {
+  "ad": "duo-cactus-elbow-link",
+  "video": "07",
+  "boy": 0.88,
+  "gen": 0.615
+ },
+ {
+  "ad": "duo-dancer-reach-hands",
+  "video": "07",
+  "boy": 0.88,
+  "gen": 0.895
+ },
+ {
+  "ad": "duo-heart-hands",
+  "video": "07",
+  "boy": 0.88,
+  "gen": 0.596
+ },
+ {
+  "ad": "duo-high-ten",
+  "video": "07",
+  "boy": 0.88,
+  "gen": 0.429
+ },
+ {
+  "ad": "duo-knee-up-elbow-touch",
+  "video": "07",
+  "boy": 0.88,
+  "gen": 0.394
+ },
+ {
+  "ad": "duo-kneeling-gate-arch",
+  "video": "07",
+  "boy": 0.721,
+  "gen": 0.9
+ },
+ {
+  "ad": "duo-kneeling-heart",
+  "video": "07",
+  "boy": 0.88,
+  "gen": 0.614
+ },
+ {
+  "ad": "duo-lunge-arch-bridge",
+  "video": "07",
+  "boy": 0.88,
+  "gen": 0.601
+ },
+ {
+  "ad": "duo-lunge-back-hand-link",
+  "video": "07",
+  "boy": 0.88,
+  "gen": 0.545
+ },
+ {
+  "ad": "duo-mirror-knee-hold",
+  "video": "07",
+  "boy": 0.88,
+  "gen": 0.9
+ },
+ {
+  "ad": "duo-pyramid-fold-hand-link",
+  "video": "07",
+  "boy": 0.712,
+  "gen": 0.9
+ },
+ {
+  "ad": "duo-seated-feet-together-arms-up",
+  "video": "07",
+  "boy": 0.88,
+  "gen": 0.811
+ },
+ {
+  "ad": "duo-seated-side-bend-overhead",
+  "video": "07",
+  "boy": 0.848,
+  "gen": 0.9
+ },
+ {
+  "ad": "duo-shoulder-hug-tree",
+  "video": "07",
+  "boy": 0.88,
+  "gen": 0.701
+ },
+ {
+  "ad": "duo-shoulder-to-shoulder-lean-out",
+  "video": "07",
+  "boy": 0.88,
+  "gen": 0.497
+ },
+ {
+  "ad": "duo-star-link",
+  "video": "07",
+  "boy": 0.88,
+  "gen": 0.641
+ },
+ {
+  "ad": "duo-tree-palm-press",
+  "video": "07",
+  "boy": 0.88,
+  "gen": 0.594
+ },
+ {
+  "ad": "duo-arabesque-low-hand-link",
+  "video": "11",
+  "boy": 0.88,
+  "gen": 0.874
+ },
+ {
+  "ad": "duo-deep-squat-hand-link",
+  "video": "11",
+  "boy": 0.88,
+  "gen": 0.636
+ },
+ {
+  "ad": "duo-downward-dog-facing",
+  "video": "11",
+  "boy": 0.856,
+  "gen": 0.9
+ },
+ {
+  "ad": "duo-extended-side-angle-feet-meet",
+  "video": "11",
+  "boy": 0.88,
+  "gen": 0.686
+ },
+ {
+  "ad": "duo-fist-bump-front-lunge",
+  "video": "11",
+  "boy": 0.88,
+  "gen": 0.652
+ },
+ {
+  "ad": "duo-goddess-squat-prayer",
+  "video": "11",
+  "boy": 0.88,
+  "gen": 0.735
+ },
+ {
+  "ad": "duo-half-moon-facing-out",
+  "video": "11",
+  "boy": 0.88,
+  "gen": 0.815
+ },
+ {
+  "ad": "duo-hero-sit-palms-up-touch",
+  "video": "11",
+  "boy": 0.88,
+  "gen": 0.574
+ },
+ {
+  "ad": "duo-horse-stance-fist-bump",
+  "video": "11",
+  "boy": 0.88,
+  "gen": 0.713
+ },
+ {
+  "ad": "duo-kneeling-lunge-hand-link",
+  "video": "11",
+  "boy": 0.88,
+  "gen": 0.743
+ },
+ {
+  "ad": "duo-kneeling-side-reach-palms-together",
+  "video": "11",
+  "boy": 0.88,
+  "gen": 0.609
+ },
+ {
+  "ad": "duo-lateral-leg-raise-inner-hands",
+  "video": "11",
+  "boy": 0.88,
+  "gen": 0.846
+ },
+ {
+  "ad": "duo-seated-wide-leg-hand-pull",
+  "video": "11",
+  "boy": 0.576,
+  "gen": 0.9
+ },
+ {
+  "ad": "duo-sphinx-facing",
+  "video": "11",
+  "boy": 0.417,
+  "gen": 0.9
+ },
+ {
+  "ad": "duo-standing-quad-stretch-hand-link",
+  "video": "11",
+  "boy": 0.88,
+  "gen": 0.571
+ },
+ {
+  "ad": "duo-wide-stance-palm-push",
+  "video": "11",
+  "boy": 0.88,
+  "gen": 0.826
+ },
+ {
+  "ad": "duo-back-to-back-squat",
+  "video": "13",
+  "boy": 0.88,
+  "gen": 0.816
+ },
+ {
+  "ad": "duo-dancer-pose-hand-link",
+  "video": "13",
+  "boy": 0.88,
+  "gen": 0.66
+ },
+ {
+  "ad": "duo-flamingo-knee-up-hand-link",
+  "video": "13",
+  "boy": 0.88,
+  "gen": 0.542
+ },
+ {
+  "ad": "duo-forward-fold-hand-link",
+  "video": "13",
+  "boy": 0.88,
+  "gen": 0.811
+ },
+ {
+  "ad": "duo-garland-squat-side-by-side",
+  "video": "13",
+  "boy": 0.88,
+  "gen": 0.8
+ },
+ {
+  "ad": "duo-hands-behind-head-wide-stance",
+  "video": "13",
+  "boy": 0.88,
+  "gen": 0.581
+ },
+ {
+  "ad": "duo-high-lunge-palm-press",
+  "video": "13",
+  "boy": 0.88,
+  "gen": 0.53
+ },
+ {
+  "ad": "duo-knee-raise-inner-hand-link",
+  "video": "13",
+  "boy": 0.88,
+  "gen": 0.586
+ },
+ {
+  "ad": "duo-knee-tuck-arm-up-inner-link",
+  "video": "13",
+  "boy": 0.88,
+  "gen": 0.497
+ },
+ {
+  "ad": "duo-kneel-stand-high-five",
+  "video": "13",
+  "boy": 0.88,
+  "gen": 0.537
+ },
+ {
+  "ad": "duo-kneeling-arm-wrestle",
+  "video": "13",
+  "boy": 0.88,
+  "gen": 0.7
+ },
+ {
+  "ad": "duo-kneeling-back-to-back-arms-high",
+  "video": "13",
+  "boy": 0.88,
+  "gen": 0.536
+ },
+ {
+  "ad": "duo-low-lunge-palms-high",
+  "video": "13",
+  "boy": 0.88,
+  "gen": 0.414
+ },
+ {
+  "ad": "duo-peak-lean-palms-overhead",
+  "video": "13",
+  "boy": 0.88,
+  "gen": 0.369
+ },
+ {
+  "ad": "duo-seated-knees-bent-feet-meet",
+  "video": "13",
+  "boy": 0.683,
+  "gen": 0.9
+ },
+ {
+  "ad": "duo-side-bend-arc-outer-arm-up",
+  "video": "13",
+  "boy": 0.88,
+  "gen": 0.564
+ },
+ {
+  "ad": "duo-side-lunge-low-hand-link",
+  "video": "13",
+  "boy": 0.88,
+  "gen": 0.841
+ },
+ {
+  "ad": "duo-star-stance-fingertip-touch",
+  "video": "13",
+  "boy": 0.811,
+  "gen": 0.9
+ },
+ {
+  "ad": "duo-stride-high-hand-link",
+  "video": "13",
+  "boy": 0.88,
+  "gen": 0.642
+ },
+ {
+  "ad": "duo-tilted-t-leg-lift",
+  "video": "13",
+  "boy": 0.88,
+  "gen": 0.595
+ },
+ {
+  "ad": "duo-tree-pose-arms-overhead",
+  "video": "13",
+  "boy": 0.88,
+  "gen": 0.403
+ },
+ {
+  "ad": "duo-y-arms-step-out",
+  "video": "13",
+  "boy": 0.862,
+  "gen": 0.9
+ },
+ {
+  "ad": "duo-bow-forward-hands-clasp",
+  "video": "15",
+  "boy": 0.88,
+  "gen": 0.694
+ },
+ {
+  "ad": "duo-crescent-tiptoe-arms-high",
+  "video": "15",
+  "boy": 0.88,
+  "gen": 0.367
+ },
+ {
+  "ad": "duo-deep-side-lunge-arch-link",
+  "video": "15",
+  "boy": 0.88,
+  "gen": 0.866
+ },
+ {
+  "ad": "duo-guard-step-punch-link",
+  "video": "15",
+  "boy": 0.88,
+  "gen": 0.52
+ },
+ {
+  "ad": "duo-half-kneel-forward-reach",
+  "video": "15",
+  "boy": 0.88,
+  "gen": 0.776
+ },
+ {
+  "ad": "duo-heart-arch-hands-on-hips",
+  "video": "15",
+  "boy": 0.88,
+  "gen": 0.894
+ },
+ {
+  "ad": "duo-heel-lift-side-arch",
+  "video": "15",
+  "boy": 0.88,
+  "gen": 0.546
+ },
+ {
+  "ad": "duo-hip-hinge-foot-back-link",
+  "video": "15",
+  "boy": 0.819,
+  "gen": 0.9
+ },
+ {
+  "ad": "duo-inner-knee-open-link",
+  "video": "15",
+  "boy": 0.88,
+  "gen": 0.885
+ },
+ {
+  "ad": "duo-kneeling-side-stretch-link",
+  "video": "15",
+  "boy": 0.88,
+  "gen": 0.706
+ },
+ {
+  "ad": "duo-long-side-lunge-low-link",
+  "video": "15",
+  "boy": 0.65,
+  "gen": 0.9
+ },
+ {
+  "ad": "duo-low-squat-w-arms",
+  "video": "15",
+  "boy": 0.88,
+  "gen": 0.836
+ },
+ {
+  "ad": "duo-reverse-warrior-low-link",
+  "video": "15",
+  "boy": 0.88,
+  "gen": 0.838
+ },
+ {
+  "ad": "duo-stork-side-reach",
+  "video": "15",
+  "boy": 0.88,
+  "gen": 0.679
+ },
+ {
+  "ad": "duo-warrior-two-fingertip-line",
+  "video": "15",
+  "boy": 0.74,
+  "gen": 0.9
+ },
+ {
+  "ad": "duo-wide-horse-v-arms",
+  "video": "15",
+  "boy": 0.88,
+  "gen": 0.621
+ },
+ {
+  "ad": "duo-wide-lunge-hand-down-arm-up",
+  "video": "15",
+  "boy": 0.88,
+  "gen": 0.806
+ },
+ {
+  "ad": "duo-wide-side-stretch-low-link",
+  "video": "15",
+  "boy": 0.88,
+  "gen": 0.507
+ },
+ {
+  "ad": "duo-back-to-back-arms-t",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.811
+ },
+ {
+  "ad": "duo-back-to-back-half-kneel-arms-up",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.624
+ },
+ {
+  "ad": "duo-back-to-back-peace-up",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.226
+ },
+ {
+  "ad": "duo-back-to-back-side-lunge",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.579
+ },
+ {
+  "ad": "duo-back-to-back-wall-sit",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.583
+ },
+ {
+  "ad": "duo-bow-and-cheer",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.35
+ },
+ {
+  "ad": "duo-crossed-reach-wide-v",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.573
+ },
+ {
+  "ad": "duo-facing-lunge-high-five",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.444
+ },
+ {
+  "ad": "duo-frame-arms-cactus-link",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.677
+ },
+ {
+  "ad": "duo-half-kneel-crown-and-star",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.593
+ },
+ {
+  "ad": "duo-half-kneel-facing-arch",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.458
+ },
+ {
+  "ad": "duo-half-kneel-offer-hand",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.449
+ },
+ {
+  "ad": "duo-heart-lunge-outer-t",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.868
+ },
+ {
+  "ad": "duo-inner-knee-lift-arms-up",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.45
+ },
+ {
+  "ad": "duo-kneel-arms-up-and-standing-bow",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.517
+ },
+ {
+  "ad": "duo-kneel-stretch-and-side-bend",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.574
+ },
+ {
+  "ad": "duo-low-squat-and-tall-reach",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.426
+ },
+ {
+  "ad": "duo-outer-arm-up-hand-link",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.268
+ },
+ {
+  "ad": "duo-outer-side-lunge-inner-palms-up",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.432
+ },
+ {
+  "ad": "duo-outer-tree-joined-palms",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.492
+ },
+ {
+  "ad": "duo-roof-hands-wide-stance",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.539
+ },
+ {
+  "ad": "duo-seated-lean-and-bow-link",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.556
+ },
+ {
+  "ad": "duo-shoulder-hug-hip-hand",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.724
+ },
+ {
+  "ad": "duo-side-bend-toward-arch",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.615
+ },
+ {
+  "ad": "duo-side-lunge-and-kneel-t",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.885
+ },
+ {
+  "ad": "duo-star-outer-low-link",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.727
+ },
+ {
+  "ad": "duo-twin-wide-v-low-link",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.466
+ },
+ {
+  "ad": "duo-wide-lunge-down-and-tree",
+  "video": "18",
+  "boy": 0.88,
+  "gen": 0.618
+ }
+]
