@@ -791,6 +791,8 @@ elif arg("--mod", "pvp") == "kozmikpist":   # 21. video (REF-075 TetrisBounce, 1
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-kozmikpist.py"), encoding="utf-8").read(), "varlik-kozmikpist.py", "exec"))
 elif arg("--mod", "pvp") == "lunapark":     # 22. video (REF-077 TetrisBounce, 1v1): neon lunapark, donme dolap, kabarcik, fiyonklu korkuluk, truss kapi
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-lunapark.py"), encoding="utf-8").read(), "varlik-lunapark.py", "exec"))
+elif arg("--mod", "pvp") == "altigentunel":  # 23. video (REF-078 HumanWarmUp, CO-OP): ic ice neon altigen tunel, pembe chevron kopru, kafes kapi
+    exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-altigentunel.py"), encoding="utf-8").read(), "varlik-altigentunel.py", "exec"))
 elif arg("--mod", "pvp") == "cadi":
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-cadi.py"), encoding="utf-8").read(), "varlik-cadi.py", "exec"))
 else:
