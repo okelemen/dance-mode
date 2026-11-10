@@ -15,9 +15,9 @@ PEMBE, MOR, MAVI = "#ff3fb0", "#8a3cff", "#3f7bff"
 KAPAK = YALNIZ == "kapak"
 POZLAMA = float(arg("--kapak-pozlama", "0"))
 if KAPAK:                                                  # REF-078 kapak kompozisyonu: ufuk ~%46, kapi saga kacik, yol kadrajin alt yarisi
-    KAM.update(z=float(arg("--kapak-z", "1.9")), egim=float(arg("--kapak-egim", "5.0")), x=float(arg("--kapak-x", "-1.4")),
+    KAM.update(z=float(arg("--kapak-z", "1.9")), egim=float(arg("--kapak-egim", "3.0")), x=float(arg("--kapak-x", "-1.4")),
                lens=float(arg("--kapak-lens", "18")))
-    KAP["y"] = 9.8; Y_SON = 10.6
+    KAP["y"] = float(arg("--kapak-kapi-y", "9.0")); Y_SON = KAP["y"] + 0.8
 TUNEL_Z = KAP["h"] / 2 + 0.4                               # altigenlerin merkezi: kapi acikliginin ortasi
 
 
@@ -81,7 +81,7 @@ def gok_katmani():
     tc = nt.nodes.new("ShaderNodeTexCoord"); ay = nt.nodes.new("ShaderNodeSeparateXYZ"); ra = nt.nodes.new("ShaderNodeValToRGB")
     nt.links.new(tc.outputs["Generated"], ay.inputs[0]); nt.links.new(ay.outputs["Z"], ra.inputs[0])
     cr = ra.color_ramp
-    alt, orta, ust = ("#8a1486", "#56107a", "#2c0650") if KAPAK else ("#3a0a52", "#1c0534", "#0e0220")
+    alt, orta, ust = ("#c01490", "#7a0c8c", "#40066a") if KAPAK else ("#3a0a52", "#1c0534", "#0e0220")
     cr.elements[0].position = 0.0; cr.elements[0].color = (*lin(hex3(alt)), 1)
     cr.elements[1].position = 0.6; cr.elements[1].color = (*lin(hex3(ust)), 1)
     e = cr.elements.new(0.2); e.color = (*lin(hex3(orta)), 1)
@@ -92,7 +92,7 @@ def gok_katmani():
 
 
 def kopru_yol():
-    yol = mat_emis("yol", lin(hex3("#2a0838")), 1.0) if KAPAK else mat_metal("yol", lin(hex3("#12051c")), 0.55, metal=0.0)
+    yol = mat_emis("yol", lin(hex3("#3c0a56")), 1.0) if KAPAK else mat_metal("yol", lin(hex3("#12051c")), 0.55, metal=0.0)
     yuvarlak_kutu("yol", (0, (0.3 + Y_SON) / 2, -0.2), (YOL_W, Y_SON - 0.3, 0.4), yol, egim=0.05, seg=2)
     pembe = mat_emis("chev", lin(hex3("#ff2fa8")), 1.7)
     for yy, hw, kal in ((0.9, 1.75, 0.6), (2.3, 1.55, 0.48), (3.55, 1.38, 0.4), (4.65, 1.24, 0.33), (5.65, 1.12, 0.28), (6.55, 1.02, 0.24), (7.35, 0.94, 0.2)):
