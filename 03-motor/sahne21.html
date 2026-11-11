@@ -430,7 +430,7 @@ function nasilSerit(d, u) {
   const Z = ZD(d); if (!d.nasil || u > Z.kart + Z.say) return;
   const a = ease(kisit(u / 0.4, 0, 1)) * (1 - ease(kisit((u - Z.kart - Z.say + 0.4) / 0.4, 0, 1)));
   cx.save(); cx.globalAlpha = a; cx.fillStyle = 'rgba(20,10,60,0.72)'; cx.beginPath(); cx.roundRect(W / 2 - 720 * k, H * 0.118 - 33 * k, 1440 * k, 66 * k, 33 * k); cx.fill(); cx.restore();
-  satir([['COPY THE SHAPE ON YOUR SIDE  ·  ', '#ffffff'], ['BLUE', RENK[0]], [' LEFT  ', '#ffffff'], ['PINK', RENK[1]], [' RIGHT', '#ffffff']], W / 2, H * 0.118, 42 * k, a);
+  satir([['COPY THE SHAPE ON YOUR SIDE  ·  ', '#ffffff'], ['BLUE', RENK[0]], [' LEFT  ', '#ffffff'], ['PINK', '#ff6ade'], [' RIGHT', '#ffffff']], W / 2, H * 0.118, 42 * k, a);   // md. 28: PINK #ff2ad2 mor konturla 4,2 -> 5,4
 }
 
 // ------------------------------------------------------------ YARISAN KARAKTERLER (mobil paket md. 2)
@@ -774,7 +774,7 @@ function rutbeKart(kart, u, t) {                              // izleyicinin rut
   kartZeminCiz(t);
   const g = i => ease(kisit((u - 0.15 - i * 0.35) / 0.35, 0, 1));
   yaziK('HOW MANY WALLS DID YOU CLEAR?', W / 2, H * 0.15, 76 * k * g(0), KART_DOLGU, 1, KON, '#7ad8ff');
-  [['GOLD', '24 WALLS', ['#fff6c0', '#ffd23a', '#e09a00']], ['SILVER', '18+ WALLS', ['#ffffff', '#dfe6f2', '#9aa6ba']], ['BRONZE', '12+ WALLS', ['#ffe0c0', '#e89a5a', '#a85a20']]].forEach(([m, alt, dol], j) => {
+  [['GOLD', '24 WALLS', ['#fff6c0', '#ffd23a', '#e09a00']], ['SILVER', '18+ WALLS', ['#ffffff', '#dfe6f2', '#9aa6ba']], ['BRONZE', '12+ WALLS', ['#ffe0c0', '#ec9a5a', '#d8843a']]   // md. 28: alt ton #a85a20 mor konturla 2,7 -> 4,7].forEach(([m, alt, dol], j) => {
     const a = g(j + 1); if (a <= 0) return;
     const y = H * (0.34 + j * 0.16);
     cx.save(); cx.globalAlpha = a; const gr = cx.createRadialGradient(W * 0.3 - 8 * k, y - 8 * k, 4 * k, W * 0.3, y, 52 * k); gr.addColorStop(0, dol[0]); gr.addColorStop(1, dol[2]);
