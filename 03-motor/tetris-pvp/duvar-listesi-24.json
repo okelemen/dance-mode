@@ -1,0 +1,122 @@
+[
+ {
+  "tur": 1,
+  "p1": "curtsy-reach",
+  "p2": "lantern-knee-raise-diagonal-reach"
+ },
+ {
+  "tur": 1,
+  "p1": "side-bend-leg-out",
+  "p2": "ghoul-kick-back-back-down"
+ },
+ {
+  "tur": 1,
+  "p1": "standing-arms-forward-tiptoe-lean",
+  "p2": "witch-cactus-leg-out"
+ },
+ {
+  "tur": 1,
+  "p1": "flat-back",
+  "p2": "triangle"
+ },
+ {
+  "tur": 1,
+  "p1": "graveyard-seated-knees-up-diag-forward",
+  "p2": "moonlight-frog-hands-floor"
+ },
+ {
+  "tur": 1,
+  "p1": "standing-bow-pull",
+  "p2": "phantom-cross-legged-cactus"
+ },
+ {
+  "tur": 2,
+  "p1": "side-lean-squat",
+  "p2": "pigeon-upright"
+ },
+ {
+  "tur": 2,
+  "p1": "kneel-torch-up",
+  "p2": "bear-hold"
+ },
+ {
+  "tur": 2,
+  "p1": "shadow-low-lunge-low-forward-high-back",
+  "p2": "lunge-backbend-arms-up"
+ },
+ {
+  "tur": 2,
+  "p1": "phantom-lunge-arms-forward",
+  "p2": "broom-low-squat-t-v"
+ },
+ {
+  "tur": 2,
+  "p1": "low-lunge-arms-wide-back",
+  "p2": "black-cat-low-lunge-prayer-low-forward"
+ },
+ {
+  "tur": 2,
+  "p1": "seated-reach-back",
+  "p2": "knee-to-nose"
+ },
+ {
+  "tur": 3,
+  "p1": "reverse-prayer-fold",
+  "p2": "wide-stance-toe-reach"
+ },
+ {
+  "tur": 3,
+  "p1": "fog-warrior-high-back-hip",
+  "p2": "kneeling-reach"
+ },
+ {
+  "tur": 3,
+  "p1": "compass-prep",
+  "p2": "toe-stand-prep"
+ },
+ {
+  "tur": 3,
+  "p1": "candle-boat-arms-up",
+  "p2": "seated-toe-point-arms-forward"
+ },
+ {
+  "tur": 3,
+  "p1": "bat-hook-t-leg-out-lean-r",
+  "p2": "black-cat-split-stance-archer"
+ },
+ {
+  "tur": 3,
+  "p1": "spider-lunge-arms-up",
+  "p2": "garland-squat"
+ },
+ {
+  "tur": 4,
+  "p1": "black-cat-crab",
+  "p2": "runner-lunge-low"
+ },
+ {
+  "tur": 4,
+  "p1": "hands-down-lunge-knee-up",
+  "p2": "lantern-warrior-three-arms-up"
+ },
+ {
+  "tur": 4,
+  "p1": "candle-high-plank-diag-floor",
+  "p2": "wide-angle-side-bend"
+ },
+ {
+  "tur": 4,
+  "p1": "seated-lean-back-leg-up",
+  "p2": "knee-plank-feet-up"
+ },
+ {
+  "tur": 4,
+  "p1": "seated-forward-fold-arms-long",
+  "p2": "splits-prep-arms-wide"
+ },
+ {
+  "tur": 4,
+  "p1": "plank-leg-lift",
+  "p2": "half-bow"
+ }
+]

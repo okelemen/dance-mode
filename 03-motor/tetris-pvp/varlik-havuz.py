@@ -135,10 +135,14 @@ def isik_kulesi(x, z0, z1, y, rnd):
 
 
 def mat_kristal_huzme():
-    m = bpy.data.materials.new("huzme"); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
-    em = nt.nodes.new("ShaderNodeEmission"); em.inputs[0].default_value = (*lin(hex3("#fffbe0")), 1); em.inputs[1].default_value = 1.0
+    return mat_saydam_isik("huzme", "#fffbe0", 0.16)
+
+
+def mat_saydam_isik(ad, renk, alfa):
+    m = bpy.data.materials.new(ad); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+    em = nt.nodes.new("ShaderNodeEmission"); em.inputs[0].default_value = (*lin(hex3(renk)), 1); em.inputs[1].default_value = 1.0
     tr = nt.nodes.new("ShaderNodeBsdfTransparent")
-    mx = nt.nodes.new("ShaderNodeMixShader"); mx.inputs[0].default_value = 0.16
+    mx = nt.nodes.new("ShaderNodeMixShader"); mx.inputs[0].default_value = alfa
     nt.links.new(tr.outputs[0], mx.inputs[1]); nt.links.new(em.outputs[0], mx.inputs[2])
     o = nt.nodes.new("ShaderNodeOutputMaterial"); nt.links.new(mx.outputs[0], o.inputs[0])
     return m
@@ -205,8 +209,10 @@ def gok_katmani(ad):
     p.data.materials.append(mat_gok())
     rnd = random.Random(24)
     # gunes (sag ust) + hale
+    # gunes (sag ust): hale opak kureyken zeytin rengi disk gibi duruyordu (sahne 1) -> yari saydam halkalar
     kure((720, 560, 960), 70, E("gunes", "#fff6c8", 3.0), sub=3)
-    hl = kure((720, 570, 960), 190, E("hale", "#fff2b0", 0.35), sub=3); hl.scale = (1, 0.1, 1)
+    for r_, a_ in ((110, 0.35), (160, 0.18), (220, 0.08)):
+        hl = kure((720, 570, 960), r_, mat_saydam_isik("hale%d" % r_, "#fffbe0", a_), sub=3); hl.scale = (1, 0.05, 1)
     bm = [E("bulut%d" % i, c, g) for i, (c, g) in enumerate((("#ffffff", 1.05), ("#f2f8ff", 1.0), ("#e4f0ff", 0.95)))]
     for (cx_, cz_, rr) in ((-760, 960, 70), (-330, 1010, 55), (120, 950, 60), (480, 1020, 50), (-620, 820, 45), (880, 820, 55)):
         bulut(cx_, cz_, rr, rnd, bm)
@@ -302,8 +308,8 @@ def serit_katmani(oyuncu):
     px = [world_to_camera_view(sc, kam, Vector(p)) for p in ((-ic, Y, 0), (ic, Y, 0), (-ic, Y, H_), (ic, Y, H_))]
     xs = [p.x * 960 for p in px]; ys = [(1 - p.y) * 1080 for p in px]
     YERLESIM["aciklik_" + oyuncu] = [round(min(xs), 1), round(min(ys), 1), round(max(xs), 1), round(max(ys), 1)]
-    # OUT ani icin: platform kenari ve su yuzeyinin ekrandaki yeri (yakin plan y=1.5'te)
-    pk = [world_to_camera_view(sc, kam, Vector(p)) for p in ((-PLAT, 1.5, 0), (PLAT, 1.5, 0), (0, 1.5, SU_Z), (0, Y - 0.6, 0))]
+    # OUT ani icin: platform kenari ve su yuzeyinin ekrandaki yeri (y=4,5'te; 1,5 kadrajin altinda kaliyordu - sahne 1)
+    pk = [world_to_camera_view(sc, kam, Vector(p)) for p in ((-PLAT, 4.5, 0), (PLAT, 4.5, 0), (PLAT + 0.8, 4.5, SU_Z), (0, Y - 0.6, 0))]
     YERLESIM["havuz_" + oyuncu] = {"plat_sol_x": round(pk[0].x * 960, 1), "plat_sag_x": round(pk[1].x * 960, 1),
                                   "plat_y": round((1 - pk[0].y) * 1080, 1), "su_y": round((1 - pk[2].y) * 1080, 1),
                                   "kapi_onu_y": round((1 - pk[3].y) * 1080, 1)}
