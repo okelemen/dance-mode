@@ -475,9 +475,9 @@ function karakterCiz(d, u, t) {
 }
 
 // ------------------------------------------------------------ HAKEM MASKOT (ekranin ortasi, cankurtaran kulesi; gelen pozu once kendisi yapar)
-const MAS_BOY = 0.34;                                          // kullanici: maskot ortada ve gorunur
+const MAS_BOY = 0.32;                                          // kullanici: maskot ortada ve gorunur
 function kule(t) {                                             // iki kapinin arasinda beyaz cankurtaran kulesi + kirmizi oturak
-  const xm = W / 2, y0 = H * 0.86, y1 = H, w = 150 * k;
+  const xm = W / 2, y0 = H * 0.925, y1 = H, w = 150 * k;      // kontak: kollar yukari pozda 3-2-1 maskota degiyordu -> maskot alcaldi
   cx.save(); cx.lineCap = 'round';
   cx.strokeStyle = '#ffffff'; cx.lineWidth = 16 * k;
   for (const s of [-1, 1]) { cx.beginPath(); cx.moveTo(xm + s * w * 0.45, y0); cx.lineTo(xm + s * w * 0.75, y1 + 20 * k); cx.stroke(); }
@@ -488,7 +488,7 @@ function kule(t) {                                             // iki kapinin ar
 }
 function hakemCiz(t, d, u) {
   kule(t);
-  const xm = W / 2, ay = H * 0.87, Y = KY.maskot;
+  const xm = W / 2, ay = H * 0.935, Y = KY.maskot;
   let ad = d ? d.p1 : POZ_ADLAR[0], j = 0, bob = Math.abs(Math.sin(t * BPM / 60 * Math.PI)) * 10 * k, isaret = 0;
   if (d) {
     const Z = ZD(d), sq = (u - Z.kart) / Z.say;
@@ -770,11 +770,12 @@ function sonucKart(kart, u, t) {                              // bastaki "WHO WI
   satir([[i ? 'PINK' : 'BLUE', ['#ffffff', ACIK[i], RENK[i]]], [' WINS!', KART_DOLGU]], W / 2, H * 0.17, 150 * k * s, 1);
   satir([['BLUE ', ['#ffffff', ACIK[0], RENK[0]]], [String(kart.skor.p1) + ' - ' + String(kart.skor.p2), KART_DOLGU], [' PINK', ['#ffffff', ACIK[1], RENK[1]]]], W / 2, H * 0.36, 90 * k * s, 1);
 }
+// md. 28 (tam render 1): BRONZE alt tonu #a85a20 mor konturla 2,7 -> #d8843a 4,7
 function rutbeKart(kart, u, t) {                              // izleyicinin rutbesi + yorum cagrisi (TALIMATLAR §4 skor + rutbe)
   kartZeminCiz(t);
   const g = i => ease(kisit((u - 0.15 - i * 0.35) / 0.35, 0, 1));
   yaziK('HOW MANY WALLS DID YOU CLEAR?', W / 2, H * 0.15, 76 * k * g(0), KART_DOLGU, 1, KON, '#7ad8ff');
-  [['GOLD', '24 WALLS', ['#fff6c0', '#ffd23a', '#e09a00']], ['SILVER', '18+ WALLS', ['#ffffff', '#dfe6f2', '#9aa6ba']], ['BRONZE', '12+ WALLS', ['#ffe0c0', '#ec9a5a', '#d8843a']]   // md. 28: alt ton #a85a20 mor konturla 2,7 -> 4,7].forEach(([m, alt, dol], j) => {
+  [['GOLD', '24 WALLS', ['#fff6c0', '#ffd23a', '#e09a00']], ['SILVER', '18+ WALLS', ['#ffffff', '#dfe6f2', '#9aa6ba']], ['BRONZE', '12+ WALLS', ['#ffe0c0', '#ec9a5a', '#d8843a']]].forEach(([m, alt, dol], j) => {
     const a = g(j + 1); if (a <= 0) return;
     const y = H * (0.34 + j * 0.16);
     cx.save(); cx.globalAlpha = a; const gr = cx.createRadialGradient(W * 0.3 - 8 * k, y - 8 * k, 4 * k, W * 0.3, y, 52 * k); gr.addColorStop(0, dol[0]); gr.addColorStop(1, dol[2]);
