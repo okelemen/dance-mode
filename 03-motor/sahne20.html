@@ -1250,7 +1250,7 @@ function canBari(x, y, renk, ters) {
 function pYazi(m, x, y, px, renk, a) {
   patlamaSekli(x, y + px * 0.05, px * 0.78, 12, '#ffffff', '#1a0630', -0.1, 0.72);
   cx.save(); cx.translate(x, y); cx.transform(1, 0, -0.22, 1, 0, 0);
-  yazi(m, 0, 0, px, TEMA.yildiz ? [renk, renk, renk] : ['#ffffff', renk, renk], TEMA.yildiz ? '#1a0630' : '#ffffff', a, renk);
+  yazi(m, 0, 0, px, (TEMA.yildiz || TEMA.altigen) ? [renk, renk, renk] : ['#ffffff', renk, renk], (TEMA.yildiz || TEMA.altigen) ? '#1a0630' : '#ffffff', a, renk);
   cx.restore();
 }
 // tek oyuncu açılışı: rakip = duvar. İlk pozun oyuğu olan renkli panel, hafif sallanır
@@ -1491,6 +1491,7 @@ function kartCiz(kart, u, t) {
     cx.fillStyle = '#e11d2e'; cx.beginPath(); cx.roundRect(W / 2 - bw / 2, H * 0.48 - bh / 2, bw, bh, bh / 2); cx.fill(); cx.restore();
     if (g > 0.6) yazi('SUBSCRIBE', W / 2, H * 0.48, 120 * k * pul, '#ffffff', '#5a0010');
     yazi(TEMA.aboneAlt, W / 2, H * 0.68, 70 * k * g + 1, ['#ffffff', TEMA.p1acik], '#06122e', g);
+    if (TEMA.altigen) begenSatiri(W / 2, H * 0.85, 1.2, u, t);
   }
   cx.restore();
 }

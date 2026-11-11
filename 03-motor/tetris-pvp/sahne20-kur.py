@@ -49,5 +49,12 @@ r1("  const ust = TEMA.yildiz && KARTLAR.some(kk => kk.tip === 'acilis' && t >= 
    "  const ust = (TEMA.yildiz || TEMA.altigen) && KARTLAR.some(kk => kk.tip === 'acilis' && t >= kk.t && t < kk.t + kk.sure);")
 r1("  if (TEMA.yildiz) begenSatiri(W / 2, yM + 96 * k, cik, u, t);   // Masaustu md. 27",
    "  if (TEMA.yildiz || TEMA.altigen) begenSatiri(W / 2, yM + 96 * k, cik, u, t);   // Masaustu md. 27")
+# tam video kontrolu 1 (md. 28): acilista PLAYER 1 / PLAYER 2 kendi renkli bandinda beyaz konturla okunmuyordu -> duz renk + koyu kontur (motor 15'teki gibi)
+r1("  yazi(m, 0, 0, px, TEMA.yildiz ? [renk, renk, renk] : ['#ffffff', renk, renk], TEMA.yildiz ? '#1a0630' : '#ffffff', a, renk);",
+   "  yazi(m, 0, 0, px, (TEMA.yildiz || TEMA.altigen) ? [renk, renk, renk] : ['#ffffff', renk, renk], (TEMA.yildiz || TEMA.altigen) ? '#1a0630' : '#ffffff', a, renk);")
+# tam video kontrolu 1 (md. 27): kapanis SUBSCRIBE kartinda LIKE / COMMENT / SHARE yoktu
+r1("    yazi(TEMA.aboneAlt, W / 2, H * 0.68, 70 * k * g + 1, ['#ffffff', TEMA.p1acik], '#06122e', g);",
+   "    yazi(TEMA.aboneAlt, W / 2, H * 0.68, 70 * k * g + 1, ['#ffffff', TEMA.p1acik], '#06122e', g);\n"
+   "    if (TEMA.altigen) begenSatiri(W / 2, H * 0.85, 1.2, u, t);")
 open(os.path.join(M, "sahne20.html"), "w", encoding="utf-8", newline="\n").write(s)
 print("sahne20.html", len(s.splitlines()), "satir")
