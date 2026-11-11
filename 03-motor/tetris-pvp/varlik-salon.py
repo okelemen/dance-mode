@@ -1,4 +1,8 @@
-"""HUMAN TETRIS 25. video (REFERANSSIZ, 1v1) - GUNDUZ OKUL SPOR SALONU, GERCEKCI. varlik.py calistirir (--mod salon).
+"""HUMAN TETRIS 25. video (REFERANSSIZ, 1v1) - GUNDUZ OKUL SPOR SALONU, CILALI 3D OYUN GORUNUMU. varlik.py calistirir (--mod salon).
+
+STIL (kullanici 11 Kas 2026, onizleme 1 sonrasi): foto-gercekci salon REDDEDILDI ("gercek hayattan alinan bir kesit ... olmaz") ->
+"cilali 3D oyun gorunumu": canli doygun renkler, yuvarlak tombul hatlar (her kutu pahli), parlak oyuncak plastik / cilali yuzey,
+ama gercek isik-golge-parlama (Cycles) + isik hare (glare). Foto dokusu yok (ambientCG dokulari kullanilmaz), desenler prosedurel ve sade.
 
 POZ-DUVARI TALIMATLAR §2b 2. mekan + §4 GERCEKCI GORUNUM (kullanici 11 Kas 2026: "cocuklarin pastel boyayla resim cizmis gibi
 seyler yapma ... biraz daha gercekci olmaya bak"). 24'un (varlik-havuz.py) farki: isiksiz emission yuzey yok; PBR malzeme
@@ -30,10 +34,10 @@ ARKA_Y = 20.0           # arka duvar
 YAN_X = 16.0            # yan duvarlar
 TAVAN = 9.0
 SERIT = {
-    "p1": {"ana": "#1a7fe0", "koyu": "#0c3f8a", "minder": "#1f63c4"},
-    "p2": {"ana": "#e8329a", "koyu": "#8a1458", "minder": "#d02a86"},
+    "p1": {"ana": "#1e8cff", "koyu": "#0a3fa8", "minder": "#1a78f0"},
+    "p2": {"ana": "#ff3aa8", "koyu": "#a8105e", "minder": "#ff2a98"},
 }
-OKUL = {"lacivert": "#1b2d5c", "sari": "#e8b21e", "kirmizi": "#b8282e"}
+OKUL = {"lacivert": "#3a2fc8", "sari": "#ffcc1e", "kirmizi": "#ff3b4e"}      # oyun paleti: canli mor-lacivert, sari, kirmizi
 
 
 # ------------------------------------------------------------------ sahne / isik
@@ -55,6 +59,13 @@ def salon_sahnesi(w, h, saydam):
     bg = nt.nodes.new("ShaderNodeBackground"); bg.inputs[1].default_value = 0.35
     o = nt.nodes.new("ShaderNodeOutputWorld")
     nt.links.new(gk.outputs[0], bg.inputs[0]); nt.links.new(bg.outputs[0], o.inputs[0])
+    # oyun gorunumu: lamba ve parlama noktalarinda yumusak hare
+    sc.use_nodes = True; sc.render.use_compositing = True; ct = sc.node_tree; ct.nodes.clear()
+    rl = ct.nodes.new("CompositorNodeRLayers"); gl = ct.nodes.new("CompositorNodeGlare"); co = ct.nodes.new("CompositorNodeComposite")
+    gl.glare_type = "FOG_GLOW"; gl.quality = "HIGH"; gl.threshold = 1.2; gl.size = 7; gl.mix = 0.0
+    ct.links.new(rl.outputs["Image"], gl.inputs[0]); ct.links.new(gl.outputs[0], co.inputs[0])
+    if saydam:
+        ct.links.new(rl.outputs["Alpha"], co.inputs[1])
     return sc
 
 
@@ -141,7 +152,35 @@ def mat_doku(ad, kod, olcek, duzlem="XY", ton=None, purluk_kat=1.0, kaplama=0.0,
     return m
 
 
-def kutu(ad, merkez, boyut, mat, egim=0.0, seg=1):
+def mat_tahta(ad, renk1, renk2, harc, olcek=(1.6, 0.11), duzlem="XY", kaplama=0.7, purluk=0.22):
+    """oyun parkesi / tahta: prosedurel uzun tahta seritleri, iki ton + ince koyu derz, cilali ust kaplama (foto dokusu yok)"""
+    m = bpy.data.materials.new(ad); m.use_nodes = True; nt = m.node_tree; b = nt.nodes["Principled BSDF"]
+    geo = nt.nodes.new("ShaderNodeNewGeometry"); sp = nt.nodes.new("ShaderNodeSeparateXYZ"); nt.links.new(geo.outputs["Position"], sp.inputs[0])
+    cb = nt.nodes.new("ShaderNodeCombineXYZ")
+    # tahta boyu ikinci eksen boyunca: bricks X'te uzun -> (v, u) verilir
+    nt.links.new(sp.outputs[duzlem[1]], cb.inputs[0]); nt.links.new(sp.outputs[duzlem[0]], cb.inputs[1])
+    br = nt.nodes.new("ShaderNodeTexBrick")
+    br.inputs["Color1"].default_value = (*lin(hex3(renk1)), 1); br.inputs["Color2"].default_value = (*lin(hex3(renk2)), 1)
+    br.inputs["Mortar"].default_value = (*lin(hex3(harc)), 1); br.inputs["Scale"].default_value = 1.0
+    br.inputs["Mortar Size"].default_value = 0.006; br.inputs["Brick Width"].default_value = olcek[0]; br.inputs["Row Height"].default_value = olcek[1]
+    br.offset = 0.37; br.squash = 1.0
+    nt.links.new(cb.outputs[0], br.inputs["Vector"]); nt.links.new(br.outputs["Color"], b.inputs["Base Color"])
+    bp = nt.nodes.new("ShaderNodeBump"); bp.inputs["Strength"].default_value = 0.25; bp.invert = True
+    nt.links.new(br.outputs["Fac"], bp.inputs["Height"]); nt.links.new(bp.outputs["Normal"], b.inputs["Normal"])
+    b.inputs["Roughness"].default_value = purluk; b.inputs["Coat Weight"].default_value = kaplama; b.inputs["Coat Roughness"].default_value = 0.04
+    return m
+
+
+def mat_blok(ad, renk1, renk2, harc, duzlem):
+    """oyun duvari: iri yuvarlak hatli boyali bloklar, iki canli ton, beyaz derz"""
+    m = mat_tahta(ad, renk1, renk2, harc, olcek=(0.8, 0.4), duzlem=duzlem, kaplama=0.25, purluk=0.4)
+    br = [n for n in m.node_tree.nodes if n.type == "TEX_BRICK"][0]
+    br.inputs["Mortar Size"].default_value = 0.035; br.inputs["Mortar Smooth"].default_value = 0.6; br.offset = 0.5
+    m.node_tree.nodes["Bump"].inputs["Strength"].default_value = 0.5
+    return m
+
+
+def kutu(ad, merkez, boyut, mat, egim=0.025, seg=3):
     if egim > 0:
         return yuvarlak_kutu(ad, merkez, boyut, mat, egim=egim, seg=seg)
     bpy.ops.mesh.primitive_cube_add(size=1, location=merkez)
@@ -161,7 +200,7 @@ def duz(ad, x0, x1, y0, y1, z, mat):
 # ------------------------------------------------------------------ SALON (her iki katmanda; serit sahnesinde uzak kisim holdout)
 def salon(serit_modu, rnd):
     uzak = []                                                   # serit sahnesinde holdout olacaklar
-    parke = mat_doku("parke", "WoodFloor040", 0.85, "XY", purluk_kat=0.55, kaplama=0.55, normal=0.5)
+    parke = mat_tahta("parke", "#f0a24a", "#e48a34", "#9a4e1c")
     boya_beyaz = mat_pbr("cizgi_b", "#f4f1ea", 0.35, kaplama=0.4)
     boya_lac = mat_pbr("cizgi_l", OKUL["lacivert"], 0.4, kaplama=0.4)
     # zemin: yakin (serit katmaninda gorunur) + uzak
@@ -184,7 +223,7 @@ def salon(serit_modu, rnd):
 
 
 def blok_duvar_mat(ad, duzlem):
-    return mat_doku(ad, "Bricks066", 1.6, duzlem, ton=("#b9b1a0", "#efe9dc"), purluk_kat=1.0, normal=0.8)
+    return mat_blok(ad, "#36b4f2", "#28a2e6", "#eaf8ff", duzlem)
 
 
 def duvar_pencereli(ad, eksen, sabit, a0, a1, pencereler, z_alt, z_ust, mat, cerceve):
@@ -273,7 +312,7 @@ def yan_duvarlar(rnd):
     ob = []
     cer = mat_pbr("pencere_c2", "#5b6068", 0.35, metal=1.0)
     pen = [(y, y + 2.6) for y in (-1.0, 3.0, 7.0, 11.0, 15.0)]
-    ahsap = mat_doku("isvec", "WoodFloor051", 1.2, "YZ", purluk_kat=0.8, kaplama=0.3)
+    ahsap = mat_pbr("isvec", "#f2b04a", 0.3, kaplama=0.6)
     ip = mat_pbr("ip", "#c9b48a", 0.9, bump=(90, 0.4))
     for s in (-1, 1):
         x = s * (YAN_X + 0.15)
@@ -326,9 +365,9 @@ def pota(s, y):
 
 def tavan(rnd):
     ob = []
-    sac = mat_pbr("tavan_sac", "#c9ccd0", 0.55, metal=0.4)
+    sac = mat_pbr("tavan_sac", "#f2f6fb", 0.5)
     ob.append(kutu("tavan", (0, ARKA_Y / 2 - 2, TAVAN + 0.1), (2 * YAN_X + 1, ARKA_Y + 6, 0.2), sac))
-    celik = mat_pbr("makas", "#e6e8eb", 0.45, metal=0.7)
+    celik = mat_pbr("makas", "#ffcc1e", 0.3, kaplama=0.5)
     for y in (0.0, 4.5, 9.0, 13.5, 18.0):                    # celik makaslar (alt + ust kusak + diyagonal)
         ob.append(boru((-YAN_X, y, TAVAN - 0.15), (YAN_X, y, TAVAN - 0.15), 0.07, celik))
         ob.append(boru((-YAN_X, y, TAVAN - 1.0), (YAN_X, y, TAVAN - 1.0), 0.06, celik))
@@ -337,15 +376,50 @@ def tavan(rnd):
             z0, z1 = (TAVAN - 1.0, TAVAN - 0.15) if i % 2 == 0 else (TAVAN - 0.15, TAVAN - 1.0)
             ob.append(boru((x, y, z0), (x + 1.6, y, z1), 0.03, celik)); x += 1.6; i += 1
     # (sarili bolme perdesi kaldirildi - onizleme 1: ust kadrajda agir siyah bant)
+    ob += flama_dizileri(rnd) + balonlar(rnd)
+    return ob
+
+
+def flama_dizileri(rnd):
+    """tavandan sarkan ucgen flama dizileri (oyun / senlik havasi, ekran dolu kurali md. 7)"""
+    ob = []
+    renk = [mat_pbr("fl%d" % i, c, 0.35, kaplama=0.3) for i, c in enumerate(("#ff3b4e", "#ffcc1e", "#1e9cff", "#2fd06a", "#ff4fc0", "#ff8a1e"))]
+    ip = mat_pbr("fl_ip", "#ffffff", 0.5)
+    for (y, z, sark) in ((3.0, TAVAN - 1.4, 0.9), (8.5, TAVAN - 1.3, 1.0), (14.0, TAVAN - 1.2, 0.9)):
+        n = 26; onc = None
+        for i in range(n + 1):
+            q = i / n; x = -YAN_X + 2 * YAN_X * q; zz = z - sark * 4 * q * (1 - q)
+            if onc:
+                ob.append(boru((onc[0], y, onc[1]), (x, y, zz), 0.012, ip))
+                mx_, mz = (onc[0] + x) / 2, (onc[1] + zz) / 2
+                me = bpy.data.meshes.new("flama_u")
+                me.from_pydata([(mx_ - 0.42, y, mz), (mx_ + 0.42, y, mz), (mx_, y, mz - 0.7)], [], [[0, 1, 2]]); me.update()
+                o = bpy.data.objects.new("flama_u", me); bpy.context.collection.objects.link(o); o.data.materials.append(renk[i % len(renk)])
+                sl = o.modifiers.new("kal", "SOLIDIFY"); sl.thickness = 0.02
+                ob.append(o)
+            onc = (x, zz)
+    return ob
+
+
+def balonlar(rnd):
+    """tribun koselerinde ve tavanda parlak balon kumeleri (oyuncak plastik)"""
+    ob = []
+    renk = [mat_pbr("bl%d" % i, c, 0.12, kaplama=1.0) for i, c in enumerate(("#ff3b4e", "#ffcc1e", "#1e9cff", "#2fd06a", "#ff4fc0", "#8a5aff"))]
+    ip = mat_pbr("bl_ip", "#ffffff", 0.5)
+    for (cx_, cy_, cz_) in ((-12.5, ARKA_Y - 5.2, 3.2), (12.5, ARKA_Y - 5.2, 3.2), (-6.0, 12.0, 6.6), (6.5, 13.0, 6.9), (0.0, 16.5, 7.4)):
+        for k in range(7):
+            p_ = (cx_ + rnd.uniform(-0.5, 0.5), cy_ + rnd.uniform(-0.4, 0.4), cz_ + rnd.uniform(-0.3, 0.6))
+            b_ = kure(p_, rnd.uniform(0.32, 0.42), rnd.choice(renk), sub=3); b_.scale = (1, 1, 1.15); ob.append(b_)
+            ob.append(boru((p_[0], p_[1], p_[2] - 0.45), (cx_, cy_, cz_ - 2.6 if cz_ < 5 else cz_ - 1.2), 0.006, ip))
     return ob
 
 
 def tribun(rnd):
     """arka duvar onunde teleskopik ahsap tribun (8 kademe), mavi plastik sirt, korkuluk; seyirci yok (gercekci, cizgi film insan yok)"""
     ob = []
-    tahta = mat_doku("tribun_t", "WoodFloor051", 1.4, "XY", purluk_kat=0.7, kaplama=0.35, parlak=1.1)
+    tahta = mat_pbr("tribun_t", "#f6f2ea", 0.3, kaplama=0.4)
     yuz = mat_pbr("tribun_y", "#3a3f48", 0.5)
-    sirt = mat_pbr("tribun_s", "#1d4fa8", 0.35, kaplama=0.3)
+    gokkusagi = [mat_pbr("sirt%d" % i, c, 0.25, kaplama=0.7) for i, c in enumerate(("#ff3b4e", "#ff8a1e", "#ffd21e", "#2fd06a", "#1e9cff", "#8a5aff", "#ff4fc0", "#20d6d0"))]
     kork = mat_pbr("korkuluk", "#b8bcc2", 0.3, metal=1.0)
     x0, x1 = -11.0, 11.0
     for r in range(8):
@@ -355,7 +429,7 @@ def tribun(rnd):
         x = x0 + 0.25
         while x < x1 - 0.2:                                   # koltuk sirtlari (aralikli)
             if rnd.random() < 0.93:
-                ob.append(kutu("sirt", (x, y + 0.18, z + 0.2), (0.42, 0.04, 0.34), sirt, egim=0.02, seg=2))
+                ob.append(kutu("sirt", (x, y + 0.18, z + 0.2), (0.42, 0.06, 0.34), gokkusagi[r], egim=0.05, seg=3))
             x += 0.5
     for s in (-1, 1):
         ob.append(boru((s * 11.1, ARKA_Y - 4.6, 1.0), (s * 11.1, ARKA_Y - 0.6, 4.4), 0.03, kork))
@@ -379,8 +453,8 @@ def serit_esyalari(oyuncu, R, rnd):
         o = bpy.data.objects.new("ok", me); bpy.context.collection.objects.link(o); o.data.materials.append(boya)
     # iki yanda katlanir jimnastik minderi (OUT ani: karakter buraya duser), 4 panel, dikis olugu
     # onizleme 1: ic minderler ekran ortasinda mavi | pembe sert cizgiyle birlesiyordu -> ic taraf iki seritte ayni lacivert hakem minderi
-    vinil = mat_pbr("minder_" + oyuncu, R["minder"], 0.5, kaplama=0.1, bump=(220, 0.06))
-    hakem = mat_pbr("minder_hakem", OKUL["lacivert"], 0.5, kaplama=0.1, bump=(220, 0.06))
+    vinil = mat_pbr("minder_" + oyuncu, R["minder"], 0.3, kaplama=0.6)
+    hakem = mat_pbr("minder_hakem", OKUL["lacivert"], 0.3, kaplama=0.6)
     for s in (-1, 1):
         for k in range(4):
             y0 = 3.2 + k * 1.2
@@ -437,7 +511,7 @@ def koni(xy):
 
 def bank(xy):
     x, y = xy
-    tahta = mat_doku("bank", "WoodFloor051", 0.9, "XY", purluk_kat=0.7, kaplama=0.4)
+    tahta = mat_tahta("bank", "#f0a24a", "#e48a34", "#9a4e1c", olcek=(0.6, 0.08))
     ayak = mat_pbr("bank_a", "#2c2f34", 0.35, metal=1.0)
     kutu("bank_ust", (x, y, 0.45), (0.32, 2.6, 0.05), tahta, egim=0.01, seg=2)
     for dy in (-1.1, 1.1):
@@ -467,7 +541,7 @@ def rulo_minder(xy):
 def kapi(R):
     """celik cerceve + oyuncu renginde kalin vinil koruma yastiklari; ustte sonuk LED tabela (motor PLAYER n yazar)"""
     Y, W_, H_, K = KAP["y"], KAP["w"], KAP["h"], KAP["kalin"]
-    yastik = mat_pbr("kapi_y", R["ana"], 0.45, kaplama=0.15, bump=(200, 0.05))
+    yastik = mat_pbr("kapi_y", R["ana"], 0.3, kaplama=0.7)
     cel = mat_pbr("kapi_c", "#cfd3d8", 0.3, metal=1.0)
     xk = W_ / 2 + K / 2
     for s in (-1, 1):
