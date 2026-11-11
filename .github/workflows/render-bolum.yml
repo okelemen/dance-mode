@@ -50,7 +50,7 @@ on:
 
 jobs:
   hazirla:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04      # 11 Kas 2026: ubuntu-latest (resolute) security.ubuntu.com cozemedi (tetris-varlik.yml)
     outputs:
       matris: ${{ steps.uret.outputs.matris }}
     steps:
@@ -70,7 +70,7 @@ jobs:
 
   parca:
     needs: hazirla
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04      # 11 Kas 2026: ubuntu-latest (resolute) security.ubuntu.com cozemedi (tetris-varlik.yml)
     timeout-minutes: 340
     strategy:
       fail-fast: false
@@ -133,7 +133,7 @@ jobs:
     # Ses yolu 120 BPM HAM mp3'e bagli. 01-muzik/*.wav gitignore'da oldugu icin
     # yeni muzikli bolumlerin sesi runner'da YOK -> montaj yerelde yapilir.
     if: ${{ github.event.inputs.birlestir == 'evet' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04      # 11 Kas 2026: ubuntu-latest (resolute) security.ubuntu.com cozemedi (tetris-varlik.yml)
     steps:
       - uses: actions/checkout@v4
       # 23 Eki 2026: apt-get update bir runner'da 40 dk asili kaldi (parca 0 ve 5) -> her deneme 4 dk sinirli, 3 deneme

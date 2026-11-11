@@ -19,13 +19,13 @@ const arg = (a, d) => { const i = process.argv.indexOf('--' + a); return i > -1 
     fs.createReadStream(p).pipe(r);
   });
   await new Promise(r => s.listen(0, '127.0.0.1', r));
-  const b = await puppeteer.launch({ executablePath: CHROME, headless: 'new', args: ['--no-sandbox'] });
+  const b = await puppeteer.launch({ executablePath: CHROME, headless: 'new', args: ['--no-sandbox'], protocolTimeout: 900000 });
   const pg = await b.newPage();
   await pg.setViewport({ width: W, height: H });
   pg.on('pageerror', e => console.log('HATA:', e.message));
   const KOK_URL = arg('url', `http://127.0.0.1:${s.address().port}`);   // --url http://127.0.0.1:8765 : calisan statik sunucu (cok dosyada node sunucusu fetch hatasi verdi)
   await pg.goto(`${KOK_URL}/03-motor/${arg('sayfa', 'sahne21.html')}?w=${W}&h=${H}&bolum=${encodeURIComponent(arg('bolum', ''))}`);
-  await pg.waitForFunction('window.HAZIR === true', { timeout: 180000 });
+  await pg.waitForFunction('window.HAZIR === true', { timeout: 300000, polling: 500 });   // HT25: raf yoklamasi agir yuklemede takiliyordu
   const veri = await pg.evaluate((T, SUTUN, OLC) => {
     const c = document.getElementById('cikti'), cw = c.width * OLC, ch = c.height * OLC, sat = Math.ceil(T.length / SUTUN);
     const k = Object.assign(document.createElement('canvas'), { width: cw * SUTUN, height: ch * sat }), g = k.getContext('2d');
