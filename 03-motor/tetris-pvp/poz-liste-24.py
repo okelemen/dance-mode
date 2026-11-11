@@ -12,6 +12,11 @@ YASAK2 = ("kneeling-camel", "haunted", "front-leg-reach", "kick-back-reach", "to
           "lying-reach-up", "v-sit", "pistol-squat",
           "wide-leg-twist", "glute-bridge", "skeleton-superman")   # 24 kontak 1-2: bas asagi / havada / yere yapisik okunan   # havada / ziplama / dusuyor okunan (kontak 1)
 ad = [k for k in d if not any(w in k for w in YASAK2)]
+# 24: karakterler ve maskot pozu acilardan kurar (karakter.py) -> aci tanimi olmayan maske (or. varlik/poz/triangle) elenir
+import glob as _g
+_POZ = {"varlik": "pozlar.json", "varlik-03": "pozlar-03.json", "varlik-04": "pozlar-04.json", "varlik-05": "pozlar-05.json"}
+_TAN = {f: json.load(open(os.path.join(BURA, f), encoding="utf-8"))["pozlar"] for f in set(_POZ.values())}
+ad = [k for k in ad if os.path.basename(k)[:-4] in _TAN[_POZ[k.split("/")[0]]]]
 M = {k: maske(os.path.join(BURA, k)) for k in ad}
 # farthest-point: ilk = en ayakta; sonra mevcut secilenlere en uzak (en dusuk max-IoU)
 sec = [min(ad, key=lambda k: d[k]["gen"])]

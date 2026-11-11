@@ -2,27 +2,27 @@
  {
   "tur": 1,
   "p1": "curtsy-reach",
-  "p2": "lantern-knee-raise-diagonal-reach"
+  "p2": "moonlight-knee-raise-arms-down"
  },
  {
   "tur": 1,
-  "p1": "side-bend-leg-out",
-  "p2": "ghoul-kick-back-back-down"
+  "p1": "reverse-warrior",
+  "p2": "standing-arms-forward-tiptoe-lean"
  },
  {
   "tur": 1,
-  "p1": "standing-arms-forward-tiptoe-lean",
-  "p2": "witch-cactus-leg-out"
- },
- {
-  "tur": 1,
-  "p1": "flat-back",
-  "p2": "triangle"
+  "p1": "witch-cactus-leg-out",
+  "p2": "flat-back"
  },
  {
   "tur": 1,
   "p1": "graveyard-seated-knees-up-diag-forward",
-  "p2": "moonlight-frog-hands-floor"
+  "p2": "ghoul-head-t-knee-up"
+ },
+ {
+  "tur": 1,
+  "p1": "moonlight-frog-hands-floor",
+  "p2": "revolved-side-angle"
  },
  {
   "tur": 1,
@@ -31,22 +31,22 @@
  },
  {
   "tur": 2,
-  "p1": "side-lean-squat",
+  "p1": "garland-squat",
+  "p2": "lunge-arms-back"
+ },
+ {
+  "tur": 2,
+  "p1": "side-lunge-hands-prayer-deep",
   "p2": "pigeon-upright"
  },
  {
   "tur": 2,
-  "p1": "kneel-torch-up",
-  "p2": "bear-hold"
+  "p1": "bear-hold",
+  "p2": "crescent-lunge"
  },
  {
   "tur": 2,
-  "p1": "shadow-low-lunge-low-forward-high-back",
-  "p2": "lunge-backbend-arms-up"
- },
- {
-  "tur": 2,
-  "p1": "phantom-lunge-arms-forward",
+  "p1": "tabletop-twist-reach",
   "p2": "broom-low-squat-t-v"
  },
  {
@@ -62,32 +62,32 @@
  {
   "tur": 3,
   "p1": "reverse-prayer-fold",
-  "p2": "wide-stance-toe-reach"
+  "p2": "ghost-v-t-leg-out"
  },
  {
   "tur": 3,
-  "p1": "fog-warrior-high-back-hip",
-  "p2": "kneeling-reach"
+  "p1": "wide-stance-toe-reach",
+  "p2": "fog-warrior-high-back-hip"
  },
  {
   "tur": 3,
-  "p1": "compass-prep",
-  "p2": "toe-stand-prep"
+  "p1": "kneeling-reach",
+  "p2": "compass-prep"
  },
  {
   "tur": 3,
-  "p1": "candle-boat-arms-up",
-  "p2": "seated-toe-point-arms-forward"
+  "p1": "toe-stand-prep",
+  "p2": "candle-boat-arms-up"
  },
  {
   "tur": 3,
-  "p1": "bat-hook-t-leg-out-lean-r",
+  "p1": "seated-toe-point-arms-forward",
+  "p2": "bat-hook-t-leg-out-lean-r"
+ },
+ {
+  "tur": 3,
+  "p1": "wide-squat-twist",
   "p2": "black-cat-split-stance-archer"
- },
- {
-  "tur": 3,
-  "p1": "spider-lunge-arms-up",
-  "p2": "garland-squat"
  },
  {
   "tur": 4,
