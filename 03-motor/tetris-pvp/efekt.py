@@ -17,12 +17,12 @@ from efekt import SR, vuus, ding, bip, vurus, piril, zap, tik, fanfar, yerlestir
 def main():
     bolum, cikti = sys.argv[1:3]
     B = json.load(open(bolum, encoding="utf-8"))
-    Z = B["zaman"]
+    Z0 = B.get("zaman")                          # 24. video (motor 21): duvar basina dongu d["z"] (SPEED ROUND / BOSS WALL)
     sure = B["toplam_olcu"] * 60 / B["bpm"] * 4
     ef = np.zeros(int(sure * SR) + SR)
     for k in B["kartlar"]:
         t = k["t"]
-        if k["tip"] in ("vs", "giris"):          # 5. video: giris karti (3 PLAYERS) VS ile ayni carpisma
+        if k["tip"] in ("vs", "giris", "acilis"):          # 5. video: giris karti (3 PLAYERS) VS ile ayni carpisma
             yerlestir(ef, vuus(0.7, True, 0.9), t)
             yerlestir(ef, vurus(), t + 0.45, 1.0)
             yerlestir(ef, zap(0.4), t + 0.5, 0.7)
@@ -35,6 +35,9 @@ def main():
                 yerlestir(ef, bip(660, 0.18), t + i * ad + 0.02, 0.9)
             yerlestir(ef, bip(1320, 0.4), t + 3 * ad + 0.02, 1.0)
             yerlestir(ef, vurus(), t + 3 * ad + 0.02, 0.8)
+        elif k["tip"] in ("sonuc", "rutbe"):    # 24: sonuc (kazanan) + rutbe kartlari
+            yerlestir(ef, fanfar(1.2 if k["tip"] == "sonuc" else 1.0), t + 0.05, 1.0)
+            yerlestir(ef, piril(0.8), t + 0.3, 0.8)
         elif k["tip"] == "wrap":
             yerlestir(ef, fanfar(1.2), t + 0.05, 1.0)
             yerlestir(ef, piril(0.8), t + 0.3, 0.8)
@@ -44,6 +47,7 @@ def main():
             yerlestir(ef, ding(1760, 0.5), t + 1.25, 0.45)
     for d in B["duvarlar"]:
         t0 = d["t0"]
+        Z = d.get("z") or Z0
         a = t0 + Z["kart"]; b = a + Z["say"]; c = b + Z["buyu"]
         yerlestir(ef, ding(990, 0.2), t0 + 0.05, 0.5)                    # oyuncu kartlari pop
         if B.get("tema", {}).get("tekOyuncu"):                           # 10. video (REF-061): "!" uyarisinda alarm, sahne7 nabziyla ayni 3 vurus
@@ -57,14 +61,20 @@ def main():
         yerlestir(ef, vuus(Z["buyu"] * 0.6, True, 0.55), c - Z["buyu"] * 0.6)   # duvar yaklasiyor
         yerlestir(ef, vurus(), c - 0.05, 1.0)                            # en yakinda
         yerlestir(ef, vuus(0.6, False, 0.9), c)                          # icinden gecti
-        yerlestir(ef, piril(), c + Z["gec"] * 0.35, 0.6)                 # ovgu
+        out = [o for o in ("p1", "p2") if d.get("out", {}).get(o)]
+        if out:                                                          # 24: OUT - karakter suya duser (sicrama) + alcak uyari
+            yerlestir(ef, vuus(0.5, False, 1.0), c - Z["buyu"] * 0.25)
+            yerlestir(ef, zap(0.35), c - Z["buyu"] * 0.2, 0.6)
+            yerlestir(ef, bip(330, 0.3), c + 0.25, 0.8)
+        else:
+            yerlestir(ef, piril(), c + Z["gec"] * 0.35, 0.6)             # ovgu
     # SUBSCRIBE hatirlatmasi (her ~15 sn, sahne4.html aboneCiz ile ayni zaman): giriste pop, 1,3 sn'de tik + zil
     for ta in B.get("abone", []):
         yerlestir(ef, ding(990, 0.2), ta + 0.05, 0.55)
         yerlestir(ef, tik(), ta + 1.3, 0.9)
         yerlestir(ef, ding(1760, 0.5), ta + 1.35, 0.5)
         yerlestir(ef, piril(0.5), ta + 1.4, 0.35)
-        if B.get("tema", {}).get("yildiz"):   # 18. video: LIKE / COMMENT / SHARE dokunuslari (sahne15 begenSatiri, Masaustu md. 27)
+        if B.get("tema", {}).get("yildiz") or B.get("tema", {}).get("karakter"):   # 18. video: LIKE / COMMENT / SHARE dokunuslari (sahne15 begenSatiri, Masaustu md. 27)
             for i in range(3):
                 yerlestir(ef, ding([1175, 1319, 1568][i], 0.15), ta + 1.75 + i * 0.32, 0.4)
     ef = ef[: int(sure * SR)]
