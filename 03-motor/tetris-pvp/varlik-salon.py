@@ -43,11 +43,8 @@ OKUL = {"lacivert": "#3a2fc8", "sari": "#ffcc1e", "kirmizi": "#ff3b4e"}      # o
 # ------------------------------------------------------------------ sahne / isik
 def salon_sahnesi(w, h, saydam):
     sc = bos_sahne(w=w, h=h, saydam=saydam, ornek=ORNEK, doygun=False)
-    sc.view_settings.view_transform = "AgX"
-    try:
-        sc.view_settings.look = "AgX - Punchy"
-    except TypeError:
-        pass
+    # onizleme 2 (oyun gorunumu): AgX doygun renkleri pastele cekti (tribun, minderler soluk) -> Standard (seri notu: varlik.py deneme 1)
+    sc.view_settings.view_transform = "Standard"
     sc.view_settings.exposure = POZLAMA
     sc.cycles.max_bounces = 6; sc.cycles.diffuse_bounces = 3; sc.cycles.glossy_bounces = 3
     sc.cycles.transmission_bounces = 2; sc.cycles.transparent_max_bounces = 8
@@ -173,7 +170,8 @@ def mat_tahta(ad, renk1, renk2, harc, olcek=(1.6, 0.11), duzlem="XY", kaplama=0.
 
 def mat_blok(ad, renk1, renk2, harc, duzlem):
     """oyun duvari: iri yuvarlak hatli boyali bloklar, iki canli ton, beyaz derz"""
-    m = mat_tahta(ad, renk1, renk2, harc, olcek=(0.8, 0.4), duzlem=duzlem, kaplama=0.25, purluk=0.4)
+    # onizleme 2: bloklar dikey diziliyordu (mat_tahta eksenleri cevirir) -> duzlem ters verilir, bloklar yatay
+    m = mat_tahta(ad, renk1, renk2, harc, olcek=(0.8, 0.4), duzlem=duzlem[::-1], kaplama=0.25, purluk=0.4)
     br = [n for n in m.node_tree.nodes if n.type == "TEX_BRICK"][0]
     br.inputs["Mortar Size"].default_value = 0.035; br.inputs["Mortar Smooth"].default_value = 0.6; br.offset = 0.5
     m.node_tree.nodes["Bump"].inputs["Strength"].default_value = 0.5
