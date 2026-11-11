@@ -336,8 +336,7 @@ def tavan(rnd):
         while x < YAN_X - 0.01:
             z0, z1 = (TAVAN - 1.0, TAVAN - 0.15) if i % 2 == 0 else (TAVAN - 0.15, TAVAN - 1.0)
             ob.append(boru((x, y, z0), (x + 1.6, y, z1), 0.03, celik)); x += 1.6; i += 1
-    # orta tavanda asili bez bolme perdesi (sarili, salon bolucusu)
-    ob.append(boru((-YAN_X, 15.2, TAVAN - 1.3), (YAN_X, 15.2, TAVAN - 1.3), 0.32, mat_pbr("perde_sarili", "#2b3a5e", 0.9, bump=(40, 0.2))))
+    # (sarili bolme perdesi kaldirildi - onizleme 1: ust kadrajda agir siyah bant)
     return ob
 
 
@@ -379,11 +378,13 @@ def serit_esyalari(oyuncu, R, rnd):
         me = bpy.data.meshes.new("ok"); me.from_pydata([(a, b, 0.002) for a, b in nok], [], [list(range(6))]); me.update()
         o = bpy.data.objects.new("ok", me); bpy.context.collection.objects.link(o); o.data.materials.append(boya)
     # iki yanda katlanir jimnastik minderi (OUT ani: karakter buraya duser), 4 panel, dikis olugu
+    # onizleme 1: ic minderler ekran ortasinda mavi | pembe sert cizgiyle birlesiyordu -> ic taraf iki seritte ayni lacivert hakem minderi
     vinil = mat_pbr("minder_" + oyuncu, R["minder"], 0.5, kaplama=0.1, bump=(220, 0.06))
+    hakem = mat_pbr("minder_hakem", OKUL["lacivert"], 0.5, kaplama=0.1, bump=(220, 0.06))
     for s in (-1, 1):
         for k in range(4):
             y0 = 3.2 + k * 1.2
-            kutu("minder", (s * 2.55, y0 + 0.6, 0.05), (1.5, 1.17, 0.1), vinil, egim=0.035, seg=3)
+            kutu("minder", (s * 2.55, y0 + 0.6, 0.05), (1.5, 1.17, 0.1), vinil if s == s_dis else hakem, egim=0.035, seg=3)
     # dis tarafta salon esyalari
     if oyuncu == "p1":
         top_arabasi((s_dis * 5.2, 6.0), rnd)
@@ -502,7 +503,7 @@ def serit_katmani(oyuncu):
     px = [world_to_camera_view(sc, kam, Vector(p)) for p in ((-ic, Y, 0), (ic, Y, 0), (-ic, Y, H_), (ic, Y, H_))]
     xs = [p.x * 960 for p in px]; ys = [(1 - p.y) * 1080 for p in px]
     YERLESIM["aciklik_" + oyuncu] = [round(min(xs), 1), round(min(ys), 1), round(max(xs), 1), round(max(ys), 1)]
-    # OUT ani: minderlerin ekrandaki yeri (y=5,0)
+    # OUT ani: minderlerin ekrandaki yeri (y=5,0); oyuncu dis taraftaki kendi renkli minderine duser
     mk = [world_to_camera_view(sc, kam, Vector(p)) for p in ((-2.55, 5.0, 0.1), (2.55, 5.0, 0.1), (0, GECIS, 0))]
     YERLESIM["salon_" + oyuncu] = {"minder_sol_x": round(mk[0].x * 960, 1), "minder_sag_x": round(mk[1].x * 960, 1),
                                   "minder_y": round((1 - mk[0].y) * 1080, 1), "gecis_y": round((1 - mk[2].y) * 1080, 1)}
