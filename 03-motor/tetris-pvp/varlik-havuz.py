@@ -22,8 +22,8 @@ YOL_YARI = 2.6          # yerlesim uyumu (motor serit genisligi); platform bunda
 PLAT = 1.75             # platform yari genisligi
 SU_Z = -0.55            # su yuzeyi platform ustunden bu kadar asagida
 SERIT = {
-    "p1": {"ana": "#1aa8ff", "acik": "#bfeaff", "koyu": "#0a50d0"},
-    "p2": {"ana": "#ff3fb4", "acik": "#ffd0ee", "koyu": "#b0107c"},
+    "p1": {"ana": "#1aa8ff", "acik": "#bfeaff", "koyu": "#0a50d0", "plat": "#4ab8ff", "plat_u": "#a8e2ff"},
+    "p2": {"ana": "#ff3fb4", "acik": "#ffd0ee", "koyu": "#b0107c", "plat": "#ff6cc8", "plat_u": "#ffbfe8"},
 }
 
 
@@ -105,7 +105,7 @@ def dik_sekil(ad, noktalar, mat, y):
 # ------------------------------------------------------------------ GOK: ortografik; x -960..960, z 0..1080
 def mat_gok():
     """gunduz gogu: tepede doygun mavi, ufka dogru acik camgobegi"""
-    return mat_dikey("gok", "#bdeeff", "#2a94ff", 300, 1080, 1.0, eksen="Z")
+    return mat_dikey("gok", "#7fd2ff", "#1474ff", 300, 1080, 1.0, eksen="Z")       # kapak olcumu 1: daha doygun mavi
 
 
 def bulut(cx, cz, rr, rnd, mats, y=420):
@@ -150,7 +150,7 @@ def mat_saydam_isik(ad, renk, alfa):
 
 def tribun(rnd):
     """kademeli renkli tribun + seyirci (renkli govde + ten kafa), aralarda pankart bezleri"""
-    kat_renk = ("#ffffff", "#e8f2ff")
+    kat_renk = ("#8fd0ff", "#ffa8dc")                 # kapak olcumu 1: beyaz kademeler -> acik mavi / pembe
     seyirci = [E("sy%d" % i, c, 1.0) for i, c in enumerate(("#ff4a6a", "#ffd23a", "#2ac86a", "#1aa8ff", "#ff8a1a", "#a65aff", "#ff4fc8", "#ffffff"))]
     ten = [E("ten%d" % i, c, 1.0) for i, c in enumerate(("#f6c9a0", "#d89a6a", "#8a5a3a", "#ffe0c0"))]
     for r in range(7):                                    # alttan uste 7 kademe
@@ -236,7 +236,7 @@ def gok_katmani(ad):
 
 # ------------------------------------------------------------------ SERIT: havuz + platform + yarisma kapisi
 def havuz(R):
-    su = mat_su("su", "#3ae0f0", "#0a6ad8", -0.6, KAP["y"] + 6, 1.4)
+    su = mat_su("su", "#14c8e8", "#0650c8", -0.6, KAP["y"] + 6, 1.4)
     _sekil("su", [(-14, -1.0), (14, -1.0), (14, KAP["y"] + 12), (-14, KAP["y"] + 12)], su, z=SU_Z)
     # can simidi + sisme ordek (genel nesne) iki yanda suda
     for (x, y) in ((-3.3, 2.4), (3.4, 4.6), (-3.6, 6.8)):
@@ -253,7 +253,8 @@ def havuz(R):
 
 def platform(R):
     """yastikli yarisma platformu: beyaz ust, kenarlarda oyuncu renginde yuvarlak yastiklar, ustte renkli ok; ayaklar suya iner"""
-    ust = mat_dikey("plat", "#ffffff", R["acik"], -0.6, KAP["y"], 1.0, eksen="Y")
+    # kapak olcumu 1 (11 Kas): beyaz platform kapagi soluk yapiyordu (doygunluk 0,35 / parlaklik 0,82; 22-23 kapaklari 0,59 / 0,63) -> oyuncu renginde
+    ust = mat_dikey("plat", R["plat"], R["plat_u"], -0.6, KAP["y"], 1.0, eksen="Y")
     yuvarlak_kutu("plat", (0, (KAP["y"] - 0.6) / 2 - 0.3, -0.16), (PLAT * 2, KAP["y"] + 0.6, 0.32), ust, egim=0.06, seg=2)
     yastik = (E("yastik_a", R["ana"], 1.0), E("yastik_b", "#ffffff", 1.05))
     for s in (-1, 1):
