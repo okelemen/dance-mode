@@ -198,7 +198,7 @@ def duz(ad, x0, x1, y0, y1, z, mat):
 # ------------------------------------------------------------------ SALON (her iki katmanda; serit sahnesinde uzak kisim holdout)
 def salon(serit_modu, rnd):
     uzak = []                                                   # serit sahnesinde holdout olacaklar
-    parke = mat_tahta("parke", "#f0a24a", "#e48a34", "#9a4e1c")
+    parke = mat_tahta("parke", "#f0a24a", "#e48a34", "#9a4e1c", kaplama=0.4, purluk=0.3)      # onizleme 3: parlama zemini beyaza kaciriyordu
     boya_beyaz = mat_pbr("cizgi_b", "#f4f1ea", 0.35, kaplama=0.4)
     boya_lac = mat_pbr("cizgi_l", OKUL["lacivert"], 0.4, kaplama=0.4)
     # zemin: yakin (serit katmaninda gorunur) + uzak
@@ -451,8 +451,8 @@ def serit_esyalari(oyuncu, R, rnd):
         o = bpy.data.objects.new("ok", me); bpy.context.collection.objects.link(o); o.data.materials.append(boya)
     # iki yanda katlanir jimnastik minderi (OUT ani: karakter buraya duser), 4 panel, dikis olugu
     # onizleme 1: ic minderler ekran ortasinda mavi | pembe sert cizgiyle birlesiyordu -> ic taraf iki seritte ayni lacivert hakem minderi
-    vinil = mat_pbr("minder_" + oyuncu, R["minder"], 0.3, kaplama=0.6)
-    hakem = mat_pbr("minder_hakem", OKUL["lacivert"], 0.3, kaplama=0.6)
+    vinil = mat_pbr("minder_" + oyuncu, R["minder"], 0.35, kaplama=0.3)
+    hakem = mat_pbr("minder_hakem", OKUL["lacivert"], 0.35, kaplama=0.3)
     for s in (-1, 1):
         for k in range(4):
             y0 = 3.2 + k * 1.2
