@@ -26,7 +26,7 @@ on:
 
 jobs:
   varlik:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04      # 11 Kas 2026: ubuntu-latest (resolute) security.ubuntu.com cozemedi, apt adimi dustu
     timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
@@ -42,7 +42,9 @@ jobs:
           mkdir -p ~/blender && cd ~/blender
           curl -sSL -o b.tar.xz https://download.blender.org/release/Blender4.2/blender-4.2.3-linux-x64.tar.xz
           tar -xf b.tar.xz --strip-components=1 && rm b.tar.xz
-      - run: sudo apt-get update -qq && sudo apt-get install -y -qq libxi6 libxxf86vm1 libxfixes3 libxrender1 libgl1 libegl1 libxkbcommon0 libsm6
+      - run: |
+          sudo apt-get update -qq || true
+          sudo apt-get install -y -qq --fix-missing libxi6 libxxf86vm1 libxfixes3 libxrender1 libgl1 libegl1 libxkbcommon0 libsm6 || echo "UYARI: bazi paketler kurulamadi (ayna), Blender yine denenir"
       - name: Render
         run: |
           mkdir -p cikti
