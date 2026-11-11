@@ -1,0 +1,39 @@
+{
+ "aciklik_p1": [
+  304.5,
+  324.1,
+  655.5,
+  698.0
+ ],
+ "havuz_p1": {
+  "plat_sol_x": 177.3,
+  "plat_sag_x": 782.7,
+  "plat_y": 868.4,
+  "su_y": 958.9,
+  "kapi_onu_y": 716.1
+ },
+ "yol": {
+  "y_kapi": 8.0,
+  "genislik": 5.2,
+  "kam": {
+   "z": 2.3,
+   "egim": 5.0,
+   "lens": 18.0,
+   "sensor": 24.0
+  },
+  "serit_w": 960
+ },
+ "aciklik_p2": [
+  304.5,
+  324.1,
+  655.5,
+  698.0
+ ],
+ "havuz_p2": {
+  "plat_sol_x": 177.3,
+  "plat_sag_x": 782.7,
+  "plat_y": 868.4,
+  "su_y": 958.9,
+  "kapi_onu_y": 716.1
+ }
+}
