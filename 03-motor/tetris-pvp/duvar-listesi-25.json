@@ -1,0 +1,122 @@
+[
+ {
+  "tur": 1,
+  "p1": "tall-reach",
+  "p2": "standing-leg-back-arms-up"
+ },
+ {
+  "tur": 1,
+  "p1": "lantern-knee-raise-diagonal-reach",
+  "p2": "vampire-flex-reach-knee-up"
+ },
+ {
+  "tur": 1,
+  "p1": "hands-on-head",
+  "p2": "ghoul-kick-back-back-down"
+ },
+ {
+  "tur": 1,
+  "p1": "broom-t-salute-curtsy-lean-l",
+  "p2": "werewolf-knee-raise-arms-back"
+ },
+ {
+  "tur": 1,
+  "p1": "phantom-diagonal-curtsy",
+  "p2": "kneeling-arms-up-back"
+ },
+ {
+  "tur": 1,
+  "p1": "wizard-warrior-prayer-up",
+  "p2": "squat-hands-behind-head"
+ },
+ {
+  "tur": 2,
+  "p1": "low-squat-prayer-twist",
+  "p2": "banshee-split-stance-forward-down"
+ },
+ {
+  "tur": 2,
+  "p1": "cow-lift",
+  "p2": "vampire-kneel-lunge-archer"
+ },
+ {
+  "tur": 2,
+  "p1": "low-lunge-hands-on-back-knee",
+  "p2": "side-lunge-arms-up"
+ },
+ {
+  "tur": 2,
+  "p1": "shadow-low-lunge-low-forward-high-back",
+  "p2": "lunge-backbend-arms-up"
+ },
+ {
+  "tur": 2,
+  "p1": "warrior-lunge-arms-back",
+  "p2": "cauldron-half-kneel-side-v-t"
+ },
+ {
+  "tur": 2,
+  "p1": "kneeling-side-plank",
+  "p2": "low-lunge-arms-forward"
+ },
+ {
+  "tur": 3,
+  "p1": "cobweb-diag-point-knee-lean-l",
+  "p2": "phantom-hook-t-horse-lean-r"
+ },
+ {
+  "tur": 3,
+  "p1": "werewolf-split-stance-diagonal-reach",
+  "p2": "hand-to-toe-side"
+ },
+ {
+  "tur": 3,
+  "p1": "seated-staff",
+  "p2": "mermaid-seat"
+ },
+ {
+  "tur": 3,
+  "p1": "tiger-pose",
+  "p2": "spider-lunge-arms-up"
+ },
+ {
+  "tur": 3,
+  "p1": "broom-side-sit-up45-w",
+  "p2": "goddess-squat"
+ },
+ {
+  "tur": 3,
+  "p1": "kneeling-diagonal-reach",
+  "p2": "warrior-three-hands-prayer"
+ },
+ {
+  "tur": 4,
+  "p1": "fire-log-seat",
+  "p2": "seated-leg-raise-hold"
+ },
+ {
+  "tur": 4,
+  "p1": "potion-half-kneel-side-w-t",
+  "p2": "seated-leg-hold-up"
+ },
+ {
+  "tur": 4,
+  "p1": "side-lying-leg-lift",
+  "p2": "deep-lunge-hands-down"
+ },
+ {
+  "tur": 4,
+  "p1": "straddle-side-reach",
+  "p2": "plank-knee-drive"
+ },
+ {
+  "tur": 4,
+  "p1": "seated-twist-arms",
+  "p2": "graveyard-bird-dog"
+ },
+ {
+  "tur": 4,
+  "p1": "sphinx-lift",
+  "p2": "bicycle-hold"
+ }
+]

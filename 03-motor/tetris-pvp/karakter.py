@@ -20,6 +20,8 @@ DUVAR = json.load(open(os.path.join(KOK, arg("--duvar", "03-motor/tetris-pvp/duv
 KAYNAK = json.load(open(os.path.join(KOK, arg("--kaynak", "03-motor/tetris-pvp/aday-olcu-24.json")), encoding="utf-8"))
 POZ_DOSYA = {"varlik": "pozlar.json", "varlik-03": "pozlar-03.json", "varlik-04": "pozlar-04.json", "varlik-05": "pozlar-05.json"}
 RENK_K = {"p1": "#2E9BFF", "p2": "#FF3EA5", "maskot": "#ff9ad8"}
+# 25 (TALIMATLAR §4 cilali 3D oyun gorunumu): 24'teki guclu kenar isiltisi govdeyi bembeyaz/pastel yapiyordu -> ayarlanabilir
+RIM = float(arg("--rim", "1.6")); EKIP_EMIS = float(arg("--ekip-emis", "0.35")); GOVDE_ACIK = float(arg("--govde-acik", "0.78"))
 
 # poz adi -> aci tanimi (maskenin klasorune gore dogru pozlar dosyasi)
 ad_klasor = {os.path.basename(k)[:-4]: k.split("/")[0] for k in KAYNAK}
@@ -47,7 +49,7 @@ def mat_govde(renk, acik_m):
     b.inputs["Coat Weight"].default_value = 1.0
     b.inputs["Coat Roughness"].default_value = 0.03
     lw = nt.nodes.new("ShaderNodeLayerWeight"); lw.inputs["Blend"].default_value = 0.35
-    mu = nt.nodes.new("ShaderNodeMath"); mu.operation = "MULTIPLY"; mu.inputs[1].default_value = 1.6
+    mu = nt.nodes.new("ShaderNodeMath"); mu.operation = "MULTIPLY"; mu.inputs[1].default_value = RIM
     nt.links.new(lw.outputs["Facing"], mu.inputs[0])
     b.inputs["Emission Color"].default_value = (*acik(renk, 0.2), 1)
     nt.links.new(mu.outputs[0], b.inputs["Emission Strength"])
@@ -66,7 +68,7 @@ arm.animation_data_clear()
 for o in mesler:
     o.animation_data_clear()
 R = lin(hex3(RENK_K[OYUNCU]))
-gm = mat_govde(R, 0.78 if OYUNCU != "maskot" else 0.35)
+gm = mat_govde(R, GOVDE_ACIK if OYUNCU != "maskot" else 0.35)
 for m in mesler:
     m.data.materials.clear(); m.data.materials.append(gm)
     for poly in m.data.polygons:
@@ -85,7 +87,7 @@ log("govde boy", round(BOY, 3))
 # ---------------------------------------------------------------- ekipman (yalniz yarisan karakterler; VS kartindaki boksorlerin dili)
 EKIP = []
 if OYUNCU != "maskot":
-    ekip = mat_jole("ekipman", R, emis=0.35, purluk=0.06)
+    ekip = mat_jole("ekipman", R, emis=EKIP_EMIS, purluk=0.06)
     beyaz = mat_jole("kenar", (0.92, 0.94, 1.0), emis=0.15, purluk=0.08)
 
     def kemik_boy(ad):
