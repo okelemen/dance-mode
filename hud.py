@@ -53,7 +53,8 @@ def hap(d, merkez, metin, f, zemin, yazi, pad=(34, 16)):
     return w
 
 
-CTA = [(14.6, 18.0), (44.0, 47.4)]
+# abone + begen/yorum/paylas cagrisi: her 10 sn, 3.5 sn gorunur (kullanici 13 Kas)
+CTA = [(t0, t0 + 3.5) for t0 in range(5, int(P["sure"]), 10)]
 
 for yol in sorted(glob.glob(os.path.join(a.giris, "kare_*.png"))):
     f = int(os.path.basename(yol)[5:9])
@@ -81,16 +82,16 @@ for yol in sorted(glob.glob(os.path.join(a.giris, "kare_*.png"))):
     son_mu = True
     yaz(d, (540, 250), str(kesim), F_SAYI, BEYAZ, 9)
     yaz(d, (540, 372), "CUTS", F_ETIKET, ALTIN, 6)
-    yaz(d, (540, 1545), kup_metni(kup) if son_mu else f"{kup:,}", F_KUP, BEYAZ, 8)
-    yaz(d, (540, 1650), "CUBES", F_ETIKET, ALTIN, 6)
+    yaz(d, (540, 1360), kup_metni(kup) if son_mu else f"{kup:,}", F_KUP, BEYAZ, 8)
+    yaz(d, (540, 1452), "CUBES", F_ETIKET, ALTIN, 7)
     for c0, c1 in CTA:
         if c0 <= t < c1:
-            hap(d, (540, 1765), "SUBSCRIBE", F_CTA, (214, 32, 26), (255, 255, 255))
+            hap(d, (540, 1548), "SUBSCRIBE", F_CTA, (214, 32, 26), (255, 255, 255))
             ws = [d.textbbox((0, 0), m, font=F_CTA2)[2] + 60 for m in ("LIKE", "COMMENT", "SHARE")]
             top = sum(ws) + 2 * 22
             x = 540 - top / 2
             for m, w in zip(("LIKE", "COMMENT", "SHARE"), ws):
-                hap(d, (x + w / 2, 1858), m, F_CTA2, (58, 84, 30), (255, 255, 255), pad=(30, 12))
+                hap(d, (x + w / 2, 1634), m, F_CTA2, (58, 84, 30), (255, 255, 255), pad=(30, 12))
                 x += w + 22
     if a.jpg:
         im.save(os.path.join(a.cikis, os.path.basename(yol)[:-4] + ".jpg"), quality=93)
