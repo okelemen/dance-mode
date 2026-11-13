@@ -58,7 +58,10 @@ try:
     sc.cycles.denoiser = "OPENIMAGEDENOISE"
 except Exception:
     pass
-sc.cycles.max_bounces = 4
+sc.cycles.max_bounces = 3
+sc.cycles.use_adaptive_sampling = True
+sc.cycles.adaptive_threshold = 0.04
+sc.render.use_persistent_data = True
 sc.render.resolution_x = 1080
 sc.render.resolution_y = 1920
 sc.render.resolution_percentage = 100
@@ -79,7 +82,7 @@ dunya = bpy.data.worlds.new("dunya")
 sc.world = dunya
 dunya.use_nodes = True
 dunya.node_tree.nodes["Background"].inputs[0].default_value = hex_renk("#9a9a9a")
-dunya.node_tree.nodes["Background"].inputs[1].default_value = 0.35
+dunya.node_tree.nodes["Background"].inputs[1].default_value = 0.6
 
 
 # ---------------------------------------------------------------- malzeme yardimcilari
@@ -277,9 +280,9 @@ def bicak_kur():
     agiz = bpy.data.objects.new("bicak", me)
     sc.collection.objects.link(agiz)
     mb, ntb, bb = malzeme("celik")
-    bb.inputs["Base Color"].default_value = hex_renk("#c9ccd0")
-    bb.inputs["Metallic"].default_value = 1.0
-    bb.inputs["Roughness"].default_value = 0.22
+    bb.inputs["Base Color"].default_value = hex_renk("#dfe2e6")
+    bb.inputs["Metallic"].default_value = 0.85
+    bb.inputs["Roughness"].default_value = 0.32
     me.materials.append(mb)
     bpy.ops.mesh.primitive_cube_add(size=1, location=(-0.55, 0.22, 0))
     sap = bpy.context.object
@@ -289,6 +292,7 @@ def bicak_kur():
     bh.inputs["Roughness"].default_value = 0.5
     sap.data.materials.append(mh)
     sap.parent = agiz
+    agiz.scale = (1.2, 1.45, 1.0)  # agiz 2.4 boy, sirt ~0.6
     return agiz
 
 
@@ -300,7 +304,7 @@ YON = {
     "y": (math.radians(90), 0.0, math.radians(180)),   # agiz x boyunca, duzlem XZ, kameraya yuzu donuk
     "z": (0.0, 0.0, math.radians(-90)),                # yatay dilim, agiz -x'e bakar
 }
-DISARI = (3.4, -0.6, 3.6)
+DISARI = (7.5, -1.0, 4.5)  # kadraj disi (sag ust)
 
 
 def bicak_konum(eks, konum, asagi, yuk):
@@ -308,7 +312,7 @@ def bicak_konum(eks, konum, asagi, yuk):
     if eks == "x":
         return (konum, -1.0, TAHTA_UST + 0.004 if asagi else MERKEZ_Z + R + 0.15 + 0.9 * yuk)
     if eks == "y":
-        return (1.0, konum, TAHTA_UST + 0.004 if asagi else MERKEZ_Z + R + 0.15 + 0.9 * yuk)
+        return (1.25, konum, TAHTA_UST + 0.004 if asagi else MERKEZ_Z + R + 0.15 + 0.9 * yuk)
     # z: yatay dilim; asagi = ice girmis (uc meyveden gecti), yukari = sagda disarida
     return ((-A - 0.3) if asagi else (A + 0.5 + 0.8 * yuk), 1.0, MERKEZ_Z + konum)
 
@@ -359,28 +363,30 @@ def kup_nesnesi(tur, no):
     f = np.sqrt(np.maximum(0, 1 - xn * xn)) * (M["boyun"] + (1 - M["boyun"]) * (xn + 1) / 2) / FMAX
     rr = R * f
     ic = (np.abs(X / A) <= 1) & (Y * Y + Z * Z <= rr * rr)
-    # kabuk = icteki hucrenin 6 komsusundan biri disarida
     p = np.pad(ic, 1)
-    komsu_hepsi = (p[2:, 1:-1, 1:-1] & p[:-2, 1:-1, 1:-1] & p[1:-1, 2:, 1:-1] & p[1:-1, :-2, 1:-1]
-                   & p[1:-1, 1:-1, 2:] & p[1:-1, 1:-1, :-2])
-    kabuk = ic & ~komsu_hepsi
     ck = M["cekirdek"]
     cekirdek = ((X - ck["x"] * A) ** 2 + Y ** 2 + Z ** 2) <= (ck["r"] * R) ** 2
     d = np.sqrt(Y * Y + Z * Z) / np.maximum(rr, 1e-6)
     idx = np.argwhere(ic)
+    k = len(idx)
     rng = np.random.default_rng(7 + no)
     merk = np.stack([X[ic], Y[ic], Z[ic]], 1)
-    renk = np.zeros((len(idx), 3))
-    et_ic = np.array(hex_renk("#ece58c")[:3])
-    et_dis = np.array(hex_renk("#86b43c")[:3])
+    # temel (et/cekirdek) rengi
+    et_ic = np.array(hex_renk("#efe78e")[:3])
+    et_dis = np.array(hex_renk("#8fbf3f")[:3])
     dd = np.clip(d[ic], 0, 1)[:, None]
-    renk[:] = et_ic * (1 - dd ** 1.6) + et_dis * dd ** 1.6
-    renk[cekirdek[ic]] = np.array(hex_renk("#6e3d1d")[:3])
-    renk[kabuk[ic]] = np.array(hex_renk("#22300f")[:3])
-    renk *= rng.uniform(0.9, 1.08, (len(idx), 1))
-    hx, hy, hz = A / gx * 0.86, R / gy * 0.86, R / gz * 0.86
+    taban = et_ic * (1 - dd ** 1.8) + et_dis * dd ** 1.8
+    taban[cekirdek[ic]] = np.array(hex_renk("#7a4321")[:3])
+    taban *= rng.uniform(0.92, 1.06, (k, 1))
+    kabuk_r = np.array(hex_renk("#26340f")[:3])
+    # yuz yonleri (yuz sirasi asagidaki 'yuz' ile ayni): -X +X -Y +Y -Z +Z
+    yonler = [(-1, 0, 0), (1, 0, 0), (0, -1, 0), (0, 1, 0), (0, 0, -1), (0, 0, 1)]
+    renk = np.zeros((k, 6, 3))
+    for fi, (dx, dy, dz) in enumerate(yonler):
+        dis = ~p[idx[:, 0] + 1 + dx, idx[:, 1] + 1 + dy, idx[:, 2] + 1 + dz]
+        renk[:, fi] = np.where(dis[:, None], kabuk_r * rng.uniform(0.85, 1.15, (k, 1)), taban)
+    hx, hy, hz = A / gx * 0.88, R / gy * 0.88, R / gz * 0.88
     ofs = np.array([[sx * hx, sy * hy, sz * hz] for sx in (-1, 1) for sy in (-1, 1) for sz in (-1, 1)])
-    k = len(merk)
     v = (merk[:, None, :] + ofs[None, :, :]).reshape(-1, 3)
     v[:, 2] += MERKEZ_Z
     yuz = np.array([[0, 1, 3, 2], [4, 6, 7, 5], [0, 4, 5, 1], [2, 3, 7, 6], [0, 2, 6, 4], [1, 5, 7, 3]])
@@ -394,8 +400,9 @@ def kup_nesnesi(tur, no):
     me.polygons.foreach_set("loop_start", (np.arange(len(f_all)) * 4).astype(np.int32))
     me.polygons.foreach_set("loop_total", np.full(len(f_all), 4, np.int32))
     me.update(calc_edges=True)
-    ca = me.color_attributes.new("renk", "FLOAT_COLOR", "POINT")
-    rv = np.repeat(np.hstack([renk, np.ones((k, 1))]), 8, axis=0)
+    ca = me.color_attributes.new("renk", "FLOAT_COLOR", "CORNER")
+    rv = np.repeat(renk.reshape(-1, 3), 4, axis=0)
+    rv = np.hstack([rv, np.ones((len(rv), 1))])
     ca.data.foreach_set("color", rv.ravel().astype(np.float32))
     ob = bpy.data.objects.new(f"kup_{no}", me)
     sc.collection.objects.link(ob)
@@ -405,19 +412,28 @@ def kup_nesnesi(tur, no):
     baglan(ntk, at.outputs["Color"], bk.inputs["Base Color"])
     bk.inputs["Roughness"].default_value = 0.5
     me.materials.append(mk)
-    # cokme sekil anahtari: yigin asagi oturur, yana yayilir
+    # acilma: on yari (y<0) one dogru devrilir -> ic yuz (et + cekirdek) kameraya doner
     ob.shape_key_add(name="temel")
-    sk = ob.shape_key_add(name="cokme")
-    merk_v = np.repeat(merk, 8, axis=0)
-    yeni = v.copy()
+    on = np.repeat(merk[:, 1] < 0, 8)
     zb = TAHTA_UST
-    zc = merk_v[:, 2] + MERKEZ_Z
-    yay = 1.0 + 0.10 * rng.standard_normal(len(merk))
-    yay = np.repeat(yay, 8)
-    yeni[:, 0] += merk_v[:, 0] * 0.10 * yay
-    yeni[:, 1] += merk_v[:, 1] * 0.16 * yay
-    yeni[:, 2] -= (zc - zb - R * 0.15) * 0.28
-    sk.data.foreach_set("co", yeni.ravel().astype(np.float32))
+    egik = np.repeat(rng.normal(0, 0.035, k), 8)
+
+    def devir(aci):
+        y = v[:, 1]; z = v[:, 2]
+        ry, rz = y + R, z - zb
+        c, s = math.cos(aci), np.sin(aci + egik)
+        ny = -R + ry * c - rz * s
+        nz = zb + ry * s + rz * c
+        w = v.copy()
+        w[on, 1] = ny[on]
+        w[on, 2] = np.maximum(nz[on], zb + 0.001)
+        # arka yari hafif oturur
+        w[~on, 2] = zb + (v[~on, 2] - zb) * (1 - 0.06 * aci / math.radians(72))
+        return w
+
+    for ad, aci in (("yari", math.radians(36)), ("tam", math.radians(72))):
+        sk = ob.shape_key_add(name=ad)
+        sk.data.foreach_set("co", devir(aci).ravel().astype(np.float32))
     return ob
 
 
@@ -450,8 +466,11 @@ for no, tur in enumerate(PLAN["turlar"]):
     meyve.keyframe_insert("scale", frame=kare(bas + 0.22))
     meyve.scale = (1, 1, 1)
     meyve.keyframe_insert("scale", frame=kare(bas + 0.36))
+    meyve.keyframe_insert("scale", frame=kare(ks))  # tur boyunca 1.0 sabit
     meyve.hide_render = True
     meyve.keyframe_insert("hide_render", frame=kare(ks + 0.05))
+    bicak.location = DISARI
+    bicak.keyframe_insert("location", frame=kare(kb - 0.3))
     # cizgi degerleri sifirla
     for eks, c in (("x", tur["cx"]), ("y", tur["cy"]), ("z", tur["cz"])):
         deger_anahtar(f"n_{eks}", bas, c + 1.0)
@@ -478,7 +497,7 @@ for no, tur in enumerate(PLAN["turlar"]):
         sayac[eks] += 1
         deger_anahtar(f"d_{eks}", t, float(sayac[eks]))
     bicak.location = DISARI
-    bicak.keyframe_insert("location", frame=kare(ks + 0.25))
+    bicak.keyframe_insert("location", frame=kare(ks + 0.12))
     # kup yigini
     kup = kup_nesnesi(tur, no)
     kup.hide_render = True
@@ -487,18 +506,14 @@ for no, tur in enumerate(PLAN["turlar"]):
     kup.keyframe_insert("hide_render", frame=kare(ks + 0.05))
     kup.hide_render = True
     kup.keyframe_insert("hide_render", frame=kare(son))
-    ky = kup.data.shape_keys.key_blocks["cokme"]
-    ky.value = 0.0
-    ky.keyframe_insert("value", frame=kare(ks + 0.05))
-    ky.value = 1.0
-    ky.keyframe_insert("value", frame=kare(ks + 0.75))
+    kb_ = kup.data.shape_keys.key_blocks
+    for t_, yv, tv in ((ks + 0.2, 0, 0), (ks + 0.42, 1, 0), (ks + 0.62, 0, 1)):
+        kb_["yari"].value = yv; kb_["yari"].keyframe_insert("value", frame=kare(t_))
+        kb_["tam"].value = tv; kb_["tam"].keyframe_insert("value", frame=kare(t_))
     sabit_interp(kup)
-    # cokme egrisi yumusak olsun
-    if kup.data.shape_keys.animation_data:
-        for fc in egriler(kup.data.shape_keys.animation_data.action):
-            for kp in fc.keyframe_points:
-                kp.interpolation = "QUAD"
-                kp.easing = "EASE_OUT"
+    for fc in egriler(kup.data.shape_keys.animation_data.action):
+        for kp in fc.keyframe_points:
+            kp.interpolation = "LINEAR"
 
 # interpolasyon: bicak konumu dogrusal, yon sabit; cizgi degerleri sabit; gorunurluk sabit
 ad = bicak.animation_data.action
@@ -527,14 +542,14 @@ a.rotation_euler = (math.radians(45), 0, math.radians(-30))
 sc.collection.objects.link(a)
 
 cam = bpy.data.cameras.new("kamera")
-cam.lens = 42
+cam.lens = 50
 cam.sensor_fit = "HORIZONTAL"
 cam.sensor_width = 36
 k = bpy.data.objects.new("kamera", cam)
-k.location = (0.55, -5.0, 2.55)
+k.location = (2.0, -3.77, 2.57)
 sc.collection.objects.link(k)
 hedef = bpy.data.objects.new("hedef", None)
-hedef.location = (0.0, 0.0, 0.95)
+hedef.location = (0.0, 0.0, 0.62)
 sc.collection.objects.link(hedef)
 tr = k.constraints.new("TRACK_TO")
 tr.target = hedef
@@ -555,5 +570,7 @@ if arg("--render", "1") == "1":
     for f in liste:
         sc.frame_set(f)
         sc.render.filepath = os.path.join(CIKTI, f"kare_{f:04d}.png")
+        import time as _t
+        _b = _t.time()
         bpy.ops.render.render(write_still=True)
-        print(f"KARE {f} tamam", flush=True)
+        print(f"KARE {f} tamam {(_t.time() - _b):.1f} sn", flush=True)
