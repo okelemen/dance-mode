@@ -1,4 +1,1 @@
-{"plan": "plan-avokado.json", "mod": "marka", "betik": "marka3b.py", "ornek": 48, "isler": [
- {"ad": "banner", "arg": "--tur banner"},
- {"ad": "profil", "arg": "--tur profil"}
-]}
+{"plan": "plan-avokado.json", "mod": "marka", "betik": "marka3b.py", "ornek": 48, "t": 2, "isler": [{"ad": "banner", "arg": "--tur banner"}, {"ad": "profil", "arg": "--tur profil"}]}

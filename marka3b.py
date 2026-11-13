@@ -142,13 +142,13 @@ ET2 = np.array(hex_renk("#bfe06a")[:3])
 CEK = np.array(hex_renk("#8a4a22")[:3])
 
 
-def harf_kupleri(dosya, genislik, z0, derinlik=3, kopuk=None):
+def harf_kupleri(dosya, genislik, z0, derinlik=3, kopuk=None, kay=0.0):
     d = json.load(open(dosya))
     s = genislik / d["en"]
     merk, renk, don = [], [], []
     for x, y, kenar in d["kupler"]:
         for dz in range(derinlik):
-            px = (x - d["en"] / 2 + 0.5) * s
+            px = (x - d["en"] / 2 + 0.5) * s + kay
             pz = z0 + (y + 0.5) * s
             py = -0.1 + (dz - (derinlik - 1) / 2) * s
             on = dz == 0
@@ -160,6 +160,9 @@ def harf_kupleri(dosya, genislik, z0, derinlik=3, kopuk=None):
                 c = CEK
             r_ = None
             if kopuk is not None and px > kopuk[0] and pz > kopuk[1]:  # bicak bu kosede: kupler dagilir
+                if rng.random() < 0.55:  # kosenin bir kismi yerinde kalir (harf okunur)
+                    merk.append((px, py, pz)); renk.append(c); don.append((0.0, 0.0, 0.0))
+                    continue
                 px += rng.uniform(0.05, 0.6)
                 pz = max(TAHTA_UST + s / 2, pz - rng.uniform(0.0, pz - TAHTA_UST) * rng.uniform(0.6, 1.0))
                 py += rng.uniform(-0.4, 0.3)
@@ -171,12 +174,12 @@ def harf_kupleri(dosya, genislik, z0, derinlik=3, kopuk=None):
 
 
 if TUR == "banner":
-    merk, renk, don, s = harf_kupleri("harf-cubecut.json", 3.6, TAHTA_UST, kopuk=(1.35, TAHTA_UST + 0.35))
+    merk, renk, don, s = harf_kupleri("harf-cubecut.json", 3.3, TAHTA_UST, kopuk=(1.2, TAHTA_UST + 0.47), kay=-0.35)
     kup_mesh("harfler", merk, s, renk, don)
     # sagda kucuk avokado kup yigini, solda butun avokado
     n = 260
-    yk = np.column_stack([rng.normal(2.25, 0.16, n), rng.normal(-0.25, 0.14, n), np.zeros(n)])
-    yk[:, 2] = TAHTA_UST + 0.05 + np.maximum(0, 0.32 - np.hypot(yk[:, 0] - 2.25, yk[:, 1] + 0.25)) * rng.uniform(0.3, 1.0, n)
+    yk = np.column_stack([rng.normal(1.75, 0.15, n), rng.normal(-0.25, 0.13, n), np.zeros(n)])
+    yk[:, 2] = TAHTA_UST + 0.05 + np.maximum(0, 0.3 - np.hypot(yk[:, 0] - 1.75, yk[:, 1] + 0.25)) * rng.uniform(0.3, 1.0, n)
     rk = np.array([KABUK if rng.random() < 0.3 else (ET if rng.random() < 0.7 else ET2) for _ in range(n)])
     kup_mesh("yigin", yk, 0.09, rk, rng.uniform(-1.5, 1.5, (n, 3)))
     bpy.ops.mesh.primitive_uv_sphere_add(segments=64, ring_count=48, radius=1.0, location=(-2.45, -0.15, TAHTA_UST + 0.36))
@@ -193,13 +196,14 @@ if TUR == "banner":
     av.data.materials.append(m)
     # bicak: son harfi kesiyor (capraz, sag ustten)
     bicak = bicak_kur()
-    bicak.rotation_euler = (math.radians(90), math.radians(-28), math.radians(180))
-    bicak.location = (2.95, -0.12, TAHTA_UST + 0.95)
+    bicak.scale = (0.5, 0.5, 0.5)
+    bicak.rotation_euler = (math.radians(90), math.radians(-32), math.radians(180))
+    bicak.location = (2.05, -0.1, TAHTA_UST + 0.98)
     kam_loc, hedef_loc, lens = (0.0, -9.6, 1.55), (0.0, -0.1, 0.62), 50
 else:
-    merk, renk, don, s = harf_kupleri("harf-c.json", 1.25, TAHTA_UST, derinlik=4, kopuk=(0.25, TAHTA_UST + 0.85))
+    merk, renk, don, s = harf_kupleri("harf-c.json", 1.25, TAHTA_UST, derinlik=4, kopuk=(0.3, TAHTA_UST + 0.95))
     kup_mesh("harfler", merk, s, renk, don)
-    kam_loc, hedef_loc, lens = (0.0, -4.1, 1.05), (0.05, -0.1, 0.78), 50
+    kam_loc, hedef_loc, lens = (0.12, -2.75, 0.95), (0.12, -0.1, 0.8), 50
 
 # isik: sicak gunes + dolgu (canli)
 g = bpy.data.objects.new("gunes", bpy.data.lights.new("gunes", "SUN"))
