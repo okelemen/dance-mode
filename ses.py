@@ -54,8 +54,6 @@ if __name__ == "__main__":
     R = P["sekil"]["R"]
     MERKEZ_Z = TAHTA_UST + R - 0.03
     x = yukle(KAYNAK)
-    vuruslar = [sar(parca(x, t - 0.004, t + 0.16), 0.001, 0.03) for t in VURUS]
-    kesmeler = [parca(x, s, e) for s, e in KESME]
     rng = np.random.default_rng(5)
     N = int(P["sure"] * SR)
     sol, sag = np.zeros(N + SR), np.zeros(N + SR)
@@ -69,25 +67,15 @@ if __name__ == "__main__":
         sol[i:i + n] += sinyal[:n] * g * (1 - pan)
         sag[i:i + n] += sinyal[:n] * g * (1 + pan)
 
+    # her gorunur bicak vurusu = kayittaki TAM bir dograma ani (kesme + tahtaya inis birlikte, dogal zarf);
+    # kisa kesme kirpintilari yok (cizirti yapiyordu). Yatay (z) vurus tahtaya inmez: yalniz kesme kismi.
+    # earshot rank ("knife chopping through a vegetable onto a wooden cutting board"): en iyi 3 dograma
+    tam = [sar(parca(x, h - 0.12, h + 0.22), 0.01, 0.06) for h in (4.66, 6.96, 9.56)]
     for tur in P["turlar"]:
-        onceki = tur["kes_bas"] - 0.25
-        for t, eks, konum, j in tur["kesimler"]:
-            ara = max(0.01, t - onceki)
-            onceki = t
-            # sahne.py ile ayni: bicak yukaridan (t - inis) aninda iner, t'de tahtada
-            inis = min(ara * 0.55, 0.18)
-            ust = MERKEZ_Z + R + 0.15 + 0.9 * min(1.0, ara * 3)
-            girme = inis * (ust - (MERKEZ_Z + R * 0.9)) / (ust - TAHTA_UST)  # meyveye girdigi an (inisin basindan)
-            kesme_sure = max(0.025, inis - girme)
-            kb = kesmeler[rng.integers(len(kesmeler))]
-            bas = rng.integers(0, max(1, len(kb) - int(kesme_sure * SR)))
-            k = sar(kb[bas:bas + int(kesme_sure * SR)].copy())
-            pan = rng.uniform(-0.12, 0.12)
-            if eks == "z":
-                ekle(k, t - kesme_sure, 0.75 * rng.uniform(0.85, 1.0), pan)  # yatay dilim: yalniz kesme
-            else:
-                ekle(k, t - kesme_sure, 0.55 * rng.uniform(0.8, 1.0), pan)
-                ekle(vuruslar[rng.integers(len(vuruslar))], t, rng.uniform(0.8, 1.0), pan)
+        for t, eks, konum, adet in tur["vuruslar"]:
+            pan = rng.uniform(-0.1, 0.1)
+            g = rng.uniform(0.85, 1.0) * (1.0 if adet == 1 else 1.05)
+            ekle(tam[rng.integers(len(tam))], t - 0.12, g * (0.8 if eks == "z" else 1.0), pan)
     # yeni meyve tahtaya duser (sahne.py DUSUS_ANAHTAR: temas 0.30 sn, sekme inisi 0.53 sn): tok + yumusak pof
     tok = yukle("ses/dusus_tok.wav")
     pof = yukle("ses/dusus_pof.wav")

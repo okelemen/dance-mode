@@ -455,7 +455,7 @@ def kup_nesnesi(tur, no):
     renk *= rng.uniform(0.93, 1.05, (k, 1))
 
     # birakilma ani: x kesimi hucrenin sag kenarini gectiginde (soldan saga)
-    xk = [(t, konum) for t, eks, konum, j in tur["kesimler"] if eks == "x"]
+    xk = [(k_[4], k_[2]) for k_ in tur["kesimler"] if k_[1] == "x"]
     T = np.array([t for t, _ in xk])
     P = np.array([c for _, c in xk])
     sag = -A + (idx[:, 0] + 1) * (2 * A / gx)
@@ -713,27 +713,25 @@ for no, tur in enumerate(PLAN["turlar"]):
         deger_anahtar(f"n_{eks}", bas, c + 1.0)
         deger_anahtar(f"d_{eks}", bas, 0.0)
     deger_anahtar("kes_x", bas, -10.0)
-    # kesimler
-    sayac = {"x": 0, "y": 0, "z": 0}
-    ks_list = tur["kesimler"]
+    # bicak: her gorunur vurus TAM: ustte -> tek hamlede tahtaya -> kisa durus -> ustte (ara durum yok)
+    vl = tur["vuruslar"]
     onceki_eks = None
-    for i, (t, eks, konum, j) in enumerate(ks_list):
-        sonraki = ks_list[i + 1][0] if i + 1 < len(ks_list) else t + 0.4
-        onceki = ks_list[i - 1][0] if i > 0 else kb - 0.25
-        ara_on = max(0.01, t - onceki)
-        ara_son = max(0.01, sonraki - t)
-        yuk_on = min(1.0, ara_on * 3)
+    for i, (t, eks, konum, adet) in enumerate(vl):
+        once = vl[i - 1][0] if i > 0 else kb - 0.3
+        sonra = vl[i + 1][0] if i + 1 < len(vl) else t + 0.4
+        inis = min(0.055, (t - once) * 0.4)
+        kalkis = min(0.07, (sonra - t) * 0.45)
         if eks != onceki_eks:
-            # yon degisimi: bicak yukarida, bir onceki anda yon degisir
             bicak.rotation_euler = YON[eks]
-            bicak.keyframe_insert("rotation_euler", frame=kare(t - ara_on * 0.6))
+            bicak.keyframe_insert("rotation_euler", frame=kare(t - inis - 0.01))
             onceki_eks = eks
-        bicak.location = bicak_konum(eks, konum, False, yuk_on)
-        bicak.keyframe_insert("location", frame=kare(t - min(ara_on * 0.55, 0.18)))
+        bicak.location = bicak_konum(eks, konum, False, 1.0)
+        bicak.keyframe_insert("location", frame=kare(t - inis))
         bicak.location = bicak_konum(eks, konum, True, 0)
         bicak.keyframe_insert("location", frame=kare(t))
-        sayac[eks] += 1
-        deger_anahtar(f"d_{eks}", t, float(sayac[eks]))
+        bicak.keyframe_insert("location", frame=kare(t + min(0.02, kalkis * 0.3)))
+        bicak.location = bicak_konum(eks, konum, False, 1.0)
+        bicak.keyframe_insert("location", frame=kare(t + kalkis))
         if eks == "x":
             deger_anahtar("kes_x", t, konum)
     bicak.location = DISARI
@@ -818,7 +816,7 @@ nt_k = mk_.node_tree
 kesit.hide_render = True
 kesit.keyframe_insert("hide_render", frame=0)
 for tur in PLAN["turlar"]:
-    xk = [(t, konum) for t, eks, konum, j in tur["kesimler"] if eks == "x"]
+    xk = [(v_[0], v_[2]) for v_ in tur["vuruslar"] if v_[1] == "x"]
     kesit.hide_render = False
     kesit.keyframe_insert("hide_render", frame=kare(xk[0][0]))
     kesit.hide_render = True
