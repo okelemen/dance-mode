@@ -745,8 +745,8 @@ for no, tur in enumerate(PLAN["turlar"]):
         bicak.keyframe_insert("location", frame=kare(t + min(0.02, kalkis * 0.3)))
         bicak.location = bicak_konum(eks, konum, False, 1.0)
         bicak.keyframe_insert("location", frame=kare(t + kalkis))
-        if eks == "x":
-            deger_anahtar("kes_x", t, konum)
+        if eks_g == "x":  # kesim yuzu yalniz gercek dilim kesiminde ilerler (iz asamasinda meyve butun)
+            deger_anahtar("kes_x", t, konum_g)
     bicak.location = DISARI
     bicak.keyframe_insert("location", frame=kare(ks + 0.12))
     # kup yigini: supurme basinda gorunur (meyvenin icinde), dilim dilim coker
