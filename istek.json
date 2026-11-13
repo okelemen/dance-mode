@@ -1,6 +1,5 @@
 {"plan": "plan-avokado.json", "mod": "marka", "ornek": 32, "yuzde": 100, "isler": [
- {"ad": "profil-a", "arg": "--kareler 142 --cozunurluk 800x800 --kamera 0.0,-3.0,1.9,-0.35,-0.1,0.38,55"},
- {"ad": "profil-b", "arg": "--kareler 418 --cozunurluk 800x800 --kamera 0.0,-3.3,2.2,-0.3,-0.1,0.3,50"},
- {"ad": "banner-a", "arg": "--kareler 649 --cozunurluk 2560x1440 --kamera 1.5,-9.0,2.3,1.5,-0.1,0.75,50"},
- {"ad": "banner-b", "arg": "--kareler 1786 --cozunurluk 2560x1440 --kamera 1.5,-9.0,2.3,1.5,-0.1,0.75,50"}
+ {"ad": "banner-a2", "arg": "--kareler 649 --cozunurluk 2560x1440 --kamera 1.9,-12.5,2.6,1.9,-0.1,0.85,50"},
+ {"ad": "banner-b2", "arg": "--kareler 1786 --cozunurluk 2560x1440 --kamera 1.9,-12.5,2.6,1.9,-0.1,0.85,50"},
+ {"ad": "banner-c2", "arg": "--kareler 418 --cozunurluk 2560x1440 --kamera 1.9,-12.5,2.6,1.9,-0.1,0.85,50"}
 ]}
