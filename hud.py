@@ -58,6 +58,8 @@ for yol in sorted(glob.glob(os.path.join(a.giris, "kare_*.png"))):
     f = int(os.path.basename(yol)[5:9])
     t = (f - 1) / FPS
     im = Image.open(yol).convert("RGB")
+    if im.size != (1080, 1920):
+        im = im.resize((1080, 1920), Image.LANCZOS)
     d = ImageDraw.Draw(im)
     tur = next((r for r in P["turlar"] if r["bas"] <= t < r["son"]), P["turlar"][-1])
     kesim = sum(1 for k in tur["kesimler"] if k[0] <= t + 1e-6)

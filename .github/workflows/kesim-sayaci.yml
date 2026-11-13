@@ -17,6 +17,7 @@ jobs:
       plan: ${{ steps.m.outputs.plan }}
       ornek: ${{ steps.m.outputs.ornek }}
       mod: ${{ steps.m.outputs.mod }}
+      yuzde: ${{ steps.m.outputs.yuzde }}
     steps:
       - uses: actions/checkout@v4
       - id: m
@@ -32,6 +33,7 @@ jobs:
               mat = [{"ad": f"p{j:02d}", "arg": f"--bas {j*adim+1} --son {min(K,(j+1)*adim)}"} for j in range(n)]
           print("matris=" + json.dumps({"include": mat}))
           print("plan=" + i["plan"]); print("ornek=" + str(i.get("ornek", 24))); print("mod=" + i["mod"])
+          print("yuzde=" + str(i.get("yuzde", 100)))
           EOF
 
   render:
@@ -60,7 +62,7 @@ jobs:
         run: |
           set -o pipefail
           ~/blender/blender -b --factory-startup -noaudio -P sahne.py -- --plan "${{ needs.hazirlik.outputs.plan }}" \
-            --cikti cikti --ornek ${{ needs.hazirlik.outputs.ornek }} ${{ matrix.arg }} 2>&1 | grep -E "KARE|Error|Traceback|rror:" | tail -n 400
+            --cikti cikti --ornek ${{ needs.hazirlik.outputs.ornek }} --yuzde ${{ needs.hazirlik.outputs.yuzde }} ${{ matrix.arg }} 2>&1 | grep -E "KARE|Error|Traceback|rror:" | tail -n 400
           ls cikti | wc -l
       - uses: actions/upload-artifact@v4
         with:
