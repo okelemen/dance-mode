@@ -797,6 +797,8 @@ elif arg("--mod", "pvp") == "havuz":        # 24. video (referanssiz, 1v1, TALIM
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-havuz.py"), encoding="utf-8").read(), "varlik-havuz.py", "exec"))
 elif arg("--mod", "pvp") == "salon":        # 25. video (referanssiz, 1v1, TALIMATLAR §2b + §4 GERCEKCI): okul spor salonu, PBR + gercek isik
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-salon.py"), encoding="utf-8").read(), "varlik-salon.py", "exec"))
+elif arg("--mod", "pvp") == "plaj":         # 26. video (referanssiz, 1v1, TALIMATLAR §2b 3. mekan): tropik plaj, cilali 3D oyun gorunumu
+    exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-plaj.py"), encoding="utf-8").read(), "varlik-plaj.py", "exec"))
 elif arg("--mod", "pvp") == "karakter":     # 24. video: yarisan karakterler + hakem maskot poz kareleri (mobil paket md. 2)
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "karakter.py"), encoding="utf-8").read(), "karakter.py", "exec"))
 elif arg("--mod", "pvp") == "cadi":
