@@ -288,9 +288,16 @@ def bicak_kur():
     agiz = bpy.data.objects.new("bicak", me)
     sc.collection.objects.link(agiz)
     mb, ntb, bb = malzeme("celik")
-    bb.inputs["Base Color"].default_value = hex_renk("#dfe2e6")
-    bb.inputs["Metallic"].default_value = 0.85
-    bb.inputs["Roughness"].default_value = 0.32
+    bb.inputs["Base Color"].default_value = hex_renk("#b9bcc0")
+    bb.inputs["Metallic"].default_value = 0.0
+    bb.inputs["Roughness"].default_value = 0.35
+    # REF-080: hizli kesimde bicak yari saydam iz gibi gorunur
+    sf_ = ntb.nodes.new("ShaderNodeBsdfTransparent")
+    mx_ = ntb.nodes.new("ShaderNodeMixShader")
+    mx_.inputs[0].default_value = 0.45
+    ntb.links.new(bb.outputs[0], mx_.inputs[1])
+    ntb.links.new(sf_.outputs[0], mx_.inputs[2])
+    ntb.links.new(mx_.outputs[0], ntb.nodes["Material Output"].inputs["Surface"])
     me.materials.append(mb)
     bpy.ops.mesh.primitive_cube_add(size=1, location=(-0.55, 0.22, 0))
     sap = bpy.context.object
