@@ -33,7 +33,7 @@ FMAX = PLAN["fmax"]
 A, R = M["A"], M["R"]
 TAHTA_UST = 0.14
 MERKEZ_Z = TAHTA_UST + R - 0.03
-GORSEL_TAVAN = 36  # gorsel kup izgarasi eksen basina en fazla (sayi plandaki gercek degerdir)
+GORSEL_TAVAN = 120  # gorsel kup izgarasi eksen basina en fazla (sayi plandaki gercek degerdir)
 
 
 def hex_renk(h, a=1.0):
@@ -352,6 +352,10 @@ def dogrusal_interp(kimlik):
 
 
 # ---------------------------------------------------------------- kup yigini (tur sonu)
+DUSUS_ORNEK = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.75, 0.95]  # sn, kup dusus yorunge ornekleri
+G = 11.0  # sahne birimi/sn^2 (agir cekim yer cekimi)
+
+
 def kup_nesnesi(tur, no):
     cx, cy, cz = tur["cx"], tur["cy"], tur["cz"]
     gx, gy, gz = (min(c + 1, GORSEL_TAVAN) for c in (cx, cy, cz))
@@ -363,77 +367,136 @@ def kup_nesnesi(tur, no):
     f = np.sqrt(np.maximum(0, 1 - xn * xn)) * (M["boyun"] + (1 - M["boyun"]) * (xn + 1) / 2) / FMAX
     rr = R * f
     ic = (np.abs(X / A) <= 1) & (Y * Y + Z * Z <= rr * rr)
-    p = np.pad(ic, 1)
     ck = M["cekirdek"]
-    cekirdek = ((X - ck["x"] * A) ** 2 + Y ** 2 + Z ** 2) <= (ck["r"] * R) ** 2
+    cek_r = ck["r"] * R
+    cek_d = np.sqrt((X - ck["x"] * A) ** 2 + Y ** 2 + Z ** 2)
     d = np.sqrt(Y * Y + Z * Z) / np.maximum(rr, 1e-6)
-    idx = np.argwhere(ic)
-    k = len(idx)
+    k = int(ic.sum())
     rng = np.random.default_rng(7 + no)
     merk = np.stack([X[ic], Y[ic], Z[ic]], 1)
-    # temel (et/cekirdek) rengi
-    et_ic = np.array(hex_renk("#efe78e")[:3])
-    et_dis = np.array(hex_renk("#8fbf3f")[:3])
-    dd = np.clip(d[ic], 0, 1)[:, None]
-    taban = et_ic * (1 - dd ** 1.8) + et_dis * dd ** 1.8
-    taban[cekirdek[ic]] = np.array(hex_renk("#7a4321")[:3])
-    taban *= rng.uniform(0.92, 1.06, (k, 1))
-    kabuk_r = np.array(hex_renk("#26340f")[:3])
-    # yuz yonleri (yuz sirasi asagidaki 'yuz' ile ayni): -X +X -Y +Y -Z +Z
-    yonler = [(-1, 0, 0), (1, 0, 0), (0, -1, 0), (0, 1, 0), (0, 0, -1), (0, 0, 1)]
-    renk = np.zeros((k, 6, 3))
-    for fi, (dx, dy, dz) in enumerate(yonler):
-        dis = ~p[idx[:, 0] + 1 + dx, idx[:, 1] + 1 + dy, idx[:, 2] + 1 + dz]
-        renk[:, fi] = np.where(dis[:, None], kabuk_r * rng.uniform(0.85, 1.15, (k, 1)), taban)
-    hx, hy, hz = A / gx * 0.88, R / gy * 0.88, R / gz * 0.88
-    ofs = np.array([[sx * hx, sy * hy, sz * hz] for sx in (-1, 1) for sy in (-1, 1) for sz in (-1, 1)])
-    v = (merk[:, None, :] + ofs[None, :, :]).reshape(-1, 3)
-    v[:, 2] += MERKEZ_Z
-    yuz = np.array([[0, 1, 3, 2], [4, 6, 7, 5], [0, 4, 5, 1], [2, 3, 7, 6], [0, 2, 6, 4], [1, 5, 7, 3]])
-    f_all = (yuz[None, :, :] + (np.arange(k) * 8)[:, None, None]).reshape(-1, 4)
+    hx, hy, hz = A / gx, R / gy, R / gz  # yarim hucre
+    # renk: cekirdek kahve, hemen etrafi acik yesil -> kabuga dogru koyu yesil; en dis katman kabuk
+    cek_ic = np.array(hex_renk("#6b3a1c")[:3])
+    et_cek = np.array(hex_renk("#c6d96a")[:3])
+    et_dis = np.array(hex_renk("#5e9a2a")[:3])
+    kabuk = np.array(hex_renk("#22300f")[:3])
+    cd = cek_d[ic]
+    u = np.clip((cd - cek_r) / np.maximum(R * 0.62 - cek_r, 1e-6), 0, 1)[:, None]
+    renk = et_cek * (1 - u) + et_dis * u
+    renk[cd <= cek_r] = cek_ic
+    dk = d[ic]
+    hucre = min(hy, hz) / R
+    dis = dk > 1 - 1.2 * hucre  # en dis katman
+    karis = np.where(dis, 0.65, 0.0)[:, None]
+    renk = renk * (1 - karis) + kabuk * karis
+    renk *= rng.uniform(0.9, 1.07, (k, 1))
+
+    # ---- dusus: her kup ayri duser, tahtada yigilir
+    p0 = merk.copy()
+    p0[:, 2] += MERKEZ_Z
+    zb = TAHTA_UST
+    h = 2 * hz * 0.9
+    yon = merk[:, :2] / np.maximum(np.linalg.norm(merk[:, :2], axis=1, keepdims=True), 1e-6)
+    yuks = (p0[:, 2] - zb) / (2 * R)
+    yay = (0.25 + 0.9 * yuks) * R * rng.uniform(0.5, 1.3, k)
+    hedef_xy = merk[:, :2] + yon * yay[:, None] + rng.normal(0, 0.03, (k, 2))
+    bx = np.floor(hedef_xy[:, 0] / (2 * hx)).astype(np.int64)
+    by = np.floor(hedef_xy[:, 1] / (2 * hy)).astype(np.int64)
+    hedef_xy[:, 0] = (bx + 0.5) * 2 * hx
+    hedef_xy[:, 1] = (by + 0.5) * 2 * hy
+    anah = (bx - bx.min()) * 1_000_003 + (by - by.min())
+    sira = np.lexsort((p0[:, 2], anah))
+    rank = np.zeros(k, np.int64)
+    a_s = anah[sira]
+    yeni = np.r_[True, a_s[1:] != a_s[:-1]]
+    grup_bas = np.maximum.accumulate(np.where(yeni, np.arange(k), 0))
+    rank[sira] = np.arange(k) - grup_bas
+    zf = zb + h / 2 + rank * h
+    zf = np.minimum(zf, p0[:, 2])
+    gecik = rng.uniform(0, 0.12, k) + (1 - yuks) * 0.04
+
+    def konum(s):
+        tau = np.maximum(s - gecik, 0)
+        z = np.maximum(zf, p0[:, 2] - 0.5 * G * tau * tau)
+        ilerle = np.where(p0[:, 2] - zf > 1e-6, (p0[:, 2] - z) / np.maximum(p0[:, 2] - zf, 1e-6), 1.0)
+        xy = p0[:, :2] + (hedef_xy - p0[:, :2]) * ilerle[:, None]
+        return np.column_stack([xy, z])
+
     me = bpy.data.meshes.new(f"kup_{no}")
-    me.vertices.add(len(v))
-    me.vertices.foreach_set("co", v.ravel().astype(np.float32))
-    me.loops.add(f_all.size)
-    me.loops.foreach_set("vertex_index", f_all.ravel().astype(np.int32))
-    me.polygons.add(len(f_all))
-    me.polygons.foreach_set("loop_start", (np.arange(len(f_all)) * 4).astype(np.int32))
-    me.polygons.foreach_set("loop_total", np.full(len(f_all), 4, np.int32))
-    me.update(calc_edges=True)
-    ca = me.color_attributes.new("renk", "FLOAT_COLOR", "CORNER")
-    rv = np.repeat(renk.reshape(-1, 3), 4, axis=0)
-    rv = np.hstack([rv, np.ones((len(rv), 1))])
-    ca.data.foreach_set("color", rv.ravel().astype(np.float32))
+    me.vertices.add(k)
+    me.vertices.foreach_set("co", p0.ravel().astype(np.float32))
+    me.update()
+    a1 = me.attributes.new("rest", "FLOAT_VECTOR", "POINT")
+    a1.data.foreach_set("vector", p0.ravel().astype(np.float32))
+    rv = np.column_stack([rng.normal(0, 0.5, k), rng.normal(0, 0.5, k), rng.normal(0, 2.0, k)])
+    a2 = me.attributes.new("rv", "FLOAT_VECTOR", "POINT")
+    a2.data.foreach_set("vector", rv.ravel().astype(np.float32))
+    a3 = me.attributes.new("renk", "FLOAT_COLOR", "POINT")
+    a3.data.foreach_set("color", np.hstack([renk, np.ones((k, 1))]).ravel().astype(np.float32))
     ob = bpy.data.objects.new(f"kup_{no}", me)
     sc.collection.objects.link(ob)
+    try:
+        ob.cycles.use_motion_blur = False
+    except Exception:
+        pass
+    ob.shape_key_add(name="temel")
+    for i, s in enumerate(DUSUS_ORNEK[1:], 1):
+        sk = ob.shape_key_add(name=f"d{i}")
+        sk.data.foreach_set("co", konum(s).ravel().astype(np.float32))
+
     mk, ntk, bk = malzeme(f"kup_m_{no}")
     at = ntk.nodes.new("ShaderNodeAttribute")
+    at.attribute_type = "INSTANCER"
     at.attribute_name = "renk"
     baglan(ntk, at.outputs["Color"], bk.inputs["Base Color"])
-    bk.inputs["Roughness"].default_value = 0.5
-    me.materials.append(mk)
-    # acilma: on yari (y<0) one dogru devrilir -> ic yuz (et + cekirdek) kameraya doner
-    ob.shape_key_add(name="temel")
-    on = np.repeat(merk[:, 1] < 0, 8)
-    zb = TAHTA_UST
-    egik = np.repeat(rng.normal(0, 0.035, k), 8)
+    bk.inputs["Roughness"].default_value = 0.55
 
-    def devir(aci):
-        y = v[:, 1]; z = v[:, 2]
-        ry, rz = y + R, z - zb
-        c, s = math.cos(aci), np.sin(aci + egik)
-        ny = -R + ry * c - rz * s
-        nz = zb + ry * s + rz * c
-        w = v.copy()
-        w[on, 1] = ny[on]
-        w[on, 2] = np.maximum(nz[on], zb + 0.001)
-        # arka yari hafif oturur
-        w[~on, 2] = zb + (v[~on, 2] - zb) * (1 - 0.06 * aci / math.radians(72))
-        return w
-
-    for ad, aci in (("yari", math.radians(36)), ("tam", math.radians(72))):
-        sk = ob.shape_key_add(name=ad)
-        sk.data.foreach_set("co", devir(aci).ravel().astype(np.float32))
+    ng = bpy.data.node_groups.new(f"kupGN_{no}", "GeometryNodeTree")
+    ng.interface.new_socket("Geometry", in_out="INPUT", socket_type="NodeSocketGeometry")
+    ng.interface.new_socket("Geometry", in_out="OUTPUT", socket_type="NodeSocketGeometry")
+    N = ng.nodes
+    gi = N.new("NodeGroupInput")
+    go = N.new("NodeGroupOutput")
+    kup = N.new("GeometryNodeMeshCube")
+    kup.inputs["Size"].default_value = (2 * hx * 0.9, 2 * hy * 0.9, 2 * hz * 0.9)
+    sm = N.new("GeometryNodeSetMaterial")
+    sm.inputs["Material"].default_value = mk
+    ng.links.new(kup.outputs["Mesh"], sm.inputs["Geometry"])
+    iop = N.new("GeometryNodeInstanceOnPoints")
+    ng.links.new(gi.outputs[0], iop.inputs["Points"])
+    ng.links.new(sm.outputs["Geometry"], iop.inputs["Instance"])
+    na_r = N.new("GeometryNodeInputNamedAttribute")
+    na_r.data_type = "FLOAT_VECTOR"
+    na_r.inputs["Name"].default_value = "rest"
+    na_v = N.new("GeometryNodeInputNamedAttribute")
+    na_v.data_type = "FLOAT_VECTOR"
+    na_v.inputs["Name"].default_value = "rv"
+    pos = N.new("GeometryNodeInputPosition")
+    fark = N.new("ShaderNodeVectorMath")
+    fark.operation = "SUBTRACT"
+    ng.links.new(pos.outputs[0], fark.inputs[0])
+    ng.links.new(na_r.outputs["Attribute"], fark.inputs[1])
+    uz = N.new("ShaderNodeVectorMath")
+    uz.operation = "LENGTH"
+    ng.links.new(fark.outputs[0], uz.inputs[0])
+    oran = N.new("ShaderNodeMath")
+    oran.operation = "MULTIPLY"
+    oran.use_clamp = True
+    ng.links.new(uz.outputs["Value"], oran.inputs[0])
+    oran.inputs[1].default_value = 1.6
+    olc = N.new("ShaderNodeVectorMath")
+    olc.operation = "SCALE"
+    ng.links.new(na_v.outputs["Attribute"], olc.inputs[0])
+    ng.links.new(oran.outputs[0], olc.inputs["Scale"])
+    try:
+        e2r = N.new("FunctionNodeEulerToRotation")
+        ng.links.new(olc.outputs[0], e2r.inputs[0])
+        ng.links.new(e2r.outputs[0], iop.inputs["Rotation"])
+    except Exception:
+        ng.links.new(olc.outputs[0], iop.inputs["Rotation"])
+    ng.links.new(iop.outputs["Instances"], go.inputs[0])
+    md = ob.modifiers.new("kupler", "NODES")
+    md.node_group = ng
     return ob
 
 
@@ -507,9 +570,12 @@ for no, tur in enumerate(PLAN["turlar"]):
     kup.hide_render = True
     kup.keyframe_insert("hide_render", frame=kare(son))
     kb_ = kup.data.shape_keys.key_blocks
-    for t_, yv, tv in ((ks + 0.2, 0, 0), (ks + 0.42, 1, 0), (ks + 0.62, 0, 1)):
-        kb_["yari"].value = yv; kb_["yari"].keyframe_insert("value", frame=kare(t_))
-        kb_["tam"].value = tv; kb_["tam"].keyframe_insert("value", frame=kare(t_))
+    t0 = ks + 0.05
+    nk = len(DUSUS_ORNEK)
+    for i in range(1, nk):
+        for j, s_ in enumerate(DUSUS_ORNEK):
+            kb_[f"d{i}"].value = 1.0 if j == i else 0.0
+            kb_[f"d{i}"].keyframe_insert("value", frame=kare(t0 + s_))
     sabit_interp(kup)
     for fc in egriler(kup.data.shape_keys.animation_data.action):
         for kp in fc.keyframe_points:

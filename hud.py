@@ -63,12 +63,18 @@ for yol in sorted(glob.glob(os.path.join(a.giris, "kare_*.png"))):
     d = ImageDraw.Draw(im)
     tur = next((r for r in P["turlar"] if r["bas"] <= t < r["son"]), P["turlar"][-1])
     kesim = sum(1 for k in tur["kesimler"] if k[0] <= t + 1e-6)
-    kup = tur["kup"] if t >= tur["kes_son"] + 0.05 else 0
+    # CUBES: kupler ayrilmaya baslayinca hedefe sayarak cikar (1,1 sn, yavaslayarak)
+    s_ = (t - tur["kes_son"] - 0.05) / 1.1
+    if s_ <= 0:
+        kup = 0
+        son_mu = False
+    else:
+        s_ = min(1.0, s_)
+        kup = int(round(tur["kup"] * (1 - (1 - s_) ** 3)))
+        son_mu = s_ >= 1.0
     yaz(d, (540, 250), str(kesim), F_SAYI, BEYAZ, 9)
     yaz(d, (540, 372), "CUTS", F_ETIKET, ALTIN, 6)
-    kalan = max(0, math.ceil(P["sure"] - t - 1e-6))
-    yaz(d, (1030, 250), f"{kalan // 60}:{kalan % 60:02d}", F_SURE, BEYAZ, 5, "rm")
-    yaz(d, (540, 1545), kup_metni(kup), F_KUP, BEYAZ, 8)
+    yaz(d, (540, 1545), kup_metni(kup) if son_mu else f"{kup:,}", F_KUP, BEYAZ, 8)
     yaz(d, (540, 1650), "CUBES", F_ETIKET, ALTIN, 6)
     for c0, c1 in CTA:
         if c0 <= t < c1:

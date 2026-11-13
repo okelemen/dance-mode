@@ -94,8 +94,6 @@ jobs:
           ffprobe -v error -show_entries format=duration -of csv=p=0 video/sessiz.mp4
       - uses: actions/upload-artifact@v4
         with:
-          name: sonuc-${{ needs.hazirlik.outputs.mod }}
-          path: |
-            hud/
-            video/
+          name: video-${{ needs.hazirlik.outputs.mod }}
+          path: video/
           retention-days: 14
