@@ -25,7 +25,7 @@ MEYVELER = {
 }
 
 # Turlar: (kesim sayisi, kesim suresi sn). Acilis 0.4 sn + sonuc 1.3 sn eklenir -> toplam 60 sn
-TURLAR = [(12, 3.5), (45, 6.3), (120, 9.3), (300, 12.8), (600, 16.1)]
+TURLAR = [(6, 2.8), (50, 6.2), (150, 9.0), (400, 12.0), (1000, 18.0)]  # kural: kucukten (6) 1000'e
 ACILIS = 0.4
 SONUC = 2.0
 US = 0.7  # kesim hizlanma ussu (<1 = hizlanir)

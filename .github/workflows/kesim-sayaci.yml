@@ -90,7 +90,7 @@ jobs:
         run: |
           sudo apt-get install -y -qq ffmpeg
           mkdir -p video
-          ffmpeg -v error -framerate 30 -start_number 1 -i hud/kare_%04d.png -c:v libx264 -preset slow -crf 17 -pix_fmt yuv420p video/sessiz.mp4
+          ffmpeg -v error -framerate 30 -start_number 1 -i hud/kare_%04d.png -c:v libx264 -preset veryfast -crf 18 -pix_fmt yuv420p video/sessiz.mp4
           ffprobe -v error -show_entries format=duration -of csv=p=0 video/sessiz.mp4
       - uses: actions/upload-artifact@v4
         with:
