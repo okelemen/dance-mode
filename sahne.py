@@ -163,8 +163,8 @@ baglan(nt, tk.outputs["Object"], mp.inputs["Vector"])
 dalga = nt.nodes.new("ShaderNodeTexWave")
 dalga.wave_type = "BANDS"
 dalga.bands_direction = "Y"
-dalga.inputs["Scale"].default_value = 2.2
-dalga.inputs["Distortion"].default_value = 6.0
+dalga.inputs["Scale"].default_value = 1.5
+dalga.inputs["Distortion"].default_value = 11.0
 dalga.inputs["Detail"].default_value = 3.0
 baglan(nt, mp.outputs["Vector"], dalga.inputs["Vector"])
 rmp = nt.nodes.new("ShaderNodeValToRGB")
@@ -300,7 +300,7 @@ bicak = bicak_kur()
 
 # eksene gore bicak yonleri (Euler XYZ, radyan)
 YON = {
-    "x": (math.radians(90), 0.0, math.radians(90)),    # agiz derinlik boyunca, duzlem YZ
+    "x": (math.radians(90), 0.0, math.radians(-90)),   # agiz derinlik boyunca, duzlem YZ, sap arkada
     "y": (math.radians(90), 0.0, math.radians(180)),   # agiz x boyunca, duzlem XZ, kameraya yuzu donuk
     "z": (0.0, 0.0, math.radians(-90)),                # yatay dilim, agiz -x'e bakar
 }
@@ -310,7 +310,7 @@ DISARI = (7.5, -1.0, 4.5)  # kadraj disi (sag ust)
 def bicak_konum(eks, konum, asagi, yuk):
     """eks kesim duzlemi, konum duzlem koordinati, asagi=True agiz tahtada; yuk=0..1 kalkis yuksekligi."""
     if eks == "x":
-        return (konum, -1.0, TAHTA_UST + 0.004 if asagi else MERKEZ_Z + R + 0.15 + 0.9 * yuk)
+        return (konum, 1.05, TAHTA_UST + 0.004 if asagi else MERKEZ_Z + R + 0.15 + 0.9 * yuk)
     if eks == "y":
         return (1.25, konum, TAHTA_UST + 0.004 if asagi else MERKEZ_Z + R + 0.15 + 0.9 * yuk)
     # z: yatay dilim; asagi = ice girmis (uc meyveden gecti), yukari = sagda disarida
