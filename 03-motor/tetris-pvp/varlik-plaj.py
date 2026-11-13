@@ -18,7 +18,7 @@ KAPAK = YALNIZ == "kapak"
 POZLAMA = float(arg("--pozlama", arg("--kapak-pozlama", "0")))
 GUNES = float(arg("--gunes", "3.0"))
 ON_EK = "kapak-" if KAPAK else ""
-KAP = {"y": 8.0, "w": 3.4, "h": 3.7, "kalin": 0.34}
+KAP = {"y": 8.0, "w": 3.4, "h": 3.7, "kalin": 0.50}      # onizleme 1: 0,34 ince boru gibiydi -> tombul sisme
 KAM = {"z": 2.3, "egim": 5.0, "lens": 18.0, "sensor": 24.0}
 if KAPAK:
     KAM.update({"z": float(arg("--kapak-z", "2.0")), "egim": float(arg("--kapak-egim", "3.0")), "lens": float(arg("--kapak-lens", "16.0"))})
@@ -134,9 +134,9 @@ def mat_deniz():
     pw = nt.nodes.new("ShaderNodeMath"); pw.operation = "POWER"; pw.inputs[1].default_value = 0.45
     nt.links.new(mr.outputs[0], pw.inputs[0])
     rp = nt.nodes.new("ShaderNodeValToRGB"); el = rp.color_ramp.elements
-    el[0].position = 0.0; el[0].color = (*lin(hex3("#4ff0dc")), 1)
+    el[0].position = 0.0; el[0].color = (*lin(hex3("#22efd6")), 1)
     el[1].position = 1.0; el[1].color = (*lin(hex3("#0a56c8")), 1)
-    e = el.new(0.18); e.color = (*lin(hex3("#14c8e6")), 1)
+    e = el.new(0.18); e.color = (*lin(hex3("#00c4ea")), 1)
     e = el.new(0.5); e.color = (*lin(hex3("#0b8ae6")), 1)
     nt.links.new(pw.outputs[0], rp.inputs[0]); nt.links.new(rp.outputs[0], b.inputs["Base Color"])
     ns = nt.nodes.new("ShaderNodeTexNoise"); ns.inputs["Scale"].default_value = 0.8; ns.inputs["Detail"].default_value = 6
@@ -144,7 +144,8 @@ def mat_deniz():
     nt.links.new(geo.outputs["Position"], mp.inputs[0]); nt.links.new(mp.outputs[0], ns.inputs["Vector"])
     bp = nt.nodes.new("ShaderNodeBump"); bp.inputs["Strength"].default_value = 0.35; bp.inputs["Distance"].default_value = 0.05
     nt.links.new(ns.outputs["Fac"], bp.inputs["Height"]); nt.links.new(bp.outputs["Normal"], b.inputs["Normal"])
-    b.inputs["Roughness"].default_value = 0.12; b.inputs["Coat Weight"].default_value = 0.3
+    # onizleme 1: gok yansimasi (Fresnel) turkuazi griye yikiyordu -> yansima azaltildi, renk doygun
+    b.inputs["Roughness"].default_value = 0.18; b.inputs["Specular IOR Level"].default_value = 0.12; b.inputs["Coat Weight"].default_value = 0.0
     return m
 
 
@@ -510,12 +511,12 @@ def kapi(R):
     beyaz = mat_pbr("kapi_b", "#ffffff", 0.2, kaplama=1.0)
     xk = W_ / 2 + K / 2
     for s in (-1, 1):
-        yuvarlak_kutu("direk", (s * xk, Y, (H_ + K) / 2), (K, K, H_ + K), sisme, egim=0.15, seg=5)
+        yuvarlak_kutu("direk", (s * xk, Y, (H_ + K) / 2), (K, K, H_ + K), sisme, egim=0.22, seg=6)
         for z in (0.7, 1.7, 2.7):
             yuvarlak_kutu("halka", (s * xk, Y, z), (K + 0.04, K + 0.04, 0.14), beyaz, egim=0.06, seg=3)
         kum_ = mat_kum("kum_kapi", "#f6d595", "#f0c47c", dalga=0.05)
         k = kure((s * xk, Y, -0.05), 0.45, kum_); k.scale = (1.0, 1.0, 0.3)
-    yuvarlak_kutu("kiris", (0, Y, H_ + K / 2), (W_ + 2 * K, K, K), sisme, egim=0.15, seg=5)
+    yuvarlak_kutu("kiris", (0, Y, H_ + K / 2), (W_ + 2 * K, K, K), sisme, egim=0.22, seg=6)
     for x in (-1.0, 0.0, 1.0):
         yuvarlak_kutu("halka_k", (x, Y, H_ + K / 2), (0.14, K + 0.04, K + 0.04), beyaz, egim=0.06, seg=3)
     yuvarlak_kutu("tabela", (0, Y, H_ + K + 0.5), (W_ * 0.85, 0.2, 0.7), mat_pbr("tabela", "#15171a", 0.35, metal=0.4), egim=0.05, seg=3)
