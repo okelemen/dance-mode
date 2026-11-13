@@ -81,7 +81,7 @@ except Exception:
 dunya = bpy.data.worlds.new("dunya")
 sc.world = dunya
 dunya.use_nodes = True
-dunya.node_tree.nodes["Background"].inputs[0].default_value = hex_renk("#9a9a9a")
+dunya.node_tree.nodes["Background"].inputs[0].default_value = hex_renk("#c9c3b6")
 dunya.node_tree.nodes["Background"].inputs[1].default_value = 0.6
 
 
@@ -112,48 +112,62 @@ def matematik(nt, islem, a=None, b=None, deger_a=0.0, deger_b=0.0):
     return n.outputs[0]
 
 
-# ---------------------------------------------------------------- zemin (koyu fayans)
+# ---------------------------------------------------------------- mekan: mermer tezgah
 bpy.ops.mesh.primitive_plane_add(size=40, location=(0, 0, 0))
 zemin = bpy.context.object
-m, nt, bsdf = malzeme("fayans")
+m, nt, bsdf = malzeme("mermer")
 tk = nt.nodes.new("ShaderNodeTexCoord")
-br = nt.nodes.new("ShaderNodeTexBrick")
-br.inputs["Scale"].default_value = 0.55
-br.inputs["Mortar Size"].default_value = 0.012
-br.inputs["Color1"].default_value = hex_renk("#3b3b3d")
-br.inputs["Color2"].default_value = hex_renk("#2d2d2f")
-br.inputs["Mortar"].default_value = hex_renk("#151515")
-br.offset = 0.0
-baglan(nt, tk.outputs["Object"], br.inputs["Vector"])
-baglan(nt, br.outputs["Color"], bsdf.inputs["Base Color"])
-bsdf.inputs["Roughness"].default_value = 0.35
+nzm = nt.nodes.new("ShaderNodeTexNoise")
+nzm.inputs["Scale"].default_value = 0.9
+nzm.inputs["Detail"].default_value = 6
+nzm.inputs["Distortion"].default_value = 2.5
+baglan(nt, tk.outputs["Object"], nzm.inputs["Vector"])
+dm = nt.nodes.new("ShaderNodeTexWave")
+dm.inputs["Scale"].default_value = 0.6
+dm.inputs["Distortion"].default_value = 9.0
+dm.inputs["Detail"].default_value = 6.0
+baglan(nt, nzm.outputs["Color"], dm.inputs["Vector"])
+dmr = nt.nodes.new("ShaderNodeValToRGB")
+dmr.color_ramp.elements[0].position = 0.0
+dmr.color_ramp.elements[0].color = hex_renk("#a9a59c")
+dmr.color_ramp.elements[1].position = 0.12
+dmr.color_ramp.elements[1].color = hex_renk("#e9e6df")
+baglan(nt, dm.outputs["Fac"], dmr.inputs["Fac"])
+baglan(nt, dmr.outputs["Color"], bsdf.inputs["Base Color"])
+bsdf.inputs["Roughness"].default_value = 0.22
 zemin.data.materials.append(m)
 
-# ---------------------------------------------------------------- duvar (acik gri siva)
-bpy.ops.mesh.primitive_plane_add(size=30, location=(0, 4.2, 5), rotation=(math.radians(90), 0, 0))
+# ---------------------------------------------------------------- mekan: adacayi yesili metro fayans duvar
+bpy.ops.mesh.primitive_plane_add(size=30, location=(0, 2.6, 5), rotation=(math.radians(90), 0, 0))
 duvar = bpy.context.object
-m, nt, bsdf = malzeme("duvar")
-nz = nt.nodes.new("ShaderNodeTexNoise")
-nz.inputs["Scale"].default_value = 18
-rmp = nt.nodes.new("ShaderNodeValToRGB")
-rmp.color_ramp.elements[0].color = hex_renk("#a9a9a9")
-rmp.color_ramp.elements[1].color = hex_renk("#c4c4c4")
-baglan(nt, nz.outputs["Fac"], rmp.inputs["Fac"])
-baglan(nt, rmp.outputs["Color"], bsdf.inputs["Base Color"])
+m, nt, bsdf = malzeme("fayans_duvar")
+tk = nt.nodes.new("ShaderNodeTexCoord")
+br = nt.nodes.new("ShaderNodeTexBrick")
+br.inputs["Scale"].default_value = 1.6
+br.inputs["Mortar Size"].default_value = 0.012
+br.inputs["Brick Width"].default_value = 0.5
+br.inputs["Row Height"].default_value = 0.25
+br.inputs["Color1"].default_value = hex_renk("#93a88c")
+br.inputs["Color2"].default_value = hex_renk("#a2b59a")
+br.inputs["Mortar"].default_value = hex_renk("#e8e3d6")
+br.offset = 0.5
+baglan(nt, tk.outputs["Object"], br.inputs["Vector"])
+baglan(nt, br.outputs["Color"], bsdf.inputs["Base Color"])
 bmp = nt.nodes.new("ShaderNodeBump")
-bmp.inputs["Strength"].default_value = 0.15
-baglan(nt, nz.outputs["Fac"], bmp.inputs["Height"])
+bmp.inputs["Strength"].default_value = 0.35
+bmp.invert = True
+baglan(nt, br.outputs["Fac"], bmp.inputs["Height"])
 baglan(nt, bmp.outputs["Normal"], bsdf.inputs["Normal"])
-bsdf.inputs["Roughness"].default_value = 0.9
+bsdf.inputs["Roughness"].default_value = 0.28
 duvar.data.materials.append(m)
 
 # ---------------------------------------------------------------- kesme tahtasi
 bpy.ops.mesh.primitive_cube_add(size=1, location=(0, -0.1, TAHTA_UST / 2))
 tahta = bpy.context.object
-tahta.scale = (4.8, 3.2, TAHTA_UST)
+tahta.scale = (3.7, 2.5, TAHTA_UST)
 bpy.ops.object.transform_apply(scale=True)
 bv = tahta.modifiers.new("pah", "BEVEL")
-bv.width = 0.025
+bv.width = 0.04
 bv.segments = 3
 m, nt, bsdf = malzeme("ahsap")
 tk = nt.nodes.new("ShaderNodeTexCoord")
@@ -254,8 +268,8 @@ meyve.data.materials.append(m)
 def bicak_kur():
     """Gercekci buyuk sef bicagi (kullanici 13 Kas): yerel +X boyunca agiz (y=0 kesici kenar), sirt y~0.62,
     uc x=2.9; kesitte kama (kenarda ince, sirtta 0.036). Celik topuk + perçinli koyu ahsap sap (-X)."""
-    L_ = 2.9      # agiz boyu
-    H_ = 0.62     # topuk yuksekligi
+    L_ = 3.4      # agiz boyu (buyuk sef bicagi)
+    H_ = 0.78     # topuk yuksekligi
     N = 48
     xs = np.linspace(0, L_, N + 1)
     # kesici kenar: duz, son %35'te kavisle uca kalkar (belly)
@@ -310,9 +324,9 @@ def bicak_kur():
     topuk.data.materials.append(mb)
     topuk.parent = agiz
     # sap: koyu ahsap, hafif oval, 3 perçin
-    bpy.ops.mesh.primitive_cube_add(size=1, location=(-0.78, H_ * 0.52, 0))
+    bpy.ops.mesh.primitive_cube_add(size=1, location=(-0.72, H_ * 0.5, 0))
     sap = bpy.context.object
-    sap.scale = (1.3, 0.30, 0.11)
+    sap.scale = (1.2, 0.27, 0.10)
     bv2 = sap.modifiers.new("pah", "BEVEL"); bv2.width = 0.045; bv2.segments = 4
     mh, nth, bh = malzeme("sap")
     nzh = nth.nodes.new("ShaderNodeTexWave")
@@ -326,8 +340,8 @@ def bicak_kur():
     bh.inputs["Roughness"].default_value = 0.45
     sap.data.materials.append(mh)
     sap.parent = agiz
-    for px in (-0.35, -0.75, -1.15):
-        bpy.ops.mesh.primitive_cylinder_add(vertices=16, radius=0.035, depth=0.125, location=(px, H_ * 0.52, 0),
+    for px in (-0.33, -0.7, -1.07):
+        bpy.ops.mesh.primitive_cylinder_add(vertices=16, radius=0.032, depth=0.115, location=(px, H_ * 0.5, 0),
                                             rotation=(0, 0, 0))
         pc = bpy.context.object
         pc.data.materials.append(mb)
@@ -463,8 +477,8 @@ def kup_nesnesi(tur, no):
     hx_ = p0[:, 0] + dx
     hy_ = p0[:, 1] + dy
     # dogal yigin: kum yigini gibi devrilme (yukseklik alani, ~35 derece dogal egim) + duzene sokulmamis yerlesim
-    x0, y0 = -2.3, -1.55
-    nxm, nym = int(4.6 / hucre) + 1, int(2.9 / hucre) + 1
+    x0, y0 = -1.75, -1.25
+    nxm, nym = int(3.5 / hucre) + 1, int(2.3 / hucre) + 1
     ix = np.clip(((hx_ - x0) / hucre).astype(np.int64), 0, nxm - 1)
     iy = np.clip(((hy_ - y0) / hucre).astype(np.int64), 0, nym - 1)
     H = np.zeros((nxm, nym))
@@ -669,6 +683,9 @@ def deger_anahtar(ad, t, deger):
     n.outputs[0].keyframe_insert("default_value", frame=kare(t))
 
 
+# yeni meyve dusus anahtarlari: (sn, yukseklik, xy olcek, z olcek) - dusus, ezilme, sekme, oturma
+DUSUS_ANAHTAR = [(0.0, 3.0, 0.94, 1.10), (0.30, 0.0, 1.12, 0.84), (0.42, 0.20, 0.97, 1.05),
+                 (0.53, 0.0, 1.04, 0.95), (0.62, 0.0, 1.0, 1.0)]
 # baslangic
 bicak.location = DISARI
 bicak.rotation_euler = YON["x"]
@@ -680,13 +697,13 @@ for no, tur in enumerate(PLAN["turlar"]):
     # meyve: belirir (olcek), sonda gizlenir
     meyve.hide_render = False
     meyve.keyframe_insert("hide_render", frame=kare(bas))
-    meyve.scale = (0.001, 0.001, 0.001)
-    meyve.keyframe_insert("scale", frame=kare(bas))
-    meyve.scale = (1.05, 1.05, 1.05)
-    meyve.keyframe_insert("scale", frame=kare(bas + 0.22))
-    meyve.scale = (1, 1, 1)
-    meyve.keyframe_insert("scale", frame=kare(bas + 0.36))
-    meyve.keyframe_insert("scale", frame=kare(ks))  # tur boyunca 1.0 sabit
+    for t_, dz_, sxy, sz in DUSUS_ANAHTAR:
+        meyve.scale = (sxy, sxy, sz)
+        meyve.location = (0, 0, MERKEZ_Z + dz_ - R * (1 - sz))  # ezilmede alt yuzey tahtada kalir
+        meyve.keyframe_insert("scale", frame=kare(bas + t_))
+        meyve.keyframe_insert("location", frame=kare(bas + t_))
+    meyve.keyframe_insert("scale", frame=kare(ks))  # tur boyunca sabit
+    meyve.keyframe_insert("location", frame=kare(ks))
     meyve.hide_render = True
     meyve.keyframe_insert("hide_render", frame=kare(ks + 0.02))
     bicak.location = DISARI
@@ -829,8 +846,15 @@ alan = bpy.data.lights.new("dolgu", "AREA")
 alan.energy = 450
 alan.size = 5
 a = bpy.data.objects.new("dolgu", alan)
-a.location = (-2.5, -4.0, 5.0)
-a.rotation_euler = (math.radians(45), 0, math.radians(-30))
+a.location = (-2.0, -4.5, 5.0)
+a.rotation_euler = (math.radians(45), 0, math.radians(-22))
+arka = bpy.data.lights.new("arka", "AREA")
+arka.energy = 220
+arka.size = 3
+ab = bpy.data.objects.new("arka", arka)
+ab.location = (2.5, 1.8, 3.5)
+ab.rotation_euler = (math.radians(-55), math.radians(30), 0)
+sc.collection.objects.link(ab)
 sc.collection.objects.link(a)
 
 cam = bpy.data.cameras.new("kamera")
@@ -838,10 +862,13 @@ cam.lens = 58
 cam.sensor_fit = "HORIZONTAL"
 cam.sensor_width = 36
 k = bpy.data.objects.new("kamera", cam)
-k.location = (-1.2, -4.15, 2.35)  # on-soldan: kalan meyvenin kesit yuzu gorunur (REF-080)
+k.location = (0.0, -6.7, 3.55)  # tam karsidan (kullanici 13 Kas)
 sc.collection.objects.link(k)
 hedef = bpy.data.objects.new("hedef", None)
-hedef.location = (0.05, 0.0, 0.66)
+hedef.location = (0.0, -0.1, 0.62)
+cam.dof.use_dof = True
+cam.dof.focus_object = hedef
+cam.dof.aperture_fstop = 4.0
 sc.collection.objects.link(hedef)
 tr = k.constraints.new("TRACK_TO")
 tr.target = hedef

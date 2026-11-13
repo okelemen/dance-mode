@@ -25,9 +25,9 @@ MEYVELER = {
 }
 
 # Turlar: (kesim sayisi, kesim suresi sn). Acilis 0.4 sn + sonuc 1.3 sn eklenir -> toplam 60 sn
-TURLAR = [(10, 4.5), (50, 9.5), (100, 10.5), (240, 10.5), (500, 11.0), (1000, 17.0)]  # REF-080: 6 tur 10 -> 1000
-ACILIS = 0.3
-SONUC = 1.2
+TURLAR = [(10, 4.3), (50, 9.3), (100, 10.3), (240, 10.3), (500, 10.8), (1000, 16.8)]  # REF-080: 6 tur 10 -> 1000
+ACILIS = 0.7  # yeni meyve yukaridan duser + seker
+SONUC = 1.0
 CIZGI_PAY = 0.6  # tur suresinin ilk %60'i kabukta cizgiler (z, y); son %40 soldan saga supurme (x)
 US = 0.7  # kesim hizlanma ussu (<1 = hizlanir)
 

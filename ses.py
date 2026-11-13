@@ -88,6 +88,13 @@ if __name__ == "__main__":
             else:
                 ekle(k, t - kesme_sure, 0.55 * rng.uniform(0.8, 1.0), pan)
                 ekle(vuruslar[rng.integers(len(vuruslar))], t, rng.uniform(0.8, 1.0), pan)
+    # yeni meyve tahtaya duser (sahne.py DUSUS_ANAHTAR: temas 0.30 sn, sekme inisi 0.53 sn): tok + yumusak pof
+    tok = yukle("ses/dusus_tok.wav")
+    pof = yukle("ses/dusus_pof.wav")
+    for tur in P["turlar"]:
+        ekle(tok, tur["bas"] + 0.30, 1.0, 0.0)
+        ekle(pof, tur["bas"] + 0.30, 0.8, 0.0)
+        ekle(tok, tur["bas"] + 0.53, 0.35, 0.0)
     st = np.stack([sol[:N], sag[:N]], 1)
     st *= 10 ** (-1.5 / 20) / np.abs(st).max()
     yaz(a.cikti, st)
