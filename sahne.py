@@ -426,7 +426,7 @@ def kup_nesnesi(tur, no):
     son[:, 2] = np.maximum(son[:, 2], zb + hz * 0.9)
     p0 = merk.copy()
     p0[:, 2] += zc
-    olc_d = 0.6 if gx <= 6 else (0.3 if gx <= 20 else 0.15)
+    olc_d = 0.2 if gx <= 6 else (0.25 if gx <= 20 else 0.15)
     rv = np.column_stack([rng.normal(0, olc_d, k), rng.normal(0, olc_d, k), rng.normal(0, olc_d * 1.5, k)])
 
     me = bpy.data.meshes.new(f"kup_{no}")
