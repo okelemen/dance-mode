@@ -95,5 +95,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: video-${{ needs.hazirlik.outputs.mod }}
-          path: video/
+          path: |
+            video/
+            ${{ needs.hazirlik.outputs.mod == 'probe' && 'hud/' || 'video/' }}
           retention-days: 14

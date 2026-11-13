@@ -12,7 +12,7 @@ import math
 import numpy as np
 
 FPS = 30
-SURE = 60.0
+SURE = 72.0
 
 # Meyve sekli: x ekseni boyunca yatan donel govde. r(xn) = Rmax * f(xn)/fmax
 MEYVELER = {
@@ -25,9 +25,10 @@ MEYVELER = {
 }
 
 # Turlar: (kesim sayisi, kesim suresi sn). Acilis 0.4 sn + sonuc 1.3 sn eklenir -> toplam 60 sn
-TURLAR = [(6, 2.8), (50, 6.2), (150, 9.0), (400, 12.0), (1000, 18.0)]  # kural: kucukten (6) 1000'e
-ACILIS = 0.4
-SONUC = 2.0
+TURLAR = [(10, 4.5), (50, 9.5), (100, 10.5), (240, 10.5), (500, 11.0), (1000, 17.0)]  # REF-080: 6 tur 10 -> 1000
+ACILIS = 0.3
+SONUC = 1.2
+CIZGI_PAY = 0.6  # tur suresinin ilk %60'i kabukta cizgiler (z, y); son %40 soldan saga supurme (x)
 US = 0.7  # kesim hizlanma ussu (<1 = hizlanir)
 
 
@@ -70,6 +71,16 @@ def kup_say(m, cx, cy, cz):
     return say
 
 
+def dilim_say(m, cx, cy, cz):
+    """x dilimi basina (soldan saga) kup sayisi; toplam = kup_say."""
+    A, R = m["A"], m["R"]
+    xs = -A + (np.arange(cx + 1) + 0.5) * (2 * A / (cx + 1))
+    ys = -R + (np.arange(cy + 1) + 0.5) * (2 * R / (cy + 1))
+    zs = -R + (np.arange(cz + 1) + 0.5) * (2 * R / (cz + 1))
+    Y, Z = np.meshgrid(ys, zs, indexing="ij")
+    return np.array([int(icinde(np.full_like(Y, x), Y, Z, m).sum()) for x in xs])
+
+
 def plan_kur(meyve):
     m = MEYVELER[meyve]
     turlar = []
@@ -81,22 +92,26 @@ def plan_kur(meyve):
         kes_son = kes_bas + tc
         son = kes_son + SONUC
         kesimler = []
-        for i in range(1, n + 1):
-            tt = kes_bas + tc * (i / n) ** US
-            if i <= cx:
-                eks, j, c = "x", i, cx
-            elif i <= cx + cy:
-                eks, j, c = "y", i - cx, cy
+        # REF-080 sirasi: once z (yatay) + y (kameraya dik halkalar) cizgileri, sonra x supurmesi soldan saga
+        sira = [("z", j, cz) for j in range(1, cz + 1)] + [("y", j, cy) for j in range(1, cy + 1)]
+        sira += [("x", j, cx) for j in range(1, cx + 1)]
+        n_c = cz + cy
+        for i, (eks, j, c) in enumerate(sira, 1):
+            if i <= n_c:
+                tt = kes_bas + tc * CIZGI_PAY * (i / n_c) ** US
             else:
-                eks, j, c = "z", i - cx - cy, cz
-            # kesim duzlemi: sagdan sola / arkadan one / ustten alta
+                tt = kes_bas + tc * CIZGI_PAY + tc * (1 - CIZGI_PAY) * ((i - n_c) / cx) ** 0.85
             yar = m["A"] if eks == "x" else m["R"]
-            konum = yar - j * 2 * yar / (c + 1)
+            if eks == "x":
+                konum = -yar + j * 2 * yar / (c + 1)  # soldan (dar uc) saga
+            else:
+                konum = yar - j * 2 * yar / (c + 1)
             kesimler.append([round(tt, 4), eks, round(konum, 5), j])
+        dilim = dilim_say(m, cx, cy, cz)
         turlar.append({
             "bas": round(bas, 4), "kes_bas": round(kes_bas, 4), "kes_son": round(kes_son, 4),
             "son": round(son, 4), "n": n, "cx": cx, "cy": cy, "cz": cz,
-            "kup": kup_say(m, cx, cy, cz), "kesimler": kesimler,
+            "kup": int(dilim.sum()), "dilim": dilim.tolist(), "kesimler": kesimler,
         })
         t = son
     assert abs(t - SURE) < 1e-6, t

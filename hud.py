@@ -63,15 +63,21 @@ for yol in sorted(glob.glob(os.path.join(a.giris, "kare_*.png"))):
     d = ImageDraw.Draw(im)
     tur = next((r for r in P["turlar"] if r["bas"] <= t < r["son"]), P["turlar"][-1])
     kesim = sum(1 for k in tur["kesimler"] if k[0] <= t + 1e-6)
-    # CUBES: kupler ayrilmaya baslayinca hedefe sayarak cikar (1,1 sn, yavaslayarak)
-    s_ = (t - tur["kes_son"] - 0.05) / 1.1
-    if s_ <= 0:
+    # CUBES (REF-080): x supurmesi ilerledikce birakilan dilimlerin kupleri sayilir, kesimler arasi akarak
+    xk = [k[0] for k in tur["kesimler"] if k[1] == "x"]
+    dil = tur["dilim"]
+    birikim = [sum(dil[:j]) for j in range(1, len(xk))] + [sum(dil)]
+    if t < xk[0]:
         kup = 0
-        son_mu = False
+    elif t >= xk[-1]:
+        kup = tur["kup"]
     else:
-        s_ = min(1.0, s_)
-        kup = int(round(tur["kup"] * (1 - (1 - s_) ** 3)))
-        son_mu = s_ >= 1.0
+        i = max(j for j in range(len(xk)) if xk[j] <= t)
+        a0 = birikim[i]
+        a1 = birikim[i + 1] if i + 1 < len(birikim) else tur["kup"]
+        f_ = (t - xk[i]) / max(1e-6, xk[i + 1] - xk[i]) if i + 1 < len(xk) else 1.0
+        kup = int(round(a0 + (a1 - a0) * min(1.0, f_)))
+    son_mu = True
     yaz(d, (540, 250), str(kesim), F_SAYI, BEYAZ, 9)
     yaz(d, (540, 372), "CUTS", F_ETIKET, ALTIN, 6)
     yaz(d, (540, 1545), kup_metni(kup) if son_mu else f"{kup:,}", F_KUP, BEYAZ, 8)
