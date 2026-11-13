@@ -875,6 +875,17 @@ tr.target = hedef
 tr.track_axis = "TRACK_NEGATIVE_Z"
 tr.up_axis = "UP_Y"
 sc.camera = k
+# foto modu (marka gorselleri): --cozunurluk WxH, --kamera "kx,ky,kz,hx,hy,hz,lens"
+if arg("--cozunurluk"):
+    w_, h_ = (int(v) for v in arg("--cozunurluk").lower().split("x"))
+    sc.render.resolution_x, sc.render.resolution_y = w_, h_
+    sc.render.resolution_percentage = 100
+    cam.sensor_fit = "AUTO"
+if arg("--kamera"):
+    kv = [float(v) for v in arg("--kamera").split(",")]
+    k.location = kv[0:3]
+    hedef.location = kv[3:6]
+    cam.lens = kv[6]
 
 # ---------------------------------------------------------------- render
 os.makedirs(CIKTI, exist_ok=True)
