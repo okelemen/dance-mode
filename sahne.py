@@ -252,62 +252,86 @@ meyve.data.materials.append(m)
 
 # ---------------------------------------------------------------- bicak
 def bicak_kur():
-    # yerel: agiz kenari +X boyunca y=0, sirt y~0.42, uc x=2.0; kalinlik z
-    pr = []
-    N = 24
-    for i in range(N + 1):
-        x = 2.0 * i / N
-        pr.append((x, 0.0))
-    for i in range(N, -1, -1):
-        x = 2.0 * i / N
-        sirt = 0.42 if x < 1.3 else 0.42 - (x - 1.3) / 0.7 * 0.40
-        # agiz ucta yukari kivrilir
-        pr.append((x, sirt))
-    alt = []
-    for i in range(N + 1):
-        x = 2.0 * i / N
-        kivrim = 0.0 if x < 1.4 else ((x - 1.4) / 0.6) ** 2 * 0.06
-        alt.append((x, kivrim))
-    ust = [(x, (0.42 if x < 1.3 else 0.42 - (x - 1.3) / 0.7 * 0.36)) for x, _ in alt]
-    kal = 0.012
+    """Gercekci buyuk sef bicagi (kullanici 13 Kas): yerel +X boyunca agiz (y=0 kesici kenar), sirt y~0.62,
+    uc x=2.9; kesitte kama (kenarda ince, sirtta 0.036). Celik topuk + perçinli koyu ahsap sap (-X)."""
+    L_ = 2.9      # agiz boyu
+    H_ = 0.62     # topuk yuksekligi
+    N = 48
+    xs = np.linspace(0, L_, N + 1)
+    # kesici kenar: duz, son %35'te kavisle uca kalkar (belly)
+    kenar = np.where(xs < L_ * 0.62, 0.0, ((xs - L_ * 0.62) / (L_ * 0.38)) ** 2.2 * H_ * 0.42)
+    # sirt: duz, son %25'te uca iner
+    sirt = np.where(xs < L_ * 0.72, H_, H_ - ((xs - L_ * 0.72) / (L_ * 0.28)) ** 1.4 * (H_ - H_ * 0.42 - 0.004))
+    sirt = np.maximum(sirt, kenar + 0.004)
+    kal_s = 0.018  # sirt yari kalinligi
     vs, fs = [], []
-    n = len(alt)
-    for (x, y) in alt:
-        vs.append((x, y, 0.0))          # keskin agiz (ince)
-    for (x, y) in ust:
-        vs.append((x, y, kal))
-    for (x, y) in ust:
-        vs.append((x, y, -kal))
-    for i in range(n - 1):
-        fs.append((i, i + 1, n + i + 1, n + i))
-        fs.append((i, 2 * n + i, 2 * n + i + 1, i + 1))
-        fs.append((n + i, n + i + 1, 2 * n + i + 1, 2 * n + i))
+    # her istasyonda 4 nokta: kenar (0), egim baslangici (+/-), sirt (+/-)
+    for x, ke, si in zip(xs, kenar, sirt):
+        egim = ke + (si - ke) * 0.35
+        vs += [(x, ke, 0.0), (x, egim, kal_s * 0.55), (x, si, kal_s), (x, si, -kal_s), (x, egim, -kal_s * 0.55)]
+    n = 5
+    for i in range(N):
+        a, b = i * n, (i + 1) * n
+        for j in range(n):
+            j2 = (j + 1) % n
+            fs.append((a + j, b + j, b + j2, a + j2))
+    fs.append(tuple(range(n))[::-1])
+    fs.append(tuple(range(N * n, N * n + n)))
     me = bpy.data.meshes.new("bicak")
     me.from_pydata(vs, [], fs)
     me.update()
     agiz = bpy.data.objects.new("bicak", me)
     sc.collection.objects.link(agiz)
+    for p in me.polygons:
+        p.use_smooth = False
     mb, ntb, bb = malzeme("celik")
-    bb.inputs["Base Color"].default_value = hex_renk("#b9bcc0")
-    bb.inputs["Metallic"].default_value = 0.0
-    bb.inputs["Roughness"].default_value = 0.35
-    # REF-080: hizli kesimde bicak yari saydam iz gibi gorunur
-    sf_ = ntb.nodes.new("ShaderNodeBsdfTransparent")
-    mx_ = ntb.nodes.new("ShaderNodeMixShader")
-    mx_.inputs[0].default_value = 0.45
-    ntb.links.new(bb.outputs[0], mx_.inputs[1])
-    ntb.links.new(sf_.outputs[0], mx_.inputs[2])
-    ntb.links.new(mx_.outputs[0], ntb.nodes["Material Output"].inputs["Surface"])
+    bb.inputs["Base Color"].default_value = hex_renk("#cfd3d8")
+    bb.inputs["Metallic"].default_value = 0.9
+    bb.inputs["Roughness"].default_value = 0.24
+    # firca izi: x yonunde ince cizgili puruz
+    tkb = ntb.nodes.new("ShaderNodeTexCoord")
+    mpb = ntb.nodes.new("ShaderNodeMapping")
+    mpb.inputs["Scale"].default_value = (2.0, 220.0, 1.0)
+    ntb.links.new(tkb.outputs["Object"], mpb.inputs["Vector"])
+    nzb = ntb.nodes.new("ShaderNodeTexNoise")
+    nzb.inputs["Scale"].default_value = 3.0
+    ntb.links.new(mpb.outputs["Vector"], nzb.inputs["Vector"])
+    rb = ntb.nodes.new("ShaderNodeMapRange")
+    rb.inputs["To Min"].default_value = 0.18
+    rb.inputs["To Max"].default_value = 0.34
+    ntb.links.new(nzb.outputs["Fac"], rb.inputs["Value"])
+    ntb.links.new(rb.outputs["Result"], bb.inputs["Roughness"])
     me.materials.append(mb)
-    bpy.ops.mesh.primitive_cube_add(size=1, location=(-0.55, 0.22, 0))
+    # celik topuk (bolster)
+    bpy.ops.mesh.primitive_cube_add(size=1, location=(-0.06, H_ * 0.5, 0))
+    topuk = bpy.context.object
+    topuk.scale = (0.12, H_ * 0.92, 0.07)
+    bv_ = topuk.modifiers.new("pah", "BEVEL"); bv_.width = 0.015; bv_.segments = 2
+    topuk.data.materials.append(mb)
+    topuk.parent = agiz
+    # sap: koyu ahsap, hafif oval, 3 perçin
+    bpy.ops.mesh.primitive_cube_add(size=1, location=(-0.78, H_ * 0.52, 0))
     sap = bpy.context.object
-    sap.scale = (1.1, 0.26, 0.09)
+    sap.scale = (1.3, 0.30, 0.11)
+    bv2 = sap.modifiers.new("pah", "BEVEL"); bv2.width = 0.045; bv2.segments = 4
     mh, nth, bh = malzeme("sap")
-    bh.inputs["Base Color"].default_value = hex_renk("#5b3820")
-    bh.inputs["Roughness"].default_value = 0.5
+    nzh = nth.nodes.new("ShaderNodeTexWave")
+    nzh.inputs["Scale"].default_value = 6.0
+    nzh.inputs["Distortion"].default_value = 8.0
+    rh = nth.nodes.new("ShaderNodeValToRGB")
+    rh.color_ramp.elements[0].color = hex_renk("#2a1810")
+    rh.color_ramp.elements[1].color = hex_renk("#5a3420")
+    nth.links.new(nzh.outputs["Fac"], rh.inputs["Fac"])
+    nth.links.new(rh.outputs["Color"], bh.inputs["Base Color"])
+    bh.inputs["Roughness"].default_value = 0.45
     sap.data.materials.append(mh)
     sap.parent = agiz
-    agiz.scale = (1.2, 1.45, 1.0)  # agiz 2.4 boy, sirt ~0.6
+    for px in (-0.35, -0.75, -1.15):
+        bpy.ops.mesh.primitive_cylinder_add(vertices=16, radius=0.035, depth=0.125, location=(px, H_ * 0.52, 0),
+                                            rotation=(0, 0, 0))
+        pc = bpy.context.object
+        pc.data.materials.append(mb)
+        pc.parent = agiz
     return agiz
 
 
