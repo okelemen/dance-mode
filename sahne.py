@@ -353,7 +353,7 @@ bicak = bicak_kur()
 
 # eksene gore bicak yonleri (Euler XYZ, radyan)
 YON = {
-    "x": (math.radians(90), 0.0, math.radians(-90)),   # agiz derinlik boyunca, duzlem YZ, sap arkada
+    "x": (math.radians(90), 0.0, math.radians(-112)),  # dikey dograma; 22 derece cevrik: agzin yuzu gorunur, sap sag-arkada
     "y": (math.radians(90), 0.0, math.radians(180)),   # agiz x boyunca, duzlem XZ, kameraya yuzu donuk
     "z": (0.0, 0.0, math.radians(-90)),                # yatay dilim, agiz -x'e bakar
 }
@@ -363,7 +363,9 @@ DISARI = (7.5, -1.0, 4.5)  # kadraj disi (sag ust)
 def bicak_konum(eks, konum, asagi, yuk):
     """eks kesim duzlemi, konum duzlem koordinati, asagi=True agiz tahtada; yuk=0..1 kalkis yuksekligi."""
     if eks == "x":
-        return (konum, 1.05, TAHTA_UST + 0.004 if asagi else MERKEZ_Z + R + 0.15 + 0.9 * yuk)
+        # bicak 22 derece cevrik: meyve ortasinda (y=0) agiz tam kesim duzleminde olsun diye koken kaydirilir
+        return (konum + 1.05 * math.tan(math.radians(22)), 1.05,
+                TAHTA_UST + 0.004 if asagi else MERKEZ_Z + R + 0.15 + 0.9 * yuk)
     if eks == "y":
         return (1.25, konum, TAHTA_UST + 0.004 if asagi else MERKEZ_Z + R + 0.15 + 0.9 * yuk)
     # z: yatay dilim; asagi = ice girmis (uc meyveden gecti), yukari = sagda disarida
@@ -684,6 +686,7 @@ def deger_anahtar(ad, t, deger):
 
 
 # yeni meyve dusus anahtarlari: (sn, yukseklik, xy olcek, z olcek) - dusus, ezilme, sekme, oturma
+rng_b = np.random.default_rng(21)
 DUSUS_ANAHTAR = [(0.0, 3.0, 0.94, 1.10), (0.30, 0.0, 1.12, 0.84), (0.42, 0.20, 0.97, 1.05),
                  (0.53, 0.0, 1.04, 0.95), (0.62, 0.0, 1.0, 1.0)]
 # baslangic
@@ -716,7 +719,17 @@ for no, tur in enumerate(PLAN["turlar"]):
     # bicak: her gorunur vurus TAM: ustte -> tek hamlede tahtaya -> kisa durus -> ustte (ara durum yok)
     vl = tur["vuruslar"]
     onceki_eks = None
-    for i, (t, eks, konum, adet) in enumerate(vl):
+    n_iz = 0
+    for i, (t, eks_g, konum_g, adet) in enumerate(vl):
+        # REF-080: butun gorunur vuruslar yukaridan dikey dograma. Iz asamasi (y/z kesimleri, kabukta iz yok)
+        # bicak meyve boyunca soldan saga gidip gelir; supurmede gercek x kesim duzleminde iner.
+        if eks_g == "x":
+            eks, konum = "x", konum_g
+        else:
+            eks = "x"
+            yol = [-0.7, -0.35, 0.0, 0.35, 0.7, 0.35, 0.0, -0.35]
+            konum = yol[n_iz % len(yol)] * A + rng_b.uniform(-0.06, 0.06)
+            n_iz += 1
         once = vl[i - 1][0] if i > 0 else kb - 0.3
         sonra = vl[i + 1][0] if i + 1 < len(vl) else t + 0.4
         inis = min(0.055, (t - once) * 0.4)
