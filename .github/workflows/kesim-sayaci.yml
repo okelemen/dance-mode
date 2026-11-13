@@ -30,6 +30,9 @@ jobs:
           p = json.load(open(i["plan"]))
           if i["mod"] == "probe":
               mat = [{"ad": "probe", "arg": "--kareler " + i["kareler"]}]
+          elif i["mod"] == "kesit":
+              n = int(i.get("parca", 20)); b0, b1 = int(i["bas_kare"]), int(i["son_kare"])
+              mat = [{"ad": f"k{j:02d}", "arg": f"--bas {b0+j} --son {b1} --adim {n}"} for j in range(n)]
           else:
               n = int(i.get("parca", 20))
               mat = [{"ad": f"p{j:02d}", "arg": f"--bas {j+1} --son {p['kare']} --adim {n}"} for j in range(n)]
@@ -84,11 +87,12 @@ jobs:
           path: hud
           merge-multiple: true
       - name: Video (sessiz)
-        if: needs.hazirlik.outputs.mod == 'full'
+        if: needs.hazirlik.outputs.mod != 'probe'
         run: |
           sudo apt-get install -y -qq ffmpeg
           mkdir -p video
-          ffmpeg -v error -framerate 30 -start_number 1 -i hud/kare_%04d.jpg -c:v libx264 -preset veryfast -crf 18 -pix_fmt yuv420p video/sessiz.mp4
+          B=$(ls hud | sort | head -1 | sed 's/kare_0*\([0-9]*\).jpg//')
+          ffmpeg -v error -framerate 30 -start_number $B -i hud/kare_%04d.jpg -c:v libx264 -preset veryfast -crf 18 -pix_fmt yuv420p video/sessiz.mp4
           ffprobe -v error -show_entries format=duration -of csv=p=0 video/sessiz.mp4
       - name: Probe kareleri
         if: needs.hazirlik.outputs.mod == 'probe'

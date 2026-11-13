@@ -223,7 +223,7 @@ for eks, idx, yar in (("x", 0, A), ("y", 1, R), ("z", 2, R)):
     s = matematik(nt, "MULTIPLY", u, vn.outputs[0])
     en_yakin = matematik(nt, "ROUND", s)
     uzak = matematik(nt, "ABSOLUTE", matematik(nt, "SUBTRACT", s, en_yakin))
-    ince = matematik(nt, "LESS_THAN", uzak, None, deger_b=0.07)
+    ince = matematik(nt, "LESS_THAN", uzak, None, deger_b=-1.0)  # kullanici: kesim izi yok
     # gorunur: en_yakin >= n - d  ve en_yakin <= n - 1 ve d > 0
     alt = matematik(nt, "SUBTRACT", vn.outputs[0], vd.outputs[0])
     k1 = matematik(nt, "GREATER_THAN", en_yakin, matematik(nt, "SUBTRACT", alt, None, deger_b=0.5))
@@ -434,25 +434,70 @@ def kup_nesnesi(tur, no):
     yuks = np.maximum(p0[:, 2] - zb, 0)
     # yatay savrulma: yukseklikle artar, sola (kesilmis tarafa) ve kesitten disari egilimli
     yon_y = np.sign(merk[:, 1] + 1e-9)
-    dx = -np.abs(rng.normal(0.30, 0.20, k)) * yuks + rng.normal(0, 0.22, k) * yuks
-    dy = yon_y * np.abs(rng.normal(0.25, 0.18, k)) * yuks + rng.normal(0, 0.15, k) * yuks
+    dx = -np.abs(rng.normal(0.10, 0.10, k)) * yuks + rng.normal(0, 0.08, k) * yuks
+    dy = yon_y * np.abs(rng.normal(0.06, 0.08, k)) * yuks + rng.normal(0, 0.06, k) * yuks
     hx_ = p0[:, 0] + dx
     hy_ = p0[:, 1] + dy
-    # biriktirme (vektorel): hedef hucrede once birakilan / alttaki once yigilir
+    # dogal yigin: kum yigini gibi devrilme (yukseklik alani, ~35 derece dogal egim) + duzene sokulmamis yerlesim
     x0, y0 = -2.3, -1.55
-    ix = np.clip(((hx_ - x0) / hucre).astype(np.int64), 0, int(4.6 / hucre))
-    iy = np.clip(((hy_ - y0) / hucre).astype(np.int64), 0, int(2.9 / hucre))
-    anah = ix * 1_000_003 + iy
-    sira = np.lexsort((p0[:, 2], tr, anah))
-    a_s = anah[sira]
-    yeni_ = np.r_[True, a_s[1:] != a_s[:-1]]
-    grup_bas = np.maximum.accumulate(np.where(yeni_, np.arange(k), 0))
-    rank = np.zeros(k, np.int64)
-    rank[sira] = np.arange(k) - grup_bas
+    nxm, nym = int(4.6 / hucre) + 1, int(2.9 / hucre) + 1
+    ix = np.clip(((hx_ - x0) / hucre).astype(np.int64), 0, nxm - 1)
+    iy = np.clip(((hy_ - y0) / hucre).astype(np.int64), 0, nym - 1)
+    H = np.zeros((nxm, nym))
+    np.add.at(H, (ix, iy), 1.0)
+    lim = 0.7 * hucre / h  # komsu farki bu kadar kupu gecince devrilir (tan 35)
+    for _ in range(600):
+        degisti = False
+        for ax_, sh in ((0, 1), (0, -1), (1, 1), (1, -1)):
+            fark_ = H - np.roll(H, sh, axis=ax_)
+            asim = np.maximum(fark_ - lim, 0) / 5.0
+            if ax_ == 0:
+                asim[0 if sh == -1 else -1, :] = 0
+            else:
+                asim[:, 0 if sh == -1 else -1] = 0
+            if asim.max() > 1e-3:
+                degisti = True
+            H -= asim
+            H += np.roll(asim, -sh, axis=ax_)
+        if not degisti:
+            break
+    # yuvalara (cell, katman) yerlestirme: toplam k
+    sayi = np.floor(H).astype(np.int64)
+    eksik = k - int(sayi.sum())
+    if eksik > 0:
+        kesir = (H - np.floor(H)).ravel()
+        ek = np.argsort(-kesir)[:eksik]
+        sayi.ravel()[ek] += 1
+    elif eksik < 0:
+        dolu = np.argwhere(sayi.ravel() > 0).ravel()
+        cik = rng.choice(dolu, -eksik, replace=True)
+        np.subtract.at(sayi.ravel(), cik, 1)
+        sayi = np.maximum(sayi, 0)
+    ci, cj = np.nonzero(sayi)
+    adet = sayi[ci, cj]
+    slot_i = np.repeat(ci, adet)
+    slot_j = np.repeat(cj, adet)
+    slot_k = np.concatenate([np.arange(n_) for n_ in adet]) if len(adet) else np.zeros(0, np.int64)
+    n_s = len(slot_i)
+    if n_s < k:  # yuvarlama guvencesi
+        slot_i = np.r_[slot_i, np.full(k - n_s, slot_i[-1])]
+        slot_j = np.r_[slot_j, np.full(k - n_s, slot_j[-1])]
+        slot_k = np.r_[slot_k, np.arange(k - n_s) + slot_k.max() + 1]
+    slot_i, slot_j, slot_k = slot_i[:k], slot_j[:k], slot_k[:k]
+    # esleme: kupler ve yuvalar x seridine, serit icinde y'ye, sonra yukseklige gore siralanir
+    B = max(1, int(np.sqrt(k) / 2))
+    def _sira(xv, yv, zv):
+        o = np.argsort(xv, kind="stable")
+        serit = np.empty(len(xv), np.int64)
+        serit[o] = (np.arange(len(xv)) * B) // len(xv)
+        return np.lexsort((zv, yv, serit))
+    kup_sira = _sira(hx_, hy_, p0[:, 2])
+    slot_sira = _sira(slot_i + rng.uniform(0, 1, k), slot_j + rng.uniform(0, 1, k), slot_k.astype(float))
     son = np.empty_like(p0)
-    son[:, 0] = x0 + (ix + 0.5) * hucre + rng.uniform(-0.3, 0.3, k) * hucre
-    son[:, 1] = y0 + (iy + 0.5) * hucre + rng.uniform(-0.3, 0.3, k) * hucre
-    son[:, 2] = zb + h / 2 + rank * h
+    si, sj, sk = slot_i[slot_sira], slot_j[slot_sira], slot_k[slot_sira]
+    son[kup_sira, 0] = x0 + (si + rng.uniform(0, 1, k)) * hucre
+    son[kup_sira, 1] = y0 + (sj + rng.uniform(0, 1, k)) * hucre
+    son[kup_sira, 2] = zb + h / 2 + sk * h * 0.92 + rng.uniform(-0.25, 0.25, k) * h
     # dusus suresi: yer cekimi (hizli), en az 0.12 sn
     G_ = 30.0
     dz = np.maximum(p0[:, 2] - son[:, 2], 0.0)
