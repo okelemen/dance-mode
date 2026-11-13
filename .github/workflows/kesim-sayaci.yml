@@ -1,0 +1,99 @@
+name: Kesim Sayaci render
+
+# KESIM SAYACI serisi: Blender (Cycles CPU) GitHub Actions'ta (Masaustu CLAUDE.md md. 9).
+# istek.json: {"plan": "...json", "mod": "probe"|"full", "kareler": "61,151", "parca": 15, "ornek": 24}
+
+on:
+  push:
+    branches: [kesim-sayaci]
+    paths: [istek.json]
+  workflow_dispatch:
+
+jobs:
+  hazirlik:
+    runs-on: ubuntu-latest
+    outputs:
+      matris: ${{ steps.m.outputs.matris }}
+      plan: ${{ steps.m.outputs.plan }}
+      ornek: ${{ steps.m.outputs.ornek }}
+      mod: ${{ steps.m.outputs.mod }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        run: |
+          python3 - <<'EOF' >> "$GITHUB_OUTPUT"
+          import json, math
+          i = json.load(open("istek.json"))
+          p = json.load(open(i["plan"]))
+          if i["mod"] == "probe":
+              mat = [{"ad": "probe", "arg": "--kareler " + i["kareler"]}]
+          else:
+              n = int(i.get("parca", 15)); K = p["kare"]; adim = math.ceil(K / n)
+              mat = [{"ad": f"p{j:02d}", "arg": f"--bas {j*adim+1} --son {min(K,(j+1)*adim)}"} for j in range(n)]
+          print("matris=" + json.dumps({"include": mat}))
+          print("plan=" + i["plan"]); print("ornek=" + str(i.get("ornek", 24))); print("mod=" + i["mod"])
+          EOF
+
+  render:
+    needs: hazirlik
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: true
+      matrix: ${{ fromJSON(needs.hazirlik.outputs.matris) }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Blender onbellek
+        id: bc
+        uses: actions/cache@v4
+        with:
+          path: ~/blender
+          key: blender-4.2.3-linux-x64
+      - name: Blender indir (4.2.3 LTS)
+        if: steps.bc.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ~/blender && cd ~/blender
+          curl -sSL -o b.tar.xz https://download.blender.org/release/Blender4.2/blender-4.2.3-linux-x64.tar.xz
+          tar -xf b.tar.xz --strip-components=1 && rm b.tar.xz
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq libxi6 libxxf86vm1 libxfixes3 libxrender1 libgl1 libegl1 libxkbcommon0 libsm6
+      - name: Render
+        run: |
+          set -o pipefail
+          ~/blender/blender -b --factory-startup -noaudio -P sahne.py -- --plan "${{ needs.hazirlik.outputs.plan }}" \
+            --cikti cikti --ornek ${{ needs.hazirlik.outputs.ornek }} ${{ matrix.arg }} 2>&1 | grep -E "KARE|Error|Traceback|rror:" | tail -n 400
+          ls cikti | wc -l
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kare-${{ matrix.ad }}
+          path: cikti/
+          retention-days: 7
+
+  birlestir:
+    needs: [hazirlik, render]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: kare-*
+          path: kareler
+          merge-multiple: true
+      - run: pip install -q pillow
+      - name: Yazi katmani
+        run: |
+          python3 hud.py --plan "${{ needs.hazirlik.outputs.plan }}" --giris kareler --cikis hud | tail -n 3
+          ls hud | wc -l
+      - name: Video (sessiz)
+        if: needs.hazirlik.outputs.mod == 'full'
+        run: |
+          sudo apt-get install -y -qq ffmpeg
+          mkdir -p video
+          ffmpeg -v error -framerate 30 -start_number 1 -i hud/kare_%04d.png -c:v libx264 -preset slow -crf 17 -pix_fmt yuv420p video/sessiz.mp4
+          ffprobe -v error -show_entries format=duration -of csv=p=0 video/sessiz.mp4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sonuc-${{ needs.hazirlik.outputs.mod }}
+          path: |
+            hud/
+            video/
+          retention-days: 14
