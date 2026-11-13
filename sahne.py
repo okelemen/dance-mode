@@ -360,7 +360,7 @@ def dogrusal_interp(kimlik):
 
 
 # ---------------------------------------------------------------- kup yigini (tur sonu)
-GORSEL_TAVANLAR = [40, 50, 60, 70, 80, 90]  # tur basina eksen basi gorsel kup siniri (her tur kuculur)
+GORSEL_TAVANLAR = [40, 50, 60, 70, 75, 80]  # tur basina eksen basi gorsel kup siniri (her tur kuculur)
 DUSUS_SN = 0.5  # bir kupun yerine cokme suresi
 SN_KAYMA = 1.0 / FPS  # GN Scene Time saniyesi = kare / fps; kare(t) = t*fps + 1
 
@@ -414,7 +414,7 @@ def kup_nesnesi(tur, no):
     P = np.array([c for _, c in xk])
     sag = -A + (idx[:, 0] + 1) * (2 * A / gx)
     j = np.searchsorted(P, sag - 1e-6)
-    tr = np.where(j < len(T), T[np.minimum(j, len(T) - 1)], T[-1]) + rng.uniform(0, 0.06, k)
+    tr = np.where(j < len(T), T[np.minimum(j, len(T) - 1)], T[-1]) + 0.005 + rng.uniform(0, 0.05, k)
     # son konum: ust yari (z>0) alt yarinin icine coker, hepsi hafif oturur ve yayilir
     zc = MERKEZ_Z
     zb = TAHTA_UST
@@ -508,8 +508,13 @@ def kup_nesnesi(tur, no):
     L.new(fark.outputs[0], olc.inputs[0]); L.new(e2.outputs[0], olc.inputs["Scale"])
     topla = N.new("ShaderNodeVectorMath"); topla.operation = "ADD"
     L.new(poz.outputs[0], topla.inputs[0]); L.new(olc.outputs[0], topla.inputs[1])
+    once = gm("LESS_THAN", zaman.outputs["Seconds"], nattr("tr", "FLOAT"))
+    sil = N.new("GeometryNodeDeleteGeometry")
+    sil.domain = "POINT"
+    L.new(gi.outputs[0], sil.inputs["Geometry"])
+    L.new(once.outputs[0], sil.inputs["Selection"])
     sp = N.new("GeometryNodeSetPosition")
-    L.new(gi.outputs[0], sp.inputs["Geometry"])
+    L.new(sil.outputs["Geometry"], sp.inputs["Geometry"])
     L.new(topla.outputs[0], sp.inputs["Position"])
     kup = N.new("GeometryNodeMeshCube")
     kup.inputs["Size"].default_value = (2 * hx * 0.94, 2 * hy * 0.94, 2 * hz * 0.94)
@@ -619,6 +624,70 @@ for fc in egriler(ad):
     for kp in fc.keyframe_points:
         kp.interpolation = "CONSTANT" if fc.data_path == "hide_render" else "BEZIER"
 
+# ---------------------------------------------------------------- kesit yuzu (kalan meyve)
+bpy.ops.mesh.primitive_circle_add(vertices=96, radius=1.0, fill_type="NGON", location=(0, 0, MERKEZ_Z),
+                                  rotation=(0, math.radians(-90), 0))
+kesit = bpy.context.object
+kesit.name = "kesit"
+bpy.ops.object.transform_apply(rotation=True)
+mk_, ntk_, bk_ = malzeme("kesit_m")
+gp = ntk_.nodes.new("ShaderNodeNewGeometry")
+ay_ = ntk_.nodes.new("ShaderNodeSeparateXYZ")
+baglan(ntk_, gp.outputs["Position"], ay_.inputs[0])
+v_r = ntk_.nodes.new("ShaderNodeValue"); v_r.name = "kesit_r"; v_r.outputs[0].default_value = 1.0
+v_x = ntk_.nodes.new("ShaderNodeValue"); v_x.name = "kesit_x"; v_x.outputs[0].default_value = 0.0
+dy = ay_.outputs[1]
+dz = matematik(ntk_, "SUBTRACT", ay_.outputs[2], None, deger_b=MERKEZ_Z)
+rad = matematik(ntk_, "SQRT", matematik(ntk_, "ADD", matematik(ntk_, "MULTIPLY", dy, dy), matematik(ntk_, "MULTIPLY", dz, dz)))
+u_ = matematik(ntk_, "DIVIDE", rad, v_r.outputs[0])
+et_r = ntk_.nodes.new("ShaderNodeValToRGB")
+et_r.color_ramp.elements[0].color = hex_renk("#f1e9b8")
+et_r.color_ramp.elements[1].position = 0.97
+et_r.color_ramp.elements[1].color = hex_renk("#a8cc5c")
+e_m = et_r.color_ramp.elements.new(0.6); e_m.color = hex_renk("#e3e08e")
+e_k = et_r.color_ramp.elements.new(0.985); e_k.color = hex_renk("#21361a")
+baglan(ntk_, u_, et_r.inputs["Fac"])
+ck_ = M["cekirdek"]
+dxp = matematik(ntk_, "SUBTRACT", v_x.outputs[0], None, deger_b=ck_["x"] * A)
+cdist = matematik(ntk_, "SQRT", matematik(ntk_, "ADD", matematik(ntk_, "MULTIPLY", dxp, dxp),
+                                         matematik(ntk_, "ADD", matematik(ntk_, "MULTIPLY", dy, dy), matematik(ntk_, "MULTIPLY", dz, dz))))
+cu = matematik(ntk_, "DIVIDE", cdist, None, deger_b=ck_["r"] * R)
+cek_r_ = ntk_.nodes.new("ShaderNodeValToRGB")
+cek_r_.color_ramp.interpolation = "CONSTANT"
+cek_r_.color_ramp.elements[0].color = hex_renk("#b98a52")
+cek_r_.color_ramp.elements[1].position = 1.0
+cek_r_.color_ramp.elements[1].color = hex_renk("#000000", 0.0)
+c_k = cek_r_.color_ramp.elements.new(0.86); c_k.color = hex_renk("#4a2412")
+baglan(ntk_, cu, cek_r_.inputs["Fac"])
+ic_mi = matematik(ntk_, "LESS_THAN", cu, None, deger_b=1.0)
+kk_ = ntk_.nodes.new("ShaderNodeMix"); kk_.data_type = "RGBA"
+baglan(ntk_, ic_mi, kk_.inputs["Factor"])
+baglan(ntk_, et_r.outputs["Color"], kk_.inputs[6])
+baglan(ntk_, cek_r_.outputs["Color"], kk_.inputs[7])
+baglan(ntk_, kk_.outputs[2], bk_.inputs["Base Color"])
+bk_.inputs["Roughness"].default_value = 0.45
+kesit.data.materials.append(mk_)
+nt_k = mk_.node_tree
+kesit.hide_render = True
+kesit.keyframe_insert("hide_render", frame=0)
+for tur in PLAN["turlar"]:
+    xk = [(t, konum) for t, eks, konum, j in tur["kesimler"] if eks == "x"]
+    kesit.hide_render = False
+    kesit.keyframe_insert("hide_render", frame=kare(xk[0][0]))
+    kesit.hide_render = True
+    kesit.keyframe_insert("hide_render", frame=kare(xk[-1][0] + 0.02))
+    for t, konum in xk:
+        r_ = float(profil_r(np.array([konum]))[0]) * 0.995
+        kesit.location = (konum + 0.002, 0, MERKEZ_Z)
+        kesit.scale = (1, r_, r_)
+        kesit.keyframe_insert("location", frame=kare(t))
+        kesit.keyframe_insert("scale", frame=kare(t))
+        for ad_, deger in (("kesit_r", r_), ("kesit_x", konum)):
+            nt_k.nodes[ad_].outputs[0].default_value = deger
+            nt_k.nodes[ad_].outputs[0].keyframe_insert("default_value", frame=kare(t))
+sabit_interp(kesit)
+sabit_interp(nt_k)
+
 # ---------------------------------------------------------------- isik + kamera
 gunes = bpy.data.lights.new("gunes", "SUN")
 gunes.energy = 3.2
@@ -639,10 +708,10 @@ cam.lens = 58
 cam.sensor_fit = "HORIZONTAL"
 cam.sensor_width = 36
 k = bpy.data.objects.new("kamera", cam)
-k.location = (2.0, -3.77, 2.57)
+k.location = (-1.2, -4.15, 2.35)  # on-soldan: kalan meyvenin kesit yuzu gorunur (REF-080)
 sc.collection.objects.link(k)
 hedef = bpy.data.objects.new("hedef", None)
-hedef.location = (0.0, 0.0, 0.62)
+hedef.location = (0.05, 0.0, 0.66)
 sc.collection.objects.link(hedef)
 tr = k.constraints.new("TRACK_TO")
 tr.target = hedef
@@ -656,7 +725,7 @@ kareler = arg("--kareler")
 if kareler:
     liste = [int(x) for x in kareler.split(",") if x.strip()]
 else:
-    liste = list(range(int(arg("--bas", "1")), int(arg("--son", str(PLAN["kare"]))) + 1))
+    liste = list(range(int(arg("--bas", "1")), int(arg("--son", str(PLAN["kare"]))) + 1, int(arg("--adim", "1"))))
 if arg("--kaydet"):
     bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(arg("--kaydet")))
 if arg("--render", "1") == "1":

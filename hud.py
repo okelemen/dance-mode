@@ -17,6 +17,7 @@ ap.add_argument("--plan", required=True)
 ap.add_argument("--giris", required=True)
 ap.add_argument("--cikis", required=True)
 ap.add_argument("--font", default="/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf")
+ap.add_argument("--jpg", action="store_true")
 a = ap.parse_args()
 
 P = json.load(open(a.plan, encoding="utf-8"))
@@ -91,5 +92,8 @@ for yol in sorted(glob.glob(os.path.join(a.giris, "kare_*.png"))):
             for m, w in zip(("LIKE", "COMMENT", "SHARE"), ws):
                 hap(d, (x + w / 2, 1858), m, F_CTA2, (58, 84, 30), (255, 255, 255), pad=(30, 12))
                 x += w + 22
-    im.save(os.path.join(a.cikis, os.path.basename(yol)))
+    if a.jpg:
+        im.save(os.path.join(a.cikis, os.path.basename(yol)[:-4] + ".jpg"), quality=93)
+    else:
+        im.save(os.path.join(a.cikis, os.path.basename(yol)))
     print("HUD", f, flush=True)
