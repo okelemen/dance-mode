@@ -367,7 +367,8 @@ def dogrusal_interp(kimlik):
 
 
 # ---------------------------------------------------------------- kup yigini (tur sonu)
-GORSEL_TAVANLAR = [40, 50, 60, 70, 75, 80]  # tur basina eksen basi gorsel kup siniri (her tur kuculur)
+GORSEL_TAVANLAR = [200] * 6  # parca boyutu gercek kesim hucresi; 200/eksen ustu render cozunurlugunde piksel alti
+TANECIK_ESIK = 60  # eksen basi hucre bunu gecerse kupler tanecik (nokta bulutu) olarak cizilir
 DUSUS_SN = 0.5  # bir kupun yerine cokme suresi
 SN_KAYMA = 1.0 / FPS  # GN Scene Time saniyesi = kare / fps; kare(t) = t*fps + 1
 
@@ -422,20 +423,42 @@ def kup_nesnesi(tur, no):
     sag = -A + (idx[:, 0] + 1) * (2 * A / gx)
     j = np.searchsorted(P, sag - 1e-6)
     tr = np.where(j < len(T), T[np.minimum(j, len(T) - 1)], T[-1]) + 0.005 + rng.uniform(0, 0.05, k)
-    # son konum: ust yari (z>0) alt yarinin icine coker, hepsi hafif oturur ve yayilir
+    # REF-080 dokulme: dilim kesilince kupler hizla duser, donerek akar, tahtada daha once dusenlerin ustune
+    # yigilir (yigin = biriktirme + dogal egim; onceden hesaplanmis duzgun sekil yok)
     zc = MERKEZ_Z
     zb = TAHTA_UST
-    z_yeni = np.where(merk[:, 2] > 0, -merk[:, 2] * 0.9, merk[:, 2])
-    son = np.empty_like(merk)
-    son[:, 0] = merk[:, 0] * 1.04 - 0.04 * R
-    son[:, 1] = merk[:, 1] * 1.12 - 0.06 * R * (merk[:, 2] > 0)
-    son[:, 2] = zb + (zc + z_yeni - zb) * 0.86
-    son[:, 2] = np.maximum(son[:, 2], zb + hz * 0.9)
     p0 = merk.copy()
     p0[:, 2] += zc
-    olc_d = 0.2 if gx <= 6 else (0.25 if gx <= 20 else 0.15)
-    rv = np.column_stack([rng.normal(0, olc_d, k), rng.normal(0, olc_d, k), rng.normal(0, olc_d * 1.5, k)])
-
+    hucre = 2 * max(hx, hy) * 0.98
+    h = 2 * hz * 0.92
+    yuks = np.maximum(p0[:, 2] - zb, 0)
+    # yatay savrulma: yukseklikle artar, sola (kesilmis tarafa) ve kesitten disari egilimli
+    yon_y = np.sign(merk[:, 1] + 1e-9)
+    dx = -np.abs(rng.normal(0.30, 0.20, k)) * yuks + rng.normal(0, 0.22, k) * yuks
+    dy = yon_y * np.abs(rng.normal(0.25, 0.18, k)) * yuks + rng.normal(0, 0.15, k) * yuks
+    hx_ = p0[:, 0] + dx
+    hy_ = p0[:, 1] + dy
+    # biriktirme (vektorel): hedef hucrede once birakilan / alttaki once yigilir
+    x0, y0 = -2.3, -1.55
+    ix = np.clip(((hx_ - x0) / hucre).astype(np.int64), 0, int(4.6 / hucre))
+    iy = np.clip(((hy_ - y0) / hucre).astype(np.int64), 0, int(2.9 / hucre))
+    anah = ix * 1_000_003 + iy
+    sira = np.lexsort((p0[:, 2], tr, anah))
+    a_s = anah[sira]
+    yeni_ = np.r_[True, a_s[1:] != a_s[:-1]]
+    grup_bas = np.maximum.accumulate(np.where(yeni_, np.arange(k), 0))
+    rank = np.zeros(k, np.int64)
+    rank[sira] = np.arange(k) - grup_bas
+    son = np.empty_like(p0)
+    son[:, 0] = x0 + (ix + 0.5) * hucre + rng.uniform(-0.3, 0.3, k) * hucre
+    son[:, 1] = y0 + (iy + 0.5) * hucre + rng.uniform(-0.3, 0.3, k) * hucre
+    son[:, 2] = zb + h / 2 + rank * h
+    # dusus suresi: yer cekimi (hizli), en az 0.12 sn
+    G_ = 30.0
+    dz = np.maximum(p0[:, 2] - son[:, 2], 0.0)
+    sure = np.maximum(np.sqrt(2 * dz / G_), 0.12)
+    # donus: dusus boyunca serbest dondurme, kupler egik iner
+    rv = rng.normal(0, 1.0, (k, 3)) * np.array([1.6, 1.6, 2.2])
     me = bpy.data.meshes.new(f"kup_{no}")
     me.vertices.add(k)
     me.vertices.foreach_set("co", p0.ravel().astype(np.float32))
@@ -443,7 +466,7 @@ def kup_nesnesi(tur, no):
     for ad_, tip, veri in (("son", "FLOAT_VECTOR", son), ("rv", "FLOAT_VECTOR", rv)):
         at_ = me.attributes.new(ad_, tip, "POINT")
         at_.data.foreach_set("vector", veri.ravel().astype(np.float32))
-    for ad_, veri in (("tr", tr + SN_KAYMA), ("maske", maske)):
+    for ad_, veri in (("tr", tr + SN_KAYMA), ("maske", maske), ("sure", sure)):
         at_ = me.attributes.new(ad_, "FLOAT", "POINT")
         at_.data.foreach_set("value", veri.astype(np.float32))
     at_ = me.attributes.new("renk", "FLOAT_COLOR", "POINT")
@@ -478,6 +501,16 @@ def kup_nesnesi(tur, no):
     baglan(ntk, karis.outputs[2], bk.inputs["Base Color"])
     bk.inputs["Roughness"].default_value = 0.5
 
+    mt, ntt, bt = malzeme(f"tanecik_m_{no}")
+    t_r = ntt.nodes.new("ShaderNodeAttribute"); t_r.attribute_type = "GEOMETRY"; t_r.attribute_name = "renk"
+    t_m = ntt.nodes.new("ShaderNodeAttribute"); t_m.attribute_type = "GEOMETRY"; t_m.attribute_name = "maske"
+    t_k = ntt.nodes.new("ShaderNodeMix"); t_k.data_type = "RGBA"
+    baglan(ntt, matematik(ntt, "GREATER_THAN", t_m.outputs["Fac"], None, deger_b=0.5), t_k.inputs["Factor"])
+    baglan(ntt, t_r.outputs["Color"], t_k.inputs[6])
+    t_k.inputs[7].default_value = hex_renk("#21361a")
+    baglan(ntt, t_k.outputs[2], bt.inputs["Base Color"])
+    bt.inputs["Roughness"].default_value = 0.55
+
     # geometri dugumleri: zaman -> konum, kup kopyalari
     ng = bpy.data.node_groups.new(f"kupGN_{no}", "GeometryNodeTree")
     ng.interface.new_socket("Geometry", in_out="INPUT", socket_type="NodeSocketGeometry")
@@ -505,7 +538,7 @@ def kup_nesnesi(tur, no):
 
     zaman = N.new("GeometryNodeInputSceneTime")
     e = gm("SUBTRACT", zaman.outputs["Seconds"], nattr("tr", "FLOAT"))
-    e = gm("DIVIDE", e.outputs[0], db=DUSUS_SN)
+    e = gm("DIVIDE", e.outputs[0], nattr("sure", "FLOAT"))
     e.use_clamp = True
     e2 = gm("MULTIPLY", e.outputs[0], e.outputs[0])
     poz = N.new("GeometryNodeInputPosition")
@@ -523,23 +556,32 @@ def kup_nesnesi(tur, no):
     sp = N.new("GeometryNodeSetPosition")
     L.new(sil.outputs["Geometry"], sp.inputs["Geometry"])
     L.new(topla.outputs[0], sp.inputs["Position"])
-    kup = N.new("GeometryNodeMeshCube")
-    kup.inputs["Size"].default_value = (2 * hx * 0.94, 2 * hy * 0.94, 2 * hz * 0.94)
-    sm = N.new("GeometryNodeSetMaterial")
-    sm.inputs["Material"].default_value = mk
-    L.new(kup.outputs["Mesh"], sm.inputs["Geometry"])
-    iop = N.new("GeometryNodeInstanceOnPoints")
-    L.new(sp.outputs["Geometry"], iop.inputs["Points"])
-    L.new(sm.outputs["Geometry"], iop.inputs["Instance"])
-    rot = N.new("ShaderNodeVectorMath"); rot.operation = "SCALE"
-    L.new(nattr("rv", "FLOAT_VECTOR"), rot.inputs[0]); L.new(e.outputs[0], rot.inputs["Scale"])
-    try:
-        e2r = N.new("FunctionNodeEulerToRotation")
-        L.new(rot.outputs[0], e2r.inputs[0])
-        L.new(e2r.outputs[0], iop.inputs["Rotation"])
-    except Exception:
-        L.new(rot.outputs[0], iop.inputs["Rotation"])
-    L.new(iop.outputs["Instances"], go.inputs[0])
+    if gx <= TANECIK_ESIK:
+        kup = N.new("GeometryNodeMeshCube")
+        kup.inputs["Size"].default_value = (2 * hx * 0.94, 2 * hy * 0.94, 2 * hz * 0.94)
+        sm = N.new("GeometryNodeSetMaterial")
+        sm.inputs["Material"].default_value = mk
+        L.new(kup.outputs["Mesh"], sm.inputs["Geometry"])
+        iop = N.new("GeometryNodeInstanceOnPoints")
+        L.new(sp.outputs["Geometry"], iop.inputs["Points"])
+        L.new(sm.outputs["Geometry"], iop.inputs["Instance"])
+        rot = N.new("ShaderNodeVectorMath"); rot.operation = "SCALE"
+        L.new(nattr("rv", "FLOAT_VECTOR"), rot.inputs[0]); L.new(e.outputs[0], rot.inputs["Scale"])
+        try:
+            e2r = N.new("FunctionNodeEulerToRotation")
+            L.new(rot.outputs[0], e2r.inputs[0])
+            L.new(e2r.outputs[0], iop.inputs["Rotation"])
+        except Exception:
+            L.new(rot.outputs[0], iop.inputs["Rotation"])
+        L.new(iop.outputs["Instances"], go.inputs[0])
+    else:
+        m2p = N.new("GeometryNodeMeshToPoints")
+        m2p.inputs["Radius"].default_value = max(hx, hy, hz) * 0.95
+        L.new(sp.outputs["Geometry"], m2p.inputs["Mesh"])
+        sm = N.new("GeometryNodeSetMaterial")
+        sm.inputs["Material"].default_value = mt
+        L.new(m2p.outputs["Points"], sm.inputs["Geometry"])
+        L.new(sm.outputs["Geometry"], go.inputs[0])
     md = ob.modifiers.new("kupler", "NODES")
     md.node_group = ng
     print(f"tur {no}: {k} gorsel kup ({gx}x{gy}x{gz}), supurme {T[0]:.2f}-{T[-1]:.2f} sn", flush=True)
