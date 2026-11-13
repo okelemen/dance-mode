@@ -632,11 +632,15 @@ for fc in egriler(ad):
         kp.interpolation = "CONSTANT" if fc.data_path == "hide_render" else "BEZIER"
 
 # ---------------------------------------------------------------- kesit yuzu (kalan meyve)
-bpy.ops.mesh.primitive_circle_add(vertices=96, radius=1.0, fill_type="NGON", location=(0, 0, MERKEZ_Z),
-                                  rotation=(0, math.radians(-90), 0))
-kesit = bpy.context.object
-kesit.name = "kesit"
-bpy.ops.object.transform_apply(rotation=True)
+# disk elle kurulur (YZ duzleminde, yaricap tam 1): surumden bagimsiz olcu
+_n = 96
+_vs = [(0.0, math.cos(2 * math.pi * i / _n), math.sin(2 * math.pi * i / _n)) for i in range(_n)]
+_me = bpy.data.meshes.new("kesit")
+_me.from_pydata(_vs, [], [list(range(_n))[::-1]])
+_me.update()
+kesit = bpy.data.objects.new("kesit", _me)
+sc.collection.objects.link(kesit)
+kesit.location = (0, 0, MERKEZ_Z)
 mk_, ntk_, bk_ = malzeme("kesit_m")
 gp = ntk_.nodes.new("ShaderNodeNewGeometry")
 ay_ = ntk_.nodes.new("ShaderNodeSeparateXYZ")
@@ -673,6 +677,14 @@ baglan(ntk_, et_r.outputs["Color"], kk_.inputs[6])
 baglan(ntk_, cek_r_.outputs["Color"], kk_.inputs[7])
 baglan(ntk_, kk_.outputs[2], bk_.inputs["Base Color"])
 bk_.inputs["Roughness"].default_value = 0.45
+# guvence: meyve kesitinin disina tasan her nokta seffaf
+_dis = matematik(ntk_, "GREATER_THAN", u_, None, deger_b=1.0)
+_sf = ntk_.nodes.new("ShaderNodeBsdfTransparent")
+_mx = ntk_.nodes.new("ShaderNodeMixShader")
+baglan(ntk_, _dis, _mx.inputs[0])
+baglan(ntk_, bk_.outputs[0], _mx.inputs[1])
+baglan(ntk_, _sf.outputs[0], _mx.inputs[2])
+baglan(ntk_, _mx.outputs[0], ntk_.nodes["Material Output"].inputs["Surface"])
 kesit.data.materials.append(mk_)
 nt_k = mk_.node_tree
 kesit.hide_render = True
