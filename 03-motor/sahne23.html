@@ -498,7 +498,8 @@ function hudCiz(t, tur) {
   yaziK('-', W / 2, y, 50 * k, ['#ffffff', '#ffffff'], 1, KON);
   yaziK(String(s.p2), W / 2 + 46 * k, y, 58 * k * pop, ['#ffffff', ACIK[1], RENK[1]], 1, '#24083e');
   const ad = TEMA.turAd[tur] || ('ROUND ' + tur);
-  yaziK(ad, 190 * k, H * 0.055, 52 * k, ['#f0fff8', '#7affd0', '#1ac8a0'], 1);
+  cx.font = F(52 * k); const yw = cx.measureText(ad).width;          // tam render 1: MIRROR ROUND sol kenardan tasiyordu -> sola yasla, 24 px pay
+  yaziK(ad, Math.max(190 * k, yw / 2 + 34 * k), H * 0.055, 52 * k, ['#f0fff8', '#7affd0', '#1ac8a0'], 1);
 }
 // ilk iki duvarda ustte HOW TO PLAY seridi (mobil paket md. 1: ayri HOW TO PLAY karti yok)
 function nasilSerit(d, u) {
