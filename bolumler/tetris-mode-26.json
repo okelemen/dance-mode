@@ -1,0 +1,734 @@
+{
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-26",
+ "bpm": 135.0,
+ "toplam_olcu": 166,
+ "toplam_duvar": 24,
+ "kartlar": [
+  {
+   "t": 0.0,
+   "sure": 3.5556,
+   "tip": "acilis",
+   "soru": true
+  },
+  {
+   "t": 67.5556,
+   "sure": 3.5556,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "02",
+   "alt": "ROUND 2",
+   "ek": null,
+   "boss": false
+  },
+  {
+   "t": 135.1111,
+   "sure": 3.5556,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "03",
+   "alt": "MIRROR ROUND",
+   "ek": "LEFT IS RIGHT!",
+   "boss": false
+  },
+  {
+   "t": 202.6667,
+   "sure": 3.5556,
+   "tip": "tur",
+   "tur": 4,
+   "metin": "04",
+   "alt": "FINAL ROUND",
+   "ek": null,
+   "boss": false
+  },
+  {
+   "t": 259.5556,
+   "sure": 3.5556,
+   "tip": "tur",
+   "tur": 4,
+   "metin": "!",
+   "alt": "BOSS WALL",
+   "ek": "WINNER TAKES IT ALL",
+   "boss": true
+  },
+  {
+   "t": 277.3333,
+   "sure": 5.3333,
+   "tip": "sonuc",
+   "kazanan": "p2",
+   "skor": {
+    "p1": 20,
+    "p2": 21
+   }
+  },
+  {
+   "t": 282.6667,
+   "sure": 5.3333,
+   "tip": "rutbe"
+  },
+  {
+   "t": 288.0,
+   "sure": 7.1111,
+   "tip": "abone"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 3.5556,
+   "z": {
+    "kart": 1.7778,
+    "say": 5.3333,
+    "buyu": 1.7778,
+    "gec": 1.7778,
+    "sure": 10.6667
+   },
+   "p1": "spell-stork-prayer",
+   "p2": "sunrise-arch",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 1,
+    "p2": 1
+   },
+   "ovgu": "PERFECT!",
+   "boss": false,
+   "ayna": false,
+   "nasil": true
+  },
+  {
+   "no": 2,
+   "tur": 1,
+   "t0": 14.2222,
+   "z": {
+    "kart": 1.7778,
+    "say": 5.3333,
+    "buyu": 1.7778,
+    "gec": 1.7778,
+    "sure": 10.6667
+   },
+   "p1": "standing-clasp-behind-lift",
+   "p2": "one-arm-up-knee-lift",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 2,
+    "p2": 2
+   },
+   "ovgu": "NICE!",
+   "boss": false,
+   "ayna": false,
+   "nasil": true
+  },
+  {
+   "no": 3,
+   "tur": 1,
+   "t0": 24.8889,
+   "z": {
+    "kart": 1.7778,
+    "say": 5.3333,
+    "buyu": 1.7778,
+    "gec": 1.7778,
+    "sure": 10.6667
+   },
+   "p1": "side-leg-lift-arms-up",
+   "p2": "wide-side-reach",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 3,
+    "p2": 3
+   },
+   "ovgu": "GREAT!",
+   "boss": false,
+   "ayna": false,
+   "nasil": false
+  },
+  {
+   "no": 4,
+   "tur": 1,
+   "t0": 35.5556,
+   "z": {
+    "kart": 1.7778,
+    "say": 5.3333,
+    "buyu": 1.7778,
+    "gec": 1.7778,
+    "sure": 10.6667
+   },
+   "p1": "standing-knee-hold",
+   "p2": "cauldron-w-reach-knee-up",
+   "out": {
+    "p1": true,
+    "p2": false
+   },
+   "skor": {
+    "p1": 3,
+    "p2": 4
+   },
+   "ovgu": "AMAZING!",
+   "boss": false,
+   "ayna": false,
+   "nasil": false
+  },
+  {
+   "no": 5,
+   "tur": 1,
+   "t0": 46.2222,
+   "z": {
+    "kart": 1.7778,
+    "say": 5.3333,
+    "buyu": 1.7778,
+    "gec": 1.7778,
+    "sure": 10.6667
+   },
+   "p1": "gate-pose",
+   "p2": "banshee-deep-goddess-v",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 4,
+    "p2": 5
+   },
+   "ovgu": "SUPER!",
+   "boss": false,
+   "ayna": false,
+   "nasil": false
+  },
+  {
+   "no": 6,
+   "tur": 1,
+   "t0": 56.8889,
+   "z": {
+    "kart": 1.7778,
+    "say": 5.3333,
+    "buyu": 1.7778,
+    "gec": 1.7778,
+    "sure": 10.6667
+   },
+   "p1": "one-leg-hug-knee-side",
+   "p2": "goddess-hands-on-head",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 5,
+    "p2": 6
+   },
+   "ovgu": "WOW!",
+   "boss": false,
+   "ayna": false,
+   "nasil": false
+  },
+  {
+   "no": 7,
+   "tur": 2,
+   "t0": 71.1111,
+   "z": {
+    "kart": 1.7778,
+    "say": 5.3333,
+    "buyu": 1.7778,
+    "gec": 1.7778,
+    "sure": 10.6667
+   },
+   "p1": "broom-w-knee-up",
+   "p2": "king-pigeon-reach",
+   "out": {
+    "p1": false,
+    "p2": true
+   },
+   "skor": {
+    "p1": 6,
+    "p2": 6
+   },
+   "ovgu": "PERFECT!",
+   "boss": false,
+   "ayna": false,
+   "nasil": false
+  },
+  {
+   "no": 8,
+   "tur": 2,
+   "t0": 81.7778,
+   "z": {
+    "kart": 1.7778,
+    "say": 5.3333,
+    "buyu": 1.7778,
+    "gec": 1.7778,
+    "sure": 10.6667
+   },
+   "p1": "zombie-diagonal-side-tap",
+   "p2": "seated-leg-cradle",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 7,
+    "p2": 7
+   },
+   "ovgu": "NICE!",
+   "boss": false,
+   "ayna": false,
+   "nasil": false
+  },
+  {
+   "no": 9,
+   "tur": 2,
+   "t0": 92.4444,
+   "z": {
+    "kart": 1.7778,
+    "say": 5.3333,
+    "buyu": 1.7778,
+    "gec": 1.7778,
+    "sure": 10.6667
+   },
+   "p1": "broom-kneel-one-up",
+   "p2": "bound-side-angle",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 8,
+    "p2": 8
+   },
+   "ovgu": "GREAT!",
+   "boss": false,
+   "ayna": false,
+   "nasil": false
+  },
+  {
+   "no": 10,
+   "tur": 2,
+   "t0": 103.1111,
+   "z": {
+    "kart": 1.7778,
+    "say": 5.3333,
+    "buyu": 1.7778,
+    "gec": 1.7778,
+    "sure": 10.6667
+   },
+   "p1": "lunge-victory-reach",
+   "p2": "reverse-lunge-reach-up",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 9,
+    "p2": 9
+   },
+   "ovgu": "AMAZING!",
+   "boss": false,
+   "ayna": false,
+   "nasil": false
+  },
+  {
+   "no": 11,
+   "tur": 2,
+   "t0": 113.7778,
+   "z": {
+    "kart": 1.7778,
+    "say": 5.3333,
+    "buyu": 1.7778,
+    "gec": 1.7778,
+    "sure": 10.6667
+   },
+   "p1": "half-kneel-cactus",
+   "p2": "half-kneel-arms-back-lift",
+   "out": {
+    "p1": true,
+    "p2": false
+   },
+   "skor": {
+    "p1": 9,
+    "p2": 10
+   },
+   "ovgu": "SUPER!",
+   "boss": false,
+   "ayna": false,
+   "nasil": false
+  },
+  {
+   "no": 12,
+   "tur": 2,
+   "t0": 124.4444,
+   "z": {
+    "kart": 1.7778,
+    "say": 5.3333,
+    "buyu": 1.7778,
+    "gec": 1.7778,
+    "sure": 10.6667
+   },
+   "p1": "phantom-lunge-arms-forward",
+   "p2": "seated-leg-lift",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 10,
+    "p2": 11
+   },
+   "ovgu": "WOW!",
+   "boss": false,
+   "ayna": false,
+   "nasil": false
+  },
+  {
+   "no": 13,
+   "tur": 3,
+   "t0": 138.6667,
+   "z": {
+    "kart": 1.7778,
+    "say": 5.3333,
+    "buyu": 1.7778,
+    "gec": 1.7778,
+    "sure": 10.6667
+   },
+   "p1": "extended-side-angle",
+   "p2": "broom-v-t-curtsy",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 11,
+    "p2": 12
+   },
+   "ovgu": "PERFECT!",
+   "boss": false,
+   "ayna": true,
+   "nasil": false
+  },
+  {
+   "no": 14,
+   "tur": 3,
+   "t0": 149.3333,
+   "z": {
+    "kart": 1.7778,
+    "say": 5.3333,
+    "buyu": 1.7778,
+    "gec": 1.7778,
+    "sure": 10.6667
+   },
+   "p1": "owl-half-cactus-stand",
+   "p2": "wizard-head-low-kick-lean-l",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 12,
+    "p2": 13
+   },
+   "ovgu": "NICE!",
+   "boss": false,
+   "ayna": true,
+   "nasil": false
+  },
+  {
+   "no": 15,
+   "tur": 3,
+   "t0": 160.0,
+   "z": {
+    "kart": 1.7778,
+    "say": 5.3333,
+    "buyu": 1.7778,
+    "gec": 1.7778,
+    "sure": 10.6667
+   },
+   "p1": "spider-half-cactus-wide",
+   "p2": "goblin-diag-hip-tap-lean-l",
+   "out": {
+    "p1": false,
+    "p2": true
+   },
+   "skor": {
+    "p1": 13,
+    "p2": 13
+   },
+   "ovgu": "GREAT!",
+   "boss": false,
+   "ayna": true,
+   "nasil": false
+  },
+  {
+   "no": 16,
+   "tur": 3,
+   "t0": 170.6667,
+   "z": {
+    "kart": 1.7778,
+    "say": 5.3333,
+    "buyu": 1.7778,
+    "gec": 1.7778,
+    "sure": 10.6667
+   },
+   "p1": "kneeling-clasp-behind-lift",
+   "p2": "seated-leg-lift-arms-up",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 14,
+    "p2": 14
+   },
+   "ovgu": "AMAZING!",
+   "boss": false,
+   "ayna": true,
+   "nasil": false
+  },
+  {
+   "no": 17,
+   "tur": 3,
+   "t0": 181.3333,
+   "z": {
+    "kart": 1.7778,
+    "say": 5.3333,
+    "buyu": 1.7778,
+    "gec": 1.7778,
+    "sure": 10.6667
+   },
+   "p1": "crypt-side-sit-flex-up45",
+   "p2": "kneeling-lunge-quad-pull",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 15,
+    "p2": 15
+   },
+   "ovgu": "SUPER!",
+   "boss": false,
+   "ayna": true,
+   "nasil": false
+  },
+  {
+   "no": 18,
+   "tur": 3,
+   "t0": 192.0,
+   "z": {
+    "kart": 1.7778,
+    "say": 5.3333,
+    "buyu": 1.7778,
+    "gec": 1.7778,
+    "sure": 10.6667
+   },
+   "p1": "pumpkin-kneel-up45-hip",
+   "p2": "shadow-low-lunge-back-back",
+   "out": {
+    "p1": true,
+    "p2": false
+   },
+   "skor": {
+    "p1": 15,
+    "p2": 16
+   },
+   "ovgu": "WOW!",
+   "boss": false,
+   "ayna": true,
+   "nasil": false
+  },
+  {
+   "no": 19,
+   "tur": 4,
+   "t0": 206.2222,
+   "z": {
+    "kart": 1.7778,
+    "say": 5.3333,
+    "buyu": 1.7778,
+    "gec": 1.7778,
+    "sure": 10.6667
+   },
+   "p1": "lateral-lunge-reach-across",
+   "p2": "kneeling-side-arm",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 16,
+    "p2": 17
+   },
+   "ovgu": "PERFECT!",
+   "boss": false,
+   "ayna": false,
+   "nasil": false
+  },
+  {
+   "no": 20,
+   "tur": 4,
+   "t0": 216.8889,
+   "z": {
+    "kart": 1.7778,
+    "say": 5.3333,
+    "buyu": 1.7778,
+    "gec": 1.7778,
+    "sure": 10.6667
+   },
+   "p1": "raven-low-squat-w-t",
+   "p2": "side-plank-leg-lift",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 17,
+    "p2": 18
+   },
+   "ovgu": "NICE!",
+   "boss": false,
+   "ayna": false,
+   "nasil": false
+  },
+  {
+   "no": 21,
+   "tur": 4,
+   "t0": 227.5556,
+   "z": {
+    "kart": 1.7778,
+    "say": 5.3333,
+    "buyu": 1.7778,
+    "gec": 1.7778,
+    "sure": 10.6667
+   },
+   "p1": "cobra",
+   "p2": "lotus-arms-wide",
+   "out": {
+    "p1": false,
+    "p2": true
+   },
+   "skor": {
+    "p1": 18,
+    "p2": 18
+   },
+   "ovgu": "GREAT!",
+   "boss": false,
+   "ayna": false,
+   "nasil": false
+  },
+  {
+   "no": 22,
+   "tur": 4,
+   "t0": 238.2222,
+   "z": {
+    "kart": 1.7778,
+    "say": 5.3333,
+    "buyu": 1.7778,
+    "gec": 1.7778,
+    "sure": 10.6667
+   },
+   "p1": "half-split",
+   "p2": "tabletop-leg-lift",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 19,
+    "p2": 19
+   },
+   "ovgu": "AMAZING!",
+   "boss": false,
+   "ayna": false,
+   "nasil": false
+  },
+  {
+   "no": 23,
+   "tur": 4,
+   "t0": 248.8889,
+   "z": {
+    "kart": 1.7778,
+    "say": 5.3333,
+    "buyu": 1.7778,
+    "gec": 1.7778,
+    "sure": 10.6667
+   },
+   "p1": "hurdler-stretch",
+   "p2": "seated-straddle-arms-t",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 20,
+    "p2": 20
+   },
+   "ovgu": "SUPER!",
+   "boss": false,
+   "ayna": false,
+   "nasil": false
+  },
+  {
+   "no": 24,
+   "tur": 4,
+   "t0": 263.1111,
+   "z": {
+    "kart": 1.7778,
+    "say": 7.1111,
+    "buyu": 2.6667,
+    "gec": 2.6667,
+    "sure": 14.2222
+   },
+   "p1": "upward-plank-leg-lift",
+   "p2": "boat-twist-arms",
+   "out": {
+    "p1": true,
+    "p2": false
+   },
+   "skor": {
+    "p1": 20,
+    "p2": 21
+   },
+   "ovgu": "WOW!",
+   "boss": true,
+   "ayna": false,
+   "nasil": false
+  }
+ ],
+ "abone": [
+  8.0,
+  23.0,
+  38.0,
+  53.7,
+  71.4,
+  86.4,
+  103.2,
+  118.2,
+  138.9,
+  153.9,
+  170.7,
+  185.7,
+  206.5,
+  221.5,
+  238.3,
+  253.3
+ ],
+ "abone_sure": 3.2,
+ "muzik": "Sunset Duo Drive.wav (Suno, kullanici; TETRIS MODE 7de de) -> 01-muzik/human-tetris-26/sunset-135.wav (133->137 kayiyordu, 135 BPM sabit)",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur-26.py. Motor 03-motor/sahne23.html. Referanssiz (kullanici 14 Kas 2026).",
+ "tema": {
+  "varlik": "/03-motor/tetris-pvp/varlik-26s3/tetris-varlik/",
+  "karakter": "/03-motor/tetris-pvp/varlik-26-karakter/",
+  "maskeVarlik": "/03-motor/tetris-pvp/varlik-26s3/tetris-varlik/",
+  "turAd": {
+   "1": "ROUND 1",
+   "2": "ROUND 2",
+   "3": "MIRROR ROUND",
+   "4": "FINAL ROUND"
+  },
+  "aboneAlt": "NEW BATTLE EVERY DAY"
+ }
+}

@@ -14,6 +14,44 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."
 from efekt import SR, vuus, ding, bip, vurus, piril, zap, tik, fanfar, yerlestir  # noqa: E402
 
 
+def duduk(sure=0.55):
+    """25 (spor salonu): hakem duduk sesi - 2,9 kHz tasiyici, bilyeli titresim (~32 Hz genlik + frekans), hafif nefes gurultusu"""
+    t = np.arange(int(sure * SR)) / SR
+    tit = 0.5 + 0.5 * np.sin(2 * np.pi * 32 * t)
+    f = 2900 + 120 * np.sin(2 * np.pi * 32 * t)
+    faz = 2 * np.pi * np.cumsum(f) / SR
+    x = (np.sin(faz) + 0.3 * np.sin(2 * faz)) * (0.55 + 0.45 * tit) + 0.08 * np.random.default_rng(7).standard_normal(len(t))
+    zarf = np.minimum(1, t / 0.02) * np.minimum(1, (sure - t) / 0.08)
+    return (x * zarf * 0.35).astype(np.float64)
+
+
+def buz(sure=0.9):
+    """25 FREEZE: buz cinlamasi - yuksek, inharmonik kristal kismi tonlar, uzun sonum"""
+    t = np.arange(int(sure * SR)) / SR
+    x = sum(a * np.sin(2 * np.pi * f * t) * np.exp(-t * d) for f, a, d in ((2093, 0.5, 4), (3136, 0.35, 5), (4699, 0.25, 7), (6272, 0.15, 9)))
+    return (x * np.minimum(1, t / 0.003) * 0.5).astype(np.float64)
+
+
+
+def kum(sure=0.7):
+    """26 (plaj): kuma dusus - boguk gumleme (90->45 Hz) + alcak geciren kum hisirtisi, hizli sonum"""
+    t = np.arange(int(sure * SR)) / SR
+    f = 90 * np.exp(-t * 3) + 45
+    gum = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 9)
+    g = np.random.default_rng(11).standard_normal(len(t))
+    k = np.exp(-np.arange(int(0.004 * SR)) / (0.0012 * SR)); g = np.convolve(g, k / k.sum(), "same")      # alcak geciren
+    his = g * np.exp(-t * 6) * np.minimum(1, t / 0.01)
+    return ((gum * 0.9 + his * 1.6) * 0.5).astype(np.float64)
+
+
+def ayna(sure=0.8):
+    """26 MIRROR: ayna isiltisi - yukari kayan iki ton (glissando) + parilti, siluet ters dondugunu duyurur"""
+    t = np.arange(int(sure * SR)) / SR
+    f = 880 * 2 ** (t / sure * 1.0)
+    x = np.sin(2 * np.pi * np.cumsum(f) / SR) + 0.6 * np.sin(2 * np.pi * np.cumsum(f * 1.5) / SR)
+    return (x * np.minimum(1, t / 0.02) * np.exp(-t * 2.5) * 0.3).astype(np.float64)
+
+
 def main():
     bolum, cikti = sys.argv[1:3]
     B = json.load(open(bolum, encoding="utf-8"))
@@ -48,7 +86,7 @@ def main():
     for d in B["duvarlar"]:
         t0 = d["t0"]
         Z = d.get("z") or Z0
-        a = t0 + Z["kart"]; b = a + Z["say"]; c = b + Z["buyu"]
+        a = t0 + Z["kart"]; b = a + Z["say"]; c = b + Z["buyu"]; T = Z.get("tut", 0)   # 25: FREEZE tut evresi
         yerlestir(ef, ding(990, 0.2), t0 + 0.05, 0.5)                    # oyuncu kartlari pop
         if B.get("tema", {}).get("tekOyuncu"):                           # 10. video (REF-061): "!" uyarisinda alarm, sahne7 nabziyla ayni 3 vurus
             u0, ud = t0 + Z["kart"] * 0.5, Z["kart"] * 0.5
@@ -56,6 +94,8 @@ def main():
                 yerlestir(ef, bip(988, 0.12), u0 + ud * (1 + 4 * i) / 12 - 0.06, 0.8)
                 yerlestir(ef, bip(740, 0.12), u0 + ud * (1 + 4 * i) / 12 + 0.08, 0.8)
         yerlestir(ef, ding(), a + 0.02, 0.6)                             # poz belirdi
+        if d.get("ayna"):                                                # 26 MIRROR: siluet ters doner
+            yerlestir(ef, ayna(), a + 0.02, 0.8)
         for i in range(3):
             yerlestir(ef, bip([660, 784, 988][i]), a + i * Z["say"] / 3 + 0.02, 0.9)    # 3-2-1 yukselen (sahne ile ayni adim)
         yerlestir(ef, vuus(Z["buyu"] * 0.6, True, 0.55), c - Z["buyu"] * 0.6)   # duvar yaklasiyor
@@ -65,9 +105,21 @@ def main():
         if out:                                                          # 24: OUT - karakter suya duser (sicrama) + alcak uyari
             yerlestir(ef, vuus(0.5, False, 1.0), c - Z["buyu"] * 0.25)
             yerlestir(ef, zap(0.35), c - Z["buyu"] * 0.2, 0.6)
-            yerlestir(ef, bip(330, 0.3), c + 0.25, 0.8)
+            if "--kum" in sys.argv:                                       # 26: kuma yuvarlanir -> gumleme + kum + cankurtaran duduk
+                yerlestir(ef, kum(), c - 0.03, 1.0)
+                yerlestir(ef, duduk(), c + 0.3, 0.8)
+            elif "--duduk" in sys.argv:                                   # 25: mindere duser -> hakem duduk
+                yerlestir(ef, duduk(), c + 0.15, 0.9)
+            else:
+                yerlestir(ef, bip(330, 0.3), c + 0.25, 0.8)
         else:
-            yerlestir(ef, piril(), c + Z["gec"] * 0.35, 0.6)             # ovgu
+            yerlestir(ef, piril(), c + T + Z["gec"] * 0.35, 0.6)         # ovgu (FREEZE'de tut sonrasi)
+        if T:                                                             # 25 FREEZE: buz cinlamasi + her vuruste tik + sonda zil
+            yerlestir(ef, buz(), c + 0.05, 0.8)
+            v = 60 / B["bpm"]
+            for i in range(1, int(round(T / v))):
+                yerlestir(ef, tik(), c + i * v, 0.5)
+            yerlestir(ef, ding(1568, 0.4), c + T - 0.05, 0.7)
     # SUBSCRIBE hatirlatmasi (her ~15 sn, sahne4.html aboneCiz ile ayni zaman): giriste pop, 1,3 sn'de tik + zil
     for ta in B.get("abone", []):
         yerlestir(ef, ding(990, 0.2), ta + 0.05, 0.55)
