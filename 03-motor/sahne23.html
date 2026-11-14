@@ -391,8 +391,10 @@ function duvarCiz(d, u, t) {
   }
   karakterCiz(d, u, t);
   if (d.ayna && u < b) {                                         // motor 23 MIRROR ROUND: ustte MIRROR! (gumus-camgobegi), kapi gelirken parlar
-    const gir = ease(kisit(u / 0.4, 0, 1)), p = 1 + 0.06 * Math.sin(t * 6);
-    yaziK('MIRROR!', W / 2, H * 0.165, 96 * k * gir * p, ['#ffffff', '#c8f4ff', '#3ab8ff'], gir, '#06306a', '#ffffff');
+    // tam render 1: SUBSCRIBE dugmesi ayni yere geliyordu -> dugme gorunurken MIRROR! soner (ust uste binme yok)
+    const ab = ABONE.reduce((m, x) => Math.max(m, kisit(1 - Math.max(x - t, t - x - ABONE_SURE, 0) / 0.3, 0, 1)), 0);
+    const gir = ease(kisit(u / 0.4, 0, 1)) * (1 - ab), p = 1 + 0.06 * Math.sin(t * 6);
+    if (gir > 0.01) yaziK('MIRROR!', W / 2, H * 0.165, 96 * k * ease(kisit(u / 0.4, 0, 1)) * p, ['#ffffff', '#c8f4ff', '#3ab8ff'], gir, '#06306a', '#ffffff');
   }
   if (T && u >= c) freezeCiz(u - c, T, t);
   return u >= a && u < b ? (u - a) / Z.say : null;
