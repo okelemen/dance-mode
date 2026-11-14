@@ -83,8 +83,8 @@ except Exception:
 dunya = bpy.data.worlds.new("dunya")
 sc.world = dunya
 dunya.use_nodes = True
-dunya.node_tree.nodes["Background"].inputs[0].default_value = hex_renk("#c9c3b6")
-dunya.node_tree.nodes["Background"].inputs[1].default_value = 0.6
+dunya.node_tree.nodes["Background"].inputs[0].default_value = hex_renk("#303b35")
+dunya.node_tree.nodes["Background"].inputs[1].default_value = 0.25
 
 
 # ---------------------------------------------------------------- malzeme yardimcilari
@@ -131,12 +131,12 @@ dm.inputs["Detail"].default_value = 6.0
 baglan(nt, nzm.outputs["Color"], dm.inputs["Vector"])
 dmr = nt.nodes.new("ShaderNodeValToRGB")
 dmr.color_ramp.elements[0].position = 0.0
-dmr.color_ramp.elements[0].color = hex_renk("#a9a59c")
+dmr.color_ramp.elements[0].color = hex_renk("#252c2a")
 dmr.color_ramp.elements[1].position = 0.12
-dmr.color_ramp.elements[1].color = hex_renk("#e9e6df")
+dmr.color_ramp.elements[1].color = hex_renk("#414743")
 baglan(nt, dm.outputs["Fac"], dmr.inputs["Fac"])
 baglan(nt, dmr.outputs["Color"], bsdf.inputs["Base Color"])
-bsdf.inputs["Roughness"].default_value = 0.22
+bsdf.inputs["Roughness"].default_value = 0.38
 zemin.data.materials.append(m)
 
 # ---------------------------------------------------------------- mekan: adacayi yesili metro fayans duvar
@@ -149,9 +149,9 @@ br.inputs["Scale"].default_value = 1.6
 br.inputs["Mortar Size"].default_value = 0.012
 br.inputs["Brick Width"].default_value = 0.5
 br.inputs["Row Height"].default_value = 0.25
-br.inputs["Color1"].default_value = hex_renk("#93a88c")
-br.inputs["Color2"].default_value = hex_renk("#a2b59a")
-br.inputs["Mortar"].default_value = hex_renk("#e8e3d6")
+br.inputs["Color1"].default_value = hex_renk("#263a34")
+br.inputs["Color2"].default_value = hex_renk("#334940")
+br.inputs["Mortar"].default_value = hex_renk("#172621")
 br.offset = 0.5
 baglan(nt, tk.outputs["Object"], br.inputs["Vector"])
 baglan(nt, br.outputs["Color"], bsdf.inputs["Base Color"])
@@ -160,7 +160,7 @@ bmp.inputs["Strength"].default_value = 0.35
 bmp.invert = True
 baglan(nt, br.outputs["Fac"], bmp.inputs["Height"])
 baglan(nt, bmp.outputs["Normal"], bsdf.inputs["Normal"])
-bsdf.inputs["Roughness"].default_value = 0.28
+bsdf.inputs["Roughness"].default_value = 0.48
 duvar.data.materials.append(m)
 
 # ---------------------------------------------------------------- kesme tahtasi
@@ -357,7 +357,7 @@ bicak = bicak_kur()
 YON = {
     "x": (math.radians(90), 0.0, math.radians(-105)),  # dikey dograma; 15 derece cevrik: agzin yuzu gorunur, sap sag-arkada
     "y": (math.radians(90), 0.0, math.radians(180)),   # agiz x boyunca, duzlem XZ, kameraya yuzu donuk
-    "z": (0.0, 0.0, math.radians(-90)),                # yatay dilim, agiz -x'e bakar
+    "z": (0.0, 0.0, math.radians(180)),                # yatay dilim, agiz meyve boyunca -x'e bakar
 }
 DISARI = (7.5, -1.0, 4.5)  # kadraj disi (sag ust)
 
@@ -371,7 +371,7 @@ def bicak_konum(eks, konum, asagi, yuk):
     if eks == "y":
         return (1.25, konum, TAHTA_UST + 0.004 if asagi else MERKEZ_Z + R + 0.15 + 0.2 * yuk)
     # z: yatay dilim; asagi = ice girmis (uc meyveden gecti), yukari = sagda disarida
-    return ((-A - 0.3) if asagi else (A + 0.1 + 0.2 * yuk), 1.0, MERKEZ_Z + konum)
+    return ((-A - 0.3) if asagi else (A + 3.6 + 0.2 * yuk), 0.0, MERKEZ_Z + konum)
 
 
 def anahtar(ob, yol, t, deger, interp="LINEAR"):
@@ -845,20 +845,22 @@ sabit_interp(nt_k)
 
 # ---------------------------------------------------------------- isik + kamera
 gunes = bpy.data.lights.new("gunes", "SUN")
-gunes.energy = 3.2
+gunes.energy = 0.75
 gunes.angle = math.radians(6)
 g = bpy.data.objects.new("gunes", gunes)
 g.rotation_euler = (math.radians(50), math.radians(-28), math.radians(-35))
 sc.collection.objects.link(g)
 alan = bpy.data.lights.new("dolgu", "AREA")
-alan.energy = 450
-alan.size = 5
+alan.energy = 700
+alan.size = 3.0
+alan.color = (1.0, 0.84, 0.67)
 a = bpy.data.objects.new("dolgu", alan)
 a.location = (-2.0, -4.5, 5.0)
 a.rotation_euler = (math.radians(45), 0, math.radians(-22))
 arka = bpy.data.lights.new("arka", "AREA")
-arka.energy = 220
+arka.energy = 140
 arka.size = 3
+arka.color = (0.66, 0.82, 0.88)
 ab = bpy.data.objects.new("arka", arka)
 ab.location = (2.5, 1.8, 3.5)
 ab.rotation_euler = (math.radians(-55), math.radians(30), 0)
