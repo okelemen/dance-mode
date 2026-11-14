@@ -43,7 +43,9 @@ def hex_renk(h, a=1.0):
 
 
 def kare(t):
-    return t * FPS + 1.0
+    f = t * FPS
+    r = round(f)
+    return (r if abs(f - r) < 1e-3 else f) + 1.0  # karede olan anlar tam kareye oturur
 
 
 # ---------------------------------------------------------------- sahne temizligi
@@ -353,7 +355,7 @@ bicak = bicak_kur()
 
 # eksene gore bicak yonleri (Euler XYZ, radyan)
 YON = {
-    "x": (math.radians(90), 0.0, math.radians(-112)),  # dikey dograma; 22 derece cevrik: agzin yuzu gorunur, sap sag-arkada
+    "x": (math.radians(90), 0.0, math.radians(-105)),  # dikey dograma; 15 derece cevrik: agzin yuzu gorunur, sap sag-arkada
     "y": (math.radians(90), 0.0, math.radians(180)),   # agiz x boyunca, duzlem XZ, kameraya yuzu donuk
     "z": (0.0, 0.0, math.radians(-90)),                # yatay dilim, agiz -x'e bakar
 }
@@ -363,8 +365,8 @@ DISARI = (7.5, -1.0, 4.5)  # kadraj disi (sag ust)
 def bicak_konum(eks, konum, asagi, yuk):
     """eks kesim duzlemi, konum duzlem koordinati, asagi=True agiz tahtada; yuk=0..1 kalkis yuksekligi."""
     if eks == "x":
-        # bicak 22 derece cevrik: meyve ortasinda (y=0) agiz tam kesim duzleminde olsun diye koken kaydirilir
-        return (konum + 1.05 * math.tan(math.radians(22)), 1.05,
+        # bicak 15 derece cevrik: meyvenin kameraya bakan on yuzunde (y=-R/2) agiz tam kesim duzleminde
+        return (konum + (1.05 + R * 0.5) * math.tan(math.radians(15)), 1.05,
                 TAHTA_UST + 0.004 if asagi else MERKEZ_Z + R + 0.15 + 0.9 * yuk)
     if eks == "y":
         return (1.25, konum, TAHTA_UST + 0.004 if asagi else MERKEZ_Z + R + 0.15 + 0.9 * yuk)
@@ -719,34 +721,29 @@ for no, tur in enumerate(PLAN["turlar"]):
     # bicak: her gorunur vurus TAM: ustte -> tek hamlede tahtaya -> kisa durus -> ustte (ara durum yok)
     vl = tur["vuruslar"]
     onceki_eks = None
-    n_iz = 0
-    for i, (t, eks_g, konum_g, adet) in enumerate(vl):
-        # REF-080: butun gorunur vuruslar yukaridan dikey dograma. Iz asamasi (y/z kesimleri, kabukta iz yok)
-        # bicak meyve boyunca soldan saga gidip gelir; supurmede gercek x kesim duzleminde iner.
-        if eks_g == "x":
-            eks, konum = "x", konum_g
-        else:
-            eks = "x"
-            yol = [-0.7, -0.35, 0.0, 0.35, 0.7, 0.35, 0.0, -0.35]
-            konum = yol[n_iz % len(yol)] * A + rng_b.uniform(-0.06, 0.06)
-            n_iz += 1
-        once = vl[i - 1][0] if i > 0 else kb - 0.3
-        sonra = vl[i + 1][0] if i + 1 < len(vl) else t + 0.4
-        inis = min(0.055, (t - once) * 0.4)
-        kalkis = min(0.07, (sonra - t) * 0.45)
+    # her vurus kesimin GERCEK yonunde (REF-080): z = sagdan yatay dilim, y = yukaridan boyuna, x = dilim dograma.
+    # Kare tabanli: vurus karesinde agiz tahtada (z: meyvenin icinden gecmis), bir sonraki karede yukarida.
+    for i, (t, eks, konum, adet) in enumerate(vl):
+        f = round(t * FPS)
+        f_once = round(vl[i - 1][0] * FPS) if i > 0 else round((kb - 0.3) * FPS)
+        f_sonra = round(vl[i + 1][0] * FPS) if i + 1 < len(vl) else f + 12
+        inis = 1  # ustten tahtaya tek karede: ara karede bicak meyvenin yarisinda gorunmez (net vurus)
+        kalkis = 1
+        tut = 1 if (f - f_once >= 6 and f_sonra - f >= 6) else 0
         if eks != onceki_eks:
             bicak.rotation_euler = YON[eks]
-            bicak.keyframe_insert("rotation_euler", frame=kare(t - inis - 0.01))
+            bicak.keyframe_insert("rotation_euler", frame=f - inis + 1)
             onceki_eks = eks
         bicak.location = bicak_konum(eks, konum, False, 1.0)
-        bicak.keyframe_insert("location", frame=kare(t - inis))
+        bicak.keyframe_insert("location", frame=f - inis + 1)
         bicak.location = bicak_konum(eks, konum, True, 0)
-        bicak.keyframe_insert("location", frame=kare(t))
-        bicak.keyframe_insert("location", frame=kare(t + min(0.02, kalkis * 0.3)))
+        bicak.keyframe_insert("location", frame=f + 1)
+        if tut:
+            bicak.keyframe_insert("location", frame=f + 2)
         bicak.location = bicak_konum(eks, konum, False, 1.0)
-        bicak.keyframe_insert("location", frame=kare(t + kalkis))
-        if eks_g == "x":  # kesim yuzu yalniz gercek dilim kesiminde ilerler (iz asamasinda meyve butun)
-            deger_anahtar("kes_x", t, konum_g)
+        bicak.keyframe_insert("location", frame=f + 1 + tut + kalkis)
+        if eks == "x":  # kesim yuzu yalniz dilim kesiminde ilerler (iz asamasinda meyve butun)
+            deger_anahtar("kes_x", t, konum)
     bicak.location = DISARI
     bicak.keyframe_insert("location", frame=kare(ks + 0.12))
     # kup yigini: supurme basinda gorunur (meyvenin icinde), dilim dilim coker

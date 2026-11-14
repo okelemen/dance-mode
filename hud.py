@@ -64,7 +64,7 @@ for yol in sorted(glob.glob(os.path.join(a.giris, "kare_*.png"))):
         im = im.resize((1080, 1920), Image.LANCZOS)
     d = ImageDraw.Draw(im)
     tur = next((r for r in P["turlar"] if r["bas"] <= t < r["son"]), P["turlar"][-1])
-    kesim = sum(1 for k in tur["kesimler"] if k[0] <= t + 1e-6)
+    kesim = sum(1 for k in tur["kesimler"] if k[4] <= t + 1e-6)  # bicak tahtaya indigi karede artar
     # CUBES (REF-080): x supurmesi ilerledikce birakilan dilimlerin kupleri sayilir, kesimler arasi akarak
     xk = [k[4] for k in tur["kesimler"] if k[1] == "x"]
     dil = tur["dilim"]

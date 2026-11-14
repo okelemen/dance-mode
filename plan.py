@@ -30,7 +30,7 @@ ACILIS = 0.7  # yeni meyve yukaridan duser + seker
 SONUC = 1.0
 CIZGI_PAY = 0.6  # tur suresinin ilk %60'i kabukta cizgiler (z, y); son %40 soldan saga supurme (x)
 US = 0.7  # kesim hizlanma ussu (<1 = hizlanir)
-VURUS_ARA = 0.15  # gorunur bicak vuruslari arasi en az sure (sn)
+VURUS_ARA = 0.1  # gorunur bicak vuruslari arasi en az sure (sn)
 
 
 def profil(xn, boyun):
@@ -129,25 +129,26 @@ def plan_kur(meyve):
             vt = son_k[0]
             if len(g) > 1:  # yogun bolge: vurus kovanin sonunda (grubun tum kesimleri yapilmis)
                 vt = kes_bas + (int((son_k[0] - kes_bas) / VURUS_ARA) + 1) * VURUS_ARA
-            vt = max(vt, onceki_v + 0.12, son_k[0])
+            vt = max(vt, onceki_v + 3.0 / FPS, son_k[0])
+            vt = math.ceil(vt * FPS - 1e-6) / FPS  # vurus tam bir karede: bicak o karede tahtada
             if vt > kes_son + 1e-6 and vurus_liste and vurus_liste[-1][1] == son_k[1]:
                 # tur sonuna sigmayan vurus: kesimleri bir onceki (son) vurusa katilir, o vurus tur sonuna kayar
                 onceki = vurus_liste[-1]
-                onceki[0] = round(kes_son, 4)
+                onceki[0] = round(math.ceil(kes_son * FPS - 1e-6) / FPS, 6)
                 onceki[2] = son_k[2]
                 onceki[3] += len(g)
                 for k_ in kesimler:
                     if len(k_) == 5 and abs(k_[4] - onceki_v) < 1e-6:
-                        k_[4] = round(kes_son, 4)
+                        k_[4] = onceki[0]
                 for idx in g:
-                    kesimler[idx].append(round(kes_son, 4))
-                onceki_v = kes_son
+                    kesimler[idx].append(onceki[0])
+                onceki_v = onceki[0]
                 continue
-            vt = min(vt, kes_son)
+            vt = min(vt, math.ceil(kes_son * FPS - 1e-6) / FPS)
             onceki_v = vt
-            vurus_liste.append([round(vt, 4), son_k[1], son_k[2], len(g)])
+            vurus_liste.append([round(vt, 6), son_k[1], son_k[2], len(g)])
             for idx in g:
-                kesimler[idx].append(round(vt, 4))  # 5. alan: bu kesimin goruldugu vurus ani
+                kesimler[idx].append(round(vt, 6))  # 5. alan: bu kesimin goruldugu vurus ani
         dilim = dilim_say(m, cx, cy, cz)
         turlar.append({
             "bas": round(bas, 4), "kes_bas": round(kes_bas, 4), "kes_son": round(kes_son, 4),

@@ -75,7 +75,7 @@ if __name__ == "__main__":
         for t, eks, konum, adet in tur["vuruslar"]:
             pan = rng.uniform(-0.1, 0.1)
             g = rng.uniform(0.85, 1.0) * (1.0 if adet == 1 else 1.05)
-            ekle(tam[rng.integers(len(tam))], t - 0.12, g * (0.8 if eks == "z" else 1.0), pan)
+            ekle(tam[rng.integers(len(tam))], t - 0.12, g * (0.45 if eks == "z" else 1.0), pan)
     # yeni meyve tahtaya duser (sahne.py DUSUS_ANAHTAR: temas 0.30 sn, sekme inisi 0.53 sn): tok + yumusak pof
     tok = yukle("ses/dusus_tok.wav")
     pof = yukle("ses/dusus_pof.wav")
