@@ -60,7 +60,11 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--plan", required=True)
     ap.add_argument("--cikti", required=True)
+    ap.add_argument("--onaysiz-ses-denemesi", action="store_true",
+                    help="Kullanici tarafindan reddedilen eski ses karisimini yalniz karsilastirma icin uret")
     a = ap.parse_args()
+    if not a.onaysiz_ses_denemesi:
+        ap.error("Avokado ses paketi reddedildi. Yayin icin onayli bagimsiz Foley kaydi gerekli.")
     P = json.load(open(a.plan, encoding="utf-8"))
     R = P["sekil"]["R"]
     MERKEZ_Z = TAHTA_UST + R - 0.03
