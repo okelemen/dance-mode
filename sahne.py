@@ -371,7 +371,7 @@ def bicak_konum(eks, konum, asagi, yuk):
     if eks == "y":
         return (1.25, konum, TAHTA_UST + 0.004 if asagi else MERKEZ_Z + R + 0.15 + 0.2 * yuk)
     # z: yatay dilim; asagi = ice girmis (uc meyveden gecti), yukari = sagda disarida
-    return ((-A - 0.3) if asagi else (A + 0.5 + 0.8 * yuk), 1.0, MERKEZ_Z + konum)
+    return ((-A - 0.3) if asagi else (A + 0.1 + 0.2 * yuk), 1.0, MERKEZ_Z + konum)
 
 
 def anahtar(ob, yol, t, deger, interp="LINEAR"):
