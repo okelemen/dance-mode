@@ -80,8 +80,8 @@ for yol in sorted(glob.glob(os.path.join(a.giris, "kare_*.png"))):
         f_ = (t - xk[i]) / max(1e-6, xk[i + 1] - xk[i]) if i + 1 < len(xk) else 1.0
         kup = int(round(a0 + (a1 - a0) * min(1.0, f_)))
     son_mu = True
-    yaz(d, (540, 250), str(kesim), F_SAYI, BEYAZ, 9)
-    yaz(d, (540, 372), "CUTS", F_ETIKET, ALTIN, 6)
+    yaz(d, (540, 160), str(kesim), F_SAYI, BEYAZ, 9)
+    yaz(d, (540, 282), "CUTS", F_ETIKET, ALTIN, 6)
     yaz(d, (540, 1360), kup_metni(kup) if son_mu else f"{kup:,}", F_KUP, BEYAZ, 8)
     yaz(d, (540, 1452), "CUBES", F_ETIKET, ALTIN, 7)
     for c0, c1 in CTA:

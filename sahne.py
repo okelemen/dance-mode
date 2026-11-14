@@ -367,9 +367,9 @@ def bicak_konum(eks, konum, asagi, yuk):
     if eks == "x":
         # bicak 15 derece cevrik: meyvenin kameraya bakan on yuzunde (y=-R/2) agiz tam kesim duzleminde
         return (konum + (1.05 + R * 0.5) * math.tan(math.radians(15)), 1.05,
-                TAHTA_UST + 0.004 if asagi else MERKEZ_Z + R + 0.15 + 0.9 * yuk)
+                TAHTA_UST + 0.004 if asagi else MERKEZ_Z + R + 0.15 + 0.2 * yuk)
     if eks == "y":
-        return (1.25, konum, TAHTA_UST + 0.004 if asagi else MERKEZ_Z + R + 0.15 + 0.9 * yuk)
+        return (1.25, konum, TAHTA_UST + 0.004 if asagi else MERKEZ_Z + R + 0.15 + 0.2 * yuk)
     # z: yatay dilim; asagi = ice girmis (uc meyveden gecti), yukari = sagda disarida
     return ((-A - 0.3) if asagi else (A + 0.5 + 0.8 * yuk), 1.0, MERKEZ_Z + konum)
 
