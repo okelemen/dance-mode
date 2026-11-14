@@ -1,9 +1,9 @@
-"""KESIM SAYACI - ses: her kesimde once avokadoyu kesme hisirtisi, sonra bicagin tahtaya vurusu.
+"""KESIM SAYACI - ses: meyve kesimi ve tahta darbesi ayri kayitlardan.
 
 python ses.py --plan plan-avokado.json --cikti ses/avokado.wav
-Kaynak: Mixkit #136 "Cutting hard vegetables with knife" (Mixkit Sound Effects Free License,
-https://mixkit.co/free-sound-effects/knife/). Kayittan kesme parcalari ve tahta vuruslari ayri kesildi
-(earshot timeline ile bulunan anlar). Yatay (z) kesimde tahtaya vurus yok, yalniz kesme sesi.
+Meyve: KaleidacousticsAudio, "Chopping fruit_Short.wav", Freesound 627197, CC0 (hq mp3 preview).
+Tahta: Mixkit #136 "Cutting hard vegetables with knife", Mixkit Free License.
+Yatay (z) kesimde tahtaya vurus yok, yalniz meyve kesimi.
 """
 import argparse
 import json
@@ -13,6 +13,7 @@ import numpy as np
 
 SR = 48000
 KAYNAK = "ses/mixkit-136.wav"
+MEYVE_KAYNAK = "ses/chopping-fruit-CC0-627197.mp3"
 VURUS = [2.25, 4.66, 5.64, 6.96, 7.96, 9.56]                       # tahtaya vurus baslangiclari (sn)
 KESME = [(0.12, 0.80), (3.28, 3.80), (6.42, 6.92), (7.62, 7.92), (8.90, 9.50)]  # kesme hisirtisi
 TAHTA_UST = 0.14
@@ -45,6 +46,16 @@ def sar(p, giris=0.004, cikis=0.012):
     return p
 
 
+def yumusat(p, alt=90, ust=2500):
+    """Mikrofon hissini ve gereksiz pes patlamayi yumusak gecisle azalt."""
+    pad = 4096
+    f = np.fft.rfftfreq(len(p) + 2 * pad, 1 / SR)
+    hp = np.clip((f - alt) / alt, 0, 1)
+    lp = np.clip((ust * 1.5 - f) / (ust * 0.5), 0, 1)
+    buf = np.pad(p, (pad, pad))
+    return np.fft.irfft(np.fft.rfft(buf) * np.minimum(hp, lp), n=len(buf))[pad:-pad]
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--plan", required=True)
@@ -54,6 +65,7 @@ if __name__ == "__main__":
     R = P["sekil"]["R"]
     MERKEZ_Z = TAHTA_UST + R - 0.03
     x = yukle(KAYNAK)
+    meyve_kaydi = yukle(MEYVE_KAYNAK)
     rng = np.random.default_rng(5)
     N = int(P["sure"] * SR)
     sol, sag = np.zeros(N + SR), np.zeros(N + SR)
@@ -67,15 +79,18 @@ if __name__ == "__main__":
         sol[i:i + n] += sinyal[:n] * g * (1 - pan)
         sag[i:i + n] += sinyal[:n] * g * (1 + pan)
 
-    # her gorunur bicak vurusu = kayittaki TAM bir dograma ani (kesme + tahtaya inis birlikte, dogal zarf);
-    # kisa kesme kirpintilari yok (cizirti yapiyordu). Yatay (z) vurus tahtaya inmez: yalniz kesme kismi.
-    # earshot rank ("knife chopping through a vegetable onto a wooden cutting board"): en iyi 3 dograma
-    tam = [sar(parca(x, h - 0.12, h + 0.22), 0.01, 0.06) for h in (4.66, 6.96, 9.56)]
+    # CC0 kaydin 1.84-2.15 sn bolumu kisa meyve kesimi; ilk kaydin tislama veren bolumleri kullanilmaz.
+    # Mixkit kaydindaki kisa darbe yalniz tahtaya inis icindir, meyve kesimi icin kullanilmaz.
+    kesme = yumusat(sar(parca(meyve_kaydi, 1.84, 2.15), 0.008, 0.06), 90, 3500)
+    tahta = [yumusat(sar(parca(x, h - 0.03, h + 0.11), 0.003, 0.05), 120, 5000)
+             for h in (4.66, 6.96)]
     for tur in P["turlar"]:
         for t, eks, konum, adet in tur["vuruslar"]:
             pan = rng.uniform(-0.1, 0.1)
             g = rng.uniform(0.85, 1.0) * (1.0 if adet == 1 else 1.05)
-            ekle(tam[rng.integers(len(tam))], t - 0.12, g * (0.45 if eks == "z" else 1.0), pan)
+            ekle(kesme, t - 0.23, g * 0.70, pan)
+            if eks != "z":
+                ekle(tahta[rng.integers(len(tahta))], t - 0.02, g * 0.52, pan)
     # yeni meyve tahtaya duser (sahne.py DUSUS_ANAHTAR: temas 0.30 sn, sekme inisi 0.53 sn): tok + yumusak pof
     tok = yukle("ses/dusus_tok.wav")
     pof = yukle("ses/dusus_pof.wav")
