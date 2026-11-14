@@ -274,8 +274,11 @@ def teleferik():
     """iki halat hatti kadrajin ustunden gecer; renkli tombul kabinler (gok dolu kurali)"""
     cel = mat_pbr("tel_kule", "#ffcc1e", 0.3, metal=0.4, kaplama=0.5)
     hal = mat_pbr("halat", "#2a2e36", 0.5, metal=0.6)
-    for (a, b, renkler) in (((-70, 45, 34), (70, 90, 58), ("#ff3b4e", "#1e9cff", "#ffcc1e", "#2fd06a", "#ff4fc0")),
-                            ((-90, 120, 70), (60, 60, 40), ("#ff8a1e", "#8a5aff", "#20d6d0", "#ff3b4e"))):
+    # 27 onizleme 1: video kadrajinda halat kadrajin ustunde kaliyordu (yalniz sari direkler) -> videoda halatlar alcak (kapakta ilk hal)
+    H1 = ((-70, 45, 34), (70, 90, 58)) if KAPAK else ((-70, 45, 21), (70, 90, 36))
+    H2 = ((-90, 120, 70), (60, 60, 40)) if KAPAK else ((-90, 120, 46), (60, 60, 26))
+    for (a, b, renkler) in ((H1[0], H1[1], ("#ff3b4e", "#1e9cff", "#ffcc1e", "#2fd06a", "#ff4fc0")),
+                            (H2[0], H2[1], ("#ff8a1e", "#8a5aff", "#20d6d0", "#ff3b4e"))):
         boru(a, b, 0.09, hal)
         for p in (a, b):
             boru((p[0], p[1], 0), (p[0], p[1], p[2]), 0.9, cel)
