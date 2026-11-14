@@ -1,0 +1,122 @@
+[
+ {
+  "tur": 1,
+  "p1": "spell-stork-prayer",
+  "p2": "sunrise-arch"
+ },
+ {
+  "tur": 1,
+  "p1": "standing-clasp-behind-lift",
+  "p2": "one-arm-up-knee-lift"
+ },
+ {
+  "tur": 1,
+  "p1": "side-leg-lift-arms-up",
+  "p2": "wide-side-reach"
+ },
+ {
+  "tur": 1,
+  "p1": "standing-knee-hold",
+  "p2": "cauldron-w-reach-knee-up"
+ },
+ {
+  "tur": 1,
+  "p1": "gate-pose",
+  "p2": "banshee-deep-goddess-v"
+ },
+ {
+  "tur": 1,
+  "p1": "one-leg-hug-knee-side",
+  "p2": "goddess-hands-on-head"
+ },
+ {
+  "tur": 2,
+  "p1": "broom-w-knee-up",
+  "p2": "king-pigeon-reach"
+ },
+ {
+  "tur": 2,
+  "p1": "zombie-diagonal-side-tap",
+  "p2": "seated-leg-cradle"
+ },
+ {
+  "tur": 2,
+  "p1": "broom-kneel-one-up",
+  "p2": "bound-side-angle"
+ },
+ {
+  "tur": 2,
+  "p1": "lunge-victory-reach",
+  "p2": "reverse-lunge-reach-up"
+ },
+ {
+  "tur": 2,
+  "p1": "half-kneel-cactus",
+  "p2": "half-kneel-arms-back-lift"
+ },
+ {
+  "tur": 2,
+  "p1": "phantom-lunge-arms-forward",
+  "p2": "seated-leg-lift"
+ },
+ {
+  "tur": 3,
+  "p1": "extended-side-angle",
+  "p2": "broom-v-t-curtsy"
+ },
+ {
+  "tur": 3,
+  "p1": "owl-half-cactus-stand",
+  "p2": "wizard-head-low-kick-lean-l"
+ },
+ {
+  "tur": 3,
+  "p1": "spider-half-cactus-wide",
+  "p2": "goblin-diag-hip-tap-lean-l"
+ },
+ {
+  "tur": 3,
+  "p1": "kneeling-clasp-behind-lift",
+  "p2": "seated-leg-lift-arms-up"
+ },
+ {
+  "tur": 3,
+  "p1": "crypt-side-sit-flex-up45",
+  "p2": "kneeling-lunge-quad-pull"
+ },
+ {
+  "tur": 3,
+  "p1": "pumpkin-kneel-up45-hip",
+  "p2": "shadow-low-lunge-back-back"
+ },
+ {
+  "tur": 4,
+  "p1": "lateral-lunge-reach-across",
+  "p2": "kneeling-side-arm"
+ },
+ {
+  "tur": 4,
+  "p1": "raven-low-squat-w-t",
+  "p2": "side-plank-leg-lift"
+ },
+ {
+  "tur": 4,
+  "p1": "cobra",
+  "p2": "lotus-arms-wide"
+ },
+ {
+  "tur": 4,
+  "p1": "half-split",
+  "p2": "tabletop-leg-lift"
+ },
+ {
+  "tur": 4,
+  "p1": "hurdler-stretch",
+  "p2": "seated-straddle-arms-t"
+ },
+ {
+  "tur": 4,
+  "p1": "upward-plank-leg-lift",
+  "p2": "boat-twist-arms"
+ }
+]

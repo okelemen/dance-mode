@@ -1,0 +1,1166 @@
+{
+ "varlik/poz/balance-t-knee.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/hand-to-toe-side.png",
+  "yakin_iou": 0.514,
+  "boy": 0.923,
+  "gen": 0.779
+ },
+ "varlik/poz/camel.png": {
+  "yakin": "22-kapak/274664",
+  "yakin_iou": 0.406,
+  "boy": 0.922,
+  "gen": 0.378
+ },
+ "varlik/poz/cobra.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/candle-high-plank-diag-floor.png",
+  "yakin_iou": 0.468,
+  "boy": 0.745,
+  "gen": 0.922
+ },
+ "varlik/poz/crescent.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/crescent-lunge.png",
+  "yakin_iou": 0.714,
+  "boy": 0.922,
+  "gen": 0.571
+ },
+ "varlik/poz/curtsy-cactus.png": {
+  "yakin": "kapak/336199",
+  "yakin_iou": 0.596,
+  "boy": 0.922,
+  "gen": 0.411
+ },
+ "varlik/poz/diagonal-line.png": {
+  "yakin": "varlik-22/poz/half-kneel-w.png",
+  "yakin_iou": 0.538,
+  "boy": 0.922,
+  "gen": 0.673
+ },
+ "varlik/poz/elbows-back-stretch.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/tall-reach.png",
+  "yakin_iou": 0.579,
+  "boy": 0.922,
+  "gen": 0.284
+ },
+ "varlik/poz/elbows-down-knee-lift.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/hand-to-toe-side.png",
+  "yakin_iou": 0.574,
+  "boy": 0.923,
+  "gen": 0.496
+ },
+ "varlik/poz/extended-side-angle.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/side-lunge-arms-up.png",
+  "yakin_iou": 0.432,
+  "boy": 0.922,
+  "gen": 0.558
+ },
+ "varlik/poz/flexed-arms-wide.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/goddess-squat.png",
+  "yakin_iou": 0.565,
+  "boy": 0.922,
+  "gen": 0.711
+ },
+ "varlik/poz/front-leg-reach.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/ghoul-kick-back-back-down.png",
+  "yakin_iou": 0.402,
+  "boy": 0.922,
+  "gen": 0.362
+ },
+ "varlik/poz/gate-pose.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/graveyard-seated-knees-up-diag-forward.png",
+  "yakin_iou": 0.444,
+  "boy": 0.922,
+  "gen": 0.489
+ },
+ "varlik/poz/goddess-hands-on-head.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/goddess-squat.png",
+  "yakin_iou": 0.553,
+  "boy": 0.923,
+  "gen": 0.529
+ },
+ "varlik/poz/goddess-side-bend.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/wide-squat-twist.png",
+  "yakin_iou": 0.594,
+  "boy": 0.923,
+  "gen": 0.464
+ },
+ "varlik/poz/half-kneel-cactus.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/goddess-squat.png",
+  "yakin_iou": 0.633,
+  "boy": 0.923,
+  "gen": 0.496
+ },
+ "varlik/poz/half-kneel-lean.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/hands-on-head.png",
+  "yakin_iou": 0.488,
+  "boy": 0.922,
+  "gen": 0.329
+ },
+ "varlik/poz/half-kneel-v.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/wide-squat-twist.png",
+  "yakin_iou": 0.5,
+  "boy": 0.922,
+  "gen": 0.496
+ },
+ "varlik/poz/hero-seat-arms-up.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/kneeling-reach.png",
+  "yakin_iou": 0.619,
+  "boy": 0.922,
+  "gen": 0.302
+ },
+ "varlik/poz/hero-seat-lean-back.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/knee-to-nose.png",
+  "yakin_iou": 0.465,
+  "boy": 0.88,
+  "gen": 0.593
+ },
+ "varlik/poz/hip-shift-reach.png": {
+  "yakin": "20-kapak/230147",
+  "yakin_iou": 0.601,
+  "boy": 0.922,
+  "gen": 0.253
+ },
+ "varlik/poz/horse-stance.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/hands-on-head.png",
+  "yakin_iou": 0.605,
+  "boy": 0.922,
+  "gen": 0.389
+ },
+ "varlik/poz/kick-back-reach.png": {
+  "yakin": "varlik-22/poz/single-leg-reach-forward.png",
+  "yakin_iou": 0.569,
+  "boy": 0.922,
+  "gen": 0.813
+ },
+ "varlik/poz/knee-in-twist.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/hands-on-head.png",
+  "yakin_iou": 0.519,
+  "boy": 0.923,
+  "gen": 0.387
+ },
+ "varlik/poz/knee-lift-cactus.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/hand-to-toe-side.png",
+  "yakin_iou": 0.649,
+  "boy": 0.922,
+  "gen": 0.449
+ },
+ "varlik/poz/knee-lift-v.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/curtsy-reach.png",
+  "yakin_iou": 0.492,
+  "boy": 0.922,
+  "gen": 0.442
+ },
+ "varlik/poz/knee-up-diagonal.png": {
+  "yakin": "varlik-22/poz/half-kneel-w.png",
+  "yakin_iou": 0.496,
+  "boy": 0.922,
+  "gen": 0.671
+ },
+ "varlik/poz/kneel-torch-up.png": {
+  "yakin": "varlik-22/poz/kneeling-lunge-reach-back.png",
+  "yakin_iou": 0.476,
+  "boy": 0.922,
+  "gen": 0.55
+ },
+ "varlik/poz/kneeling-camel-reach.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/kneeling-arms-up-back.png",
+  "yakin_iou": 0.625,
+  "boy": 0.922,
+  "gen": 0.292
+ },
+ "varlik/poz/kneeling-lean-back.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/broom-t-salute-curtsy-lean-l.png",
+  "yakin_iou": 0.456,
+  "boy": 0.922,
+  "gen": 0.509
+ },
+ "varlik/poz/kneeling-lunge-arms-up.png": {
+  "yakin": "varlik-22/poz/kneeling-lunge-reach-back.png",
+  "yakin_iou": 0.545,
+  "boy": 0.922,
+  "gen": 0.527
+ },
+ "varlik/poz/kneeling-side-arm.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/low-lunge-arms-wide-back.png",
+  "yakin_iou": 0.522,
+  "boy": 0.923,
+  "gen": 0.749
+ },
+ "varlik/poz/lean-left-reach.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/low-lunge-hands-on-back-knee.png",
+  "yakin_iou": 0.442,
+  "boy": 0.922,
+  "gen": 0.407
+ },
+ "varlik/poz/low-lunge-twist-back.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/runner-lunge-low.png",
+  "yakin_iou": 0.434,
+  "boy": 0.923,
+  "gen": 0.847
+ },
+ "varlik/poz/low-v-curtsy.png": {
+  "yakin": "20-kapak/230147",
+  "yakin_iou": 0.586,
+  "boy": 0.922,
+  "gen": 0.52
+ },
+ "varlik/poz/low-v-stance.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/hands-on-head.png",
+  "yakin_iou": 0.773,
+  "boy": 0.922,
+  "gen": 0.533
+ },
+ "varlik/poz/one-arm-up-knee-lift.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/witch-cactus-leg-out.png",
+  "yakin_iou": 0.51,
+  "boy": 0.922,
+  "gen": 0.324
+ },
+ "varlik/poz/quad-stretch-reach.png": {
+  "yakin": "20-kapak/230147",
+  "yakin_iou": 0.488,
+  "boy": 0.922,
+  "gen": 0.333
+ },
+ "varlik/poz/seated-knees-up.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/garland-squat.png",
+  "yakin_iou": 0.471,
+  "boy": 0.923,
+  "gen": 0.498
+ },
+ "varlik/poz/seated-leg-lift.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/seated-leg-raise-hold.png",
+  "yakin_iou": 0.635,
+  "boy": 0.88,
+  "gen": 0.922
+ },
+ "varlik/poz/side-lean-squat.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/wide-squat-twist.png",
+  "yakin_iou": 0.498,
+  "boy": 0.923,
+  "gen": 0.524
+ },
+ "varlik/poz/standing-knee-hold.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/moonlight-knee-raise-arms-down.png",
+  "yakin_iou": 0.697,
+  "boy": 0.922,
+  "gen": 0.403
+ },
+ "varlik/poz/standing-split-low.png": {
+  "yakin": "varlik-22/poz/banana-reach.png",
+  "yakin_iou": 0.355,
+  "boy": 0.922,
+  "gen": 0.633
+ },
+ "varlik/poz/star.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/hands-on-head.png",
+  "yakin_iou": 0.692,
+  "boy": 0.922,
+  "gen": 0.62
+ },
+ "varlik/poz/tabletop-leg-lift.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/plank-leg-lift.png",
+  "yakin_iou": 0.446,
+  "boy": 0.63,
+  "gen": 0.922
+ },
+ "varlik/poz/tabletop-reach.png": {
+  "yakin": "varlik-22/poz/puppy-stretch.png",
+  "yakin_iou": 0.443,
+  "boy": 0.641,
+  "gen": 0.922
+ },
+ "varlik/poz/tree.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/vampire-flex-reach-knee-up.png",
+  "yakin_iou": 0.596,
+  "boy": 0.922,
+  "gen": 0.324
+ },
+ "varlik/poz/triangle.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/revolved-side-angle.png",
+  "yakin_iou": 0.462,
+  "boy": 0.922,
+  "gen": 0.522
+ },
+ "varlik/poz/w-arms.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/hands-on-head.png",
+  "yakin_iou": 0.545,
+  "boy": 0.922,
+  "gen": 0.502
+ },
+ "varlik/poz/warrior2.png": {
+  "yakin": "20-kapak/277859",
+  "yakin_iou": 0.613,
+  "boy": 0.924,
+  "gen": 0.882
+ },
+ "varlik/poz/wide-side-reach.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/hands-on-head.png",
+  "yakin_iou": 0.557,
+  "boy": 0.922,
+  "gen": 0.393
+ },
+ "varlik-03/poz/bound-lunge.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/warrior-lunge-arms-back.png",
+  "yakin_iou": 0.53,
+  "boy": 0.923,
+  "gen": 0.591
+ },
+ "varlik-03/poz/bound-side-angle.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/moonlight-frog-hands-floor.png",
+  "yakin_iou": 0.487,
+  "boy": 0.922,
+  "gen": 0.784
+ },
+ "varlik-03/poz/cat-back.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/knee-to-nose.png",
+  "yakin_iou": 0.619,
+  "boy": 0.785,
+  "gen": 0.79
+ },
+ "varlik-03/poz/childs-pose.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/side-lying-leg-lift.png",
+  "yakin_iou": 0.474,
+  "boy": 0.495,
+  "gen": 0.829
+ },
+ "varlik-03/poz/clasp-fold.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/phantom-diagonal-curtsy.png",
+  "yakin_iou": 0.48,
+  "boy": 0.922,
+  "gen": 0.351
+ },
+ "varlik-03/poz/cross-leg-fold.png": {
+  "yakin": "varlik-22/poz/high-plank.png",
+  "yakin_iou": 0.41,
+  "boy": 0.603,
+  "gen": 0.804
+ },
+ "varlik-03/poz/down-dog-split.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/wide-squat-twist.png",
+  "yakin_iou": 0.402,
+  "boy": 0.922,
+  "gen": 0.547
+ },
+ "varlik-03/poz/easy-seat-prayer-up.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/phantom-cross-legged-cactus.png",
+  "yakin_iou": 0.543,
+  "boy": 0.922,
+  "gen": 0.518
+ },
+ "varlik-03/poz/fish-pose.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/bicycle-hold.png",
+  "yakin_iou": 0.53,
+  "boy": 0.345,
+  "gen": 0.922
+ },
+ "varlik-03/poz/floor-swimmer.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/half-bow.png",
+  "yakin_iou": 0.636,
+  "boy": 0.339,
+  "gen": 0.922
+ },
+ "varlik-03/poz/forearm-plank.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/sphinx-lift.png",
+  "yakin_iou": 0.63,
+  "boy": 0.415,
+  "gen": 0.922
+ },
+ "varlik-03/poz/forearm-side-plank.png": {
+  "yakin": "varlik-22/poz/reverse-plank.png",
+  "yakin_iou": 0.529,
+  "boy": 0.682,
+  "gen": 0.922
+ },
+ "varlik-03/poz/half-split.png": {
+  "yakin": "varlik-22/poz/puppy-stretch.png",
+  "yakin_iou": 0.556,
+  "boy": 0.764,
+  "gen": 0.922
+ },
+ "varlik-03/poz/happy-baby.png": {
+  "yakin": "22-kapak/266208",
+  "yakin_iou": 0.531,
+  "boy": 0.834,
+  "gen": 0.587
+ },
+ "varlik-03/poz/head-to-knee.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/seated-leg-raise-hold.png",
+  "yakin_iou": 0.456,
+  "boy": 0.507,
+  "gen": 0.814
+ },
+ "varlik-03/poz/heron-seat.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/graveyard-seated-knees-up-diag-forward.png",
+  "yakin_iou": 0.496,
+  "boy": 0.922,
+  "gen": 0.447
+ },
+ "varlik-03/poz/humble-pigeon.png": {
+  "yakin": "varlik-22/poz/hollow-hold.png",
+  "yakin_iou": 0.527,
+  "boy": 0.259,
+  "gen": 0.922
+ },
+ "varlik-03/poz/hurdler-stretch.png": {
+  "yakin": "varlik-22/poz/wide-angle-fold.png",
+  "yakin_iou": 0.432,
+  "boy": 0.608,
+  "gen": 0.922
+ },
+ "varlik-03/poz/king-pigeon-reach.png": {
+  "yakin": "22-kapak/274664",
+  "yakin_iou": 0.494,
+  "boy": 0.922,
+  "gen": 0.556
+ },
+ "varlik-03/poz/kneeling-arm-sweep.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/kneeling-diagonal-reach.png",
+  "yakin_iou": 0.536,
+  "boy": 0.923,
+  "gen": 0.573
+ },
+ "varlik-03/poz/legs-up.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/pigeon-upright.png",
+  "yakin_iou": 0.595,
+  "boy": 0.836,
+  "gen": 0.763
+ },
+ "varlik-03/poz/lizard-lunge.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/side-lying-leg-lift.png",
+  "yakin_iou": 0.439,
+  "boy": 0.52,
+  "gen": 0.921
+ },
+ "varlik-03/poz/locust.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/bicycle-hold.png",
+  "yakin_iou": 0.5,
+  "boy": 0.395,
+  "gen": 0.922
+ },
+ "varlik-03/poz/mermaid-pigeon.png": {
+  "yakin": "22-kapak/274664",
+  "yakin_iou": 0.509,
+  "boy": 0.923,
+  "gen": 0.593
+ },
+ "varlik-03/poz/pyramid-fold.png": {
+  "yakin": "kapak/275917",
+  "yakin_iou": 0.431,
+  "boy": 0.922,
+  "gen": 0.504
+ },
+ "varlik-03/poz/sage-twist.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/seated-leg-raise-hold.png",
+  "yakin_iou": 0.549,
+  "boy": 0.922,
+  "gen": 0.851
+ },
+ "varlik-03/poz/seated-leg-cradle.png": {
+  "yakin": "varlik-22/poz/heel-sit-reach-forward.png",
+  "yakin_iou": 0.544,
+  "boy": 0.892,
+  "gen": 0.518
+ },
+ "varlik-03/poz/seated-side-stretch.png": {
+  "yakin": "22-kapak/274664",
+  "yakin_iou": 0.555,
+  "boy": 0.922,
+  "gen": 0.591
+ },
+ "varlik-03/poz/side-lying-quad-hold.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/bicycle-hold.png",
+  "yakin_iou": 0.483,
+  "boy": 0.384,
+  "gen": 0.922
+ },
+ "varlik-03/poz/side-split-prep.png": {
+  "yakin": "varlik-22/poz/wide-angle-fold.png",
+  "yakin_iou": 0.424,
+  "boy": 0.627,
+  "gen": 0.922
+ },
+ "varlik-03/poz/standing-figure-four.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/phantom-diagonal-curtsy.png",
+  "yakin_iou": 0.571,
+  "boy": 0.922,
+  "gen": 0.349
+ },
+ "varlik-03/poz/stork-fold.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/warrior-three-hands-prayer.png",
+  "yakin_iou": 0.468,
+  "boy": 0.914,
+  "gen": 0.922
+ },
+ "varlik-03/poz/sunrise-arch.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/curtsy-reach.png",
+  "yakin_iou": 0.481,
+  "boy": 0.922,
+  "gen": 0.248
+ },
+ "varlik-03/poz/supine-twist.png": {
+  "yakin": "varlik-22/poz/hollow-hold.png",
+  "yakin_iou": 0.448,
+  "boy": 0.266,
+  "gen": 0.922
+ },
+ "varlik-03/poz/toe-touch-twist.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/wide-stance-toe-reach.png",
+  "yakin_iou": 0.475,
+  "boy": 0.922,
+  "gen": 0.587
+ },
+ "varlik-03/poz/upward-plank-leg-lift.png": {
+  "yakin": "varlik-22/poz/reverse-plank.png",
+  "yakin_iou": 0.766,
+  "boy": 0.665,
+  "gen": 0.922
+ },
+ "varlik-03/poz/wide-leg-fold.png": {
+  "yakin": "varlik-22/poz/split-stance-fold.png",
+  "yakin_iou": 0.504,
+  "boy": 0.909,
+  "gen": 0.787
+ },
+ "varlik-03/poz/wide-leg-twist.png": {
+  "yakin": "varlik-23/grup/duo-shoulder-to-shoulder-lean-out.png",
+  "yakin_iou": 0.51,
+  "boy": 0.922,
+  "gen": 0.621
+ },
+ "varlik-04/poz/boat-twist-arms.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/sphinx-lift.png",
+  "yakin_iou": 0.389,
+  "boy": 0.524,
+  "gen": 0.922
+ },
+ "varlik-04/poz/child-arms-back.png": {
+  "yakin": "varlik-22/poz/seated-splits-lean.png",
+  "yakin_iou": 0.421,
+  "boy": 0.322,
+  "gen": 0.742
+ },
+ "varlik-04/poz/crab-kick.png": {
+  "yakin": "varlik-22/poz/reverse-tabletop.png",
+  "yakin_iou": 0.483,
+  "boy": 0.922,
+  "gen": 0.687
+ },
+ "varlik-04/poz/crescent-prayer.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/side-lunge-hands-prayer-deep.png",
+  "yakin_iou": 0.571,
+  "boy": 0.923,
+  "gen": 0.571
+ },
+ "varlik-04/poz/dead-bug.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/seated-leg-raise-hold.png",
+  "yakin_iou": 0.389,
+  "boy": 0.765,
+  "gen": 0.922
+ },
+ "varlik-04/poz/elbow-to-knee.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/phantom-diagonal-curtsy.png",
+  "yakin_iou": 0.525,
+  "boy": 0.922,
+  "gen": 0.309
+ },
+ "varlik-04/poz/forearm-plank-leg-up.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/sphinx-lift.png",
+  "yakin_iou": 0.469,
+  "boy": 0.578,
+  "gen": 0.922
+ },
+ "varlik-04/poz/glute-bridge-arms-up.png": {
+  "yakin": "varlik-22/poz/humble-warrior.png",
+  "yakin_iou": 0.386,
+  "boy": 0.923,
+  "gen": 0.644
+ },
+ "varlik-04/poz/goddess-arms-crossed-up.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/wide-squat-twist.png",
+  "yakin_iou": 0.701,
+  "boy": 0.922,
+  "gen": 0.444
+ },
+ "varlik-04/poz/half-kneel-arms-back-lift.png": {
+  "yakin": "varlik-22/poz/kneeling-lunge-reach-back.png",
+  "yakin_iou": 0.638,
+  "boy": 0.922,
+  "gen": 0.537
+ },
+ "varlik-04/poz/inchworm-walk-out.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/deep-lunge-hands-down.png",
+  "yakin_iou": 0.544,
+  "boy": 0.811,
+  "gen": 0.922
+ },
+ "varlik-04/poz/kneel-one-leg-forward-arms-up.png": {
+  "yakin": "varlik-22/poz/knee-raise-arms-up.png",
+  "yakin_iou": 0.444,
+  "boy": 0.922,
+  "gen": 0.624
+ },
+ "varlik-04/poz/kneeling-arm-swing-back.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/kneeling-reach.png",
+  "yakin_iou": 0.483,
+  "boy": 0.922,
+  "gen": 0.453
+ },
+ "varlik-04/poz/kneeling-clasp-behind-lift.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/kneeling-reach.png",
+  "yakin_iou": 0.493,
+  "boy": 0.923,
+  "gen": 0.353
+ },
+ "varlik-04/poz/kneeling-hands-on-hips.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/kneeling-reach.png",
+  "yakin_iou": 0.556,
+  "boy": 0.922,
+  "gen": 0.382
+ },
+ "varlik-04/poz/kneeling-lunge-hands-on-knee.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/low-lunge-arms-forward.png",
+  "yakin_iou": 0.666,
+  "boy": 0.923,
+  "gen": 0.602
+ },
+ "varlik-04/poz/kneeling-lunge-quad-pull.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/low-lunge-hands-on-back-knee.png",
+  "yakin_iou": 0.468,
+  "boy": 0.922,
+  "gen": 0.46
+ },
+ "varlik-04/poz/lateral-lunge-reach-across.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/shadow-low-lunge-low-forward-high-back.png",
+  "yakin_iou": 0.452,
+  "boy": 0.922,
+  "gen": 0.711
+ },
+ "varlik-04/poz/lotus-arms-wide.png": {
+  "yakin": "varlik-22/poz/open-wide-boat.png",
+  "yakin_iou": 0.402,
+  "boy": 0.695,
+  "gen": 0.922
+ },
+ "varlik-04/poz/lotus-prayer.png": {
+  "yakin": "22-kapak/266208",
+  "yakin_iou": 0.694,
+  "boy": 0.923,
+  "gen": 0.673
+ },
+ "varlik-04/poz/lunge-victory-reach.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/spider-lunge-arms-up.png",
+  "yakin_iou": 0.685,
+  "boy": 0.923,
+  "gen": 0.484
+ },
+ "varlik-04/poz/lying-leg-hug.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/bicycle-hold.png",
+  "yakin_iou": 0.52,
+  "boy": 0.339,
+  "gen": 0.922
+ },
+ "varlik-04/poz/lying-reach-up.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/seated-leg-raise-hold.png",
+  "yakin_iou": 0.445,
+  "boy": 0.836,
+  "gen": 0.657
+ },
+ "varlik-04/poz/one-leg-hug-knee-side.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/ghoul-head-t-knee-up.png",
+  "yakin_iou": 0.55,
+  "boy": 0.922,
+  "gen": 0.524
+ },
+ "varlik-04/poz/pistol-squat-prep.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/toe-stand-prep.png",
+  "yakin_iou": 0.408,
+  "boy": 0.922,
+  "gen": 0.658
+ },
+ "varlik-04/poz/plank-knee-to-elbow.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/plank-leg-lift.png",
+  "yakin_iou": 0.704,
+  "boy": 0.611,
+  "gen": 0.922
+ },
+ "varlik-04/poz/reverse-lunge-reach-up.png": {
+  "yakin": "varlik-22/poz/warrior-one.png",
+  "yakin_iou": 0.479,
+  "boy": 0.922,
+  "gen": 0.49
+ },
+ "varlik-04/poz/scissor-legs.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/sphinx-lift.png",
+  "yakin_iou": 0.447,
+  "boy": 0.668,
+  "gen": 0.922
+ },
+ "varlik-04/poz/seated-leg-lift-arms-up.png": {
+  "yakin": "varlik-22/poz/staff-arms-up.png",
+  "yakin_iou": 0.619,
+  "boy": 0.923,
+  "gen": 0.737
+ },
+ "varlik-04/poz/seated-straddle-arms-t.png": {
+  "yakin": "varlik-22/poz/wide-angle-fold.png",
+  "yakin_iou": 0.483,
+  "boy": 0.604,
+  "gen": 0.922
+ },
+ "varlik-04/poz/seated-wide-twist-reach.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/wide-angle-side-bend.png",
+  "yakin_iou": 0.643,
+  "boy": 0.778,
+  "gen": 0.922
+ },
+ "varlik-04/poz/side-bend-leg-out.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/cauldron-half-kneel-side-v-t.png",
+  "yakin_iou": 0.425,
+  "boy": 0.922,
+  "gen": 0.318
+ },
+ "varlik-04/poz/side-leg-lift-arms-up.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/cauldron-half-kneel-side-v-t.png",
+  "yakin_iou": 0.489,
+  "boy": 0.922,
+  "gen": 0.353
+ },
+ "varlik-04/poz/side-plank-leg-lift.png": {
+  "yakin": "22-kapak/268843",
+  "yakin_iou": 0.525,
+  "boy": 0.862,
+  "gen": 0.922
+ },
+ "varlik-04/poz/skandasana-prayer.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/phantom-hook-t-horse-lean-r.png",
+  "yakin_iou": 0.429,
+  "boy": 0.922,
+  "gen": 0.718
+ },
+ "varlik-04/poz/standing-clasp-behind-lift.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/curtsy-reach.png",
+  "yakin_iou": 0.504,
+  "boy": 0.922,
+  "gen": 0.282
+ },
+ "varlik-04/poz/standing-split-hands-floor.png": {
+  "yakin": "varlik-22/poz/wild-thing-lite.png",
+  "yakin_iou": 0.438,
+  "boy": 0.922,
+  "gen": 0.316
+ },
+ "varlik-04/poz/tabletop-knee-tuck.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/bear-hold.png",
+  "yakin_iou": 0.46,
+  "boy": 0.869,
+  "gen": 0.829
+ },
+ "varlik-04/poz/v-sit-hands-floor.png": {
+  "yakin": "22-kapak/274664",
+  "yakin_iou": 0.467,
+  "boy": 0.892,
+  "gen": 0.871
+ },
+ "varlik-04/poz/wide-squat-arms-up.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/wide-squat-twist.png",
+  "yakin_iou": 0.592,
+  "boy": 0.923,
+  "gen": 0.429
+ },
+ "varlik-04/poz/wide-stance-punch-up.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/black-cat-split-stance-archer.png",
+  "yakin_iou": 0.57,
+  "boy": 0.922,
+  "gen": 0.342
+ },
+ "varlik-05/poz/banshee-deep-goddess-v.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/wide-squat-twist.png",
+  "yakin_iou": 0.582,
+  "boy": 0.922,
+  "gen": 0.5
+ },
+ "varlik-05/poz/banshee-head-t-leg-out-lean-r.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/bat-hook-t-leg-out-lean-r.png",
+  "yakin_iou": 0.681,
+  "boy": 0.922,
+  "gen": 0.753
+ },
+ "varlik-05/poz/bat-heel-sit-bent-up-back.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/broom-side-sit-up45-w.png",
+  "yakin_iou": 0.441,
+  "boy": 0.922,
+  "gen": 0.707
+ },
+ "varlik-05/poz/bat-kneel-prayer.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/kneeling-reach.png",
+  "yakin_iou": 0.535,
+  "boy": 0.922,
+  "gen": 0.416
+ },
+ "varlik-05/poz/bat-t-salute-leg-out.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/potion-half-kneel-side-w-t.png",
+  "yakin_iou": 0.593,
+  "boy": 0.922,
+  "gen": 0.571
+ },
+ "varlik-05/poz/black-cat-flex-reach-horse.png": {
+  "yakin": "varlik-22/poz/warrior-one.png",
+  "yakin_iou": 0.446,
+  "boy": 0.922,
+  "gen": 0.338
+ },
+ "varlik-05/poz/broom-cactus-tree.png": {
+  "yakin": "kapak/336199",
+  "yakin_iou": 0.483,
+  "boy": 0.922,
+  "gen": 0.427
+ },
+ "varlik-05/poz/broom-kneel-one-up.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/tall-reach.png",
+  "yakin_iou": 0.541,
+  "boy": 0.922,
+  "gen": 0.296
+ },
+ "varlik-05/poz/broom-side-lunge-cactus.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/hand-to-toe-side.png",
+  "yakin_iou": 0.513,
+  "boy": 0.923,
+  "gen": 0.439
+ },
+ "varlik-05/poz/broom-stork-arms-back.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/standing-leg-back-arms-up.png",
+  "yakin_iou": 0.488,
+  "boy": 0.922,
+  "gen": 0.468
+ },
+ "varlik-05/poz/broom-v-t-curtsy.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/standing-leg-back-arms-up.png",
+  "yakin_iou": 0.438,
+  "boy": 0.922,
+  "gen": 0.564
+ },
+ "varlik-05/poz/broom-w-knee-up.png": {
+  "yakin": "kapak/336199",
+  "yakin_iou": 0.493,
+  "boy": 0.922,
+  "gen": 0.54
+ },
+ "varlik-05/poz/candle-half-kneel-side-up45-head.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/phantom-diagonal-curtsy.png",
+  "yakin_iou": 0.499,
+  "boy": 0.922,
+  "gen": 0.616
+ },
+ "varlik-05/poz/cauldron-side-lunge-v.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/ghost-v-t-leg-out.png",
+  "yakin_iou": 0.476,
+  "boy": 0.922,
+  "gen": 0.434
+ },
+ "varlik-05/poz/cauldron-w-reach-knee-up.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/tall-reach.png",
+  "yakin_iou": 0.597,
+  "boy": 0.922,
+  "gen": 0.422
+ },
+ "varlik-05/poz/coffin-cobra-wide-wide.png": {
+  "yakin": "varlik-22/poz/low-boat.png",
+  "yakin_iou": 0.483,
+  "boy": 0.697,
+  "gen": 0.922
+ },
+ "varlik-05/poz/coffin-low-squat-prayer.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/moonlight-frog-hands-floor.png",
+  "yakin_iou": 0.579,
+  "boy": 0.923,
+  "gen": 0.549
+ },
+ "varlik-05/poz/coffin-tabletop.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/knee-to-nose.png",
+  "yakin_iou": 0.599,
+  "boy": 0.757,
+  "gen": 0.836
+ },
+ "varlik-05/poz/crypt-side-sit-flex-up45.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/broom-side-sit-up45-w.png",
+  "yakin_iou": 0.628,
+  "boy": 0.922,
+  "gen": 0.807
+ },
+ "varlik-05/poz/ghost-w-reach-curtsy.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/phantom-diagonal-curtsy.png",
+  "yakin_iou": 0.498,
+  "boy": 0.922,
+  "gen": 0.318
+ },
+ "varlik-05/poz/ghoul-kneel-diagonal-reach.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/kneeling-diagonal-reach.png",
+  "yakin_iou": 0.618,
+  "boy": 0.922,
+  "gen": 0.478
+ },
+ "varlik-05/poz/goblin-diag-hip-tap-lean-l.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/bat-hook-t-leg-out-lean-r.png",
+  "yakin_iou": 0.524,
+  "boy": 0.922,
+  "gen": 0.66
+ },
+ "varlik-05/poz/goblin-flex-tree.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/hand-to-toe-side.png",
+  "yakin_iou": 0.503,
+  "boy": 0.922,
+  "gen": 0.403
+ },
+ "varlik-05/poz/goblin-kneel-arms-forward.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/low-lunge-arms-forward.png",
+  "yakin_iou": 0.553,
+  "boy": 0.923,
+  "gen": 0.629
+ },
+ "varlik-05/poz/goblin-kneel-cactus.png": {
+  "yakin": "varlik-22/poz/half-kneel-w.png",
+  "yakin_iou": 0.532,
+  "boy": 0.922,
+  "gen": 0.489
+ },
+ "varlik-05/poz/goblin-t-v-horse.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/cauldron-half-kneel-side-v-t.png",
+  "yakin_iou": 0.467,
+  "boy": 0.922,
+  "gen": 0.578
+ },
+ "varlik-05/poz/graveyard-chest-reach-side-tap.png": {
+  "yakin": "kapak/266681",
+  "yakin_iou": 0.447,
+  "boy": 0.922,
+  "gen": 0.313
+ },
+ "varlik-05/poz/haunted-chest-point-curtsy-lean-r.png": {
+  "yakin": "varlik-22/poz/wizard-t-low-curtsy-lean-l.png",
+  "yakin_iou": 0.526,
+  "boy": 0.922,
+  "gen": 0.504
+ },
+ "varlik-05/poz/haunted-deep-goddess-t.png": {
+  "yakin": "varlik-22/poz/cossack-reach.png",
+  "yakin_iou": 0.521,
+  "boy": 0.916,
+  "gen": 0.922
+ },
+ "varlik-05/poz/haunted-seated-knees-up-hug-forward.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/graveyard-seated-knees-up-diag-forward.png",
+  "yakin_iou": 0.517,
+  "boy": 0.915,
+  "gen": 0.623
+ },
+ "varlik-05/poz/haunted-seated-staff-hands-back.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/pigeon-upright.png",
+  "yakin_iou": 0.562,
+  "boy": 0.865,
+  "gen": 0.889
+ },
+ "varlik-05/poz/haunted-warrior-hip-low-forward.png": {
+  "yakin": "varlik-22/poz/wizard-warrior-three-diag-diag.png",
+  "yakin_iou": 0.612,
+  "boy": 0.731,
+  "gen": 0.922
+ },
+ "varlik-05/poz/lantern-w-reach-side-tap.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/tall-reach.png",
+  "yakin_iou": 0.611,
+  "boy": 0.922,
+  "gen": 0.411
+ },
+ "varlik-05/poz/mummy-cobra-wide-forward.png": {
+  "yakin": "varlik-22/poz/prone-arms-forward-lift.png",
+  "yakin_iou": 0.469,
+  "boy": 0.545,
+  "gen": 0.922
+ },
+ "varlik-05/poz/mummy-heel-sit-arms-back.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/graveyard-seated-knees-up-diag-forward.png",
+  "yakin_iou": 0.424,
+  "boy": 0.909,
+  "gen": 0.737
+ },
+ "varlik-05/poz/mummy-seated-knees-up-floor-up.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/standing-leg-back-arms-up.png",
+  "yakin_iou": 0.499,
+  "boy": 0.922,
+  "gen": 0.326
+ },
+ "varlik-05/poz/mummy-side-kneel-reach.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/cauldron-half-kneel-side-v-t.png",
+  "yakin_iou": 0.592,
+  "boy": 0.922,
+  "gen": 0.371
+ },
+ "varlik-05/poz/owl-half-cactus-stand.png": {
+  "yakin": "varlik-22/poz/banana-reach.png",
+  "yakin_iou": 0.553,
+  "boy": 0.922,
+  "gen": 0.571
+ },
+ "varlik-05/poz/owl-t-cactus-horse.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/potion-half-kneel-side-w-t.png",
+  "yakin_iou": 0.447,
+  "boy": 0.922,
+  "gen": 0.592
+ },
+ "varlik-05/poz/phantom-lunge-arms-forward.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/side-lunge-hands-prayer-deep.png",
+  "yakin_iou": 0.54,
+  "boy": 0.922,
+  "gen": 0.601
+ },
+ "varlik-05/poz/potion-side-lunge-w.png": {
+  "yakin": "kapak/336199",
+  "yakin_iou": 0.52,
+  "boy": 0.922,
+  "gen": 0.502
+ },
+ "varlik-05/poz/pumpkin-kneel-up45-hip.png": {
+  "yakin": "varlik-22/poz/wizard-t-low-curtsy-lean-l.png",
+  "yakin_iou": 0.557,
+  "boy": 0.922,
+  "gen": 0.618
+ },
+ "varlik-05/poz/raven-half-kneel-side-cactus-up45.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/cauldron-half-kneel-side-v-t.png",
+  "yakin_iou": 0.558,
+  "boy": 0.922,
+  "gen": 0.584
+ },
+ "varlik-05/poz/raven-low-squat-w-t.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/potion-half-kneel-side-w-t.png",
+  "yakin_iou": 0.465,
+  "boy": 0.922,
+  "gen": 0.778
+ },
+ "varlik-05/poz/raven-one-up-stand.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/curtsy-reach.png",
+  "yakin_iou": 0.586,
+  "boy": 0.922,
+  "gen": 0.251
+ },
+ "varlik-05/poz/raven-stork-hands-hips.png": {
+  "yakin": "varlik-22/poz/stork-arms-up.png",
+  "yakin_iou": 0.561,
+  "boy": 0.923,
+  "gen": 0.274
+ },
+ "varlik-05/poz/scarecrow-diag-hip-tree-lean-r.png": {
+  "yakin": "varlik-22/poz/spider-hip-t-half-goddess-lean-l.png",
+  "yakin_iou": 0.542,
+  "boy": 0.922,
+  "gen": 0.502
+ },
+ "varlik-05/poz/shadow-low-lunge-back-back.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/black-cat-low-lunge-prayer-low-forward.png",
+  "yakin_iou": 0.664,
+  "boy": 0.922,
+  "gen": 0.691
+ },
+ "varlik-05/poz/skeleton-head-t-side-tap.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/ghoul-head-t-knee-up.png",
+  "yakin_iou": 0.481,
+  "boy": 0.922,
+  "gen": 0.566
+ },
+ "varlik-05/poz/skeleton-superman-lite.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/half-bow.png",
+  "yakin_iou": 0.68,
+  "boy": 0.33,
+  "gen": 0.922
+ },
+ "varlik-05/poz/spell-kneel-up-cactus.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/phantom-diagonal-curtsy.png",
+  "yakin_iou": 0.434,
+  "boy": 0.922,
+  "gen": 0.338
+ },
+ "varlik-05/poz/spell-stork-prayer.png": {
+  "yakin": "varlik-22/poz/stork-arms-up.png",
+  "yakin_iou": 0.521,
+  "boy": 0.923,
+  "gen": 0.242
+ },
+ "varlik-05/poz/spider-half-cactus-wide.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/potion-half-kneel-side-w-t.png",
+  "yakin_iou": 0.499,
+  "boy": 0.922,
+  "gen": 0.602
+ },
+ "varlik-05/poz/spider-kneel-v.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/tall-reach.png",
+  "yakin_iou": 0.545,
+  "boy": 0.922,
+  "gen": 0.507
+ },
+ "varlik-05/poz/tombstone-elbows-down-leg-out.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/witch-cactus-leg-out.png",
+  "yakin_iou": 0.61,
+  "boy": 0.923,
+  "gen": 0.559
+ },
+ "varlik-05/poz/tombstone-half-kneel-side-hip-up45.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/potion-half-kneel-side-w-t.png",
+  "yakin_iou": 0.571,
+  "boy": 0.922,
+  "gen": 0.567
+ },
+ "varlik-05/poz/tombstone-high-plank-forward-floor.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/candle-high-plank-diag-floor.png",
+  "yakin_iou": 0.431,
+  "boy": 0.504,
+  "gen": 0.922
+ },
+ "varlik-05/poz/tombstone-lying-arms-up.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/bicycle-hold.png",
+  "yakin_iou": 0.457,
+  "boy": 0.636,
+  "gen": 0.922
+ },
+ "varlik-05/poz/tombstone-side-lunge-reach.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/vampire-flex-reach-knee-up.png",
+  "yakin_iou": 0.514,
+  "boy": 0.923,
+  "gen": 0.314
+ },
+ "varlik-05/poz/vampire-skater-swing-hip.png": {
+  "yakin": "kapak/266681",
+  "yakin_iou": 0.467,
+  "boy": 0.922,
+  "gen": 0.522
+ },
+ "varlik-05/poz/werewolf-head-t-horse.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/phantom-hook-t-horse-lean-r.png",
+  "yakin_iou": 0.558,
+  "boy": 0.922,
+  "gen": 0.606
+ },
+ "varlik-05/poz/werewolf-hip-hook-horse.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/potion-half-kneel-side-w-t.png",
+  "yakin_iou": 0.498,
+  "boy": 0.922,
+  "gen": 0.502
+ },
+ "varlik-05/poz/wizard-head-low-kick-lean-l.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/ghoul-head-t-knee-up.png",
+  "yakin_iou": 0.491,
+  "boy": 0.922,
+  "gen": 0.578
+ },
+ "varlik-05/poz/zombie-diagonal-side-tap.png": {
+  "yakin": "varlik-25-e13/tetris-varlik/poz/phantom-diagonal-curtsy.png",
+  "yakin_iou": 0.626,
+  "boy": 0.922,
+  "gen": 0.596
+ },
+ "varlik-05/poz/zombie-knee-raise-arms-forward.png": {
+  "yakin": "varlik-24s/tetris-varlik/poz/moonlight-knee-raise-arms-down.png",
+  "yakin_iou": 0.71,
+  "boy": 0.922,
+  "gen": 0.362
+ }
+}
