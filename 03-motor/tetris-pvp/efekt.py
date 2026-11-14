@@ -52,6 +52,28 @@ def ayna(sure=0.8):
     return (x * np.minimum(1, t / 0.02) * np.exp(-t * 2.5) * 0.3).astype(np.float64)
 
 
+def kar(sure=0.8):
+    """27 (karli zirve): kara gomulme - yumusak gumleme (80->40 Hz) + parlak toz kar hisirtisi (bant gecirgen, 2-6 kHz), kisa sonum"""
+    t = np.arange(int(sure * SR)) / SR
+    f = 80 * np.exp(-t * 4) + 40
+    gum = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 10)
+    g = np.random.default_rng(13).standard_normal(len(t))
+    k1 = np.exp(-np.arange(int(0.002 * SR)) / (0.0004 * SR)); g1 = np.convolve(g, k1 / k1.sum(), "same")
+    k2 = np.exp(-np.arange(int(0.006 * SR)) / (0.0015 * SR)); g2 = np.convolve(g, k2 / k2.sum(), "same")
+    his = (g1 - g2) * np.exp(-t * 5) * np.minimum(1, t / 0.008)
+    return ((gum * 0.85 + his * 2.2) * 0.5).astype(np.float64)
+
+
+def ruzgar(sure=2.0):
+    """27 BLIND: tipi ruzgari - alcak geciren gurultu, yavas yukselip alcalan uguldama (iki yavas LFO)"""
+    t = np.arange(int(sure * SR)) / SR
+    g = np.random.default_rng(17).standard_normal(len(t))
+    k = np.exp(-np.arange(int(0.01 * SR)) / (0.003 * SR)); g = np.convolve(g, k / k.sum(), "same")
+    lfo = 0.6 + 0.4 * np.sin(2 * np.pi * 0.7 * t) * np.sin(2 * np.pi * 0.23 * t + 1)
+    zarf = np.minimum(1, t / 0.4) * np.minimum(1, (sure - t) / 0.5)
+    return (g * lfo * zarf * 1.4).astype(np.float64)
+
+
 def main():
     bolum, cikti = sys.argv[1:3]
     B = json.load(open(bolum, encoding="utf-8"))
@@ -96,6 +118,9 @@ def main():
         yerlestir(ef, ding(), a + 0.02, 0.6)                             # poz belirdi
         if d.get("ayna"):                                                # 26 MIRROR: siluet ters doner
             yerlestir(ef, ayna(), a + 0.02, 0.8)
+        if d.get("blind"):                                               # 27 BLIND: tipi (siluet gizli), son 1,5 sn'de belirir -> buz cinlamasi
+            yerlestir(ef, ruzgar(max(0.8, b - 1.5 - a + 0.3)), a, 0.55)
+            yerlestir(ef, buz(), b - 1.5, 0.75)
         for i in range(3):
             yerlestir(ef, bip([660, 784, 988][i]), a + i * Z["say"] / 3 + 0.02, 0.9)    # 3-2-1 yukselen (sahne ile ayni adim)
         yerlestir(ef, vuus(Z["buyu"] * 0.6, True, 0.55), c - Z["buyu"] * 0.6)   # duvar yaklasiyor
@@ -105,7 +130,10 @@ def main():
         if out:                                                          # 24: OUT - karakter suya duser (sicrama) + alcak uyari
             yerlestir(ef, vuus(0.5, False, 1.0), c - Z["buyu"] * 0.25)
             yerlestir(ef, zap(0.35), c - Z["buyu"] * 0.2, 0.6)
-            if "--kum" in sys.argv:                                       # 26: kuma yuvarlanir -> gumleme + kum + cankurtaran duduk
+            if "--kar" in sys.argv:                                       # 27: kar yiginina gomulur -> gumleme + toz kar + hakem duduk
+                yerlestir(ef, kar(), c - 0.03, 1.0)
+                yerlestir(ef, duduk(), c + 0.3, 0.7)
+            elif "--kum" in sys.argv:                                       # 26: kuma yuvarlanir -> gumleme + kum + cankurtaran duduk
                 yerlestir(ef, kum(), c - 0.03, 1.0)
                 yerlestir(ef, duduk(), c + 0.3, 0.8)
             elif "--duduk" in sys.argv:                                   # 25: mindere duser -> hakem duduk
