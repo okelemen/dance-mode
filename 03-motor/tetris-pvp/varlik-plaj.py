@@ -16,7 +16,7 @@ import random
 YERLESIM.clear()
 KAPAK = YALNIZ == "kapak"
 POZLAMA = float(arg("--pozlama", arg("--kapak-pozlama", "0")))
-GUNES = float(arg("--gunes", "3.0"))
+GUNES = float(arg("--gunes", "3.6"))
 ON_EK = "kapak-" if KAPAK else ""
 KAP = {"y": 8.0, "w": 3.4, "h": 3.7, "kalin": 0.50}      # onizleme 1: 0,34 ince boru gibiydi -> tombul sisme
 KAM = {"z": 2.3, "egim": 5.0, "lens": 18.0, "sensor": 24.0}
@@ -45,13 +45,13 @@ def plaj_sahnesi(w, h, saydam):
     tc = nt.nodes.new("ShaderNodeTexCoord"); sp = nt.nodes.new("ShaderNodeSeparateXYZ")
     nt.links.new(tc.outputs["Generated"], sp.inputs[0])
     rp = nt.nodes.new("ShaderNodeValToRGB"); el = rp.color_ramp.elements
-    el[0].position = 0.0; el[0].color = (*lin(hex3("#9eeaff")), 1)
-    el[1].position = 0.45; el[1].color = (*lin(hex3("#1f86ff")), 1)
-    e2 = el.new(0.12); e2.color = (*lin(hex3("#5cc8ff")), 1)
+    el[0].position = 0.0; el[0].color = (*lin(hex3("#3fd4ff")), 1)
+    el[1].position = 0.45; el[1].color = (*lin(hex3("#0a62ff")), 1)
+    e2 = el.new(0.12); e2.color = (*lin(hex3("#1aa6ff")), 1)
     nt.links.new(sp.outputs["Z"], rp.inputs[0])
     lp = nt.nodes.new("ShaderNodeLightPath")
     bg_k = nt.nodes.new("ShaderNodeBackground"); bg_k.inputs[1].default_value = 1.0
-    bg_i = nt.nodes.new("ShaderNodeBackground"); bg_i.inputs[1].default_value = 0.7
+    bg_i = nt.nodes.new("ShaderNodeBackground"); bg_i.inputs[1].default_value = 0.45   # 14 Kas: mavi ortam isigi kumu soldurmasin (kullanici: "daha canli")
     nt.links.new(rp.outputs[0], bg_k.inputs[0]); nt.links.new(rp.outputs[0], bg_i.inputs[0])
     mx = nt.nodes.new("ShaderNodeMixShader")
     nt.links.new(lp.outputs["Is Camera Ray"], mx.inputs[0])
@@ -192,10 +192,10 @@ def serit_mesh(ad, noktalar, gen, z, mat):
 
 # ------------------------------------------------------------------ PLAJ (her iki katmanda; serit sahnesinde uzak kisim holdout)
 def plaj(serit_modu, rnd):
-    kum = mat_kum("kum", "#f6d595", "#f0c47c")
+    kum = mat_kum("kum", "#ffcf5c", "#ffbd45")
     duz("kum_yakin", -80, 80, -4, GECIS, 0, kum)
     duz("kum_uzak", -80, 80, GECIS, SAHIL + 2.5, 0, kum)
-    islak = mat_kum("islak", "#e2ad6c", "#d89f5e", purluk=0.25, dalga=0.05)
+    islak = mat_kum("islak", "#f39a40", "#e88a30", purluk=0.25, dalga=0.05)
     duz("islak", -80, 80, SAHIL - 1.4, SAHIL + 2.5, 0.004, islak)
     deniz = mat_deniz()
     duz("deniz", -900, 900, SAHIL, 900, 0.02, deniz)
@@ -344,7 +344,7 @@ def sorf(xy, rnd):
 
 def kum_kalesi(xy, olcek=1.0):
     x, y = xy
-    km = mat_kum("kale", "#ecb876", "#e2a965", purluk=0.7, dalga=0.05)
+    km = mat_kum("kale", "#f7ae45", "#ee9f38", purluk=0.7, dalga=0.05)
     bpy.ops.mesh.primitive_cylinder_add(radius=0.55 * olcek, depth=0.5 * olcek, location=(x, y, 0.25 * olcek)); bpy.context.active_object.data.materials.append(km)
     for dx in (-0.45, 0.45):
         bpy.ops.mesh.primitive_cylinder_add(radius=0.22 * olcek, depth=0.85 * olcek, location=(x + dx * olcek, y, 0.42 * olcek)); bpy.context.active_object.data.materials.append(km)
@@ -365,7 +365,7 @@ def plaj_topu(konum, r, rnd):
 
 
 def adalar(rnd):
-    ye = mat_pbr("ada", "#2fb14a", 0.6, bump=(2, 0.4)); ka = mat_kum("ada_kum", "#f2cf8c", "#eac07a", dalga=0.02)
+    ye = mat_pbr("ada", "#2fb14a", 0.6, bump=(2, 0.4)); ka = mat_kum("ada_kum", "#ffd062", "#ffc04c", dalga=0.02)
     for (x, y, r, h) in ((-120, 330, 40, 14), (-70, 360, 26, 9), (150, 380, 55, 20), (90, 300, 18, 6)):
         k = kure((x, y, -h * 0.25), r, ye, sub=4); k.scale = (1.0, 0.5, h / r)
         k2 = kure((x, y - 2, -0.6), r * 1.08, ka, sub=4); k2.scale = (1.0, 0.5, 0.06)
@@ -465,7 +465,7 @@ def serit_esyalari(oyuncu, R, rnd):
         o = bpy.data.objects.new("ok", me); bpy.context.collection.objects.link(o); o.data.materials.append(boya)
         o.modifiers.new("k", "SOLIDIFY").thickness = 0.02
     # OUT ani: dis tarafta yumusak kum yigini (karakter buraya yuvarlanir)
-    km = mat_kum("yigin", "#f8dba0", "#f1c983", dalga=0.08)
+    km = mat_kum("yigin", "#ffd468", "#ffc24c", dalga=0.08)
     y_ = kure((s_dis * 2.75, 5.2, -0.15), 1.0, km, sub=4); y_.scale = (1.0, 1.8, 0.42)
     # dis tarafta plaj esyalari (havlu, kova-kurek, top / sorf, sogutucu, kum kalesi)
     if oyuncu == "p1":
