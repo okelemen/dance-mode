@@ -132,6 +132,27 @@ if OYUNCU != "maskot":
         bv = d_.modifiers.new("egim", "BEVEL"); bv.width = 0.35 * rd; bv.segments = 4
         EKIP.append((d_, taraf + "Leg", Matrix.Translation((0, 0.12 * rd, 0))))
 
+if OYUNCU == "maskot" and arg("--cankurtaran", "0") == "1":   # 26 (plaj): hakem maskot cankurtaran sortu (kirmizi, beyaz bel bandi); duduk motorda 2B
+    sort = mat_jole("sort", lin(hex3("#ff2436")), emis=0.25, purluk=0.08)
+    bant = mat_jole("bant", (0.95, 0.96, 1.0), emis=0.15, purluk=0.1)
+    rh = 0.085 * BOY
+    bpy.ops.mesh.primitive_cylinder_add(radius=rh, depth=0.75 * rh, vertices=40)
+    h_ = bpy.context.active_object; h_.data.materials.append(sort); bpy.ops.object.shade_smooth()
+    h_.data.transform(Matrix.Diagonal((1.0, 1.0, 0.8, 1.0)) @ Matrix.Rotation(math.radians(90), 4, "X"))
+    bv = h_.modifiers.new("egim", "BEVEL"); bv.width = 0.2 * rh; bv.segments = 4
+    EKIP.append((h_, "Hips", Matrix.Translation((0, 0.05 * rh, 0))))
+    bpy.ops.mesh.primitive_cylinder_add(radius=1.03 * rh, depth=0.16 * rh, vertices=40)
+    w_ = bpy.context.active_object; w_.data.materials.append(bant); bpy.ops.object.shade_smooth()
+    w_.data.transform(Matrix.Diagonal((1.0, 1.0, 0.8, 1.0)) @ Matrix.Rotation(math.radians(90), 4, "X"))
+    EKIP.append((w_, "Hips", Matrix.Translation((0, 0.42 * rh, 0))))
+    rb = 0.05 * BOY
+    for taraf in ("Left", "Right"):
+        bpy.ops.mesh.primitive_cylinder_add(radius=rb, depth=1.6 * rb, vertices=32)
+        u_ = bpy.context.active_object; u_.data.materials.append(sort); bpy.ops.object.shade_smooth()
+        u_.data.transform(Matrix.Rotation(math.radians(90), 4, "X"))
+        bv = u_.modifiers.new("egim", "BEVEL"); bv.width = 0.25 * rb; bv.segments = 3
+        EKIP.append((u_, taraf + "UpLeg", Matrix.Translation((0, 0.75 * rb, 0))))
+
 
 def ekip_yerlestir():
     for ob, ad, yerel in EKIP:
