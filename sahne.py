@@ -321,6 +321,7 @@ def bicak_kur():
     # celik topuk (bolster)
     bpy.ops.mesh.primitive_cube_add(size=1, location=(-0.06, H_ * 0.5, 0))
     topuk = bpy.context.object
+    topuk.name = "bicak_topuk"
     topuk.scale = (0.12, H_ * 0.92, 0.07)
     bv_ = topuk.modifiers.new("pah", "BEVEL"); bv_.width = 0.015; bv_.segments = 2
     topuk.data.materials.append(mb)
@@ -328,6 +329,7 @@ def bicak_kur():
     # sap: koyu ahsap, hafif oval, 3 perçin
     bpy.ops.mesh.primitive_cube_add(size=1, location=(-0.72, H_ * 0.5, 0))
     sap = bpy.context.object
+    sap.name = "bicak_sap"
     sap.scale = (1.2, 0.27, 0.10)
     bv2 = sap.modifiers.new("pah", "BEVEL"); bv2.width = 0.045; bv2.segments = 4
     mh, nth, bh = malzeme("sap")
@@ -370,8 +372,10 @@ def bicak_konum(eks, konum, asagi, yuk):
                 TAHTA_UST + 0.004 if asagi else MERKEZ_Z + R + 0.15 + 0.2 * yuk)
     if eks == "y":
         return (1.25, konum, TAHTA_UST + 0.004 if asagi else MERKEZ_Z + R + 0.15 + 0.2 * yuk)
-    # z: yatay dilim; asagi = ice girmis (uc meyveden gecti), yukari = sagda disarida
-    return ((-A - 0.3) if asagi else (A + 3.6 + 0.2 * yuk), 0.0, MERKEZ_Z + konum)
+    # z: yatay dilim; sap ve topuk sagda meyvenin DISINDA kalir.
+    # Bicak yerel +x yonunde, 180 derece donunce dunyada -x'e uzanir.
+    # Kok noktasini sol uca goturmek sapi meyvenin icine sokuyordu.
+    return ((A + 0.22) if asagi else (A + 3.6 + 0.2 * yuk), 0.0, MERKEZ_Z + konum)
 
 
 def anahtar(ob, yol, t, deger, interp="LINEAR"):
