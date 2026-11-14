@@ -3,14 +3,14 @@
 
     python bolum-kur-27.py   ->  bolumler/tetris-mode-27.json
 
-Olcu cizelgesi (126 BPM, olcu 1,905 sn):
-  0-2     acilis CO-OP karti + "CAN YOU CLEAR ALL 24 WALLS?" (ilk duvar 3,81 sn; mobil paket md. 1)
-  2-38    ROUND 1: 6 duvar x 6 olcu (ilk iki duvarda HOW TO PLAY seridi)
-  38-40   ROUND 2 karti; 40-76 6 duvar x 6
-  76-78   BLIND ROUND karti ("WHITEOUT!"); 78-114 6 duvar x 6 (siluet kar firtinasinin arkasinda, son 1,5 sn'de belirir - motor 24)
-  114-116 FINAL ROUND karti; 116-146 5 duvar x 6
-  146-148 BOSS WALL karti; 148-156 son duvar 8 olcu
-  156-159 sonuc (TEAM 21/24 + SILVER); 159-162 RUTBE; 162-166 abone + LIKE/COMMENT/SHARE
+SURE 3:15-3:20 (kullanici 14 Kas 2026: "bu video ve bundan sonraki videolar 3 dakika 15 saniye ya da 3 dakika 20 saniye") ->
+104 olcu = 3:18,1 (ilk hal 166 olcu = 5:16 idi). 24 duvar / 24 poz / turlar / OUT'lar ayni; dongu kisaldi.
+Vurus cizelgesi (126 BPM, vurus 0,476 sn, olcu 1,905 sn):
+  acilis 2 olcu (ilk duvar 3,81 sn; mobil paket md. 1)
+  normal duvar 15 vurus = 7,14 sn: kart 2 (0,95) / say 8 (3,81; BLIND'da son 1,5 sn siluet) / buyu 3 (1,43) / gec 2 (0,95)
+  tur kartlari (ROUND 2, BLIND ROUND, FINAL ROUND, BOSS WALL) 1'er olcu
+  BOSS WALL 23 vurus: kart 2 / say 12 / buyu 5 / gec 4
+  sonuc 2 + RUTBE 2 + abone 2 olcu
 CO-OP: tek duvar, iki oyuncu ayni ikili pozu birlikte yapar. Biri gec kalirsa duvar ikisini birden kar yiginlarina iter (OUT),
 o duvar sayilmaz. Sayac WALLS CLEARED n/24. OUT: 5 (PINK gec), 11 (BLUE gec), 16 (BLIND, PINK gec) -> 21/24 = SILVER.
 BOSS WALL gecilir (son duvar zafer).
@@ -24,25 +24,25 @@ V = 60 / BPM; O = 4 * V
 DUVAR = json.load(open(os.path.join(BURA, "duvar-listesi-27.json"), encoding="utf-8"))
 assert len(DUVAR) == 24
 
-Z_NORMAL = {"kart": 4, "say": 12, "buyu": 4, "gec": 4}
-Z_BOSS = {"kart": 4, "say": 16, "buyu": 6, "gec": 6}
+Z_NORMAL = {"kart": 2, "say": 8, "buyu": 3, "gec": 2}       # 3:15-3:20 kurali (14 Kas 2026)
+Z_BOSS = {"kart": 2, "say": 12, "buyu": 5, "gec": 4}
 OUT = {5: "p2", 11: "p1", 16: "p2"}
 OVGU = ["PERFECT!", "NICE!", "GREAT!", "AMAZING!", "SUPER!", "WOW!"]
 
 kartlar, duvarlar = [], []
-def kart(olcu, sure_olcu, **k):
-    kartlar.append(dict(t=round(olcu * O, 4), sure=round(sure_olcu * O, 4), **k))
+def kart(vur, sure_olcu, **k):                                  # konum vurus cinsinden (duvarlar olcu ortasinda bitebilir)
+    kartlar.append(dict(t=round(vur * V, 4), sure=round(sure_olcu * O, 4), **k))
 
 kart(0, 2, tip="acilis", soru=True)
-olcu = 2
+vur = 8
 temiz = 0
 plan = [(1, None, 6, Z_NORMAL), (2, ("02", "ROUND 2"), 6, Z_NORMAL), (3, ("03", "BLIND ROUND", "WHITEOUT!"), 6, Z_NORMAL),
         (4, ("04", "FINAL ROUND"), 5, Z_NORMAL), (5, ("!", "BOSS WALL", "CLEAR IT TOGETHER"), 1, Z_BOSS)]
 no = 0
 for tur, tk, n, Z in plan:
     if tk:
-        kart(olcu, 2, tip="tur", tur=min(tur, 4), metin=tk[0], alt=tk[1], ek=tk[2] if len(tk) > 2 else None, boss=tur == 5)
-        olcu += 2
+        kart(vur, 1, tip="tur", tur=min(tur, 4), metin=tk[0], alt=tk[1], ek=tk[2] if len(tk) > 2 else None, boss=tur == 5)
+        vur += 4
     for _ in range(n):
         d = DUVAR[no]; no += 1
         assert d["tur"] == {1: "ROUND 1", 2: "ROUND 2", 3: "BLIND ROUND", 4: "FINAL ROUND", 5: "FINAL ROUND"}[tur], (no, d["tur"])
@@ -50,17 +50,19 @@ for tur, tk, n, Z in plan:
         if not any(out.values()):
             temiz += 1
         z = {k: round(v * V, 4) for k, v in Z.items()}; z["sure"] = round(sum(Z.values()) * V, 4)
-        duvarlar.append({"no": no, "tur": min(tur, 4), "t0": round(olcu * O, 4), "z": z, "grup": d["grup"], "video": d["video"],
+        duvarlar.append({"no": no, "tur": min(tur, 4), "t0": round(vur * V, 4), "z": z, "grup": d["grup"], "video": d["video"],
                          "out": out, "skor": temiz, "ovgu": OVGU[(no - 1) % len(OVGU)], "boss": tur == 5, "blind": tur == 3,
                          "nasil": no <= 2})
-        olcu += sum(Z.values()) // 4
+        vur += sum(Z.values())
 assert temiz == 21, temiz
 rutbe = "GOLD" if temiz == 24 else "SILVER" if temiz >= 18 else "BRONZE"
-kart(olcu, 3, tip="sonuc", skor=temiz, toplam=len(duvarlar), rutbe=rutbe); olcu += 3
-kart(olcu, 3, tip="rutbe"); olcu += 3
-kart(olcu, 4, tip="abone"); olcu += 4
-TOPLAM = olcu
-assert TOPLAM == 166, TOPLAM
+assert vur % 4 == 0, vur                                     # kapanis kartlari olcu basinda
+kart(vur, 2, tip="sonuc", skor=temiz, toplam=len(duvarlar), rutbe=rutbe); vur += 8
+kart(vur, 2, tip="rutbe"); vur += 8
+kart(vur, 2, tip="abone"); vur += 8
+TOPLAM = vur // 4
+assert TOPLAM == 104, TOPLAM
+assert 195 <= TOPLAM * O <= 200, TOPLAM * O                  # 3:15-3:20 kurali
 assert duvarlar[0]["t0"] <= 5.0, duvarlar[0]["t0"]          # mobil paket md. 1
 
 # SUBSCRIBE her ~15 sn (TALIMATLAR §4), tam ekran kartlarda yok, gec panelinde yok; 3,2 sn
