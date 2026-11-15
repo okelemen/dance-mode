@@ -1,0 +1,24 @@
+name: CubeCut upload dry run
+
+on:
+  push:
+    branches: [kesim-sayaci]
+    paths:
+      - .github/workflows/cubecut-upload-dry-run.yml
+      - scripts/cubecut_upload_dry_run.py
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    environment: cubecut
+    env:
+      CUBECUT_OAUTH_CLIENT_JSON: ${{ secrets.CUBECUT_OAUTH_CLIENT_JSON }}
+      CUBECUT_YOUTUBE_TOKEN_JSON: ${{ secrets.CUBECUT_YOUTUBE_TOKEN_JSON }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read-only cloud upload preflight
+        run: python3 scripts/cubecut_upload_dry_run.py
