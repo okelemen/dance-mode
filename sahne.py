@@ -16,7 +16,7 @@ import bpy
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from plan import meyve_profil, profil_yaricap
+from plan import icinde, meyve_profil, profil_yaricap
 
 argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 
@@ -35,6 +35,7 @@ M = PLAN["sekil"]
 FMAX = PLAN["fmax"]
 A, R = M["A"], M["R"]
 CILEK = PLAN["meyve"] == "strawberry"
+B = M.get("B", R)
 TAHTA_UST = 0.14
 MERKEZ_Z = TAHTA_UST + R - 0.03
 GORSEL_TAVAN = 120  # gorsel kup izgarasi eksen basina en fazla (sayi plandaki gercek degerdir)
@@ -234,13 +235,16 @@ tahta.data.materials.append(m)
 bpy.ops.mesh.primitive_uv_sphere_add(segments=96, ring_count=64, radius=1.0, location=(0, 0, MERKEZ_Z))
 meyve = bpy.context.object
 meyve.name = "meyve"
-# Kure -> plan.py ile birebir ayni donel profil.
+# Kure -> plan.py ile birebir ayni profil; cilekte dikey eksen Z.
 for v in meyve.data.vertices:
     x, y, z = v.co
-    xn = max(-1.0, min(1.0, x))
-    sphere_r = math.sqrt(max(0.0, 1.0 - xn * xn))
-    radial = float(meyve_profil(np.array([xn]), M)[0]) / max(sphere_r, 1e-6)
-    v.co = (x * A, y * R * radial / FMAX, z * R * radial / FMAX)
+    eks = z if CILEK else x
+    sphere_r = math.sqrt(max(0.0, 1.0 - eks * eks))
+    radial = float(meyve_profil(np.array([eks]), M)[0]) / max(sphere_r, 1e-6) / FMAX
+    if CILEK:
+        v.co = (x * A * radial, y * B * radial, z * R)
+    else:
+        v.co = (x * A, y * R * radial, z * R * radial)
 bpy.ops.object.shade_smooth()
 
 m, nt, bsdf = malzeme("cilek_yuzey" if CILEK else "avokado_kabuk")
@@ -268,7 +272,7 @@ ayir = nt.nodes.new("ShaderNodeSeparateXYZ")
 baglan(nt, tk.outputs["Object"], ayir.inputs[0])
 DEGER = {}
 cizgi_top = None
-for eks, idx, yar in (("x", 0, A), ("y", 1, R), ("z", 2, R)):
+for eks, idx, yar in (("x", 0, A), ("y", 1, B), ("z", 2, R)):
     vn = nt.nodes.new("ShaderNodeValue"); vn.name = f"n_{eks}"; vn.outputs[0].default_value = 1.0
     vd = nt.nodes.new("ShaderNodeValue"); vd.name = f"d_{eks}"; vd.outputs[0].default_value = 0.0
     DEGER[eks] = (vn, vd)
@@ -317,24 +321,23 @@ if CILEK:
     yaprak_bsdf.inputs["Base Color"].default_value = hex_renk("#357c2b")
     yaprak_bsdf.inputs["Roughness"].default_value = 0.62
     def on_yuz(x, z):
-        rr = float(profil_yaricap(np.array([x]), M, FMAX)[0])
-        return -math.sqrt(max(0.0, rr * rr - z * z)) - 0.035
+        rr = float(profil_yaricap(np.array([z]), M, FMAX)[0])
+        return -B * math.sqrt(max(0.0, rr * rr - (x / A) ** 2)) - 0.035
 
     vs, fs = [], []
-    # Yapraklar kameraya donuk -Y yuzeyine serilir; tac kenardan bakilan
-    # ince bir disk gibi gorunmez. Yuvarlak omuzun uzerinde yedi ayri sepaldir.
+    # Ustteki yedi sepal -Y on yuzune iner; karsidan gorulen tac x boyunca yayilir.
     for i in range(-3, 4):
-        tip_z = i * 0.17
-        tip_x = A * (0.36 + 0.06 * abs(i))
-        mid_x = A * (0.58 + 0.04 * abs(i))
-        mid_z = tip_z * 0.57
-        base_x = A * 0.82
-        base_z = i * 0.025
+        base_x = i * 0.035
+        base_z = R * 0.87
+        tip_x = i * 0.18
+        tip_z = R * (0.45 + 0.035 * abs(i))
+        mid_x = (base_x + tip_x) * 0.5
+        mid_z = (base_z + tip_z) * 0.5
         j = len(vs)
         vs.extend([(base_x, on_yuz(base_x, base_z), base_z),
-                   (mid_x, on_yuz(mid_x, mid_z - 0.07), mid_z - 0.07),
+                   (mid_x - 0.075, on_yuz(mid_x - 0.075, mid_z), mid_z),
                    (tip_x, on_yuz(tip_x, tip_z), tip_z),
-                   (mid_x, on_yuz(mid_x, mid_z + 0.07), mid_z + 0.07)])
+                   (mid_x + 0.075, on_yuz(mid_x + 0.075, mid_z), mid_z)])
         fs.append((j, j + 1, j + 2, j + 3))
     yaprak_mesh = bpy.data.meshes.new("cilek_canak_mesh")
     yaprak_mesh.from_pydata(vs, [], fs)
@@ -349,8 +352,7 @@ if CILEK:
     sap_cilek = bpy.context.object
     sap_cilek.name = "cilek_sap"
     sap_cilek.parent = meyve
-    sap_cilek.location = (A + 0.035, -0.23, 0)
-    sap_cilek.rotation_euler = (0, math.pi / 2, 0)
+    sap_cilek.location = (0, -0.22, R + 0.045)
     sap_cilek.data.materials.append(sap_m)
 
 # ---------------------------------------------------------------- bicak
@@ -454,8 +456,8 @@ DISARI = (7.5, -1.0, 4.5)  # kadraj disi (sag ust)
 def bicak_konum(eks, konum, asagi, yuk):
     """eks kesim duzlemi, konum duzlem koordinati, asagi=True agiz tahtada; yuk=0..1 kalkis yuksekligi."""
     if eks == "x":
-        # bicak 15 derece cevrik: meyvenin kameraya bakan on yuzunde (y=-R/2) agiz tam kesim duzleminde
-        return (konum + (1.05 + R * 0.5) * math.tan(math.radians(15)), 1.05,
+        # bicak 15 derece cevrik: meyvenin kameraya bakan on yuzunde (y=-B/2) agiz tam kesim duzleminde
+        return (konum + (1.05 + B * 0.5) * math.tan(math.radians(15)), 1.05,
                 TAHTA_UST + 0.004 if asagi else MERKEZ_Z + R + 0.15 + 0.2 * yuk)
     if eks == "y":
         return (1.25, konum, TAHTA_UST + 0.004 if asagi else MERKEZ_Z + R + 0.15 + 0.2 * yuk)
@@ -518,16 +520,15 @@ def kup_nesnesi(tur, no):
     cx, cy, cz = tur["cx"], tur["cy"], tur["cz"]
     gx, gy, gz = (min(c + 1, tavan) for c in (cx, cy, cz))
     xs = -A + (np.arange(gx) + 0.5) * (2 * A / gx)
-    ys = -R + (np.arange(gy) + 0.5) * (2 * R / gy)
+    ys = -B + (np.arange(gy) + 0.5) * (2 * B / gy)
     zs = -R + (np.arange(gz) + 0.5) * (2 * R / gz)
     X, Y, Z = np.meshgrid(xs, ys, zs, indexing="ij")
-    rr = profil_r(X)
-    ic = (np.abs(X / A) <= 1) & (Y * Y + Z * Z <= rr * rr)
+    ic = icinde(X, Y, Z, M)
     idx = np.argwhere(ic)
     merk = np.stack([X[ic], Y[ic], Z[ic]], 1)
     k = len(merk)
     rng = np.random.default_rng(7 + no)
-    hx, hy, hz = A / gx, R / gy, R / gz
+    hx, hy, hz = A / gx, B / gy, R / gz
     # dis yuz maskesi: bit 0:+X 1:-X 2:+Y 3:-Y 4:+Z 5:-Z (komsu hucre disarida ise kabuk)
     p = np.pad(ic, 1)
     maske = np.zeros(k)
@@ -535,7 +536,12 @@ def kup_nesnesi(tur, no):
         dis = ~p[idx[:, 0] + 1 + dx, idx[:, 1] + 1 + dy, idx[:, 2] + 1 + dz]
         maske += dis * (2 ** bit)
     # et/cekirdek rengi (REF-080: ic krem, kabuga yakin acik yesil, cekirdek kahve + koyu kenar)
-    d = np.sqrt(merk[:, 1] ** 2 + merk[:, 2] ** 2) / np.maximum(profil_r(merk[:, 0]), 1e-6)
+    if CILEK:
+        pz = np.maximum(profil_r(merk[:, 2]), 1e-6)
+        en = np.sqrt((merk[:, 0] / A) ** 2 + (merk[:, 1] / B) ** 2) / pz
+        d = np.maximum(en, np.abs(merk[:, 2] / R))
+    else:
+        d = np.sqrt(merk[:, 1] ** 2 + merk[:, 2] ** 2) / np.maximum(profil_r(merk[:, 0]), 1e-6)
     u = np.clip(d, 0, 1)[:, None]
     if CILEK:
         # Kesit rampasiyla ayni duraklar: beyaz oz, pembe et, kirmizi halka.
@@ -881,11 +887,13 @@ for fc in egriler(ad):
         kp.interpolation = "CONSTANT" if fc.data_path == "hide_render" else "BEZIER"
 
 # ---------------------------------------------------------------- kesit yuzu (kalan meyve)
-# disk elle kurulur (YZ duzleminde, yaricap tam 1): surumden bagimsiz olcu
+# Cilek kesiti YZ dikdortgeninde shader ile gercek profil sinirina kirpilir.
+# Avokado eski dairesel kesitini korur.
 _n = 96
-_vs = [(0.0, math.cos(2 * math.pi * i / _n), math.sin(2 * math.pi * i / _n)) for i in range(_n)]
+_vs = ([(0.0, -B, -R), (0.0, B, -R), (0.0, B, R), (0.0, -B, R)] if CILEK else
+       [(0.0, math.cos(2 * math.pi * i / _n), math.sin(2 * math.pi * i / _n)) for i in range(_n)])
 _me = bpy.data.meshes.new("kesit")
-_me.from_pydata(_vs, [], [list(range(_n))[::-1]])
+_me.from_pydata(_vs, [], [list(range(len(_vs)))[::-1]])
 _me.update()
 kesit = bpy.data.objects.new("kesit", _me)
 sc.collection.objects.link(kesit)
@@ -899,7 +907,22 @@ v_x = ntk_.nodes.new("ShaderNodeValue"); v_x.name = "kesit_x"; v_x.outputs[0].de
 dy = ay_.outputs[1]
 dz = matematik(ntk_, "SUBTRACT", ay_.outputs[2], None, deger_b=MERKEZ_Z)
 rad = matematik(ntk_, "SQRT", matematik(ntk_, "ADD", matematik(ntk_, "MULTIPLY", dy, dy), matematik(ntk_, "MULTIPLY", dz, dz)))
-u_ = matematik(ntk_, "DIVIDE", rad, v_r.outputs[0])
+if CILEK:
+    # plan.py: p(z) = s^.62 * (1-s)^.25 / FMAX.
+    s_ = matematik(ntk_, "MULTIPLY", dz, None, deger_b=0.5 / R)
+    s_ = matematik(ntk_, "ADD", s_, None, deger_b=0.5)
+    s_ = matematik(ntk_, "MINIMUM", matematik(ntk_, "MAXIMUM", s_, None, deger_b=0.0), None, deger_b=1.0)
+    p_ = matematik(ntk_, "MULTIPLY",
+                   matematik(ntk_, "POWER", s_, None, deger_b=0.62),
+                   matematik(ntk_, "POWER", matematik(ntk_, "SUBTRACT", None, s_, deger_a=1.0), None, deger_b=0.25))
+    p_ = matematik(ntk_, "DIVIDE", p_, None, deger_b=FMAX)
+    nx_ = matematik(ntk_, "DIVIDE", v_x.outputs[0], None, deger_b=A)
+    ny_ = matematik(ntk_, "DIVIDE", dy, None, deger_b=B)
+    en_ = matematik(ntk_, "SQRT", matematik(ntk_, "ADD", matematik(ntk_, "MULTIPLY", nx_, nx_), matematik(ntk_, "MULTIPLY", ny_, ny_)))
+    en_ = matematik(ntk_, "DIVIDE", en_, matematik(ntk_, "MAXIMUM", p_, None, deger_b=1e-6))
+    u_ = matematik(ntk_, "MAXIMUM", en_, matematik(ntk_, "ABSOLUTE", matematik(ntk_, "DIVIDE", dz, None, deger_b=R)))
+else:
+    u_ = matematik(ntk_, "DIVIDE", rad, v_r.outputs[0])
 et_r = ntk_.nodes.new("ShaderNodeValToRGB")
 et_r.color_ramp.elements[0].color = hex_renk("#fff1e5" if CILEK else "#f1e9b8")
 et_r.color_ramp.elements[1].position = 0.97
@@ -951,7 +974,7 @@ for tur in PLAN["turlar"]:
     kesit.hide_render = True
     kesit.keyframe_insert("hide_render", frame=kare(xk[-1][0] + 0.02))
     for t, konum in xk:
-        r_ = float(profil_r(np.array([konum]))[0]) * 0.995
+        r_ = 1.0 if CILEK else float(profil_r(np.array([konum]))[0]) * 0.995
         kesit.location = (konum + 0.002, 0, MERKEZ_Z)
         kesit.scale = (1, r_, r_)
         kesit.keyframe_insert("location", frame=kare(t))

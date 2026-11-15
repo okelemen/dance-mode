@@ -14,7 +14,7 @@ import numpy as np
 FPS = 30
 SURE = 60.0  # kullanici: 1 dakikalik video
 
-# Meyve sekli: x ekseni boyunca yatan donel govde. r(xn) = Rmax * f(xn)/fmax
+# Avokado x boyunca yatar; cilek kameraya donuk XZ duzleminde dik durur.
 MEYVELER = {
     "avokado": {
         "A": 1.15,      # yarim boy (x)
@@ -23,12 +23,13 @@ MEYVELER = {
         "cekirdek": {"x": 0.28, "r": 0.40},  # x: A'ya oranla merkez, r: R'ye oranla yaricap
     },
     "strawberry": {
-        # Nesne karti: kisa, dolgun, kalp siluetli cilek. Sol ucu yumusakca
-        # daralir; genis omuz sagdaki yesil canak ve kisa sapin altindadir.
+        # Nesne karti: kameraya donuk dik kalp silueti. Ust omuzlar genis,
+        # alt uc yumusak sivri; yesil canak/sap usttedir.
         # Kirmizi yuzeyde altin oval akenler ve sig cukurlar; kesitte kirmizi
         # dis halka -> pembe et -> beyaz oz vardir, iri cekirdek/oyuk yoktur.
-        "A": 0.98,
-        "R": 0.83,
+        "A": 0.91,  # yatay yari genislik
+        "B": 0.62,  # kameraya dogru derinlik
+        "R": 0.88,  # dikey yari yukseklik
         "profil": "strawberry",
     },
 }
@@ -57,8 +58,7 @@ def meyve_profil(xn, m):
     """Plan, Blender govdesi, kesit ve kup izgarasinin ortak dis profili."""
     if m.get("profil") == "strawberry":
         s = (np.clip(xn, -1.0, 1.0) + 1.0) / 2.0
-        wave = np.where((s <= 0.0) | (s >= 1.0), 0.0, np.sin(np.pi * s))
-        return np.maximum(0.0, wave) ** 0.58 * (0.84 + 0.16 * s)
+        return s ** 0.62 * (1.0 - s) ** 0.25
     return profil(xn, m["boyun"])
 
 
@@ -70,11 +70,17 @@ def meyve_fmax(m):
 
 def profil_yaricap(x, m, fm=None):
     fm = meyve_fmax(m) if fm is None else fm
+    if m.get("profil") == "strawberry":
+        # Dikey z boyunca yatay elipsin boyutsuz yari genisligi.
+        return meyve_profil(np.asarray(x) / m["R"], m) / fm
     return m["R"] * meyve_profil(np.asarray(x) / m["A"], m) / fm
 
 
 def icinde(x, y, z, m):
     """Meyvenin merkezine gore (x,y,z) noktasi govdenin icinde mi."""
+    if m.get("profil") == "strawberry":
+        p = profil_yaricap(z, m)
+        return (np.abs(z) <= m["R"]) & ((x / m["A"]) ** 2 + (y / m["B"]) ** 2 <= p * p)
     xn = x / m["A"]
     rr = profil_yaricap(x, m)
     return (np.abs(xn) <= 1.0) & (y * y + z * z <= rr * rr)
@@ -89,9 +95,9 @@ def eksen_bol(n):
 
 def kup_say(m, cx, cy, cz):
     """Kesimlerle olusan hucrelerden merkezi meyvenin icinde kalanlar = kup sayisi."""
-    A, R = m["A"], m["R"]
+    A, R, B = m["A"], m["R"], m.get("B", m["R"])
     xs = -A + (np.arange(cx + 1) + 0.5) * (2 * A / (cx + 1))
-    ys = -R + (np.arange(cy + 1) + 0.5) * (2 * R / (cy + 1))
+    ys = -B + (np.arange(cy + 1) + 0.5) * (2 * B / (cy + 1))
     zs = -R + (np.arange(cz + 1) + 0.5) * (2 * R / (cz + 1))
     say = 0
     Y, Z = np.meshgrid(ys, zs, indexing="ij")
@@ -102,9 +108,9 @@ def kup_say(m, cx, cy, cz):
 
 def dilim_say(m, cx, cy, cz):
     """x dilimi basina (soldan saga) kup sayisi; toplam = kup_say."""
-    A, R = m["A"], m["R"]
+    A, R, B = m["A"], m["R"], m.get("B", m["R"])
     xs = -A + (np.arange(cx + 1) + 0.5) * (2 * A / (cx + 1))
-    ys = -R + (np.arange(cy + 1) + 0.5) * (2 * R / (cy + 1))
+    ys = -B + (np.arange(cy + 1) + 0.5) * (2 * B / (cy + 1))
     zs = -R + (np.arange(cz + 1) + 0.5) * (2 * R / (cz + 1))
     Y, Z = np.meshgrid(ys, zs, indexing="ij")
     return np.array([int(icinde(np.full_like(Y, x), Y, Z, m).sum()) for x in xs])
@@ -130,9 +136,9 @@ def plan_kur(meyve):
                 tt = kes_bas + tc * CIZGI_PAY * (i / n_c) ** US
             else:
                 tt = kes_bas + tc * CIZGI_PAY + tc * (1 - CIZGI_PAY) * ((i - n_c) / cx) ** 0.85
-            yar = m["A"] if eks == "x" else m["R"]
+            yar = m["A"] if eks == "x" else (m.get("B", m["R"]) if eks == "y" else m["R"])
             if eks == "x":
-                konum = -yar + j * 2 * yar / (c + 1)  # soldan (dar uc) saga
+                konum = -yar + j * 2 * yar / (c + 1)  # soldan saga
             else:
                 konum = yar - j * 2 * yar / (c + 1)
             kesimler.append([round(tt, 4), eks, round(konum, 5), j])
