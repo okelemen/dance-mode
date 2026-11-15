@@ -139,8 +139,8 @@ def mat_fayans():
     br = nt.nodes.new("ShaderNodeTexBrick"); br.offset = 0.0
     br.inputs["Scale"].default_value = 0.25; br.inputs["Mortar Size"].default_value = 0.03
     br.inputs["Brick Width"].default_value = 1.0; br.inputs["Row Height"].default_value = 1.0
-    br.inputs["Color1"].default_value = (*lin(hex3("#ffc62e")), 1); br.inputs["Color2"].default_value = (*lin(hex3("#ff9a2a")), 1)
-    br.inputs["Mortar"].default_value = (*lin(hex3("#fff0cf")), 1)
+    br.inputs["Color1"].default_value = (*lin(hex3("#ffbe0a")), 1); br.inputs["Color2"].default_value = (*lin(hex3("#ff8a0a")), 1)   # 28 kapak olcumu: soluk -> doygun
+    br.inputs["Mortar"].default_value = (*lin(hex3("#ffe2a0")), 1)
     nt.links.new(cb.outputs[0], br.inputs["Vector"])
     nt.links.new(br.outputs["Color"], b.inputs["Base Color"])
     bp = nt.nodes.new("ShaderNodeBump"); bp.inputs["Strength"].default_value = 0.4; bp.invert = True
@@ -477,7 +477,7 @@ def makaron(konum, r, renk, ic="#fff4e0"):
 
 
 def serit_esyalari(rnd):
-    kutu("tahta", (0, (KAP["y"] + 0.4 - 4) / 2, 0.03), (PIST * 2, KAP["y"] + 4.4, 0.06), mat_tahta("tahta", "#f4a446", "#e48a34", 0.6), egim=0.02, seg=2)   # 28 onizleme 1: damar zebra gibi sertti -> yakin tonlar
+    kutu("tahta", (0, (KAP["y"] + 0.4 - 4) / 2, 0.03), (PIST * 2, KAP["y"] + 4.4, 0.06), mat_tahta("tahta", "#ff9418", "#f07808", 0.6), egim=0.02, seg=2)   # 28 onizleme 1: damar zebra gibi sertti -> yakin tonlar
     bay = {-1: MAVI, 1: PEMBE}
     for s in (-1, 1):                                            # pist kenarinda makaron siniri: solda mavi, sagda pembe (P1/P2 tarafi)
         y = -3.4
