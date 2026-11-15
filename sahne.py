@@ -15,6 +15,9 @@ import sys
 import bpy
 import numpy as np
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from plan import meyve_profil, profil_yaricap
+
 argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 
 
@@ -115,6 +118,41 @@ def matematik(nt, islem, a=None, b=None, deger_a=0.0, deger_b=0.0):
     return n.outputs[0]
 
 
+def cilek_aken(nt, vector, ana_renk, bsdf, dis_maske=None, temel_normal=None):
+    """Iri oval altin aken, koyu sig cukur ve ona eslik eden fiziksel bump."""
+    esne = nt.nodes.new("ShaderNodeVectorMath")
+    esne.operation = "MULTIPLY"
+    esne.inputs[1].default_value = (0.72, 1.0, 1.18)
+    baglan(nt, vector, esne.inputs[0])
+    vor = nt.nodes.new("ShaderNodeTexVoronoi")
+    vor.inputs["Scale"].default_value = 13.5
+    baglan(nt, esne.outputs["Vector"], vor.inputs["Vector"])
+    cukur = matematik(nt, "LESS_THAN", vor.outputs["Distance"], None, deger_b=0.27)
+    aken = matematik(nt, "LESS_THAN", vor.outputs["Distance"], None, deger_b=0.17)
+    if dis_maske is not None:
+        cukur = matematik(nt, "MULTIPLY", cukur, dis_maske)
+        aken = matematik(nt, "MULTIPLY", aken, dis_maske)
+    oyuk_rengi = nt.nodes.new("ShaderNodeMix"); oyuk_rengi.data_type = "RGBA"
+    baglan(nt, cukur, oyuk_rengi.inputs["Factor"])
+    baglan(nt, ana_renk, oyuk_rengi.inputs[6])
+    oyuk_rengi.inputs[7].default_value = hex_renk("#862b28")
+    cekirdek_rengi = nt.nodes.new("ShaderNodeMix"); cekirdek_rengi.data_type = "RGBA"
+    baglan(nt, aken, cekirdek_rengi.inputs["Factor"])
+    baglan(nt, oyuk_rengi.outputs[2], cekirdek_rengi.inputs[6])
+    cekirdek_rengi.inputs[7].default_value = hex_renk("#f4ce80")
+    baglan(nt, cekirdek_rengi.outputs[2], bsdf.inputs["Base Color"])
+    yukseklik = matematik(nt, "SUBTRACT",
+                         matematik(nt, "MULTIPLY", aken, None, deger_b=0.28),
+                         matematik(nt, "MULTIPLY", cukur, None, deger_b=0.23))
+    pit_bump = nt.nodes.new("ShaderNodeBump")
+    pit_bump.inputs["Strength"].default_value = 0.48
+    pit_bump.inputs["Distance"].default_value = 0.025
+    baglan(nt, yukseklik, pit_bump.inputs["Height"])
+    if temel_normal is not None:
+        baglan(nt, temel_normal, pit_bump.inputs["Normal"])
+    baglan(nt, pit_bump.outputs["Normal"], bsdf.inputs["Normal"])
+
+
 # ---------------------------------------------------------------- mekan: mermer tezgah
 bpy.ops.mesh.primitive_plane_add(size=40, location=(0, 0, 0))
 zemin = bpy.context.object
@@ -196,13 +234,13 @@ tahta.data.materials.append(m)
 bpy.ops.mesh.primitive_uv_sphere_add(segments=96, ring_count=64, radius=1.0, location=(0, 0, MERKEZ_Z))
 meyve = bpy.context.object
 meyve.name = "meyve"
-# kure -> x boyunca donel profil (plan.py ile ayni formul)
+# Kure -> plan.py ile birebir ayni donel profil.
 for v in meyve.data.vertices:
     x, y, z = v.co
     xn = max(-1.0, min(1.0, x))
-    s = (xn + 1) / 2
-    f = (M["boyun"] + (1 - M["boyun"]) * s)
-    v.co = (x * A, y * R * f / FMAX, z * R * f / FMAX)
+    sphere_r = math.sqrt(max(0.0, 1.0 - xn * xn))
+    radial = float(meyve_profil(np.array([xn]), M)[0]) / max(sphere_r, 1e-6)
+    v.co = (x * A, y * R * radial / FMAX, z * R * radial / FMAX)
 bpy.ops.object.shade_smooth()
 
 m, nt, bsdf = malzeme("cilek_yuzey" if CILEK else "avokado_kabuk")
@@ -223,19 +261,7 @@ bmp = nt.nodes.new("ShaderNodeBump")
 bmp.inputs["Strength"].default_value = 0.08 if CILEK else 0.12
 bmp.inputs["Distance"].default_value = 0.01 if CILEK else 0.02
 baglan(nt, yukseklik, bmp.inputs["Height"])
-if CILEK:
-    # Kucuk sari akenler, kirmizi yuzeyin icine gomulu; Voronoi cepcikleri.
-    tohum = nt.nodes.new("ShaderNodeTexVoronoi")
-    tohum.inputs["Scale"].default_value = 23
-    baglan(nt, tk.outputs["Object"], tohum.inputs["Vector"])
-    nokta = matematik(nt, "LESS_THAN", tohum.outputs["Distance"], None, deger_b=0.115)
-    kirmizi = nt.nodes.new("ShaderNodeMix"); kirmizi.data_type = "RGBA"
-    baglan(nt, nokta, kirmizi.inputs["Factor"])
-    baglan(nt, kabuk_rmp.outputs["Color"], kirmizi.inputs[6])
-    kirmizi.inputs[7].default_value = hex_renk("#d8b76a")
-    kabuk_rengi = kirmizi.outputs[2]
-else:
-    kabuk_rengi = kabuk_rmp.outputs["Color"]
+kabuk_rengi = kabuk_rmp.outputs["Color"]
 
 # kesim cizgileri: her eksen icin n=c+1 ve yapilan kesim sayisi d (anahtar kareli Value dugumleri)
 ayir = nt.nodes.new("ShaderNodeSeparateXYZ")
@@ -267,9 +293,13 @@ kar.data_type = "RGBA"
 baglan(nt, cizgi_top, kar.inputs["Factor"])
 baglan(nt, kabuk_rengi, kar.inputs[6])
 kar.inputs[7].default_value = hex_renk("#f5bcc1" if CILEK else "#c3df86")
-baglan(nt, kar.outputs[2], bsdf.inputs["Base Color"])
-baglan(nt, bmp.outputs["Normal"], bsdf.inputs["Normal"])
-bsdf.inputs["Roughness"].default_value = 0.34 if CILEK else 0.26
+if CILEK:
+    cilek_aken(nt, tk.outputs["Object"], kar.outputs[2], bsdf,
+               temel_normal=bmp.outputs["Normal"])
+else:
+    baglan(nt, kar.outputs[2], bsdf.inputs["Base Color"])
+    baglan(nt, bmp.outputs["Normal"], bsdf.inputs["Normal"])
+bsdf.inputs["Roughness"].default_value = 0.42 if CILEK else 0.26
 kes_x = nt.nodes.new("ShaderNodeValue"); kes_x.name = "kes_x"; kes_x.outputs[0].default_value = -10.0
 kirp = matematik(nt, "LESS_THAN", ayir.outputs[0], kes_x.outputs[0])
 seffaf = nt.nodes.new("ShaderNodeBsdfTransparent")
@@ -284,17 +314,27 @@ meyve.data.materials.append(m)
 canak = None
 if CILEK:
     yaprak_m, _, yaprak_bsdf = malzeme("cilek_canak_yesili")
-    yaprak_bsdf.inputs["Base Color"].default_value = hex_renk("#397c32")
-    yaprak_bsdf.inputs["Roughness"].default_value = 0.55
+    yaprak_bsdf.inputs["Base Color"].default_value = hex_renk("#357c2b")
+    yaprak_bsdf.inputs["Roughness"].default_value = 0.62
+    def on_yuz(x, z):
+        rr = float(profil_yaricap(np.array([x]), M, FMAX)[0])
+        return -math.sqrt(max(0.0, rr * rr - z * z)) - 0.035
+
     vs, fs = [], []
-    for i in range(8):
-        aci = 2 * math.pi * i / 8
-        yy, zz = math.cos(aci), math.sin(aci)
+    # Yapraklar kameraya donuk -Y yuzeyine serilir; tac kenardan bakilan
+    # ince bir disk gibi gorunmez. Yuvarlak omuzun uzerinde yedi ayri sepaldir.
+    for i in range(-3, 4):
+        tip_z = i * 0.17
+        tip_x = A * (0.36 + 0.06 * abs(i))
+        mid_x = A * (0.58 + 0.04 * abs(i))
+        mid_z = tip_z * 0.57
+        base_x = A * 0.82
+        base_z = i * 0.025
         j = len(vs)
-        vs.extend([(A + 0.025, 0.035 * yy, 0.035 * zz),
-                   (A - 0.12, 0.53 * yy - 0.075 * zz, 0.53 * zz + 0.075 * yy),
-                   (A - 0.28, 0.73 * yy, 0.73 * zz),
-                   (A - 0.12, 0.53 * yy + 0.075 * zz, 0.53 * zz - 0.075 * yy)])
+        vs.extend([(base_x, on_yuz(base_x, base_z), base_z),
+                   (mid_x, on_yuz(mid_x, mid_z - 0.07), mid_z - 0.07),
+                   (tip_x, on_yuz(tip_x, tip_z), tip_z),
+                   (mid_x, on_yuz(mid_x, mid_z + 0.07), mid_z + 0.07)])
         fs.append((j, j + 1, j + 2, j + 3))
     yaprak_mesh = bpy.data.meshes.new("cilek_canak_mesh")
     yaprak_mesh.from_pydata(vs, [], fs)
@@ -305,11 +345,11 @@ if CILEK:
     canak.data.materials.append(yaprak_m)
     sap_m, _, sap_bsdf = malzeme("cilek_sap_yesili")
     sap_bsdf.inputs["Base Color"].default_value = hex_renk("#315b29")
-    bpy.ops.mesh.primitive_cylinder_add(vertices=12, radius=0.055, depth=0.20)
+    bpy.ops.mesh.primitive_cylinder_add(vertices=16, radius=0.052, depth=0.24)
     sap_cilek = bpy.context.object
     sap_cilek.name = "cilek_sap"
     sap_cilek.parent = meyve
-    sap_cilek.location = (A + 0.10, 0, 0)
+    sap_cilek.location = (A + 0.035, -0.23, 0)
     sap_cilek.rotation_euler = (0, math.pi / 2, 0)
     sap_cilek.data.materials.append(sap_m)
 
@@ -467,8 +507,7 @@ SN_KAYMA = 1.0 / FPS  # GN Scene Time saniyesi = kare / fps; kare(t) = t*fps + 1
 
 
 def profil_r(x):
-    xn = np.clip(x / A, -1, 1)
-    return R * np.sqrt(np.maximum(0, 1 - xn * xn)) * (M["boyun"] + (1 - M["boyun"]) * (xn + 1) / 2) / FMAX
+    return profil_yaricap(x, M, FMAX)
 
 
 def kup_nesnesi(tur, no):
@@ -499,12 +538,14 @@ def kup_nesnesi(tur, no):
     d = np.sqrt(merk[:, 1] ** 2 + merk[:, 2] ** 2) / np.maximum(profil_r(merk[:, 0]), 1e-6)
     u = np.clip(d, 0, 1)[:, None]
     if CILEK:
-        # Soluk ozden pembe ete, kenarda kirmizi halkaya gecis; iri cekirdek yok.
-        oz = np.array(hex_renk("#f7e8d9")[:3])
-        pembe = np.array(hex_renk("#f19298")[:3])
-        kirmizi = np.array(hex_renk("#ca2632")[:3])
-        renk = np.where(u < 0.48, oz * (1 - u / 0.48) + pembe * (u / 0.48),
-                        pembe * (1 - (u - 0.48) / 0.52) + kirmizi * ((u - 0.48) / 0.52))
+        # Kesit rampasiyla ayni duraklar: beyaz oz, pembe et, kirmizi halka.
+        oz = np.array(hex_renk("#fff1e5")[:3])
+        pembe = np.array(hex_renk("#f7a7ab")[:3])
+        kirmizi = np.array(hex_renk("#d52b36")[:3])
+        koyu = np.array(hex_renk("#a81722")[:3])
+        renk = np.where(u < 0.42, oz * (1 - u / 0.42) + pembe * (u / 0.42),
+                        np.where(u < 0.82, pembe * (1 - (u - 0.42) / 0.40) + kirmizi * ((u - 0.42) / 0.40),
+                                 kirmizi * (1 - (u - 0.82) / 0.18) + koyu * ((u - 0.82) / 0.18)))
     else:
         ck = M["cekirdek"]
         cek_r = ck["r"] * R
@@ -645,18 +686,9 @@ def kup_nesnesi(tur, no):
     baglan(ntk, a_r.outputs["Color"], karis.inputs[6])
     karis.inputs[7].default_value = hex_renk("#b71f29" if CILEK else "#21361a")
     if CILEK:
-        # Yalniz dis deri yuzlerindeki akenler; kesik et yuzleri soluk/kirmizi kalir.
+        # Sadece maskelenmis dis yuz; kesik et yuzunde aken bulunmaz.
         geometri = ntk.nodes.new("ShaderNodeNewGeometry")
-        aken = ntk.nodes.new("ShaderNodeTexVoronoi")
-        aken.inputs["Scale"].default_value = 23
-        baglan(ntk, geometri.outputs["Position"], aken.inputs["Vector"])
-        aken_maske = matematik(ntk, "MULTIPLY", bitv,
-                               matematik(ntk, "LESS_THAN", aken.outputs["Distance"], None, deger_b=0.115))
-        benek = ntk.nodes.new("ShaderNodeMix"); benek.data_type = "RGBA"
-        baglan(ntk, aken_maske, benek.inputs["Factor"])
-        baglan(ntk, karis.outputs[2], benek.inputs[6])
-        benek.inputs[7].default_value = hex_renk("#d8b76a")
-        baglan(ntk, benek.outputs[2], bk.inputs["Base Color"])
+        cilek_aken(ntk, geometri.outputs["Position"], karis.outputs[2], bk, dis_maske=bitv)
     else:
         baglan(ntk, karis.outputs[2], bk.inputs["Base Color"])
     bk.inputs["Roughness"].default_value = 0.5
@@ -869,11 +901,14 @@ dz = matematik(ntk_, "SUBTRACT", ay_.outputs[2], None, deger_b=MERKEZ_Z)
 rad = matematik(ntk_, "SQRT", matematik(ntk_, "ADD", matematik(ntk_, "MULTIPLY", dy, dy), matematik(ntk_, "MULTIPLY", dz, dz)))
 u_ = matematik(ntk_, "DIVIDE", rad, v_r.outputs[0])
 et_r = ntk_.nodes.new("ShaderNodeValToRGB")
-et_r.color_ramp.elements[0].color = hex_renk("#f7e8d9" if CILEK else "#f1e9b8")
+et_r.color_ramp.elements[0].color = hex_renk("#fff1e5" if CILEK else "#f1e9b8")
 et_r.color_ramp.elements[1].position = 0.97
-et_r.color_ramp.elements[1].color = hex_renk("#d1323a" if CILEK else "#a8cc5c")
-e_m = et_r.color_ramp.elements.new(0.6); e_m.color = hex_renk("#f19298" if CILEK else "#e3e08e")
-e_k = et_r.color_ramp.elements.new(0.985); e_k.color = hex_renk("#a81722" if CILEK else "#21361a")
+et_r.color_ramp.elements[1].color = hex_renk("#a81722" if CILEK else "#a8cc5c")
+e_m = et_r.color_ramp.elements.new(0.42 if CILEK else 0.6); e_m.color = hex_renk("#f7a7ab" if CILEK else "#e3e08e")
+if CILEK:
+    e_r = et_r.color_ramp.elements.new(0.82); e_r.color = hex_renk("#d52b36")
+else:
+    e_k = et_r.color_ramp.elements.new(0.985); e_k.color = hex_renk("#21361a")
 baglan(ntk_, u_, et_r.inputs["Fac"])
 if CILEK:
     baglan(ntk_, et_r.outputs["Color"], bk_.inputs["Base Color"])

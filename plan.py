@@ -23,9 +23,13 @@ MEYVELER = {
         "cekirdek": {"x": 0.28, "r": 0.40},  # x: A'ya oranla merkez, r: R'ye oranla yaricap
     },
     "strawberry": {
-        "A": 1.12,      # sivri uctan yesil tac ucuna yarim boy
-        "R": 0.76,      # tahtaya sigan en genis omuz yaricapi
-        "boyun": 0.16,  # sol sivri uc, sag genis omuz; tek buyuk cekirdek yok
+        # Nesne karti: kisa, dolgun, kalp siluetli cilek. Sol ucu yumusakca
+        # daralir; genis omuz sagdaki yesil canak ve kisa sapin altindadir.
+        # Kirmizi yuzeyde altin oval akenler ve sig cukurlar; kesitte kirmizi
+        # dis halka -> pembe et -> beyaz oz vardir, iri cekirdek/oyuk yoktur.
+        "A": 0.98,
+        "R": 0.83,
+        "profil": "strawberry",
     },
 }
 
@@ -49,11 +53,30 @@ def fmax(boyun):
     return float(profil(xs, boyun).max())
 
 
+def meyve_profil(xn, m):
+    """Plan, Blender govdesi, kesit ve kup izgarasinin ortak dis profili."""
+    if m.get("profil") == "strawberry":
+        s = (np.clip(xn, -1.0, 1.0) + 1.0) / 2.0
+        wave = np.where((s <= 0.0) | (s >= 1.0), 0.0, np.sin(np.pi * s))
+        return np.maximum(0.0, wave) ** 0.58 * (0.84 + 0.16 * s)
+    return profil(xn, m["boyun"])
+
+
+def meyve_fmax(m):
+    if m.get("profil") == "strawberry":
+        return float(meyve_profil(np.linspace(-1, 1, 20001), m).max())
+    return fmax(m["boyun"])
+
+
+def profil_yaricap(x, m, fm=None):
+    fm = meyve_fmax(m) if fm is None else fm
+    return m["R"] * meyve_profil(np.asarray(x) / m["A"], m) / fm
+
+
 def icinde(x, y, z, m):
     """Meyvenin merkezine gore (x,y,z) noktasi govdenin icinde mi."""
-    fm = fmax(m["boyun"])
     xn = x / m["A"]
-    rr = m["R"] * profil(xn, m["boyun"]) / fm
+    rr = profil_yaricap(x, m)
     return (np.abs(xn) <= 1.0) & (y * y + z * z <= rr * rr)
 
 
@@ -163,7 +186,7 @@ def plan_kur(meyve):
         t = son
     assert abs(t - SURE) < 1e-6, t
     return {"meyve": meyve, "fps": FPS, "sure": SURE, "kare": int(SURE * FPS), "sekil": m,
-            "fmax": fmax(m["boyun"]), "turlar": turlar}
+            "fmax": meyve_fmax(m), "turlar": turlar}
 
 
 if __name__ == "__main__":
