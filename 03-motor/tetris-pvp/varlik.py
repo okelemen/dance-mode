@@ -803,6 +803,8 @@ elif arg("--mod", "pvp") == "dag":          # 27. video (referanssiz, CO-OP, TAL
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-dag.py"), encoding="utf-8").read(), "varlik-dag.py", "exec"))
 elif arg("--mod", "pvp") == "mutfak":       # 28. video (referanssiz, CO-OP, TALIMATLAR §2b 5. mekan): dev mutfak tezgahi, tek serit, cilali 3D oyun gorunumu
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-mutfak.py"), encoding="utf-8").read(), "varlik-mutfak.py", "exec"))
+elif arg("--mod", "pvp") == "orman":        # 29. video (referanssiz, 1v1, TALIMATLAR §2b 6. mekan): orman tapinagi, cilali 3D oyun gorunumu
+    exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-orman.py"), encoding="utf-8").read(), "varlik-orman.py", "exec"))
 elif arg("--mod", "pvp") == "karakter":     # 24. video: yarisan karakterler + hakem maskot poz kareleri (mobil paket md. 2)
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "karakter.py"), encoding="utf-8").read(), "karakter.py", "exec"))
 elif arg("--mod", "pvp") == "cadi":
