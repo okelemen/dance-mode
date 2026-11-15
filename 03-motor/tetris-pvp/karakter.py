@@ -18,6 +18,7 @@ Cikti: karakter/<oyuncu>/<poz>-NN.png (KxK kare, saydam), yerlesim.json: karakte
   maskot: her grubun A ve B figurleri ayri poz (<grup>-A, <grup>-B), tekli kare (motor once A'yi sonra B'yi gosterir).
   yerlesim: karakter.<oyuncu> = {boy_px, zemin_px, w_px, h_px, poz: {grup: {"kalca": [[x,y] her kare]}}}.
   --kayakci 1: maskota bere (ponponlu) + atki (karli zirve hakemi).
+  --asci 1: maskota asci sapkasi (beyaz, kabarik) + kirmizi fular (28, dev mutfak hakemi).
 """
 import bmesh
 
@@ -209,6 +210,29 @@ if OYUNCU == "maskot" and arg("--kayakci", "0") == "1":     # 27 (karli zirve): 
     u_.data.transform(Matrix.Diagonal((0.05 * BOY, 0.2 * BOY, 0.025 * BOY, 1.0)))
     bv = u_.modifiers.new("egim", "BEVEL"); bv.width = 0.008 * BOY; bv.segments = 3
     EKIP.append((u_, "Neck", Matrix.Translation((0.05 * BOY, -0.1 * BOY, 0.08 * BOY))))
+
+
+if OYUNCU == "maskot" and arg("--asci", "0") == "1":        # 28 (dev mutfak): hakem maskot asci sapkasi (beyaz, kabarik tepe) + kirmizi fular
+    sap = mat_jole("asci_sapka", (0.97, 0.97, 1.0), emis=0.12, purluk=0.25)
+    fular = mat_jole("fular", lin(hex3("#ff2436")), emis=0.22, purluk=0.1)
+    Lh = ((arm.matrix_world @ kemik(arm, "Head").tail) - (arm.matrix_world @ kemik(arm, "Head").head)).length
+    rk = max(0.6 * Lh, 0.066 * BOY)
+    bpy.ops.mesh.primitive_cylinder_add(radius=rk * 0.98, depth=rk * 0.75, vertices=40)      # serit (bant)
+    c_ = bpy.context.active_object; bpy.ops.object.shade_smooth(); c_.data.materials.append(sap)
+    c_.data.transform(Matrix.Rotation(math.radians(-90), 4, "X"))
+    bv = c_.modifiers.new("egim", "BEVEL"); bv.width = 0.08 * rk; bv.segments = 3
+    EKIP.append((c_, "Head", Matrix.Translation((0, 0.62 * Lh + rk * 0.25, 0))))
+    for i in range(6):                                                                        # kabarik tepe: halka 5 top + ortada 1
+        a_ = i * 2 * math.pi / 5
+        rr = 0.0 if i == 5 else rk * 0.55
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=rk * (0.62 if i == 5 else 0.52), segments=24, ring_count=12)
+        t_ = bpy.context.active_object; bpy.ops.object.shade_smooth(); t_.data.materials.append(sap)
+        EKIP.append((t_, "Head", Matrix.Translation((math.cos(a_) * rr, 0.62 * Lh + rk * (0.95 if i < 5 else 1.15), math.sin(a_) * rr))))
+    ra = 0.085 * BOY
+    bpy.ops.mesh.primitive_torus_add(major_radius=ra, minor_radius=ra * 0.34, major_segments=40, minor_segments=12)
+    f_ = bpy.context.active_object; bpy.ops.object.shade_smooth(); f_.data.materials.append(fular)
+    f_.data.transform(Matrix.Rotation(math.radians(-90), 4, "X"))
+    EKIP.append((f_, "Neck", Matrix.Translation((0, 0.02 * BOY, 0))))
 
 
 def ekip_yerlestir():
