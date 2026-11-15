@@ -633,11 +633,11 @@ def kup_nesnesi(tur, no):
         slot_k = np.r_[slot_k, np.arange(k - n_s) + slot_k.max() + 1]
     slot_i, slot_j, slot_k = slot_i[:k], slot_j[:k], slot_k[:k]
     # esleme: kupler ve yuvalar x seridine, serit icinde y'ye, sonra yukseklige gore siralanir
-    B = max(1, int(np.sqrt(k) / 2))
+    serit_adedi = max(1, int(np.sqrt(k) / 2))
     def _sira(xv, yv, zv):
         o = np.argsort(xv, kind="stable")
         serit = np.empty(len(xv), np.int64)
-        serit[o] = (np.arange(len(xv)) * B) // len(xv)
+        serit[o] = (np.arange(len(xv)) * serit_adedi) // len(xv)
         return np.lexsort((zv, yv, serit))
     kup_sira = _sira(hx_, hy_, p0[:, 2])
     slot_sira = _sira(slot_i + rng.uniform(0, 1, k), slot_j + rng.uniform(0, 1, k), slot_k.astype(float))
