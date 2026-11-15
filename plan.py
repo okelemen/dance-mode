@@ -21,7 +21,12 @@ MEYVELER = {
         "R": 0.78,      # en genis yaricap
         "boyun": 0.55,  # dar uc / genis uc orani
         "cekirdek": {"x": 0.28, "r": 0.40},  # x: A'ya oranla merkez, r: R'ye oranla yaricap
-    }
+    },
+    "strawberry": {
+        "A": 1.12,      # sivri uctan yesil tac ucuna yarim boy
+        "R": 0.76,      # tahtaya sigan en genis omuz yaricapi
+        "boyun": 0.16,  # sol sivri uc, sag genis omuz; tek buyuk cekirdek yok
+    },
 }
 
 # Turlar: (kesim sayisi, kesim suresi sn). Acilis 0.4 sn + sonuc 1.3 sn eklenir -> toplam 60 sn
