@@ -32,6 +32,14 @@ MEYVELER = {
         "R": 0.88,  # dikey yari yukseklik
         "profil": "strawberry",
     },
+    "watermelon": {
+        # Nesne karti: tahtaya yatmis, iki ucu yuvarlak kisa elipsoid;
+        # koyu/acik yesil boyuna serit, kalin beyaz-yesil ara kabuk,
+        # kirmizi sulu et ve yalniz et icinde seyrek yassi koyu cekirdek.
+        "A": 1.14,
+        "R": 0.72,
+        "boyun": 1.0,
+    },
 }
 
 # Turlar: (kesim sayisi, kesim suresi sn). Acilis 0.4 sn + sonuc 1.3 sn eklenir -> toplam 60 sn
