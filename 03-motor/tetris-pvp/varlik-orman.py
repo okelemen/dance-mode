@@ -17,7 +17,7 @@ import random
 YERLESIM.clear()
 KAPAK = YALNIZ == "kapak"
 POZLAMA = float(arg("--pozlama", arg("--kapak-pozlama", "0")))
-GUNES = float(arg("--gunes", "3.6"))
+GUNES = float(arg("--gunes", "4.0"))   # 15 Kas: kapak 1 soluk/koyu (doygunluk 0,485 < 0,504, parlaklik 0,666)
 ON_EK = "kapak-" if KAPAK else ""
 KAP = {"y": 8.0, "w": 3.4, "h": 3.7, "kalin": 0.55}
 KAM = {"z": 2.3, "egim": 5.0, "lens": 18.0, "sensor": 24.0}
@@ -213,10 +213,10 @@ def M(ad, f):
 
 def orman(serit_modu, rnd):
     _MAT.clear()
-    cim = mat_pbr("cim", "#3ccf3e", 0.55, kaplama=0.2, bump=(18, 0.25))
+    cim = mat_pbr("cim", "#2fe03a", 0.55, kaplama=0.2, bump=(18, 0.25))
     duz("zemin_yakin", -80, 80, -4, GECIS, 0, cim)
     duz("zemin_uzak", -300, 300, GECIS, 400, 0, cim)
-    yol = mat_dosek("tas_yol", "#e8a85a", "#f2c46e")
+    yol = mat_dosek("tas_yol", "#ffa43a", "#ffc252", harc="#c8702c")
     duz("tas_yol_uzak", -2.6, 2.6, GECIS, TAPINAK_Y - 2, 0.006, yol)      # tapinaga uzanan tas yol (iki serit birlesir)
     tapinak((0, TAPINAK_Y, 0))
     selale((-26, 62, 0), rnd)
@@ -251,7 +251,7 @@ def orman(serit_modu, rnd):
 def tapinak(konum):
     """basamakli tas tapinak: 5 kat, on yuzde genis merdiven, tepede sutunlu kucuk oda + oyuncu renklerinde bayrak; sarmasik sarkar"""
     x, y, z = konum
-    tas = mat_tas("tapinak", "#e09a52", "#f0b866", yosun_oran=0.28, olcek=0.25)
+    tas = mat_tas("tapinak", "#ff9a38", "#ffb94e", yosun_oran=0.28, olcek=0.25)
     koyu = mat_tas("tapinak_k", "#b8723a", "#cc8646", yosun_oran=0.2, olcek=0.3)
     katlar = 5; h = 2.6; W0, D0 = 34.0, 20.0
     for i in range(katlar):
@@ -301,7 +301,7 @@ def sarmasik(ust, boy, rnd):
 def sutun(taban, boy, rnd, devrik=False):
     """sarmasikli tas sutun: tombul govde + bilezik bantlari + baslik; bazen devrilmis (yatik, yarim)"""
     x, y, z = taban
-    tas = M("sutun", lambda: mat_tas("sutun", "#e6a35a", "#f3c27a", yosun_oran=0.32, olcek=0.9))
+    tas = M("sutun", lambda: mat_tas("sutun", "#ff9e3a", "#ffbe55", yosun_oran=0.32, olcek=0.9))
     koyu = M("sutun_k", lambda: mat_tas("sutun_k", "#bd773c", "#d08e4c", yosun_oran=0.2, olcek=0.9))
     if devrik:
         o = boru((x - 1.6, y, 0.55), (x + 1.8, y + 0.6, 0.55), 0.55, tas)
@@ -457,9 +457,9 @@ def gok_ogeleri(rnd):
 # ------------------------------------------------------------------ SERIT: oyuncu tas yolu + tas sinir + oyuncu renginde fener + OUT camuru + kapi
 def serit_esyalari(oyuncu, R, rnd):
     s_dis = -1 if oyuncu == "p1" else 1
-    yol = mat_dosek("serit_yol", "#e8a85a", "#f2c46e")
+    yol = mat_dosek("serit_yol", "#ffa43a", "#ffc252", harc="#c8702c")
     duz("serit_yol", -1.6, 1.6, -4, GECIS, 0.006, yol)
-    sinir = mat_tas("sinir", "#c98444", "#dc9a52", yosun_oran=0.35, olcek=2.0)
+    sinir = mat_tas("sinir", "#f08a30", "#ffa640", yosun_oran=0.35, olcek=2.0)
     for x in (-1.75, 1.75):                                                # serit siniri: alcak tas bordur + oyuncu renginde cicekler
         yuvarlak_kutu("bordur", (x, (KAP["y"] - 4) / 2 - 0.3, 0.12), (0.32, KAP["y"] + 3.4, 0.26), sinir, egim=0.08, seg=2)
         y = -3.4; i = 0
@@ -511,7 +511,7 @@ def kapi(R):
     """tas kemer kapi: iki tombul oymali tas sutun + kemer kirisi, oyuncu renginde boyali oyma bantlar, sarmasik, ampul dizisi,
     ustte sonuk LED tabela (motor PLAYER n yazar)"""
     Y, W_, H_, K = KAP["y"], KAP["w"], KAP["h"], KAP["kalin"]
-    tas = mat_tas("kapi_tas", "#e6a35a", "#f3c27a", yosun_oran=0.22, olcek=1.4)
+    tas = mat_tas("kapi_tas", "#ff9e3a", "#ffbe55", yosun_oran=0.22, olcek=1.4)
     boya = mat_pbr("kapi_boya", R["ana"], 0.25, kaplama=0.9)
     xk = W_ / 2 + K / 2
     for s in (-1, 1):
