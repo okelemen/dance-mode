@@ -263,6 +263,11 @@ function maskotCiz(x, y, s, t, alfa = 1, yuzSadece = false) {
   cx.rotate(-0.3); cx.beginPath();
   for (let q = 0; q <= 10; q++) { const a = -Math.PI / 2 + q * Math.PI / 5, rr = q % 2 ? 6 : 14; q ? cx.lineTo(Math.cos(a) * rr, Math.sin(a) * rr) : cx.moveTo(Math.cos(a) * rr, Math.sin(a) * rr); }
   cx.closePath(); cx.fillStyle = '#ffd23a'; cx.fill(); cx.lineWidth = 3; cx.stroke(); cx.restore();
+  cx.save(); cx.fillStyle = '#ffffff'; cx.strokeStyle = KN; cx.lineWidth = 4;   // motor 25: asci sapkasi (hakem asci)
+  for (const [px_, py_, pr_] of [[-30, -100, 22], [30, -100, 22], [0, -112, 27]]) { cx.beginPath(); cx.arc(px_, py_, pr_, 0, 6.283); cx.fill(); cx.stroke(); }
+  cx.beginPath(); cx.roundRect(-40, -92, 80, 30, 8); cx.fill(); cx.stroke();
+  cx.strokeStyle = 'rgba(90,31,134,0.35)'; cx.lineWidth = 3; for (const lx of [-14, 14]) { cx.beginPath(); cx.moveTo(lx, -90); cx.lineTo(lx, -64); cx.stroke(); }
+  cx.restore();
   cx.save(); cx.translate(0, -58);                              // basta cicek (seri tanirligi)
   for (let i = 0; i < 5; i++) { cx.save(); cx.rotate(i * 1.2566 + t * 0.6); cx.fillStyle = '#ffffff'; cx.beginPath(); cx.ellipse(0, -11, 7, 11, 0, 0, 6.283); cx.fill(); cx.lineWidth = 2.5; cx.stroke(); cx.restore(); }
   cx.fillStyle = '#ffd94a'; cx.beginPath(); cx.arc(0, 0, 6, 0, 6.283); cx.fill(); cx.restore();
@@ -442,7 +447,7 @@ function duvarCiz(d, u, t) {
   }
   if (u < a) kepenk(0, K, acik, t);
   if (kar > 0) {                                             // kapi kararir: duvar gecti
-    cx.save(); cx.globalAlpha = kar * 0.88; cx.fillStyle = '#0a0618'; cx.fillRect(K.x, K.y, K.w, K.h); cx.restore();
+    cx.save(); cx.globalAlpha = kar * (T && u >= c ? 0.3 : 0.88); cx.fillStyle = '#0a0618'; cx.fillRect(K.x, K.y, K.w, K.h); cx.restore();
   }
   karakterCiz(d, u, t);
   if (T && u >= c) freezeCiz(u - c, T, t);                    // motor 25: FREEZE ROUND tut evresi

@@ -74,6 +74,18 @@ def ruzgar(sure=2.0):
     return (g * lfo * zarf * 1.4).astype(np.float64)
 
 
+def jole(sure=0.9):
+    """28 (dev mutfak): joleye dusus - islak 'blop' (220->90 Hz, 11 Hz titresimli jole sallanmasi) + kisa islak sap (bant gecirgen gurultu)"""
+    t = np.arange(int(sure * SR)) / SR
+    f = (220 * np.exp(-t * 6) + 90) * (1 + 0.12 * np.sin(2 * np.pi * 11 * t) * np.exp(-t * 3))
+    blop = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 4.5) * (0.7 + 0.3 * np.sin(2 * np.pi * 11 * t))
+    g = np.random.default_rng(19).standard_normal(len(t))
+    k1 = np.exp(-np.arange(int(0.002 * SR)) / (0.0005 * SR)); g1 = np.convolve(g, k1 / k1.sum(), "same")
+    k2 = np.exp(-np.arange(int(0.008 * SR)) / (0.002 * SR)); g2 = np.convolve(g, k2 / k2.sum(), "same")
+    sap = (g1 - g2) * np.exp(-t * 18) * np.minimum(1, t / 0.003)
+    return ((blop * 0.9 + sap * 1.8) * 0.5).astype(np.float64)
+
+
 def main():
     bolum, cikti = sys.argv[1:3]
     B = json.load(open(bolum, encoding="utf-8"))
@@ -130,7 +142,10 @@ def main():
         if out:                                                          # 24: OUT - karakter suya duser (sicrama) + alcak uyari
             yerlestir(ef, vuus(0.5, False, 1.0), c - Z["buyu"] * 0.25)
             yerlestir(ef, zap(0.35), c - Z["buyu"] * 0.2, 0.6)
-            if "--kar" in sys.argv:                                       # 27: kar yiginina gomulur -> gumleme + toz kar + hakem duduk
+            if "--jole" in sys.argv:                                      # 28: dev jole kasesine duser -> islak blop + hakem duduk
+                yerlestir(ef, jole(), c - 0.03, 1.0)
+                yerlestir(ef, duduk(), c + 0.35, 0.7)
+            elif "--kar" in sys.argv:                                       # 27: kar yiginina gomulur -> gumleme + toz kar + hakem duduk
                 yerlestir(ef, kar(), c - 0.03, 1.0)
                 yerlestir(ef, duduk(), c + 0.3, 0.7)
             elif "--kum" in sys.argv:                                       # 26: kuma yuvarlanir -> gumleme + kum + cankurtaran duduk

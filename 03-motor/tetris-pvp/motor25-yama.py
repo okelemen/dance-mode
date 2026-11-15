@@ -123,5 +123,17 @@ r("""  yaziK('FREEZE!', W / 2, H * 0.165, 118 * k * p, ['#ffffff', '#bff0ff', '#
 r("  yaziK('HOLD IT! ' + Math.max(1, Math.ceil(T * (1 - q))), W / 2, by + bh + 36 * k,",
   "  yaziK('HOLD IT! ' + Math.max(1, Math.ceil(T * (1 - q))), fx, by + bh + 40 * k,")
 
+# ---- kontak 1: FREEZE tut evresinde kapi kapkara bos delik gibi duruyordu -> tut sirasinda kararma hafif
+r("    cx.save(); cx.globalAlpha = kar * 0.88; cx.fillStyle = '#0a0618'; cx.fillRect(K.x, K.y, K.w, K.h); cx.restore();",
+  "    cx.save(); cx.globalAlpha = kar * (T && u >= c ? 0.3 : 0.88); cx.fillStyle = '#0a0618'; cx.fillRect(K.x, K.y, K.w, K.h); cx.restore();")
+# ---- kontak 1: 3B asci sapkasi 2B yuzun altinda kaliyordu -> 2B asci sapkasi (bant + uc kabarik top), cicek bantta
+r("""  cx.save(); cx.translate(0, -58);                              // basta cicek (seri tanirligi)""",
+  """  cx.save(); cx.fillStyle = '#ffffff'; cx.strokeStyle = KN; cx.lineWidth = 4;   // motor 25: asci sapkasi (hakem asci)
+  for (const [px_, py_, pr_] of [[-30, -100, 22], [30, -100, 22], [0, -112, 27]]) { cx.beginPath(); cx.arc(px_, py_, pr_, 0, 6.283); cx.fill(); cx.stroke(); }
+  cx.beginPath(); cx.roundRect(-40, -92, 80, 30, 8); cx.fill(); cx.stroke();
+  cx.strokeStyle = 'rgba(90,31,134,0.35)'; cx.lineWidth = 3; for (const lx of [-14, 14]) { cx.beginPath(); cx.moveTo(lx, -90); cx.lineTo(lx, -64); cx.stroke(); }
+  cx.restore();
+  cx.save(); cx.translate(0, -58);                              // basta cicek (seri tanirligi)""")
+
 open(os.path.join(BURA, "..", "sahne25.html"), "w", encoding="utf-8").write(t)
 print("-> sahne25.html", len(t))
