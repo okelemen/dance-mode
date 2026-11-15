@@ -468,7 +468,7 @@ def mutfak(serit_modu, rnd):
 
 
 # ------------------------------------------------------------------ SERIT: kesme tahtasi pist + makaron sinir + oklar + OUT jole kaseleri
-def makaron(konum, r, renk, ic="#fff4e0"):
+def makaron(konum, r, renk, ic="#ffe04a"):   # 28 kapak olcumu: krem dolgu soluk -> sari
     x, y, z = konum
     kab = mat_pbr("mak" + renk, renk, 0.4, kaplama=0.4, bump=(30, 0.15))
     for dz in (0.0, 0.62 * r):
@@ -494,8 +494,8 @@ def serit_esyalari(rnd):
             o.modifiers.new("k", "SOLIDIFY").thickness = 0.02
     # OUT ani: iki dis tarafta dev jole kasesi (karakterler buraya duser) - sol mavi jole, sag pembe jole
     for s in (-1, 1):
-        silindir((s * 5.6, 5.0, 0), 1.0, 1.0, mat_pbr("kase" + str(s), "#ffffff", 0.1, kaplama=1.0), v=48, r2=1.65, bevel=0.1)
-        simit((s * 5.6, 5.0, 1.0), 1.65, 0.1, mat_pbr("kase_k" + str(s), "#ffcc1e", 0.15, kaplama=1.0))
+        silindir((s * 5.6, 5.0, 0), 1.0, 1.0, mat_pbr("kase" + str(s), "#ffcc1e" if s < 0 else "#20d6d0", 0.1, kaplama=1.0), v=48, r2=1.65, bevel=0.1)
+        simit((s * 5.6, 5.0, 1.0), 1.65, 0.1, mat_pbr("kase_k" + str(s), "#ff3b4e", 0.15, kaplama=1.0))
         j = kure((s * 5.6, 5.0, 1.0), 1.55, mat_jele("jole" + str(s), MAVI if s < 0 else PEMBE), sub=4); j.scale = (1.0, 1.0, 0.5)
         kure((s * 5.6, 5.0, 1.82), 0.22, mat_pbr("j_kiraz" + str(s), "#e8102a", 0.12, kaplama=1.0))
     # dis tarafta kucuk yiyecekler (dev olcekte bile yakin plan dolu)
