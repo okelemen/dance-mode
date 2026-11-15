@@ -477,7 +477,7 @@ def makaron(konum, r, renk, ic="#fff4e0"):
 
 
 def serit_esyalari(rnd):
-    kutu("tahta", (0, (KAP["y"] + 0.4 - 4) / 2, 0.03), (PIST * 2, KAP["y"] + 4.4, 0.06), mat_tahta(), egim=0.02, seg=2)
+    kutu("tahta", (0, (KAP["y"] + 0.4 - 4) / 2, 0.03), (PIST * 2, KAP["y"] + 4.4, 0.06), mat_tahta("tahta", "#f4a446", "#e48a34", 0.6), egim=0.02, seg=2)   # 28 onizleme 1: damar zebra gibi sertti -> yakin tonlar
     bay = {-1: MAVI, 1: PEMBE}
     for s in (-1, 1):                                            # pist kenarinda makaron siniri: solda mavi, sagda pembe (P1/P2 tarafi)
         y = -3.4
