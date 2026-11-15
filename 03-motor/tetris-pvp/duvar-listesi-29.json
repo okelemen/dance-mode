@@ -1,0 +1,122 @@
+[
+ {
+  "tur": 1,
+  "p1": "raven-one-up-stand",
+  "p2": "raven-stork-hands-hips"
+ },
+ {
+  "tur": 1,
+  "p1": "hero-seat-arms-up",
+  "p2": "elbow-to-knee"
+ },
+ {
+  "tur": 1,
+  "p1": "side-bend-leg-out",
+  "p2": "knee-out-steeple"
+ },
+ {
+  "tur": 1,
+  "p1": "quad-stretch-reach",
+  "p2": "black-cat-flex-reach-horse"
+ },
+ {
+  "tur": 1,
+  "p1": "crescent-moon-bend",
+  "p2": "zombie-knee-raise-arms-forward"
+ },
+ {
+  "tur": 1,
+  "p1": "horse-stance",
+  "p2": "lean-left-reach"
+ },
+ {
+  "tur": 2,
+  "p1": "owl-t-cactus-horse",
+  "p2": "werewolf-head-t-horse"
+ },
+ {
+  "tur": 2,
+  "p1": "half-kneel-lean",
+  "p2": "flexed-arms-wide"
+ },
+ {
+  "tur": 2,
+  "p1": "spell-kneel-up-cactus",
+  "p2": "skandasana-prayer"
+ },
+ {
+  "tur": 2,
+  "p1": "banshee-head-t-leg-out-lean-r",
+  "p2": "knee-in-twist"
+ },
+ {
+  "tur": 2,
+  "p1": "balance-t-knee",
+  "p2": "goblin-kneel-cactus"
+ },
+ {
+  "tur": 2,
+  "p1": "coffin-lunge-archer",
+  "p2": "side-lean-squat"
+ },
+ {
+  "tur": 3,
+  "p1": "broom-cactus-tree",
+  "p2": "knee-lift-v"
+ },
+ {
+  "tur": 3,
+  "p1": "goddess-side-bend",
+  "p2": "broom-stork-arms-back"
+ },
+ {
+  "tur": 3,
+  "p1": "w-arms",
+  "p2": "werewolf-hip-hook-horse"
+ },
+ {
+  "tur": 3,
+  "p1": "scarecrow-diag-hip-tree-lean-r",
+  "p2": "werewolf-v-t-stand"
+ },
+ {
+  "tur": 3,
+  "p1": "crescent-prayer",
+  "p2": "bat-t-salute-leg-out"
+ },
+ {
+  "tur": 3,
+  "p1": "goblin-t-v-horse",
+  "p2": "seated-side-stretch"
+ },
+ {
+  "tur": 4,
+  "p1": "kneeling-lunge-arms-up",
+  "p2": "squat-elbows-down"
+ },
+ {
+  "tur": 4,
+  "p1": "raven-half-kneel-side-cactus-up45",
+  "p2": "goblin-kneel-arms-forward"
+ },
+ {
+  "tur": 4,
+  "p1": "skeleton-low-squat-hip-up45",
+  "p2": "sage-twist"
+ },
+ {
+  "tur": 4,
+  "p1": "zombie-cobra",
+  "p2": "seated-wide-twist-reach"
+ },
+ {
+  "tur": 4,
+  "p1": "forearm-side-plank",
+  "p2": "head-to-knee"
+ },
+ {
+  "tur": 4,
+  "p1": "side-split-prep",
+  "p2": "plank-knee-to-elbow"
+ }
+]
