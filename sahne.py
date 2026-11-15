@@ -590,13 +590,7 @@ def kup_nesnesi(tur, no):
     k = len(merk)
     rng = np.random.default_rng(7 + no)
     hx, hy, hz = A / gx, B / gy, R / gz
-    # dis yuz maskesi: bit 0:+X 1:-X 2:+Y 3:-Y 4:+Z 5:-Z (komsu hucre disarida ise kabuk)
-    p = np.pad(ic, 1)
-    maske = np.zeros(k)
-    for bit, (dx, dy, dz) in enumerate([(1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1)]):
-        dis = ~p[idx[:, 0] + 1 + dx, idx[:, 1] + 1 + dy, idx[:, 2] + 1 + dz]
-        maske += dis * (2 ** bit)
-    # et/cekirdek rengi (REF-080: ic krem, kabuga yakin acik yesil, cekirdek kahve + koyu kenar)
+    # Et/cekirdek rengi ve gercek dis kabuk maskesi ayni kaynak hucre konumundan gelir.
     if CILEK:
         pz = np.maximum(profil_r(merk[:, 2]), 1e-6)
         en = np.sqrt((merk[:, 0] / A) ** 2 + (merk[:, 1] / B) ** 2) / pz
@@ -604,12 +598,26 @@ def kup_nesnesi(tur, no):
     else:
         d = np.sqrt(merk[:, 1] ** 2 + merk[:, 2] ** 2) / np.maximum(profil_r(merk[:, 0]), 1e-6)
     u = np.clip(d, 0, 1)[:, None]
+    # bit 0:+X 1:-X 2:+Y 3:-Y 4:+Z 5:-Z.
+    # Karpuzda kaba izgaranin eksik komsusu tek basina kabuk kaniti degildir:
+    # hucre gercek dis halka yakininda veya fiziksel ucta olmalidir.
+    p = np.pad(ic, 1)
+    maske = np.zeros(k)
+    for bit, (dx, dy, dz) in enumerate([(1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1)]):
+        dis = ~p[idx[:, 0] + 1 + dx, idx[:, 1] + 1 + dy, idx[:, 2] + 1 + dz]
+        if KARPUZ:
+            uc = (dx > 0) & (idx[:, 0] == gx - 1) | (dx < 0) & (idx[:, 0] == 0)
+            dis &= (u[:, 0] >= 0.82) | uc
+        maske += dis * (2 ** bit)
     if KARPUZ:
         # Ayni radyal duraklar asagidaki kesit shader'indaki rampayla eslesir.
         durak = np.array([0.0, 0.72, 0.78, 0.81, 0.90, 0.965, 0.985, 1.0])
         ton = np.array([hex_renk(h)[:3] for h in
             ("#e84244", "#d92730", "#ee7773", "#f8efdc", "#ebedd5", "#a2c891", "#1d4a2d", "#143c27")])
-        renk = np.column_stack([np.interp(u[:, 0], durak, ton[:, c]) for c in range(3)])
+        # Iri hucrede merkezdeki rind ornegi tum kupu beyaza boyamasin;
+        # hucrenin icerideki kirmizi et payini olcuyle hesaba kat.
+        ic_renk_u = np.maximum(0.0, u[:, 0] - np.minimum(0.10, 0.5 * max(hy, hz) / R))
+        renk = np.column_stack([np.interp(ic_renk_u, durak, ton[:, c]) for c in range(3)])
     elif CILEK:
         # Kesit rampasiyla ayni duraklar: beyaz oz, pembe et, kirmizi halka.
         oz = np.array(hex_renk("#fff1e5")[:3])
@@ -630,20 +638,6 @@ def kup_nesnesi(tur, no):
         renk[cd <= cek_r] = np.array(hex_renk("#b98a52")[:3])
         renk[(cd <= cek_r) & (cd > cek_r * 0.86)] = np.array(hex_renk("#4a2412")[:3])
     renk *= rng.uniform(0.96 if KARPUZ else 0.93, 1.04 if KARPUZ else 1.05, (k, 1))
-    if KARPUZ:
-        theta = np.arctan2(merk[:, 2], merk[:, 1])
-        faz = 9 * theta + 0.35 * np.sin(6 * merk[:, 0] + 2 * theta) + 0.15 * np.sin(13 * merk[:, 0] - 3 * theta)
-        acik = np.sin(faz) > 0.05
-        kabuk = np.where(acik[:, None], np.array(hex_renk("#6c9c49")[:3]),
-                         np.array(hex_renk("#143c27")[:3]))
-        tohum = np.zeros(k, dtype=np.float32)
-        for sx, sy, sz in KARPUZ_CEKIRDEKLER:
-            # Gercek cekirdek hacmi hucreyle kesismiyorsa o parca cekirdeksizdir.
-            dx = np.maximum(np.abs(merk[:, 0] - sx) - hx, 0) / 0.075
-            dy = np.maximum(np.abs(merk[:, 1] - sy) - hy, 0) / 0.065
-            dz = np.maximum(np.abs(merk[:, 2] - sz) - hz, 0) / 0.11
-            tohum = np.maximum(tohum, (dx * dx + dy * dy + dz * dz < 1.0).astype(np.float32))
-
     # birakilma ani: x kesimi hucrenin sag kenarini gectiginde (soldan saga)
     xk = [(k_[4], k_[2]) for k_ in tur["kesimler"] if k_[1] == "x"]
     T = np.array([t for t, _ in xk])
@@ -745,10 +739,8 @@ def kup_nesnesi(tur, no):
     at_ = me.attributes.new("renk", "FLOAT_COLOR", "POINT")
     at_.data.foreach_set("color", np.hstack([renk, np.ones((k, 1))]).ravel().astype(np.float32))
     if KARPUZ:
-        at_ = me.attributes.new("kabuk", "FLOAT_COLOR", "POINT")
-        at_.data.foreach_set("color", np.hstack([kabuk, np.ones((k, 1))]).ravel().astype(np.float32))
-        at_ = me.attributes.new("tohum", "FLOAT", "POINT")
-        at_.data.foreach_set("value", tohum)
+        at_ = me.attributes.new("kaynak", "FLOAT_VECTOR", "POINT")
+        at_.data.foreach_set("vector", merk.ravel().astype(np.float32))
     ob = bpy.data.objects.new(f"kup_{no}", me)
     sc.collection.objects.link(ob)
     try:
@@ -760,9 +752,6 @@ def kup_nesnesi(tur, no):
     mk, ntk, bk = malzeme(f"kup_m_{no}")
     a_r = ntk.nodes.new("ShaderNodeAttribute"); a_r.attribute_type = "INSTANCER"; a_r.attribute_name = "renk"
     a_m = ntk.nodes.new("ShaderNodeAttribute"); a_m.attribute_type = "INSTANCER"; a_m.attribute_name = "maske"
-    if KARPUZ:
-        a_k = ntk.nodes.new("ShaderNodeAttribute"); a_k.attribute_type = "INSTANCER"; a_k.attribute_name = "kabuk"
-        a_t = ntk.nodes.new("ShaderNodeAttribute"); a_t.attribute_type = "INSTANCER"; a_t.attribute_name = "tohum"
     tkk = ntk.nodes.new("ShaderNodeTexCoord")
     ay = ntk.nodes.new("ShaderNodeSeparateXYZ")
     baglan(ntk, tkk.outputs["Normal"], ay.inputs[0])
@@ -778,33 +767,61 @@ def kup_nesnesi(tur, no):
     karis.data_type = "RGBA"
     baglan(ntk, bitv, karis.inputs["Factor"])
     baglan(ntk, a_r.outputs["Color"], karis.inputs[6])
-    if KARPUZ:
-        baglan(ntk, a_k.outputs["Color"], karis.inputs[7])
-    else:
-        karis.inputs[7].default_value = hex_renk("#b71f29" if CILEK else "#21361a")
+    karis.inputs[7].default_value = hex_renk("#b71f29" if CILEK else "#21361a")
     if CILEK:
         # Sadece maskelenmis dis yuz; kesik et yuzunde aken bulunmaz.
         geometri = ntk.nodes.new("ShaderNodeNewGeometry")
         cilek_aken(ntk, geometri.outputs["Position"], karis.outputs[2], bk, dis_maske=bitv)
     elif KARPUZ:
-        # Tohum yalniz gercek cekirdek hucresinin kesik X yuzunde oval olarak gorunur.
+        # Generated kubun yerel 0..1 koordinati, kaynak merkez ve hucre boyutu
+        # ile kesilmeden onceki tam 3B konuma geri cevrilir. Rind renkleri
+        # boylece ilk turun iri kuplerinde bile tek renkli etiket olmaz.
+        kaynak = ntk.nodes.new("ShaderNodeAttribute")
+        kaynak.attribute_type = "INSTANCER"; kaynak.attribute_name = "kaynak"
         uv = ntk.nodes.new("ShaderNodeSeparateXYZ")
         baglan(ntk, tkk.outputs["Generated"], uv.inputs[0])
-        yy = matematik(ntk, "SUBTRACT", uv.outputs[1], None, deger_b=0.5)
-        zz = matematik(ntk, "SUBTRACT", uv.outputs[2], None, deger_b=0.5)
-        oval = matematik(ntk, "LESS_THAN", matematik(ntk, "ADD",
-            matematik(ntk, "MULTIPLY", matematik(ntk, "DIVIDE", yy, None, deger_b=0.18),
-                                      matematik(ntk, "DIVIDE", yy, None, deger_b=0.18)),
-            matematik(ntk, "MULTIPLY", matematik(ntk, "DIVIDE", zz, None, deger_b=0.29),
-                                      matematik(ntk, "DIVIDE", zz, None, deger_b=0.29))), None, deger_b=1.0)
+        src = ntk.nodes.new("ShaderNodeSeparateXYZ")
+        baglan(ntk, kaynak.outputs["Vector"], src.inputs[0])
+        def konum(eks, yarim):
+            ofset = matematik(ntk, "MULTIPLY", matematik(ntk, "SUBTRACT", uv.outputs[eks], None, deger_b=0.5),
+                             None, deger_b=2 * yarim * 0.94)
+            return matematik(ntk, "ADD", src.outputs[eks], ofset)
+        ox, oy, oz = konum(0, hx), konum(1, hy), konum(2, hz)
+        rr_ = matematik(ntk, "MULTIPLY", matematik(ntk, "SQRT",
+            matematik(ntk, "MAXIMUM", matematik(ntk, "SUBTRACT", None,
+                matematik(ntk, "MULTIPLY", matematik(ntk, "DIVIDE", ox, None, deger_b=A),
+                                          matematik(ntk, "DIVIDE", ox, None, deger_b=A)), deger_a=1.0),
+                None, deger_b=1e-8)), None, deger_b=R)
+        radyal = matematik(ntk, "SQRT", matematik(ntk, "ADD",
+            matematik(ntk, "MULTIPLY", oy, oy), matematik(ntk, "MULTIPLY", oz, oz)))
+        u_src = matematik(ntk, "DIVIDE", radyal, rr_)
+        ramp = ntk.nodes.new("ShaderNodeValToRGB")
+        ramp.color_ramp.elements[0].color = hex_renk("#e84244")
+        ramp.color_ramp.elements[1].position = 1.0
+        ramp.color_ramp.elements[1].color = hex_renk("#143c27")
+        for pos, renk_ in ((0.72, "#d92730"), (0.78, "#ee7773"), (0.81, "#f8efdc"),
+                           (0.90, "#ebedd5"), (0.965, "#a2c891"), (0.985, "#1d4a2d")):
+            el = ramp.color_ramp.elements.new(pos); el.color = hex_renk(renk_)
+        baglan(ntk, u_src, ramp.inputs["Fac"])
+        kaynak_vec = ntk.nodes.new("ShaderNodeCombineXYZ")
+        for i, val in enumerate((ox, oy, oz)):
+            baglan(ntk, val, kaynak_vec.inputs[i])
+        serit_renk = karpuz_serit(ntk, kaynak_vec.outputs[0])
+        deri = matematik(ntk, "MULTIPLY", bitv,
+            matematik(ntk, "GREATER_THAN", u_src, None, deger_b=0.985))
+        rind = ntk.nodes.new("ShaderNodeMix"); rind.data_type = "RGBA"
+        baglan(ntk, deri, rind.inputs["Factor"])
+        baglan(ntk, ramp.outputs["Color"], rind.inputs[6])
+        baglan(ntk, serit_renk, rind.inputs[7])
+        # Ayni sekiz sonlu tohum hacmi; yalniz kirmizi et ve X kesim yuzleri.
         x_yuzu = matematik(ntk, "GREATER_THAN", matematik(ntk, "ABSOLUTE", nx), None, deger_b=0.5)
-        et_tohum = matematik(ntk, "MULTIPLY", a_t.outputs["Fac"],
-            matematik(ntk, "MULTIPLY", oval,
-                matematik(ntk, "MULTIPLY", x_yuzu,
-                    matematik(ntk, "SUBTRACT", None, bitv, deger_a=1.0))))
+        et_tohum = matematik(ntk, "MULTIPLY", karpuz_cekirdek_maske(ntk, ox, oy,
+            matematik(ntk, "ADD", oz, None, deger_b=MERKEZ_Z)),
+            matematik(ntk, "MULTIPLY", x_yuzu,
+                matematik(ntk, "LESS_THAN", u_src, None, deger_b=0.72)))
         cek = ntk.nodes.new("ShaderNodeMix"); cek.data_type = "RGBA"
         baglan(ntk, et_tohum, cek.inputs["Factor"])
-        baglan(ntk, karis.outputs[2], cek.inputs[6])
+        baglan(ntk, rind.outputs[2], cek.inputs[6])
         cek.inputs[7].default_value = hex_renk("#261b18")
         baglan(ntk, cek.outputs[2], bk.inputs["Base Color"])
     else:
@@ -1016,14 +1033,23 @@ _me.update()
 kesit = bpy.data.objects.new("kesit", _me)
 sc.collection.objects.link(kesit)
 kesit.location = (0, 0, MERKEZ_Z)
+if KARPUZ:
+    # Tam karsidan kamerada YZ kesiti kenar gorunurdu. Acik yuzun okunmasi
+    # icin yalniz gosterim diski kameraya cevrilir; kesim/hucre plani X kalir.
+    kesit.rotation_euler = (0, 0, math.radians(55))
 mk_, ntk_, bk_ = malzeme("kesit_m")
 gp = ntk_.nodes.new("ShaderNodeNewGeometry")
 ay_ = ntk_.nodes.new("ShaderNodeSeparateXYZ")
-baglan(ntk_, gp.outputs["Position"], ay_.inputs[0])
+if KARPUZ:
+    kesit_koordinat = ntk_.nodes.new("ShaderNodeTexCoord")
+    baglan(ntk_, kesit_koordinat.outputs["Object"], ay_.inputs[0])
+else:
+    baglan(ntk_, gp.outputs["Position"], ay_.inputs[0])
 v_r = ntk_.nodes.new("ShaderNodeValue"); v_r.name = "kesit_r"; v_r.outputs[0].default_value = 1.0
 v_x = ntk_.nodes.new("ShaderNodeValue"); v_x.name = "kesit_x"; v_x.outputs[0].default_value = 0.0
-dy = ay_.outputs[1]
-dz = matematik(ntk_, "SUBTRACT", ay_.outputs[2], None, deger_b=MERKEZ_Z)
+dy = matematik(ntk_, "MULTIPLY", ay_.outputs[1], v_r.outputs[0]) if KARPUZ else ay_.outputs[1]
+dz = (matematik(ntk_, "MULTIPLY", ay_.outputs[2], v_r.outputs[0]) if KARPUZ else
+      matematik(ntk_, "SUBTRACT", ay_.outputs[2], None, deger_b=MERKEZ_Z))
 rad = matematik(ntk_, "SQRT", matematik(ntk_, "ADD", matematik(ntk_, "MULTIPLY", dy, dy), matematik(ntk_, "MULTIPLY", dz, dz)))
 if CILEK:
     # plan.py: p(z) = s^.62 * (1-s)^.25 / FMAX.
@@ -1062,7 +1088,8 @@ baglan(ntk_, u_, et_r.inputs["Fac"])
 if CILEK:
     baglan(ntk_, et_r.outputs["Color"], bk_.inputs["Base Color"])
 elif KARPUZ:
-    tohum_maske = karpuz_cekirdek_maske(ntk_, v_x.outputs[0], dy, ay_.outputs[2])
+    tohum_maske = karpuz_cekirdek_maske(ntk_, v_x.outputs[0], dy,
+        matematik(ntk_, "ADD", dz, None, deger_b=MERKEZ_Z))
     # Koyu cekirdek yalniz kirmizi et araliginda.
     tohum_maske = matematik(ntk_, "MULTIPLY", tohum_maske,
         matematik(ntk_, "LESS_THAN", u_, None, deger_b=0.72))
@@ -1111,7 +1138,7 @@ for tur in PLAN["turlar"]:
     kesit.keyframe_insert("hide_render", frame=kare(xk[-1][0] + 0.02))
     for t, konum in xk:
         r_ = 1.0 if CILEK else float(profil_r(np.array([konum]))[0]) * 0.995
-        kesit.location = (konum + 0.002, 0, MERKEZ_Z)
+        kesit.location = (konum + 0.002, -0.08 if KARPUZ else 0, MERKEZ_Z)
         kesit.scale = (1, r_, r_)
         kesit.keyframe_insert("location", frame=kare(t))
         kesit.keyframe_insert("scale", frame=kare(t))
