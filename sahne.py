@@ -184,7 +184,7 @@ def kivi_ic_renk(nt, x, y, z, yaricap, tohum_kapisi=None):
         el = et.color_ramp.elements.new(pos); el.color = hex_renk(renk)
     baglan(nt, u, et.inputs["Fac"])
     aci = matematik(nt, "ARCTAN2", z, y)
-    faz = matematik(nt, "ADD", matematik(nt, "MULTIPLY", aci, None, deger_b=48.0),
+    faz = matematik(nt, "ADD", matematik(nt, "MULTIPLY", aci, None, deger_b=40.0),
                     matematik(nt, "MULTIPLY", x, None, deger_b=2.0))
     dalga = matematik(nt, "COSINE", faz)
     isin = matematik(nt, "MULTIPLY", matematik(nt, "GREATER_THAN", dalga, None, deger_b=0.93),
@@ -194,15 +194,15 @@ def kivi_ic_renk(nt, x, y, z, yaricap, tohum_kapisi=None):
     baglan(nt, matematik(nt, "MULTIPLY", isin, None, deger_b=0.62), isikli.inputs["Factor"])
     baglan(nt, et.outputs["Color"], isikli.inputs[6])
     isikli.inputs[7].default_value = hex_renk("#e1ecab")
-    tohum = matematik(nt, "MULTIPLY", matematik(nt, "GREATER_THAN", dalga, None, deger_b=0.90),
-        matematik(nt, "MULTIPLY", matematik(nt, "GREATER_THAN", u, None, deger_b=0.39),
-                    matematik(nt, "LESS_THAN", u, None, deger_b=0.49)))
+    tohum = matematik(nt, "MULTIPLY", matematik(nt, "GREATER_THAN", dalga, None, deger_b=0.45),
+        matematik(nt, "MULTIPLY", matematik(nt, "GREATER_THAN", u, None, deger_b=0.38),
+                    matematik(nt, "LESS_THAN", u, None, deger_b=0.53)))
     if tohum_kapisi is not None:
         tohum = matematik(nt, "MULTIPLY", tohum, tohum_kapisi)
     benek = nt.nodes.new("ShaderNodeMix"); benek.data_type = "RGBA"
     baglan(nt, tohum, benek.inputs["Factor"])
     baglan(nt, isikli.outputs[2], benek.inputs[6])
-    benek.inputs[7].default_value = hex_renk("#1b2016")
+    benek.inputs[7].default_value = hex_renk("#10150d")
     return benek.outputs[2], u
 
 
@@ -703,11 +703,11 @@ def kup_nesnesi(tur, no):
              "#8fc75c", "#d5d8a1", "#8a6747", "#5e422d")])
         renk = np.column_stack([np.interp(u[:, 0], durak, ton[:, c]) for c in range(3)])
         theta = np.arctan2(merk[:, 2], merk[:, 1])
-        dalga = np.cos(48 * theta + 2 * merk[:, 0])
+        dalga = np.cos(40 * theta + 2 * merk[:, 0])
         isin = (dalga > 0.93) & (u[:, 0] > 0.30) & (u[:, 0] < 0.88)
         renk[isin] = 0.38 * renk[isin] + 0.62 * np.array(hex_renk("#e1ecab")[:3])
-        tohum = (dalga > 0.90) & (u[:, 0] > 0.39) & (u[:, 0] < 0.49)
-        renk[tohum] = np.array(hex_renk("#1b2016")[:3])
+        tohum = (dalga > 0.45) & (u[:, 0] > 0.38) & (u[:, 0] < 0.53)
+        renk[tohum] = np.array(hex_renk("#10150d")[:3])
     elif KARPUZ:
         # Ayni radyal duraklar asagidaki kesit shader'indaki rampayla eslesir.
         durak = np.array([0.0, 0.72, 0.78, 0.81, 0.90, 0.965, 0.985, 1.0])
@@ -1184,7 +1184,7 @@ kesit.location = (0, 0, MERKEZ_Z)
 if KARPUZ or KIVI:
     # Tam karsidan kamerada YZ kesiti kenar gorunurdu. Acik yuzun okunmasi
     # icin yalniz gosterim diski kameraya cevrilir; kesim/hucre plani X kalir.
-    kesit.rotation_euler = (0, 0, math.radians(55))
+    kesit.rotation_euler = (0, 0, math.radians(80 if KIVI else 55))
 mk_, ntk_, bk_ = malzeme("kesit_m")
 gp = ntk_.nodes.new("ShaderNodeNewGeometry")
 ay_ = ntk_.nodes.new("ShaderNodeSeparateXYZ")
@@ -1289,7 +1289,8 @@ for tur in PLAN["turlar"]:
     kesit.keyframe_insert("hide_render", frame=kare(xk[-1][0] + 0.02))
     for t, konum in xk:
         r_ = 1.0 if CILEK else float(profil_r(np.array([konum]))[0]) * 0.995
-        kesit.location = (konum + 0.002, -0.08 if (KARPUZ or KIVI) else 0, MERKEZ_Z)
+        kesit.location = ((konum + 0.16 * r_) if KIVI else konum + 0.002,
+                          -1.15 * R if KIVI else (-0.08 if KARPUZ else 0), MERKEZ_Z)
         kesit.scale = (1, r_, r_)
         kesit.keyframe_insert("location", frame=kare(t))
         kesit.keyframe_insert("scale", frame=kare(t))
