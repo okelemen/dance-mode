@@ -41,7 +41,13 @@ if IKILI:
         f = "gruplar-%s.json" % d["video"]
         if f not in _onbellek:
             _onbellek[f] = json.load(open(os.path.join(KOK, "03-motor/tetris-pvp", f), encoding="utf-8"))["gruplar"]
-        GRUP[d["grup"]] = _onbellek[f][d["grup"]]
+        if d["grup"] not in _onbellek[f]:                     # 28: havuz maskesi videonun aday dosyasindan gelebilir (gruplar-18-aday.json)
+            fa = f.replace(".json", "-aday.json")
+            if fa not in _onbellek and os.path.exists(os.path.join(KOK, "03-motor/tetris-pvp", fa)):
+                _onbellek[fa] = json.load(open(os.path.join(KOK, "03-motor/tetris-pvp", fa), encoding="utf-8"))["gruplar"]
+            GRUP[d["grup"]] = _onbellek[fa][d["grup"]]
+        else:
+            GRUP[d["grup"]] = _onbellek[f][d["grup"]]
         assert len(GRUP[d["grup"]]["figurler"]) == 2, d["grup"]
     if OYUNCU == "maskot":
         for g_, G in GRUP.items():

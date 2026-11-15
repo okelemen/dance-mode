@@ -1,0 +1,661 @@
+{
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-28",
+ "bpm": 132.0,
+ "toplam_olcu": 109,
+ "toplam_duvar": 24,
+ "kartlar": [
+  {
+   "t": 0.0,
+   "sure": 3.6364,
+   "tip": "acilis",
+   "soru": true
+  },
+  {
+   "t": 44.5455,
+   "sure": 1.8182,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "02",
+   "alt": "ROUND 2",
+   "ek": null,
+   "boss": false
+  },
+  {
+   "t": 87.2727,
+   "sure": 1.8182,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "03",
+   "alt": "FREEZE ROUND",
+   "ek": "HOLD YOUR POSE!",
+   "boss": false
+  },
+  {
+   "t": 138.1818,
+   "sure": 1.8182,
+   "tip": "tur",
+   "tur": 4,
+   "metin": "04",
+   "alt": "FINAL ROUND",
+   "ek": null,
+   "boss": false
+  },
+  {
+   "t": 174.0909,
+   "sure": 1.8182,
+   "tip": "tur",
+   "tur": 4,
+   "metin": "!",
+   "alt": "BOSS WALL",
+   "ek": "CLEAR IT TOGETHER",
+   "boss": true
+  },
+  {
+   "t": 187.2727,
+   "sure": 3.6364,
+   "tip": "sonuc",
+   "skor": 21,
+   "toplam": 24,
+   "rutbe": "SILVER"
+  },
+  {
+   "t": 190.9091,
+   "sure": 3.6364,
+   "tip": "rutbe"
+  },
+  {
+   "t": 194.5455,
+   "sure": 3.6364,
+   "tip": "abone"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 3.6364,
+   "z": {
+    "kart": 0.9091,
+    "say": 3.6364,
+    "buyu": 1.3636,
+    "gec": 0.9091,
+    "sure": 6.8182
+   },
+   "grup": "duo-outer-arm-up-hand-link",
+   "video": "18",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": 1,
+   "ovgu": "PERFECT!",
+   "boss": false,
+   "freeze": false,
+   "nasil": true
+  },
+  {
+   "no": 2,
+   "tur": 1,
+   "t0": 10.4545,
+   "z": {
+    "kart": 0.9091,
+    "say": 3.6364,
+    "buyu": 1.3636,
+    "gec": 0.9091,
+    "sure": 6.8182
+   },
+   "grup": "duo-peak-lean-palms-overhead",
+   "video": "13",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": 2,
+   "ovgu": "NICE!",
+   "boss": false,
+   "freeze": false,
+   "nasil": true
+  },
+  {
+   "no": 3,
+   "tur": 1,
+   "t0": 17.2727,
+   "z": {
+    "kart": 0.9091,
+    "say": 3.6364,
+    "buyu": 1.3636,
+    "gec": 0.9091,
+    "sure": 6.8182
+   },
+   "grup": "duo-outer-side-lunge-inner-palms-up",
+   "video": "18",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": 3,
+   "ovgu": "GREAT!",
+   "boss": false,
+   "freeze": false,
+   "nasil": false
+  },
+  {
+   "no": 4,
+   "tur": 1,
+   "t0": 24.0909,
+   "z": {
+    "kart": 0.9091,
+    "say": 3.6364,
+    "buyu": 1.3636,
+    "gec": 0.9091,
+    "sure": 6.8182
+   },
+   "grup": "duo-twin-wide-v-low-link",
+   "video": "18",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": 4,
+   "ovgu": "AMAZING!",
+   "boss": false,
+   "freeze": false,
+   "nasil": false
+  },
+  {
+   "no": 5,
+   "tur": 1,
+   "t0": 30.9091,
+   "z": {
+    "kart": 0.9091,
+    "say": 3.6364,
+    "buyu": 1.3636,
+    "gec": 0.9091,
+    "sure": 6.8182
+   },
+   "grup": "duo-wide-side-stretch-low-link",
+   "video": "15",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": 5,
+   "ovgu": "SUPER!",
+   "boss": false,
+   "freeze": false,
+   "nasil": false
+  },
+  {
+   "no": 6,
+   "tur": 1,
+   "t0": 37.7273,
+   "z": {
+    "kart": 0.9091,
+    "say": 3.6364,
+    "buyu": 1.3636,
+    "gec": 0.9091,
+    "sure": 6.8182
+   },
+   "grup": "duo-roof-hands-wide-stance",
+   "video": "18",
+   "out": {
+    "p1": false,
+    "p2": true
+   },
+   "skor": 5,
+   "ovgu": "WOW!",
+   "boss": false,
+   "freeze": false,
+   "nasil": false
+  },
+  {
+   "no": 7,
+   "tur": 2,
+   "t0": 46.3636,
+   "z": {
+    "kart": 0.9091,
+    "say": 3.6364,
+    "buyu": 1.3636,
+    "gec": 0.9091,
+    "sure": 6.8182
+   },
+   "grup": "duo-deep-squat-hand-link",
+   "video": "11",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": 6,
+   "ovgu": "PERFECT!",
+   "boss": false,
+   "freeze": false,
+   "nasil": false
+  },
+  {
+   "no": 8,
+   "tur": 2,
+   "t0": 53.1818,
+   "z": {
+    "kart": 0.9091,
+    "say": 3.6364,
+    "buyu": 1.3636,
+    "gec": 0.9091,
+    "sure": 6.8182
+   },
+   "grup": "duo-stork-side-reach",
+   "video": "15",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": 7,
+   "ovgu": "NICE!",
+   "boss": false,
+   "freeze": false,
+   "nasil": false
+  },
+  {
+   "no": 9,
+   "tur": 2,
+   "t0": 60.0,
+   "z": {
+    "kart": 0.9091,
+    "say": 3.6364,
+    "buyu": 1.3636,
+    "gec": 0.9091,
+    "sure": 6.8182
+   },
+   "grup": "duo-star-outer-low-link",
+   "video": "18",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": 8,
+   "ovgu": "GREAT!",
+   "boss": false,
+   "freeze": false,
+   "nasil": false
+  },
+  {
+   "no": 10,
+   "tur": 2,
+   "t0": 66.8182,
+   "z": {
+    "kart": 0.9091,
+    "say": 3.6364,
+    "buyu": 1.3636,
+    "gec": 0.9091,
+    "sure": 6.8182
+   },
+   "grup": "duo-kneeling-lunge-hand-link",
+   "video": "11",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": 9,
+   "ovgu": "AMAZING!",
+   "boss": false,
+   "freeze": false,
+   "nasil": false
+  },
+  {
+   "no": 11,
+   "tur": 2,
+   "t0": 73.6364,
+   "z": {
+    "kart": 0.9091,
+    "say": 3.6364,
+    "buyu": 1.3636,
+    "gec": 0.9091,
+    "sure": 6.8182
+   },
+   "grup": "duo-heel-lift-side-arch",
+   "video": "15",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": 10,
+   "ovgu": "SUPER!",
+   "boss": false,
+   "freeze": false,
+   "nasil": false
+  },
+  {
+   "no": 12,
+   "tur": 2,
+   "t0": 80.4545,
+   "z": {
+    "kart": 0.9091,
+    "say": 3.6364,
+    "buyu": 1.3636,
+    "gec": 0.9091,
+    "sure": 6.8182
+   },
+   "grup": "duo-standing-quad-stretch-hand-link",
+   "video": "11",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": 11,
+   "ovgu": "WOW!",
+   "boss": false,
+   "freeze": false,
+   "nasil": false
+  },
+  {
+   "no": 13,
+   "tur": 3,
+   "t0": 89.0909,
+   "z": {
+    "kart": 0.9091,
+    "say": 3.1818,
+    "buyu": 1.3636,
+    "tut": 2.7273,
+    "gec": 0.0,
+    "sure": 8.1818
+   },
+   "grup": "duo-frame-arms-cactus-link",
+   "video": "18",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": 12,
+   "ovgu": "PERFECT!",
+   "boss": false,
+   "freeze": true,
+   "nasil": false
+  },
+  {
+   "no": 14,
+   "tur": 3,
+   "t0": 97.2727,
+   "z": {
+    "kart": 0.9091,
+    "say": 3.1818,
+    "buyu": 1.3636,
+    "tut": 2.7273,
+    "gec": 0.0,
+    "sure": 8.1818
+   },
+   "grup": "duo-shoulder-hug-hip-hand",
+   "video": "18",
+   "out": {
+    "p1": true,
+    "p2": false
+   },
+   "skor": 12,
+   "ovgu": "NICE!",
+   "boss": false,
+   "freeze": true,
+   "nasil": false
+  },
+  {
+   "no": 15,
+   "tur": 3,
+   "t0": 105.4545,
+   "z": {
+    "kart": 0.9091,
+    "say": 3.1818,
+    "buyu": 1.3636,
+    "tut": 2.7273,
+    "gec": 0.0,
+    "sure": 8.1818
+   },
+   "grup": "duo-side-bend-arc-outer-arm-up",
+   "video": "13",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": 13,
+   "ovgu": "GREAT!",
+   "boss": false,
+   "freeze": true,
+   "nasil": false
+  },
+  {
+   "no": 16,
+   "tur": 3,
+   "t0": 113.6364,
+   "z": {
+    "kart": 0.9091,
+    "say": 3.1818,
+    "buyu": 1.3636,
+    "tut": 2.7273,
+    "gec": 0.0,
+    "sure": 8.1818
+   },
+   "grup": "duo-back-to-back-side-lunge",
+   "video": "18",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": 14,
+   "ovgu": "AMAZING!",
+   "boss": false,
+   "freeze": true,
+   "nasil": false
+  },
+  {
+   "no": 17,
+   "tur": 3,
+   "t0": 121.8182,
+   "z": {
+    "kart": 0.9091,
+    "say": 3.1818,
+    "buyu": 1.3636,
+    "tut": 2.7273,
+    "gec": 0.0,
+    "sure": 8.1818
+   },
+   "grup": "duo-back-to-back-wall-sit",
+   "video": "18",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": 15,
+   "ovgu": "SUPER!",
+   "boss": false,
+   "freeze": true,
+   "nasil": false
+  },
+  {
+   "no": 18,
+   "tur": 3,
+   "t0": 130.0,
+   "z": {
+    "kart": 0.9091,
+    "say": 3.1818,
+    "buyu": 1.3636,
+    "tut": 2.7273,
+    "gec": 0.0,
+    "sure": 8.1818
+   },
+   "grup": "duo-back-to-back-half-kneel-arms-up",
+   "video": "18",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": 16,
+   "ovgu": "WOW!",
+   "boss": false,
+   "freeze": true,
+   "nasil": false
+  },
+  {
+   "no": 19,
+   "tur": 4,
+   "t0": 140.0,
+   "z": {
+    "kart": 0.9091,
+    "say": 3.6364,
+    "buyu": 1.3636,
+    "gec": 0.9091,
+    "sure": 6.8182
+   },
+   "grup": "duo-half-kneel-forward-reach",
+   "video": "15",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": 17,
+   "ovgu": "PERFECT!",
+   "boss": false,
+   "freeze": false,
+   "nasil": false
+  },
+  {
+   "no": 20,
+   "tur": 4,
+   "t0": 146.8182,
+   "z": {
+    "kart": 0.9091,
+    "say": 3.6364,
+    "buyu": 1.3636,
+    "gec": 0.9091,
+    "sure": 6.8182
+   },
+   "grup": "duo-wide-lunge-hand-down-arm-up",
+   "video": "15",
+   "out": {
+    "p1": false,
+    "p2": true
+   },
+   "skor": 17,
+   "ovgu": "NICE!",
+   "boss": false,
+   "freeze": false,
+   "nasil": false
+  },
+  {
+   "no": 21,
+   "tur": 4,
+   "t0": 153.6364,
+   "z": {
+    "kart": 0.9091,
+    "say": 3.6364,
+    "buyu": 1.3636,
+    "gec": 0.9091,
+    "sure": 6.8182
+   },
+   "grup": "duo-back-to-back-arms-t",
+   "video": "18",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": 18,
+   "ovgu": "GREAT!",
+   "boss": false,
+   "freeze": false,
+   "nasil": false
+  },
+  {
+   "no": 22,
+   "tur": 4,
+   "t0": 160.4545,
+   "z": {
+    "kart": 0.9091,
+    "say": 3.6364,
+    "buyu": 1.3636,
+    "gec": 0.9091,
+    "sure": 6.8182
+   },
+   "grup": "duo-reverse-warrior-low-link",
+   "video": "15",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": 19,
+   "ovgu": "AMAZING!",
+   "boss": false,
+   "freeze": false,
+   "nasil": false
+  },
+  {
+   "no": 23,
+   "tur": 4,
+   "t0": 167.2727,
+   "z": {
+    "kart": 0.9091,
+    "say": 3.6364,
+    "buyu": 1.3636,
+    "gec": 0.9091,
+    "sure": 6.8182
+   },
+   "grup": "duo-deep-side-lunge-arch-link",
+   "video": "15",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": 20,
+   "ovgu": "SUPER!",
+   "boss": false,
+   "freeze": false,
+   "nasil": false
+  },
+  {
+   "no": 24,
+   "tur": 4,
+   "t0": 175.9091,
+   "z": {
+    "kart": 0.9091,
+    "say": 5.4545,
+    "buyu": 2.2727,
+    "gec": 2.7273,
+    "sure": 11.3636
+   },
+   "grup": "duo-heart-lunge-outer-t",
+   "video": "18",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": 21,
+   "ovgu": "WOW!",
+   "boss": true,
+   "freeze": false,
+   "nasil": false
+  }
+ ],
+ "abone": [
+  8.0,
+  23.0,
+  38.0,
+  53.2,
+  68.2,
+  85.9,
+  102.3,
+  118.7,
+  140.3,
+  155.3
+ ],
+ "abone_sure": 3.2,
+ "muzik": "Mirrorball Showdown.wav (Suno, kullanici, 24 Eki 2026; HUMAN TETRIS 8de de) -> 01-muzik/human-tetris-28/mirror-132.wav (130->133 kayiyordu, 132 BPM sabit, sapma 0,34)",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur-28.py. Motor 03-motor/sahne25.html (CO-OP, FREEZE). Referanssiz (kullanici 15 Kas 2026).",
+ "tema": {
+  "varlik": "/03-motor/tetris-pvp/varlik-28s3/tetris-varlik/",
+  "karakter": "/03-motor/tetris-pvp/varlik-28-karakter/",
+  "maskeVarlik": "/03-motor/tetris-pvp/varlik-28-grup/",
+  "maskeKlasor": "",
+  "turAd": {
+   "1": "ROUND 1",
+   "2": "ROUND 2",
+   "3": "FREEZE ROUND",
+   "4": "FINAL ROUND"
+  },
+  "aboneAlt": "NEW BATTLE EVERY DAY"
+ }
+}
