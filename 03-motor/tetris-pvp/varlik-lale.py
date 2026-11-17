@@ -46,9 +46,9 @@ def lale_sahnesi(w, h, saydam):
     tc = nt.nodes.new("ShaderNodeTexCoord"); sp = nt.nodes.new("ShaderNodeSeparateXYZ")
     nt.links.new(tc.outputs["Generated"], sp.inputs[0])
     rp = nt.nodes.new("ShaderNodeValToRGB"); el = rp.color_ramp.elements
-    el[0].position = 0.0; el[0].color = (*lin(hex3("#7fe6ff")), 1)
+    el[0].position = 0.0; el[0].color = (*lin(hex3("#2ccaff")), 1)
     el[1].position = 0.45; el[1].color = (*lin(hex3("#0a5cff")), 1)
-    e2 = el.new(0.12); e2.color = (*lin(hex3("#1ea2ff")), 1)
+    e2 = el.new(0.12); e2.color = (*lin(hex3("#0a8aff")), 1)
     nt.links.new(sp.outputs["Z"], rp.inputs[0])
     lp = nt.nodes.new("ShaderNodeLightPath")
     bg_k = nt.nodes.new("ShaderNodeBackground"); bg_k.inputs[1].default_value = 1.0
@@ -381,7 +381,7 @@ def cit():
 
 
 def bulut(merkez, olcek, rnd):
-    beyaz = M("bulut", lambda: mat_pbr("bulut", "#ffffff", 0.85))
+    beyaz = M("bulut", lambda: mat_pbr("bulut", "#f4fbff", 0.85))
     x, y, z = merkez
     for k in range(9):
         r = olcek * rnd.uniform(0.45, 0.85)
@@ -415,7 +415,7 @@ def kelebek(konum, olcek, renk):
 def gok_ogeleri(rnd):
     """ekran dolu kurali (md. 7): bulut kumeleri, kus suruleri, kelebekler, ruzgarda ucusan lale yapraklari"""
     for (x, y, z, o) in ((-150, 260, 70, 16), (-60, 300, 95, 20), (40, 280, 80, 17), (140, 250, 62, 15), (230, 320, 100, 22),
-                         (-240, 320, 110, 22), (-100, 200, 48, 11), (95, 210, 50, 12), (0, 330, 120, 20), (-30, 220, 58, 10),
+                         (-240, 320, 110, 22), (0, 330, 120, 20),
                          (190, 200, 40, 9), (-200, 230, 42, 10), (60, 360, 140, 26), (-140, 360, 150, 26)):
         bulut((x, y, z), o, rnd)
     for k in range(12):
