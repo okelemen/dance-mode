@@ -1,0 +1,61 @@
+{
+ "aciklik_p1": [
+  325.1,
+  347.1,
+  634.9,
+  680.4
+ ],
+ "salon_p1": {
+  "minder_sol_x": 91.9,
+  "minder_sag_x": 868.1,
+  "minder_y": 747.7,
+  "gecis_y": 632.3
+ },
+ "plaj_p1": {
+  "minder_sol_x": 91.9,
+  "minder_sag_x": 868.1,
+  "minder_y": 747.7,
+  "gecis_y": 632.3
+ },
+ "orman_p1": {
+  "minder_sol_x": 91.9,
+  "minder_sag_x": 868.1,
+  "minder_y": 747.7,
+  "gecis_y": 632.3
+ },
+ "yol": {
+  "y_kapi": 8.0,
+  "genislik": 5.2,
+  "kam": {
+   "z": 2.0,
+   "egim": 3.0,
+   "lens": 16.0,
+   "sensor": 24.0
+  },
+  "serit_w": 960
+ },
+ "aciklik_p2": [
+  325.1,
+  347.1,
+  634.9,
+  680.4
+ ],
+ "salon_p2": {
+  "minder_sol_x": 91.9,
+  "minder_sag_x": 868.1,
+  "minder_y": 747.7,
+  "gecis_y": 632.3
+ },
+ "plaj_p2": {
+  "minder_sol_x": 91.9,
+  "minder_sag_x": 868.1,
+  "minder_y": 747.7,
+  "gecis_y": 632.3
+ },
+ "orman_p2": {
+  "minder_sol_x": 91.9,
+  "minder_sag_x": 868.1,
+  "minder_y": 747.7,
+  "gecis_y": 632.3
+ }
+}

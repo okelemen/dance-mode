@@ -86,6 +86,27 @@ def jole(sure=0.9):
     return ((blop * 0.9 + sap * 1.8) * 0.5).astype(np.float64)
 
 
+def camur(sure=0.8):
+    """29 (orman tapinagi): camura kayis - kalin islak 'splat' (160->60 Hz) + yapiskan sap (alcak bant gurultu, iki darbe)"""
+    t = np.arange(int(sure * SR)) / SR
+    f = 160 * np.exp(-t * 5) + 60
+    g = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 6)
+    r = np.random.default_rng(29).standard_normal(len(t))
+    r = np.convolve(r, np.ones(18) / 18, mode="same")
+    sap = r * (np.exp(-t * 14) + 0.6 * np.exp(-np.maximum(0, t - 0.12) * 18) * (t > 0.12))
+    return ((g * 0.9 + sap * 2.2) * 0.5).astype(np.float64)
+
+
+def gurleme(sure=1.9):
+    """29 tas kapi: agir tas surtunmesi - alcak gecirgen gurultu + 38 Hz titresim, sonda yavaslar"""
+    t = np.arange(int(sure * SR)) / SR
+    r = np.random.default_rng(91).standard_normal(len(t))
+    r = np.convolve(r, np.ones(60) / 60, mode="same") * 6
+    x = (r * (0.6 + 0.4 * np.sin(2 * np.pi * 38 * t)) + 0.5 * np.sin(2 * np.pi * 42 * t))
+    zarf = np.minimum(1, t / 0.15) * np.minimum(1, (sure - t) / 0.4)
+    return (x * zarf * 0.6).astype(np.float64)
+
+
 def main():
     bolum, cikti = sys.argv[1:3]
     B = json.load(open(bolum, encoding="utf-8"))
@@ -98,6 +119,9 @@ def main():
             yerlestir(ef, vuus(0.7, True, 0.9), t)
             yerlestir(ef, vurus(), t + 0.45, 1.0)
             yerlestir(ef, zap(0.4), t + 0.5, 0.7)
+            if B.get("tema", {}).get("acilis") == "taskapi":          # 29: tas kapi gurler (0-1,9 sn), VS tableti yere oturur (2,15 sn)
+                yerlestir(ef, gurleme(1.9), t + 0.05, 1.0)
+                yerlestir(ef, vurus(), t + 2.15, 1.0)
         elif k["tip"] == "tur":
             yerlestir(ef, vuus(0.5, True, 0.6), t)
             yerlestir(ef, fanfar(), t + 0.15, 0.9)
@@ -128,6 +152,12 @@ def main():
                 yerlestir(ef, bip(988, 0.12), u0 + ud * (1 + 4 * i) / 12 - 0.06, 0.8)
                 yerlestir(ef, bip(740, 0.12), u0 + ud * (1 + 4 * i) / 12 + 0.08, 0.8)
         yerlestir(ef, ding(), a + 0.02, 0.6)                             # poz belirdi
+        if d.get("hiz"):                                                 # 29 SPEED: hizlanan duvar -> cift hizli bip (FASTER!)
+            yerlestir(ef, bip(1319, 0.07), a - 0.15, 0.7)
+            yerlestir(ef, bip(1568, 0.07), a - 0.05, 0.7)
+        if d.get("no") == 1 and B.get("tema", {}).get("acilis") == "taskapi":   # 29: ilk duvarin 3-2-1 tas bloklari duser
+            for i in range(3):
+                yerlestir(ef, kum(0.35), a + (i + 0.22) * Z["say"] / 3, 0.8)
         if d.get("ayna"):                                                # 26 MIRROR: siluet ters doner
             yerlestir(ef, ayna(), a + 0.02, 0.8)
         if d.get("blind"):                                               # 27 BLIND: tipi (siluet gizli), son 1,5 sn'de belirir -> buz cinlamasi
@@ -142,7 +172,10 @@ def main():
         if out:                                                          # 24: OUT - karakter suya duser (sicrama) + alcak uyari
             yerlestir(ef, vuus(0.5, False, 1.0), c - Z["buyu"] * 0.25)
             yerlestir(ef, zap(0.35), c - Z["buyu"] * 0.2, 0.6)
-            if "--jole" in sys.argv:                                      # 28: dev jole kasesine duser -> islak blop + hakem duduk
+            if "--camur" in sys.argv:                                     # 29: camura kayar -> islak splat + hakem duduk
+                yerlestir(ef, camur(), c - 0.03, 1.0)
+                yerlestir(ef, duduk(), c + 0.35, 0.7)
+            elif "--jole" in sys.argv:                                      # 28: dev jole kasesine duser -> islak blop + hakem duduk
                 yerlestir(ef, jole(), c - 0.03, 1.0)
                 yerlestir(ef, duduk(), c + 0.35, 0.7)
             elif "--kar" in sys.argv:                                       # 27: kar yiginina gomulur -> gumleme + toz kar + hakem duduk
