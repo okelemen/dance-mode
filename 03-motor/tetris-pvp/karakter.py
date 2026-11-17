@@ -20,6 +20,7 @@ Cikti: karakter/<oyuncu>/<poz>-NN.png (KxK kare, saydam), yerlesim.json: karakte
   --kayakci 1: maskota bere (ponponlu) + atki (karli zirve hakemi).
   --asci 1: maskota asci sapkasi (beyaz, kabarik) + kirmizi fular (28, dev mutfak hakemi).
   --kasif 1: maskota kasif sapkasi (genis kenarli haki, yesil bant) + yesil fular (29, orman tapinagi hakemi).
+  --ciftci 1: maskota hasir sapka (sari, kirmizi bant) + kirmizi fular (30, lale tarlasi hakemi).
 """
 import bmesh
 
@@ -28,7 +29,11 @@ K = int(arg("--kare", "7"))
 PX = int(arg("--px", "420"))
 DUVAR = json.load(open(os.path.join(KOK, arg("--duvar", "03-motor/tetris-pvp/duvar-listesi-24.json")), encoding="utf-8"))
 KAYNAK = json.load(open(os.path.join(KOK, arg("--kaynak", "03-motor/tetris-pvp/aday-olcu-24.json")), encoding="utf-8"))
-POZ_DOSYA = {"varlik": "pozlar.json", "varlik-03": "pozlar-03.json", "varlik-04": "pozlar-04.json", "varlik-05": "pozlar-05.json"}
+POZ_DOSYA = {"varlik": "pozlar.json", "varlik-03": "pozlar-03.json", "varlik-04": "pozlar-04.json", "varlik-05": "pozlar-05.json",
+             # 30: aday havuzlari (daha once render edilip kullanilmamis pozlar)
+             "varlik-05-aday": "pozlar-05-aday.json", "varlik-06-aday": "pozlar-06-aday.json", "varlik-08-aday": "pozlar-08-aday.json",
+             "varlik-09-aday": "pozlar-09-aday.json", "varlik-10-aday": "pozlar-10-aday.json", "varlik-12-aday": "pozlar-12-aday.json",
+             "varlik-14-aday": "pozlar-14-aday.json", "varlik-16-aday-2": "pozlar-16-aday.json", "varlik-17-aday": "pozlar-17-aday.json"}
 RENK_K = {"p1": "#2E9BFF", "p2": "#FF3EA5", "maskot": "#ff9ad8"}
 # 25 (TALIMATLAR §4 cilali 3D oyun gorunumu): 24'teki guclu kenar isiltisi govdeyi bembeyaz/pastel yapiyordu -> ayarlanabilir
 RIM = float(arg("--rim", "1.6")); EKIP_EMIS = float(arg("--ekip-emis", "0.35")); GOVDE_ACIK = float(arg("--govde-acik", "0.78"))
@@ -257,6 +262,31 @@ if OYUNCU == "maskot" and arg("--kasif", "0") == "1":       # 29 (orman tapinagi
     c_.data.transform(Matrix.Diagonal((1.0, 1.0, 0.75, 1.0)) @ Matrix.Rotation(math.radians(-90), 4, "X"))
     EKIP.append((c_, "Head", Matrix.Translation((0, 0.62 * Lh + rk * 0.35, 0))))
     bpy.ops.mesh.primitive_cylinder_add(radius=rk * 1.01, depth=rk * 0.22, vertices=48)      # yesil bant
+    b_ = bpy.context.active_object; bpy.ops.object.shade_smooth(); b_.data.materials.append(bant)
+    b_.data.transform(Matrix.Rotation(math.radians(-90), 4, "X"))
+    EKIP.append((b_, "Head", Matrix.Translation((0, 0.62 * Lh + rk * 0.3, 0))))
+    ra = 0.085 * BOY
+    bpy.ops.mesh.primitive_torus_add(major_radius=ra, minor_radius=ra * 0.34, major_segments=40, minor_segments=12)
+    f_ = bpy.context.active_object; bpy.ops.object.shade_smooth(); f_.data.materials.append(bant)
+    f_.data.transform(Matrix.Rotation(math.radians(-90), 4, "X"))
+    EKIP.append((f_, "Neck", Matrix.Translation((0, 0.02 * BOY, 0))))
+
+if OYUNCU == "maskot" and arg("--ciftci", "0") == "1":      # 30 (lale tarlasi): hakem maskot hasir sapka (genis duz kenar, sari) + kirmizi bant + kirmizi fular
+    sap = mat_jole("ciftci_sapka", lin(hex3("#ffd23a")), emis=0.14, purluk=0.35)
+    bant = mat_jole("ciftci_bant", lin(hex3("#ff2a3a")), emis=0.18, purluk=0.15)
+    Lh = ((arm.matrix_world @ kemik(arm, "Head").tail) - (arm.matrix_world @ kemik(arm, "Head").head)).length
+    rk = max(0.6 * Lh, 0.066 * BOY)
+    bpy.ops.mesh.primitive_cylinder_add(radius=rk * 1.95, depth=rk * 0.10, vertices=48)      # genis duz hasir kenar
+    k_ = bpy.context.active_object; bpy.ops.object.shade_smooth(); k_.data.materials.append(sap)
+    k_.data.transform(Matrix.Rotation(math.radians(-90), 4, "X"))
+    bv = k_.modifiers.new("egim", "BEVEL"); bv.width = 0.05 * rk; bv.segments = 3
+    EKIP.append((k_, "Head", Matrix.Translation((0, 0.62 * Lh + rk * 0.15, 0))))
+    bpy.ops.mesh.primitive_cylinder_add(radius=rk * 0.95, depth=rk * 0.7, vertices=48)       # silindir tepe (hasir sapka)
+    c_ = bpy.context.active_object; bpy.ops.object.shade_smooth(); c_.data.materials.append(sap)
+    c_.data.transform(Matrix.Rotation(math.radians(-90), 4, "X"))
+    bv = c_.modifiers.new("egim", "BEVEL"); bv.width = 0.12 * rk; bv.segments = 3
+    EKIP.append((c_, "Head", Matrix.Translation((0, 0.62 * Lh + rk * 0.5, 0))))
+    bpy.ops.mesh.primitive_cylinder_add(radius=rk * 0.97, depth=rk * 0.2, vertices=48)       # kirmizi bant
     b_ = bpy.context.active_object; bpy.ops.object.shade_smooth(); b_.data.materials.append(bant)
     b_.data.transform(Matrix.Rotation(math.radians(-90), 4, "X"))
     EKIP.append((b_, "Head", Matrix.Translation((0, 0.62 * Lh + rk * 0.3, 0))))
