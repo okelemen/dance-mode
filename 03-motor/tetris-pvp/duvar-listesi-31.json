@@ -1,0 +1,122 @@
+[
+ {
+  "tur": 1,
+  "p1": "spider-stork-up-down",
+  "p2": "nebula-crescent-lean-left"
+ },
+ {
+  "tur": 1,
+  "p1": "banshee-quad-hold-up",
+  "p2": "bat-knee-raise-down-diag"
+ },
+ {
+  "tur": 1,
+  "p1": "ghost-w-reach-curtsy",
+  "p2": "candle-stork-diag-high-back"
+ },
+ {
+  "tur": 1,
+  "p1": "cobweb-reach-hip-wide-lean-r",
+  "p2": "cauldron-reach-hook-kick-lean-r"
+ },
+ {
+  "tur": 1,
+  "p1": "iceberg-head-reach-knee",
+  "p2": "hex-v-v-wide-lean-l"
+ },
+ {
+  "tur": 1,
+  "p1": "werewolf-kick-back-back-back",
+  "p2": "crypt-kick-back-up-bent-up"
+ },
+ {
+  "tur": 2,
+  "p1": "tundra-diag-reach-tree",
+  "p2": "coffin-knee-raise-back-up"
+ },
+ {
+  "tur": 2,
+  "p1": "chevron-v-head-kick",
+  "p2": "goblin-point-chest-half-goddess-lean-l"
+ },
+ {
+  "tur": 2,
+  "p1": "banshee-w-low-knee-lean-r",
+  "p2": "beam-flex-diag-knee"
+ },
+ {
+  "tur": 2,
+  "p1": "glow-comet-diag-tree",
+  "p2": "fog-point-v-tree-lean-r"
+ },
+ {
+  "tur": 2,
+  "p1": "retro-t-cactus-curtsy",
+  "p2": "candle-knee-raise-back-hip"
+ },
+ {
+  "tur": 2,
+  "p1": "glow-wave-cactus-knee",
+  "p2": "saturn-diag-hug-tree"
+ },
+ {
+  "tur": 3,
+  "p1": "cauldron-diag-back-stand",
+  "p2": "grid-v-w-goddess"
+ },
+ {
+  "tur": 3,
+  "p1": "low-v-stance",
+  "p2": "petal-t-v-wide"
+ },
+ {
+  "tur": 3,
+  "p1": "plush-swing-cactus-goddess",
+  "p2": "beam-flex-t-wide"
+ },
+ {
+  "tur": 3,
+  "p1": "sakura-diagonal-dash-arms",
+  "p2": "moonlight-hook-diag-horse-lean-l"
+ },
+ {
+  "tur": 3,
+  "p1": "step-t-low-horse",
+  "p2": "graveyard-split-stance-up-up"
+ },
+ {
+  "tur": 3,
+  "p1": "magenta-reach-diag-lunge",
+  "p2": "meteor-chest-eagle-lunge"
+ },
+ {
+  "tur": 4,
+  "p1": "comet-cactus-t-tap",
+  "p2": "cosmic-w-t-curtsy"
+ },
+ {
+  "tur": 4,
+  "p1": "bat-warrior-high-back-hip",
+  "p2": "violet-t-halo-kick"
+ },
+ {
+  "tur": 4,
+  "p1": "witch-side-lunge-elbow-hip",
+  "p2": "banshee-lunge-bent-up-high-back"
+ },
+ {
+  "tur": 4,
+  "p1": "cobweb-lunge-arms-back",
+  "p2": "comet-chest-hip-split"
+ },
+ {
+  "tur": 4,
+  "p1": "bat-low-lunge-diag-diag",
+  "p2": "fog-low-lunge-forward-up"
+ },
+ {
+  "tur": 4,
+  "p1": "duel-lunge-twist-arm-back",
+  "p2": "skeleton-low-lunge-low-forward-forward"
+ }
+]

@@ -21,6 +21,7 @@ Cikti: karakter/<oyuncu>/<poz>-NN.png (KxK kare, saydam), yerlesim.json: karakte
   --asci 1: maskota asci sapkasi (beyaz, kabarik) + kirmizi fular (28, dev mutfak hakemi).
   --kasif 1: maskota kasif sapkasi (genis kenarli haki, yesil bant) + yesil fular (29, orman tapinagi hakemi).
   --ciftci 1: maskota hasir sapka (sari, kirmizi bant) + kirmizi fular (30, lale tarlasi hakemi).
+  --penguen 1: maskot penguen yavrusu govdesi (lacivert sirt, beyaz gogus, turuncu ayak) + kirmizi atki (31). --don 90: yan gorunum.
   --sporcu 1: yarisan karakterler boksor degil sporcu (30'dan itibaren, kullanici 17 Kas): forma + koyu sort + ayakkabi oyuncu renginde, sac bandi, bileklik.
 """
 import bmesh
@@ -117,6 +118,7 @@ pb = arm.pose.bones
 L = arm.matrix_world @ kemik(arm, "LeftArm").head; Rr = arm.matrix_world @ kemik(arm, "RightArm").head
 v = L - Rr; v.z = 0
 arm.rotation_euler.z -= math.atan2(v.y, v.x)
+arm.rotation_euler.z += math.radians(float(arg("--don", "0")))   # 31: maskot ornek sayfasi yan gorunum (--don 90)
 bpy.context.view_layer.update()
 TABAN_ROT = arm.rotation_euler.z
 alt0, ust0 = dunya_kutusu(mesler)
@@ -346,6 +348,43 @@ if OYUNCU == "maskot" and arg("--ciftci", "0") == "1":      # 30 (lale tarlasi):
     ra = 0.085 * BOY
     bpy.ops.mesh.primitive_torus_add(major_radius=ra, minor_radius=ra * 0.34, major_segments=40, minor_segments=12)
     f_ = bpy.context.active_object; bpy.ops.object.shade_smooth(); f_.data.materials.append(bant)
+    f_.data.transform(Matrix.Rotation(math.radians(-90), 4, "X"))
+    EKIP.append((f_, "Neck", Matrix.Translation((0, 0.02 * BOY, 0))))
+
+if OYUNCU == "maskot" and arg("--penguen", "0") == "1":     # 31 (kutup buzul kiyisi; TALIMATLAR §4 maskot sirasi): penguen yavrusu
+    # govde uc renk, dinlenme pozunda nokta ozniteligi "pg" (0 lacivert-siyah sirt, 1 beyaz gogus/karin, 2 turuncu ayak) -> keskin sinir.
+    # Kafa motorda 2B cizilir (siyah yuvarlak bas, beyaz yuz lekesi, buyuk gozler, turuncu gaga, kizarik yanak).
+    zb = lambda ad: (arm.matrix_world @ kemik(arm, ad).head).z
+    BILEK, BOYUN, KALCA = zb("LeftFoot") + 0.015 * BOY, zb("Neck"), zb("Hips")
+    mx = (arm.matrix_world @ kemik(arm, "Hips").head)
+    for m in mesler:
+        a_ = m.data.attributes.new("pg", "FLOAT", "POINT")
+        mw = m.matrix_world; nr = mw.to_3x3()
+        on = None
+        for v_ in m.data.vertices:
+            w = mw @ v_.co; n = (nr @ v_.normal).normalized()
+            if w.z < BILEK:
+                val = 2.0
+            elif KALCA - 0.16 * BOY < w.z < BOYUN - 0.01 * BOY and abs(w.x - mx.x) < 0.11 * BOY and n.y < -0.15:
+                val = 1.0
+            else:
+                val = 0.0
+            a_.data[v_.index].value = val
+    pm = mat_govde(lin(hex3("#1c2a5a")), 0.0); pm.name = "penguen"; nt = pm.node_tree; bs = nt.nodes["Principled BSDF"]
+    na = nt.nodes.new("ShaderNodeAttribute"); na.attribute_name = "pg"
+    mp = nt.nodes.new("ShaderNodeMapRange"); mp.inputs["From Min"].default_value = 0; mp.inputs["From Max"].default_value = 2
+    nt.links.new(na.outputs["Fac"], mp.inputs["Value"])
+    rp = nt.nodes.new("ShaderNodeValToRGB"); cr = rp.color_ramp; cr.interpolation = "CONSTANT"
+    cr.elements[0].position = 0.0; cr.elements[0].color = (*lin(hex3("#1c2a5a")), 1)
+    cr.elements[1].position = 0.75; cr.elements[1].color = (*lin(hex3("#ff8a10")), 1)
+    e = cr.elements.new(0.25); e.color = (*lin(hex3("#f4f8ff")), 1)
+    nt.links.new(mp.outputs["Result"], rp.inputs["Fac"]); nt.links.new(rp.outputs["Color"], bs.inputs["Base Color"])
+    bs.inputs["Emission Color"].default_value = (*lin(hex3("#3a5ab8")), 1)
+    for m in mesler:
+        m.data.materials.clear(); m.data.materials.append(pm)
+    ra = 0.07 * BOY                                                   # kirmizi-beyaz seritli atki (kutup hakemi)
+    bpy.ops.mesh.primitive_torus_add(major_radius=ra, minor_radius=ra * 0.36, major_segments=40, minor_segments=12)
+    f_ = bpy.context.active_object; bpy.ops.object.shade_smooth(); f_.data.materials.append(mat_jole("pg_atki", lin(hex3("#ff2a3a")), emis=0.18, purluk=0.15))
     f_.data.transform(Matrix.Rotation(math.radians(-90), 4, "X"))
     EKIP.append((f_, "Neck", Matrix.Translation((0, 0.02 * BOY, 0))))
 
