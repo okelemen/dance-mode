@@ -47,7 +47,7 @@ def lale_sahnesi(w, h, saydam):
     nt.links.new(tc.outputs["Generated"], sp.inputs[0])
     rp = nt.nodes.new("ShaderNodeValToRGB"); el = rp.color_ramp.elements
     el[0].position = 0.0; el[0].color = (*lin(hex3("#2ccaff")), 1)
-    el[1].position = 0.45; el[1].color = (*lin(hex3("#0a5cff")), 1)
+    el[1].position = 0.40; el[1].color = (*lin(hex3("#0038d8")), 1)   # 17 Kas: parlaklik +0,07 -> koyu doygun tepe
     e2 = el.new(0.12); e2.color = (*lin(hex3("#0a8aff")), 1)
     nt.links.new(sp.outputs["Z"], rp.inputs[0])
     lp = nt.nodes.new("ShaderNodeLightPath")
@@ -233,7 +233,7 @@ def lale_koy(renk, konum, olcek, rnd):
 # ------------------------------------------------------------------ LALE TARLASI (iki katmanda; serit sahnesinde uzak kisim holdout)
 def tarla(serit_modu, rnd):
     _MAT.clear(); _SABLON.clear()
-    cim = mat_pbr("cim", "#2ee640", 0.55, kaplama=0.2, bump=(18, 0.25))
+    cim = mat_pbr("cim", "#18c42a", 0.55, kaplama=0.2, bump=(18, 0.25))
     duz("zemin_yakin", -80, 80, -4, GECIS, 0, cim)
     duz("zemin_uzak", -400, 400, GECIS, 500, 0, cim)
     yol = mat_tahta("tahta_yol", "#ff7a14", "#ff9a26", ara="#8a2a08")
