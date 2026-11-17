@@ -880,8 +880,83 @@ function tasKapiCiz(kart, u, t) {
     parilti4(vx - R * 0.72, vy - R * 0.72, 30 * k, isik * (0.6 + 0.4 * Math.sin(u * 9)));
   }
 }
+const KH = 1.6, KR_ = 0.4;                                      // motor 27 kanca: onizleme / geri sarma sureleri
+function kancaBoss(ub) {                                        // BOSS WALL'un gercek karesini (karakterler + hakem dahil) ciz
+  const d = DUVARLAR[DUVARLAR.length - 1], tb = d.t0 + ub;
+  AYNA = false; sahneCiz(tb); hakemCiz(tb, d, ub); duvarCiz(d, ub, tb);
+}
+function kanatCiz(x, y, L, a) {                                 // yel degirmeni kanadi: ahsap kafes + kirmizi-beyaz bez, cilali
+  cx.save(); cx.translate(x, y); cx.rotate(a);
+  const b = L * 0.16;
+  for (let j = 0; j < 4; j++) {
+    cx.save(); cx.rotate(j * Math.PI / 2);
+    const g = cx.createLinearGradient(0, -b, 0, b); g.addColorStop(0, '#ff5a5a'); g.addColorStop(0.5, '#e01a2a'); g.addColorStop(1, '#a00818');
+    cx.fillStyle = g; cx.strokeStyle = '#5a2a0a'; cx.lineWidth = 10 * k;
+    cx.beginPath(); cx.roundRect(L * 0.12, -b, L * 0.88, b * 2, 18 * k); cx.fill(); cx.stroke();
+    cx.fillStyle = 'rgba(255,255,255,0.92)';
+    for (let q = 0; q < 4; q++) { cx.beginPath(); cx.roundRect(L * (0.16 + q * 0.21), -b * 0.82, L * 0.17, b * 0.7, 8 * k); cx.fill(); }
+    cx.strokeStyle = '#8a4a1a'; cx.lineWidth = 7 * k;
+    for (let q = 0; q <= 8; q++) { const xx = L * (0.12 + q * 0.11); cx.beginPath(); cx.moveTo(xx, -b); cx.lineTo(xx, b); cx.stroke(); }
+    cx.beginPath(); cx.moveTo(L * 0.12, 0); cx.lineTo(L, 0); cx.stroke();
+    cx.fillStyle = 'rgba(255,255,255,0.35)'; cx.beginPath(); cx.roundRect(L * 0.14, -b * 0.95, L * 0.84, b * 0.22, 6 * k); cx.fill();
+    const gk = cx.createLinearGradient(0, -b * 0.3, 0, b * 0.3); gk.addColorStop(0, '#c8843a'); gk.addColorStop(1, '#6a3410');
+    cx.fillStyle = gk; cx.fillRect(0, -b * 0.28, L * 0.2, b * 0.56);
+    cx.restore();
+  }
+  const gh = cx.createRadialGradient(-b * 0.3, -b * 0.3, b * 0.1, 0, 0, b * 1.2); gh.addColorStop(0, '#ffe08a'); gh.addColorStop(1, '#a8601a');
+  cx.fillStyle = gh; cx.strokeStyle = '#4a2008'; cx.lineWidth = 10 * k; cx.beginPath(); cx.arc(0, 0, b * 1.1, 0, 6.283); cx.fill(); cx.stroke();
+  cx.restore();
+}
+function kancaCiz(kart, u, t) {
+  if (u < KH + KR_) {
+    const d = DUVARLAR[DUVARLAR.length - 1], Z = ZD(d), u0 = Z.kart + Z.say * 0.55, u1 = Z.kart + Z.say + Z.buyu * 0.4;
+    const ub = u < KH ? lerp(u0, u1, ease(u / KH)) : lerp(u1, Z.kart * 0.5, ease((u - KH) / KR_));   // geri sarmada zaman geri akar
+    kancaBoss(ub);
+    if (u < KH) {
+      cx.save(); cx.globalAlpha = 0.25 + 0.2 * Math.sin(u * 14); cx.strokeStyle = '#ff1a2a'; cx.lineWidth = 60 * k; cx.strokeRect(0, 0, W, H); cx.restore();
+      const g = ease(kisit((u - 0.1) / 0.25, 0, 1)), p = 1 + 0.12 * Math.max(0, 1 - (u - 0.1) * 5) + 0.03 * Math.sin(u * 9);
+      if (g > 0.01) {
+        cx.save(); cx.globalAlpha = g * 0.82; cx.fillStyle = '#1a0408'; cx.beginPath(); cx.roundRect(W / 2 - 680 * k, H * 0.13 - 74 * k, 1360 * k, 148 * k, 74 * k); cx.fill(); cx.restore();
+        yaziK('CAN YOU PASS THIS?', W / 2, H * 0.13, 110 * k * g * p, ['#ffffff', '#fff27a', '#ffc21a'], g, '#3a0a00', '#ffffff');
+      }
+    } else {                                                    // geri sarma: VHS seritleri + << isareti
+      const q = (u - KH) / KR_;
+      cx.save(); cx.globalCompositeOperation = 'lighter';
+      for (let j = 0; j < 7; j++) { const yy = ((j * 0.31 + q * 3.7) % 1) * H; cx.fillStyle = 'rgba(255,255,255,0.18)'; cx.fillRect(0, yy, W, (10 + 22 * ((j * 7) % 3)) * k); }
+      cx.restore();
+      cx.save(); cx.fillStyle = 'rgba(20,10,40,0.18)'; cx.fillRect(0, 0, W, H); cx.restore();
+      cx.save(); cx.fillStyle = '#ffffff'; cx.strokeStyle = '#1a0630'; cx.lineWidth = 8 * k; cx.translate(150 * k, 140 * k);
+      for (const dx of [0, 70 * k]) { cx.beginPath(); cx.moveTo(dx, 0); cx.lineTo(dx + 70 * k, -48 * k); cx.lineTo(dx + 70 * k, 48 * k); cx.closePath(); cx.stroke(); cx.fill(); }
+      cx.restore();
+    }
+    return;
+  }
+  // mekan acilisi (30: lale tarlasi) - sahne kareKur'da zaten cizili
+  const ua = u - KH - KR_;
+  hakemCiz(t, null, 0);                                         // hakem kursusunde, ilk duvarla ayni yer
+  const ac = ease(kisit((ua - 0.3) / 0.6, 0, 1));                // kanat donerken buyur, kameranin icinden gecer
+  if (ac < 1) {
+    cx.save(); cx.globalAlpha = 1 - ac; kanatCiz(W / 2, H * 0.5, W * 0.62 * (1 + 1.6 * ac), ua * 4.2 + 0.4); cx.restore();
+  }
+  const R = rng(3030);                                          // lale yapragi firtinasi soldan saga
+  for (let j = 0; j < 110; j++) {
+    const hz = 0.8 + 0.7 * R(), y0 = R() * H, ph = R(), c = KONF_R[Math.floor(R() * 5)], r = (16 + 26 * R()) * k;
+    const x = (-0.25 + (ua * hz * 1.1 + ph * 0.6 - 0.2)) * W, y = y0 + Math.sin(ua * 5 + ph * 9) * 50 * k;
+    if (x < -60 * k || x > W + 60 * k) continue;
+    cx.save(); cx.translate(x, y); cx.rotate(ph * 6 + ua * 6 * hz); cx.scale(1, 0.4 + 0.6 * Math.abs(Math.sin(ua * 7 * hz + ph * 5)));
+    cx.fillStyle = c; cx.strokeStyle = 'rgba(80,0,20,0.5)'; cx.lineWidth = 2 * k;
+    cx.beginPath(); cx.ellipse(0, 0, r, r * 0.55, 0, 0, 6.283); cx.fill(); cx.stroke();
+    cx.fillStyle = 'rgba(255,255,255,0.45)'; cx.beginPath(); cx.ellipse(-r * 0.3, -r * 0.15, r * 0.35, r * 0.15, 0, 0, 6.283); cx.fill();
+    cx.restore();
+  }
+  if (ua < 0.18) { cx.save(); cx.fillStyle = `rgba(255,255,255,${0.85 * (1 - ua / 0.18)})`; cx.fillRect(0, 0, W, H); cx.restore(); }
+  acilisSoru = kart.soru ? ease(kisit((ua - 0.55) / 0.3, 0, 1)) : 0;
+  const pa = ease(kisit((ua - 0.7) / 0.25, 0, 1));
+  if (pa > 0.01) for (let i = 0; i < 2; i++) pYazi(['P1', 'P2'][i], i * SW + SW / 2, H * 0.6, 150 * k, RENK[i], pa);
+}
 function acilisCiz(kart, u, t) {
   acilisSoru = 0;
+  if (TEMA.acilis === 'kanca') { kancaCiz(kart, u, t); return; }
   if (TEMA.acilis === 'taskapi') { tasKapiCiz(kart, u, t); return; }
   const P1 = RENK[0], P2 = RENK[1];
   const BANT = Math.min(1.7, kart.sure * 0.36);                      // 1. bolum: capraz bantlar
@@ -1145,7 +1220,7 @@ function kareKur(n) {
       satir([['WHO WILL WIN? ', KART_DOLGU], ['BLUE', ['#ffffff', ACIK[0], RENK[0]]], [' OR ', KART_DOLGU], ['PINK', ['#ffffff', ACIK[1], RENK[1]]], ['?', KART_DOLGU]], W / 2, H * 0.13, 84 * k * acilisSoru, acilisSoru);
     }
     if (kart.tip === 'acilis') {                                 // TALIMATLAR §4: maskot video boyunca; VS kartinda alt ortada (P1/P2 ve can barlarina degmez)
-      const v = (t * BPM / 60) % 1; if (TEMA.acilis !== 'taskapi') maskotCiz(W / 2, H * 0.9 - Math.abs(Math.sin(v * Math.PI)) * 10 * k, 0.55, t);
+      const v = (t * BPM / 60) % 1; if (TEMA.acilis !== 'taskapi' && TEMA.acilis !== 'kanca') maskotCiz(W / 2, H * 0.9 - Math.abs(Math.sin(v * Math.PI)) * 10 * k, 0.55, t);
     } else if (kart.tip !== 'abone') maskotKose(t, true);
     return;
   }

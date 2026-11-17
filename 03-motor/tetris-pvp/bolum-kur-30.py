@@ -1,10 +1,10 @@
 """HUMAN TETRIS 30 bolum JSON'u (REF-082 yapi, 1v1, cilali 3D yel degirmenli lale tarlasi) - bolum-kur-29.py'den; ozel tur MIRROR
-(25 FREEZE, 26 MIRROR, 27 BLIND, 28 FREEZE, 29 SPEED -> 30 MIRROR); giris normal VS boksor karti (motor 27).
+(25 FREEZE, 26 MIRROR, 27 BLIND, 28 FREEZE, 29 SPEED -> 30 MIRROR); giris KANCA (17 Kas 2026, kullanici: boksor yok; BOSS WALL onizleme + geri sarma + lale acilisi, motor 27 TEMA.acilis='kanca').
 
     python bolum-kur-30.py   ->  bolumler/tetris-mode-30.json
 
 SURE 3:15-3:20 (TALIMATLAR §3) -> 111 olcu = 3:15,9 (136 BPM, vurus 0,4412 sn, olcu 1,7647 sn):
-  acilis (VS + WHO WILL WIN?) 2 olcu (ilk duvar 3,53 sn; mobil paket md. 1)
+  acilis (kanca 0-1,6 + geri sarma 1,6-2,0 + lale acilisi + WHO WILL WIN?) 2 olcu (ilk duvar 3,53 sn; mobil paket md. 1)
   normal duvar 15 vurus = 6,62 sn: kart 2 / say 8 / buyu 3 / gec 2
   MIRROR ROUND: 6 duvar d.ayna (siluet, panel, karakter, maskot aynalanir; ustte MIRROR!)
   tur kartlari (ROUND 2, MIRROR ROUND, FINAL ROUND, BOSS WALL) 1'er olcu
@@ -80,7 +80,7 @@ bolum = {"seri": "HUMAN TETRIS", "bolum": "human-tetris-30", "bpm": BPM, "toplam
          "kartlar": kartlar, "duvarlar": duvarlar, "abone": abone, "abone_sure": 3.2,
          "muzik": "Neon Party Pulse.mp3 (Suno, kullanici; Human Tetris'te ilk kullanim) -> 01-muzik/human-tetris-30/neon-136.wav (136,0 BPM sabit)",
          "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur-30.py. Motor 03-motor/sahne27.html (lale tarlasi, MIRROR). Referans REF-082 (yapi), mekan bizden (kullanici 17 Kas 2026).",
-         "tema": {"varlik": "/03-motor/tetris-pvp/varlik-30s1/tetris-varlik/", "karakter": "/03-motor/tetris-pvp/varlik-30-karakter/",
+         "tema": {"acilis": "kanca", "varlik": "/03-motor/tetris-pvp/varlik-30s1/tetris-varlik/", "karakter": "/03-motor/tetris-pvp/varlik-30-karakter/",
                   "maskeVarlik": "/03-motor/tetris-pvp/varlik-30s1/tetris-varlik/", "turAd": {"1": "ROUND 1", "2": "ROUND 2", "3": "MIRROR ROUND", "4": "FINAL ROUND"},
                   "aboneAlt": "NEW BATTLE EVERY DAY"}}
 yol = os.path.join(KOK, "bolumler", "tetris-mode-30.json")

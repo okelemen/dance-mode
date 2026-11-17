@@ -715,6 +715,7 @@
  "muzik": "Neon Party Pulse.mp3 (Suno, kullanici; Human Tetris'te ilk kullanim) -> 01-muzik/human-tetris-30/neon-136.wav (136,0 BPM sabit)",
  "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur-30.py. Motor 03-motor/sahne27.html (lale tarlasi, MIRROR). Referans REF-082 (yapi), mekan bizden (kullanici 17 Kas 2026).",
  "tema": {
+  "acilis": "kanca",
   "varlik": "/03-motor/tetris-pvp/varlik-30s1/tetris-varlik/",
   "karakter": "/03-motor/tetris-pvp/varlik-30-karakter/",
   "maskeVarlik": "/03-motor/tetris-pvp/varlik-30s1/tetris-varlik/",

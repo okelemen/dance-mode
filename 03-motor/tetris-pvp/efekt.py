@@ -109,6 +109,15 @@ def saman(sure=0.75):
     return ((puf * 0.8 + his * 2.4) * 0.5).astype(np.float64)
 
 
+def geri_sar(sure=0.4):
+    """30 kanca: kaset geri sarma - 1400->180 Hz inen cizirti + titreyen ust ton"""
+    t = np.arange(int(sure * SR)) / SR
+    f = 1400 * np.exp(-t / sure * 2.05) + 40 * np.sin(2 * np.pi * 31 * t)
+    x = np.sign(np.sin(2 * np.pi * np.cumsum(f) / SR)) * 0.35 + np.random.default_rng(17).standard_normal(len(t)) * 0.12
+    x = np.convolve(x, np.ones(6) / 6, mode="same")
+    return (x * np.minimum(1, t / 0.02) * np.minimum(1, (sure - t) / 0.06) * 0.8).astype(np.float64)
+
+
 def gurleme(sure=1.9):
     """29 tas kapi: agir tas surtunmesi - alcak gecirgen gurultu + 38 Hz titresim, sonda yavaslar"""
     t = np.arange(int(sure * SR)) / SR
@@ -127,7 +136,14 @@ def main():
     ef = np.zeros(int(sure * SR) + SR)
     for k in B["kartlar"]:
         t = k["t"]
-        if k["tip"] in ("vs", "giris", "acilis"):          # 5. video: giris karti (3 PLAYERS) VS ile ayni carpisma
+        if k["tip"] == "acilis" and B.get("tema", {}).get("acilis") == "kanca":   # 30: BOSS onizleme -> geri sarma -> lale acilisi (boksor yok)
+            yerlestir(ef, vurus(), t + 0.02, 1.0)                       # BOSS WALL karesi patlar
+            yerlestir(ef, vuus(1.4, True, 0.7), t + 0.15)               # duvar yaklasiyor
+            yerlestir(ef, geri_sar(0.4), t + 1.6, 1.0)                  # geri sarma
+            yerlestir(ef, vuus(0.6, True, 0.9), t + 2.0)                # beyaz parlama + kanat
+            yerlestir(ef, ruzgar(1.3), t + 2.0, 0.6)                    # lale yapragi firtinasi
+            yerlestir(ef, zap(0.4), t + 2.55, 0.7)                      # WHO WILL WIN?
+        elif k["tip"] in ("vs", "giris", "acilis"):          # 5. video: giris karti (3 PLAYERS) VS ile ayni carpisma
             yerlestir(ef, vuus(0.7, True, 0.9), t)
             yerlestir(ef, vurus(), t + 0.45, 1.0)
             yerlestir(ef, zap(0.4), t + 0.5, 0.7)

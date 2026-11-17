@@ -21,6 +21,7 @@ Cikti: karakter/<oyuncu>/<poz>-NN.png (KxK kare, saydam), yerlesim.json: karakte
   --asci 1: maskota asci sapkasi (beyaz, kabarik) + kirmizi fular (28, dev mutfak hakemi).
   --kasif 1: maskota kasif sapkasi (genis kenarli haki, yesil bant) + yesil fular (29, orman tapinagi hakemi).
   --ciftci 1: maskota hasir sapka (sari, kirmizi bant) + kirmizi fular (30, lale tarlasi hakemi).
+  --sporcu 1: yarisan karakterler boksor degil sporcu (30'dan itibaren, kullanici 17 Kas): forma + koyu sort + ayakkabi oyuncu renginde, sac bandi, bileklik.
 """
 import bmesh
 
@@ -124,7 +125,44 @@ log("govde boy", round(BOY, 3))
 
 # ---------------------------------------------------------------- ekipman (yalniz yarisan karakterler; VS kartindaki boksorlerin dili)
 EKIP = []
-if OYUNCU != "maskot":
+SPORCU = arg("--sporcu", "0") == "1"
+if OYUNCU != "maskot" and SPORCU:      # 30 (17 Kas 2026, kullanici: "box eldivenleri falan olmasin" -> sporcu): kask/eldiven/dizlik yok;
+    # govde parcalari kemik agirligina gore boyanir: forma (oyuncu rengi, kisa kol) / sort (koyu) / ayakkabi (oyuncu rengi) / ten (acik govde) + sac bandi
+    forma = mat_jole("forma", R, emis=EKIP_EMIS, purluk=0.10)
+    sort = mat_jole("sort", tuple(c * 0.22 for c in R), emis=0.04, purluk=0.12)
+    ayak = mat_jole("ayakkabi", R, emis=EKIP_EMIS, purluk=0.05)
+    beyazs = mat_jole("serit", (0.92, 0.94, 1.0), emis=0.15, purluk=0.08)
+    def sinif(ad):
+        for anahtar, i in (("ToeBase", 3), ("Foot", 3), ("UpLeg", 2), ("Hips", 2), ("Spine", 1), ("Shoulder", 1),
+                           ("ForeArm", 0), ("Hand", 0), ("Arm", 1), ("Leg", 0), ("Head", 0), ("Neck", 0)):
+            if anahtar in ad:
+                return i
+        return 0
+    say_ = [0, 0, 0, 0]
+    for m in mesler:
+        for mt in (forma, sort, ayak):
+            m.data.materials.append(mt)
+        gs = {g.index: sinif(g.name) for g in m.vertex_groups}
+        vs = []
+        for v_ in m.data.vertices:
+            en = max(v_.groups, key=lambda g: g.weight, default=None)
+            vs.append(gs.get(en.group, 0) if en else 0)
+        for poly in m.data.polygons:
+            c = [vs[i] for i in poly.vertices]
+            poly.material_index = max(set(c), key=c.count); say_[poly.material_index] += 1
+    log("sporcu poligon ten/forma/sort/ayakkabi", say_)
+    Lh = ((arm.matrix_world @ kemik(arm, "Head").tail) - (arm.matrix_world @ kemik(arm, "Head").head)).length
+    rk = max(0.6 * Lh, 0.066 * BOY)
+    bpy.ops.mesh.primitive_torus_add(major_radius=rk * 0.86, minor_radius=rk * 0.13, major_segments=48, minor_segments=12)   # sac bandi
+    sb = bpy.context.active_object; bpy.ops.object.shade_smooth(); sb.data.materials.append(forma)
+    sb.data.transform(Matrix.Rotation(math.radians(-90), 4, "X"))
+    EKIP.append((sb, "Head", Matrix.Translation((0, 0.55 * Lh, 0))))
+    for taraf in ("Left", "Right"):                                   # bileklik (beyaz)
+        bpy.ops.mesh.primitive_torus_add(major_radius=0.03 * BOY, minor_radius=0.011 * BOY, major_segments=32, minor_segments=10)
+        bl = bpy.context.active_object; bpy.ops.object.shade_smooth(); bl.data.materials.append(beyazs)
+        bl.data.transform(Matrix.Rotation(math.radians(90), 4, "X"))
+        EKIP.append((bl, taraf + "Hand", Matrix.Translation((0, -0.01 * BOY, 0))))
+elif OYUNCU != "maskot":
     ekip = mat_jole("ekipman", R, emis=EKIP_EMIS, purluk=0.06)
     beyaz = mat_jole("kenar", (0.92, 0.94, 1.0), emis=0.15, purluk=0.08)
 
