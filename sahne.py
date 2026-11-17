@@ -16,7 +16,7 @@ import bpy
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from plan import icinde, meyve_profil, profil_yaricap
+from plan import icinde, mango_yaprak_icinde, meyve_profil, profil_yaricap
 
 argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 
@@ -37,6 +37,7 @@ A, R = M["A"], M["R"]
 CILEK = PLAN["meyve"] == "strawberry"
 KARPUZ = PLAN["meyve"] == "watermelon"
 KIVI = PLAN["meyve"] == "kiwi"
+MANGO = PLAN["meyve"] == "mango"
 B = M.get("B", R)
 TAHTA_UST = 0.14
 MERKEZ_Z = TAHTA_UST + R - 0.03
@@ -119,6 +120,43 @@ def matematik(nt, islem, a=None, b=None, deger_a=0.0, deger_b=0.0):
     else:
         n.inputs[1].default_value = deger_b
     return n.outputs[0]
+
+
+def mango_cekirdek_maske(nt, x, y, z):
+    """Uzun X, dar Y ve orta Z eksenli gercek yassi cekirdek hacmi."""
+    ck = M["cekirdek"]
+    toplam = None
+    for deger, merkez, yari in ((x, ck["x"] * A, ck["a"]),
+                                (y, 0.0, ck["b"]), (z, 0.0, ck["r"])):
+        q = matematik(nt, "DIVIDE", matematik(nt, "SUBTRACT", deger, None, deger_b=merkez),
+                     None, deger_b=yari)
+        q2 = matematik(nt, "MULTIPLY", q, q)
+        toplam = q2 if toplam is None else matematik(nt, "ADD", toplam, q2)
+    return matematik(nt, "LESS_THAN", toplam, None, deger_b=1.0), toplam
+
+
+def mango_kabuk(nt, vector):
+    """Yesil-sari zemin, kameraya bakan tarafta turuncu-kirmizi gun yanigi."""
+    xyz = nt.nodes.new("ShaderNodeSeparateXYZ")
+    baglan(nt, vector, xyz.inputs[0])
+    noise = nt.nodes.new("ShaderNodeTexNoise")
+    noise.inputs["Scale"].default_value = 3.6
+    noise.inputs["Detail"].default_value = 3.0
+    baglan(nt, vector, noise.inputs["Vector"])
+    taban = nt.nodes.new("ShaderNodeValToRGB")
+    taban.color_ramp.elements[0].color = hex_renk("#587a36")
+    taban.color_ramp.elements[1].color = hex_renk("#e9b83e")
+    baglan(nt, noise.outputs["Fac"], taban.inputs["Fac"])
+    on = matematik(nt, "MULTIPLY", matematik(nt, "SUBTRACT", None, xyz.outputs[1], deger_a=0.12),
+                   None, deger_b=2.0)
+    on = matematik(nt, "MINIMUM", matematik(nt, "MAXIMUM", on, None, deger_b=0.0), None, deger_b=1.0)
+    allik = matematik(nt, "MULTIPLY", on,
+                      matematik(nt, "GREATER_THAN", xyz.outputs[0], None, deger_b=-0.75 * A))
+    kar = nt.nodes.new("ShaderNodeMix"); kar.data_type = "RGBA"
+    baglan(nt, allik, kar.inputs["Factor"])
+    baglan(nt, taban.outputs["Color"], kar.inputs[6])
+    kar.inputs[7].default_value = hex_renk("#cf512d")
+    return kar.outputs[2]
 
 
 def karpuz_serit(nt, vector):
@@ -330,11 +368,14 @@ for v in meyve.data.vertices:
     radial = float(meyve_profil(np.array([eks]), M)[0]) / max(sphere_r, 1e-6) / FMAX
     if CILEK:
         v.co = (x * A * radial, y * B * radial, z * R)
+    elif MANGO:
+        v.co = (x * A, y * B * radial,
+                z * R * radial + 0.09 * math.sin(math.pi * x))
     else:
         v.co = (x * A, y * R * radial, z * R * radial)
 bpy.ops.object.shade_smooth()
 
-m, nt, bsdf = malzeme("kivi_kisa_tuylu_kabuk" if KIVI else ("karpuz_seritli_kabuk" if KARPUZ else ("cilek_yuzey" if CILEK else "avokado_kabuk")))
+m, nt, bsdf = malzeme("mango_alacali_kabuk" if MANGO else ("kivi_kisa_tuylu_kabuk" if KIVI else ("karpuz_seritli_kabuk" if KARPUZ else ("cilek_yuzey" if CILEK else "avokado_kabuk"))))
 tk = nt.nodes.new("ShaderNodeTexCoord")
 nz = nt.nodes.new("ShaderNodeTexNoise")
 nz.inputs["Scale"].default_value = 5
@@ -359,7 +400,21 @@ if KIVI:
     yukseklik = matematik(nt, "ADD", yukseklik,
         matematik(nt, "MULTIPLY", kisa_tuy.outputs["Fac"], None, deger_b=0.65))
 baglan(nt, yukseklik, bmp.inputs["Height"])
-kabuk_rengi = karpuz_serit(nt, tk.outputs["Object"]) if KARPUZ else kabuk_rmp.outputs["Color"]
+kabuk_rengi = (mango_kabuk(nt, tk.outputs["Object"]) if MANGO else
+                karpuz_serit(nt, tk.outputs["Object"]) if KARPUZ else kabuk_rmp.outputs["Color"])
+if MANGO:
+    xyz_sap = nt.nodes.new("ShaderNodeSeparateXYZ")
+    baglan(nt, tk.outputs["Object"], xyz_sap.inputs[0])
+    sap_alan = matematik(nt, "MULTIPLY",
+        matematik(nt, "LESS_THAN", xyz_sap.outputs[0], None, deger_b=-0.78 * A),
+        matematik(nt, "MULTIPLY",
+            matematik(nt, "LESS_THAN", matematik(nt, "ABSOLUTE", xyz_sap.outputs[1]), None, deger_b=0.13),
+            matematik(nt, "GREATER_THAN", xyz_sap.outputs[2], None, deger_b=0.08)))
+    sap_renk = nt.nodes.new("ShaderNodeMix"); sap_renk.data_type = "RGBA"
+    baglan(nt, sap_alan, sap_renk.inputs["Factor"])
+    baglan(nt, kabuk_rengi, sap_renk.inputs[6])
+    sap_renk.inputs[7].default_value = hex_renk("#765739")
+    kabuk_rengi = sap_renk.outputs[2]
 
 # kesim cizgileri: her eksen icin n=c+1 ve yapilan kesim sayisi d (anahtar kareli Value dugumleri)
 ayir = nt.nodes.new("ShaderNodeSeparateXYZ")
@@ -397,7 +452,7 @@ if CILEK:
 else:
     baglan(nt, kar.outputs[2], bsdf.inputs["Base Color"])
     baglan(nt, bmp.outputs["Normal"], bsdf.inputs["Normal"])
-bsdf.inputs["Roughness"].default_value = 0.88 if KIVI else (0.42 if CILEK else (0.34 if KARPUZ else 0.26))
+bsdf.inputs["Roughness"].default_value = 0.35 if MANGO else (0.88 if KIVI else (0.42 if CILEK else (0.34 if KARPUZ else 0.26)))
 kes_x = nt.nodes.new("ShaderNodeValue"); kes_x.name = "kes_x"; kes_x.outputs[0].default_value = -10.0
 kirp = matematik(nt, "LESS_THAN", ayir.outputs[0], kes_x.outputs[0])
 seffaf = nt.nodes.new("ShaderNodeBsdfTransparent")
@@ -407,6 +462,47 @@ baglan(nt, bsdf.outputs[0], karis_s.inputs[1])
 baglan(nt, seffaf.outputs[0], karis_s.inputs[2])
 baglan(nt, karis_s.outputs[0], nt.nodes["Material Output"].inputs["Surface"])
 meyve.data.materials.append(m)
+
+mango_yaprak = None
+mango_yaprak_nt = None
+if MANGO:
+    # Yaprak tek mesh olarak govdeye bagli; kes_x shader'i ayni vurusla kirpar.
+    # Kesilen hacim asagidaki ana kup nokta kumesine de dahil edilir.
+    verts, faces = [], []
+    for i in range(13):
+        t = i / 12
+        xx = -A + 0.08 + 0.54 * t
+        yy = -0.14
+        zz = 0.54 - 0.06 * t
+        gen = 0.16 * math.sin(math.pi * t) + 0.035
+        verts.extend([(xx, yy - gen, zz - 0.055), (xx, yy + gen, zz - 0.055),
+                      (xx, yy + gen, zz + 0.055), (xx, yy - gen, zz + 0.055)])
+        if i:
+            b = 4 * (i - 1); n = 4 * i
+            faces.extend([(b+j, b+(j+1)%4, n+(j+1)%4, n+j) for j in range(4)])
+    faces.extend([(3, 2, 1, 0), tuple(4*12+j for j in range(4))])
+    leaf_mesh = bpy.data.meshes.new("mango_yaprak_mesh")
+    leaf_mesh.from_pydata(verts, [], faces)
+    leaf_mesh.update()
+    mango_yaprak = bpy.data.objects.new("mango_kesilen_yaprak", leaf_mesh)
+    sc.collection.objects.link(mango_yaprak)
+    mango_yaprak.parent = meyve
+    lm, mango_yaprak_nt, lb = malzeme("mango_yaprak_yesili")
+    lb.inputs["Base Color"].default_value = hex_renk("#3f782e")
+    lb.inputs["Roughness"].default_value = 0.72
+    lxyz = mango_yaprak_nt.nodes.new("ShaderNodeSeparateXYZ")
+    ltc = mango_yaprak_nt.nodes.new("ShaderNodeTexCoord")
+    baglan(mango_yaprak_nt, ltc.outputs["Object"], lxyz.inputs[0])
+    lkes = mango_yaprak_nt.nodes.new("ShaderNodeValue"); lkes.name = "kes_x"
+    lkes.outputs[0].default_value = -10.0
+    lclip = matematik(mango_yaprak_nt, "LESS_THAN", lxyz.outputs[0], lkes.outputs[0])
+    ltrans = mango_yaprak_nt.nodes.new("ShaderNodeBsdfTransparent")
+    lmix = mango_yaprak_nt.nodes.new("ShaderNodeMixShader")
+    baglan(mango_yaprak_nt, lclip, lmix.inputs[0])
+    baglan(mango_yaprak_nt, lb.outputs[0], lmix.inputs[1])
+    baglan(mango_yaprak_nt, ltrans.outputs[0], lmix.inputs[2])
+    baglan(mango_yaprak_nt, lmix.outputs[0], mango_yaprak_nt.nodes["Material Output"].inputs["Surface"])
+    mango_yaprak.data.materials.append(lm)
 
 kivi_tuy = None
 kivi_tuy_nt = None
@@ -682,6 +778,9 @@ def kup_nesnesi(tur, no):
         pz = np.maximum(profil_r(merk[:, 2]), 1e-6)
         en = np.sqrt((merk[:, 0] / A) ** 2 + (merk[:, 1] / B) ** 2) / pz
         d = np.maximum(en, np.abs(merk[:, 2] / R))
+    elif MANGO:
+        kayma = 0.09 * np.sin(np.pi * merk[:, 0] / A)
+        d = np.sqrt((merk[:, 1] / B) ** 2 + ((merk[:, 2] - kayma) / R) ** 2) / np.maximum(profil_r(merk[:, 0]) / R, 1e-6)
     else:
         d = np.sqrt(merk[:, 1] ** 2 + merk[:, 2] ** 2) / np.maximum(profil_r(merk[:, 0]), 1e-6)
     u = np.clip(d, 0, 1)[:, None]
@@ -696,7 +795,23 @@ def kup_nesnesi(tur, no):
             uc = (dx > 0) & (idx[:, 0] == gx - 1) | (dx < 0) & (idx[:, 0] == 0)
             dis &= (u[:, 0] >= 0.82) | uc
         maske += dis * (2 ** bit)
-    if KIVI:
+    if MANGO:
+        ck = M["cekirdek"]
+        ell = (((merk[:, 0] - ck["x"] * A) / ck["a"]) ** 2 +
+               (merk[:, 1] / ck["b"]) ** 2 + ((merk[:, 2] - kayma) / ck["r"]) ** 2)
+        renk = np.tile(np.array(hex_renk("#f5a729")[:3]), (k, 1))
+        renk[(ell >= 1.0) & (ell < 1.35)] = np.array(hex_renk("#d98627")[:3])
+        renk[ell < 1.0] = np.array(hex_renk("#ae7941")[:3])
+        yaprak_hucre = mango_yaprak_icinde(merk[:, 0], merk[:, 1], merk[:, 2], M)
+        renk[yaprak_hucre] = np.array(hex_renk("#3f782e")[:3])
+        deri = np.tile(np.array(hex_renk("#dcae3c")[:3]), (k, 1))
+        deri[merk[:, 1] > 0.13] = np.array(hex_renk("#72964a")[:3])
+        deri[(merk[:, 1] < -0.08) & (merk[:, 0] > -0.75 * A)] = np.array(hex_renk("#cf512d")[:3])
+        deri[yaprak_hucre] = np.array(hex_renk("#3f782e")[:3])
+        # Dar ucta govdeye gomulu sap izi; ayri butun nesne degildir.
+        sap_hucre = (merk[:, 0] < -0.79 * A) & (np.abs(merk[:, 1]) < 0.13) & (merk[:, 2] > 0.08)
+        deri[sap_hucre & ~yaprak_hucre] = np.array(hex_renk("#765739")[:3])
+    elif KIVI:
         durak = np.array([0.0, 0.25, 0.31, 0.47, 0.76, 0.91, 0.965, 0.985, 1.0])
         ton = np.array([hex_renk(h)[:3] for h in
             ("#f6f1d8", "#f2eed1", "#c8e68d", "#72c83e", "#48ab2f",
@@ -837,6 +952,9 @@ def kup_nesnesi(tur, no):
         at_.data.foreach_set("value", veri.astype(np.float32))
     at_ = me.attributes.new("renk", "FLOAT_COLOR", "POINT")
     at_.data.foreach_set("color", np.hstack([renk, np.ones((k, 1))]).ravel().astype(np.float32))
+    if MANGO:
+        at_ = me.attributes.new("deri", "FLOAT_COLOR", "POINT")
+        at_.data.foreach_set("color", np.hstack([deri, np.ones((k, 1))]).ravel().astype(np.float32))
     if KARPUZ or KIVI:
         at_ = me.attributes.new("kaynak", "FLOAT_VECTOR", "POINT")
         at_.data.foreach_set("vector", merk.ravel().astype(np.float32))
@@ -867,6 +985,10 @@ def kup_nesnesi(tur, no):
     baglan(ntk, bitv, karis.inputs["Factor"])
     baglan(ntk, a_r.outputs["Color"], karis.inputs[6])
     karis.inputs[7].default_value = hex_renk("#b71f29" if CILEK else "#21361a")
+    if MANGO:
+        a_deri = ntk.nodes.new("ShaderNodeAttribute")
+        a_deri.attribute_type = "INSTANCER"; a_deri.attribute_name = "deri"
+        baglan(ntk, a_deri.outputs["Color"], karis.inputs[7])
     if CILEK:
         # Sadece maskelenmis dis yuz; kesik et yuzunde aken bulunmaz.
         geometri = ntk.nodes.new("ShaderNodeNewGeometry")
@@ -1065,6 +1187,10 @@ def deger_anahtar(ad, t, deger):
         n_tuy = kivi_tuy_nt.nodes["kes_x"]
         n_tuy.outputs[0].default_value = deger
         n_tuy.outputs[0].keyframe_insert("default_value", frame=kare(t))
+    if MANGO and ad == "kes_x":
+        n_leaf = mango_yaprak_nt.nodes["kes_x"]
+        n_leaf.outputs[0].default_value = deger
+        n_leaf.outputs[0].keyframe_insert("default_value", frame=kare(t))
 
 
 # yeni meyve dusus anahtarlari: (sn, yukseklik, xy olcek, z olcek) - dusus, ezilme, sekme, oturma
@@ -1082,6 +1208,9 @@ for no, tur in enumerate(PLAN["turlar"]):
     # meyve: belirir (olcek), sonda gizlenir
     meyve.hide_render = False
     meyve.keyframe_insert("hide_render", frame=kare(bas))
+    if mango_yaprak is not None:
+        mango_yaprak.hide_render = False
+        mango_yaprak.keyframe_insert("hide_render", frame=kare(bas))
     if canak is not None:
         for parca in (canak, sap_cilek):
             parca.hide_render = False
@@ -1101,6 +1230,9 @@ for no, tur in enumerate(PLAN["turlar"]):
     meyve.keyframe_insert("location", frame=kare(ks))
     meyve.hide_render = True
     meyve.keyframe_insert("hide_render", frame=kare(ks + 0.02))
+    if mango_yaprak is not None:
+        mango_yaprak.hide_render = True
+        mango_yaprak.keyframe_insert("hide_render", frame=kare(ks + 0.02))
     if canak is not None:
         for parca in (canak, sap_cilek):
             parca.hide_render = True
@@ -1162,6 +1294,9 @@ for fc in egriler(ad):
     for kp in fc.keyframe_points:
         kp.interpolation = "CONSTANT" if fc.data_path == "rotation_euler" else "LINEAR"
 sabit_interp(nt_m)
+if mango_yaprak_nt is not None:
+    sabit_interp(mango_yaprak_nt)
+    sabit_interp(mango_yaprak)
 if kivi_tuy_nt is not None:
     sabit_interp(kivi_tuy_nt)
 ad = meyve.animation_data.action
@@ -1187,15 +1322,17 @@ kesit.rotation_euler = (0, 0, 0)
 mk_, ntk_, bk_ = malzeme("kesit_m")
 gp = ntk_.nodes.new("ShaderNodeNewGeometry")
 ay_ = ntk_.nodes.new("ShaderNodeSeparateXYZ")
-if KARPUZ or KIVI:
+if KARPUZ or KIVI or MANGO:
     kesit_koordinat = ntk_.nodes.new("ShaderNodeTexCoord")
     baglan(ntk_, kesit_koordinat.outputs["Object"], ay_.inputs[0])
 else:
     baglan(ntk_, gp.outputs["Position"], ay_.inputs[0])
 v_r = ntk_.nodes.new("ShaderNodeValue"); v_r.name = "kesit_r"; v_r.outputs[0].default_value = 1.0
 v_x = ntk_.nodes.new("ShaderNodeValue"); v_x.name = "kesit_x"; v_x.outputs[0].default_value = 0.0
-dy = matematik(ntk_, "MULTIPLY", ay_.outputs[1], v_r.outputs[0]) if (KARPUZ or KIVI) else ay_.outputs[1]
-dz = (matematik(ntk_, "MULTIPLY", ay_.outputs[2], v_r.outputs[0]) if (KARPUZ or KIVI) else
+dy = (matematik(ntk_, "MULTIPLY", ay_.outputs[1], v_r.outputs[0]) if (KARPUZ or KIVI) else
+      matematik(ntk_, "MULTIPLY", ay_.outputs[1],
+          matematik(ntk_, "MULTIPLY", v_r.outputs[0], None, deger_b=B / R)) if MANGO else ay_.outputs[1])
+dz = (matematik(ntk_, "MULTIPLY", ay_.outputs[2], v_r.outputs[0]) if (KARPUZ or KIVI or MANGO) else
       matematik(ntk_, "SUBTRACT", ay_.outputs[2], None, deger_b=MERKEZ_Z))
 rad = matematik(ntk_, "SQRT", matematik(ntk_, "ADD", matematik(ntk_, "MULTIPLY", dy, dy), matematik(ntk_, "MULTIPLY", dz, dz)))
 if CILEK:
@@ -1212,10 +1349,22 @@ if CILEK:
     en_ = matematik(ntk_, "SQRT", matematik(ntk_, "ADD", matematik(ntk_, "MULTIPLY", nx_, nx_), matematik(ntk_, "MULTIPLY", ny_, ny_)))
     en_ = matematik(ntk_, "DIVIDE", en_, matematik(ntk_, "MAXIMUM", p_, None, deger_b=1e-6))
     u_ = matematik(ntk_, "MAXIMUM", en_, matematik(ntk_, "ABSOLUTE", matematik(ntk_, "DIVIDE", dz, None, deger_b=R)))
+elif MANGO:
+    p_rad = matematik(ntk_, "DIVIDE", v_r.outputs[0], None, deger_b=R)
+    ny = matematik(ntk_, "DIVIDE", dy, None, deger_b=B)
+    nz = matematik(ntk_, "DIVIDE", dz, None, deger_b=R)
+    u_ = matematik(ntk_, "DIVIDE", matematik(ntk_, "SQRT", matematik(ntk_, "ADD",
+        matematik(ntk_, "MULTIPLY", ny, ny), matematik(ntk_, "MULTIPLY", nz, nz))),
+        matematik(ntk_, "MAXIMUM", p_rad, None, deger_b=1e-6))
 else:
     u_ = matematik(ntk_, "DIVIDE", rad, v_r.outputs[0])
 et_r = ntk_.nodes.new("ShaderNodeValToRGB")
-if KARPUZ:
+if MANGO:
+    et_r.color_ramp.elements[0].color = hex_renk("#f6ae33")
+    et_r.color_ramp.elements[1].position = 1.0
+    et_r.color_ramp.elements[1].color = hex_renk("#d88922")
+    e_mango = et_r.color_ramp.elements.new(0.96); e_mango.color = hex_renk("#f6a32c")
+elif KARPUZ:
     et_r.color_ramp.elements[0].color = hex_renk("#e84244")
     et_r.color_ramp.elements[1].position = 1.0
     et_r.color_ramp.elements[1].color = hex_renk("#143c27")
@@ -1227,7 +1376,20 @@ else:
     et_r.color_ramp.elements[1].position = 0.97
     et_r.color_ramp.elements[1].color = hex_renk("#a81722" if CILEK else "#a8cc5c")
     e_m = et_r.color_ramp.elements.new(0.42 if CILEK else 0.6); e_m.color = hex_renk("#f7a7ab" if CILEK else "#e3e08e")
-if CILEK:
+if MANGO:
+    cek, ell = mango_cekirdek_maske(ntk_, v_x.outputs[0], dy, dz)
+    lif = matematik(ntk_, "MULTIPLY", matematik(ntk_, "GREATER_THAN", ell, None, deger_b=1.0),
+                    matematik(ntk_, "LESS_THAN", ell, None, deger_b=1.35))
+    lif_mix = ntk_.nodes.new("ShaderNodeMix"); lif_mix.data_type = "RGBA"
+    baglan(ntk_, lif, lif_mix.inputs["Factor"])
+    baglan(ntk_, et_r.outputs["Color"], lif_mix.inputs[6])
+    lif_mix.inputs[7].default_value = hex_renk("#d98627")
+    cek_mix = ntk_.nodes.new("ShaderNodeMix"); cek_mix.data_type = "RGBA"
+    baglan(ntk_, cek, cek_mix.inputs["Factor"])
+    baglan(ntk_, lif_mix.outputs[2], cek_mix.inputs[6])
+    cek_mix.inputs[7].default_value = hex_renk("#ae7941")
+    baglan(ntk_, cek_mix.outputs[2], bk_.inputs["Base Color"])
+elif CILEK:
     e_r = et_r.color_ramp.elements.new(0.82); e_r.color = hex_renk("#d52b36")
 elif not KARPUZ:
     e_k = et_r.color_ramp.elements.new(0.985); e_k.color = hex_renk("#21361a")
@@ -1285,13 +1447,14 @@ for tur in PLAN["turlar"]:
     kesit.hide_render = False
     kesit.keyframe_insert("hide_render", frame=kare(xk[0][0]))
     kesit.hide_render = True
-    kesit.keyframe_insert("hide_render", frame=kare(xk[-1][0] + 0.02))
+    kesit.keyframe_insert("hide_render", frame=kare(xk[-1][0] if MANGO else xk[-1][0] + 0.02))
     for t, konum in xk:
         r_ = 1.0 if CILEK else float(profil_r(np.array([konum]))[0]) * 0.995
         # Yalniz kalan govdenin yeni kesim duzlemine bagli; hicbir nesnede
         # kameraya/yone dogru ayrik bir on yuz konumlandirilmaz.
-        kesit.location = (konum + 0.002, 0, MERKEZ_Z)
-        kesit.scale = (1, r_, r_)
+        z_kayma = 0.09 * math.sin(math.pi * konum / A) if MANGO else 0.0
+        kesit.location = (konum + 0.002, 0, MERKEZ_Z + z_kayma)
+        kesit.scale = (1, B * r_ / R, r_) if MANGO else (1, r_, r_)
         kesit.keyframe_insert("location", frame=kare(t))
         kesit.keyframe_insert("scale", frame=kare(t))
         for ad_, deger in (("kesit_r", r_), ("kesit_x", konum)):

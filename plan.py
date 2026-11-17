@@ -49,6 +49,16 @@ MEYVELER = {
         "boyun": 1.0,
         "profil": "kiwi",
     },
+    "mango": {
+        # Yatik, bir ucu daha dar ve hafif bobreksi; yassi uzun lifli cekirdek.
+        # Dar ucta kabuga gomulu kisa sap izi; ayri havada kalan parca yok.
+        "A": 1.16,
+        "B": 0.62,
+        "R": 0.72,
+        "boyun": 0.60,
+        "profil": "mango",
+        "cekirdek": {"x": 0.04, "a": 0.62, "b": 0.20, "r": 0.28},
+    },
 }
 
 # Turlar: (kesim sayisi, kesim suresi sn). Acilis 0.4 sn + sonuc 1.3 sn eklenir -> toplam 60 sn
@@ -79,6 +89,10 @@ def meyve_profil(xn, m):
     if m.get("profil") == "kiwi":
         xn = np.clip(xn, -1.0, 1.0)
         return np.maximum(0.0, 1.0 - xn * xn) ** 0.38
+    if m.get("profil") == "mango":
+        xn = np.clip(xn, -1.0, 1.0)
+        s = (xn + 1.0) / 2.0
+        return np.sqrt(np.maximum(0.0, 1.0 - xn * xn)) * (0.60 + 0.40 * s) * (1.0 + 0.12 * np.sin(np.pi * s))
     return profil(xn, m["boyun"])
 
 
@@ -87,6 +101,8 @@ def meyve_fmax(m):
         return float(meyve_profil(np.linspace(-1, 1, 20001), m).max())
     if m.get("profil") == "kiwi":
         return 1.0
+    if m.get("profil") == "mango":
+        return float(meyve_profil(np.linspace(-1, 1, 20001), m).max())
     return fmax(m["boyun"])
 
 
@@ -98,6 +114,14 @@ def profil_yaricap(x, m, fm=None):
     return m["R"] * meyve_profil(np.asarray(x) / m["A"], m) / fm
 
 
+def mango_yaprak_icinde(x, y, z, m):
+    """Govdeye bagli tek kisa yapragin gercek hacmi; ayni hacim kuplenir."""
+    t = (x + m["A"] - 0.08) / 0.54
+    gen = 0.16 * np.sin(np.pi * np.clip(t, 0.0, 1.0)) + 0.035
+    return ((t >= 0.0) & (t <= 1.0) & (np.abs(y + 0.14) <= gen) &
+            (np.abs(z - (0.54 - 0.06 * t)) <= 0.055))
+
+
 def icinde(x, y, z, m):
     """Meyvenin merkezine gore (x,y,z) noktasi govdenin icinde mi."""
     if m.get("profil") == "strawberry":
@@ -105,6 +129,11 @@ def icinde(x, y, z, m):
         return (np.abs(z) <= m["R"]) & ((x / m["A"]) ** 2 + (y / m["B"]) ** 2 <= p * p)
     xn = x / m["A"]
     rr = profil_yaricap(x, m)
+    if m.get("profil") == "mango":
+        # Bobreksi eksen kaymasi her kesit ve kup hesabinda ayni kalir.
+        ofset = 0.09 * np.sin(np.pi * xn)
+        govde = (np.abs(xn) <= 1.0) & ((y / m["B"]) ** 2 + ((z - ofset) / m["R"]) ** 2 <= (rr / m["R"]) ** 2)
+        return govde | mango_yaprak_icinde(x, y, z, m)
     return (np.abs(xn) <= 1.0) & (y * y + z * z <= rr * rr)
 
 
