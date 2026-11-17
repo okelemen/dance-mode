@@ -46,7 +46,7 @@ def lale_sahnesi(w, h, saydam):
     tc = nt.nodes.new("ShaderNodeTexCoord"); sp = nt.nodes.new("ShaderNodeSeparateXYZ")
     nt.links.new(tc.outputs["Generated"], sp.inputs[0])
     rp = nt.nodes.new("ShaderNodeValToRGB"); el = rp.color_ramp.elements
-    el[0].position = 0.0; el[0].color = (*lin(hex3("#2ccaff")), 1)
+    el[0].position = 0.0; el[0].color = (*lin(hex3("#12b8ff")), 1)
     el[1].position = 0.40; el[1].color = (*lin(hex3("#0038d8")), 1)   # 17 Kas: parlaklik +0,07 -> koyu doygun tepe
     e2 = el.new(0.12); e2.color = (*lin(hex3("#0a8aff")), 1)
     nt.links.new(sp.outputs["Z"], rp.inputs[0])
@@ -412,12 +412,37 @@ def kelebek(konum, olcek, renk):
     boru((x, y, z - 0.4 * olcek), (x, y, z + 0.45 * olcek), 0.05 * olcek, M("kel_g", lambda: mat_pbr("kel_g", "#20242a", 0.5)))
 
 
+def balon(merkez, r, renkler):
+    """sicak hava balonu: dilimli (renk renk) tombul zarf + hasir sepet + halatlar"""
+    x, y, z = merkez
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=r, location=(x, y, z), segments=16, ring_count=12)
+    o = bpy.context.active_object; o.scale = (1.0, 1.0, 1.18)
+    for p_ in o.data.polygons:
+        p_.use_smooth = True
+    mats = [M("bal" + c, lambda c_=c: mat_pbr("bal" + c_, c_, 0.3, kaplama=0.5)) for c in renkler]
+    for m_ in mats:
+        o.data.materials.append(m_)
+    for p_ in o.data.polygons:
+        a_ = math.atan2(p_.center.y, p_.center.x)
+        p_.material_index = int(((a_ + math.pi) / (2 * math.pi)) * 16) % len(mats)
+    yuvarlak_kutu("sepet", (x, y, z - r * 1.75), (r * 0.42, r * 0.42, r * 0.32), M("sepet", lambda: mat_pbr("sepet", "#a85a1e", 0.6)), egim=r * 0.05, seg=2)
+    for dx in (-1, 1):
+        for dy in (-1, 1):
+            boru((x + dx * r * 0.18, y + dy * r * 0.18, z - r * 1.6), (x + dx * r * 0.45, y + dy * r * 0.45, z - r * 1.05), r * 0.012,
+                 M("halat", lambda: mat_pbr("halat", "#6a3a1a", 0.6)))
+
+
 def gok_ogeleri(rnd):
     """ekran dolu kurali (md. 7): bulut kumeleri, kus suruleri, kelebekler, ruzgarda ucusan lale yapraklari"""
-    for (x, y, z, o) in ((-150, 260, 70, 16), (-60, 300, 95, 20), (40, 280, 80, 17), (140, 250, 62, 15), (230, 320, 100, 22),
-                         (-240, 320, 110, 22), (0, 330, 120, 20),
-                         (190, 200, 40, 9), (-200, 230, 42, 10), (60, 360, 140, 26), (-140, 360, 150, 26)):
+    for (x, y, z, o) in ((-150, 260, 70, 16), (140, 250, 62, 15), (230, 320, 100, 22), (-240, 320, 110, 22),
+                         (190, 200, 40, 9), (-200, 230, 42, 10)):
         bulut((x, y, z), o, rnd)
+    # 17 Kas: ortadaki beyaz bulutlar yerine renkli sicak hava balonlari (gok dolu, doygun - kapak soluk yasak)
+    takim = (("#ff1e3c", "#ffd21e"), ("#1e8cff", "#ffffff"), ("#a040ff", "#ff3ab4"), ("#ff7a14", "#2fd04a"), ("#ffd21e", "#ff1e3c", "#1e8cff"),
+             ("#ff3ab4", "#ffd21e"), ("#2fd04a", "#1e8cff"), ("#ff7a14", "#a040ff"))
+    for k, (x, y, z, r) in enumerate(((-34, 90, 26, 3.2), (30, 80, 30, 3.0), (-12, 120, 42, 3.6), (48, 130, 20, 3.4), (-60, 140, 46, 4.2),
+                                      (8, 160, 56, 4.0), (80, 190, 60, 5.0), (-95, 200, 34, 5.0), (-22, 70, 16, 2.0), (18, 64, 21, 1.8))):
+        balon((x, y, z), r, takim[k % len(takim)])
     for k in range(12):
         kus((rnd.uniform(-22, 22), rnd.uniform(28, 55), rnd.uniform(9, 20)), rnd.uniform(0.6, 0.9),
             rnd.choice(("#ffffff", "#ffffff", "#ffd21e", "#ff7a14")), rnd)
