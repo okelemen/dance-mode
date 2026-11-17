@@ -109,6 +109,40 @@ def saman(sure=0.75):
     return ((puf * 0.8 + his * 2.4) * 0.5).astype(np.float64)
 
 
+def su(sure=0.9):
+    """31 (kutup buzul kiyisi): buzlu suya kayis - kisa buz kayma cizirtisi + 'splas' (genis bant gurultu, hizli atak) + 3 kabarcik 'blup'"""
+    t = np.arange(int(sure * SR)) / SR
+    r = np.random.default_rng(31).standard_normal(len(t))
+    k = np.exp(-np.arange(int(0.002 * SR)) / (0.0006 * SR)); r2 = r - np.convolve(r, k / k.sum(), "same")       # yuksek geciren: su tanecikleri
+    kay = r2 * np.exp(-((t - 0.05) / 0.05) ** 2) * 0.6                                                          # buzda kayma
+    spl = r2 * np.exp(-np.maximum(0, t - 0.12) * 9) * (t > 0.12) * np.minimum(1, np.maximum(0, t - 0.12) / 0.004)
+    g = np.zeros(len(t))
+    for i, (t0, f0) in enumerate(((0.32, 520), (0.45, 640), (0.56, 760))):                                     # kabarciklar
+        tt = np.maximum(0, t - t0); f = f0 * (1 + 2.5 * tt)
+        g += np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-tt * 40) * (t > t0) * 0.5
+    return ((kay + spl * 1.6 + g) * 0.5).astype(np.float64)
+
+
+def buzul_kopma(sure=1.6):
+    """31 acilis: buzuldan dev buz kutlesi kopar. earshot bankasi cut_hit/rumble (01-muzik/human-tetris-31/buzul-kopma.wav, sfx_render);
+    kendi sentezim earshot'ta 'digital glitch' okundu (18 Kas) -> dosya varsa o kullanilir."""
+    import os as _os
+    yol = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "01-muzik", "human-tetris-31", "buzul-kopma.wav")
+    if _os.path.exists(yol):
+        x, r = sf.read(yol, dtype="float64", always_2d=True); x = x.mean(1)
+        if r != SR:
+            x = np.interp(np.arange(int(len(x) * SR / r)) / SR, np.arange(len(x)) / r, x)
+        return x[: int(sure * SR)]
+    t = np.arange(int(sure * SR)) / SR
+    rng = np.random.default_rng(311)
+    c = np.zeros(len(t))
+    for t0 in sorted(rng.uniform(0, 0.5, 14)):
+        i = int(t0 * SR); n = int(0.012 * SR); c[i:i + n] += rng.standard_normal(n) * np.exp(-np.arange(n) / (0.003 * SR))
+    f = 70 * np.exp(-t * 1.5) + 40
+    gur = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 2.2) * np.minimum(1, t / 0.05)
+    return ((c * 1.4 + gur * 0.9) * 0.5).astype(np.float64)
+
+
 def geri_sar(sure=0.4):
     """30 kanca: kaset geri sarma - 1400->180 Hz inen cizirti + titreyen ust ton"""
     t = np.arange(int(sure * SR)) / SR
@@ -141,7 +175,11 @@ def main():
             yerlestir(ef, vuus(1.4, True, 0.7), t + 0.15)               # duvar yaklasiyor
             yerlestir(ef, geri_sar(0.4), t + 1.6, 1.0)                  # geri sarma
             yerlestir(ef, vuus(0.6, True, 0.9), t + 2.0)                # beyaz parlama + kanat
-            yerlestir(ef, ruzgar(1.3), t + 2.0, 0.6)                    # lale yapragi firtinasi
+            if "--buzul" in sys.argv:                                     # 31: buz kutlesi kopar, suya duser, sicrayan su yaziyi acar
+                yerlestir(ef, buzul_kopma(1.2), t + 2.0, 0.9)
+                yerlestir(ef, su(), t + 2.35, 0.9)
+            else:
+                yerlestir(ef, ruzgar(1.3), t + 2.0, 0.6)                # lale yapragi firtinasi
             yerlestir(ef, zap(0.4), t + 2.55, 0.7)                      # WHO WILL WIN?
         elif k["tip"] in ("vs", "giris", "acilis"):          # 5. video: giris karti (3 PLAYERS) VS ile ayni carpisma
             yerlestir(ef, vuus(0.7, True, 0.9), t)
@@ -200,7 +238,10 @@ def main():
         if out:                                                          # 24: OUT - karakter suya duser (sicrama) + alcak uyari
             yerlestir(ef, vuus(0.5, False, 1.0), c - Z["buyu"] * 0.25)
             yerlestir(ef, zap(0.35), c - Z["buyu"] * 0.2, 0.6)
-            if "--saman" in sys.argv:                                     # 30: saman yiginina gomulur -> puf + kuru hisirti + hakem duduk
+            if "--buzul" in sys.argv:                                     # 31: buzlu suya kayar -> kayma + splas + kabarcik + hakem duduk
+                yerlestir(ef, su(), c - 0.05, 1.0)
+                yerlestir(ef, duduk(), c + 0.4, 0.7)
+            elif "--saman" in sys.argv:                                   # 30: saman yiginina gomulur -> puf + kuru hisirti + hakem duduk
                 yerlestir(ef, saman(), c - 0.03, 1.0)
                 yerlestir(ef, duduk(), c + 0.35, 0.7)
             elif "--camur" in sys.argv:                                     # 29: camura kayar -> islak splat + hakem duduk

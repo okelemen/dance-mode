@@ -382,6 +382,28 @@ if OYUNCU == "maskot" and arg("--penguen", "0") == "1":     # 31 (kutup buzul ki
     bs.inputs["Emission Color"].default_value = (*lin(hex3("#3a5ab8")), 1)
     for m in mesler:
         m.data.materials.clear(); m.data.materials.append(pm)
+    # 31 yan gorunum kontrolu: ince insan govdesi penguen okunmuyordu -> gogus kemigine bagli TOMBUL YUMURTA govde (lacivert sirt, beyaz karin).
+    # Kemik uzayinda y = kemik boyu (yukari); karin yonu dinlenme pozunda dunya -y'den (kameraya) hesaplanir, shader nesne normaliyle boyar.
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=1.0, segments=48, ring_count=24)
+    yum = bpy.context.active_object; bpy.ops.object.shade_smooth()
+    yum.data.transform(Matrix.Diagonal((0.155 * BOY, 0.21 * BOY, 0.14 * BOY, 1)))
+    Mb0 = (arm.matrix_world @ kemik(arm, "Spine1").matrix).to_3x3()
+    on_d = Matrix.Rotation(math.radians(float(arg("--don", "0"))), 3, "Z") @ Vector((0, -1, 0))
+    on_l = (Mb0.inverted() @ on_d).normalized()
+    ym = mat_govde(lin(hex3("#1c2a5a")), 0.0); ym.name = "pg_yumurta"; nt = ym.node_tree; bs = nt.nodes["Principled BSDF"]
+    ge = nt.nodes.new("ShaderNodeNewGeometry"); vt = nt.nodes.new("ShaderNodeVectorTransform")
+    vt.vector_type = "NORMAL"; vt.convert_from = "WORLD"; vt.convert_to = "OBJECT"
+    nt.links.new(ge.outputs["Normal"], vt.inputs["Vector"])
+    dp = nt.nodes.new("ShaderNodeVectorMath"); dp.operation = "DOT_PRODUCT"; dp.inputs[1].default_value = tuple(on_l)
+    nt.links.new(vt.outputs["Vector"], dp.inputs[0])
+    gt = nt.nodes.new("ShaderNodeMath"); gt.operation = "GREATER_THAN"; gt.inputs[1].default_value = 0.42
+    nt.links.new(dp.outputs["Value"], gt.inputs[0])
+    mx_ = nt.nodes.new("ShaderNodeMix"); mx_.data_type = "RGBA"; nt.links.new(gt.outputs[0], mx_.inputs["Factor"])
+    mx_.inputs[6].default_value = (*lin(hex3("#1c2a5a")), 1); mx_.inputs[7].default_value = (*lin(hex3("#f4f8ff")), 1)
+    nt.links.new(mx_.outputs[2], bs.inputs["Base Color"])
+    yum.data.materials.append(ym)
+    EKIP.append((yum, "Spine1", Matrix.Translation((0, 0.02 * BOY, 0))))
+    log("penguen yumurta karin yonu (kemik uzayi)", [round(c, 2) for c in on_l])
     ra = 0.07 * BOY                                                   # kirmizi-beyaz seritli atki (kutup hakemi)
     bpy.ops.mesh.primitive_torus_add(major_radius=ra, minor_radius=ra * 0.36, major_segments=40, minor_segments=12)
     f_ = bpy.context.active_object; bpy.ops.object.shade_smooth(); f_.data.materials.append(mat_jole("pg_atki", lin(hex3("#ff2a3a")), emis=0.18, purluk=0.15))
