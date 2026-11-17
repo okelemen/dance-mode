@@ -173,5 +173,20 @@ degis("  cx.save(); cx.shadowColor = '#ff6ad6'; cx.shadowBlur = 24 * k;",
 degis("  maskotCiz(ayn ? 2 * xm - kx : kx, y0 + kf[1] * sc, kf[2] * sc * 1.25 / (62 * k), t, 1, true);",
       "  maskotCiz(ayn ? 2 * xm - kx : kx, y0 + kf[1] * sc - kf[2] * sc * 0.25, kf[2] * sc * 1.6 / (62 * k), t, 1, true);   // motor 28: yavru penguen buyuk kafa")
 
+# tam render 1: kapi kepengindeki neon amblem eski pembe maskotun yaprak kulakli yuzuydu -> Nilo (penguen) neon yuzu
+degis("""  cx.beginPath(); cx.ellipse(mx, my, r, r * 0.9, 0, 0, 6.283); cx.stroke();                         // yuz
+  for (const sx of [-1, 1]) {
+    cx.beginPath(); cx.ellipse(mx + sx * r * 0.55, my - r * 0.95, r * 0.24, r * 0.42, sx * 0.5, 0, 6.283); cx.stroke();   // yaprak kulak
+    cx.beginPath(); cx.ellipse(mx + sx * r * 0.33, my - r * 0.12, r * 0.1, r * 0.15, 0, 0, 6.283); cx.stroke();          // goz
+  }
+  cx.beginPath(); cx.arc(mx, my + r * 0.2, r * 0.16, 0.2, Math.PI - 0.2); cx.stroke();""",
+      """  cx.beginPath(); cx.ellipse(mx, my, r, r * 0.92, 0, 0, 6.283); cx.stroke();                        // motor 28: Nilo neon yuzu - bas
+  cx.beginPath(); cx.moveTo(mx, my - r * 0.22); cx.bezierCurveTo(mx - r * 0.2, my - r * 0.68, mx - r * 0.9, my - r * 0.55, mx - r * 0.76, my + r * 0.06);
+  cx.bezierCurveTo(mx - r * 0.66, my + r * 0.52, mx - r * 0.2, my + r * 0.76, mx, my + r * 0.8);
+  cx.bezierCurveTo(mx + r * 0.2, my + r * 0.76, mx + r * 0.66, my + r * 0.52, mx + r * 0.76, my + r * 0.06);
+  cx.bezierCurveTo(mx + r * 0.9, my - r * 0.55, mx + r * 0.2, my - r * 0.68, mx, my - r * 0.22); cx.stroke();   // kalp yuz lekesi
+  for (const sx of [-1, 1]) { cx.beginPath(); cx.ellipse(mx + sx * r * 0.3, my - r * 0.02, r * 0.13, r * 0.17, 0, 0, 6.283); cx.stroke(); }   // gozler
+  cx.beginPath(); cx.moveTo(mx - r * 0.17, my + r * 0.24); cx.lineTo(mx + r * 0.17, my + r * 0.24); cx.lineTo(mx, my + r * 0.44); cx.closePath(); cx.stroke();   // gaga""")
+
 open(HEDEF, "w", encoding="utf-8").write(t)
 print("->", HEDEF, len(t))
