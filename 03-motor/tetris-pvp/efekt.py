@@ -97,6 +97,18 @@ def camur(sure=0.8):
     return ((g * 0.9 + sap * 2.2) * 0.5).astype(np.float64)
 
 
+def saman(sure=0.75):
+    """30 (lale tarlasi): saman yiginina gomulme - yumusak 'puf' (110->55 Hz, kisa) + kuru hisirti (bant gecirgen gurultu, iki dalga)"""
+    t = np.arange(int(sure * SR)) / SR
+    f = 110 * np.exp(-t * 9) + 55
+    puf = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 11)
+    g = np.random.default_rng(30).standard_normal(len(t))
+    k1 = np.exp(-np.arange(int(0.001 * SR)) / (0.0003 * SR)); g1 = np.convolve(g, k1 / k1.sum(), "same")
+    k2 = np.exp(-np.arange(int(0.004 * SR)) / (0.0012 * SR)); g2 = np.convolve(g, k2 / k2.sum(), "same")
+    his = (g1 - g2) * (np.exp(-t * 7) + 0.5 * np.exp(-np.maximum(0, t - 0.18) * 9) * (t > 0.18)) * np.minimum(1, t / 0.01)
+    return ((puf * 0.8 + his * 2.4) * 0.5).astype(np.float64)
+
+
 def gurleme(sure=1.9):
     """29 tas kapi: agir tas surtunmesi - alcak gecirgen gurultu + 38 Hz titresim, sonda yavaslar"""
     t = np.arange(int(sure * SR)) / SR
@@ -172,7 +184,10 @@ def main():
         if out:                                                          # 24: OUT - karakter suya duser (sicrama) + alcak uyari
             yerlestir(ef, vuus(0.5, False, 1.0), c - Z["buyu"] * 0.25)
             yerlestir(ef, zap(0.35), c - Z["buyu"] * 0.2, 0.6)
-            if "--camur" in sys.argv:                                     # 29: camura kayar -> islak splat + hakem duduk
+            if "--saman" in sys.argv:                                     # 30: saman yiginina gomulur -> puf + kuru hisirti + hakem duduk
+                yerlestir(ef, saman(), c - 0.03, 1.0)
+                yerlestir(ef, duduk(), c + 0.35, 0.7)
+            elif "--camur" in sys.argv:                                     # 29: camura kayar -> islak splat + hakem duduk
                 yerlestir(ef, camur(), c - 0.03, 1.0)
                 yerlestir(ef, duduk(), c + 0.35, 0.7)
             elif "--jole" in sys.argv:                                      # 28: dev jole kasesine duser -> islak blop + hakem duduk
