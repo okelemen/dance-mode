@@ -130,12 +130,12 @@ def ananas_tac(x, y, z, m):
     sektor = (aci * 16.0 / (2.0 * np.pi)) % 16.0
     indeks = np.floor(sektor + 0.5) % 16.0
     faz = np.abs(((sektor + 0.5) % 1.0) - 0.5)
-    uzunluk = 0.58 + 0.065 * np.sin(indeks * 2.3) + 0.035 * np.cos(indeks * 3.7)
+    uzunluk = np.minimum(0.81, 0.77 + 0.035 * np.sin(indeks * 2.3) + 0.020 * np.cos(indeks * 3.7))
     t = (x - base) / uzunluk
     rho = np.sqrt(y * y + z * z) / m["R"]
-    merkez = 0.18 + 0.32 * np.clip(t, 0, 1)
-    yaricap = (0.15 * (1.0 - np.clip(t, 0, 1)) + 0.09) * np.minimum(1.0, (1.0 - np.clip(t, 0, 1)) / 0.10)
-    aci_pay = 0.27 * (1.0 - np.clip(t, 0, 1)) + 0.035
+    merkez = 0.19 + 0.53 * np.clip(t, 0, 1)
+    yaricap = (0.26 * (1.0 - np.clip(t, 0, 1)) + 0.15) * np.minimum(1.0, (1.0 - np.clip(t, 0, 1)) / 0.10)
+    aci_pay = 0.44 * (1.0 - np.clip(t, 0, 1)) + 0.09
     yaprak = (np.abs(rho - merkez) <= yaricap) & (faz <= aci_pay)
     dip = (x <= m["A"] + 0.18) & (rho <= 0.19 * np.sqrt(np.maximum(0.0, 1.0 - np.clip(t, 0, 1))))
     return (t >= 0) & (t <= 1) & (yaprak | dip)

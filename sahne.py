@@ -567,12 +567,12 @@ if ANANAS:
     base = 0.78 * A
     for i in range(16):
         aci = 2 * math.pi * i / 16
-        uzunluk = 0.58 + 0.065 * math.sin(i * 2.3) + 0.035 * math.cos(i * 3.7)
+        uzunluk = min(0.81, 0.77 + 0.035 * math.sin(i * 2.3) + 0.020 * math.cos(i * 3.7))
         once = None
         for t in (0.0, 0.22, 0.48, 0.72, 0.90):
-            merkez = R * (0.18 + 0.32 * t)
-            yarim = R * (0.15 * (1 - t) + 0.09)
-            da = (0.27 * (1 - t) + 0.035) * (2 * math.pi / 16)
+            merkez = R * (0.19 + 0.53 * t)
+            yarim = R * (0.26 * (1 - t) + 0.15)
+            da = (0.44 * (1 - t) + 0.09) * (2 * math.pi / 16)
             j = len(vs)
             for rr, aa in ((merkez - yarim, aci - da), (merkez + yarim, aci - da),
                            (merkez + yarim, aci + da), (merkez - yarim, aci + da)):
@@ -585,7 +585,7 @@ if ANANAS:
                 fs.append((j + 3, j + 2, j + 1, j)); mi.append(i % 2)
             once = j
         tip = len(vs)
-        merkez = R * 0.50
+        merkez = R * 0.72
         vs.append((base + uzunluk, merkez * math.cos(aci), merkez * math.sin(aci)))
         for q in range(4):
             fs.append((once + q, once + (q + 1) % 4, tip)); mi.append(i % 2)
