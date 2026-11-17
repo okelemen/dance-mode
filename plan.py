@@ -49,6 +49,17 @@ MEYVELER = {
         "boyun": 1.0,
         "profil": "kiwi",
     },
+    "pineapple": {
+        # Yatay uzun oval-silindir; sag ucta yesil yaprak tac, solda sap tabani.
+        # Capraz sarmal baklava gozleri kabariktir. Kesitte altin sari lifli et,
+        # boyuna soluk silindirik merkez vardir; sert cekirdek/oyuk yoktur.
+        "A": 1.10,
+        "R": 0.65,
+        "boyun": 1.0,
+        "profil": "pineapple",
+        "xmin": -1.20,  # sol sap tabani da kesim hacmine dahil
+        "xmax": 1.68,   # sag yaprak tacinin son ucu da kup olur
+    },
 }
 
 # Turlar: (kesim sayisi, kesim suresi sn). Acilis 0.4 sn + sonuc 1.3 sn eklenir -> toplam 60 sn
@@ -79,13 +90,16 @@ def meyve_profil(xn, m):
     if m.get("profil") == "kiwi":
         xn = np.clip(xn, -1.0, 1.0)
         return np.maximum(0.0, 1.0 - xn * xn) ** 0.38
+    if m.get("profil") == "pineapple":
+        xn = np.clip(xn, -1.0, 1.0)
+        return np.maximum(0.0, 1.0 - xn * xn) ** 0.31
     return profil(xn, m["boyun"])
 
 
 def meyve_fmax(m):
     if m.get("profil") == "strawberry":
         return float(meyve_profil(np.linspace(-1, 1, 20001), m).max())
-    if m.get("profil") == "kiwi":
+    if m.get("profil") in ("kiwi", "pineapple"):
         return 1.0
     return fmax(m["boyun"])
 
@@ -98,6 +112,40 @@ def profil_yaricap(x, m, fm=None):
     return m["R"] * meyve_profil(np.asarray(x) / m["A"], m) / fm
 
 
+def ananas_goz(x, aci, m):
+    """0..1 kabarik baklava gozu; x ve aci boyunca capraz sarmal sira."""
+    s = (np.asarray(x) / m["A"] + 1.0) * 0.5
+    ax = np.abs(((18.0 * s + 0.5) % 1.0) - 0.5) * 2.0
+    cevre = np.asarray(aci) * (12.0 / (2.0 * np.pi)) + 0.45 * 18.0 * s
+    an = np.abs(((cevre + 0.5) % 1.0) - 0.5) * 2.0
+    baklava = np.maximum(0.0, 1.0 - 0.72 * (ax + an))
+    zarf = np.minimum(1.0, meyve_profil(np.asarray(x) / m["A"], m) / 0.35)
+    return baklava * zarf
+
+
+def ananas_tac(x, y, z, m):
+    """On alti sivri yaprak ve merkez dip: ayni hacim gorunur tac/kup icin."""
+    base = 0.78 * m["A"]
+    aci = np.arctan2(z, y)
+    sektor = (aci * 16.0 / (2.0 * np.pi)) % 16.0
+    indeks = np.floor(sektor + 0.5) % 16.0
+    faz = np.abs(((sektor + 0.5) % 1.0) - 0.5)
+    uzunluk = 0.58 + 0.065 * np.sin(indeks * 2.3) + 0.035 * np.cos(indeks * 3.7)
+    t = (x - base) / uzunluk
+    rho = np.sqrt(y * y + z * z) / m["R"]
+    merkez = 0.18 + 0.32 * np.clip(t, 0, 1)
+    yaricap = (0.15 * (1.0 - np.clip(t, 0, 1)) + 0.09) * np.minimum(1.0, (1.0 - np.clip(t, 0, 1)) / 0.10)
+    aci_pay = 0.27 * (1.0 - np.clip(t, 0, 1)) + 0.035
+    yaprak = (np.abs(rho - merkez) <= yaricap) & (faz <= aci_pay)
+    dip = (x <= m["A"] + 0.18) & (rho <= 0.19 * np.sqrt(np.maximum(0.0, 1.0 - np.clip(t, 0, 1))))
+    return (t >= 0) & (t <= 1) & (yaprak | dip)
+
+
+def ananas_sap(x, y, z, m):
+    return ((x >= m["xmin"]) & (x <= -m["A"] + 0.025) &
+            (y * y + z * z <= 0.07 * 0.07))
+
+
 def icinde(x, y, z, m):
     """Meyvenin merkezine gore (x,y,z) noktasi govdenin icinde mi."""
     if m.get("profil") == "strawberry":
@@ -105,6 +153,10 @@ def icinde(x, y, z, m):
         return (np.abs(z) <= m["R"]) & ((x / m["A"]) ** 2 + (y / m["B"]) ** 2 <= p * p)
     xn = x / m["A"]
     rr = profil_yaricap(x, m)
+    if m.get("profil") == "pineapple":
+        rr = rr + 0.035 * ananas_goz(x, np.arctan2(z, y), m)
+        govde = (np.abs(xn) <= 1.0) & (y * y + z * z <= rr * rr)
+        return govde | ananas_tac(x, y, z, m) | ananas_sap(x, y, z, m)
     return (np.abs(xn) <= 1.0) & (y * y + z * z <= rr * rr)
 
 
@@ -118,7 +170,8 @@ def eksen_bol(n):
 def kup_say(m, cx, cy, cz):
     """Kesimlerle olusan hucrelerden merkezi meyvenin icinde kalanlar = kup sayisi."""
     A, R, B = m["A"], m["R"], m.get("B", m["R"])
-    xs = -A + (np.arange(cx + 1) + 0.5) * (2 * A / (cx + 1))
+    xmin, xmax = m.get("xmin", -A), m.get("xmax", A)
+    xs = xmin + (np.arange(cx + 1) + 0.5) * ((xmax - xmin) / (cx + 1))
     ys = -B + (np.arange(cy + 1) + 0.5) * (2 * B / (cy + 1))
     zs = -R + (np.arange(cz + 1) + 0.5) * (2 * R / (cz + 1))
     say = 0
@@ -131,7 +184,8 @@ def kup_say(m, cx, cy, cz):
 def dilim_say(m, cx, cy, cz):
     """x dilimi basina (soldan saga) kup sayisi; toplam = kup_say."""
     A, R, B = m["A"], m["R"], m.get("B", m["R"])
-    xs = -A + (np.arange(cx + 1) + 0.5) * (2 * A / (cx + 1))
+    xmin, xmax = m.get("xmin", -A), m.get("xmax", A)
+    xs = xmin + (np.arange(cx + 1) + 0.5) * ((xmax - xmin) / (cx + 1))
     ys = -B + (np.arange(cy + 1) + 0.5) * (2 * B / (cy + 1))
     zs = -R + (np.arange(cz + 1) + 0.5) * (2 * R / (cz + 1))
     Y, Z = np.meshgrid(ys, zs, indexing="ij")
@@ -160,7 +214,8 @@ def plan_kur(meyve):
                 tt = kes_bas + tc * CIZGI_PAY + tc * (1 - CIZGI_PAY) * ((i - n_c) / cx) ** 0.85
             yar = m["A"] if eks == "x" else (m.get("B", m["R"]) if eks == "y" else m["R"])
             if eks == "x":
-                konum = -yar + j * 2 * yar / (c + 1)  # soldan saga
+                xmin, xmax = m.get("xmin", -yar), m.get("xmax", yar)
+                konum = xmin + j * (xmax - xmin) / (c + 1)  # sap -> tac
             else:
                 konum = yar - j * 2 * yar / (c + 1)
             kesimler.append([round(tt, 4), eks, round(konum, 5), j])

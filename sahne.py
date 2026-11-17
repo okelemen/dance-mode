@@ -16,7 +16,7 @@ import bpy
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from plan import icinde, meyve_profil, profil_yaricap
+from plan import ananas_goz, ananas_sap, ananas_tac, icinde, meyve_profil, profil_yaricap
 
 argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 
@@ -37,7 +37,9 @@ A, R = M["A"], M["R"]
 CILEK = PLAN["meyve"] == "strawberry"
 KARPUZ = PLAN["meyve"] == "watermelon"
 KIVI = PLAN["meyve"] == "kiwi"
+ANANAS = PLAN["meyve"] == "pineapple"
 B = M.get("B", R)
+XMIN, XMAX = M.get("xmin", -A), M.get("xmax", A)
 TAHTA_UST = 0.14
 MERKEZ_Z = TAHTA_UST + R - 0.03
 GORSEL_TAVAN = 120  # gorsel kup izgarasi eksen basina en fazla (sayi plandaki gercek degerdir)
@@ -319,10 +321,13 @@ bsdf.inputs["Roughness"].default_value = 0.55
 tahta.data.materials.append(m)
 
 # ---------------------------------------------------------------- nesne govdesi
-bpy.ops.mesh.primitive_uv_sphere_add(segments=96, ring_count=64, radius=1.0, location=(0, 0, MERKEZ_Z))
+bpy.ops.mesh.primitive_uv_sphere_add(segments=128 if ANANAS else 96,
+                                    ring_count=96 if ANANAS else 64,
+                                    radius=1.0, location=(0, 0, MERKEZ_Z))
 meyve = bpy.context.object
 meyve.name = "meyve"
 # Kure -> plan.py ile birebir ayni profil; cilekte dikey eksen Z.
+goz_degerleri = []
 for v in meyve.data.vertices:
     x, y, z = v.co
     eks = z if CILEK else x
@@ -330,11 +335,20 @@ for v in meyve.data.vertices:
     radial = float(meyve_profil(np.array([eks]), M)[0]) / max(sphere_r, 1e-6) / FMAX
     if CILEK:
         v.co = (x * A * radial, y * B * radial, z * R)
+    elif ANANAS:
+        eye = float(ananas_goz(np.array([x * A]), np.array([math.atan2(z, y)]), M)[0])
+        rr = R * float(meyve_profil(np.array([x]), M)[0]) / FMAX + 0.035 * eye
+        scale = rr / max(sphere_r, 1e-6)
+        v.co = (x * A, y * scale, z * scale)
+        goz_degerleri.append(eye)
     else:
         v.co = (x * A, y * R * radial, z * R * radial)
+if ANANAS:
+    goz_at = meyve.data.attributes.new("ananas_goz", "FLOAT", "POINT")
+    goz_at.data.foreach_set("value", np.asarray(goz_degerleri, dtype=np.float32))
 bpy.ops.object.shade_smooth()
 
-m, nt, bsdf = malzeme("kivi_kisa_tuylu_kabuk" if KIVI else ("karpuz_seritli_kabuk" if KARPUZ else ("cilek_yuzey" if CILEK else "avokado_kabuk")))
+m, nt, bsdf = malzeme("ananas_kabarik_baklava_goz" if ANANAS else ("kivi_kisa_tuylu_kabuk" if KIVI else ("karpuz_seritli_kabuk" if KARPUZ else ("cilek_yuzey" if CILEK else "avokado_kabuk"))))
 tk = nt.nodes.new("ShaderNodeTexCoord")
 nz = nt.nodes.new("ShaderNodeTexNoise")
 nz.inputs["Scale"].default_value = 5
@@ -359,7 +373,18 @@ if KIVI:
     yukseklik = matematik(nt, "ADD", yukseklik,
         matematik(nt, "MULTIPLY", kisa_tuy.outputs["Fac"], None, deger_b=0.65))
 baglan(nt, yukseklik, bmp.inputs["Height"])
-kabuk_rengi = karpuz_serit(nt, tk.outputs["Object"]) if KARPUZ else kabuk_rmp.outputs["Color"]
+if ANANAS:
+    goz_attr = nt.nodes.new("ShaderNodeAttribute")
+    goz_attr.attribute_name = "ananas_goz"
+    goz_ramp = nt.nodes.new("ShaderNodeValToRGB")
+    goz_ramp.color_ramp.elements[0].color = hex_renk("#4c4727")
+    goz_ramp.color_ramp.elements[1].color = hex_renk("#dfb653")
+    for pos, renk_ in ((0.15, "#6f7838"), (0.42, "#a18b35"), (0.75, "#c69c39")):
+        el = goz_ramp.color_ramp.elements.new(pos); el.color = hex_renk(renk_)
+    baglan(nt, goz_attr.outputs["Fac"], goz_ramp.inputs["Fac"])
+    kabuk_rengi = goz_ramp.outputs["Color"]
+else:
+    kabuk_rengi = karpuz_serit(nt, tk.outputs["Object"]) if KARPUZ else kabuk_rmp.outputs["Color"]
 
 # kesim cizgileri: her eksen icin n=c+1 ve yapilan kesim sayisi d (anahtar kareli Value dugumleri)
 ayir = nt.nodes.new("ShaderNodeSeparateXYZ")
@@ -397,7 +422,7 @@ if CILEK:
 else:
     baglan(nt, kar.outputs[2], bsdf.inputs["Base Color"])
     baglan(nt, bmp.outputs["Normal"], bsdf.inputs["Normal"])
-bsdf.inputs["Roughness"].default_value = 0.88 if KIVI else (0.42 if CILEK else (0.34 if KARPUZ else 0.26))
+bsdf.inputs["Roughness"].default_value = 0.57 if ANANAS else (0.88 if KIVI else (0.42 if CILEK else (0.34 if KARPUZ else 0.26)))
 kes_x = nt.nodes.new("ShaderNodeValue"); kes_x.name = "kes_x"; kes_x.outputs[0].default_value = -10.0
 kirp = matematik(nt, "LESS_THAN", ayir.outputs[0], kes_x.outputs[0])
 seffaf = nt.nodes.new("ShaderNodeBsdfTransparent")
@@ -502,6 +527,101 @@ if KARPUZ or KIVI:
     sap_izi.location = (A - 0.012, 0, 0)
     sap_izi.rotation_euler = (0, math.pi / 2, 0)
     sap_izi.data.materials.append(iz_m)
+
+ANANAS_EK_OB = []
+ANANAS_EK_NT = []
+if ANANAS:
+    def ananas_ek_malzeme(ad, renk):
+        mat, tree, b = malzeme(ad)
+        b.inputs["Base Color"].default_value = hex_renk(renk)
+        b.inputs["Roughness"].default_value = 0.61
+        tc = tree.nodes.new("ShaderNodeTexCoord")
+        if "yaprak" in ad:
+            damar = tree.nodes.new("ShaderNodeTexNoise")
+            damar.inputs["Scale"].default_value = 26.0
+            damar.inputs["Detail"].default_value = 2.0
+            baglan(tree, tc.outputs["Object"], damar.inputs["Vector"])
+            yesil = tree.nodes.new("ShaderNodeValToRGB")
+            yesil.color_ramp.elements[0].color = hex_renk("#214b28")
+            yesil.color_ramp.elements[1].color = hex_renk("#65a54d")
+            baglan(tree, damar.outputs["Fac"], yesil.inputs["Fac"])
+            baglan(tree, yesil.outputs["Color"], b.inputs["Base Color"])
+        xyz = tree.nodes.new("ShaderNodeSeparateXYZ")
+        baglan(tree, tc.outputs["Object"], xyz.inputs[0])
+        kes = tree.nodes.new("ShaderNodeValue")
+        kes.name = "kes_x"; kes.outputs[0].default_value = -10.0
+        sil = matematik(tree, "LESS_THAN", xyz.outputs[0], kes.outputs[0])
+        mix = tree.nodes.new("ShaderNodeMixShader")
+        trn = tree.nodes.new("ShaderNodeBsdfTransparent")
+        baglan(tree, sil, mix.inputs[0])
+        baglan(tree, b.outputs[0], mix.inputs[1])
+        baglan(tree, trn.outputs[0], mix.inputs[2])
+        baglan(tree, mix.outputs[0], tree.nodes["Material Output"].inputs["Surface"])
+        ANANAS_EK_NT.append(tree)
+        return mat
+
+    yesiller = [ananas_ek_malzeme("ananas_yaprak_koyu", "#28572c"),
+                ananas_ek_malzeme("ananas_yaprak_acik", "#4d923d"),
+                ananas_ek_malzeme("ananas_tac_dibi", "#315f2e")]
+    vs, fs, mi = [], [], []
+    base = 0.78 * A
+    for i in range(16):
+        aci = 2 * math.pi * i / 16
+        uzunluk = 0.58 + 0.065 * math.sin(i * 2.3) + 0.035 * math.cos(i * 3.7)
+        once = None
+        for t in (0.0, 0.22, 0.48, 0.72, 0.90):
+            merkez = R * (0.18 + 0.32 * t)
+            yarim = R * (0.15 * (1 - t) + 0.09)
+            da = (0.27 * (1 - t) + 0.035) * (2 * math.pi / 16)
+            j = len(vs)
+            for rr, aa in ((merkez - yarim, aci - da), (merkez + yarim, aci - da),
+                           (merkez + yarim, aci + da), (merkez - yarim, aci + da)):
+                vs.append((base + uzunluk * t, rr * math.cos(aa), rr * math.sin(aa)))
+            if once is not None:
+                for q in range(4):
+                    fs.append((once + q, once + (q + 1) % 4, j + (q + 1) % 4, j + q))
+                    mi.append(i % 2)
+            else:
+                fs.append((j + 3, j + 2, j + 1, j)); mi.append(i % 2)
+            once = j
+        tip = len(vs)
+        merkez = R * 0.50
+        vs.append((base + uzunluk, merkez * math.cos(aci), merkez * math.sin(aci)))
+        for q in range(4):
+            fs.append((once + q, once + (q + 1) % 4, tip)); mi.append(i % 2)
+    # Orta dip, yapraklarla ayni kesim hacminin icindedir.
+    j = len(vs)
+    for xx, rr in ((base, 0.19 * R), (A + 0.18, 0.07 * R)):
+        for i in range(16):
+            aa = 2 * math.pi * i / 16
+            vs.append((xx, rr * math.cos(aa), rr * math.sin(aa)))
+    for i in range(16):
+        fs.append((j + i, j + (i + 1) % 16, j + 16 + (i + 1) % 16, j + 16 + i)); mi.append(2)
+    fs.extend((tuple(j + i for i in range(15, -1, -1)),
+               tuple(j + 16 + i for i in range(16))))
+    mi.extend((2, 2))
+    tac_mesh = bpy.data.meshes.new("ananas_on_alti_yaprak_tac")
+    tac_mesh.from_pydata(vs, [], fs)
+    tac_mesh.update()
+    for p_, index in zip(tac_mesh.polygons, mi):
+        p_.material_index = index
+    tac_ob = bpy.data.objects.new("ananas_tac_kesilip_kuplenir", tac_mesh)
+    sc.collection.objects.link(tac_ob)
+    tac_ob.parent = meyve
+    for mat in yesiller:
+        tac_mesh.materials.append(mat)
+    ANANAS_EK_OB.append(tac_ob)
+
+    sap_mat = ananas_ek_malzeme("ananas_sol_sap_tabani", "#776643")
+    bpy.ops.mesh.primitive_cylinder_add(vertices=16, radius=0.07, depth=0.13)
+    sap_ob = bpy.context.object
+    sap_ob.name = "ananas_sap_kesilip_kuplenir"
+    sap_ob.location = (XMIN + 0.065, 0, 0)
+    sap_ob.rotation_euler = (0, math.pi / 2, 0)
+    bpy.ops.object.transform_apply(location=True, rotation=True)
+    sap_ob.parent = meyve
+    sap_ob.data.materials.append(sap_mat)
+    ANANAS_EK_OB.append(sap_ob)
 
 # ---------------------------------------------------------------- bicak
 def bicak_kur():
@@ -667,7 +787,7 @@ def kup_nesnesi(tur, no):
     tavan = GORSEL_TAVANLAR[min(no, len(GORSEL_TAVANLAR) - 1)]
     cx, cy, cz = tur["cx"], tur["cy"], tur["cz"]
     gx, gy, gz = (min(c + 1, tavan) for c in (cx, cy, cz))
-    xs = -A + (np.arange(gx) + 0.5) * (2 * A / gx)
+    xs = XMIN + (np.arange(gx) + 0.5) * ((XMAX - XMIN) / gx)
     ys = -B + (np.arange(gy) + 0.5) * (2 * B / gy)
     zs = -R + (np.arange(gz) + 0.5) * (2 * R / gz)
     X, Y, Z = np.meshgrid(xs, ys, zs, indexing="ij")
@@ -676,7 +796,7 @@ def kup_nesnesi(tur, no):
     merk = np.stack([X[ic], Y[ic], Z[ic]], 1)
     k = len(merk)
     rng = np.random.default_rng(7 + no)
-    hx, hy, hz = A / gx, B / gy, R / gz
+    hx, hy, hz = (XMAX - XMIN) / (2 * gx), B / gy, R / gz
     # Et/cekirdek rengi ve gercek dis kabuk maskesi ayni kaynak hucre konumundan gelir.
     if CILEK:
         pz = np.maximum(profil_r(merk[:, 2]), 1e-6)
@@ -717,6 +837,21 @@ def kup_nesnesi(tur, no):
         # hucrenin icerideki kirmizi et payini olcuyle hesaba kat.
         ic_renk_u = np.maximum(0.0, u[:, 0] - np.minimum(0.10, 0.5 * max(hy, hz) / R))
         renk = np.column_stack([np.interp(ic_renk_u, durak, ton[:, c]) for c in range(3)])
+    elif ANANAS:
+        # Kaynak konumu plan.py'deki hacimle ayni. Tac ve sap govde etine boyanmaz.
+        renk = np.column_stack([np.interp(u[:, 0], [0, .28, .82, .95, 1],
+            [hex_renk(h)[c] for h in ("#f8e9a2", "#f3dfa0", "#eec95f", "#aa8140", "#594925")])
+            for c in range(3)])
+        aci = np.arctan2(merk[:, 2], merk[:, 1])
+        lif = (np.cos(38 * aci + 5 * merk[:, 0]) > .89) & (u[:, 0] > .28) & (u[:, 0] < .89)
+        renk[lif] = .72 * renk[lif] + .28 * np.array(hex_renk("#fff2b8")[:3])
+        govde = (np.abs(merk[:, 0]) <= A) & (merk[:, 1] ** 2 + merk[:, 2] ** 2 <=
+            (profil_r(merk[:, 0]) + .035 * ananas_goz(merk[:, 0], aci, M)) ** 2)
+        tac = ananas_tac(merk[:, 0], merk[:, 1], merk[:, 2], M) & ~govde
+        sap = ananas_sap(merk[:, 0], merk[:, 1], merk[:, 2], M) & ~govde
+        renk[tac] = np.array(hex_renk("#3e7937")[:3])
+        renk[sap] = np.array(hex_renk("#776643")[:3])
+        goz = ananas_goz(merk[:, 0], aci, M)
     elif CILEK:
         # Kesit rampasiyla ayni duraklar: beyaz oz, pembe et, kirmizi halka.
         oz = np.array(hex_renk("#fff1e5")[:3])
@@ -741,7 +876,7 @@ def kup_nesnesi(tur, no):
     xk = [(k_[4], k_[2]) for k_ in tur["kesimler"] if k_[1] == "x"]
     T = np.array([t for t, _ in xk])
     P = np.array([c for _, c in xk])
-    sag = -A + (idx[:, 0] + 1) * (2 * A / gx)
+    sag = XMIN + (idx[:, 0] + 1) * ((XMAX - XMIN) / gx)
     j = np.searchsorted(P, sag - 1e-6)
     tr = np.where(j < len(T), T[np.minimum(j, len(T) - 1)], T[-1]) + 0.005 + rng.uniform(0, 0.05, k)
     # REF-080 dokulme: dilim kesilince kupler hizla duser, donerek akar, tahtada daha once dusenlerin ustune
@@ -835,9 +970,13 @@ def kup_nesnesi(tur, no):
     for ad_, veri in (("tr", tr + SN_KAYMA), ("maske", maske), ("sure", sure)):
         at_ = me.attributes.new(ad_, "FLOAT", "POINT")
         at_.data.foreach_set("value", veri.astype(np.float32))
+    if ANANAS:
+        for ad_, veri in (("ananas_tac", tac.astype(float)), ("ananas_sap", sap.astype(float)), ("ananas_goz", goz)):
+            at_ = me.attributes.new(ad_, "FLOAT", "POINT")
+            at_.data.foreach_set("value", np.asarray(veri, dtype=np.float32))
     at_ = me.attributes.new("renk", "FLOAT_COLOR", "POINT")
     at_.data.foreach_set("color", np.hstack([renk, np.ones((k, 1))]).ravel().astype(np.float32))
-    if KARPUZ or KIVI:
+    if KARPUZ or KIVI or ANANAS:
         at_ = me.attributes.new("kaynak", "FLOAT_VECTOR", "POINT")
         at_.data.foreach_set("vector", merk.ravel().astype(np.float32))
     ob = bpy.data.objects.new(f"kup_{no}", me)
@@ -871,6 +1010,37 @@ def kup_nesnesi(tur, no):
         # Sadece maskelenmis dis yuz; kesik et yuzunde aken bulunmaz.
         geometri = ntk.nodes.new("ShaderNodeNewGeometry")
         cilek_aken(ntk, geometri.outputs["Position"], karis.outputs[2], bk, dis_maske=bitv)
+    elif ANANAS:
+        a_goz = ntk.nodes.new("ShaderNodeAttribute"); a_goz.attribute_type = "INSTANCER"; a_goz.attribute_name = "ananas_goz"
+        a_tac = ntk.nodes.new("ShaderNodeAttribute"); a_tac.attribute_type = "INSTANCER"; a_tac.attribute_name = "ananas_tac"
+        a_sap = ntk.nodes.new("ShaderNodeAttribute"); a_sap.attribute_type = "INSTANCER"; a_sap.attribute_name = "ananas_sap"
+        goz_r = ntk.nodes.new("ShaderNodeValToRGB")
+        goz_r.color_ramp.elements[0].color = hex_renk("#51452c")
+        goz_r.color_ramp.elements[1].color = hex_renk("#e2b449")
+        for pos, col in ((.25, "#708044"), (.55, "#a98238"), (.82, "#c9973b")):
+            el = goz_r.color_ramp.elements.new(pos); el.color = hex_renk(col)
+        baglan(ntk, a_goz.outputs["Fac"], goz_r.inputs["Fac"])
+        kab = ntk.nodes.new("ShaderNodeMix"); kab.data_type = "RGBA"
+        baglan(ntk, bitv, kab.inputs["Factor"])
+        baglan(ntk, a_r.outputs["Color"], kab.inputs[6])
+        baglan(ntk, goz_r.outputs["Color"], kab.inputs[7])
+        yap = ntk.nodes.new("ShaderNodeMix"); yap.data_type = "RGBA"
+        baglan(ntk, a_tac.outputs["Fac"], yap.inputs["Factor"])
+        baglan(ntk, kab.outputs[2], yap.inputs[6])
+        yap_doku = ntk.nodes.new("ShaderNodeTexNoise")
+        yap_doku.inputs["Scale"].default_value = 24.0
+        yap_doku.inputs["Detail"].default_value = 2.0
+        baglan(ntk, tkk.outputs["Generated"], yap_doku.inputs["Vector"])
+        yap_renk = ntk.nodes.new("ShaderNodeValToRGB")
+        yap_renk.color_ramp.elements[0].color = hex_renk("#28572c")
+        yap_renk.color_ramp.elements[1].color = hex_renk("#5e9b45")
+        baglan(ntk, yap_doku.outputs["Fac"], yap_renk.inputs["Fac"])
+        baglan(ntk, yap_renk.outputs["Color"], yap.inputs[7])
+        sap_mix = ntk.nodes.new("ShaderNodeMix"); sap_mix.data_type = "RGBA"
+        baglan(ntk, a_sap.outputs["Fac"], sap_mix.inputs["Factor"])
+        baglan(ntk, yap.outputs[2], sap_mix.inputs[6])
+        baglan(ntk, a_r.outputs["Color"], sap_mix.inputs[7])
+        baglan(ntk, sap_mix.outputs[2], bk.inputs["Base Color"])
     elif KARPUZ:
         # Generated kubun yerel 0..1 koordinati, kaynak merkez ve hucre boyutu
         # ile kesilmeden onceki tam 3B konuma geri cevrilir. Rind renkleri
@@ -1065,6 +1235,11 @@ def deger_anahtar(ad, t, deger):
         n_tuy = kivi_tuy_nt.nodes["kes_x"]
         n_tuy.outputs[0].default_value = deger
         n_tuy.outputs[0].keyframe_insert("default_value", frame=kare(t))
+    if ANANAS and ad == "kes_x":
+        for tree in ANANAS_EK_NT:
+            node = tree.nodes["kes_x"]
+            node.outputs[0].default_value = deger
+            node.outputs[0].keyframe_insert("default_value", frame=kare(t))
 
 
 # yeni meyve dusus anahtarlari: (sn, yukseklik, xy olcek, z olcek) - dusus, ezilme, sekme, oturma
@@ -1092,6 +1267,9 @@ for no, tur in enumerate(PLAN["turlar"]):
     if kivi_tuy is not None:
         kivi_tuy.hide_render = False
         kivi_tuy.keyframe_insert("hide_render", frame=kare(bas))
+    for parca in ANANAS_EK_OB:
+        parca.hide_render = False
+        parca.keyframe_insert("hide_render", frame=kare(bas))
     for t_, dz_, sxy, sz in DUSUS_ANAHTAR:
         meyve.scale = (sxy, sxy, sz)
         meyve.location = (0, 0, MERKEZ_Z + dz_ - R * (1 - sz))  # ezilmede alt yuzey tahtada kalir
@@ -1111,6 +1289,9 @@ for no, tur in enumerate(PLAN["turlar"]):
     if kivi_tuy is not None:
         kivi_tuy.hide_render = True
         kivi_tuy.keyframe_insert("hide_render", frame=kare(ks + 0.02))
+    for parca in ANANAS_EK_OB:
+        parca.hide_render = True
+        parca.keyframe_insert("hide_render", frame=kare(ks + 0.02))
     bicak.location = DISARI
     bicak.keyframe_insert("location", frame=kare(kb - 0.3))
     # cizgi degerleri sifirla
@@ -1143,7 +1324,10 @@ for no, tur in enumerate(PLAN["turlar"]):
         bicak.location = bicak_konum(eks, konum, False, 1.0)
         bicak.keyframe_insert("location", frame=f + 1 + tut + kalkis)
         if eks == "x":  # kesim yuzu yalniz dilim kesiminde ilerler (iz asamasinda meyve butun)
-            deger_anahtar("kes_x", t, konum)
+            # Son dilim kalan tac ucunu da tasir; ayni anda butun kaynak
+            # geometri kesilirken o dilimin yesil kupleri yigina katilir.
+            bitis_x = XMAX + 0.01 if ANANAS and i == len(vl) - 1 else konum
+            deger_anahtar("kes_x", t, bitis_x)
     bicak.location = DISARI
     bicak.keyframe_insert("location", frame=kare(ks + 0.12))
     # kup yigini: supurme basinda gorunur (meyvenin icinde), dilim dilim coker
@@ -1164,6 +1348,8 @@ for fc in egriler(ad):
 sabit_interp(nt_m)
 if kivi_tuy_nt is not None:
     sabit_interp(kivi_tuy_nt)
+for tree in ANANAS_EK_NT:
+    sabit_interp(tree)
 ad = meyve.animation_data.action
 for fc in egriler(ad):
     for kp in fc.keyframe_points:
@@ -1222,6 +1408,12 @@ if KARPUZ:
     for pos, renk_ in ((0.72, "#d92730"), (0.78, "#ee7773"), (0.81, "#f8efdc"),
                        (0.90, "#ebedd5"), (0.965, "#a2c891"), (0.985, "#1d4a2d")):
         el = et_r.color_ramp.elements.new(pos); el.color = hex_renk(renk_)
+elif ANANAS:
+    et_r.color_ramp.elements[0].color = hex_renk("#f8e9a2")
+    et_r.color_ramp.elements[1].position = 1.0
+    et_r.color_ramp.elements[1].color = hex_renk("#594925")
+    for pos, col in ((.28, "#f3dfa0"), (.82, "#eec95f"), (.95, "#aa8140")):
+        el = et_r.color_ramp.elements.new(pos); el.color = hex_renk(col)
 else:
     et_r.color_ramp.elements[0].color = hex_renk("#fff1e5" if CILEK else "#f1e9b8")
     et_r.color_ramp.elements[1].position = 0.97
@@ -1229,7 +1421,7 @@ else:
     e_m = et_r.color_ramp.elements.new(0.42 if CILEK else 0.6); e_m.color = hex_renk("#f7a7ab" if CILEK else "#e3e08e")
 if CILEK:
     e_r = et_r.color_ramp.elements.new(0.82); e_r.color = hex_renk("#d52b36")
-elif not KARPUZ:
+elif not KARPUZ and not ANANAS:
     e_k = et_r.color_ramp.elements.new(0.985); e_k.color = hex_renk("#21361a")
 baglan(ntk_, u_, et_r.inputs["Fac"])
 if CILEK:
@@ -1248,6 +1440,20 @@ elif KARPUZ:
 elif KIVI:
     kivi_renk, _ = kivi_ic_renk(ntk_, v_x.outputs[0], dy, dz, v_r.outputs[0])
     baglan(ntk_, kivi_renk, bk_.inputs["Base Color"])
+elif ANANAS:
+    # Uzunlamasina lifler kesitte radyal acik izler olarak gorunur.
+    aci_ = matematik(ntk_, "ARCTAN2", dz, dy)
+    dalga_ = matematik(ntk_, "COSINE", matematik(ntk_, "ADD",
+        matematik(ntk_, "MULTIPLY", aci_, None, deger_b=38.0),
+        matematik(ntk_, "MULTIPLY", v_x.outputs[0], None, deger_b=5.0)))
+    lif_ = matematik(ntk_, "MULTIPLY", matematik(ntk_, "GREATER_THAN", dalga_, None, deger_b=.89),
+        matematik(ntk_, "MULTIPLY", matematik(ntk_, "GREATER_THAN", u_, None, deger_b=.28),
+            matematik(ntk_, "LESS_THAN", u_, None, deger_b=.89)))
+    lif_mix = ntk_.nodes.new("ShaderNodeMix"); lif_mix.data_type = "RGBA"
+    baglan(ntk_, lif_, lif_mix.inputs["Factor"])
+    baglan(ntk_, et_r.outputs["Color"], lif_mix.inputs[6])
+    lif_mix.inputs[7].default_value = hex_renk("#fff2b8")
+    baglan(ntk_, lif_mix.outputs[2], bk_.inputs["Base Color"])
 else:
     ck_ = M["cekirdek"]
     dxp = matematik(ntk_, "SUBTRACT", v_x.outputs[0], None, deger_b=ck_["x"] * A)
@@ -1287,6 +1493,9 @@ for tur in PLAN["turlar"]:
     kesit.hide_render = True
     kesit.keyframe_insert("hide_render", frame=kare(xk[-1][0] + 0.02))
     for t, konum in xk:
+        if ANANAS and konum >= A:
+            kesit.hide_render = True
+            kesit.keyframe_insert("hide_render", frame=kare(t))
         r_ = 1.0 if CILEK else float(profil_r(np.array([konum]))[0]) * 0.995
         # Yalniz kalan govdenin yeni kesim duzlemine bagli; hicbir nesnede
         # kameraya/yone dogru ayrik bir on yuz konumlandirilmaz.
