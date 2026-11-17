@@ -34,7 +34,7 @@ SERIT = {
     "p2": {"ana": "#ff3aa8", "koyu": "#a8105e", "acik": "#ffa6d6"},
 }
 SICAK = ("#ff1e3c", "#ffd21e", "#ff7a14", "#a040ff", "#ff3ab4", "#2fd04a")
-BUZ = ("#38d4ff", "#1ab4ff", "#5ae6ff", "#20c8f0")
+BUZ = ("#08b8ff", "#0a8cff", "#00d0f0", "#1a6cff")
 
 
 # ------------------------------------------------------------------ sahne / isik
@@ -170,7 +170,7 @@ def buz_kutlesi(konum, boyut, renk, rnd, kar=True):
     o.scale = boyut
     o.data.materials.append(buz_mat(renk))
     if kar:
-        k = kure((x, y, z + boyut[2] * 0.72), 1.0, M("kar", lambda: mat_pbr("kar", "#c8eeff", 0.45, kaplama=0.2, bump=(6, 0.2))), sub=2)
+        k = kure((x, y, z + boyut[2] * 0.72), 1.0, M("kar", lambda: mat_pbr("kar", "#5ad0ff", 0.45, kaplama=0.2, bump=(6, 0.2))), sub=2)
         k.scale = (boyut[0] * 0.8, boyut[1] * 0.8, boyut[2] * 0.3)
     return o
 
@@ -223,7 +223,7 @@ def penguen(konum, olcek, rnd, don=0.0):
 # ------------------------------------------------------------------ KUTUP KIYISI (iki katmanda; serit sahnesinde uzak kisim holdout)
 def kiyi(serit_modu, rnd):
     _MAT.clear(); _SABLON.clear()
-    raf = mat_pbr("buz_raf", "#62dcff", 0.25, kaplama=0.4, bump=(3, 0.2))          # buz rafi: doygun acik camgobegi (beyaz degil)
+    raf = mat_pbr("buz_raf", "#0a9cff", 0.25, kaplama=0.4, bump=(3, 0.2))          # buz rafi: doygun camgobegi-mavi (17 Kas kapak 1: acik camgobegi soluk + parlak cikti)
     duz("zemin_yakin", -80, 80, -4, GECIS, 0, raf)
     duz("zemin_uzak", -80, 80, GECIS, KIYI_Y, 0, raf)
     deniz = mat_su("deniz", "#00c8e8", "#0068e0", olcek=0.08)
@@ -233,13 +233,13 @@ def kiyi(serit_modu, rnd):
     for x in (-80, 80):
         yuvarlak_kutu("raf_kenar", (x, (KIYI_Y - 4) / 2, -0.15), (1.2, KIYI_Y + 4, 0.5), raf, egim=0.3, seg=2)
     yuvarlak_kutu("raf_kenar", (0, KIYI_Y, -0.15), (161, 1.2, 0.5), raf, egim=0.3, seg=2)
-    yol = mat_buz_blok("buz_yol", "#2ab8ff", "#56d6ff")
+    yol = mat_buz_blok("buz_yol", "#0a7cff", "#12a4ff", ara="#04307a")
     duz("buz_yol_uzak", -2.6, 2.6, GECIS, KIYI_Y, 0.006, yol)
     iskele(rnd)
     # raf ustunde: kar tumsekleri (mavi tonlu), penguen kolonileri, renkli arastirma kulubeleri, samandira ve kizaklar
     for k in range(40):
         x = rnd.choice((-1, 1)) * rnd.uniform(5.5, 70); y = rnd.uniform(GECIS + 1, KIYI_Y - 2)
-        t_ = kure((x, y, -0.3), rnd.uniform(0.8, 2.2), M("kar", lambda: mat_pbr("kar", "#c8eeff", 0.45, kaplama=0.2, bump=(6, 0.2))), sub=2)
+        t_ = kure((x, y, -0.3), rnd.uniform(0.8, 2.2), M("kar", lambda: mat_pbr("kar", "#5ad0ff", 0.45, kaplama=0.2, bump=(6, 0.2))), sub=2)
         t_.scale = (1.6, 1.0, 0.45)
     for (cx, cy, n) in ((-9, 16, 14), (11, 19, 16), (-22, 24, 18), (26, 14, 12), (-38, 18, 14), (40, 25, 16)):
         for k in range(n):
@@ -270,7 +270,7 @@ def kiyi(serit_modu, rnd):
 
 def iskele(rnd):
     """kiyidan fener kutlesine uzanan iskele: buz yolu devam eder, iki yanda oyuncu renginde halat babalari"""
-    yol = M("iskele", lambda: mat_buz_blok("iskele", "#2ab8ff", "#56d6ff"))
+    yol = M("iskele", lambda: mat_buz_blok("iskele", "#0a7cff", "#12a4ff", ara="#04307a"))
     yuvarlak_kutu("iskele", (0, (KIYI_Y + FENER_Y - 6) / 2, -0.05), (5.4, FENER_Y - 6 - KIYI_Y, 0.3), yol, egim=0.08, seg=2)
     for s, R in ((-1, SERIT["p1"]), (1, SERIT["p2"])):
         bm = M("baba" + R["ana"], lambda r_=R["ana"]: mat_pbr("baba" + r_, r_, 0.3, kaplama=0.7))
@@ -286,7 +286,7 @@ def kulube(xy, boy, renk):
     x, y = xy
     gov = M("kul" + renk, lambda: mat_pbr("kul" + renk, renk, 0.35, kaplama=0.5))
     yuvarlak_kutu("kulube", (x, y, boy * 0.45), (boy * 1.6, boy * 1.1, boy * 0.9), gov, egim=boy * 0.08, seg=3)
-    c = kure((x, y, boy * 0.9), boy * 0.95, M("kar", lambda: mat_pbr("kar", "#c8eeff", 0.45, kaplama=0.2, bump=(6, 0.2))), sub=2)
+    c = kure((x, y, boy * 0.9), boy * 0.95, M("kar", lambda: mat_pbr("kar", "#5ad0ff", 0.45, kaplama=0.2, bump=(6, 0.2))), sub=2)
     c.scale = (1.0, 0.7, 0.4)
     pen = M("pen_isik", lambda: mat_emis("pen_isik", lin(hex3("#ffd27a")), 3.0))
     for dx in (-0.4, 0.4):
@@ -353,7 +353,7 @@ def buzul(_rnd=None):
         h = rnd.uniform(18, 34)
         buz_kutlesi((x, rnd.uniform(270, 300), h * 0.35), (rnd.uniform(14, 20), rnd.uniform(10, 16), h), rnd.choice(BUZ + ("#1a9cf0",)), rnd)
     for (x, y, r, h) in ((-200, 420, 90, 50), (-40, 460, 80, 40), (120, 430, 95, 56), (280, 460, 90, 44)):
-        k_ = kure((x, y, 0), r, M("sirt", lambda: mat_pbr("sirt", "#9adcff", 0.5, kaplama=0.15, bump=(1.5, 0.4))), sub=3)
+        k_ = kure((x, y, 0), r, M("sirt", lambda: mat_pbr("sirt", "#3aa8ff", 0.5, kaplama=0.15, bump=(1.5, 0.4))), sub=3)
         k_.scale = (1.6, 0.7, h / r)
 
 
@@ -420,7 +420,7 @@ def gok_ogeleri(rnd):
 # ------------------------------------------------------------------ SERIT: oyuncu buz yolu + renkli sinir + OUT su deligi + kapi
 def serit_esyalari(oyuncu, R, rnd):
     s_dis = -1 if oyuncu == "p1" else 1
-    yol = mat_buz_blok("serit_yol", "#2ab8ff", "#56d6ff")
+    yol = mat_buz_blok("serit_yol", "#0a7cff", "#12a4ff", ara="#04307a")
     duz("serit_yol", -1.6, 1.6, -4, GECIS, 0.006, yol)
     bm = M("sinir" + R["ana"], lambda: mat_pbr("sinir" + R["ana"], R["ana"], 0.25, kaplama=0.8))
     for x in (-1.75, 1.75):                                                # serit siniri: oyuncu renginde cilali buz bloklari
@@ -436,12 +436,12 @@ def serit_esyalari(oyuncu, R, rnd):
         o.modifiers.new("k", "SOLIDIFY").thickness = 0.02
     # OUT ani: dis tarafta acik su deligi (koyu turkuaz su + kenarinda kar halkasi + yuzen buz parcalari; karakter buraya kayar)
     cx, cy = s_dis * 2.95, 5.2
-    su = M("delik", lambda: mat_su("delik", "#00b8e0", "#0050c8", olcek=1.5))
+    su = M("delik", lambda: mat_su("delik", "#00a8e0", "#0038c0", olcek=1.5))
     bpy.ops.mesh.primitive_cylinder_add(radius=1.0, depth=0.05, location=(cx, cy, 0.01), vertices=40)
     d_ = bpy.context.active_object; d_.scale = (1.15, 1.8, 1.0); d_.data.materials.append(su)
     bpy.ops.mesh.primitive_torus_add(major_radius=1.0, minor_radius=0.16, location=(cx, cy, 0.04))
     t_ = bpy.context.active_object; t_.scale = (1.15, 1.8, 1.0)
-    t_.data.materials.append(M("kar", lambda: mat_pbr("kar", "#c8eeff", 0.45, kaplama=0.2, bump=(6, 0.2)))); bpy.ops.object.shade_smooth()
+    t_.data.materials.append(M("kar", lambda: mat_pbr("kar", "#5ad0ff", 0.45, kaplama=0.2, bump=(6, 0.2)))); bpy.ops.object.shade_smooth()
     for k in range(5):
         a = rnd.uniform(0, 6.28)
         buz_kutlesi((cx + 0.55 * math.cos(a), cy + 1.0 * math.sin(a), 0.02), (0.25, 0.2, 0.08), rnd.choice(BUZ), rnd, kar=False)
@@ -458,7 +458,7 @@ def serit_esyalari(oyuncu, R, rnd):
         boru((s_dis * 4.2 + dx, 1.6, 0.25), (s_dis * 4.2 + dx, 3.4, 0.05), 0.04, M("fen_g", lambda: mat_pbr("fen_g", "#2a3a4a", 0.4, metal=0.6)))
     for k in range(8):
         t2 = kure((s_dis * rnd.uniform(6, 20), rnd.uniform(-3, GECIS), -0.25), rnd.uniform(0.7, 1.4),
-                  M("kar", lambda: mat_pbr("kar", "#c8eeff", 0.45, kaplama=0.2, bump=(6, 0.2))), sub=2)
+                  M("kar", lambda: mat_pbr("kar", "#5ad0ff", 0.45, kaplama=0.2, bump=(6, 0.2))), sub=2)
         t2.scale = (1.6, 1.0, 0.45)
     for yy in (2.5, 7.4):                                                  # ic tarafta (hakem yeri) kucuk fener direkleri
         fener((-s_dis * 2.45, yy))
@@ -475,8 +475,8 @@ def kapi(R):
     """buz bloklarindan kapi cercevesi: iki ust uste buz blok direk + kiris (camgobegi cilali), oyuncu renginde bantlar,
     kirisin ustunde kar sapkasi + sarkan buz sarkitlari, ampul dizisi, ustte sonuk LED tabela (motor PLAYER n yazar)"""
     Y, W_, H_, K = KAP["y"], KAP["w"], KAP["h"], KAP["kalin"]
-    buz = mat_pbr("kapi_buz", "#3ad0ff", 0.12, kaplama=0.8, bump=(4, 0.15))
-    kar = mat_pbr("kapi_kar", "#d4f2ff", 0.4, kaplama=0.3, bump=(6, 0.2))
+    buz = mat_pbr("kapi_buz", "#08b4ff", 0.12, kaplama=0.8, bump=(4, 0.15))
+    kar = mat_pbr("kapi_kar", "#5ad0ff", 0.4, kaplama=0.3, bump=(6, 0.2))
     boya = mat_pbr("kapi_boya", R["ana"], 0.25, kaplama=0.9)
     xk = W_ / 2 + K / 2
     for s in (-1, 1):
