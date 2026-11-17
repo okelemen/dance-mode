@@ -17,7 +17,7 @@ import random
 YERLESIM.clear()
 KAPAK = YALNIZ == "kapak"
 POZLAMA = float(arg("--pozlama", arg("--kapak-pozlama", "0")))
-GUNES = float(arg("--gunes", "4.0"))
+GUNES = float(arg("--gunes", "4.8"))   # 17 Kas: mavi ortam isigi turuncu tahtayi soldurdu -> ortam 0,45 -> 0,22, gunes 4,0 -> 4,8
 ON_EK = "kapak-" if KAPAK else ""
 KAP = {"y": 8.0, "w": 3.4, "h": 3.7, "kalin": 0.55}
 KAM = {"z": 2.3, "egim": 5.0, "lens": 18.0, "sensor": 24.0}
@@ -52,7 +52,7 @@ def lale_sahnesi(w, h, saydam):
     nt.links.new(sp.outputs["Z"], rp.inputs[0])
     lp = nt.nodes.new("ShaderNodeLightPath")
     bg_k = nt.nodes.new("ShaderNodeBackground"); bg_k.inputs[1].default_value = 1.0
-    bg_i = nt.nodes.new("ShaderNodeBackground"); bg_i.inputs[1].default_value = 0.45
+    bg_i = nt.nodes.new("ShaderNodeBackground"); bg_i.inputs[1].default_value = 0.22
     nt.links.new(rp.outputs[0], bg_k.inputs[0]); nt.links.new(rp.outputs[0], bg_i.inputs[0])
     mx = nt.nodes.new("ShaderNodeMixShader")
     nt.links.new(lp.outputs["Is Camera Ray"], mx.inputs[0])
@@ -515,6 +515,17 @@ def kapi(R):
             lale_koy(LALE[(k + (s > 0)) % 5], (s * (xk + 0.5 + rnd.uniform(0, 0.4)), Y - 0.5 + rnd.uniform(-0.3, 0.3), 0), 1.0, rnd)
 
 
+def mat_parlama_kis():
+    """buyuk yuzeylerde (cim, tahta, saman, tepe, lale siralari) beyaz yansima doygunlugu yiyor -> specular/coat dusuk"""
+    for m in bpy.data.materials:
+        if not m.use_nodes or "Principled BSDF" not in m.node_tree.nodes:
+            continue
+        if m.name.split(".")[0].startswith(("cim", "tahta_yol", "serit_yol", "saman", "bordur", "tepe", "tac", "sira")):
+            b = m.node_tree.nodes["Principled BSDF"]
+            b.inputs["Specular IOR Level"].default_value = 0.18
+            b.inputs["Coat Weight"].default_value = min(0.1, b.inputs["Coat Weight"].default_value)
+
+
 def serit_katmani(oyuncu):
     R = SERIT[oyuncu]
     sc = lale_sahnesi(960, 1080, True)
@@ -538,6 +549,7 @@ def serit_katmani(oyuncu):
         YERLESIM[on + oyuncu] = d
     YERLESIM["yol"] = {"y_kapi": Y, "genislik": YOL_YARI * 2, "kam": KAM, "serit_w": 960}
     log("aciklik", oyuncu, YERLESIM["aciklik_" + oyuncu], d)
+    mat_parlama_kis()
     yaz(sc, ON_EK + "serit-%s.png" % oyuncu)
 
 
@@ -546,6 +558,7 @@ def gok_katmani(ad):
     kamera(sc)
     isiklar()
     tarla(False, random.Random(30))
+    mat_parlama_kis()
     yaz(sc, ad)
 
 
