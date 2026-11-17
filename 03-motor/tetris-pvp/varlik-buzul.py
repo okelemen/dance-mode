@@ -425,7 +425,7 @@ def serit_esyalari(oyuncu, R, rnd):
     if oyuncu == "p1":
         yol = mat_buz_blok("serit_yol", "#0a5cff", "#1a7cff", ara="#042a7a")
     else:
-        yol = mat_buz_blok("serit_yol", "#ff1e96", "#ff46b4", ara="#7a0848")
+        yol = mat_buz_blok("serit_yol", "#ff0a8c", "#ff14a0", ara="#6a0640")
     duz("serit_yol", -1.6, 1.6, -4, GECIS, 0.006, yol)
     bm = M("sinir" + R["ana"], lambda: mat_pbr("sinir" + R["ana"], R["ana"], 0.25, kaplama=0.8))
     for x in (-1.75, 1.75):                                                # serit siniri: oyuncu renginde cilali buz bloklari
@@ -525,6 +525,8 @@ def mat_parlama_kis():
             b = m.node_tree.nodes["Principled BSDF"]
             b.inputs["Specular IOR Level"].default_value = 0.06
             b.inputs["Coat Weight"].default_value = 0.0
+            if ad.startswith(("buz_yol", "serit_yol", "iskele")):
+                b.inputs["Roughness"].default_value = 0.5   # 18 Kas kapak 5: fener yansimasi yolda beyaz sutun birakiyordu
 
 
 def serit_katmani(oyuncu):
