@@ -123,7 +123,7 @@ def mat_tahta(ad, renk1, renk2, ara="#5a3416", olcek=1.0, satir=0.34):
     return m
 
 
-def mat_saman(ad, renk1="#ffc82a", renk2="#f0a018"):
+def mat_saman(ad, renk1="#ffc400", renk2="#ff8c00"):
     """saman: dolanan (silindirde) seritler + lif bump; parlak altin sari"""
     m = bpy.data.materials.new(ad); m.use_nodes = True; nt = m.node_tree; b = nt.nodes["Principled BSDF"]
     geo = nt.nodes.new("ShaderNodeNewGeometry")
@@ -165,7 +165,7 @@ def mat_lale_sira(ad, renk):
     nt.links.new(geo.outputs["Position"], vo.inputs["Vector"])
     rp = nt.nodes.new("ShaderNodeValToRGB")
     rp.color_ramp.elements[0].position = 0.0; rp.color_ramp.elements[0].color = (*lin(hex3(renk)), 1)
-    rp.color_ramp.elements[1].position = 0.55; rp.color_ramp.elements[1].color = (*lin(hex3("#1f9a2e")), 1)
+    rp.color_ramp.elements[1].position = 0.75; rp.color_ramp.elements[1].color = (*lin(hex3("#18b030")), 1)
     nt.links.new(vo.outputs["Distance"], rp.inputs[0]); nt.links.new(rp.outputs[0], b.inputs["Base Color"])
     bp = nt.nodes.new("ShaderNodeBump"); bp.inputs["Strength"].default_value = 0.8; bp.inputs["Distance"].default_value = 0.08
     inv = nt.nodes.new("ShaderNodeMath"); inv.operation = "SUBTRACT"; inv.inputs[0].default_value = 1.0
@@ -236,7 +236,7 @@ def tarla(serit_modu, rnd):
     cim = mat_pbr("cim", "#2ee640", 0.55, kaplama=0.2, bump=(18, 0.25))
     duz("zemin_yakin", -80, 80, -4, GECIS, 0, cim)
     duz("zemin_uzak", -400, 400, GECIS, 500, 0, cim)
-    yol = mat_tahta("tahta_yol", "#d88a3c", "#e8a04c")
+    yol = mat_tahta("tahta_yol", "#ff7a14", "#ff9a26", ara="#8a2a08")
     duz("tahta_yol_uzak", -2.6, 2.6, GECIS, KANAL_Y[0], 0.006, yol)
     duz("tahta_yol_uzak2", -2.6, 2.6, KANAL_Y[1], DEGIRMEN_Y - 4, 0.006, yol)
     kanal(rnd)
@@ -247,7 +247,7 @@ def tarla(serit_modu, rnd):
             renk = LALE[(i + (s > 0) * 3) % len(LALE)]
             mat = M("sira" + renk, lambda r_=renk: mat_lale_sira("sira" + r_, r_))
             for (y0, y1) in ((14.0 if i < 8 else GECIS + 0.5, KANAL_Y[0] - 0.6), (KANAL_Y[1] + 0.6, 260.0)):
-                yuvarlak_kutu("sira", (x, (y0 + y1) / 2, 0.32), (0.85, y1 - y0, 0.64), mat, egim=0.3, seg=3)
+                yuvarlak_kutu("sira", (x, (y0 + y1) / 2, 0.5), (1.0, y1 - y0, 1.0), mat, egim=0.4, seg=3)
     # yakin siralar tek tek lale (gercek cicek basi) - yolun iki yaninda, y 11..14 arasi ve sira basi
     for s in (-1, 1):
         for i in range(8):
@@ -256,7 +256,7 @@ def tarla(serit_modu, rnd):
             y = GECIS + 0.2
             while y < 14.0:
                 for dx in (-0.22, 0.22):
-                    lale_koy(renk, (x + dx + rnd.uniform(-0.05, 0.05), y, 0), rnd.uniform(1.0, 1.25), rnd)
+                    lale_koy(renk, (x + dx + rnd.uniform(-0.05, 0.05), y, 0), rnd.uniform(1.4, 1.7), rnd)
                 y += 0.42
     degirmen((0, DEGIRMEN_Y, 0), 17.0, 0.35)
     for (x, y, boy, a) in ((-30, 74, 13.0, 0.9), (34, 66, 12.0, 0.2), (-70, 120, 15.0, 0.55), (78, 128, 16.0, 1.1),
@@ -434,7 +434,7 @@ def gok_ogeleri(rnd):
 # ------------------------------------------------------------------ SERIT: oyuncu tahta yolu + lale siniri + OUT saman yigini + kapi
 def serit_esyalari(oyuncu, R, rnd):
     s_dis = -1 if oyuncu == "p1" else 1
-    yol = mat_tahta("serit_yol", "#d88a3c", "#e8a04c")
+    yol = mat_tahta("serit_yol", "#ff7a14", "#ff9a26", ara="#8a2a08")
     duz("serit_yol", -1.6, 1.6, -4, GECIS, 0.006, yol)
     kenar = M("bordur", lambda: mat_pbr("bordur", "#9a5a2a", 0.45, kaplama=0.3, bump=(14, 0.2)))
     for x in (-1.75, 1.75):                                                # serit siniri: alcak tahta bordur + oyuncu renginde laleler
@@ -459,6 +459,11 @@ def serit_esyalari(oyuncu, R, rnd):
         t_.scale = (1.3, 1.0, 0.7)
     balya((s_dis * 4.4, 7.4), 1.0, 0.4 * s_dis, rnd)
     balya((s_dis * 4.0, 3.2), 0.85, -0.3 * s_dis, rnd)
+    # dis tarafta yakin lale siralari (tarla serit katmaninda da gorunsun): x 6..20, y -4..GECIS
+    for i in range(12):
+        x = s_dis * (6.2 + i * 1.25); renk = LALE[(i + 2) % len(LALE)]
+        mat = M("sira" + renk, lambda r_=renk: mat_lale_sira("sira" + r_, r_))
+        yuvarlak_kutu("sira_yakin", (x, (GECIS - 2.0) / 2, 0.5), (1.0, GECIS + 2.0, 1.0), mat, egim=0.4, seg=3)
     # dis tarafta kir esyalari: lale saksisi, ahsap kova, kisa cit
     for k, renk in enumerate(("#ffd21e", "#ff7a14", "#a040ff")):
         lale_koy(renk, (s_dis * (5.2 + 0.25 * k), 9.4 + 0.3 * k, 0), 1.3, rnd)
