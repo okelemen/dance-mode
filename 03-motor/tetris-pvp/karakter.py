@@ -127,30 +127,45 @@ log("govde boy", round(BOY, 3))
 EKIP = []
 SPORCU = arg("--sporcu", "0") == "1"
 if OYUNCU != "maskot" and SPORCU:      # 30 (17 Kas 2026, kullanici: "box eldivenleri falan olmasin" -> sporcu): kask/eldiven/dizlik yok;
-    # govde parcalari kemik agirligina gore boyanir: forma (oyuncu rengi, kisa kol) / sort (koyu) / ayakkabi (oyuncu rengi) / ten (acik govde) + sac bandi
+    # govde parcalari: dinlenme pozundaki yukseklik ("boy") + kol sinifi ("kol") nokta ozniteligi -> shader'da keskin cizgi
+    # (1. deneme poligon boyamasi bel/diz cizgisini basamakli yapti). forma (oyuncu rengi, kisa kol) / koyu sort / ayakkabi / ten
     forma = mat_jole("forma", R, emis=EKIP_EMIS, purluk=0.10)
-    sort = mat_jole("sort", tuple(c * 0.22 for c in R), emis=0.04, purluk=0.12)
-    ayak = mat_jole("ayakkabi", R, emis=EKIP_EMIS, purluk=0.05)
     beyazs = mat_jole("serit", (0.92, 0.94, 1.0), emis=0.15, purluk=0.08)
-    def sinif(ad):
-        for anahtar, i in (("ToeBase", 3), ("Foot", 3), ("UpLeg", 2), ("Hips", 2), ("Spine", 1), ("Shoulder", 1),
-                           ("ForeArm", 0), ("Hand", 0), ("Arm", 1), ("Leg", 0), ("Head", 0), ("Neck", 0)):
-            if anahtar in ad:
-                return i
-        return 0
-    say_ = [0, 0, 0, 0]
+    zb = lambda ad: (arm.matrix_world @ kemik(arm, ad).head).z
+    BEL, DIZ, BILEK, BOYUN = zb("Hips") + 0.035 * BOY, zb("LeftLeg") + 0.045 * BOY, zb("LeftFoot") + 0.012 * BOY, zb("Neck") - 0.005 * BOY
+    log("sporcu cizgiler bel/diz/bilek/boyun", [round(x, 3) for x in (BEL, DIZ, BILEK, BOYUN)])
+    def kol_sinif(ad):
+        if "ForeArm" in ad or "Hand" in ad: return 2.0
+        if "Arm" in ad or "Shoulder" in ad: return 1.0
+        return 0.0
     for m in mesler:
-        for mt in (forma, sort, ayak):
-            m.data.materials.append(mt)
-        gs = {g.index: sinif(g.name) for g in m.vertex_groups}
-        vs = []
+        gs = {g.index: kol_sinif(g.name) for g in m.vertex_groups}
+        ab = m.data.attributes.new("boy", "FLOAT", "POINT"); ak = m.data.attributes.new("kol", "FLOAT", "POINT")
         for v_ in m.data.vertices:
+            ab.data[v_.index].value = (m.matrix_world @ v_.co).z
             en = max(v_.groups, key=lambda g: g.weight, default=None)
-            vs.append(gs.get(en.group, 0) if en else 0)
-        for poly in m.data.polygons:
-            c = [vs[i] for i in poly.vertices]
-            poly.material_index = max(set(c), key=c.count); say_[poly.material_index] += 1
-    log("sporcu poligon ten/forma/sort/ayakkabi", say_)
+            ak.data[v_.index].value = gs.get(en.group, 0.0) if en else 0.0
+    sm = mat_govde(R, GOVDE_ACIK); sm.name = "sporcu"; nt = sm.node_tree; bs = nt.nodes["Principled BSDF"]
+    TEN = (*acik(R, GOVDE_ACIK), 1); FORMA = (*R, 1); SORT = (*(c * 0.2 for c in R), 1); AYAK = (*R, 1)
+    nb = nt.nodes.new("ShaderNodeAttribute"); nb.attribute_name = "boy"
+    nk = nt.nodes.new("ShaderNodeAttribute"); nk.attribute_name = "kol"
+    rp = nt.nodes.new("ShaderNodeValToRGB"); cr = rp.color_ramp; cr.interpolation = "CONSTANT"
+    span = BOY * 1.2; z0 = alt0.z - 0.1 * BOY; f = lambda z: (z - z0) / span
+    mp = nt.nodes.new("ShaderNodeMapRange"); mp.inputs["From Min"].default_value = z0; mp.inputs["From Max"].default_value = z0 + span
+    nt.links.new(nb.outputs["Fac"], mp.inputs["Value"]); nt.links.new(mp.outputs["Result"], rp.inputs["Fac"])
+    cr.elements[0].position = 0.0; cr.elements[0].color = AYAK; cr.elements[1].position = f(BILEK); cr.elements[1].color = TEN
+    for z, c in ((DIZ, SORT), (BEL, FORMA), (BOYUN, TEN)):
+        e = cr.elements.new(f(z)); e.color = c
+    def esik(deger):
+        g = nt.nodes.new("ShaderNodeMath"); g.operation = "GREATER_THAN"; g.inputs[1].default_value = deger
+        nt.links.new(nk.outputs["Fac"], g.inputs[0]); return g
+    m1 = nt.nodes.new("ShaderNodeMix"); m1.data_type = "RGBA"; nt.links.new(esik(0.5).outputs[0], m1.inputs["Factor"])
+    nt.links.new(rp.outputs["Color"], m1.inputs[6]); m1.inputs[7].default_value = FORMA
+    m2 = nt.nodes.new("ShaderNodeMix"); m2.data_type = "RGBA"; nt.links.new(esik(1.5).outputs[0], m2.inputs["Factor"])
+    nt.links.new(m1.outputs[2], m2.inputs[6]); m2.inputs[7].default_value = TEN
+    nt.links.new(m2.outputs[2], bs.inputs["Base Color"])
+    for m in mesler:
+        m.data.materials.clear(); m.data.materials.append(sm)
     Lh = ((arm.matrix_world @ kemik(arm, "Head").tail) - (arm.matrix_world @ kemik(arm, "Head").head)).length
     rk = max(0.6 * Lh, 0.066 * BOY)
     bpy.ops.mesh.primitive_torus_add(major_radius=rk * 0.86, minor_radius=rk * 0.13, major_segments=48, minor_segments=12)   # sac bandi
@@ -158,7 +173,7 @@ if OYUNCU != "maskot" and SPORCU:      # 30 (17 Kas 2026, kullanici: "box eldive
     sb.data.transform(Matrix.Rotation(math.radians(-90), 4, "X"))
     EKIP.append((sb, "Head", Matrix.Translation((0, 0.55 * Lh, 0))))
     for taraf in ("Left", "Right"):                                   # bileklik (beyaz)
-        bpy.ops.mesh.primitive_torus_add(major_radius=0.03 * BOY, minor_radius=0.011 * BOY, major_segments=32, minor_segments=10)
+        bpy.ops.mesh.primitive_torus_add(major_radius=0.017 * BOY, minor_radius=0.008 * BOY, major_segments=32, minor_segments=10)
         bl = bpy.context.active_object; bpy.ops.object.shade_smooth(); bl.data.materials.append(beyazs)
         bl.data.transform(Matrix.Rotation(math.radians(90), 4, "X"))
         EKIP.append((bl, taraf + "Hand", Matrix.Translation((0, -0.01 * BOY, 0))))
