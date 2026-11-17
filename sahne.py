@@ -1181,10 +1181,9 @@ _me.update()
 kesit = bpy.data.objects.new("kesit", _me)
 sc.collection.objects.link(kesit)
 kesit.location = (0, 0, MERKEZ_Z)
-if KARPUZ or KIVI:
-    # Tam karsidan kamerada YZ kesiti kenar gorunurdu. Acik yuzun okunmasi
-    # icin yalniz gosterim diski kameraya cevrilir; kesim/hucre plani X kalir.
-    kesit.rotation_euler = (0, 0, math.radians(80 if KIVI else 55))
+# Kesit nesnenin GERCEK YZ kesim duzlemindedir. Kameraya cevrilen veya one
+# tasinan gosterim diski, kup dokulurken havada duran sahte yuvarlak yuz olusturur.
+kesit.rotation_euler = (0, 0, 0)
 mk_, ntk_, bk_ = malzeme("kesit_m")
 gp = ntk_.nodes.new("ShaderNodeNewGeometry")
 ay_ = ntk_.nodes.new("ShaderNodeSeparateXYZ")
@@ -1289,8 +1288,9 @@ for tur in PLAN["turlar"]:
     kesit.keyframe_insert("hide_render", frame=kare(xk[-1][0] + 0.02))
     for t, konum in xk:
         r_ = 1.0 if CILEK else float(profil_r(np.array([konum]))[0]) * 0.995
-        kesit.location = ((konum + 0.16 * r_) if KIVI else konum + 0.002,
-                          -1.15 * R if KIVI else (-0.08 if KARPUZ else 0), MERKEZ_Z)
+        # Yalniz kalan govdenin yeni kesim duzlemine bagli; hicbir nesnede
+        # kameraya/yone dogru ayrik bir on yuz konumlandirilmaz.
+        kesit.location = (konum + 0.002, 0, MERKEZ_Z)
         kesit.scale = (1, r_, r_)
         kesit.keyframe_insert("location", frame=kare(t))
         kesit.keyframe_insert("scale", frame=kare(t))
