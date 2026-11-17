@@ -78,8 +78,8 @@ bolum = {"seri": "HUMAN TETRIS", "bolum": "human-tetris-31", "bpm": BPM, "toplam
          "kartlar": kartlar, "duvarlar": duvarlar, "abone": abone, "abone_sure": 3.2,
          "muzik": "Subterranean Pulse.mp3 (Suno, kullanici 17 Kas; Human Tetris'te ilk kullanim) -> 01-muzik/human-tetris-31/sub-1325.wav (132,5 BPM sabit)",
          "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur-31.py. Motor 03-motor/sahne28.html (kutup buzul kiyisi, FREEZE, penguen hakem). Referans REF-083 (yapi), mekan bizden (kullanici 17 Kas 2026).",
-         "tema": {"acilis": "kanca", "varlik": "/03-motor/tetris-pvp/varlik-31s1/tetris-varlik/", "karakter": "/03-motor/tetris-pvp/varlik-31-karakter/",
-                  "maskeVarlik": "/03-motor/tetris-pvp/varlik-31s1/tetris-varlik/", "turAd": {"1": "ROUND 1", "2": "ROUND 2", "3": "FREEZE ROUND", "4": "FINAL ROUND"},
+         "tema": {"acilis": "kanca", "varlik": "/03-motor/tetris-pvp/varlik-31s1/", "karakter": "/03-motor/tetris-pvp/varlik-31-karakter/",
+                  "maskeVarlik": "/03-motor/tetris-pvp/varlik-31s1/", "turAd": {"1": "ROUND 1", "2": "ROUND 2", "3": "FREEZE ROUND", "4": "FINAL ROUND"},
                   "aboneAlt": "NEW BATTLE EVERY DAY"}}
 yol = os.path.join(KOK, "bolumler", "tetris-mode-31.json")
 json.dump(bolum, open(yol, "w", encoding="utf-8"), indent=1, ensure_ascii=False)

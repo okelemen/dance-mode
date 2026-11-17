@@ -79,15 +79,28 @@ t = t[:bas] + """  // motor 28: PENGUEN YAVRUSU kafasi (TALIMATLAR §4 maskot si
   cx.fillStyle = '#f6faff';                                     // beyaz kalp yuz lekesi
   cx.beginPath(); cx.moveTo(0, -14); cx.bezierCurveTo(-14, -44, -60, -36, -50, 4); cx.bezierCurveTo(-44, 34, -14, 50, 0, 52);
   cx.bezierCurveTo(14, 50, 44, 34, 50, 4); cx.bezierCurveTo(60, -36, 14, -44, 0, -14); cx.closePath(); cx.fill();
-  for (const sx of [-1, 1]) {                                   // kisa kanatcik kulak yerine yok; buyuk parlak gozler
-    cx.fillStyle = '#141e48'; cx.beginPath(); cx.ellipse(sx * 20, -2, 11, 14, 0, 0, 6.283); cx.fill();
-    cx.fillStyle = '#ffffff'; cx.beginPath(); cx.arc(sx * 20 - 4, -8, 5, 0, 6.283); cx.fill();
-    cx.beginPath(); cx.arc(sx * 20 + 3, 3, 2.2, 0, 6.283); cx.fill();
+  for (const sx of [-1, 1]) {                                   // gozler: 3 duygu (MASKOT_DUYGU: mutlu / sevinc / sasirma)
+    if (MASKOT_DUYGU === 'sevinc') {                            // PERFECT: kapali ^^ gozler
+      cx.strokeStyle = '#141e48'; cx.lineWidth = 6; cx.lineCap = 'round';
+      cx.beginPath(); cx.arc(sx * 20, 2, 11, Math.PI * 1.15, Math.PI * 1.85); cx.stroke();
+    } else if (MASKOT_DUYGU === 'sasirma') {                    // OUT: iri beyaz gozler, kucuk bebek
+      cx.fillStyle = '#ffffff'; cx.strokeStyle = '#141e48'; cx.lineWidth = 3; cx.beginPath(); cx.arc(sx * 21, -4, 15, 0, 6.283); cx.fill(); cx.stroke();
+      cx.fillStyle = '#141e48'; cx.beginPath(); cx.arc(sx * 21, -2, 6, 0, 6.283); cx.fill();
+    } else {
+      cx.fillStyle = '#141e48'; cx.beginPath(); cx.ellipse(sx * 20, -2, 11, 14, 0, 0, 6.283); cx.fill();
+      cx.fillStyle = '#ffffff'; cx.beginPath(); cx.arc(sx * 20 - 4, -8, 5, 0, 6.283); cx.fill();
+      cx.beginPath(); cx.arc(sx * 20 + 3, 3, 2.2, 0, 6.283); cx.fill();
+    }
     cx.fillStyle = 'rgba(255,110,150,0.6)'; cx.beginPath(); cx.ellipse(sx * 36, 20, 10, 6, 0, 0, 6.283); cx.fill();   // kizarik yanak
   }
   const gb = cx.createLinearGradient(0, 10, 0, 34); gb.addColorStop(0, '#ffb22a'); gb.addColorStop(1, '#ff7a10');
-  cx.fillStyle = gb; cx.strokeStyle = '#7a3000'; cx.lineWidth = 3;   // turuncu gaga
-  cx.beginPath(); cx.moveTo(-12, 14); cx.quadraticCurveTo(0, 8, 12, 14); cx.quadraticCurveTo(0, 34, -12, 14); cx.closePath(); cx.fill(); cx.stroke();
+  cx.fillStyle = gb; cx.strokeStyle = '#7a3000'; cx.lineWidth = 3;   // turuncu gaga (sasirmada acik)
+  if (MASKOT_DUYGU === 'sasirma') {
+    cx.beginPath(); cx.moveTo(-13, 12); cx.quadraticCurveTo(0, 4, 13, 12); cx.lineTo(0, 20); cx.closePath(); cx.fill(); cx.stroke();
+    cx.beginPath(); cx.moveTo(-10, 24); cx.lineTo(10, 24); cx.quadraticCurveTo(0, 38, -10, 24); cx.closePath(); cx.fill(); cx.stroke();
+  } else {
+    cx.beginPath(); cx.moveTo(-12, 14); cx.quadraticCurveTo(0, 8, 12, 14); cx.quadraticCurveTo(0, 34, -12, 14); cx.closePath(); cx.fill(); cx.stroke();
+  }
   cx.fillStyle = 'rgba(255,255,255,0.35)'; cx.beginPath(); cx.ellipse(-22, -40, 18, 8, -0.4, 0, 6.283); cx.fill();   // cilali isilti
   cx.strokeStyle = '#0a0f2a'; cx.lineWidth = 3;               // kirmizi-beyaz seritli atki
   cx.fillStyle = '#ff2a3a'; cx.beginPath(); cx.roundRect(-46, 46, 92, 18, 9); cx.fill(); cx.stroke();
@@ -148,6 +161,17 @@ degis("""    cx.fillStyle = c; cx.strokeStyle = 'rgba(80,0,20,0.5)'; cx.lineWidt
       """    if (j % 4 === 0) { cx.restore(); kristalCiz(x, y, r * 0.8, ua * 3 + ph * 6); continue; }   // motor 28: her 4 taneden biri kar kristali
     cx.fillStyle = c; cx.strokeStyle = 'rgba(10,60,140,0.5)'; cx.lineWidth = 2 * k;
     cx.beginPath(); cx.arc(0, 0, r * 0.55, 0, 6.283); cx.fill(); cx.stroke();""")
+
+degis("function maskotCiz(x, y, s, t, alfa = 1, yuzSadece = false) {",
+      "let MASKOT_DUYGU = 'mutlu';                                   // motor 28: penguen hakem duygusu\nfunction maskotCiz(x, y, s, t, alfa = 1, yuzSadece = false) {")
+degis("  const kf = Y.poz[ad].kafa[Math.round(j)], kx = x0 + kf[0] * sc;",
+      "  const kf = Y.poz[ad].kafa[Math.round(j)], kx = x0 + kf[0] * sc;\n"
+      "  MASKOT_DUYGU = 'mutlu';                                      // motor 28: duvar gecince PERFECT -> sevinc, OUT -> sasirma\n"
+      "  if (d && u >= ZD(d).kart + ZD(d).say + ZD(d).buyu * 0.5) MASKOT_DUYGU = (d.out && (d.out.p1 || d.out.p2)) ? 'sasirma' : 'sevinc';")
+degis("  cx.save(); cx.shadowColor = '#ff6ad6'; cx.shadowBlur = 24 * k;",
+      "  cx.save(); cx.shadowColor = '#7ae0ff'; cx.shadowBlur = 24 * k;   // motor 28: buz dunyasi hakem isiltisi")
+degis("  maskotCiz(ayn ? 2 * xm - kx : kx, y0 + kf[1] * sc, kf[2] * sc * 1.25 / (62 * k), t, 1, true);",
+      "  maskotCiz(ayn ? 2 * xm - kx : kx, y0 + kf[1] * sc - kf[2] * sc * 0.25, kf[2] * sc * 1.6 / (62 * k), t, 1, true);   // motor 28: yavru penguen buyuk kafa")
 
 open(HEDEF, "w", encoding="utf-8").write(t)
 print("->", HEDEF, len(t))

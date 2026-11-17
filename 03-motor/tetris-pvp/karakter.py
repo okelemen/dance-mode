@@ -365,7 +365,7 @@ if OYUNCU == "maskot" and arg("--penguen", "0") == "1":     # 31 (kutup buzul ki
             w = mw @ v_.co; n = (nr @ v_.normal).normalized()
             if w.z < BILEK:
                 val = 2.0
-            elif KALCA - 0.16 * BOY < w.z < BOYUN - 0.01 * BOY and abs(w.x - mx.x) < 0.11 * BOY and n.y < -0.15:
+            elif False:                                           # ornek 1: yumurta gocdeyi ortunce kalcada beyaz bant kaliyordu -> govde beyazi yalniz yumurtada
                 val = 1.0
             else:
                 val = 0.0
