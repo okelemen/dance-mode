@@ -28,7 +28,7 @@ p.add_argument("--bas-boy", type=float, default=180)
 p.add_argument("--tasma", type=float, default=0.0, help="siluetin alttan kadraj disina tasan payi (kadraj orani)")
 p.add_argument("--rozet-xy", nargs=2, type=float, default=[1135, 215])
 p.add_argument("--yeni-xy", nargs=2, type=float, default=[112, 600])
-p.add_argument("--vs-y", type=float, default=320); p.add_argument("--bas-y", type=float, default=80)
+p.add_argument("--vs-x", type=float, default=640); p.add_argument("--vs-y", type=float, default=320); p.add_argument("--bas-y", type=float, default=80)
 p.add_argument("--kontur", type=int, default=17)
 p.add_argument("--renk", type=float, default=1.0); p.add_argument("--parlak", type=float, default=1.0)
 p.add_argument("--cikti", required=True)
@@ -231,7 +231,7 @@ for kid, yuk, alan, sx, sy, sw, sb in OLCU:
 ONCE = np.asarray(im.convert("RGB")).copy()
 ARKA = im.copy()      # kontrast olcumu icin yazisiz zemin (siluetler dahil: yazinin arkasinda gorunen bu)
 PEMBE = ["#ffb8ec", "#ff5ad0", "#ff2aa8"]; MAVI = ["#a8f0ff", "#3ac0ff", "#2a7aff"]; SARI = ["#fff4a0", "#ffd21a", "#ffa21a"]
-vs(W / 2, a.vs_y, MAVI, PEMBE)    # REF-075: tek VS = mavi V + pembe S, kapilarin arasinda
+vs(a.vs_x, a.vs_y, MAVI, PEMBE)    # REF-075: tek VS = mavi V + pembe S, kapilarin arasinda
 
 ONCE2 = np.asarray(im.convert("RGB")).copy()
 # baslik en onde: HUMAN mavi -> pembe, TETRIS pembe -> sari -> mavi (REF-072 harf renkleri)

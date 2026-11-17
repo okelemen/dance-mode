@@ -420,7 +420,11 @@ def gok_ogeleri(rnd):
 # ------------------------------------------------------------------ SERIT: oyuncu buz yolu + renkli sinir + OUT su deligi + kapi
 def serit_esyalari(oyuncu, R, rnd):
     s_dis = -1 if oyuncu == "p1" else 1
-    yol = mat_buz_blok("serit_yol", "#0a7cff", "#12a4ff", ara="#04307a")
+    # 18 Kas kapak 2: tek renk mavi sahnede renklilik/doygunluk tutmadi -> serit buz yolu oyuncu renginde (P1 koyu mavi, P2 pembe buz)
+    if oyuncu == "p1":
+        yol = mat_buz_blok("serit_yol", "#0a5cff", "#1a7cff", ara="#042a7a")
+    else:
+        yol = mat_buz_blok("serit_yol", "#ff1e96", "#ff46b4", ara="#7a0848")
     duz("serit_yol", -1.6, 1.6, -4, GECIS, 0.006, yol)
     bm = M("sinir" + R["ana"], lambda: mat_pbr("sinir" + R["ana"], R["ana"], 0.25, kaplama=0.8))
     for x in (-1.75, 1.75):                                                # serit siniri: oyuncu renginde cilali buz bloklari
