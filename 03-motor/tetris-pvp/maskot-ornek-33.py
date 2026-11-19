@@ -9,7 +9,7 @@ import json, math, os
 from PIL import Image, ImageDraw, ImageFont
 
 BURA = os.path.dirname(os.path.abspath(__file__))
-ON, YAN = os.path.join(BURA, "varlik-33-maskot-on"), os.path.join(BURA, "varlik-33-maskot-yan")
+ON, YAN = os.path.join(BURA, "varlik-33-maskot-on2"), os.path.join(BURA, "varlik-33-maskot-yan2")   # ornek 2: mat uzuvlar
 S2 = 4   # supersample
 YESIL, KOYU, ACIK, SARI, TURUNCU = "#22c43a", "#0a5a1a", "#7ae86a", "#ffc21e", "#ff7a14"
 
