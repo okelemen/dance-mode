@@ -506,7 +506,7 @@ if OYUNCU == "maskot" and arg("--ejderha", "0") == "1":   # 33 (antik kum arenas
         b_.inputs["Base Color"].default_value = (*lin(hex3(renk)), 1)
         b_.inputs["Roughness"].default_value = purluk; b_.inputs["Coat Weight"].default_value = kap; b_.inputs["Coat Roughness"].default_value = 0.08
         return m_
-    emat, kmat, sm = mat_ej("ej_uzuv", YESIL), mat_ej("ej_kanat", KANAT, 0.45, 0.2), mat_ej("ej_sari", KARIN, 0.35, 0.4)
+    emat, kmat, sm = mat_ej("ej_uzuv", YESIL, 0.6, 0.12), mat_ej("ej_kanat", KANAT, 0.55, 0.1), mat_ej("ej_sari", KARIN, 0.45, 0.25)   # ornek 1: beyaz parlama seritleri -> mat (32 panda dersi)
     def uzuv(ad, r):
         b_ = kemik(arm, ad); L = ((arm.matrix_world @ b_.tail) - (arm.matrix_world @ b_.head)).length
         bpy.ops.mesh.primitive_cylinder_add(radius=r, depth=L, vertices=28); c_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
@@ -532,7 +532,7 @@ if OYUNCU == "maskot" and arg("--ejderha", "0") == "1":   # 33 (antik kum arenas
     Mb0 = (arm.matrix_world @ kemik(arm, "Spine1").matrix).to_3x3()
     on_d = Matrix.Rotation(math.radians(float(arg("--don", "0"))), 3, "Z") @ Vector((0, -1, 0))
     on_l = (Mb0.inverted() @ on_d).normalized()
-    ym = mat_ej("ej_yumurta", YESIL); nt = ym.node_tree; bs = nt.nodes["Principled BSDF"]
+    ym = mat_ej("ej_yumurta", YESIL, 0.55, 0.15); nt = ym.node_tree; bs = nt.nodes["Principled BSDF"]
     ge = nt.nodes.new("ShaderNodeNewGeometry"); vt = nt.nodes.new("ShaderNodeVectorTransform")
     vt.vector_type = "NORMAL"; vt.convert_from = "WORLD"; vt.convert_to = "OBJECT"
     nt.links.new(ge.outputs["Normal"], vt.inputs["Vector"])
