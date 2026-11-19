@@ -223,7 +223,10 @@ def tribun(rnd):
             o = yuvarlak_kutu("basamak", (x, y, z / 2), (ln + 0.3, 3.4, z), tas(TAS[(k + i // 4) % len(TAS)]), egim=0.2, seg=1)
             o.rotation_euler = (0, 0, am + math.pi / 2)
             for j in range(2):                             # seyirci: renkli govde + ten rengi kafa
-                aj = a0 + (a1 - a0) * (j + 0.5) / 2
+                if rnd.random() < 0.18:                        # gercek kalabalik: arada bos koltuk
+                    continue
+                # 33 sahne 1: satirlar ayni acida dizilince uzaktan dikey boncuk dizisi okundu -> satir basina kaydir + titret
+                aj = a0 + (a1 - a0) * ((j + 0.5 + 0.5 * (k % 2)) / 2 + rnd.uniform(-0.12, 0.12))
                 sx, sy = math.cos(aj) * (r - 0.6) * 1.35, math.sin(aj) * (r - 0.6)
                 g = kure((sx, sy, z + 0.7), 0.55, P(rnd.choice(SICAK), 0.4, 0.4), sub=1); g.scale = (1.0, 0.8, 1.3)
                 kure((sx, sy, z + 1.7), 0.38, P(rnd.choice(("#ffcf9a", "#d8925a", "#a8643a", "#ffd8b0")), 0.5, 0.2), sub=1)
@@ -470,8 +473,9 @@ def kapi(R):
     for i in range(9):
         xx = -W_ / 2 + W_ * i / 8
         kure((xx, Y - K / 2 - 0.12, H_ - 0.35 - 0.12 * math.sin(math.pi * i / 8)), 0.07, ampul, sub=2)
-    yuvarlak_kutu("tabela", (0, Y - 0.3, H_ + K + 0.55), (W_ * 0.85, 0.2, 0.7), mat_pbr("tabela", "#15171a", 0.35, metal=0.4), egim=0.05, seg=3)
-    me = bpy.data.meshes.new("led_yuz"); a, b = W_ * 0.4, 0.28; z0 = H_ + K + 0.55
+    # 33 sahne 1: alinlik tabelayi ortuyordu -> tabela alinligin tepesinin ustune
+    yuvarlak_kutu("tabela", (0, Y - 0.3, H_ + K + 1.15), (W_ * 0.85, 0.2, 0.7), mat_pbr("tabela", "#15171a", 0.35, metal=0.4), egim=0.05, seg=3)
+    me = bpy.data.meshes.new("led_yuz"); a, b = W_ * 0.4, 0.28; z0 = H_ + K + 1.15
     me.from_pydata([(-a, Y - 0.41, z0 - b), (a, Y - 0.41, z0 - b), (a, Y - 0.41, z0 + b), (-a, Y - 0.41, z0 + b)], [], [[0, 1, 2, 3]]); me.update()
     o = bpy.data.objects.new("led_yuz", me); bpy.context.collection.objects.link(o)
     o.data.materials.append(mat_emis("led_yuz", lin(hex3(R["koyu"])), 1.2))
