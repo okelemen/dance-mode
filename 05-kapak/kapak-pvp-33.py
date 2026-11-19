@@ -247,8 +247,8 @@ baloncuk("TETRIS", 950, a.bas_y, a.bas_boy, ["#ff1a8a", "#ff4a1a", "#ffd000", "#
 # REF-082: sagda egik rozet + solda NEW madalyasi (baslikla ayni katmanda, siluetlerin onunde)
 ONCE3 = np.asarray(im.convert("RGB")).copy()
 # 33 (REF-085): sagdaki egik rozet yerine madalyanin altinda iki satir PVP / BATTLE (beyaz-lila baloncuk, koyu mor kontur)
-baloncuk("PVP", a.vs_x, a.pvp_y, 78, ["#ffffff", "#f0e0ff"], kontur="#3a1478", ad="PVP")
-baloncuk("BATTLE", a.vs_x, a.pvp_y + 74, 78, ["#ffffff", "#f0e0ff"], kontur="#3a1478", ad="BATTLE")
+baloncuk("PVP", a.vs_x, a.pvp_y, 78, ["#fff27a", "#ffc21a"], kontur="#3a1478", ad="PVP")      # 33 olcum 1: beyaz dolgu doygunlugu dusuruyordu -> altin
+baloncuk("BATTLE", a.vs_x, a.pvp_y + 74, 78, ["#fff27a", "#ffc21a"], kontur="#3a1478", ad="BATTLE")
 mx_, my_ = a.yeni_xy
 for s_, ren in ((-1, "#e8362c"), (1, "#c81e1e")):                                   # madalya kurdeleleri
     ImageDraw.Draw(im).polygon([(mx_ + s_ * 18, my_ + 20), (mx_ + s_ * 62, my_ + 112), (mx_ + s_ * 40, my_ + 100), (mx_ + s_ * 30, my_ + 124), (mx_ - s_ * 6, my_ + 30)], fill=ren)
