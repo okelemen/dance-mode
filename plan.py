@@ -73,6 +73,14 @@ MEYVELER = {
     "peach": {
         "A": 0.78, "R": 0.72, "boyun": 1.0, "profil": "peach",
     },
+    "pomegranate": {
+        "A": 0.78, "R": 0.76, "boyun": 1.0, "profil": "pomegranate",
+        "zmax": 0.96,
+    },
+    "tomato": {
+        "A": 0.78, "R": 0.72, "boyun": 1.0, "profil": "tomato",
+        "zmax": 0.87,
+    },
 }
 
 # Turlar: (kesim sayisi, kesim suresi sn). Acilis 0.4 sn + sonuc 1.3 sn eklenir -> toplam 60 sn
@@ -114,13 +122,15 @@ def meyve_profil(xn, m):
         return np.maximum(0.0, 1.0 - xn ** 2) ** 0.48 * (1.0 - .25*np.abs(xn)**2) * (.96 + .04*xn)
     if m.get("profil") == "peach":
         return np.maximum(0.0, 1.0 - xn * xn) ** 0.46
+    if m.get("profil") in ("pomegranate", "tomato"):
+        return np.maximum(0.0, 1.0 - xn*xn) ** 0.48
     return profil(xn, m["boyun"])
 
 
 def meyve_fmax(m):
     if m.get("profil") == "strawberry":
         return float(meyve_profil(np.linspace(-1, 1, 20001), m).max())
-    if m.get("profil") in ("kiwi", "pineapple", "apple", "orange", "peach"):
+    if m.get("profil") in ("kiwi", "pineapple", "apple", "orange", "peach", "pomegranate", "tomato"):
         return 1.0
     if m.get("profil") == "banana":
         return float(meyve_profil(np.linspace(-1, 1, 20001), m).max())
@@ -178,6 +188,23 @@ def muz_sirt(y, z):
     return 1.0 + 0.11 * np.cos(5.0 * np.arctan2(z, y))
 
 
+def nar_tac(x, y, z, m):
+    """Acik merkezli bes sivri tac lobu; govdeyle birlikte kesim hacminde."""
+    r = np.sqrt(x*x+y*y)
+    angle = np.arctan2(y,x)
+    peak = .82 + .14*np.maximum(0.0,np.cos(5*angle))**3
+    return (z >= .69) & (z <= peak) & (r >= .075) & (r <= .21*(1-.25*np.clip((z-.69)/.27,0,1)))
+
+
+def domates_canak(x, y, z, m):
+    r = np.sqrt(x*x+y*y)
+    angle = np.arctan2(y,x)
+    star = .11 + .20*np.maximum(0.0,np.cos(5*angle))**6
+    leaf = (z >= .69) & (z <= .74) & (r <= star)
+    stem = (z >= .73) & (z <= m["zmax"]) & (r <= .045)
+    return leaf | stem
+
+
 def icinde(x, y, z, m):
     """Meyvenin merkezine gore (x,y,z) noktasi govdenin icinde mi."""
     if m.get("profil") == "strawberry":
@@ -217,6 +244,17 @@ def icinde(x, y, z, m):
         wobble = 1.0 + 0.035*np.sin(3*angle + 0.5)
         body = (np.abs(xn) <= 1.0) & (y*y+z*z <= (rr*groove*wobble)**2)
         return body
+    if m.get("profil") == "pomegranate":
+        # Hafif bes lob ve derimsi kabuk altinda aril odalari.
+        angle = np.arctan2(y,z)
+        lob = 1.0 + .025*np.cos(5*angle)
+        body = (np.abs(xn)<=1.0) & (y*y+z*z <= (rr*lob)**2)
+        return body | nar_tac(x,y,z,m)
+    if m.get("profil") == "tomato":
+        angle=np.arctan2(y,z)
+        lob=1.0+.035*np.cos(5*angle)
+        body=(np.abs(xn)<=1.0)&(y*y+z*z<=(rr*lob)**2)
+        return body | domates_canak(x,y,z,m)
     return (np.abs(xn) <= 1.0) & (y * y + z * z <= rr * rr)
 
 
@@ -233,7 +271,8 @@ def kup_say(m, cx, cy, cz):
     xmin, xmax = m.get("xmin", -A), m.get("xmax", A)
     xs = xmin + (np.arange(cx + 1) + 0.5) * ((xmax - xmin) / (cx + 1))
     ys = -B + (np.arange(cy + 1) + 0.5) * (2 * B / (cy + 1))
-    zs = -R + (np.arange(cz + 1) + 0.5) * (2 * R / (cz + 1))
+    zmin, zmax = m.get("zmin", -R), m.get("zmax", R)
+    zs = zmin + (np.arange(cz + 1) + 0.5) * ((zmax-zmin) / (cz + 1))
     say = 0
     Y, Z = np.meshgrid(ys, zs, indexing="ij")
     for x in xs:  # bellek dostu: x dilim dilim
@@ -247,7 +286,8 @@ def dilim_say(m, cx, cy, cz):
     xmin, xmax = m.get("xmin", -A), m.get("xmax", A)
     xs = xmin + (np.arange(cx + 1) + 0.5) * ((xmax - xmin) / (cx + 1))
     ys = -B + (np.arange(cy + 1) + 0.5) * (2 * B / (cy + 1))
-    zs = -R + (np.arange(cz + 1) + 0.5) * (2 * R / (cz + 1))
+    zmin, zmax = m.get("zmin", -R), m.get("zmax", R)
+    zs = zmin + (np.arange(cz + 1) + 0.5) * ((zmax-zmin) / (cz + 1))
     Y, Z = np.meshgrid(ys, zs, indexing="ij")
     return np.array([int(icinde(np.full_like(Y, x), Y, Z, m).sum()) for x in xs])
 
