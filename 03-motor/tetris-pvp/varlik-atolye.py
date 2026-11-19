@@ -181,8 +181,8 @@ def golgesiz(o):
 def hediye(konum, boyut, renk, kurdele, rnd, fiyonk=True):
     """cilali ambalajli tombul hediye kutusu: iki capraz kurdele bandi + ustte iki halkali fiyonk"""
     x, y, z = konum; bx, by, bz = boyut
-    yuvarlak_kutu("hediye", (x, y, z + bz / 2), boyut, P(renk, 0.28, 0.8), egim=min(bx, by, bz) * 0.12, seg=3)
-    km = P(kurdele, 0.25, 0.8, metal=0.35 if kurdele == "#ffd21e" else 0.0)
+    yuvarlak_kutu("hediye", (x, y, z + bz / 2), boyut, P(renk, 0.4, 0.25), egim=min(bx, by, bz) * 0.12, seg=3)
+    km = P(kurdele, 0.4, 0.25)
     yuvarlak_kutu("kurdele", (x, y, z + bz / 2), (bx * 0.16, by + 0.04, bz + 0.04), km, egim=0.01, seg=1)
     yuvarlak_kutu("kurdele", (x, y, z + bz / 2), (bx + 0.04, by * 0.16, bz + 0.04), km, egim=0.01, seg=1)
     if fiyonk:
@@ -440,7 +440,7 @@ def serit_esyalari(oyuncu, R, rnd):
         y = -3.6
         while y < KAP["y"] - 0.6:
             bpy.ops.mesh.primitive_cylinder_add(radius=0.16, depth=0.26, location=(s * 1.42, y, 0.46), rotation=(0, math.pi / 2, 0), vertices=20)
-            bpy.context.active_object.data.materials.append(P("#ffc21a", 0.2, 0.7, metal=0.7)); bpy.ops.object.shade_smooth()
+            bpy.context.active_object.data.materials.append(M("makara", lambda: mat_pbr("makara", "#ff9a00", 0.5))); bpy.ops.object.shade_smooth()
             y += 0.7
     boya = P("#ffd21e", 0.3, 0.6)
     for y in (4.9, 6.4):                                                   # bantta sari yon oklari (seri sabiti)
