@@ -351,8 +351,8 @@ for v in meyve.data.vertices:
             lob = 0.025 * math.cos(5 * math.atan2(yy, xx)) * max(0.0, (zz / R))**6
             zz -= math.copysign(dip, zz) if abs(zz) > 0.45 else 0.0
             zz += lob
-            xx *= 1.05 if zz >= 0 else 0.89
-            yy *= 1.05 if zz >= 0 else 0.89
+            omuz = 1.0 + 0.08 * math.tanh(zz / (0.20*R))
+            xx *= omuz; yy *= omuz
         elif ORANGE:
             zz *= 0.96
         v.co = (xx, yy, zz)
@@ -401,13 +401,13 @@ else:
     if APPLE:
         # Kirmizi allik, sari/yesil omuzlar ve dogal benekler.
         alaca = nt.nodes.new("ShaderNodeTexNoise")
-        alaca.inputs["Scale"].default_value = 3.0
+        alaca.inputs["Scale"].default_value = 6.0
         alaca.inputs["Detail"].default_value = 3.0
         baglan(nt, tk.outputs["Object"], alaca.inputs["Vector"])
         arm = nt.nodes.new("ShaderNodeValToRGB")
-        arm.color_ramp.elements[0].color = hex_renk("#86191e")
-        arm.color_ramp.elements[1].color = hex_renk("#bd2623")
-        for pos, col in ((0.30,"#a91d20"),(0.58,"#c82c20"),(0.76,"#c7a53b"),(0.87,"#83a047")):
+        arm.color_ramp.elements[0].color = hex_renk("#77151a")
+        arm.color_ramp.elements[1].color = hex_renk("#a8251f")
+        for pos, col in ((0.30,"#9c1a20"),(0.58,"#b2261e"),(0.79,"#b83b20"),(0.91,"#a69940")):
             e = arm.color_ramp.elements.new(pos); e.color = hex_renk(col)
         baglan(nt, alaca.outputs["Fac"], arm.inputs["Fac"])
         benek_m = matematik(nt,"LESS_THAN",vor.outputs["Distance"],None,deger_b=.055)
@@ -697,7 +697,7 @@ if APPLE or ORANGE:
         ob.parent = meyve; ob.data.materials.append(sm)
         ANANAS_EK_OB.append(ob)
         lm = bagli_malzeme("elma_yaprak", "#3c792d")
-        vs = [(0.04,-0.15,0.70),(0.24,-0.20,0.755),(0.49,-0.14,0.72),(0.24,-0.08,0.70)]
+        vs = [(0.02,-0.10,0.66),(0.11,-0.43,0.75),(0.48,-0.45,0.74),(0.25,-0.34,0.67)]
         mesh = bpy.data.meshes.new("elma_yaprak_mesh"); mesh.from_pydata(vs,[],[(0,1,2,3)]); mesh.update()
         ob = bpy.data.objects.new("elma_yaprak_kesilir",mesh); sc.collection.objects.link(ob)
         ob.parent = meyve; ob.data.materials.append(lm); ANANAS_EK_OB.append(ob)
@@ -955,14 +955,14 @@ def kup_nesnesi(tur, no):
         tohum = odacik & (np.cos(5*aci) > .82) & (u[:, 0] > .22)
         renk[odacik] = np.array(hex_renk("#e1d5b6")[:3])
         renk[tohum] = np.array(hex_renk("#51321e")[:3])
-        omuz=np.where(merk[:,2]>=0,1.05,.89)
+        omuz=1.0+0.08*np.tanh(merk[:,2]/(.20*R))
         xn_app=merk[:,0]/(A*omuz)
         r_app=R*np.maximum(0,1-xn_app*xn_app)**.46
         govde = (np.abs(xn_app)<=1) & ((merk[:,1]/omuz)**2 +
             (np.abs(merk[:,2])+.105*np.exp(-(merk[:,0]**2+merk[:,1]**2)/.032))**2 <= r_app*r_app)
         sap = ~govde & (merk[:, 0]**2 + merk[:, 1]**2 <= .050**2) & (merk[:, 2] >= .56)
-        yaprak = ~govde & ~sap & (((merk[:, 0]-.27)/.22)**2 +
-            ((merk[:, 1]+.13)/.09)**2 + ((merk[:, 2]-.72)/.035)**2 <= 1)
+        yaprak = ~govde & ~sap & (((merk[:, 0]-.23)/.25)**2 +
+            ((merk[:, 1]+.36)/.14)**2 + ((merk[:, 2]-.715)/.055)**2 <= 1)
         renk[sap] = np.array(hex_renk("#624027")[:3])
         renk[yaprak] = np.array(hex_renk("#3c792d")[:3])
         maske[sap | yaprak] = 0

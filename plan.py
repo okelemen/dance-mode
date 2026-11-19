@@ -170,11 +170,11 @@ def icinde(x, y, z, m):
     if m.get("profil") == "apple":
         # Gercek ust sap cukuru ve alt cicek cukuru; sap/yaprak da kesim hacminde.
         cukur = 0.105 * np.exp(-(x*x + y*y) / 0.032)
-        omuz = np.where(z >= 0, 1.05, 0.89)
+        omuz = 1.0 + 0.08 * np.tanh(z / (0.20*m["R"]))
         r_app = m["R"] * meyve_profil(x/(m["A"]*omuz), m)
         govde = (np.abs(x/(m["A"]*omuz)) <= 1.0) & ((y/omuz)**2 + (np.abs(z) + cukur)**2 <= r_app*r_app)
         sap = (x*x + y*y <= 0.050**2) & (z >= 0.56) & (z <= 0.76)
-        yaprak = ((x-0.27)/0.22)**2 + ((y+0.13)/0.09)**2 + ((z-0.72)/0.035)**2 <= 1
+        yaprak = ((x-0.23)/0.25)**2 + ((y+0.36)/0.14)**2 + ((z-0.715)/0.055)**2 <= 1
         return govde | sap | yaprak
     if m.get("profil") == "orange":
         govde = (np.abs(xn) <= 1.0) & (y*y + z*z <= rr*rr)
