@@ -170,13 +170,15 @@ def icinde(x, y, z, m):
     if m.get("profil") == "apple":
         # Gercek ust sap cukuru ve alt cicek cukuru; sap/yaprak da kesim hacminde.
         cukur = 0.105 * np.exp(-(x*x + y*y) / 0.032)
-        govde = (np.abs(xn) <= 1.0) & (y*y + (np.abs(z) + cukur)**2 <= rr*rr)
-        sap = (x*x + y*y <= 0.040**2) & (z >= 0.57) & (z <= 0.76)
-        yaprak = ((x-0.14)/0.16)**2 + ((y+0.035)/0.075)**2 + ((z-0.67)/0.045)**2 <= 1
+        omuz = np.where(z >= 0, 1.05, 0.89)
+        r_app = m["R"] * meyve_profil(x/(m["A"]*omuz), m)
+        govde = (np.abs(x/(m["A"]*omuz)) <= 1.0) & ((y/omuz)**2 + (np.abs(z) + cukur)**2 <= r_app*r_app)
+        sap = (x*x + y*y <= 0.050**2) & (z >= 0.56) & (z <= 0.76)
+        yaprak = ((x-0.27)/0.22)**2 + ((y+0.13)/0.09)**2 + ((z-0.72)/0.035)**2 <= 1
         return govde | sap | yaprak
     if m.get("profil") == "orange":
         govde = (np.abs(xn) <= 1.0) & (y*y + z*z <= rr*rr)
-        calyx = (x*x+y*y <= 0.15**2) & (z >= 0.66) & (z <= 0.76)
+        calyx = (x*x+y*y <= 0.21**2) & (z >= 0.70) & (z <= 0.76)
         return govde | calyx
     return (np.abs(xn) <= 1.0) & (y * y + z * z <= rr * rr)
 
