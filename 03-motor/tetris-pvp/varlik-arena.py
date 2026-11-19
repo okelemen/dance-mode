@@ -210,24 +210,35 @@ def tribun(rnd):
     """arenayi saran (yolun iki yaninda ve arkada) basamakli tas tribun: her basamakta renkli seyirci kafalari + govde,
     ustte renkli tenteler (direk + egik kumas); elips yay, ondeki acik kisim kamerada"""
     adim = 7
-    for k in range(adim):                                  # basamak halkalari (elips yay -150..-30 derece yerine yanlardan arkaya)
+    # 33 sahne 2: dondurulmus kutu basamaklar ortada cizilmedi (seyirci gokte asili kaldi) -> her basamak tek parca eliptik
+    # halka mesh'i: on yuz (z0 -> z) + ust yuz (r -> r + 3.2); acilar -12..192 derece, y < 6 olan uclar kesilir
+    E = lambda a, rr, zz: (math.cos(a) * rr * 1.35, math.sin(a) * rr, zz)
+    for k in range(adim):
         r = ARENA_R + 6 + k * 3.2
         z = 3.2 + k * 2.2
+        acilar = [math.radians(-12 + i * (204 / 120)) for i in range(121)]
+        acilar = [a for a in acilar if math.sin(a) * r >= 6]
+        v, f = [], []
+        for a in acilar:
+            v += [E(a, r, 0.0), E(a, r, z), E(a, r + 3.2, z)]
+        for i in range(len(acilar) - 1):
+            p, q = 3 * i, 3 * (i + 1)
+            f.append([p, q, q + 1, p + 1]); f.append([p + 1, q + 1, q + 2, p + 2])
+        me = bpy.data.meshes.new("basamak"); me.from_pydata(v, [], f); me.update()
+        o = bpy.data.objects.new("basamak", me); bpy.context.collection.objects.link(o)
+        o.data.materials.append(tas(TAS[k % len(TAS)]))
+        o.modifiers.new("k", "SOLIDIFY").thickness = 0.3
         for i in range(40):
             a0 = math.radians(-12 + i * (204 / 40)); a1 = math.radians(-12 + (i + 1) * (204 / 40))
             am = (a0 + a1) / 2
-            x, y = math.cos(am) * r * 1.35, math.sin(am) * r
-            if y < 6:
+            if math.sin(am) * r < 6:
                 continue
-            ln = abs(a1 - a0) * r * 1.2
-            o = yuvarlak_kutu("basamak", (x, y, z / 2), (ln + 0.3, 3.4, z), tas(TAS[(k + i // 4) % len(TAS)]), egim=0.2, seg=1)
-            o.rotation_euler = (0, 0, am + math.pi / 2)
             for j in range(2):                             # seyirci: renkli govde + ten rengi kafa
                 if rnd.random() < 0.18:                        # gercek kalabalik: arada bos koltuk
                     continue
                 # 33 sahne 1: satirlar ayni acida dizilince uzaktan dikey boncuk dizisi okundu -> satir basina kaydir + titret
                 aj = a0 + (a1 - a0) * ((j + 0.5 + 0.5 * (k % 2)) / 2 + rnd.uniform(-0.12, 0.12))
-                sx, sy = math.cos(aj) * (r - 0.6) * 1.35, math.sin(aj) * (r - 0.6)
+                sx, sy = math.cos(aj) * (r + 1.4) * 1.35, math.sin(aj) * (r + 1.4)          # basamagin ustunde oturur
                 g = kure((sx, sy, z + 0.7), 0.55, P(rnd.choice(SICAK), 0.4, 0.4), sub=1); g.scale = (1.0, 0.8, 1.3)
                 kure((sx, sy, z + 1.7), 0.38, P(rnd.choice(("#ffcf9a", "#d8925a", "#a8643a", "#ffd8b0")), 0.5, 0.2), sub=1)
     # tenteler: tribun tepesinde direkler + egik renkli kumas seritleri (cizgili)
