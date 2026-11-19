@@ -435,7 +435,26 @@ if OYUNCU == "maskot" and arg("--panda", "0") == "1":     # 32 (Noel oyuncak ato
     # 32 video 1 (kullanici: "ustu maskot, alti iskelet ... alti facia"): ince parlak insan uzuvlari -> TOMBUL MAT panda uzuvlari
     bs.inputs["Roughness"].default_value = 0.6; bs.inputs["Coat Weight"].default_value = 0.0
     for m_ in mesler:
-        dz = m_.modifiers.new("panda_sisir", "DISPLACE"); dz.strength = 0.055 * BOY; dz.mid_level = 0.0   # normal boyunca sisir (pozlanmis govdede)
+        m_.hide_render = True                                         # 32 video 1 duzeltme 2: sisirme yetmedi -> insan govdesi gizli
+    # kemiklere bagli TOMBUL panda uzuvlari: kalin siyah kapsul kol/bacak + yuvarlak pati + oval ayak (mat)
+    pmat = mat_pbr_k = bpy.data.materials.new("panda_uzuv"); pmat.use_nodes = True
+    pb_ = pmat.node_tree.nodes["Principled BSDF"]; pb_.inputs["Base Color"].default_value = (*lin(hex3("#1a1a24")), 1)
+    pb_.inputs["Roughness"].default_value = 0.55; pb_.inputs["Coat Weight"].default_value = 0.15
+    def uzuv(ad, r):
+        b_ = kemik(arm, ad); L = ((arm.matrix_world @ b_.tail) - (arm.matrix_world @ b_.head)).length
+        bpy.ops.mesh.primitive_cylinder_add(radius=r, depth=L, vertices=28); c_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
+        c_.data.transform(Matrix.Rotation(math.radians(-90), 4, "X") @ Matrix.Translation((0, 0, L / 2))); c_.data.materials.append(pmat)
+        EKIP.append((c_, ad, Matrix.Identity(4)))
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=r, segments=24, ring_count=12); k_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
+        k_.data.materials.append(pmat); EKIP.append((k_, ad, Matrix.Identity(4)))
+        return L
+    for tr in ("Left", "Right"):
+        uzuv(tr + "Arm", 0.052 * BOY); uzuv(tr + "ForeArm", 0.048 * BOY); uzuv(tr + "UpLeg", 0.075 * BOY); uzuv(tr + "Leg", 0.066 * BOY)
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=0.058 * BOY, segments=24, ring_count=12); h_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
+        h_.data.materials.append(pmat); EKIP.append((h_, tr + "Hand", Matrix.Translation((0, 0.02 * BOY, 0))))
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=1.0, segments=24, ring_count=12); f_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
+        f_.data.transform(Matrix.Diagonal((0.065 * BOY, 0.11 * BOY, 0.05 * BOY, 1))); f_.data.materials.append(pmat)
+        EKIP.append((f_, tr + "Foot", Matrix.Translation((0, 0.04 * BOY, 0))))
     na = nt.nodes.new("ShaderNodeAttribute"); na.attribute_name = "pg"
     mp = nt.nodes.new("ShaderNodeMapRange"); mp.inputs["From Min"].default_value = 0; mp.inputs["From Max"].default_value = 2
     nt.links.new(na.outputs["Fac"], mp.inputs["Value"])
