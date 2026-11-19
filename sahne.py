@@ -1102,7 +1102,7 @@ def kup_nesnesi(tur, no):
             at_.data.foreach_set("value", np.asarray(veri, dtype=np.float32))
     at_ = me.attributes.new("renk", "FLOAT_COLOR", "POINT")
     at_.data.foreach_set("color", np.hstack([renk, np.ones((k, 1))]).ravel().astype(np.float32))
-    if KARPUZ or KIVI or ANANAS:
+    if KARPUZ or KIVI or ANANAS or APPLE or ORANGE:
         at_ = me.attributes.new("kaynak", "FLOAT_VECTOR", "POINT")
         at_.data.foreach_set("vector", merk.ravel().astype(np.float32))
     ob = bpy.data.objects.new(f"kup_{no}", me)
@@ -1167,6 +1167,52 @@ def kup_nesnesi(tur, no):
         baglan(ntk, yap.outputs[2], sap_mix.inputs[6])
         baglan(ntk, a_r.outputs["Color"], sap_mix.inputs[7])
         baglan(ntk, sap_mix.outputs[2], bk.inputs["Base Color"])
+    elif APPLE or ORANGE:
+        # Iri ilk tur kuplerinin kesik yuzlerinde gercek kaynak konumundaki
+        # cekirdek evi veya portakal dilim zari gorunsun; her kupe ayni etiket basma.
+        kaynak = ntk.nodes.new("ShaderNodeAttribute")
+        kaynak.attribute_type="INSTANCER"; kaynak.attribute_name="kaynak"
+        uv=ntk.nodes.new("ShaderNodeSeparateXYZ")
+        baglan(ntk,tkk.outputs["Generated"],uv.inputs[0])
+        src=ntk.nodes.new("ShaderNodeSeparateXYZ")
+        baglan(ntk,kaynak.outputs["Vector"],src.inputs[0])
+        def pos_eks(i,half):
+            d=matematik(ntk,"MULTIPLY",matematik(ntk,"SUBTRACT",uv.outputs[i],None,deger_b=.5),
+                       None,deger_b=2*half*.94)
+            return matematik(ntk,"ADD",src.outputs[i],d)
+        ox,oy,oz=pos_eks(0,hx),pos_eks(1,hy),pos_eks(2,hz)
+        rad_=matematik(ntk,"SQRT",matematik(ntk,"ADD",matematik(ntk,"MULTIPLY",oy,oy),
+                       matematik(ntk,"MULTIPLY",oz,oz)))
+        u_src=matematik(ntk,"DIVIDE",rad_,None,deger_b=R)
+        angle=matematik(ntk,"ARCTAN2",oz,oy)
+        if APPLE:
+            star=matematik(ntk,"COSINE",matematik(ntk,"MULTIPLY",angle,None,deger_b=5.0))
+            inside=matematik(ntk,"MULTIPLY",matematik(ntk,"LESS_THAN",u_src,None,deger_b=.38),
+                matematik(ntk,"LESS_THAN",matematik(ntk,"ABSOLUTE",ox),None,deger_b=.43*A))
+            chamber=matematik(ntk,"MULTIPLY",inside,
+                matematik(ntk,"MULTIPLY",matematik(ntk,"GREATER_THAN",star,None,deger_b=.28),
+                    matematik(ntk,"GREATER_THAN",u_src,None,deger_b=.15)))
+            seed=matematik(ntk,"MULTIPLY",chamber,
+                matematik(ntk,"MULTIPLY",matematik(ntk,"GREATER_THAN",star,None,deger_b=.82),
+                    matematik(ntk,"GREATER_THAN",u_src,None,deger_b=.22)))
+            m1=ntk.nodes.new("ShaderNodeMix");m1.data_type="RGBA"
+            baglan(ntk,chamber,m1.inputs["Factor"]);baglan(ntk,karis.outputs[2],m1.inputs[6])
+            m1.inputs[7].default_value=hex_renk("#ddcfb0")
+            m2=ntk.nodes.new("ShaderNodeMix");m2.data_type="RGBA"
+            baglan(ntk,seed,m2.inputs["Factor"]);baglan(ntk,m1.outputs[2],m2.inputs[6])
+            m2.inputs[7].default_value=hex_renk("#55351e")
+            baglan(ntk,m2.outputs[2],bk.inputs["Base Color"])
+        else:
+            membrane=matematik(ntk,"MULTIPLY",matematik(ntk,"GREATER_THAN",
+                matematik(ntk,"COSINE",matematik(ntk,"MULTIPLY",angle,None,deger_b=10.0)),
+                None,deger_b=.98),matematik(ntk,"LESS_THAN",u_src,None,deger_b=.80))
+            albedo=matematik(ntk,"MULTIPLY",matematik(ntk,"GREATER_THAN",u_src,None,deger_b=.80),
+                matematik(ntk,"LESS_THAN",u_src,None,deger_b=.94))
+            white=matematik(ntk,"MAXIMUM",membrane,albedo)
+            m1=ntk.nodes.new("ShaderNodeMix");m1.data_type="RGBA"
+            baglan(ntk,white,m1.inputs["Factor"]);baglan(ntk,karis.outputs[2],m1.inputs[6])
+            m1.inputs[7].default_value=hex_renk("#fff0d0")
+            baglan(ntk,m1.outputs[2],bk.inputs["Base Color"])
     elif KARPUZ:
         # Generated kubun yerel 0..1 koordinati, kaynak merkez ve hucre boyutu
         # ile kesilmeden onceki tam 3B konuma geri cevrilir. Rind renkleri
