@@ -93,8 +93,12 @@ degis("const w = 160 * k, h = 200 * k, x = W / 2 + (i - 0.5) * 230 * k - w / 2, 
 
 # ---- karakterler: uc serit; P2 orta seridin saginda (hakem solunda)
 degis("const KAR_BOY = 0.34;", "const KAR_BOY = 0.30;")
+degis("const MAS_BOY = 0.32;", "const MAS_BOY = 0.25;")
+# video 1 duzeltmesi: hakem duvarlardan SONRA cizilir (kapilarin arasinda, hep onde gorunur)
+degis("    if (!tam) hakemCiz(t, d, t - d.t0);                       // maskot kapilarin arasinda; karakterler duvarCiz icinde ustte\n    e = duvarCiz(d, t - d.t0, t);",
+      "    e = duvarCiz(d, t - d.t0, t);\n    if (!tam) hakemCiz(t, d, t - d.t0);                       // motor 29: maskot 1.-2. kapi arasinda, duvar ve karakterlerin onunde")
 degis("  for (let i = 0; i < 2; i++) {\n    const o = OY[i], ad = d[o], out = d.out && d.out[o], Y = KY[o];",
-      "  for (let i = 0; i < OY.length; i++) {\n    const o = OY[i], ad = d[o], out = d.out && d.out[o], Y = KY[o];\n    const yon = i === 0 ? -1 : 1, xs = i * SW + SW / 2 + (i === 1 ? SW * 0.24 : 0);")
+      "  for (let i = 0; i < OY.length; i++) {\n    const o = OY[i], ad = d[o], out = d.out && d.out[o], Y = KY[o];\n    const yon = i === 0 ? -1 : 1, xs = i * SW + SW / 2;")
 degis("      dx = (i ? 1 : -1) * 420 * k * q; dy = 260 * k * q * q - 120 * k * Math.sin(q * Math.PI); don = (i ? 1 : -1) * 1.6 * q;\n"
       "      if (q >= 0.85) sicrama(i * SW + SW / 2 + (i ? 1 : -1) * 400 * k, H * 0.86, (q - 0.85) * Z.buyu * 0.55, 1);",
       "      dx = yon * 300 * k * q; dy = 260 * k * q * q - 120 * k * Math.sin(q * Math.PI); don = yon * 1.6 * q;\n"
@@ -124,7 +128,7 @@ t = t[:st] + """function sicrama(xm, ym, u, olc = 1) {                        //
 """ + t[en:]
 
 # ---- hakem: orta seridin solunda; isaret oku hangi oyuncu
-degis("  const xm = W / 2, y0 = H * 0.925, w = 170 * k, h = H - y0 + 10 * k;", "  const xm = W / 2 - SW * 0.2, y0 = H * 0.925, w = 170 * k, h = H - y0 + 10 * k;")
+degis("  const xm = W / 2, y0 = H * 0.925, w = 170 * k, h = H - y0 + 10 * k;", "  const xm = SW, y0 = H * 0.61, w = 130 * k, h = 70 * k;   // motor 29 (video 1 duzeltmesi): kursu 1. ve 2. kapinin arasinda")
 st = t.index("  const g = cx.createLinearGradient(0, y0, 0, H); g.addColorStop(0, '#7ae8ff'); g.addColorStop(1, '#0a6ad8');   // motor 28: buz blogu kursu")
 en = t.index("  cx.restore();\n}\nfunction hakemCiz(t, d, u) {")
 t = t[:st] + """  const g = cx.createLinearGradient(0, y0, 0, H); g.addColorStop(0, '#ff3a4a'); g.addColorStop(1, '#b8081c');   // motor 29: kirmizi hediye kutusu kursu
@@ -134,7 +138,7 @@ t = t[:st] + """  const g = cx.createLinearGradient(0, y0, 0, H); g.addColorStop
   cx.fillStyle = 'rgba(255,255,255,0.35)'; cx.beginPath(); cx.roundRect(xm - w / 2 + 10 * k, y0 + 6 * k, w - 20 * k, 10 * k, 5 * k); cx.fill();
   for (const s of [-1, 1]) yildiz5(xm + s * w * 0.6, y0 - 26 * k, 20 * k, '#ffd21e', t * s);   // motor 29: iki altin yildiz
 """ + t[en:]
-degis("  const xm = W / 2, ay = H * 0.935, Y = KY.maskot;", "  const xm = W / 2 - SW * 0.2, ay = H * 0.935, Y = KY.maskot;")
+degis("  const xm = W / 2, ay = H * 0.935, Y = KY.maskot;", "  const xm = SW, ay = H * 0.615, Y = KY.maskot;   // motor 29 (kullanici: maskot kapilarin arasinda, onde kalmasin, hep gorunsun)")
 degis("      const yari = sq < 0.5 ? 0 : 1, q = (sq - yari * 0.5) / 0.5;\n      ad = d[OY[yari]]; isaret = yari ? 1 : -1;",
       "      const yari = Math.min(2, Math.floor(sq * 3)), q = sq * 3 - yari;   // motor 29: uc oyuncunun pozunu sirayla gosterir\n      ad = d[OY[yari]]; isaret = yari + 1;")
 degis("    } else ad = d.p2;\n  }", "    } else ad = d.p3;\n  }")
@@ -145,9 +149,9 @@ degis("  cx.save(); cx.shadowColor = '#7ae0ff'; cx.shadowBlur = 24 * k;   // mot
 degis("    const i = isaret > 0 ? 1 : 0, ox = xm + isaret * 230 * k, oy = H * 0.62;\n"
       "    cx.save(); cx.fillStyle = RENK[i]; cx.strokeStyle = '#ffffff'; cx.lineWidth = 6 * k; cx.translate(ox + Math.sin(t * 8) * 8 * k * isaret, oy);\n"
       "    cx.scale(isaret, 1);",
-      "    const i = isaret - 1, hx = i * SW + SW / 2, ox = xm + (hx - xm) * 0.55, oy = H * 0.64, aci = Math.atan2(H * 0.6 - oy, hx - xm + 1);\n"
+      "    const i = isaret - 1, hx = i * SW + SW / 2, ox = xm + (hx - xm) * 0.45, oy = H * 0.5, aci = Math.atan2(0, hx - xm + 1);\n"
       "    cx.save(); cx.fillStyle = RENK[i]; cx.strokeStyle = '#ffffff'; cx.lineWidth = 6 * k; cx.translate(ox + Math.sin(t * 8) * 8 * k * Math.cos(aci), oy);\n"
-      "    cx.rotate(i === 1 ? -Math.PI / 2 : aci);")
+      "    cx.rotate(aci);")
 degis("  else satir([[outlar[0] === 'p1' ? 'BLUE' : 'PINK', ['#ffffff', RENK[outlar[0] === 'p1' ? 0 : 1]]], [' OUT!', ['#ffffff', '#ff8a8a', '#ff1a2a']]], W / 2, y, 64 * k * s, q);",
       "  else satir([[TEMA.ad[OY.indexOf(outlar[0])], ['#ffffff', RENK[OY.indexOf(outlar[0])]]], [' OUT!', ['#ffffff', '#ff8a8a', '#ff1a2a']]], W / 2, y, 64 * k * s, q);")
 

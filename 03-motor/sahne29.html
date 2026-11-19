@@ -647,7 +647,7 @@ function karakterCiz(d, u, t) {
   const Z = ZD(d), a = Z.kart, b = a + Z.say;
   for (let i = 0; i < OY.length; i++) {
     const o = OY[i], ad = d[o], out = d.out && d.out[o], Y = KY[o];
-    const yon = i === 0 ? -1 : 1, xs = i * SW + SW / 2 + (i === 1 ? SW * 0.24 : 0);
+    const yon = i === 0 ? -1 : 1, xs = i * SW + SW / 2;
     const L = KR[o][ad]; if (!L) continue;
     const sc = H * KAR_BOY / Y.boy_px, px = L[0].width * sc;
     let j = 0, dx = 0, dy = 0, don = 0, bob = 0;
@@ -672,9 +672,9 @@ function karakterCiz(d, u, t) {
 }
 
 // ------------------------------------------------------------ HAKEM MASKOT (ekranin ortasi, cankurtaran kulesi; gelen pozu once kendisi yapar)
-const MAS_BOY = 0.32;                                          // kullanici: maskot ortada ve gorunur
+const MAS_BOY = 0.25;                                          // kullanici: maskot ortada ve gorunur
 function kule(t) {                                             // motor 22: iki kapinin arasinda hakem kursusu (mor-lacivert, sari yildiz, cilali)
-  const xm = W / 2 - SW * 0.2, y0 = H * 0.925, w = 170 * k, h = H - y0 + 10 * k;
+  const xm = SW, y0 = H * 0.61, w = 130 * k, h = 70 * k;   // motor 29 (video 1 duzeltmesi): kursu 1. ve 2. kapinin arasinda
   cx.save();
   const g = cx.createLinearGradient(0, y0, 0, H); g.addColorStop(0, '#ff3a4a'); g.addColorStop(1, '#b8081c');   // motor 29: kirmizi hediye kutusu kursu
   cx.fillStyle = g; cx.strokeStyle = '#ffffff'; cx.lineWidth = 6 * k;
@@ -686,7 +686,7 @@ function kule(t) {                                             // motor 22: iki 
 }
 function hakemCiz(t, d, u) {
   kule(t);
-  const xm = W / 2 - SW * 0.2, ay = H * 0.935, Y = KY.maskot;
+  const xm = SW, ay = H * 0.615, Y = KY.maskot;   // motor 29 (kullanici: maskot kapilarin arasinda, onde kalmasin, hep gorunsun)
   let ad = d ? d.p1 : POZ_ADLAR[0], j = 0, bob = Math.abs(Math.sin(t * BPM / 60 * Math.PI)) * 10 * k, isaret = 0;
   if (d) {
     const Z = ZD(d), sq = (u - Z.kart) / Z.say;
@@ -710,9 +710,9 @@ function hakemCiz(t, d, u) {
   if (d && u >= ZD(d).kart + ZD(d).say + ZD(d).buyu * 0.5) MASKOT_DUYGU = (d.out && OY.some(o => d.out[o])) ? 'sasirma' : 'sevinc';
   maskotCiz(ayn ? 2 * xm - kx : kx, y0 + kf[1] * sc - kf[2] * sc * 0.25, kf[2] * sc * 1.6 / (62 * k), t, 1, true);   // motor 28: yavru penguen buyuk kafa
   if (d && isaret && u < ZD(d).kart + ZD(d).say) {             // hangi tarafin pozunu gosterdigini oyuncu renginde ok ile isaret eder
-    const i = isaret - 1, hx = i * SW + SW / 2, ox = xm + (hx - xm) * 0.55, oy = H * 0.64, aci = Math.atan2(H * 0.6 - oy, hx - xm + 1);
+    const i = isaret - 1, hx = i * SW + SW / 2, ox = xm + (hx - xm) * 0.45, oy = H * 0.5, aci = Math.atan2(0, hx - xm + 1);
     cx.save(); cx.fillStyle = RENK[i]; cx.strokeStyle = '#ffffff'; cx.lineWidth = 6 * k; cx.translate(ox + Math.sin(t * 8) * 8 * k * Math.cos(aci), oy);
-    cx.rotate(i === 1 ? -Math.PI / 2 : aci); cx.beginPath(); cx.moveTo(-30 * k, -26 * k); cx.lineTo(30 * k, 0); cx.lineTo(-30 * k, 26 * k); cx.closePath(); cx.fill(); cx.stroke(); cx.restore();
+    cx.rotate(aci); cx.beginPath(); cx.moveTo(-30 * k, -26 * k); cx.lineTo(30 * k, 0); cx.lineTo(-30 * k, 26 * k); cx.closePath(); cx.fill(); cx.stroke(); cx.restore();
   }
 }
 function hakemBalon(d, u, t) {                                  // duvar gecerken hakem tepkisi: PERFECT! / BLUE OUT! (renk adi kendi renginde)
@@ -1303,8 +1303,8 @@ function kareKur(n) {
   if (d) {
     const Z = ZD(d); tam = t - d.t0 >= Z.kart + Z.say + Z.buyu + (Z.tut || 0);
     AYNA = !!d.ayna; SAYIM_TAS = d.no === 1 && TEMA.acilis === 'taskapi';
-    if (!tam) hakemCiz(t, d, t - d.t0);                       // maskot kapilarin arasinda; karakterler duvarCiz icinde ustte
     e = duvarCiz(d, t - d.t0, t);
+    if (!tam) hakemCiz(t, d, t - d.t0);                       // motor 29: maskot 1.-2. kapi arasinda, duvar ve karakterlerin onunde
     if (!tam) hakemBalon(d, t - d.t0, t);
   }
   if (!tam) { hudCiz(t, turBul(t)); sayimCiz(e); if (d) nasilSerit(d, t - d.t0); }
