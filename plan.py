@@ -171,7 +171,7 @@ def ananas_sap(x, y, z, m):
 
 def muz_egri(x, m):
     """Muzun egri merkez cizgisi, plan ve sahnede ayni."""
-    return 0.30 * (np.asarray(x) / m["A"]) ** 2 - 0.12
+    return 0.40 * (np.asarray(x) / m["A"]) ** 2 - 0.12
 
 
 def muz_sirt(y, z):

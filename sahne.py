@@ -1649,7 +1649,7 @@ dz = (matematik(ntk_, "MULTIPLY", ay_.outputs[2], v_r.outputs[0]) if (KARPUZ or 
 if BANANA:
     xu = matematik(ntk_, "DIVIDE", v_x.outputs[0], None, deger_b=A)
     curve = matematik(ntk_, "SUBTRACT",
-        matematik(ntk_, "MULTIPLY", xu, xu, deger_b=.30), None, deger_b=.12)
+        matematik(ntk_, "MULTIPLY", xu, xu, deger_b=.40), None, deger_b=.12)
     dz = matematik(ntk_, "SUBTRACT", dz, curve)
 rad = matematik(ntk_, "SQRT", matematik(ntk_, "ADD", matematik(ntk_, "MULTIPLY", dy, dy), matematik(ntk_, "MULTIPLY", dz, dz)))
 if CILEK:
