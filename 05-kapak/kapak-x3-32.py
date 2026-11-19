@@ -242,18 +242,18 @@ VS_M = np.zeros((H, W), bool)       # REF-084: VS yok    # REF-075: tek VS = mav
 
 ONCE2 = np.asarray(im.convert("RGB")).copy()
 # baslik en onde: HUMAN mavi -> pembe, TETRIS pembe -> sari -> mavi (REF-072 harf renkleri)
-baloncuk("HUMAN", 330, a.bas_y, a.bas_boy, ["#18e0ff", "#3aa8ff", "#c070ff", "#ff50c8"], hedef=600)   # REF-082: doygun gokkusagi harfler
+baloncuk("HUMAN", 330, a.bas_y, a.bas_boy, ["#18e0ff", "#3aa8ff", "#c070ff", "#ff50c8"], kontur="#2e0f66", hedef=600)   # 19 Kas: md. 28 dolgu/kontur 4,4 -> koyu mor   # REF-082: doygun gokkusagi harfler
 baloncuk("TETRIS", 950, a.bas_y, a.bas_boy, ["#ff1a8a", "#ff4a1a", "#ffd000", "#2ad83a", "#10b0ff"], hedef=600)
 
 # REF-082: sagda egik rozet + solda NEW madalyasi (baslikla ayni katmanda, siluetlerin onunde)
 ONCE3 = np.asarray(im.convert("RGB")).copy()
 rx_, ry_ = a.rozet_xy                # REF-084: altta ortada rozet (koyu lacivert plaka + mor/beyaz kenar)
 pl = Image.new("RGBA", (W, H), (0, 0, 0, 0)); dp = ImageDraw.Draw(pl)
-dp.rounded_rectangle((rx_ - 215, ry_ - 52, rx_ + 215, ry_ + 52), 26, fill=(255, 255, 255, 255))
+dp.rounded_rectangle((rx_ - 215, ry_ - 52, rx_ + 215, ry_ + 52), 26, fill=(255, 42, 160, 255))   # 19 Kas kapak 6: beyaz kenar -> pembe (soluk yasak)
 dp.rounded_rectangle((rx_ - 207, ry_ - 44, rx_ + 207, ry_ + 44), 22, fill=(124, 40, 220, 255))
 dp.rounded_rectangle((rx_ - 199, ry_ - 36, rx_ + 199, ry_ + 36), 18, fill=(22, 24, 92, 255))
 im.alpha_composite(pl)
-baloncuk(a.rozet, rx_, ry_ + 2, 64, ["#ffffff", "#e8d8ff", "#c8a8ff"], kontur="#3a1478", hedef=380, ad=a.rozet)
+baloncuk(a.rozet, rx_, ry_ + 2, 64, ["#fff27a", "#ffd21e", "#ff9a1a"], kontur="#3a1478", hedef=380, ad=a.rozet)   # 19 Kas kapak 6: lila -> altin
 ROZ_M = np.abs(np.asarray(im.convert("RGB")).astype(int) - ONCE3.astype(int)).sum(2) > 30
 print("rozet/NEW-siluet cakisma piksel:", int((ROZ_M & SIL_M).sum()))
 
