@@ -72,7 +72,7 @@ def kart(i, oy, ton):
     x0, y0, x1, y1 = [v * OL for v in YER["aciklik_" + oy]]
     X0, Y0 = int(i * SW + x0), int(y0); w, h = int(x1 - x0), int(y1 - y0)
     arka = im.crop((X0, Y0, X0 + w, Y0 + h)).filter(ImageFilter.GaussianBlur(9))
-    k = Image.blend(arka, Image.new("RGBA", (w, h), ton + (255,)), 0.70)   # REF-084: doygun oyuncu renginde pano
+    k = Image.blend(arka, Image.new("RGBA", (w, h), ton + (255,)), 0.85)   # REF-084: doygun oyuncu renginde pano
     yy = np.linspace(0, 1, h)[:, None].repeat(w, 1)
     yan = Image.fromarray((np.clip(1 - yy / 0.35, 0, 1) * 55).astype(np.uint8))      # ust kenardan inen yumusak yansima
     k.paste(Image.new("RGBA", (w, h), (255, 255, 255, 255)), (0, 0), yan)
@@ -97,7 +97,7 @@ for i, oy in enumerate(("p1", "p2", "p3")):          # kapi panolari + icinde so
     ma = siluet_maske(a.siluet[i], a.ayna[i]); ph = int(h_ * 0.78); pw = int(ph * ma.width / ma.height)
     if pw > w_ * 0.85:
         pw = int(w_ * 0.85); ph = int(pw * ma.height / ma.width)
-    acik_ = tuple(int(c + (255 - c) * 0.72) for c in TON[oy])
+    acik_ = tuple(int(c + (255 - c) * 0.45) for c in TON[oy])   # 19 Kas kapak 3: %72 acik soluk okunuyordu
     im.paste(acik_ + (255,), (X0 + (w_ - pw) // 2, Y0 + h_ - ph - int(h_ * 0.06)), ma.resize((pw, ph), Image.LANCZOS))
 for i in (0, 2, 1):
     ma = siluet_maske(a.siluet[i], a.ayna[i])

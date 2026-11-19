@@ -430,7 +430,7 @@ def atolye(serit_modu, rnd):
 def serit_esyalari(oyuncu, R, rnd):
     bant = M("bant" + oyuncu, lambda: mat_pbr("bant" + oyuncu, R["bant"], 0.7, kaplama=0.0, bump=(1.0, 0.0)))
     # konveyor govdesi (oyuncu renginde kenar) + bant (koyu oyuncu rengi, enine nervurlar)
-    yuvarlak_kutu("konv_govde", (0, (GECIS - 4) / 2, 0.2), (2.7, GECIS + 4, 0.4), P(R["iki"], 0.25, 0.8), egim=0.08, seg=3)
+    yuvarlak_kutu("konv_govde", (0, (GECIS - 4) / 2, 0.2), (2.7, GECIS + 4, 0.4), M("govde" + oyuncu, lambda: mat_pbr("govde" + oyuncu, R["iki"], 0.55)), egim=0.08, seg=3)   # 19 Kas kapak 3: kenar yansimasi beyaz serit birakiyordu -> mat
     yuvarlak_kutu("konv_bant", (0, (GECIS - 4) / 2, 0.42), (2.2, GECIS + 4, 0.06), bant, egim=0.02, seg=1)
     y = -3.8
     while y < GECIS:
@@ -495,7 +495,7 @@ def mat_parlama_kis():
         if not m.use_nodes or "Principled BSDF" not in m.node_tree.nodes:
             continue
         ad = m.name.split(".")[0]
-        if ad.startswith(("zemin", "duvar", "tavan", "lambri", "kiris", "bant")):
+        if ad.startswith(("zemin", "duvar", "tavan", "lambri", "kiris", "bant", "govde")):
             b = m.node_tree.nodes["Principled BSDF"]
             b.inputs["Specular IOR Level"].default_value = 0.08
             b.inputs["Coat Weight"].default_value = 0.0
