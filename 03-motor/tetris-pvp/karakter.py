@@ -432,6 +432,10 @@ if OYUNCU == "maskot" and arg("--panda", "0") == "1":     # 32 (Noel oyuncak ato
                 val = 0.0
             a_.data[v_.index].value = val
     pm = mat_govde(lin(hex3("#16161e")), 0.0); pm.name = "panda"; nt = pm.node_tree; bs = nt.nodes["Principled BSDF"]
+    # 32 video 1 (kullanici: "ustu maskot, alti iskelet ... alti facia"): ince parlak insan uzuvlari -> TOMBUL MAT panda uzuvlari
+    bs.inputs["Roughness"].default_value = 0.6; bs.inputs["Coat Weight"].default_value = 0.0
+    for m_ in mesler:
+        dz = m_.modifiers.new("panda_sisir", "DISPLACE"); dz.strength = 0.055 * BOY; dz.mid_level = 0.0   # normal boyunca sisir (pozlanmis govdede)
     na = nt.nodes.new("ShaderNodeAttribute"); na.attribute_name = "pg"
     mp = nt.nodes.new("ShaderNodeMapRange"); mp.inputs["From Min"].default_value = 0; mp.inputs["From Max"].default_value = 2
     nt.links.new(na.outputs["Fac"], mp.inputs["Value"])
