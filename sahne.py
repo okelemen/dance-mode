@@ -45,7 +45,7 @@ PEACH = PLAN["meyve"] == "peach"
 B = M.get("B", R)
 XMIN, XMAX = M.get("xmin", -A), M.get("xmax", A)
 TAHTA_UST = 0.14
-MERKEZ_Z = TAHTA_UST + R - 0.03 + (0.06 if BANANA else 0.0)
+MERKEZ_Z = TAHTA_UST + R - 0.03 + (0.12 if BANANA else 0.0)
 GORSEL_TAVAN = 120  # gorsel kup izgarasi eksen basina en fazla (sayi plandaki gercek degerdir)
 
 
@@ -359,7 +359,7 @@ for v in meyve.data.vertices:
             zz *= 0.96
         elif BANANA:
             theta = math.atan2(zz, yy)
-            rib = 1.0 + 0.055 * math.cos(5.0 * theta)
+            rib = 1.0 + 0.11 * math.cos(5.0 * theta)
             yy *= rib; zz = zz * rib + float(muz_egri(xx, M))
         elif PEACH:
             theta = math.atan2(zz, yy)
@@ -450,11 +450,11 @@ else:
         bruise.inputs["Detail"].default_value = 3.0
         baglan(nt, tk.outputs["Object"], bruise.inputs["Vector"])
         br = nt.nodes.new("ShaderNodeValToRGB")
-        br.color_ramp.elements[0].color = hex_renk("#b89425")
-        br.color_ramp.elements[1].color = hex_renk("#f7d74a")
-        e = br.color_ramp.elements.new(.48); e.color = hex_renk("#e9c332")
+        br.color_ramp.elements[0].color = hex_renk("#aa7d1d")
+        br.color_ramp.elements[1].color = hex_renk("#eebd20")
+        e = br.color_ramp.elements.new(.48); e.color = hex_renk("#dbad1d")
         baglan(nt, bruise.outputs["Fac"], br.inputs["Fac"])
-        spots = matematik(nt,"LESS_THAN",vor.outputs["Distance"],None,deger_b=.035)
+        spots = matematik(nt,"LESS_THAN",vor.outputs["Distance"],None,deger_b=.095)
         sm = nt.nodes.new("ShaderNodeMix"); sm.data_type="RGBA"
         baglan(nt, spots, sm.inputs["Factor"])
         baglan(nt, br.outputs["Color"], sm.inputs[6])
@@ -1649,7 +1649,7 @@ dz = (matematik(ntk_, "MULTIPLY", ay_.outputs[2], v_r.outputs[0]) if (KARPUZ or 
 if BANANA:
     xu = matematik(ntk_, "DIVIDE", v_x.outputs[0], None, deger_b=A)
     curve = matematik(ntk_, "SUBTRACT",
-        matematik(ntk_, "MULTIPLY", xu, xu, deger_b=.12), None, deger_b=.06)
+        matematik(ntk_, "MULTIPLY", xu, xu, deger_b=.30), None, deger_b=.12)
     dz = matematik(ntk_, "SUBTRACT", dz, curve)
 rad = matematik(ntk_, "SQRT", matematik(ntk_, "ADD", matematik(ntk_, "MULTIPLY", dy, dy), matematik(ntk_, "MULTIPLY", dz, dz)))
 if CILEK:

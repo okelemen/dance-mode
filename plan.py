@@ -67,7 +67,7 @@ MEYVELER = {
         "A": 0.80, "R": 0.75, "boyun": 1.0, "profil": "orange",
     },
     "banana": {
-        "A": 1.33, "R": 0.34, "boyun": 1.0, "profil": "banana",
+        "A": 1.33, "R": 0.30, "boyun": 1.0, "profil": "banana",
         "xmin": -1.43, "xmax": 1.52,
     },
     "peach": {
@@ -111,7 +111,7 @@ def meyve_profil(xn, m):
     if m.get("profil") == "orange":
         return np.maximum(0.0, 1.0 - xn * xn) ** 0.50
     if m.get("profil") == "banana":
-        return np.maximum(0.0, 1.0 - xn ** 6) ** 0.30 * (0.94 + 0.06 * xn)
+        return np.maximum(0.0, 1.0 - xn ** 2) ** 0.48 * (1.0 - .25*np.abs(xn)**2) * (.96 + .04*xn)
     if m.get("profil") == "peach":
         return np.maximum(0.0, 1.0 - xn * xn) ** 0.46
     return profil(xn, m["boyun"])
@@ -171,11 +171,11 @@ def ananas_sap(x, y, z, m):
 
 def muz_egri(x, m):
     """Muzun egri merkez cizgisi, plan ve sahnede ayni."""
-    return 0.12 * (np.asarray(x) / m["A"]) ** 2 - 0.06
+    return 0.30 * (np.asarray(x) / m["A"]) ** 2 - 0.12
 
 
 def muz_sirt(y, z):
-    return 1.0 + 0.055 * np.cos(5.0 * np.arctan2(z, y))
+    return 1.0 + 0.11 * np.cos(5.0 * np.arctan2(z, y))
 
 
 def icinde(x, y, z, m):
@@ -205,7 +205,7 @@ def icinde(x, y, z, m):
     if m.get("profil") == "banana":
         dz = z - muz_egri(x, m)
         aci = np.arctan2(dz, y)
-        rib = 1.0 + 0.055 * np.cos(5.0 * aci)
+        rib = 1.0 + 0.11 * np.cos(5.0 * aci)
         govde = (np.abs(xn) <= 1.0) & (y*y + dz*dz <= (rr*rib)**2)
         sap = (x >= m["A"]-0.04) & (x <= m["xmax"]) & (y*y+(dz-0.01)**2 <= .072**2)
         uc = (x >= m["xmin"]) & (x <= -m["A"]+0.05) & (y*y+dz*dz <= .048**2)
