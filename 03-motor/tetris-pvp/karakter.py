@@ -22,6 +22,8 @@ Cikti: karakter/<oyuncu>/<poz>-NN.png (KxK kare, saydam), yerlesim.json: karakte
   --kasif 1: maskota kasif sapkasi (genis kenarli haki, yesil bant) + yesil fular (29, orman tapinagi hakemi).
   --ciftci 1: maskota hasir sapka (sari, kirmizi bant) + kirmizi fular (30, lale tarlasi hakemi).
   --penguen 1: maskot penguen yavrusu govdesi (lacivert sirt, beyaz gogus, turuncu ayak) + kirmizi atki (31). --don 90: yan gorunum.
+  --panda 1: maskot panda yavrusu govdesi (32): siyah kol/bacak, beyaz tombul yumurta govde + kirmizi atki; kafa motorda 2B.
+  --p3 (32, 3 oyuncu): yesil sporcu.
   --sporcu 1: yarisan karakterler boksor degil sporcu (30'dan itibaren, kullanici 17 Kas): forma + koyu sort + ayakkabi oyuncu renginde, sac bandi, bileklik.
 """
 import bmesh
@@ -36,7 +38,7 @@ POZ_DOSYA = {"varlik": "pozlar.json", "varlik-03": "pozlar-03.json", "varlik-04"
              "varlik-05-aday": "pozlar-05-aday.json", "varlik-06-aday": "pozlar-06-aday.json", "varlik-08-aday": "pozlar-08-aday.json",
              "varlik-09-aday": "pozlar-09-aday.json", "varlik-10-aday": "pozlar-10-aday.json", "varlik-12-aday": "pozlar-12-aday.json",
              "varlik-14-aday": "pozlar-14-aday.json", "varlik-16-aday-2": "pozlar-16-aday.json", "varlik-17-aday": "pozlar-17-aday.json"}
-RENK_K = {"p1": "#2E9BFF", "p2": "#FF3EA5", "maskot": "#ff9ad8"}
+RENK_K = {"p1": "#2E9BFF", "p2": "#FF3EA5", "p3": "#22C84A", "maskot": "#ff9ad8"}
 # 25 (TALIMATLAR §4 cilali 3D oyun gorunumu): 24'teki guclu kenar isiltisi govdeyi bembeyaz/pastel yapiyordu -> ayarlanabilir
 RIM = float(arg("--rim", "1.6")); EKIP_EMIS = float(arg("--ekip-emis", "0.35")); GOVDE_ACIK = float(arg("--govde-acik", "0.78"))
 
@@ -67,7 +69,7 @@ else:
     # poz adi -> aci tanimi (maskenin klasorune gore dogru pozlar dosyasi)
     ad_klasor = {os.path.basename(k)[:-4]: k.split("/")[0] for k in KAYNAK}
     if OYUNCU == "maskot":
-        ADLAR = [a for d in DUVAR for a in (d["p1"], d["p2"])]
+        ADLAR = [a for d in DUVAR for a in (d["p1"], d["p2"]) + ((d["p3"],) if "p3" in d else ())]
     else:
         ADLAR = [d[OYUNCU] for d in DUVAR]
     for a in ADLAR:
@@ -407,6 +409,65 @@ if OYUNCU == "maskot" and arg("--penguen", "0") == "1":     # 31 (kutup buzul ki
     ra = 0.07 * BOY                                                   # kirmizi-beyaz seritli atki (kutup hakemi)
     bpy.ops.mesh.primitive_torus_add(major_radius=ra, minor_radius=ra * 0.36, major_segments=40, minor_segments=12)
     f_ = bpy.context.active_object; bpy.ops.object.shade_smooth(); f_.data.materials.append(mat_jole("pg_atki", lin(hex3("#ff2a3a")), emis=0.18, purluk=0.15))
+    f_.data.transform(Matrix.Rotation(math.radians(-90), 4, "X"))
+    EKIP.append((f_, "Neck", Matrix.Translation((0, 0.02 * BOY, 0))))
+
+if OYUNCU == "maskot" and arg("--panda", "0") == "1":     # 32 (Noel oyuncak atolyesi; TALIMATLAR §4 maskot sirasi): PANDA yavrusu - penguen blogunun kopyasi, renkler panda
+    # govde uc renk, dinlenme pozunda nokta ozniteligi "pg" (0 lacivert-siyah sirt, 1 beyaz gogus/karin, 2 turuncu ayak) -> keskin sinir.
+    # Kafa motorda 2B cizilir (siyah yuvarlak bas, beyaz yuz lekesi, buyuk gozler, turuncu gaga, kizarik yanak).
+    zb = lambda ad: (arm.matrix_world @ kemik(arm, ad).head).z
+    BILEK, BOYUN, KALCA = zb("LeftFoot") + 0.015 * BOY, zb("Neck"), zb("Hips")
+    mx = (arm.matrix_world @ kemik(arm, "Hips").head)
+    for m in mesler:
+        a_ = m.data.attributes.new("pg", "FLOAT", "POINT")
+        mw = m.matrix_world; nr = mw.to_3x3()
+        on = None
+        for v_ in m.data.vertices:
+            w = mw @ v_.co; n = (nr @ v_.normal).normalized()
+            if w.z < BILEK:
+                val = 2.0
+            elif False:                                           # ornek 1: yumurta gocdeyi ortunce kalcada beyaz bant kaliyordu -> govde beyazi yalniz yumurtada
+                val = 1.0
+            else:
+                val = 0.0
+            a_.data[v_.index].value = val
+    pm = mat_govde(lin(hex3("#16161e")), 0.0); pm.name = "panda"; nt = pm.node_tree; bs = nt.nodes["Principled BSDF"]
+    na = nt.nodes.new("ShaderNodeAttribute"); na.attribute_name = "pg"
+    mp = nt.nodes.new("ShaderNodeMapRange"); mp.inputs["From Min"].default_value = 0; mp.inputs["From Max"].default_value = 2
+    nt.links.new(na.outputs["Fac"], mp.inputs["Value"])
+    rp = nt.nodes.new("ShaderNodeValToRGB"); cr = rp.color_ramp; cr.interpolation = "CONSTANT"
+    cr.elements[0].position = 0.0; cr.elements[0].color = (*lin(hex3("#16161e")), 1)
+    cr.elements[1].position = 0.75; cr.elements[1].color = (*lin(hex3("#16161e")), 1)
+    e = cr.elements.new(0.25); e.color = (*lin(hex3("#f4f8ff")), 1)
+    nt.links.new(mp.outputs["Result"], rp.inputs["Fac"]); nt.links.new(rp.outputs["Color"], bs.inputs["Base Color"])
+    bs.inputs["Emission Color"].default_value = (*lin(hex3("#3a3a5a")), 1)
+    for m in mesler:
+        m.data.materials.clear(); m.data.materials.append(pm)
+    # 31 yan gorunum kontrolu: ince insan govdesi penguen okunmuyordu -> gogus kemigine bagli TOMBUL YUMURTA govde (lacivert sirt, beyaz karin).
+    # Kemik uzayinda y = kemik boyu (yukari); karin yonu dinlenme pozunda dunya -y'den (kameraya) hesaplanir, shader nesne normaliyle boyar.
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=1.0, segments=48, ring_count=24)
+    yum = bpy.context.active_object; bpy.ops.object.shade_smooth()
+    yum.data.transform(Matrix.Diagonal((0.155 * BOY, 0.21 * BOY, 0.14 * BOY, 1)))
+    Mb0 = (arm.matrix_world @ kemik(arm, "Spine1").matrix).to_3x3()
+    on_d = Matrix.Rotation(math.radians(float(arg("--don", "0"))), 3, "Z") @ Vector((0, -1, 0))
+    on_l = (Mb0.inverted() @ on_d).normalized()
+    ym = mat_govde(lin(hex3("#16161e")), 0.0); ym.name = "pd_yumurta"; nt = ym.node_tree; bs = nt.nodes["Principled BSDF"]
+    ge = nt.nodes.new("ShaderNodeNewGeometry"); vt = nt.nodes.new("ShaderNodeVectorTransform")
+    vt.vector_type = "NORMAL"; vt.convert_from = "WORLD"; vt.convert_to = "OBJECT"
+    nt.links.new(ge.outputs["Normal"], vt.inputs["Vector"])
+    dp = nt.nodes.new("ShaderNodeVectorMath"); dp.operation = "DOT_PRODUCT"; dp.inputs[1].default_value = tuple(on_l)
+    nt.links.new(vt.outputs["Vector"], dp.inputs[0])
+    gt = nt.nodes.new("ShaderNodeMath"); gt.operation = "GREATER_THAN"; gt.inputs[1].default_value = 0.42
+    nt.links.new(dp.outputs["Value"], gt.inputs[0])
+    mx_ = nt.nodes.new("ShaderNodeMix"); mx_.data_type = "RGBA"; nt.links.new(gt.outputs[0], mx_.inputs["Factor"])
+    mx_.inputs[6].default_value = (*lin(hex3("#f6f6fa")), 1); mx_.inputs[7].default_value = (*lin(hex3("#f6f6fa")), 1)   # panda: govde bastan sona beyaz
+    nt.links.new(mx_.outputs[2], bs.inputs["Base Color"])
+    yum.data.materials.append(ym)
+    EKIP.append((yum, "Spine1", Matrix.Translation((0, 0.02 * BOY, 0))))
+    log("panda yumurta karin yonu (kemik uzayi)", [round(c, 2) for c in on_l])
+    ra = 0.07 * BOY                                                   # kirmizi Noel atkisi (atolye hakemi)
+    bpy.ops.mesh.primitive_torus_add(major_radius=ra, minor_radius=ra * 0.36, major_segments=40, minor_segments=12)
+    f_ = bpy.context.active_object; bpy.ops.object.shade_smooth(); f_.data.materials.append(mat_jole("pd_atki", lin(hex3("#e8102c")), emis=0.18, purluk=0.15))
     f_.data.transform(Matrix.Rotation(math.radians(-90), 4, "X"))
     EKIP.append((f_, "Neck", Matrix.Translation((0, 0.02 * BOY, 0))))
 
