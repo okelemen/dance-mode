@@ -363,7 +363,7 @@ for v in meyve.data.vertices:
             yy *= rib; zz = zz * rib + float(muz_egri(xx, M))
         elif PEACH:
             theta = math.atan2(zz, yy)
-            groove = 1.0 - 0.09 * math.exp(-(xx/.11)**2) * (yy < 0)
+            groove = 1.0 - 0.045 * math.exp(-(xx/.09)**2) * (yy < 0)
             wobble = 1.0 + 0.035 * math.sin(3*theta + 0.5)
             yy *= groove*wobble; zz *= groove*wobble
             if zz > 0.5:
@@ -464,24 +464,30 @@ else:
         bmp.inputs["Distance"].default_value = .004
     elif PEACH:
         blush = nt.nodes.new("ShaderNodeTexNoise")
-        blush.inputs["Scale"].default_value = 2.6
+        blush.inputs["Scale"].default_value = 4.0
         blush.inputs["Detail"].default_value = 3.0
         baglan(nt, tk.outputs["Object"], blush.inputs["Vector"])
+        xyz = nt.nodes.new("ShaderNodeSeparateXYZ")
+        baglan(nt, tk.outputs["Object"], xyz.inputs[0])
+        xblush = matematik(nt,"ADD",
+            matematik(nt,"MULTIPLY",xyz.outputs[0],None,deger_b=.46/A),
+            matematik(nt,"MULTIPLY",blush.outputs["Fac"],None,deger_b=.28))
+        xblush = matematik(nt,"ADD",xblush,None,deger_b=.25)
         pr = nt.nodes.new("ShaderNodeValToRGB")
-        pr.color_ramp.elements[0].color = hex_renk("#f5b64c")
-        pr.color_ramp.elements[1].color = hex_renk("#c74743")
-        e=pr.color_ramp.elements.new(.50); e.color=hex_renk("#ed8d53")
-        baglan(nt, blush.outputs["Fac"], pr.inputs["Fac"])
+        pr.color_ramp.elements[0].color = hex_renk("#e9ac4d")
+        pr.color_ramp.elements[1].color = hex_renk("#b72d35")
+        e=pr.color_ramp.elements.new(.50); e.color=hex_renk("#e86543")
+        baglan(nt, xblush, pr.inputs["Fac"])
         kabuk_rengi = pr.outputs["Color"]
         pos = nt.nodes.new("ShaderNodeSeparateXYZ")
         baglan(nt, tk.outputs["Object"], pos.inputs[0])
-        seam = matematik(nt,"LESS_THAN",matematik(nt,"ABSOLUTE",pos.outputs[0]),None,deger_b=.035)
+        seam = matematik(nt,"LESS_THAN",matematik(nt,"ABSOLUTE",pos.outputs[0]),None,deger_b=.012)
         front = matematik(nt,"LESS_THAN",pos.outputs[1],None,deger_b=-.12)
         seam = matematik(nt,"MULTIPLY",seam,front)
         ss=nt.nodes.new("ShaderNodeMix");ss.data_type="RGBA"
         baglan(nt,seam,ss.inputs["Factor"])
         baglan(nt,kabuk_rengi,ss.inputs[6])
-        ss.inputs[7].default_value=hex_renk("#ad5143")
+        ss.inputs[7].default_value=hex_renk("#bd6047")
         kabuk_rengi=ss.outputs[2]
         fuzz = nt.nodes.new("ShaderNodeTexNoise")
         fuzz.inputs["Scale"].default_value = 170.0
@@ -526,7 +532,7 @@ if CILEK:
 else:
     baglan(nt, kar.outputs[2], bsdf.inputs["Base Color"])
     baglan(nt, bmp.outputs["Normal"], bsdf.inputs["Normal"])
-bsdf.inputs["Roughness"].default_value = 0.57 if ANANAS else (0.88 if KIVI else (0.46 if ORANGE else (0.35 if APPLE else (0.42 if CILEK else (0.34 if KARPUZ else 0.26)))))
+bsdf.inputs["Roughness"].default_value = 0.91 if PEACH else (0.57 if ANANAS else (0.88 if KIVI else (0.46 if ORANGE else (0.35 if APPLE else (0.42 if CILEK else (0.34 if KARPUZ else 0.26))))))
 kes_x = nt.nodes.new("ShaderNodeValue"); kes_x.name = "kes_x"; kes_x.outputs[0].default_value = -10.0
 kirp = matematik(nt, "LESS_THAN", ayir.outputs[0], kes_x.outputs[0])
 seffaf = nt.nodes.new("ShaderNodeBsdfTransparent")
@@ -1032,7 +1038,7 @@ def kup_nesnesi(tur, no):
     elif PEACH:
         renk = np.tile(np.array(hex_renk("#f6ba63")[:3]), (k,1))
         renk[u[:,0] > .92] = np.array(hex_renk("#d95c4d")[:3])
-        core = (merk[:,0]/(.30*A))**2 + (merk[:,1]/(.30*R))**2 + (merk[:,2]/(.38*R))**2
+        core = (merk[:,0]/(.40*A))**2 + (merk[:,1]/(.38*R))**2 + (merk[:,2]/(.44*R))**2
         pit = core < (1.0 + .14*np.sin(17*merk[:,0]+12*merk[:,2]))
         renk[pit] = np.array(hex_renk("#84502e")[:3])
         renk[pit & (core > .8)] = np.array(hex_renk("#a76b3b")[:3])
@@ -1258,7 +1264,7 @@ def kup_nesnesi(tur, no):
         baglan(ntk, yap.outputs[2], sap_mix.inputs[6])
         baglan(ntk, a_r.outputs["Color"], sap_mix.inputs[7])
         baglan(ntk, sap_mix.outputs[2], bk.inputs["Base Color"])
-    elif APPLE or ORANGE:
+    elif APPLE or ORANGE or PEACH:
         # Iri ilk tur kuplerinin kesik yuzlerinde gercek kaynak konumundaki
         # cekirdek evi veya portakal dilim zari gorunsun; her kupe ayni etiket basma.
         kaynak = ntk.nodes.new("ShaderNodeAttribute")
@@ -1276,7 +1282,25 @@ def kup_nesnesi(tur, no):
                        matematik(ntk,"MULTIPLY",oz,oz)))
         u_src=matematik(ntk,"DIVIDE",rad_,None,deger_b=R)
         angle=matematik(ntk,"ARCTAN2",oz,oy)
-        if APPLE:
+        if PEACH:
+            xp=matematik(ntk,"DIVIDE",ox,None,deger_b=.40*A)
+            yp=matematik(ntk,"DIVIDE",oy,None,deger_b=.38*R)
+            zp=matematik(ntk,"DIVIDE",oz,None,deger_b=.44*R)
+            core=matematik(ntk,"ADD",matematik(ntk,"MULTIPLY",xp,xp),
+                matematik(ntk,"ADD",matematik(ntk,"MULTIPLY",yp,yp),
+                    matematik(ntk,"MULTIPLY",zp,zp)))
+            rough=matematik(ntk,"SINE",matematik(ntk,"ADD",
+                matematik(ntk,"MULTIPLY",ox,None,deger_b=17.0),
+                matematik(ntk,"MULTIPLY",oz,None,deger_b=12.0)))
+            threshold=matematik(ntk,"ADD",None,
+                matematik(ntk,"MULTIPLY",rough,None,deger_b=.14),deger_a=1.0)
+            pit=matematik(ntk,"LESS_THAN",core,threshold)
+            pm=ntk.nodes.new("ShaderNodeMix");pm.data_type="RGBA"
+            baglan(ntk,pit,pm.inputs["Factor"])
+            baglan(ntk,karis.outputs[2],pm.inputs[6])
+            pm.inputs[7].default_value=hex_renk("#80502d")
+            baglan(ntk,pm.outputs[2],bk.inputs["Base Color"])
+        elif APPLE:
             star=matematik(ntk,"COSINE",matematik(ntk,"MULTIPLY",angle,None,deger_b=5.0))
             inside=matematik(ntk,"MULTIPLY",matematik(ntk,"LESS_THAN",u_src,None,deger_b=.38),
                 matematik(ntk,"LESS_THAN",matematik(ntk,"ABSOLUTE",ox),None,deger_b=.43*A))
@@ -1782,9 +1806,9 @@ elif BANANA:
     baglan(ntk_,sm.outputs[2],bk_.inputs["Base Color"])
 elif PEACH:
     # Merkezde tek, pütürlü taş çekirdeğin YZ kesişimi.
-    xfac=matematik(ntk_,"DIVIDE",v_x.outputs[0],None,deger_b=.30*A)
-    ry=matematik(ntk_,"DIVIDE",dy,None,deger_b=.30*R)
-    rz=matematik(ntk_,"DIVIDE",dz,None,deger_b=.38*R)
+    xfac=matematik(ntk_,"DIVIDE",v_x.outputs[0],None,deger_b=.40*A)
+    ry=matematik(ntk_,"DIVIDE",dy,None,deger_b=.38*R)
+    rz=matematik(ntk_,"DIVIDE",dz,None,deger_b=.44*R)
     pit2=matematik(ntk_,"ADD",matematik(ntk_,"MULTIPLY",xfac,xfac),
         matematik(ntk_,"ADD",matematik(ntk_,"MULTIPLY",ry,ry),matematik(ntk_,"MULTIPLY",rz,rz)))
     pit=matematik(ntk_,"LESS_THAN",pit2,None,deger_b=1.0)

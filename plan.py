@@ -213,7 +213,7 @@ def icinde(x, y, z, m):
     if m.get("profil") == "peach":
         # Kameraya bakan x=0 duzleminde sap cukurundan asagi inen oluk.
         angle = np.arctan2(z, y)
-        groove = 1.0 - 0.09 * np.exp(-(x / .11)**2) * (y < 0)
+        groove = 1.0 - 0.045 * np.exp(-(x / .09)**2) * (y < 0)
         wobble = 1.0 + 0.035*np.sin(3*angle + 0.5)
         body = (np.abs(xn) <= 1.0) & (y*y+z*z <= (rr*groove*wobble)**2)
         return body
