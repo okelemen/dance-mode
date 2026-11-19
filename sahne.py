@@ -351,6 +351,8 @@ for v in meyve.data.vertices:
             lob = 0.025 * math.cos(5 * math.atan2(yy, xx)) * max(0.0, (zz / R))**6
             zz -= math.copysign(dip, zz) if abs(zz) > 0.45 else 0.0
             zz += lob
+            xx *= 1.05 if zz >= 0 else 0.89
+            yy *= 1.05 if zz >= 0 else 0.89
         elif ORANGE:
             zz *= 0.96
         v.co = (xx, yy, zz)
@@ -403,12 +405,17 @@ else:
         alaca.inputs["Detail"].default_value = 3.0
         baglan(nt, tk.outputs["Object"], alaca.inputs["Vector"])
         arm = nt.nodes.new("ShaderNodeValToRGB")
-        arm.color_ramp.elements[0].color = hex_renk("#9e2220")
-        arm.color_ramp.elements[1].color = hex_renk("#e94728")
-        for pos, col in ((0.30,"#c42722"),(0.58,"#da4423"),(0.76,"#d2aa32"),(0.87,"#92a13b")):
+        arm.color_ramp.elements[0].color = hex_renk("#86191e")
+        arm.color_ramp.elements[1].color = hex_renk("#bd2623")
+        for pos, col in ((0.30,"#a91d20"),(0.58,"#c82c20"),(0.76,"#c7a53b"),(0.87,"#83a047")):
             e = arm.color_ramp.elements.new(pos); e.color = hex_renk(col)
         baglan(nt, alaca.outputs["Fac"], arm.inputs["Fac"])
-        kabuk_rengi = arm.outputs["Color"]
+        benek_m = matematik(nt,"LESS_THAN",vor.outputs["Distance"],None,deger_b=.055)
+        benek_c = nt.nodes.new("ShaderNodeMix"); benek_c.data_type="RGBA"
+        baglan(nt,benek_m,benek_c.inputs["Factor"])
+        baglan(nt,arm.outputs["Color"],benek_c.inputs[6])
+        benek_c.inputs[7].default_value=hex_renk("#d8b988")
+        kabuk_rengi = benek_c.outputs[2]
         bmp.inputs["Strength"].default_value = 0.10
         bmp.inputs["Distance"].default_value = 0.004
     elif ORANGE:
@@ -683,27 +690,27 @@ if APPLE or ORANGE:
     if APPLE:
         # Sap cukurundan cikan kisa, gercek odunsu sap.
         sm = bagli_malzeme("elma_odunsu_sap", "#624027")
-        bpy.ops.mesh.primitive_cylinder_add(vertices=14, radius=0.038, depth=0.20)
+        bpy.ops.mesh.primitive_cylinder_add(vertices=14, radius=0.050, depth=0.22)
         ob = bpy.context.object; ob.name = "elma_sapi_kesilir"
         ob.location = (0, 0, 0.65)
         bpy.ops.object.transform_apply(location=True, rotation=True)
         ob.parent = meyve; ob.data.materials.append(sm)
         ANANAS_EK_OB.append(ob)
         lm = bagli_malzeme("elma_yaprak", "#3c792d")
-        vs = [(0.02,-0.08,0.65),(0.16,-0.095,0.72),(0.31,-0.075,0.64),(0.16,-0.055,0.62)]
+        vs = [(0.04,-0.15,0.70),(0.24,-0.20,0.755),(0.49,-0.14,0.72),(0.24,-0.08,0.70)]
         mesh = bpy.data.meshes.new("elma_yaprak_mesh"); mesh.from_pydata(vs,[],[(0,1,2,3)]); mesh.update()
         ob = bpy.data.objects.new("elma_yaprak_kesilir",mesh); sc.collection.objects.link(ob)
         ob.parent = meyve; ob.data.materials.append(lm); ANANAS_EK_OB.append(ob)
     else:
         # Bes uc yaprakli kucuk ust kaliks; govde kabugu gibi degil, yesil.
         cm = bagli_malzeme("portakal_yesil_kaliks", "#396a2e")
-        vs=[(0,0,0.68)]; fs=[]
+        vs=[(0,0,0.755)]; fs=[]
         for i in range(5):
             a=2*math.pi*i/5
             mid=len(vs)
-            vs.extend([(0.06*math.cos(a-.35),0.06*math.sin(a-.35),0.68),
-                       (0.16*math.cos(a),0.16*math.sin(a),0.66),
-                       (0.06*math.cos(a+.35),0.06*math.sin(a+.35),0.68)])
+            vs.extend([(0.08*math.cos(a-.35),0.08*math.sin(a-.35),0.752),
+                       (0.21*math.cos(a),0.21*math.sin(a),0.715),
+                       (0.08*math.cos(a+.35),0.08*math.sin(a+.35),0.752)])
             fs.append((0,mid,mid+1,mid+2))
         mesh=bpy.data.meshes.new("portakal_kaliks_mesh"); mesh.from_pydata(vs,[],fs); mesh.update()
         ob=bpy.data.objects.new("portakal_kaliks_kesilir",mesh); sc.collection.objects.link(ob)
@@ -948,6 +955,17 @@ def kup_nesnesi(tur, no):
         tohum = odacik & (np.cos(5*aci) > .82) & (u[:, 0] > .22)
         renk[odacik] = np.array(hex_renk("#e1d5b6")[:3])
         renk[tohum] = np.array(hex_renk("#51321e")[:3])
+        omuz=np.where(merk[:,2]>=0,1.05,.89)
+        xn_app=merk[:,0]/(A*omuz)
+        r_app=R*np.maximum(0,1-xn_app*xn_app)**.46
+        govde = (np.abs(xn_app)<=1) & ((merk[:,1]/omuz)**2 +
+            (np.abs(merk[:,2])+.105*np.exp(-(merk[:,0]**2+merk[:,1]**2)/.032))**2 <= r_app*r_app)
+        sap = ~govde & (merk[:, 0]**2 + merk[:, 1]**2 <= .050**2) & (merk[:, 2] >= .56)
+        yaprak = ~govde & ~sap & (((merk[:, 0]-.27)/.22)**2 +
+            ((merk[:, 1]+.13)/.09)**2 + ((merk[:, 2]-.72)/.035)**2 <= 1)
+        renk[sap] = np.array(hex_renk("#624027")[:3])
+        renk[yaprak] = np.array(hex_renk("#3c792d")[:3])
+        maske[sap | yaprak] = 0
     elif ORANGE:
         # Beyaz albedo, on dilimli zarlar ve merkezde acik oz.
         renk = np.tile(np.array(hex_renk("#f77b16")[:3]), (k, 1))
@@ -957,6 +975,9 @@ def kup_nesnesi(tur, no):
         zar = (np.cos(10*aci) > .985) & (u[:, 0] < .80)
         renk[zar] = np.array(hex_renk("#fff0cd")[:3])
         renk[u[:, 0] < .10] = np.array(hex_renk("#ffefd1")[:3])
+        kaliks = (merk[:, 0]**2 + merk[:, 1]**2 <= .21**2) & (merk[:, 2] >= .70)
+        renk[kaliks] = np.array(hex_renk("#396a2e")[:3])
+        maske[kaliks] = 0
     elif CILEK:
         # Kesit rampasiyla ayni duraklar: beyaz oz, pembe et, kirmizi halka.
         oz = np.array(hex_renk("#fff1e5")[:3])
