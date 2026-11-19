@@ -66,6 +66,13 @@ MEYVELER = {
     "orange": {
         "A": 0.80, "R": 0.75, "boyun": 1.0, "profil": "orange",
     },
+    "banana": {
+        "A": 1.33, "R": 0.34, "boyun": 1.0, "profil": "banana",
+        "xmin": -1.43, "xmax": 1.52,
+    },
+    "peach": {
+        "A": 0.78, "R": 0.72, "boyun": 1.0, "profil": "peach",
+    },
 }
 
 # Turlar: (kesim sayisi, kesim suresi sn). Acilis 0.4 sn + sonuc 1.3 sn eklenir -> toplam 60 sn
@@ -103,14 +110,20 @@ def meyve_profil(xn, m):
         return np.maximum(0.0, 1.0 - xn * xn) ** 0.46
     if m.get("profil") == "orange":
         return np.maximum(0.0, 1.0 - xn * xn) ** 0.50
+    if m.get("profil") == "banana":
+        return np.maximum(0.0, 1.0 - xn ** 6) ** 0.30 * (0.94 + 0.06 * xn)
+    if m.get("profil") == "peach":
+        return np.maximum(0.0, 1.0 - xn * xn) ** 0.46
     return profil(xn, m["boyun"])
 
 
 def meyve_fmax(m):
     if m.get("profil") == "strawberry":
         return float(meyve_profil(np.linspace(-1, 1, 20001), m).max())
-    if m.get("profil") in ("kiwi", "pineapple", "apple", "orange"):
+    if m.get("profil") in ("kiwi", "pineapple", "apple", "orange", "peach"):
         return 1.0
+    if m.get("profil") == "banana":
+        return float(meyve_profil(np.linspace(-1, 1, 20001), m).max())
     return fmax(m["boyun"])
 
 
@@ -156,6 +169,15 @@ def ananas_sap(x, y, z, m):
             (y * y + z * z <= 0.07 * 0.07))
 
 
+def muz_egri(x, m):
+    """Muzun egri merkez cizgisi, plan ve sahnede ayni."""
+    return 0.12 * (np.asarray(x) / m["A"]) ** 2 - 0.06
+
+
+def muz_sirt(y, z):
+    return 1.0 + 0.055 * np.cos(5.0 * np.arctan2(z, y))
+
+
 def icinde(x, y, z, m):
     """Meyvenin merkezine gore (x,y,z) noktasi govdenin icinde mi."""
     if m.get("profil") == "strawberry":
@@ -180,6 +202,21 @@ def icinde(x, y, z, m):
         govde = (np.abs(xn) <= 1.0) & (y*y + z*z <= rr*rr)
         calyx = (x*x+y*y <= 0.21**2) & (z >= 0.70) & (z <= 0.76)
         return govde | calyx
+    if m.get("profil") == "banana":
+        dz = z - muz_egri(x, m)
+        aci = np.arctan2(dz, y)
+        rib = 1.0 + 0.055 * np.cos(5.0 * aci)
+        govde = (np.abs(xn) <= 1.0) & (y*y + dz*dz <= (rr*rib)**2)
+        sap = (x >= m["A"]-0.04) & (x <= m["xmax"]) & (y*y+(dz-0.01)**2 <= .072**2)
+        uc = (x >= m["xmin"]) & (x <= -m["A"]+0.05) & (y*y+dz*dz <= .048**2)
+        return govde | sap | uc
+    if m.get("profil") == "peach":
+        # Kameraya bakan x=0 duzleminde sap cukurundan asagi inen oluk.
+        angle = np.arctan2(z, y)
+        groove = 1.0 - 0.09 * np.exp(-(x / .11)**2) * (y < 0)
+        wobble = 1.0 + 0.035*np.sin(3*angle + 0.5)
+        body = (np.abs(xn) <= 1.0) & (y*y+z*z <= (rr*groove*wobble)**2)
+        return body
     return (np.abs(xn) <= 1.0) & (y * y + z * z <= rr * rr)
 
 
