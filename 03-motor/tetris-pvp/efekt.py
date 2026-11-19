@@ -175,7 +175,11 @@ def main():
             yerlestir(ef, vuus(1.4, True, 0.7), t + 0.15)               # duvar yaklasiyor
             yerlestir(ef, geri_sar(0.4), t + 1.6, 1.0)                  # geri sarma
             yerlestir(ef, vuus(0.6, True, 0.9), t + 2.0)                # beyaz parlama + kanat
-            if "--hediye" in sys.argv:                                    # 32: dev hediye kutusu duser, kapak firlar, konfeti
+            if "--arena" in sys.argv:                                     # 33: arena kapisinin ahsap kanatlari acilir (gurleme), kum patlar, kum firtinasi
+                yerlestir(ef, gurleme(0.9), t + 2.0, 0.9)
+                yerlestir(ef, kum(0.6), t + 2.3, 0.9)
+                yerlestir(ef, ruzgar(1.0), t + 2.25, 0.5)
+            elif "--hediye" in sys.argv:                                    # 32: dev hediye kutusu duser, kapak firlar, konfeti
                 yerlestir(ef, vurus(), t + 2.33, 1.0)
                 yerlestir(ef, vuus(0.5, True, 0.8), t + 2.4)
                 yerlestir(ef, piril(1.0), t + 2.45, 0.9)
@@ -234,7 +238,7 @@ def main():
             yerlestir(ef, ayna(), a + 0.02, 0.8)
         if d.get("blind"):                                               # 27 BLIND: tipi (siluet gizli), son 1,5 sn'de belirir -> buz cinlamasi
             yerlestir(ef, ruzgar(max(0.8, b - 1.5 - a + 0.3)), a, 0.55)
-            yerlestir(ef, buz(), b - 1.5, 0.75)
+            yerlestir(ef, piril(0.5) if "--arena" in sys.argv else buz(), b - 1.5, 0.75)   # 33 arena: kum firtinasi dagilir -> piril
         for i in range(3):
             yerlestir(ef, bip([660, 784, 988][i]), a + i * Z["say"] / 3 + 0.02, 0.9)    # 3-2-1 yukselen (sahne ile ayni adim)
         yerlestir(ef, vuus(Z["buyu"] * 0.6, True, 0.55), c - Z["buyu"] * 0.6)   # duvar yaklasiyor
@@ -244,7 +248,10 @@ def main():
         if out:                                                          # 24: OUT - karakter suya duser (sicrama) + alcak uyari
             yerlestir(ef, vuus(0.5, False, 1.0), c - Z["buyu"] * 0.25)
             yerlestir(ef, zap(0.35), c - Z["buyu"] * 0.2, 0.6)
-            if "--hediye" in sys.argv:                                    # 32: hediye kutusu yiginina duser -> kutular sacilir (uc gum + tik) + hakem duduk
+            if "--arena" in sys.argv:                                     # 33: kum yiginina yuvarlanir -> gumleme + kum + hakem duduk
+                yerlestir(ef, kum(), c - 0.03, 1.0)
+                yerlestir(ef, duduk(), c + 0.35, 0.7)
+            elif "--hediye" in sys.argv:                                    # 32: hediye kutusu yiginina duser -> kutular sacilir (uc gum + tik) + hakem duduk
                 for i in range(3):
                     yerlestir(ef, kum(0.25), c - 0.03 + i * 0.11, 0.9 - 0.2 * i)
                 yerlestir(ef, piril(0.4), c + 0.2, 0.5)

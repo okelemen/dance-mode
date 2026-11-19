@@ -1,0 +1,730 @@
+{
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-33",
+ "bpm": 129.58,
+ "toplam_olcu": 106,
+ "toplam_duvar": 24,
+ "kartlar": [
+  {
+   "t": 0.0,
+   "sure": 3.7043,
+   "tip": "acilis",
+   "soru": true
+  },
+  {
+   "t": 42.5992,
+   "sure": 1.8521,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "02",
+   "alt": "ROUND 2",
+   "ek": null,
+   "boss": false
+  },
+  {
+   "t": 83.3462,
+   "sure": 1.8521,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "03",
+   "alt": "BLIND ROUND",
+   "ek": "SANDSTORM!",
+   "boss": false
+  },
+  {
+   "t": 129.6496,
+   "sure": 1.8521,
+   "tip": "tur",
+   "tur": 4,
+   "metin": "04",
+   "alt": "FINAL ROUND",
+   "ek": null,
+   "boss": false
+  },
+  {
+   "t": 163.9142,
+   "sure": 1.8521,
+   "tip": "tur",
+   "tur": 4,
+   "metin": "!",
+   "alt": "BOSS WALL",
+   "ek": "WINNER TAKES IT ALL",
+   "boss": true
+  },
+  {
+   "t": 179.6574,
+   "sure": 5.5564,
+   "tip": "sonuc",
+   "kazanan": "p2",
+   "skor": {
+    "p1": 20,
+    "p2": 21
+   }
+  },
+  {
+   "t": 185.2138,
+   "sure": 5.5564,
+   "tip": "rutbe"
+  },
+  {
+   "t": 190.7702,
+   "sure": 5.5564,
+   "tip": "abone"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 3.7043,
+   "z": {
+    "kart": 0.9261,
+    "say": 3.2412,
+    "buyu": 1.3891,
+    "gec": 0.9261,
+    "sure": 6.4825
+   },
+   "p1": "raven-down-reach-curtsy",
+   "p2": "cosmic-heel-raise-arms-forward-high",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 1,
+    "p2": 1
+   },
+   "ovgu": "PERFECT!",
+   "boss": false,
+   "blind": false,
+   "nasil": true
+  },
+  {
+   "no": 2,
+   "tur": 1,
+   "t0": 10.1868,
+   "z": {
+    "kart": 0.9261,
+    "say": 3.2412,
+    "buyu": 1.3891,
+    "gec": 0.9261,
+    "sure": 6.4825
+   },
+   "p1": "werewolf-stork-down-up",
+   "p2": "phantom-quad-hold-up",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 2,
+    "p2": 2
+   },
+   "ovgu": "NICE!",
+   "boss": false,
+   "blind": false,
+   "nasil": true
+  },
+  {
+   "no": 3,
+   "tur": 1,
+   "t0": 16.6692,
+   "z": {
+    "kart": 0.9261,
+    "say": 3.2412,
+    "buyu": 1.3891,
+    "gec": 0.9261,
+    "sure": 6.4825
+   },
+   "p1": "owl-quad-hold-bent-up",
+   "p2": "funk-reach-w-curtsy",
+   "out": {
+    "p1": true,
+    "p2": false
+   },
+   "skor": {
+    "p1": 2,
+    "p2": 3
+   },
+   "ovgu": "GREAT!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 4,
+   "tur": 1,
+   "t0": 23.1517,
+   "z": {
+    "kart": 0.9261,
+    "say": 3.2412,
+    "buyu": 1.3891,
+    "gec": 0.9261,
+    "sure": 6.4825
+   },
+   "p1": "graveyard-chest-reach-side-tap",
+   "p2": "werewolf-knee-raise-low-forward-bent-up",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 3,
+    "p2": 4
+   },
+   "ovgu": "AMAZING!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 5,
+   "tur": 1,
+   "t0": 29.6342,
+   "z": {
+    "kart": 0.9261,
+    "say": 3.2412,
+    "buyu": 1.3891,
+    "gec": 0.9261,
+    "sure": 6.4825
+   },
+   "p1": "strike-hip-reach-horse",
+   "p2": "solar-flex-v-tap",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 4,
+    "p2": 5
+   },
+   "ovgu": "SUPER!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 6,
+   "tur": 1,
+   "t0": 36.1167,
+   "z": {
+    "kart": 0.9261,
+    "say": 3.2412,
+    "buyu": 1.3891,
+    "gec": 0.9261,
+    "sure": 6.4825
+   },
+   "p1": "astro-cactus-reach-tree",
+   "p2": "bold-reach-wave-knee",
+   "out": {
+    "p1": false,
+    "p2": true
+   },
+   "skor": {
+    "p1": 5,
+    "p2": 5
+   },
+   "ovgu": "WOW!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 7,
+   "tur": 2,
+   "t0": 44.4513,
+   "z": {
+    "kart": 0.9261,
+    "say": 3.2412,
+    "buyu": 1.3891,
+    "gec": 0.9261,
+    "sure": 6.4825
+   },
+   "p1": "orbit-hip-cactus-leg-out",
+   "p2": "spider-chest-diag-tap",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 6,
+    "p2": 6
+   },
+   "ovgu": "PERFECT!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 8,
+   "tur": 2,
+   "t0": 50.9338,
+   "z": {
+    "kart": 0.9261,
+    "say": 3.2412,
+    "buyu": 1.3891,
+    "gec": 0.9261,
+    "sure": 6.4825
+   },
+   "p1": "goblin-v-low-leg-out",
+   "p2": "iceberg-hook-cactus-knee",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 7,
+    "p2": 7
+   },
+   "ovgu": "NICE!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 9,
+   "tur": 2,
+   "t0": 57.4163,
+   "z": {
+    "kart": 0.9261,
+    "say": 3.2412,
+    "buyu": 1.3891,
+    "gec": 0.9261,
+    "sure": 6.4825
+   },
+   "p1": "ready-cactus-v-kick",
+   "p2": "owl-t-v-leg-out-lean-l",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 8,
+    "p2": 8
+   },
+   "ovgu": "GREAT!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 10,
+   "tur": 2,
+   "t0": 63.8987,
+   "z": {
+    "kart": 0.9261,
+    "say": 3.2412,
+    "buyu": 1.3891,
+    "gec": 0.9261,
+    "sure": 6.4825
+   },
+   "p1": "wake-hug-t-knee",
+   "p2": "shadow-w-w-kick-lean-r",
+   "out": {
+    "p1": true,
+    "p2": false
+   },
+   "skor": {
+    "p1": 8,
+    "p2": 9
+   },
+   "ovgu": "AMAZING!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 11,
+   "tur": 2,
+   "t0": 70.3812,
+   "z": {
+    "kart": 0.9261,
+    "say": 3.2412,
+    "buyu": 1.3891,
+    "gec": 0.9261,
+    "sure": 6.4825
+   },
+   "p1": "prism-t-cactus-tree",
+   "p2": "spell-diag-w-tap-lean-r",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 9,
+    "p2": 10
+   },
+   "ovgu": "SUPER!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 12,
+   "tur": 2,
+   "t0": 76.8637,
+   "z": {
+    "kart": 0.9261,
+    "say": 3.2412,
+    "buyu": 1.3891,
+    "gec": 0.9261,
+    "sure": 6.4825
+   },
+   "p1": "smooth-halo-t-tap",
+   "p2": "beam-diag-w-horse",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 10,
+    "p2": 11
+   },
+   "ovgu": "WOW!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 13,
+   "tur": 3,
+   "t0": 85.1983,
+   "z": {
+    "kart": 0.9261,
+    "say": 4.1673,
+    "buyu": 1.3891,
+    "gec": 0.9261,
+    "sure": 7.4086
+   },
+   "p1": "rise-wave-reach-wide",
+   "p2": "sakura-shrug-palms-up",
+   "out": {
+    "p1": false,
+    "p2": true
+   },
+   "skor": {
+    "p1": 11,
+    "p2": 11
+   },
+   "ovgu": "PERFECT!",
+   "boss": false,
+   "blind": true,
+   "nasil": false
+  },
+  {
+   "no": 14,
+   "tur": 3,
+   "t0": 92.6069,
+   "z": {
+    "kart": 0.9261,
+    "say": 4.1673,
+    "buyu": 1.3891,
+    "gec": 0.9261,
+    "sure": 7.4086
+   },
+   "p1": "planet-hip-wave-wide",
+   "p2": "goddess-arms-crossed-up",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 12,
+    "p2": 12
+   },
+   "ovgu": "NICE!",
+   "boss": false,
+   "blind": true,
+   "nasil": false
+  },
+  {
+   "no": 15,
+   "tur": 3,
+   "t0": 100.0154,
+   "z": {
+    "kart": 0.9261,
+    "say": 4.1673,
+    "buyu": 1.3891,
+    "gec": 0.9261,
+    "sure": 7.4086
+   },
+   "p1": "branch-wave-head-curtsy",
+   "p2": "cosmic-diag-cactus-curtsy",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 13,
+    "p2": 13
+   },
+   "ovgu": "GREAT!",
+   "boss": false,
+   "blind": true,
+   "nasil": false
+  },
+  {
+   "no": 16,
+   "tur": 3,
+   "t0": 107.424,
+   "z": {
+    "kart": 0.9261,
+    "say": 4.1673,
+    "buyu": 1.3891,
+    "gec": 0.9261,
+    "sure": 7.4086
+   },
+   "p1": "solo-reverse-warrior-reach",
+   "p2": "shine-t-halo-wide",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 14,
+    "p2": 14
+   },
+   "ovgu": "AMAZING!",
+   "boss": false,
+   "blind": true,
+   "nasil": false
+  },
+  {
+   "no": 17,
+   "tur": 3,
+   "t0": 114.8325,
+   "z": {
+    "kart": 0.9261,
+    "say": 4.1673,
+    "buyu": 1.3891,
+    "gec": 0.9261,
+    "sure": 7.4086
+   },
+   "p1": "orbit-low-hip-goddess",
+   "p2": "ray-diag-hug-horse",
+   "out": {
+    "p1": true,
+    "p2": false
+   },
+   "skor": {
+    "p1": 14,
+    "p2": 15
+   },
+   "ovgu": "SUPER!",
+   "boss": false,
+   "blind": true,
+   "nasil": false
+  },
+  {
+   "no": 18,
+   "tur": 3,
+   "t0": 122.2411,
+   "z": {
+    "kart": 0.9261,
+    "say": 4.1673,
+    "buyu": 1.3891,
+    "gec": 0.9261,
+    "sure": 7.4086
+   },
+   "p1": "moonlight-split-stance-back-diag",
+   "p2": "light-head-diag-lunge",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 15,
+    "p2": 16
+   },
+   "ovgu": "WOW!",
+   "boss": false,
+   "blind": true,
+   "nasil": false
+  },
+  {
+   "no": 19,
+   "tur": 4,
+   "t0": 131.5018,
+   "z": {
+    "kart": 0.9261,
+    "say": 3.2412,
+    "buyu": 1.3891,
+    "gec": 0.9261,
+    "sure": 6.4825
+   },
+   "p1": "snowflake-hook-diag-curtsy",
+   "p2": "planet-w-t-knee",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 16,
+    "p2": 17
+   },
+   "ovgu": "PERFECT!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 20,
+   "tur": 4,
+   "t0": 137.9843,
+   "z": {
+    "kart": 0.9261,
+    "say": 3.2412,
+    "buyu": 1.3891,
+    "gec": 0.9261,
+    "sure": 6.4825
+   },
+   "p1": "diagonal-line",
+   "p2": "crystal-hook-head-kick",
+   "out": {
+    "p1": false,
+    "p2": true
+   },
+   "skor": {
+    "p1": 17,
+    "p2": 17
+   },
+   "ovgu": "NICE!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 21,
+   "tur": 4,
+   "t0": 144.4667,
+   "z": {
+    "kart": 0.9261,
+    "say": 3.2412,
+    "buyu": 1.3891,
+    "gec": 0.9261,
+    "sure": 6.4825
+   },
+   "p1": "zenith-t-swing-goddess",
+   "p2": "laser-t-diag-wide",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 18,
+    "p2": 18
+   },
+   "ovgu": "GREAT!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 22,
+   "tur": 4,
+   "t0": 150.9492,
+   "z": {
+    "kart": 0.9261,
+    "say": 3.2412,
+    "buyu": 1.3891,
+    "gec": 0.9261,
+    "sure": 6.4825
+   },
+   "p1": "meteor-cross-cactus-lunge",
+   "p2": "cauldron-lunge-up-hip",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 19,
+    "p2": 19
+   },
+   "ovgu": "AMAZING!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 23,
+   "tur": 4,
+   "t0": 157.4317,
+   "z": {
+    "kart": 0.9261,
+    "say": 3.2412,
+    "buyu": 1.3891,
+    "gec": 0.9261,
+    "sure": 6.4825
+   },
+   "p1": "polar-swing-reach-lunge",
+   "p2": "disco-archer-lunge",
+   "out": {
+    "p1": false,
+    "p2": false
+   },
+   "skor": {
+    "p1": 20,
+    "p2": 20
+   },
+   "ovgu": "SUPER!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 24,
+   "tur": 4,
+   "t0": 165.7663,
+   "z": {
+    "kart": 0.9261,
+    "say": 5.5564,
+    "buyu": 2.7782,
+    "gec": 4.6303,
+    "sure": 13.891
+   },
+   "p1": "truss-wave-halo-lunge",
+   "p2": "bat-low-lunge-prayer-hip",
+   "out": {
+    "p1": true,
+    "p2": false
+   },
+   "skor": {
+    "p1": 20,
+    "p2": 21
+   },
+   "ovgu": "WOW!",
+   "boss": true,
+   "blind": false,
+   "nasil": false
+  }
+ ],
+ "abone": [
+  8.0,
+  23.2,
+  38.2,
+  54.3,
+  69.3,
+  85.4,
+  100.4,
+  115.4,
+  131.8,
+  147.8,
+  162.8
+ ],
+ "abone_sure": 3.2,
+ "muzik": "Stardust Crown.wav (Suno; HT 9'dan beri ilk, kullanici 19 Kas) -> 01-muzik/human-tetris-33/stardust-33-dizili.wav (129,58 BPM sabit, 106 olcu)",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur-33.py. Motor 03-motor/sahne30.html (antik kum arenasi, BLIND, ejderha hakem). Referans REF-085 (yapi), mekan bizden (kullanici 19 Kas 2026).",
+ "tema": {
+  "acilis": "kanca",
+  "varlik": "/03-motor/tetris-pvp/varlik-33s1/",
+  "karakter": "/03-motor/tetris-pvp/varlik-33-karakter/",
+  "maskeVarlik": "/03-motor/tetris-pvp/varlik-33s1/",
+  "turAd": {
+   "1": "ROUND 1",
+   "2": "ROUND 2",
+   "3": "BLIND ROUND",
+   "4": "FINAL ROUND"
+  },
+  "aboneAlt": "NEW BATTLE EVERY DAY"
+ }
+}
