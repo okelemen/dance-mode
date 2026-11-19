@@ -36,9 +36,9 @@ ARKA_Y = 38.0           # arka duvar (pencereler + cam)
 YAN_X = 22.0            # yan duvarlar (raflar)
 TAVAN = 12.0
 SERIT = {
-    "p1": {"ana": "#1e7cff", "koyu": "#0a3fa8", "acik": "#8cc8ff"},
-    "p2": {"ana": "#ff2aa0", "koyu": "#a8105e", "acik": "#ffa6d6"},
-    "p3": {"ana": "#18c840", "koyu": "#0a6a22", "acik": "#9cf0a8"},
+    "p1": {"ana": "#1e7cff", "koyu": "#0a3fa8", "acik": "#8cc8ff", "iki": "#00b4ff"},
+    "p2": {"ana": "#ff2aa0", "koyu": "#a8105e", "acik": "#ffa6d6", "iki": "#c020ff"},
+    "p3": {"ana": "#18c840", "koyu": "#0a6a22", "acik": "#9cf0a8", "iki": "#00d890"},
 }
 HEDIYE = ("#e8102c", "#14a83a", "#ffc21a", "#8a2ae8", "#1e7cff", "#ff2aa0", "#ff6a10", "#00b8d8")
 KURDELE = ("#ffd21e", "#ffd21e", "#e8102c", "#ffd21e", "#ff2aa0", "#ffd21e", "#14a83a", "#ffd21e")
@@ -340,7 +340,7 @@ def sarkan_sus(konum, ip, rnd, tur):
 
 def raf_duvari(s, rnd):
     """yan duvar: yesil duvar + tahta raf katlari, raflar oyuncak dolu"""
-    raf = M("raf", lambda: mat_tahta("raf", "#c8641e", "#b0501a", olcek=0.3, satir=0.3, gen=3.0))
+    raf = M("raf", lambda: mat_tahta("raf", "#f0701a", "#e05a10", olcek=0.3, satir=0.3, gen=3.0))
     for z in (1.2, 3.4, 5.6, 7.8):
         yuvarlak_kutu("raf", (s * (YAN_X - 0.8), ARKA_Y / 2, z), (1.6, ARKA_Y, 0.18), raf, egim=0.04, seg=2)
         y = 2.0
@@ -367,7 +367,7 @@ def raf_duvari(s, rnd):
 # ------------------------------------------------------------------ ATOLYE (iki katmanda; serit sahnesinde oda holdout)
 def atolye(serit_modu, rnd):
     _MAT.clear()
-    zemin = mat_tahta("zemin", "#d8701e", "#c05a14", ara="#6a2008", olcek=0.35, satir=0.18, gen=2.4)
+    zemin = mat_tahta("zemin", "#ff6a0a", "#f0500a", ara="#8a2004", olcek=0.35, satir=0.18, gen=2.4)
     duz("zemin_yakin", -YAN_X, YAN_X, -4, GECIS, 0, zemin)
     duz("zemin_uzak", -YAN_X, YAN_X, GECIS, ARKA_Y, 0, zemin)
     # duvarlar: arka doygun kirmizi, yanlar doygun yesil; altta tahta lambri; tavan koyu kirmizi + kirisler
@@ -376,10 +376,10 @@ def atolye(serit_modu, rnd):
     golgesiz(dik("arka_duvar", -YAN_X, YAN_X, ARKA_Y, 0, TAVAN, duvar_k))
     for s in (-1, 1):
         golgesiz(yan_dik("yan_duvar", s * YAN_X, -4, ARKA_Y, 0, TAVAN, duvar_y))
-    golgesiz(duz("tavan", -YAN_X, YAN_X, -4, ARKA_Y, TAVAN, mat_pbr("tavan", "#8a1a24", 0.5, kaplama=0.1)))
+    golgesiz(duz("tavan", -YAN_X, YAN_X, -4, ARKA_Y, TAVAN, mat_pbr("tavan", "#d0102c", 0.5, kaplama=0.1)))
     lam = M("lambri", lambda: mat_tahta("lambri", "#b04a12", "#9a3c0c", olcek=0.4, satir=0.5, gen=0.4))
     yuvarlak_kutu("lambri", (0, ARKA_Y - 0.15, 0.9), (2 * YAN_X, 0.3, 1.8), lam, egim=0.04, seg=2)
-    kiris = M("kiris", lambda: mat_tahta("kiris", "#a8401a", "#8a3010", olcek=0.5, satir=0.4, gen=4.0))
+    kiris = M("kiris", lambda: mat_tahta("kiris", "#e8501a", "#d03c10", olcek=0.5, satir=0.4, gen=4.0))
     for y in range(2, int(ARKA_Y), 6):
         golgesiz(yuvarlak_kutu("kiris", (0, y, TAVAN - 0.35), (2 * YAN_X, 0.6, 0.7), kiris, egim=0.06, seg=2))
     # arka duvarda uc kemerli dev pencere (gunduz gogu), altin cerceve
@@ -428,13 +428,13 @@ def atolye(serit_modu, rnd):
 
 # ------------------------------------------------------------------ SERIT: konveyor + kapi + OUT hediye yigini
 def serit_esyalari(oyuncu, R, rnd):
-    bant = M("bant" + oyuncu, lambda: mat_pbr("bant" + oyuncu, R["koyu"], 0.45, kaplama=0.3, bump=(1.0, 0.0)))
+    bant = M("bant" + oyuncu, lambda: mat_pbr("bant" + oyuncu, R["ana"], 0.45, kaplama=0.3, bump=(1.0, 0.0)))
     # konveyor govdesi (oyuncu renginde kenar) + bant (koyu oyuncu rengi, enine nervurlar)
-    yuvarlak_kutu("konv_govde", (0, (GECIS - 4) / 2, 0.2), (2.7, GECIS + 4, 0.4), P(R["ana"], 0.25, 0.8), egim=0.08, seg=3)
+    yuvarlak_kutu("konv_govde", (0, (GECIS - 4) / 2, 0.2), (2.7, GECIS + 4, 0.4), P(R["iki"], 0.25, 0.8), egim=0.08, seg=3)
     yuvarlak_kutu("konv_bant", (0, (GECIS - 4) / 2, 0.42), (2.2, GECIS + 4, 0.06), bant, egim=0.02, seg=1)
     y = -3.8
     while y < GECIS:
-        yuvarlak_kutu("nervur", (0, y, 0.46), (2.15, 0.06, 0.03), P(R["koyu"], 0.4, 0.2), egim=0.01, seg=1)
+        yuvarlak_kutu("nervur", (0, y, 0.46), (2.15, 0.06, 0.03), P(R["iki"], 0.4, 0.2), egim=0.01, seg=1)
         y += 0.45
     for s in (-1, 1):                                                      # kenarda altin makaralar
         y = -3.6
@@ -469,7 +469,7 @@ def kapi(R):
         z = 0.0
         for i in range(4):
             h = (H_ + K) / 4
-            hediye((s * xk, Y, z), (K + 0.06 * (i % 2), K + 0.06 * (i % 2), h - 0.03), ana if i % 2 == 0 else R["koyu"], "#ffd21e", rnd, fiyonk=False)
+            hediye((s * xk, Y, z), (K + 0.06 * (i % 2), K + 0.06 * (i % 2), h - 0.03), ana if i % 2 == 0 else R["iki"], "#ffd21e", rnd, fiyonk=False)
             z += h
     hediye((0, Y, H_), (W_ + 2 * K + 0.2, K, K), ana, "#ffd21e", rnd, fiyonk=False)
     km = P("#ffd21e", 0.2, 0.9, metal=0.6)
