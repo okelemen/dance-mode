@@ -1,0 +1,122 @@
+[
+ {
+  "tur": 1,
+  "p1": "raven-down-reach-curtsy",
+  "p2": "cosmic-heel-raise-arms-forward-high"
+ },
+ {
+  "tur": 1,
+  "p1": "werewolf-stork-down-up",
+  "p2": "phantom-quad-hold-up"
+ },
+ {
+  "tur": 1,
+  "p1": "owl-quad-hold-bent-up",
+  "p2": "funk-reach-w-curtsy"
+ },
+ {
+  "tur": 1,
+  "p1": "graveyard-chest-reach-side-tap",
+  "p2": "werewolf-knee-raise-low-forward-bent-up"
+ },
+ {
+  "tur": 1,
+  "p1": "strike-hip-reach-horse",
+  "p2": "solar-flex-v-tap"
+ },
+ {
+  "tur": 1,
+  "p1": "astro-cactus-reach-tree",
+  "p2": "bold-reach-wave-knee"
+ },
+ {
+  "tur": 2,
+  "p1": "orbit-hip-cactus-leg-out",
+  "p2": "spider-chest-diag-tap"
+ },
+ {
+  "tur": 2,
+  "p1": "goblin-v-low-leg-out",
+  "p2": "iceberg-hook-cactus-knee"
+ },
+ {
+  "tur": 2,
+  "p1": "ready-cactus-v-kick",
+  "p2": "owl-t-v-leg-out-lean-l"
+ },
+ {
+  "tur": 2,
+  "p1": "wake-hug-t-knee",
+  "p2": "shadow-w-w-kick-lean-r"
+ },
+ {
+  "tur": 2,
+  "p1": "prism-t-cactus-tree",
+  "p2": "spell-diag-w-tap-lean-r"
+ },
+ {
+  "tur": 2,
+  "p1": "smooth-halo-t-tap",
+  "p2": "beam-diag-w-horse"
+ },
+ {
+  "tur": 3,
+  "p1": "rise-wave-reach-wide",
+  "p2": "sakura-shrug-palms-up"
+ },
+ {
+  "tur": 3,
+  "p1": "planet-hip-wave-wide",
+  "p2": "goddess-arms-crossed-up"
+ },
+ {
+  "tur": 3,
+  "p1": "branch-wave-head-curtsy",
+  "p2": "cosmic-diag-cactus-curtsy"
+ },
+ {
+  "tur": 3,
+  "p1": "solo-reverse-warrior-reach",
+  "p2": "shine-t-halo-wide"
+ },
+ {
+  "tur": 3,
+  "p1": "orbit-low-hip-goddess",
+  "p2": "ray-diag-hug-horse"
+ },
+ {
+  "tur": 3,
+  "p1": "moonlight-split-stance-back-diag",
+  "p2": "light-head-diag-lunge"
+ },
+ {
+  "tur": 4,
+  "p1": "snowflake-hook-diag-curtsy",
+  "p2": "planet-w-t-knee"
+ },
+ {
+  "tur": 4,
+  "p1": "diagonal-line",
+  "p2": "crystal-hook-head-kick"
+ },
+ {
+  "tur": 4,
+  "p1": "zenith-t-swing-goddess",
+  "p2": "laser-t-diag-wide"
+ },
+ {
+  "tur": 4,
+  "p1": "meteor-cross-cactus-lunge",
+  "p2": "cauldron-lunge-up-hip"
+ },
+ {
+  "tur": 4,
+  "p1": "polar-swing-reach-lunge",
+  "p2": "disco-archer-lunge"
+ },
+ {
+  "tur": 4,
+  "p1": "truss-wave-halo-lunge",
+  "p2": "bat-low-lunge-prayer-hip"
+ }
+]
