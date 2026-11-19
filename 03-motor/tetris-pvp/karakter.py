@@ -23,6 +23,7 @@ Cikti: karakter/<oyuncu>/<poz>-NN.png (KxK kare, saydam), yerlesim.json: karakte
   --ciftci 1: maskota hasir sapka (sari, kirmizi bant) + kirmizi fular (30, lale tarlasi hakemi).
   --penguen 1: maskot penguen yavrusu govdesi (lacivert sirt, beyaz gogus, turuncu ayak) + kirmizi atki (31). --don 90: yan gorunum.
   --panda 1: maskot panda yavrusu govdesi (32): siyah kol/bacak, beyaz tombul yumurta govde + kirmizi atki; kafa motorda 2B.
+  --ejderha 1: maskot kucuk ejderha (33): yesil tombul uzuv + yumurta govde (sari karin), sirt dikeni, turuncu kanat, kuyruk; kafa motorda 2B.
   --p3 (32, 3 oyuncu): yesil sporcu.
   --sporcu 1: yarisan karakterler boksor degil sporcu (30'dan itibaren, kullanici 17 Kas): forma + koyu sort + ayakkabi oyuncu renginde, sac bandi, bileklik.
 """
@@ -491,6 +492,96 @@ if OYUNCU == "maskot" and arg("--panda", "0") == "1":     # 32 (Noel oyuncak ato
     ra = 0.07 * BOY                                                   # kirmizi Noel atkisi (atolye hakemi)
     bpy.ops.mesh.primitive_torus_add(major_radius=ra, minor_radius=ra * 0.36, major_segments=40, minor_segments=12)
     f_ = bpy.context.active_object; bpy.ops.object.shade_smooth(); f_.data.materials.append(mat_jole("pd_atki", lin(hex3("#e8102c")), emis=0.18, purluk=0.15))
+    f_.data.transform(Matrix.Rotation(math.radians(-90), 4, "X"))
+    EKIP.append((f_, "Neck", Matrix.Translation((0, 0.02 * BOY, 0))))
+
+if OYUNCU == "maskot" and arg("--ejderha", "0") == "1":   # 33 (antik kum arenasi; TALIMATLAR §4 maskot sirasi): KUCUK EJDERHA yavrusu
+    # 32'nin dersi (kullanici: "ustu maskot, alti iskelet"): insan govdesi gizli; kemiklere bagli TOMBUL yesil uzuvlar + yumurta govde
+    # (yesil sirt, sari-turuncu karin), sirtta turuncu yarasa kanatlari, kalcadan sarkan tombul kuyruk + ok ucu. Kafa motorda 2B.
+    YESIL, KARIN, KANAT = "#22c43a", "#ffc21e", "#ff7a14"
+    for m_ in mesler:
+        m_.hide_render = True
+    def mat_ej(ad, renk, purluk=0.4, kap=0.35):
+        m_ = bpy.data.materials.new(ad); m_.use_nodes = True; b_ = m_.node_tree.nodes["Principled BSDF"]
+        b_.inputs["Base Color"].default_value = (*lin(hex3(renk)), 1)
+        b_.inputs["Roughness"].default_value = purluk; b_.inputs["Coat Weight"].default_value = kap; b_.inputs["Coat Roughness"].default_value = 0.08
+        return m_
+    emat, kmat, sm = mat_ej("ej_uzuv", YESIL), mat_ej("ej_kanat", KANAT, 0.45, 0.2), mat_ej("ej_sari", KARIN, 0.35, 0.4)
+    def uzuv(ad, r):
+        b_ = kemik(arm, ad); L = ((arm.matrix_world @ b_.tail) - (arm.matrix_world @ b_.head)).length
+        bpy.ops.mesh.primitive_cylinder_add(radius=r, depth=L, vertices=28); c_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
+        c_.data.transform(Matrix.Rotation(math.radians(-90), 4, "X") @ Matrix.Translation((0, 0, L / 2))); c_.data.materials.append(emat)
+        EKIP.append((c_, ad, Matrix.Identity(4)))
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=r, segments=24, ring_count=12); k_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
+        k_.data.materials.append(emat); EKIP.append((k_, ad, Matrix.Identity(4)))
+        return L
+    for tr in ("Left", "Right"):
+        uzuv(tr + "Arm", 0.05 * BOY); uzuv(tr + "ForeArm", 0.046 * BOY); uzuv(tr + "UpLeg", 0.075 * BOY); uzuv(tr + "Leg", 0.066 * BOY)
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=0.056 * BOY, segments=24, ring_count=12); h_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
+        h_.data.materials.append(emat); EKIP.append((h_, tr + "Hand", Matrix.Translation((0, 0.02 * BOY, 0))))
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=1.0, segments=24, ring_count=12); f_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
+        f_.data.transform(Matrix.Diagonal((0.068 * BOY, 0.115 * BOY, 0.05 * BOY, 1))); f_.data.materials.append(emat)
+        EKIP.append((f_, tr + "Foot", Matrix.Translation((0, 0.04 * BOY, 0))))
+        for dx in (-1, 0, 1):                                         # ayakta uc kucuk sari tirnak
+            bpy.ops.mesh.primitive_uv_sphere_add(radius=0.018 * BOY, segments=12, ring_count=6); t_ = bpy.context.active_object
+            t_.data.materials.append(sm); EKIP.append((t_, tr + "Foot", Matrix.Translation((dx * 0.035 * BOY, 0.14 * BOY, 0.0))))
+    # yumurta govde: karin (kameraya donuk taraf) sari-turuncu, sirt yesil; karin yonu nesne normaliyle (31/32 yontemi)
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=1.0, segments=48, ring_count=24)
+    yum = bpy.context.active_object; bpy.ops.object.shade_smooth()
+    yum.data.transform(Matrix.Diagonal((0.155 * BOY, 0.21 * BOY, 0.145 * BOY, 1)))
+    Mb0 = (arm.matrix_world @ kemik(arm, "Spine1").matrix).to_3x3()
+    on_d = Matrix.Rotation(math.radians(float(arg("--don", "0"))), 3, "Z") @ Vector((0, -1, 0))
+    on_l = (Mb0.inverted() @ on_d).normalized()
+    ym = mat_ej("ej_yumurta", YESIL); nt = ym.node_tree; bs = nt.nodes["Principled BSDF"]
+    ge = nt.nodes.new("ShaderNodeNewGeometry"); vt = nt.nodes.new("ShaderNodeVectorTransform")
+    vt.vector_type = "NORMAL"; vt.convert_from = "WORLD"; vt.convert_to = "OBJECT"
+    nt.links.new(ge.outputs["Normal"], vt.inputs["Vector"])
+    dp = nt.nodes.new("ShaderNodeVectorMath"); dp.operation = "DOT_PRODUCT"; dp.inputs[1].default_value = tuple(on_l)
+    nt.links.new(vt.outputs["Vector"], dp.inputs[0])
+    gt = nt.nodes.new("ShaderNodeMath"); gt.operation = "GREATER_THAN"; gt.inputs[1].default_value = 0.42
+    nt.links.new(dp.outputs["Value"], gt.inputs[0])
+    mx_ = nt.nodes.new("ShaderNodeMix"); mx_.data_type = "RGBA"; nt.links.new(gt.outputs[0], mx_.inputs["Factor"])
+    mx_.inputs[6].default_value = (*lin(hex3(YESIL)), 1); mx_.inputs[7].default_value = (*lin(hex3(KARIN)), 1)
+    nt.links.new(mx_.outputs[2], bs.inputs["Base Color"])
+    yum.data.materials.append(ym)
+    EKIP.append((yum, "Spine1", Matrix.Translation((0, 0.02 * BOY, 0))))
+    arka = (-on_l).normalized(); yan = Vector((0, 1, 0)).cross(on_l).normalized()
+    log("ejderha karin yonu (kemik uzayi)", [round(c, 2) for c in on_l], "yan", [round(c, 2) for c in yan])
+    for yy in (0.16, 0.06, -0.04, -0.13):                             # sirt dikenleri: yumurtanin sirt cizgisinde 4 sari koni
+        bpy.ops.mesh.primitive_cone_add(radius1=0.03 * BOY, radius2=0.0, depth=0.06 * BOY, vertices=12); c_ = bpy.context.active_object
+        c_.data.materials.append(sm)
+        q = arka.to_track_quat("Z", "Y").to_matrix().to_4x4()
+        c_.data.transform(Matrix.Translation(arka * (0.14 * BOY) + Vector((0, yy * BOY, 0))) @ q @ Matrix.Translation((0, 0, 0.02 * BOY)))
+        EKIP.append((c_, "Spine1", Matrix.Translation((0, 0.02 * BOY, 0))))
+    for s_ in (-1, 1):                                                # kanatlar: sirttan iki yana acilan yarasa kanadi, Spine2'ye bagli
+        r0 = arka * (0.11 * BOY) + Vector((0, 0.06 * BOY, 0))
+        uc = r0 + yan * (s_ * 0.30 * BOY) + Vector((0, 0.16 * BOY, 0)) + arka * (0.06 * BOY)
+        nok = [r0, uc]
+        for t, d_ in ((0.78, 0.10), (0.5, 0.13), (0.22, 0.09)):
+            nok.append(r0 + yan * (s_ * 0.30 * BOY * t) + Vector((0, (0.16 * t - d_) * BOY, 0)) + arka * (0.06 * BOY * t))
+        me = bpy.data.meshes.new("kanat"); me.from_pydata([tuple(v) for v in nok], [], [[0, 1, 2, 3, 4]]); me.update()
+        o_ = bpy.data.objects.new("kanat", me); bpy.context.collection.objects.link(o_); o_.data.materials.append(kmat)
+        o_.modifiers.new("k", "SOLIDIFY").thickness = 0.012 * BOY
+        EKIP.append((o_, "Spine2", Matrix.Identity(4)))
+        bpy.ops.mesh.primitive_cylinder_add(radius=0.012 * BOY, depth=(uc - r0).length, vertices=12); kb = bpy.context.active_object
+        kb.data.materials.append(emat)
+        q = (uc - r0).to_track_quat("Z", "Y").to_matrix().to_4x4()
+        kb.data.transform(Matrix.Translation((r0 + uc) / 2) @ q)
+        EKIP.append((kb, "Spine2", Matrix.Identity(4)))
+    for i in range(6):                                                # kuyruk: kalcadan arkaya-asagi kivrilan, incelen 6 kure + sari ok ucu
+        t = i / 5
+        c = arka * ((0.10 + 0.16 * t) * BOY) + Vector((0, (-0.02 - 0.10 * t + 0.06 * t * t) * BOY, 0)) + yan * (0.05 * t * t * BOY)
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=(0.06 - 0.035 * t) * BOY, segments=20, ring_count=10); k_ = bpy.context.active_object
+        bpy.ops.object.shade_smooth(); k_.data.materials.append(emat); k_.data.transform(Matrix.Translation(c))
+        EKIP.append((k_, "Hips", Matrix.Identity(4)))
+    bpy.ops.mesh.primitive_cone_add(radius1=0.05 * BOY, radius2=0.0, depth=0.07 * BOY, vertices=4); k_ = bpy.context.active_object
+    k_.data.materials.append(sm)
+    q = arka.to_track_quat("Z", "Y").to_matrix().to_4x4()
+    k_.data.transform(Matrix.Translation(c + arka * (0.04 * BOY)) @ q @ Matrix.Diagonal((1.0, 0.3, 1.0, 1)))
+    EKIP.append((k_, "Hips", Matrix.Identity(4)))
+    ra = 0.07 * BOY                                                   # kirmizi hakem fulari
+    bpy.ops.mesh.primitive_torus_add(major_radius=ra, minor_radius=ra * 0.36, major_segments=40, minor_segments=12)
+    f_ = bpy.context.active_object; bpy.ops.object.shade_smooth(); f_.data.materials.append(mat_jole("ej_ful", lin(hex3("#e8102c")), emis=0.18, purluk=0.15))
     f_.data.transform(Matrix.Rotation(math.radians(-90), 4, "X"))
     EKIP.append((f_, "Neck", Matrix.Translation((0, 0.02 * BOY, 0))))
 
