@@ -175,7 +175,13 @@ def main():
             yerlestir(ef, vuus(1.4, True, 0.7), t + 0.15)               # duvar yaklasiyor
             yerlestir(ef, geri_sar(0.4), t + 1.6, 1.0)                  # geri sarma
             yerlestir(ef, vuus(0.6, True, 0.9), t + 2.0)                # beyaz parlama + kanat
-            if "--buzul" in sys.argv:                                     # 31: buz kutlesi kopar, suya duser, sicrayan su yaziyi acar
+            if "--hediye" in sys.argv:                                    # 32: dev hediye kutusu duser, kapak firlar, konfeti
+                yerlestir(ef, vurus(), t + 2.33, 1.0)
+                yerlestir(ef, vuus(0.5, True, 0.8), t + 2.4)
+                yerlestir(ef, piril(1.0), t + 2.45, 0.9)
+                for i in range(4):
+                    yerlestir(ef, tik(), t + 2.5 + i * 0.09, 0.6)
+            elif "--buzul" in sys.argv:                                     # 31: buz kutlesi kopar, suya duser, sicrayan su yaziyi acar
                 yerlestir(ef, buzul_kopma(1.2), t + 2.0, 0.9)
                 yerlestir(ef, su(), t + 2.35, 0.9)
             else:
@@ -234,11 +240,16 @@ def main():
         yerlestir(ef, vuus(Z["buyu"] * 0.6, True, 0.55), c - Z["buyu"] * 0.6)   # duvar yaklasiyor
         yerlestir(ef, vurus(), c - 0.05, 1.0)                            # en yakinda
         yerlestir(ef, vuus(0.6, False, 0.9), c)                          # icinden gecti
-        out = [o for o in ("p1", "p2") if d.get("out", {}).get(o)]
+        out = [o for o in ("p1", "p2", "p3") if d.get("out", {}).get(o)]
         if out:                                                          # 24: OUT - karakter suya duser (sicrama) + alcak uyari
             yerlestir(ef, vuus(0.5, False, 1.0), c - Z["buyu"] * 0.25)
             yerlestir(ef, zap(0.35), c - Z["buyu"] * 0.2, 0.6)
-            if "--buzul" in sys.argv:                                     # 31: buzlu suya kayar -> kayma + splas + kabarcik + hakem duduk
+            if "--hediye" in sys.argv:                                    # 32: hediye kutusu yiginina duser -> kutular sacilir (uc gum + tik) + hakem duduk
+                for i in range(3):
+                    yerlestir(ef, kum(0.25), c - 0.03 + i * 0.11, 0.9 - 0.2 * i)
+                yerlestir(ef, piril(0.4), c + 0.2, 0.5)
+                yerlestir(ef, duduk(), c + 0.4, 0.7)
+            elif "--buzul" in sys.argv:                                     # 31: buzlu suya kayar -> kayma + splas + kabarcik + hakem duduk
                 yerlestir(ef, su(), c - 0.05, 1.0)
                 yerlestir(ef, duduk(), c + 0.4, 0.7)
             elif "--saman" in sys.argv:                                   # 30: saman yiginina gomulur -> puf + kuru hisirti + hakem duduk
