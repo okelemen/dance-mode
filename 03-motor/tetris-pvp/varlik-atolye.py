@@ -36,9 +36,9 @@ ARKA_Y = 38.0           # arka duvar (pencereler + cam)
 YAN_X = 22.0            # yan duvarlar (raflar)
 TAVAN = 12.0
 SERIT = {
-    "p1": {"ana": "#1e7cff", "koyu": "#0a3fa8", "acik": "#8cc8ff", "iki": "#00b4ff"},
-    "p2": {"ana": "#ff2aa0", "koyu": "#a8105e", "acik": "#ffa6d6", "iki": "#c020ff"},
-    "p3": {"ana": "#18c840", "koyu": "#0a6a22", "acik": "#9cf0a8", "iki": "#00d890"},
+    "p1": {"ana": "#1e7cff", "koyu": "#0a3fa8", "acik": "#8cc8ff", "iki": "#00b4ff", "bant": "#0048ff"},
+    "p2": {"ana": "#ff2aa0", "koyu": "#a8105e", "acik": "#ffa6d6", "iki": "#c020ff", "bant": "#ff0088"},
+    "p3": {"ana": "#18c840", "koyu": "#0a6a22", "acik": "#9cf0a8", "iki": "#00d890", "bant": "#00b41e"},
 }
 HEDIYE = ("#e8102c", "#14a83a", "#ffc21a", "#8a2ae8", "#1e7cff", "#ff2aa0", "#ff6a10", "#00b8d8")
 KURDELE = ("#ffd21e", "#ffd21e", "#e8102c", "#ffd21e", "#ff2aa0", "#ffd21e", "#14a83a", "#ffd21e")
@@ -79,7 +79,7 @@ def isiklar():
     g.data.color = lin(hex3("#fff0d0"))
     g.rotation_euler = Vector((-0.35, 0.6, -0.72)).to_track_quat("-Z", "Y").to_euler()
     for (x, y) in ((-8, 6), (8, 6), (-10, 20), (10, 20), (0, 30)):
-        isik("AREA", (x, y, TAVAN - 1.0), 900, lin(hex3("#ffe2b0")), 6, yon=(x, y, 0))
+        isik("AREA", (x, y, TAVAN - 1.0), 650, lin(hex3("#ffe2b0")), 6, yon=(x, y, 0))
 
 
 # ------------------------------------------------------------------ malzemeler
@@ -127,10 +127,10 @@ def mat_pencere(ad):
     tc = nt.nodes.new("ShaderNodeTexCoord"); sp = nt.nodes.new("ShaderNodeSeparateXYZ")
     nt.links.new(tc.outputs["Generated"], sp.inputs[0])
     rp = nt.nodes.new("ShaderNodeValToRGB"); el = rp.color_ramp.elements
-    el[0].position = 0.0; el[0].color = (*lin(hex3("#18c8ff")), 1)
-    el[1].position = 1.0; el[1].color = (*lin(hex3("#0a50ff")), 1)
+    el[0].position = 0.0; el[0].color = (*lin(hex3("#0a90ff")), 1)
+    el[1].position = 1.0; el[1].color = (*lin(hex3("#0a30d8")), 1)
     nt.links.new(sp.outputs["Z"], rp.inputs[0])
-    e = nt.nodes.new("ShaderNodeEmission"); e.inputs[1].default_value = 1.6
+    e = nt.nodes.new("ShaderNodeEmission"); e.inputs[1].default_value = 1.1
     nt.links.new(rp.outputs[0], e.inputs[0])
     o = nt.nodes.new("ShaderNodeOutputMaterial"); nt.links.new(e.outputs[0], o.inputs[0])
     return m
@@ -428,13 +428,13 @@ def atolye(serit_modu, rnd):
 
 # ------------------------------------------------------------------ SERIT: konveyor + kapi + OUT hediye yigini
 def serit_esyalari(oyuncu, R, rnd):
-    bant = M("bant" + oyuncu, lambda: mat_pbr("bant" + oyuncu, R["ana"], 0.45, kaplama=0.3, bump=(1.0, 0.0)))
+    bant = M("bant" + oyuncu, lambda: mat_pbr("bant" + oyuncu, R["bant"], 0.7, kaplama=0.0, bump=(1.0, 0.0)))
     # konveyor govdesi (oyuncu renginde kenar) + bant (koyu oyuncu rengi, enine nervurlar)
     yuvarlak_kutu("konv_govde", (0, (GECIS - 4) / 2, 0.2), (2.7, GECIS + 4, 0.4), P(R["iki"], 0.25, 0.8), egim=0.08, seg=3)
     yuvarlak_kutu("konv_bant", (0, (GECIS - 4) / 2, 0.42), (2.2, GECIS + 4, 0.06), bant, egim=0.02, seg=1)
     y = -3.8
     while y < GECIS:
-        yuvarlak_kutu("nervur", (0, y, 0.46), (2.15, 0.06, 0.03), P(R["iki"], 0.4, 0.2), egim=0.01, seg=1)
+        yuvarlak_kutu("nervur", (0, y, 0.46), (2.15, 0.06, 0.03), P(R["ana"], 0.6, 0.0), egim=0.01, seg=1)
         y += 0.45
     for s in (-1, 1):                                                      # kenarda altin makaralar
         y = -3.6
