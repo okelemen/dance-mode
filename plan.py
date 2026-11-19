@@ -60,6 +60,12 @@ MEYVELER = {
         "xmin": -1.20,  # sol sap tabani da kesim hacmine dahil
         "xmax": 1.68,   # sag yaprak tacinin son ucu da kup olur
     },
+    "apple": {
+        "A": 0.86, "R": 0.76, "boyun": 1.0, "profil": "apple",
+    },
+    "orange": {
+        "A": 0.80, "R": 0.75, "boyun": 1.0, "profil": "orange",
+    },
 }
 
 # Turlar: (kesim sayisi, kesim suresi sn). Acilis 0.4 sn + sonuc 1.3 sn eklenir -> toplam 60 sn
@@ -93,13 +99,17 @@ def meyve_profil(xn, m):
     if m.get("profil") == "pineapple":
         xn = np.clip(xn, -1.0, 1.0)
         return np.maximum(0.0, 1.0 - xn * xn) ** 0.31
+    if m.get("profil") == "apple":
+        return np.maximum(0.0, 1.0 - xn * xn) ** 0.46
+    if m.get("profil") == "orange":
+        return np.maximum(0.0, 1.0 - xn * xn) ** 0.50
     return profil(xn, m["boyun"])
 
 
 def meyve_fmax(m):
     if m.get("profil") == "strawberry":
         return float(meyve_profil(np.linspace(-1, 1, 20001), m).max())
-    if m.get("profil") in ("kiwi", "pineapple"):
+    if m.get("profil") in ("kiwi", "pineapple", "apple", "orange"):
         return 1.0
     return fmax(m["boyun"])
 
@@ -157,6 +167,17 @@ def icinde(x, y, z, m):
         rr = rr + 0.035 * ananas_goz(x, np.arctan2(z, y), m)
         govde = (np.abs(xn) <= 1.0) & (y * y + z * z <= rr * rr)
         return govde | ananas_tac(x, y, z, m) | ananas_sap(x, y, z, m)
+    if m.get("profil") == "apple":
+        # Gercek ust sap cukuru ve alt cicek cukuru; sap/yaprak da kesim hacminde.
+        cukur = 0.105 * np.exp(-(x*x + y*y) / 0.032)
+        govde = (np.abs(xn) <= 1.0) & (y*y + (np.abs(z) + cukur)**2 <= rr*rr)
+        sap = (x*x + y*y <= 0.040**2) & (z >= 0.57) & (z <= 0.76)
+        yaprak = ((x-0.14)/0.16)**2 + ((y+0.035)/0.075)**2 + ((z-0.67)/0.045)**2 <= 1
+        return govde | sap | yaprak
+    if m.get("profil") == "orange":
+        govde = (np.abs(xn) <= 1.0) & (y*y + z*z <= rr*rr)
+        calyx = (x*x+y*y <= 0.15**2) & (z >= 0.66) & (z <= 0.76)
+        return govde | calyx
     return (np.abs(xn) <= 1.0) & (y * y + z * z <= rr * rr)
 
 
