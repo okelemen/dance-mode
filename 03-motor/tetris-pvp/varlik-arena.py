@@ -166,7 +166,7 @@ def tas(renk):
 
 
 def kum_mat():
-    return M("kum", lambda: mat_kum("kum", "#ff8a0a", "#ffb01e"))
+    return M("kum", lambda: mat_kum("kum", "#ff7000" if KAPAK else "#ff8a0a", "#ff9800" if KAPAK else "#ffb01e"))   # 33 kapak olcum: doygunluk 0,652 < 0,677 -> kapakta daha doygun kum
 
 
 # ------------------------------------------------------------------ yapi parcalari

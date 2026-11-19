@@ -241,7 +241,7 @@ vs(a.vs_x, a.vs_y, MAVI, PEMBE)    # REF-075: tek VS = mavi V + pembe S, kapilar
 
 ONCE2 = np.asarray(im.convert("RGB")).copy()
 # baslik en onde: HUMAN mavi -> pembe, TETRIS pembe -> sari -> mavi (REF-072 harf renkleri)
-baloncuk("HUMAN", 330, a.bas_y, a.bas_boy, ["#18e0ff", "#3aa8ff", "#c070ff", "#ff50c8"], hedef=600)   # REF-082: doygun gokkusagi harfler
+baloncuk("HUMAN", 330, a.bas_y, a.bas_boy, ["#18e0ff", "#3aa8ff", "#c070ff", "#ff50c8"], hedef=600, kontur="#2e0f66")   # REF-082: doygun gokkusagi harfler; 33: koyu kontur (md. 28, 32 dersi)
 baloncuk("TETRIS", 950, a.bas_y, a.bas_boy, ["#ff1a8a", "#ff4a1a", "#ffd000", "#2ad83a", "#10b0ff"], hedef=600)
 
 # REF-082: sagda egik rozet + solda NEW madalyasi (baslikla ayni katmanda, siluetlerin onunde)

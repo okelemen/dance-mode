@@ -6,8 +6,8 @@ from PIL import Image, ImageDraw, ImageFont
 BURA = os.path.dirname(os.path.abspath(__file__))
 T = r"C:\Users\eleme\OneDrive\Masaüstü\POZ-DUVARI\kapak-taslak\33"
 REF = r"C:\Users\eleme\OneDrive\Masaüstü\REFERANSLAR\REF-085-HumanWarmUp-bgFolOzkqxM\kapak.jpg"
-AYAR = {"A": ["--siluet", "D259886", "D255536", "--x", "0.2", "0.8", "--boy", "0.9", "0.9", "--tasma", "0.15"],
-        "B": ["--siluet", "S1220742", "D259887", "--x", "0.18", "0.81", "--boy", "0.92", "0.9", "--maks-gen", "0.44", "--tasma", "0.15"]}
+AYAR = {"A": ["--siluet", "D259886", "D255536", "--x", "0.2", "0.8", "--boy", "0.9", "0.9", "--tasma", "0.15", "--kontur", "9", "--yansima", "70"],
+        "B": ["--siluet", "S1220742", "D259887", "--x", "0.18", "0.81", "--boy", "0.92", "0.9", "--maks-gen", "0.44", "--tasma", "0.15", "--kontur", "9", "--yansima", "70"]}
 py = sys.executable
 for arka in sys.argv[1:]:
     for k, ek in AYAR.items():
