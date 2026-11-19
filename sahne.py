@@ -1589,7 +1589,7 @@ for no, tur in enumerate(PLAN["turlar"]):
         if eks == "x":  # kesim yuzu yalniz dilim kesiminde ilerler (iz asamasinda meyve butun)
             # Son dilim kalan tac ucunu da tasir; ayni anda butun kaynak
             # geometri kesilirken o dilimin yesil kupleri yigina katilir.
-            bitis_x = XMAX + 0.01 if ANANAS and i == len(vl) - 1 else konum
+            bitis_x = XMAX + 0.01 if (ANANAS or BANANA) and i == len(vl) - 1 else konum
             deger_anahtar("kes_x", t, bitis_x)
     bicak.location = DISARI
     bicak.keyframe_insert("location", frame=kare(ks + 0.12))
@@ -1832,7 +1832,7 @@ for tur in PLAN["turlar"]:
     kesit.hide_render = True
     kesit.keyframe_insert("hide_render", frame=kare(xk[-1][0] + 0.02))
     for t, konum in xk:
-        if ANANAS and konum >= A:
+        if (ANANAS or BANANA) and konum >= A:
             kesit.hide_render = True
             kesit.keyframe_insert("hide_render", frame=kare(t))
         r_ = 1.0 if CILEK else float(profil_r(np.array([konum]))[0]) * 0.995
