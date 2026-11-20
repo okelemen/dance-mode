@@ -31,12 +31,15 @@ CANLI = ("#ff2a3a", "#ffc21a", "#1e8cff", "#20c850", "#ff3aa8", "#ff7a10", "#8a3
 MAVI, PEMBE = "#1e8cff", "#ff3aa8"
 BULUT_UST, BULUT_GOLGE = "#ffa6cc", "#b08aff"      # sahne 1: pastel pembe soluk okunuyordu (§8) -> daha doygun
 GOK_ALT, GOK_UST, PIST_R = "#3ad6ff", "#0038e0", ("#ff9a1e", "#f07a0a")
-if KAPAK and arg("--kapak-doygun", "1") == "1":      # kapak olcumu 1 (20 Kas): doygunluk 0,53 < REF-087 0,66, parlaklik 0,68 > 0,48
+if KAPAK and arg("--kapak-doygun", "1") != "0":      # kapak olcumu 1 (20 Kas): doygunluk 0,53 < REF-087 0,66, parlaklik 0,68 > 0,48
     BULUT_UST, BULUT_GOLGE = "#ff5aa8", "#7a3aff"     # -> buyuk alanlar (bulut denizi, gok, pist) Blender'da doygun; 2B boyama yok (md. 21)
     GOK_ALT, GOK_UST, PIST_R = "#08a8ff", "#0018a0", ("#ff7a00", "#e04800")
     if arg("--kapak-doygun", "1") in ("2", "3"):     # kapak olcumu 2: -1,4 pozlamada doygunluk 0,60 / parlaklik 0,58 -> daha doygun bulut + pist
-        BULUT_UST, BULUT_GOLGE = "#ff2a90", "#5a18ff"
+        BULUT_UST, BULUT_GOLGE = "#ff2a90", "#5a18ff"   # (2 ve 3 ilk denemede bu satira hic girmemisti: dis kosul yalniz "1" idi)
         PIST_R = ("#ff5a00", "#c83000")
+    if arg("--kapak-doygun", "1") == "4":            # kapak olcumu 4: parlak pembe gunes altinda kirpilip beyaza kayiyor -> KOYU doygun pembe
+        BULUT_UST, BULUT_GOLGE = "#c8146e", "#4a10c0"
+        PIST_R = ("#e85a00", "#b03000")
 KAPAK_3 = KAPAK and arg("--kapak-doygun", "1") == "3"   # kapak olcumu 3: koyu pozlama bulutu boz-mor yapti -> ortam isigi kisik, ic sacilma yok
 
 
