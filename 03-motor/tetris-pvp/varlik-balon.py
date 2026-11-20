@@ -294,6 +294,7 @@ def konfeti(rnd, n, x_gen, y0, y1, z0, z1, kac=0.0):
 
 # ------------------------------------------------------------------ MEKAN (her iki katmanda; serit sahnesinde uzak kisim holdout)
 def mekan(serit_modu, rnd):
+    _BMAT.clear()                       # Actions 44714901512: ikinci katmanda bos_sahne eski malzemeleri silmisti (StructRNA removed)
     bm = mat_bulut()
     bulut_denizi(rnd, bm, -4, GECIS, 60, 3.2, z=-0.7)                 # yakin bulut zemini (pistin iki yani)
     for o in bpy.data.objects:

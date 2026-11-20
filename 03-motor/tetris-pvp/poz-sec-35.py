@@ -102,7 +102,7 @@ print("kaynak dagilimi:", {v: sum(1 for c in S if c["video"] == v) for v, _ in H
 TUR = ["ROUND 1"] * 6 + ["ROUND 2"] * 6 + ["FREEZE ROUND"] * 6 + ["FINAL ROUND"] * 6
 if not a.sira:                                              # zorluk sirasi: 1-6 R1, 7-12 FREEZE (orta-kolay, tutulabilir) videoda 3. tur, 13-18 R2, 19-24 FINAL
     S = S[:6] + S[12:18] + S[6:12] + S[18:]
-    TEK = lambda c: "knee-lift" in c["ad"]          # 35: FREEZE'de 3 sn tutulacak -> tek ayak yok, R2 ile takas
+    TEK = lambda c: any(w in c["ad"] for w in ("knee-lift", "tree", "kneeup"))          # 35: FREEZE'de 3 sn tutulacak -> tek ayak yok, R2 ile takas
     for i in range(12, 18):
         if TEK(S[i]):
             j = next(j for j in range(6, 12) if not TEK(S[j])); S[i], S[j] = S[j], S[i]
