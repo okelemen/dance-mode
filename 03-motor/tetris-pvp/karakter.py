@@ -627,7 +627,7 @@ if OYUNCU == "maskot" and arg("--sincap", "0") == "1":   # 35 (balon festivali; 
     nt.links.new(ge.outputs["Normal"], vt.inputs["Vector"])
     dp = nt.nodes.new("ShaderNodeVectorMath"); dp.operation = "DOT_PRODUCT"; dp.inputs[1].default_value = tuple(on_l)
     nt.links.new(vt.outputs["Vector"], dp.inputs[0])
-    gt = nt.nodes.new("ShaderNodeMath"); gt.operation = "GREATER_THAN"; gt.inputs[1].default_value = 0.42
+    gt = nt.nodes.new("ShaderNodeMath"); gt.operation = "GREATER_THAN"; gt.inputs[1].default_value = 0.62   # ornek 1: karin onden butun govdeyi kapliyordu
     nt.links.new(dp.outputs["Value"], gt.inputs[0])
     mx_ = nt.nodes.new("ShaderNodeMix"); mx_.data_type = "RGBA"; nt.links.new(gt.outputs[0], mx_.inputs["Factor"])
     mx_.inputs[6].default_value = (*lin(hex3(KAHVE)), 1); mx_.inputs[7].default_value = (*lin(hex3(KARIN)), 1)
@@ -636,21 +636,16 @@ if OYUNCU == "maskot" and arg("--sincap", "0") == "1":   # 35 (balon festivali; 
     EKIP.append((yum, "Spine1", Matrix.Translation((0, 0.02 * BOY, 0))))
     arka = (-on_l).normalized(); yan = Vector((0, 1, 0)).cross(on_l).normalized()
     log("sincap karin yonu (kemik uzayi)", [round(c, 2) for c in on_l], "yan", [round(c, 2) for c in yan])
-    for s_ in (-1, 1):                                                # kanat zari: govde yaninda, koltuk altindan kalcaya inen yelpaze (Spine1)
-        r0 = yan * (s_ * 0.12 * BOY) + Vector((0, 0.12 * BOY, 0))
-        nok = [r0, r0 + yan * (s_ * 0.13 * BOY) + Vector((0, 0.02 * BOY, 0)), r0 + yan * (s_ * 0.15 * BOY) + Vector((0, -0.12 * BOY, 0)),
-               r0 + yan * (s_ * 0.09 * BOY) + Vector((0, -0.26 * BOY, 0)), yan * (s_ * 0.11 * BOY) + Vector((0, -0.16 * BOY, 0))]
-        me = bpy.data.meshes.new("zar"); me.from_pydata([tuple(v + arka * (0.02 * BOY)) for v in nok], [], [[0, 1, 2, 3, 4]]); me.update()
-        o_ = bpy.data.objects.new("zar", me); bpy.context.collection.objects.link(o_); o_.data.materials.append(zmat)
-        o_.modifiers.new("k", "SOLIDIFY").thickness = 0.014 * BOY
-        EKIP.append((o_, "Spine1", Matrix.Translation((0, 0.02 * BOY, 0))))
-    for i in range(8):                                                # kuyruk: kalcadan arkaya cikip sirt boyunca YUKARI kivrilan, kalinlasan kabarik kureler
-        t = i / 7
-        c = arka * ((0.12 + 0.12 * math.sin(t * math.pi * 0.9)) * BOY) + Vector((0, (-0.06 + 0.42 * t) * BOY, 0)) + yan * (0.03 * t * BOY)
-        bpy.ops.mesh.primitive_uv_sphere_add(radius=(0.06 + 0.05 * math.sin(t * math.pi * 0.85)) * BOY, segments=24, ring_count=12)
-        k_ = bpy.context.active_object; bpy.ops.object.shade_smooth(); k_.data.materials.append(km if i == 7 else emat); k_.data.transform(Matrix.Translation(c))
+    # ornek 1 (20 Kas): kanat zari karton levha gibi okundu -> kaldirildi; kuyruk boğum boğum karides kabugu gibiydi ve onden gorunmuyordu
+    # -> az sayida, buyuk, ic ice gecen kurelerle puruzsuz kabarik kuyruk; govdenin bir yaninda omuz ustune kadar cikar (onden gorunur).
+    for i in range(11):
+        t = i / 10
+        c = (arka * ((0.10 + 0.10 * math.sin(t * math.pi)) * BOY) + Vector((0, (-0.10 + 0.50 * t) * BOY, 0))
+             + yan * ((0.10 + 0.08 * math.sin(t * math.pi * 0.8)) * BOY))
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=(0.075 + 0.04 * math.sin(t * math.pi * 0.9)) * BOY, segments=24, ring_count=12)
+        k_ = bpy.context.active_object; bpy.ops.object.shade_smooth(); k_.data.materials.append(km if i >= 9 else emat); k_.data.transform(Matrix.Translation(c))
         EKIP.append((k_, "Hips", Matrix.Identity(4)))
-    ra = 0.07 * BOY                                                   # kirmizi hakem atkisi
+    ra = 0.08 * BOY                                                   # kirmizi hakem atkisi
     bpy.ops.mesh.primitive_torus_add(major_radius=ra, minor_radius=ra * 0.36, major_segments=40, minor_segments=12)
     f_ = bpy.context.active_object; bpy.ops.object.shade_smooth(); f_.data.materials.append(mat_jole("sc_atki", lin(hex3("#e8102c")), emis=0.18, purluk=0.15))
     f_.data.transform(Matrix.Rotation(math.radians(-90), 4, "X"))
