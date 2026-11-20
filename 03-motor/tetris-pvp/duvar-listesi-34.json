@@ -1,0 +1,146 @@
+[
+ {
+  "tur": 1,
+  "p1": "sparkle-reach-swing-curtsy",
+  "p2": "tiptoe-prayer",
+  "p3": "aurora-standing-hug-knee"
+ },
+ {
+  "tur": 1,
+  "p1": "pumpkin-head-reach-half-goddess-lean-l",
+  "p2": "solo-lean-back-arms-up",
+  "p3": "banshee-stork-low-forward-bent-up"
+ },
+ {
+  "tur": 1,
+  "p1": "nova-hug-comet-tap",
+  "p2": "prism-reach-v-curtsy",
+  "p3": "ribbon-chest-v-tree"
+ },
+ {
+  "tur": 1,
+  "p1": "bat-salute-chest-half-goddess-lean-l",
+  "p2": "magenta-halo-v-wide",
+  "p3": "lift-comet-wave-tap"
+ },
+ {
+  "tur": 1,
+  "p1": "bassline-low-swing-curtsy",
+  "p2": "potion-knee-raise-bent-up-high-back",
+  "p3": "potion-reach-diag-tree-lean-r"
+ },
+ {
+  "tur": 1,
+  "p1": "laser-cactus-flex-tap",
+  "p2": "cosmic-goal-cactus-curtsy",
+  "p3": "kawaii-cactus-v-tree"
+ },
+ {
+  "tur": 2,
+  "p1": "banshee-down-down-wide-lean-r",
+  "p2": "banshee-reach-cross-goddess-lean-r",
+  "p3": "glitter-hip-flex-knee"
+ },
+ {
+  "tur": 2,
+  "p1": "meteor-reach-v-tap",
+  "p2": "glacier-v-low-knee",
+  "p3": "meteor-w-v-horse"
+ },
+ {
+  "tur": 2,
+  "p1": "kawaii-cactus-comet-knee",
+  "p2": "solo-arc-reach-wide",
+  "p3": "truss-v-w-horse"
+ },
+ {
+  "tur": 2,
+  "p1": "sakura-lean-right-arch",
+  "p2": "comet-cactus-low-knee",
+  "p3": "cobweb-head-cactus-leg-out"
+ },
+ {
+  "tur": 2,
+  "p1": "copper-hip-diag-horse",
+  "p2": "horse-w",
+  "p3": "breeze-low-w-horse"
+ },
+ {
+  "tur": 2,
+  "p1": "prism-swing-cactus-wide",
+  "p2": "dash-diag-cactus-tap",
+  "p3": "stardust-diag-v-knee"
+ },
+ {
+  "tur": 3,
+  "p1": "spell-stork-hip-back",
+  "p2": "aurora-reach-t-tree",
+  "p3": "spark-wave-cactus-tap"
+ },
+ {
+  "tur": 3,
+  "p1": "balance-halo-diag-horse",
+  "p2": "violet-flex-hug-kick",
+  "p3": "bat-t-hip-stand"
+ },
+ {
+  "tur": 3,
+  "p1": "neon-t-v-wide",
+  "p2": "ray-flex-comet-kick",
+  "p3": "quasar-t-halo-tree"
+ },
+ {
+  "tur": 3,
+  "p1": "glow-head-diag-kick",
+  "p2": "cauldron-t-flex-leg-out",
+  "p3": "lumen-swing-cross-wide"
+ },
+ {
+  "tur": 3,
+  "p1": "truss-diag-w-tree",
+  "p2": "quasar-t-hip-knee",
+  "p3": "runner-flex-t-tap"
+ },
+ {
+  "tur": 3,
+  "p1": "orbit-hip-t-wide",
+  "p2": "truss-hug-halo-lunge",
+  "p3": "grid-head-hip-split"
+ },
+ {
+  "tur": 4,
+  "p1": "pulsar-hug-w-tap",
+  "p2": "star-head-hip-goddess",
+  "p3": "magenta-v-t-kick"
+ },
+ {
+  "tur": 4,
+  "p1": "flow-t-v-knee",
+  "p2": "halo-swing-low-curtsy",
+  "p3": "runner-comet-diag-leg-out"
+ },
+ {
+  "tur": 4,
+  "p1": "twilight-hug-diag-goddess",
+  "p2": "shadow-deep-goddess-hook-flex",
+  "p3": "rocket-low-hip-kick"
+ },
+ {
+  "tur": 4,
+  "p1": "disco-side-leg-hold-low-arm-wide",
+  "p2": "comet-reach-salute-lunge",
+  "p3": "groove-cactus-swing-lunge"
+ },
+ {
+  "tur": 4,
+  "p1": "blue-reach-cactus-lunge",
+  "p2": "graveyard-lunge-high-back-forward",
+  "p3": "comet-head-cactus-split"
+ },
+ {
+  "tur": 4,
+  "p1": "coffin-lunge-down-prayer",
+  "p2": "duel-lunge-diagonal-bolt",
+  "p3": "mirrorball-swing-cactus-lunge"
+ }
+]

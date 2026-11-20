@@ -24,6 +24,7 @@ Cikti: karakter/<oyuncu>/<poz>-NN.png (KxK kare, saydam), yerlesim.json: karakte
   --penguen 1: maskot penguen yavrusu govdesi (lacivert sirt, beyaz gogus, turuncu ayak) + kirmizi atki (31). --don 90: yan gorunum.
   --panda 1: maskot panda yavrusu govdesi (32): siyah kol/bacak, beyaz tombul yumurta govde + kirmizi atki; kafa motorda 2B.
   --ejderha 1: maskot kucuk ejderha (33): yesil tombul uzuv + yumurta govde (sari karin), sirt dikeni, turuncu kanat, kuyruk; kafa motorda 2B.
+  --jole 1: maskot jole kup (34): kalcadan basa tek buyuk turuncu jole kup govde + tombul uzuvlar; yuz motorda 2B.
   --p3 (32, 3 oyuncu): yesil sporcu.
   --sporcu 1: yarisan karakterler boksor degil sporcu (30'dan itibaren, kullanici 17 Kas): forma + koyu sort + ayakkabi oyuncu renginde, sac bandi, bileklik.
 """
@@ -584,6 +585,44 @@ if OYUNCU == "maskot" and arg("--ejderha", "0") == "1":   # 33 (antik kum arenas
     f_ = bpy.context.active_object; bpy.ops.object.shade_smooth(); f_.data.materials.append(mat_jole("ej_ful", lin(hex3("#e8102c")), emis=0.18, purluk=0.15))
     f_.data.transform(Matrix.Rotation(math.radians(-90), 4, "X"))
     EKIP.append((f_, "Neck", Matrix.Translation((0, 0.02 * BOY, 0))))
+
+if OYUNCU == "maskot" and arg("--jole", "0") == "1":     # 34 (oyuncak blok sehri; TALIMATLAR §4 maskot sirasi): JOLE KUP
+    # 32/33 dersi: insan govdesi gizli; kemiklere bagli TOMBUL uzuvlar. Govde = kalcadan basa kadar tek buyuk yuvarlatilmis jole kup
+    # (turuncu-mango, ic isilti, yari mat cilali - beyaz parlama seridi olmasin). Yuz motorda 2B (kupun ust yarisina cizilir).
+    JOLE, JOLE_K = "#ff8a10", "#e85a00"
+    for m_ in mesler:
+        m_.hide_render = True
+    def mat_jk(ad, renk, purluk=0.32, kap=0.45, emis=0.12):
+        m_ = bpy.data.materials.new(ad); m_.use_nodes = True; b_ = m_.node_tree.nodes["Principled BSDF"]
+        b_.inputs["Base Color"].default_value = (*lin(hex3(renk)), 1)
+        b_.inputs["Roughness"].default_value = purluk; b_.inputs["Coat Weight"].default_value = kap; b_.inputs["Coat Roughness"].default_value = 0.1
+        b_.inputs["Subsurface Weight"].default_value = 0.25; b_.inputs["Subsurface Radius"].default_value = (0.5, 0.3, 0.15)
+        b_.inputs["Emission Color"].default_value = (*lin(hex3("#ffb040")), 1); b_.inputs["Emission Strength"].default_value = emis
+        b_.inputs["Specular IOR Level"].default_value = 0.3
+        return m_
+    jm, jk = mat_jk("jole_govde", JOLE), mat_jk("jole_uzuv", JOLE_K, 0.45, 0.2, 0.06)
+    def uzuv(ad, r):
+        b_ = kemik(arm, ad); L = ((arm.matrix_world @ b_.tail) - (arm.matrix_world @ b_.head)).length
+        bpy.ops.mesh.primitive_cylinder_add(radius=r, depth=L, vertices=28); c_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
+        c_.data.transform(Matrix.Rotation(math.radians(-90), 4, "X") @ Matrix.Translation((0, 0, L / 2))); c_.data.materials.append(jk)
+        EKIP.append((c_, ad, Matrix.Identity(4)))
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=r, segments=24, ring_count=12); k_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
+        k_.data.materials.append(jk); EKIP.append((k_, ad, Matrix.Identity(4)))
+        return L
+    for tr in ("Left", "Right"):
+        uzuv(tr + "Arm", 0.05 * BOY); uzuv(tr + "ForeArm", 0.046 * BOY); uzuv(tr + "UpLeg", 0.075 * BOY); uzuv(tr + "Leg", 0.066 * BOY)
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=0.058 * BOY, segments=24, ring_count=12); h_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
+        h_.data.materials.append(jm); EKIP.append((h_, tr + "Hand", Matrix.Translation((0, 0.02 * BOY, 0))))
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=1.0, segments=24, ring_count=12); f_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
+        f_.data.transform(Matrix.Diagonal((0.07 * BOY, 0.11 * BOY, 0.05 * BOY, 1))); f_.data.materials.append(jm)
+        EKIP.append((f_, tr + "Foot", Matrix.Translation((0, 0.04 * BOY, 0))))
+    # KUP govde: Spine1'e bagli; kemik uzayinda +Y = omurga yukari. Kalca ustunden bas tepesine kadar (~0,52 BOY), genislik 0,40 BOY
+    bpy.ops.mesh.primitive_cube_add(size=1.0); kp = bpy.context.active_object
+    kp.data.transform(Matrix.Translation((0, 0.13 * BOY, 0)) @ Matrix.Diagonal((0.40 * BOY, 0.52 * BOY, 0.36 * BOY, 1)))
+    bv = kp.modifiers.new("egim", "BEVEL"); bv.width = 0.07 * BOY; bv.segments = 6; bv.limit_method = "NONE"
+    bpy.ops.object.shade_smooth(); kp.data.materials.append(jm)
+    EKIP.append((kp, "Spine1", Matrix.Identity(4)))
+    log("jole kup govde: 0.40 x 0.52 x 0.36 BOY, Spine1 +0.13 BOY")
 
 def ekip_yerlestir():
     for ob, ad, yerel in EKIP:

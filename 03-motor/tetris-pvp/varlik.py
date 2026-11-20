@@ -813,6 +813,8 @@ elif arg("--mod", "pvp") == "atolye":       # 32. video (REF-084 yapi, 3 oyuncu,
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-atolye.py"), encoding="utf-8").read(), "varlik-atolye.py", "exec"))
 elif arg("--mod", "pvp") == "arena":        # 33. video (REF-085 yapi, 1v1, kullanici 19 Kas): antik kum arenasi, cilali 3D oyun gorunumu
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-arena.py"), encoding="utf-8").read(), "varlik-arena.py", "exec"))
+elif arg("--mod", "pvp") == "blok":         # 34. video (REF-086 yapi, 3P CO-OP, kullanici 20 Kas): oyuncak blok sehri, cilali 3D oyun gorunumu
+    exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-blok.py"), encoding="utf-8").read(), "varlik-blok.py", "exec"))
 elif arg("--mod", "pvp") == "karakter":     # 24. video: yarisan karakterler + hakem maskot poz kareleri (mobil paket md. 2)
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "karakter.py"), encoding="utf-8").read(), "karakter.py", "exec"))
 elif arg("--mod", "pvp") == "cadi":
