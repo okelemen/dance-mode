@@ -34,6 +34,9 @@ GOK_ALT, GOK_UST, PIST_R = "#3ad6ff", "#0038e0", ("#ff9a1e", "#f07a0a")
 if KAPAK and arg("--kapak-doygun", "1") == "1":      # kapak olcumu 1 (20 Kas): doygunluk 0,53 < REF-087 0,66, parlaklik 0,68 > 0,48
     BULUT_UST, BULUT_GOLGE = "#ff5aa8", "#7a3aff"     # -> buyuk alanlar (bulut denizi, gok, pist) Blender'da doygun; 2B boyama yok (md. 21)
     GOK_ALT, GOK_UST, PIST_R = "#08a8ff", "#0018a0", ("#ff7a00", "#e04800")
+    if arg("--kapak-doygun", "1") == "2":            # kapak olcumu 2: -1,4 pozlamada doygunluk 0,60 / parlaklik 0,58 -> daha doygun bulut + pist
+        BULUT_UST, BULUT_GOLGE = "#ff2a90", "#5a18ff"
+        PIST_R = ("#ff5a00", "#c83000")
 
 
 # ------------------------------------------------------------------ sahne / isik
