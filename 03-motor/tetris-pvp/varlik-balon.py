@@ -34,9 +34,10 @@ GOK_ALT, GOK_UST, PIST_R = "#3ad6ff", "#0038e0", ("#ff9a1e", "#f07a0a")
 if KAPAK and arg("--kapak-doygun", "1") == "1":      # kapak olcumu 1 (20 Kas): doygunluk 0,53 < REF-087 0,66, parlaklik 0,68 > 0,48
     BULUT_UST, BULUT_GOLGE = "#ff5aa8", "#7a3aff"     # -> buyuk alanlar (bulut denizi, gok, pist) Blender'da doygun; 2B boyama yok (md. 21)
     GOK_ALT, GOK_UST, PIST_R = "#08a8ff", "#0018a0", ("#ff7a00", "#e04800")
-    if arg("--kapak-doygun", "1") == "2":            # kapak olcumu 2: -1,4 pozlamada doygunluk 0,60 / parlaklik 0,58 -> daha doygun bulut + pist
+    if arg("--kapak-doygun", "1") in ("2", "3"):     # kapak olcumu 2: -1,4 pozlamada doygunluk 0,60 / parlaklik 0,58 -> daha doygun bulut + pist
         BULUT_UST, BULUT_GOLGE = "#ff2a90", "#5a18ff"
         PIST_R = ("#ff5a00", "#c83000")
+KAPAK_3 = KAPAK and arg("--kapak-doygun", "1") == "3"   # kapak olcumu 3: koyu pozlama bulutu boz-mor yapti -> ortam isigi kisik, ic sacilma yok
 
 
 # ------------------------------------------------------------------ sahne / isik
@@ -57,8 +58,8 @@ def balon_sahnesi(w, h, saydam):
     nt.links.new(sp.outputs["Z"], rp.inputs[0])
     lp = nt.nodes.new("ShaderNodeLightPath")
     bg_k = nt.nodes.new("ShaderNodeBackground"); bg_k.inputs[1].default_value = 1.0
-    bg_i = nt.nodes.new("ShaderNodeBackground"); bg_i.inputs[1].default_value = 0.35
-    bg_i.inputs[0].default_value = (*lin(hex3("#bfe0ff")), 1)
+    bg_i = nt.nodes.new("ShaderNodeBackground"); bg_i.inputs[1].default_value = 0.12 if KAPAK_3 else 0.35
+    bg_i.inputs[0].default_value = (*lin(hex3("#6aa8ff" if KAPAK_3 else "#bfe0ff")), 1)   # kapak 3: soluk mavi ortam isigi pembe bulutu griye cekiyordu
     nt.links.new(rp.outputs[0], bg_k.inputs[0])
     mx = nt.nodes.new("ShaderNodeMixShader")
     nt.links.new(lp.outputs["Is Camera Ray"], mx.inputs[0])
@@ -117,7 +118,9 @@ def mat_bulut(ad="bulut"):
     nt.links.new(sp.outputs["Z"], mp.inputs["Value"]); nt.links.new(mp.outputs["Result"], rp.inputs[0])
     nt.links.new(rp.outputs[0], b.inputs["Base Color"])
     b.inputs["Roughness"].default_value = 0.9
-    b.inputs["Subsurface Weight"].default_value = 0.25; b.inputs["Subsurface Radius"].default_value = (1.0, 0.6, 0.8)
+    b.inputs["Subsurface Weight"].default_value = 0.0 if KAPAK_3 else 0.25; b.inputs["Subsurface Radius"].default_value = (1.0, 0.6, 0.8)
+    if KAPAK_3:
+        b.inputs["Roughness"].default_value = 0.75
     return m
 
 
