@@ -29,7 +29,7 @@ PIST = 3.9
 GECIS = 11.5
 CANLI = ("#ff2a3a", "#ffc21a", "#1e8cff", "#20c850", "#ff3aa8", "#ff7a10", "#8a3aff", "#10c8d0")
 MAVI, PEMBE = "#1e8cff", "#ff3aa8"
-BULUT_UST, BULUT_GOLGE = "#ffc6dc", "#c49cff"
+BULUT_UST, BULUT_GOLGE = "#ffa6cc", "#b08aff"      # sahne 1: pastel pembe soluk okunuyordu (§8) -> daha doygun
 
 
 # ------------------------------------------------------------------ sahne / isik
@@ -238,14 +238,16 @@ def bulut(merkez, olcek, rnd, mat):
     kure((x, y, z - 0.25 * olcek), olcek * 0.75, mat).scale = (2.4, 0.8, 0.45)
 
 
-def bulut_denizi(rnd, mat, y0, y1, x_gen, adim, z=-0.6):
+def bulut_denizi(rnd, mat, y0, y1, x_gen, adim, z=-0.6, kac=0.0, rmin=1.4, rmax=2.4):
     """ufka kadar kabarik bulut tepecikleri (zemin): seyrek kure tarlasi, uzakta buyur (perspektif zaten sikistirir)"""
     y = y0
     while y < y1:
         s = 1.0 + (y - y0) / 25.0
         x = -x_gen + rnd.uniform(0, adim * s)
         while x < x_gen:
-            r = rnd.uniform(1.4, 2.4) * s
+            r = rnd.uniform(rmin, rmax) * s
+            if abs(x) - r * 1.3 < kac:                                # sahne 1: yakin bulutlar pisti ortuyordu -> koridor bos
+                x += adim * s * rnd.uniform(0.75, 1.15); continue
             b = kure((x, y + rnd.uniform(-0.5, 0.5) * s, z + rnd.uniform(-0.3, 0.4) * r), r, mat, sub=2); b.scale = (1.3, 1.0, 0.55)
             x += adim * s * rnd.uniform(0.75, 1.15)
         y += adim * 0.8 * s
@@ -296,7 +298,7 @@ def konfeti(rnd, n, x_gen, y0, y1, z0, z1, kac=0.0):
 def mekan(serit_modu, rnd):
     _BMAT.clear()                       # Actions 44714901512: ikinci katmanda bos_sahne eski malzemeleri silmisti (StructRNA removed)
     bm = mat_bulut()
-    bulut_denizi(rnd, bm, -4, GECIS, 60, 3.2, z=-0.7)                 # yakin bulut zemini (pistin iki yani)
+    bulut_denizi(rnd, bm, -4, GECIS, 60, 2.4, z=-0.9, kac=PIST + 0.5, rmin=0.9, rmax=1.5)   # yakin bulut zemini (pistin iki yani; sahne 1 sonrasi alcak + kucuk)
     for o in bpy.data.objects:
         if o.type == "MESH":
             o["yakin"] = 1
