@@ -211,8 +211,8 @@ def biber_profil(z, m):
 def biber_canak(x,y,z,m):
     r=np.sqrt(x*x+y*y)
     angle=np.arctan2(y,x)
-    star=.13+.29*np.maximum(0.0,np.cos(5*angle))**5
-    leaf=(z>=.56)&(z<=.72)&(r<=star)
+    star=.14+.49*np.maximum(0.0,np.cos(5*(angle+np.pi/2)))**5
+    leaf=(z>=.47)&(z<=.72)&(r<=star)
     stem=(z>=.68)&(z<=m["zmax"])&(r<=.053)
     return leaf|stem
 
@@ -245,7 +245,7 @@ def icinde(x, y, z, m):
         return (np.abs(z) <= m["R"]) & ((x / m["A"]) ** 2 + (y / m["B"]) ** 2 <= p * p)
     if m.get("profil") == "red-bell-pepper":
         theta=np.arctan2(y/m["B"],x/m["A"])
-        lob=1.0-.14*np.cos(4*theta)
+        lob=1.0-.22*np.cos(4*theta)
         rr=np.maximum(.001,biber_profil(z,m)*lob)
         rad=np.sqrt((x/m["A"])**2+(y/m["B"])**2)/rr
         shell=(np.abs(z)<=m["R"])&(rad<=1.0)

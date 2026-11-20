@@ -344,7 +344,7 @@ for v in meyve.data.vertices:
     if PEPPER:
         zz=z*R
         angle=math.atan2(y,x)
-        lob=1.0-.14*math.cos(4*angle)
+        lob=1.0-.22*math.cos(4*angle)
         ring=float(biber_profil(zz,M))*lob/max(math.sqrt(max(0.0,1.0-z*z)),1e-6)
         v.co=(x*A*ring,y*B*ring,zz)
     elif CILEK:
@@ -553,6 +553,17 @@ else:
         e=red.color_ramp.elements.new(.52);e.color=hex_renk("#c6221b")
         baglan(nt,nz.outputs["Fac"],red.inputs["Fac"])
         kabuk_rengi=red.outputs["Color"]
+        pos=nt.nodes.new("ShaderNodeSeparateXYZ")
+        baglan(nt,tk.outputs["Object"],pos.inputs[0])
+        angle=matematik(nt,"ARCTAN2",pos.outputs[1],pos.outputs[0])
+        crease=matematik(nt,"GREATER_THAN",
+            matematik(nt,"COSINE",matematik(nt,"MULTIPLY",angle,None,deger_b=4.0)),
+            None,deger_b=.83)
+        vein=nt.nodes.new("ShaderNodeMix");vein.data_type="RGBA"
+        baglan(nt,crease,vein.inputs["Factor"])
+        baglan(nt,kabuk_rengi,vein.inputs[6])
+        vein.inputs[7].default_value=hex_renk("#9f1a18")
+        kabuk_rengi=vein.outputs[2]
         bmp.inputs["Strength"].default_value=.05
         bmp.inputs["Distance"].default_value=.003
 
@@ -901,9 +912,9 @@ if APPLE or ORANGE or BANANA or NAR or TOMATO or CUCUMBER or PEPPER:
         green=bagli_malzeme("biber_yesil_besli_canak", "#2f7032")
         vs=[(0,0,.715)];fs=[]
         for i in range(5):
-            a=2*math.pi*i/5;j=len(vs)
+            a=-math.pi/2+2*math.pi*i/5;j=len(vs)
             vs.extend([(.10*math.cos(a-.33),.10*math.sin(a-.33),.705),
-                       (.42*math.cos(a),.42*math.sin(a),.56),
+                       (.63*math.cos(a),.63*math.sin(a),.47),
                        (.10*math.cos(a+.33),.10*math.sin(a+.33),.705)])
             fs.append((0,j,j+1,j+2))
         mesh=bpy.data.meshes.new("biber_canak_mesh");mesh.from_pydata(vs,[],fs);mesh.update()
@@ -1094,7 +1105,7 @@ def kup_nesnesi(tur, no):
     # Et/cekirdek rengi ve gercek dis kabuk maskesi ayni kaynak hucre konumundan gelir.
     if PEPPER:
         theta=np.arctan2(merk[:,1]/B,merk[:,0]/A)
-        lob=1.0-.14*np.cos(4*theta)
+        lob=1.0-.22*np.cos(4*theta)
         rr=np.maximum(.001,biber_profil(merk[:,2],M)*lob)
         d=np.sqrt((merk[:,0]/A)**2+(merk[:,1]/B)**2)/rr
     elif CILEK:
@@ -1966,7 +1977,7 @@ elif PEPPER:
     lob=matematik(ntk_,"ADD",None,
         matematik(ntk_,"MULTIPLY",
             matematik(ntk_,"COSINE",matematik(ntk_,"MULTIPLY",theta,None,deger_b=4.0)),
-            None,deger_b=-.14),deger_a=1.0)
+            None,deger_b=-.22),deger_a=1.0)
     shape=matematik(ntk_,"MAXIMUM",matematik(ntk_,"MULTIPLY",body,lob),None,deger_b=.001)
     radial_xy=matematik(ntk_,"SQRT",matematik(ntk_,"ADD",
         matematik(ntk_,"MULTIPLY",xx,xx),matematik(ntk_,"MULTIPLY",yy,yy)))
