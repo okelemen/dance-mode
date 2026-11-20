@@ -81,6 +81,10 @@ MEYVELER = {
         "A": 0.78, "R": 0.72, "boyun": 1.0, "profil": "tomato",
         "zmax": 0.87,
     },
+    "cucumber": {
+        "A": 1.26, "R": 0.30, "boyun": 1.0, "profil": "cucumber",
+        "xmax": 1.39,
+    },
 }
 
 # Turlar: (kesim sayisi, kesim suresi sn). Acilis 0.4 sn + sonuc 1.3 sn eklenir -> toplam 60 sn
@@ -124,6 +128,8 @@ def meyve_profil(xn, m):
         return np.maximum(0.0, 1.0 - xn * xn) ** 0.46
     if m.get("profil") in ("pomegranate", "tomato"):
         return np.maximum(0.0, 1.0 - xn*xn) ** 0.48
+    if m.get("profil") == "cucumber":
+        return np.maximum(0.0, 1.0 - np.abs(xn)**8) ** 0.34 * (0.97 + 0.03*xn)
     return profil(xn, m["boyun"])
 
 
@@ -133,6 +139,8 @@ def meyve_fmax(m):
     if m.get("profil") in ("kiwi", "pineapple", "apple", "orange", "peach", "pomegranate", "tomato"):
         return 1.0
     if m.get("profil") == "banana":
+        return float(meyve_profil(np.linspace(-1, 1, 20001), m).max())
+    if m.get("profil") == "cucumber":
         return float(meyve_profil(np.linspace(-1, 1, 20001), m).max())
     return fmax(m["boyun"])
 
@@ -182,6 +190,11 @@ def ananas_sap(x, y, z, m):
 def muz_egri(x, m):
     """Muzun egri merkez cizgisi, plan ve sahnede ayni."""
     return 0.30 * (np.asarray(x) / m["A"]) ** 2 - 0.12
+
+
+def salatalik_egri(x, m):
+    """Hafif dogal egri; kesit, govde ve kupte ayni merkez ekseni."""
+    return 0.085 * (np.asarray(x) / m["A"]) ** 2 - 0.035
 
 
 def muz_sirt(y, z):
@@ -255,6 +268,13 @@ def icinde(x, y, z, m):
         lob=1.0+.035*np.cos(5*angle)
         body=(np.abs(xn)<=1.0)&(y*y+z*z<=(rr*lob)**2)
         return body | domates_canak(x,y,z,m)
+    if m.get("profil") == "cucumber":
+        dz = z - salatalik_egri(x, m)
+        angle = np.arctan2(dz, y)
+        ridge = 1.0 + .025*np.cos(9*angle + .8*x)
+        body = (np.abs(xn) <= 1.0) & (y*y + dz*dz <= (rr*ridge)**2)
+        stem = (x >= m["A"]-.025) & (x <= m["xmax"]) & (y*y + dz*dz <= .052**2)
+        return body | stem
     return (np.abs(xn) <= 1.0) & (y * y + z * z <= rr * rr)
 
 
