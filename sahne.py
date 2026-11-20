@@ -344,7 +344,7 @@ for v in meyve.data.vertices:
     if PEPPER:
         zz=z*R
         angle=math.atan2(y,x)
-        lob=1.0+.08*math.cos(4*angle)
+        lob=1.0-.14*math.cos(4*angle)
         ring=float(biber_profil(zz,M))*lob/max(math.sqrt(max(0.0,1.0-z*z)),1e-6)
         v.co=(x*A*ring,y*B*ring,zz)
     elif CILEK:
@@ -899,12 +899,12 @@ if APPLE or ORANGE or BANANA or NAR or TOMATO or CUCUMBER or PEPPER:
         ob.parent=meyve;ob.data.materials.append(sm);ANANAS_EK_OB.append(ob)
     elif PEPPER:
         green=bagli_malzeme("biber_yesil_besli_canak", "#2f7032")
-        vs=[(0,0,.745)];fs=[]
+        vs=[(0,0,.715)];fs=[]
         for i in range(5):
             a=2*math.pi*i/5;j=len(vs)
-            vs.extend([(.09*math.cos(a-.33),.09*math.sin(a-.33),.735),
-                       (.34*math.cos(a),.34*math.sin(a),.69),
-                       (.09*math.cos(a+.33),.09*math.sin(a+.33),.735)])
+            vs.extend([(.10*math.cos(a-.33),.10*math.sin(a-.33),.705),
+                       (.42*math.cos(a),.42*math.sin(a),.56),
+                       (.10*math.cos(a+.33),.10*math.sin(a+.33),.705)])
             fs.append((0,j,j+1,j+2))
         mesh=bpy.data.meshes.new("biber_canak_mesh");mesh.from_pydata(vs,[],fs);mesh.update()
         ob=bpy.data.objects.new("biber_canagi_kesilir",mesh);sc.collection.objects.link(ob)
@@ -912,7 +912,7 @@ if APPLE or ORANGE or BANANA or NAR or TOMATO or CUCUMBER or PEPPER:
         stem=bagli_malzeme("biber_kalin_sap", "#3b6d2d")
         bpy.ops.mesh.primitive_cylinder_add(vertices=16,radius=.053,depth=.24)
         ob=bpy.context.object;ob.name="biber_sapi_kesilir"
-        ob.location=(0,0,.87)
+        ob.location=(0,0,.80)
         bpy.ops.object.transform_apply(location=True,rotation=True)
         ob.parent=meyve;ob.data.materials.append(stem);ANANAS_EK_OB.append(ob)
 
@@ -1094,7 +1094,7 @@ def kup_nesnesi(tur, no):
     # Et/cekirdek rengi ve gercek dis kabuk maskesi ayni kaynak hucre konumundan gelir.
     if PEPPER:
         theta=np.arctan2(merk[:,1]/B,merk[:,0]/A)
-        lob=1.0+.08*np.cos(4*theta)
+        lob=1.0-.14*np.cos(4*theta)
         rr=np.maximum(.001,biber_profil(merk[:,2],M)*lob)
         d=np.sqrt((merk[:,0]/A)**2+(merk[:,1]/B)**2)/rr
     elif CILEK:
@@ -1212,8 +1212,8 @@ def kup_nesnesi(tur, no):
     elif PEPPER:
         renk=np.tile(np.array(hex_renk("#dc5130")[:3]),(k,1))
         renk[u[:,0]>.94]=np.array(hex_renk("#c3221a")[:3])
-        renk[(u[:,0]>.72)&(u[:,0]<.82)]=np.array(hex_renk("#f08a55")[:3])
-        cream=(u[:,0]<.50)&(merk[:,2]>-.25)&(merk[:,2]<.72)
+        renk[(u[:,0]>.72)&(u[:,0]<.90)]=np.array(hex_renk("#f2aa74")[:3])
+        cream=(u[:,0]<.50)&(merk[:,2]>-.25)&(merk[:,2]<.65)
         renk[cream]=np.array(hex_renk("#f5dfac")[:3])
         seed=cream&(np.cos(29*merk[:,0]+37*merk[:,1]+41*merk[:,2])>.86)
         renk[seed]=np.array(hex_renk("#fff2cc")[:3])
@@ -1948,14 +1948,17 @@ if CILEK:
 elif PEPPER:
     zn=matematik(ntk_,"DIVIDE",dz,None,deger_b=R)
     s=matematik(ntk_,"MULTIPLY",matematik(ntk_,"ADD",zn,None,deger_b=1.0),None,deger_b=.5)
-    decay=matematik(ntk_,"SUBTRACT",None,matematik(ntk_,"MULTIPLY",s,None,deger_b=.19),deger_a=.95)
+    decay=matematik(ntk_,"ADD",None,
+        matematik(ntk_,"MULTIPLY",s,None,deger_b=-.12),deger_a=.92)
     bulge=matematik(ntk_,"MULTIPLY",
-        matematik(ntk_,"SINE",matematik(ntk_,"MULTIPLY",s,None,deger_b=math.pi)),None,deger_b=.06)
-    base=matematik(ntk_,"ADD",decay,bulge)
+        matematik(ntk_,"SINE",matematik(ntk_,"MULTIPLY",s,None,deger_b=math.pi)),None,deger_b=.15)
+    s4=matematik(ntk_,"POWER",s,None,deger_b=4.0)
+    base=matematik(ntk_,"SUBTRACT",matematik(ntk_,"ADD",decay,bulge),
+        matematik(ntk_,"MULTIPLY",s4,None,deger_b=.15))
     taper=matematik(ntk_,"POWER",matematik(ntk_,"MAXIMUM",
         matematik(ntk_,"SUBTRACT",None,
             matematik(ntk_,"POWER",matematik(ntk_,"ABSOLUTE",zn),None,deger_b=8.0),deger_a=1.0),
-        None,deger_b=0.0),None,deger_b=.28)
+        None,deger_b=0.0),None,deger_b=.23)
     body=matematik(ntk_,"MULTIPLY",base,taper)
     xx=matematik(ntk_,"DIVIDE",v_x.outputs[0],None,deger_b=A)
     yy=matematik(ntk_,"DIVIDE",dy,None,deger_b=B)
@@ -1963,7 +1966,7 @@ elif PEPPER:
     lob=matematik(ntk_,"ADD",None,
         matematik(ntk_,"MULTIPLY",
             matematik(ntk_,"COSINE",matematik(ntk_,"MULTIPLY",theta,None,deger_b=4.0)),
-            None,deger_b=.08),deger_a=1.0)
+            None,deger_b=-.14),deger_a=1.0)
     shape=matematik(ntk_,"MAXIMUM",matematik(ntk_,"MULTIPLY",body,lob),None,deger_b=.001)
     radial_xy=matematik(ntk_,"SQRT",matematik(ntk_,"ADD",
         matematik(ntk_,"MULTIPLY",xx,xx),matematik(ntk_,"MULTIPLY",yy,yy)))
@@ -2187,7 +2190,7 @@ if PEPPER:
         matematik(ntk_,"LESS_THAN",u_,None,deger_b=.72),
         matematik(ntk_,"MULTIPLY",
             matematik(ntk_,"GREATER_THAN",dz,None,deger_b=-.62*R),
-            matematik(ntk_,"LESS_THAN",dz,None,deger_b=.70*R)))
+            matematik(ntk_,"LESS_THAN",dz,None,deger_b=.85*R)))
     pith=matematik(ntk_,"MULTIPLY",
         matematik(ntk_,"LESS_THAN",u_,None,deger_b=.18),
         matematik(ntk_,"GREATER_THAN",dz,None,deger_b=-.22))
