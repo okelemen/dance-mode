@@ -80,7 +80,7 @@ bolum = {"seri": "HUMAN TETRIS", "bolum": "human-tetris-34", "bpm": BPM, "toplam
          "tema": {"acilis": "kanca", "varlik": "/03-motor/tetris-pvp/varlik-34s1/", "karakter": "/03-motor/tetris-pvp/varlik-34-karakter/",
                   "maskeVarlik": "/03-motor/tetris-pvp/varlik-34s1/", "turAd": {"1": "ROUND 1", "2": "ROUND 2", "3": "MIRROR ROUND", "4": "FINAL ROUND"},
                   "renk": ["#1ad2ff", "#ff2ad2", "#2ee860"], "acik": ["#d6f6ff", "#ffd6f4", "#d6ffe0"], "koyu": ["#0a5ad8", "#b0108c", "#0a8a2a"],
-                  "ad": ["BLUE", "PINK", "GREEN"], "aboneAlt": "NEW CHALLENGE EVERY DAY", "yuzDy": 0}}
+                  "ad": ["BLUE", "PINK", "GREEN"], "aboneAlt": "NEW CHALLENGE EVERY DAY", "yuzDy": 30, "yuzOlcek": 1.15}}
 yol = os.path.join(KOK, "bolumler", "tetris-mode-34.json")
 json.dump(bolum, open(yol, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
 print("->", yol, "olcu", TOPLAM, "sure %.1f sn" % SURE, "duvar", len(duvarlar), "abone", len(abone), "ilk duvar %.2f" % duvarlar[0]["t0"], "skor", skor)

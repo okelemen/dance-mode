@@ -52,7 +52,7 @@ degis("  if (!yuzSadece) sekerCiz(x + (78 + bs) * s * k, y - 60 * s * k, 26 * s 
 i0 = t.index("  // motor 29: PANDA YAVRUSU kafasi")
 i1 = t.index("  cx.restore();\n  cx.restore();\n}\n// alt orta:")
 t = t[:i0] + """  // motor 31: JOLE KUP (TALIMATLAR §4 maskot sirasi; kendi tasarimimiz). yuzSadece = 3B kup govdenin uzerine yalniz yuz
-  cx.translate(0, yuzSadece ? (TEMA.yuzDy || 0) : 0);
+  if (yuzSadece) { cx.translate(0, TEMA.yuzDy || 0); cx.scale(TEMA.yuzOlcek || 1, TEMA.yuzOlcek || 1); }
   if (!yuzSadece) {                                             // kartlarda / acilista: 2B tombul jole kup
     const gv = cx.createLinearGradient(0, -70, 0, 70); gv.addColorStop(0, '#ffb040'); gv.addColorStop(1, '#e85a00');
     cx.fillStyle = gv; cx.strokeStyle = '#7a2600'; cx.lineWidth = 6; cx.beginPath(); cx.roundRect(-70, -70, 140, 140, 30); cx.fill(); cx.stroke();
@@ -76,8 +76,8 @@ t = t[:i0] + """  // motor 31: JOLE KUP (TALIMATLAR §4 maskot sirasi; kendi tas
   if (MASKOT_DUYGU === 'sasirma') { cx.fillStyle = '#7a1020'; cx.beginPath(); cx.ellipse(0, 30, 9, 12, 0, 0, 6.283); cx.fill(); cx.stroke(); }
   else { cx.fillStyle = '#7a1020'; cx.beginPath(); cx.moveTo(-20, 22); cx.quadraticCurveTo(0, 46, 20, 22); cx.closePath(); cx.fill(); cx.stroke(); }
   cx.fillStyle = '#e8102c'; cx.strokeStyle = '#3a0a10'; cx.lineWidth = 3;                    // kirmizi hakem duduğu (ip boyunda)
-  cx.beginPath(); cx.roundRect(28, 44, 26, 13, 6); cx.fill(); cx.stroke();
-  cx.strokeStyle = '#ffd21e'; cx.lineWidth = 2.5; cx.beginPath(); cx.moveTo(30, 50); cx.quadraticCurveTo(0, 62, -30, 46); cx.stroke();
+  cx.beginPath(); cx.roundRect(34, 58, 26, 13, 6); cx.fill(); cx.stroke();
+  cx.strokeStyle = '#ffd21e'; cx.lineWidth = 2.5; cx.beginPath(); cx.moveTo(36, 64); cx.quadraticCurveTo(0, 74, -36, 56); cx.stroke();
 """ + t[i1:]
 
 # ---- kepenk: panda neon yuzu -> jole kup neon yuzu
@@ -185,5 +185,10 @@ t = t[:i0] + """function sonucKart(kart, u, t) {                              //
 degis("      satir([['WHO WILL WIN? ', KART_DOLGU], ['BLUE', ['#ffffff', ACIK[0], RENK[0]]], [', ', KART_DOLGU], ['PINK', ['#ffffff', ACIK[1], RENK[1]]], [' OR ', KART_DOLGU], ['GREEN', ['#ffffff', ACIK[2], RENK[2]]], ['?', KART_DOLGU]], W / 2, H * 0.13, 76 * k * acilisSoru, acilisSoru);",
       "      satir([['CAN YOUR TEAM CLEAR ALL ' + TOPLAM_DUVAR + '?', KART_DOLGU]], W / 2, H * 0.13, 80 * k * acilisSoru, acilisSoru);   // motor 31: CO-OP sorusu")
 
+# ---- on kontak 1: MIRROR! yazisi 3-2-1 rakamina biniyordu -> FASTER! gibi ustte (0,12 H; abone varken zaten soner)
+degis("    if (gir > 0.01) yaziK('MIRROR!', W / 2, H * 0.165,", "    if (gir > 0.01) yaziK('MIRROR!', W / 2, H * 0.12,")
+# ---- yakin plan: Bobo turuncu-sari blok duvarinin onunde kayboluyordu -> altin yerine beyaz hakem isiltisi
+degis("  cx.save(); cx.shadowColor = '#ffd21e'; cx.shadowBlur = 24 * k;   // motor 29: altin hakem isiltisi",
+      "  cx.save(); cx.shadowColor = '#ffffff'; cx.shadowBlur = 30 * k;   // motor 31: beyaz hakem isiltisi (turuncu Bobo blok duvarindan ayrilsin)")
 open(HEDEF, "w", encoding="utf-8").write(t)
 print("->", HEDEF, len(t))

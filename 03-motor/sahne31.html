@@ -320,7 +320,7 @@ function maskotCiz(x, y, s, t, alfa = 1, yuzSadece = false) {
   cx.translate(x, y); cx.scale(s * k, s * k);
   cx.lineJoin = 'round'; cx.lineWidth = 5; cx.strokeStyle = KN;
   // motor 31: JOLE KUP (TALIMATLAR §4 maskot sirasi; kendi tasarimimiz). yuzSadece = 3B kup govdenin uzerine yalniz yuz
-  cx.translate(0, yuzSadece ? (TEMA.yuzDy || 0) : 0);
+  if (yuzSadece) { cx.translate(0, TEMA.yuzDy || 0); cx.scale(TEMA.yuzOlcek || 1, TEMA.yuzOlcek || 1); }
   if (!yuzSadece) {                                             // kartlarda / acilista: 2B tombul jole kup
     const gv = cx.createLinearGradient(0, -70, 0, 70); gv.addColorStop(0, '#ffb040'); gv.addColorStop(1, '#e85a00');
     cx.fillStyle = gv; cx.strokeStyle = '#7a2600'; cx.lineWidth = 6; cx.beginPath(); cx.roundRect(-70, -70, 140, 140, 30); cx.fill(); cx.stroke();
@@ -344,8 +344,8 @@ function maskotCiz(x, y, s, t, alfa = 1, yuzSadece = false) {
   if (MASKOT_DUYGU === 'sasirma') { cx.fillStyle = '#7a1020'; cx.beginPath(); cx.ellipse(0, 30, 9, 12, 0, 0, 6.283); cx.fill(); cx.stroke(); }
   else { cx.fillStyle = '#7a1020'; cx.beginPath(); cx.moveTo(-20, 22); cx.quadraticCurveTo(0, 46, 20, 22); cx.closePath(); cx.fill(); cx.stroke(); }
   cx.fillStyle = '#e8102c'; cx.strokeStyle = '#3a0a10'; cx.lineWidth = 3;                    // kirmizi hakem duduğu (ip boyunda)
-  cx.beginPath(); cx.roundRect(28, 44, 26, 13, 6); cx.fill(); cx.stroke();
-  cx.strokeStyle = '#ffd21e'; cx.lineWidth = 2.5; cx.beginPath(); cx.moveTo(30, 50); cx.quadraticCurveTo(0, 62, -30, 46); cx.stroke();
+  cx.beginPath(); cx.roundRect(34, 58, 26, 13, 6); cx.fill(); cx.stroke();
+  cx.strokeStyle = '#ffd21e'; cx.lineWidth = 2.5; cx.beginPath(); cx.moveTo(36, 64); cx.quadraticCurveTo(0, 74, -36, 56); cx.stroke();
   cx.restore();
   cx.restore();
 }
@@ -488,7 +488,7 @@ function duvarCiz(d, u, t) {
     // tam render 1: SUBSCRIBE dugmesi ayni yere geliyordu -> dugme gorunurken MIRROR! soner (ust uste binme yok)
     const ab = ABONE.reduce((m, x) => Math.max(m, kisit(1 - Math.max(x - t, t - x - ABONE_SURE, 0) / 0.3, 0, 1)), 0);
     const gir = ease(kisit(u / 0.4, 0, 1)) * (1 - ab), p = 1 + 0.06 * Math.sin(t * 6);
-    if (gir > 0.01) yaziK('MIRROR!', W / 2, H * 0.165, 96 * k * ease(kisit(u / 0.4, 0, 1)) * p, ['#ffffff', '#c8f4ff', '#3ab8ff'], gir, '#06306a', '#ffffff');
+    if (gir > 0.01) yaziK('MIRROR!', W / 2, H * 0.12, 96 * k * ease(kisit(u / 0.4, 0, 1)) * p, ['#ffffff', '#c8f4ff', '#3ab8ff'], gir, '#06306a', '#ffffff');
   }
   if (d.hiz && u < b) {                                          // motor 26 SPEED ROUND: hizlanan duvarda ustte FASTER! (abone dugmesiyle ust uste binmez)
     const ab = ABONE.reduce((m, x) => Math.max(m, kisit(1 - Math.max(x - t, t - x - ABONE_SURE, 0) / 0.3, 0, 1)), 0);
@@ -700,7 +700,7 @@ function hakemCiz(t, d, u) {
   if (!im) { maskotCiz(xm, ay - 80 * k - bob, 1.0, t); return; }
   const sc = H * MAS_BOY / Y.boy_px, px = im.width * sc, x0 = xm - px / 2, y0 = ay - Y.zemin_px * sc - bob;
   const ayn = d && d.ayna;
-  cx.save(); cx.shadowColor = '#ffd21e'; cx.shadowBlur = 24 * k;   // motor 29: altin hakem isiltisi
+  cx.save(); cx.shadowColor = '#ffffff'; cx.shadowBlur = 30 * k;   // motor 31: beyaz hakem isiltisi (turuncu Bobo blok duvarindan ayrilsin)
   if (ayn) { cx.translate(xm, 0); cx.scale(-1, 1); cx.translate(-xm, 0); }        // motor 23 MIRROR: maskot da ters pozu gosterir
   cx.drawImage(im, x0, y0, px, px); cx.restore();
   const kf = Y.poz[ad].kafa[Math.round(j)], kx = x0 + kf[0] * sc;

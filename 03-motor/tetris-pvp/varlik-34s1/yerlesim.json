@@ -1,0 +1,48 @@
+{
+ "aciklik_p1": [
+  180.8,
+  334.6,
+  459.2,
+  688.3
+ ],
+ "blok_p1": {
+  "minder_sol_x": 86.3,
+  "minder_sag_x": 553.7,
+  "minder_y": 603.2,
+  "gecis_y": 629.6
+ },
+ "yol": {
+  "y_kapi": 8.0,
+  "kam": {
+   "z": 2.2,
+   "egim": 5.0,
+   "lens": 18.0,
+   "sensor": 24.0
+  },
+  "serit_w": 640
+ },
+ "aciklik_p2": [
+  180.8,
+  334.6,
+  459.2,
+  688.3
+ ],
+ "blok_p2": {
+  "minder_sol_x": 86.3,
+  "minder_sag_x": 553.7,
+  "minder_y": 603.2,
+  "gecis_y": 629.6
+ },
+ "aciklik_p3": [
+  180.8,
+  334.6,
+  459.2,
+  688.3
+ ],
+ "blok_p3": {
+  "minder_sol_x": 86.3,
+  "minder_sag_x": 553.7,
+  "minder_y": 603.2,
+  "gecis_y": 629.6
+ }
+}

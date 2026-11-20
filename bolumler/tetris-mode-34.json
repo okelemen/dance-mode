@@ -719,6 +719,7 @@
    "GREEN"
   ],
   "aboneAlt": "NEW CHALLENGE EVERY DAY",
-  "yuzDy": 0
+  "yuzDy": 30,
+  "yuzOlcek": 1.15
  }
 }
