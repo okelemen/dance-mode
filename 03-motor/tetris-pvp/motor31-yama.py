@@ -186,7 +186,7 @@ degis("      satir([['WHO WILL WIN? ', KART_DOLGU], ['BLUE', ['#ffffff', ACIK[0]
       "      satir([['CAN YOUR TEAM CLEAR ALL ' + TOPLAM_DUVAR + '?', KART_DOLGU]], W / 2, H * 0.13, 80 * k * acilisSoru, acilisSoru);   // motor 31: CO-OP sorusu")
 
 # ---- on kontak 1: MIRROR! yazisi 3-2-1 rakamina biniyordu -> FASTER! gibi ustte (0,12 H; abone varken zaten soner)
-degis("    if (gir > 0.01) yaziK('MIRROR!', W / 2, H * 0.165,", "    if (gir > 0.01) yaziK('MIRROR!', W / 2, H * 0.12,")
+degis("    if (gir > 0.01) yaziK('MIRROR!', W / 2, H * 0.165, 96 * k", "    if (gir > 0.01) yaziK('MIRROR!', W / 2, H * 0.131, 64 * k")   # tam render 1: 0,12 H / 96 px kapsule ve 3-2-1'e degiyordu
 # ---- yakin plan: Bobo turuncu-sari blok duvarinin onunde kayboluyordu -> altin yerine beyaz hakem isiltisi
 degis("  cx.save(); cx.shadowColor = '#ffd21e'; cx.shadowBlur = 24 * k;   // motor 29: altin hakem isiltisi",
       "  cx.save(); cx.shadowColor = '#ffffff'; cx.shadowBlur = 30 * k;   // motor 31: beyaz hakem isiltisi (turuncu Bobo blok duvarindan ayrilsin)")
