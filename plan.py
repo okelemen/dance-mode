@@ -85,6 +85,10 @@ MEYVELER = {
         "A": 1.26, "R": 0.30, "boyun": 1.0, "profil": "cucumber",
         "xmax": 1.39,
     },
+    "red-bell-pepper": {
+        "A": 0.70, "B": 0.66, "R": 0.77, "boyun": 1.0,
+        "profil": "red-bell-pepper", "zmax": 0.99,
+    },
 }
 
 # Turlar: (kesim sayisi, kesim suresi sn). Acilis 0.4 sn + sonuc 1.3 sn eklenir -> toplam 60 sn
@@ -197,6 +201,22 @@ def salatalik_egri(x, m):
     return 0.085 * (np.asarray(x) / m["A"]) ** 2 - 0.035
 
 
+def biber_profil(z, m):
+    """Dort loblu dolmalik biberin altta dolgun, ustte daralan govde yaricapi."""
+    zn=np.clip(np.asarray(z)/m["R"],-1.0,1.0)
+    s=(zn+1.0)*.5
+    return (0.95-0.19*s+0.06*np.sin(np.pi*s))*np.maximum(0.0,1.0-np.abs(zn)**8)**.28
+
+
+def biber_canak(x,y,z,m):
+    r=np.sqrt(x*x+y*y)
+    angle=np.arctan2(y,x)
+    star=.11+.23*np.maximum(0.0,np.cos(5*angle))**5
+    leaf=(z>=.70)&(z<=.77)&(r<=star)
+    stem=(z>=.75)&(z<=m["zmax"])&(r<=.053)
+    return leaf|stem
+
+
 def muz_sirt(y, z):
     return 1.0 + 0.11 * np.cos(5.0 * np.arctan2(z, y))
 
@@ -223,6 +243,17 @@ def icinde(x, y, z, m):
     if m.get("profil") == "strawberry":
         p = profil_yaricap(z, m)
         return (np.abs(z) <= m["R"]) & ((x / m["A"]) ** 2 + (y / m["B"]) ** 2 <= p * p)
+    if m.get("profil") == "red-bell-pepper":
+        theta=np.arctan2(y/m["B"],x/m["A"])
+        lob=1.0+.08*np.cos(4*theta)
+        rr=np.maximum(.001,biber_profil(z,m)*lob)
+        rad=np.sqrt((x/m["A"])**2+(y/m["B"])**2)/rr
+        shell=(np.abs(z)<=m["R"])&(rad<=1.0)
+        cavity=(z>-.62*m["R"])&(z<.70*m["R"])&(rad<.72)
+        body=shell&~cavity
+        pith=(np.sqrt(x*x+y*y)<.12)&(z>-.22)&(z<.72)
+        seeds=(rad>.14)&(rad<.49)&(z>.20)&(z<.68)&(np.cos(29*x+37*y+41*z)>.86)
+        return body|pith|seeds|biber_canak(x,y,z,m)
     xn = x / m["A"]
     rr = profil_yaricap(x, m)
     if m.get("profil") == "pineapple":
