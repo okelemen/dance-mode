@@ -33,6 +33,16 @@ def buz(sure=0.9):
 
 
 
+def blok_tak(sure=0.22, ton=820):
+    """34 (oyuncak blok sehri): plastik blok carpmasi - kisa tok vurus (inharmonik iki ton) + bant geciren tik, hizli sonum"""
+    t = np.arange(int(sure * SR)) / SR
+    g = np.random.default_rng(int(ton)).standard_normal(len(t))
+    x = 0.6 * np.sin(2 * np.pi * ton * t) * np.exp(-t * 38) + 0.35 * np.sin(2 * np.pi * ton * 2.31 * t) * np.exp(-t * 55)
+    x += 0.5 * np.convolve(g, np.ones(6) / 6, "same") * np.exp(-t * 90)
+    x += 0.4 * np.sin(2 * np.pi * 140 * t) * np.exp(-t * 30)
+    return (x * np.minimum(1, t / 0.001) * 0.6).astype(np.float64)
+
+
 def kum(sure=0.7):
     """26 (plaj): kuma dusus - boguk gumleme (90->45 Hz) + alcak geciren kum hisirtisi, hizli sonum"""
     t = np.arange(int(sure * SR)) / SR
@@ -179,6 +189,13 @@ def main():
                 yerlestir(ef, gurleme(0.9), t + 2.0, 0.9)
                 yerlestir(ef, kum(0.6), t + 2.3, 0.9)
                 yerlestir(ef, ruzgar(1.0), t + 2.25, 0.5)
+            elif "--blok" in sys.argv:                                      # 34: gokten 6 blok sirayla duser (kule), kule devrilir, bloklar sacilir
+                for j in range(6):
+                    yerlestir(ef, blok_tak(0.25, 620 + 70 * j), t + 2.0 + 0.14 + 0.09 * j, 0.9)
+                yerlestir(ef, vurus(), t + 2.78, 1.0)
+                for i in range(6):
+                    yerlestir(ef, blok_tak(0.18, 900 + 90 * i), t + 2.8 + i * 0.06, 0.6)
+                yerlestir(ef, piril(0.8), t + 2.85, 0.8)
             elif "--hediye" in sys.argv:                                    # 32: dev hediye kutusu duser, kapak firlar, konfeti
                 yerlestir(ef, vurus(), t + 2.33, 1.0)
                 yerlestir(ef, vuus(0.5, True, 0.8), t + 2.4)
@@ -190,7 +207,7 @@ def main():
                 yerlestir(ef, su(), t + 2.35, 0.9)
             else:
                 yerlestir(ef, ruzgar(1.3), t + 2.0, 0.6)                # lale yapragi firtinasi
-            yerlestir(ef, zap(0.4), t + 2.55, 0.7)                      # WHO WILL WIN?
+            yerlestir(ef, zap(0.4), t + (2.88 if "--blok" in sys.argv else 2.55), 0.7)   # WHO WILL WIN? / 34: CAN YOUR TEAM CLEAR ALL 24?
         elif k["tip"] in ("vs", "giris", "acilis"):          # 5. video: giris karti (3 PLAYERS) VS ile ayni carpisma
             yerlestir(ef, vuus(0.7, True, 0.9), t)
             yerlestir(ef, vurus(), t + 0.45, 1.0)
@@ -251,6 +268,10 @@ def main():
             if "--arena" in sys.argv:                                     # 33: kum yiginina yuvarlanir -> gumleme + kum + hakem duduk
                 yerlestir(ef, kum(), c - 0.03, 1.0)
                 yerlestir(ef, duduk(), c + 0.35, 0.7)
+            elif "--blok" in sys.argv:                                      # 34: blok yiginina duser -> bloklar sacilir (tak tak) + hakem duduk
+                for i in range(5):
+                    yerlestir(ef, blok_tak(0.2, 700 + 110 * i), c - 0.03 + i * 0.07, 1.0 - 0.12 * i)
+                yerlestir(ef, duduk(), c + 0.4, 0.7)
             elif "--hediye" in sys.argv:                                    # 32: hediye kutusu yiginina duser -> kutular sacilir (uc gum + tik) + hakem duduk
                 for i in range(3):
                     yerlestir(ef, kum(0.25), c - 0.03 + i * 0.11, 0.9 - 0.2 * i)
