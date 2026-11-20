@@ -596,7 +596,7 @@ if OYUNCU == "maskot" and arg("--jole", "0") == "1":     # 34 (oyuncak blok sehr
         m_ = bpy.data.materials.new(ad); m_.use_nodes = True; b_ = m_.node_tree.nodes["Principled BSDF"]
         b_.inputs["Base Color"].default_value = (*lin(hex3(renk)), 1)
         b_.inputs["Roughness"].default_value = purluk; b_.inputs["Coat Weight"].default_value = kap; b_.inputs["Coat Roughness"].default_value = 0.1
-        b_.inputs["Subsurface Weight"].default_value = 0.25; b_.inputs["Subsurface Radius"].default_value = (0.5, 0.3, 0.15)
+        b_.inputs["Subsurface Weight"].default_value = 0.45; b_.inputs["Subsurface Radius"].default_value = (0.6, 0.35, 0.15)   # ornek 1: plastik okunuyordu -> daha jole
         b_.inputs["Emission Color"].default_value = (*lin(hex3("#ffb040")), 1); b_.inputs["Emission Strength"].default_value = emis
         b_.inputs["Specular IOR Level"].default_value = 0.3
         return m_
@@ -618,11 +618,11 @@ if OYUNCU == "maskot" and arg("--jole", "0") == "1":     # 34 (oyuncak blok sehr
         EKIP.append((f_, tr + "Foot", Matrix.Translation((0, 0.04 * BOY, 0))))
     # KUP govde: Spine1'e bagli; kemik uzayinda +Y = omurga yukari. Kalca ustunden bas tepesine kadar (~0,52 BOY), genislik 0,40 BOY
     bpy.ops.mesh.primitive_cube_add(size=1.0); kp = bpy.context.active_object
-    kp.data.transform(Matrix.Translation((0, 0.13 * BOY, 0)) @ Matrix.Diagonal((0.40 * BOY, 0.52 * BOY, 0.36 * BOY, 1)))
-    bv = kp.modifiers.new("egim", "BEVEL"); bv.width = 0.07 * BOY; bv.segments = 6; bv.limit_method = "NONE"
+    kp.data.transform(Matrix.Translation((0, 0.10 * BOY, 0)) @ Matrix.Diagonal((0.46 * BOY, 0.46 * BOY, 0.42 * BOY, 1)))   # ornek 1: uzun kutu okunuyordu -> kup oranlari
+    bv = kp.modifiers.new("egim", "BEVEL"); bv.width = 0.09 * BOY; bv.segments = 6; bv.limit_method = "NONE"
     bpy.ops.object.shade_smooth(); kp.data.materials.append(jm)
     EKIP.append((kp, "Spine1", Matrix.Identity(4)))
-    log("jole kup govde: 0.40 x 0.52 x 0.36 BOY, Spine1 +0.13 BOY")
+    log("jole kup govde: 0.46 x 0.46 x 0.42 BOY, Spine1 +0.10 BOY")
 
 def ekip_yerlestir():
     for ob, ad, yerel in EKIP:
