@@ -1,0 +1,1705 @@
+{
+ "_not": "35. video (REF-087) CO-OP ikili es poz ADAYLARI, kaldirma yok. Figurler soldan saga; temas [sol eklem, sag eklem], 'yan' ya da bosluk (m).",
+ "gruplar": {
+  "duo-inner-hands-high-outer-hip": {
+   "ad": "Duo Inner Hands High Outer Hip",
+   "figurler": [
+    {
+     "ad": "Duo Inner Hands High Outer Hip A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -45,
+      20
+     ],
+     "solKol": [
+      174,
+      176
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Duo Inner Hands High Outer Hip B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      45,
+      -20
+     ],
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solBacak": [
+      3,
+      1
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ],
+   "tur": 1
+  },
+  "duo-palm-press-chest-height": {
+   "ad": "Duo Palm Press Chest Height",
+   "figurler": [
+    {
+     "ad": "Duo Palm Press Chest Height A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -8,
+      -5
+     ],
+     "solKol": [
+      90,
+      90
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Duo Palm Press Chest Height B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      8,
+      5
+     ],
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solBacak": [
+      3,
+      1
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ],
+   "tur": 1
+  },
+  "duo-outer-v-inner-low-link": {
+   "ad": "Duo Outer V Inner Low Link",
+   "figurler": [
+    {
+     "ad": "Duo Outer V Inner Low Link A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -122,
+      -122
+     ],
+     "solKol": [
+      35,
+      35
+     ],
+     "sagBacak": [
+      -22,
+      -22
+     ],
+     "solBacak": [
+      22,
+      22
+     ]
+    },
+    {
+     "ad": "Duo Outer V Inner Low Link B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      122,
+      122
+     ],
+     "sagKol": [
+      -35,
+      -35
+     ],
+     "solBacak": [
+      22,
+      22
+     ],
+     "sagBacak": [
+      -22,
+      -22
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ],
+   "tur": 1
+  },
+  "duo-shoulder-to-shoulder-cactus": {
+   "ad": "Duo Shoulder To Shoulder Cactus",
+   "figurler": [
+    {
+     "ad": "Duo Shoulder To Shoulder Cactus A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -90,
+      180
+     ],
+     "solKol": [
+      8,
+      5
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Duo Shoulder To Shoulder Cactus B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      90,
+      -180
+     ],
+     "sagKol": [
+      -8,
+      -5
+     ],
+     "solBacak": [
+      3,
+      1
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    "yan"
+   ],
+   "tur": 1
+  },
+  "duo-inner-elbow-hook-outer-up": {
+   "ad": "Duo Inner Elbow Hook Outer Up",
+   "figurler": [
+    {
+     "ad": "Duo Inner Elbow Hook Outer Up A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solKol": [
+      95,
+      -150
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Duo Inner Elbow Hook Outer Up B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      174,
+      176
+     ],
+     "sagKol": [
+      -95,
+      150
+     ],
+     "solBacak": [
+      3,
+      1
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    0.05
+   ],
+   "tur": 1
+  },
+  "duo-joined-arch-horse-stance": {
+   "ad": "Duo Joined Arch Horse Stance",
+   "figurler": [
+    {
+     "ad": "Duo Joined Arch Horse Stance A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -128,
+      62
+     ],
+     "solKol": [
+      174,
+      176
+     ],
+     "sagBacak": [
+      -38,
+      4
+     ],
+     "solBacak": [
+      38,
+      -4
+     ]
+    },
+    {
+     "ad": "Duo Joined Arch Horse Stance B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      128,
+      -62
+     ],
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solBacak": [
+      38,
+      -4
+     ],
+     "sagBacak": [
+      -38,
+      4
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ],
+   "tur": 1
+  },
+  "duo-side-step-outer-t-inner-up": {
+   "ad": "Duo Side Step Outer T Inner Up",
+   "figurler": [
+    {
+     "ad": "Duo Side Step Outer T Inner Up A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solKol": [
+      122,
+      122
+     ],
+     "sagBacak": [
+      -30,
+      -30
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Duo Side Step Outer T Inner Up B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      90,
+      90
+     ],
+     "sagKol": [
+      -122,
+      -122
+     ],
+     "solBacak": [
+      30,
+      30
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ],
+   "tur": 1
+  },
+  "duo-back-to-back-prayer-reach": {
+   "ad": "Duo Back To Back Prayer Reach",
+   "figurler": [
+    {
+     "ad": "Duo Back To Back Prayer Reach A",
+     "yon": "sol",
+     "govde": -178,
+     "bas": 0,
+     "solKol": [
+      -176,
+      -178
+     ],
+     "sagKol": [
+      -176,
+      -178
+     ],
+     "solBacak": [
+      4,
+      4
+     ],
+     "sagBacak": [
+      0,
+      0
+     ]
+    },
+    {
+     "ad": "Duo Back To Back Prayer Reach B",
+     "yon": "sag",
+     "govde": 178,
+     "bas": 0,
+     "solKol": [
+      176,
+      178
+     ],
+     "sagKol": [
+      176,
+      178
+     ],
+     "solBacak": [
+      0,
+      0
+     ],
+     "sagBacak": [
+      -4,
+      -4
+     ]
+    }
+   ],
+   "temas": [
+    0.0
+   ],
+   "tur": 1
+  },
+  "duo-outer-hand-head-inner-low-link": {
+   "ad": "Duo Outer Hand Head Inner Low Link",
+   "figurler": [
+    {
+     "ad": "Duo Outer Hand Head Inner Low Link A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -128,
+      62
+     ],
+     "solKol": [
+      35,
+      35
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      12,
+      -6
+     ]
+    },
+    {
+     "ad": "Duo Outer Hand Head Inner Low Link B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      128,
+      -62
+     ],
+     "sagKol": [
+      -35,
+      -35
+     ],
+     "solBacak": [
+      3,
+      1
+     ],
+     "sagBacak": [
+      -12,
+      6
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ],
+   "tur": 1
+  },
+  "duo-wide-stance-outer-flex-link": {
+   "ad": "Duo Wide Stance Outer Flex Link",
+   "figurler": [
+    {
+     "ad": "Duo Wide Stance Outer Flex Link A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -95,
+      150
+     ],
+     "solKol": [
+      90,
+      90
+     ],
+     "sagBacak": [
+      -22,
+      -22
+     ],
+     "solBacak": [
+      22,
+      22
+     ]
+    },
+    {
+     "ad": "Duo Wide Stance Outer Flex Link B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      95,
+      -150
+     ],
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solBacak": [
+      22,
+      22
+     ],
+     "sagBacak": [
+      -22,
+      -22
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ],
+   "tur": 1
+  },
+  "duo-wide-squat-inner-high-five": {
+   "ad": "Duo Wide Squat Inner High Five",
+   "figurler": [
+    {
+     "ad": "Duo Wide Squat Inner High Five A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -45,
+      20
+     ],
+     "solKol": [
+      174,
+      176
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ],
+     "solBacak": [
+      62,
+      4
+     ]
+    },
+    {
+     "ad": "Duo Wide Squat Inner High Five B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      45,
+      -20
+     ],
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solBacak": [
+      62,
+      4
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ],
+   "tur": 2
+  },
+  "duo-leaning-diamond-hands": {
+   "ad": "Duo Leaning Diamond Hands",
+   "figurler": [
+    {
+     "ad": "Duo Leaning Diamond Hands A",
+     "yon": "on",
+     "govde": 165,
+     "bas": 0,
+     "sagKol": [
+      -45,
+      20
+     ],
+     "solKol": [
+      174,
+      176
+     ],
+     "sagBacak": [
+      -45,
+      -45
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Duo Leaning Diamond Hands B",
+     "yon": "on",
+     "govde": -165,
+     "bas": 0,
+     "solKol": [
+      45,
+      -20
+     ],
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solBacak": [
+      45,
+      45
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ],
+   "tur": 2
+  },
+  "duo-side-lunge-inner-high-five": {
+   "ad": "Duo Side Lunge Inner High Five",
+   "figurler": [
+    {
+     "ad": "Duo Side Lunge Inner High Five A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -35,
+      -35
+     ],
+     "solKol": [
+      174,
+      176
+     ],
+     "sagBacak": [
+      -62,
+      -2
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Duo Side Lunge Inner High Five B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      35,
+      35
+     ],
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solBacak": [
+      62,
+      2
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ],
+   "tur": 2
+  },
+  "duo-wide-squat-crossed-diagonal": {
+   "ad": "Duo Wide Squat Crossed Diagonal",
+   "figurler": [
+    {
+     "ad": "Duo Wide Squat Crossed Diagonal A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -55,
+      -160
+     ],
+     "solKol": [
+      122,
+      122
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ],
+     "solBacak": [
+      62,
+      4
+     ]
+    },
+    {
+     "ad": "Duo Wide Squat Crossed Diagonal B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      55,
+      160
+     ],
+     "sagKol": [
+      -122,
+      -122
+     ],
+     "solBacak": [
+      62,
+      4
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ],
+   "tur": 2
+  },
+  "duo-outer-knee-lift-inner-link": {
+   "ad": "Duo Outer Knee Lift Inner Link",
+   "figurler": [
+    {
+     "ad": "Duo Outer Knee Lift Inner Link A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -148,
+      -148
+     ],
+     "solKol": [
+      90,
+      90
+     ],
+     "sagBacak": [
+      -80,
+      -8
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    },
+    {
+     "ad": "Duo Outer Knee Lift Inner Link B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      148,
+      148
+     ],
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solBacak": [
+      80,
+      8
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ],
+   "tur": 2
+  },
+  "duo-lunge-cactus-frame": {
+   "ad": "Duo Lunge Cactus Frame",
+   "figurler": [
+    {
+     "ad": "Duo Lunge Cactus Frame A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -90,
+      180
+     ],
+     "solKol": [
+      174,
+      176
+     ],
+     "sagBacak": [
+      -62,
+      -2
+     ],
+     "solBacak": [
+      12,
+      -6
+     ]
+    },
+    {
+     "ad": "Duo Lunge Cactus Frame B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      90,
+      -180
+     ],
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solBacak": [
+      62,
+      2
+     ],
+     "sagBacak": [
+      -12,
+      6
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ],
+   "tur": 2
+  },
+  "duo-side-bend-away-inner-link": {
+   "ad": "Duo Side Bend Away Inner Link",
+   "figurler": [
+    {
+     "ad": "Duo Side Bend Away Inner Link A",
+     "yon": "on",
+     "govde": 200,
+     "bas": 0,
+     "sagKol": [
+      -150,
+      -150
+     ],
+     "solKol": [
+      90,
+      90
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      30,
+      30
+     ]
+    },
+    {
+     "ad": "Duo Side Bend Away Inner Link B",
+     "yon": "on",
+     "govde": -200,
+     "bas": 0,
+     "solKol": [
+      150,
+      150
+     ],
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solBacak": [
+      3,
+      1
+     ],
+     "sagBacak": [
+      -30,
+      -30
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ],
+   "tur": 2
+  },
+  "duo-facing-chair-palms": {
+   "ad": "Duo Facing Chair Palms",
+   "figurler": [
+    {
+     "ad": "Duo Facing Chair Palms A",
+     "yon": "sag",
+     "govde": 160,
+     "bas": 0,
+     "solKol": [
+      90,
+      90
+     ],
+     "sagKol": [
+      85,
+      85
+     ],
+     "solBacak": [
+      40,
+      -30
+     ],
+     "sagBacak": [
+      40,
+      -30
+     ]
+    },
+    {
+     "ad": "Duo Facing Chair Palms B",
+     "yon": "sol",
+     "govde": -160,
+     "bas": 0,
+     "solKol": [
+      -85,
+      -85
+     ],
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solBacak": [
+      -40,
+      30
+     ],
+     "sagBacak": [
+      -40,
+      30
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ],
+   "tur": 2
+  },
+  "duo-facing-warrior-reach": {
+   "ad": "Duo Facing Warrior Reach",
+   "figurler": [
+    {
+     "ad": "Duo Facing Warrior Reach A",
+     "yon": "sag",
+     "govde": 170,
+     "bas": 0,
+     "solKol": [
+      100,
+      100
+     ],
+     "sagKol": [
+      -60,
+      -60
+     ],
+     "solBacak": [
+      60,
+      0
+     ],
+     "sagBacak": [
+      -40,
+      -40
+     ]
+    },
+    {
+     "ad": "Duo Facing Warrior Reach B",
+     "yon": "sol",
+     "govde": -170,
+     "bas": 0,
+     "solKol": [
+      60,
+      60
+     ],
+     "sagKol": [
+      -100,
+      -100
+     ],
+     "solBacak": [
+      40,
+      40
+     ],
+     "sagBacak": [
+      -60,
+      0
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ],
+   "tur": 2
+  },
+  "duo-mirror-warrior-two-inner-up": {
+   "ad": "Duo Mirror Warrior Two Inner Up",
+   "figurler": [
+    {
+     "ad": "Duo Mirror Warrior Two Inner Up A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solKol": [
+      174,
+      176
+     ],
+     "sagBacak": [
+      -62,
+      -2
+     ],
+     "solBacak": [
+      45,
+      45
+     ]
+    },
+    {
+     "ad": "Duo Mirror Warrior Two Inner Up B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      90,
+      90
+     ],
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solBacak": [
+      62,
+      2
+     ],
+     "sagBacak": [
+      -45,
+      -45
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ],
+   "tur": 2
+  },
+  "duo-horse-stance-outer-up-inner-elbow": {
+   "ad": "Duo Horse Stance Outer Up Inner Elbow",
+   "figurler": [
+    {
+     "ad": "Duo Horse Stance Outer Up Inner Elbow A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solKol": [
+      30,
+      150
+     ],
+     "sagBacak": [
+      -38,
+      4
+     ],
+     "solBacak": [
+      38,
+      -4
+     ]
+    },
+    {
+     "ad": "Duo Horse Stance Outer Up Inner Elbow B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      174,
+      176
+     ],
+     "sagKol": [
+      -30,
+      -150
+     ],
+     "solBacak": [
+      38,
+      -4
+     ],
+     "sagBacak": [
+      -38,
+      4
+     ]
+    }
+   ],
+   "temas": [
+    0.05
+   ],
+   "tur": 2
+  },
+  "duo-half-kneel-and-lunge-link": {
+   "ad": "Duo Half Kneel And Lunge Link",
+   "figurler": [
+    {
+     "ad": "Duo Half Kneel And Lunge Link A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solKol": [
+      90,
+      90
+     ],
+     "sagBacak": [
+      0,
+      "geri"
+     ],
+     "solBacak": [
+      70,
+      0
+     ]
+    },
+    {
+     "ad": "Duo Half Kneel And Lunge Link B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solKol": [
+      90,
+      90
+     ],
+     "sagBacak": [
+      -62,
+      -2
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    }
+   ],
+   "temas": [
+    0.1
+   ],
+   "tur": 3
+  },
+  "duo-wide-squat-and-side-lunge": {
+   "ad": "Duo Wide Squat And Side Lunge",
+   "figurler": [
+    {
+     "ad": "Duo Wide Squat And Side Lunge A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -90,
+      180
+     ],
+     "solKol": [
+      90,
+      -180
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ],
+     "solBacak": [
+      62,
+      4
+     ]
+    },
+    {
+     "ad": "Duo Wide Squat And Side Lunge B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solKol": [
+      122,
+      122
+     ],
+     "sagBacak": [
+      -3,
+      -1
+     ],
+     "solBacak": [
+      62,
+      2
+     ]
+    }
+   ],
+   "temas": [
+    0.1
+   ],
+   "tur": 3
+  },
+  "duo-deep-squat-twin-reach-up": {
+   "ad": "Duo Deep Squat Twin Reach Up",
+   "figurler": [
+    {
+     "ad": "Duo Deep Squat Twin Reach Up A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solKol": [
+      174,
+      176
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ],
+     "solBacak": [
+      62,
+      4
+     ]
+    },
+    {
+     "ad": "Duo Deep Squat Twin Reach Up B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      174,
+      176
+     ],
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solBacak": [
+      62,
+      4
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ]
+    }
+   ],
+   "temas": [
+    0.1
+   ],
+   "tur": 3
+  },
+  "duo-half-kneel-facing-palms": {
+   "ad": "Duo Half Kneel Facing Palms",
+   "figurler": [
+    {
+     "ad": "Duo Half Kneel Facing Palms A",
+     "yon": "sag",
+     "govde": 178,
+     "bas": 0,
+     "solKol": [
+      90,
+      90
+     ],
+     "sagKol": [
+      -20,
+      -20
+     ],
+     "solBacak": [
+      85,
+      0
+     ],
+     "sagBacak": [
+      0,
+      -90
+     ]
+    },
+    {
+     "ad": "Duo Half Kneel Facing Palms B",
+     "yon": "sol",
+     "govde": -178,
+     "bas": 0,
+     "solKol": [
+      20,
+      20
+     ],
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solBacak": [
+      0,
+      90
+     ],
+     "sagBacak": [
+      -85,
+      0
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ],
+   "tur": 3
+  },
+  "duo-back-to-back-half-kneel-t": {
+   "ad": "Duo Back To Back Half Kneel T",
+   "figurler": [
+    {
+     "ad": "Duo Back To Back Half Kneel T A",
+     "yon": "sol",
+     "govde": -178,
+     "bas": 0,
+     "solKol": [
+      90,
+      90
+     ],
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solBacak": [
+      0,
+      90
+     ],
+     "sagBacak": [
+      -85,
+      0
+     ]
+    },
+    {
+     "ad": "Duo Back To Back Half Kneel T B",
+     "yon": "sag",
+     "govde": 178,
+     "bas": 0,
+     "solKol": [
+      90,
+      90
+     ],
+     "sagKol": [
+      -90,
+      -90
+     ],
+     "solBacak": [
+      85,
+      0
+     ],
+     "sagBacak": [
+      0,
+      -90
+     ]
+    }
+   ],
+   "temas": [
+    0.0
+   ],
+   "tur": 3
+  },
+  "duo-half-kneel-v-and-standing-diagonal": {
+   "ad": "Duo Half Kneel V And Standing Diagonal",
+   "figurler": [
+    {
+     "ad": "Duo Half Kneel V And Standing Diagonal A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -148,
+      -148
+     ],
+     "solKol": [
+      148,
+      148
+     ],
+     "sagBacak": [
+      0,
+      "geri"
+     ],
+     "solBacak": [
+      70,
+      0
+     ]
+    },
+    {
+     "ad": "Duo Half Kneel V And Standing Diagonal B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -122,
+      -122
+     ],
+     "solKol": [
+      55,
+      55
+     ],
+     "sagBacak": [
+      -45,
+      -45
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    }
+   ],
+   "temas": [
+    0.15
+   ],
+   "tur": 3
+  },
+  "duo-low-lunge-and-tall-diagonal": {
+   "ad": "Duo Low Lunge And Tall Diagonal",
+   "figurler": [
+    {
+     "ad": "Duo Low Lunge And Tall Diagonal A",
+     "yon": "sag",
+     "govde": 150,
+     "bas": 0,
+     "solKol": [
+      150,
+      150
+     ],
+     "sagKol": [
+      140,
+      140
+     ],
+     "solBacak": [
+      70,
+      0
+     ],
+     "sagBacak": [
+      -40,
+      -45
+     ]
+    },
+    {
+     "ad": "Duo Low Lunge And Tall Diagonal B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -122,
+      -122
+     ],
+     "solKol": [
+      55,
+      55
+     ],
+     "sagBacak": [
+      -45,
+      -45
+     ],
+     "solBacak": [
+      3,
+      1
+     ]
+    }
+   ],
+   "temas": [
+    0.15
+   ],
+   "tur": 3
+  },
+  "duo-twin-wide-lunge-arms-up": {
+   "ad": "Duo Twin Wide Lunge Arms Up",
+   "figurler": [
+    {
+     "ad": "Duo Twin Wide Lunge Arms Up A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solKol": [
+      174,
+      176
+     ],
+     "sagBacak": [
+      -62,
+      -2
+     ],
+     "solBacak": [
+      45,
+      45
+     ]
+    },
+    {
+     "ad": "Duo Twin Wide Lunge Arms Up B",
+     "yon": "on",
+     "govde": -180,
+     "bas": 0,
+     "solKol": [
+      174,
+      176
+     ],
+     "sagKol": [
+      -174,
+      -176
+     ],
+     "solBacak": [
+      62,
+      2
+     ],
+     "sagBacak": [
+      -45,
+      -45
+     ]
+    }
+   ],
+   "temas": [
+    0.1
+   ],
+   "tur": 3
+  },
+  "duo-half-kneel-cactus-and-wide-squat": {
+   "ad": "Duo Half Kneel Cactus And Wide Squat",
+   "figurler": [
+    {
+     "ad": "Duo Half Kneel Cactus And Wide Squat A",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -90,
+      180
+     ],
+     "solKol": [
+      90,
+      -180
+     ],
+     "sagBacak": [
+      0,
+      "geri"
+     ],
+     "solBacak": [
+      70,
+      0
+     ]
+    },
+    {
+     "ad": "Duo Half Kneel Cactus And Wide Squat B",
+     "yon": "on",
+     "govde": 180,
+     "bas": 0,
+     "sagKol": [
+      -55,
+      -160
+     ],
+     "solKol": [
+      55,
+      160
+     ],
+     "sagBacak": [
+      -62,
+      -4
+     ],
+     "solBacak": [
+      62,
+      4
+     ]
+    }
+   ],
+   "temas": [
+    0.15
+   ],
+   "tur": 3
+  },
+  "duo-facing-low-lunge-palms": {
+   "ad": "Duo Facing Low Lunge Palms",
+   "figurler": [
+    {
+     "ad": "Duo Facing Low Lunge Palms A",
+     "yon": "sag",
+     "govde": 160,
+     "bas": 0,
+     "solKol": [
+      110,
+      110
+     ],
+     "sagKol": [
+      -30,
+      -30
+     ],
+     "solBacak": [
+      70,
+      0
+     ],
+     "sagBacak": [
+      -40,
+      -45
+     ]
+    },
+    {
+     "ad": "Duo Facing Low Lunge Palms B",
+     "yon": "sol",
+     "govde": -160,
+     "bas": 0,
+     "solKol": [
+      30,
+      30
+     ],
+     "sagKol": [
+      -110,
+      -110
+     ],
+     "solBacak": [
+      40,
+      45
+     ],
+     "sagBacak": [
+      -70,
+      0
+     ]
+    }
+   ],
+   "temas": [
+    [
+     "el",
+     "el"
+    ]
+   ],
+   "tur": 3
+  }
+ }
+}
