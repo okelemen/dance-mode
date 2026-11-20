@@ -30,6 +30,10 @@ GECIS = 11.5
 CANLI = ("#ff2a3a", "#ffc21a", "#1e8cff", "#20c850", "#ff3aa8", "#ff7a10", "#8a3aff", "#10c8d0")
 MAVI, PEMBE = "#1e8cff", "#ff3aa8"
 BULUT_UST, BULUT_GOLGE = "#ffa6cc", "#b08aff"      # sahne 1: pastel pembe soluk okunuyordu (§8) -> daha doygun
+GOK_ALT, GOK_UST, PIST_R = "#3ad6ff", "#0038e0", ("#ff9a1e", "#f07a0a")
+if KAPAK and arg("--kapak-doygun", "1") == "1":      # kapak olcumu 1 (20 Kas): doygunluk 0,53 < REF-087 0,66, parlaklik 0,68 > 0,48
+    BULUT_UST, BULUT_GOLGE = "#ff5aa8", "#7a3aff"     # -> buyuk alanlar (bulut denizi, gok, pist) Blender'da doygun; 2B boyama yok (md. 21)
+    GOK_ALT, GOK_UST, PIST_R = "#08a8ff", "#0018a0", ("#ff7a00", "#e04800")
 
 
 # ------------------------------------------------------------------ sahne / isik
@@ -44,8 +48,8 @@ def balon_sahnesi(w, h, saydam):
     tc = nt.nodes.new("ShaderNodeTexCoord"); sp = nt.nodes.new("ShaderNodeSeparateXYZ")
     nt.links.new(tc.outputs["Generated"], sp.inputs[0])
     rp = nt.nodes.new("ShaderNodeValToRGB"); el = rp.color_ramp.elements
-    el[0].position = 0.0; el[0].color = (*lin(hex3("#3ad6ff")), 1)
-    el[1].position = 0.42; el[1].color = (*lin(hex3("#0038e0")), 1)     # 30/31/34 dersi: koyu doygun tepe
+    el[0].position = 0.0; el[0].color = (*lin(hex3(GOK_ALT)), 1)
+    el[1].position = 0.42; el[1].color = (*lin(hex3(GOK_UST)), 1)     # 30/31/34 dersi: koyu doygun tepe
     e2 = el.new(0.13); e2.color = (*lin(hex3("#0a8cff")), 1)
     nt.links.new(sp.outputs["Z"], rp.inputs[0])
     lp = nt.nodes.new("ShaderNodeLightPath")
@@ -323,7 +327,7 @@ def mekan(serit_modu, rnd):
 
 # ------------------------------------------------------------------ SERIT: tahta festival pisti + balon babali sinir + oklar + OUT bulut yiginlari
 def serit_esyalari(rnd):
-    kutu("pist", (0, (KAP["y"] + 0.4 - 4) / 2, 0.0), (PIST * 2, KAP["y"] + 4.4, 0.16), mat_tahta("pist"), egim=0.04, seg=2)
+    kutu("pist", (0, (KAP["y"] + 0.4 - 4) / 2, 0.0), (PIST * 2, KAP["y"] + 4.4, 0.16), mat_tahta("pist", PIST_R[0], PIST_R[1]), egim=0.04, seg=2)
     kenar = mat_pbr("pist_kenar", "#e8102c", 0.3, kaplama=0.6)
     for s in (-1, 1):
         kutu("pist_kenar", (s * (PIST + 0.06), (KAP["y"] + 0.4 - 4) / 2, 0.02), (0.18, KAP["y"] + 4.4, 0.24), kenar, egim=0.05, seg=2)
