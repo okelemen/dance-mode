@@ -638,12 +638,13 @@ if OYUNCU == "maskot" and arg("--sincap", "0") == "1":   # 35 (balon festivali; 
     log("sincap karin yonu (kemik uzayi)", [round(c, 2) for c in on_l], "yan", [round(c, 2) for c in yan])
     # ornek 1 (20 Kas): kanat zari karton levha gibi okundu -> kaldirildi; kuyruk boğum boğum karides kabugu gibiydi ve onden gorunmuyordu
     # -> az sayida, buyuk, ic ice gecen kurelerle puruzsuz kabarik kuyruk; govdenin bir yaninda omuz ustune kadar cikar (onden gorunur).
-    for i in range(11):
-        t = i / 10
+    uc_m = mat_sc("sc_kuyruk_uc", "#f0a060")      # ornek 2: krem uc basin yaninda ikinci bas gibi okundu -> acik turuncu
+    for i in range(36):                                   # ornek 2: 11 kure bogum bogum okundu -> 36 sik kure, puruzsuz
+        t = i / 35
         c = (arka * ((0.10 + 0.10 * math.sin(t * math.pi)) * BOY) + Vector((0, (-0.10 + 0.50 * t) * BOY, 0))
              + yan * ((0.10 + 0.08 * math.sin(t * math.pi * 0.8)) * BOY))
         bpy.ops.mesh.primitive_uv_sphere_add(radius=(0.075 + 0.04 * math.sin(t * math.pi * 0.9)) * BOY, segments=24, ring_count=12)
-        k_ = bpy.context.active_object; bpy.ops.object.shade_smooth(); k_.data.materials.append(km if i >= 9 else emat); k_.data.transform(Matrix.Translation(c))
+        k_ = bpy.context.active_object; bpy.ops.object.shade_smooth(); k_.data.materials.append(uc_m if i >= 30 else emat); k_.data.transform(Matrix.Translation(c))
         EKIP.append((k_, "Hips", Matrix.Identity(4)))
     ra = 0.08 * BOY                                                   # kirmizi hakem atkisi
     bpy.ops.mesh.primitive_torus_add(major_radius=ra, minor_radius=ra * 0.36, major_segments=40, minor_segments=12)
