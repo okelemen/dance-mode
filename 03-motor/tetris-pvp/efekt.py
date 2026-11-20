@@ -119,6 +119,26 @@ def saman(sure=0.75):
     return ((puf * 0.8 + his * 2.4) * 0.5).astype(np.float64)
 
 
+def bulut_puf(sure=0.6):
+    """35 (balon festivali): pembe bulut yiginina dusme - cok yumusak alcak 'pof' (90->45 Hz) + hava hisirtisi (genis, yumusak)"""
+    t = np.arange(int(sure * SR)) / SR
+    f = 90 * np.exp(-t * 8) + 45
+    pof = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 9) * np.minimum(1, t / 0.015)
+    g = np.random.default_rng(35).standard_normal(len(t))
+    k = np.exp(-np.arange(int(0.006 * SR)) / (0.002 * SR)); h = np.convolve(g, k / k.sum(), "same")
+    his = h * np.exp(-t * 6) * np.minimum(1, t / 0.03)
+    return ((pof * 0.9 + his * 1.6) * 0.5).astype(np.float64)
+
+
+def brulor(sure=0.9):
+    """35: sicak hava balonu brulor alevi - genis band 'fuuus' (yukselen dolgu, yumusak sonum)"""
+    t = np.arange(int(sure * SR)) / SR
+    g = np.random.default_rng(36).standard_normal(len(t))
+    k = np.exp(-np.arange(int(0.002 * SR)) / (0.0006 * SR)); h = np.convolve(g, k / k.sum(), "same")
+    zarf = np.minimum(1, t / 0.08) * np.minimum(1, (sure - t) / 0.35)
+    return (h * zarf * 0.55).astype(np.float64)
+
+
 def su(sure=0.9):
     """31 (kutup buzul kiyisi): buzlu suya kayis - kisa buz kayma cizirtisi + 'splas' (genis bant gurultu, hizli atak) + 3 kabarcik 'blup'"""
     t = np.arange(int(sure * SR)) / SR
@@ -189,6 +209,12 @@ def main():
                 yerlestir(ef, gurleme(0.9), t + 2.0, 0.9)
                 yerlestir(ef, kum(0.6), t + 2.3, 0.9)
                 yerlestir(ef, ruzgar(1.0), t + 2.25, 0.5)
+            elif "--balon" in sys.argv:                                     # 35: dev balon buluttan yukselir (brulor), mini balonlar + konfeti salinir
+                yerlestir(ef, brulor(0.9), t + 2.0, 0.8)
+                yerlestir(ef, vuus(0.8, True, 0.7), t + 2.1)
+                yerlestir(ef, piril(1.0), t + 2.45, 0.9)
+                for i in range(4):
+                    yerlestir(ef, tik(), t + 2.4 + i * 0.09, 0.5)
             elif "--blok" in sys.argv:                                      # 34: gokten 6 blok sirayla duser (kule), kule devrilir, bloklar sacilir
                 for j in range(6):
                     yerlestir(ef, blok_tak(0.25, 620 + 70 * j), t + 2.0 + 0.14 + 0.09 * j, 0.9)
@@ -207,7 +233,7 @@ def main():
                 yerlestir(ef, su(), t + 2.35, 0.9)
             else:
                 yerlestir(ef, ruzgar(1.3), t + 2.0, 0.6)                # lale yapragi firtinasi
-            yerlestir(ef, zap(0.4), t + (2.88 if "--blok" in sys.argv else 2.55), 0.7)   # WHO WILL WIN? / 34: CAN YOUR TEAM CLEAR ALL 24?
+            yerlestir(ef, zap(0.4), t + (2.88 if "--blok" in sys.argv else 2.7 if "--balon" in sys.argv else 2.55), 0.7)   # WHO WILL WIN? / 34: CAN YOUR TEAM CLEAR ALL 24?
         elif k["tip"] in ("vs", "giris", "acilis"):          # 5. video: giris karti (3 PLAYERS) VS ile ayni carpisma
             yerlestir(ef, vuus(0.7, True, 0.9), t)
             yerlestir(ef, vurus(), t + 0.45, 1.0)
@@ -268,6 +294,9 @@ def main():
             if "--arena" in sys.argv:                                     # 33: kum yiginina yuvarlanir -> gumleme + kum + hakem duduk
                 yerlestir(ef, kum(), c - 0.03, 1.0)
                 yerlestir(ef, duduk(), c + 0.35, 0.7)
+            elif "--balon" in sys.argv:                                     # 35: pembe bulut yiginina duser -> yumusak pof + hakem duduk
+                yerlestir(ef, bulut_puf(), c - 0.03, 1.0)
+                yerlestir(ef, duduk(), c + 0.4, 0.7)
             elif "--blok" in sys.argv:                                      # 34: blok yiginina duser -> bloklar sacilir (tak tak) + hakem duduk
                 for i in range(5):
                     yerlestir(ef, blok_tak(0.2, 700 + 110 * i), c - 0.03 + i * 0.07, 1.0 - 0.12 * i)
