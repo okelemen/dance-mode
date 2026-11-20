@@ -278,5 +278,19 @@ degis("    if (kart.tip === 'acilis') {                                 // TALIM
       "    if (kart.tip === 'acilis') {                                 // motor 32: kancada BOSS karesinde, acilista kursude hakem (3B) zaten cizili\n"
       "      const v = (t * BPM / 60) % 1;")
 
+
+# tam render 1 (20 Kas): FREEZE turundaki OUT duvarinda (15) BLUE LATE! cikarken FREEZE! HOLD IT sayaci da suruyordu -> OUT duvarinda tut evresi cizilmez
+degis("  if (T && u >= c) freezeCiz(u - c, T, t);", "  if (T && u >= c && !(d.out && (d.out.p1 || d.out.p2))) freezeCiz(u - c, T, t);   // motor 32: OUT duvarinda HOLD yok")
+# tam render 1: kepenkte motor 25'ten kalan eski maskotun (yaprak kulak) neon yuzu -> Pip (sivri kulak + pilot gozlugu + iki on dis)
+KUL_ESKI = ("    cx.beginPath(); cx.ellipse(mx + sx * r * 0.55, my - r * 0.95, r * 0.24, r * 0.42, sx * 0.5, 0, 6.283); cx.stroke();   // yaprak kulak\n"
+            "    cx.beginPath(); cx.ellipse(mx + sx * r * 0.33, my - r * 0.12, r * 0.1, r * 0.15, 0, 0, 6.283); cx.stroke();          // goz")
+KUL_YENI = ("    cx.beginPath(); cx.moveTo(mx + sx * r * 0.3, my - r * 0.78); cx.lineTo(mx + sx * r * 0.62, my - r * 1.45); cx.lineTo(mx + sx * r * 0.82, my - r * 0.55); cx.stroke();   // motor 32: Pip sivri kulak\n"
+            "    cx.beginPath(); cx.ellipse(mx + sx * r * 0.36, my - r * 0.62, r * 0.28, r * 0.22, 0, 0, 6.283); cx.stroke();          // pilot gozlugu\n"
+            "    cx.beginPath(); cx.ellipse(mx + sx * r * 0.36, my - r * 0.08, r * 0.1, r * 0.15, 0, 0, 6.283); cx.stroke();          // goz")
+degis(KUL_ESKI, KUL_YENI)
+degis("  cx.beginPath(); cx.arc(mx, my + r * 0.2, r * 0.16, 0.2, Math.PI - 0.2); cx.stroke();\n  cx.shadowBlur = 0;",
+      "  cx.beginPath(); cx.moveTo(mx - r * 0.64, my - r * 0.62); cx.lineTo(mx - r * 0.9, my - r * 0.6); cx.moveTo(mx + r * 0.64, my - r * 0.62); cx.lineTo(mx + r * 0.9, my - r * 0.6); cx.stroke();   // gozluk kayisi\n"
+      "  cx.beginPath(); cx.arc(mx, my + r * 0.2, r * 0.16, 0.2, Math.PI - 0.2); cx.stroke(); cx.strokeRect(mx - r * 0.07, my + r * 0.36, r * 0.14, r * 0.12);   // gulus + iki on dis\n  cx.shadowBlur = 0;")
+
 open(HEDEF, "w", encoding="utf-8").write(t)
 print("->", HEDEF, len(t))

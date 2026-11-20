@@ -416,10 +416,12 @@ function kepenk(i, K, acik, t) {
   cx.shadowColor = RENK[i]; cx.shadowBlur = 18 * k; cx.strokeStyle = RENK[i]; cx.lineWidth = 4 * k; cx.lineJoin = 'round';
   cx.beginPath(); cx.ellipse(mx, my, r, r * 0.9, 0, 0, 6.283); cx.stroke();                         // yuz
   for (const sx of [-1, 1]) {
-    cx.beginPath(); cx.ellipse(mx + sx * r * 0.55, my - r * 0.95, r * 0.24, r * 0.42, sx * 0.5, 0, 6.283); cx.stroke();   // yaprak kulak
-    cx.beginPath(); cx.ellipse(mx + sx * r * 0.33, my - r * 0.12, r * 0.1, r * 0.15, 0, 0, 6.283); cx.stroke();          // goz
+    cx.beginPath(); cx.moveTo(mx + sx * r * 0.3, my - r * 0.78); cx.lineTo(mx + sx * r * 0.62, my - r * 1.45); cx.lineTo(mx + sx * r * 0.82, my - r * 0.55); cx.stroke();   // motor 32: Pip sivri kulak
+    cx.beginPath(); cx.ellipse(mx + sx * r * 0.36, my - r * 0.62, r * 0.28, r * 0.22, 0, 0, 6.283); cx.stroke();          // pilot gozlugu
+    cx.beginPath(); cx.ellipse(mx + sx * r * 0.36, my - r * 0.08, r * 0.1, r * 0.15, 0, 0, 6.283); cx.stroke();          // goz
   }
-  cx.beginPath(); cx.arc(mx, my + r * 0.2, r * 0.16, 0.2, Math.PI - 0.2); cx.stroke();
+  cx.beginPath(); cx.moveTo(mx - r * 0.64, my - r * 0.62); cx.lineTo(mx - r * 0.9, my - r * 0.6); cx.moveTo(mx + r * 0.64, my - r * 0.62); cx.lineTo(mx + r * 0.9, my - r * 0.6); cx.stroke();   // gozluk kayisi
+  cx.beginPath(); cx.arc(mx, my + r * 0.2, r * 0.16, 0.2, Math.PI - 0.2); cx.stroke(); cx.strokeRect(mx - r * 0.07, my + r * 0.36, r * 0.14, r * 0.12);   // gulus + iki on dis
   cx.shadowBlur = 0;
   for (const [dx, dy] of [[-1.5, -0.6], [1.5, -0.7], [-1.3, 0.8], [1.4, 0.7]]) yildiz5(mx + dx * r, my + dy * r, r * 0.16, hex(RENK[i], 0.9), t);
   cx.fillStyle = RENK[i]; cx.fillRect(K.x, y0, K.w, 4 * k);                                         // kepenk alt kenari (ustte)
@@ -476,7 +478,7 @@ function duvarCiz(d, u, t) {
     cx.save(); cx.globalAlpha = kar * (T && u >= c ? 0.3 : 0.88); cx.fillStyle = '#0a0618'; cx.fillRect(K.x, K.y, K.w, K.h); cx.restore();
   }
   karakterCiz(d, u, t);
-  if (T && u >= c) freezeCiz(u - c, T, t);                    // motor 25: FREEZE ROUND tut evresi
+  if (T && u >= c && !(d.out && (d.out.p1 || d.out.p2))) freezeCiz(u - c, T, t);   // motor 32: OUT duvarinda HOLD yok                    // motor 25: FREEZE ROUND tut evresi
   return u >= a && u < b ? (u - a) / Z.say : null;
 }
 function acilma(d, u) {                                       // BLIND: 0 = gizli, 1 = acik (sayimin son 1,5 sn'si); BLIND olmayan duvarda 1
