@@ -8,6 +8,7 @@ elmas, omuz omuza, sırt sırta), bir kısmı karşılıklı (yüz yüze sandaly
 çökük öbürü ayakta. Kullanıcı kararı (5 Kas 2026, 18): KALDIRMA / TAŞIMA YOK, kimse havaya kalkmaz; her figür kendi
 ayağı / dizi ile yerde. Açı dili poz-listesi-kur.py (ikili-listesi-kur-15/18 yardımcıları).
 Aday sayısı 24'ten fazla: maskeler kontakta havada / tekrar elemesinden sonra poz-sec-35.py seçer (eski ikililere IoU < 0,78).
+Kontak 1 (20 Kas): sayi temasli (0,05-0,15 m bosluk) adaylar birbirine degmiyor okundu (28 kurali) -> temas "yan" (siluetler deger).
 Maskeler Actions'ta: tetris-varlik.yml yalniz=grup, ek="--mod cadi --gruplar 03-motor/tetris-pvp/gruplar-35-aday.json".
 """
 import glob, json, os
@@ -37,7 +38,7 @@ EASY = [  # ayakta, ayna
     ikili("Palm Press Chest Height", on("", "down", "t", "tog", "tog")),
     ikili("Outer V Inner Low Link", on("", "up45", "lowv", "wide", "wide")),
     ikili("Shoulder To Shoulder Cactus", on("", "cactus", "down", "tog", "tog"), temas="yan"),
-    ikili("Inner Elbow Hook Outer Up", on("", "up", "flex", "tog", "tog"), temas=0.05),
+    ikili("Inner Elbow Hook Outer Up", on("", "up", "flex", "tog", "tog"), temas="yan"),
     ikili("Joined Arch Horse Stance", on("", "head", "up", "horse", "horse")),
     ikili("Side Step Outer T Inner Up", on("", "t", "up45", "sidetap", "tog")),
     sirt("Back To Back Prayer Reach", profil("", 178, [176, 178], [176, 178], [0, 0], [-4, -4])),
@@ -56,20 +57,20 @@ MEDIUM = [  # temasli / farkli figurler (REF-087 kapagi: genis comelme + ic elle
     karsi("Facing Chair Palms", profil("", 160, [90, 90], [85, 85], [40, -30], [40, -30])),
     karsi("Facing Warrior Reach", profil("", 170, [100, 100], [-60, -60], [60, 0], [-40, -40])),
     ikili("Mirror Warrior Two Inner Up", on("", "t", "up", "lunge", "straight")),
-    ikili("Horse Stance Outer Up Inner Elbow", on("", "up", "elbowdown", "horse", "horse"), temas=0.05),
+    ikili("Horse Stance Outer Up Inner Elbow", on("", "up", "elbowdown", "horse", "horse"), temas="yan"),
 ]
 
 HARD = [  # biri yarim diz / derin comelme, obuu ayakta ya da ikisi de alcak; kimse havada degil
-    ikili("Half Kneel And Lunge Link", on("", "t", "t", *YARIM_DIZ), on("", "up", "t", "lunge", "tog"), temas=0.1),
-    ikili("Wide Squat And Side Lunge", on("", "cactus", "cactus", "goddess", "goddess"), on("", "t", "up45", "tog", "lunge"), temas=0.1),
-    ikili("Deep Squat Twin Reach Up", on("", "up", "up", "goddess", "goddess"), temas=0.1),
+    ikili("Half Kneel And Lunge Link", on("", "t", "t", *YARIM_DIZ), on("", "up", "t", "lunge", "tog"), temas="yan"),
+    ikili("Wide Squat And Side Lunge", on("", "cactus", "cactus", "goddess", "goddess"), on("", "t", "up45", "tog", "lunge"), temas="yan"),
+    ikili("Deep Squat Twin Reach Up", on("", "up", "up", "goddess", "goddess"), temas="yan"),
     karsi("Half Kneel Facing Palms", profil("", 178, [90, 90], [-20, -20], [85, 0], KNEEL)),
     sirt("Back To Back Half Kneel T", profil("", 178, [90, 90], [-90, -90], [85, 0], KNEEL)),
-    ikili("Half Kneel V And Standing Diagonal", on("", "v", "v", *YARIM_DIZ), on("", "up45", [55, 55], "straight", "tog"), temas=0.15),
+    ikili("Half Kneel V And Standing Diagonal", on("", "v", "v", *YARIM_DIZ), on("", "up45", [55, 55], "straight", "tog"), temas="yan"),
     ikili("Low Lunge And Tall Diagonal", profil("", 150, [150, 150], [140, 140], [70, 0], [-40, -45]),
-          on("", "up45", [55, 55], "straight", "tog"), temas=0.15),
-    ikili("Twin Wide Lunge Arms Up", on("", "up", "up", "lunge", "straight"), temas=0.1),
-    ikili("Half Kneel Cactus And Wide Squat", on("", "cactus", "cactus", *YARIM_DIZ), on("", "w", "w", "goddess", "goddess"), temas=0.15),
+          on("", "up45", [55, 55], "straight", "tog"), temas="yan"),
+    ikili("Twin Wide Lunge Arms Up", on("", "up", "up", "lunge", "straight"), temas="yan"),
+    ikili("Half Kneel Cactus And Wide Squat", on("", "cactus", "cactus", *YARIM_DIZ), on("", "w", "w", "goddess", "goddess"), temas="yan"),
     karsi("Facing Low Lunge Palms", profil("", 160, [110, 110], [-30, -30], [70, 0], [-40, -45])),
 ]
 
