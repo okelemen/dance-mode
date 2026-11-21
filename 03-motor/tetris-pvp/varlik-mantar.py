@@ -34,6 +34,7 @@ if KAPAK and arg("--kapak-doygun", "0") != "0":        # kapak olcumu 1 (21 Kas)
     YOSUN, YOSUN_K = "#10d81a", "#068a10"
     GOK_ALT, GOK_ORTA, GOK_UST = "#10c0ff", "#0080ff", "#0028d8"
     TAS = ("#ff7a08", "#e04800")
+KAPAK_D = KAPAK and arg("--kapak-doygun", "0") != "0"   # kapak olcumu 2: alt bant (yosun + pist) S 0,75 < REF 0,89 -> sheen/coat beyaz parlama kisilir
 
 
 # ------------------------------------------------------------------ sahne / isik
@@ -119,7 +120,7 @@ def mat_yosun(ad="yosun"):
     bp = nt.nodes.new("ShaderNodeBump"); bp.inputs["Strength"].default_value = 0.6
     nt.links.new(n2.outputs["Fac"], bp.inputs["Height"]); nt.links.new(bp.outputs["Normal"], b.inputs["Normal"])
     b.inputs["Roughness"].default_value = 0.85
-    b.inputs["Sheen Weight"].default_value = 0.4; b.inputs["Sheen Tint"].default_value = (*lin(hex3("#b8ff60")), 1)
+    b.inputs["Sheen Weight"].default_value = 0.0 if KAPAK_D else 0.4; b.inputs["Sheen Tint"].default_value = (*lin(hex3("#b8ff60")), 1)
     return m
 
 
@@ -141,7 +142,7 @@ def mat_tas(ad="tas"):
     nt.links.new(mx.outputs[2], b.inputs["Base Color"])
     bp = nt.nodes.new("ShaderNodeBump"); bp.inputs["Strength"].default_value = 0.7
     nt.links.new(vr.outputs["Distance"], bp.inputs["Height"]); nt.links.new(bp.outputs["Normal"], b.inputs["Normal"])
-    b.inputs["Roughness"].default_value = 0.4; b.inputs["Coat Weight"].default_value = 0.3; b.inputs["Coat Roughness"].default_value = 0.12
+    b.inputs["Roughness"].default_value = 0.65 if KAPAK_D else 0.4; b.inputs["Coat Weight"].default_value = 0.03 if KAPAK_D else 0.3; b.inputs["Coat Roughness"].default_value = 0.12
     return m
 
 
@@ -166,7 +167,7 @@ def mat_sapka(renk, benek):
     else:
         b.inputs["Base Color"].default_value = (*lin(hex3(renk)), 1)
     b.inputs["Roughness"].default_value = 0.3
-    b.inputs["Coat Weight"].default_value = 0.6; b.inputs["Coat Roughness"].default_value = 0.08
+    b.inputs["Coat Weight"].default_value = 0.25 if KAPAK_D else 0.6; b.inputs["Coat Roughness"].default_value = 0.08
     b.inputs["Subsurface Weight"].default_value = 0.15; b.inputs["Subsurface Radius"].default_value = (1.0, 0.4, 0.3)
     _SMAT[key] = m
     return m
