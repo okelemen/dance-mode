@@ -57,6 +57,8 @@ def orman_sahnesi(w, h, saydam):
     bg_k = nt.nodes.new("ShaderNodeBackground"); bg_k.inputs[1].default_value = 1.0
     bg_i = nt.nodes.new("ShaderNodeBackground"); bg_i.inputs[1].default_value = 0.35
     bg_i.inputs[0].default_value = (*lin(hex3("#c8f0b0")), 1)     # orman ortam isigi: hafif yesil (gri golge yok)
+    if KAPAK_D:                                                # kapak olcumu 3: yosun S 0,76 (beyazimsi ortam isigi golgeyi griye cekiyor) -> kisik doygun yesil
+        bg_i.inputs[1].default_value = 0.18; bg_i.inputs[0].default_value = (*lin(hex3("#7aff3a")), 1)
     nt.links.new(rp.outputs[0], bg_k.inputs[0])
     mx = nt.nodes.new("ShaderNodeMixShader")
     nt.links.new(lp.outputs["Is Camera Ray"], mx.inputs[0])
@@ -84,7 +86,7 @@ def isiklar():
     # sabah gunesi: arkadan-ustten, sapkalarda parlak kenar + yosunda uzun golge
     bpy.ops.object.light_add(type="SUN", location=(0, 0, 30))
     g = bpy.context.active_object; g.data.energy = GUNES; g.data.angle = math.radians(2.0)
-    g.data.color = lin(hex3("#fff2c8"))
+    g.data.color = lin(hex3("#ffe2a0" if KAPAK_D else "#fff2c8"))
     g.rotation_euler = Vector((-0.35, 0.65, -0.68)).to_track_quat("-Z", "Y").to_euler()
 
 
