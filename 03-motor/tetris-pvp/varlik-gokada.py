@@ -245,11 +245,15 @@ def su_mat():
     """selale suyu: doygun camgobegi-mavi, cilali, akis cizgisi bump (emission degil; kendi isigi yok)"""
     def f():
         m = bpy.data.materials.new("su"); m.use_nodes = True; nt = m.node_tree; b = nt.nodes["Principled BSDF"]
-        b.inputs["Base Color"].default_value = (*lin(hex3(SU)), 1)
         b.inputs["Roughness"].default_value = 0.12; b.inputs["Coat Weight"].default_value = 0.8
         geo = nt.nodes.new("ShaderNodeNewGeometry"); wv = nt.nodes.new("ShaderNodeTexWave")
-        wv.wave_type = "BANDS"; wv.bands_direction = "Z"; wv.inputs["Scale"].default_value = 3.0; wv.inputs["Distortion"].default_value = 6.0
+        wv.wave_type = "BANDS"; wv.bands_direction = "X"; wv.inputs["Scale"].default_value = 1.4; wv.inputs["Distortion"].default_value = 3.0
+        wv.inputs["Detail"].default_value = 4
         nt.links.new(geo.outputs["Position"], wv.inputs["Vector"])
+        # sahne 1: duz mavi serit direk gibi okundu -> dikey akis cizgileri RENKTE (koyu mavi / acik camgobegi)
+        rp = nt.nodes.new("ShaderNodeValToRGB"); rp.color_ramp.elements[0].color = (*lin(hex3(SU)), 1)
+        rp.color_ramp.elements[1].color = (*lin(hex3("#8af0ff")), 1); rp.color_ramp.elements[1].position = 0.85
+        nt.links.new(wv.outputs["Fac"], rp.inputs[0]); nt.links.new(rp.outputs[0], b.inputs["Base Color"])
         bp = nt.nodes.new("ShaderNodeBump"); bp.inputs["Strength"].default_value = 0.5
         nt.links.new(wv.outputs["Fac"], bp.inputs["Height"]); nt.links.new(bp.outputs["Normal"], b.inputs["Normal"])
         return m
@@ -295,6 +299,8 @@ def selale(x, y, z_ust, boy, gen):
     o.modifiers.new("k", "SOLIDIFY").thickness = 0.15
     for k in range(4):
         kure((x + (k - 1.5) * gen * 0.4, y, z_ust - boy), gen * 0.45, bulut_mat(), sub=2).scale = (1.2, 0.9, 0.7)
+    for k in range(3):                                     # sahne 1: ustte kopuk yok, direk gibiydi -> agizda su kabarcigi kumesi
+        kure((x + (k - 1) * gen * 0.35, y - 0.1, z_ust + 0.05), gen * 0.28, M("kopuk", lambda: mat_pbr("kopuk", "#a8f4ff", 0.3, kaplama=0.6)), sub=2).scale = (1.2, 0.8, 0.6)
 
 
 def ada(merkez, r, rnd, agac_n=4, su=True, kaya=None):
@@ -316,7 +322,7 @@ def ada(merkez, r, rnd, agac_n=4, su=True, kaya=None):
         cicek((x + d * math.cos(a), y + d * math.sin(a)), z + r * 0.09, rnd.choice(SICAK), r=0.06 * r)
     if su:
         a = rnd.choice((-0.6, 0.6, -1.2, 1.2)) - math.pi / 2       # kameraya bakan kenar
-        selale(x + r * math.cos(a), y + r * math.sin(a), z + r * 0.05, r * rnd.uniform(1.6, 2.6), r * 0.22)
+        selale(x + r * math.cos(a), y + r * math.sin(a), z + r * 0.05, r * rnd.uniform(1.6, 2.6), r * 0.34)   # sahne 1: ince serit direk gibi -> genis
 
 
 def gokkusagi(cx, y, R0, z0):

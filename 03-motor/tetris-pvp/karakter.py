@@ -742,7 +742,7 @@ if OYUNCU == "maskot" and arg("--kartal", "0") == "1":   # 37 (ucan gokyuzu adal
     # uzun kuyruk yelpazesi, kirmizi pilot atkisi; bas 2B motorda: krem tuylu bas, kivrik sari gaga, tepe tuyu). Asagisi baykusun aciklamasi.
     # 35 sincap blogunun kopyasi: insan govdesi gizli; kemiklere bagli tombul uzuvlar. Govde = kure gibi yuvarlak tuy topu (yumurtadan genis),
     # kollar KANAT: Arm/ForeArm/Hand uzerinde yassi tuy dilimleri (poz kanatla okunur). Kuyruk: kisa tuy yelpazesi.
-    KARAMEL, GOGUS, KANAT, KANAT_UC, AYAK = "#a8501a", "#ffb43a", "#6a3010", "#ffb01e", "#ffc21a"   # kestane / altin / koyu kahve / altin uc / sari
+    KARAMEL, GOGUS, KANAT, KANAT_UC, AYAK = "#a8501a", "#ffb43a", "#6a3010", "#c8781a", "#ffc21a"   # ornek 1: sari kanat ucu muz gibi -> koyu altin   # kestane / altin / koyu kahve / altin uc / sari
     for m_ in mesler:
         m_.hide_render = True
     def mat_by(ad, renk, purluk=0.62, kap=0.12):
@@ -759,19 +759,20 @@ if OYUNCU == "maskot" and arg("--kartal", "0") == "1":   # 37 (ucan gokyuzu adal
         k_.data.transform(Matrix.Translation((0, L * 0.5, 0)) @ Matrix.Diagonal((gen * BOY, L * uz, 0.035 * BOY, 1)))
         k_.data.materials.append(mat); EKIP.append((k_, ad, Matrix.Identity(4)))
         return L
-    def bacak(ad, r):
+    def bacak(ad, r, mat=None):
+        mat = mat or gm
         b_ = kemik(arm, ad); L = ((arm.matrix_world @ b_.tail) - (arm.matrix_world @ b_.head)).length
         bpy.ops.mesh.primitive_cylinder_add(radius=r, depth=L, vertices=28); c_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
-        c_.data.transform(Matrix.Rotation(math.radians(-90), 4, "X") @ Matrix.Translation((0, 0, L / 2))); c_.data.materials.append(gm)
+        c_.data.transform(Matrix.Rotation(math.radians(-90), 4, "X") @ Matrix.Translation((0, 0, L / 2))); c_.data.materials.append(mat)
         EKIP.append((c_, ad, Matrix.Identity(4)))
         bpy.ops.mesh.primitive_uv_sphere_add(radius=r, segments=24, ring_count=12); k_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
-        k_.data.materials.append(gm); EKIP.append((k_, ad, Matrix.Identity(4)))
+        k_.data.materials.append(mat); EKIP.append((k_, ad, Matrix.Identity(4)))
     for tr in ("Left", "Right"):
-        kanat(tr + "Arm", 0.78, 0.13, km); kanat(tr + "ForeArm", 0.78, 0.12, km)   # kartal: baykustan genis kanat
+        kanat(tr + "Arm", 0.85, 0.17, km); kanat(tr + "ForeArm", 0.85, 0.16, km)   # kartal ornek 2: genis koyu kanat
         bpy.ops.mesh.primitive_uv_sphere_add(radius=1.0, segments=24, ring_count=12); h_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
-        h_.data.transform(Matrix.Translation((0, 0.05 * BOY, 0)) @ Matrix.Diagonal((0.10 * BOY, 0.15 * BOY, 0.035 * BOY, 1)))   # kanat ucu altin tuyleri (kartal: daha uzun)
+        h_.data.transform(Matrix.Translation((0, 0.05 * BOY, 0)) @ Matrix.Diagonal((0.12 * BOY, 0.13 * BOY, 0.03 * BOY, 1)))   # kanat ucu tuyleri: genis yelpaze (ornek 1 uzun sari muz gibiydi)
         h_.data.materials.append(ku); EKIP.append((h_, tr + "Hand", Matrix.Identity(4)))
-        bacak(tr + "UpLeg", 0.08 * BOY); bacak(tr + "Leg", 0.06 * BOY)
+        bacak(tr + "UpLeg", 0.07 * BOY, km); bacak(tr + "Leg", 0.04 * BOY, am)   # ornek 1: kahve pantolon gibi -> koyu tuylu uyluk + sari incik
         for dx in (-0.035, 0.0, 0.035):                                   # uc parmakli turuncu ayak
             bpy.ops.mesh.primitive_uv_sphere_add(radius=1.0, segments=20, ring_count=10); f_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
             f_.data.transform(Matrix.Translation((dx * BOY, 0.03 * BOY, 0.05 * BOY)) @ Matrix.Diagonal((0.02 * BOY, 0.025 * BOY, 0.04 * BOY, 1)))

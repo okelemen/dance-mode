@@ -19,46 +19,47 @@ TUY, KAS = "#6a3010", "#5a2408"
 
 
 def bas(dr, cx, cy, u, duygu, yan=False):
-    """kartal yavrusu basi: krem tuylu yuvarlak bas (kestane ense), tepede uc sivri tuy, kalin kas tuyu, iri parlak goz,
-    kivrik sari gaga (ucu asagi), kizarik yanak; boyunda kirmizi atki zaten 3B govdede. Kendi tasarimimiz."""
+    """kartal yavrusu basi (ornek 2): kestane tuylu yuvarlak bas, onde krem yuz maskesi (iki goz ustunde yukari kivrik),
+    arkaya yatik kestane tepe tuyleri, kalin koyu kas, iri amber goz, IRI kivrik sari gaga (ucu asagi kanca). Ornek 1 krem oval
+    bas baykus gibi okundu, yan gorunumde kahve/krem sert dikey bolunme vardi."""
     S = lambda v: v * u * S2
     X = lambda v: (cx + v * u) * S2
     Y = lambda v: (cy + v * u) * S2
     def el(x, y, rx, ry, **k): dr.ellipse((X(x) - S(rx), Y(y) - S(ry), X(x) + S(rx), Y(y) + S(ry)), **k)
     w = int(S(1.6))
     if yan:
-        for dx, h in ((-6, 30), (0, 33), (6, 29)):                      # tepe tuyu (arkaya yatik)
-            dr.polygon([(X(dx - 4), Y(-16)), (X(dx - 6), Y(-h)), (X(dx + 3), Y(-17))], fill=DISK, outline=KN, width=w)
-        el(0, 0, 22, 20, fill=DISK, outline=KN, width=w)
-        dr.chord((X(-22), Y(-20), X(22), Y(20)), 100, 260, fill=KARAMEL, outline=KN, width=w)   # kestane ense
+        for dx, h in ((-14, 24), (-9, 29), (-3, 31)):                    # tepe tuyu arkaya yatik
+            dr.polygon([(X(dx + 2), Y(-15)), (X(dx - 9), Y(-h)), (X(dx + 9), Y(-17))], fill=KARAMEL, outline=KN, width=w)
+        el(0, 0, 22, 20, fill=KARAMEL, outline=KN, width=w)
+        el(9, 3, 13, 13, fill=DISK)                                    # yan yuz maskesi (yumusak gecis, sert cizgi yok)
         el(11, -3, 6.5, 7, fill="#ffffff", outline=KN, width=int(S(1.2))); el(12.5, -3, 4, 4.5, fill=AMBER); el(13.5, -3, 2.4, 2.6, fill=KN)
-        dr.line([(X(5), Y(-12)), (X(17), Y(-10))], fill=KAS, width=int(S(3.0)))
-        dr.polygon([(X(18), Y(-2)), (X(30), Y(2)), (X(28), Y(9)), (X(24), Y(6)), (X(18), Y(7))], fill=GAGA, outline=KN, width=int(S(1.0)))
-        el(9, 10, 3.2, 2, fill="#ff7a8a")
+        dr.line([(X(4), Y(-11)), (X(18), Y(-12))], fill=KAS, width=int(S(3.4)))
+        dr.polygon([(X(16), Y(-3)), (X(31), Y(0)), (X(33), Y(8)), (X(28), Y(13)), (X(27), Y(7)), (X(16), Y(8))], fill=GAGA, outline=KN, width=int(S(1.1)))
+        el(8, 11, 3.2, 2, fill="#ff7a8a")
         return
-    for dx, h, eg in ((-6, 30, -4), (0, 34, 0), (6, 30, 4)):            # tepede uc sivri tuy (kedi kulagi degil: ortada, dik)
-        dr.polygon([(X(dx - 4), Y(-17)), (X(dx + eg), Y(-h)), (X(dx + 4), Y(-17))], fill=DISK, outline=KN, width=w)
-    el(0, 0, 24, 21, fill=DISK, outline=KN, width=w)                   # krem tuylu bas
-    for sx in (-1, 1):                                                 # yanlarda kestane tuy (bas kenari, ense rengi)
-        dr.chord((X(-24), Y(-21), X(24), Y(21)), (150 if sx < 0 else -30), (210 if sx < 0 else 30), fill=KARAMEL, outline=KN, width=w)
+    for dx, h, eg in ((-9, 27, -10), (0, 33, -3), (9, 27, 6)):          # tepe tuyleri (kestane, hafif saga savrulmus)
+        dr.polygon([(X(dx - 5), Y(-16)), (X(dx + eg), Y(-h)), (X(dx + 5), Y(-17))], fill=KARAMEL, outline=KN, width=w)
+    el(0, 0, 24, 21, fill=KARAMEL, outline=KN, width=w)                # kestane bas
+    dr.polygon([(X(-19), Y(-6)), (X(-10), Y(-12)), (X(0), Y(-8)), (X(10), Y(-12)), (X(19), Y(-6)), (X(17), Y(10)),
+                (X(8), Y(18)), (X(-8), Y(18)), (X(-17), Y(10))], fill=DISK)                         # krem yuz maskesi
     for sx in (-1, 1):
         if duygu == "sevinc":
             dr.arc((X(sx * 9) - S(6), Y(0) - S(6), X(sx * 9) + S(6), Y(0) + S(6)), 200, 340, fill=KN, width=int(S(2.6)))
         elif duygu == "sasirma":
             el(sx * 9, -1, 7.5, 8, fill="#ffffff", outline=KN, width=int(S(1.4))); el(sx * 9, -1, 4, 4.2, fill=AMBER); el(sx * 9, -1, 2.1, 2.1, fill=KN)
-            dr.line([(X(sx * 4), Y(-13)), (X(sx * 14), Y(-15))], fill=KAS, width=int(S(2.6)))       # kaslar yukari
+            dr.line([(X(sx * 4), Y(-13)), (X(sx * 15), Y(-16))], fill=KAS, width=int(S(3.0)))
         else:
             el(sx * 9, 0, 7, 7.5, fill="#ffffff", outline=KN, width=int(S(1.4)))
             el(sx * 9 + 0.8, 0.6, 4.7, 4.9, fill=AMBER); el(sx * 9 + 1.1, 0.9, 2.8, 3.0, fill=KN)
             el(sx * 9 - 1, -2.2, 1.4, 1.4, fill="#ffffff")
-            dr.line([(X(sx * 3), Y(-9)), (X(sx * 15), Y(-11))], fill=KAS, width=int(S(3.0)))        # kararli kas tuyu (cesur, kizgin degil)
-        el(sx * 16, 10, 3.6, 2.2, fill="#ff7a8a")
-    if duygu == "sasirma":                                              # gaga acik
-        dr.polygon([(X(-5), Y(5)), (X(5), Y(5)), (X(3), Y(10)), (X(0), Y(12)), (X(-3), Y(10))], fill=GAGA, outline=KN, width=int(S(1.0)))
-        el(0, 15.5, 3.0, 2.6, fill="#7a1020", outline=KN, width=int(S(1.0)))
-    else:                                                               # kivrik gaga: genis taban, ucu asagi kanca
-        dr.polygon([(X(-5.5), Y(5)), (X(5.5), Y(5)), (X(3.5), Y(11)), (X(0), Y(16)), (X(-1.5), Y(13)), (X(-3.5), Y(11))], fill=GAGA, outline=KN, width=int(S(1.0)))
-        dr.line([(X(-4), Y(8.5)), (X(4), Y(8.5))], fill="#e8901a", width=int(S(0.8)))
+            dr.line([(X(sx * 3), Y(-9)), (X(sx * 16), Y(-12))], fill=KAS, width=int(S(3.4)))
+        el(sx * 15, 11, 3.6, 2.2, fill="#ff7a8a")
+    if duygu == "sasirma":
+        dr.polygon([(X(-6.5), Y(5)), (X(6.5), Y(5)), (X(4), Y(11)), (X(0), Y(13)), (X(-4), Y(11))], fill=GAGA, outline=KN, width=int(S(1.1)))
+        el(0, 17, 3.4, 2.8, fill="#7a1020", outline=KN, width=int(S(1.0)))
+    else:                                                               # iri kivrik gaga: genis taban, ucu asagi kanca
+        dr.polygon([(X(-7), Y(4)), (X(7), Y(4)), (X(5), Y(11)), (X(1.5), Y(19)), (X(-1), Y(16)), (X(-4.5), Y(11))], fill=GAGA, outline=KN, width=int(S(1.1)))
+        dr.line([(X(-5), Y(8.5)), (X(5), Y(8.5))], fill="#e8901a", width=int(S(0.9)))
 
 
 def kare(klasor, ad, j, duygu, yan=False):
