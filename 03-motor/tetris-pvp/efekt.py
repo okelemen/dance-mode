@@ -225,7 +225,13 @@ def main():
             yerlestir(ef, vuus(1.4, True, 0.7), t + 0.15)               # duvar yaklasiyor
             yerlestir(ef, geri_sar(0.4), t + 1.6, 1.0)                  # geri sarma
             yerlestir(ef, vuus(0.6, True, 0.9), t + 2.0)                # beyaz parlama + kanat
-            if "--arena" in sys.argv:                                     # 33: arena kapisinin ahsap kanatlari acilir (gurleme), kum patlar, kum firtinasi
+            if "--gokada" in sys.argv:                                    # 37: bulut perdesi aralanir (ruzgar), ada yukselir (piril), selale akar, kus surusu
+                yerlestir(ef, ruzgar(1.0), t + 2.0, 0.6)
+                yerlestir(ef, piril(1.0), t + 2.35, 0.8)
+                yerlestir(ef, su(), t + 2.6, 0.4)
+                for i in range(5):
+                    yerlestir(ef, bip(2400 + 300 * (i % 2), 0.05), t + 2.5 + i * 0.11, 0.35)
+            elif "--arena" in sys.argv:                                     # 33: arena kapisinin ahsap kanatlari acilir (gurleme), kum patlar, kum firtinasi
                 yerlestir(ef, gurleme(0.9), t + 2.0, 0.9)
                 yerlestir(ef, kum(0.6), t + 2.3, 0.9)
                 yerlestir(ef, ruzgar(1.0), t + 2.25, 0.5)
@@ -305,7 +311,7 @@ def main():
             yerlestir(ef, ayna(), a + 0.02, 0.8)
         if d.get("blind"):                                               # 27 BLIND: tipi (siluet gizli), son 1,5 sn'de belirir -> buz cinlamasi
             yerlestir(ef, ruzgar(max(0.8, b - 1.5 - a + 0.3)), a, 0.55)
-            yerlestir(ef, piril(0.5) if "--arena" in sys.argv else buz(), b - 1.5, 0.75)   # 33 arena: kum firtinasi dagilir -> piril
+            yerlestir(ef, piril(0.5) if ("--arena" in sys.argv or "--gokada" in sys.argv) else buz(), b - 1.5, 0.75)   # 33 arena: kum firtinasi dagilir -> piril
         for i in range(3):
             yerlestir(ef, bip([660, 784, 988][i]), a + i * Z["say"] / 3 + 0.02, 0.9)    # 3-2-1 yukselen (sahne ile ayni adim)
         yerlestir(ef, vuus(Z["buyu"] * 0.6, True, 0.55), c - Z["buyu"] * 0.6)   # duvar yaklasiyor
@@ -315,7 +321,10 @@ def main():
         if out:                                                          # 24: OUT - karakter suya duser (sicrama) + alcak uyari
             yerlestir(ef, vuus(0.5, False, 1.0), c - Z["buyu"] * 0.25)
             yerlestir(ef, zap(0.35), c - Z["buyu"] * 0.2, 0.6)
-            if "--arena" in sys.argv:                                     # 33: kum yiginina yuvarlanir -> gumleme + kum + hakem duduk
+            if "--gokada" in sys.argv:                                    # 37: bulut yatagina duser -> yumusak pof + hakem duduk
+                yerlestir(ef, bulut_puf(), c - 0.03, 1.0)
+                yerlestir(ef, duduk(), c + 0.4, 0.7)
+            elif "--arena" in sys.argv:                                     # 33: kum yiginina yuvarlanir -> gumleme + kum + hakem duduk
                 yerlestir(ef, kum(), c - 0.03, 1.0)
                 yerlestir(ef, duduk(), c + 0.35, 0.7)
             elif "--mantar" in sys.argv:                                    # 36: dev mantar sapkasina duser, seker (boing) + spor pufu + hakem duduk
@@ -356,6 +365,14 @@ def main():
                 yerlestir(ef, duduk(), c + 0.15, 0.9)
             else:
                 yerlestir(ef, bip(330, 0.3), c + 0.25, 0.8)
+        elif d.get("aboneDuvar"):                                       # 37 SUBSCRIBE WALL: yumruk dugmeye basar (b) -> tik + zil; tam ekranda imlec tik + zil + LIKE/COMMENT/SHARE
+            yerlestir(ef, tik(), b + 0.02, 1.0)
+            yerlestir(ef, ding(1760, 0.5), b + 0.06, 0.6)
+            yerlestir(ef, piril(0.6), b + 0.1, 0.5)
+            yerlestir(ef, tik(), c + 0.75, 0.9)
+            yerlestir(ef, ding(1760, 0.5), c + 0.8, 0.55)
+            for i in range(3):
+                yerlestir(ef, ding([1175, 1319, 1568][i], 0.15), c + 1.2 + i * 0.32, 0.45)
         else:
             yerlestir(ef, piril(), c + T + Z["gec"] * 0.35, 0.6)         # ovgu (FREEZE'de tut sonrasi)
         if T:                                                             # 25 FREEZE: buz cinlamasi + her vuruste tik + sonda zil
