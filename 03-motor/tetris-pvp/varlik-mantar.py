@@ -310,8 +310,14 @@ def mekan(serit_modu, rnd):
         mantar((x, y, 0), R, H, rnd, egik=rnd.uniform(-0.12, 0.12))
     for _ in range(30):                                               # uzak kucuk mantar ormani (ufuk dolu)
         mantar((rnd.uniform(-300, 300), rnd.uniform(260, 480), 0), rnd.uniform(10, 22), rnd.uniform(15, 60), rnd)
-    for (x, y, z, uz) in ((-18, 40, 18, 60), (6, 70, 30, 80), (30, 55, 22, 70), (-40, 90, 34, 90), (50, 110, 40, 90)):
-        huzme(x, y, z, uz, 3.5)
+    # sahne 1 (Actions 44873050910): gunes huzmeleri gokte beyaz cubuk gibi okundu -> kaldirildi; orta plan cayir bos kaliyordu
+    # -> orta-uzak zemine mantar kumeleri + cicek tarlasi (koridor ve kapinin arkasi acik)
+    for _ in range(46):
+        x = rnd.choice((-1, 1)) * rnd.uniform(7, 90); y = rnd.uniform(GECIS + 2, 120)
+        mantar_kumesi((x, y, 0), rnd.uniform(0.9, 2.6) * (1 + y / 60), rnd, n=rnd.randint(3, 5))
+    for i in range(260):
+        y = rnd.uniform(GECIS, 90); x = rnd.choice((-1, 1)) * rnd.uniform(PIST + 2.5, 70)
+        cicek(x, y, 0.08, rnd.uniform(0.25, 0.5) * (1 + y / 40), CANLI[i % 8])
     sporlar(rnd, 160, 40, 6, 70, 1.0, 26, kac=6)
     for i in range(18):
         kelebek(rnd.uniform(-24, 24), rnd.uniform(6, 50), rnd.uniform(2.5, 14), rnd.uniform(0.35, 0.6), CANLI[i % 8], rnd)

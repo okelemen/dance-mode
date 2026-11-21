@@ -34,9 +34,9 @@ def bas(dr, cx, cy, u, duygu, yan=False):
         el(9, 9, 3.2, 2, fill="#ff7a8a")
         dr.polygon([(X(-2), Y(-19)), (X(3), Y(-30)), (X(7), Y(-19))], fill=YAPRAK, outline=KN, width=int(S(1.0)))
         return
-    for sx in (-1, 1):                                           # kulak tuyleri (yana-yukari)
-        dr.polygon([(X(sx * 8), Y(-15)), (X(sx * 22), Y(-33)), (X(sx * 19), Y(-11))], fill=KARAMEL, outline=KN, width=w)
-        dr.polygon([(X(sx * 11), Y(-16)), (X(sx * 19), Y(-27)), (X(sx * 17), Y(-14))], fill="#8a4a1a")
+    for sx in (-1, 1):                                           # kulak tuyleri: disa yatik, iki uclu tuy demeti (kedi kulagi gibi okunmasin)
+        dr.polygon([(X(sx * 11), Y(-17)), (X(sx * 27), Y(-27)), (X(sx * 22), Y(-20)), (X(sx * 29), Y(-19)), (X(sx * 21), Y(-11))],
+                   fill="#8a4a1a", outline=KN, width=w)
     el(0, 0, 24, 21, fill=KARAMEL, outline=KN, width=w)          # bas
     dr.polygon([(X(-3), Y(-19)), (X(0), Y(-31)), (X(4), Y(-19))], fill=YAPRAK, outline=KN, width=int(S(1.0)))   # yaprak
     dr.line([(X(0.5), Y(-19)), (X(0.3), Y(-28))], fill="#108a2a", width=int(S(0.6)))
