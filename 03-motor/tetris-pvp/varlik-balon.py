@@ -49,7 +49,7 @@ AKSAM = KAPAK and arg("--kapak-aksam", "0") != "0"
 if AKSAM:
     GOK_ALT, GOK_ORTA, GOK_UST = "#ff4a10", "#d0107a", "#3a0a9a"
     BULUT_UST, BULUT_GOLGE = "#ff2a7a", "#3a10a0"
-    PIST_R = ("#ff5a00", "#c83000")
+    PIST_R = ("#ff3a00", "#a81800")                      # aksam olcum 2: pist cila yansimasi beyaza kaciyordu (S 0,64-0,80) -> koyu doygun, mat
     GUNES = float(arg("--gunes", "1.6"))
 BALON_EMIS = float(arg("--balon-emis", "0.9")) if AKSAM else 0.0
 
@@ -152,6 +152,8 @@ def mat_tahta(ad="tahta", r1="#ff9a1e", r2="#f07a0a", olcek=0.6):
     nt.links.new(wv.outputs["Fac"], rp.inputs[0]); nt.links.new(rp.outputs[0], b.inputs["Base Color"])
     b.inputs["Roughness"].default_value = 0.35
     b.inputs["Coat Weight"].default_value = 0.35; b.inputs["Coat Roughness"].default_value = 0.1
+    if AKSAM:
+        b.inputs["Coat Weight"].default_value = 0.05; b.inputs["Roughness"].default_value = 0.65
     return m
 
 
