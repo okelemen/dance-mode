@@ -660,7 +660,7 @@ if OYUNCU == "maskot" and arg("--sincap", "0") == "1":   # 35 (balon festivali; 
 if OYUNCU == "maskot" and arg("--baykus", "0") == "1":   # 36 (dev mantar ormani; kullanici 20 Kas secimi C): BAYKUS yavrusu
     # 35 sincap blogunun kopyasi: insan govdesi gizli; kemiklere bagli tombul uzuvlar. Govde = kure gibi yuvarlak tuy topu (yumurtadan genis),
     # kollar KANAT: Arm/ForeArm/Hand uzerinde yassi tuy dilimleri (poz kanatla okunur). Kuyruk: kisa tuy yelpazesi.
-    KARAMEL, GOGUS, KANAT, KANAT_UC, AYAK = "#c8782a", "#ffe2a8", "#8a4a1a", "#e8a040", "#ff8a10"
+    KARAMEL, GOGUS, KANAT, KANAT_UC, AYAK = "#c8782a", "#ffc870", "#8a4a1a", "#e8a040", "#ff8a10"
     for m_ in mesler:
         m_.hide_render = True
     def mat_by(ad, renk, purluk=0.62, kap=0.12):
@@ -685,14 +685,14 @@ if OYUNCU == "maskot" and arg("--baykus", "0") == "1":   # 36 (dev mantar ormani
         bpy.ops.mesh.primitive_uv_sphere_add(radius=r, segments=24, ring_count=12); k_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
         k_.data.materials.append(gm); EKIP.append((k_, ad, Matrix.Identity(4)))
     for tr in ("Left", "Right"):
-        kanat(tr + "Arm", 0.62, 0.075, km); kanat(tr + "ForeArm", 0.62, 0.07, km)
+        kanat(tr + "Arm", 0.72, 0.11, km); kanat(tr + "ForeArm", 0.72, 0.10, km)   # ornek 1: ince cubuk gibi -> genis tuy
         bpy.ops.mesh.primitive_uv_sphere_add(radius=1.0, segments=24, ring_count=12); h_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
-        h_.data.transform(Matrix.Translation((0, 0.05 * BOY, 0)) @ Matrix.Diagonal((0.05 * BOY, 0.09 * BOY, 0.03 * BOY, 1)))   # kanat ucu tuyleri
+        h_.data.transform(Matrix.Translation((0, 0.05 * BOY, 0)) @ Matrix.Diagonal((0.08 * BOY, 0.12 * BOY, 0.035 * BOY, 1)))   # kanat ucu tuyleri
         h_.data.materials.append(ku); EKIP.append((h_, tr + "Hand", Matrix.Identity(4)))
         bacak(tr + "UpLeg", 0.08 * BOY); bacak(tr + "Leg", 0.06 * BOY)
         for dx in (-0.035, 0.0, 0.035):                                   # uc parmakli turuncu ayak
             bpy.ops.mesh.primitive_uv_sphere_add(radius=1.0, segments=20, ring_count=10); f_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
-            f_.data.transform(Matrix.Translation((dx * BOY, 0.03 * BOY, 0.05 * BOY)) @ Matrix.Diagonal((0.022 * BOY, 0.03 * BOY, 0.055 * BOY, 1)))
+            f_.data.transform(Matrix.Translation((dx * BOY, 0.03 * BOY, 0.05 * BOY)) @ Matrix.Diagonal((0.02 * BOY, 0.025 * BOY, 0.04 * BOY, 1)))
             f_.data.materials.append(am); EKIP.append((f_, tr + "Foot", Matrix.Identity(4)))
     bpy.ops.mesh.primitive_uv_sphere_add(radius=1.0, segments=48, ring_count=24)
     yum = bpy.context.active_object; bpy.ops.object.shade_smooth()
@@ -706,7 +706,7 @@ if OYUNCU == "maskot" and arg("--baykus", "0") == "1":   # 36 (dev mantar ormani
     nt.links.new(ge.outputs["Normal"], vt.inputs["Vector"])
     dp = nt.nodes.new("ShaderNodeVectorMath"); dp.operation = "DOT_PRODUCT"; dp.inputs[1].default_value = tuple(on_l)
     nt.links.new(vt.outputs["Vector"], dp.inputs[0])
-    gt = nt.nodes.new("ShaderNodeMath"); gt.operation = "GREATER_THAN"; gt.inputs[1].default_value = 0.55
+    gt = nt.nodes.new("ShaderNodeMath"); gt.operation = "GREATER_THAN"; gt.inputs[1].default_value = 0.8   # ornek 1: krem gogus butun onu kapliyordu (soluk alan)
     nt.links.new(dp.outputs["Value"], gt.inputs[0])
     tc = nt.nodes.new("ShaderNodeTexCoord"); vr = nt.nodes.new("ShaderNodeTexVoronoi"); vr.inputs["Scale"].default_value = 9.0
     nt.links.new(tc.outputs["Object"], vr.inputs["Vector"])
@@ -726,13 +726,13 @@ if OYUNCU == "maskot" and arg("--baykus", "0") == "1":   # 36 (dev mantar ormani
         c = arka * (0.17 * BOY) + Vector((0, -0.16 * BOY, 0)) + yan * (a_ * 0.06 * BOY)
         t_.data.transform(Matrix.Translation(c) @ Matrix.Diagonal((0.035 * BOY, 0.08 * BOY, 0.02 * BOY, 1)))
         t_.data.materials.append(km); EKIP.append((t_, "Hips", Matrix.Identity(4)))
-    ra = 0.085 * BOY                                                  # yesil hakem atkisi (orman)
+    ra = 0.13 * BOY                                                   # yesil hakem atkisi (orman); ornek 1: govde icinde kayboluyordu
     bpy.ops.mesh.primitive_torus_add(major_radius=ra, minor_radius=ra * 0.36, major_segments=40, minor_segments=12)
     f_ = bpy.context.active_object; bpy.ops.object.shade_smooth(); f_.data.materials.append(mat_jole("by_atki", lin(hex3("#18b83a")), emis=0.15, purluk=0.2))
     f_.data.transform(Matrix.Rotation(math.radians(-90), 4, "X"))
-    EKIP.append((f_, "Neck", Matrix.Translation((0, 0.02 * BOY, 0))))
+    EKIP.append((f_, "Neck", Matrix.Translation((0, -0.02 * BOY, 0))))
     bpy.ops.mesh.primitive_cube_add(size=1.0); u_ = bpy.context.active_object      # atkinin sarkan ucu
-    u_.data.transform(Matrix.Translation(on_l * (0.09 * BOY) + yan * (0.05 * BOY) + Vector((0, -0.08 * BOY, 0))) @ Matrix.Diagonal((0.05 * BOY, 0.12 * BOY, 0.02 * BOY, 1)))
+    u_.data.transform(Matrix.Translation(on_l * (0.19 * BOY) + yan * (0.06 * BOY) + Vector((0, 0.0, 0))) @ Matrix.Diagonal((0.06 * BOY, 0.14 * BOY, 0.025 * BOY, 1)))
     u_.modifiers.new("b", "BEVEL").width = 0.008 * BOY; u_.data.materials.append(mat_jole("by_atki2", lin(hex3("#18b83a")), emis=0.15, purluk=0.2))
     EKIP.append((u_, "Spine2", Matrix.Identity(4)))
 if OYUNCU == "maskot" and arg("--jole", "0") == "1":     # 34 (oyuncak blok sehri; TALIMATLAR §4 maskot sirasi): JOLE KUP
