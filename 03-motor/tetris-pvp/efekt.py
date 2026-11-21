@@ -192,6 +192,26 @@ def gurleme(sure=1.9):
     return (x * zarf * 0.6).astype(np.float64)
 
 
+def boing(sure=0.7):
+    """36 (mantar ormani): yumusak mantar sapkasinda sekme - asagi kayan titresimli 'boyiing' (260->110 Hz, 9 Hz vibrato) + alcak dolgu"""
+    t = np.arange(int(sure * SR)) / SR
+    f = (260 * np.exp(-t * 3.5) + 110) * (1 + 0.06 * np.sin(2 * np.pi * 9 * t))
+    s_ = np.sin(2 * np.pi * np.cumsum(f) / SR) + 0.35 * np.sin(4 * np.pi * np.cumsum(f) / SR)
+    zarf = np.exp(-t * 4.5) * np.minimum(1, t / 0.01)
+    alt = np.sin(2 * np.pi * 70 * t) * np.exp(-t * 14)
+    return ((s_ * zarf * 0.5 + alt * 0.5) * 0.7).astype(np.float64)
+
+
+def mantar_buyu(sure=0.75):
+    """36: yerden buyuyen dev mantar - yukselen yumusak 'bluuup' (80->320 Hz) + sonda sapka acilma 'pop'"""
+    t = np.arange(int(sure * SR)) / SR
+    f = 80 + 240 * (t / sure) ** 1.6
+    s_ = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.minimum(1, t / 0.05) * np.minimum(1, (sure - t) / 0.05)
+    pop = np.zeros_like(t); i0 = int((sure - 0.12) * SR); tp = np.arange(len(t) - i0) / SR
+    pop[i0:] = np.sin(2 * np.pi * (520 * np.exp(-tp * 30) + 180) * tp) * np.exp(-tp * 40)
+    return ((s_ * 0.45 + pop * 0.8) * 0.8).astype(np.float64)
+
+
 def main():
     bolum, cikti = sys.argv[1:3]
     B = json.load(open(bolum, encoding="utf-8"))
@@ -209,6 +229,10 @@ def main():
                 yerlestir(ef, gurleme(0.9), t + 2.0, 0.9)
                 yerlestir(ef, kum(0.6), t + 2.3, 0.9)
                 yerlestir(ef, ruzgar(1.0), t + 2.25, 0.5)
+            elif "--mantar" in sys.argv:                                    # 36: dev mantar yerden buyur, sapka acilir (pop), spor bulutu
+                yerlestir(ef, mantar_buyu(0.75), t + 2.0, 0.9)
+                yerlestir(ef, piril(1.0), t + 2.6, 0.9)
+                yerlestir(ef, bulut_puf(0.5), t + 2.62, 0.6)
             elif "--balon" in sys.argv:                                     # 35: dev balon buluttan yukselir (brulor), mini balonlar + konfeti salinir
                 yerlestir(ef, brulor(0.9), t + 2.0, 0.8)
                 yerlestir(ef, vuus(0.8, True, 0.7), t + 2.1)
@@ -233,7 +257,7 @@ def main():
                 yerlestir(ef, su(), t + 2.35, 0.9)
             else:
                 yerlestir(ef, ruzgar(1.3), t + 2.0, 0.6)                # lale yapragi firtinasi
-            yerlestir(ef, zap(0.4), t + (2.88 if "--blok" in sys.argv else 2.7 if "--balon" in sys.argv else 2.55), 0.7)   # WHO WILL WIN? / 34: CAN YOUR TEAM CLEAR ALL 24?
+            yerlestir(ef, zap(0.4), t + (2.88 if "--blok" in sys.argv else 2.7 if ("--balon" in sys.argv or "--mantar" in sys.argv) else 2.55), 0.7)   # WHO WILL WIN? / 34: CAN YOUR TEAM CLEAR ALL 24?
         elif k["tip"] in ("vs", "giris", "acilis"):          # 5. video: giris karti (3 PLAYERS) VS ile ayni carpisma
             yerlestir(ef, vuus(0.7, True, 0.9), t)
             yerlestir(ef, vurus(), t + 0.45, 1.0)
@@ -294,6 +318,10 @@ def main():
             if "--arena" in sys.argv:                                     # 33: kum yiginina yuvarlanir -> gumleme + kum + hakem duduk
                 yerlestir(ef, kum(), c - 0.03, 1.0)
                 yerlestir(ef, duduk(), c + 0.35, 0.7)
+            elif "--mantar" in sys.argv:                                    # 36: dev mantar sapkasina duser, seker (boing) + spor pufu + hakem duduk
+                yerlestir(ef, boing(), c - 0.03, 1.0)
+                yerlestir(ef, bulut_puf(0.5), c + 0.05, 0.6)
+                yerlestir(ef, duduk(), c + 0.45, 0.7)
             elif "--balon" in sys.argv:                                     # 35: pembe bulut yiginina duser -> yumusak pof + hakem duduk
                 yerlestir(ef, bulut_puf(), c - 0.03, 1.0)
                 yerlestir(ef, duduk(), c + 0.4, 0.7)
