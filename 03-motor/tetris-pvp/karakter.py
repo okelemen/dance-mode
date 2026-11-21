@@ -75,7 +75,7 @@ else:
     # poz adi -> aci tanimi (maskenin klasorune gore dogru pozlar dosyasi)
     ad_klasor = {os.path.basename(k)[:-4]: k.split("/")[0] for k in KAYNAK}
     if OYUNCU == "maskot":
-        ADLAR = [a for d in DUVAR for a in (d["p1"], d["p2"]) + ((d["p3"],) if "p3" in d else ())]
+        ADLAR = [a for d in DUVAR for a in (d["p1"],) + tuple(d[k] for k in ("p2", "p3") if k in d)]   # 36: solo listede p2 yok
     else:
         ADLAR = [d[OYUNCU] for d in DUVAR]
     for a in ADLAR:
