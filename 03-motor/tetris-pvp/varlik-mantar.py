@@ -29,6 +29,11 @@ SAP, BENEK = "#ffcf8a", "#fff08a"                         # sap sicak krem-sefta
 YOSUN, YOSUN_K = "#2ec83a", "#109a2a"
 GOK_ALT, GOK_ORTA, GOK_UST = "#7ae8ff", "#18a8ff", "#0040e0"
 TAS = ("#ff9a3a", "#e86a1a")
+if KAPAK and arg("--kapak-doygun", "0") != "0":        # kapak olcumu 1 (21 Kas): doygunluk 0,655 / renklilik 0,573 < REF-088 0,742 / 0,582
+    SAP, BENEK = "#ffa418", "#ffe41a"                   # -> buyuk alanlar Blender'da doygun (soluk krem sap en buyuk dusuk-S alan); 2B boyama yok (md. 21)
+    YOSUN, YOSUN_K = "#10d81a", "#068a10"
+    GOK_ALT, GOK_ORTA, GOK_UST = "#10c0ff", "#0080ff", "#0028d8"
+    TAS = ("#ff7a08", "#e04800")
 
 
 # ------------------------------------------------------------------ sahne / isik
