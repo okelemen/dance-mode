@@ -36,6 +36,13 @@ KAYA = ("#ff7a2a", "#e85a1a", "#a040ff", "#ff9a3a")
 SU = "#18b8ff"
 BULUT = "#78d4ff"
 BULUT_P = "#ffa0dc"
+GOK = ("#18b8ff", "#0a7cff", "#0030d0")
+KAPAK_D = KAPAK and arg("--kapak-doygun", "0") != "0"   # kapak olcumu 1 (21 Kas): doygunluk 0,61-0,63 < REF-089 0,707, parlaklik 0,69-0,73 > 0,543
+if KAPAK_D:                                              # -> buyuk alanlar Blender'da doygun ve koyu (soluk acik mavi bulut + acik gok en buyuk dusuk-S alan); 2B boyama yok (md. 21)
+    BULUT, BULUT_P = "#1a8cff", "#ff3ab0"
+    CIMEN = ("#0aa81a", "#28d020")
+    SU = "#0a8cff"
+    GOK = ("#0a90ff", "#0050f0", "#1a10b8")
 TAS_YOL = ("#e8641e", "#f0842a")
 TAS = ("#e8641e", "#f0842a", "#d84a1a", "#ffa63a")
 
@@ -52,9 +59,9 @@ def gok_sahnesi(w, h, saydam):
     tc = nt.nodes.new("ShaderNodeTexCoord"); sp = nt.nodes.new("ShaderNodeSeparateXYZ")
     nt.links.new(tc.outputs["Generated"], sp.inputs[0])
     rp = nt.nodes.new("ShaderNodeValToRGB"); el = rp.color_ramp.elements
-    el[0].position = 0.0; el[0].color = (*lin(hex3("#18b8ff")), 1)
-    el[1].position = 0.40; el[1].color = (*lin(hex3("#0030d0")), 1)   # 30/31 dersi: koyu doygun tepe
-    e2 = el.new(0.12); e2.color = (*lin(hex3("#0a7cff")), 1)
+    el[0].position = 0.0; el[0].color = (*lin(hex3(GOK[0])), 1)
+    el[1].position = 0.40; el[1].color = (*lin(hex3(GOK[2])), 1)   # 30/31 dersi: koyu doygun tepe
+    e2 = el.new(0.12); e2.color = (*lin(hex3(GOK[1])), 1)
     nt.links.new(sp.outputs["Z"], rp.inputs[0])
     lp = nt.nodes.new("ShaderNodeLightPath")
     bg_k = nt.nodes.new("ShaderNodeBackground"); bg_k.inputs[1].default_value = 1.0
@@ -207,7 +214,7 @@ def kus(konum, olcek, renk, rnd):
 
 
 def bulut(merkez, olcek, rnd):
-    beyaz = M("bulut", lambda: mat_pbr("bulut", "#7ad0ff", 0.85))
+    beyaz = M("bulut", lambda: mat_pbr("bulut", BULUT if KAPAK_D else "#7ad0ff", 0.85))
     x, y, z = merkez
     for k in range(7):
         r = olcek * rnd.uniform(0.45, 0.85)
