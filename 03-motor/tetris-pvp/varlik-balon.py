@@ -41,6 +41,17 @@ if KAPAK and arg("--kapak-doygun", "1") != "0":      # kapak olcumu 1 (20 Kas): 
         BULUT_UST, BULUT_GOLGE = "#c8146e", "#4a10c0"
         PIST_R = ("#e85a00", "#b03000")
 KAPAK_3 = KAPAK and arg("--kapak-doygun", "1") == "3"   # kapak olcumu 3: koyu pozlama bulutu boz-mor yapti -> ortam isigi kisik, ic sacilma yok
+GOK_ORTA = "#0a8cff"
+# AKSAM BALON PARILTISI (kullanici 21 Kas 2026): gunduz sahne REF-087 gece neon kapaginin doygunlugunu (0,66) tutamadi (0,62 tavan:
+# siyah es poz %16 alan S=0). Ayni festival gun batimindan sonra: koyu doygun mor-indigo gok, ufukta turuncu-magenta, brulor
+# isigiyla icten parlayan balonlar, alttan yanan sepet agzi. Koyu pikseller de doygun kalir (REF-087 koyu piksel S ~0,47).
+AKSAM = KAPAK and arg("--kapak-aksam", "0") != "0"
+if AKSAM:
+    GOK_ALT, GOK_ORTA, GOK_UST = "#ff4a10", "#d0107a", "#3a0a9a"
+    BULUT_UST, BULUT_GOLGE = "#ff2a7a", "#3a10a0"
+    PIST_R = ("#ff5a00", "#c83000")
+    GUNES = float(arg("--gunes", "1.6"))
+BALON_EMIS = float(arg("--balon-emis", "0.9")) if AKSAM else 0.0
 
 
 # ------------------------------------------------------------------ sahne / isik
@@ -57,12 +68,14 @@ def balon_sahnesi(w, h, saydam):
     rp = nt.nodes.new("ShaderNodeValToRGB"); el = rp.color_ramp.elements
     el[0].position = 0.0; el[0].color = (*lin(hex3(GOK_ALT)), 1)
     el[1].position = 0.42; el[1].color = (*lin(hex3(GOK_UST)), 1)     # 30/31/34 dersi: koyu doygun tepe
-    e2 = el.new(0.13); e2.color = (*lin(hex3("#0a8cff")), 1)
+    e2 = el.new(0.13); e2.color = (*lin(hex3(GOK_ORTA)), 1)
     nt.links.new(sp.outputs["Z"], rp.inputs[0])
     lp = nt.nodes.new("ShaderNodeLightPath")
     bg_k = nt.nodes.new("ShaderNodeBackground"); bg_k.inputs[1].default_value = 1.0
     bg_i = nt.nodes.new("ShaderNodeBackground"); bg_i.inputs[1].default_value = 0.12 if KAPAK_3 else 0.35
     bg_i.inputs[0].default_value = (*lin(hex3("#6aa8ff" if KAPAK_3 else "#bfe0ff")), 1)   # kapak 3: soluk mavi ortam isigi pembe bulutu griye cekiyordu
+    if AKSAM:                                                  # alacakaranlik: kisik, doygun mor ortam isigi (gri golge yok)
+        bg_i.inputs[1].default_value = 0.22; bg_i.inputs[0].default_value = (*lin(hex3("#7a2aff")), 1)
     nt.links.new(rp.outputs[0], bg_k.inputs[0])
     mx = nt.nodes.new("ShaderNodeMixShader")
     nt.links.new(lp.outputs["Is Camera Ray"], mx.inputs[0])
@@ -90,8 +103,8 @@ def isiklar():
     # ogleden sonra gunesi: arkadan-yandan, balonlarda parlak kenar + bulutlarda uzun lila golge
     bpy.ops.object.light_add(type="SUN", location=(0, 0, 30))
     g = bpy.context.active_object; g.data.energy = GUNES; g.data.angle = math.radians(2.0)
-    g.data.color = lin(hex3("#fff0d6"))
-    g.rotation_euler = Vector((-0.45, 0.55, -0.70)).to_track_quat("-Z", "Y").to_euler()
+    g.data.color = lin(hex3("#ff8a4a" if AKSAM else "#fff0d6"))
+    g.rotation_euler = Vector((-0.45, 0.55, -0.30 if AKSAM else -0.70)).to_track_quat("-Z", "Y").to_euler()   # aksam: alcak gun batimi
 
 
 # ------------------------------------------------------------------ malzemeler
@@ -178,6 +191,8 @@ def mat_balon(ad, r1, r2, dilim=12, r3=None):
         m2 = nt.nodes.new("ShaderNodeMix"); m2.data_type = "RGBA"; nt.links.new(lt.outputs[0], m2.inputs["Factor"])
         nt.links.new(son, m2.inputs[6]); m2.inputs[7].default_value = (*lin(hex3(r3)), 1); son = m2.outputs[2]
     nt.links.new(son, b.inputs["Base Color"])
+    if BALON_EMIS > 0:                                         # aksam: brulor yanarken zarf icten parlar (kendi rengiyle, beyaz degil)
+        nt.links.new(son, b.inputs["Emission Color"]); b.inputs["Emission Strength"].default_value = BALON_EMIS
     b.inputs["Roughness"].default_value = 0.32
     b.inputs["Coat Weight"].default_value = 0.6; b.inputs["Coat Roughness"].default_value = 0.08
     return m
@@ -234,6 +249,8 @@ def balon(merkez, R, rnd, renk=None):
     bpy.ops.mesh.primitive_cone_add(radius1=0.62 * R, radius2=0.22 * R, depth=0.75 * R, location=(x, y, z - 1.12 * R), vertices=40)
     e = bpy.context.active_object; e.rotation_euler = (math.pi, 0, 0); e.data.materials.append(zm); bpy.ops.object.shade_smooth()
     zs = z - 1.62 * R
+    if AKSAM:                                                  # brulor alevi: etek agzinda sicak turuncu parilti
+        kure((x, y, z - 1.42 * R), 0.13 * R, mat_emis("brulor", lin(hex3("#ff8a10")), 6.0))
     sep = kutu("sepet", (x, y, zs - 0.13 * R), (0.32 * R, 0.32 * R, 0.24 * R), mat_hasir(), egim=0.03 * R, seg=2)
     hl = mat_pbr("halat", "#7a4a1a", 0.7)
     for dx in (-1, 1):
