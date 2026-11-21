@@ -817,6 +817,8 @@ elif arg("--mod", "pvp") == "balon":        # 35. video (REF-087 yapi, 2P CO-OP,
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-balon.py"), encoding="utf-8").read(), "varlik-balon.py", "exec"))
 elif arg("--mod", "pvp") == "blok":         # 34. video (REF-086 yapi, 3P CO-OP, kullanici 20 Kas): oyuncak blok sehri, cilali 3D oyun gorunumu
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-blok.py"), encoding="utf-8").read(), "varlik-blok.py", "exec"))
+elif arg("--mod", "pvp") == "mantar":       # 36. video (REF-088 yapi, 1P SOLO, kullanici 20 Kas A): gunduz dev mantar ormani, tek serit
+    exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-mantar.py"), encoding="utf-8").read(), "varlik-mantar.py", "exec"))
 elif arg("--mod", "pvp") == "karakter":     # 24. video: yarisan karakterler + hakem maskot poz kareleri (mobil paket md. 2)
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "karakter.py"), encoding="utf-8").read(), "karakter.py", "exec"))
 elif arg("--mod", "pvp") == "cadi":
