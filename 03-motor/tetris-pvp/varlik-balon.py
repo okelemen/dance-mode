@@ -140,6 +140,17 @@ def mat_bulut(ad="bulut"):
     return m
 
 
+BULUT2 = None
+
+
+def mat_bulut2(ust):
+    """aksam: ikinci pamuk seker rengi (ust yuz verilen renk, golge koyu indigo)"""
+    global BULUT_UST
+    eski = BULUT_UST; BULUT_UST = ust
+    m = mat_bulut("bulut2"); BULUT_UST = eski
+    return m
+
+
 def mat_tahta(ad="tahta", r1="#ff9a1e", r2="#f07a0a", olcek=0.6):
     m = bpy.data.materials.new(ad); m.use_nodes = True; nt = m.node_tree; b = nt.nodes["Principled BSDF"]
     geo = nt.nodes.new("ShaderNodeNewGeometry")
@@ -280,7 +291,10 @@ def bulut_denizi(rnd, mat, y0, y1, x_gen, adim, z=-0.6, kac=0.0, rmin=1.4, rmax=
             r = rnd.uniform(rmin, rmax) * s
             if abs(x) - r * 1.3 < kac:                                # sahne 1: yakin bulutlar pisti ortuyordu -> koridor bos
                 x += adim * s * rnd.uniform(0.75, 1.15); continue
-            b = kure((x, y + rnd.uniform(-0.5, 0.5) * s, z + rnd.uniform(-0.3, 0.4) * r), r, mat, sub=2); b.scale = (1.3, 1.0, 0.55)
+            mt = mat
+            if BULUT2 is not None and (int(x * 7) + int(y * 13)) % 5 < 2:   # aksam olcum 6: tek renk bulut denizi renkliligi dusuruyor -> pembe + mavi pamuk seker
+                mt = BULUT2
+            b = kure((x, y + rnd.uniform(-0.5, 0.5) * s, z + rnd.uniform(-0.3, 0.4) * r), r, mt, sub=2); b.scale = (1.3, 1.0, 0.55)
             x += adim * s * rnd.uniform(0.75, 1.15)
         y += adim * 0.8 * s
 
@@ -329,7 +343,11 @@ def konfeti(rnd, n, x_gen, y0, y1, z0, z1, kac=0.0):
 # ------------------------------------------------------------------ MEKAN (her iki katmanda; serit sahnesinde uzak kisim holdout)
 def mekan(serit_modu, rnd):
     _BMAT.clear()                       # Actions 44714901512: ikinci katmanda bos_sahne eski malzemeleri silmisti (StructRNA removed)
+    global BULUT2
     bm = mat_bulut()
+    BULUT2 = None
+    if AKSAM and arg("--bulut2", "") != "":
+        BULUT2 = mat_bulut2("#" + arg("--bulut2", ""))
     bulut_denizi(rnd, bm, -4, GECIS, 60, 2.4, z=-0.9, kac=PIST + 0.5, rmin=0.9, rmax=1.5)   # yakin bulut zemini (pistin iki yani; sahne 1 sonrasi alcak + kucuk)
     for o in bpy.data.objects:
         if o.type == "MESH":
