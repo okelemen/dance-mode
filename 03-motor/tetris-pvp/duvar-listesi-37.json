@@ -1,0 +1,122 @@
+[
+ {
+  "tur": 1,
+  "p1": "moonlight-reach-down-curtsy-lean-l",
+  "p2": "petal-reach-halo-tree"
+ },
+ {
+  "tur": 1,
+  "p1": "truss-flex-reach-tap",
+  "p2": "galaxy-hug-reach-tree"
+ },
+ {
+  "tur": 1,
+  "p1": "ghost-v-reach-horse-lean-r",
+  "p2": "lantern-quad-hold-diag"
+ },
+ {
+  "tur": 1,
+  "p1": "crown-flex-head-tap",
+  "p2": "vapor-halo-low-curtsy"
+ },
+ {
+  "tur": 1,
+  "p1": "pastel-chest-w-curtsy",
+  "p2": "breeze-flex-hip-tap"
+ },
+ {
+  "tur": 1,
+  "p1": "lantern-w-reach-side-tap",
+  "p2": "rail-comet-cactus-wide"
+ },
+ {
+  "tur": 2,
+  "p1": "spider-reach-t-kick",
+  "p2": "crypt-low-salute-tree"
+ },
+ {
+  "tur": 2,
+  "p1": "pulse-halo-t-knee",
+  "p2": "strobe-cactus-w-kick"
+ },
+ {
+  "tur": 2,
+  "p1": "sequin-swing-hip-leg-out",
+  "p2": "witch-v-w-kick"
+ },
+ {
+  "tur": 2,
+  "p1": "sunrise-comet-diag-tap",
+  "p2": "orbit-hook-low-tree"
+ },
+ {
+  "tur": 2,
+  "p1": "werewolf-salute-point-knee-lean-l",
+  "p2": "grid-t-head-tree"
+ },
+ {
+  "tur": 2,
+  "p1": "easy-head-t-tree",
+  "p2": "truss-wave-head-knee"
+ },
+ {
+  "tur": 3,
+  "p1": "star-w-goal-wide",
+  "p2": "pumpkin-point-back-horse-lean-r"
+ },
+ {
+  "tur": 3,
+  "p1": "snowflake-hook-v-goddess",
+  "p2": "saturn-diag-hug-wide"
+ },
+ {
+  "tur": 3,
+  "p1": "hex-low-diag-stand-lean-l",
+  "p2": "copper-t-flex-horse"
+ },
+ {
+  "tur": 3,
+  "p1": "bright-t-v-horse",
+  "p2": "halo-hook-cross-goddess"
+ },
+ {
+  "tur": 3,
+  "p1": "low-horse-reach",
+  "p2": "blue-v-diag-lunge"
+ },
+ {
+  "tur": 3,
+  "p1": "calm-w-cactus-lunge",
+  "p2": "duel-side-lunge-cross-reach"
+ },
+ {
+  "tur": 4,
+  "p1": "groove-swing-v-kick",
+  "p2": "breeze-v-hug-kick"
+ },
+ {
+  "tur": 4,
+  "p1": "cosmic-skandasana-prep",
+  "p2": "neon-low-t-knee"
+ },
+ {
+  "tur": 4,
+  "p1": "strobe-t-salute-knee",
+  "p2": "duel-comet-t-leg-out"
+ },
+ {
+  "tur": 4,
+  "p1": "knee-up-diagonal",
+  "p2": "pulsar-diag-flex-kick"
+ },
+ {
+  "tur": 4,
+  "p1": "jukebox-w-t-leg-out",
+  "p2": "halo-flex-hip-lunge"
+ },
+ {
+  "tur": 4,
+  "p1": "hex-lunge-back-hip",
+  "p2": "spell-low-lunge-bent-up-bent-up"
+ }
+]
