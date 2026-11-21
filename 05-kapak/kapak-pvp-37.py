@@ -281,7 +281,7 @@ kal = Image.new("RGBA", (W, H), (0, 0, 0, 0)); dk = ImageDraw.Draw(kal)
 def altigen(r, en):
     return [(ax - en * r, ay - 0.62 * r), (ax, ay - 0.86 * r), (ax + en * r, ay - 0.62 * r), (ax + en * r, ay + 0.38 * r), (ax, ay + 0.72 * r), (ax - en * r, ay + 0.38 * r)]
 AO = a.amblem_olcek
-dk.polygon(altigen(150 * AO, 1.3), fill=(255, 255, 255, 255))                      # beyaz dis hat
+dk.polygon(altigen(150 * AO, 1.3), fill=(255, 210, 40, 255))   # kapak olcumu 3: beyaz dis hat doygunlugu dusuruyordu -> altin                      # beyaz dis hat
 dk.polygon(altigen(140 * AO, 1.3), fill=(255, 58, 168, 255))                        # pembe-mor neon kenar
 dk.polygon(altigen(126 * AO, 1.3), fill=(70, 22, 150, 255))                         # koyu mor govde
 kal = kal.filter(ImageFilter.GaussianBlur(0.6))

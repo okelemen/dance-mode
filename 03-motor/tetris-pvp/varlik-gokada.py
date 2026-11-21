@@ -43,6 +43,9 @@ if KAPAK_D:                                              # -> buyuk alanlar Blen
     CIMEN = ("#0aa81a", "#28d020")
     SU = "#0a8cff"
     GOK = ("#0a90ff", "#0050f0", "#1a10b8")
+    if arg("--kapak-doygun", "0") == "2":                # kapak olcumu 3: ust yari (gok) S 0,65 < REF 0,77 -> derin mavi-mor gok, pembe kumulus
+        GOK = ("#0060ff", "#2a18e8", "#3a06a8")
+        BULUT_P = "#ff2a9a"
 TAS_YOL = ("#e8641e", "#f0842a")
 TAS = ("#e8641e", "#f0842a", "#d84a1a", "#ffa63a")
 
