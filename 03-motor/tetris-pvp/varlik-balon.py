@@ -48,7 +48,7 @@ GOK_ORTA = "#0a8cff"
 AKSAM = KAPAK and arg("--kapak-aksam", "0") != "0"
 if AKSAM:
     GOK_ALT, GOK_ORTA, GOK_UST = "#ff4a10", "#d0107a", "#2a10d0"   # aksam olcum 3: renklilik 0,46 < 0,477 -> tepe mavi-mor (turuncu pistle karsit)
-    BULUT_UST, BULUT_GOLGE = "#ff2a7a", "#3a10a0"
+    BULUT_UST, BULUT_GOLGE = "#" + arg("--bulut-ust", "ff2a7a"), "#" + arg("--bulut-golge", "3a10a0")   # olcum 4: renklilik tek renk ailede kaliyor -> golge mavi denenir
     PIST_R = ("#ff3a00", "#a81800")                      # aksam olcum 2: pist cila yansimasi beyaza kaciyordu (S 0,64-0,80) -> koyu doygun, mat
     GUNES = float(arg("--gunes", "1.6"))
 BALON_EMIS = float(arg("--balon-emis", "0.9")) if AKSAM else 0.0
