@@ -89,6 +89,10 @@ MEYVELER = {
         "A": 0.74, "B": 0.68, "R": 0.69, "boyun": 1.0,
         "profil": "red-bell-pepper", "zmax": 0.92,
     },
+    "egg": {
+        # Yatay duran asimetrik oval; ince kirik-beyaz kabuk, beyaz ak, sari sari.
+        "A": 0.90, "R": 0.64, "boyun": 1.0, "profil": "boiled-egg",
+    },
 }
 
 # Turlar: (kesim sayisi, kesim suresi sn). Acilis 0.4 sn + sonuc 1.3 sn eklenir -> toplam 60 sn
@@ -116,6 +120,9 @@ def meyve_profil(xn, m):
     if m.get("profil") == "strawberry":
         s = (np.clip(xn, -1.0, 1.0) + 1.0) / 2.0
         return s ** 0.62 * (1.0 - s) ** 0.25
+    if m.get("profil") == "boiled-egg":
+        xn = np.clip(xn, -1.0, 1.0)
+        return np.sqrt(np.maximum(0.0, 1.0 - xn*xn)) * (1.0 - 0.16*xn)
     if m.get("profil") == "kiwi":
         xn = np.clip(xn, -1.0, 1.0)
         return np.maximum(0.0, 1.0 - xn * xn) ** 0.38
@@ -139,6 +146,8 @@ def meyve_profil(xn, m):
 
 def meyve_fmax(m):
     if m.get("profil") == "strawberry":
+        return float(meyve_profil(np.linspace(-1, 1, 20001), m).max())
+    if m.get("profil") == "boiled-egg":
         return float(meyve_profil(np.linspace(-1, 1, 20001), m).max())
     if m.get("profil") in ("kiwi", "pineapple", "apple", "orange", "peach", "pomegranate", "tomato"):
         return 1.0

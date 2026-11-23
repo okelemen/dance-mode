@@ -46,6 +46,7 @@ NAR = PLAN["meyve"] == "pomegranate"
 TOMATO = PLAN["meyve"] == "tomato"
 CUCUMBER = PLAN["meyve"] == "cucumber"
 PEPPER = PLAN["meyve"] == "red-bell-pepper"
+EGG = PLAN["meyve"] == "egg"
 B = M.get("B", R)
 XMIN, XMAX = M.get("xmin", -A), M.get("xmax", A)
 TAHTA_UST = 0.14
@@ -566,6 +567,14 @@ else:
         kabuk_rengi=vein.outputs[2]
         bmp.inputs["Strength"].default_value=.05
         bmp.inputs["Distance"].default_value=.003
+    elif EGG:
+        shell=nt.nodes.new("ShaderNodeValToRGB")
+        shell.color_ramp.elements[0].color=hex_renk("#e8dcc8")
+        shell.color_ramp.elements[1].color=hex_renk("#fcf5e8")
+        baglan(nt,nz.outputs["Fac"],shell.inputs["Fac"])
+        kabuk_rengi=shell.outputs["Color"]
+        bmp.inputs["Strength"].default_value=.04
+        bmp.inputs["Distance"].default_value=.002
 
 # kesim cizgileri: her eksen icin n=c+1 ve yapilan kesim sayisi d (anahtar kareli Value dugumleri)
 ayir = nt.nodes.new("ShaderNodeSeparateXYZ")
@@ -603,10 +612,10 @@ if CILEK:
 else:
     baglan(nt, kar.outputs[2], bsdf.inputs["Base Color"])
     baglan(nt, bmp.outputs["Normal"], bsdf.inputs["Normal"])
-bsdf.inputs["Roughness"].default_value = (0.91 if PEACH else (0.27 if PEPPER else (0.62 if CUCUMBER else (0.57 if ANANAS else
+bsdf.inputs["Roughness"].default_value = (0.72 if EGG else (0.91 if PEACH else (0.27 if PEPPER else (0.62 if CUCUMBER else (0.57 if ANANAS else
     (0.88 if KIVI else (0.54 if NAR else (0.30 if TOMATO else
     (0.46 if ORANGE else (0.35 if APPLE else (0.42 if CILEK else
-    (0.34 if KARPUZ else 0.26)))))))))))
+    (0.34 if KARPUZ else 0.26))))))))))))
 kes_x = nt.nodes.new("ShaderNodeValue"); kes_x.name = "kes_x"; kes_x.outputs[0].default_value = -10.0
 kirp = matematik(nt, "LESS_THAN", ayir.outputs[0], kes_x.outputs[0])
 seffaf = nt.nodes.new("ShaderNodeBsdfTransparent")
@@ -1220,6 +1229,13 @@ def kup_nesnesi(tur, no):
         renk[u[:,0]>.92]=np.array(hex_renk("#c7231d")[:3])
         calyx=domates_canak(merk[:,0],merk[:,1],merk[:,2],M)
         renk[calyx]=np.array(hex_renk("#357a2f")[:3]);maske[calyx]=0
+    elif EGG:
+        renk=np.tile(np.array(hex_renk("#f6f1e6")[:3]),(k,1))
+        core=(merk[:,0]/(.50*A))**2+(merk[:,1]/(.42*R))**2+(merk[:,2]/(.42*R))**2
+        yolk=core<1.0
+        renk[yolk]=np.array(hex_renk("#edb326")[:3])
+        renk[yolk & (core>.78)]=np.array(hex_renk("#f7cb3c")[:3])
+        renk[u[:,0]>.965]=np.array(hex_renk("#efe4d2")[:3])
     elif PEPPER:
         renk=np.tile(np.array(hex_renk("#dc5130")[:3]),(k,1))
         renk[u[:,0]>.94]=np.array(hex_renk("#c3221a")[:3])
@@ -1419,7 +1435,7 @@ def kup_nesnesi(tur, no):
     karis.data_type = "RGBA"
     baglan(ntk, bitv, karis.inputs["Factor"])
     baglan(ntk, a_r.outputs["Color"], karis.inputs[6])
-    karis.inputs[7].default_value = hex_renk("#b71f29" if CILEK else ("#c93225" if APPLE else ("#e87916" if ORANGE else ("#e7c137" if BANANA else ("#356d2c" if CUCUMBER else ("#c3221a" if PEPPER else ("#d95c4d" if PEACH else ("#8c1c27" if NAR else ("#c7231d" if TOMATO else "#21361a")))))))))
+    karis.inputs[7].default_value = hex_renk("#efe4d2" if EGG else ("#b71f29" if CILEK else ("#c93225" if APPLE else ("#e87916" if ORANGE else ("#e7c137" if BANANA else ("#356d2c" if CUCUMBER else ("#c3221a" if PEPPER else ("#d95c4d" if PEACH else ("#8c1c27" if NAR else ("#c7231d" if TOMATO else "#21361a"))))))))))
     if CILEK:
         # Sadece maskelenmis dis yuz; kesik et yuzunde aken bulunmaz.
         geometri = ntk.nodes.new("ShaderNodeNewGeometry")
@@ -1692,7 +1708,7 @@ def kup_nesnesi(tur, no):
     t_k = ntt.nodes.new("ShaderNodeMix"); t_k.data_type = "RGBA"
     baglan(ntt, matematik(ntt, "GREATER_THAN", t_m.outputs["Fac"], None, deger_b=0.5), t_k.inputs["Factor"])
     baglan(ntt, t_r.outputs["Color"], t_k.inputs[6])
-    t_k.inputs[7].default_value = hex_renk("#60452f" if KIVI else ("#143c27" if KARPUZ else ("#b71f29" if CILEK else ("#c93225" if APPLE else ("#e87916" if ORANGE else ("#356d2c" if CUCUMBER else ("#c3221a" if PEPPER else "#21361a")))))))
+    t_k.inputs[7].default_value = hex_renk("#efe4d2" if EGG else ("#60452f" if KIVI else ("#143c27" if KARPUZ else ("#b71f29" if CILEK else ("#c93225" if APPLE else ("#e87916" if ORANGE else ("#356d2c" if CUCUMBER else ("#c3221a" if PEPPER else "#21361a"))))))))
     baglan(ntt, t_k.outputs[2], bt.inputs["Base Color"])
     bt.inputs["Roughness"].default_value = 0.55
 
@@ -2038,6 +2054,11 @@ elif TOMATO:
     et_r.color_ramp.elements[1].color=hex_renk("#b81e1c")
     for pos,col in ((.7,"#e44b2e"),(.76,"#cf3726"),(.94,"#d1261d")):
         e=et_r.color_ramp.elements.new(pos);e.color=hex_renk(col)
+elif EGG:
+    et_r.color_ramp.elements[0].color=hex_renk("#f6f1e6")
+    et_r.color_ramp.elements[1].color=hex_renk("#efe4d2")
+    for pos,col in ((.90,"#f6f1e6"),(.965,"#f4eee3")):
+        e=et_r.color_ramp.elements.new(pos);e.color=hex_renk(col)
 else:
     et_r.color_ramp.elements[0].color = hex_renk("#fff1e5" if CILEK else "#f1e9b8")
     et_r.color_ramp.elements[1].position = 0.97
@@ -2045,7 +2066,7 @@ else:
     e_m = et_r.color_ramp.elements.new(0.42 if CILEK else 0.6); e_m.color = hex_renk("#f7a7ab" if CILEK else "#e3e08e")
 if CILEK:
     e_r = et_r.color_ramp.elements.new(0.82); e_r.color = hex_renk("#d52b36")
-elif not KARPUZ and not ANANAS and not APPLE and not ORANGE and not BANANA and not PEACH and not NAR and not TOMATO and not CUCUMBER:
+elif not KARPUZ and not ANANAS and not APPLE and not ORANGE and not BANANA and not PEACH and not NAR and not TOMATO and not CUCUMBER and not EGG:
     e_k = et_r.color_ramp.elements.new(0.985); e_k.color = hex_renk("#21361a")
 baglan(ntk_, u_, et_r.inputs["Fac"])
 if CILEK:
@@ -2133,6 +2154,18 @@ elif CUCUMBER:
     baglan(ntk_,sm.outputs[2],bk_.inputs["Base Color"])
 elif PEPPER:
     baglan(ntk_,et_r.outputs["Color"],bk_.inputs["Base Color"])
+elif EGG:
+    xfac=matematik(ntk_,"DIVIDE",v_x.outputs[0],None,deger_b=.50*A)
+    ry=matematik(ntk_,"DIVIDE",dy,None,deger_b=.42*R)
+    rz=matematik(ntk_,"DIVIDE",dz,None,deger_b=.42*R)
+    core2=matematik(ntk_,"ADD",matematik(ntk_,"MULTIPLY",xfac,xfac),
+        matematik(ntk_,"ADD",matematik(ntk_,"MULTIPLY",ry,ry),matematik(ntk_,"MULTIPLY",rz,rz)))
+    yolk=matematik(ntk_,"LESS_THAN",core2,None,deger_b=1.0)
+    ym=ntk_.nodes.new("ShaderNodeMix");ym.data_type="RGBA"
+    baglan(ntk_,yolk,ym.inputs["Factor"])
+    baglan(ntk_,et_r.outputs["Color"],ym.inputs[6])
+    ym.inputs[7].default_value=hex_renk("#edb326")
+    baglan(ntk_,ym.outputs[2],bk_.inputs["Base Color"])
 elif PEACH:
     # Merkezde tek, pütürlü taş çekirdeğin YZ kesişimi.
     xfac=matematik(ntk_,"DIVIDE",v_x.outputs[0],None,deger_b=.40*A)
