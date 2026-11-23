@@ -48,6 +48,7 @@ CUCUMBER = PLAN["meyve"] == "cucumber"
 PEPPER = PLAN["meyve"] == "red-bell-pepper"
 HOTDOG = PLAN["meyve"] == "hot-dog"
 CHOCBAR = PLAN["meyve"] == "pistachio-kataifi-chocolate-bar"
+CAKE = PLAN["meyve"] == "black-forest-cake"
 B = M.get("B", R)
 XMIN, XMAX = M.get("xmin", -A), M.get("xmax", A)
 TAHTA_UST = 0.14
@@ -331,7 +332,12 @@ bsdf.inputs["Roughness"].default_value = 0.55
 tahta.data.materials.append(m)
 
 # ---------------------------------------------------------------- nesne govdesi
-if CHOCBAR:
+if CAKE:
+    bpy.ops.mesh.primitive_cylinder_add(vertices=96, radius=1.0, depth=2.0, location=(0,0,MERKEZ_Z))
+    bevel=bpy.context.object.modifiers.new("kremali_kenar", "BEVEL")
+    bevel.width=.045;bevel.segments=3
+    bpy.ops.object.modifier_apply(modifier=bevel.name)
+elif CHOCBAR:
     bpy.ops.mesh.primitive_cube_add(size=2.0, location=(0, 0, MERKEZ_Z))
     bevel = bpy.context.object.modifiers.new("tablet_yuvarlak_kenar", "BEVEL")
     bevel.width = 0.07
@@ -350,7 +356,9 @@ for v in meyve.data.vertices:
     eks = z if CILEK else x
     sphere_r = math.sqrt(max(0.0, 1.0 - eks * eks))
     radial = float(meyve_profil(np.array([eks]), M)[0]) / max(sphere_r, 1e-6) / FMAX
-    if CHOCBAR:
+    if CAKE:
+        v.co=(x*A,y*B,z*R)
+    elif CHOCBAR:
         v.co = (x*A, y*B, z*R)
     elif PEPPER:
         zz=z*R
@@ -588,6 +596,19 @@ else:
         kabuk_rengi=bread.outputs["Color"]
         bmp.inputs["Strength"].default_value=.20
         bmp.inputs["Distance"].default_value=.007
+    elif CAKE:
+        cream=nt.nodes.new("ShaderNodeValToRGB")
+        cream.color_ramp.elements[0].color=hex_renk("#e7dfd1")
+        cream.color_ramp.elements[1].color=hex_renk("#fff5e6")
+        baglan(nt,nz.outputs["Fac"],cream.inputs["Fac"])
+        shavings=matematik(nt,"LESS_THAN",vor.outputs["Distance"],None,deger_b=.065)
+        flake=nt.nodes.new("ShaderNodeMix");flake.data_type="RGBA"
+        baglan(nt,shavings,flake.inputs["Factor"])
+        baglan(nt,cream.outputs["Color"],flake.inputs[6])
+        flake.inputs[7].default_value=hex_renk("#55301e")
+        kabuk_rengi=flake.outputs[2]
+        bmp.inputs["Strength"].default_value=.12
+        bmp.inputs["Distance"].default_value=.004
     elif CHOCBAR:
         brown=nt.nodes.new("ShaderNodeValToRGB")
         brown.color_ramp.elements[0].color=hex_renk("#522717")
@@ -645,10 +666,10 @@ if CILEK:
 else:
     baglan(nt, kar.outputs[2], bsdf.inputs["Base Color"])
     baglan(nt, bmp.outputs["Normal"], bsdf.inputs["Normal"])
-bsdf.inputs["Roughness"].default_value = (0.29 if CHOCBAR else (0.82 if HOTDOG else (0.91 if PEACH else (0.27 if PEPPER else (0.62 if CUCUMBER else (0.57 if ANANAS else
+bsdf.inputs["Roughness"].default_value = (0.73 if CAKE else (0.29 if CHOCBAR else (0.82 if HOTDOG else (0.91 if PEACH else (0.27 if PEPPER else (0.62 if CUCUMBER else (0.57 if ANANAS else
     (0.88 if KIVI else (0.54 if NAR else (0.30 if TOMATO else
     (0.46 if ORANGE else (0.35 if APPLE else (0.42 if CILEK else
-    (0.34 if KARPUZ else 0.26)))))))))))))
+    (0.34 if KARPUZ else 0.26))))))))))))))
 kes_x = nt.nodes.new("ShaderNodeValue"); kes_x.name = "kes_x"; kes_x.outputs[0].default_value = -10.0
 kirp = matematik(nt, "LESS_THAN", ayir.outputs[0], kes_x.outputs[0])
 seffaf = nt.nodes.new("ShaderNodeBsdfTransparent")
@@ -849,7 +870,7 @@ if ANANAS:
     sap_ob.data.materials.append(sap_mat)
     ANANAS_EK_OB.append(sap_ob)
 
-if APPLE or ORANGE or BANANA or NAR or TOMATO or CUCUMBER or PEPPER or HOTDOG:
+if APPLE or ORANGE or BANANA or NAR or TOMATO or CUCUMBER or PEPPER or HOTDOG or CAKE:
     def bagli_malzeme(ad, renk):
         mat, tree, b = malzeme(ad)
         b.inputs["Base Color"].default_value = hex_renk(renk)
@@ -993,6 +1014,22 @@ if APPLE or ORANGE or BANANA or NAR or TOMATO or CUCUMBER or PEPPER or HOTDOG:
             ob=bpy.data.objects.new("hotdog_"+ad+"_kesilir",curve)
             sc.collection.objects.link(ob);ob.parent=meyve
             curve.materials.append(sauce);ANANAS_EK_OB.append(ob)
+    elif CAKE:
+        white=bagli_malzeme("pasta_krema_rozetleri", "#fff2dd")
+        red=bagli_malzeme("pasta_kirazlari", "#a81f2d")
+        for i in range(8):
+            angle=2*math.pi*i/8
+            cx,cy=.61*math.cos(angle),.61*math.sin(angle)
+            bpy.ops.mesh.primitive_cone_add(vertices=24,radius1=.13,radius2=.09,depth=.13)
+            ob=bpy.context.object;ob.name=f"krema_rozet_{i}_kesilir"
+            ob.location=(cx,cy,.465)
+            bpy.ops.object.transform_apply(location=True)
+            ob.parent=meyve;ob.data.materials.append(white);ANANAS_EK_OB.append(ob)
+            bpy.ops.mesh.primitive_uv_sphere_add(segments=20,ring_count=12,radius=.085)
+            ob=bpy.context.object;ob.name=f"kiraz_{i}_kesilir"
+            ob.location=(cx,cy,.56)
+            bpy.ops.object.transform_apply(location=True)
+            ob.parent=meyve;ob.data.materials.append(red);ANANAS_EK_OB.append(ob)
 
 # ---------------------------------------------------------------- bicak
 def bicak_kur():
@@ -1170,7 +1207,10 @@ def kup_nesnesi(tur, no):
     rng = np.random.default_rng(7 + no)
     hx, hy, hz = (XMAX - XMIN) / (2 * gx), B / gy, (zmax-zmin) / (2*gz)
     # Et/cekirdek rengi ve gercek dis kabuk maskesi ayni kaynak hucre konumundan gelir.
-    if CHOCBAR:
+    if CAKE:
+        radial=np.sqrt((merk[:,0]/A)**2+(merk[:,1]/B)**2)
+        d=np.maximum(radial,np.abs(merk[:,2])/R)
+    elif CHOCBAR:
         d = np.maximum.reduce((np.abs(merk[:,0])/A, np.abs(merk[:,1])/B, np.abs(merk[:,2])/R))
     elif PEPPER:
         theta=np.arctan2(merk[:,1]/B,merk[:,0]/A)
@@ -1289,6 +1329,24 @@ def kup_nesnesi(tur, no):
         renk[u[:,0]>.92]=np.array(hex_renk("#c7231d")[:3])
         calyx=domates_canak(merk[:,0],merk[:,1],merk[:,2],M)
         renk[calyx]=np.array(hex_renk("#357a2f")[:3]);maske[calyx]=0
+    elif CAKE:
+        zc=merk[:,2]
+        renk=np.tile(np.array(hex_renk("#f4ead8")[:3]),(k,1))
+        sponge=((zc>-.34)&(zc<-.19))|((zc>-.08)&(zc<.07))|((zc>.18)&(zc<.34))
+        renk[sponge]=np.array(hex_renk("#543020")[:3])
+        cream=(~sponge)&(zc<=R)&(zc>=-R)
+        cherry=cream&(np.sin(27*merk[:,0]+33*merk[:,1]+11*zc)>.80)
+        renk[cherry]=np.array(hex_renk("#ad2636")[:3])
+        outer=(radial>.90)&(np.abs(zc)<=R)
+        renk[outer]=np.array(hex_renk("#f5ecde")[:3])
+        garnish=zc>R
+        for i in range(8):
+            angle=2*np.pi*i/8
+            cx,cy=.61*np.cos(angle),.61*np.sin(angle)
+            d2=(merk[:,0]-cx)**2+(merk[:,1]-cy)**2
+            red=(d2+(zc-.56)**2<=.085**2)
+            renk[red]=np.array(hex_renk("#a81f2d")[:3])
+        maske[garnish]=0
     elif CHOCBAR:
         renk=np.tile(np.array(hex_renk("#74a94d")[:3]),(k,1))
         shell=(np.abs(merk[:,0])>.88*A)|(np.abs(merk[:,1])>.84*B)|(np.abs(merk[:,2])>.82*R)
@@ -1513,6 +1571,8 @@ def kup_nesnesi(tur, no):
     karis.inputs[7].default_value = hex_renk("#b87538" if HOTDOG else ("#b71f29" if CILEK else ("#c93225" if APPLE else ("#e87916" if ORANGE else ("#e7c137" if BANANA else ("#356d2c" if CUCUMBER else ("#c3221a" if PEPPER else ("#d95c4d" if PEACH else ("#8c1c27" if NAR else ("#c7231d" if TOMATO else "#21361a"))))))))))
     if CHOCBAR:
         karis.inputs[7].default_value = hex_renk("#663521")
+    if CAKE:
+        karis.inputs[7].default_value = hex_renk("#f5ecde")
     if CILEK:
         # Sadece maskelenmis dis yuz; kesik et yuzunde aken bulunmaz.
         geometri = ntk.nodes.new("ShaderNodeNewGeometry")
@@ -1788,6 +1848,8 @@ def kup_nesnesi(tur, no):
     t_k.inputs[7].default_value = hex_renk("#b87538" if HOTDOG else ("#60452f" if KIVI else ("#143c27" if KARPUZ else ("#b71f29" if CILEK else ("#c93225" if APPLE else ("#e87916" if ORANGE else ("#356d2c" if CUCUMBER else ("#c3221a" if PEPPER else "#21361a"))))))))
     if CHOCBAR:
         t_k.inputs[7].default_value = hex_renk("#663521")
+    if CAKE:
+        t_k.inputs[7].default_value = hex_renk("#f5ecde")
     baglan(ntt, t_k.outputs[2], bt.inputs["Base Color"])
     bt.inputs["Roughness"].default_value = 0.55
 
@@ -2006,7 +2068,7 @@ for fc in egriler(ad):
 # Cilek kesiti YZ dikdortgeninde shader ile gercek profil sinirina kirpilir.
 # Avokado eski dairesel kesitini korur.
 _n = 96
-_vs = ([(0.0, -B, -R), (0.0, B, -R), (0.0, B, R), (0.0, -B, R)] if (CILEK or CHOCBAR) else
+_vs = ([(0.0, -B, -R), (0.0, B, -R), (0.0, B, R), (0.0, -B, R)] if (CILEK or CHOCBAR or CAKE) else
        [(0.0, math.cos(2 * math.pi * i / _n), math.sin(2 * math.pi * i / _n)) for i in range(_n)])
 _me = bpy.data.meshes.new("kesit")
 _me.from_pydata(_vs, [], [list(range(len(_vs)))[::-1]])
@@ -2037,7 +2099,12 @@ if BANANA or CUCUMBER:
         None, deger_b=.12 if BANANA else .035)
     dz = matematik(ntk_, "SUBTRACT", dz, curve)
 rad = matematik(ntk_, "SQRT", matematik(ntk_, "ADD", matematik(ntk_, "MULTIPLY", dy, dy), matematik(ntk_, "MULTIPLY", dz, dz)))
-if CHOCBAR:
+if CAKE:
+    radial_y=matematik(ntk_,"ABSOLUTE",matematik(ntk_,"DIVIDE",dy,matematik(ntk_,"MAXIMUM",v_r.outputs[0],None,deger_b=.001)))
+    u_=matematik(ntk_,"MAXIMUM",
+        matematik(ntk_,"DIVIDE",radial_y,None,deger_b=B),
+        matematik(ntk_,"ABSOLUTE",matematik(ntk_,"DIVIDE",dz,None,deger_b=R)))
+elif CHOCBAR:
     uy=matematik(ntk_, "POWER",matematik(ntk_, "ABSOLUTE",matematik(ntk_, "DIVIDE",dy,None,deger_b=B)),None,deger_b=12.0)
     uz=matematik(ntk_, "POWER",matematik(ntk_, "ABSOLUTE",matematik(ntk_, "DIVIDE",dz,None,deger_b=R)),None,deger_b=12.0)
     u_=matematik(ntk_, "POWER",matematik(ntk_, "ADD",uy,uz),None,deger_b=1.0/12.0)
@@ -2164,10 +2231,34 @@ else:
     e_m = et_r.color_ramp.elements.new(0.42 if CILEK else 0.6); e_m.color = hex_renk("#f7a7ab" if CILEK else "#e3e08e")
 if CILEK:
     e_r = et_r.color_ramp.elements.new(0.82); e_r.color = hex_renk("#d52b36")
-elif not KARPUZ and not ANANAS and not APPLE and not ORANGE and not BANANA and not PEACH and not NAR and not TOMATO and not CUCUMBER and not HOTDOG and not CHOCBAR:
+elif not KARPUZ and not ANANAS and not APPLE and not ORANGE and not BANANA and not PEACH and not NAR and not TOMATO and not CUCUMBER and not HOTDOG and not CHOCBAR and not CAKE:
     e_k = et_r.color_ramp.elements.new(0.985); e_k.color = hex_renk("#21361a")
 baglan(ntk_, u_, et_r.inputs["Fac"])
-if CILEK:
+if CAKE:
+    height=matematik(ntk_,"DIVIDE",matematik(ntk_,"ADD",dz,None,deger_b=R),None,deger_b=2*R)
+    layers=ntk_.nodes.new("ShaderNodeValToRGB")
+    layers.color_ramp.interpolation="CONSTANT"
+    layers.color_ramp.elements[0].color=hex_renk("#f4ead8")
+    layers.color_ramp.elements[1].color=hex_renk("#f4ead8")
+    for pos,col in ((.08,"#543020"),(.27,"#f4ead8"),(.40,"#543020"),
+                    (.59,"#f4ead8"),(.72,"#543020"),(.93,"#f4ead8")):
+        e=layers.color_ramp.elements.new(pos);e.color=hex_renk(col)
+    baglan(ntk_,height,layers.inputs["Fac"])
+    cherry=matematik(ntk_,"MULTIPLY",
+        matematik(ntk_,"GREATER_THAN",matematik(ntk_,"SINE",matematik(ntk_,"ADD",
+            matematik(ntk_,"MULTIPLY",dy,None,deger_b=31),
+            matematik(ntk_,"MULTIPLY",v_x.outputs[0],None,deger_b=27))),None,deger_b=.82),
+        matematik(ntk_,"LESS_THAN",matematik(ntk_,"ABSOLUTE",dz),None,deger_b=.19))
+    filling=ntk_.nodes.new("ShaderNodeMix");filling.data_type="RGBA"
+    baglan(ntk_,cherry,filling.inputs["Factor"])
+    baglan(ntk_,layers.outputs["Color"],filling.inputs[6])
+    filling.inputs[7].default_value=hex_renk("#aa2333")
+    frost=ntk_.nodes.new("ShaderNodeMix");frost.data_type="RGBA"
+    baglan(ntk_,matematik(ntk_,"GREATER_THAN",u_,None,deger_b=.91),frost.inputs["Factor"])
+    baglan(ntk_,filling.outputs[2],frost.inputs[6])
+    frost.inputs[7].default_value=hex_renk("#f5ecde")
+    baglan(ntk_,frost.outputs[2],bk_.inputs["Base Color"])
+elif CILEK:
     baglan(ntk_, et_r.outputs["Color"], bk_.inputs["Base Color"])
 elif KARPUZ:
     tohum_maske = karpuz_cekirdek_maske(ntk_, v_x.outputs[0], dy,
@@ -2364,15 +2455,15 @@ for tur in PLAN["turlar"]:
     kesit.hide_render = True
     kesit.keyframe_insert("hide_render", frame=kare(xk[-1][0] + 0.02))
     for t, konum in xk:
-        if (ANANAS or BANANA or CUCUMBER or HOTDOG or CHOCBAR) and konum >= A:
+        if (ANANAS or BANANA or CUCUMBER or HOTDOG or CHOCBAR or CAKE) and konum >= A:
             kesit.hide_render = True
             kesit.keyframe_insert("hide_render", frame=kare(t))
-        r_ = (float(meyve_profil(np.array([konum/A]), M)[0]) if CHOCBAR else
+        r_ = (float(meyve_profil(np.array([konum/A]), M)[0]) if (CHOCBAR or CAKE) else
               (1.0 if (CILEK or PEPPER or HOTDOG) else float(profil_r(np.array([konum]))[0]) * 0.995))
         # Yalniz kalan govdenin yeni kesim duzlemine bagli; hicbir nesnede
         # kameraya/yone dogru ayrik bir on yuz konumlandirilmaz.
         kesit.location = (konum + 0.002, 0, MERKEZ_Z + (float(muz_egri(konum,M)) if BANANA else (float(salatalik_egri(konum,M)) if CUCUMBER else 0.0)))
-        kesit.scale = (1, r_, r_)
+        kesit.scale = (1, r_, 1.0 if CAKE else r_)
         kesit.keyframe_insert("location", frame=kare(t))
         kesit.keyframe_insert("scale", frame=kare(t))
         for ad_, deger in (("kesit_r", r_), ("kesit_x", konum)):
