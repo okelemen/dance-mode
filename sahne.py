@@ -1944,7 +1944,7 @@ def deger_anahtar(ad, t, deger):
         n_tuy = kivi_tuy_nt.nodes["kes_x"]
         n_tuy.outputs[0].default_value = deger
         n_tuy.outputs[0].keyframe_insert("default_value", frame=kare(t))
-    if (ANANAS or APPLE or ORANGE or BANANA or NAR or TOMATO or CUCUMBER or PEPPER or HOTDOG) and ad == "kes_x":
+    if (ANANAS or APPLE or ORANGE or BANANA or NAR or TOMATO or CUCUMBER or PEPPER or HOTDOG or CAKE) and ad == "kes_x":
         for tree in ANANAS_EK_NT:
             node = tree.nodes["kes_x"]
             node.outputs[0].default_value = deger
