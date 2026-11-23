@@ -597,16 +597,31 @@ else:
         bmp.inputs["Strength"].default_value=.20
         bmp.inputs["Distance"].default_value=.007
     elif CAKE:
-        cream=nt.nodes.new("ShaderNodeValToRGB")
-        cream.color_ramp.elements[0].color=hex_renk("#e7dfd1")
-        cream.color_ramp.elements[1].color=hex_renk("#fff5e6")
-        baglan(nt,nz.outputs["Fac"],cream.inputs["Fac"])
-        shavings=matematik(nt,"LESS_THAN",vor.outputs["Distance"],None,deger_b=.065)
-        flake=nt.nodes.new("ShaderNodeMix");flake.data_type="RGBA"
-        baglan(nt,shavings,flake.inputs["Factor"])
-        baglan(nt,cream.outputs["Color"],flake.inputs[6])
-        flake.inputs[7].default_value=hex_renk("#55301e")
-        kabuk_rengi=flake.outputs[2]
+        # Black Forest: chocolate-shaving sides, two visible cream seams,
+        # white top with the separate cream rosettes and cherries.
+        xyz_c=nt.nodes.new("ShaderNodeSeparateXYZ")
+        baglan(nt,tk.outputs["Object"],xyz_c.inputs[0])
+        zc=xyz_c.outputs[2]
+        side=matematik(nt,"LESS_THAN",matematik(nt,"ABSOLUTE",zc),None,deger_b=.95*R)
+        seam1=matematik(nt,"LESS_THAN",matematik(nt,"ABSOLUTE",
+            matematik(nt,"SUBTRACT",zc,None,deger_b=-.13)),None,deger_b=.034)
+        seam2=matematik(nt,"LESS_THAN",matematik(nt,"ABSOLUTE",
+            matematik(nt,"SUBTRACT",zc,None,deger_b=.13)),None,deger_b=.034)
+        seams=matematik(nt,"MAXIMUM",seam1,seam2)
+        chocolate=nt.nodes.new("ShaderNodeMix");chocolate.data_type="RGBA"
+        baglan(nt,matematik(nt,"LESS_THAN",vor.outputs["Distance"],None,deger_b=.065),
+               chocolate.inputs["Factor"])
+        chocolate.inputs[6].default_value=hex_renk("#452319")
+        chocolate.inputs[7].default_value=hex_renk("#673d2b")
+        striped=nt.nodes.new("ShaderNodeMix");striped.data_type="RGBA"
+        baglan(nt,seams,striped.inputs["Factor"])
+        baglan(nt,chocolate.outputs[2],striped.inputs[6])
+        striped.inputs[7].default_value=hex_renk("#f5ead7")
+        surface=nt.nodes.new("ShaderNodeMix");surface.data_type="RGBA"
+        baglan(nt,side,surface.inputs["Factor"])
+        surface.inputs[6].default_value=hex_renk("#fff5e6")
+        baglan(nt,striped.outputs[2],surface.inputs[7])
+        kabuk_rengi=surface.outputs[2]
         bmp.inputs["Strength"].default_value=.12
         bmp.inputs["Distance"].default_value=.004
     elif CHOCBAR:
@@ -1338,7 +1353,9 @@ def kup_nesnesi(tur, no):
         cherry=cream&(np.sin(27*merk[:,0]+33*merk[:,1]+11*zc)>.80)
         renk[cherry]=np.array(hex_renk("#ad2636")[:3])
         outer=(radial>.90)&(np.abs(zc)<=R)
-        renk[outer]=np.array(hex_renk("#f5ecde")[:3])
+        renk[outer]=np.array(hex_renk("#452319")[:3])
+        cream_seams=outer&((np.abs(zc+.13)<.034)|(np.abs(zc-.13)<.034))
+        renk[cream_seams]=np.array(hex_renk("#f5ead7")[:3])
         garnish=zc>R
         for i in range(8):
             angle=2*np.pi*i/8
@@ -2256,7 +2273,7 @@ if CAKE:
     frost=ntk_.nodes.new("ShaderNodeMix");frost.data_type="RGBA"
     baglan(ntk_,matematik(ntk_,"GREATER_THAN",u_,None,deger_b=.91),frost.inputs["Factor"])
     baglan(ntk_,filling.outputs[2],frost.inputs[6])
-    frost.inputs[7].default_value=hex_renk("#f5ecde")
+    frost.inputs[7].default_value=hex_renk("#452319")
     baglan(ntk_,frost.outputs[2],bk_.inputs["Base Color"])
 elif CILEK:
     baglan(ntk_, et_r.outputs["Color"], bk_.inputs["Base Color"])
