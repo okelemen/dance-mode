@@ -34,10 +34,10 @@ jobs:
           elif i["mod"] == "probe":
               mat = [{"ad": "probe", "arg": "--kareler " + i["kareler"]}]
           elif i["mod"] == "kesit":
-              n = int(i.get("parca", 20)); b0, b1 = int(i["bas_kare"]), int(i["son_kare"])
+              n = min(int(i.get("parca", 20)), 17); b0, b1 = int(i["bas_kare"]), int(i["son_kare"])
               mat = [{"ad": f"k{j:02d}", "arg": f"--bas {b0+j} --son {b1} --adim {n}"} for j in range(n)]
           else:
-              n = int(i.get("parca", 20))
+              n = min(int(i.get("parca", 20)), 17)
               mat = [{"ad": f"p{j:02d}", "arg": f"--bas {j+1} --son {p['kare']} --adim {n}"} for j in range(n)]
           print("matris=" + json.dumps({"include": mat}))
           print("plan=" + i["plan"]); print("ornek=" + str(i.get("ornek", 6))); print("mod=" + i["mod"])
