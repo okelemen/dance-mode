@@ -94,6 +94,11 @@ MEYVELER = {
         "A": 1.19, "R": 0.37, "boyun": 1.0,
         "profil": "hot-dog", "zmax": 0.50,
     },
+    "pistachio-kataifi-chocolate-bar": {
+        # Bolmeli koyu tablet; ince kabuk, yesil fistik ve altin kadayif dolgusu.
+        "A": 1.18, "B": 0.50, "R": 0.31, "boyun": 1.0,
+        "profil": "pistachio-kataifi-chocolate-bar",
+    },
 }
 
 # Turlar: (kesim sayisi, kesim suresi sn). Acilis 0.4 sn + sonuc 1.3 sn eklenir -> toplam 60 sn
@@ -123,6 +128,8 @@ def meyve_profil(xn, m):
         return s ** 0.62 * (1.0 - s) ** 0.25
     if m.get("profil") == "hot-dog":
         return np.maximum(0.0, 1.0 - np.abs(xn)**8)**0.34
+    if m.get("profil") == "pistachio-kataifi-chocolate-bar":
+        return np.maximum(0.0, 1.0 - np.abs(xn)**12)**(1.0/12.0)
     if m.get("profil") == "kiwi":
         xn = np.clip(xn, -1.0, 1.0)
         return np.maximum(0.0, 1.0 - xn * xn) ** 0.38
@@ -147,7 +154,7 @@ def meyve_profil(xn, m):
 def meyve_fmax(m):
     if m.get("profil") == "strawberry":
         return float(meyve_profil(np.linspace(-1, 1, 20001), m).max())
-    if m.get("profil") in ("kiwi", "pineapple", "apple", "orange", "peach", "pomegranate", "tomato", "hot-dog"):
+    if m.get("profil") in ("kiwi", "pineapple", "apple", "orange", "peach", "pomegranate", "tomato", "hot-dog", "pistachio-kataifi-chocolate-bar"):
         return 1.0
     if m.get("profil") == "banana":
         return float(meyve_profil(np.linspace(-1, 1, 20001), m).max())
@@ -260,6 +267,9 @@ def icinde(x, y, z, m):
         mustard=(np.abs(x)<.94)&((y-zig+.045)**2+(z-.423)**2 <= .029**2)
         ketchup=(np.abs(x)<.94)&((y-zig-.045)**2+(z-.433)**2 <= .026**2)
         return bun|sausage|mustard|ketchup
+    if m.get("profil") == "pistachio-kataifi-chocolate-bar":
+        return ((np.abs(x)/m["A"])**12 + (np.abs(y)/m["B"])**12 +
+                (np.abs(z)/m["R"])**12 <= 1.0)
     if m.get("profil") == "red-bell-pepper":
         theta=np.arctan2(y/m["B"],x/m["A"])
         lob=1.0-.22*np.cos(4*theta)
