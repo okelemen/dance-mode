@@ -89,6 +89,11 @@ MEYVELER = {
         "A": 0.74, "B": 0.68, "R": 0.69, "boyun": 1.0,
         "profil": "red-bell-pepper", "zmax": 0.92,
     },
+    "hot-dog": {
+        # Uzun ekmek govdesi, ustte sosis ve iki sos izi ayni kesim hacminde.
+        "A": 1.19, "R": 0.37, "boyun": 1.0,
+        "profil": "hot-dog", "zmax": 0.50,
+    },
 }
 
 # Turlar: (kesim sayisi, kesim suresi sn). Acilis 0.4 sn + sonuc 1.3 sn eklenir -> toplam 60 sn
@@ -116,6 +121,8 @@ def meyve_profil(xn, m):
     if m.get("profil") == "strawberry":
         s = (np.clip(xn, -1.0, 1.0) + 1.0) / 2.0
         return s ** 0.62 * (1.0 - s) ** 0.25
+    if m.get("profil") == "hot-dog":
+        return np.maximum(0.0, 1.0 - np.abs(xn)**8)**0.34
     if m.get("profil") == "kiwi":
         xn = np.clip(xn, -1.0, 1.0)
         return np.maximum(0.0, 1.0 - xn * xn) ** 0.38
@@ -140,7 +147,7 @@ def meyve_profil(xn, m):
 def meyve_fmax(m):
     if m.get("profil") == "strawberry":
         return float(meyve_profil(np.linspace(-1, 1, 20001), m).max())
-    if m.get("profil") in ("kiwi", "pineapple", "apple", "orange", "peach", "pomegranate", "tomato"):
+    if m.get("profil") in ("kiwi", "pineapple", "apple", "orange", "peach", "pomegranate", "tomato", "hot-dog"):
         return 1.0
     if m.get("profil") == "banana":
         return float(meyve_profil(np.linspace(-1, 1, 20001), m).max())
@@ -243,6 +250,16 @@ def icinde(x, y, z, m):
     if m.get("profil") == "strawberry":
         p = profil_yaricap(z, m)
         return (np.abs(z) <= m["R"]) & ((x / m["A"]) ** 2 + (y / m["B"]) ** 2 <= p * p)
+    if m.get("profil") == "hot-dog":
+        rr = profil_yaricap(x, m)
+        bun = (np.abs(x) <= m["A"]) & (y*y+z*z <= rr*rr)
+        sausage = (np.abs(x) <= 1.02) & (y*y+(z-.24)**2 <= .175**2)
+        for tip in (-1.02, 1.02):
+            sausage |= (x-tip)**2+y*y+(z-.24)**2 <= .175**2
+        zig = .075*np.sin(14*x)
+        mustard=(np.abs(x)<.94)&((y-zig+.045)**2+(z-.423)**2 <= .029**2)
+        ketchup=(np.abs(x)<.94)&((y-zig-.045)**2+(z-.433)**2 <= .026**2)
+        return bun|sausage|mustard|ketchup
     if m.get("profil") == "red-bell-pepper":
         theta=np.arctan2(y/m["B"],x/m["A"])
         lob=1.0-.22*np.cos(4*theta)
