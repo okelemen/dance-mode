@@ -1231,7 +1231,7 @@ def kup_nesnesi(tur, no):
         renk[calyx]=np.array(hex_renk("#357a2f")[:3]);maske[calyx]=0
     elif EGG:
         renk=np.tile(np.array(hex_renk("#f6f1e6")[:3]),(k,1))
-        core=(merk[:,0]/(.50*A))**2+(merk[:,1]/(.42*R))**2+(merk[:,2]/(.42*R))**2
+        core=(merk[:,0]/(.65*A))**2+(merk[:,1]/(.55*R))**2+(merk[:,2]/(.55*R))**2
         yolk=core<1.0
         renk[yolk]=np.array(hex_renk("#edb326")[:3])
         renk[yolk & (core>.78)]=np.array(hex_renk("#f7cb3c")[:3])
@@ -2155,9 +2155,9 @@ elif CUCUMBER:
 elif PEPPER:
     baglan(ntk_,et_r.outputs["Color"],bk_.inputs["Base Color"])
 elif EGG:
-    xfac=matematik(ntk_,"DIVIDE",v_x.outputs[0],None,deger_b=.50*A)
-    ry=matematik(ntk_,"DIVIDE",dy,None,deger_b=.42*R)
-    rz=matematik(ntk_,"DIVIDE",dz,None,deger_b=.42*R)
+    xfac=matematik(ntk_,"DIVIDE",v_x.outputs[0],None,deger_b=.65*A)
+    ry=matematik(ntk_,"DIVIDE",dy,None,deger_b=.55*R)
+    rz=matematik(ntk_,"DIVIDE",dz,None,deger_b=.55*R)
     core2=matematik(ntk_,"ADD",matematik(ntk_,"MULTIPLY",xfac,xfac),
         matematik(ntk_,"ADD",matematik(ntk_,"MULTIPLY",ry,ry),matematik(ntk_,"MULTIPLY",rz,rz)))
     yolk=matematik(ntk_,"LESS_THAN",core2,None,deger_b=1.0)
