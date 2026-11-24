@@ -27,6 +27,8 @@ Cikti: karakter/<oyuncu>/<poz>-NN.png (KxK kare, saydam), yerlesim.json: karakte
   --jole 1: maskot jole kup (34): kalcadan basa tek buyuk turuncu jole kup govde + tombul uzuvlar; yuz motorda 2B.
   --sincap 1: maskot ucan sincap yavrusu (35, balon festivali): turuncu-kahve tombul uzuv + yumurta govde (krem karin), yan kanat zari,
               sirttan yukari kivrilan kabarik kuyruk + kirmizi atki; kafa, kulak ve pilot gozlugu motorda 2B.
+  --rengeyik 1: maskot ren geyigi yavrusu (38, Christmas kurabiye koyu): kahve kurk tombul uzuv + yumurta govde (krem-karamel karin),
+              koyu toynaklar, krem kuyruk ponponu, kirmizi atki + altin can; bas/boynuz/kulak motorda 2B.
   --baykus 1: maskot baykus yavrusu (36, mantar ormani): yuvarlak karamel tuy topu govde (krem gogus), kollara bagli kanatlar
               (pozu kanatlarla gosterir), kisa tuylu bacak + turuncu ayak, yesil atki; kafa, goz diski, kulak tuyleri motorda 2B.
   --kartal 1: maskot kartal yavrusu (37, gokyuzu adalari): kestane tuy govde (altin gogus), genis koyu kanat + altin uc tuyleri,
@@ -818,6 +820,74 @@ if OYUNCU == "maskot" and arg("--kartal", "0") == "1":   # 37 (ucan gokyuzu adal
     u_.data.transform(Matrix.Translation(on_l * (0.19 * BOY) + yan * (0.06 * BOY) + Vector((0, 0.0, 0))) @ Matrix.Diagonal((0.06 * BOY, 0.14 * BOY, 0.025 * BOY, 1)))
     u_.modifiers.new("b", "BEVEL").width = 0.008 * BOY; u_.data.materials.append(mat_jole("kt_atki2", lin(hex3("#e8102c")), emis=0.15, purluk=0.2))
     EKIP.append((u_, "Spine2", Matrix.Identity(4)))
+if OYUNCU == "maskot" and arg("--rengeyik", "0") == "1":   # 38 (Christmas kurabiye koyu; kullanici 24 Kas secimi): REN GEYIGI yavrusu
+    # 37 kartal blogunun iskeleti; kanat yerine TUYLU TOMBUL UZUV (kol + bacak), uclarda koyu toynak; yumurta govde sicak kahve,
+    # onde krem-karamel karin; arkada kabarik krem kuyruk ponponu; boyunda kirmizi atki + onde altin can (Christmas hakemi).
+    # Bas, boynuz, kulak, burun motorda 2B. Kendi tasarimimiz: bilinen ren geyigi karakterlerine benzemez (kirmizi parlak burun YOK).
+    KURK, KARIN, KURK_K, TOYNAK = "#b8621e", "#ffb860", "#7a3a10", "#3a1a0a"
+    for m_ in mesler:
+        m_.hide_render = True
+    def mat_rg(ad, renk, purluk=0.6, kap=0.12):
+        m_ = bpy.data.materials.new(ad); m_.use_nodes = True; b_ = m_.node_tree.nodes["Principled BSDF"]
+        b_.inputs["Base Color"].default_value = (*lin(hex3(renk)), 1)
+        b_.inputs["Roughness"].default_value = purluk; b_.inputs["Coat Weight"].default_value = kap; b_.inputs["Coat Roughness"].default_value = 0.1
+        b_.inputs["Sheen Weight"].default_value = 0.55; b_.inputs["Sheen Tint"].default_value = (*lin(hex3("#ffd8a0")), 1)   # kurk yumusakligi
+        return m_
+    gm, km, tm = mat_rg("rg_kurk", KURK), mat_rg("rg_kurk_k", KURK_K), mat_rg("rg_toynak", TOYNAK, 0.3, 0.5)
+    def uzuv(ad, r, mat):
+        b_ = kemik(arm, ad); L = ((arm.matrix_world @ b_.tail) - (arm.matrix_world @ b_.head)).length
+        bpy.ops.mesh.primitive_cylinder_add(radius=r, depth=L, vertices=28); c_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
+        c_.data.transform(Matrix.Rotation(math.radians(-90), 4, "X") @ Matrix.Translation((0, 0, L / 2))); c_.data.materials.append(mat)
+        EKIP.append((c_, ad, Matrix.Identity(4)))
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=r, segments=24, ring_count=12); k_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
+        k_.data.materials.append(mat); EKIP.append((k_, ad, Matrix.Identity(4)))
+    for tr in ("Left", "Right"):
+        uzuv(tr + "Arm", 0.055 * BOY, gm); uzuv(tr + "ForeArm", 0.048 * BOY, gm)
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=1.0, segments=24, ring_count=12); h_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
+        h_.data.transform(Matrix.Translation((0, 0.03 * BOY, 0)) @ Matrix.Diagonal((0.05 * BOY, 0.05 * BOY, 0.045 * BOY, 1)))   # on toynak
+        h_.data.materials.append(tm); EKIP.append((h_, tr + "Hand", Matrix.Identity(4)))
+        uzuv(tr + "UpLeg", 0.075 * BOY, gm); uzuv(tr + "Leg", 0.055 * BOY, km)
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=1.0, segments=24, ring_count=12); f_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
+        f_.data.transform(Matrix.Translation((0, 0.03 * BOY, 0.02 * BOY)) @ Matrix.Diagonal((0.06 * BOY, 0.05 * BOY, 0.08 * BOY, 1)))   # arka toynak (yere basar)
+        f_.data.materials.append(tm); EKIP.append((f_, tr + "Foot", Matrix.Identity(4)))
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=1.0, segments=48, ring_count=24)
+    yum = bpy.context.active_object; bpy.ops.object.shade_smooth()
+    yum.data.transform(Matrix.Diagonal((0.17 * BOY, 0.22 * BOY, 0.16 * BOY, 1)))
+    Mb0 = (arm.matrix_world @ kemik(arm, "Spine1").matrix).to_3x3()
+    on_d = Matrix.Rotation(math.radians(float(arg("--don", "0"))), 3, "Z") @ Vector((0, -1, 0))
+    on_l = (Mb0.inverted() @ on_d).normalized()
+    ym = mat_rg("rg_yumurta", KURK); nt = ym.node_tree; bs = nt.nodes["Principled BSDF"]
+    ge = nt.nodes.new("ShaderNodeNewGeometry"); vt = nt.nodes.new("ShaderNodeVectorTransform")
+    vt.vector_type = "NORMAL"; vt.convert_from = "WORLD"; vt.convert_to = "OBJECT"
+    nt.links.new(ge.outputs["Normal"], vt.inputs["Vector"])
+    dp = nt.nodes.new("ShaderNodeVectorMath"); dp.operation = "DOT_PRODUCT"; dp.inputs[1].default_value = tuple(on_l)
+    nt.links.new(vt.outputs["Vector"], dp.inputs[0])
+    gt = nt.nodes.new("ShaderNodeMath"); gt.operation = "GREATER_THAN"; gt.inputs[1].default_value = 0.62    # krem-karamel karin (soluk degil)
+    nt.links.new(dp.outputs["Value"], gt.inputs[0])
+    mx_ = nt.nodes.new("ShaderNodeMix"); mx_.data_type = "RGBA"; nt.links.new(gt.outputs[0], mx_.inputs["Factor"])
+    mx_.inputs[6].default_value = (*lin(hex3(KURK)), 1); mx_.inputs[7].default_value = (*lin(hex3(KARIN)), 1)
+    nt.links.new(mx_.outputs[2], bs.inputs["Base Color"])
+    yum.data.materials.append(ym)
+    EKIP.append((yum, "Spine1", Matrix.Translation((0, 0.02 * BOY, 0))))
+    arka = (-on_l).normalized(); yan = Vector((0, 1, 0)).cross(on_l).normalized()
+    log("rengeyik karin yonu (kemik uzayi)", [round(c, 2) for c in on_l], "yan", [round(c, 2) for c in yan])
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=0.06 * BOY, segments=24, ring_count=12); t_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
+    t_.data.transform(Matrix.Translation(arka * (0.16 * BOY) + Vector((0, -0.12 * BOY, 0))))       # kabarik krem kuyruk ponponu
+    t_.data.materials.append(mat_rg("rg_kuyruk", "#ffd08a")); EKIP.append((t_, "Hips", Matrix.Identity(4)))
+    ra = 0.12 * BOY                                                   # kirmizi atki (Christmas hakemi)
+    bpy.ops.mesh.primitive_torus_add(major_radius=ra, minor_radius=ra * 0.36, major_segments=40, minor_segments=12)
+    f_ = bpy.context.active_object; bpy.ops.object.shade_smooth(); f_.data.materials.append(mat_jole("rg_atki", lin(hex3("#e8102c")), emis=0.15, purluk=0.2))
+    f_.data.transform(Matrix.Rotation(math.radians(-90), 4, "X"))
+    EKIP.append((f_, "Neck", Matrix.Translation((0, -0.02 * BOY, 0))))
+    bpy.ops.mesh.primitive_cube_add(size=1.0); u_ = bpy.context.active_object      # atkinin sarkan ucu (yesil serit uclu)
+    u_.data.transform(Matrix.Translation(on_l * (0.19 * BOY) + yan * (0.07 * BOY)) @ Matrix.Diagonal((0.06 * BOY, 0.14 * BOY, 0.025 * BOY, 1)))
+    u_.modifiers.new("b", "BEVEL").width = 0.008 * BOY; u_.data.materials.append(mat_jole("rg_atki2", lin(hex3("#e8102c")), emis=0.15, purluk=0.2))
+    EKIP.append((u_, "Spine2", Matrix.Identity(4)))
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=0.045 * BOY, segments=24, ring_count=12); c_ = bpy.context.active_object; bpy.ops.object.shade_smooth()
+    c_.data.transform(Matrix.Translation(on_l * (0.15 * BOY) + Vector((0, -0.06 * BOY, 0))))     # altin can (atkinin onunde)
+    cm = bpy.data.materials.new("rg_can"); cm.use_nodes = True; cb = cm.node_tree.nodes["Principled BSDF"]
+    cb.inputs["Base Color"].default_value = (*lin(hex3("#ffc21a")), 1); cb.inputs["Metallic"].default_value = 0.9; cb.inputs["Roughness"].default_value = 0.2
+    c_.data.materials.append(cm); EKIP.append((c_, "Spine2", Matrix.Identity(4)))
 if OYUNCU == "maskot" and arg("--jole", "0") == "1":     # 34 (oyuncak blok sehri; TALIMATLAR §4 maskot sirasi): JOLE KUP
     # 32/33 dersi: insan govdesi gizli; kemiklere bagli TOMBUL uzuvlar. Govde = kalcadan basa kadar tek buyuk yuvarlatilmis jole kup
     # (turuncu-mango, ic isilti, yari mat cilali - beyaz parlama seridi olmasin). Yuz motorda 2B (kupun ust yarisina cizilir).
