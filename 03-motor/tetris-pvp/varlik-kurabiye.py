@@ -54,7 +54,7 @@ def koy_sahnesi(w, h, saydam):
     bg_i = nt.nodes.new("ShaderNodeBackground"); bg_i.inputs[1].default_value = 0.5
     bg_i.inputs[0].default_value = (*lin(hex3("#a080ff")), 1)      # alacakaranlik ortam isigi: mor-mavi (gri golge yok)
     # aurora (sahne 1: perde duzlemleri dikdortgen blok okundu): gok rengine yumusak dalgali seritler; yalniz ufkun ustu (Z 0,06-0,4)
-    gz = nt.nodes.new("ShaderNodeTexCoord"); nr = nt.nodes.new("ShaderNodeNormalize"); nt.links.new(gz.outputs["Generated"], nr.inputs[0])
+    gz = nt.nodes.new("ShaderNodeTexCoord")
     wv = nt.nodes.new("ShaderNodeTexWave"); wv.wave_type = "BANDS"; wv.bands_direction = "X"; wv.inputs["Scale"].default_value = 1.6
     wv.inputs["Distortion"].default_value = 9.0; wv.inputs["Detail"].default_value = 3.0; wv.inputs["Detail Scale"].default_value = 1.5
     nt.links.new(gz.outputs["Generated"], wv.inputs["Vector"])
