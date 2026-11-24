@@ -24,12 +24,12 @@ if KAPAK:
 PIST = 3.9
 GECIS = 11.5
 KURABIYE, KURABIYE_K = "#c8661e", "#8a3a10"               # zencefilli kurabiye
-KREMA = "#fff0f4"                                         # krema (kucuk alanlar; buyuk alan degil)
-KAR, KAR_K = "#c4ccff", "#8a8aff"                         # alacakaranlik kari: leylak-mavi (beyaz degil, soluk yasak)
+KREMA = "#ffd0e8"                                         # krema (kucuk alanlar; buyuk alan degil)
+KAR, KAR_K = "#8a96ff", "#6a4aff"                         # alacakaranlik kari: doygun leylak-mavi (sahne 1: #c4ccff soluk, doygunluk 0,47)
 CAM, CAM_K = "#14b83a", "#0a7a28"
 SEKER = ("#ff2a4a", "#20c850", "#ffc21a", "#1e8cff", "#ff3aa8", "#8a3aff", "#ff7a10", "#10c8d0")
 ISIK = ("#ff3030", "#30ff50", "#ffd21a", "#3a8cff", "#ff40c0")
-GOK_ALT, GOK_ORTA, GOK_UST = "#ff6ab0", "#8a2ad8", "#140a6a"   # ufuk pembe -> mor -> derin lacivert
+GOK_ALT, GOK_ORTA, GOK_UST = "#ff3a9a", "#7a1ae8", "#1a0a8a"   # ufuk pembe -> mor -> derin lacivert
 AURORA = ("#20ffa0", "#20e0ff", "#ff50d0")
 
 
@@ -53,7 +53,27 @@ def koy_sahnesi(w, h, saydam):
     bg_k = nt.nodes.new("ShaderNodeBackground"); bg_k.inputs[1].default_value = 1.0
     bg_i = nt.nodes.new("ShaderNodeBackground"); bg_i.inputs[1].default_value = 0.5
     bg_i.inputs[0].default_value = (*lin(hex3("#a080ff")), 1)      # alacakaranlik ortam isigi: mor-mavi (gri golge yok)
-    nt.links.new(rp.outputs[0], bg_k.inputs[0])
+    # aurora (sahne 1: perde duzlemleri dikdortgen blok okundu): gok rengine yumusak dalgali seritler; yalniz ufkun ustu (Z 0,06-0,4)
+    gz = nt.nodes.new("ShaderNodeTexCoord"); nr = nt.nodes.new("ShaderNodeNormalize"); nt.links.new(gz.outputs["Generated"], nr.inputs[0])
+    wv = nt.nodes.new("ShaderNodeTexWave"); wv.wave_type = "BANDS"; wv.bands_direction = "X"; wv.inputs["Scale"].default_value = 1.6
+    wv.inputs["Distortion"].default_value = 9.0; wv.inputs["Detail"].default_value = 3.0; wv.inputs["Detail Scale"].default_value = 1.5
+    nt.links.new(gz.outputs["Generated"], wv.inputs["Vector"])
+    bt = nt.nodes.new("ShaderNodeValToRGB"); be = bt.color_ramp.elements                      # serit maskesi: ince parlak cizgiler
+    be[0].position = 0.55; be[0].color = (0, 0, 0, 1); be[1].position = 0.9; be[1].color = (1, 1, 1, 1)
+    nt.links.new(wv.outputs["Fac"], bt.inputs[0])
+    zb = nt.nodes.new("ShaderNodeValToRGB"); ze = zb.color_ramp.elements                      # yukseklik bandi
+    ze[0].position = 0.05; ze[0].color = (0, 0, 0, 1); ze[1].position = 0.42; ze[1].color = (0, 0, 0, 1)
+    z1 = ze.new(0.13); z1.color = (1, 1, 1, 1); z2 = ze.new(0.26); z2.color = (0.7, 0.7, 0.7, 1)
+    nt.links.new(sp.outputs["Z"], zb.inputs[0])
+    ml = nt.nodes.new("ShaderNodeMath"); ml.operation = "MULTIPLY"
+    nt.links.new(bt.outputs[0], ml.inputs[0]); nt.links.new(zb.outputs[0], ml.inputs[1])
+    ar = nt.nodes.new("ShaderNodeValToRGB"); ae = ar.color_ramp.elements                      # renk: x boyunca yesil -> camgobegi -> pembe
+    ae[0].position = 0.3; ae[0].color = (*lin(hex3(AURORA[0])), 1); ae[1].position = 0.7; ae[1].color = (*lin(hex3(AURORA[2])), 1)
+    a3 = ae.new(0.5); a3.color = (*lin(hex3(AURORA[1])), 1)
+    nt.links.new(sp.outputs["X"], ar.inputs[0])
+    am = nt.nodes.new("ShaderNodeMix"); am.data_type = "RGBA"; am.blend_type = "ADD"
+    nt.links.new(ml.outputs[0], am.inputs["Factor"]); nt.links.new(rp.outputs[0], am.inputs[6]); nt.links.new(ar.outputs[0], am.inputs[7])
+    nt.links.new(am.outputs[2], bg_k.inputs[0])
     mx = nt.nodes.new("ShaderNodeMixShader")
     nt.links.new(lp.outputs["Is Camera Ray"], mx.inputs[0])
     nt.links.new(bg_i.outputs[0], mx.inputs[1]); nt.links.new(bg_k.outputs[0], mx.inputs[2])
@@ -120,7 +140,7 @@ def mat_kar(ad="kar"):
     bp = nt.nodes.new("ShaderNodeBump"); bp.inputs["Strength"].default_value = 0.35
     nt.links.new(n2.outputs["Fac"], bp.inputs["Height"]); nt.links.new(bp.outputs["Normal"], b.inputs["Normal"])
     b.inputs["Roughness"].default_value = 0.55
-    b.inputs["Sheen Weight"].default_value = 0.5; b.inputs["Sheen Tint"].default_value = (*lin(hex3("#e0c8ff")), 1)
+    b.inputs["Sheen Weight"].default_value = 0.15; b.inputs["Sheen Tint"].default_value = (*lin(hex3("#b08aff")), 1)
     b.inputs["Subsurface Weight"].default_value = 0.2; b.inputs["Subsurface Radius"].default_value = (0.6, 0.7, 1.0)
     return m
 
@@ -129,18 +149,18 @@ def mat_kurabiye_tas(ad="pist"):
     """pist: kare kurabiye karolari (voronoi), kahve-turuncu ton farki + aralarda krema derz"""
     m = bpy.data.materials.new(ad); m.use_nodes = True; nt = m.node_tree; b = nt.nodes["Principled BSDF"]
     geo = nt.nodes.new("ShaderNodeNewGeometry")
-    vr = nt.nodes.new("ShaderNodeTexVoronoi"); vr.feature = "DISTANCE_TO_EDGE"; vr.inputs["Scale"].default_value = 0.8
+    vr = nt.nodes.new("ShaderNodeTexVoronoi"); vr.feature = "DISTANCE_TO_EDGE"; vr.inputs["Scale"].default_value = 1.4
     vr.distance = "CHEBYCHEV"
     nt.links.new(geo.outputs["Position"], vr.inputs["Vector"])
-    v2 = nt.nodes.new("ShaderNodeTexVoronoi"); v2.inputs["Scale"].default_value = 0.8; v2.distance = "CHEBYCHEV"
+    v2 = nt.nodes.new("ShaderNodeTexVoronoi"); v2.inputs["Scale"].default_value = 1.4; v2.distance = "CHEBYCHEV"
     nt.links.new(geo.outputs["Position"], v2.inputs["Vector"])
     rt = nt.nodes.new("ShaderNodeValToRGB"); el = rt.color_ramp.elements
     el[0].position = 0.0; el[0].color = (*lin(hex3("#d8761e")), 1); el[1].position = 1.0; el[1].color = (*lin(hex3("#a8501a")), 1)
     nt.links.new(v2.outputs["Color"], rt.inputs[0])
-    dz = nt.nodes.new("ShaderNodeMath"); dz.operation = "LESS_THAN"; dz.inputs[1].default_value = 0.05
+    dz = nt.nodes.new("ShaderNodeMath"); dz.operation = "LESS_THAN"; dz.inputs[1].default_value = 0.03
     nt.links.new(vr.outputs["Distance"], dz.inputs[0])
     mx = nt.nodes.new("ShaderNodeMix"); mx.data_type = "RGBA"; nt.links.new(dz.outputs[0], mx.inputs["Factor"])
-    nt.links.new(rt.outputs[0], mx.inputs[6]); mx.inputs[7].default_value = (*lin(hex3("#ffd0e0")), 1)
+    nt.links.new(rt.outputs[0], mx.inputs[6]); mx.inputs[7].default_value = (*lin(hex3("#ff7ab8")), 1)
     nt.links.new(mx.outputs[2], b.inputs["Base Color"])
     bp = nt.nodes.new("ShaderNodeBump"); bp.inputs["Strength"].default_value = 0.6
     nt.links.new(vr.outputs["Distance"], bp.inputs["Height"]); nt.links.new(bp.outputs["Normal"], b.inputs["Normal"])
@@ -405,10 +425,7 @@ def mekan(serit_modu, rnd):
         s = -1 if i % 2 == 0 else 1; y = GECIS + 2 + (i // 2) * 4.5
         seker_kamisi(s * (PIST + 2.0 + y * 0.02), y, 0, 2.4 + y * 0.03, 0.14 + y * 0.002, "#ff1a3a" if (i // 2) % 2 == 0 else "#20b850")
     # gok: dolunay, aurora perdeleri, yildizlar; kar tanesi havada
-    kure((-120, 700, 260), 46, mat_emis("ay", lin(hex3("#fff4d8")), 5.0))
-    for (x, y, z, uz, yk, r, e) in ((-260, 620, 120, 520, 220, AURORA[0], 1.5), (220, 680, 150, 560, 240, AURORA[1], 2.0),
-                                    (0, 760, 230, 700, 200, AURORA[2], 1.2), (-60, 720, 90, 420, 160, AURORA[0], 2.4)):
-        aurora(x, y, z, uz, yk, r, e)
+    kure((-150, 700, 230), 40, mat_emis("ay", lin(hex3("#fff0c0")), 4.0))
     yildizlar(rnd, 260)
     kar_tanesi(rnd, 420, 30, 2, 60, 0.5, 18, kac=5)
     if serit_modu:
