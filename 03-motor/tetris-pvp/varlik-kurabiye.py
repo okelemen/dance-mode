@@ -93,6 +93,8 @@ def kamera(sc):
     kam = bpy.context.active_object; sc.camera = kam
     kam.data.sensor_fit = "VERTICAL"; kam.data.sensor_height = KAM["sensor"]; kam.data.lens = KAM["lens"]
     kam.data.clip_end = 2500
+    if KAPAK and arg("--kapak-dof", "0") != "0":            # mobil kapak (md. 30): kapi/pano net, arka koy yumusak bulanik -> sade arka plan
+        kam.data.dof.use_dof = True; kam.data.dof.focus_distance = KAP["y"]; kam.data.dof.aperture_fstop = float(arg("--kapak-dof", "1.2"))
     return kam
 
 
