@@ -119,6 +119,8 @@ mesler = [o for o in yeni if o.type == "MESH"]
 arm.animation_data_clear()
 for o in mesler:
     o.animation_data_clear()
+if arg("--renk", ""):                                    # 38: oyuncu rengi disaridan (RED, # olmadan: --renk FF2A3A)
+    RENK_K[OYUNCU] = "#" + arg("--renk", "").lstrip("#")
 R = lin(hex3(RENK_K[OYUNCU]))
 gm = mat_govde(R, GOVDE_ACIK if OYUNCU != "maskot" else 0.35)
 for m in mesler:
