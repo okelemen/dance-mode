@@ -163,6 +163,12 @@ def mat_kurabiye_tas(ad="pist"):
     rt = nt.nodes.new("ShaderNodeValToRGB"); el = rt.color_ramp.elements
     el[0].position = 0.0; el[0].color = (*lin(hex3("#ff6a0a" if KAPAK_D else "#d8761e")), 1); el[1].position = 1.0; el[1].color = (*lin(hex3("#c83a06" if KAPAK_D else "#a8501a")), 1)
     nt.links.new(v2.outputs["Color"], rt.inputs[0])
+    if KAPAK_D:                                           # kapak olcumu 3 (25 Kas): yol renkliligi REF-090'in yarisi -> karolarin bir kismi kirmizi/yesil seker sirli (Noel)
+        rt.color_ramp.interpolation = "CONSTANT"; el = rt.color_ramp.elements
+        el[0].color = (*lin(hex3("#ff6a0a")), 1); el[1].position = 0.34; el[1].color = (*lin(hex3("#f0102a")), 1)
+        e3 = el.new(0.52); e3.color = (*lin(hex3("#ff7a10")), 1)
+        e4 = el.new(0.70); e4.color = (*lin(hex3("#10c030")), 1)
+        e5 = el.new(0.86); e5.color = (*lin(hex3("#e8500a")), 1)
     dz = nt.nodes.new("ShaderNodeMath"); dz.operation = "LESS_THAN"; dz.inputs[1].default_value = 0.03
     nt.links.new(vr.outputs["Distance"], dz.inputs[0])
     mx = nt.nodes.new("ShaderNodeMix"); mx.data_type = "RGBA"; nt.links.new(dz.outputs[0], mx.inputs["Factor"])
