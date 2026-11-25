@@ -599,16 +599,22 @@ else:
         bmp.inputs["Strength"].default_value=.20
         bmp.inputs["Distance"].default_value=.007
     elif RAINBOW:
-        # Thin ivory frosting hides the sponge until the real cut face opens.
+        # Semi-naked cake: real sponge bands stay readable from the front camera,
+        # with pale buttercream between layers and across the top.
         xyz_c=nt.nodes.new("ShaderNodeSeparateXYZ")
         baglan(nt,tk.outputs["Object"],xyz_c.inputs[0])
         zc=xyz_c.outputs[2]
-        seam=matematik(nt,"LESS_THAN",matematik(nt,"ABSOLUTE",zc),None,deger_b=.025)
-        fleck=nt.nodes.new("ShaderNodeMix");fleck.data_type="RGBA"
-        baglan(nt,matematik(nt,"LESS_THAN",vor.outputs["Distance"],None,deger_b=.037),fleck.inputs["Factor"])
-        fleck.inputs[6].default_value=hex_renk("#f8efdf")
-        fleck.inputs[7].default_value=hex_renk("#fff9ef")
-        kabuk_rengi=fleck.outputs[2]
+        height=matematik(nt,"DIVIDE",matematik(nt,"ADD",zc,None,deger_b=R),None,deger_b=2*R)
+        stripes=nt.nodes.new("ShaderNodeValToRGB")
+        stripes.color_ramp.interpolation="CONSTANT"
+        stripes.color_ramp.elements[0].color=hex_renk("#fff4e6")
+        stripes.color_ramp.elements[1].color=hex_renk("#fff4e6")
+        for j,col in enumerate(RAINBOW_COLORS):
+            lo=(-.39+j*.13+R)/(2*R)
+            for pos,color in ((lo,col),(lo+.115/(2*R),"#fff4e6")):
+                stripes.color_ramp.elements.new(pos).color=hex_renk(color)
+        baglan(nt,height,stripes.inputs["Fac"])
+        kabuk_rengi=stripes.outputs["Color"]
         bmp.inputs["Strength"].default_value=.09
         bmp.inputs["Distance"].default_value=.003
     elif CAKE:
@@ -1384,7 +1390,7 @@ def kup_nesnesi(tur, no):
             lo=-.39+j*.13
             band=(zc>=lo)&(zc<lo+.115)&(radial<.935)
             renk[band]=np.array(hex_renk(col)[:3])
-        outer=(radial>=.935)&(np.abs(zc)<=R)
+        outer=(radial>=.97)&(np.abs(zc)<=R)
         renk[outer]=np.array(hex_renk("#fff4e6")[:3])
         garnish=zc>R
         for i in range(8):
@@ -1393,7 +1399,9 @@ def kup_nesnesi(tur, no):
             d2=(merk[:,0]-cx)**2+(merk[:,1]-cy)**2
             candy=d2+(zc-.56)**2<=.085**2
             renk[candy]=np.array(hex_renk(RAINBOW_COLORS[i%6])[:3])
-        maske[garnish]=0
+        # Use the source cell's sponge/cream color on every face; the generic
+        # shell mask would paint exposed rainbow pieces white.
+        maske[:]=0
     elif CAKE:
         zc=merk[:,2]
         renk=np.tile(np.array(hex_renk("#f4ead8")[:3]),(k,1))
@@ -2313,7 +2321,7 @@ if RAINBOW:
             layers.color_ramp.elements.new(pos).color=hex_renk(color)
     baglan(ntk_,height,layers.inputs["Fac"])
     frost=ntk_.nodes.new("ShaderNodeMix");frost.data_type="RGBA"
-    baglan(ntk_,matematik(ntk_,"GREATER_THAN",u_,None,deger_b=.935),frost.inputs["Factor"])
+    baglan(ntk_,matematik(ntk_,"GREATER_THAN",u_,None,deger_b=.97),frost.inputs["Factor"])
     baglan(ntk_,layers.outputs["Color"],frost.inputs[6])
     frost.inputs[7].default_value=hex_renk("#fff4e6")
     baglan(ntk_,frost.outputs[2],bk_.inputs["Base Color"])
