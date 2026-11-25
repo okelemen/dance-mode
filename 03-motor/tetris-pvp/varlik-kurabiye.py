@@ -31,7 +31,8 @@ SEKER = ("#ff2a4a", "#20c850", "#ffc21a", "#1e8cff", "#ff3aa8", "#8a3aff", "#ff7
 ISIK = ("#ff3030", "#30ff50", "#ffd21a", "#3a8cff", "#ff40c0")
 GOK_ALT, GOK_ORTA, GOK_UST = "#ff3a9a", "#7a1ae8", "#1a0a8a"   # ufuk pembe -> mor -> derin lacivert
 AURORA = ("#20ffa0", "#20e0ff", "#ff50d0")
-KAPAK_D = KAPAK and arg("--kapak-doygun", "0") != "0"   # kapak olcumu 1 (25 Kas): arka plan S 0,554, siluet+kontur ile kapak 0,46 < REF-090 0,559
+KAPAK_DN = int(arg("--kapak-doygun", "0")) if KAPAK else 0
+KAPAK_D = KAPAK_DN > 0   # kapak olcumu 1 (25 Kas): arka plan S 0,554, siluet+kontur ile kapak 0,46 < REF-090 0,559
 if KAPAK_D:                                               # buyuk alanlar (kurabiye yol, leylak kar) daha doygun; cila/parilti beyaza cekmesin
     KURABIYE, KURABIYE_K = "#e8580a", "#a83008"
     KAR, KAR_K = "#5a6aff", "#5a1aff"
@@ -57,6 +58,8 @@ def koy_sahnesi(w, h, saydam):
     bg_k = nt.nodes.new("ShaderNodeBackground"); bg_k.inputs[1].default_value = 1.0
     bg_i = nt.nodes.new("ShaderNodeBackground"); bg_i.inputs[1].default_value = 0.5
     bg_i.inputs[0].default_value = (*lin(hex3("#a080ff")), 1)      # alacakaranlik ortam isigi: mor-mavi (gri golge yok)
+    if KAPAK_DN >= 2:                                    # kapak olcumu 4 (25 Kas): leylak ortam isigi kirmizi/yesil karoyu bulandiriyor -> daha az, daha doygun
+        bg_i.inputs[0].default_value = (*lin(hex3("#7a3aff")), 1); bg_i.inputs[1].default_value = 0.32
     # aurora (sahne 1: perde duzlemleri dikdortgen blok okundu): gok rengine yumusak dalgali seritler; yalniz ufkun ustu (Z 0,06-0,4)
     gz = nt.nodes.new("ShaderNodeTexCoord")
     wv = nt.nodes.new("ShaderNodeTexWave"); wv.wave_type = "BANDS"; wv.bands_direction = "X"; wv.inputs["Scale"].default_value = 1.6
@@ -107,6 +110,8 @@ def isiklar():
     bpy.ops.object.light_add(type="SUN", location=(0, 0, 30))
     g = bpy.context.active_object; g.data.energy = AY_GUC; g.data.angle = math.radians(3.0)
     g.data.color = lin(hex3("#c8d0ff"))
+    if KAPAK_DN >= 2:                                    # beyazimsi ay yerine notr-sicak ana isik, biraz daha guclu (parlaklik korunur)
+        g.data.color = lin(hex3("#fff0e0")); g.data.energy = AY_GUC * 1.25
     g.rotation_euler = Vector((0.25, 0.7, -0.6)).to_track_quat("-Z", "Y").to_euler()
     bpy.ops.object.light_add(type="SUN", location=(0, 0, 30))
     f = bpy.context.active_object; f.data.energy = 1.4; f.data.angle = math.radians(8.0)
@@ -176,7 +181,7 @@ def mat_kurabiye_tas(ad="pist"):
     nt.links.new(mx.outputs[2], b.inputs["Base Color"])
     bp = nt.nodes.new("ShaderNodeBump"); bp.inputs["Strength"].default_value = 0.6
     nt.links.new(vr.outputs["Distance"], bp.inputs["Height"]); nt.links.new(bp.outputs["Normal"], b.inputs["Normal"])
-    b.inputs["Roughness"].default_value = 0.45; b.inputs["Coat Weight"].default_value = 0.08 if KAPAK_D else 0.35; b.inputs["Coat Roughness"].default_value = 0.12
+    b.inputs["Roughness"].default_value = 0.7 if KAPAK_DN >= 3 else 0.45; b.inputs["Coat Weight"].default_value = (0.0 if KAPAK_DN >= 3 else 0.08) if KAPAK_D else 0.35; b.inputs["Coat Roughness"].default_value = 0.12
     return m
 
 
