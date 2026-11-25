@@ -610,20 +610,20 @@ else:
         if RUBY:
             # Tabletin ustundeki gercek kirinti ve fistik benekleri.
             fleck=nt.nodes.new("ShaderNodeTexVoronoi")
-            fleck.inputs["Scale"].default_value=42.0
+            fleck.inputs["Scale"].default_value=24.0
             baglan(nt,tk.outputs["Object"],fleck.inputs["Vector"])
             crumb=matematik(nt,"MULTIPLY",top,
-                matematik(nt,"LESS_THAN",fleck.outputs["Distance"],None,deger_b=.105))
+                matematik(nt,"LESS_THAN",fleck.outputs["Distance"],None,deger_b=.21))
             cm=nt.nodes.new("ShaderNodeMix");cm.data_type="RGBA"
             baglan(nt,crumb,cm.inputs["Factor"])
             baglan(nt,kabuk_rengi,cm.inputs[6])
             cm.inputs[7].default_value=hex_renk("#a7244c")
             kabuk_rengi=cm.outputs[2]
             pist_noise=nt.nodes.new("ShaderNodeTexNoise")
-            pist_noise.inputs["Scale"].default_value=58.0
+            pist_noise.inputs["Scale"].default_value=18.0
             baglan(nt,tk.outputs["Object"],pist_noise.inputs["Vector"])
             pist=matematik(nt,"MULTIPLY",top,
-                matematik(nt,"GREATER_THAN",pist_noise.outputs["Fac"],None,deger_b=.78))
+                matematik(nt,"GREATER_THAN",pist_noise.outputs["Fac"],None,deger_b=.70))
             pm=nt.nodes.new("ShaderNodeMix");pm.data_type="RGBA"
             baglan(nt,pist,pm.inputs["Factor"])
             baglan(nt,kabuk_rengi,pm.inputs[6])
@@ -1164,7 +1164,9 @@ def dogrusal_interp(kimlik):
 
 
 # ---------------------------------------------------------------- kup yigini (tur sonu)
-GORSEL_TAVANLAR = [200] * 6  # parca boyutu gercek kesim hucresi; 200/eksen ustu render cozunurlugunde piksel alti
+GORSEL_TAVANLAR = ([200, 200, 200, 40, 44, 48] if RUBY else [200] * 6)
+# Ruby'de son tur da goze secilen minik instanced kuplerden olusur;
+# nokta bulutu uzaktan kesilmemis tek pembe kalip gibi gorunuyordu.
 TANECIK_ESIK = 60  # eksen basi hucre bunu gecerse kupler tanecik (nokta bulutu) olarak cizilir
 DUSUS_SN = 0.5  # bir kupun yerine cokme suresi
 SN_KAYMA = 1.0 / FPS  # GN Scene Time saniyesi = kare / fps; kare(t) = t*fps + 1
@@ -1317,9 +1319,9 @@ def kup_nesnesi(tur, no):
         shell=(np.abs(merk[:,0])>.88*A)|(np.abs(merk[:,1])>.84*B)|(np.abs(merk[:,2])>.82*R)
         renk[shell]=np.array(hex_renk("#c7658c" if RUBY else "#663521")[:3])
         if RUBY:
-            crumb=(~shell)&(np.sin(67*merk[:,0]+91*merk[:,1]+53*merk[:,2])>.67)
+            crumb=(~shell)&(np.sin(67*merk[:,0]+91*merk[:,1]+53*merk[:,2])>.80)
             renk[crumb]=np.array(hex_renk("#a92348")[:3])
-            nuts=(~shell)&(np.sin(35*merk[:,0]-42*merk[:,1]+27*merk[:,2])>.82)
+            nuts=(~shell)&(np.sin(35*merk[:,0]-42*merk[:,1]+27*merk[:,2])>.93)
             renk[nuts]=np.array(hex_renk("#78a047")[:3])
         else:
             thread=(~shell)&(np.sin(62*merk[:,0]+91*merk[:,1]+53*merk[:,2])>.67)
