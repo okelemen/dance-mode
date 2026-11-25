@@ -48,7 +48,8 @@ CUCUMBER = PLAN["meyve"] == "cucumber"
 PEPPER = PLAN["meyve"] == "red-bell-pepper"
 HOTDOG = PLAN["meyve"] == "hot-dog"
 CHOCBAR = PLAN["meyve"] == "pistachio-kataifi-chocolate-bar"
-CAKE = PLAN["meyve"] == "black-forest-cake"
+RED_VELVET = PLAN["meyve"] == "red-velvet-cake"
+CAKE = PLAN["meyve"] in ("black-forest-cake", "red-velvet-cake")
 B = M.get("B", R)
 XMIN, XMAX = M.get("xmin", -A), M.get("xmax", A)
 TAHTA_UST = 0.14
@@ -611,15 +612,15 @@ else:
         chocolate=nt.nodes.new("ShaderNodeMix");chocolate.data_type="RGBA"
         baglan(nt,matematik(nt,"LESS_THAN",vor.outputs["Distance"],None,deger_b=.065),
                chocolate.inputs["Factor"])
-        chocolate.inputs[6].default_value=hex_renk("#452319")
-        chocolate.inputs[7].default_value=hex_renk("#673d2b")
+        chocolate.inputs[6].default_value=hex_renk("#59101b" if RED_VELVET else "#452319")
+        chocolate.inputs[7].default_value=hex_renk("#8d2630" if RED_VELVET else "#673d2b")
         striped=nt.nodes.new("ShaderNodeMix");striped.data_type="RGBA"
         baglan(nt,seams,striped.inputs["Factor"])
         baglan(nt,chocolate.outputs[2],striped.inputs[6])
-        striped.inputs[7].default_value=hex_renk("#f5ead7")
+        striped.inputs[7].default_value=hex_renk("#fff3eb" if RED_VELVET else "#f5ead7")
         surface=nt.nodes.new("ShaderNodeMix");surface.data_type="RGBA"
         baglan(nt,side,surface.inputs["Factor"])
-        surface.inputs[6].default_value=hex_renk("#fff5e6")
+        surface.inputs[6].default_value=hex_renk("#fff7f0" if RED_VELVET else "#fff5e6")
         baglan(nt,striped.outputs[2],surface.inputs[7])
         kabuk_rengi=surface.outputs[2]
         bmp.inputs["Strength"].default_value=.12
@@ -1030,8 +1031,9 @@ if APPLE or ORANGE or BANANA or NAR or TOMATO or CUCUMBER or PEPPER or HOTDOG or
             sc.collection.objects.link(ob);ob.parent=meyve
             curve.materials.append(sauce);ANANAS_EK_OB.append(ob)
     elif CAKE:
-        white=bagli_malzeme("pasta_krema_rozetleri", "#fff2dd")
-        red=bagli_malzeme("pasta_kirazlari", "#a81f2d")
+        white=bagli_malzeme("pasta_krema_rozetleri", "#fff5ed" if RED_VELVET else "#fff2dd")
+        red=bagli_malzeme("pasta_kirmizi_kirintilar" if RED_VELVET else "pasta_kirazlari",
+                            "#75202b" if RED_VELVET else "#a81f2d")
         for i in range(8):
             angle=2*math.pi*i/8
             cx,cy=.61*math.cos(angle),.61*math.sin(angle)
@@ -1040,9 +1042,11 @@ if APPLE or ORANGE or BANANA or NAR or TOMATO or CUCUMBER or PEPPER or HOTDOG or
             ob.location=(cx,cy,.465)
             bpy.ops.object.transform_apply(location=True)
             ob.parent=meyve;ob.data.materials.append(white);ANANAS_EK_OB.append(ob)
-            bpy.ops.mesh.primitive_uv_sphere_add(segments=20,ring_count=12,radius=.085)
-            ob=bpy.context.object;ob.name=f"kiraz_{i}_kesilir"
-            ob.location=(cx,cy,.56)
+            bpy.ops.mesh.primitive_uv_sphere_add(segments=20,ring_count=12,
+                                                  radius=.042 if RED_VELVET else .085)
+            ob=bpy.context.object;ob.name=(f"kirmizi_kek_kirintisi_{i}_kesilir" if RED_VELVET
+                                            else f"kiraz_{i}_kesilir")
+            ob.location=(cx,cy,.535 if RED_VELVET else .56)
             bpy.ops.object.transform_apply(location=True)
             ob.parent=meyve;ob.data.materials.append(red);ANANAS_EK_OB.append(ob)
 
@@ -1346,23 +1350,25 @@ def kup_nesnesi(tur, no):
         renk[calyx]=np.array(hex_renk("#357a2f")[:3]);maske[calyx]=0
     elif CAKE:
         zc=merk[:,2]
-        renk=np.tile(np.array(hex_renk("#f4ead8")[:3]),(k,1))
+        renk=np.tile(np.array(hex_renk("#fff3e9" if RED_VELVET else "#f4ead8")[:3]),(k,1))
         sponge=((zc>-.34)&(zc<-.19))|((zc>-.08)&(zc<.07))|((zc>.18)&(zc<.34))
-        renk[sponge]=np.array(hex_renk("#543020")[:3])
+        renk[sponge]=np.array(hex_renk("#701b27" if RED_VELVET else "#543020")[:3])
         cream=(~sponge)&(zc<=R)&(zc>=-R)
-        cherry=cream&(np.sin(27*merk[:,0]+33*merk[:,1]+11*zc)>.80)
-        renk[cherry]=np.array(hex_renk("#ad2636")[:3])
+        if not RED_VELVET:
+            cherry=cream&(np.sin(27*merk[:,0]+33*merk[:,1]+11*zc)>.80)
+            renk[cherry]=np.array(hex_renk("#ad2636")[:3])
         outer=(radial>.90)&(np.abs(zc)<=R)
-        renk[outer]=np.array(hex_renk("#452319")[:3])
+        renk[outer]=np.array(hex_renk("#731923" if RED_VELVET else "#452319")[:3])
         cream_seams=outer&((np.abs(zc+.13)<.034)|(np.abs(zc-.13)<.034))
-        renk[cream_seams]=np.array(hex_renk("#f5ead7")[:3])
+        renk[cream_seams]=np.array(hex_renk("#fff3e9" if RED_VELVET else "#f5ead7")[:3])
         garnish=zc>R
         for i in range(8):
             angle=2*np.pi*i/8
             cx,cy=.61*np.cos(angle),.61*np.sin(angle)
             d2=(merk[:,0]-cx)**2+(merk[:,1]-cy)**2
-            red=(d2+(zc-.56)**2<=.085**2)
-            renk[red]=np.array(hex_renk("#a81f2d")[:3])
+            red=(d2+(zc-(.535 if RED_VELVET else .56))**2 <=
+                 (.042 if RED_VELVET else .085)**2)
+            renk[red]=np.array(hex_renk("#75202b" if RED_VELVET else "#a81f2d")[:3])
         maske[garnish]=0
     elif CHOCBAR:
         renk=np.tile(np.array(hex_renk("#74a94d")[:3]),(k,1))
@@ -1589,7 +1595,7 @@ def kup_nesnesi(tur, no):
     if CHOCBAR:
         karis.inputs[7].default_value = hex_renk("#663521")
     if CAKE:
-        karis.inputs[7].default_value = hex_renk("#f5ecde")
+        karis.inputs[7].default_value = hex_renk("#fff3e9" if RED_VELVET else "#f5ecde")
     if CILEK:
         # Sadece maskelenmis dis yuz; kesik et yuzunde aken bulunmaz.
         geometri = ntk.nodes.new("ShaderNodeNewGeometry")
@@ -1866,7 +1872,7 @@ def kup_nesnesi(tur, no):
     if CHOCBAR:
         t_k.inputs[7].default_value = hex_renk("#663521")
     if CAKE:
-        t_k.inputs[7].default_value = hex_renk("#f5ecde")
+        t_k.inputs[7].default_value = hex_renk("#fff3e9" if RED_VELVET else "#f5ecde")
     baglan(ntt, t_k.outputs[2], bt.inputs["Base Color"])
     bt.inputs["Roughness"].default_value = 0.55
 
@@ -2255,10 +2261,12 @@ if CAKE:
     height=matematik(ntk_,"DIVIDE",matematik(ntk_,"ADD",dz,None,deger_b=R),None,deger_b=2*R)
     layers=ntk_.nodes.new("ShaderNodeValToRGB")
     layers.color_ramp.interpolation="CONSTANT"
-    layers.color_ramp.elements[0].color=hex_renk("#f4ead8")
-    layers.color_ramp.elements[1].color=hex_renk("#f4ead8")
-    for pos,col in ((.08,"#543020"),(.27,"#f4ead8"),(.40,"#543020"),
-                    (.59,"#f4ead8"),(.72,"#543020"),(.93,"#f4ead8")):
+    cream_col="#fff3e9" if RED_VELVET else "#f4ead8"
+    sponge_col="#701b27" if RED_VELVET else "#543020"
+    layers.color_ramp.elements[0].color=hex_renk(cream_col)
+    layers.color_ramp.elements[1].color=hex_renk(cream_col)
+    for pos,col in ((.08,sponge_col),(.27,cream_col),(.40,sponge_col),
+                    (.59,cream_col),(.72,sponge_col),(.93,cream_col)):
         e=layers.color_ramp.elements.new(pos);e.color=hex_renk(col)
     baglan(ntk_,height,layers.inputs["Fac"])
     cherry=matematik(ntk_,"MULTIPLY",
@@ -2267,14 +2275,24 @@ if CAKE:
             matematik(ntk_,"MULTIPLY",v_x.outputs[0],None,deger_b=27))),None,deger_b=.82),
         matematik(ntk_,"LESS_THAN",matematik(ntk_,"ABSOLUTE",dz),None,deger_b=.19))
     filling=ntk_.nodes.new("ShaderNodeMix");filling.data_type="RGBA"
-    baglan(ntk_,cherry,filling.inputs["Factor"])
+    if not RED_VELVET:
+        baglan(ntk_,cherry,filling.inputs["Factor"])
+    else:
+        filling.inputs["Factor"].default_value=0.0
     baglan(ntk_,layers.outputs["Color"],filling.inputs[6])
     filling.inputs[7].default_value=hex_renk("#aa2333")
     frost=ntk_.nodes.new("ShaderNodeMix");frost.data_type="RGBA"
     baglan(ntk_,matematik(ntk_,"GREATER_THAN",u_,None,deger_b=.91),frost.inputs["Factor"])
     baglan(ntk_,filling.outputs[2],frost.inputs[6])
-    frost.inputs[7].default_value=hex_renk("#452319")
-    baglan(ntk_,frost.outputs[2],bk_.inputs["Base Color"])
+    frost.inputs[7].default_value=hex_renk("#731923" if RED_VELVET else "#452319")
+    if RED_VELVET:
+        top_icing=ntk_.nodes.new("ShaderNodeMix");top_icing.data_type="RGBA"
+        baglan(ntk_,matematik(ntk_,"GREATER_THAN",dz,None,deger_b=.34),top_icing.inputs["Factor"])
+        baglan(ntk_,frost.outputs[2],top_icing.inputs[6])
+        top_icing.inputs[7].default_value=hex_renk("#fff3e9")
+        baglan(ntk_,top_icing.outputs[2],bk_.inputs["Base Color"])
+    else:
+        baglan(ntk_,frost.outputs[2],bk_.inputs["Base Color"])
 elif CILEK:
     baglan(ntk_, et_r.outputs["Color"], bk_.inputs["Base Color"])
 elif KARPUZ:

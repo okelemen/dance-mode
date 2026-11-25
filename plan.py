@@ -104,6 +104,12 @@ MEYVELER = {
         "A": 0.84, "B": 0.84, "R": 0.41, "boyun": 1.0,
         "profil": "black-forest-cake", "zmax": 0.65,
     },
+    "red-velvet-cake": {
+        # Three deep red sponge tiers, white cream cheese seams and frosting.
+        # Frosting rosettes and red crumb decorations occupy the cut volume.
+        "A": 0.84, "B": 0.84, "R": 0.41, "boyun": 1.0,
+        "profil": "red-velvet-cake", "zmax": 0.63,
+    },
 }
 
 # Turlar: (kesim sayisi, kesim suresi sn). Acilis 0.4 sn + sonuc 1.3 sn eklenir -> toplam 60 sn
@@ -135,7 +141,7 @@ def meyve_profil(xn, m):
         return np.maximum(0.0, 1.0 - np.abs(xn)**8)**0.34
     if m.get("profil") == "pistachio-kataifi-chocolate-bar":
         return np.maximum(0.0, 1.0 - np.abs(xn)**12)**(1.0/12.0)
-    if m.get("profil") == "black-forest-cake":
+    if m.get("profil") in ("black-forest-cake", "red-velvet-cake"):
         return np.sqrt(np.maximum(0.0, 1.0 - xn*xn))
     if m.get("profil") == "kiwi":
         xn = np.clip(xn, -1.0, 1.0)
@@ -161,7 +167,7 @@ def meyve_profil(xn, m):
 def meyve_fmax(m):
     if m.get("profil") == "strawberry":
         return float(meyve_profil(np.linspace(-1, 1, 20001), m).max())
-    if m.get("profil") in ("kiwi", "pineapple", "apple", "orange", "peach", "pomegranate", "tomato", "hot-dog", "pistachio-kataifi-chocolate-bar", "black-forest-cake"):
+    if m.get("profil") in ("kiwi", "pineapple", "apple", "orange", "peach", "pomegranate", "tomato", "hot-dog", "pistachio-kataifi-chocolate-bar", "black-forest-cake", "red-velvet-cake"):
         return 1.0
     if m.get("profil") == "banana":
         return float(meyve_profil(np.linspace(-1, 1, 20001), m).max())
@@ -277,7 +283,7 @@ def icinde(x, y, z, m):
     if m.get("profil") == "pistachio-kataifi-chocolate-bar":
         return ((np.abs(x)/m["A"])**12 + (np.abs(y)/m["B"])**12 +
                 (np.abs(z)/m["R"])**12 <= 1.0)
-    if m.get("profil") == "black-forest-cake":
+    if m.get("profil") in ("black-forest-cake", "red-velvet-cake"):
         radius=(x/m["A"])**2+(y/m["B"])**2
         body=(radius<=1.0)&(np.abs(z)<=m["R"])
         top=np.zeros_like(body,dtype=bool)
@@ -286,8 +292,12 @@ def icinde(x, y, z, m):
             cx,cy=.61*np.cos(angle),.61*np.sin(angle)
             d2=(x-cx)**2+(y-cy)**2
             rosette=(z>=.40)&(z<=.53)&(d2<=(.13-.28*np.maximum(z-.40,0))**2)
-            cherry=d2+(z-.56)**2<=.085**2
-            top|=rosette|cherry
+            if m.get("profil") == "red-velvet-cake":
+                crumb=d2+(z-.535)**2<=.042**2
+                top|=rosette|crumb
+            else:
+                cherry=d2+(z-.56)**2<=.085**2
+                top|=rosette|cherry
         return body|top
     if m.get("profil") == "red-bell-pepper":
         theta=np.arctan2(y/m["B"],x/m["A"])
