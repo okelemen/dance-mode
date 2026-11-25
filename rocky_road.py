@@ -7,18 +7,18 @@ import numpy as np
 
 # kind, centre (x,y,z), half size (x,y,z).  The camera looks from -Y.
 INGREDIENTS = [
-    ("marshmallow", -.88, -.31, .30, .17, .13, .17),
-    ("biscuit", -.53, -.19, .34, .18, .13, .105),
-    ("hazelnut", -.24, -.35, .32, .115, .105, .11),
-    ("marshmallow", .12, -.18, .34, .17, .14, .16),
-    ("biscuit", .48, -.32, .32, .19, .12, .105),
-    ("hazelnut", .84, -.20, .33, .12, .11, .105),
-    ("biscuit", -.96, .21, .32, .15, .14, .10),
-    ("hazelnut", -.67, .26, .33, .12, .11, .10),
-    ("marshmallow", -.29, .18, .32, .17, .14, .17),
-    ("biscuit", .16, .27, .34, .17, .14, .10),
-    ("hazelnut", .56, .19, .32, .11, .11, .10),
-    ("marshmallow", .91, .19, .32, .15, .13, .15),
+    ("marshmallow", -.93, -.24, .30, .15, .12, .13),
+    ("biscuit", -.72, .17, .33, .13, .11, .09),
+    ("hazelnut", -.51, -.34, .31, .095, .09, .09),
+    ("marshmallow", -.31, .02, .32, .15, .14, .13),
+    ("biscuit", -.03, -.27, .32, .16, .11, .09),
+    ("hazelnut", .18, .28, .32, .10, .09, .09),
+    ("biscuit", .45, -.05, .33, .16, .13, .09),
+    ("hazelnut", .71, -.29, .32, .10, .10, .09),
+    ("marshmallow", .94, .17, .30, .15, .13, .13),
+    ("biscuit", -.96, .25, .32, .12, .10, .09),
+    ("marshmallow", .10, .03, .31, .13, .12, .13),
+    ("hazelnut", .59, .29, .33, .11, .09, .09),
     # Pieces buried in the dark chocolate appear on the real cut face.
     ("marshmallow", -.71, .04, -.04, .13, .13, .12),
     ("biscuit", -.38, -.08, -.13, .12, .13, .075),
@@ -40,7 +40,7 @@ def ingredient_masks(x, y, z):
     occupied = np.zeros(shape, dtype=bool)
     kind = np.zeros(shape, dtype=np.uint8)
     for name, px, py, pz, sx, sy, sz in INGREDIENTS:
-        if name == "biscuit":
+        if name in ("biscuit", "marshmallow"):
             inside = (np.abs(x-px) <= sx) & (np.abs(y-py) <= sy) & (np.abs(z-pz) <= sz)
         else:
             inside = ((x-px)/sx)**2 + ((y-py)/sy)**2 + ((z-pz)/sz)**2 <= 1.0

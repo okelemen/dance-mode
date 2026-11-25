@@ -1032,12 +1032,13 @@ if ROCKY:
     for i, (kind, px, py, pz, sx, sy, sz) in enumerate(INGREDIENTS):
         if pz < .15:
             continue  # embedded pieces show only after cutting
-        if kind == "biscuit":
+        if kind in ("biscuit", "marshmallow"):
             bpy.ops.mesh.primitive_cube_add(size=2)
             ob = bpy.context.object
             ob.scale = (sx, sy, sz)
-            bevel = ob.modifiers.new("biscuit_broken_edge", "BEVEL")
-            bevel.width = .022; bevel.segments = 2
+            bevel = ob.modifiers.new("soft_ingredient_edge", "BEVEL")
+            bevel.width = .048 if kind == "marshmallow" else .022
+            bevel.segments = 3 if kind == "marshmallow" else 2
         else:
             bpy.ops.mesh.primitive_uv_sphere_add(segments=20, ring_count=12)
             ob = bpy.context.object
@@ -2326,7 +2327,7 @@ elif ROCKY:
         dx=matematik(ntk_,"DIVIDE",matematik(ntk_,"SUBTRACT",v_x.outputs[0],None,deger_b=px),None,deger_b=sx)
         yy=matematik(ntk_,"DIVIDE",matematik(ntk_,"SUBTRACT",dy,None,deger_b=py),None,deger_b=sy)
         zz=matematik(ntk_,"DIVIDE",matematik(ntk_,"SUBTRACT",dz,None,deger_b=pz),None,deger_b=sz)
-        if kind == "biscuit":
+        if kind in ("biscuit", "marshmallow"):
             inside=matematik(ntk_,"MULTIPLY",matematik(ntk_,"LESS_THAN",matematik(ntk_,"ABSOLUTE",dx),None,deger_b=1.0),
                 matematik(ntk_,"MULTIPLY",matematik(ntk_,"LESS_THAN",matematik(ntk_,"ABSOLUTE",yy),None,deger_b=1.0),
                     matematik(ntk_,"LESS_THAN",matematik(ntk_,"ABSOLUTE",zz),None,deger_b=1.0)))
