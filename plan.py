@@ -104,6 +104,11 @@ MEYVELER = {
         "A": 0.84, "B": 0.84, "R": 0.41, "boyun": 1.0,
         "profil": "black-forest-cake", "zmax": 0.65,
     },
+    "rainbow-layer-cake": {
+        # Round frosted cake: six colored sponge layers, pale cream and edible toppings.
+        "A": 0.84, "B": 0.84, "R": 0.41, "boyun": 1.0,
+        "profil": "rainbow-layer-cake", "zmax": 0.65,
+    },
 }
 
 # Turlar: (kesim sayisi, kesim suresi sn). Acilis 0.4 sn + sonuc 1.3 sn eklenir -> toplam 60 sn
@@ -135,7 +140,7 @@ def meyve_profil(xn, m):
         return np.maximum(0.0, 1.0 - np.abs(xn)**8)**0.34
     if m.get("profil") == "pistachio-kataifi-chocolate-bar":
         return np.maximum(0.0, 1.0 - np.abs(xn)**12)**(1.0/12.0)
-    if m.get("profil") == "black-forest-cake":
+    if m.get("profil") in ("black-forest-cake", "rainbow-layer-cake"):
         return np.sqrt(np.maximum(0.0, 1.0 - xn*xn))
     if m.get("profil") == "kiwi":
         xn = np.clip(xn, -1.0, 1.0)
@@ -161,7 +166,7 @@ def meyve_profil(xn, m):
 def meyve_fmax(m):
     if m.get("profil") == "strawberry":
         return float(meyve_profil(np.linspace(-1, 1, 20001), m).max())
-    if m.get("profil") in ("kiwi", "pineapple", "apple", "orange", "peach", "pomegranate", "tomato", "hot-dog", "pistachio-kataifi-chocolate-bar", "black-forest-cake"):
+    if m.get("profil") in ("kiwi", "pineapple", "apple", "orange", "peach", "pomegranate", "tomato", "hot-dog", "pistachio-kataifi-chocolate-bar", "black-forest-cake", "rainbow-layer-cake"):
         return 1.0
     if m.get("profil") == "banana":
         return float(meyve_profil(np.linspace(-1, 1, 20001), m).max())
@@ -277,7 +282,7 @@ def icinde(x, y, z, m):
     if m.get("profil") == "pistachio-kataifi-chocolate-bar":
         return ((np.abs(x)/m["A"])**12 + (np.abs(y)/m["B"])**12 +
                 (np.abs(z)/m["R"])**12 <= 1.0)
-    if m.get("profil") == "black-forest-cake":
+    if m.get("profil") in ("black-forest-cake", "rainbow-layer-cake"):
         radius=(x/m["A"])**2+(y/m["B"])**2
         body=(radius<=1.0)&(np.abs(z)<=m["R"])
         top=np.zeros_like(body,dtype=bool)
