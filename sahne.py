@@ -47,7 +47,8 @@ TOMATO = PLAN["meyve"] == "tomato"
 CUCUMBER = PLAN["meyve"] == "cucumber"
 PEPPER = PLAN["meyve"] == "red-bell-pepper"
 HOTDOG = PLAN["meyve"] == "hot-dog"
-CHOCBAR = PLAN["meyve"] == "pistachio-kataifi-chocolate-bar"
+RUBY = PLAN["meyve"] == "ruby-raspberry-chocolate-bar"
+CHOCBAR = PLAN["meyve"] in ("pistachio-kataifi-chocolate-bar", "ruby-raspberry-chocolate-bar")
 B = M.get("B", R)
 XMIN, XMAX = M.get("xmin", -A), M.get("xmax", A)
 TAHTA_UST = 0.14
@@ -590,8 +591,8 @@ else:
         bmp.inputs["Distance"].default_value=.007
     elif CHOCBAR:
         brown=nt.nodes.new("ShaderNodeValToRGB")
-        brown.color_ramp.elements[0].color=hex_renk("#522717")
-        brown.color_ramp.elements[1].color=hex_renk("#75402a")
+        brown.color_ramp.elements[0].color=hex_renk("#a94770" if RUBY else "#522717")
+        brown.color_ramp.elements[1].color=hex_renk("#e78eac" if RUBY else "#75402a")
         baglan(nt,nz.outputs["Fac"],brown.inputs["Fac"])
         xyz=nt.nodes.new("ShaderNodeSeparateXYZ")
         baglan(nt,tk.outputs["Object"],xyz.inputs[0])
@@ -604,8 +605,30 @@ else:
         tiles=nt.nodes.new("ShaderNodeMix");tiles.data_type="RGBA"
         baglan(nt,seam,tiles.inputs["Factor"])
         baglan(nt,brown.outputs["Color"],tiles.inputs[6])
-        tiles.inputs[7].default_value=hex_renk("#33190f")
+        tiles.inputs[7].default_value=hex_renk("#883859" if RUBY else "#33190f")
         kabuk_rengi=tiles.outputs[2]
+        if RUBY:
+            # Tabletin ustundeki gercek kirinti ve fistik benekleri.
+            fleck=nt.nodes.new("ShaderNodeTexVoronoi")
+            fleck.inputs["Scale"].default_value=42.0
+            baglan(nt,tk.outputs["Object"],fleck.inputs["Vector"])
+            crumb=matematik(nt,"MULTIPLY",top,
+                matematik(nt,"LESS_THAN",fleck.outputs["Distance"],None,deger_b=.105))
+            cm=nt.nodes.new("ShaderNodeMix");cm.data_type="RGBA"
+            baglan(nt,crumb,cm.inputs["Factor"])
+            baglan(nt,kabuk_rengi,cm.inputs[6])
+            cm.inputs[7].default_value=hex_renk("#a7244c")
+            kabuk_rengi=cm.outputs[2]
+            pist_noise=nt.nodes.new("ShaderNodeTexNoise")
+            pist_noise.inputs["Scale"].default_value=58.0
+            baglan(nt,tk.outputs["Object"],pist_noise.inputs["Vector"])
+            pist=matematik(nt,"MULTIPLY",top,
+                matematik(nt,"GREATER_THAN",pist_noise.outputs["Fac"],None,deger_b=.78))
+            pm=nt.nodes.new("ShaderNodeMix");pm.data_type="RGBA"
+            baglan(nt,pist,pm.inputs["Factor"])
+            baglan(nt,kabuk_rengi,pm.inputs[6])
+            pm.inputs[7].default_value=hex_renk("#86a347")
+            kabuk_rengi=pm.outputs[2]
         bmp.inputs["Strength"].default_value=.05
         bmp.inputs["Distance"].default_value=.002
 
@@ -1290,14 +1313,19 @@ def kup_nesnesi(tur, no):
         calyx=domates_canak(merk[:,0],merk[:,1],merk[:,2],M)
         renk[calyx]=np.array(hex_renk("#357a2f")[:3]);maske[calyx]=0
     elif CHOCBAR:
-        renk=np.tile(np.array(hex_renk("#74a94d")[:3]),(k,1))
+        renk=np.tile(np.array(hex_renk("#d77296" if RUBY else "#74a94d")[:3]),(k,1))
         shell=(np.abs(merk[:,0])>.88*A)|(np.abs(merk[:,1])>.84*B)|(np.abs(merk[:,2])>.82*R)
-        renk[shell]=np.array(hex_renk("#663521")[:3])
-        # Kadayif telleri, fistik kremasinin icinde kesim konumuna bagli.
-        thread=(~shell)&(np.sin(62*merk[:,0]+91*merk[:,1]+53*merk[:,2])>.67)
-        renk[thread]=np.array(hex_renk("#d8ab57")[:3])
-        nuts=(~shell)&(np.sin(35*merk[:,0]-42*merk[:,1]+27*merk[:,2])>.94)
-        renk[nuts]=np.array(hex_renk("#3e7631")[:3])
+        renk[shell]=np.array(hex_renk("#c7658c" if RUBY else "#663521")[:3])
+        if RUBY:
+            crumb=(~shell)&(np.sin(67*merk[:,0]+91*merk[:,1]+53*merk[:,2])>.67)
+            renk[crumb]=np.array(hex_renk("#a92348")[:3])
+            nuts=(~shell)&(np.sin(35*merk[:,0]-42*merk[:,1]+27*merk[:,2])>.82)
+            renk[nuts]=np.array(hex_renk("#78a047")[:3])
+        else:
+            thread=(~shell)&(np.sin(62*merk[:,0]+91*merk[:,1]+53*merk[:,2])>.67)
+            renk[thread]=np.array(hex_renk("#d8ab57")[:3])
+            nuts=(~shell)&(np.sin(35*merk[:,0]-42*merk[:,1]+27*merk[:,2])>.94)
+            renk[nuts]=np.array(hex_renk("#3e7631")[:3])
         maske[shell]=0
     elif HOTDOG:
         renk=np.tile(np.array(hex_renk("#eac18b")[:3]),(k,1))
@@ -1512,7 +1540,7 @@ def kup_nesnesi(tur, no):
     baglan(ntk, a_r.outputs["Color"], karis.inputs[6])
     karis.inputs[7].default_value = hex_renk("#b87538" if HOTDOG else ("#b71f29" if CILEK else ("#c93225" if APPLE else ("#e87916" if ORANGE else ("#e7c137" if BANANA else ("#356d2c" if CUCUMBER else ("#c3221a" if PEPPER else ("#d95c4d" if PEACH else ("#8c1c27" if NAR else ("#c7231d" if TOMATO else "#21361a"))))))))))
     if CHOCBAR:
-        karis.inputs[7].default_value = hex_renk("#663521")
+        karis.inputs[7].default_value = hex_renk("#c7658c" if RUBY else "#663521")
     if CILEK:
         # Sadece maskelenmis dis yuz; kesik et yuzunde aken bulunmaz.
         geometri = ntk.nodes.new("ShaderNodeNewGeometry")
@@ -1787,7 +1815,7 @@ def kup_nesnesi(tur, no):
     baglan(ntt, t_r.outputs["Color"], t_k.inputs[6])
     t_k.inputs[7].default_value = hex_renk("#b87538" if HOTDOG else ("#60452f" if KIVI else ("#143c27" if KARPUZ else ("#b71f29" if CILEK else ("#c93225" if APPLE else ("#e87916" if ORANGE else ("#356d2c" if CUCUMBER else ("#c3221a" if PEPPER else "#21361a"))))))))
     if CHOCBAR:
-        t_k.inputs[7].default_value = hex_renk("#663521")
+        t_k.inputs[7].default_value = hex_renk("#c7658c" if RUBY else "#663521")
     baglan(ntt, t_k.outputs[2], bt.inputs["Base Color"])
     bt.inputs["Roughness"].default_value = 0.55
 
@@ -2148,10 +2176,10 @@ elif TOMATO:
     for pos,col in ((.7,"#e44b2e"),(.76,"#cf3726"),(.94,"#d1261d")):
         e=et_r.color_ramp.elements.new(pos);e.color=hex_renk(col)
 elif CHOCBAR:
-    et_r.color_ramp.elements[0].color=hex_renk("#77a948")
-    et_r.color_ramp.elements[1].color=hex_renk("#663521")
-    e=et_r.color_ramp.elements.new(.78);e.color=hex_renk("#7dae4d")
-    e=et_r.color_ramp.elements.new(.84);e.color=hex_renk("#663521")
+    et_r.color_ramp.elements[0].color=hex_renk("#df83a3" if RUBY else "#77a948")
+    et_r.color_ramp.elements[1].color=hex_renk("#c7658c" if RUBY else "#663521")
+    e=et_r.color_ramp.elements.new(.78);e.color=hex_renk("#df83a3" if RUBY else "#7dae4d")
+    e=et_r.color_ramp.elements.new(.84);e.color=hex_renk("#c7658c" if RUBY else "#663521")
 elif HOTDOG:
     et_r.color_ramp.elements[0].color=hex_renk("#eac18b")
     et_r.color_ramp.elements[1].color=hex_renk("#b87538")
@@ -2264,8 +2292,23 @@ elif CHOCBAR:
     filling=ntk_.nodes.new("ShaderNodeMix");filling.data_type="RGBA"
     baglan(ntk_,strand,filling.inputs["Factor"])
     baglan(ntk_,et_r.outputs["Color"],filling.inputs[6])
-    filling.inputs[7].default_value=hex_renk("#d5a455")
-    baglan(ntk_,filling.outputs[2],bk_.inputs["Base Color"])
+    filling.inputs[7].default_value=hex_renk("#a92348" if RUBY else "#d5a455")
+    if RUBY:
+        nuts=matematik(ntk_,"SINE",
+            matematik(ntk_,"ADD",
+                matematik(ntk_,"MULTIPLY",dy,None,deger_b=43),
+                matematik(ntk_,"ADD",matematik(ntk_,"MULTIPLY",dz,None,deger_b=-61),
+                    matematik(ntk_,"MULTIPLY",v_x.outputs[0],None,deger_b=31))))
+        nuts=matematik(ntk_,"MULTIPLY",
+            matematik(ntk_,"GREATER_THAN",nuts,None,deger_b=.80),
+            matematik(ntk_,"LESS_THAN",u_,None,deger_b=.78))
+        pist=ntk_.nodes.new("ShaderNodeMix");pist.data_type="RGBA"
+        baglan(ntk_,nuts,pist.inputs["Factor"])
+        baglan(ntk_,filling.outputs[2],pist.inputs[6])
+        pist.inputs[7].default_value=hex_renk("#78a047")
+        baglan(ntk_,pist.outputs[2],bk_.inputs["Base Color"])
+    else:
+        baglan(ntk_,filling.outputs[2],bk_.inputs["Base Color"])
 elif HOTDOG:
     meat=matematik(ntk_,"LESS_THAN",sausage_u,None,deger_b=1.0)
     cm=ntk_.nodes.new("ShaderNodeMix");cm.data_type="RGBA"
