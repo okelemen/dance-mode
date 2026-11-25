@@ -103,7 +103,10 @@ jobs:
       - name: Video (sessiz)
         if: needs.hazirlik.outputs.mod != 'probe' && needs.hazirlik.outputs.mod != 'marka'
         run: |
-          sudo apt-get install -y -qq ffmpeg
+          if ! command -v ffmpeg >/dev/null; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+          fi
           mkdir -p video
           B=$(ls hud | sort | head -1 | tr -dc '0-9' | sed 's/^0*//')
           ffmpeg -v error -framerate 30 -start_number $B -i hud/kare_%04d.jpg -c:v libx264 -preset veryfast -crf 18 -pix_fmt yuv420p video/sessiz.mp4
