@@ -52,13 +52,13 @@ def koy_sahnesi(w, h, saydam):
     nt.links.new(sp.outputs["Z"], rp.inputs[0])
     # su yuzeyi (ust bant): dalgali parlak cizgiler -> gokte bos alan yok
     wv = nt.nodes.new("ShaderNodeTexWave"); wv.wave_type = "BANDS"; wv.bands_direction = "X"; wv.inputs["Scale"].default_value = 7.0
-    wv.inputs["Distortion"].default_value = 14.0; wv.inputs["Detail"].default_value = 4.0; wv.inputs["Detail Scale"].default_value = 2.0
+    wv.inputs["Distortion"].default_value = 6.0; wv.inputs["Detail"].default_value = 2.0; wv.inputs["Detail Scale"].default_value = 1.0   # sahne 1: mermer gibi kalabalik okundu
     nt.links.new(tc.outputs["Generated"], wv.inputs["Vector"])
     bt = nt.nodes.new("ShaderNodeValToRGB"); be = bt.color_ramp.elements
-    be[0].position = 0.6; be[0].color = (0, 0, 0, 1); be[1].position = 0.92; be[1].color = (1, 1, 1, 1)
+    be[0].position = 0.8; be[0].color = (0, 0, 0, 1); be[1].position = 0.97; be[1].color = (1, 1, 1, 1)   # yalniz ince parlak cizgiler
     nt.links.new(wv.outputs["Fac"], bt.inputs[0])
     zb = nt.nodes.new("ShaderNodeValToRGB"); ze = zb.color_ramp.elements
-    ze[0].position = 0.18; ze[0].color = (0, 0, 0, 1); ze[1].position = 0.5; ze[1].color = (0.9, 0.9, 0.9, 1)
+    ze[0].position = 0.3; ze[0].color = (0, 0, 0, 1); ze[1].position = 0.6; ze[1].color = (0.6, 0.6, 0.6, 1)   # su yuzeyi yalniz ust bantta
     nt.links.new(sp.outputs["Z"], zb.inputs[0])
     ml = nt.nodes.new("ShaderNodeMath"); ml.operation = "MULTIPLY"
     nt.links.new(bt.outputs[0], ml.inputs[0]); nt.links.new(zb.outputs[0], ml.inputs[1])
@@ -178,7 +178,7 @@ def mat_kum(ad="kum", acik_ton=False):
     bp = nt.nodes.new("ShaderNodeBump"); bp.inputs["Strength"].default_value = 0.3
     nt.links.new(wv.outputs["Fac"], bp.inputs["Height"]); nt.links.new(bp.outputs["Normal"], b.inputs["Normal"])
     b.inputs["Roughness"].default_value = 0.6
-    b.inputs["Coat Weight"].default_value = 0.15 if acik_ton else 0.0; b.inputs["Coat Roughness"].default_value = 0.1
+    b.inputs["Coat Weight"].default_value = 0.0   # sahne 1: pistte beyaz parlama lekesi; b.inputs["Coat Roughness"].default_value = 0.1
     return m
 
 
@@ -192,10 +192,10 @@ def mat_huzme(ad="huzme"):
     rp = nt.nodes.new("ShaderNodeValToRGB"); el = rp.color_ramp.elements
     el[0].position = 0.0; el[0].color = (0, 0, 0, 1); el[1].position = 1.0; el[1].color = (1, 1, 1, 1)
     nt.links.new(sp.outputs["Y"], rp.inputs[0])
-    em = nt.nodes.new("ShaderNodeEmission"); em.inputs[0].default_value = (*lin(hex3("#d0fff8")), 1); em.inputs[1].default_value = 1.6
+    em = nt.nodes.new("ShaderNodeEmission"); em.inputs[0].default_value = (*lin(hex3("#e0fff8")), 1); em.inputs[1].default_value = 2.2
     tr = nt.nodes.new("ShaderNodeBsdfTransparent")
     mx = nt.nodes.new("ShaderNodeMixShader")
-    mt = nt.nodes.new("ShaderNodeMath"); mt.operation = "MULTIPLY"; mt.inputs[1].default_value = 0.28
+    mt = nt.nodes.new("ShaderNodeMath"); mt.operation = "MULTIPLY"; mt.inputs[1].default_value = 0.45   # sahne 1: huzme gorunmuyordu
     nt.links.new(rp.outputs[0], mt.inputs[0]); nt.links.new(mt.outputs[0], mx.inputs[0])
     nt.links.new(tr.outputs[0], mx.inputs[1]); nt.links.new(em.outputs[0], mx.inputs[2])
     o = nt.nodes.new("ShaderNodeOutputMaterial"); nt.links.new(mx.outputs[0], o.inputs[0])
@@ -438,12 +438,14 @@ def mekan(serit_modu, rnd):
         s = -1 if i % 2 == 0 else 1; y = GECIS + 2 + (i // 2) * 4.5
         dal_mercan(s * (PIST + 2.2 + y * 0.02), y, 0.9 + y * 0.02, rnd, renk=MERCAN[(i // 2) % len(MERCAN)])
     # su ici: gunes huzmeleri, balik suruleri, kabarciklar
-    for i in range(9):
-        x = -60 + i * 15 + rnd.uniform(-4, 4)
-        huzme(x, rnd.uniform(40, 140), rnd.uniform(2.5, 6), 70, rnd.uniform(-0.35, -0.15))
-    for (m, r, s, renk) in (((-22, 40, 9), 5, 0.35, BALIK[0]), ((26, 55, 12), 6, 0.4, BALIK[1]), ((-40, 90, 18), 9, 0.6, BALIK[2]),
-                            ((45, 110, 22), 10, 0.7, BALIK[3]), ((-12, 160, 30), 12, 0.9, BALIK[4]), ((60, 200, 34), 14, 1.1, BALIK[5])):
-        balik_surusu(rnd, 14, m, r, s, renk)
+    for i in range(9):                                  # sahne 1: 40-140 m'de mist icinde kayboldu -> yakin (22-45 m), genis
+        x = -48 + i * 12 + rnd.uniform(-3, 3)
+        if abs(x) < 7:
+            continue
+        huzme(x, rnd.uniform(22, 45), rnd.uniform(3, 6), 50, rnd.uniform(-0.35, -0.15))
+    for (m, r, s, renk) in (((-18, 30, 8), 4, 0.7, BALIK[0]), ((20, 34, 9), 4.5, 0.75, BALIK[1]), ((-34, 60, 14), 7, 1.1, BALIK[2]),   # sahne 1: suruler cok kucuktu
+                            ((38, 70, 16), 7, 1.2, BALIK[3]), ((-10, 110, 24), 10, 1.6, BALIK[4]), ((55, 140, 28), 12, 1.9, BALIK[5])):
+        balik_surusu(rnd, 12, m, r, s, renk)
     for (x, y, z, renk) in ((-9, 16, 5.5, BALIK[1]), (10, 20, 6.5, BALIK[0]), (-14, 26, 8, BALIK[3])):   # yakin tek baliklar (gokte bos alan yok)
         balik(x, y, z, 0.5, renk, 1 if x < 0 else -1)
     kabarcik(rnd, 420, 30, 2, 60, 0.5, 18, kac=5)
@@ -469,7 +471,7 @@ def serit_esyalari(rnd):
             y += 1.3; i += 1
         kutu("halat", (s * (PIST + 0.5), (KAP["y"] - 3.4) / 2, 0.55), (0.06, KAP["y"] + 2.6, 0.1), mat_m("#10b870", 0.35, 0.5), egim=0)
     for j, x in enumerate((-1.7, 1.7)):                 # yon oklari: mercan pembesi ve sari
-        ok = mat_m("#ff2a7a" if j == 0 else "#ffd21a", 0.25, 0.8)
+        ok = mat_m("#ff2a7a" if j == 0 else "#7a2aff", 0.25, 0.8)   # sahne 1: sari ok sari kumda kayboldu -> mor
         for y in (4.6, 6.2):
             nok = [(x - 0.6, y - 0.4), (x, y), (x + 0.6, y - 0.4), (x + 0.6, y - 0.68), (x, y - 0.28), (x - 0.6, y - 0.68)]
             me = bpy.data.meshes.new("ok"); me.from_pydata([(a, b, 0.17) for a, b in nok], [], [list(range(6))]); me.update()
