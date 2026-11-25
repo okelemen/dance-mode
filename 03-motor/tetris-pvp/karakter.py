@@ -1078,8 +1078,15 @@ kafa_gizli = OYUNCU == "maskot"
 if kafa_gizli:   # maskotun yuzu motorda cizilir: Mixamo kafasi gizlenir, kafa kemiginin yeri her karede yazilir
     hb = kemik(arm, "Head")
 yer = YERLESIM.setdefault("karakter", {}).setdefault(OYUNCU, {"boy_px": round(BOY / CERCEVE * PX, 1), "zemin_px": round((1 - (ZEMIN - (kam.location.z - CERCEVE / 2)) / CERCEVE) * PX, 1), "poz": {}})
+EKLEM = arg("--eklem", "0") == "1"
+EKLEM_LISTE = [("Hips", 0), ("Spine2", 0), ("Neck", 0), ("Head", 0)] + [(t + k, u) for t in ("Left", "Right") for k, u in
+               (("Arm", 0), ("ForeArm", 0), ("Hand", 0), ("Hand", 1), ("UpLeg", 0), ("Leg", 0), ("Foot", 0), ("Foot", 1))]
+if arg("--govde-gizli", "0") == "1":                                  # 38: govde 2B cizilir -> 3B govde/ekip hic render edilmez
+    for o_ in bpy.data.objects:
+        if o_.type == "MESH":
+            o_.hide_render = True
 for ad, P in TANIM.items():
-    kafa = []
+    kafa = []; eklem = []
     for i in range(K):
         q = i / (K - 1); q = q * q * (3 - 2 * q)
         uygula(P, q)
@@ -1088,9 +1095,17 @@ for ad, P in TANIM.items():
         mrk = h0 + (h1 - h0) * 0.6
         kv = world_to_camera_view(sc, kam, mrk)
         kafa.append([round(kv.x * PX, 1), round((1 - kv.y) * PX, 1), round(((h1 - h0).length * 1.25) / CERCEVE * PX, 1)])
+        if EKLEM:                                                     # 38: 2B cizilen maskot (gövde de motorda 2B) - eklemlerin ekran yeri
+            e_ = {}
+            for kad, uc in EKLEM_LISTE:
+                b_ = kemik(arm, kad); w_ = arm.matrix_world @ (b_.tail if uc else b_.head)
+                v_ = world_to_camera_view(sc, kam, w_); e_[kad + ("_uc" if uc else "")] = [round(v_.x * PX, 1), round((1 - v_.y) * PX, 1)]
+            eklem.append(e_)
         if kafa_gizli:
             hb_.scale = (0.01, 0.01, 0.01); bpy.context.view_layer.update()
         yaz(sc, "karakter/%s/%s-%02d.png" % (OYUNCU, ad, i))
     yer["poz"][ad] = {"kafa": kafa}
+    if EKLEM:
+        yer["poz"][ad]["eklem"] = eklem
 json.dump(YERLESIM, open(os.path.join(CIKTI, "yerlesim.json"), "w"), indent=1)
 log("bitti (karakter)", OYUNCU, len(TANIM))
