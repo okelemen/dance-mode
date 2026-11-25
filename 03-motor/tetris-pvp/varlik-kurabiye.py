@@ -89,6 +89,8 @@ def koy_sahnesi(w, h, saydam):
     rl = ct.nodes.new("CompositorNodeRLayers"); gl = ct.nodes.new("CompositorNodeGlare"); co = ct.nodes.new("CompositorNodeComposite")
     gl.glare_type = "FOG_GLOW"; gl.quality = "HIGH"; gl.threshold = 1.0; gl.size = 7; gl.mix = -0.3   # isik dizileri hafif parlar
     ct.links.new(rl.outputs["Image"], gl.inputs[0]); ct.links.new(gl.outputs[0], co.inputs[0])
+    if KAPAK_DN >= 4:                                    # kapak olcumu 5 (25 Kas): fog glow beyaz pus katiyor -> kapakta parilti yok
+        ct.links.new(rl.outputs["Image"], co.inputs[0])
     if saydam:
         ct.links.new(rl.outputs["Alpha"], co.inputs[1])
     return sc
