@@ -2063,14 +2063,15 @@ for no, tur in enumerate(PLAN["turlar"]):
     bicak.location = DISARI
     bicak.keyframe_insert("location", frame=kare(ks + 0.12))
     # kup yigini: supurme basinda gorunur (meyvenin icinde), dilim dilim coker
-    kup, t_sup = kup_nesnesi(tur, no)
-    kup.hide_render = True
-    kup.keyframe_insert("hide_render", frame=0)
-    kup.hide_render = False
-    kup.keyframe_insert("hide_render", frame=kare(t_sup - 0.05))
-    kup.hide_render = True
-    kup.keyframe_insert("hide_render", frame=kare(son))
-    sabit_interp(kup)
+    if arg("--render", "1") == "1":
+        kup, t_sup = kup_nesnesi(tur, no)
+        kup.hide_render = True
+        kup.keyframe_insert("hide_render", frame=0)
+        kup.hide_render = False
+        kup.keyframe_insert("hide_render", frame=kare(t_sup - 0.05))
+        kup.hide_render = True
+        kup.keyframe_insert("hide_render", frame=kare(son))
+        sabit_interp(kup)
 
 # interpolasyon: bicak konumu dogrusal, yon sabit; cizgi degerleri sabit; gorunurluk sabit
 ad = bicak.animation_data.action
