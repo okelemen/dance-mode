@@ -31,6 +31,10 @@ SEKER = ("#ff2a4a", "#20c850", "#ffc21a", "#1e8cff", "#ff3aa8", "#8a3aff", "#ff7
 ISIK = ("#ff3030", "#30ff50", "#ffd21a", "#3a8cff", "#ff40c0")
 GOK_ALT, GOK_ORTA, GOK_UST = "#ff3a9a", "#7a1ae8", "#1a0a8a"   # ufuk pembe -> mor -> derin lacivert
 AURORA = ("#20ffa0", "#20e0ff", "#ff50d0")
+KAPAK_D = KAPAK and arg("--kapak-doygun", "0") != "0"   # kapak olcumu 1 (25 Kas): arka plan S 0,554, siluet+kontur ile kapak 0,46 < REF-090 0,559
+if KAPAK_D:                                               # buyuk alanlar (kurabiye yol, leylak kar) daha doygun; cila/parilti beyaza cekmesin
+    KURABIYE, KURABIYE_K = "#e8580a", "#a83008"
+    KAR, KAR_K = "#5a6aff", "#5a1aff"
 
 
 # ------------------------------------------------------------------ sahne / isik
@@ -142,7 +146,7 @@ def mat_kar(ad="kar"):
     bp = nt.nodes.new("ShaderNodeBump"); bp.inputs["Strength"].default_value = 0.35
     nt.links.new(n2.outputs["Fac"], bp.inputs["Height"]); nt.links.new(bp.outputs["Normal"], b.inputs["Normal"])
     b.inputs["Roughness"].default_value = 0.55
-    b.inputs["Sheen Weight"].default_value = 0.15; b.inputs["Sheen Tint"].default_value = (*lin(hex3("#b08aff")), 1)
+    b.inputs["Sheen Weight"].default_value = 0.0 if KAPAK_D else 0.15; b.inputs["Sheen Tint"].default_value = (*lin(hex3("#b08aff")), 1)
     b.inputs["Subsurface Weight"].default_value = 0.2; b.inputs["Subsurface Radius"].default_value = (0.6, 0.7, 1.0)
     return m
 
@@ -157,7 +161,7 @@ def mat_kurabiye_tas(ad="pist"):
     v2 = nt.nodes.new("ShaderNodeTexVoronoi"); v2.inputs["Scale"].default_value = 1.4; v2.distance = "CHEBYCHEV"
     nt.links.new(geo.outputs["Position"], v2.inputs["Vector"])
     rt = nt.nodes.new("ShaderNodeValToRGB"); el = rt.color_ramp.elements
-    el[0].position = 0.0; el[0].color = (*lin(hex3("#d8761e")), 1); el[1].position = 1.0; el[1].color = (*lin(hex3("#a8501a")), 1)
+    el[0].position = 0.0; el[0].color = (*lin(hex3("#ff6a0a" if KAPAK_D else "#d8761e")), 1); el[1].position = 1.0; el[1].color = (*lin(hex3("#c83a06" if KAPAK_D else "#a8501a")), 1)
     nt.links.new(v2.outputs["Color"], rt.inputs[0])
     dz = nt.nodes.new("ShaderNodeMath"); dz.operation = "LESS_THAN"; dz.inputs[1].default_value = 0.03
     nt.links.new(vr.outputs["Distance"], dz.inputs[0])
@@ -166,7 +170,7 @@ def mat_kurabiye_tas(ad="pist"):
     nt.links.new(mx.outputs[2], b.inputs["Base Color"])
     bp = nt.nodes.new("ShaderNodeBump"); bp.inputs["Strength"].default_value = 0.6
     nt.links.new(vr.outputs["Distance"], bp.inputs["Height"]); nt.links.new(bp.outputs["Normal"], b.inputs["Normal"])
-    b.inputs["Roughness"].default_value = 0.45; b.inputs["Coat Weight"].default_value = 0.35; b.inputs["Coat Roughness"].default_value = 0.12
+    b.inputs["Roughness"].default_value = 0.45; b.inputs["Coat Weight"].default_value = 0.08 if KAPAK_D else 0.35; b.inputs["Coat Roughness"].default_value = 0.12
     return m
 
 
