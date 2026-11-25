@@ -116,6 +116,7 @@ function pipGovde(E, P, boy) {                                  // motor 35: Pip
   const KON = Math.max(2, boy * 0.018);
   const g = a => P(E[a]);
   function kapsul(a, b, ra, rb, renk) {
+    ra = Math.max(0.5, ra); rb = Math.max(0.5, rb);              // tam render 1: kucuk boyda negatif yaricap (arc IndexSizeError)
     const dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy) || 1, nx = -dy / L, ny = dx / L;
     cx.fillStyle = renk; cx.beginPath();
     cx.moveTo(a[0] + nx * ra, a[1] + ny * ra); cx.lineTo(b[0] + nx * rb, b[1] + ny * rb); cx.lineTo(b[0] - nx * rb, b[1] - ny * rb); cx.lineTo(a[0] - nx * ra, a[1] - ny * ra); cx.closePath(); cx.fill();
@@ -128,7 +129,7 @@ function pipGovde(E, P, boy) {                                  // motor 35: Pip
   function elips(m, rx, ry, aci, renk, kontur = true) {
     cx.save(); cx.translate(m[0], m[1]); cx.rotate(aci);
     if (kontur) { cx.fillStyle = KN; cx.beginPath(); cx.ellipse(0, 0, rx + KON, ry + KON, 0, 0, 6.283); cx.fill(); }
-    cx.fillStyle = renk; cx.beginPath(); cx.ellipse(0, 0, rx, ry, 0, 0, 6.283); cx.fill(); cx.restore();
+    cx.fillStyle = renk; cx.beginPath(); cx.ellipse(0, 0, Math.max(0.5, rx), Math.max(0.5, ry), 0, 0, 6.283); cx.fill(); cx.restore();
   }
   const ru = boy * 0.062, rl = boy * 0.042, rt = boy * 0.048, ra = boy * 0.05, rf = boy * 0.04;
   const bacak = (t_, renk) => uzuv([[g(t_ + 'UpLeg'), g(t_ + 'Leg'), ru, rl * 1.1], [g(t_ + 'Leg'), g(t_ + 'Foot'), rl * 1.1, rl], [g(t_ + 'Foot'), g(t_ + 'Foot_uc'), rt, rt * 0.8, TOYNAK]], renk);

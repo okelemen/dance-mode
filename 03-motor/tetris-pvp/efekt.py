@@ -235,6 +235,11 @@ def main():
                 yerlestir(ef, gurleme(0.9), t + 2.0, 0.9)
                 yerlestir(ef, kum(0.6), t + 2.3, 0.9)
                 yerlestir(ef, ruzgar(1.0), t + 2.25, 0.5)
+            elif "--kurabiye" in sys.argv:                                  # 38: dev hediye kutusu kayarak gelir, kapak firlar (pop), kar + yildizcik fiskirir
+                yerlestir(ef, vuus(0.6, True, 0.8), t + 2.0)
+                yerlestir(ef, boing(0.5), t + 2.4, 0.7)
+                yerlestir(ef, kar(0.6), t + 2.45, 0.8)
+                yerlestir(ef, piril(1.0), t + 2.5, 0.9)
             elif "--mantar" in sys.argv:                                    # 36: dev mantar yerden buyur, sapka acilir (pop), spor bulutu
                 yerlestir(ef, mantar_buyu(0.75), t + 2.0, 0.9)
                 yerlestir(ef, piril(1.0), t + 2.6, 0.9)
@@ -263,7 +268,7 @@ def main():
                 yerlestir(ef, su(), t + 2.35, 0.9)
             else:
                 yerlestir(ef, ruzgar(1.3), t + 2.0, 0.6)                # lale yapragi firtinasi
-            yerlestir(ef, zap(0.4), t + (2.88 if "--blok" in sys.argv else 2.7 if ("--balon" in sys.argv or "--mantar" in sys.argv) else 2.55), 0.7)   # WHO WILL WIN? / 34: CAN YOUR TEAM CLEAR ALL 24?
+            yerlestir(ef, zap(0.4), t + (2.88 if "--blok" in sys.argv else 2.7 if ("--balon" in sys.argv or "--mantar" in sys.argv or "--kurabiye" in sys.argv) else 2.55), 0.7)   # WHO WILL WIN? / 34: CAN YOUR TEAM CLEAR ALL 24?
         elif k["tip"] in ("vs", "giris", "acilis"):          # 5. video: giris karti (3 PLAYERS) VS ile ayni carpisma
             yerlestir(ef, vuus(0.7, True, 0.9), t)
             yerlestir(ef, vurus(), t + 0.45, 1.0)
@@ -327,6 +332,10 @@ def main():
             elif "--arena" in sys.argv:                                     # 33: kum yiginina yuvarlanir -> gumleme + kum + hakem duduk
                 yerlestir(ef, kum(), c - 0.03, 1.0)
                 yerlestir(ef, duduk(), c + 0.35, 0.7)
+            elif "--kurabiye" in sys.argv:                                  # 38: krema kapli kar yiginina gomulur -> kar pufu + seker parilti + hakem duduk
+                yerlestir(ef, kar(), c - 0.03, 1.0)
+                yerlestir(ef, piril(0.4), c + 0.15, 0.5)
+                yerlestir(ef, duduk(), c + 0.45, 0.7)
             elif "--mantar" in sys.argv:                                    # 36: dev mantar sapkasina duser, seker (boing) + spor pufu + hakem duduk
                 yerlestir(ef, boing(), c - 0.03, 1.0)
                 yerlestir(ef, bulut_puf(0.5), c + 0.05, 0.6)
