@@ -1,0 +1,41 @@
+name: Assemble existing CubeCut frames
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_run:
+        description: Source render run ID
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ inputs.source_run }}
+          github-token: ${{ github.token }}
+          pattern: kare-*
+          path: hud
+          merge-multiple: true
+      - name: Encode approved render frames
+        shell: bash
+        run: |
+          set -euo pipefail
+          command -v ffmpeg >/dev/null || { sudo apt-get update -qq; sudo apt-get install -y -qq ffmpeg; }
+          test "$(find hud -maxdepth 1 -name 'kare_*.jpg' | wc -l)" -eq 1800
+          mkdir -p video
+          ffmpeg -v error -framerate 30 -start_number 1 -i hud/kare_%04d.jpg \
+            -c:v libx264 -preset veryfast -crf 18 -pix_fmt yuv420p video/sessiz.mp4
+          ffprobe -v error -show_entries format=duration -of csv=p=0 video/sessiz.mp4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: video-recovered
+          path: video/sessiz.mp4
+          retention-days: 3
