@@ -192,6 +192,20 @@ def gurleme(sure=1.9):
     return (x * zarf * 0.6).astype(np.float64)
 
 
+def kabarcik(sure=0.9, n=9, tohum=39):
+    """39 (mercan resifi): su alti kabarciklari - kisa yukari kayan 'blop'lar (sinus, 300->900 Hz, 40-70 ms), rastgele aralik, hafif yankili"""
+    r = np.random.default_rng(tohum)
+    x = np.zeros(int(sure * SR))
+    for i in range(n):
+        t0 = int(r.uniform(0, sure * 0.8) * SR); d = r.uniform(0.04, 0.07)
+        tt = np.arange(int(d * SR)) / SR
+        f0 = r.uniform(280, 520); f = f0 * (1 + 2.0 * tt / d)
+        b = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.pi * tt / d) ** 2
+        e = min(len(x), t0 + len(b)); x[t0:e] += b[:e - t0] * r.uniform(0.5, 1.0)
+    k = np.zeros(int(0.09 * SR)); k[0] = 1; k[int(0.045 * SR)] = 0.35; k[-1] = 0.15
+    return (np.convolve(x, k)[:len(x)] * 0.45).astype(np.float64)
+
+
 def boing(sure=0.7):
     """36 (mantar ormani): yumusak mantar sapkasinda sekme - asagi kayan titresimli 'boyiing' (260->110 Hz, 9 Hz vibrato) + alcak dolgu"""
     t = np.arange(int(sure * SR)) / SR
@@ -240,6 +254,11 @@ def main():
                 yerlestir(ef, boing(0.5), t + 2.4, 0.7)
                 yerlestir(ef, kar(0.6), t + 2.45, 0.8)
                 yerlestir(ef, piril(1.0), t + 2.5, 0.9)
+            elif "--mercan" in sys.argv:                                    # 39: dev istiridye kayarak gelir, ust kabuk acilir (boing), kabarcik seli + inci piriltisi
+                yerlestir(ef, vuus(0.6, True, 0.8), t + 2.0)
+                yerlestir(ef, boing(0.5), t + 2.4, 0.6)
+                yerlestir(ef, kabarcik(1.2, 16), t + 2.45, 0.9)
+                yerlestir(ef, piril(1.0), t + 2.55, 0.8)
             elif "--mantar" in sys.argv:                                    # 36: dev mantar yerden buyur, sapka acilir (pop), spor bulutu
                 yerlestir(ef, mantar_buyu(0.75), t + 2.0, 0.9)
                 yerlestir(ef, piril(1.0), t + 2.6, 0.9)
@@ -268,7 +287,7 @@ def main():
                 yerlestir(ef, su(), t + 2.35, 0.9)
             else:
                 yerlestir(ef, ruzgar(1.3), t + 2.0, 0.6)                # lale yapragi firtinasi
-            yerlestir(ef, zap(0.4), t + (2.88 if "--blok" in sys.argv else 2.7 if ("--balon" in sys.argv or "--mantar" in sys.argv or "--kurabiye" in sys.argv) else 2.55), 0.7)   # WHO WILL WIN? / 34: CAN YOUR TEAM CLEAR ALL 24?
+            yerlestir(ef, zap(0.4), t + (2.88 if "--blok" in sys.argv else 2.7 if ("--balon" in sys.argv or "--mantar" in sys.argv or "--kurabiye" in sys.argv or "--mercan" in sys.argv) else 2.55), 0.7)   # WHO WILL WIN? / 34: CAN YOUR TEAM CLEAR ALL 24?
         elif k["tip"] in ("vs", "giris", "acilis"):          # 5. video: giris karti (3 PLAYERS) VS ile ayni carpisma
             yerlestir(ef, vuus(0.7, True, 0.9), t)
             yerlestir(ef, vurus(), t + 0.45, 1.0)
@@ -335,6 +354,10 @@ def main():
             elif "--kurabiye" in sys.argv:                                  # 38: krema kapli kar yiginina gomulur -> kar pufu + seker parilti + hakem duduk
                 yerlestir(ef, kar(), c - 0.03, 1.0)
                 yerlestir(ef, piril(0.4), c + 0.15, 0.5)
+                yerlestir(ef, duduk(), c + 0.45, 0.7)
+            elif "--mercan" in sys.argv:                                    # 39: deniz anemonuna itilir, seker (boing) + kabarcik pufu + hakem duduk
+                yerlestir(ef, boing(), c - 0.03, 1.0)
+                yerlestir(ef, kabarcik(0.7, 10, 391), c + 0.05, 0.8)
                 yerlestir(ef, duduk(), c + 0.45, 0.7)
             elif "--mantar" in sys.argv:                                    # 36: dev mantar sapkasina duser, seker (boing) + spor pufu + hakem duduk
                 yerlestir(ef, boing(), c - 0.03, 1.0)
