@@ -20,6 +20,7 @@ KAPAK = YALNIZ == "kapak"
 POZLAMA = float(arg("--pozlama", arg("--kapak-pozlama", "0")))
 GUNES = float(arg("--gunes", "2.6"))
 ON_EK = "kapak-" if KAPAK else ""
+KDOY = KAPAK and arg("--kapak-doygun", "0") != "0"        # HT38 dersi: kapakta fog glow + beyazimsi sis renkliligi dusuruyor
 KAP = {"y": 8.6, "w": 7.4, "h": 3.7, "kalin": 0.55}       # tek serit motoru ile ayni olcu
 KAM = {"z": 2.3, "egim": 5.0, "lens": 18.0, "sensor": 24.0}
 if KAPAK:
@@ -64,7 +65,7 @@ def koy_sahnesi(w, h, saydam):
     nt.links.new(bt.outputs[0], ml.inputs[0]); nt.links.new(zb.outputs[0], ml.inputs[1])
     am = nt.nodes.new("ShaderNodeMix"); am.data_type = "RGBA"; am.blend_type = "ADD"
     nt.links.new(ml.outputs[0], am.inputs["Factor"]); nt.links.new(rp.outputs[0], am.inputs[6])
-    am.inputs[7].default_value = (*lin(hex3("#a0fff8")), 1)
+    am.inputs[7].default_value = (*lin(hex3("#40e8ff" if KDOY else "#a0fff8")), 1)
     lp = nt.nodes.new("ShaderNodeLightPath")
     bg_k = nt.nodes.new("ShaderNodeBackground"); bg_k.inputs[1].default_value = 1.0
     nt.links.new(am.outputs[2], bg_k.inputs[0])
@@ -79,13 +80,16 @@ def koy_sahnesi(w, h, saydam):
     sc.world.mist_settings.start = 40.0; sc.world.mist_settings.depth = 360.0; sc.world.mist_settings.falloff = "QUADRATIC"
     sc.use_nodes = True; sc.render.use_compositing = True; ct = sc.node_tree; ct.nodes.clear()
     rl = ct.nodes.new("CompositorNodeRLayers"); co = ct.nodes.new("CompositorNodeComposite")
-    mk = ct.nodes.new("CompositorNodeMath"); mk.operation = "MULTIPLY"; mk.inputs[1].default_value = 0.7
+    mk = ct.nodes.new("CompositorNodeMath"); mk.operation = "MULTIPLY"; mk.inputs[1].default_value = 0.3 if KDOY else 0.7
     ct.links.new(rl.outputs["Mist"], mk.inputs[0])
     mm = ct.nodes.new("CompositorNodeMixRGB"); mm.blend_type = "MIX"
     ct.links.new(mk.outputs[0], mm.inputs[0]); ct.links.new(rl.outputs["Image"], mm.inputs[1])
-    mm.inputs[2].default_value = (*lin(hex3(SU_SIS)), 1)
+    mm.inputs[2].default_value = (*lin(hex3("#0090e0" if KDOY else SU_SIS)), 1)
     gl = ct.nodes.new("CompositorNodeGlare"); gl.glare_type = "FOG_GLOW"; gl.quality = "HIGH"; gl.threshold = 1.0; gl.size = 7; gl.mix = -0.4
-    ct.links.new(mm.outputs[0], gl.inputs[0]); ct.links.new(gl.outputs[0], co.inputs[0])
+    if KDOY:
+        ct.links.new(mm.outputs[0], co.inputs[0])
+    else:
+        ct.links.new(mm.outputs[0], gl.inputs[0]); ct.links.new(gl.outputs[0], co.inputs[0])
     if saydam:
         ct.links.new(rl.outputs["Alpha"], co.inputs[1])
     return sc
