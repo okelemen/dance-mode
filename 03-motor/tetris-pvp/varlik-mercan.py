@@ -28,7 +28,8 @@ if KAPAK:
 PIST = 3.9
 GECIS = 11.5
 KUM, KUM_K = "#ffbc3a", "#f08a1a"                         # sicak altin kum (soluk bej degil)
-KDOY2 = KAPAK and arg("--kapak-doygun", "0") == "2"
+KDOY2 = KAPAK and arg("--kapak-doygun", "0") in ("2", "3")
+KDOY3 = KAPAK and arg("--kapak-doygun", "0") == "3"      # kapak 3: beyaz parlama / inci / kabarcik / huzme doygunlugu dusuruyor
 if KDOY:                                                  # kapak 1: acik sari kum kadrajin yarisi -> doygunluk 0,54 (REF 0,72)
     KUM, KUM_K = ("#ff5a00", "#c82a00") if KDOY2 else ("#ff8a00", "#e04a00")
     if KDOY2:
@@ -37,7 +38,7 @@ SU_UFUK, SU_ORTA, SU_UST = ("#00a8ff", "#0060ff", "#3a1ae0") if KDOY2 else ("#00
 SU_SIS = "#08c0dc"                                        # mist rengi (uzak nesneler bu suya karisir)
 MERCAN = ("#ff2a7a", "#ff6a10", "#9a3aff", "#ffd21a", "#ff3ac8", "#20d070", "#ff4a3a", "#3a8cff")
 BALIK = ("#ffd21a", "#1e8cff", "#ff3a9a", "#8a3aff", "#20e0a0", "#ff6a10")
-INCI = ("#fff4e8", "#ffe0f0", "#e8f0ff", "#fff0c8", "#f0e0ff")
+INCI = ("#ff3ac8", "#ffd21a", "#3ad8ff", "#ff8a1a", "#9a5aff") if KDOY3 else ("#fff4e8", "#ffe0f0", "#e8f0ff", "#fff0c8", "#f0e0ff")
 
 
 # ------------------------------------------------------------------ sahne / isik
@@ -130,6 +131,8 @@ _SM = {}
 def mat_pbr(ad, renk, purluk, metal=0.0, kaplama=0.0, bump=None, ss=0.0):
     m = bpy.data.materials.new(ad); m.use_nodes = True
     b = m.node_tree.nodes["Principled BSDF"]
+    if KDOY3:
+        kaplama *= 0.2; purluk = max(purluk, 0.55)
     b.inputs["Base Color"].default_value = (*lin(hex3(renk)), 1)
     b.inputs["Roughness"].default_value = purluk; b.inputs["Metallic"].default_value = metal
     b.inputs["Coat Weight"].default_value = kaplama; b.inputs["Coat Roughness"].default_value = 0.06
@@ -333,7 +336,7 @@ def balik_surusu(rnd, n, merkez, yaricap, s, renk):
 
 
 def kabarcik(rnd, n, x_gen, y0, y1, z0, z1, kac=0.0):
-    km = mat_emis("kabarcik", lin(hex3("#e8fffc")), 1.3)
+    km = mat_emis("kabarcik", lin(hex3("#3ae8ff" if KDOY3 else "#e8fffc")), 1.3)
     for _ in range(n):
         x = rnd.uniform(-x_gen, x_gen); y = rnd.uniform(y0, y1); z = rnd.uniform(z0, z1)
         if abs(x) < kac and y < y0 + 12:
@@ -449,7 +452,7 @@ def mekan(serit_modu, rnd):
     # su ici: gunes huzmeleri, balik suruleri, kabarciklar
     for i in range(9):                                  # sahne 1: 40-140 m'de mist icinde kayboldu -> yakin (22-45 m), genis
         x = -48 + i * 12 + rnd.uniform(-3, 3)
-        if abs(x) < 7:
+        if abs(x) < 7 or KDOY3:
             continue
         huzme(x, rnd.uniform(22, 45), rnd.uniform(3, 6), 50, rnd.uniform(-0.35, -0.15))
     for (m, r, s, renk) in (((-18, 30, 8), 4, 0.7, BALIK[0]), ((20, 34, 9), 4.5, 0.75, BALIK[1]), ((-34, 60, 14), 7, 1.1, BALIK[2]),   # sahne 1: suruler cok kucuktu

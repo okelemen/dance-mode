@@ -37,6 +37,7 @@ p.add_argument("--gosterge-xy", nargs=2, type=float, default=[360, 175], help="W
 p.add_argument("--hayalet", type=float, default=0.75, help="portaldaki beyaz hayalet pozun ortme orani")
 p.add_argument("--hayalet-x", type=float, default=0.5, help="hayaletin portal icindeki yatay yeri (0-1)")
 p.add_argument("--pano-saydam", type=float, default=1.0, help="portal degradesinin ortme orani (1 = duz pano)")
+p.add_argument("--baslik-beyaz", type=int, default=1, help="0 = baslikta dis beyaz kontur yok (REF-091)")
 p.add_argument("--cikti", required=True)
 a = p.parse_args()
 W, H = 1280, 720
@@ -177,7 +178,7 @@ def kontrast_olc(ad, dolgu_m, kontur_m, dis_m, x, y):
     KONTRAST.append((ad, r1, r2, r3))
 
 
-def baloncuk(metin, cx, cy, boy, renkler, kontur="#4a1f86", hedef=None, aci=0, ad=None, dikey=False):
+def baloncuk(metin, cx, cy, boy, renkler, kontur="#4a1f86", hedef=None, aci=0, ad=None, dikey=False, beyaz=True):
     """baloncuk yazi: yatay cok renkli degrade, kalin mor dis kontur, ustte cam yansimasi, beyaz ince ic hat"""
     S = 2; fS = font(boy * S)
     bx = fS.getbbox(metin); tw, th = bx[2] - bx[0], bx[3] - bx[1]
@@ -192,8 +193,11 @@ def baloncuk(metin, cx, cy, boy, renkler, kontur="#4a1f86", hedef=None, aci=0, a
     rgb = rgb * (0.92 + 0.22 * (1 - yy))[..., None].clip(0, 1.15)
     dol = Image.fromarray(np.clip(rgb, 0, 255).astype(np.uint8)).convert("RGBA")
     K = Image.new("RGBA", (w, h), (0, 0, 0, 0))
-    K.paste(Image.new("RGBA", (w, h), (30, 6, 70, 150)), (int(boy * S * 0.03), int(boy * S * 0.06)), dis2)
-    K.paste(Image.new("RGBA", (w, h), "#ffffff"), (0, 0), dis2)
+    if beyaz:
+        K.paste(Image.new("RGBA", (w, h), (30, 6, 70, 150)), (int(boy * S * 0.03), int(boy * S * 0.06)), dis2)
+        K.paste(Image.new("RGBA", (w, h), "#ffffff"), (0, 0), dis2)
+    else:                                                  # REF-091 basligi: dis beyaz kontur yok, koyu mor kontur + golge (beyaz halka doygunlugu dusuruyordu)
+        K.paste(Image.new("RGBA", (w, h), (20, 4, 60, 200)), (int(boy * S * 0.03), int(boy * S * 0.06)), dis)
     K.paste(Image.new("RGBA", (w, h), kontur), (0, 0), dis)
     K.paste(Image.new("RGBA", (w, h), "#ffffff"), (0, 0), ic)
     K.paste(dol, (0, 0), m)
@@ -255,7 +259,6 @@ for kid, yuk, alan, sx, sy, sw, sb in OLCU:
 def plaka(cx, cy, w, h):
     """md. 28: acik su/gokte beyaz yazi okunmuyor (1,9:1) -> REF-091'deki koyu zemin gibi koyu mor plaka, pembe kenar"""
     d = ImageDraw.Draw(im)
-    d.rounded_rectangle((cx - w / 2 - 6, cy - h / 2 - 6, cx + w / 2 + 6, cy + h / 2 + 6), radius=h / 2 + 6, fill=(255, 255, 255, 255))
     d.rounded_rectangle((cx - w / 2, cy - h / 2, cx + w / 2, cy + h / 2), radius=h / 2, fill=(34, 8, 92, 255), outline=(255, 58, 200, 255), width=5)
 
 
@@ -277,7 +280,7 @@ top = sum(gen) + ara * (len(HARF) - 1); olc = min(1.0, (W - 70) / top)
 x = W / 2 - top * olc / 2
 for (c, renk), g in zip(HARF, gen):
     if renk:
-        baloncuk(c, x + g * olc / 2, a.bas_y, a.bas_boy * olc, renk, kontur="#10022a", ad="harf-" + c, dikey=True)
+        baloncuk(c, x + g * olc / 2, a.bas_y, a.bas_boy * olc, renk, kontur="#10022a", ad="harf-" + c, dikey=True, beyaz=a.baslik_beyaz)
     x += (g + ara) * olc
 BAS_M = np.abs(np.asarray(im.convert("RGB")).astype(int) - ONCE2.astype(int)).sum(2) > 30
 
@@ -285,11 +288,10 @@ ONCE3 = np.asarray(im.convert("RGB")).copy()
 # REF-091: solda "Warm Up" (beyaz-sari, mor kontur) + altinda pembe-mavi kivrik cizgi; sagda "1 Player" + "#39" hap
 gx, gy = a.gosterge_xy
 dk = ImageDraw.Draw(im)
-baloncuk("Warm Up", gx, gy, 78, ["#ffffff", "#fff6c0", "#ffd23a"], kontur="#2a0a66", hedef=320, ad="Warm Up", dikey=True)
+baloncuk("Warm Up", gx, gy, 78, ["#fff04a", "#ffd000", "#ff9a00"], kontur="#2a0a66", hedef=320, ad="Warm Up", dikey=True, beyaz=False)
 yx, yy_ = a.yazi_xy
-baloncuk("1 Player", yx, yy_, 76, ["#ffffff", "#f0f4ff", "#c8e8ff"], kontur="#2a0a66", hedef=280, ad="1 Player", dikey=True)
+baloncuk("1 Player", yx, yy_, 76, ["#8af4ff", "#10c8ff", "#0a8aff"], kontur="#2a0a66", hedef=280, ad="1 Player", dikey=True, beyaz=False)
 hp = (yx - 88, yy_ + 50, yx + 88, yy_ + 124)
-dk.rounded_rectangle((hp[0] - 6, hp[1] - 6, hp[2] + 6, hp[3] + 6), radius=44, fill=(255, 255, 255, 255))
 dk.rounded_rectangle(hp, radius=38, fill=(42, 10, 102, 255), outline=(255, 58, 200, 255), width=5)
 baloncuk("#39", yx, (hp[1] + hp[3]) / 2, 62, ["#fff6a0", "#ffd21a", "#ffa21a"], kontur="#2a0a66", hedef=140, ad="#39", dikey=True)
 # sol altta sari NEW madalyonu (REF-091: tirtikli altin madalyon, ustte tac, altta kirmizi kurdele, ortada kirmizi NEW + dal)
