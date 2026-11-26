@@ -1,0 +1,48 @@
+name: Recover completed CubeCut frame render
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_run:
+        description: Completed render run with kare-pXX artifacts
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download and verify rendered frames
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_RUN: ${{ inputs.source_run }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$SOURCE_RUN" =~ ^[0-9]+$ ]]
+          gh run download "$SOURCE_RUN" --repo "$GITHUB_REPOSITORY" --pattern 'kare-*' --dir frames
+          mkdir -p hud
+          find frames -type f -name 'kare_*.jpg' -exec cp -n {} hud/ \;
+          test "$(find hud -maxdepth 1 -name 'kare_*.jpg' | wc -l)" -eq 1800
+          for n in $(seq -f '%04g' 1 1800); do test -s "hud/kare_$n.jpg"; done
+      - name: Encode silent Shorts video
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          mkdir -p video
+          ffmpeg -v error -framerate 30 -start_number 1 -i hud/kare_%04d.jpg \
+            -c:v libx264 -preset veryfast -crf 18 -pix_fmt yuv420p video/sessiz.mp4
+          ffprobe -v error -show_entries format=duration -of csv=p=0 video/sessiz.mp4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: video-full
+          path: video/sessiz.mp4
+          retention-days: 7
