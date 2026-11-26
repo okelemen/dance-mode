@@ -28,6 +28,8 @@ if KAPAK:
 PIST = 3.9
 GECIS = 11.5
 KUM, KUM_K = "#ffbc3a", "#f08a1a"                         # sicak altin kum (soluk bej degil)
+if KDOY:                                                  # kapak 1: acik sari kum kadrajin yarisi -> doygunluk 0,54 (REF 0,72)
+    KUM, KUM_K = "#ff8a00", "#e04a00"
 SU_UFUK, SU_ORTA, SU_UST = "#00d8e0", "#00a8f0", "#0a5ae8"  # ufuk camgobegi -> mavi -> derin
 SU_SIS = "#08c0dc"                                        # mist rengi (uzak nesneler bu suya karisir)
 MERCAN = ("#ff2a7a", "#ff6a10", "#9a3aff", "#ffd21a", "#ff3ac8", "#20d070", "#ff4a3a", "#3a8cff")
@@ -173,8 +175,8 @@ def mat_kum(ad="kum", acik_ton=False):
     ns = nt.nodes.new("ShaderNodeTexNoise"); ns.inputs["Scale"].default_value = 0.8; ns.inputs["Detail"].default_value = 4
     nt.links.new(geo.outputs["Position"], ns.inputs["Vector"])
     rp = nt.nodes.new("ShaderNodeValToRGB"); el = rp.color_ramp.elements
-    el[0].position = 0.3; el[0].color = (*lin(hex3("#ffcc4a" if acik_ton else KUM_K)), 1)
-    el[1].position = 0.75; el[1].color = (*lin(hex3("#ffe07a" if acik_ton else KUM)), 1)
+    el[0].position = 0.3; el[0].color = (*lin(hex3(("#ff9a00" if KDOY else "#ffcc4a") if acik_ton else KUM_K)), 1)
+    el[1].position = 0.75; el[1].color = (*lin(hex3(("#ffc020" if KDOY else "#ffe07a") if acik_ton else KUM)), 1)
     nt.links.new(ns.outputs["Fac"], rp.inputs[0]); nt.links.new(rp.outputs[0], b.inputs["Base Color"])
     wv = nt.nodes.new("ShaderNodeTexWave"); wv.wave_type = "BANDS"; wv.bands_direction = "Y"; wv.inputs["Scale"].default_value = 1.2
     wv.inputs["Distortion"].default_value = 4.0
