@@ -610,7 +610,9 @@ else:
         drip_g=matematik(nt,"MULTIPLY",matematik(nt,"ADD",wave_g,None,deger_b=2.2),None,deger_b=.025)
         ganache=None
         for rim in (.19,.49,.79):
-            cap=matematik(nt,"GREATER_THAN",z_g,matematik(nt,"SUBTRACT",drip_g,None,deger_b=rim))
+            below=matematik(nt,"GREATER_THAN",z_g,matematik(nt,"SUBTRACT",drip_g,None,deger_b=rim))
+            above=matematik(nt,"LESS_THAN",z_g,None,deger_b=rim+.035)
+            cap=matematik(nt,"MULTIPLY",below,above)
             ganache=cap if ganache is None else matematik(nt,"MAXIMUM",ganache,cap)
         cream_g=matematik(nt,"LESS_THAN",matematik(nt,"ABSOLUTE",matematik(nt,"SUBTRACT",z_g,None,deger_b=-.015)),None,deger_b=.022)
         for seam in (.34,.64):
@@ -2219,7 +2221,9 @@ if GIANT:
     mid_r=matematik(ntk_,"MULTIPLY",matematik(ntk_,"MULTIPLY",matematik(ntk_,"GREATER_THAN",dz,None,deger_b=.19),matematik(ntk_,"LESS_THAN",dz,None,deger_b=.49)),None,deger_b=.72)
     low_r=matematik(ntk_,"MULTIPLY",matematik(ntk_,"LESS_THAN",dz,None,deger_b=.19),None,deger_b=1.0)
     radius_t=matematik(ntk_,"ADD",matematik(ntk_,"ADD",tier_r,mid_r),low_r)
-    u_=matematik(ntk_,"DIVIDE",radial_y,matematik(ntk_,"MULTIPLY",radius_t,None,deger_b=B))
+    u_y=matematik(ntk_,"DIVIDE",radial_y,matematik(ntk_,"MULTIPLY",radius_t,None,deger_b=B))
+    u_x=matematik(ntk_,"DIVIDE",matematik(ntk_,"ABSOLUTE",v_x.outputs[0]),matematik(ntk_,"MULTIPLY",radius_t,None,deger_b=A))
+    u_=matematik(ntk_,"SQRT",matematik(ntk_,"ADD",matematik(ntk_,"MULTIPLY",u_y,u_y),matematik(ntk_,"MULTIPLY",u_x,u_x)))
     u_=matematik(ntk_,"MAXIMUM",u_,matematik(ntk_,"MULTIPLY",matematik(ntk_,"GREATER_THAN",dz,None,deger_b=.79),None,deger_b=2))
 elif CAKESHAPE:
     radial_y=matematik(ntk_,"ABSOLUTE",matematik(ntk_,"DIVIDE",dy,matematik(ntk_,"MAXIMUM",v_r.outputs[0],None,deger_b=.001)))
