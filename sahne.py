@@ -610,7 +610,7 @@ else:
         drip_g=matematik(nt,"MULTIPLY",matematik(nt,"ADD",wave_g,None,deger_b=2.2),None,deger_b=.025)
         ganache=None
         for rim in (.19,.49,.79):
-            below=matematik(nt,"GREATER_THAN",z_g,matematik(nt,"SUBTRACT",drip_g,None,deger_b=rim))
+            below=matematik(nt,"GREATER_THAN",z_g,matematik(nt,"SUBTRACT",None,drip_g,deger_a=rim))
             above=matematik(nt,"LESS_THAN",z_g,None,deger_b=rim+.035)
             cap=matematik(nt,"MULTIPLY",below,above)
             ganache=cap if ganache is None else matematik(nt,"MAXIMUM",ganache,cap)
@@ -1685,6 +1685,8 @@ def kup_nesnesi(tur, no):
         karis.inputs[7].default_value = hex_renk("#f5ecde")
     if GALAXY:
         karis.inputs[7].default_value = hex_renk("#20265e")
+    if GIANT:
+        karis.inputs[7].default_value = hex_renk("#32170f")
     if CILEK:
         # Sadece maskelenmis dis yuz; kesik et yuzunde aken bulunmaz.
         geometri = ntk.nodes.new("ShaderNodeNewGeometry")
