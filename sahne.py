@@ -2258,14 +2258,23 @@ elif CUCUMBER:
 elif PEPPER:
     baglan(ntk_,et_r.outputs["Color"],bk_.inputs["Base Color"])
 elif CHOCSHAPE:
-    strand=matematik(ntk_,"SINE",
-        matematik(ntk_,"ADD",
-            matematik(ntk_,"MULTIPLY",dy,None,deger_b=75),
-            matematik(ntk_,"ADD",matematik(ntk_,"MULTIPLY",dz,None,deger_b=93),
-                matematik(ntk_,"MULTIPLY",v_x.outputs[0],None,deger_b=42))))
-    strand=matematik(ntk_,"MULTIPLY",
-        matematik(ntk_,"GREATER_THAN",strand,None,deger_b=.58 if HONEYCOMB else .62),
-        matematik(ntk_,"LESS_THAN",u_,None,deger_b=.78))
+    if HONEYCOMB:
+        coords=ntk_.nodes.new("ShaderNodeTexCoord")
+        pores=ntk_.nodes.new("ShaderNodeTexVoronoi")
+        baglan(ntk_,coords.outputs["Object"],pores.inputs["Vector"])
+        pores.inputs["Scale"].default_value=12.0
+        strand=matematik(ntk_,"MULTIPLY",
+            matematik(ntk_,"LESS_THAN",pores.outputs["Distance"],None,deger_b=.22),
+            matematik(ntk_,"LESS_THAN",u_,None,deger_b=.78))
+    else:
+        strand=matematik(ntk_,"SINE",
+            matematik(ntk_,"ADD",
+                matematik(ntk_,"MULTIPLY",dy,None,deger_b=75),
+                matematik(ntk_,"ADD",matematik(ntk_,"MULTIPLY",dz,None,deger_b=93),
+                    matematik(ntk_,"MULTIPLY",v_x.outputs[0],None,deger_b=42))))
+        strand=matematik(ntk_,"MULTIPLY",
+            matematik(ntk_,"GREATER_THAN",strand,None,deger_b=.62),
+            matematik(ntk_,"LESS_THAN",u_,None,deger_b=.78))
     filling=ntk_.nodes.new("ShaderNodeMix");filling.data_type="RGBA"
     baglan(ntk_,strand,filling.inputs["Factor"])
     baglan(ntk_,et_r.outputs["Color"],filling.inputs[6])
