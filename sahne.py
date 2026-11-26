@@ -50,7 +50,8 @@ HOTDOG = PLAN["meyve"] == "hot-dog"
 CHOCBAR = PLAN["meyve"] == "pistachio-kataifi-chocolate-bar"
 CAKE = PLAN["meyve"] == "black-forest-cake"
 GALAXY = PLAN["meyve"] == "galaxy-mirror-glaze-cake"
-CAKESHAPE = CAKE or GALAXY
+GIANT = PLAN["meyve"] == "giant-three-tier-chocolate-drip-cake"
+CAKESHAPE = CAKE or GALAXY or GIANT
 B = M.get("B", R)
 XMIN, XMAX = M.get("xmin", -A), M.get("xmax", A)
 TAHTA_UST = 0.14
@@ -598,6 +599,33 @@ else:
         kabuk_rengi=bread.outputs["Color"]
         bmp.inputs["Strength"].default_value=.20
         bmp.inputs["Distance"].default_value=.007
+    elif GIANT:
+        # Three chocolate tiers with irregular dark ganache drips.
+        xyz_g=nt.nodes.new("ShaderNodeSeparateXYZ")
+        baglan(nt,tk.outputs["Object"],xyz_g.inputs[0])
+        z_g=xyz_g.outputs[2]
+        x_g=xyz_g.outputs[0]
+        y_g=xyz_g.outputs[1]
+        wave_g=matematik(nt,"ADD",matematik(nt,"SINE",matematik(nt,"MULTIPLY",x_g,None,deger_b=24.0)),matematik(nt,"SINE",matematik(nt,"MULTIPLY",y_g,None,deger_b=19.0)))
+        drip_g=matematik(nt,"MULTIPLY",matematik(nt,"ADD",wave_g,None,deger_b=2.2),None,deger_b=.025)
+        ganache=None
+        for rim in (.19,.49,.79):
+            cap=matematik(nt,"GREATER_THAN",z_g,matematik(nt,"SUBTRACT",drip_g,None,deger_b=rim))
+            ganache=cap if ganache is None else matematik(nt,"MAXIMUM",ganache,cap)
+        cream_g=matematik(nt,"LESS_THAN",matematik(nt,"ABSOLUTE",matematik(nt,"SUBTRACT",z_g,None,deger_b=-.015)),None,deger_b=.022)
+        for seam in (.34,.64):
+            cream_g=matematik(nt,"MAXIMUM",cream_g,matematik(nt,"LESS_THAN",matematik(nt,"ABSOLUTE",matematik(nt,"SUBTRACT",z_g,None,deger_b=seam)),None,deger_b=.018))
+        body_g=nt.nodes.new("ShaderNodeMix");body_g.data_type="RGBA"
+        baglan(nt,cream_g,body_g.inputs["Factor"])
+        body_g.inputs[6].default_value=hex_renk("#75422d")
+        body_g.inputs[7].default_value=hex_renk("#dfbb91")
+        glaze_g=nt.nodes.new("ShaderNodeMix");glaze_g.data_type="RGBA"
+        baglan(nt,ganache,glaze_g.inputs["Factor"])
+        baglan(nt,body_g.outputs[2],glaze_g.inputs[6])
+        glaze_g.inputs[7].default_value=hex_renk("#32170f")
+        kabuk_rengi=glaze_g.outputs[2]
+        bmp.inputs["Strength"].default_value=.035
+        bmp.inputs["Distance"].default_value=.002
     elif GALAXY:
         # Mirror glaze: dark blue-violet surface, visible nebula swirls and sparse stars.
         nebula=nt.nodes.new("ShaderNodeTexNoise")
@@ -819,6 +847,21 @@ if KARPUZ or KIVI:
 
 ANANAS_EK_OB = []
 ANANAS_EK_NT = []
+if GIANT:
+    # Geometry is baked into each child's local coordinates so all three
+    # tiers share the same x-cut shader and the same parent drop animation.
+    for name, radius, lo, hi in (("middle_tier",.72,.19,.49),("top_tier",.48,.49,.79)):
+        bpy.ops.mesh.primitive_cylinder_add(vertices=96, radius=1, depth=1, location=(0,0,0))
+        tier=bpy.context.object
+        tier.name=name
+        for vert in tier.data.vertices:
+            vert.co=(vert.co.x*A*radius,vert.co.y*B*radius,(hi+lo)*.5+vert.co.z*(hi-lo))
+        bev=tier.modifiers.new("soft_frosting_edge","BEVEL")
+        bev.width=.018;bev.segments=3
+        bpy.ops.object.modifier_apply(modifier=bev.name)
+        tier.parent=meyve
+        tier.data.materials.append(m)
+        ANANAS_EK_OB.append(tier)
 if ANANAS:
     def ananas_ek_malzeme(ad, renk):
         mat, tree, b = malzeme(ad)
@@ -1176,9 +1219,9 @@ def bicak_konum(eks, konum, asagi, yuk):
     if eks == "x":
         # bicak 15 derece cevrik: meyvenin kameraya bakan on yuzunde (y=-B/2) agiz tam kesim duzleminde
         return (konum + (1.05 + B * 0.5) * math.tan(math.radians(15)), 1.05,
-                TAHTA_UST + 0.004 if asagi else MERKEZ_Z + R + 0.15 + 0.2 * yuk)
+                TAHTA_UST + 0.004 if asagi else MERKEZ_Z + M.get("zmax",R) + 0.15 + 0.2 * yuk)
     if eks == "y":
-        return (1.25, konum, TAHTA_UST + 0.004 if asagi else MERKEZ_Z + R + 0.15 + 0.2 * yuk)
+        return (1.25, konum, TAHTA_UST + 0.004 if asagi else MERKEZ_Z + M.get("zmax",R) + 0.15 + 0.2 * yuk)
     # z: yatay dilim; sap ve topuk sagda meyvenin DISINDA kalir.
     # Bicak yerel +x yonunde, 180 derece donunce dunyada -x'e uzanir.
     # Kok noktasini sol uca goturmek sapi meyvenin icine sokuyordu.
@@ -1251,7 +1294,11 @@ def kup_nesnesi(tur, no):
     # Et/cekirdek rengi ve gercek dis kabuk maskesi ayni kaynak hucre konumundan gelir.
     if CAKESHAPE:
         radial=np.sqrt((merk[:,0]/A)**2+(merk[:,1]/B)**2)
-        d=np.maximum(radial,np.abs(merk[:,2])/R)
+        if GIANT:
+            tier_radius=np.where(merk[:,2]<.19,1.0,np.where(merk[:,2]<.49,.72,.48))
+            d=radial/tier_radius
+        else:
+            d=np.maximum(radial,np.abs(merk[:,2])/R)
     elif CHOCBAR:
         d = np.maximum.reduce((np.abs(merk[:,0])/A, np.abs(merk[:,1])/B, np.abs(merk[:,2])/R))
     elif PEPPER:
@@ -1371,6 +1418,14 @@ def kup_nesnesi(tur, no):
         renk[u[:,0]>.92]=np.array(hex_renk("#c7231d")[:3])
         calyx=domates_canak(merk[:,0],merk[:,1],merk[:,2],M)
         renk[calyx]=np.array(hex_renk("#357a2f")[:3]);maske[calyx]=0
+    elif GIANT:
+        zc=merk[:,2]
+        renk=np.tile(np.array(hex_renk("#75422d")[:3]),(k,1))
+        cream=(np.abs(zc+.015)<.022)|(np.abs(zc-.34)<.018)|(np.abs(zc-.64)<.018)
+        renk[cream]=np.array(hex_renk("#dfbb91")[:3])
+        tier_radius=np.where(zc<.19,1.0,np.where(zc<.49,.72,.48))
+        glaze=(radial/tier_radius>.91)|(np.abs(zc-.19)<.026)|(np.abs(zc-.49)<.026)|(zc>.755)
+        renk[glaze]=np.array(hex_renk("#32170f")[:3]);maske[glaze]=0
     elif GALAXY:
         zc=merk[:,2]
         renk=np.tile(np.array(hex_renk("#ece2f2")[:3]),(k,1))
@@ -1907,6 +1962,8 @@ def kup_nesnesi(tur, no):
         t_k.inputs[7].default_value = hex_renk("#f5ecde")
     if GALAXY:
         t_k.inputs[7].default_value = hex_renk("#20265e")
+    if GIANT:
+        t_k.inputs[7].default_value = hex_renk("#32170f")
     baglan(ntt, t_k.outputs[2], bt.inputs["Base Color"])
     bt.inputs["Roughness"].default_value = 0.55
 
@@ -2125,7 +2182,7 @@ for fc in egriler(ad):
 # Cilek kesiti YZ dikdortgeninde shader ile gercek profil sinirina kirpilir.
 # Avokado eski dairesel kesitini korur.
 _n = 96
-_vs = ([(0.0, -B, -R), (0.0, B, -R), (0.0, B, R), (0.0, -B, R)] if (CILEK or CHOCBAR or CAKESHAPE) else
+_vs = ([(0.0, -B, -R), (0.0, B, -R), (0.0, B, M.get("zmax",R)), (0.0, -B, M.get("zmax",R))] if (CILEK or CHOCBAR or CAKESHAPE) else
        [(0.0, math.cos(2 * math.pi * i / _n), math.sin(2 * math.pi * i / _n)) for i in range(_n)])
 _me = bpy.data.meshes.new("kesit")
 _me.from_pydata(_vs, [], [list(range(len(_vs)))[::-1]])
@@ -2156,7 +2213,15 @@ if BANANA or CUCUMBER:
         None, deger_b=.12 if BANANA else .035)
     dz = matematik(ntk_, "SUBTRACT", dz, curve)
 rad = matematik(ntk_, "SQRT", matematik(ntk_, "ADD", matematik(ntk_, "MULTIPLY", dy, dy), matematik(ntk_, "MULTIPLY", dz, dz)))
-if CAKESHAPE:
+if GIANT:
+    radial_y=matematik(ntk_,"ABSOLUTE",matematik(ntk_,"DIVIDE",dy,matematik(ntk_,"MAXIMUM",v_r.outputs[0],None,deger_b=.001)))
+    tier_r=matematik(ntk_,"MULTIPLY",matematik(ntk_,"GREATER_THAN",dz,None,deger_b=.49),None,deger_b=.48)
+    mid_r=matematik(ntk_,"MULTIPLY",matematik(ntk_,"MULTIPLY",matematik(ntk_,"GREATER_THAN",dz,None,deger_b=.19),matematik(ntk_,"LESS_THAN",dz,None,deger_b=.49)),None,deger_b=.72)
+    low_r=matematik(ntk_,"MULTIPLY",matematik(ntk_,"LESS_THAN",dz,None,deger_b=.19),None,deger_b=1.0)
+    radius_t=matematik(ntk_,"ADD",matematik(ntk_,"ADD",tier_r,mid_r),low_r)
+    u_=matematik(ntk_,"DIVIDE",radial_y,matematik(ntk_,"MULTIPLY",radius_t,None,deger_b=B))
+    u_=matematik(ntk_,"MAXIMUM",u_,matematik(ntk_,"MULTIPLY",matematik(ntk_,"GREATER_THAN",dz,None,deger_b=.79),None,deger_b=2))
+elif CAKESHAPE:
     radial_y=matematik(ntk_,"ABSOLUTE",matematik(ntk_,"DIVIDE",dy,matematik(ntk_,"MAXIMUM",v_r.outputs[0],None,deger_b=.001)))
     u_=matematik(ntk_,"MAXIMUM",
         matematik(ntk_,"DIVIDE",radial_y,None,deger_b=B),
@@ -2292,12 +2357,12 @@ elif not KARPUZ and not ANANAS and not APPLE and not ORANGE and not BANANA and n
     e_k = et_r.color_ramp.elements.new(0.985); e_k.color = hex_renk("#21361a")
 baglan(ntk_, u_, et_r.inputs["Fac"])
 if CAKESHAPE:
-    height=matematik(ntk_,"DIVIDE",matematik(ntk_,"ADD",dz,None,deger_b=R),None,deger_b=2*R)
+    height=matematik(ntk_,"DIVIDE",matematik(ntk_,"ADD",dz,None,deger_b=R),None,deger_b=M.get("zmax",R)+R)
     layers=ntk_.nodes.new("ShaderNodeValToRGB")
     layers.color_ramp.interpolation="CONSTANT"
-    layers.color_ramp.elements[0].color=hex_renk("#ece2f2" if GALAXY else "#f4ead8")
-    layers.color_ramp.elements[1].color=hex_renk("#ece2f2" if GALAXY else "#f4ead8")
-    palette=((.08,"#493486"),(.27,"#ece2f2"),(.40,"#263a83"),
+    layers.color_ramp.elements[0].color=hex_renk("#75422d" if GIANT else ("#ece2f2" if GALAXY else "#f4ead8"))
+    layers.color_ramp.elements[1].color=hex_renk("#75422d" if GIANT else ("#ece2f2" if GALAXY else "#f4ead8"))
+    palette=((.18,"#dfbb91"),(.23,"#75422d"),(.50,"#dfbb91"),(.55,"#75422d"),(.81,"#dfbb91"),(.86,"#75422d")) if GIANT else ((.08,"#493486"),(.27,"#ece2f2"),(.40,"#263a83"),
              (.59,"#ece2f2"),(.72,"#493486"),(.93,"#ece2f2")) if GALAXY else (
              (.08,"#543020"),(.27,"#f4ead8"),(.40,"#543020"),
              (.59,"#f4ead8"),(.72,"#543020"),(.93,"#f4ead8"))
@@ -2316,7 +2381,7 @@ if CAKESHAPE:
     frost=ntk_.nodes.new("ShaderNodeMix");frost.data_type="RGBA"
     baglan(ntk_,matematik(ntk_,"GREATER_THAN",u_,None,deger_b=.91),frost.inputs["Factor"])
     baglan(ntk_,filling.outputs[2],frost.inputs[6])
-    frost.inputs[7].default_value=hex_renk("#20265e" if GALAXY else "#452319")
+    frost.inputs[7].default_value=hex_renk("#32170f" if GIANT else ("#20265e" if GALAXY else "#452319"))
     baglan(ntk_,frost.outputs[2],bk_.inputs["Base Color"])
 elif CILEK:
     baglan(ntk_, et_r.outputs["Color"], bk_.inputs["Base Color"])

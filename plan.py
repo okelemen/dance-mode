@@ -109,6 +109,11 @@ MEYVELER = {
         "A": 0.84, "B": 0.84, "R": 0.41, "boyun": 1.0,
         "profil": "galaxy-mirror-glaze-cake",
     },
+    "giant-three-tier-chocolate-drip-cake": {
+        # Uc farkli capli ust uste duran pasta; her katta koyu kek ve acik krema.
+        "A": 0.92, "B": 0.92, "R": 0.19, "boyun": 1.0,
+        "profil": "giant-three-tier-chocolate-drip-cake", "zmax": 0.79,
+    },
 }
 
 # Turlar: (kesim sayisi, kesim suresi sn). Acilis 0.4 sn + sonuc 1.3 sn eklenir -> toplam 60 sn
@@ -140,7 +145,7 @@ def meyve_profil(xn, m):
         return np.maximum(0.0, 1.0 - np.abs(xn)**8)**0.34
     if m.get("profil") == "pistachio-kataifi-chocolate-bar":
         return np.maximum(0.0, 1.0 - np.abs(xn)**12)**(1.0/12.0)
-    if m.get("profil") in ("black-forest-cake", "galaxy-mirror-glaze-cake"):
+    if m.get("profil") in ("black-forest-cake", "galaxy-mirror-glaze-cake", "giant-three-tier-chocolate-drip-cake"):
         return np.sqrt(np.maximum(0.0, 1.0 - xn*xn))
     if m.get("profil") == "kiwi":
         xn = np.clip(xn, -1.0, 1.0)
@@ -166,7 +171,7 @@ def meyve_profil(xn, m):
 def meyve_fmax(m):
     if m.get("profil") == "strawberry":
         return float(meyve_profil(np.linspace(-1, 1, 20001), m).max())
-    if m.get("profil") in ("kiwi", "pineapple", "apple", "orange", "peach", "pomegranate", "tomato", "hot-dog", "pistachio-kataifi-chocolate-bar", "black-forest-cake", "galaxy-mirror-glaze-cake"):
+    if m.get("profil") in ("kiwi", "pineapple", "apple", "orange", "peach", "pomegranate", "tomato", "hot-dog", "pistachio-kataifi-chocolate-bar", "black-forest-cake", "galaxy-mirror-glaze-cake", "giant-three-tier-chocolate-drip-cake"):
         return 1.0
     if m.get("profil") == "banana":
         return float(meyve_profil(np.linspace(-1, 1, 20001), m).max())
@@ -282,6 +287,12 @@ def icinde(x, y, z, m):
     if m.get("profil") == "pistachio-kataifi-chocolate-bar":
         return ((np.abs(x)/m["A"])**12 + (np.abs(y)/m["B"])**12 +
                 (np.abs(z)/m["R"])**12 <= 1.0)
+    if m.get("profil") == "giant-three-tier-chocolate-drip-cake":
+        radial=(x/m["A"])**2+(y/m["B"])**2
+        base=(z>=-m["R"])&(z<.19)&(radial<=1.0)
+        middle=(z>=.19)&(z<.49)&(radial<=.72**2)
+        top=(z>=.49)&(z<=.79)&(radial<=.48**2)
+        return base|middle|top
     if m.get("profil") in ("black-forest-cake", "galaxy-mirror-glaze-cake"):
         radius=(x/m["A"])**2+(y/m["B"])**2
         body=(radius<=1.0)&(np.abs(z)<=m["R"])
