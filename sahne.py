@@ -49,7 +49,8 @@ PEPPER = PLAN["meyve"] == "red-bell-pepper"
 HOTDOG = PLAN["meyve"] == "hot-dog"
 CHOCBAR = PLAN["meyve"] == "pistachio-kataifi-chocolate-bar"
 HONEYCOMB = PLAN["meyve"] == "honeycomb-crunch-chocolate-bar"
-CHOCSHAPE = CHOCBAR or HONEYCOMB
+MATCHA = PLAN["meyve"] == "matcha-white-chocolate-bar"
+CHOCSHAPE = CHOCBAR or HONEYCOMB or MATCHA
 B = M.get("B", R)
 XMIN, XMAX = M.get("xmin", -A), M.get("xmax", A)
 TAHTA_UST = 0.14
@@ -592,8 +593,10 @@ else:
         bmp.inputs["Distance"].default_value=.007
     elif CHOCSHAPE:
         brown=nt.nodes.new("ShaderNodeValToRGB")
-        brown.color_ramp.elements[0].color=hex_renk("#653c27" if HONEYCOMB else "#522717")
-        brown.color_ramp.elements[1].color=hex_renk("#a16a43" if HONEYCOMB else "#75402a")
+        brown.color_ramp.elements[0].color=hex_renk("#f4f0dc" if MATCHA else ("#653c27" if HONEYCOMB else "#522717"))
+        brown.color_ramp.elements[1].color=hex_renk("#6f9d58" if MATCHA else ("#a16a43" if HONEYCOMB else "#75402a"))
+        if MATCHA:
+            e=brown.color_ramp.elements.new(.55);e.color=hex_renk("#e4ebd1")
         baglan(nt,nz.outputs["Fac"],brown.inputs["Fac"])
         xyz=nt.nodes.new("ShaderNodeSeparateXYZ")
         baglan(nt,tk.outputs["Object"],xyz.inputs[0])
@@ -606,7 +609,7 @@ else:
         tiles=nt.nodes.new("ShaderNodeMix");tiles.data_type="RGBA"
         baglan(nt,seam,tiles.inputs["Factor"])
         baglan(nt,brown.outputs["Color"],tiles.inputs[6])
-        tiles.inputs[7].default_value=hex_renk("#4b2a1c" if HONEYCOMB else "#33190f")
+        tiles.inputs[7].default_value=hex_renk("#a4b385" if MATCHA else ("#4b2a1c" if HONEYCOMB else "#33190f"))
         kabuk_rengi=tiles.outputs[2]
         bmp.inputs["Strength"].default_value=.05
         bmp.inputs["Distance"].default_value=.002
@@ -851,7 +854,7 @@ if ANANAS:
     sap_ob.data.materials.append(sap_mat)
     ANANAS_EK_OB.append(sap_ob)
 
-if APPLE or ORANGE or BANANA or NAR or TOMATO or CUCUMBER or PEPPER or HOTDOG:
+if APPLE or ORANGE or BANANA or NAR or TOMATO or CUCUMBER or PEPPER or HOTDOG or MATCHA:
     def bagli_malzeme(ad, renk):
         mat, tree, b = malzeme(ad)
         b.inputs["Base Color"].default_value = hex_renk(renk)
@@ -995,6 +998,19 @@ if APPLE or ORANGE or BANANA or NAR or TOMATO or CUCUMBER or PEPPER or HOTDOG:
             ob=bpy.data.objects.new("hotdog_"+ad+"_kesilir",curve)
             sc.collection.objects.link(ob);ob.parent=meyve
             curve.materials.append(sauce);ANANAS_EK_OB.append(ob)
+    elif MATCHA:
+        # Uneven, partly embedded pistachio fragments; each follows the cut plane.
+        nut=bagli_malzeme("matcha_fistik_parcalari", "#5e8c3e")
+        seed=np.random.default_rng(2801)
+        for i in range(23):
+            px=float(seed.uniform(-1.04,1.04));py=float(seed.uniform(-.39,.39))
+            rad=float(seed.uniform(.036,.068))
+            bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=1,radius=rad)
+            ob=bpy.context.object;ob.name=f"fistik_parcasi_{i}_kesilir"
+            ob.scale=(float(seed.uniform(.9,1.5)),float(seed.uniform(.7,1.2)),float(seed.uniform(.5,.9)))
+            ob.location=(px,py,.31)
+            bpy.ops.object.transform_apply(location=True,rotation=True,scale=True)
+            ob.parent=meyve;ob.data.materials.append(nut);ANANAS_EK_OB.append(ob)
 
 # ---------------------------------------------------------------- bicak
 def bicak_kur():
@@ -1292,10 +1308,16 @@ def kup_nesnesi(tur, no):
         calyx=domates_canak(merk[:,0],merk[:,1],merk[:,2],M)
         renk[calyx]=np.array(hex_renk("#357a2f")[:3]);maske[calyx]=0
     elif CHOCSHAPE:
-        renk=np.tile(np.array(hex_renk("#df9d38" if HONEYCOMB else "#74a94d")[:3]),(k,1))
+        renk=np.tile(np.array(hex_renk("#f2eedb" if MATCHA else ("#df9d38" if HONEYCOMB else "#74a94d"))[:3]),(k,1))
         shell=(np.abs(merk[:,0])>.88*A)|(np.abs(merk[:,1])>.84*B)|(np.abs(merk[:,2])>.82*R)
-        renk[shell]=np.array(hex_renk("#805031" if HONEYCOMB else "#663521")[:3])
-        if HONEYCOMB:
+        renk[shell]=np.array(hex_renk("#f4f0df" if MATCHA else ("#805031" if HONEYCOMB else "#663521"))[:3])
+        if MATCHA:
+            marble=np.sin(13*merk[:,0]+19*merk[:,1]+8*merk[:,2])*np.cos(9*merk[:,1]-11*merk[:,2])
+            renk[marble>.18]=np.array(hex_renk("#a3c27b")[:3])
+            renk[marble>.63]=np.array(hex_renk("#658f50")[:3])
+            nuts=(merk[:,2]>.22)&(np.sin(31*merk[:,0]+41*merk[:,1])>.91)
+            renk[nuts]=np.array(hex_renk("#507b35")[:3])
+        elif HONEYCOMB:
             pore=(~shell)&(np.sin(49*merk[:,0]+71*merk[:,1])*np.cos(63*merk[:,2]-29*merk[:,1])>.40)
             renk[pore]=np.array(hex_renk("#8d5822")[:3])
         else:
@@ -1517,7 +1539,7 @@ def kup_nesnesi(tur, no):
     baglan(ntk, a_r.outputs["Color"], karis.inputs[6])
     karis.inputs[7].default_value = hex_renk("#b87538" if HOTDOG else ("#b71f29" if CILEK else ("#c93225" if APPLE else ("#e87916" if ORANGE else ("#e7c137" if BANANA else ("#356d2c" if CUCUMBER else ("#c3221a" if PEPPER else ("#d95c4d" if PEACH else ("#8c1c27" if NAR else ("#c7231d" if TOMATO else "#21361a"))))))))))
     if CHOCSHAPE:
-        karis.inputs[7].default_value = hex_renk("#805031" if HONEYCOMB else "#663521")
+        karis.inputs[7].default_value = hex_renk("#f2eedb" if MATCHA else ("#805031" if HONEYCOMB else "#663521"))
     if CILEK:
         # Sadece maskelenmis dis yuz; kesik et yuzunde aken bulunmaz.
         geometri = ntk.nodes.new("ShaderNodeNewGeometry")
@@ -1792,7 +1814,7 @@ def kup_nesnesi(tur, no):
     baglan(ntt, t_r.outputs["Color"], t_k.inputs[6])
     t_k.inputs[7].default_value = hex_renk("#b87538" if HOTDOG else ("#60452f" if KIVI else ("#143c27" if KARPUZ else ("#b71f29" if CILEK else ("#c93225" if APPLE else ("#e87916" if ORANGE else ("#356d2c" if CUCUMBER else ("#c3221a" if PEPPER else "#21361a"))))))))
     if CHOCSHAPE:
-        t_k.inputs[7].default_value = hex_renk("#805031" if HONEYCOMB else "#663521")
+        t_k.inputs[7].default_value = hex_renk("#f2eedb" if MATCHA else ("#805031" if HONEYCOMB else "#663521"))
     baglan(ntt, t_k.outputs[2], bt.inputs["Base Color"])
     bt.inputs["Roughness"].default_value = 0.55
 
@@ -1887,7 +1909,7 @@ def deger_anahtar(ad, t, deger):
         n_tuy = kivi_tuy_nt.nodes["kes_x"]
         n_tuy.outputs[0].default_value = deger
         n_tuy.outputs[0].keyframe_insert("default_value", frame=kare(t))
-    if (ANANAS or APPLE or ORANGE or BANANA or NAR or TOMATO or CUCUMBER or PEPPER or HOTDOG) and ad == "kes_x":
+    if (ANANAS or APPLE or ORANGE or BANANA or NAR or TOMATO or CUCUMBER or PEPPER or HOTDOG or MATCHA) and ad == "kes_x":
         for tree in ANANAS_EK_NT:
             node = tree.nodes["kes_x"]
             node.outputs[0].default_value = deger
@@ -2153,10 +2175,10 @@ elif TOMATO:
     for pos,col in ((.7,"#e44b2e"),(.76,"#cf3726"),(.94,"#d1261d")):
         e=et_r.color_ramp.elements.new(pos);e.color=hex_renk(col)
 elif CHOCSHAPE:
-    et_r.color_ramp.elements[0].color=hex_renk("#e0a543" if HONEYCOMB else "#77a948")
-    et_r.color_ramp.elements[1].color=hex_renk("#805031" if HONEYCOMB else "#663521")
-    e=et_r.color_ramp.elements.new(.78);e.color=hex_renk("#e1ab4e" if HONEYCOMB else "#7dae4d")
-    e=et_r.color_ramp.elements.new(.84);e.color=hex_renk("#805031" if HONEYCOMB else "#663521")
+    et_r.color_ramp.elements[0].color=hex_renk("#f2eedb" if MATCHA else ("#e0a543" if HONEYCOMB else "#77a948"))
+    et_r.color_ramp.elements[1].color=hex_renk("#d3e3bd" if MATCHA else ("#805031" if HONEYCOMB else "#663521"))
+    e=et_r.color_ramp.elements.new(.78);e.color=hex_renk("#c0d6a2" if MATCHA else ("#e1ab4e" if HONEYCOMB else "#7dae4d"))
+    e=et_r.color_ramp.elements.new(.84);e.color=hex_renk("#e1e9ce" if MATCHA else ("#805031" if HONEYCOMB else "#663521"))
 elif HOTDOG:
     et_r.color_ramp.elements[0].color=hex_renk("#eac18b")
     et_r.color_ramp.elements[1].color=hex_renk("#b87538")
@@ -2273,12 +2295,12 @@ elif CHOCSHAPE:
                 matematik(ntk_,"ADD",matematik(ntk_,"MULTIPLY",dz,None,deger_b=93),
                     matematik(ntk_,"MULTIPLY",v_x.outputs[0],None,deger_b=42))))
         strand=matematik(ntk_,"MULTIPLY",
-            matematik(ntk_,"GREATER_THAN",strand,None,deger_b=.62),
+            matematik(ntk_,"GREATER_THAN",strand,None,deger_b=.35 if MATCHA else .62),
             matematik(ntk_,"LESS_THAN",u_,None,deger_b=.78))
     filling=ntk_.nodes.new("ShaderNodeMix");filling.data_type="RGBA"
     baglan(ntk_,strand,filling.inputs["Factor"])
     baglan(ntk_,et_r.outputs["Color"],filling.inputs[6])
-    filling.inputs[7].default_value=hex_renk("#8d5822" if HONEYCOMB else "#d5a455")
+    filling.inputs[7].default_value=hex_renk("#6f9c57" if MATCHA else ("#8d5822" if HONEYCOMB else "#d5a455"))
     baglan(ntk_,filling.outputs[2],bk_.inputs["Base Color"])
 elif HOTDOG:
     meat=matematik(ntk_,"LESS_THAN",sausage_u,None,deger_b=1.0)
