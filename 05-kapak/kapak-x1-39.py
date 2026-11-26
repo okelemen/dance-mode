@@ -252,6 +252,15 @@ for kid, yuk, alan, sx, sy, sw, sb in OLCU:
     m_ = np.asarray(siluet_maske(kid).resize((sw, sb), Image.LANCZOS).filter(ImageFilter.MaxFilter(a.kontur))) > 127
     x1, y1 = min(W, sx + sw), min(H, sy + sb)
     SIL_M[sy:y1, sx:x1] |= m_[:y1 - sy, :x1 - sx]
+def plaka(cx, cy, w, h):
+    """md. 28: acik su/gokte beyaz yazi okunmuyor (1,9:1) -> REF-091'deki koyu zemin gibi koyu mor plaka, pembe kenar"""
+    d = ImageDraw.Draw(im)
+    d.rounded_rectangle((cx - w / 2 - 6, cy - h / 2 - 6, cx + w / 2 + 6, cy + h / 2 + 6), radius=h / 2 + 6, fill=(255, 255, 255, 255))
+    d.rounded_rectangle((cx - w / 2, cy - h / 2, cx + w / 2, cy + h / 2), radius=h / 2, fill=(34, 8, 92, 255), outline=(255, 58, 200, 255), width=5)
+
+
+plaka(a.gosterge_xy[0], a.gosterge_xy[1] + 4, 372, 104)
+plaka(a.yazi_xy[0], a.yazi_xy[1] + 4, 330, 100)
 ONCE = np.asarray(im.convert("RGB")).copy()
 ARKA = im.copy()      # kontrast olcumu icin yazisiz zemin (siluetler dahil: yazinin arkasinda gorunen bu)
 PEMBE = ["#ffb8ec", "#ff5ad0", "#ff2aa8"]; MAVI = ["#a8f0ff", "#3ac0ff", "#2a7aff"]; SARI = ["#fff4a0", "#ffd21a", "#ffa21a"]
@@ -276,8 +285,6 @@ ONCE3 = np.asarray(im.convert("RGB")).copy()
 # REF-091: solda "Warm Up" (beyaz-sari, mor kontur) + altinda pembe-mavi kivrik cizgi; sagda "1 Player" + "#39" hap
 gx, gy = a.gosterge_xy
 dk = ImageDraw.Draw(im)
-for k, (rn, kal) in enumerate((("#2a0a66", 16), ("#ff3ac8", 9), ("#3ad8ff", 4))):
-    dk.arc((gx - 190, gy - 30, gx + 170, gy + 62), 25, 155, fill=rn, width=kal)
 baloncuk("Warm Up", gx, gy, 78, ["#ffffff", "#fff6c0", "#ffd23a"], kontur="#2a0a66", hedef=320, ad="Warm Up", dikey=True)
 yx, yy_ = a.yazi_xy
 baloncuk("1 Player", yx, yy_, 76, ["#ffffff", "#f0f4ff", "#c8e8ff"], kontur="#2a0a66", hedef=280, ad="1 Player", dikey=True)
@@ -307,7 +314,7 @@ for s_ in (-1, 1):                                                     # alt dal
         cx_, cy_ = rx + s_ * (14 + q * 11), ry + 44 - q * 3
         dz.ellipse((cx_ - 6, cy_ - 4, cx_ + 6, cy_ + 4), fill=(200, 20, 30, 255))
 im.alpha_composite(rz)
-baloncuk("NEW", rx, ry + 4, 70, ["#ff4a4a", "#e0101e", "#a8000e"], kontur="#ffffff", hedef=118, ad="NEW", dikey=True)
+baloncuk("NEW", rx, ry + 4, 70, ["#d0101e", "#b0000e", "#80000a"], kontur="#4a0008", hedef=118, ad="NEW", dikey=True)
 ROZ_M = np.abs(np.asarray(im.convert("RGB")).astype(int) - ONCE3.astype(int)).sum(2) > 30
 print("rozet/yazi-siluet cakisma piksel:", int((ROZ_M & SIL_M).sum()))
 

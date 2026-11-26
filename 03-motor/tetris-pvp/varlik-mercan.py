@@ -28,9 +28,12 @@ if KAPAK:
 PIST = 3.9
 GECIS = 11.5
 KUM, KUM_K = "#ffbc3a", "#f08a1a"                         # sicak altin kum (soluk bej degil)
+KDOY2 = KAPAK and arg("--kapak-doygun", "0") == "2"
 if KDOY:                                                  # kapak 1: acik sari kum kadrajin yarisi -> doygunluk 0,54 (REF 0,72)
-    KUM, KUM_K = "#ff8a00", "#e04a00"
-SU_UFUK, SU_ORTA, SU_UST = "#00d8e0", "#00a8f0", "#0a5ae8"  # ufuk camgobegi -> mavi -> derin
+    KUM, KUM_K = ("#ff5a00", "#c82a00") if KDOY2 else ("#ff8a00", "#e04a00")
+    if KDOY2:
+        GUNES = GUNES * 0.75                                # kapak 2: parlak yuzeyler beyaza patliyordu (S dusuk)
+SU_UFUK, SU_ORTA, SU_UST = ("#00a8ff", "#0060ff", "#3a1ae0") if KDOY2 else ("#00d8e0", "#00a8f0", "#0a5ae8")  # ufuk camgobegi -> mavi -> derin
 SU_SIS = "#08c0dc"                                        # mist rengi (uzak nesneler bu suya karisir)
 MERCAN = ("#ff2a7a", "#ff6a10", "#9a3aff", "#ffd21a", "#ff3ac8", "#20d070", "#ff4a3a", "#3a8cff")
 BALIK = ("#ffd21a", "#1e8cff", "#ff3a9a", "#8a3aff", "#20e0a0", "#ff6a10")
@@ -72,7 +75,7 @@ def koy_sahnesi(w, h, saydam):
     bg_k = nt.nodes.new("ShaderNodeBackground"); bg_k.inputs[1].default_value = 1.0
     nt.links.new(am.outputs[2], bg_k.inputs[0])
     bg_i = nt.nodes.new("ShaderNodeBackground"); bg_i.inputs[1].default_value = 0.55
-    bg_i.inputs[0].default_value = (*lin(hex3("#30c8ff")), 1)     # su ortam isigi: camgobegi (gri golge yok)
+    bg_i.inputs[0].default_value = (*lin(hex3("#1a6aff" if KDOY2 else "#30c8ff")), 1)     # su ortam isigi: camgobegi (gri golge yok)
     mx = nt.nodes.new("ShaderNodeMixShader")
     nt.links.new(lp.outputs["Is Camera Ray"], mx.inputs[0])
     nt.links.new(bg_i.outputs[0], mx.inputs[1]); nt.links.new(bg_k.outputs[0], mx.inputs[2])
@@ -175,8 +178,8 @@ def mat_kum(ad="kum", acik_ton=False):
     ns = nt.nodes.new("ShaderNodeTexNoise"); ns.inputs["Scale"].default_value = 0.8; ns.inputs["Detail"].default_value = 4
     nt.links.new(geo.outputs["Position"], ns.inputs["Vector"])
     rp = nt.nodes.new("ShaderNodeValToRGB"); el = rp.color_ramp.elements
-    el[0].position = 0.3; el[0].color = (*lin(hex3(("#ff9a00" if KDOY else "#ffcc4a") if acik_ton else KUM_K)), 1)
-    el[1].position = 0.75; el[1].color = (*lin(hex3(("#ffc020" if KDOY else "#ffe07a") if acik_ton else KUM)), 1)
+    el[0].position = 0.3; el[0].color = (*lin(hex3((("#ff6a00" if KDOY2 else "#ff9a00") if KDOY else "#ffcc4a") if acik_ton else KUM_K)), 1)
+    el[1].position = 0.75; el[1].color = (*lin(hex3((("#ff9a00" if KDOY2 else "#ffc020") if KDOY else "#ffe07a") if acik_ton else KUM)), 1)
     nt.links.new(ns.outputs["Fac"], rp.inputs[0]); nt.links.new(rp.outputs[0], b.inputs["Base Color"])
     wv = nt.nodes.new("ShaderNodeTexWave"); wv.wave_type = "BANDS"; wv.bands_direction = "Y"; wv.inputs["Scale"].default_value = 1.2
     wv.inputs["Distortion"].default_value = 4.0
