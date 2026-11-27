@@ -476,7 +476,9 @@ def serit_esyalari(oyuncu, R, rnd):
     duz("guverte_yakin", min(x_dis, x_ic), max(x_dis, x_ic), -4, GECIS, 0.0, guverte_mat())
     yuvarlak_kutu("govde_yan", (s_dis * (KUPESTE_X + 0.15), GECIS / 2 - 2, DENIZ_Z / 2 - 0.2), (0.3, GECIS + 4, -DENIZ_Z + 0.4), P(GOVDE, 0.45, 0.4), egim=0.08, seg=2)
     boru((s_dis * (KUPESTE_X + 0.32), -4, -0.3), (s_dis * (KUPESTE_X + 0.32), GECIS, -0.3), 0.1, altin())
-    duz("deniz_yakin", min(s_dis * (KUPESTE_X + 0.1), s_dis * 60), max(s_dis * (KUPESTE_X + 0.1), s_dis * 60), -6, GECIS + 40, DENIZ_Z, mat_deniz())
+    # sahne 1: deniz_yakin GECIS+40'a kadar uzaniyordu -> uzak kupeste direkleri / adacik (holdout) opak denizde delik acip gok.png'den
+    # uyusmayan koyu benekli bloklar + yesil ada yansimasi gosterdi -> yakin deniz yalniz gecis cizgisine kadar; otesi gok.png
+    duz("deniz_yakin", min(s_dis * (KUPESTE_X + 0.1), s_dis * 60), max(s_dis * (KUPESTE_X + 0.1), s_dis * 60), -6, GECIS, DENIZ_Z, mat_deniz())
     # oyuncu renginde boyali tahta pist (iki ton) + kenarda altin civili tahta bordur
     if oyuncu == "p1":
         yol = mat_tahta("serit_yol", "#0a5cff", "#1a7cff", ara="#042a7a", olcek=1.2, satir=0.2)
