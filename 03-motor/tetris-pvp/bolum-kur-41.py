@@ -83,7 +83,7 @@ bolum = {"seri": "HUMAN TETRIS", "bolum": "human-tetris-41", "bpm": BPM, "toplam
          "kartlar": kartlar, "duvarlar": duvarlar, "abone": abone, "abone_sure": 3.2,
          "muzik": "Mirrorball Showdown (Suno; hazir liste - kullanici 27 Kas) -> HT28 sabit surum mirror-132.wav -> DANCE-MODE/01-muzik/human-tetris-41/mirror-41-dizili.wav (132 BPM, 109 olcu, ilk 0,302)",
          "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur-41.py. Motor 03-motor/sahne38.html (1P SOLO, SPEED, 2B fennek Fino, kanca + kum tepesi acilisi). REF-093 yapi, mekan col vahasi (kullanici 27 Kas 2026).",
-         "tema": {"varlik": "/03-motor/tetris-pvp/varlik-41s2/tetris-varlik/", "karakter": "/03-motor/tetris-pvp/varlik-41-karakter/",
+         "tema": {"varlik": "/03-motor/tetris-pvp/varlik-41s3/tetris-varlik/", "karakter": "/03-motor/tetris-pvp/varlik-41-karakter/",
                   "maskeVarlik": "/03-motor/tetris-pvp/varlik-41s1/", "maskeKlasor": "poz/",
                   "turAd": {"1": "ROUND 1", "2": "ROUND 2", "3": "SPEED ROUND", "4": "FINAL ROUND"},
                   "aboneAlt": "NEW CHALLENGE EVERY DAY", "acilis": "kanca",
