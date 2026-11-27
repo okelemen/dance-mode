@@ -292,6 +292,13 @@ degis("satir([['CAN YOU WIN THE ', KART_DOLGU], ['GOLDEN SKATE', ['#fff6c0', '#f
 degis("  yaziK((kart.rutbe === 'GOLD' ? 'GOLDEN SKATE' : kart.rutbe) + '!', W / 2, H * 0.45, 110 * k * s, dol, 1);   // motor 37: altin paten",
       "  yaziK((kart.rutbe === 'GOLD' ? 'GOLDEN DUNE' : kart.rutbe) + '!', W / 2, H * 0.45, 110 * k * s, dol, 1);   // motor 38: altin kum tepesi")
 degis("  [['GOLDEN SKATE', '24 WALLS',", "  [['GOLDEN DUNE', '24 WALLS',")
+
+# ------------------------------------------------------------------ tam render 1 kare kontrolu (27 Kas): uc duzeltme
+degis("const MAS_BOY = 0.22; ", "const MAS_BOY = 0.17; ")       # Fino'nun dev kulaklari 0,22'de ekranin ust kenarindan kesiliyordu
+degis("    if (gir > 0.01) yaziK('FASTER!', W / 2, H * 0.12, 104 * k * ease(kisit(u / 0.3, 0, 1)) * p, ['#fff6a0', '#ffd23a', '#ff6a1a'], gir, '#4a1400', '#ffffff');",
+      "    if (gir > 0.01) yaziK('FASTER!', W * 0.17, H * 0.36, 88 * k * ease(kisit(u / 0.3, 0, 1)) * p, ['#fff6a0', '#ffd23a', '#ff6a1a'], gir, '#4a1400', '#ffffff');   // motor 38: ortada Fino'nun yuzunu kapatiyordu -> sol")
+degis("    yaziK(m, W * 0.48, y, 84 * k * a, dol, a);\n    yaziK(alt, W * 0.72, y, 64 * k * a, KART_DOLGU, a);",
+      "    yaziK(m, W * 0.47, y, (m.length > 8 ? 68 : 84) * k * a, dol, a);   // motor 38: GOLDEN DUNE 24 WALLS'a yapisiyordu\n    yaziK(alt, W * 0.74, y, 64 * k * a, KART_DOLGU, a);")
 kod = t.split("// --- motor 37 aciklamasi ---")[1]
 for kalan in ("LUMI", "SKATE"):
     gov = re.sub(r"//.*", "", kod)
