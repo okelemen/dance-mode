@@ -26,11 +26,11 @@ if KAPAK:
 PIST = 3.9
 GECIS = 11.5
 GOK_UFUK, GOK_ORTA, GOK_UST = "#5ad0ff", "#1a9aff", "#0a52f0"      # acik camgobegi ufuk -> derin mavi (beyaz-gri degil)
-SIS = "#ffc878"                                            # mist: uzak kum tepeleri sicak altin pusa karisir
+SIS = "#6ac4ff"                                            # mist: uzak tepeler acik gok mavisine karisir (sahne 1: sicak altin sis gok mavisiyle karisip leylak yapti)
 KDOY = KAPAK and arg("--kapak-doygun", "0") != "0"
 if KDOY:
     GOK_UFUK, GOK_ORTA, GOK_UST = "#2a9aff", "#0a62ff", "#0a2ad8"
-    SIS = "#ffa83a"
+    SIS = "#2a8aff"
 KUM, KUM_A, KUM_G = "#ffbd45", "#ffcf5c", "#f08a1a"        # altin kum + acik tepe tonu + turuncu golge (bej degil)
 TAS, TAS_A = "#e0742a", "#f2a04a"                          # kumtasi: kiremit turuncu + acik
 PALM = ("#18b83a", "#0aa04a", "#3ac81a")                   # palmiye yapragi yesilleri
@@ -67,7 +67,7 @@ def koy_sahnesi(w, h, saydam):
     sc.world.mist_settings.start = 60.0; sc.world.mist_settings.depth = 420.0; sc.world.mist_settings.falloff = "QUADRATIC"
     sc.use_nodes = True; sc.render.use_compositing = True; ct = sc.node_tree; ct.nodes.clear()
     rl = ct.nodes.new("CompositorNodeRLayers"); co = ct.nodes.new("CompositorNodeComposite")
-    mk = ct.nodes.new("CompositorNodeMath"); mk.operation = "MULTIPLY"; mk.inputs[1].default_value = 0.3 if KDOY else 0.45
+    mk = ct.nodes.new("CompositorNodeMath"); mk.operation = "MULTIPLY"; mk.inputs[1].default_value = 0.3 if KDOY else 0.35
     ct.links.new(rl.outputs["Mist"], mk.inputs[0])
     mm = ct.nodes.new("CompositorNodeMixRGB"); mm.blend_type = "MIX"
     ct.links.new(mk.outputs[0], mm.inputs[0]); ct.links.new(rl.outputs["Image"], mm.inputs[1])
@@ -147,9 +147,9 @@ def mat_kum(ad="kum", acik=False, dalga=True):
     b.inputs["Coat Weight"].default_value = 0.12; b.inputs["Coat Roughness"].default_value = 0.2
     if dalga:
         wv = nt.nodes.new("ShaderNodeTexWave"); wv.wave_type = "BANDS"; wv.bands_direction = "Y"
-        wv.inputs["Scale"].default_value = 1.6; wv.inputs["Distortion"].default_value = 3.0; wv.inputs["Detail"].default_value = 2
+        wv.inputs["Scale"].default_value = 0.9; wv.inputs["Distortion"].default_value = 4.0; wv.inputs["Detail"].default_value = 2
         nt.links.new(geo.outputs["Position"], wv.inputs["Vector"])
-        bp = nt.nodes.new("ShaderNodeBump"); bp.inputs["Strength"].default_value = 0.35
+        bp = nt.nodes.new("ShaderNodeBump"); bp.inputs["Strength"].default_value = 0.1   # sahne 1: 0,35 oluklu sac gibi okundu
         nt.links.new(wv.outputs["Fac"], bp.inputs["Height"]); nt.links.new(bp.outputs["Normal"], b.inputs["Normal"])
     _SM[ad] = m
     return m
@@ -382,8 +382,8 @@ def mekan(serit_modu, rnd):
         ucurtma(x, y, z, rnd.uniform(0.35, 0.7) * (1 + y / 40), rnd)
     for _ in range(9):
         bulut(rnd.uniform(-60, 60), rnd.uniform(60, 110), rnd.uniform(22, 40), rnd.uniform(2.5, 4.5), rnd)
-    pm = mat_isik("#fff0b0", 3.0)
-    for _ in range(300):
+    pm = mat_isik("#ffc23a", 2.5)                       # sahne 1: acik parilti kar gibi okundu -> sicak altin, seyrek
+    for _ in range(140):
         x = rnd.uniform(-30, 30); y = rnd.uniform(4, 60); z = rnd.uniform(0.8, 18)
         if abs(x) < 5 and y < 14:
             continue
