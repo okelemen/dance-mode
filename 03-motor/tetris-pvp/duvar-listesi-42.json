@@ -1,0 +1,122 @@
+[
+ {
+  "tur": 1,
+  "p1": "elbows-back-stretch",
+  "p2": "aurora-tree-hands-overhead-tilt"
+ },
+ {
+  "tur": 1,
+  "p1": "grid-goal-reach-curtsy",
+  "p2": "easy-halo-reach-knee"
+ },
+ {
+  "tur": 1,
+  "p1": "broom-back-cactus-stand",
+  "p2": "ray-reach-wave-wide"
+ },
+ {
+  "tur": 1,
+  "p1": "step-low-comet-tap",
+  "p2": "velvet-hip-cactus-curtsy"
+ },
+ {
+  "tur": 1,
+  "p1": "twilight-halo-cactus-horse",
+  "p2": "steady-reach-head-tap"
+ },
+ {
+  "tur": 1,
+  "p1": "skeleton-w-down-curtsy",
+  "p2": "sakura-lasso-spin-high"
+ },
+ {
+  "tur": 2,
+  "p1": "phantom-chest-flex-knee-lean-l",
+  "p2": "runner-hug-w-knee"
+ },
+ {
+  "tur": 2,
+  "p1": "arena-reach-t-kick",
+  "p2": "scarecrow-reach-flex-leg-out"
+ },
+ {
+  "tur": 2,
+  "p1": "fog-salute-salute-tap",
+  "p2": "sakura-knee-up-v-arms-tall"
+ },
+ {
+  "tur": 2,
+  "p1": "meteor-w-v-tree",
+  "p2": "raven-v-cross-tap-lean-l"
+ },
+ {
+  "tur": 2,
+  "p1": "rival-diag-comet-tree",
+  "p2": "violet-flex-hug-knee"
+ },
+ {
+  "tur": 2,
+  "p1": "shine-halo-t-tree",
+  "p2": "shine-flex-w-leg-out"
+ },
+ {
+  "tur": 3,
+  "p1": "ribbon-low-comet-wide",
+  "p2": "rail-low-head-horse"
+ },
+ {
+  "tur": 3,
+  "p1": "spider-v-head-horse-lean-l",
+  "p2": "tundra-cactus-v-goddess"
+ },
+ {
+  "tur": 3,
+  "p1": "shadow-point-cactus-stand",
+  "p2": "step-diag-cactus-wide"
+ },
+ {
+  "tur": 3,
+  "p1": "meteor-eagle-diag-horse",
+  "p2": "blossom-wave-t-goddess"
+ },
+ {
+  "tur": 3,
+  "p1": "neon-v-goal-lunge",
+  "p2": "candle-wide-lunge-salute-low"
+ },
+ {
+  "tur": 3,
+  "p1": "blaze-hip-head-lunge",
+  "p2": "sakura-deep-side-lunge-arm-over"
+ },
+ {
+  "tur": 4,
+  "p1": "vivid-flex-wave-kick",
+  "p2": "comet-wave-comet-knee"
+ },
+ {
+  "tur": 4,
+  "p1": "plush-swing-flex-knee",
+  "p2": "crown-hug-v-leg-out"
+ },
+ {
+  "tur": 4,
+  "p1": "skeleton-head-t-side-tap",
+  "p2": "blaze-t-halo-leg-out"
+ },
+ {
+  "tur": 4,
+  "p1": "spring-v-comet-kick",
+  "p2": "stardust-swing-w-kick"
+ },
+ {
+  "tur": 4,
+  "p1": "morning-low-wave-kick",
+  "p2": "ghost-chest-point-leg-out"
+ },
+ {
+  "tur": 4,
+  "p1": "phantom-t-t-kick-lean-l",
+  "p2": "groove-w-low-lunge"
+ }
+]
