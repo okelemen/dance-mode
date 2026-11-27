@@ -33,7 +33,7 @@ KDOY5 = KAPAK and arg("--kapak-doygun", "0") == "5"      # kapak 6: gece neon re
 KDOY4 = KAPAK and arg("--kapak-doygun", "0") in ("4", "5")      # kapak 5: derin su + parlayan mercan (REF-091 koyu zemin + neon)
 KDOY3 = KAPAK and arg("--kapak-doygun", "0") in ("3", "4", "5")      # kapak 3: beyaz parlama / inci / kabarcik / huzme doygunlugu dusuruyor
 if KDOY:                                                  # kapak 1: acik sari kum kadrajin yarisi -> doygunluk 0,54 (REF 0,72)
-    KUM, KUM_K = ("#ff5a00", "#c82a00") if KDOY2 else ("#ff8a00", "#e04a00")
+    KUM, KUM_K = ("#ff3a00", "#ff0a40") if KDOY5 else ("#ff5a00", "#c82a00") if KDOY2 else ("#ff8a00", "#e04a00")
     if KDOY2:
         GUNES = GUNES * (0.3 if KDOY5 else 0.5 if KDOY4 else 0.75)                                # kapak 2: parlak yuzeyler beyaza patliyordu (S dusuk)
 SU_UFUK, SU_ORTA, SU_UST = ("#1a3aff", "#2a0ae0", "#4a00b0") if KDOY5 else ("#0a6aff", "#1a2ae0", "#3a0aa0") if KDOY4 else ("#00a8ff", "#0060ff", "#3a1ae0") if KDOY2 else ("#00d8e0", "#00a8f0", "#0a5ae8")  # ufuk camgobegi -> mavi -> derin
@@ -188,6 +188,8 @@ def mat_kum(ad="kum", acik_ton=False):
     el[0].position = 0.3; el[0].color = (*lin(hex3((("#ff6a00" if KDOY2 else "#ff9a00") if KDOY else "#ffcc4a") if acik_ton else KUM_K)), 1)
     el[1].position = 0.75; el[1].color = (*lin(hex3((("#ff9a00" if KDOY2 else "#ffc020") if KDOY else "#ffe07a") if acik_ton else KUM)), 1)
     nt.links.new(ns.outputs["Fac"], rp.inputs[0]); nt.links.new(rp.outputs[0], b.inputs["Base Color"])
+    if KDOY5:                                             # kapak 6: mor ay isigi turuncu kumu camura ceviriyordu -> kum kendi neon rengiyle parlar
+        nt.links.new(rp.outputs[0], b.inputs["Emission Color"]); b.inputs["Emission Strength"].default_value = 0.8
     wv = nt.nodes.new("ShaderNodeTexWave"); wv.wave_type = "BANDS"; wv.bands_direction = "Y"; wv.inputs["Scale"].default_value = 1.2
     wv.inputs["Distortion"].default_value = 4.0
     nt.links.new(geo.outputs["Position"], wv.inputs["Vector"])
