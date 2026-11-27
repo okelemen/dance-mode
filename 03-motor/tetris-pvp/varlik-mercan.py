@@ -28,14 +28,15 @@ if KAPAK:
 PIST = 3.9
 GECIS = 11.5
 KUM, KUM_K = "#ffbc3a", "#f08a1a"                         # sicak altin kum (soluk bej degil)
-KDOY2 = KAPAK and arg("--kapak-doygun", "0") in ("2", "3", "4")
-KDOY4 = KAPAK and arg("--kapak-doygun", "0") == "4"      # kapak 5: derin su + parlayan mercan (REF-091 koyu zemin + neon)
-KDOY3 = KAPAK and arg("--kapak-doygun", "0") in ("3", "4")      # kapak 3: beyaz parlama / inci / kabarcik / huzme doygunlugu dusuruyor
+KDOY2 = KAPAK and arg("--kapak-doygun", "0") in ("2", "3", "4", "5")
+KDOY5 = KAPAK and arg("--kapak-doygun", "0") == "5"      # kapak 6: gece neon resif (REF-091 lacivert zemin + neon; 26 Kas kullanici secimi)
+KDOY4 = KAPAK and arg("--kapak-doygun", "0") in ("4", "5")      # kapak 5: derin su + parlayan mercan (REF-091 koyu zemin + neon)
+KDOY3 = KAPAK and arg("--kapak-doygun", "0") in ("3", "4", "5")      # kapak 3: beyaz parlama / inci / kabarcik / huzme doygunlugu dusuruyor
 if KDOY:                                                  # kapak 1: acik sari kum kadrajin yarisi -> doygunluk 0,54 (REF 0,72)
     KUM, KUM_K = ("#ff5a00", "#c82a00") if KDOY2 else ("#ff8a00", "#e04a00")
     if KDOY2:
-        GUNES = GUNES * (0.5 if KDOY4 else 0.75)                                # kapak 2: parlak yuzeyler beyaza patliyordu (S dusuk)
-SU_UFUK, SU_ORTA, SU_UST = ("#0a6aff", "#1a2ae0", "#3a0aa0") if KDOY4 else ("#00a8ff", "#0060ff", "#3a1ae0") if KDOY2 else ("#00d8e0", "#00a8f0", "#0a5ae8")  # ufuk camgobegi -> mavi -> derin
+        GUNES = GUNES * (0.3 if KDOY5 else 0.5 if KDOY4 else 0.75)                                # kapak 2: parlak yuzeyler beyaza patliyordu (S dusuk)
+SU_UFUK, SU_ORTA, SU_UST = ("#1a3aff", "#2a0ae0", "#4a00b0") if KDOY5 else ("#0a6aff", "#1a2ae0", "#3a0aa0") if KDOY4 else ("#00a8ff", "#0060ff", "#3a1ae0") if KDOY2 else ("#00d8e0", "#00a8f0", "#0a5ae8")  # ufuk camgobegi -> mavi -> derin
 SU_SIS = "#08c0dc"                                        # mist rengi (uzak nesneler bu suya karisir)
 MERCAN = ("#ff2a7a", "#ff6a10", "#9a3aff", "#ffd21a", "#ff3ac8", "#20d070", "#ff4a3a", "#3a8cff")
 BALIK = ("#ffd21a", "#1e8cff", "#ff3a9a", "#8a3aff", "#20e0a0", "#ff6a10")
@@ -72,12 +73,12 @@ def koy_sahnesi(w, h, saydam):
     nt.links.new(bt.outputs[0], ml.inputs[0]); nt.links.new(zb.outputs[0], ml.inputs[1])
     am = nt.nodes.new("ShaderNodeMix"); am.data_type = "RGBA"; am.blend_type = "ADD"
     nt.links.new(ml.outputs[0], am.inputs["Factor"]); nt.links.new(rp.outputs[0], am.inputs[6])
-    am.inputs[7].default_value = (*lin(hex3("#40e8ff" if KDOY else "#a0fff8")), 1)
+    am.inputs[7].default_value = (*lin(hex3("#ff3ae8" if KDOY5 else "#40e8ff" if KDOY else "#a0fff8")), 1)
     lp = nt.nodes.new("ShaderNodeLightPath")
     bg_k = nt.nodes.new("ShaderNodeBackground"); bg_k.inputs[1].default_value = 1.0
     nt.links.new(am.outputs[2], bg_k.inputs[0])
     bg_i = nt.nodes.new("ShaderNodeBackground"); bg_i.inputs[1].default_value = 0.55
-    bg_i.inputs[0].default_value = (*lin(hex3("#2a3aff" if KDOY4 else "#1a6aff" if KDOY2 else "#30c8ff")), 1)     # su ortam isigi: camgobegi (gri golge yok)
+    bg_i.inputs[0].default_value = (*lin(hex3("#5a1aff" if KDOY5 else "#2a3aff" if KDOY4 else "#1a6aff" if KDOY2 else "#30c8ff")), 1)     # su ortam isigi: camgobegi (gri golge yok)
     mx = nt.nodes.new("ShaderNodeMixShader")
     nt.links.new(lp.outputs["Is Camera Ray"], mx.inputs[0])
     nt.links.new(bg_i.outputs[0], mx.inputs[1]); nt.links.new(bg_k.outputs[0], mx.inputs[2])
@@ -91,7 +92,7 @@ def koy_sahnesi(w, h, saydam):
     ct.links.new(rl.outputs["Mist"], mk.inputs[0])
     mm = ct.nodes.new("CompositorNodeMixRGB"); mm.blend_type = "MIX"
     ct.links.new(mk.outputs[0], mm.inputs[0]); ct.links.new(rl.outputs["Image"], mm.inputs[1])
-    mm.inputs[2].default_value = (*lin(hex3("#0090e0" if KDOY else SU_SIS)), 1)
+    mm.inputs[2].default_value = (*lin(hex3("#2a1ae8" if KDOY5 else "#0090e0" if KDOY else SU_SIS)), 1)
     gl = ct.nodes.new("CompositorNodeGlare"); gl.glare_type = "FOG_GLOW"; gl.quality = "HIGH"; gl.threshold = 1.0; gl.size = 7; gl.mix = -0.4
     if KDOY:
         ct.links.new(mm.outputs[0], co.inputs[0])
@@ -117,7 +118,7 @@ def isiklar():
     # yukaridan sicak gunes (su yuzeyinden suzulen, hafif onden) + camgobegi yan dolgu -> mercan golgeli, gri degil
     bpy.ops.object.light_add(type="SUN", location=(0, 0, 30))
     g = bpy.context.active_object; g.data.energy = GUNES; g.data.angle = math.radians(4.0)
-    g.data.color = lin(hex3("#fff4d8"))
+    g.data.color = lin(hex3("#b07aff" if KDOY5 else "#fff4d8"))
     g.rotation_euler = Vector((0.2, 0.45, -0.85)).to_track_quat("-Z", "Y").to_euler()
     bpy.ops.object.light_add(type="SUN", location=(0, 0, 30))
     f = bpy.context.active_object; f.data.energy = 1.1; f.data.angle = math.radians(10.0)
@@ -165,7 +166,7 @@ def mat_mercan(renk):
     bp = nt.nodes.new("ShaderNodeBump"); bp.inputs["Strength"].default_value = 0.5
     nt.links.new(vr.outputs["Distance"], bp.inputs["Height"]); nt.links.new(bp.outputs["Normal"], b.inputs["Normal"])
     if KDOY4:
-        b.inputs["Emission Color"].default_value = (*lin(hex3(renk)), 1); b.inputs["Emission Strength"].default_value = 0.6
+        b.inputs["Emission Color"].default_value = (*lin(hex3(renk)), 1); b.inputs["Emission Strength"].default_value = 1.6 if KDOY5 else 0.6
     _SM[key] = m
     return m
 
