@@ -266,6 +266,11 @@ def main():
                 yerlestir(ef, boing(0.5), t + 2.4, 0.7)
                 yerlestir(ef, kar(0.6), t + 2.45, 0.8)
                 yerlestir(ef, piril(1.0), t + 2.5, 0.9)
+            elif "--col" in sys.argv:                                       # 41: ruzgar dev kum tepesini kaydirir (uguldama + kum hisirtisi), kum savrulur, altin isik (piril), Fino cikar
+                yerlestir(ef, ruzgar(1.2), t + 2.0, 0.7)
+                yerlestir(ef, vuus(0.8, True, 0.7), t + 2.1)
+                yerlestir(ef, kum(0.5), t + 2.25, 0.6)
+                yerlestir(ef, piril(1.0), t + 2.55, 0.9)
             elif "--paten" in sys.argv:                                     # 40: paten bicagi buza iz oyar (kazima), buz kiymiklari (tin), Lumi kayarak gelir, iz soruya akar
                 yerlestir(ef, paten_kazima(0.7), t + 2.0, 0.9)
                 for i in range(6):
@@ -305,7 +310,7 @@ def main():
                 yerlestir(ef, su(), t + 2.35, 0.9)
             else:
                 yerlestir(ef, ruzgar(1.3), t + 2.0, 0.6)                # lale yapragi firtinasi
-            yerlestir(ef, zap(0.4), t + (2.88 if "--blok" in sys.argv else 2.7 if ("--balon" in sys.argv or "--mantar" in sys.argv or "--kurabiye" in sys.argv or "--mercan" in sys.argv or "--paten" in sys.argv) else 2.55), 0.7)   # WHO WILL WIN? / 34: CAN YOUR TEAM CLEAR ALL 24?
+            yerlestir(ef, zap(0.4), t + (2.88 if "--blok" in sys.argv else 2.7 if ("--balon" in sys.argv or "--mantar" in sys.argv or "--kurabiye" in sys.argv or "--mercan" in sys.argv or "--paten" in sys.argv or "--col" in sys.argv) else 2.55), 0.7)   # WHO WILL WIN? / 34: CAN YOUR TEAM CLEAR ALL 24?
         elif k["tip"] in ("vs", "giris", "acilis"):          # 5. video: giris karti (3 PLAYERS) VS ile ayni carpisma
             yerlestir(ef, vuus(0.7, True, 0.9), t)
             yerlestir(ef, vurus(), t + 0.45, 1.0)
@@ -373,6 +378,10 @@ def main():
                 yerlestir(ef, kar(), c - 0.03, 1.0)
                 yerlestir(ef, piril(0.4), c + 0.15, 0.5)
                 yerlestir(ef, duduk(), c + 0.45, 0.7)
+            elif "--col" in sys.argv:                                       # 41: kum tepesine itilir, asagi yuvarlanir (iki kisa kum gumlemesi) + kum pufu + hakem duduk
+                yerlestir(ef, kum(0.35), c - 0.03, 1.0)
+                yerlestir(ef, kum(0.3), c + 0.22, 0.7)
+                yerlestir(ef, duduk(), c + 0.5, 0.7)
             elif "--paten" in sys.argv:                                     # 40: buzda kayar (kazima), kar yiginina gomulur (kar pufu) + hakem duduk
                 yerlestir(ef, paten_kazima(0.35, 401), c - 0.3, 0.8)
                 yerlestir(ef, kar(), c - 0.03, 1.0)
