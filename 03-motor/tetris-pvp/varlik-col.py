@@ -28,9 +28,13 @@ GECIS = 11.5
 GOK_UFUK, GOK_ORTA, GOK_UST = "#5ad0ff", "#1a9aff", "#0a52f0"      # acik camgobegi ufuk -> derin mavi (beyaz-gri degil)
 SIS = "#6ac4ff"                                            # mist: uzak tepeler acik gok mavisine karisir (sahne 1: sicak altin sis gok mavisiyle karisip leylak yapti)
 KDOY = KAPAK and arg("--kapak-doygun", "0") != "0"
-if KDOY:
+KGB = KAPAK and arg("--kapak-doygun", "0") == "2"        # HT41 kapak: GUN BATIMI (REF-093 gece mor neon tunel 0,685 / 0,567 / 0,520;
+if KDOY:                                                  # gunduz col 0,62 / 0,83 -> doygun turuncu-pembe-mor gok, parlaklik duser, doygunluk artar)
     GOK_UFUK, GOK_ORTA, GOK_UST = "#2a9aff", "#0a62ff", "#0a2ad8"
     SIS = "#2a8aff"
+if KGB:
+    GOK_UFUK, GOK_ORTA, GOK_UST = "#ff7a0a", "#ff1a6a", "#5a0aa8"
+    SIS = "#ff4a5a"
 KUM, KUM_A, KUM_G = "#ffbd45", "#ffcf5c", "#f08a1a"        # altin kum + acik tepe tonu + turuncu golge (bej degil)
 TAS, TAS_A = "#e0742a", "#f2a04a"                          # kumtasi: kiremit turuncu + acik
 PALM = ("#18b83a", "#0aa04a", "#3ac81a")                   # palmiye yapragi yesilleri
@@ -58,7 +62,7 @@ def koy_sahnesi(w, h, saydam):
     bg_k = nt.nodes.new("ShaderNodeBackground"); bg_k.inputs[1].default_value = 1.0
     nt.links.new(rp.outputs[0], bg_k.inputs[0])
     bg_i = nt.nodes.new("ShaderNodeBackground"); bg_i.inputs[1].default_value = 0.55
-    bg_i.inputs[0].default_value = (*lin(hex3("#6aa8ff")), 1)        # gok ortam isigi: mavi dolgu (kum golgesi kahve degil)
+    bg_i.inputs[0].default_value = (*lin(hex3("#b04aff" if KGB else "#6aa8ff")), 1)        # gok ortam isigi: mavi dolgu (kum golgesi kahve degil)
     mx = nt.nodes.new("ShaderNodeMixShader")
     nt.links.new(lp.outputs["Is Camera Ray"], mx.inputs[0])
     nt.links.new(bg_i.outputs[0], mx.inputs[1]); nt.links.new(bg_k.outputs[0], mx.inputs[2])
@@ -93,12 +97,12 @@ def kamera(sc):
 def isiklar():
     # yuksek sicak col gunesi (onden-yandan) -> kumda kisa sicak golge, kaplamada parlama; mavi gok dolgu
     bpy.ops.object.light_add(type="SUN", location=(0, 0, 30))
-    g = bpy.context.active_object; g.data.energy = GUNES; g.data.angle = math.radians(2.5)
-    g.data.color = lin(hex3("#fff0d0"))
-    g.rotation_euler = Vector((0.4, 0.45, -0.85)).to_track_quat("-Z", "Y").to_euler()
+    g = bpy.context.active_object; g.data.energy = GUNES * (0.8 if KGB else 1.0); g.data.angle = math.radians(2.5)
+    g.data.color = lin(hex3("#ff9a4a" if KGB else "#fff0d0"))
+    g.rotation_euler = Vector((0.4, 0.45, -0.85) if not KGB else (0.15, 0.95, -0.28)).to_track_quat("-Z", "Y").to_euler()   # gun batimi: alcak, karsidan
     bpy.ops.object.light_add(type="SUN", location=(0, 0, 30))
     f = bpy.context.active_object; f.data.energy = 0.8; f.data.angle = math.radians(12.0)
-    f.data.color = lin(hex3("#9ac0ff"))
+    f.data.color = lin(hex3("#c06aff" if KGB else "#9ac0ff"))
     f.rotation_euler = Vector((-0.4, -0.7, -0.55)).to_track_quat("-Z", "Y").to_euler()
 
 
