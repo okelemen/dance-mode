@@ -6,7 +6,7 @@ set -euo pipefail
 RUN=$1
 KOK=/c/Users/eleme/DANCE-MODE
 CIK="/c/Users/eleme/OneDrive/Masaüstü/POZ-DUVARI/kesitler"
-P=$KOK/03-motor/tetris-pvp/parca-41
+P=$KOK/03-motor/tetris-pvp/parca-41-${2:-r1}
 mkdir -p "$P"
 gh run download "$RUN" -R okelemen/dance-mode -D "$P"
 mapfile -t L < <(find "$P" -name '*.mp4' | sed -E 's#.*/([^/]*)$#\1\t&#' | sort -t$'\t' -k1,1V | cut -f2)
