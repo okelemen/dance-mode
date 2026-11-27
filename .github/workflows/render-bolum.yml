@@ -53,7 +53,27 @@ jobs:
     runs-on: ubuntu-24.04      # 11 Kas 2026: ubuntu-latest (resolute) security.ubuntu.com cozemedi (tetris-varlik.yml)
     outputs:
       matris: ${{ steps.uret.outputs.matris }}
+      bolum: ${{ steps.yol.outputs.bolum }}
     steps:
+      - uses: actions/checkout@v4
+      # 28 Kas 2026 (gozlem 0011, 5 tekrar): render.js 03-motor/ icinden kosar; "bolumler/x.json" girilince 404 + 180 sn bekleme.
+      # Yol burada 03-motor/'e gore duzeltilir ve dosya yoksa ya da JSON bozuksa is SANIYELER icinde acik mesajla durur.
+      - id: yol
+        env:
+          GIRDI: ${{ github.event.inputs.bolum }}
+        run: |
+          B="$GIRDI"
+          if [ -z "$B" ]; then echo "bolum=" >> "$GITHUB_OUTPUT"; echo "bolum girilmedi (motor varsayilani)"; exit 0; fi
+          case "$B" in
+            ../*) ;;
+            /*) echo "::error::bolum mutlak yol olamaz: $B"; exit 1 ;;
+            ./bolumler/*) B="../${B#./}" ;;
+            bolumler/*) B="../$B" ;;
+          esac
+          if [ ! -f "03-motor/$B" ]; then echo "::error::bolum dosyasi bulunamadi: 03-motor/$B (girdi: $GIRDI)"; exit 1; fi
+          python3 -c "import json,sys; json.load(open(sys.argv[1], encoding='utf-8'))" "03-motor/$B" || { echo "::error::bolum JSON okunamadi: $B"; exit 1; }
+          [ "$B" != "$GIRDI" ] && echo "::notice::bolum yolu duzeltildi: $GIRDI -> $B"
+          echo "bolum=$B" >> "$GITHUB_OUTPUT"; echo "bolum: $B"
       - id: uret
         run: |
           TOPLAM=${{ github.event.inputs.toplam_olcu }}
@@ -117,7 +137,7 @@ jobs:
             --toplam ${{ github.event.inputs.toplam_olcu }} \
             --baslangic ${{ matrix.p.baslangic }} \
             --olcu ${{ matrix.p.olcu }} \
-            ${{ github.event.inputs.bolum && format('--bolum {0}', github.event.inputs.bolum) || '' }} \
+            ${{ needs.hazirla.outputs.bolum && format('--bolum {0}', needs.hazirla.outputs.bolum) || '' }} \
             --sayfa ${{ github.event.inputs.sayfa }} \
             --sessiz \
             --cikti "../04-ciktilar/parca-$(printf '%03d' ${{ matrix.p.i }}).mp4"
