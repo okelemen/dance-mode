@@ -1,0 +1,649 @@
+{
+ "seri": "HUMAN TETRIS",
+ "bolum": "human-tetris-40",
+ "bpm": 125.0,
+ "toplam_olcu": 103,
+ "toplam_duvar": 24,
+ "kartlar": [
+  {
+   "t": 0.0,
+   "sure": 3.84,
+   "tip": "acilis",
+   "soru": true
+  },
+  {
+   "t": 44.16,
+   "sure": 1.92,
+   "tip": "tur",
+   "tur": 2,
+   "metin": "02",
+   "alt": "ROUND 2",
+   "ek": null,
+   "boss": false
+  },
+  {
+   "t": 86.4,
+   "sure": 1.92,
+   "tip": "tur",
+   "tur": 3,
+   "metin": "03",
+   "alt": "BLIND ROUND",
+   "ek": "SNOWSTORM INCOMING!",
+   "boss": false
+  },
+  {
+   "t": 137.28,
+   "sure": 1.92,
+   "tip": "tur",
+   "tur": 4,
+   "metin": "04",
+   "alt": "FINAL ROUND",
+   "ek": null,
+   "boss": false
+  },
+  {
+   "t": 172.8,
+   "sure": 1.92,
+   "tip": "tur",
+   "tur": 4,
+   "metin": "!",
+   "alt": "BOSS WALL",
+   "ek": "GO FOR THE GOLDEN SKATE!",
+   "boss": true
+  },
+  {
+   "t": 186.24,
+   "sure": 3.84,
+   "tip": "sonuc",
+   "skor": 21,
+   "toplam": 24,
+   "rutbe": "SILVER"
+  },
+  {
+   "t": 190.08,
+   "sure": 3.84,
+   "tip": "rutbe"
+  },
+  {
+   "t": 193.92,
+   "sure": 3.84,
+   "tip": "abone"
+  }
+ ],
+ "duvarlar": [
+  {
+   "no": 1,
+   "tur": 1,
+   "t0": 3.84,
+   "z": {
+    "kart": 0.96,
+    "say": 3.36,
+    "buyu": 1.44,
+    "gec": 0.96,
+    "sure": 6.72
+   },
+   "grup": "witch-quad-hold-high-back",
+   "p1": "witch-quad-hold-high-back",
+   "out": {
+    "p1": false
+   },
+   "skor": 1,
+   "ovgu": "PERFECT!",
+   "boss": false,
+   "blind": false,
+   "nasil": true
+  },
+  {
+   "no": 2,
+   "tur": 1,
+   "t0": 10.56,
+   "z": {
+    "kart": 0.96,
+    "say": 3.36,
+    "buyu": 1.44,
+    "gec": 0.96,
+    "sure": 6.72
+   },
+   "grup": "cosmic-knee-hug-standing",
+   "p1": "cosmic-knee-hug-standing",
+   "out": {
+    "p1": false
+   },
+   "skor": 2,
+   "ovgu": "NICE!",
+   "boss": false,
+   "blind": false,
+   "nasil": true
+  },
+  {
+   "no": 3,
+   "tur": 1,
+   "t0": 17.28,
+   "z": {
+    "kart": 0.96,
+    "say": 3.36,
+    "buyu": 1.44,
+    "gec": 0.96,
+    "sure": 6.72
+   },
+   "grup": "sakura-one-point-up-hip",
+   "p1": "sakura-one-point-up-hip",
+   "out": {
+    "p1": false
+   },
+   "skor": 3,
+   "ovgu": "GREAT!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 4,
+   "tur": 1,
+   "t0": 24.0,
+   "z": {
+    "kart": 0.96,
+    "say": 3.36,
+    "buyu": 1.44,
+    "gec": 0.96,
+    "sure": 6.72
+   },
+   "grup": "sweet-reach-wave-knee",
+   "p1": "sweet-reach-wave-knee",
+   "out": {
+    "p1": false
+   },
+   "skor": 4,
+   "ovgu": "AMAZING!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 5,
+   "tur": 1,
+   "t0": 30.72,
+   "z": {
+    "kart": 0.96,
+    "say": 3.36,
+    "buyu": 1.44,
+    "gec": 0.96,
+    "sure": 6.72
+   },
+   "grup": "meteor-hip-cactus-curtsy",
+   "p1": "meteor-hip-cactus-curtsy",
+   "out": {
+    "p1": true
+   },
+   "skor": 4,
+   "ovgu": "SUPER!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 6,
+   "tur": 1,
+   "t0": 37.44,
+   "z": {
+    "kart": 0.96,
+    "say": 3.36,
+    "buyu": 1.44,
+    "gec": 0.96,
+    "sure": 6.72
+   },
+   "grup": "spotlight-flex-hip-curtsy",
+   "p1": "spotlight-flex-hip-curtsy",
+   "out": {
+    "p1": false
+   },
+   "skor": 5,
+   "ovgu": "WOW!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 7,
+   "tur": 2,
+   "t0": 46.08,
+   "z": {
+    "kart": 0.96,
+    "say": 3.36,
+    "buyu": 1.44,
+    "gec": 0.96,
+    "sure": 6.72
+   },
+   "grup": "vortex-v-hip-tap",
+   "p1": "vortex-v-hip-tap",
+   "out": {
+    "p1": false
+   },
+   "skor": 6,
+   "ovgu": "PERFECT!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 8,
+   "tur": 2,
+   "t0": 52.8,
+   "z": {
+    "kart": 0.96,
+    "say": 3.36,
+    "buyu": 1.44,
+    "gec": 0.96,
+    "sure": 6.72
+   },
+   "grup": "crypt-v-chest-leg-out",
+   "p1": "crypt-v-chest-leg-out",
+   "out": {
+    "p1": false
+   },
+   "skor": 7,
+   "ovgu": "NICE!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 9,
+   "tur": 2,
+   "t0": 59.52,
+   "z": {
+    "kart": 0.96,
+    "say": 3.36,
+    "buyu": 1.44,
+    "gec": 0.96,
+    "sure": 6.72
+   },
+   "grup": "flow-v-wave-tree",
+   "p1": "flow-v-wave-tree",
+   "out": {
+    "p1": false
+   },
+   "skor": 8,
+   "ovgu": "GREAT!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 10,
+   "tur": 2,
+   "t0": 66.24,
+   "z": {
+    "kart": 0.96,
+    "say": 3.36,
+    "buyu": 1.44,
+    "gec": 0.96,
+    "sure": 6.72
+   },
+   "grup": "jukebox-cross-hook-knee",
+   "p1": "jukebox-cross-hook-knee",
+   "out": {
+    "p1": false
+   },
+   "skor": 9,
+   "ovgu": "AMAZING!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 11,
+   "tur": 2,
+   "t0": 72.96,
+   "z": {
+    "kart": 0.96,
+    "say": 3.36,
+    "buyu": 1.44,
+    "gec": 0.96,
+    "sure": 6.72
+   },
+   "grup": "truss-hip-cactus-leg-out",
+   "p1": "truss-hip-cactus-leg-out",
+   "out": {
+    "p1": false
+   },
+   "skor": 10,
+   "ovgu": "SUPER!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 12,
+   "tur": 2,
+   "t0": 79.68,
+   "z": {
+    "kart": 0.96,
+    "say": 3.36,
+    "buyu": 1.44,
+    "gec": 0.96,
+    "sure": 6.72
+   },
+   "grup": "breeze-hug-hip-kick",
+   "p1": "breeze-hug-hip-kick",
+   "out": {
+    "p1": false
+   },
+   "skor": 11,
+   "ovgu": "WOW!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 13,
+   "tur": 3,
+   "t0": 88.32,
+   "z": {
+    "kart": 0.96,
+    "say": 4.32,
+    "buyu": 1.92,
+    "gec": 0.96,
+    "sure": 8.16
+   },
+   "grup": "runner-head-flex-horse",
+   "p1": "runner-head-flex-horse",
+   "out": {
+    "p1": false
+   },
+   "skor": 12,
+   "ovgu": "PERFECT!",
+   "boss": false,
+   "blind": true,
+   "nasil": false
+  },
+  {
+   "no": 14,
+   "tur": 3,
+   "t0": 96.48,
+   "z": {
+    "kart": 0.96,
+    "say": 4.32,
+    "buyu": 1.92,
+    "gec": 0.96,
+    "sure": 8.16
+   },
+   "grup": "owl-reach-down-goddess-lean-r",
+   "p1": "owl-reach-down-goddess-lean-r",
+   "out": {
+    "p1": false
+   },
+   "skor": 13,
+   "ovgu": "NICE!",
+   "boss": false,
+   "blind": true,
+   "nasil": false
+  },
+  {
+   "no": 15,
+   "tur": 3,
+   "t0": 104.64,
+   "z": {
+    "kart": 0.96,
+    "say": 4.32,
+    "buyu": 1.92,
+    "gec": 0.96,
+    "sure": 8.16
+   },
+   "grup": "bloom-diag-hip-horse",
+   "p1": "bloom-diag-hip-horse",
+   "out": {
+    "p1": false
+   },
+   "skor": 14,
+   "ovgu": "GREAT!",
+   "boss": false,
+   "blind": true,
+   "nasil": false
+  },
+  {
+   "no": 16,
+   "tur": 3,
+   "t0": 112.8,
+   "z": {
+    "kart": 0.96,
+    "say": 4.32,
+    "buyu": 1.92,
+    "gec": 0.96,
+    "sure": 8.16
+   },
+   "grup": "pink-wave-v-wide",
+   "p1": "pink-wave-v-wide",
+   "out": {
+    "p1": true
+   },
+   "skor": 14,
+   "ovgu": "AMAZING!",
+   "boss": false,
+   "blind": true,
+   "nasil": false
+  },
+  {
+   "no": 17,
+   "tur": 3,
+   "t0": 120.96,
+   "z": {
+    "kart": 0.96,
+    "say": 4.32,
+    "buyu": 1.92,
+    "gec": 0.96,
+    "sure": 8.16
+   },
+   "grup": "glow-diag-halo-wide",
+   "p1": "glow-diag-halo-wide",
+   "out": {
+    "p1": false
+   },
+   "skor": 15,
+   "ovgu": "SUPER!",
+   "boss": false,
+   "blind": true,
+   "nasil": false
+  },
+  {
+   "no": 18,
+   "tur": 3,
+   "t0": 129.12,
+   "z": {
+    "kart": 0.96,
+    "say": 4.32,
+    "buyu": 1.92,
+    "gec": 0.96,
+    "sure": 8.16
+   },
+   "grup": "ember-reach-comet-lunge",
+   "p1": "ember-reach-comet-lunge",
+   "out": {
+    "p1": false
+   },
+   "skor": 16,
+   "ovgu": "WOW!",
+   "boss": false,
+   "blind": true,
+   "nasil": false
+  },
+  {
+   "no": 19,
+   "tur": 4,
+   "t0": 139.2,
+   "z": {
+    "kart": 0.96,
+    "say": 3.36,
+    "buyu": 1.44,
+    "gec": 0.96,
+    "sure": 6.72
+   },
+   "grup": "ember-t-halo-knee",
+   "p1": "ember-t-halo-knee",
+   "out": {
+    "p1": false
+   },
+   "skor": 17,
+   "ovgu": "PERFECT!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 20,
+   "tur": 4,
+   "t0": 145.92,
+   "z": {
+    "kart": 0.96,
+    "say": 3.36,
+    "buyu": 1.44,
+    "gec": 0.96,
+    "sure": 6.72
+   },
+   "grup": "glow-diag-w-curtsy",
+   "p1": "glow-diag-w-curtsy",
+   "out": {
+    "p1": false
+   },
+   "skor": 18,
+   "ovgu": "NICE!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 21,
+   "tur": 4,
+   "t0": 152.64,
+   "z": {
+    "kart": 0.96,
+    "say": 3.36,
+    "buyu": 1.44,
+    "gec": 0.96,
+    "sure": 6.72
+   },
+   "grup": "violet-t-reach-kick",
+   "p1": "violet-t-reach-kick",
+   "out": {
+    "p1": true
+   },
+   "skor": 18,
+   "ovgu": "GREAT!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 22,
+   "tur": 4,
+   "t0": 159.36,
+   "z": {
+    "kart": 0.96,
+    "say": 3.36,
+    "buyu": 1.44,
+    "gec": 0.96,
+    "sure": 6.72
+   },
+   "grup": "beam-t-diag-kick",
+   "p1": "beam-t-diag-kick",
+   "out": {
+    "p1": false
+   },
+   "skor": 19,
+   "ovgu": "AMAZING!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 23,
+   "tur": 4,
+   "t0": 166.08,
+   "z": {
+    "kart": 0.96,
+    "say": 3.36,
+    "buyu": 1.44,
+    "gec": 0.96,
+    "sure": 6.72
+   },
+   "grup": "daily-side-lunge-hands-prayer",
+   "p1": "daily-side-lunge-hands-prayer",
+   "out": {
+    "p1": false
+   },
+   "skor": 20,
+   "ovgu": "SUPER!",
+   "boss": false,
+   "blind": false,
+   "nasil": false
+  },
+  {
+   "no": 24,
+   "tur": 4,
+   "t0": 174.72,
+   "z": {
+    "kart": 0.96,
+    "say": 5.28,
+    "buyu": 2.4,
+    "gec": 2.88,
+    "sure": 11.52
+   },
+   "grup": "daily-low-side-lunge-arms-front",
+   "p1": "daily-low-side-lunge-arms-front",
+   "out": {
+    "p1": false
+   },
+   "skor": 21,
+   "ovgu": "WOW!",
+   "boss": true,
+   "blind": false,
+   "nasil": false
+  }
+ ],
+ "abone": [
+  8.0,
+  24.0,
+  39.0,
+  54.0,
+  69.8,
+  85.2,
+  100.2,
+  115.2,
+  130.2,
+  146.0,
+  161.0
+ ],
+ "abone_sure": 3.2,
+ "muzik": "Neon Tunnel Wake-Up (Suno; hazir liste - kullanici 27 Kas) -> HT10 sabit surum neon-125.wav -> DANCE-MODE/01-muzik/human-tetris-40/neon-40-dizili.wav (125 BPM, 103 olcu)",
+ "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur-40.py. Motor 03-motor/sahne37.html (1P SOLO, BLIND, 2B fok Lumi, kanca + paten oyma). REF-092 yapi, mekan donmus gol (kullanici 27 Kas 2026).",
+ "tema": {
+  "varlik": "/03-motor/tetris-pvp/varlik-40s2/tetris-varlik/",
+  "karakter": "/03-motor/tetris-pvp/varlik-40-karakter/",
+  "maskeVarlik": "/03-motor/tetris-pvp/varlik-40s1/",
+  "maskeKlasor": "poz/",
+  "turAd": {
+   "1": "ROUND 1",
+   "2": "ROUND 2",
+   "3": "BLIND ROUND",
+   "4": "FINAL ROUND"
+  },
+  "aboneAlt": "NEW CHALLENGE EVERY DAY",
+  "acilis": "kanca",
+  "renk": [
+   "#ff1a2a",
+   "#1a8aff"
+  ],
+  "acik": [
+   "#ffd0d4",
+   "#d0e8ff"
+  ],
+  "koyu": [
+   "#a8000e",
+   "#0a4aa8"
+  ],
+  "ad": [
+   "RED",
+   "BLUE"
+  ]
+ }
+}
