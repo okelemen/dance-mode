@@ -226,6 +226,18 @@ def mantar_buyu(sure=0.75):
     return ((s_ * 0.45 + pop * 0.8) * 0.8).astype(np.float64)
 
 
+def paten_kazima(sure=0.7, tohum=40):
+    """40 (donmus gol): paten bicagi buzu oyar - parlak hisirti (3-9 kHz bant) + bicak titresimi (1,2 kHz cizgi), kayma dalgalanmasi"""
+    t = np.arange(int(sure * SR)) / SR
+    g = np.random.default_rng(tohum).standard_normal(len(t))
+    k1 = np.exp(-np.arange(int(0.001 * SR)) / (0.00012 * SR)); g1 = np.convolve(g, k1 / k1.sum(), "same")
+    k2 = np.exp(-np.arange(int(0.004 * SR)) / (0.0006 * SR)); g2 = np.convolve(g, k2 / k2.sum(), "same")
+    his = (g1 - g2) * (0.7 + 0.3 * np.sin(2 * np.pi * 7 * t))
+    ci = np.sin(2 * np.pi * np.cumsum(1200 + 180 * np.sin(2 * np.pi * 3 * t)) / SR) * 0.12
+    zarf = np.minimum(1, t / 0.03) * np.minimum(1, (sure - t) / 0.12)
+    return ((his * 2.6 + ci) * zarf * 0.45).astype(np.float64)
+
+
 def main():
     bolum, cikti = sys.argv[1:3]
     B = json.load(open(bolum, encoding="utf-8"))
@@ -254,6 +266,12 @@ def main():
                 yerlestir(ef, boing(0.5), t + 2.4, 0.7)
                 yerlestir(ef, kar(0.6), t + 2.45, 0.8)
                 yerlestir(ef, piril(1.0), t + 2.5, 0.9)
+            elif "--paten" in sys.argv:                                     # 40: paten bicagi buza iz oyar (kazima), buz kiymiklari (tin), Lumi kayarak gelir, iz soruya akar
+                yerlestir(ef, paten_kazima(0.7), t + 2.0, 0.9)
+                for i in range(6):
+                    yerlestir(ef, bip(2800 + 420 * (i % 3), 0.04), t + 2.08 + i * 0.1, 0.3)
+                yerlestir(ef, vuus(0.7, True, 0.6), t + 2.2)
+                yerlestir(ef, piril(1.0), t + 2.62, 0.9)
             elif "--mercan" in sys.argv:                                    # 39: dev istiridye kayarak gelir, ust kabuk acilir (boing), kabarcik seli + inci piriltisi
                 yerlestir(ef, vuus(0.6, True, 0.8), t + 2.0)
                 yerlestir(ef, boing(0.5), t + 2.4, 0.6)
@@ -287,7 +305,7 @@ def main():
                 yerlestir(ef, su(), t + 2.35, 0.9)
             else:
                 yerlestir(ef, ruzgar(1.3), t + 2.0, 0.6)                # lale yapragi firtinasi
-            yerlestir(ef, zap(0.4), t + (2.88 if "--blok" in sys.argv else 2.7 if ("--balon" in sys.argv or "--mantar" in sys.argv or "--kurabiye" in sys.argv or "--mercan" in sys.argv) else 2.55), 0.7)   # WHO WILL WIN? / 34: CAN YOUR TEAM CLEAR ALL 24?
+            yerlestir(ef, zap(0.4), t + (2.88 if "--blok" in sys.argv else 2.7 if ("--balon" in sys.argv or "--mantar" in sys.argv or "--kurabiye" in sys.argv or "--mercan" in sys.argv or "--paten" in sys.argv) else 2.55), 0.7)   # WHO WILL WIN? / 34: CAN YOUR TEAM CLEAR ALL 24?
         elif k["tip"] in ("vs", "giris", "acilis"):          # 5. video: giris karti (3 PLAYERS) VS ile ayni carpisma
             yerlestir(ef, vuus(0.7, True, 0.9), t)
             yerlestir(ef, vurus(), t + 0.45, 1.0)
@@ -354,6 +372,10 @@ def main():
             elif "--kurabiye" in sys.argv:                                  # 38: krema kapli kar yiginina gomulur -> kar pufu + seker parilti + hakem duduk
                 yerlestir(ef, kar(), c - 0.03, 1.0)
                 yerlestir(ef, piril(0.4), c + 0.15, 0.5)
+                yerlestir(ef, duduk(), c + 0.45, 0.7)
+            elif "--paten" in sys.argv:                                     # 40: buzda kayar (kazima), kar yiginina gomulur (kar pufu) + hakem duduk
+                yerlestir(ef, paten_kazima(0.35, 401), c - 0.3, 0.8)
+                yerlestir(ef, kar(), c - 0.03, 1.0)
                 yerlestir(ef, duduk(), c + 0.45, 0.7)
             elif "--mercan" in sys.argv:                                    # 39: deniz anemonuna itilir, seker (boing) + kabarcik pufu + hakem duduk
                 yerlestir(ef, boing(), c - 0.03, 1.0)
