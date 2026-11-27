@@ -35,7 +35,14 @@ if KDOY:                                                  # gunduz col 0,62 / 0,
 if KGB:
     GOK_UFUK, GOK_ORTA, GOK_UST = "#ff7a0a", "#ff1a6a", "#5a0aa8"
     SIS = "#ff4a5a"
+KGC = KAPAK and arg("--kapak-doygun", "0") == "3"        # HT41 kapak tur 2: GECE NEON VAHA (REF-093 mor neon tunel havasi; HT39 gece resif emsali)
+if KGC:
+    GOK_UFUK, GOK_ORTA, GOK_UST = "#8a1ad8", "#3a0aa8", "#0a0440"
+    SIS = "#5a0ac8"
+ISIK_K = 2.0 if KGC else 1.0                              # gece: fener / ampul / bayrak isiklari daha guclu
 KUM, KUM_A, KUM_G = "#ffbd45", "#ffcf5c", "#f08a1a"        # altin kum + acik tepe tonu + turuncu golge (bej degil)
+if KAPAK and arg("--kapak-doygun", "0") != "0":            # HT41 kapak tur 1: kum 0,58 doygunlukta kaldi -> kapakta doygun turuncu kum
+    KUM, KUM_A, KUM_G = "#ff9a10", "#ffb020", "#e0580a"
 TAS, TAS_A = "#e0742a", "#f2a04a"                          # kumtasi: kiremit turuncu + acik
 PALM = ("#18b83a", "#0aa04a", "#3ac81a")                   # palmiye yapragi yesilleri
 CADIR = ("#ff1a4a", "#0ac8c8", "#9a2aff", "#ff7a0a", "#1a6aff", "#ff2ab8")   # cadir/kilim/bayrak renkleri
@@ -62,7 +69,9 @@ def koy_sahnesi(w, h, saydam):
     bg_k = nt.nodes.new("ShaderNodeBackground"); bg_k.inputs[1].default_value = 1.0
     nt.links.new(rp.outputs[0], bg_k.inputs[0])
     bg_i = nt.nodes.new("ShaderNodeBackground"); bg_i.inputs[1].default_value = 0.55
-    bg_i.inputs[0].default_value = (*lin(hex3("#b04aff" if KGB else "#6aa8ff")), 1)        # gok ortam isigi: mavi dolgu (kum golgesi kahve degil)
+    bg_i.inputs[0].default_value = (*lin(hex3("#7a2aff" if KGC else "#b04aff" if KGB else "#6aa8ff")), 1)
+    if KGC:
+        bg_i.inputs[1].default_value = 0.9        # gok ortam isigi: mavi dolgu (kum golgesi kahve degil)
     mx = nt.nodes.new("ShaderNodeMixShader")
     nt.links.new(lp.outputs["Is Camera Ray"], mx.inputs[0])
     nt.links.new(bg_i.outputs[0], mx.inputs[1]); nt.links.new(bg_k.outputs[0], mx.inputs[2])
@@ -97,12 +106,14 @@ def kamera(sc):
 def isiklar():
     # yuksek sicak col gunesi (onden-yandan) -> kumda kisa sicak golge, kaplamada parlama; mavi gok dolgu
     bpy.ops.object.light_add(type="SUN", location=(0, 0, 30))
-    g = bpy.context.active_object; g.data.energy = GUNES * (0.8 if KGB else 1.0); g.data.angle = math.radians(2.5)
-    g.data.color = lin(hex3("#ff9a4a" if KGB else "#fff0d0"))
+    g = bpy.context.active_object; g.data.energy = GUNES * (0.8 if KGB else 0.55 if KGC else 1.0); g.data.angle = math.radians(2.5)
+    g.data.color = lin(hex3("#ff9a4a" if KGB else "#ff4ad0" if KGC else "#fff0d0"))
     g.rotation_euler = Vector((0.4, 0.45, -0.85) if not KGB else (0.15, 0.95, -0.28)).to_track_quat("-Z", "Y").to_euler()   # gun batimi: alcak, karsidan
     bpy.ops.object.light_add(type="SUN", location=(0, 0, 30))
     f = bpy.context.active_object; f.data.energy = 0.8; f.data.angle = math.radians(12.0)
-    f.data.color = lin(hex3("#c06aff" if KGB else "#9ac0ff"))
+    f.data.color = lin(hex3("#c06aff" if KGB else "#3ad8ff" if KGC else "#9ac0ff"))
+    if KGC:
+        f.data.energy = 1.6
     f.rotation_euler = Vector((-0.4, -0.7, -0.55)).to_track_quat("-Z", "Y").to_euler()
 
 
@@ -131,7 +142,7 @@ def mat_m(renk, purluk=0.35, kaplama=0.5, ss=0.0, metal=0.0):
 def mat_isik(renk, guc=4.0):
     key = ("i", renk, guc)
     if key not in _SM:
-        _SM[key] = mat_emis("isik" + renk, lin(hex3(renk)), guc)
+        _SM[key] = mat_emis("isik" + renk, lin(hex3(renk)), guc * ISIK_K)
     return _SM[key]
 
 
