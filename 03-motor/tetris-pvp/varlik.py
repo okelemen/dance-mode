@@ -825,6 +825,8 @@ elif arg("--mod", "pvp") == "kurabiye":     # 38. video (REF-090 yapi, 1P SOLO C
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-kurabiye.py"), encoding="utf-8").read(), "varlik-kurabiye.py", "exec"))
 elif arg("--mod", "pvp") == "mercan":       # 39. video (REF-091 yapi, 1P SOLO, kullanici 26 Kas A): gunduz mercan resifi, tek serit
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-mercan.py"), encoding="utf-8").read(), "varlik-mercan.py", "exec"))
+elif arg("--mod", "pvp") == "buz":          # 40. video (REF-092 yapi, 1P SOLO, kullanici 27 Kas): gunduz donmus gol buz pateni, tek serit
+    exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "varlik-buz.py"), encoding="utf-8").read(), "varlik-buz.py", "exec"))
 elif arg("--mod", "pvp") == "karakter":     # 24. video: yarisan karakterler + hakem maskot poz kareleri (mobil paket md. 2)
     exec(compile(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "karakter.py"), encoding="utf-8").read(), "karakter.py", "exec"))
 elif arg("--mod", "pvp") == "cadi":
