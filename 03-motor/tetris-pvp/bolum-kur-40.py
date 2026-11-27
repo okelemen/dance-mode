@@ -83,7 +83,7 @@ bolum = {"seri": "HUMAN TETRIS", "bolum": "human-tetris-40", "bpm": BPM, "toplam
          "kartlar": kartlar, "duvarlar": duvarlar, "abone": abone, "abone_sure": 3.2,
          "muzik": "Neon Tunnel Wake-Up (Suno; hazir liste - kullanici 27 Kas) -> HT10 sabit surum neon-125.wav -> DANCE-MODE/01-muzik/human-tetris-40/neon-40-dizili.wav (125 BPM, 103 olcu)",
          "_not": "Uretici: 03-motor/tetris-pvp/bolum-kur-40.py. Motor 03-motor/sahne37.html (1P SOLO, BLIND, 2B fok Lumi, kanca + paten oyma). REF-092 yapi, mekan donmus gol (kullanici 27 Kas 2026).",
-         "tema": {"varlik": "/03-motor/tetris-pvp/varlik-40s2/tetris-varlik/", "karakter": "/03-motor/tetris-pvp/varlik-40-karakter/",
+         "tema": {"varlik": "/03-motor/tetris-pvp/varlik-40s3b/tetris-varlik/", "karakter": "/03-motor/tetris-pvp/varlik-40-karakter/",
                   "maskeVarlik": "/03-motor/tetris-pvp/varlik-40s1/", "maskeKlasor": "poz/",
                   "turAd": {"1": "ROUND 1", "2": "ROUND 2", "3": "BLIND ROUND", "4": "FINAL ROUND"},
                   "aboneAlt": "NEW CHALLENGE EVERY DAY", "acilis": "kanca",
