@@ -30,7 +30,7 @@ GECIS = 11.5
 GOK_UFUK, GOK_ORTA, GOK_UST = "#7ad8ff", "#2a9aff", "#1a5aff"      # acik mavi -> doygun mavi (beyaz-gri degil)
 SIS = "#8acfff"                                            # mist: uzak orman acik mavi kis havasina karisir
 KAR, KAR_G = "#f4f8ff", "#a8c0ff"                          # kar: beyaz + mavi-lila golge tonu
-BUZ, BUZ_A = "#3aa8ff", "#a8e4ff"                          # buz: doygun buz mavisi + acik catlak/parlama tonu
+BUZ, BUZ_A = "#3aa8ff", "#7ad0ff"                          # buz: doygun buz mavisi + acik catlak/parlama tonu
 CAM = ("#0a9a4a", "#0a8a5a", "#14a83a")                    # zumrut cam yesilleri
 SUS = ("#ff1a3a", "#ffc81a", "#1a6aff", "#ff3ac8", "#9a3aff", "#ff7a1a")   # Noel topu renkleri
 AMPUL = ("#ff2a3a", "#ffd21a", "#2ad86a", "#3aa8ff", "#ff6ad0")
@@ -138,7 +138,7 @@ def mat_kar(ad="kar"):
     ns = nt.nodes.new("ShaderNodeTexNoise"); ns.inputs["Scale"].default_value = 0.9; ns.inputs["Detail"].default_value = 3
     nt.links.new(geo.outputs["Position"], ns.inputs["Vector"])
     rp = nt.nodes.new("ShaderNodeValToRGB"); el = rp.color_ramp.elements
-    el[0].position = 0.35; el[0].color = (*lin(hex3("#d0dcff")), 1); el[1].position = 0.7; el[1].color = (*lin(hex3(KAR)), 1)
+    el[0].position = 0.35; el[0].color = (*lin(hex3("#b8d0ff")), 1); el[1].position = 0.7; el[1].color = (*lin(hex3(KAR)), 1)
     nt.links.new(ns.outputs["Fac"], rp.inputs[0]); nt.links.new(rp.outputs[0], b.inputs["Base Color"])
     b.inputs["Roughness"].default_value = 0.7
     b.inputs["Subsurface Weight"].default_value = 0.25; b.inputs["Subsurface Radius"].default_value = (0.3, 0.5, 1.0)
@@ -160,8 +160,8 @@ def mat_buz(ad="buz", acik=False):
     ns = nt.nodes.new("ShaderNodeTexNoise"); ns.inputs["Scale"].default_value = 0.25; ns.inputs["Detail"].default_value = 3
     nt.links.new(geo.outputs["Position"], ns.inputs["Vector"])
     rp = nt.nodes.new("ShaderNodeValToRGB"); el = rp.color_ramp.elements          # derin buz tonlari (noise)
-    el[0].position = 0.3; el[0].color = (*lin(hex3("#1a7aff" if not acik else "#4ab8ff")), 1)
-    el[1].position = 0.75; el[1].color = (*lin(hex3(BUZ if not acik else "#7ad0ff")), 1)
+    el[0].position = 0.3; el[0].color = (*lin(hex3("#0a5aff" if not acik else "#0a78ff")), 1)   # sahne 1: pist beyaza patliyordu (S<0,35 %18)
+    el[1].position = 0.75; el[1].color = (*lin(hex3("#1a8aff" if not acik else "#2aa0ff")), 1)
     nt.links.new(ns.outputs["Fac"], rp.inputs[0])
     cz = nt.nodes.new("ShaderNodeValToRGB"); ce = cz.color_ramp.elements           # catlak: kenara yakin ince acik cizgi
     ce[0].position = 0.0; ce[0].color = (1, 1, 1, 1); ce[1].position = 0.035; ce[1].color = (0, 0, 0, 1)
@@ -170,8 +170,8 @@ def mat_buz(ad="buz", acik=False):
     nt.links.new(cz.outputs[0], mx.inputs["Factor"]); nt.links.new(rp.outputs[0], mx.inputs[6])
     mx.inputs[7].default_value = (*lin(hex3(BUZ_A)), 1)
     nt.links.new(mx.outputs[2], b.inputs["Base Color"])
-    b.inputs["Roughness"].default_value = 0.12
-    b.inputs["Coat Weight"].default_value = 0.6; b.inputs["Coat Roughness"].default_value = 0.04
+    b.inputs["Roughness"].default_value = 0.3                # sahne 1: ayna buz beyaz gok/kari yansitip soldu
+    b.inputs["Coat Weight"].default_value = 0.25; b.inputs["Coat Roughness"].default_value = 0.08
     _SM[ad] = m
     return m
 
@@ -239,7 +239,7 @@ def noel_agaci(x, y, H, rnd, sus=True, yildiz=True):
                 kure((x + math.cos(a) * rr, y + math.sin(a) * rr, zz), 0.035 * H, mat_m(rnd.choice(SUS), 0.18, 0.9, metal=0.3), sub=1)
         z += h * 0.6
     if yildiz:
-        kure((x, y, z + 0.12 * H), 0.07 * H, mat_isik("#ffd21a", 5.0), sub=2)
+        kure((x, y, z + 0.08 * H), 0.04 * H, mat_m("#ffb800", 0.2, 0.8, metal=0.7), sub=2)   # sahne 1: isikli yildiz sari leke okundu
 
 
 def kar_yigini(x, y, r, rnd, ezik=0.55):
@@ -384,13 +384,13 @@ def mekan(serit_modu, rnd):
 def serit_esyalari(rnd):
     kutu("pist", (0, (KAP["y"] + 0.4 - 4) / 2, 0.0), (PIST * 2, KAP["y"] + 4.4, 0.16), mat_buz("pist_buz", acik=True), egim=0.04, seg=2)
     iz = mat_m("#e8f8ff", 0.15, 0.6)
-    for k in range(7):                                    # paten izleri: hafif kivrimli ince acik cizgiler
-        x0 = rnd.uniform(-PIST + 0.6, PIST - 0.6); a = rnd.uniform(0.3, 0.9); f = rnd.uniform(0.25, 0.6); ph = rnd.uniform(0, 6)
+    for k in range(4):                                    # paten izleri: hafif kivrimli ince acik cizgiler (sahne 1: 7 iz sagda demet oldu)
+        x0 = (-2.6, -0.9, 0.9, 2.6)[k] + rnd.uniform(-0.3, 0.3); a = rnd.uniform(0.3, 0.6); f = rnd.uniform(0.3, 0.5); ph = rnd.uniform(0, 6)
         y = -3.0
         while y < KAP["y"] - 0.6:
             x1 = x0 + a * math.sin(f * y + ph); x2 = x0 + a * math.sin(f * (y + 0.5) + ph)
             if abs(x1) < PIST - 0.3 and abs(x2) < PIST - 0.3:
-                egik_boru((x1, y, 0.165), (x2, y + 0.5, 0.165), 0.018, iz, v=6)
+                egik_boru((x1, y, 0.165), (x2, y + 0.5, 0.165), 0.012, iz, v=6)
             y += 0.5
     for s in (-1, 1):                                     # pist kenari: alcak kar seti
         kutu("kar_set", (s * (PIST + 0.2), (KAP["y"] - 3.4) / 2, 0.12), (0.5, KAP["y"] + 2.6, 0.26), mat_kar(), egim=0.12, seg=3)
