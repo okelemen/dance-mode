@@ -29,6 +29,10 @@ PIST = 3.9
 GECIS = 11.5
 GOK_UFUK, GOK_ORTA, GOK_UST = "#7ad8ff", "#2a9aff", "#1a5aff"      # acik mavi -> doygun mavi (beyaz-gri degil)
 SIS = "#8acfff"                                            # mist: uzak orman acik mavi kis havasina karisir
+KDOY = KAPAK and arg("--kapak-doygun", "0") != "0"        # HT40 kapak 2: parlaklik 0,75 / renklilik 0,48 (REF 0,568 / 0,502) -> beyaz yakin kar + acik gok + glow
+if KDOY:                                                  # derin kis mavisi gok + mist, yakin beyaz kar yiginlari kapakta yok (md. 30 sade arka plan)
+    GOK_UFUK, GOK_ORTA, GOK_UST = "#2a8aff", "#1a5aff", "#1a2ad8"
+    SIS = "#2a7aff"
 KAR, KAR_G = "#f4f8ff", "#a8c0ff"                          # kar: beyaz + mavi-lila golge tonu
 BUZ, BUZ_A = "#3aa8ff", "#7ad0ff"                          # buz: doygun buz mavisi + acik catlak/parlama tonu
 CAM = ("#0a9a4a", "#0a8a5a", "#14a83a")                    # zumrut cam yesilleri
@@ -65,12 +69,12 @@ def koy_sahnesi(w, h, saydam):
     sc.world.mist_settings.start = 60.0; sc.world.mist_settings.depth = 420.0; sc.world.mist_settings.falloff = "QUADRATIC"
     sc.use_nodes = True; sc.render.use_compositing = True; ct = sc.node_tree; ct.nodes.clear()
     rl = ct.nodes.new("CompositorNodeRLayers"); co = ct.nodes.new("CompositorNodeComposite")
-    mk = ct.nodes.new("CompositorNodeMath"); mk.operation = "MULTIPLY"; mk.inputs[1].default_value = 0.55
+    mk = ct.nodes.new("CompositorNodeMath"); mk.operation = "MULTIPLY"; mk.inputs[1].default_value = 0.3 if KDOY else 0.55
     ct.links.new(rl.outputs["Mist"], mk.inputs[0])
     mm = ct.nodes.new("CompositorNodeMixRGB"); mm.blend_type = "MIX"
     ct.links.new(mk.outputs[0], mm.inputs[0]); ct.links.new(rl.outputs["Image"], mm.inputs[1])
     mm.inputs[2].default_value = (*lin(hex3(SIS)), 1)
-    gl = ct.nodes.new("CompositorNodeGlare"); gl.glare_type = "FOG_GLOW"; gl.quality = "HIGH"; gl.threshold = 1.2; gl.size = 6; gl.mix = -0.5
+    gl = ct.nodes.new("CompositorNodeGlare"); gl.glare_type = "FOG_GLOW"; gl.quality = "HIGH"; gl.threshold = 1.2; gl.size = 6; gl.mix = -1.0 if KDOY else -0.5   # HT38 dersi: fog glow renkliligi dusurur
     ct.links.new(mm.outputs[0], gl.inputs[0]); ct.links.new(gl.outputs[0], co.inputs[0])
     if saydam:
         ct.links.new(rl.outputs["Alpha"], co.inputs[1])
@@ -329,7 +333,8 @@ def mekan(serit_modu, rnd):
         kulube(s * 15.5, 4.6, 1.5, rnd)
         for y in (-1.0, 3.4, 7.6):
             fener(s * (PIST + 1.5), y, 2.0)
-        kar_yigini(s * (PIST + 2.6), 1.6, 0.6, rnd, ezik=0.4)
+        if not KDOY:
+            kar_yigini(s * (PIST + 2.6), 1.6, 0.6, rnd, ezik=0.4)
         kar_yigini(s * (PIST + 2.4), 9.6, 0.7, rnd, ezik=0.4)
     for y in (-1.0, 3.4, 7.6):                            # fenerler arasinda sarkan ampul dizileri (her iki yan)
         for s in (-1, 1):
@@ -408,7 +413,7 @@ def serit_esyalari(rnd):
             me = bpy.data.meshes.new("ok"); me.from_pydata([(a, b, 0.17) for a, b in nok], [], [list(range(6))]); me.update()
             o = bpy.data.objects.new("ok", me); bpy.context.collection.objects.link(o); o.data.materials.append(ok)
             o.modifiers.new("k", "SOLIDIFY").thickness = 0.02
-    for s in (-1, 1):                                     # OUT ani: iki dis tarafta buyuk yumusak kar yigini
+    for s in (-1, 1) if not KDOY else ():                 # OUT ani: iki dis tarafta buyuk yumusak kar yigini (kapak 2'de yok)
         kar_yigini(s * 5.6, 5.0, 1.5, random.Random(40 + s), ezik=0.7)
 
 
