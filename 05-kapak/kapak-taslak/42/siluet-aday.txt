@@ -1,0 +1,12 @@
+1	Mgroove-w-low-lunge	24 BOSS P2: alçak hamle + W kollar (REF sol figür gibi)	son 0.000 (-)	tum kapaklar 0.000 (-)	C:/Users/eleme/DANCE-MODE/03-motor/tetris-pvp/varlik-42s1/poz/groove-w-low-lunge.png
+2	Mphantom-t-t-kick-lean-l	24 BOSS P1: T kollar + yana tekme	son 0.000 (-)	tum kapaklar 0.000 (-)	C:/Users/eleme/DANCE-MODE/03-motor/tetris-pvp/varlik-42s1/poz/phantom-t-t-kick-lean-l.png
+3	Mneon-v-goal-lunge	17 FINAL P1: hamle + V kollar	son 0.000 (-)	tum kapaklar 0.000 (-)	C:/Users/eleme/DANCE-MODE/03-motor/tetris-pvp/varlik-42s1/poz/neon-v-goal-lunge.png
+4	Mcandle-wide-lunge-salute-low	17 FINAL P2: geniş hamle + selam	son 0.000 (-)	tum kapaklar 0.000 (-)	C:/Users/eleme/DANCE-MODE/03-motor/tetris-pvp/varlik-42s1/poz/candle-wide-lunge-salute-low.png
+5	Mblaze-hip-head-lunge	18 FINAL P1: hamle + el başta	son 0.000 (-)	tum kapaklar 0.000 (-)	C:/Users/eleme/DANCE-MODE/03-motor/tetris-pvp/varlik-42s1/poz/blaze-hip-head-lunge.png
+6	Msakura-deep-side-lunge-arm-over	18 FINAL P2: derin yan hamle + kol üstten (REF sağ gibi)	son 0.000 (-)	tum kapaklar 0.000 (-)	C:/Users/eleme/DANCE-MODE/03-motor/tetris-pvp/varlik-42s1/poz/sakura-deep-side-lunge-arm-over.png
+7	Mblossom-wave-t-goddess	16 FREEZE P2: tanrıça duruşu + T kollar	son 0.000 (-)	tum kapaklar 0.000 (-)	C:/Users/eleme/DANCE-MODE/03-motor/tetris-pvp/varlik-42s1/poz/blossom-wave-t-goddess.png
+8	Mtundra-cactus-v-goddess	14 FREEZE P2: tanrıça duruşu + kaktüs/V kollar	son 0.000 (-)	tum kapaklar 0.000 (-)	C:/Users/eleme/DANCE-MODE/03-motor/tetris-pvp/varlik-42s1/poz/tundra-cactus-v-goddess.png
+9	Mribbon-low-comet-wide	13 FREEZE P1: tek kol dik yukarı (REF sağ figürün kolu)	son 0.000 (-)	tum kapaklar 0.000 (-)	C:/Users/eleme/DANCE-MODE/03-motor/tetris-pvp/varlik-42s1/poz/ribbon-low-comet-wide.png
+10	Mstep-diag-cactus-wide	15 FREEZE P2: geniş duruş + çapraz/kaktüs kollar	son 0.000 (-)	tum kapaklar 0.000 (-)	C:/Users/eleme/DANCE-MODE/03-motor/tetris-pvp/varlik-42s1/poz/step-diag-cactus-wide.png
+11	Mmeteor-eagle-diag-horse	16 FREEZE P1: at duruşu + çapraz kollar	son 0.000 (-)	tum kapaklar 0.000 (-)	C:/Users/eleme/DANCE-MODE/03-motor/tetris-pvp/varlik-42s1/poz/meteor-eagle-diag-horse.png
+12	Mshine-halo-t-tree	12 R2 P1: ağaç duruşu + hale/T kollar	son 0.000 (-)	tum kapaklar 0.000 (-)	C:/Users/eleme/DANCE-MODE/03-motor/tetris-pvp/varlik-42s1/poz/shine-halo-t-tree.png
