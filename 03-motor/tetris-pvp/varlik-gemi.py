@@ -46,6 +46,16 @@ if KAPAK_D:                              # kapak olcumu icin derin doygun gok/de
     GOK = ("#0a90ff", "#0050f0", "#1a10b8")
     DENIZ = ("#0a7ad8", "#0ab8d8")
     BULUT = "#3aa8ff"
+KD = arg("--kapak-doygun", "0") if KAPAK else "0"
+if KD in ("2", "3"):                     # HT42 kapak tur 2 (REF-094 doygunluk 0,727 / renklilik 0,594): tahta + gok + deniz daha doygun
+    AHSAP = ("#ff6a0a", "#ff8a14"); AHSAP_KOYU = "#a02a06"
+    YELKEN = ("#ff1030", "#ffc800"); GOVDE = "#e0100e"
+    DENIZ = ("#0050e0", "#00b8f0"); BULUT = "#2a80ff"
+    GOK = ("#0a7aff", "#1a30e8", "#2a08a0")      # ufuk mavi -> tepe lacivert-mor (REF koyu tepe)
+if KD == "3":                            # gun batimi: ufuk turuncu-pembe, tepe mor; alcak altin gunes (magenta isik yok - 41 dersi)
+    GOK = ("#ff8a10", "#ff2a7a", "#4a0ab0")
+    DENIZ = ("#1a40d0", "#7a30e0"); BULUT = "#ff7ab8"
+    GUNES = float(arg("--gunes", "3.4"))
 
 
 # ------------------------------------------------------------------ sahne / isik
@@ -74,7 +84,7 @@ def gok_sahnesi(w, h, saydam):
     o = nt.nodes.new("ShaderNodeOutputWorld"); nt.links.new(mx.outputs[0], o.inputs[0])
     sc.use_nodes = True; sc.render.use_compositing = True; ct = sc.node_tree; ct.nodes.clear()
     rl = ct.nodes.new("CompositorNodeRLayers"); gl = ct.nodes.new("CompositorNodeGlare"); co = ct.nodes.new("CompositorNodeComposite")
-    gl.glare_type = "FOG_GLOW"; gl.quality = "HIGH"; gl.threshold = 1.3; gl.size = 7; gl.mix = 0.0
+    gl.glare_type = "FOG_GLOW"; gl.quality = "HIGH"; gl.threshold = 1.3; gl.size = 7; gl.mix = -1.0 if KD in ("2", "3") else 0.0   # kapakta parlama yok (38 dersi)
     ct.links.new(rl.outputs["Image"], gl.inputs[0]); ct.links.new(gl.outputs[0], co.inputs[0])
     if saydam:
         ct.links.new(rl.outputs["Alpha"], co.inputs[1])
@@ -93,7 +103,7 @@ def kamera(sc, x=0.0):
 def isiklar():
     bpy.ops.object.light_add(type="SUN", location=(0, 0, 30))
     g = bpy.context.active_object; g.data.energy = GUNES; g.data.angle = math.radians(1.5)
-    g.data.color = lin(hex3("#fff3dc"))
+    g.data.color = lin(hex3("#ffc860" if KD == "3" else "#fff3dc"))
     g.rotation_euler = Vector((-0.40, 0.55, -0.73)).to_track_quat("-Z", "Y").to_euler()
 
 
