@@ -50,7 +50,8 @@ HOTDOG = PLAN["meyve"] == "hot-dog"
 CHOCBAR = PLAN["meyve"] == "pistachio-kataifi-chocolate-bar"
 CAKE = PLAN["meyve"] == "black-forest-cake"
 GALAXY = PLAN["meyve"] == "galaxy-mirror-glaze-cake"
-CAKESHAPE = CAKE or GALAXY
+BASQUE = PLAN["meyve"] == "basque-burnt-cheesecake"
+CAKESHAPE = CAKE or GALAXY or BASQUE
 B = M.get("B", R)
 XMIN, XMAX = M.get("xmin", -A), M.get("xmax", A)
 TAHTA_UST = 0.14
@@ -598,6 +599,28 @@ else:
         kabuk_rengi=bread.outputs["Color"]
         bmp.inputs["Strength"].default_value=.20
         bmp.inputs["Distance"].default_value=.007
+    elif BASQUE:
+        # Pale baked sides, deeply blistered near-black top with irregular border.
+        xyz_b = nt.nodes.new("ShaderNodeSeparateXYZ")
+        baglan(nt, tk.outputs["Object"], xyz_b.inputs[0])
+        scorch = nt.nodes.new("ShaderNodeTexNoise")
+        baglan(nt, tk.outputs["Object"], scorch.inputs["Vector"])
+        scorch.inputs["Scale"].default_value = 9.0
+        scorch.inputs["Detail"].default_value = 3.0
+        rim = matematik(nt,"GREATER_THAN",xyz_b.outputs[2],None,deger_b=.83*R)
+        rmp_b=nt.nodes.new("ShaderNodeValToRGB")
+        rmp_b.color_ramp.elements[0].color=hex_renk("#5b2c1d")
+        rmp_b.color_ramp.elements[1].color=hex_renk("#18100f")
+        for pos,col in ((.35,"#a7532b"),(.62,"#482519"),(.78,"#261715")):
+            e=rmp_b.color_ramp.elements.new(pos);e.color=hex_renk(col)
+        baglan(nt,scorch.outputs["Fac"],rmp_b.inputs["Fac"])
+        baked=nt.nodes.new("ShaderNodeMix");baked.data_type="RGBA"
+        baglan(nt,rim,baked.inputs["Factor"])
+        baked.inputs[6].default_value=hex_renk("#c58752")
+        baglan(nt,rmp_b.outputs["Color"],baked.inputs[7])
+        kabuk_rengi=baked.outputs[2]
+        bmp.inputs["Strength"].default_value=.12
+        bmp.inputs["Distance"].default_value=.006
     elif GALAXY:
         # Mirror glaze: dark blue-violet surface, visible nebula swirls and sparse stars.
         nebula=nt.nodes.new("ShaderNodeTexNoise")
@@ -1371,6 +1394,16 @@ def kup_nesnesi(tur, no):
         renk[u[:,0]>.92]=np.array(hex_renk("#c7231d")[:3])
         calyx=domates_canak(merk[:,0],merk[:,1],merk[:,2],M)
         renk[calyx]=np.array(hex_renk("#357a2f")[:3]);maske[calyx]=0
+    elif BASQUE:
+        zc=merk[:,2]
+        renk=np.tile(np.array(hex_renk("#f6eacb")[:3]),(k,1))
+        edge=(radial>.91)&(zc<.86*R)
+        renk[edge]=np.array(hex_renk("#c58752")[:3])
+        top=(zc>.85*R)
+        scorch=np.sin(31*merk[:,0]+19*merk[:,1])*np.cos(23*merk[:,1]-17*merk[:,0])
+        renk[top]=np.array(hex_renk("#422418")[:3])
+        renk[top&(scorch>.4)]=np.array(hex_renk("#201412")[:3])
+        maske[edge|top]=0
     elif GALAXY:
         zc=merk[:,2]
         renk=np.tile(np.array(hex_renk("#ece2f2")[:3]),(k,1))
@@ -1628,6 +1661,8 @@ def kup_nesnesi(tur, no):
         karis.inputs[7].default_value = hex_renk("#f5ecde")
     if GALAXY:
         karis.inputs[7].default_value = hex_renk("#20265e")
+    if BASQUE:
+        karis.inputs[7].default_value = hex_renk("#c58752")
     if CILEK:
         # Sadece maskelenmis dis yuz; kesik et yuzunde aken bulunmaz.
         geometri = ntk.nodes.new("ShaderNodeNewGeometry")
@@ -2276,6 +2311,11 @@ elif CHOCBAR:
     et_r.color_ramp.elements[1].color=hex_renk("#663521")
     e=et_r.color_ramp.elements.new(.78);e.color=hex_renk("#7dae4d")
     e=et_r.color_ramp.elements.new(.84);e.color=hex_renk("#663521")
+elif BASQUE:
+    et_r.color_ramp.elements[0].color=hex_renk("#f6eacb")
+    et_r.color_ramp.elements[1].color=hex_renk("#b66b39")
+    e=et_r.color_ramp.elements.new(.92);e.color=hex_renk("#f2dfb7")
+    e=et_r.color_ramp.elements.new(.97);e.color=hex_renk("#dba66c")
 elif HOTDOG:
     et_r.color_ramp.elements[0].color=hex_renk("#eac18b")
     et_r.color_ramp.elements[1].color=hex_renk("#b87538")
@@ -2295,12 +2335,14 @@ if CAKESHAPE:
     height=matematik(ntk_,"DIVIDE",matematik(ntk_,"ADD",dz,None,deger_b=R),None,deger_b=2*R)
     layers=ntk_.nodes.new("ShaderNodeValToRGB")
     layers.color_ramp.interpolation="CONSTANT"
-    layers.color_ramp.elements[0].color=hex_renk("#ece2f2" if GALAXY else "#f4ead8")
-    layers.color_ramp.elements[1].color=hex_renk("#ece2f2" if GALAXY else "#f4ead8")
+    layers.color_ramp.elements[0].color=hex_renk("#f6eacb" if BASQUE else ("#ece2f2" if GALAXY else "#f4ead8"))
+    layers.color_ramp.elements[1].color=hex_renk("#f6eacb" if BASQUE else ("#ece2f2" if GALAXY else "#f4ead8"))
     palette=((.08,"#493486"),(.27,"#ece2f2"),(.40,"#263a83"),
              (.59,"#ece2f2"),(.72,"#493486"),(.93,"#ece2f2")) if GALAXY else (
              (.08,"#543020"),(.27,"#f4ead8"),(.40,"#543020"),
              (.59,"#f4ead8"),(.72,"#543020"),(.93,"#f4ead8"))
+    if BASQUE:
+        palette=((.02,"#ead1a5"),(.88,"#f6eacb"),(.95,"#dba66c"),(.985,"#3a2119"))
     for pos,col in palette:
         e=layers.color_ramp.elements.new(pos);e.color=hex_renk(col)
     baglan(ntk_,height,layers.inputs["Fac"])
@@ -2316,7 +2358,7 @@ if CAKESHAPE:
     frost=ntk_.nodes.new("ShaderNodeMix");frost.data_type="RGBA"
     baglan(ntk_,matematik(ntk_,"GREATER_THAN",u_,None,deger_b=.91),frost.inputs["Factor"])
     baglan(ntk_,filling.outputs[2],frost.inputs[6])
-    frost.inputs[7].default_value=hex_renk("#20265e" if GALAXY else "#452319")
+    frost.inputs[7].default_value=hex_renk("#422418" if BASQUE else ("#20265e" if GALAXY else "#452319"))
     baglan(ntk_,frost.outputs[2],bk_.inputs["Base Color"])
 elif CILEK:
     baglan(ntk_, et_r.outputs["Color"], bk_.inputs["Base Color"])
