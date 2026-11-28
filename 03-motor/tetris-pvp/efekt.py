@@ -251,7 +251,14 @@ def main():
             yerlestir(ef, vuus(1.4, True, 0.7), t + 0.15)               # duvar yaklasiyor
             yerlestir(ef, geri_sar(0.4), t + 1.6, 1.0)                  # geri sarma
             yerlestir(ef, vuus(0.6, True, 0.9), t + 2.0)                # beyaz parlama + kanat
-            if "--gemi" in sys.argv:                                      # 42: serit yelken 3 katman iner (uc vuus), ruzgarda dalgalanir, Pako suzulur, altin sikkeler (tin)
+            if "--dino" in sys.argv:                                      # 43: volkan pufu (alcak gurleme), dev altin yumurta sallanir (tik), catlar (buz kiriti), ikiye ayrilir (boing), isik + Baku firlar
+                yerlestir(ef, gurleme(0.6), t + 2.02, 0.6)
+                for i in range(3):
+                    yerlestir(ef, tik(), t + 2.1 + i * 0.15, 0.5)
+                yerlestir(ef, buz(0.35), t + 2.35, 0.8)
+                yerlestir(ef, boing(0.5), t + 2.72, 0.7)
+                yerlestir(ef, piril(1.0), t + 2.75, 0.9)
+            elif "--gemi" in sys.argv:                                      # 42: serit yelken 3 katman iner (uc vuus), ruzgarda dalgalanir, Pako suzulur, altin sikkeler (tin)
                 for j in range(3):
                     yerlestir(ef, vuus(0.35, True, 0.6), t + 2.0 + j * 0.12)
                 yerlestir(ef, vuus(0.6, False, 0.45), t + 2.55)                 # Pako suzulur
@@ -318,7 +325,7 @@ def main():
                 yerlestir(ef, su(), t + 2.35, 0.9)
             else:
                 yerlestir(ef, ruzgar(1.3), t + 2.0, 0.6)                # lale yapragi firtinasi
-            yerlestir(ef, zap(0.4), t + (2.88 if "--blok" in sys.argv else 2.7 if ("--balon" in sys.argv or "--mantar" in sys.argv or "--kurabiye" in sys.argv or "--mercan" in sys.argv or "--paten" in sys.argv or "--col" in sys.argv or "--gemi" in sys.argv) else 2.55), 0.7)   # WHO WILL WIN? / 34: CAN YOUR TEAM CLEAR ALL 24?
+            yerlestir(ef, zap(0.4), t + (2.88 if "--blok" in sys.argv else 2.7 if ("--balon" in sys.argv or "--mantar" in sys.argv or "--kurabiye" in sys.argv or "--mercan" in sys.argv or "--paten" in sys.argv or "--col" in sys.argv or "--gemi" in sys.argv or "--dino" in sys.argv) else 2.55), 0.7)   # WHO WILL WIN? / 34: CAN YOUR TEAM CLEAR ALL 24?
         elif k["tip"] in ("vs", "giris", "acilis"):          # 5. video: giris karti (3 PLAYERS) VS ile ayni carpisma
             yerlestir(ef, vuus(0.7, True, 0.9), t)
             yerlestir(ef, vurus(), t + 0.45, 1.0)
@@ -376,7 +383,11 @@ def main():
         if out:                                                          # 24: OUT - karakter suya duser (sicrama) + alcak uyari
             yerlestir(ef, vuus(0.5, False, 1.0), c - Z["buyu"] * 0.25)
             yerlestir(ef, zap(0.35), c - Z["buyu"] * 0.2, 0.6)
-            if "--gemi" in sys.argv:                                      # 42: tahtadan denize itilir -> tahta tik + su sicramasi + hakem duduk
+            if "--dino" in sys.argv:                                      # 43: camur birikintisine itilir, kayar (vuus) + camur sapirtisi + hakem duduk
+                yerlestir(ef, vuus(0.3, False, 0.6), c - 0.25)
+                yerlestir(ef, camur(), c - 0.03, 1.0)
+                yerlestir(ef, duduk(), c + 0.45, 0.7)
+            elif "--gemi" in sys.argv:                                      # 42: tahtadan denize itilir -> tahta tik + su sicramasi + hakem duduk
                 yerlestir(ef, tik(), c - 0.2, 0.7)
                 yerlestir(ef, su(), c - 0.03, 1.0)
                 yerlestir(ef, duduk(), c + 0.45, 0.7)
