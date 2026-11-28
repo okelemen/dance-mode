@@ -47,11 +47,13 @@ if KAPAK_D:                              # kapak olcumu icin derin doygun gok/de
     DENIZ = ("#0a7ad8", "#0ab8d8")
     BULUT = "#3aa8ff"
 KD = arg("--kapak-doygun", "0") if KAPAK else "0"
-if KD in ("2", "3"):                     # HT42 kapak tur 2 (REF-094 doygunluk 0,727 / renklilik 0,594): tahta + gok + deniz daha doygun
+if KD in ("2", "3", "4"):                # HT42 kapak tur 2 (REF-094 doygunluk 0,727 / renklilik 0,594): tahta + gok + deniz daha doygun
     AHSAP = ("#ff6a0a", "#ff8a14"); AHSAP_KOYU = "#a02a06"
     YELKEN = ("#ff1030", "#ffc800"); GOVDE = "#e0100e"
     DENIZ = ("#0050e0", "#00b8f0"); BULUT = "#2a80ff"
     GOK = ("#0a7aff", "#1a30e8", "#2a08a0")      # ufuk mavi -> tepe lacivert-mor (REF koyu tepe)
+if KD == "4":                            # tur 3: gok tepesi koyu lacivert-mor (REF koyu zemin), bulut/beyaz marti yok, gunes biraz kisik
+    GOK = ("#0a6aff", "#1020d0", "#18047a"); GUNES = float(arg("--gunes", "3.8"))
 if KD == "3":                            # gun batimi: ufuk turuncu-pembe, tepe mor; alcak altin gunes (magenta isik yok - 41 dersi)
     GOK = ("#ff8a10", "#ff2a7a", "#4a0ab0")
     DENIZ = ("#1a40d0", "#7a30e0"); BULUT = "#ff7ab8"
@@ -459,10 +461,10 @@ def gemi(serit_modu, rnd):
         x = rnd.choice((-1, 1)) * rnd.uniform(10, 90); y = rnd.uniform(-5, 200)
         f_ = kure((x, y, DENIZ_Z), rnd.uniform(0.3, 0.9), M("kopuk", lambda: mat_pbr("kopuk", "#a8f0ff", 0.4, kaplama=0.4)), sub=1); f_.scale = (2.2, 0.8, 0.25)
     # gok: tombul bulutlar + marti suruleri
-    for (x, y, z, o_) in ((-260, 520, 140, 34), (240, 500, 130, 32), (-90, 640, 200, 30), (120, 660, 220, 28), (-380, 420, 60, 30), (380, 430, 70, 30),
+    for (x, y, z, o_) in () if KD == "4" else ((-260, 520, 140, 34), (240, 500, 130, 32), (-90, 640, 200, 30), (120, 660, 220, 28), (-380, 420, 60, 30), (380, 430, 70, 30),
                           (-60, 220, 70, 14), (80, 240, 80, 14)):
         bulut((x, y, z), o_, rnd)
-    for k in range(28):
+    for k in range(0 if KD == "4" else 28):
         kus((rnd.uniform(-40, 40), rnd.uniform(26, 90), rnd.uniform(9, 32)), rnd.uniform(0.6, 1.0), rnd.choice(("#ffffff", "#ffe08a", "#fff0c0")), rnd)
     if serit_modu:
         for o in bpy.data.objects:
