@@ -351,7 +351,7 @@ def mesale(x, y, H):
 
 def volkan(x, y, R, H):
     """uzakta volkan: kiremit-kahve koni + tepede parlak lav agzi + lav kanallari + beyaz tombul duman"""
-    silindir((x, y, -2), R, H, mat_m("#a8482a", 0.6, 0.15), v=48, r2=R * 0.22)
+    silindir((x, y, -2), R, H, mat_m("#c8400a", 0.55, 0.2), v=48, r2=R * 0.22)
     silindir((x, y, H - 2.2), R * 0.24, 0.5, mat_isik("#ff5a0a", 5.0), v=32, r2=R * 0.2)
     for j in range(4):                                     # lav kanallari
         a = math.radians(-90 + (j - 1.5) * 22)
@@ -453,7 +453,7 @@ def mekan(serit_modu, rnd):
         yesil_tepe(x, y, rnd.uniform(14, 30), rnd.uniform(5, 12))
     for _ in range(14):
         kaya(rnd.uniform(-260, 260), rnd.uniform(200, 360), rnd.uniform(8, 16), rnd)
-    volkan(-120, 420, 95, 130)                             # sol uzakta tuten volkan (kapinin arkasini kapatmaz)
+    volkan(-150, 330, 85, 115)                             # sol uzakta tuten volkan; sahne 1: (-120, 420) tabelanin arkasinda kaldi + sisle pembe -> sola ve yakina
     selale(150, 330, 70, 9)                                # sag uzakta kayalik + selale
     for (x, y, r, h) in ((40, 470, 200, 90), (240, 420, 150, 62), (-340, 470, 170, 80), (390, 480, 170, 72)):
         yesil_tepe(x, y, r, h, ad="dev_tepe")              # dev yesil tepeler (gokun alt yarisini doldurur)
@@ -498,8 +498,8 @@ def camur(x, y, r):
 
 def serit_esyalari(rnd):
     kutu("pist", (0, (KAP["y"] + 0.4 - 4) / 2, 0.0), (PIST * 2, KAP["y"] + 4.4, 0.16), mat_kum("pist_toprak", acik=True, dalga=False), egim=0.04, seg=2)
-    for (x, y, a) in ((-1.9, -1.4, 0.1), (1.2, 0.4, -0.15), (-1.0, 2.4, 0.05), (2.0, 3.6, -0.1)):
-        ayak_izi(x, y, 1.0, a)
+    for (x, y, a) in ((-0.55, 1.6, 0.08), (0.55, 3.1, -0.08)):    # sahne 1: kadraj altinda kesilen / oka binen izler tavsan izi gibi okundu -> ortada iki adimlik iz, parmaklar kapiya
+        ayak_izi(x, y, 0.85, a)
     for s in (-1, 1):                                     # pist kenari: alcak yosunlu tas bordur
         kutu("bordur", (s * (PIST + 0.2), (KAP["y"] - 3.4) / 2, 0.12), (0.45, KAP["y"] + 2.6, 0.26), mat_m(TAS, 0.55, 0.25), egim=0.08, seg=3)
         kutu("yosun", (s * (PIST + 0.2), (KAP["y"] - 3.4) / 2, 0.27), (0.42, KAP["y"] + 2.5, 0.06), mat_m("#3ac81a", 0.6, 0.1), egim=0.02, seg=2)
