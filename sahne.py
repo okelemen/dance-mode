@@ -49,7 +49,8 @@ PEPPER = PLAN["meyve"] == "red-bell-pepper"
 HOTDOG = PLAN["meyve"] == "hot-dog"
 CHOCBAR = PLAN["meyve"] == "pistachio-kataifi-chocolate-bar"
 HONEYCOMB = PLAN["meyve"] == "honeycomb-crunch-chocolate-bar"
-CHOCSHAPE = CHOCBAR or HONEYCOMB
+SALTED = PLAN["meyve"] == "salted-caramel-pretzel-chocolate-bar"
+CHOCSHAPE = CHOCBAR or HONEYCOMB or SALTED
 B = M.get("B", R)
 XMIN, XMAX = M.get("xmin", -A), M.get("xmax", A)
 TAHTA_UST = 0.14
@@ -592,8 +593,8 @@ else:
         bmp.inputs["Distance"].default_value=.007
     elif CHOCSHAPE:
         brown=nt.nodes.new("ShaderNodeValToRGB")
-        brown.color_ramp.elements[0].color=hex_renk("#653c27" if HONEYCOMB else "#522717")
-        brown.color_ramp.elements[1].color=hex_renk("#a16a43" if HONEYCOMB else "#75402a")
+        brown.color_ramp.elements[0].color=hex_renk("#321a15" if SALTED else ("#653c27" if HONEYCOMB else "#522717"))
+        brown.color_ramp.elements[1].color=hex_renk("#613723" if SALTED else ("#a16a43" if HONEYCOMB else "#75402a"))
         baglan(nt,nz.outputs["Fac"],brown.inputs["Fac"])
         xyz=nt.nodes.new("ShaderNodeSeparateXYZ")
         baglan(nt,tk.outputs["Object"],xyz.inputs[0])
@@ -606,8 +607,36 @@ else:
         tiles=nt.nodes.new("ShaderNodeMix");tiles.data_type="RGBA"
         baglan(nt,seam,tiles.inputs["Factor"])
         baglan(nt,brown.outputs["Color"],tiles.inputs[6])
-        tiles.inputs[7].default_value=hex_renk("#4b2a1c" if HONEYCOMB else "#33190f")
-        kabuk_rengi=tiles.outputs[2]
+        tiles.inputs[7].default_value=hex_renk("#25130f" if SALTED else ("#4b2a1c" if HONEYCOMB else "#33190f"))
+        if SALTED:
+            # Four pretzel knots drawn into the top chocolate tile. Their
+            # golden color is transferred to released cells below.
+            repeat=matematik(nt,"DIVIDE",xyz.outputs[0],None,deger_b=.52)
+            local=matematik(nt,"SUBTRACT",xyz.outputs[0],
+                matematik(nt,"MULTIPLY",matematik(nt,"ROUND",repeat),None,deger_b=.52))
+            xx=matematik(nt,"DIVIDE",local,None,deger_b=.18)
+            def loop(center):
+                yy=matematik(nt,"DIVIDE",
+                    matematik(nt,"SUBTRACT",xyz.outputs[1],None,deger_b=center),None,deger_b=.13)
+                rr=matematik(nt,"SQRT",matematik(nt,"ADD",
+                    matematik(nt,"MULTIPLY",xx,xx),matematik(nt,"MULTIPLY",yy,yy)))
+                return matematik(nt,"LESS_THAN",
+                    matematik(nt,"ABSOLUTE",matematik(nt,"SUBTRACT",rr,None,deger_b=1)),
+                    None,deger_b=.19)
+            loops=matematik(nt,"MAXIMUM",loop(-.12),loop(.12))
+            bridge=matematik(nt,"MULTIPLY",
+                matematik(nt,"LESS_THAN",matematik(nt,"ABSOLUTE",xyz.outputs[1]),None,deger_b=.027),
+                matematik(nt,"LESS_THAN",matematik(nt,"ABSOLUTE",local),None,deger_b=.19))
+            pretzel=matematik(nt,"MULTIPLY",
+                matematik(nt,"MAXIMUM",loops,bridge),
+                matematik(nt,"GREATER_THAN",xyz.outputs[2],None,deger_b=.84*R))
+            gold=nt.nodes.new("ShaderNodeMix");gold.data_type="RGBA"
+            baglan(nt,pretzel,gold.inputs["Factor"])
+            baglan(nt,tiles.outputs[2],gold.inputs[6])
+            gold.inputs[7].default_value=hex_renk("#c98a3b")
+            kabuk_rengi=gold.outputs[2]
+        else:
+            kabuk_rengi=tiles.outputs[2]
         bmp.inputs["Strength"].default_value=.05
         bmp.inputs["Distance"].default_value=.002
 
@@ -1292,10 +1321,19 @@ def kup_nesnesi(tur, no):
         calyx=domates_canak(merk[:,0],merk[:,1],merk[:,2],M)
         renk[calyx]=np.array(hex_renk("#357a2f")[:3]);maske[calyx]=0
     elif CHOCSHAPE:
-        renk=np.tile(np.array(hex_renk("#df9d38" if HONEYCOMB else "#74a94d")[:3]),(k,1))
+        renk=np.tile(np.array(hex_renk("#b76c28" if SALTED else ("#df9d38" if HONEYCOMB else "#74a94d"))[:3]),(k,1))
         shell=(np.abs(merk[:,0])>.88*A)|(np.abs(merk[:,1])>.84*B)|(np.abs(merk[:,2])>.82*R)
-        renk[shell]=np.array(hex_renk("#805031" if HONEYCOMB else "#663521")[:3])
-        if HONEYCOMB:
+        renk[shell]=np.array(hex_renk("#49281d" if SALTED else ("#805031" if HONEYCOMB else "#663521"))[:3])
+        if SALTED:
+            caramel=(~shell)&(np.abs(merk[:,2])<.085)
+            renk[caramel]=np.array(hex_renk("#d79335")[:3])
+            local=merk[:,0]-.52*np.round(merk[:,0]/.52)
+            loops=np.abs(np.sqrt((local/.18)**2+((np.abs(merk[:,1])-.12)/.13)**2)-1)<.19
+            bridge=(np.abs(merk[:,1])<.027)&(np.abs(local)<.19)
+            pretzel=(merk[:,2]>.82*R)&(loops|bridge)
+            renk[pretzel]=np.array(hex_renk("#c98a3b")[:3])
+            maske[pretzel]=0
+        elif HONEYCOMB:
             pore=(~shell)&(np.sin(49*merk[:,0]+71*merk[:,1])*np.cos(63*merk[:,2]-29*merk[:,1])>.40)
             renk[pore]=np.array(hex_renk("#8d5822")[:3])
         else:
@@ -1517,7 +1555,7 @@ def kup_nesnesi(tur, no):
     baglan(ntk, a_r.outputs["Color"], karis.inputs[6])
     karis.inputs[7].default_value = hex_renk("#b87538" if HOTDOG else ("#b71f29" if CILEK else ("#c93225" if APPLE else ("#e87916" if ORANGE else ("#e7c137" if BANANA else ("#356d2c" if CUCUMBER else ("#c3221a" if PEPPER else ("#d95c4d" if PEACH else ("#8c1c27" if NAR else ("#c7231d" if TOMATO else "#21361a"))))))))))
     if CHOCSHAPE:
-        karis.inputs[7].default_value = hex_renk("#805031" if HONEYCOMB else "#663521")
+        karis.inputs[7].default_value = hex_renk("#49281d" if SALTED else ("#805031" if HONEYCOMB else "#663521"))
     if CILEK:
         # Sadece maskelenmis dis yuz; kesik et yuzunde aken bulunmaz.
         geometri = ntk.nodes.new("ShaderNodeNewGeometry")
@@ -1792,7 +1830,7 @@ def kup_nesnesi(tur, no):
     baglan(ntt, t_r.outputs["Color"], t_k.inputs[6])
     t_k.inputs[7].default_value = hex_renk("#b87538" if HOTDOG else ("#60452f" if KIVI else ("#143c27" if KARPUZ else ("#b71f29" if CILEK else ("#c93225" if APPLE else ("#e87916" if ORANGE else ("#356d2c" if CUCUMBER else ("#c3221a" if PEPPER else "#21361a"))))))))
     if CHOCSHAPE:
-        t_k.inputs[7].default_value = hex_renk("#805031" if HONEYCOMB else "#663521")
+        t_k.inputs[7].default_value = hex_renk("#49281d" if SALTED else ("#805031" if HONEYCOMB else "#663521"))
     baglan(ntt, t_k.outputs[2], bt.inputs["Base Color"])
     bt.inputs["Roughness"].default_value = 0.55
 
@@ -2153,10 +2191,10 @@ elif TOMATO:
     for pos,col in ((.7,"#e44b2e"),(.76,"#cf3726"),(.94,"#d1261d")):
         e=et_r.color_ramp.elements.new(pos);e.color=hex_renk(col)
 elif CHOCSHAPE:
-    et_r.color_ramp.elements[0].color=hex_renk("#e0a543" if HONEYCOMB else "#77a948")
-    et_r.color_ramp.elements[1].color=hex_renk("#805031" if HONEYCOMB else "#663521")
-    e=et_r.color_ramp.elements.new(.78);e.color=hex_renk("#e1ab4e" if HONEYCOMB else "#7dae4d")
-    e=et_r.color_ramp.elements.new(.84);e.color=hex_renk("#805031" if HONEYCOMB else "#663521")
+    et_r.color_ramp.elements[0].color=hex_renk("#b76c28" if SALTED else ("#e0a543" if HONEYCOMB else "#77a948"))
+    et_r.color_ramp.elements[1].color=hex_renk("#49281d" if SALTED else ("#805031" if HONEYCOMB else "#663521"))
+    e=et_r.color_ramp.elements.new(.78);e.color=hex_renk("#ca8330" if SALTED else ("#e1ab4e" if HONEYCOMB else "#7dae4d"))
+    e=et_r.color_ramp.elements.new(.84);e.color=hex_renk("#49281d" if SALTED else ("#805031" if HONEYCOMB else "#663521"))
 elif HOTDOG:
     et_r.color_ramp.elements[0].color=hex_renk("#eac18b")
     et_r.color_ramp.elements[1].color=hex_renk("#b87538")
@@ -2258,7 +2296,11 @@ elif CUCUMBER:
 elif PEPPER:
     baglan(ntk_,et_r.outputs["Color"],bk_.inputs["Base Color"])
 elif CHOCSHAPE:
-    if HONEYCOMB:
+    if SALTED:
+        strand=matematik(ntk_,"MULTIPLY",
+            matematik(ntk_,"LESS_THAN",matematik(ntk_,"ABSOLUTE",dz),None,deger_b=.085),
+            matematik(ntk_,"LESS_THAN",u_,None,deger_b=.82))
+    elif HONEYCOMB:
         coords=ntk_.nodes.new("ShaderNodeTexCoord")
         pores=ntk_.nodes.new("ShaderNodeTexVoronoi")
         baglan(ntk_,coords.outputs["Object"],pores.inputs["Vector"])
@@ -2278,7 +2320,7 @@ elif CHOCSHAPE:
     filling=ntk_.nodes.new("ShaderNodeMix");filling.data_type="RGBA"
     baglan(ntk_,strand,filling.inputs["Factor"])
     baglan(ntk_,et_r.outputs["Color"],filling.inputs[6])
-    filling.inputs[7].default_value=hex_renk("#8d5822" if HONEYCOMB else "#d5a455")
+    filling.inputs[7].default_value=hex_renk("#d79335" if SALTED else ("#8d5822" if HONEYCOMB else "#d5a455"))
     baglan(ntk_,filling.outputs[2],bk_.inputs["Base Color"])
 elif HOTDOG:
     meat=matematik(ntk_,"LESS_THAN",sausage_u,None,deger_b=1.0)
