@@ -498,8 +498,7 @@ def camur(x, y, r):
 
 def serit_esyalari(rnd):
     kutu("pist", (0, (KAP["y"] + 0.4 - 4) / 2, 0.0), (PIST * 2, KAP["y"] + 4.4, 0.16), mat_kum("pist_toprak", acik=True, dalga=False), egim=0.04, seg=2)
-    for (x, y, a) in ((-0.55, 1.6, 0.08), (0.55, 3.1, -0.08)):    # sahne 1: kadraj altinda kesilen / oka binen izler tavsan izi gibi okundu -> ortada iki adimlik iz, parmaklar kapiya
-        ayak_izi(x, y, 0.85, a)
+    # sahne 2 (tam render 1): tek ayak izi de tavsan basi gibi okundu (yuvarlak topuk + uc oval parmak) -> pistte iz yok
     for s in (-1, 1):                                     # pist kenari: alcak yosunlu tas bordur
         kutu("bordur", (s * (PIST + 0.2), (KAP["y"] - 3.4) / 2, 0.12), (0.45, KAP["y"] + 2.6, 0.26), mat_m(TAS, 0.55, 0.25), egim=0.08, seg=3)
         kutu("yosun", (s * (PIST + 0.2), (KAP["y"] - 3.4) / 2, 0.27), (0.42, KAP["y"] + 2.5, 0.06), mat_m("#3ac81a", 0.6, 0.1), egim=0.02, seg=2)
